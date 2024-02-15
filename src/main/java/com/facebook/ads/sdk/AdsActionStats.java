@@ -1,24 +1,9 @@
-/**
- * Copyright (c) 2015-present, Facebook, Inc. All rights reserved.
+/*
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ * All rights reserved.
  *
- * You are hereby granted a non-exclusive, worldwide, royalty-free license to
- * use, copy, modify, and distribute this software in source code or binary
- * form for use in connection with the web services and APIs provided by
- * Facebook.
- *
- * As with any software that integrates with the Facebook platform, your use
- * of this software is subject to the Facebook Developer Principles and
- * Policies [http://developers.facebook.com/policy/]. This copyright notice
- * shall be included in all copies or substantial portions of the software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
- * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
- * DEALINGS IN THE SOFTWARE.
- *
+ * This source code is licensed under the license found in the
+ * LICENSE file in the root directory of this source tree.
  */
 
 package com.facebook.ads.sdk;
@@ -57,6 +42,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class AdsActionStats extends APINode {
   @SerializedName("1d_click")
   private String m1dClick = null;
+  @SerializedName("1d_ev")
+  private String m1dEv = null;
   @SerializedName("1d_view")
   private String m1dView = null;
   @SerializedName("28d_click")
@@ -113,8 +100,16 @@ public class AdsActionStats extends APINode {
   private String mInteractiveComponentStickerResponse = null;
   @SerializedName("skan_click")
   private String mSkanClick = null;
+  @SerializedName("skan_click_second_postback")
+  private String mSkanClickSecondPostback = null;
+  @SerializedName("skan_click_third_postback")
+  private String mSkanClickThirdPostback = null;
   @SerializedName("skan_view")
   private String mSkanView = null;
+  @SerializedName("skan_view_second_postback")
+  private String mSkanViewSecondPostback = null;
+  @SerializedName("skan_view_third_postback")
+  private String mSkanViewThirdPostback = null;
   @SerializedName("value")
   private String mValue = null;
   protected static Gson gson = null;
@@ -274,6 +269,15 @@ public class AdsActionStats extends APINode {
 
   public AdsActionStats setField1dClick(String value) {
     this.m1dClick = value;
+    return this;
+  }
+
+  public String getField1dEv() {
+    return m1dEv;
+  }
+
+  public AdsActionStats setField1dEv(String value) {
+    this.m1dEv = value;
     return this;
   }
 
@@ -529,12 +533,48 @@ public class AdsActionStats extends APINode {
     return this;
   }
 
+  public String getFieldSkanClickSecondPostback() {
+    return mSkanClickSecondPostback;
+  }
+
+  public AdsActionStats setFieldSkanClickSecondPostback(String value) {
+    this.mSkanClickSecondPostback = value;
+    return this;
+  }
+
+  public String getFieldSkanClickThirdPostback() {
+    return mSkanClickThirdPostback;
+  }
+
+  public AdsActionStats setFieldSkanClickThirdPostback(String value) {
+    this.mSkanClickThirdPostback = value;
+    return this;
+  }
+
   public String getFieldSkanView() {
     return mSkanView;
   }
 
   public AdsActionStats setFieldSkanView(String value) {
     this.mSkanView = value;
+    return this;
+  }
+
+  public String getFieldSkanViewSecondPostback() {
+    return mSkanViewSecondPostback;
+  }
+
+  public AdsActionStats setFieldSkanViewSecondPostback(String value) {
+    this.mSkanViewSecondPostback = value;
+    return this;
+  }
+
+  public String getFieldSkanViewThirdPostback() {
+    return mSkanViewThirdPostback;
+  }
+
+  public AdsActionStats setFieldSkanViewThirdPostback(String value) {
+    this.mSkanViewThirdPostback = value;
     return this;
   }
 
@@ -565,6 +605,7 @@ public class AdsActionStats extends APINode {
 
   public AdsActionStats copyFrom(AdsActionStats instance) {
     this.m1dClick = instance.m1dClick;
+    this.m1dEv = instance.m1dEv;
     this.m1dView = instance.m1dView;
     this.m28dClick = instance.m28dClick;
     this.m28dView = instance.m28dView;
@@ -593,7 +634,11 @@ public class AdsActionStats extends APINode {
     this.mInteractiveComponentStickerId = instance.mInteractiveComponentStickerId;
     this.mInteractiveComponentStickerResponse = instance.mInteractiveComponentStickerResponse;
     this.mSkanClick = instance.mSkanClick;
+    this.mSkanClickSecondPostback = instance.mSkanClickSecondPostback;
+    this.mSkanClickThirdPostback = instance.mSkanClickThirdPostback;
     this.mSkanView = instance.mSkanView;
+    this.mSkanViewSecondPostback = instance.mSkanViewSecondPostback;
+    this.mSkanViewThirdPostback = instance.mSkanViewThirdPostback;
     this.mValue = instance.mValue;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

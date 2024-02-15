@@ -1,24 +1,9 @@
-/**
- * Copyright (c) 2015-present, Facebook, Inc. All rights reserved.
+/*
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ * All rights reserved.
  *
- * You are hereby granted a non-exclusive, worldwide, royalty-free license to
- * use, copy, modify, and distribute this software in source code or binary
- * form for use in connection with the web services and APIs provided by
- * Facebook.
- *
- * As with any software that integrates with the Facebook platform, your use
- * of this software is subject to the Facebook Developer Principles and
- * Policies [http://developers.facebook.com/policy/]. This copyright notice
- * shall be included in all copies or substantial portions of the software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
- * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
- * DEALINGS IN THE SOFTWARE.
- *
+ * This source code is licensed under the license found in the
+ * LICENSE file in the root directory of this source tree.
  */
 
 package com.facebook.ads.sdk;
@@ -59,6 +44,8 @@ public class User extends APINode {
   private String mAbout = null;
   @SerializedName("age_range")
   private AgeRange mAgeRange = null;
+  @SerializedName("avatar_2d_profile_picture")
+  private AvatarProfilePicture mAvatar2dProfilePicture = null;
   @SerializedName("birthday")
   private String mBirthday = null;
   @SerializedName("community")
@@ -93,6 +80,8 @@ public class User extends APINode {
   private Boolean mInstalled = null;
   @SerializedName("is_guest_user")
   private Boolean mIsGuestUser = null;
+  @SerializedName("is_work_account")
+  private Boolean mIsWorkAccount = null;
   @SerializedName("languages")
   private List<Experience> mLanguages = null;
   @SerializedName("last_name")
@@ -126,7 +115,7 @@ public class User extends APINode {
   @SerializedName("relationship_status")
   private String mRelationshipStatus = null;
   @SerializedName("shared_login_upgrade_required_by")
-  private Object mSharedLoginUpgradeRequiredBy = null;
+  private String mSharedLoginUpgradeRequiredBy = null;
   @SerializedName("short_name")
   private String mShortName = null;
   @SerializedName("significant_other")
@@ -470,10 +459,6 @@ public class User extends APINode {
     return new APIRequestCreateFundraiser(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestCreateGameItem createGameItem() {
-    return new APIRequestCreateGameItem(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestCreateGameTime createGameTime() {
     return new APIRequestCreateGameTime(this.getPrefixedId().toString(), context);
   }
@@ -587,6 +572,13 @@ public class User extends APINode {
     return mAgeRange;
   }
 
+  public AvatarProfilePicture getFieldAvatar2dProfilePicture() {
+    if (mAvatar2dProfilePicture != null) {
+      mAvatar2dProfilePicture.context = getContext();
+    }
+    return mAvatar2dProfilePicture;
+  }
+
   public String getFieldBirthday() {
     return mBirthday;
   }
@@ -661,6 +653,10 @@ public class User extends APINode {
     return mIsGuestUser;
   }
 
+  public Boolean getFieldIsWorkAccount() {
+    return mIsWorkAccount;
+  }
+
   public List<Experience> getFieldLanguages() {
     return mLanguages;
   }
@@ -728,7 +724,7 @@ public class User extends APINode {
     return mRelationshipStatus;
   }
 
-  public Object getFieldSharedLoginUpgradeRequiredBy() {
+  public String getFieldSharedLoginUpgradeRequiredBy() {
     return mSharedLoginUpgradeRequiredBy;
   }
 
@@ -1075,6 +1071,7 @@ public class User extends APINode {
       "directed_by",
       "display_subtext",
       "displayed_message_response_time",
+      "does_viewer_have_page_permission_link_ig",
       "emails",
       "engagement",
       "fan_count",
@@ -1089,8 +1086,10 @@ public class User extends APINode {
       "global_brand_page_name",
       "global_brand_root_id",
       "has_added_app",
+      "has_lead_access",
       "has_transitioned_to_new_page_experience",
       "has_whatsapp_business_number",
+      "has_whatsapp_enterprise_number_using_cloud_api",
       "has_whatsapp_number",
       "hometown",
       "hours",
@@ -1102,6 +1101,7 @@ public class User extends APINode {
       "is_chain",
       "is_community_page",
       "is_eligible_for_branded_content",
+      "is_eligible_for_disable_connect_ig_btn_for_non_page_admin_am_web",
       "is_messenger_bot_get_started_enabled",
       "is_messenger_platform_bot",
       "is_owned",
@@ -1121,7 +1121,6 @@ public class User extends APINode {
       "merchant_review_status",
       "messaging_feature_status",
       "messenger_ads_default_icebreakers",
-      "messenger_ads_default_page_welcome_message",
       "messenger_ads_default_quick_replies",
       "messenger_ads_quick_replies_type",
       "mini_shop_storefront",
@@ -1134,6 +1133,7 @@ public class User extends APINode {
       "offer_eligible",
       "overall_star_rating",
       "owner_business",
+      "page_about_story",
       "page_token",
       "parent_page",
       "parking",
@@ -1176,6 +1176,7 @@ public class User extends APINode {
       "unread_message_count",
       "unread_notif_count",
       "unseen_message_count",
+      "user_access_expire_time",
       "username",
       "verification_status",
       "voip_info",
@@ -1551,6 +1552,13 @@ public class User extends APINode {
       this.requestField("displayed_message_response_time", value);
       return this;
     }
+    public APIRequestGetAccounts requestDoesViewerHavePagePermissionLinkIgField () {
+      return this.requestDoesViewerHavePagePermissionLinkIgField(true);
+    }
+    public APIRequestGetAccounts requestDoesViewerHavePagePermissionLinkIgField (boolean value) {
+      this.requestField("does_viewer_have_page_permission_link_ig", value);
+      return this;
+    }
     public APIRequestGetAccounts requestEmailsField () {
       return this.requestEmailsField(true);
     }
@@ -1649,6 +1657,13 @@ public class User extends APINode {
       this.requestField("has_added_app", value);
       return this;
     }
+    public APIRequestGetAccounts requestHasLeadAccessField () {
+      return this.requestHasLeadAccessField(true);
+    }
+    public APIRequestGetAccounts requestHasLeadAccessField (boolean value) {
+      this.requestField("has_lead_access", value);
+      return this;
+    }
     public APIRequestGetAccounts requestHasTransitionedToNewPageExperienceField () {
       return this.requestHasTransitionedToNewPageExperienceField(true);
     }
@@ -1661,6 +1676,13 @@ public class User extends APINode {
     }
     public APIRequestGetAccounts requestHasWhatsappBusinessNumberField (boolean value) {
       this.requestField("has_whatsapp_business_number", value);
+      return this;
+    }
+    public APIRequestGetAccounts requestHasWhatsappEnterpriseNumberUsingCloudApiField () {
+      return this.requestHasWhatsappEnterpriseNumberUsingCloudApiField(true);
+    }
+    public APIRequestGetAccounts requestHasWhatsappEnterpriseNumberUsingCloudApiField (boolean value) {
+      this.requestField("has_whatsapp_enterprise_number_using_cloud_api", value);
       return this;
     }
     public APIRequestGetAccounts requestHasWhatsappNumberField () {
@@ -1738,6 +1760,13 @@ public class User extends APINode {
     }
     public APIRequestGetAccounts requestIsEligibleForBrandedContentField (boolean value) {
       this.requestField("is_eligible_for_branded_content", value);
+      return this;
+    }
+    public APIRequestGetAccounts requestIsEligibleForDisableConnectIgBtnForNonPageAdminAmWebField () {
+      return this.requestIsEligibleForDisableConnectIgBtnForNonPageAdminAmWebField(true);
+    }
+    public APIRequestGetAccounts requestIsEligibleForDisableConnectIgBtnForNonPageAdminAmWebField (boolean value) {
+      this.requestField("is_eligible_for_disable_connect_ig_btn_for_non_page_admin_am_web", value);
       return this;
     }
     public APIRequestGetAccounts requestIsMessengerBotGetStartedEnabledField () {
@@ -1873,13 +1902,6 @@ public class User extends APINode {
       this.requestField("messenger_ads_default_icebreakers", value);
       return this;
     }
-    public APIRequestGetAccounts requestMessengerAdsDefaultPageWelcomeMessageField () {
-      return this.requestMessengerAdsDefaultPageWelcomeMessageField(true);
-    }
-    public APIRequestGetAccounts requestMessengerAdsDefaultPageWelcomeMessageField (boolean value) {
-      this.requestField("messenger_ads_default_page_welcome_message", value);
-      return this;
-    }
     public APIRequestGetAccounts requestMessengerAdsDefaultQuickRepliesField () {
       return this.requestMessengerAdsDefaultQuickRepliesField(true);
     }
@@ -1962,6 +1984,13 @@ public class User extends APINode {
     }
     public APIRequestGetAccounts requestOwnerBusinessField (boolean value) {
       this.requestField("owner_business", value);
+      return this;
+    }
+    public APIRequestGetAccounts requestPageAboutStoryField () {
+      return this.requestPageAboutStoryField(true);
+    }
+    public APIRequestGetAccounts requestPageAboutStoryField (boolean value) {
+      this.requestField("page_about_story", value);
       return this;
     }
     public APIRequestGetAccounts requestPageTokenField () {
@@ -2256,6 +2285,13 @@ public class User extends APINode {
     }
     public APIRequestGetAccounts requestUnseenMessageCountField (boolean value) {
       this.requestField("unseen_message_count", value);
+      return this;
+    }
+    public APIRequestGetAccounts requestUserAccessExpireTimeField () {
+      return this.requestUserAccessExpireTimeField(true);
+    }
+    public APIRequestGetAccounts requestUserAccessExpireTimeField (boolean value) {
+      this.requestField("user_access_expire_time", value);
       return this;
     }
     public APIRequestGetAccounts requestUsernameField () {
@@ -3009,6 +3045,7 @@ public class User extends APINode {
       "ad_account_promotable_objects",
       "age",
       "agency_client_declaration",
+      "all_capabilities",
       "amount_spent",
       "attribution_spec",
       "balance",
@@ -3068,6 +3105,7 @@ public class User extends APINode {
       "timezone_name",
       "timezone_offset_hours_utc",
       "tos_accepted",
+      "user_access_expire_time",
       "user_tasks",
       "user_tos_accepted",
       "viewable_business",
@@ -3195,6 +3233,13 @@ public class User extends APINode {
     }
     public APIRequestGetAdAccounts requestAgencyClientDeclarationField (boolean value) {
       this.requestField("agency_client_declaration", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestAllCapabilitiesField () {
+      return this.requestAllCapabilitiesField(true);
+    }
+    public APIRequestGetAdAccounts requestAllCapabilitiesField (boolean value) {
+      this.requestField("all_capabilities", value);
       return this;
     }
     public APIRequestGetAdAccounts requestAmountSpentField () {
@@ -3608,6 +3653,13 @@ public class User extends APINode {
     }
     public APIRequestGetAdAccounts requestTosAcceptedField (boolean value) {
       this.requestField("tos_accepted", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestUserAccessExpireTimeField () {
+      return this.requestUserAccessExpireTimeField(true);
+    }
+    public APIRequestGetAdAccounts requestUserAccessExpireTimeField (boolean value) {
+      this.requestField("user_access_expire_time", value);
       return this;
     }
     public APIRequestGetAdAccounts requestUserTasksField () {
@@ -4347,6 +4399,7 @@ public class User extends APINode {
       "ad_account_promotable_objects",
       "age",
       "agency_client_declaration",
+      "all_capabilities",
       "amount_spent",
       "attribution_spec",
       "balance",
@@ -4406,6 +4459,7 @@ public class User extends APINode {
       "timezone_name",
       "timezone_offset_hours_utc",
       "tos_accepted",
+      "user_access_expire_time",
       "user_tasks",
       "user_tos_accepted",
       "viewable_business",
@@ -4533,6 +4587,13 @@ public class User extends APINode {
     }
     public APIRequestGetAssignedAdAccounts requestAgencyClientDeclarationField (boolean value) {
       this.requestField("agency_client_declaration", value);
+      return this;
+    }
+    public APIRequestGetAssignedAdAccounts requestAllCapabilitiesField () {
+      return this.requestAllCapabilitiesField(true);
+    }
+    public APIRequestGetAssignedAdAccounts requestAllCapabilitiesField (boolean value) {
+      this.requestField("all_capabilities", value);
       return this;
     }
     public APIRequestGetAssignedAdAccounts requestAmountSpentField () {
@@ -4948,6 +5009,13 @@ public class User extends APINode {
       this.requestField("tos_accepted", value);
       return this;
     }
+    public APIRequestGetAssignedAdAccounts requestUserAccessExpireTimeField () {
+      return this.requestUserAccessExpireTimeField(true);
+    }
+    public APIRequestGetAssignedAdAccounts requestUserAccessExpireTimeField (boolean value) {
+      this.requestField("user_access_expire_time", value);
+      return this;
+    }
     public APIRequestGetAssignedAdAccounts requestUserTasksField () {
       return this.requestUserTasksField(true);
     }
@@ -5154,6 +5222,7 @@ public class User extends APINode {
       "directed_by",
       "display_subtext",
       "displayed_message_response_time",
+      "does_viewer_have_page_permission_link_ig",
       "emails",
       "engagement",
       "fan_count",
@@ -5168,8 +5237,10 @@ public class User extends APINode {
       "global_brand_page_name",
       "global_brand_root_id",
       "has_added_app",
+      "has_lead_access",
       "has_transitioned_to_new_page_experience",
       "has_whatsapp_business_number",
+      "has_whatsapp_enterprise_number_using_cloud_api",
       "has_whatsapp_number",
       "hometown",
       "hours",
@@ -5181,6 +5252,7 @@ public class User extends APINode {
       "is_chain",
       "is_community_page",
       "is_eligible_for_branded_content",
+      "is_eligible_for_disable_connect_ig_btn_for_non_page_admin_am_web",
       "is_messenger_bot_get_started_enabled",
       "is_messenger_platform_bot",
       "is_owned",
@@ -5200,7 +5272,6 @@ public class User extends APINode {
       "merchant_review_status",
       "messaging_feature_status",
       "messenger_ads_default_icebreakers",
-      "messenger_ads_default_page_welcome_message",
       "messenger_ads_default_quick_replies",
       "messenger_ads_quick_replies_type",
       "mini_shop_storefront",
@@ -5213,6 +5284,7 @@ public class User extends APINode {
       "offer_eligible",
       "overall_star_rating",
       "owner_business",
+      "page_about_story",
       "page_token",
       "parent_page",
       "parking",
@@ -5255,6 +5327,7 @@ public class User extends APINode {
       "unread_message_count",
       "unread_notif_count",
       "unseen_message_count",
+      "user_access_expire_time",
       "username",
       "verification_status",
       "voip_info",
@@ -5621,6 +5694,13 @@ public class User extends APINode {
       this.requestField("displayed_message_response_time", value);
       return this;
     }
+    public APIRequestGetAssignedPages requestDoesViewerHavePagePermissionLinkIgField () {
+      return this.requestDoesViewerHavePagePermissionLinkIgField(true);
+    }
+    public APIRequestGetAssignedPages requestDoesViewerHavePagePermissionLinkIgField (boolean value) {
+      this.requestField("does_viewer_have_page_permission_link_ig", value);
+      return this;
+    }
     public APIRequestGetAssignedPages requestEmailsField () {
       return this.requestEmailsField(true);
     }
@@ -5719,6 +5799,13 @@ public class User extends APINode {
       this.requestField("has_added_app", value);
       return this;
     }
+    public APIRequestGetAssignedPages requestHasLeadAccessField () {
+      return this.requestHasLeadAccessField(true);
+    }
+    public APIRequestGetAssignedPages requestHasLeadAccessField (boolean value) {
+      this.requestField("has_lead_access", value);
+      return this;
+    }
     public APIRequestGetAssignedPages requestHasTransitionedToNewPageExperienceField () {
       return this.requestHasTransitionedToNewPageExperienceField(true);
     }
@@ -5731,6 +5818,13 @@ public class User extends APINode {
     }
     public APIRequestGetAssignedPages requestHasWhatsappBusinessNumberField (boolean value) {
       this.requestField("has_whatsapp_business_number", value);
+      return this;
+    }
+    public APIRequestGetAssignedPages requestHasWhatsappEnterpriseNumberUsingCloudApiField () {
+      return this.requestHasWhatsappEnterpriseNumberUsingCloudApiField(true);
+    }
+    public APIRequestGetAssignedPages requestHasWhatsappEnterpriseNumberUsingCloudApiField (boolean value) {
+      this.requestField("has_whatsapp_enterprise_number_using_cloud_api", value);
       return this;
     }
     public APIRequestGetAssignedPages requestHasWhatsappNumberField () {
@@ -5808,6 +5902,13 @@ public class User extends APINode {
     }
     public APIRequestGetAssignedPages requestIsEligibleForBrandedContentField (boolean value) {
       this.requestField("is_eligible_for_branded_content", value);
+      return this;
+    }
+    public APIRequestGetAssignedPages requestIsEligibleForDisableConnectIgBtnForNonPageAdminAmWebField () {
+      return this.requestIsEligibleForDisableConnectIgBtnForNonPageAdminAmWebField(true);
+    }
+    public APIRequestGetAssignedPages requestIsEligibleForDisableConnectIgBtnForNonPageAdminAmWebField (boolean value) {
+      this.requestField("is_eligible_for_disable_connect_ig_btn_for_non_page_admin_am_web", value);
       return this;
     }
     public APIRequestGetAssignedPages requestIsMessengerBotGetStartedEnabledField () {
@@ -5943,13 +6044,6 @@ public class User extends APINode {
       this.requestField("messenger_ads_default_icebreakers", value);
       return this;
     }
-    public APIRequestGetAssignedPages requestMessengerAdsDefaultPageWelcomeMessageField () {
-      return this.requestMessengerAdsDefaultPageWelcomeMessageField(true);
-    }
-    public APIRequestGetAssignedPages requestMessengerAdsDefaultPageWelcomeMessageField (boolean value) {
-      this.requestField("messenger_ads_default_page_welcome_message", value);
-      return this;
-    }
     public APIRequestGetAssignedPages requestMessengerAdsDefaultQuickRepliesField () {
       return this.requestMessengerAdsDefaultQuickRepliesField(true);
     }
@@ -6032,6 +6126,13 @@ public class User extends APINode {
     }
     public APIRequestGetAssignedPages requestOwnerBusinessField (boolean value) {
       this.requestField("owner_business", value);
+      return this;
+    }
+    public APIRequestGetAssignedPages requestPageAboutStoryField () {
+      return this.requestPageAboutStoryField(true);
+    }
+    public APIRequestGetAssignedPages requestPageAboutStoryField (boolean value) {
+      this.requestField("page_about_story", value);
       return this;
     }
     public APIRequestGetAssignedPages requestPageTokenField () {
@@ -6328,6 +6429,13 @@ public class User extends APINode {
       this.requestField("unseen_message_count", value);
       return this;
     }
+    public APIRequestGetAssignedPages requestUserAccessExpireTimeField () {
+      return this.requestUserAccessExpireTimeField(true);
+    }
+    public APIRequestGetAssignedPages requestUserAccessExpireTimeField (boolean value) {
+      this.requestField("user_access_expire_time", value);
+      return this;
+    }
     public APIRequestGetAssignedPages requestUsernameField () {
       return this.requestUsernameField(true);
     }
@@ -6406,6 +6514,7 @@ public class User extends APINode {
       "owner_business",
       "product_count",
       "store_catalog_settings",
+      "user_access_expire_time",
       "vertical",
     };
 
@@ -6610,6 +6719,13 @@ public class User extends APINode {
       this.requestField("store_catalog_settings", value);
       return this;
     }
+    public APIRequestGetAssignedProductCatalogs requestUserAccessExpireTimeField () {
+      return this.requestUserAccessExpireTimeField(true);
+    }
+    public APIRequestGetAssignedProductCatalogs requestUserAccessExpireTimeField (boolean value) {
+      this.requestField("user_access_expire_time", value);
+      return this;
+    }
     public APIRequestGetAssignedProductCatalogs requestVerticalField () {
       return this.requestVerticalField(true);
     }
@@ -6619,45 +6735,46 @@ public class User extends APINode {
     }
   }
 
-  public static class APIRequestGetAvatars extends APIRequest<APINode> {
+  public static class APIRequestGetAvatars extends APIRequest<Avatar> {
 
-    APINodeList<APINode> lastResponse = null;
+    APINodeList<Avatar> lastResponse = null;
     @Override
-    public APINodeList<APINode> getLastResponse() {
+    public APINodeList<Avatar> getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
     };
 
     public static final String[] FIELDS = {
+      "id",
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header);
+    public APINodeList<Avatar> parseResponse(String response, String header) throws APIException {
+      return Avatar.parseResponse(response, getContext(), this, header);
     }
 
     @Override
-    public APINodeList<APINode> execute() throws APIException {
+    public APINodeList<Avatar> execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+    public APINodeList<Avatar> execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+    public ListenableFuture<APINodeList<Avatar>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<APINodeList<Avatar>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, APINodeList<Avatar>>() {
+           public APINodeList<Avatar> apply(ResponseWrapper result) {
              try {
                return APIRequestGetAvatars.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -6721,6 +6838,13 @@ public class User extends APINode {
       return this;
     }
 
+    public APIRequestGetAvatars requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetAvatars requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
   }
 
   public static class APIRequestGetBusinessUsers extends APIRequest<BusinessUser> {
@@ -7077,6 +7201,7 @@ public class User extends APINode {
       "two_factor_type",
       "updated_by",
       "updated_time",
+      "user_access_expire_time",
       "verification_status",
       "vertical",
       "vertical_id",
@@ -7288,6 +7413,13 @@ public class User extends APINode {
     }
     public APIRequestGetBusinesses requestUpdatedTimeField (boolean value) {
       this.requestField("updated_time", value);
+      return this;
+    }
+    public APIRequestGetBusinesses requestUserAccessExpireTimeField () {
+      return this.requestUserAccessExpireTimeField(true);
+    }
+    public APIRequestGetBusinesses requestUserAccessExpireTimeField (boolean value) {
+      this.requestField("user_access_expire_time", value);
       return this;
     }
     public APIRequestGetBusinesses requestVerificationStatusField () {
@@ -7506,6 +7638,7 @@ public class User extends APINode {
     }
     public static final String[] PARAMS = {
       "folder",
+      "platform",
       "tags",
       "user_id",
     };
@@ -7585,6 +7718,15 @@ public class User extends APINode {
 
     public APIRequestGetConversations setFolder (String folder) {
       this.setParam("folder", folder);
+      return this;
+    }
+
+    public APIRequestGetConversations setPlatform (UnifiedThread.EnumPlatform platform) {
+      this.setParam("platform", platform);
+      return this;
+    }
+    public APIRequestGetConversations setPlatform (String platform) {
+      this.setParam("platform", platform);
       return this;
     }
 
@@ -8959,7 +9101,6 @@ public class User extends APINode {
       "backdated_time_granularity",
       "call_to_action",
       "caption",
-      "checkin_entry_point",
       "child_attachments",
       "client_mutation_id",
       "composer_entry_picker",
@@ -9225,15 +9366,6 @@ public class User extends APINode {
 
     public APIRequestCreateFeed setCaption (String caption) {
       this.setParam("caption", caption);
-      return this;
-    }
-
-    public APIRequestCreateFeed setCheckinEntryPoint (Post.EnumCheckinEntryPoint checkinEntryPoint) {
-      this.setParam("checkin_entry_point", checkinEntryPoint);
-      return this;
-    }
-    public APIRequestCreateFeed setCheckinEntryPoint (String checkinEntryPoint) {
-      this.setParam("checkin_entry_point", checkinEntryPoint);
       return this;
     }
 
@@ -9955,6 +10087,7 @@ public class User extends APINode {
     public static final String[] FIELDS = {
       "about",
       "age_range",
+      "avatar_2d_profile_picture",
       "birthday",
       "community",
       "cover",
@@ -9972,6 +10105,7 @@ public class User extends APINode {
       "install_type",
       "installed",
       "is_guest_user",
+      "is_work_account",
       "languages",
       "last_name",
       "link",
@@ -10114,6 +10248,13 @@ public class User extends APINode {
       this.requestField("age_range", value);
       return this;
     }
+    public APIRequestGetFriends requestAvatar2dProfilePictureField () {
+      return this.requestAvatar2dProfilePictureField(true);
+    }
+    public APIRequestGetFriends requestAvatar2dProfilePictureField (boolean value) {
+      this.requestField("avatar_2d_profile_picture", value);
+      return this;
+    }
     public APIRequestGetFriends requestBirthdayField () {
       return this.requestBirthdayField(true);
     }
@@ -10231,6 +10372,13 @@ public class User extends APINode {
     }
     public APIRequestGetFriends requestIsGuestUserField (boolean value) {
       this.requestField("is_guest_user", value);
+      return this;
+    }
+    public APIRequestGetFriends requestIsWorkAccountField () {
+      return this.requestIsWorkAccountField(true);
+    }
+    public APIRequestGetFriends requestIsWorkAccountField (boolean value) {
+      this.requestField("is_work_account", value);
       return this;
     }
     public APIRequestGetFriends requestLanguagesField () {
@@ -10913,154 +11061,6 @@ public class User extends APINode {
 
     @Override
     public APIRequestCreateFundraiser requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
-  public static class APIRequestCreateGameItem extends APIRequest<GameItem> {
-
-    GameItem lastResponse = null;
-    @Override
-    public GameItem getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "action",
-      "app_id",
-      "drop_table_id",
-      "ext_id",
-      "item_id",
-      "quantity",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public GameItem parseResponse(String response, String header) throws APIException {
-      return GameItem.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public GameItem execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public GameItem execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<GameItem> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<GameItem> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, GameItem>() {
-           public GameItem apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateGameItem.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreateGameItem(String nodeId, APIContext context) {
-      super(context, nodeId, "/game_items", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateGameItem setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateGameItem setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateGameItem setAction (GameItem.EnumAction action) {
-      this.setParam("action", action);
-      return this;
-    }
-    public APIRequestCreateGameItem setAction (String action) {
-      this.setParam("action", action);
-      return this;
-    }
-
-    public APIRequestCreateGameItem setAppId (String appId) {
-      this.setParam("app_id", appId);
-      return this;
-    }
-
-    public APIRequestCreateGameItem setDropTableId (String dropTableId) {
-      this.setParam("drop_table_id", dropTableId);
-      return this;
-    }
-
-    public APIRequestCreateGameItem setExtId (String extId) {
-      this.setParam("ext_id", extId);
-      return this;
-    }
-
-    public APIRequestCreateGameItem setItemId (String itemId) {
-      this.setParam("item_id", itemId);
-      return this;
-    }
-
-    public APIRequestCreateGameItem setQuantity (Long quantity) {
-      this.setParam("quantity", quantity);
-      return this;
-    }
-    public APIRequestCreateGameItem setQuantity (String quantity) {
-      this.setParam("quantity", quantity);
-      return this;
-    }
-
-    public APIRequestCreateGameItem requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateGameItem requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateGameItem requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateGameItem requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateGameItem requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateGameItem requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
@@ -11892,6 +11892,7 @@ public class User extends APINode {
       "directed_by",
       "display_subtext",
       "displayed_message_response_time",
+      "does_viewer_have_page_permission_link_ig",
       "emails",
       "engagement",
       "fan_count",
@@ -11906,8 +11907,10 @@ public class User extends APINode {
       "global_brand_page_name",
       "global_brand_root_id",
       "has_added_app",
+      "has_lead_access",
       "has_transitioned_to_new_page_experience",
       "has_whatsapp_business_number",
+      "has_whatsapp_enterprise_number_using_cloud_api",
       "has_whatsapp_number",
       "hometown",
       "hours",
@@ -11919,6 +11922,7 @@ public class User extends APINode {
       "is_chain",
       "is_community_page",
       "is_eligible_for_branded_content",
+      "is_eligible_for_disable_connect_ig_btn_for_non_page_admin_am_web",
       "is_messenger_bot_get_started_enabled",
       "is_messenger_platform_bot",
       "is_owned",
@@ -11938,7 +11942,6 @@ public class User extends APINode {
       "merchant_review_status",
       "messaging_feature_status",
       "messenger_ads_default_icebreakers",
-      "messenger_ads_default_page_welcome_message",
       "messenger_ads_default_quick_replies",
       "messenger_ads_quick_replies_type",
       "mini_shop_storefront",
@@ -11951,6 +11954,7 @@ public class User extends APINode {
       "offer_eligible",
       "overall_star_rating",
       "owner_business",
+      "page_about_story",
       "page_token",
       "parent_page",
       "parking",
@@ -11993,6 +11997,7 @@ public class User extends APINode {
       "unread_message_count",
       "unread_notif_count",
       "unseen_message_count",
+      "user_access_expire_time",
       "username",
       "verification_status",
       "voip_info",
@@ -12355,6 +12360,13 @@ public class User extends APINode {
       this.requestField("displayed_message_response_time", value);
       return this;
     }
+    public APIRequestGetLikes requestDoesViewerHavePagePermissionLinkIgField () {
+      return this.requestDoesViewerHavePagePermissionLinkIgField(true);
+    }
+    public APIRequestGetLikes requestDoesViewerHavePagePermissionLinkIgField (boolean value) {
+      this.requestField("does_viewer_have_page_permission_link_ig", value);
+      return this;
+    }
     public APIRequestGetLikes requestEmailsField () {
       return this.requestEmailsField(true);
     }
@@ -12453,6 +12465,13 @@ public class User extends APINode {
       this.requestField("has_added_app", value);
       return this;
     }
+    public APIRequestGetLikes requestHasLeadAccessField () {
+      return this.requestHasLeadAccessField(true);
+    }
+    public APIRequestGetLikes requestHasLeadAccessField (boolean value) {
+      this.requestField("has_lead_access", value);
+      return this;
+    }
     public APIRequestGetLikes requestHasTransitionedToNewPageExperienceField () {
       return this.requestHasTransitionedToNewPageExperienceField(true);
     }
@@ -12465,6 +12484,13 @@ public class User extends APINode {
     }
     public APIRequestGetLikes requestHasWhatsappBusinessNumberField (boolean value) {
       this.requestField("has_whatsapp_business_number", value);
+      return this;
+    }
+    public APIRequestGetLikes requestHasWhatsappEnterpriseNumberUsingCloudApiField () {
+      return this.requestHasWhatsappEnterpriseNumberUsingCloudApiField(true);
+    }
+    public APIRequestGetLikes requestHasWhatsappEnterpriseNumberUsingCloudApiField (boolean value) {
+      this.requestField("has_whatsapp_enterprise_number_using_cloud_api", value);
       return this;
     }
     public APIRequestGetLikes requestHasWhatsappNumberField () {
@@ -12542,6 +12568,13 @@ public class User extends APINode {
     }
     public APIRequestGetLikes requestIsEligibleForBrandedContentField (boolean value) {
       this.requestField("is_eligible_for_branded_content", value);
+      return this;
+    }
+    public APIRequestGetLikes requestIsEligibleForDisableConnectIgBtnForNonPageAdminAmWebField () {
+      return this.requestIsEligibleForDisableConnectIgBtnForNonPageAdminAmWebField(true);
+    }
+    public APIRequestGetLikes requestIsEligibleForDisableConnectIgBtnForNonPageAdminAmWebField (boolean value) {
+      this.requestField("is_eligible_for_disable_connect_ig_btn_for_non_page_admin_am_web", value);
       return this;
     }
     public APIRequestGetLikes requestIsMessengerBotGetStartedEnabledField () {
@@ -12677,13 +12710,6 @@ public class User extends APINode {
       this.requestField("messenger_ads_default_icebreakers", value);
       return this;
     }
-    public APIRequestGetLikes requestMessengerAdsDefaultPageWelcomeMessageField () {
-      return this.requestMessengerAdsDefaultPageWelcomeMessageField(true);
-    }
-    public APIRequestGetLikes requestMessengerAdsDefaultPageWelcomeMessageField (boolean value) {
-      this.requestField("messenger_ads_default_page_welcome_message", value);
-      return this;
-    }
     public APIRequestGetLikes requestMessengerAdsDefaultQuickRepliesField () {
       return this.requestMessengerAdsDefaultQuickRepliesField(true);
     }
@@ -12766,6 +12792,13 @@ public class User extends APINode {
     }
     public APIRequestGetLikes requestOwnerBusinessField (boolean value) {
       this.requestField("owner_business", value);
+      return this;
+    }
+    public APIRequestGetLikes requestPageAboutStoryField () {
+      return this.requestPageAboutStoryField(true);
+    }
+    public APIRequestGetLikes requestPageAboutStoryField (boolean value) {
+      this.requestField("page_about_story", value);
       return this;
     }
     public APIRequestGetLikes requestPageTokenField () {
@@ -13060,6 +13093,13 @@ public class User extends APINode {
     }
     public APIRequestGetLikes requestUnseenMessageCountField (boolean value) {
       this.requestField("unseen_message_count", value);
+      return this;
+    }
+    public APIRequestGetLikes requestUserAccessExpireTimeField () {
+      return this.requestUserAccessExpireTimeField(true);
+    }
+    public APIRequestGetLikes requestUserAccessExpireTimeField (boolean value) {
+      this.requestField("user_access_expire_time", value);
       return this;
     }
     public APIRequestGetLikes requestUsernameField () {
@@ -13894,6 +13934,7 @@ public class User extends APINode {
       "directed_by",
       "display_subtext",
       "displayed_message_response_time",
+      "does_viewer_have_page_permission_link_ig",
       "emails",
       "engagement",
       "fan_count",
@@ -13908,8 +13949,10 @@ public class User extends APINode {
       "global_brand_page_name",
       "global_brand_root_id",
       "has_added_app",
+      "has_lead_access",
       "has_transitioned_to_new_page_experience",
       "has_whatsapp_business_number",
+      "has_whatsapp_enterprise_number_using_cloud_api",
       "has_whatsapp_number",
       "hometown",
       "hours",
@@ -13921,6 +13964,7 @@ public class User extends APINode {
       "is_chain",
       "is_community_page",
       "is_eligible_for_branded_content",
+      "is_eligible_for_disable_connect_ig_btn_for_non_page_admin_am_web",
       "is_messenger_bot_get_started_enabled",
       "is_messenger_platform_bot",
       "is_owned",
@@ -13940,7 +13984,6 @@ public class User extends APINode {
       "merchant_review_status",
       "messaging_feature_status",
       "messenger_ads_default_icebreakers",
-      "messenger_ads_default_page_welcome_message",
       "messenger_ads_default_quick_replies",
       "messenger_ads_quick_replies_type",
       "mini_shop_storefront",
@@ -13953,6 +13996,7 @@ public class User extends APINode {
       "offer_eligible",
       "overall_star_rating",
       "owner_business",
+      "page_about_story",
       "page_token",
       "parent_page",
       "parking",
@@ -13995,6 +14039,7 @@ public class User extends APINode {
       "unread_message_count",
       "unread_notif_count",
       "unseen_message_count",
+      "user_access_expire_time",
       "username",
       "verification_status",
       "voip_info",
@@ -14357,6 +14402,13 @@ public class User extends APINode {
       this.requestField("displayed_message_response_time", value);
       return this;
     }
+    public APIRequestGetMusic requestDoesViewerHavePagePermissionLinkIgField () {
+      return this.requestDoesViewerHavePagePermissionLinkIgField(true);
+    }
+    public APIRequestGetMusic requestDoesViewerHavePagePermissionLinkIgField (boolean value) {
+      this.requestField("does_viewer_have_page_permission_link_ig", value);
+      return this;
+    }
     public APIRequestGetMusic requestEmailsField () {
       return this.requestEmailsField(true);
     }
@@ -14455,6 +14507,13 @@ public class User extends APINode {
       this.requestField("has_added_app", value);
       return this;
     }
+    public APIRequestGetMusic requestHasLeadAccessField () {
+      return this.requestHasLeadAccessField(true);
+    }
+    public APIRequestGetMusic requestHasLeadAccessField (boolean value) {
+      this.requestField("has_lead_access", value);
+      return this;
+    }
     public APIRequestGetMusic requestHasTransitionedToNewPageExperienceField () {
       return this.requestHasTransitionedToNewPageExperienceField(true);
     }
@@ -14467,6 +14526,13 @@ public class User extends APINode {
     }
     public APIRequestGetMusic requestHasWhatsappBusinessNumberField (boolean value) {
       this.requestField("has_whatsapp_business_number", value);
+      return this;
+    }
+    public APIRequestGetMusic requestHasWhatsappEnterpriseNumberUsingCloudApiField () {
+      return this.requestHasWhatsappEnterpriseNumberUsingCloudApiField(true);
+    }
+    public APIRequestGetMusic requestHasWhatsappEnterpriseNumberUsingCloudApiField (boolean value) {
+      this.requestField("has_whatsapp_enterprise_number_using_cloud_api", value);
       return this;
     }
     public APIRequestGetMusic requestHasWhatsappNumberField () {
@@ -14544,6 +14610,13 @@ public class User extends APINode {
     }
     public APIRequestGetMusic requestIsEligibleForBrandedContentField (boolean value) {
       this.requestField("is_eligible_for_branded_content", value);
+      return this;
+    }
+    public APIRequestGetMusic requestIsEligibleForDisableConnectIgBtnForNonPageAdminAmWebField () {
+      return this.requestIsEligibleForDisableConnectIgBtnForNonPageAdminAmWebField(true);
+    }
+    public APIRequestGetMusic requestIsEligibleForDisableConnectIgBtnForNonPageAdminAmWebField (boolean value) {
+      this.requestField("is_eligible_for_disable_connect_ig_btn_for_non_page_admin_am_web", value);
       return this;
     }
     public APIRequestGetMusic requestIsMessengerBotGetStartedEnabledField () {
@@ -14679,13 +14752,6 @@ public class User extends APINode {
       this.requestField("messenger_ads_default_icebreakers", value);
       return this;
     }
-    public APIRequestGetMusic requestMessengerAdsDefaultPageWelcomeMessageField () {
-      return this.requestMessengerAdsDefaultPageWelcomeMessageField(true);
-    }
-    public APIRequestGetMusic requestMessengerAdsDefaultPageWelcomeMessageField (boolean value) {
-      this.requestField("messenger_ads_default_page_welcome_message", value);
-      return this;
-    }
     public APIRequestGetMusic requestMessengerAdsDefaultQuickRepliesField () {
       return this.requestMessengerAdsDefaultQuickRepliesField(true);
     }
@@ -14768,6 +14834,13 @@ public class User extends APINode {
     }
     public APIRequestGetMusic requestOwnerBusinessField (boolean value) {
       this.requestField("owner_business", value);
+      return this;
+    }
+    public APIRequestGetMusic requestPageAboutStoryField () {
+      return this.requestPageAboutStoryField(true);
+    }
+    public APIRequestGetMusic requestPageAboutStoryField (boolean value) {
+      this.requestField("page_about_story", value);
       return this;
     }
     public APIRequestGetMusic requestPageTokenField () {
@@ -15062,6 +15135,13 @@ public class User extends APINode {
     }
     public APIRequestGetMusic requestUnseenMessageCountField (boolean value) {
       this.requestField("unseen_message_count", value);
+      return this;
+    }
+    public APIRequestGetMusic requestUserAccessExpireTimeField () {
+      return this.requestUserAccessExpireTimeField(true);
+    }
+    public APIRequestGetMusic requestUserAccessExpireTimeField (boolean value) {
+      this.requestField("user_access_expire_time", value);
       return this;
     }
     public APIRequestGetMusic requestUsernameField () {
@@ -15859,6 +15939,7 @@ public class User extends APINode {
       "ad_account_promotable_objects",
       "age",
       "agency_client_declaration",
+      "all_capabilities",
       "amount_spent",
       "attribution_spec",
       "balance",
@@ -15918,6 +15999,7 @@ public class User extends APINode {
       "timezone_name",
       "timezone_offset_hours_utc",
       "tos_accepted",
+      "user_access_expire_time",
       "user_tasks",
       "user_tos_accepted",
       "viewable_business",
@@ -16045,6 +16127,13 @@ public class User extends APINode {
     }
     public APIRequestGetPersonalAdAccounts requestAgencyClientDeclarationField (boolean value) {
       this.requestField("agency_client_declaration", value);
+      return this;
+    }
+    public APIRequestGetPersonalAdAccounts requestAllCapabilitiesField () {
+      return this.requestAllCapabilitiesField(true);
+    }
+    public APIRequestGetPersonalAdAccounts requestAllCapabilitiesField (boolean value) {
+      this.requestField("all_capabilities", value);
       return this;
     }
     public APIRequestGetPersonalAdAccounts requestAmountSpentField () {
@@ -16458,6 +16547,13 @@ public class User extends APINode {
     }
     public APIRequestGetPersonalAdAccounts requestTosAcceptedField (boolean value) {
       this.requestField("tos_accepted", value);
+      return this;
+    }
+    public APIRequestGetPersonalAdAccounts requestUserAccessExpireTimeField () {
+      return this.requestUserAccessExpireTimeField(true);
+    }
+    public APIRequestGetPersonalAdAccounts requestUserAccessExpireTimeField (boolean value) {
+      this.requestField("user_access_expire_time", value);
       return this;
     }
     public APIRequestGetPersonalAdAccounts requestUserTasksField () {
@@ -17351,7 +17447,6 @@ public class User extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "breaking_change",
       "height",
       "redirect",
       "type",
@@ -17422,15 +17517,6 @@ public class User extends APINode {
       return this;
     }
 
-
-    public APIRequestGetPicture setBreakingChange (ProfilePictureSource.EnumBreakingChange breakingChange) {
-      this.setParam("breaking_change", breakingChange);
-      return this;
-    }
-    public APIRequestGetPicture setBreakingChange (String breakingChange) {
-      this.setParam("breaking_change", breakingChange);
-      return this;
-    }
 
     public APIRequestGetPicture setHeight (Long height) {
       this.setParam("height", height);
@@ -18673,6 +18759,7 @@ public class User extends APINode {
       "content_category",
       "content_tags",
       "copyright",
+      "copyright_check_information",
       "copyright_monitoring_status",
       "created_time",
       "custom_labels",
@@ -18697,6 +18784,7 @@ public class User extends APINode {
       "permalink_url",
       "picture",
       "place",
+      "post_id",
       "post_views",
       "premiere_living_room_status",
       "privacy",
@@ -18865,6 +18953,13 @@ public class User extends APINode {
       this.requestField("copyright", value);
       return this;
     }
+    public APIRequestGetVideos requestCopyrightCheckInformationField () {
+      return this.requestCopyrightCheckInformationField(true);
+    }
+    public APIRequestGetVideos requestCopyrightCheckInformationField (boolean value) {
+      this.requestField("copyright_check_information", value);
+      return this;
+    }
     public APIRequestGetVideos requestCopyrightMonitoringStatusField () {
       return this.requestCopyrightMonitoringStatusField(true);
     }
@@ -19031,6 +19126,13 @@ public class User extends APINode {
     }
     public APIRequestGetVideos requestPlaceField (boolean value) {
       this.requestField("place", value);
+      return this;
+    }
+    public APIRequestGetVideos requestPostIdField () {
+      return this.requestPostIdField(true);
+    }
+    public APIRequestGetVideos requestPostIdField (boolean value) {
+      this.requestField("post_id", value);
       return this;
     }
     public APIRequestGetVideos requestPostViewsField () {
@@ -19952,6 +20054,7 @@ public class User extends APINode {
     public static final String[] FIELDS = {
       "about",
       "age_range",
+      "avatar_2d_profile_picture",
       "birthday",
       "community",
       "cover",
@@ -19969,6 +20072,7 @@ public class User extends APINode {
       "install_type",
       "installed",
       "is_guest_user",
+      "is_work_account",
       "languages",
       "last_name",
       "link",
@@ -20102,6 +20206,13 @@ public class User extends APINode {
       this.requestField("age_range", value);
       return this;
     }
+    public APIRequestGet requestAvatar2dProfilePictureField () {
+      return this.requestAvatar2dProfilePictureField(true);
+    }
+    public APIRequestGet requestAvatar2dProfilePictureField (boolean value) {
+      this.requestField("avatar_2d_profile_picture", value);
+      return this;
+    }
     public APIRequestGet requestBirthdayField () {
       return this.requestBirthdayField(true);
     }
@@ -20219,6 +20330,13 @@ public class User extends APINode {
     }
     public APIRequestGet requestIsGuestUserField (boolean value) {
       this.requestField("is_guest_user", value);
+      return this;
+    }
+    public APIRequestGet requestIsWorkAccountField () {
+      return this.requestIsWorkAccountField(true);
+    }
+    public APIRequestGet requestIsWorkAccountField (boolean value) {
+      this.requestField("is_work_account", value);
       return this;
     }
     public APIRequestGet requestLanguagesField () {
@@ -20693,6 +20811,7 @@ public class User extends APINode {
   public User copyFrom(User instance) {
     this.mAbout = instance.mAbout;
     this.mAgeRange = instance.mAgeRange;
+    this.mAvatar2dProfilePicture = instance.mAvatar2dProfilePicture;
     this.mBirthday = instance.mBirthday;
     this.mCommunity = instance.mCommunity;
     this.mCover = instance.mCover;
@@ -20710,6 +20829,7 @@ public class User extends APINode {
     this.mInstallType = instance.mInstallType;
     this.mInstalled = instance.mInstalled;
     this.mIsGuestUser = instance.mIsGuestUser;
+    this.mIsWorkAccount = instance.mIsWorkAccount;
     this.mLanguages = instance.mLanguages;
     this.mLastName = instance.mLastName;
     this.mLink = instance.mLink;

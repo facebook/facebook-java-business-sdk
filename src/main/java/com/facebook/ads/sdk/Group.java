@@ -1,24 +1,9 @@
-/**
- * Copyright (c) 2015-present, Facebook, Inc. All rights reserved.
+/*
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ * All rights reserved.
  *
- * You are hereby granted a non-exclusive, worldwide, royalty-free license to
- * use, copy, modify, and distribute this software in source code or binary
- * form for use in connection with the web services and APIs provided by
- * Facebook.
- *
- * As with any software that integrates with the Facebook platform, your use
- * of this software is subject to the Facebook Developer Principles and
- * Policies [http://developers.facebook.com/policy/]. This copyright notice
- * shall be included in all copies or substantial portions of the software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
- * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
- * DEALINGS IN THE SOFTWARE.
- *
+ * This source code is licensed under the license found in the
+ * LICENSE file in the root directory of this source tree.
  */
 
 package com.facebook.ads.sdk;
@@ -316,14 +301,6 @@ public class Group extends APINode {
 
   public APIRequestCreateAlbum createAlbum() {
     return new APIRequestCreateAlbum(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestGetAttachmentSurfaces getAttachmentSurfaces() {
-    return new APIRequestGetAttachmentSurfaces(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestCreateAttachmentSurface createAttachmentSurface() {
-    return new APIRequestCreateAttachmentSurface(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetDocs getDocs() {
@@ -1010,6 +987,7 @@ public class Group extends APINode {
       "name",
       "place",
       "privacy",
+      "session_id",
       "tags",
       "visible",
     };
@@ -1131,6 +1109,11 @@ public class Group extends APINode {
       return this;
     }
 
+    public APIRequestCreateAlbum setSessionId (String sessionId) {
+      this.setParam("session_id", sessionId);
+      return this;
+    }
+
     public APIRequestCreateAlbum setTags (List<Long> tags) {
       this.setParam("tags", tags);
       return this;
@@ -1177,224 +1160,6 @@ public class Group extends APINode {
 
     @Override
     public APIRequestCreateAlbum requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
-  public static class APIRequestGetAttachmentSurfaces extends APIRequest<APINode> {
-
-    APINodeList<APINode> lastResponse = null;
-    @Override
-    public APINodeList<APINode> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<APINode> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetAttachmentSurfaces.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetAttachmentSurfaces(String nodeId, APIContext context) {
-      super(context, nodeId, "/attachment_surfaces", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetAttachmentSurfaces setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAttachmentSurfaces setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetAttachmentSurfaces requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetAttachmentSurfaces requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAttachmentSurfaces requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetAttachmentSurfaces requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAttachmentSurfaces requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAttachmentSurfaces requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
-  public static class APIRequestCreateAttachmentSurface extends APIRequest<APINode> {
-
-    APINode lastResponse = null;
-    @Override
-    public APINode getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "title",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINode parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public APINode execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINode execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINode> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINode>() {
-           public APINode apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateAttachmentSurface.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreateAttachmentSurface(String nodeId, APIContext context) {
-      super(context, nodeId, "/attachment_surfaces", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateAttachmentSurface setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateAttachmentSurface setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateAttachmentSurface setTitle (Map<String, String> title) {
-      this.setParam("title", title);
-      return this;
-    }
-    public APIRequestCreateAttachmentSurface setTitle (String title) {
-      this.setParam("title", title);
-      return this;
-    }
-
-    public APIRequestCreateAttachmentSurface requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateAttachmentSurface requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateAttachmentSurface requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateAttachmentSurface requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateAttachmentSurface requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateAttachmentSurface requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
@@ -2565,7 +2330,6 @@ public class Group extends APINode {
       "backdated_time_granularity",
       "call_to_action",
       "caption",
-      "checkin_entry_point",
       "child_attachments",
       "client_mutation_id",
       "composer_entry_picker",
@@ -2831,15 +2595,6 @@ public class Group extends APINode {
 
     public APIRequestCreateFeed setCaption (String caption) {
       this.setParam("caption", caption);
-      return this;
-    }
-
-    public APIRequestCreateFeed setCheckinEntryPoint (Post.EnumCheckinEntryPoint checkinEntryPoint) {
-      this.setParam("checkin_entry_point", checkinEntryPoint);
-      return this;
-    }
-    public APIRequestCreateFeed setCheckinEntryPoint (String checkinEntryPoint) {
-      this.setParam("checkin_entry_point", checkinEntryPoint);
       return this;
     }
 
@@ -3998,10 +3753,6 @@ public class Group extends APINode {
       return this;
     }
 
-    public APIRequestCreateGroup setGroupIconId (Object groupIconId) {
-      this.setParam("group_icon_id", groupIconId);
-      return this;
-    }
     public APIRequestCreateGroup setGroupIconId (String groupIconId) {
       this.setParam("group_icon_id", groupIconId);
       return this;
@@ -4030,10 +3781,6 @@ public class Group extends APINode {
       return this;
     }
 
-    public APIRequestCreateGroup setParentId (Object parentId) {
-      this.setParam("parent_id", parentId);
-      return this;
-    }
     public APIRequestCreateGroup setParentId (String parentId) {
       this.setParam("parent_id", parentId);
       return this;
@@ -5012,6 +4759,7 @@ public class Group extends APINode {
     public static final String[] FIELDS = {
       "about",
       "age_range",
+      "avatar_2d_profile_picture",
       "birthday",
       "community",
       "cover",
@@ -5029,6 +4777,7 @@ public class Group extends APINode {
       "install_type",
       "installed",
       "is_guest_user",
+      "is_work_account",
       "languages",
       "last_name",
       "link",
@@ -5162,6 +4911,13 @@ public class Group extends APINode {
       this.requestField("age_range", value);
       return this;
     }
+    public APIRequestGetOptedInMembers requestAvatar2dProfilePictureField () {
+      return this.requestAvatar2dProfilePictureField(true);
+    }
+    public APIRequestGetOptedInMembers requestAvatar2dProfilePictureField (boolean value) {
+      this.requestField("avatar_2d_profile_picture", value);
+      return this;
+    }
     public APIRequestGetOptedInMembers requestBirthdayField () {
       return this.requestBirthdayField(true);
     }
@@ -5279,6 +5035,13 @@ public class Group extends APINode {
     }
     public APIRequestGetOptedInMembers requestIsGuestUserField (boolean value) {
       this.requestField("is_guest_user", value);
+      return this;
+    }
+    public APIRequestGetOptedInMembers requestIsWorkAccountField () {
+      return this.requestIsWorkAccountField(true);
+    }
+    public APIRequestGetOptedInMembers requestIsWorkAccountField (boolean value) {
+      this.requestField("is_work_account", value);
       return this;
     }
     public APIRequestGetOptedInMembers requestLanguagesField () {
@@ -6017,7 +5780,6 @@ public class Group extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "breaking_change",
       "height",
       "redirect",
       "type",
@@ -6088,15 +5850,6 @@ public class Group extends APINode {
       return this;
     }
 
-
-    public APIRequestGetPicture setBreakingChange (ProfilePictureSource.EnumBreakingChange breakingChange) {
-      this.setParam("breaking_change", breakingChange);
-      return this;
-    }
-    public APIRequestGetPicture setBreakingChange (String breakingChange) {
-      this.setParam("breaking_change", breakingChange);
-      return this;
-    }
 
     public APIRequestGetPicture setHeight (Long height) {
       this.setParam("height", height);
@@ -6255,6 +6008,7 @@ public class Group extends APINode {
       "content_category",
       "content_tags",
       "copyright",
+      "copyright_check_information",
       "copyright_monitoring_status",
       "created_time",
       "custom_labels",
@@ -6279,6 +6033,7 @@ public class Group extends APINode {
       "permalink_url",
       "picture",
       "place",
+      "post_id",
       "post_views",
       "premiere_living_room_status",
       "privacy",
@@ -6447,6 +6202,13 @@ public class Group extends APINode {
       this.requestField("copyright", value);
       return this;
     }
+    public APIRequestGetVideos requestCopyrightCheckInformationField () {
+      return this.requestCopyrightCheckInformationField(true);
+    }
+    public APIRequestGetVideos requestCopyrightCheckInformationField (boolean value) {
+      this.requestField("copyright_check_information", value);
+      return this;
+    }
     public APIRequestGetVideos requestCopyrightMonitoringStatusField () {
       return this.requestCopyrightMonitoringStatusField(true);
     }
@@ -6613,6 +6375,13 @@ public class Group extends APINode {
     }
     public APIRequestGetVideos requestPlaceField (boolean value) {
       this.requestField("place", value);
+      return this;
+    }
+    public APIRequestGetVideos requestPostIdField () {
+      return this.requestPostIdField(true);
+    }
+    public APIRequestGetVideos requestPostIdField (boolean value) {
+      this.requestField("post_id", value);
       return this;
     }
     public APIRequestGetVideos requestPostViewsField () {

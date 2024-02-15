@@ -1,24 +1,9 @@
-/**
- * Copyright (c) 2015-present, Facebook, Inc. All rights reserved.
+/*
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ * All rights reserved.
  *
- * You are hereby granted a non-exclusive, worldwide, royalty-free license to
- * use, copy, modify, and distribute this software in source code or binary
- * form for use in connection with the web services and APIs provided by
- * Facebook.
- *
- * As with any software that integrates with the Facebook platform, your use
- * of this software is subject to the Facebook Developer Principles and
- * Policies [http://developers.facebook.com/policy/]. This copyright notice
- * shall be included in all copies or substantial portions of the software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
- * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
- * DEALINGS IN THE SOFTWARE.
- *
+ * This source code is licensed under the license found in the
+ * LICENSE file in the root directory of this source tree.
  */
 
 package com.facebook.ads.sdk;
@@ -348,6 +333,7 @@ public class VideoList extends APINode {
       "content_category",
       "content_tags",
       "copyright",
+      "copyright_check_information",
       "copyright_monitoring_status",
       "created_time",
       "custom_labels",
@@ -372,6 +358,7 @@ public class VideoList extends APINode {
       "permalink_url",
       "picture",
       "place",
+      "post_id",
       "post_views",
       "premiere_living_room_status",
       "privacy",
@@ -529,6 +516,13 @@ public class VideoList extends APINode {
     }
     public APIRequestGetVideos requestCopyrightField (boolean value) {
       this.requestField("copyright", value);
+      return this;
+    }
+    public APIRequestGetVideos requestCopyrightCheckInformationField () {
+      return this.requestCopyrightCheckInformationField(true);
+    }
+    public APIRequestGetVideos requestCopyrightCheckInformationField (boolean value) {
+      this.requestField("copyright_check_information", value);
       return this;
     }
     public APIRequestGetVideos requestCopyrightMonitoringStatusField () {
@@ -697,6 +691,13 @@ public class VideoList extends APINode {
     }
     public APIRequestGetVideos requestPlaceField (boolean value) {
       this.requestField("place", value);
+      return this;
+    }
+    public APIRequestGetVideos requestPostIdField () {
+      return this.requestPostIdField(true);
+    }
+    public APIRequestGetVideos requestPostIdField (boolean value) {
+      this.requestField("post_id", value);
       return this;
     }
     public APIRequestGetVideos requestPostViewsField () {

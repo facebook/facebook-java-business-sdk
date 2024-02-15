@@ -1,24 +1,9 @@
-/**
- * Copyright (c) 2015-present, Facebook, Inc. All rights reserved.
+/*
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ * All rights reserved.
  *
- * You are hereby granted a non-exclusive, worldwide, royalty-free license to
- * use, copy, modify, and distribute this software in source code or binary
- * form for use in connection with the web services and APIs provided by
- * Facebook.
- *
- * As with any software that integrates with the Facebook platform, your use
- * of this software is subject to the Facebook Developer Principles and
- * Policies [http://developers.facebook.com/policy/]. This copyright notice
- * shall be included in all copies or substantial portions of the software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
- * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
- * DEALINGS IN THE SOFTWARE.
- *
+ * This source code is licensed under the license found in the
+ * LICENSE file in the root directory of this source tree.
  */
 
 package com.facebook.ads.sdk;
@@ -2390,7 +2375,6 @@ public class ProductSet extends APINode {
       "additional_variant_attributes",
       "age_group",
       "applinks",
-      "ar_data",
       "availability",
       "brand",
       "capability_to_review_status",
@@ -2441,6 +2425,7 @@ public class ProductSet extends APINode {
       "product_catalog",
       "product_feed",
       "product_group",
+      "product_local_info",
       "product_type",
       "quantity_to_sell_on_facebook",
       "retailer_id",
@@ -2455,7 +2440,9 @@ public class ProductSet extends APINode {
       "short_description",
       "size",
       "start_date",
+      "tags",
       "url",
+      "video_fetch_status",
       "visibility",
       "wa_compliance_category",
     };
@@ -2618,13 +2605,6 @@ public class ProductSet extends APINode {
     }
     public APIRequestGetProducts requestApplinksField (boolean value) {
       this.requestField("applinks", value);
-      return this;
-    }
-    public APIRequestGetProducts requestArDataField () {
-      return this.requestArDataField(true);
-    }
-    public APIRequestGetProducts requestArDataField (boolean value) {
-      this.requestField("ar_data", value);
       return this;
     }
     public APIRequestGetProducts requestAvailabilityField () {
@@ -2977,6 +2957,13 @@ public class ProductSet extends APINode {
       this.requestField("product_group", value);
       return this;
     }
+    public APIRequestGetProducts requestProductLocalInfoField () {
+      return this.requestProductLocalInfoField(true);
+    }
+    public APIRequestGetProducts requestProductLocalInfoField (boolean value) {
+      this.requestField("product_local_info", value);
+      return this;
+    }
     public APIRequestGetProducts requestProductTypeField () {
       return this.requestProductTypeField(true);
     }
@@ -3075,11 +3062,25 @@ public class ProductSet extends APINode {
       this.requestField("start_date", value);
       return this;
     }
+    public APIRequestGetProducts requestTagsField () {
+      return this.requestTagsField(true);
+    }
+    public APIRequestGetProducts requestTagsField (boolean value) {
+      this.requestField("tags", value);
+      return this;
+    }
     public APIRequestGetProducts requestUrlField () {
       return this.requestUrlField(true);
     }
     public APIRequestGetProducts requestUrlField (boolean value) {
       this.requestField("url", value);
+      return this;
+    }
+    public APIRequestGetProducts requestVideoFetchStatusField () {
+      return this.requestVideoFetchStatusField(true);
+    }
+    public APIRequestGetProducts requestVideoFetchStatusField (boolean value) {
+      this.requestField("video_fetch_status", value);
       return this;
     }
     public APIRequestGetProducts requestVisibilityField () {

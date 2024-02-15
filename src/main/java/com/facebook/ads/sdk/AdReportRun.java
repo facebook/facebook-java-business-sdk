@@ -1,24 +1,9 @@
-/**
- * Copyright (c) 2015-present, Facebook, Inc. All rights reserved.
+/*
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ * All rights reserved.
  *
- * You are hereby granted a non-exclusive, worldwide, royalty-free license to
- * use, copy, modify, and distribute this software in source code or binary
- * form for use in connection with the web services and APIs provided by
- * Facebook.
- *
- * As with any software that integrates with the Facebook platform, your use
- * of this software is subject to the Facebook Developer Principles and
- * Policies [http://developers.facebook.com/policy/]. This copyright notice
- * shall be included in all copies or substantial portions of the software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
- * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
- * DEALINGS IN THE SOFTWARE.
- *
+ * This source code is licensed under the license found in the
+ * LICENSE file in the root directory of this source tree.
  */
 
 package com.facebook.ads.sdk;
@@ -402,6 +387,7 @@ public class AdReportRun extends APINode {
       "catalog_segment_value_omni_purchase_roas",
       "catalog_segment_value_website_purchase_roas",
       "clicks",
+      "conversion_lead_rate",
       "conversion_rate_ranking",
       "conversion_values",
       "conversions",
@@ -412,6 +398,7 @@ public class AdReportRun extends APINode {
       "cost_per_action_type",
       "cost_per_ad_click",
       "cost_per_conversion",
+      "cost_per_conversion_lead",
       "cost_per_dda_countby_convs",
       "cost_per_estimated_ad_recallers",
       "cost_per_inline_link_click",
@@ -456,6 +443,9 @@ public class AdReportRun extends APINode {
       "interactive_component_tap",
       "labels",
       "location",
+      "marketing_messages_cost_per_delivered",
+      "marketing_messages_cost_per_link_btn_click",
+      "marketing_messages_spend",
       "mobile_app_purchase_roas",
       "objective",
       "optimization_goal",
@@ -465,9 +455,6 @@ public class AdReportRun extends APINode {
       "purchase_roas",
       "qualifying_question_qualify_answer_rate",
       "quality_ranking",
-      "quality_score_ectr",
-      "quality_score_ecvr",
-      "quality_score_organic",
       "reach",
       "social_spend",
       "spend",
@@ -799,6 +786,13 @@ public class AdReportRun extends APINode {
       this.requestField("clicks", value);
       return this;
     }
+    public APIRequestGetInsights requestConversionLeadRateField () {
+      return this.requestConversionLeadRateField(true);
+    }
+    public APIRequestGetInsights requestConversionLeadRateField (boolean value) {
+      this.requestField("conversion_lead_rate", value);
+      return this;
+    }
     public APIRequestGetInsights requestConversionRateRankingField () {
       return this.requestConversionRateRankingField(true);
     }
@@ -867,6 +861,13 @@ public class AdReportRun extends APINode {
     }
     public APIRequestGetInsights requestCostPerConversionField (boolean value) {
       this.requestField("cost_per_conversion", value);
+      return this;
+    }
+    public APIRequestGetInsights requestCostPerConversionLeadField () {
+      return this.requestCostPerConversionLeadField(true);
+    }
+    public APIRequestGetInsights requestCostPerConversionLeadField (boolean value) {
+      this.requestField("cost_per_conversion_lead", value);
       return this;
     }
     public APIRequestGetInsights requestCostPerDdaCountbyConvsField () {
@@ -1177,6 +1178,27 @@ public class AdReportRun extends APINode {
       this.requestField("location", value);
       return this;
     }
+    public APIRequestGetInsights requestMarketingMessagesCostPerDeliveredField () {
+      return this.requestMarketingMessagesCostPerDeliveredField(true);
+    }
+    public APIRequestGetInsights requestMarketingMessagesCostPerDeliveredField (boolean value) {
+      this.requestField("marketing_messages_cost_per_delivered", value);
+      return this;
+    }
+    public APIRequestGetInsights requestMarketingMessagesCostPerLinkBtnClickField () {
+      return this.requestMarketingMessagesCostPerLinkBtnClickField(true);
+    }
+    public APIRequestGetInsights requestMarketingMessagesCostPerLinkBtnClickField (boolean value) {
+      this.requestField("marketing_messages_cost_per_link_btn_click", value);
+      return this;
+    }
+    public APIRequestGetInsights requestMarketingMessagesSpendField () {
+      return this.requestMarketingMessagesSpendField(true);
+    }
+    public APIRequestGetInsights requestMarketingMessagesSpendField (boolean value) {
+      this.requestField("marketing_messages_spend", value);
+      return this;
+    }
     public APIRequestGetInsights requestMobileAppPurchaseRoasField () {
       return this.requestMobileAppPurchaseRoasField(true);
     }
@@ -1238,27 +1260,6 @@ public class AdReportRun extends APINode {
     }
     public APIRequestGetInsights requestQualityRankingField (boolean value) {
       this.requestField("quality_ranking", value);
-      return this;
-    }
-    public APIRequestGetInsights requestQualityScoreEctrField () {
-      return this.requestQualityScoreEctrField(true);
-    }
-    public APIRequestGetInsights requestQualityScoreEctrField (boolean value) {
-      this.requestField("quality_score_ectr", value);
-      return this;
-    }
-    public APIRequestGetInsights requestQualityScoreEcvrField () {
-      return this.requestQualityScoreEcvrField(true);
-    }
-    public APIRequestGetInsights requestQualityScoreEcvrField (boolean value) {
-      this.requestField("quality_score_ecvr", value);
-      return this;
-    }
-    public APIRequestGetInsights requestQualityScoreOrganicField () {
-      return this.requestQualityScoreOrganicField(true);
-    }
-    public APIRequestGetInsights requestQualityScoreOrganicField (boolean value) {
-      this.requestField("quality_score_organic", value);
       return this;
     }
     public APIRequestGetInsights requestReachField () {
@@ -1733,6 +1734,8 @@ public class AdReportRun extends APINode {
   public static enum EnumActionAttributionWindows {
       @SerializedName("1d_click")
       VALUE_1D_CLICK("1d_click"),
+      @SerializedName("1d_ev")
+      VALUE_1D_EV("1d_ev"),
       @SerializedName("1d_view")
       VALUE_1D_VIEW("1d_view"),
       @SerializedName("28d_click")
@@ -1786,6 +1789,8 @@ public class AdReportRun extends APINode {
       VALUE_ACTION_VIDEO_SOUND("action_video_sound"),
       @SerializedName("action_video_type")
       VALUE_ACTION_VIDEO_TYPE("action_video_type"),
+      @SerializedName("standard_event_content_type")
+      VALUE_STANDARD_EVENT_CONTENT_TYPE("standard_event_content_type"),
       ;
 
       private String value;
@@ -1860,8 +1865,26 @@ public class AdReportRun extends APINode {
       VALUE_IMPRESSION_DEVICE("impression_device"),
       @SerializedName("is_conversion_id_modeled")
       VALUE_IS_CONVERSION_ID_MODELED("is_conversion_id_modeled"),
+      @SerializedName("landing_destination")
+      VALUE_LANDING_DESTINATION("landing_destination"),
       @SerializedName("link_url_asset")
       VALUE_LINK_URL_ASSET("link_url_asset"),
+      @SerializedName("marketing_messages_btn_name")
+      VALUE_MARKETING_MESSAGES_BTN_NAME("marketing_messages_btn_name"),
+      @SerializedName("mdsa_landing_destination")
+      VALUE_MDSA_LANDING_DESTINATION("mdsa_landing_destination"),
+      @SerializedName("media_asset_url")
+      VALUE_MEDIA_ASSET_URL("media_asset_url"),
+      @SerializedName("media_creator")
+      VALUE_MEDIA_CREATOR("media_creator"),
+      @SerializedName("media_destination_url")
+      VALUE_MEDIA_DESTINATION_URL("media_destination_url"),
+      @SerializedName("media_format")
+      VALUE_MEDIA_FORMAT("media_format"),
+      @SerializedName("media_origin_url")
+      VALUE_MEDIA_ORIGIN_URL("media_origin_url"),
+      @SerializedName("media_text_content")
+      VALUE_MEDIA_TEXT_CONTENT("media_text_content"),
       @SerializedName("mmm")
       VALUE_MMM("mmm"),
       @SerializedName("place_page_id")
@@ -1882,6 +1905,10 @@ public class AdReportRun extends APINode {
       VALUE_SKAN_CAMPAIGN_ID("skan_campaign_id"),
       @SerializedName("skan_conversion_id")
       VALUE_SKAN_CONVERSION_ID("skan_conversion_id"),
+      @SerializedName("skan_version")
+      VALUE_SKAN_VERSION("skan_version"),
+      @SerializedName("standard_event_content_type")
+      VALUE_STANDARD_EVENT_CONTENT_TYPE("standard_event_content_type"),
       @SerializedName("title_asset")
       VALUE_TITLE_ASSET("title_asset"),
       @SerializedName("video_asset")
@@ -1999,6 +2026,8 @@ public class AdReportRun extends APINode {
       VALUE_ACTION_VIDEO_SOUND("action_video_sound"),
       @SerializedName("action_video_type")
       VALUE_ACTION_VIDEO_TYPE("action_video_type"),
+      @SerializedName("standard_event_content_type")
+      VALUE_STANDARD_EVENT_CONTENT_TYPE("standard_event_content_type"),
       ;
 
       private String value;

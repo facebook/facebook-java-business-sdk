@@ -1,24 +1,9 @@
-/**
- * Copyright (c) 2015-present, Facebook, Inc. All rights reserved.
+/*
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ * All rights reserved.
  *
- * You are hereby granted a non-exclusive, worldwide, royalty-free license to
- * use, copy, modify, and distribute this software in source code or binary
- * form for use in connection with the web services and APIs provided by
- * Facebook.
- *
- * As with any software that integrates with the Facebook platform, your use
- * of this software is subject to the Facebook Developer Principles and
- * Policies [http://developers.facebook.com/policy/]. This copyright notice
- * shall be included in all copies or substantial portions of the software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
- * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
- * DEALINGS IN THE SOFTWARE.
- *
+ * This source code is licensed under the license found in the
+ * LICENSE file in the root directory of this source tree.
  */
 
 package com.facebook.ads.sdk;
@@ -58,11 +43,11 @@ public class AdAssetFeedSpec extends APINode {
   @SerializedName("ad_formats")
   private List<String> mAdFormats = null;
   @SerializedName("additional_data")
-  private Object mAdditionalData = null;
+  private AdAssetFeedAdditionalData mAdditionalData = null;
   @SerializedName("app_product_page_id")
   private String mAppProductPageId = null;
   @SerializedName("asset_customization_rules")
-  private List<Object> mAssetCustomizationRules = null;
+  private List<AdAssetFeedSpecAssetCustomizationRule> mAssetCustomizationRules = null;
   @SerializedName("autotranslate")
   private List<String> mAutotranslate = null;
   @SerializedName("bodies")
@@ -70,23 +55,31 @@ public class AdAssetFeedSpec extends APINode {
   @SerializedName("call_to_action_types")
   private List<EnumCallToActionTypes> mCallToActionTypes = null;
   @SerializedName("call_to_actions")
-  private List<Object> mCallToActions = null;
+  private List<AdAssetFeedSpecCallToAction> mCallToActions = null;
   @SerializedName("captions")
   private List<AdAssetFeedSpecCaption> mCaptions = null;
   @SerializedName("carousels")
-  private List<Object> mCarousels = null;
+  private List<AdAssetFeedSpecCarousel> mCarousels = null;
   @SerializedName("descriptions")
   private List<AdAssetFeedSpecDescription> mDescriptions = null;
   @SerializedName("events")
-  private List<Object> mEvents = null;
+  private List<AdAssetFeedSpecEvents> mEvents = null;
   @SerializedName("groups")
   private List<AdAssetFeedSpecGroupRule> mGroups = null;
   @SerializedName("images")
   private List<AdAssetFeedSpecImage> mImages = null;
   @SerializedName("link_urls")
   private List<AdAssetFeedSpecLinkURL> mLinkUrls = null;
+  @SerializedName("message_extensions")
+  private List<AdAssetMessageExtensions> mMessageExtensions = null;
+  @SerializedName("onsite_destinations")
+  private List<AdAssetOnsiteDestinations> mOnsiteDestinations = null;
   @SerializedName("optimization_type")
   private String mOptimizationType = null;
+  @SerializedName("reasons_to_shop")
+  private Boolean mReasonsToShop = null;
+  @SerializedName("shops_bundle")
+  private Boolean mShopsBundle = null;
   @SerializedName("titles")
   private List<AdAssetFeedSpecTitle> mTitles = null;
   @SerializedName("videos")
@@ -251,15 +244,20 @@ public class AdAssetFeedSpec extends APINode {
     return this;
   }
 
-  public Object getFieldAdditionalData() {
+  public AdAssetFeedAdditionalData getFieldAdditionalData() {
     return mAdditionalData;
   }
 
-  public AdAssetFeedSpec setFieldAdditionalData(Object value) {
+  public AdAssetFeedSpec setFieldAdditionalData(AdAssetFeedAdditionalData value) {
     this.mAdditionalData = value;
     return this;
   }
 
+  public AdAssetFeedSpec setFieldAdditionalData(String value) {
+    Type type = new TypeToken<AdAssetFeedAdditionalData>(){}.getType();
+    this.mAdditionalData = AdAssetFeedAdditionalData.getGson().fromJson(value, type);
+    return this;
+  }
   public String getFieldAppProductPageId() {
     return mAppProductPageId;
   }
@@ -269,15 +267,20 @@ public class AdAssetFeedSpec extends APINode {
     return this;
   }
 
-  public List<Object> getFieldAssetCustomizationRules() {
+  public List<AdAssetFeedSpecAssetCustomizationRule> getFieldAssetCustomizationRules() {
     return mAssetCustomizationRules;
   }
 
-  public AdAssetFeedSpec setFieldAssetCustomizationRules(List<Object> value) {
+  public AdAssetFeedSpec setFieldAssetCustomizationRules(List<AdAssetFeedSpecAssetCustomizationRule> value) {
     this.mAssetCustomizationRules = value;
     return this;
   }
 
+  public AdAssetFeedSpec setFieldAssetCustomizationRules(String value) {
+    Type type = new TypeToken<List<AdAssetFeedSpecAssetCustomizationRule>>(){}.getType();
+    this.mAssetCustomizationRules = AdAssetFeedSpecAssetCustomizationRule.getGson().fromJson(value, type);
+    return this;
+  }
   public List<String> getFieldAutotranslate() {
     return mAutotranslate;
   }
@@ -310,15 +313,20 @@ public class AdAssetFeedSpec extends APINode {
     return this;
   }
 
-  public List<Object> getFieldCallToActions() {
+  public List<AdAssetFeedSpecCallToAction> getFieldCallToActions() {
     return mCallToActions;
   }
 
-  public AdAssetFeedSpec setFieldCallToActions(List<Object> value) {
+  public AdAssetFeedSpec setFieldCallToActions(List<AdAssetFeedSpecCallToAction> value) {
     this.mCallToActions = value;
     return this;
   }
 
+  public AdAssetFeedSpec setFieldCallToActions(String value) {
+    Type type = new TypeToken<List<AdAssetFeedSpecCallToAction>>(){}.getType();
+    this.mCallToActions = AdAssetFeedSpecCallToAction.getGson().fromJson(value, type);
+    return this;
+  }
   public List<AdAssetFeedSpecCaption> getFieldCaptions() {
     return mCaptions;
   }
@@ -333,15 +341,20 @@ public class AdAssetFeedSpec extends APINode {
     this.mCaptions = AdAssetFeedSpecCaption.getGson().fromJson(value, type);
     return this;
   }
-  public List<Object> getFieldCarousels() {
+  public List<AdAssetFeedSpecCarousel> getFieldCarousels() {
     return mCarousels;
   }
 
-  public AdAssetFeedSpec setFieldCarousels(List<Object> value) {
+  public AdAssetFeedSpec setFieldCarousels(List<AdAssetFeedSpecCarousel> value) {
     this.mCarousels = value;
     return this;
   }
 
+  public AdAssetFeedSpec setFieldCarousels(String value) {
+    Type type = new TypeToken<List<AdAssetFeedSpecCarousel>>(){}.getType();
+    this.mCarousels = AdAssetFeedSpecCarousel.getGson().fromJson(value, type);
+    return this;
+  }
   public List<AdAssetFeedSpecDescription> getFieldDescriptions() {
     return mDescriptions;
   }
@@ -356,15 +369,20 @@ public class AdAssetFeedSpec extends APINode {
     this.mDescriptions = AdAssetFeedSpecDescription.getGson().fromJson(value, type);
     return this;
   }
-  public List<Object> getFieldEvents() {
+  public List<AdAssetFeedSpecEvents> getFieldEvents() {
     return mEvents;
   }
 
-  public AdAssetFeedSpec setFieldEvents(List<Object> value) {
+  public AdAssetFeedSpec setFieldEvents(List<AdAssetFeedSpecEvents> value) {
     this.mEvents = value;
     return this;
   }
 
+  public AdAssetFeedSpec setFieldEvents(String value) {
+    Type type = new TypeToken<List<AdAssetFeedSpecEvents>>(){}.getType();
+    this.mEvents = AdAssetFeedSpecEvents.getGson().fromJson(value, type);
+    return this;
+  }
   public List<AdAssetFeedSpecGroupRule> getFieldGroups() {
     return mGroups;
   }
@@ -407,12 +425,58 @@ public class AdAssetFeedSpec extends APINode {
     this.mLinkUrls = AdAssetFeedSpecLinkURL.getGson().fromJson(value, type);
     return this;
   }
+  public List<AdAssetMessageExtensions> getFieldMessageExtensions() {
+    return mMessageExtensions;
+  }
+
+  public AdAssetFeedSpec setFieldMessageExtensions(List<AdAssetMessageExtensions> value) {
+    this.mMessageExtensions = value;
+    return this;
+  }
+
+  public AdAssetFeedSpec setFieldMessageExtensions(String value) {
+    Type type = new TypeToken<List<AdAssetMessageExtensions>>(){}.getType();
+    this.mMessageExtensions = AdAssetMessageExtensions.getGson().fromJson(value, type);
+    return this;
+  }
+  public List<AdAssetOnsiteDestinations> getFieldOnsiteDestinations() {
+    return mOnsiteDestinations;
+  }
+
+  public AdAssetFeedSpec setFieldOnsiteDestinations(List<AdAssetOnsiteDestinations> value) {
+    this.mOnsiteDestinations = value;
+    return this;
+  }
+
+  public AdAssetFeedSpec setFieldOnsiteDestinations(String value) {
+    Type type = new TypeToken<List<AdAssetOnsiteDestinations>>(){}.getType();
+    this.mOnsiteDestinations = AdAssetOnsiteDestinations.getGson().fromJson(value, type);
+    return this;
+  }
   public String getFieldOptimizationType() {
     return mOptimizationType;
   }
 
   public AdAssetFeedSpec setFieldOptimizationType(String value) {
     this.mOptimizationType = value;
+    return this;
+  }
+
+  public Boolean getFieldReasonsToShop() {
+    return mReasonsToShop;
+  }
+
+  public AdAssetFeedSpec setFieldReasonsToShop(Boolean value) {
+    this.mReasonsToShop = value;
+    return this;
+  }
+
+  public Boolean getFieldShopsBundle() {
+    return mShopsBundle;
+  }
+
+  public AdAssetFeedSpec setFieldShopsBundle(Boolean value) {
+    this.mShopsBundle = value;
     return this;
   }
 
@@ -453,6 +517,8 @@ public class AdAssetFeedSpec extends APINode {
       VALUE_APPLY_NOW("APPLY_NOW"),
       @SerializedName("AUDIO_CALL")
       VALUE_AUDIO_CALL("AUDIO_CALL"),
+      @SerializedName("BOOK_NOW")
+      VALUE_BOOK_NOW("BOOK_NOW"),
       @SerializedName("BOOK_TRAVEL")
       VALUE_BOOK_TRAVEL("BOOK_TRAVEL"),
       @SerializedName("BUY")
@@ -467,6 +533,8 @@ public class AdAssetFeedSpec extends APINode {
       VALUE_CALL_ME("CALL_ME"),
       @SerializedName("CALL_NOW")
       VALUE_CALL_NOW("CALL_NOW"),
+      @SerializedName("CONFIRM")
+      VALUE_CONFIRM("CONFIRM"),
       @SerializedName("CONTACT")
       VALUE_CONTACT("CONTACT"),
       @SerializedName("CONTACT_US")
@@ -521,8 +589,6 @@ public class AdAssetFeedSpec extends APINode {
       VALUE_MESSAGE_PAGE("MESSAGE_PAGE"),
       @SerializedName("MOBILE_DOWNLOAD")
       VALUE_MOBILE_DOWNLOAD("MOBILE_DOWNLOAD"),
-      @SerializedName("MOMENTS")
-      VALUE_MOMENTS("MOMENTS"),
       @SerializedName("NO_BUTTON")
       VALUE_NO_BUTTON("NO_BUTTON"),
       @SerializedName("OPEN_INSTANT_APP")
@@ -639,7 +705,11 @@ public class AdAssetFeedSpec extends APINode {
     this.mGroups = instance.mGroups;
     this.mImages = instance.mImages;
     this.mLinkUrls = instance.mLinkUrls;
+    this.mMessageExtensions = instance.mMessageExtensions;
+    this.mOnsiteDestinations = instance.mOnsiteDestinations;
     this.mOptimizationType = instance.mOptimizationType;
+    this.mReasonsToShop = instance.mReasonsToShop;
+    this.mShopsBundle = instance.mShopsBundle;
     this.mTitles = instance.mTitles;
     this.mVideos = instance.mVideos;
     this.context = instance.context;

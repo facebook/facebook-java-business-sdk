@@ -1,24 +1,9 @@
-/**
- * Copyright (c) 2015-present, Facebook, Inc. All rights reserved.
+/*
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ * All rights reserved.
  *
- * You are hereby granted a non-exclusive, worldwide, royalty-free license to
- * use, copy, modify, and distribute this software in source code or binary
- * form for use in connection with the web services and APIs provided by
- * Facebook.
- *
- * As with any software that integrates with the Facebook platform, your use
- * of this software is subject to the Facebook Developer Principles and
- * Policies [http://developers.facebook.com/policy/]. This copyright notice
- * shall be included in all copies or substantial portions of the software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
- * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
- * DEALINGS IN THE SOFTWARE.
- *
+ * This source code is licensed under the license found in the
+ * LICENSE file in the root directory of this source tree.
  */
 
 package com.facebook.ads.sdk;
@@ -354,6 +339,7 @@ public class AdLabel extends APINode {
       "categorization_criteria",
       "category_media_source",
       "collaborative_ads_lsb_image_bank_id",
+      "creative_sourcing_spec",
       "degrees_of_freedom_spec",
       "destination_set_id",
       "dynamic_ad_voice",
@@ -387,6 +373,7 @@ public class AdLabel extends APINode {
       "object_type",
       "object_url",
       "omnichannel_link_spec",
+      "photo_album_source_object_story_id",
       "place_page_set_id",
       "platform_customizations",
       "playable_asset_id",
@@ -597,6 +584,13 @@ public class AdLabel extends APINode {
     }
     public APIRequestGetAdCreatives requestCollaborativeAdsLsbImageBankIdField (boolean value) {
       this.requestField("collaborative_ads_lsb_image_bank_id", value);
+      return this;
+    }
+    public APIRequestGetAdCreatives requestCreativeSourcingSpecField () {
+      return this.requestCreativeSourcingSpecField(true);
+    }
+    public APIRequestGetAdCreatives requestCreativeSourcingSpecField (boolean value) {
+      this.requestField("creative_sourcing_spec", value);
       return this;
     }
     public APIRequestGetAdCreatives requestDegreesOfFreedomSpecField () {
@@ -830,6 +824,13 @@ public class AdLabel extends APINode {
       this.requestField("omnichannel_link_spec", value);
       return this;
     }
+    public APIRequestGetAdCreatives requestPhotoAlbumSourceObjectStoryIdField () {
+      return this.requestPhotoAlbumSourceObjectStoryIdField(true);
+    }
+    public APIRequestGetAdCreatives requestPhotoAlbumSourceObjectStoryIdField (boolean value) {
+      this.requestField("photo_album_source_object_story_id", value);
+      return this;
+    }
     public APIRequestGetAdCreatives requestPlacePageSetIdField () {
       return this.requestPlacePageSetIdField(true);
     }
@@ -956,7 +957,10 @@ public class AdLabel extends APINode {
 
     public static final String[] FIELDS = {
       "account_id",
+      "ad_active_time",
       "ad_review_feedback",
+      "ad_schedule_end_time",
+      "ad_schedule_start_time",
       "adlabels",
       "adset",
       "adset_id",
@@ -978,7 +982,6 @@ public class AdLabel extends APINode {
       "id",
       "issues_info",
       "last_updated_by_app_id",
-      "meta_reward_adgroup_status",
       "name",
       "preview_shareable_link",
       "priority",
@@ -1088,11 +1091,32 @@ public class AdLabel extends APINode {
       this.requestField("account_id", value);
       return this;
     }
+    public APIRequestGetAds requestAdActiveTimeField () {
+      return this.requestAdActiveTimeField(true);
+    }
+    public APIRequestGetAds requestAdActiveTimeField (boolean value) {
+      this.requestField("ad_active_time", value);
+      return this;
+    }
     public APIRequestGetAds requestAdReviewFeedbackField () {
       return this.requestAdReviewFeedbackField(true);
     }
     public APIRequestGetAds requestAdReviewFeedbackField (boolean value) {
       this.requestField("ad_review_feedback", value);
+      return this;
+    }
+    public APIRequestGetAds requestAdScheduleEndTimeField () {
+      return this.requestAdScheduleEndTimeField(true);
+    }
+    public APIRequestGetAds requestAdScheduleEndTimeField (boolean value) {
+      this.requestField("ad_schedule_end_time", value);
+      return this;
+    }
+    public APIRequestGetAds requestAdScheduleStartTimeField () {
+      return this.requestAdScheduleStartTimeField(true);
+    }
+    public APIRequestGetAds requestAdScheduleStartTimeField (boolean value) {
+      this.requestField("ad_schedule_start_time", value);
       return this;
     }
     public APIRequestGetAds requestAdlabelsField () {
@@ -1242,13 +1266,6 @@ public class AdLabel extends APINode {
       this.requestField("last_updated_by_app_id", value);
       return this;
     }
-    public APIRequestGetAds requestMetaRewardAdgroupStatusField () {
-      return this.requestMetaRewardAdgroupStatusField(true);
-    }
-    public APIRequestGetAds requestMetaRewardAdgroupStatusField (boolean value) {
-      this.requestField("meta_reward_adgroup_status", value);
-      return this;
-    }
     public APIRequestGetAds requestNameField () {
       return this.requestNameField(true);
     }
@@ -1352,6 +1369,7 @@ public class AdLabel extends APINode {
       "billing_event",
       "budget_remaining",
       "campaign",
+      "campaign_active_time",
       "campaign_attribution",
       "campaign_id",
       "configured_status",
@@ -1370,6 +1388,7 @@ public class AdLabel extends APINode {
       "full_funnel_exploration_mode",
       "id",
       "instagram_actor_id",
+      "is_budget_schedule_enabled",
       "is_dynamic_creative",
       "issues_info",
       "learning_stage_info",
@@ -1579,6 +1598,13 @@ public class AdLabel extends APINode {
       this.requestField("campaign", value);
       return this;
     }
+    public APIRequestGetAdSets requestCampaignActiveTimeField () {
+      return this.requestCampaignActiveTimeField(true);
+    }
+    public APIRequestGetAdSets requestCampaignActiveTimeField (boolean value) {
+      this.requestField("campaign_active_time", value);
+      return this;
+    }
     public APIRequestGetAdSets requestCampaignAttributionField () {
       return this.requestCampaignAttributionField(true);
     }
@@ -1703,6 +1729,13 @@ public class AdLabel extends APINode {
     }
     public APIRequestGetAdSets requestInstagramActorIdField (boolean value) {
       this.requestField("instagram_actor_id", value);
+      return this;
+    }
+    public APIRequestGetAdSets requestIsBudgetScheduleEnabledField () {
+      return this.requestIsBudgetScheduleEnabledField(true);
+    }
+    public APIRequestGetAdSets requestIsBudgetScheduleEnabledField (boolean value) {
+      this.requestField("is_budget_schedule_enabled", value);
       return this;
     }
     public APIRequestGetAdSets requestIsDynamicCreativeField () {
@@ -1915,6 +1948,7 @@ public class AdLabel extends APINode {
       "budget_rebalance_flag",
       "budget_remaining",
       "buying_type",
+      "campaign_group_active_time",
       "can_create_brand_lift_study",
       "can_use_spend_cap",
       "configured_status",
@@ -1923,6 +1957,7 @@ public class AdLabel extends APINode {
       "effective_status",
       "has_secondary_skadnetwork_reporting",
       "id",
+      "is_budget_schedule_enabled",
       "is_skadnetwork_attribution",
       "issues_info",
       "last_budget_toggling_time",
@@ -2092,6 +2127,13 @@ public class AdLabel extends APINode {
       this.requestField("buying_type", value);
       return this;
     }
+    public APIRequestGetCampaigns requestCampaignGroupActiveTimeField () {
+      return this.requestCampaignGroupActiveTimeField(true);
+    }
+    public APIRequestGetCampaigns requestCampaignGroupActiveTimeField (boolean value) {
+      this.requestField("campaign_group_active_time", value);
+      return this;
+    }
     public APIRequestGetCampaigns requestCanCreateBrandLiftStudyField () {
       return this.requestCanCreateBrandLiftStudyField(true);
     }
@@ -2146,6 +2188,13 @@ public class AdLabel extends APINode {
     }
     public APIRequestGetCampaigns requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestIsBudgetScheduleEnabledField () {
+      return this.requestIsBudgetScheduleEnabledField(true);
+    }
+    public APIRequestGetCampaigns requestIsBudgetScheduleEnabledField (boolean value) {
+      this.requestField("is_budget_schedule_enabled", value);
       return this;
     }
     public APIRequestGetCampaigns requestIsSkadnetworkAttributionField () {

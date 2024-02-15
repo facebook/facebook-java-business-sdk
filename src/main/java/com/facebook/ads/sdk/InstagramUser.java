@@ -1,24 +1,9 @@
-/**
- * Copyright (c) 2015-present, Facebook, Inc. All rights reserved.
+/*
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ * All rights reserved.
  *
- * You are hereby granted a non-exclusive, worldwide, royalty-free license to
- * use, copy, modify, and distribute this software in source code or binary
- * form for use in connection with the web services and APIs provided by
- * Facebook.
- *
- * As with any software that integrates with the Facebook platform, your use
- * of this software is subject to the Facebook Developer Principles and
- * Policies [http://developers.facebook.com/policy/]. This copyright notice
- * shall be included in all copies or substantial portions of the software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
- * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
- * DEALINGS IN THE SOFTWARE.
- *
+ * This source code is licensed under the license found in the
+ * LICENSE file in the root directory of this source tree.
  */
 
 package com.facebook.ads.sdk;
@@ -290,6 +275,10 @@ public class InstagramUser extends APINode {
     return new APIRequestGetAgencies(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetArEffects getArEffects() {
+    return new APIRequestGetArEffects(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetAuthorizedAdAccounts getAuthorizedAdAccounts() {
     return new APIRequestGetAuthorizedAdAccounts(this.getPrefixedId().toString(), context);
   }
@@ -383,6 +372,7 @@ public class InstagramUser extends APINode {
       "two_factor_type",
       "updated_by",
       "updated_time",
+      "user_access_expire_time",
       "verification_status",
       "vertical",
       "vertical_id",
@@ -596,6 +586,13 @@ public class InstagramUser extends APINode {
       this.requestField("updated_time", value);
       return this;
     }
+    public APIRequestGetAgencies requestUserAccessExpireTimeField () {
+      return this.requestUserAccessExpireTimeField(true);
+    }
+    public APIRequestGetAgencies requestUserAccessExpireTimeField (boolean value) {
+      this.requestField("user_access_expire_time", value);
+      return this;
+    }
     public APIRequestGetAgencies requestVerificationStatusField () {
       return this.requestVerificationStatusField(true);
     }
@@ -619,6 +616,110 @@ public class InstagramUser extends APINode {
     }
   }
 
+  public static class APIRequestGetArEffects extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetArEffects.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetArEffects(String nodeId, APIContext context) {
+      super(context, nodeId, "/ar_effects", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetArEffects setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetArEffects setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetArEffects requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetArEffects requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetArEffects requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetArEffects requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetArEffects requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetArEffects requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGetAuthorizedAdAccounts extends APIRequest<AdAccount> {
 
     APINodeList<AdAccount> lastResponse = null;
@@ -636,6 +737,7 @@ public class InstagramUser extends APINode {
       "ad_account_promotable_objects",
       "age",
       "agency_client_declaration",
+      "all_capabilities",
       "amount_spent",
       "attribution_spec",
       "balance",
@@ -695,6 +797,7 @@ public class InstagramUser extends APINode {
       "timezone_name",
       "timezone_offset_hours_utc",
       "tos_accepted",
+      "user_access_expire_time",
       "user_tasks",
       "user_tos_accepted",
       "viewable_business",
@@ -827,6 +930,13 @@ public class InstagramUser extends APINode {
     }
     public APIRequestGetAuthorizedAdAccounts requestAgencyClientDeclarationField (boolean value) {
       this.requestField("agency_client_declaration", value);
+      return this;
+    }
+    public APIRequestGetAuthorizedAdAccounts requestAllCapabilitiesField () {
+      return this.requestAllCapabilitiesField(true);
+    }
+    public APIRequestGetAuthorizedAdAccounts requestAllCapabilitiesField (boolean value) {
+      this.requestField("all_capabilities", value);
       return this;
     }
     public APIRequestGetAuthorizedAdAccounts requestAmountSpentField () {
@@ -1240,6 +1350,13 @@ public class InstagramUser extends APINode {
     }
     public APIRequestGetAuthorizedAdAccounts requestTosAcceptedField (boolean value) {
       this.requestField("tos_accepted", value);
+      return this;
+    }
+    public APIRequestGetAuthorizedAdAccounts requestUserAccessExpireTimeField () {
+      return this.requestUserAccessExpireTimeField(true);
+    }
+    public APIRequestGetAuthorizedAdAccounts requestUserAccessExpireTimeField (boolean value) {
+      this.requestField("user_access_expire_time", value);
       return this;
     }
     public APIRequestGetAuthorizedAdAccounts requestUserTasksField () {

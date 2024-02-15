@@ -1,0 +1,324 @@
+/*
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ * All rights reserved.
+ *
+ * This source code is licensed under the license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+package com.facebook.ads.sdk;
+
+import java.io.File;
+import java.lang.reflect.Modifier;
+import java.lang.reflect.Type;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import com.google.common.base.Function;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.SettableFuture;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonArray;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.reflect.TypeToken;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
+
+import com.facebook.ads.sdk.APIException.MalformedResponseException;
+
+/**
+ * This class is auto-generated.
+ *
+ * For any issues or feature requests related to this class, please let us know
+ * on github and we'll fix in our codegen framework. We'll not be able to accept
+ * pull request for this class.
+ *
+ */
+public class ShadowIGUserCatalogProductSearch extends APINode {
+  @SerializedName("image_url")
+  private String mImageUrl = null;
+  @SerializedName("is_checkout_flow")
+  private Boolean mIsCheckoutFlow = null;
+  @SerializedName("merchant_id")
+  private Long mMerchantId = null;
+  @SerializedName("product_id")
+  private Long mProductId = null;
+  @SerializedName("product_name")
+  private String mProductName = null;
+  @SerializedName("product_variants")
+  private List<ShadowIGUserCatalogProductVariant> mProductVariants = null;
+  @SerializedName("retailer_id")
+  private String mRetailerId = null;
+  @SerializedName("review_status")
+  private String mReviewStatus = null;
+  protected static Gson gson = null;
+
+  public ShadowIGUserCatalogProductSearch() {
+  }
+
+  public String getId() {
+    return null;
+  }
+  public static ShadowIGUserCatalogProductSearch loadJSON(String json, APIContext context, String header) {
+    ShadowIGUserCatalogProductSearch shadowIGUserCatalogProductSearch = getGson().fromJson(json, ShadowIGUserCatalogProductSearch.class);
+    if (context.isDebug()) {
+      JsonParser parser = new JsonParser();
+      JsonElement o1 = parser.parse(json);
+      JsonElement o2 = parser.parse(shadowIGUserCatalogProductSearch.toString());
+      if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
+        o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
+      }
+      if (!o1.equals(o2)) {
+        context.log("[Warning] When parsing response, object is not consistent with JSON:");
+        context.log("[JSON]" + o1);
+        context.log("[Object]" + o2);
+      }
+    }
+    shadowIGUserCatalogProductSearch.context = context;
+    shadowIGUserCatalogProductSearch.rawValue = json;
+    shadowIGUserCatalogProductSearch.header = header;
+    return shadowIGUserCatalogProductSearch;
+  }
+
+  public static APINodeList<ShadowIGUserCatalogProductSearch> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<ShadowIGUserCatalogProductSearch> shadowIGUserCatalogProductSearchs = new APINodeList<ShadowIGUserCatalogProductSearch>(request, json, header);
+    JsonArray arr;
+    JsonObject obj;
+    JsonParser parser = new JsonParser();
+    Exception exception = null;
+    try{
+      JsonElement result = parser.parse(json);
+      if (result.isJsonArray()) {
+        // First, check if it's a pure JSON Array
+        arr = result.getAsJsonArray();
+        for (int i = 0; i < arr.size(); i++) {
+          shadowIGUserCatalogProductSearchs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+        };
+        return shadowIGUserCatalogProductSearchs;
+      } else if (result.isJsonObject()) {
+        obj = result.getAsJsonObject();
+        if (obj.has("data")) {
+          if (obj.has("paging")) {
+            JsonObject paging = obj.get("paging").getAsJsonObject();
+            if (paging.has("cursors")) {
+                JsonObject cursors = paging.get("cursors").getAsJsonObject();
+                String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
+                String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
+                shadowIGUserCatalogProductSearchs.setCursors(before, after);
+            }
+            String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
+            String next = paging.has("next") ? paging.get("next").getAsString() : null;
+            shadowIGUserCatalogProductSearchs.setPaging(previous, next);
+            if (context.hasAppSecret()) {
+              shadowIGUserCatalogProductSearchs.setAppSecret(context.getAppSecretProof());
+            }
+          }
+          if (obj.get("data").isJsonArray()) {
+            // Second, check if it's a JSON array with "data"
+            arr = obj.get("data").getAsJsonArray();
+            for (int i = 0; i < arr.size(); i++) {
+              shadowIGUserCatalogProductSearchs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+            };
+          } else if (obj.get("data").isJsonObject()) {
+            // Third, check if it's a JSON object with "data"
+            obj = obj.get("data").getAsJsonObject();
+            boolean isRedownload = false;
+            for (String s : new String[]{"campaigns", "adsets", "ads"}) {
+              if (obj.has(s)) {
+                isRedownload = true;
+                obj = obj.getAsJsonObject(s);
+                for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
+                  shadowIGUserCatalogProductSearchs.add(loadJSON(entry.getValue().toString(), context, header));
+                }
+                break;
+              }
+            }
+            if (!isRedownload) {
+              shadowIGUserCatalogProductSearchs.add(loadJSON(obj.toString(), context, header));
+            }
+          }
+          return shadowIGUserCatalogProductSearchs;
+        } else if (obj.has("images")) {
+          // Fourth, check if it's a map of image objects
+          obj = obj.get("images").getAsJsonObject();
+          for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
+              shadowIGUserCatalogProductSearchs.add(loadJSON(entry.getValue().toString(), context, header));
+          }
+          return shadowIGUserCatalogProductSearchs;
+        } else {
+          // Fifth, check if it's an array of objects indexed by id
+          boolean isIdIndexedArray = true;
+          for (Map.Entry entry : obj.entrySet()) {
+            String key = (String) entry.getKey();
+            if (key.equals("__fb_trace_id__")) {
+              continue;
+            }
+            JsonElement value = (JsonElement) entry.getValue();
+            if (
+              value != null &&
+              value.isJsonObject() &&
+              value.getAsJsonObject().has("id") &&
+              value.getAsJsonObject().get("id") != null &&
+              value.getAsJsonObject().get("id").getAsString().equals(key)
+            ) {
+              shadowIGUserCatalogProductSearchs.add(loadJSON(value.toString(), context, header));
+            } else {
+              isIdIndexedArray = false;
+              break;
+            }
+          }
+          if (isIdIndexedArray) {
+            return shadowIGUserCatalogProductSearchs;
+          }
+
+          // Sixth, check if it's pure JsonObject
+          shadowIGUserCatalogProductSearchs.clear();
+          shadowIGUserCatalogProductSearchs.add(loadJSON(json, context, header));
+          return shadowIGUserCatalogProductSearchs;
+        }
+      }
+    } catch (Exception e) {
+      exception = e;
+    }
+    throw new MalformedResponseException(
+      "Invalid response string: " + json,
+      exception
+    );
+  }
+
+  @Override
+  public APIContext getContext() {
+    return context;
+  }
+
+  @Override
+  public void setContext(APIContext context) {
+    this.context = context;
+  }
+
+  @Override
+  public String toString() {
+    return getGson().toJson(this);
+  }
+
+
+  public String getFieldImageUrl() {
+    return mImageUrl;
+  }
+
+  public ShadowIGUserCatalogProductSearch setFieldImageUrl(String value) {
+    this.mImageUrl = value;
+    return this;
+  }
+
+  public Boolean getFieldIsCheckoutFlow() {
+    return mIsCheckoutFlow;
+  }
+
+  public ShadowIGUserCatalogProductSearch setFieldIsCheckoutFlow(Boolean value) {
+    this.mIsCheckoutFlow = value;
+    return this;
+  }
+
+  public Long getFieldMerchantId() {
+    return mMerchantId;
+  }
+
+  public ShadowIGUserCatalogProductSearch setFieldMerchantId(Long value) {
+    this.mMerchantId = value;
+    return this;
+  }
+
+  public Long getFieldProductId() {
+    return mProductId;
+  }
+
+  public ShadowIGUserCatalogProductSearch setFieldProductId(Long value) {
+    this.mProductId = value;
+    return this;
+  }
+
+  public String getFieldProductName() {
+    return mProductName;
+  }
+
+  public ShadowIGUserCatalogProductSearch setFieldProductName(String value) {
+    this.mProductName = value;
+    return this;
+  }
+
+  public List<ShadowIGUserCatalogProductVariant> getFieldProductVariants() {
+    return mProductVariants;
+  }
+
+  public ShadowIGUserCatalogProductSearch setFieldProductVariants(List<ShadowIGUserCatalogProductVariant> value) {
+    this.mProductVariants = value;
+    return this;
+  }
+
+  public ShadowIGUserCatalogProductSearch setFieldProductVariants(String value) {
+    Type type = new TypeToken<List<ShadowIGUserCatalogProductVariant>>(){}.getType();
+    this.mProductVariants = ShadowIGUserCatalogProductVariant.getGson().fromJson(value, type);
+    return this;
+  }
+  public String getFieldRetailerId() {
+    return mRetailerId;
+  }
+
+  public ShadowIGUserCatalogProductSearch setFieldRetailerId(String value) {
+    this.mRetailerId = value;
+    return this;
+  }
+
+  public String getFieldReviewStatus() {
+    return mReviewStatus;
+  }
+
+  public ShadowIGUserCatalogProductSearch setFieldReviewStatus(String value) {
+    this.mReviewStatus = value;
+    return this;
+  }
+
+
+
+
+  synchronized /*package*/ static Gson getGson() {
+    if (gson != null) {
+      return gson;
+    } else {
+      gson = new GsonBuilder()
+        .excludeFieldsWithModifiers(Modifier.STATIC)
+        .excludeFieldsWithModifiers(Modifier.PROTECTED)
+        .disableHtmlEscaping()
+        .create();
+    }
+    return gson;
+  }
+
+  public ShadowIGUserCatalogProductSearch copyFrom(ShadowIGUserCatalogProductSearch instance) {
+    this.mImageUrl = instance.mImageUrl;
+    this.mIsCheckoutFlow = instance.mIsCheckoutFlow;
+    this.mMerchantId = instance.mMerchantId;
+    this.mProductId = instance.mProductId;
+    this.mProductName = instance.mProductName;
+    this.mProductVariants = instance.mProductVariants;
+    this.mRetailerId = instance.mRetailerId;
+    this.mReviewStatus = instance.mReviewStatus;
+    this.context = instance.context;
+    this.rawValue = instance.rawValue;
+    return this;
+  }
+
+  public static APIRequest.ResponseParser<ShadowIGUserCatalogProductSearch> getParser() {
+    return new APIRequest.ResponseParser<ShadowIGUserCatalogProductSearch>() {
+      public APINodeList<ShadowIGUserCatalogProductSearch> parseResponse(String response, APIContext context, APIRequest<ShadowIGUserCatalogProductSearch> request, String header) throws MalformedResponseException {
+        return ShadowIGUserCatalogProductSearch.parseResponse(response, context, request, header);
+      }
+    };
+  }
+}

@@ -1,24 +1,9 @@
-/**
- * Copyright (c) 2015-present, Facebook, Inc. All rights reserved.
+/*
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ * All rights reserved.
  *
- * You are hereby granted a non-exclusive, worldwide, royalty-free license to
- * use, copy, modify, and distribute this software in source code or binary
- * form for use in connection with the web services and APIs provided by
- * Facebook.
- *
- * As with any software that integrates with the Facebook platform, your use
- * of this software is subject to the Facebook Developer Principles and
- * Policies [http://developers.facebook.com/policy/]. This copyright notice
- * shall be included in all copies or substantial portions of the software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
- * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
- * DEALINGS IN THE SOFTWARE.
- *
+ * This source code is licensed under the license found in the
+ * LICENSE file in the root directory of this source tree.
  */
 
 package com.facebook.ads.sdk;
@@ -59,8 +44,6 @@ public class CommerceMerchantSettings extends APINode {
   private String mBraintreeMerchantId = null;
   @SerializedName("checkout_message")
   private String mCheckoutMessage = null;
-  @SerializedName("commerce_store")
-  private Object mCommerceStore = null;
   @SerializedName("contact_email")
   private String mContactEmail = null;
   @SerializedName("cta")
@@ -391,10 +374,6 @@ public class CommerceMerchantSettings extends APINode {
 
   public String getFieldCheckoutMessage() {
     return mCheckoutMessage;
-  }
-
-  public Object getFieldCommerceStore() {
-    return mCommerceStore;
   }
 
   public String getFieldContactEmail() {
@@ -1356,6 +1335,8 @@ public class CommerceMerchantSettings extends APINode {
       "auto_event_mapping_android",
       "auto_event_mapping_ios",
       "auto_event_setup_enabled",
+      "auto_log_app_events_default",
+      "auto_log_app_events_enabled",
       "business",
       "canvas_fluid_height",
       "canvas_fluid_width",
@@ -1408,6 +1389,7 @@ public class CommerceMerchantSettings extends APINode {
       "privacy_policy_url",
       "profile_section_url",
       "property_id",
+      "protected_mode_rules",
       "real_time_mode_devices",
       "restrictions",
       "restrictive_data_filter_params",
@@ -1697,6 +1679,20 @@ public class CommerceMerchantSettings extends APINode {
     }
     public APIRequestGetOrderManagementApps requestAutoEventSetupEnabledField (boolean value) {
       this.requestField("auto_event_setup_enabled", value);
+      return this;
+    }
+    public APIRequestGetOrderManagementApps requestAutoLogAppEventsDefaultField () {
+      return this.requestAutoLogAppEventsDefaultField(true);
+    }
+    public APIRequestGetOrderManagementApps requestAutoLogAppEventsDefaultField (boolean value) {
+      this.requestField("auto_log_app_events_default", value);
+      return this;
+    }
+    public APIRequestGetOrderManagementApps requestAutoLogAppEventsEnabledField () {
+      return this.requestAutoLogAppEventsEnabledField(true);
+    }
+    public APIRequestGetOrderManagementApps requestAutoLogAppEventsEnabledField (boolean value) {
+      this.requestField("auto_log_app_events_enabled", value);
       return this;
     }
     public APIRequestGetOrderManagementApps requestBusinessField () {
@@ -2063,6 +2059,13 @@ public class CommerceMerchantSettings extends APINode {
       this.requestField("property_id", value);
       return this;
     }
+    public APIRequestGetOrderManagementApps requestProtectedModeRulesField () {
+      return this.requestProtectedModeRulesField(true);
+    }
+    public APIRequestGetOrderManagementApps requestProtectedModeRulesField (boolean value) {
+      this.requestField("protected_mode_rules", value);
+      return this;
+    }
     public APIRequestGetOrderManagementApps requestRealTimeModeDevicesField () {
       return this.requestRealTimeModeDevicesField(true);
     }
@@ -2371,6 +2374,7 @@ public class CommerceMerchantSettings extends APINode {
       "owner_business",
       "product_count",
       "store_catalog_settings",
+      "user_access_expire_time",
       "vertical",
     };
 
@@ -2573,6 +2577,13 @@ public class CommerceMerchantSettings extends APINode {
     }
     public APIRequestGetProductCatalogs requestStoreCatalogSettingsField (boolean value) {
       this.requestField("store_catalog_settings", value);
+      return this;
+    }
+    public APIRequestGetProductCatalogs requestUserAccessExpireTimeField () {
+      return this.requestUserAccessExpireTimeField(true);
+    }
+    public APIRequestGetProductCatalogs requestUserAccessExpireTimeField (boolean value) {
+      this.requestField("user_access_expire_time", value);
       return this;
     }
     public APIRequestGetProductCatalogs requestVerticalField () {
@@ -3252,6 +3263,8 @@ public class CommerceMerchantSettings extends APINode {
       "fb_sales_channel",
       "id",
       "ig_sales_channel",
+      "is_onsite_enabled",
+      "shop_status",
       "workspace",
     };
 
@@ -3363,6 +3376,20 @@ public class CommerceMerchantSettings extends APINode {
     }
     public APIRequestGetShops requestIgSalesChannelField (boolean value) {
       this.requestField("ig_sales_channel", value);
+      return this;
+    }
+    public APIRequestGetShops requestIsOnsiteEnabledField () {
+      return this.requestIsOnsiteEnabledField(true);
+    }
+    public APIRequestGetShops requestIsOnsiteEnabledField (boolean value) {
+      this.requestField("is_onsite_enabled", value);
+      return this;
+    }
+    public APIRequestGetShops requestShopStatusField () {
+      return this.requestShopStatusField(true);
+    }
+    public APIRequestGetShops requestShopStatusField (boolean value) {
+      this.requestField("shop_status", value);
       return this;
     }
     public APIRequestGetShops requestWorkspaceField () {
@@ -3615,7 +3642,6 @@ public class CommerceMerchantSettings extends APINode {
     public static final String[] FIELDS = {
       "braintree_merchant_id",
       "checkout_message",
-      "commerce_store",
       "contact_email",
       "cta",
       "disable_checkout_urls",
@@ -3742,13 +3768,6 @@ public class CommerceMerchantSettings extends APINode {
     }
     public APIRequestGet requestCheckoutMessageField (boolean value) {
       this.requestField("checkout_message", value);
-      return this;
-    }
-    public APIRequestGet requestCommerceStoreField () {
-      return this.requestCommerceStoreField(true);
-    }
-    public APIRequestGet requestCommerceStoreField (boolean value) {
-      this.requestField("commerce_store", value);
       return this;
     }
     public APIRequestGet requestContactEmailField () {
@@ -3975,7 +3994,6 @@ public class CommerceMerchantSettings extends APINode {
   public CommerceMerchantSettings copyFrom(CommerceMerchantSettings instance) {
     this.mBraintreeMerchantId = instance.mBraintreeMerchantId;
     this.mCheckoutMessage = instance.mCheckoutMessage;
-    this.mCommerceStore = instance.mCommerceStore;
     this.mContactEmail = instance.mContactEmail;
     this.mCta = instance.mCta;
     this.mDisableCheckoutUrls = instance.mDisableCheckoutUrls;

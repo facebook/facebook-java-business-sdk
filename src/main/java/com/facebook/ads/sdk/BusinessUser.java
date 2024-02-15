@@ -1,24 +1,9 @@
-/**
- * Copyright (c) 2015-present, Facebook, Inc. All rights reserved.
+/*
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ * All rights reserved.
  *
- * You are hereby granted a non-exclusive, worldwide, royalty-free license to
- * use, copy, modify, and distribute this software in source code or binary
- * form for use in connection with the web services and APIs provided by
- * Facebook.
- *
- * As with any software that integrates with the Facebook platform, your use
- * of this software is subject to the Facebook Developer Principles and
- * Policies [http://developers.facebook.com/policy/]. This copyright notice
- * shall be included in all copies or substantial portions of the software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
- * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
- * DEALINGS IN THE SOFTWARE.
- *
+ * This source code is licensed under the license found in the
+ * LICENSE file in the root directory of this source tree.
  */
 
 package com.facebook.ads.sdk;
@@ -401,6 +386,7 @@ public class BusinessUser extends APINode {
       "ad_account_promotable_objects",
       "age",
       "agency_client_declaration",
+      "all_capabilities",
       "amount_spent",
       "attribution_spec",
       "balance",
@@ -460,6 +446,7 @@ public class BusinessUser extends APINode {
       "timezone_name",
       "timezone_offset_hours_utc",
       "tos_accepted",
+      "user_access_expire_time",
       "user_tasks",
       "user_tos_accepted",
       "viewable_business",
@@ -587,6 +574,13 @@ public class BusinessUser extends APINode {
     }
     public APIRequestGetAssignedAdAccounts requestAgencyClientDeclarationField (boolean value) {
       this.requestField("agency_client_declaration", value);
+      return this;
+    }
+    public APIRequestGetAssignedAdAccounts requestAllCapabilitiesField () {
+      return this.requestAllCapabilitiesField(true);
+    }
+    public APIRequestGetAssignedAdAccounts requestAllCapabilitiesField (boolean value) {
+      this.requestField("all_capabilities", value);
       return this;
     }
     public APIRequestGetAssignedAdAccounts requestAmountSpentField () {
@@ -1002,6 +996,13 @@ public class BusinessUser extends APINode {
       this.requestField("tos_accepted", value);
       return this;
     }
+    public APIRequestGetAssignedAdAccounts requestUserAccessExpireTimeField () {
+      return this.requestUserAccessExpireTimeField(true);
+    }
+    public APIRequestGetAssignedAdAccounts requestUserAccessExpireTimeField (boolean value) {
+      this.requestField("user_access_expire_time", value);
+      return this;
+    }
     public APIRequestGetAssignedAdAccounts requestUserTasksField () {
       return this.requestUserTasksField(true);
     }
@@ -1208,6 +1209,7 @@ public class BusinessUser extends APINode {
       "directed_by",
       "display_subtext",
       "displayed_message_response_time",
+      "does_viewer_have_page_permission_link_ig",
       "emails",
       "engagement",
       "fan_count",
@@ -1222,8 +1224,10 @@ public class BusinessUser extends APINode {
       "global_brand_page_name",
       "global_brand_root_id",
       "has_added_app",
+      "has_lead_access",
       "has_transitioned_to_new_page_experience",
       "has_whatsapp_business_number",
+      "has_whatsapp_enterprise_number_using_cloud_api",
       "has_whatsapp_number",
       "hometown",
       "hours",
@@ -1235,6 +1239,7 @@ public class BusinessUser extends APINode {
       "is_chain",
       "is_community_page",
       "is_eligible_for_branded_content",
+      "is_eligible_for_disable_connect_ig_btn_for_non_page_admin_am_web",
       "is_messenger_bot_get_started_enabled",
       "is_messenger_platform_bot",
       "is_owned",
@@ -1254,7 +1259,6 @@ public class BusinessUser extends APINode {
       "merchant_review_status",
       "messaging_feature_status",
       "messenger_ads_default_icebreakers",
-      "messenger_ads_default_page_welcome_message",
       "messenger_ads_default_quick_replies",
       "messenger_ads_quick_replies_type",
       "mini_shop_storefront",
@@ -1267,6 +1271,7 @@ public class BusinessUser extends APINode {
       "offer_eligible",
       "overall_star_rating",
       "owner_business",
+      "page_about_story",
       "page_token",
       "parent_page",
       "parking",
@@ -1309,6 +1314,7 @@ public class BusinessUser extends APINode {
       "unread_message_count",
       "unread_notif_count",
       "unseen_message_count",
+      "user_access_expire_time",
       "username",
       "verification_status",
       "voip_info",
@@ -1675,6 +1681,13 @@ public class BusinessUser extends APINode {
       this.requestField("displayed_message_response_time", value);
       return this;
     }
+    public APIRequestGetAssignedPages requestDoesViewerHavePagePermissionLinkIgField () {
+      return this.requestDoesViewerHavePagePermissionLinkIgField(true);
+    }
+    public APIRequestGetAssignedPages requestDoesViewerHavePagePermissionLinkIgField (boolean value) {
+      this.requestField("does_viewer_have_page_permission_link_ig", value);
+      return this;
+    }
     public APIRequestGetAssignedPages requestEmailsField () {
       return this.requestEmailsField(true);
     }
@@ -1773,6 +1786,13 @@ public class BusinessUser extends APINode {
       this.requestField("has_added_app", value);
       return this;
     }
+    public APIRequestGetAssignedPages requestHasLeadAccessField () {
+      return this.requestHasLeadAccessField(true);
+    }
+    public APIRequestGetAssignedPages requestHasLeadAccessField (boolean value) {
+      this.requestField("has_lead_access", value);
+      return this;
+    }
     public APIRequestGetAssignedPages requestHasTransitionedToNewPageExperienceField () {
       return this.requestHasTransitionedToNewPageExperienceField(true);
     }
@@ -1785,6 +1805,13 @@ public class BusinessUser extends APINode {
     }
     public APIRequestGetAssignedPages requestHasWhatsappBusinessNumberField (boolean value) {
       this.requestField("has_whatsapp_business_number", value);
+      return this;
+    }
+    public APIRequestGetAssignedPages requestHasWhatsappEnterpriseNumberUsingCloudApiField () {
+      return this.requestHasWhatsappEnterpriseNumberUsingCloudApiField(true);
+    }
+    public APIRequestGetAssignedPages requestHasWhatsappEnterpriseNumberUsingCloudApiField (boolean value) {
+      this.requestField("has_whatsapp_enterprise_number_using_cloud_api", value);
       return this;
     }
     public APIRequestGetAssignedPages requestHasWhatsappNumberField () {
@@ -1862,6 +1889,13 @@ public class BusinessUser extends APINode {
     }
     public APIRequestGetAssignedPages requestIsEligibleForBrandedContentField (boolean value) {
       this.requestField("is_eligible_for_branded_content", value);
+      return this;
+    }
+    public APIRequestGetAssignedPages requestIsEligibleForDisableConnectIgBtnForNonPageAdminAmWebField () {
+      return this.requestIsEligibleForDisableConnectIgBtnForNonPageAdminAmWebField(true);
+    }
+    public APIRequestGetAssignedPages requestIsEligibleForDisableConnectIgBtnForNonPageAdminAmWebField (boolean value) {
+      this.requestField("is_eligible_for_disable_connect_ig_btn_for_non_page_admin_am_web", value);
       return this;
     }
     public APIRequestGetAssignedPages requestIsMessengerBotGetStartedEnabledField () {
@@ -1997,13 +2031,6 @@ public class BusinessUser extends APINode {
       this.requestField("messenger_ads_default_icebreakers", value);
       return this;
     }
-    public APIRequestGetAssignedPages requestMessengerAdsDefaultPageWelcomeMessageField () {
-      return this.requestMessengerAdsDefaultPageWelcomeMessageField(true);
-    }
-    public APIRequestGetAssignedPages requestMessengerAdsDefaultPageWelcomeMessageField (boolean value) {
-      this.requestField("messenger_ads_default_page_welcome_message", value);
-      return this;
-    }
     public APIRequestGetAssignedPages requestMessengerAdsDefaultQuickRepliesField () {
       return this.requestMessengerAdsDefaultQuickRepliesField(true);
     }
@@ -2086,6 +2113,13 @@ public class BusinessUser extends APINode {
     }
     public APIRequestGetAssignedPages requestOwnerBusinessField (boolean value) {
       this.requestField("owner_business", value);
+      return this;
+    }
+    public APIRequestGetAssignedPages requestPageAboutStoryField () {
+      return this.requestPageAboutStoryField(true);
+    }
+    public APIRequestGetAssignedPages requestPageAboutStoryField (boolean value) {
+      this.requestField("page_about_story", value);
       return this;
     }
     public APIRequestGetAssignedPages requestPageTokenField () {
@@ -2382,6 +2416,13 @@ public class BusinessUser extends APINode {
       this.requestField("unseen_message_count", value);
       return this;
     }
+    public APIRequestGetAssignedPages requestUserAccessExpireTimeField () {
+      return this.requestUserAccessExpireTimeField(true);
+    }
+    public APIRequestGetAssignedPages requestUserAccessExpireTimeField (boolean value) {
+      this.requestField("user_access_expire_time", value);
+      return this;
+    }
     public APIRequestGetAssignedPages requestUsernameField () {
       return this.requestUsernameField(true);
     }
@@ -2460,6 +2501,7 @@ public class BusinessUser extends APINode {
       "owner_business",
       "product_count",
       "store_catalog_settings",
+      "user_access_expire_time",
       "vertical",
     };
 
@@ -2662,6 +2704,13 @@ public class BusinessUser extends APINode {
     }
     public APIRequestGetAssignedProductCatalogs requestStoreCatalogSettingsField (boolean value) {
       this.requestField("store_catalog_settings", value);
+      return this;
+    }
+    public APIRequestGetAssignedProductCatalogs requestUserAccessExpireTimeField () {
+      return this.requestUserAccessExpireTimeField(true);
+    }
+    public APIRequestGetAssignedProductCatalogs requestUserAccessExpireTimeField (boolean value) {
+      this.requestField("user_access_expire_time", value);
       return this;
     }
     public APIRequestGetAssignedProductCatalogs requestVerticalField () {
@@ -3007,6 +3056,7 @@ public class BusinessUser extends APINode {
       "last_name",
       "pending_email",
       "role",
+      "skip_verification_email",
       "title",
     };
 
@@ -3101,6 +3151,15 @@ public class BusinessUser extends APINode {
     }
     public APIRequestUpdate setRole (String role) {
       this.setParam("role", role);
+      return this;
+    }
+
+    public APIRequestUpdate setSkipVerificationEmail (Boolean skipVerificationEmail) {
+      this.setParam("skip_verification_email", skipVerificationEmail);
+      return this;
+    }
+    public APIRequestUpdate setSkipVerificationEmail (String skipVerificationEmail) {
+      this.setParam("skip_verification_email", skipVerificationEmail);
       return this;
     }
 

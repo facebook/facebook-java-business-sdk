@@ -1,24 +1,9 @@
-/**
- * Copyright (c) 2015-present, Facebook, Inc. All rights reserved.
+/*
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ * All rights reserved.
  *
- * You are hereby granted a non-exclusive, worldwide, royalty-free license to
- * use, copy, modify, and distribute this software in source code or binary
- * form for use in connection with the web services and APIs provided by
- * Facebook.
- *
- * As with any software that integrates with the Facebook platform, your use
- * of this software is subject to the Facebook Developer Principles and
- * Policies [http://developers.facebook.com/policy/]. This copyright notice
- * shall be included in all copies or substantial portions of the software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
- * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
- * DEALINGS IN THE SOFTWARE.
- *
+ * This source code is licensed under the license found in the
+ * LICENSE file in the root directory of this source tree.
  */
 
 package com.facebook.ads.sdk;
@@ -62,7 +47,9 @@ public class AdCreativeLinkData extends APINode {
   @SerializedName("app_link_spec")
   private AdCreativeLinkDataAppLinkSpec mAppLinkSpec = null;
   @SerializedName("attachment_style")
-  private EnumAttachmentStyle mAttachmentStyle = null;
+  private String mAttachmentStyle = null;
+  @SerializedName("automated_product_tags")
+  private Boolean mAutomatedProductTags = null;
   @SerializedName("branded_content_shared_to_sponsor_status")
   private String mBrandedContentSharedToSponsorStatus = null;
   @SerializedName("branded_content_sponsor_page_id")
@@ -304,12 +291,21 @@ public class AdCreativeLinkData extends APINode {
     this.mAppLinkSpec = AdCreativeLinkDataAppLinkSpec.getGson().fromJson(value, type);
     return this;
   }
-  public EnumAttachmentStyle getFieldAttachmentStyle() {
+  public String getFieldAttachmentStyle() {
     return mAttachmentStyle;
   }
 
-  public AdCreativeLinkData setFieldAttachmentStyle(EnumAttachmentStyle value) {
+  public AdCreativeLinkData setFieldAttachmentStyle(String value) {
     this.mAttachmentStyle = value;
+    return this;
+  }
+
+  public Boolean getFieldAutomatedProductTags() {
+    return mAutomatedProductTags;
+  }
+
+  public AdCreativeLinkData setFieldAutomatedProductTags(Boolean value) {
+    this.mAutomatedProductTags = value;
     return this;
   }
 
@@ -621,25 +617,6 @@ public class AdCreativeLinkData extends APINode {
 
 
 
-  public static enum EnumAttachmentStyle {
-      @SerializedName("default")
-      VALUE_DEFAULT("default"),
-      @SerializedName("link")
-      VALUE_LINK("link"),
-      ;
-
-      private String value;
-
-      private EnumAttachmentStyle(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
   public static enum EnumFormatOption {
       @SerializedName("carousel_ar_effects")
       VALUE_CAROUSEL_AR_EFFECTS("carousel_ar_effects"),
@@ -684,6 +661,7 @@ public class AdCreativeLinkData extends APINode {
     this.mAdditionalImageIndex = instance.mAdditionalImageIndex;
     this.mAppLinkSpec = instance.mAppLinkSpec;
     this.mAttachmentStyle = instance.mAttachmentStyle;
+    this.mAutomatedProductTags = instance.mAutomatedProductTags;
     this.mBrandedContentSharedToSponsorStatus = instance.mBrandedContentSharedToSponsorStatus;
     this.mBrandedContentSponsorPageId = instance.mBrandedContentSponsorPageId;
     this.mCallToAction = instance.mCallToAction;

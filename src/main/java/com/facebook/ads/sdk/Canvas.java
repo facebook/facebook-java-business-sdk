@@ -1,24 +1,9 @@
-/**
- * Copyright (c) 2015-present, Facebook, Inc. All rights reserved.
+/*
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ * All rights reserved.
  *
- * You are hereby granted a non-exclusive, worldwide, royalty-free license to
- * use, copy, modify, and distribute this software in source code or binary
- * form for use in connection with the web services and APIs provided by
- * Facebook.
- *
- * As with any software that integrates with the Facebook platform, your use
- * of this software is subject to the Facebook Developer Principles and
- * Policies [http://developers.facebook.com/policy/]. This copyright notice
- * shall be included in all copies or substantial portions of the software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
- * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
- * DEALINGS IN THE SOFTWARE.
- *
+ * This source code is licensed under the license found in the
+ * LICENSE file in the root directory of this source tree.
  */
 
 package com.facebook.ads.sdk;
@@ -318,8 +303,12 @@ public class Canvas extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGetPreViews getPreViews() {
-    return new APIRequestGetPreViews(this.getPrefixedId().toString(), context);
+  public APIRequestGetPreview getPreview() {
+    return new APIRequestGetPreview(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetPreviews getPreviews() {
+    return new APIRequestGetPreviews(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGet get() {
@@ -456,7 +445,119 @@ public class Canvas extends APINode {
 
 
 
-  public static class APIRequestGetPreViews extends APIRequest<TextWithEntities> {
+  public static class APIRequestGetPreview extends APIRequest<CanvasPreview> {
+
+    APINodeList<CanvasPreview> lastResponse = null;
+    @Override
+    public APINodeList<CanvasPreview> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "body",
+    };
+
+    @Override
+    public APINodeList<CanvasPreview> parseResponse(String response, String header) throws APIException {
+      return CanvasPreview.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<CanvasPreview> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<CanvasPreview> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<CanvasPreview>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<CanvasPreview>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<CanvasPreview>>() {
+           public APINodeList<CanvasPreview> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetPreview.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetPreview(String nodeId, APIContext context) {
+      super(context, nodeId, "/preview", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetPreview setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPreview setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetPreview requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetPreview requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPreview requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetPreview requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPreview requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPreview requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetPreview requestBodyField () {
+      return this.requestBodyField(true);
+    }
+    public APIRequestGetPreview requestBodyField (boolean value) {
+      this.requestField("body", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestGetPreviews extends APIRequest<TextWithEntities> {
 
     APINodeList<TextWithEntities> lastResponse = null;
     @Override
@@ -498,7 +599,7 @@ public class Canvas extends APINode {
         new Function<ResponseWrapper, APINodeList<TextWithEntities>>() {
            public APINodeList<TextWithEntities> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetPreViews.this.parseResponse(result.getBody(), result.getHeader());
+               return APIRequestGetPreviews.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -507,37 +608,37 @@ public class Canvas extends APINode {
       );
     };
 
-    public APIRequestGetPreViews(String nodeId, APIContext context) {
+    public APIRequestGetPreviews(String nodeId, APIContext context) {
       super(context, nodeId, "/previews", "GET", Arrays.asList(PARAMS));
     }
 
     @Override
-    public APIRequestGetPreViews setParam(String param, Object value) {
+    public APIRequestGetPreviews setParam(String param, Object value) {
       setParamInternal(param, value);
       return this;
     }
 
     @Override
-    public APIRequestGetPreViews setParams(Map<String, Object> params) {
+    public APIRequestGetPreviews setParams(Map<String, Object> params) {
       setParamsInternal(params);
       return this;
     }
 
 
-    public APIRequestGetPreViews setUserIds (List<Long> userIds) {
+    public APIRequestGetPreviews setUserIds (List<Long> userIds) {
       this.setParam("user_ids", userIds);
       return this;
     }
-    public APIRequestGetPreViews setUserIds (String userIds) {
+    public APIRequestGetPreviews setUserIds (String userIds) {
       this.setParam("user_ids", userIds);
       return this;
     }
 
-    public APIRequestGetPreViews requestAllFields () {
+    public APIRequestGetPreviews requestAllFields () {
       return this.requestAllFields(true);
     }
 
-    public APIRequestGetPreViews requestAllFields (boolean value) {
+    public APIRequestGetPreviews requestAllFields (boolean value) {
       for (String field : FIELDS) {
         this.requestField(field, value);
       }
@@ -545,12 +646,12 @@ public class Canvas extends APINode {
     }
 
     @Override
-    public APIRequestGetPreViews requestFields (List<String> fields) {
+    public APIRequestGetPreviews requestFields (List<String> fields) {
       return this.requestFields(fields, true);
     }
 
     @Override
-    public APIRequestGetPreViews requestFields (List<String> fields, boolean value) {
+    public APIRequestGetPreviews requestFields (List<String> fields, boolean value) {
       for (String field : fields) {
         this.requestField(field, value);
       }
@@ -558,21 +659,21 @@ public class Canvas extends APINode {
     }
 
     @Override
-    public APIRequestGetPreViews requestField (String field) {
+    public APIRequestGetPreviews requestField (String field) {
       this.requestField(field, true);
       return this;
     }
 
     @Override
-    public APIRequestGetPreViews requestField (String field, boolean value) {
+    public APIRequestGetPreviews requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
 
-    public APIRequestGetPreViews requestTextField () {
+    public APIRequestGetPreviews requestTextField () {
       return this.requestTextField(true);
     }
-    public APIRequestGetPreViews requestTextField (boolean value) {
+    public APIRequestGetPreviews requestTextField (boolean value) {
       this.requestField("text", value);
       return this;
     }

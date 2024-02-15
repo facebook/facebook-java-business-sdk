@@ -1,24 +1,9 @@
-/**
- * Copyright (c) 2015-present, Facebook, Inc. All rights reserved.
+/*
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ * All rights reserved.
  *
- * You are hereby granted a non-exclusive, worldwide, royalty-free license to
- * use, copy, modify, and distribute this software in source code or binary
- * form for use in connection with the web services and APIs provided by
- * Facebook.
- *
- * As with any software that integrates with the Facebook platform, your use
- * of this software is subject to the Facebook Developer Principles and
- * Policies [http://developers.facebook.com/policy/]. This copyright notice
- * shall be included in all copies or substantial portions of the software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
- * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
- * DEALINGS IN THE SOFTWARE.
- *
+ * This source code is licensed under the license found in the
+ * LICENSE file in the root directory of this source tree.
  */
 
 package com.facebook.ads.sdk;
@@ -117,6 +102,8 @@ public class AdsPixel extends APINode {
   private Business mOwnerBusiness = null;
   @SerializedName("usage")
   private OfflineConversionDataSetUsage mUsage = null;
+  @SerializedName("user_access_expire_time")
+  private String mUserAccessExpireTime = null;
   @SerializedName("valid_entries")
   private Long mValidEntries = null;
   protected static Gson gson = null;
@@ -336,6 +323,10 @@ public class AdsPixel extends APINode {
     return new APIRequestGetAgencies(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestCreateAhpConfig createAhpConfig() {
+    return new APIRequestCreateAhpConfig(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetAssignedUsers getAssignedUsers() {
     return new APIRequestGetAssignedUsers(this.getPrefixedId().toString(), context);
   }
@@ -534,6 +525,10 @@ public class AdsPixel extends APINode {
     return mUsage;
   }
 
+  public String getFieldUserAccessExpireTime() {
+    return mUserAccessExpireTime;
+  }
+
   public Long getFieldValidEntries() {
     return mValidEntries;
   }
@@ -557,6 +552,7 @@ public class AdsPixel extends APINode {
       "ad_account_promotable_objects",
       "age",
       "agency_client_declaration",
+      "all_capabilities",
       "amount_spent",
       "attribution_spec",
       "balance",
@@ -616,6 +612,7 @@ public class AdsPixel extends APINode {
       "timezone_name",
       "timezone_offset_hours_utc",
       "tos_accepted",
+      "user_access_expire_time",
       "user_tasks",
       "user_tos_accepted",
       "viewable_business",
@@ -748,6 +745,13 @@ public class AdsPixel extends APINode {
     }
     public APIRequestGetAdAccounts requestAgencyClientDeclarationField (boolean value) {
       this.requestField("agency_client_declaration", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestAllCapabilitiesField () {
+      return this.requestAllCapabilitiesField(true);
+    }
+    public APIRequestGetAdAccounts requestAllCapabilitiesField (boolean value) {
+      this.requestField("all_capabilities", value);
       return this;
     }
     public APIRequestGetAdAccounts requestAmountSpentField () {
@@ -1163,6 +1167,13 @@ public class AdsPixel extends APINode {
       this.requestField("tos_accepted", value);
       return this;
     }
+    public APIRequestGetAdAccounts requestUserAccessExpireTimeField () {
+      return this.requestUserAccessExpireTimeField(true);
+    }
+    public APIRequestGetAdAccounts requestUserAccessExpireTimeField (boolean value) {
+      this.requestField("user_access_expire_time", value);
+      return this;
+    }
     public APIRequestGetAdAccounts requestUserTasksField () {
       return this.requestUserTasksField(true);
     }
@@ -1214,6 +1225,7 @@ public class AdsPixel extends APINode {
       "two_factor_type",
       "updated_by",
       "updated_time",
+      "user_access_expire_time",
       "verification_status",
       "vertical",
       "vertical_id",
@@ -1427,6 +1439,13 @@ public class AdsPixel extends APINode {
       this.requestField("updated_time", value);
       return this;
     }
+    public APIRequestGetAgencies requestUserAccessExpireTimeField () {
+      return this.requestUserAccessExpireTimeField(true);
+    }
+    public APIRequestGetAgencies requestUserAccessExpireTimeField (boolean value) {
+      this.requestField("user_access_expire_time", value);
+      return this;
+    }
     public APIRequestGetAgencies requestVerificationStatusField () {
       return this.requestVerificationStatusField(true);
     }
@@ -1448,6 +1467,120 @@ public class AdsPixel extends APINode {
       this.requestField("vertical_id", value);
       return this;
     }
+  }
+
+  public static class APIRequestCreateAhpConfig extends APIRequest<APINode> {
+
+    APINode lastResponse = null;
+    @Override
+    public APINode getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "applink_autosetup",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public APINode execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINode execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINode> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateAhpConfig.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateAhpConfig(String nodeId, APIContext context) {
+      super(context, nodeId, "/ahp_configs", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateAhpConfig setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAhpConfig setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateAhpConfig setApplinkAutosetup (Boolean applinkAutosetup) {
+      this.setParam("applink_autosetup", applinkAutosetup);
+      return this;
+    }
+    public APIRequestCreateAhpConfig setApplinkAutosetup (String applinkAutosetup) {
+      this.setParam("applink_autosetup", applinkAutosetup);
+      return this;
+    }
+
+    public APIRequestCreateAhpConfig requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateAhpConfig requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAhpConfig requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateAhpConfig requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAhpConfig requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAhpConfig requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
   }
 
   public static class APIRequestGetAssignedUsers extends APIRequest<AssignedUser> {
@@ -1900,6 +2033,7 @@ public class AdsPixel extends APINode {
       "namespace_id",
       "partner_agent",
       "platforms",
+      "progress",
       "test_event_code",
       "trace",
       "upload_id",
@@ -1988,6 +2122,15 @@ public class AdsPixel extends APINode {
     }
     public APIRequestCreateEvent setPlatforms (String platforms) {
       this.setParam("platforms", platforms);
+      return this;
+    }
+
+    public APIRequestCreateEvent setProgress (Object progress) {
+      this.setParam("progress", progress);
+      return this;
+    }
+    public APIRequestCreateEvent setProgress (String progress) {
+      this.setParam("progress", progress);
       return this;
     }
 
@@ -2430,6 +2573,8 @@ public class AdsPixel extends APINode {
       "access_key",
       "active",
       "endpoint",
+      "fallback_domain",
+      "fallback_domain_enabled",
       "host_business_id",
       "host_external_id",
       "id",
@@ -2544,6 +2689,20 @@ public class AdsPixel extends APINode {
     }
     public APIRequestGetOpenBridgeConfigurations requestEndpointField (boolean value) {
       this.requestField("endpoint", value);
+      return this;
+    }
+    public APIRequestGetOpenBridgeConfigurations requestFallbackDomainField () {
+      return this.requestFallbackDomainField(true);
+    }
+    public APIRequestGetOpenBridgeConfigurations requestFallbackDomainField (boolean value) {
+      this.requestField("fallback_domain", value);
+      return this;
+    }
+    public APIRequestGetOpenBridgeConfigurations requestFallbackDomainEnabledField () {
+      return this.requestFallbackDomainEnabledField(true);
+    }
+    public APIRequestGetOpenBridgeConfigurations requestFallbackDomainEnabledField (boolean value) {
+      this.requestField("fallback_domain_enabled", value);
       return this;
     }
     public APIRequestGetOpenBridgeConfigurations requestHostBusinessIdField () {
@@ -2813,6 +2972,7 @@ public class AdsPixel extends APINode {
       "ad_account_promotable_objects",
       "age",
       "agency_client_declaration",
+      "all_capabilities",
       "amount_spent",
       "attribution_spec",
       "balance",
@@ -2872,6 +3032,7 @@ public class AdsPixel extends APINode {
       "timezone_name",
       "timezone_offset_hours_utc",
       "tos_accepted",
+      "user_access_expire_time",
       "user_tasks",
       "user_tos_accepted",
       "viewable_business",
@@ -3004,6 +3165,13 @@ public class AdsPixel extends APINode {
     }
     public APIRequestGetSharedAccounts requestAgencyClientDeclarationField (boolean value) {
       this.requestField("agency_client_declaration", value);
+      return this;
+    }
+    public APIRequestGetSharedAccounts requestAllCapabilitiesField () {
+      return this.requestAllCapabilitiesField(true);
+    }
+    public APIRequestGetSharedAccounts requestAllCapabilitiesField (boolean value) {
+      this.requestField("all_capabilities", value);
       return this;
     }
     public APIRequestGetSharedAccounts requestAmountSpentField () {
@@ -3419,6 +3587,13 @@ public class AdsPixel extends APINode {
       this.requestField("tos_accepted", value);
       return this;
     }
+    public APIRequestGetSharedAccounts requestUserAccessExpireTimeField () {
+      return this.requestUserAccessExpireTimeField(true);
+    }
+    public APIRequestGetSharedAccounts requestUserAccessExpireTimeField (boolean value) {
+      this.requestField("user_access_expire_time", value);
+      return this;
+    }
     public APIRequestGetSharedAccounts requestUserTasksField () {
       return this.requestUserTasksField(true);
     }
@@ -3586,6 +3761,7 @@ public class AdsPixel extends APINode {
       "two_factor_type",
       "updated_by",
       "updated_time",
+      "user_access_expire_time",
       "verification_status",
       "vertical",
       "vertical_id",
@@ -3797,6 +3973,13 @@ public class AdsPixel extends APINode {
     }
     public APIRequestGetSharedAgencies requestUpdatedTimeField (boolean value) {
       this.requestField("updated_time", value);
+      return this;
+    }
+    public APIRequestGetSharedAgencies requestUserAccessExpireTimeField () {
+      return this.requestUserAccessExpireTimeField(true);
+    }
+    public APIRequestGetSharedAgencies requestUserAccessExpireTimeField (boolean value) {
+      this.requestField("user_access_expire_time", value);
       return this;
     }
     public APIRequestGetSharedAgencies requestVerificationStatusField () {
@@ -4130,6 +4313,7 @@ public class AdsPixel extends APINode {
       "owner_ad_account",
       "owner_business",
       "usage",
+      "user_access_expire_time",
       "valid_entries",
     };
 
@@ -4437,6 +4621,13 @@ public class AdsPixel extends APINode {
     }
     public APIRequestGet requestUsageField (boolean value) {
       this.requestField("usage", value);
+      return this;
+    }
+    public APIRequestGet requestUserAccessExpireTimeField () {
+      return this.requestUserAccessExpireTimeField(true);
+    }
+    public APIRequestGet requestUserAccessExpireTimeField (boolean value) {
+      this.requestField("user_access_expire_time", value);
       return this;
     }
     public APIRequestGet requestValidEntriesField () {
@@ -4777,6 +4968,7 @@ public class AdsPixel extends APINode {
     this.mOwnerAdAccount = instance.mOwnerAdAccount;
     this.mOwnerBusiness = instance.mOwnerBusiness;
     this.mUsage = instance.mUsage;
+    this.mUserAccessExpireTime = instance.mUserAccessExpireTime;
     this.mValidEntries = instance.mValidEntries;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

@@ -1,24 +1,9 @@
-/**
- * Copyright (c) 2015-present, Facebook, Inc. All rights reserved.
+/*
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ * All rights reserved.
  *
- * You are hereby granted a non-exclusive, worldwide, royalty-free license to
- * use, copy, modify, and distribute this software in source code or binary
- * form for use in connection with the web services and APIs provided by
- * Facebook.
- *
- * As with any software that integrates with the Facebook platform, your use
- * of this software is subject to the Facebook Developer Principles and
- * Policies [http://developers.facebook.com/policy/]. This copyright notice
- * shall be included in all copies or substantial portions of the software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
- * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
- * DEALINGS IN THE SOFTWARE.
- *
+ * This source code is licensed under the license found in the
+ * LICENSE file in the root directory of this source tree.
  */
 
 package com.facebook.ads.sdk;
@@ -65,8 +50,6 @@ public class ProductItem extends APINode {
   private EnumAgeGroup mAgeGroup = null;
   @SerializedName("applinks")
   private CatalogItemAppLinks mApplinks = null;
-  @SerializedName("ar_data")
-  private ProductItemARData mArData = null;
   @SerializedName("availability")
   private EnumAvailability mAvailability = null;
   @SerializedName("brand")
@@ -167,6 +150,8 @@ public class ProductItem extends APINode {
   private ProductFeed mProductFeed = null;
   @SerializedName("product_group")
   private ProductGroup mProductGroup = null;
+  @SerializedName("product_local_info")
+  private ProductItemLocalInfo mProductLocalInfo = null;
   @SerializedName("product_type")
   private String mProductType = null;
   @SerializedName("quantity_to_sell_on_facebook")
@@ -195,8 +180,12 @@ public class ProductItem extends APINode {
   private String mSize = null;
   @SerializedName("start_date")
   private String mStartDate = null;
+  @SerializedName("tags")
+  private List<String> mTags = null;
   @SerializedName("url")
   private String mUrl = null;
+  @SerializedName("video_fetch_status")
+  private EnumVideoFetchStatus mVideoFetchStatus = null;
   @SerializedName("visibility")
   private EnumVisibility mVisibility = null;
   @SerializedName("wa_compliance_category")
@@ -455,10 +444,6 @@ public class ProductItem extends APINode {
     return mApplinks;
   }
 
-  public ProductItemARData getFieldArData() {
-    return mArData;
-  }
-
   public EnumAvailability getFieldAvailability() {
     return mAvailability;
   }
@@ -668,6 +653,13 @@ public class ProductItem extends APINode {
     return mProductGroup;
   }
 
+  public ProductItemLocalInfo getFieldProductLocalInfo() {
+    if (mProductLocalInfo != null) {
+      mProductLocalInfo.context = getContext();
+    }
+    return mProductLocalInfo;
+  }
+
   public String getFieldProductType() {
     return mProductType;
   }
@@ -724,8 +716,16 @@ public class ProductItem extends APINode {
     return mStartDate;
   }
 
+  public List<String> getFieldTags() {
+    return mTags;
+  }
+
   public String getFieldUrl() {
     return mUrl;
+  }
+
+  public EnumVideoFetchStatus getFieldVideoFetchStatus() {
+    return mVideoFetchStatus;
   }
 
   public EnumVisibility getFieldVisibility() {
@@ -1042,45 +1042,49 @@ public class ProductItem extends APINode {
     }
   }
 
-  public static class APIRequestGetVideosMetadata extends APIRequest<APINode> {
+  public static class APIRequestGetVideosMetadata extends APIRequest<DynamicVideoMetadata> {
 
-    APINodeList<APINode> lastResponse = null;
+    APINodeList<DynamicVideoMetadata> lastResponse = null;
     @Override
-    public APINodeList<APINode> getLastResponse() {
+    public APINodeList<DynamicVideoMetadata> getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
     };
 
     public static final String[] FIELDS = {
+      "id",
+      "tags",
+      "url",
+      "video",
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header);
+    public APINodeList<DynamicVideoMetadata> parseResponse(String response, String header) throws APIException {
+      return DynamicVideoMetadata.parseResponse(response, getContext(), this, header);
     }
 
     @Override
-    public APINodeList<APINode> execute() throws APIException {
+    public APINodeList<DynamicVideoMetadata> execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+    public APINodeList<DynamicVideoMetadata> execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+    public ListenableFuture<APINodeList<DynamicVideoMetadata>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<APINodeList<DynamicVideoMetadata>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, APINodeList<DynamicVideoMetadata>>() {
+           public APINodeList<DynamicVideoMetadata> apply(ResponseWrapper result) {
              try {
                return APIRequestGetVideosMetadata.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -1144,6 +1148,34 @@ public class ProductItem extends APINode {
       return this;
     }
 
+    public APIRequestGetVideosMetadata requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetVideosMetadata requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetVideosMetadata requestTagsField () {
+      return this.requestTagsField(true);
+    }
+    public APIRequestGetVideosMetadata requestTagsField (boolean value) {
+      this.requestField("tags", value);
+      return this;
+    }
+    public APIRequestGetVideosMetadata requestUrlField () {
+      return this.requestUrlField(true);
+    }
+    public APIRequestGetVideosMetadata requestUrlField (boolean value) {
+      this.requestField("url", value);
+      return this;
+    }
+    public APIRequestGetVideosMetadata requestVideoField () {
+      return this.requestVideoField(true);
+    }
+    public APIRequestGetVideosMetadata requestVideoField (boolean value) {
+      this.requestField("video", value);
+      return this;
+    }
   }
 
   public static class APIRequestDelete extends APIRequest<APINode> {
@@ -1271,7 +1303,6 @@ public class ProductItem extends APINode {
       "additional_variant_attributes",
       "age_group",
       "applinks",
-      "ar_data",
       "availability",
       "brand",
       "capability_to_review_status",
@@ -1322,6 +1353,7 @@ public class ProductItem extends APINode {
       "product_catalog",
       "product_feed",
       "product_group",
+      "product_local_info",
       "product_type",
       "quantity_to_sell_on_facebook",
       "retailer_id",
@@ -1336,7 +1368,9 @@ public class ProductItem extends APINode {
       "short_description",
       "size",
       "start_date",
+      "tags",
       "url",
+      "video_fetch_status",
       "visibility",
       "wa_compliance_category",
     };
@@ -1496,13 +1530,6 @@ public class ProductItem extends APINode {
     }
     public APIRequestGet requestApplinksField (boolean value) {
       this.requestField("applinks", value);
-      return this;
-    }
-    public APIRequestGet requestArDataField () {
-      return this.requestArDataField(true);
-    }
-    public APIRequestGet requestArDataField (boolean value) {
-      this.requestField("ar_data", value);
       return this;
     }
     public APIRequestGet requestAvailabilityField () {
@@ -1855,6 +1882,13 @@ public class ProductItem extends APINode {
       this.requestField("product_group", value);
       return this;
     }
+    public APIRequestGet requestProductLocalInfoField () {
+      return this.requestProductLocalInfoField(true);
+    }
+    public APIRequestGet requestProductLocalInfoField (boolean value) {
+      this.requestField("product_local_info", value);
+      return this;
+    }
     public APIRequestGet requestProductTypeField () {
       return this.requestProductTypeField(true);
     }
@@ -1953,11 +1987,25 @@ public class ProductItem extends APINode {
       this.requestField("start_date", value);
       return this;
     }
+    public APIRequestGet requestTagsField () {
+      return this.requestTagsField(true);
+    }
+    public APIRequestGet requestTagsField (boolean value) {
+      this.requestField("tags", value);
+      return this;
+    }
     public APIRequestGet requestUrlField () {
       return this.requestUrlField(true);
     }
     public APIRequestGet requestUrlField (boolean value) {
       this.requestField("url", value);
+      return this;
+    }
+    public APIRequestGet requestVideoFetchStatusField () {
+      return this.requestVideoFetchStatusField(true);
+    }
+    public APIRequestGet requestVideoFetchStatusField (boolean value) {
+      this.requestField("video_fetch_status", value);
       return this;
     }
     public APIRequestGet requestVisibilityField () {
@@ -2682,6 +2730,8 @@ public class ProductItem extends APINode {
       VALUE_DISCONTINUED("discontinued"),
       @SerializedName("in stock")
       VALUE_IN_STOCK("in stock"),
+      @SerializedName("mark_as_sold")
+      VALUE_MARK_AS_SOLD("mark_as_sold"),
       @SerializedName("out of stock")
       VALUE_OUT_OF_STOCK("out of stock"),
       @SerializedName("pending")
@@ -2818,6 +2868,33 @@ public class ProductItem extends APINode {
       private String value;
 
       private EnumShippingWeightUnit(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumVideoFetchStatus {
+      @SerializedName("DIRECT_UPLOAD")
+      VALUE_DIRECT_UPLOAD("DIRECT_UPLOAD"),
+      @SerializedName("FETCHED")
+      VALUE_FETCHED("FETCHED"),
+      @SerializedName("FETCH_FAILED")
+      VALUE_FETCH_FAILED("FETCH_FAILED"),
+      @SerializedName("NO_STATUS")
+      VALUE_NO_STATUS("NO_STATUS"),
+      @SerializedName("OUTDATED")
+      VALUE_OUTDATED("OUTDATED"),
+      @SerializedName("PARTIAL_FETCH")
+      VALUE_PARTIAL_FETCH("PARTIAL_FETCH"),
+      ;
+
+      private String value;
+
+      private EnumVideoFetchStatus(String value) {
         this.value = value;
       }
 
@@ -3303,16 +3380,34 @@ public class ProductItem extends APINode {
       VALUE_BAD_QUALITY_IMAGE("BAD_QUALITY_IMAGE"),
       @SerializedName("CANNOT_EDIT_SUBSCRIPTION_PRODUCTS")
       VALUE_CANNOT_EDIT_SUBSCRIPTION_PRODUCTS("CANNOT_EDIT_SUBSCRIPTION_PRODUCTS"),
+      @SerializedName("CHECKOUT_DISABLED_BY_USER")
+      VALUE_CHECKOUT_DISABLED_BY_USER("CHECKOUT_DISABLED_BY_USER"),
+      @SerializedName("COMMERCE_ACCOUNT_NOT_LEGALLY_COMPLIANT")
+      VALUE_COMMERCE_ACCOUNT_NOT_LEGALLY_COMPLIANT("COMMERCE_ACCOUNT_NOT_LEGALLY_COMPLIANT"),
       @SerializedName("CRAWLED_AVAILABILITY_MISMATCH")
       VALUE_CRAWLED_AVAILABILITY_MISMATCH("CRAWLED_AVAILABILITY_MISMATCH"),
+      @SerializedName("DA_DISABLED_BY_USER")
+      VALUE_DA_DISABLED_BY_USER("DA_DISABLED_BY_USER"),
+      @SerializedName("DA_POLICY_VIOLATION")
+      VALUE_DA_POLICY_VIOLATION("DA_POLICY_VIOLATION"),
       @SerializedName("DIGITAL_GOODS_NOT_AVAILABLE_FOR_CHECKOUT")
       VALUE_DIGITAL_GOODS_NOT_AVAILABLE_FOR_CHECKOUT("DIGITAL_GOODS_NOT_AVAILABLE_FOR_CHECKOUT"),
       @SerializedName("DUPLICATE_IMAGES")
       VALUE_DUPLICATE_IMAGES("DUPLICATE_IMAGES"),
       @SerializedName("DUPLICATE_TITLE_AND_DESCRIPTION")
       VALUE_DUPLICATE_TITLE_AND_DESCRIPTION("DUPLICATE_TITLE_AND_DESCRIPTION"),
+      @SerializedName("EMPTY_AVAILABILITY")
+      VALUE_EMPTY_AVAILABILITY("EMPTY_AVAILABILITY"),
+      @SerializedName("EMPTY_CONDITION")
+      VALUE_EMPTY_CONDITION("EMPTY_CONDITION"),
       @SerializedName("EMPTY_DESCRIPTION")
       VALUE_EMPTY_DESCRIPTION("EMPTY_DESCRIPTION"),
+      @SerializedName("EMPTY_PRODUCT_URL")
+      VALUE_EMPTY_PRODUCT_URL("EMPTY_PRODUCT_URL"),
+      @SerializedName("EMPTY_SELLER_DESCRIPTION")
+      VALUE_EMPTY_SELLER_DESCRIPTION("EMPTY_SELLER_DESCRIPTION"),
+      @SerializedName("EXTERNAL_MERCHANT_ID_MISMATCH")
+      VALUE_EXTERNAL_MERCHANT_ID_MISMATCH("EXTERNAL_MERCHANT_ID_MISMATCH"),
       @SerializedName("GENERIC_INVALID_FIELD")
       VALUE_GENERIC_INVALID_FIELD("GENERIC_INVALID_FIELD"),
       @SerializedName("HIDDEN_UNTIL_PRODUCT_LAUNCH")
@@ -3341,6 +3436,8 @@ public class ProductItem extends APINode {
       VALUE_INVALID_MONETIZER_RETURN_POLICY("INVALID_MONETIZER_RETURN_POLICY"),
       @SerializedName("INVALID_PRE_ORDER_PARAMS")
       VALUE_INVALID_PRE_ORDER_PARAMS("INVALID_PRE_ORDER_PARAMS"),
+      @SerializedName("INVALID_SHELTER_PAGE_ID")
+      VALUE_INVALID_SHELTER_PAGE_ID("INVALID_SHELTER_PAGE_ID"),
       @SerializedName("INVALID_SHIPPING_PROFILE_PARAMS")
       VALUE_INVALID_SHIPPING_PROFILE_PARAMS("INVALID_SHIPPING_PROFILE_PARAMS"),
       @SerializedName("INVALID_SUBSCRIPTION_DISABLE_PARAMS")
@@ -3357,10 +3454,16 @@ public class ProductItem extends APINode {
       VALUE_ITEM_GROUP_NOT_SPECIFIED("ITEM_GROUP_NOT_SPECIFIED"),
       @SerializedName("ITEM_NOT_SHIPPABLE_FOR_SCA_SHOP")
       VALUE_ITEM_NOT_SHIPPABLE_FOR_SCA_SHOP("ITEM_NOT_SHIPPABLE_FOR_SCA_SHOP"),
+      @SerializedName("ITEM_OVERRIDE_EMPTY_AVAILABILITY")
+      VALUE_ITEM_OVERRIDE_EMPTY_AVAILABILITY("ITEM_OVERRIDE_EMPTY_AVAILABILITY"),
+      @SerializedName("ITEM_OVERRIDE_EMPTY_PRICE")
+      VALUE_ITEM_OVERRIDE_EMPTY_PRICE("ITEM_OVERRIDE_EMPTY_PRICE"),
       @SerializedName("ITEM_OVERRIDE_NOT_VISIBLE")
       VALUE_ITEM_OVERRIDE_NOT_VISIBLE("ITEM_OVERRIDE_NOT_VISIBLE"),
       @SerializedName("ITEM_STALE_OUT_OF_STOCK")
       VALUE_ITEM_STALE_OUT_OF_STOCK("ITEM_STALE_OUT_OF_STOCK"),
+      @SerializedName("MARKETPLACE_DISABLED_BY_USER")
+      VALUE_MARKETPLACE_DISABLED_BY_USER("MARKETPLACE_DISABLED_BY_USER"),
       @SerializedName("MINI_SHOPS_DISABLED_BY_USER")
       VALUE_MINI_SHOPS_DISABLED_BY_USER("MINI_SHOPS_DISABLED_BY_USER"),
       @SerializedName("MISSING_CHECKOUT")
@@ -3383,12 +3486,16 @@ public class ProductItem extends APINode {
       VALUE_NEGATIVE_COMMUNITY_FEEDBACK("NEGATIVE_COMMUNITY_FEEDBACK"),
       @SerializedName("NOT_ENOUGH_IMAGES")
       VALUE_NOT_ENOUGH_IMAGES("NOT_ENOUGH_IMAGES"),
+      @SerializedName("NOT_ENOUGH_UNIQUE_PRODUCTS")
+      VALUE_NOT_ENOUGH_UNIQUE_PRODUCTS("NOT_ENOUGH_UNIQUE_PRODUCTS"),
       @SerializedName("PART_OF_PRODUCT_LAUNCH")
       VALUE_PART_OF_PRODUCT_LAUNCH("PART_OF_PRODUCT_LAUNCH"),
       @SerializedName("PRODUCT_EXPIRED")
       VALUE_PRODUCT_EXPIRED("PRODUCT_EXPIRED"),
       @SerializedName("PRODUCT_ITEM_HIDDEN_FROM_ALL_SHOPS")
       VALUE_PRODUCT_ITEM_HIDDEN_FROM_ALL_SHOPS("PRODUCT_ITEM_HIDDEN_FROM_ALL_SHOPS"),
+      @SerializedName("PRODUCT_ITEM_INVALID_PARTNER_TOKENS")
+      VALUE_PRODUCT_ITEM_INVALID_PARTNER_TOKENS("PRODUCT_ITEM_INVALID_PARTNER_TOKENS"),
       @SerializedName("PRODUCT_ITEM_NOT_INCLUDED_IN_ANY_SHOP")
       VALUE_PRODUCT_ITEM_NOT_INCLUDED_IN_ANY_SHOP("PRODUCT_ITEM_NOT_INCLUDED_IN_ANY_SHOP"),
       @SerializedName("PRODUCT_ITEM_NOT_VISIBLE")
@@ -3407,6 +3514,8 @@ public class ProductItem extends APINode {
       VALUE_PROPERTY_PRICE_TOO_HIGH("PROPERTY_PRICE_TOO_HIGH"),
       @SerializedName("PROPERTY_PRICE_TOO_LOW")
       VALUE_PROPERTY_PRICE_TOO_LOW("PROPERTY_PRICE_TOO_LOW"),
+      @SerializedName("PROPERTY_UNIT_PRICE_CURRENCY_MISMATCH_ITEM_PRICE_CURRENCY")
+      VALUE_PROPERTY_UNIT_PRICE_CURRENCY_MISMATCH_ITEM_PRICE_CURRENCY("PROPERTY_UNIT_PRICE_CURRENCY_MISMATCH_ITEM_PRICE_CURRENCY"),
       @SerializedName("PROPERTY_VALUE_CONTAINS_HTML_TAGS")
       VALUE_PROPERTY_VALUE_CONTAINS_HTML_TAGS("PROPERTY_VALUE_CONTAINS_HTML_TAGS"),
       @SerializedName("PROPERTY_VALUE_DESCRIPTION_CONTAINS_OFF_PLATFORM_LINK")
@@ -3423,6 +3532,8 @@ public class ProductItem extends APINode {
       VALUE_PROPERTY_VALUE_STRING_EXCEEDS_LENGTH("PROPERTY_VALUE_STRING_EXCEEDS_LENGTH"),
       @SerializedName("PROPERTY_VALUE_STRING_TOO_SHORT")
       VALUE_PROPERTY_VALUE_STRING_TOO_SHORT("PROPERTY_VALUE_STRING_TOO_SHORT"),
+      @SerializedName("PROPERTY_VALUE_UPPERCASE")
+      VALUE_PROPERTY_VALUE_UPPERCASE("PROPERTY_VALUE_UPPERCASE"),
       @SerializedName("PROPERTY_VALUE_UPPERCASE_WARNING")
       VALUE_PROPERTY_VALUE_UPPERCASE_WARNING("PROPERTY_VALUE_UPPERCASE_WARNING"),
       @SerializedName("QUALITY_DUPLICATED_DESCRIPTION")
@@ -3433,8 +3544,12 @@ public class ProductItem extends APINode {
       VALUE_QUALITY_ITEM_LINK_REDIRECTING("QUALITY_ITEM_LINK_REDIRECTING"),
       @SerializedName("RETAILER_ID_NOT_PROVIDED")
       VALUE_RETAILER_ID_NOT_PROVIDED("RETAILER_ID_NOT_PROVIDED"),
+      @SerializedName("SHOPIFY_INVALID_RETAILER_ID")
+      VALUE_SHOPIFY_INVALID_RETAILER_ID("SHOPIFY_INVALID_RETAILER_ID"),
       @SerializedName("SHOPIFY_ITEM_MISSING_SHIPPING_PROFILE")
       VALUE_SHOPIFY_ITEM_MISSING_SHIPPING_PROFILE("SHOPIFY_ITEM_MISSING_SHIPPING_PROFILE"),
+      @SerializedName("SHOPS_POLICY_VIOLATION")
+      VALUE_SHOPS_POLICY_VIOLATION("SHOPS_POLICY_VIOLATION"),
       @SerializedName("SUBSCRIPTION_INFO_NOT_ENABLED_FOR_FEED")
       VALUE_SUBSCRIPTION_INFO_NOT_ENABLED_FOR_FEED("SUBSCRIPTION_INFO_NOT_ENABLED_FOR_FEED"),
       @SerializedName("TAX_CATEGORY_NOT_SUPPORTED_IN_UK")
@@ -3443,6 +3558,24 @@ public class ProductItem extends APINode {
       VALUE_UNSUPPORTED_PRODUCT_CATEGORY("UNSUPPORTED_PRODUCT_CATEGORY"),
       @SerializedName("VARIANT_ATTRIBUTE_ISSUE")
       VALUE_VARIANT_ATTRIBUTE_ISSUE("VARIANT_ATTRIBUTE_ISSUE"),
+      @SerializedName("VIDEO_FETCH_FAILED")
+      VALUE_VIDEO_FETCH_FAILED("VIDEO_FETCH_FAILED"),
+      @SerializedName("VIDEO_FETCH_FAILED_BAD_GATEWAY")
+      VALUE_VIDEO_FETCH_FAILED_BAD_GATEWAY("VIDEO_FETCH_FAILED_BAD_GATEWAY"),
+      @SerializedName("VIDEO_FETCH_FAILED_FILE_SIZE_EXCEEDED")
+      VALUE_VIDEO_FETCH_FAILED_FILE_SIZE_EXCEEDED("VIDEO_FETCH_FAILED_FILE_SIZE_EXCEEDED"),
+      @SerializedName("VIDEO_FETCH_FAILED_FORBIDDEN")
+      VALUE_VIDEO_FETCH_FAILED_FORBIDDEN("VIDEO_FETCH_FAILED_FORBIDDEN"),
+      @SerializedName("VIDEO_FETCH_FAILED_LINK_BROKEN")
+      VALUE_VIDEO_FETCH_FAILED_LINK_BROKEN("VIDEO_FETCH_FAILED_LINK_BROKEN"),
+      @SerializedName("VIDEO_FETCH_FAILED_TIMED_OUT")
+      VALUE_VIDEO_FETCH_FAILED_TIMED_OUT("VIDEO_FETCH_FAILED_TIMED_OUT"),
+      @SerializedName("VIDEO_NOT_DOWNLOADABLE")
+      VALUE_VIDEO_NOT_DOWNLOADABLE("VIDEO_NOT_DOWNLOADABLE"),
+      @SerializedName("WHATSAPP_DISABLED_BY_USER")
+      VALUE_WHATSAPP_DISABLED_BY_USER("WHATSAPP_DISABLED_BY_USER"),
+      @SerializedName("WHATSAPP_POLICY_VIOLATION")
+      VALUE_WHATSAPP_POLICY_VIOLATION("WHATSAPP_POLICY_VIOLATION"),
       ;
 
       private String value;
@@ -4034,7 +4167,6 @@ public class ProductItem extends APINode {
     this.mAdditionalVariantAttributes = instance.mAdditionalVariantAttributes;
     this.mAgeGroup = instance.mAgeGroup;
     this.mApplinks = instance.mApplinks;
-    this.mArData = instance.mArData;
     this.mAvailability = instance.mAvailability;
     this.mBrand = instance.mBrand;
     this.mCapabilityToReviewStatus = instance.mCapabilityToReviewStatus;
@@ -4085,6 +4217,7 @@ public class ProductItem extends APINode {
     this.mProductCatalog = instance.mProductCatalog;
     this.mProductFeed = instance.mProductFeed;
     this.mProductGroup = instance.mProductGroup;
+    this.mProductLocalInfo = instance.mProductLocalInfo;
     this.mProductType = instance.mProductType;
     this.mQuantityToSellOnFacebook = instance.mQuantityToSellOnFacebook;
     this.mRetailerId = instance.mRetailerId;
@@ -4099,7 +4232,9 @@ public class ProductItem extends APINode {
     this.mShortDescription = instance.mShortDescription;
     this.mSize = instance.mSize;
     this.mStartDate = instance.mStartDate;
+    this.mTags = instance.mTags;
     this.mUrl = instance.mUrl;
+    this.mVideoFetchStatus = instance.mVideoFetchStatus;
     this.mVisibility = instance.mVisibility;
     this.mWaComplianceCategory = instance.mWaComplianceCategory;
     this.context = instance.context;

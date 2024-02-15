@@ -1,24 +1,9 @@
-/**
- * Copyright (c) 2015-present, Facebook, Inc. All rights reserved.
+/*
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ * All rights reserved.
  *
- * You are hereby granted a non-exclusive, worldwide, royalty-free license to
- * use, copy, modify, and distribute this software in source code or binary
- * form for use in connection with the web services and APIs provided by
- * Facebook.
- *
- * As with any software that integrates with the Facebook platform, your use
- * of this software is subject to the Facebook Developer Principles and
- * Policies [http://developers.facebook.com/policy/]. This copyright notice
- * shall be included in all copies or substantial portions of the software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
- * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
- * DEALINGS IN THE SOFTWARE.
- *
+ * This source code is licensed under the license found in the
+ * LICENSE file in the root directory of this source tree.
  */
 
 package com.facebook.ads.sdk;
@@ -120,7 +105,7 @@ public class Post extends APINode {
   @SerializedName("is_spherical")
   private Boolean mIsSpherical = null;
   @SerializedName("link")
-  private Object mLink = null;
+  private String mLink = null;
   @SerializedName("message")
   private String mMessage = null;
   @SerializedName("message_tags")
@@ -136,7 +121,7 @@ public class Post extends APINode {
   @SerializedName("parent_id")
   private String mParentId = null;
   @SerializedName("permalink_url")
-  private Object mPermalinkUrl = null;
+  private String mPermalinkUrl = null;
   @SerializedName("picture")
   private String mPicture = null;
   @SerializedName("place")
@@ -579,7 +564,7 @@ public class Post extends APINode {
     return mIsSpherical;
   }
 
-  public Object getFieldLink() {
+  public String getFieldLink() {
     return mLink;
   }
 
@@ -611,7 +596,7 @@ public class Post extends APINode {
     return mParentId;
   }
 
-  public Object getFieldPermalinkUrl() {
+  public String getFieldPermalinkUrl() {
     return mPermalinkUrl;
   }
 
@@ -2795,6 +2780,7 @@ public class Post extends APINode {
       "directed_by",
       "display_subtext",
       "displayed_message_response_time",
+      "does_viewer_have_page_permission_link_ig",
       "emails",
       "engagement",
       "fan_count",
@@ -2809,8 +2795,10 @@ public class Post extends APINode {
       "global_brand_page_name",
       "global_brand_root_id",
       "has_added_app",
+      "has_lead_access",
       "has_transitioned_to_new_page_experience",
       "has_whatsapp_business_number",
+      "has_whatsapp_enterprise_number_using_cloud_api",
       "has_whatsapp_number",
       "hometown",
       "hours",
@@ -2822,6 +2810,7 @@ public class Post extends APINode {
       "is_chain",
       "is_community_page",
       "is_eligible_for_branded_content",
+      "is_eligible_for_disable_connect_ig_btn_for_non_page_admin_am_web",
       "is_messenger_bot_get_started_enabled",
       "is_messenger_platform_bot",
       "is_owned",
@@ -2841,7 +2830,6 @@ public class Post extends APINode {
       "merchant_review_status",
       "messaging_feature_status",
       "messenger_ads_default_icebreakers",
-      "messenger_ads_default_page_welcome_message",
       "messenger_ads_default_quick_replies",
       "messenger_ads_quick_replies_type",
       "mini_shop_storefront",
@@ -2854,6 +2842,7 @@ public class Post extends APINode {
       "offer_eligible",
       "overall_star_rating",
       "owner_business",
+      "page_about_story",
       "page_token",
       "parent_page",
       "parking",
@@ -2896,6 +2885,7 @@ public class Post extends APINode {
       "unread_message_count",
       "unread_notif_count",
       "unseen_message_count",
+      "user_access_expire_time",
       "username",
       "verification_status",
       "voip_info",
@@ -3253,6 +3243,13 @@ public class Post extends APINode {
       this.requestField("displayed_message_response_time", value);
       return this;
     }
+    public APIRequestGetSponsorTags requestDoesViewerHavePagePermissionLinkIgField () {
+      return this.requestDoesViewerHavePagePermissionLinkIgField(true);
+    }
+    public APIRequestGetSponsorTags requestDoesViewerHavePagePermissionLinkIgField (boolean value) {
+      this.requestField("does_viewer_have_page_permission_link_ig", value);
+      return this;
+    }
     public APIRequestGetSponsorTags requestEmailsField () {
       return this.requestEmailsField(true);
     }
@@ -3351,6 +3348,13 @@ public class Post extends APINode {
       this.requestField("has_added_app", value);
       return this;
     }
+    public APIRequestGetSponsorTags requestHasLeadAccessField () {
+      return this.requestHasLeadAccessField(true);
+    }
+    public APIRequestGetSponsorTags requestHasLeadAccessField (boolean value) {
+      this.requestField("has_lead_access", value);
+      return this;
+    }
     public APIRequestGetSponsorTags requestHasTransitionedToNewPageExperienceField () {
       return this.requestHasTransitionedToNewPageExperienceField(true);
     }
@@ -3363,6 +3367,13 @@ public class Post extends APINode {
     }
     public APIRequestGetSponsorTags requestHasWhatsappBusinessNumberField (boolean value) {
       this.requestField("has_whatsapp_business_number", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestHasWhatsappEnterpriseNumberUsingCloudApiField () {
+      return this.requestHasWhatsappEnterpriseNumberUsingCloudApiField(true);
+    }
+    public APIRequestGetSponsorTags requestHasWhatsappEnterpriseNumberUsingCloudApiField (boolean value) {
+      this.requestField("has_whatsapp_enterprise_number_using_cloud_api", value);
       return this;
     }
     public APIRequestGetSponsorTags requestHasWhatsappNumberField () {
@@ -3440,6 +3451,13 @@ public class Post extends APINode {
     }
     public APIRequestGetSponsorTags requestIsEligibleForBrandedContentField (boolean value) {
       this.requestField("is_eligible_for_branded_content", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestIsEligibleForDisableConnectIgBtnForNonPageAdminAmWebField () {
+      return this.requestIsEligibleForDisableConnectIgBtnForNonPageAdminAmWebField(true);
+    }
+    public APIRequestGetSponsorTags requestIsEligibleForDisableConnectIgBtnForNonPageAdminAmWebField (boolean value) {
+      this.requestField("is_eligible_for_disable_connect_ig_btn_for_non_page_admin_am_web", value);
       return this;
     }
     public APIRequestGetSponsorTags requestIsMessengerBotGetStartedEnabledField () {
@@ -3575,13 +3593,6 @@ public class Post extends APINode {
       this.requestField("messenger_ads_default_icebreakers", value);
       return this;
     }
-    public APIRequestGetSponsorTags requestMessengerAdsDefaultPageWelcomeMessageField () {
-      return this.requestMessengerAdsDefaultPageWelcomeMessageField(true);
-    }
-    public APIRequestGetSponsorTags requestMessengerAdsDefaultPageWelcomeMessageField (boolean value) {
-      this.requestField("messenger_ads_default_page_welcome_message", value);
-      return this;
-    }
     public APIRequestGetSponsorTags requestMessengerAdsDefaultQuickRepliesField () {
       return this.requestMessengerAdsDefaultQuickRepliesField(true);
     }
@@ -3664,6 +3675,13 @@ public class Post extends APINode {
     }
     public APIRequestGetSponsorTags requestOwnerBusinessField (boolean value) {
       this.requestField("owner_business", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestPageAboutStoryField () {
+      return this.requestPageAboutStoryField(true);
+    }
+    public APIRequestGetSponsorTags requestPageAboutStoryField (boolean value) {
+      this.requestField("page_about_story", value);
       return this;
     }
     public APIRequestGetSponsorTags requestPageTokenField () {
@@ -3958,6 +3976,13 @@ public class Post extends APINode {
     }
     public APIRequestGetSponsorTags requestUnseenMessageCountField (boolean value) {
       this.requestField("unseen_message_count", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestUserAccessExpireTimeField () {
+      return this.requestUserAccessExpireTimeField(true);
+    }
+    public APIRequestGetSponsorTags requestUserAccessExpireTimeField (boolean value) {
+      this.requestField("user_access_expire_time", value);
       return this;
     }
     public APIRequestGetSponsorTags requestUsernameField () {
@@ -5287,29 +5312,6 @@ public class Post extends APINode {
       private String value;
 
       private EnumBackdatedTimeGranularity(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumCheckinEntryPoint {
-      @SerializedName("BRANDING_CHECKIN")
-      VALUE_BRANDING_CHECKIN("BRANDING_CHECKIN"),
-      @SerializedName("BRANDING_OTHER")
-      VALUE_BRANDING_OTHER("BRANDING_OTHER"),
-      @SerializedName("BRANDING_PHOTO")
-      VALUE_BRANDING_PHOTO("BRANDING_PHOTO"),
-      @SerializedName("BRANDING_STATUS")
-      VALUE_BRANDING_STATUS("BRANDING_STATUS"),
-      ;
-
-      private String value;
-
-      private EnumCheckinEntryPoint(String value) {
         this.value = value;
       }
 

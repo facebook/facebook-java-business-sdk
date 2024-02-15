@@ -1,24 +1,9 @@
-/**
- * Copyright (c) 2015-present, Facebook, Inc. All rights reserved.
+/*
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ * All rights reserved.
  *
- * You are hereby granted a non-exclusive, worldwide, royalty-free license to
- * use, copy, modify, and distribute this software in source code or binary
- * form for use in connection with the web services and APIs provided by
- * Facebook.
- *
- * As with any software that integrates with the Facebook platform, your use
- * of this software is subject to the Facebook Developer Principles and
- * Policies [http://developers.facebook.com/policy/]. This copyright notice
- * shall be included in all copies or substantial portions of the software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
- * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
- * DEALINGS IN THE SOFTWARE.
- *
+ * This source code is licensed under the license found in the
+ * LICENSE file in the root directory of this source tree.
  */
 
 package com.facebook.ads.sdk;
@@ -55,10 +40,14 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class ProductImage extends APINode {
+  @SerializedName("height")
+  private Long mHeight = null;
   @SerializedName("id")
   private String mId = null;
   @SerializedName("image_url")
   private String mImageUrl = null;
+  @SerializedName("width")
+  private Long mWidth = null;
   protected static Gson gson = null;
 
   ProductImage() {
@@ -273,12 +262,20 @@ public class ProductImage extends APINode {
   }
 
 
+  public Long getFieldHeight() {
+    return mHeight;
+  }
+
   public String getFieldId() {
     return mId;
   }
 
   public String getFieldImageUrl() {
     return mImageUrl;
+  }
+
+  public Long getFieldWidth() {
+    return mWidth;
   }
 
 
@@ -294,8 +291,10 @@ public class ProductImage extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "height",
       "id",
       "image_url",
+      "width",
     };
 
     @Override
@@ -387,6 +386,13 @@ public class ProductImage extends APINode {
       return this;
     }
 
+    public APIRequestGet requestHeightField () {
+      return this.requestHeightField(true);
+    }
+    public APIRequestGet requestHeightField (boolean value) {
+      this.requestField("height", value);
+      return this;
+    }
     public APIRequestGet requestIdField () {
       return this.requestIdField(true);
     }
@@ -399,6 +405,13 @@ public class ProductImage extends APINode {
     }
     public APIRequestGet requestImageUrlField (boolean value) {
       this.requestField("image_url", value);
+      return this;
+    }
+    public APIRequestGet requestWidthField () {
+      return this.requestWidthField(true);
+    }
+    public APIRequestGet requestWidthField (boolean value) {
+      this.requestField("width", value);
       return this;
     }
   }
@@ -418,8 +431,10 @@ public class ProductImage extends APINode {
   }
 
   public ProductImage copyFrom(ProductImage instance) {
+    this.mHeight = instance.mHeight;
     this.mId = instance.mId;
     this.mImageUrl = instance.mImageUrl;
+    this.mWidth = instance.mWidth;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

@@ -1,24 +1,9 @@
-/**
- * Copyright (c) 2015-present, Facebook, Inc. All rights reserved.
+/*
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ * All rights reserved.
  *
- * You are hereby granted a non-exclusive, worldwide, royalty-free license to
- * use, copy, modify, and distribute this software in source code or binary
- * form for use in connection with the web services and APIs provided by
- * Facebook.
- *
- * As with any software that integrates with the Facebook platform, your use
- * of this software is subject to the Facebook Developer Principles and
- * Policies [http://developers.facebook.com/policy/]. This copyright notice
- * shall be included in all copies or substantial portions of the software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
- * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
- * DEALINGS IN THE SOFTWARE.
- *
+ * This source code is licensed under the license found in the
+ * LICENSE file in the root directory of this source tree.
  */
 
 package com.facebook.ads.sdk;
@@ -61,8 +46,12 @@ public class AdCreativeBrandedContentAds extends APINode {
   private String mCreatorAdPermissionType = null;
   @SerializedName("instagram_boost_post_access_token")
   private String mInstagramBoostPostAccessToken = null;
+  @SerializedName("is_mca_internal")
+  private Boolean mIsMcaInternal = null;
   @SerializedName("partners")
-  private List<Object> mPartners = null;
+  private List<AdCreativeBrandedContentAdsPartners> mPartners = null;
+  @SerializedName("promoted_page_id")
+  private String mPromotedPageId = null;
   @SerializedName("ui_version")
   private Long mUiVersion = null;
   protected static Gson gson = null;
@@ -243,12 +232,35 @@ public class AdCreativeBrandedContentAds extends APINode {
     return this;
   }
 
-  public List<Object> getFieldPartners() {
+  public Boolean getFieldIsMcaInternal() {
+    return mIsMcaInternal;
+  }
+
+  public AdCreativeBrandedContentAds setFieldIsMcaInternal(Boolean value) {
+    this.mIsMcaInternal = value;
+    return this;
+  }
+
+  public List<AdCreativeBrandedContentAdsPartners> getFieldPartners() {
     return mPartners;
   }
 
-  public AdCreativeBrandedContentAds setFieldPartners(List<Object> value) {
+  public AdCreativeBrandedContentAds setFieldPartners(List<AdCreativeBrandedContentAdsPartners> value) {
     this.mPartners = value;
+    return this;
+  }
+
+  public AdCreativeBrandedContentAds setFieldPartners(String value) {
+    Type type = new TypeToken<List<AdCreativeBrandedContentAdsPartners>>(){}.getType();
+    this.mPartners = AdCreativeBrandedContentAdsPartners.getGson().fromJson(value, type);
+    return this;
+  }
+  public String getFieldPromotedPageId() {
+    return mPromotedPageId;
+  }
+
+  public AdCreativeBrandedContentAds setFieldPromotedPageId(String value) {
+    this.mPromotedPageId = value;
     return this;
   }
 
@@ -281,7 +293,9 @@ public class AdCreativeBrandedContentAds extends APINode {
     this.mAdFormat = instance.mAdFormat;
     this.mCreatorAdPermissionType = instance.mCreatorAdPermissionType;
     this.mInstagramBoostPostAccessToken = instance.mInstagramBoostPostAccessToken;
+    this.mIsMcaInternal = instance.mIsMcaInternal;
     this.mPartners = instance.mPartners;
+    this.mPromotedPageId = instance.mPromotedPageId;
     this.mUiVersion = instance.mUiVersion;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

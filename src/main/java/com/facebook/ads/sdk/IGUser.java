@@ -1,24 +1,9 @@
-/**
- * Copyright (c) 2015-present, Facebook, Inc. All rights reserved.
+/*
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ * All rights reserved.
  *
- * You are hereby granted a non-exclusive, worldwide, royalty-free license to
- * use, copy, modify, and distribute this software in source code or binary
- * form for use in connection with the web services and APIs provided by
- * Facebook.
- *
- * As with any software that integrates with the Facebook platform, your use
- * of this software is subject to the Facebook Developer Principles and
- * Policies [http://developers.facebook.com/policy/]. This copyright notice
- * shall be included in all copies or substantial portions of the software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
- * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
- * DEALINGS IN THE SOFTWARE.
- *
+ * This source code is licensed under the license found in the
+ * LICENSE file in the root directory of this source tree.
  */
 
 package com.facebook.ads.sdk;
@@ -308,6 +293,10 @@ public class IGUser extends APINode {
     return new APIRequestGetContentPublishingLimit(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetDataset getDataset() {
+    return new APIRequestGetDataset(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetInsights getInsights() {
     return new APIRequestGetInsights(this.getPrefixedId().toString(), context);
   }
@@ -439,45 +428,49 @@ public class IGUser extends APINode {
 
 
 
-  public static class APIRequestGetAvailableCatalogs extends APIRequest<APINode> {
+  public static class APIRequestGetAvailableCatalogs extends APIRequest<UserAvailableCatalogs> {
 
-    APINodeList<APINode> lastResponse = null;
+    APINodeList<UserAvailableCatalogs> lastResponse = null;
     @Override
-    public APINodeList<APINode> getLastResponse() {
+    public APINodeList<UserAvailableCatalogs> getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
     };
 
     public static final String[] FIELDS = {
+      "catalog_id",
+      "catalog_name",
+      "product_count",
+      "shop_name",
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header);
+    public APINodeList<UserAvailableCatalogs> parseResponse(String response, String header) throws APIException {
+      return UserAvailableCatalogs.parseResponse(response, getContext(), this, header);
     }
 
     @Override
-    public APINodeList<APINode> execute() throws APIException {
+    public APINodeList<UserAvailableCatalogs> execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+    public APINodeList<UserAvailableCatalogs> execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+    public ListenableFuture<APINodeList<UserAvailableCatalogs>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<APINodeList<UserAvailableCatalogs>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, APINodeList<UserAvailableCatalogs>>() {
+           public APINodeList<UserAvailableCatalogs> apply(ResponseWrapper result) {
              try {
                return APIRequestGetAvailableCatalogs.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -541,13 +534,41 @@ public class IGUser extends APINode {
       return this;
     }
 
+    public APIRequestGetAvailableCatalogs requestCatalogIdField () {
+      return this.requestCatalogIdField(true);
+    }
+    public APIRequestGetAvailableCatalogs requestCatalogIdField (boolean value) {
+      this.requestField("catalog_id", value);
+      return this;
+    }
+    public APIRequestGetAvailableCatalogs requestCatalogNameField () {
+      return this.requestCatalogNameField(true);
+    }
+    public APIRequestGetAvailableCatalogs requestCatalogNameField (boolean value) {
+      this.requestField("catalog_name", value);
+      return this;
+    }
+    public APIRequestGetAvailableCatalogs requestProductCountField () {
+      return this.requestProductCountField(true);
+    }
+    public APIRequestGetAvailableCatalogs requestProductCountField (boolean value) {
+      this.requestField("product_count", value);
+      return this;
+    }
+    public APIRequestGetAvailableCatalogs requestShopNameField () {
+      return this.requestShopNameField(true);
+    }
+    public APIRequestGetAvailableCatalogs requestShopNameField (boolean value) {
+      this.requestField("shop_name", value);
+      return this;
+    }
   }
 
-  public static class APIRequestGetCatalogProductSearch extends APIRequest<APINode> {
+  public static class APIRequestGetCatalogProductSearch extends APIRequest<ShadowIGUserCatalogProductSearch> {
 
-    APINodeList<APINode> lastResponse = null;
+    APINodeList<ShadowIGUserCatalogProductSearch> lastResponse = null;
     @Override
-    public APINodeList<APINode> getLastResponse() {
+    public APINodeList<ShadowIGUserCatalogProductSearch> getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
@@ -556,34 +577,42 @@ public class IGUser extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "image_url",
+      "is_checkout_flow",
+      "merchant_id",
+      "product_id",
+      "product_name",
+      "product_variants",
+      "retailer_id",
+      "review_status",
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header);
+    public APINodeList<ShadowIGUserCatalogProductSearch> parseResponse(String response, String header) throws APIException {
+      return ShadowIGUserCatalogProductSearch.parseResponse(response, getContext(), this, header);
     }
 
     @Override
-    public APINodeList<APINode> execute() throws APIException {
+    public APINodeList<ShadowIGUserCatalogProductSearch> execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+    public APINodeList<ShadowIGUserCatalogProductSearch> execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+    public ListenableFuture<APINodeList<ShadowIGUserCatalogProductSearch>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<APINodeList<ShadowIGUserCatalogProductSearch>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, APINodeList<ShadowIGUserCatalogProductSearch>>() {
+           public APINodeList<ShadowIGUserCatalogProductSearch> apply(ResponseWrapper result) {
              try {
                return APIRequestGetCatalogProductSearch.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -657,13 +686,69 @@ public class IGUser extends APINode {
       return this;
     }
 
+    public APIRequestGetCatalogProductSearch requestImageUrlField () {
+      return this.requestImageUrlField(true);
+    }
+    public APIRequestGetCatalogProductSearch requestImageUrlField (boolean value) {
+      this.requestField("image_url", value);
+      return this;
+    }
+    public APIRequestGetCatalogProductSearch requestIsCheckoutFlowField () {
+      return this.requestIsCheckoutFlowField(true);
+    }
+    public APIRequestGetCatalogProductSearch requestIsCheckoutFlowField (boolean value) {
+      this.requestField("is_checkout_flow", value);
+      return this;
+    }
+    public APIRequestGetCatalogProductSearch requestMerchantIdField () {
+      return this.requestMerchantIdField(true);
+    }
+    public APIRequestGetCatalogProductSearch requestMerchantIdField (boolean value) {
+      this.requestField("merchant_id", value);
+      return this;
+    }
+    public APIRequestGetCatalogProductSearch requestProductIdField () {
+      return this.requestProductIdField(true);
+    }
+    public APIRequestGetCatalogProductSearch requestProductIdField (boolean value) {
+      this.requestField("product_id", value);
+      return this;
+    }
+    public APIRequestGetCatalogProductSearch requestProductNameField () {
+      return this.requestProductNameField(true);
+    }
+    public APIRequestGetCatalogProductSearch requestProductNameField (boolean value) {
+      this.requestField("product_name", value);
+      return this;
+    }
+    public APIRequestGetCatalogProductSearch requestProductVariantsField () {
+      return this.requestProductVariantsField(true);
+    }
+    public APIRequestGetCatalogProductSearch requestProductVariantsField (boolean value) {
+      this.requestField("product_variants", value);
+      return this;
+    }
+    public APIRequestGetCatalogProductSearch requestRetailerIdField () {
+      return this.requestRetailerIdField(true);
+    }
+    public APIRequestGetCatalogProductSearch requestRetailerIdField (boolean value) {
+      this.requestField("retailer_id", value);
+      return this;
+    }
+    public APIRequestGetCatalogProductSearch requestReviewStatusField () {
+      return this.requestReviewStatusField(true);
+    }
+    public APIRequestGetCatalogProductSearch requestReviewStatusField (boolean value) {
+      this.requestField("review_status", value);
+      return this;
+    }
   }
 
-  public static class APIRequestGetContentPublishingLimit extends APIRequest<APINode> {
+  public static class APIRequestGetContentPublishingLimit extends APIRequest<ContentPublishingLimitResponse> {
 
-    APINodeList<APINode> lastResponse = null;
+    APINodeList<ContentPublishingLimitResponse> lastResponse = null;
     @Override
-    public APINodeList<APINode> getLastResponse() {
+    public APINodeList<ContentPublishingLimitResponse> getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
@@ -671,34 +756,36 @@ public class IGUser extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "config",
+      "quota_usage",
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header);
+    public APINodeList<ContentPublishingLimitResponse> parseResponse(String response, String header) throws APIException {
+      return ContentPublishingLimitResponse.parseResponse(response, getContext(), this, header);
     }
 
     @Override
-    public APINodeList<APINode> execute() throws APIException {
+    public APINodeList<ContentPublishingLimitResponse> execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+    public APINodeList<ContentPublishingLimitResponse> execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+    public ListenableFuture<APINodeList<ContentPublishingLimitResponse>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<APINodeList<ContentPublishingLimitResponse>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, APINodeList<ContentPublishingLimitResponse>>() {
+           public APINodeList<ContentPublishingLimitResponse> apply(ResponseWrapper result) {
              try {
                return APIRequestGetContentPublishingLimit.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -767,6 +854,132 @@ public class IGUser extends APINode {
       return this;
     }
 
+    public APIRequestGetContentPublishingLimit requestConfigField () {
+      return this.requestConfigField(true);
+    }
+    public APIRequestGetContentPublishingLimit requestConfigField (boolean value) {
+      this.requestField("config", value);
+      return this;
+    }
+    public APIRequestGetContentPublishingLimit requestQuotaUsageField () {
+      return this.requestQuotaUsageField(true);
+    }
+    public APIRequestGetContentPublishingLimit requestQuotaUsageField (boolean value) {
+      this.requestField("quota_usage", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestGetDataset extends APIRequest<Dataset> {
+
+    APINodeList<Dataset> lastResponse = null;
+    @Override
+    public APINodeList<Dataset> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "id",
+    };
+
+    @Override
+    public APINodeList<Dataset> parseResponse(String response, String header) throws APIException {
+      return Dataset.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<Dataset> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<Dataset> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<Dataset>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<Dataset>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<Dataset>>() {
+           public APINodeList<Dataset> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetDataset.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetDataset(String nodeId, APIContext context) {
+      super(context, nodeId, "/dataset", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetDataset setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetDataset setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetDataset requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetDataset requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetDataset requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetDataset requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetDataset requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetDataset requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetDataset requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetDataset requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
   }
 
   public static class APIRequestGetInsights extends APIRequest<InstagramInsightsResult> {
@@ -1006,6 +1219,7 @@ public class IGUser extends APINode {
     public static final String[] FIELDS = {
       "caption",
       "comments_count",
+      "copyright_check_information",
       "id",
       "ig_id",
       "is_comment_enabled",
@@ -1135,6 +1349,13 @@ public class IGUser extends APINode {
       this.requestField("comments_count", value);
       return this;
     }
+    public APIRequestGetLiveMedia requestCopyrightCheckInformationField () {
+      return this.requestCopyrightCheckInformationField(true);
+    }
+    public APIRequestGetLiveMedia requestCopyrightCheckInformationField (boolean value) {
+      this.requestField("copyright_check_information", value);
+      return this;
+    }
     public APIRequestGetLiveMedia requestIdField () {
       return this.requestIdField(true);
     }
@@ -1250,6 +1471,7 @@ public class IGUser extends APINode {
     public static final String[] FIELDS = {
       "caption",
       "comments_count",
+      "copyright_check_information",
       "id",
       "ig_id",
       "is_comment_enabled",
@@ -1379,6 +1601,13 @@ public class IGUser extends APINode {
       this.requestField("comments_count", value);
       return this;
     }
+    public APIRequestGetMedia requestCopyrightCheckInformationField () {
+      return this.requestCopyrightCheckInformationField(true);
+    }
+    public APIRequestGetMedia requestCopyrightCheckInformationField (boolean value) {
+      this.requestField("copyright_check_information", value);
+      return this;
+    }
     public APIRequestGetMedia requestIdField () {
       return this.requestIdField(true);
     }
@@ -1490,6 +1719,7 @@ public class IGUser extends APINode {
       "audio_name",
       "caption",
       "children",
+      "collaborators",
       "cover_url",
       "image_url",
       "is_carousel_item",
@@ -1574,6 +1804,15 @@ public class IGUser extends APINode {
     }
     public APIRequestCreateMedia setChildren (String children) {
       this.setParam("children", children);
+      return this;
+    }
+
+    public APIRequestCreateMedia setCollaborators (List<String> collaborators) {
+      this.setParam("collaborators", collaborators);
+      return this;
+    }
+    public APIRequestCreateMedia setCollaborators (String collaborators) {
+      this.setParam("collaborators", collaborators);
       return this;
     }
 
@@ -2109,11 +2348,11 @@ public class IGUser extends APINode {
     }
   }
 
-  public static class APIRequestGetProductAppeal extends APIRequest<APINode> {
+  public static class APIRequestGetProductAppeal extends APIRequest<IGShoppingProductAppeal> {
 
-    APINodeList<APINode> lastResponse = null;
+    APINodeList<IGShoppingProductAppeal> lastResponse = null;
     @Override
-    public APINodeList<APINode> getLastResponse() {
+    public APINodeList<IGShoppingProductAppeal> getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
@@ -2121,34 +2360,39 @@ public class IGUser extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "eligible_for_appeal",
+      "product_appeal_status",
+      "product_id",
+      "rejection_reasons",
+      "review_status",
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header);
+    public APINodeList<IGShoppingProductAppeal> parseResponse(String response, String header) throws APIException {
+      return IGShoppingProductAppeal.parseResponse(response, getContext(), this, header);
     }
 
     @Override
-    public APINodeList<APINode> execute() throws APIException {
+    public APINodeList<IGShoppingProductAppeal> execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+    public APINodeList<IGShoppingProductAppeal> execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+    public ListenableFuture<APINodeList<IGShoppingProductAppeal>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<APINodeList<IGShoppingProductAppeal>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, APINodeList<IGShoppingProductAppeal>>() {
+           public APINodeList<IGShoppingProductAppeal> apply(ResponseWrapper result) {
              try {
                return APIRequestGetProductAppeal.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -2217,13 +2461,48 @@ public class IGUser extends APINode {
       return this;
     }
 
+    public APIRequestGetProductAppeal requestEligibleForAppealField () {
+      return this.requestEligibleForAppealField(true);
+    }
+    public APIRequestGetProductAppeal requestEligibleForAppealField (boolean value) {
+      this.requestField("eligible_for_appeal", value);
+      return this;
+    }
+    public APIRequestGetProductAppeal requestProductAppealStatusField () {
+      return this.requestProductAppealStatusField(true);
+    }
+    public APIRequestGetProductAppeal requestProductAppealStatusField (boolean value) {
+      this.requestField("product_appeal_status", value);
+      return this;
+    }
+    public APIRequestGetProductAppeal requestProductIdField () {
+      return this.requestProductIdField(true);
+    }
+    public APIRequestGetProductAppeal requestProductIdField (boolean value) {
+      this.requestField("product_id", value);
+      return this;
+    }
+    public APIRequestGetProductAppeal requestRejectionReasonsField () {
+      return this.requestRejectionReasonsField(true);
+    }
+    public APIRequestGetProductAppeal requestRejectionReasonsField (boolean value) {
+      this.requestField("rejection_reasons", value);
+      return this;
+    }
+    public APIRequestGetProductAppeal requestReviewStatusField () {
+      return this.requestReviewStatusField(true);
+    }
+    public APIRequestGetProductAppeal requestReviewStatusField (boolean value) {
+      this.requestField("review_status", value);
+      return this;
+    }
   }
 
-  public static class APIRequestCreateProductAppeal extends APIRequest<APINode> {
+  public static class APIRequestCreateProductAppeal extends APIRequest<IGShoppingProductAppeal> {
 
-    APINode lastResponse = null;
+    IGShoppingProductAppeal lastResponse = null;
     @Override
-    public APINode getLastResponse() {
+    public IGShoppingProductAppeal getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
@@ -2235,31 +2514,31 @@ public class IGUser extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header).head();
+    public IGShoppingProductAppeal parseResponse(String response, String header) throws APIException {
+      return IGShoppingProductAppeal.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public APINode execute() throws APIException {
+    public IGShoppingProductAppeal execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINode execute(Map<String, Object> extraParams) throws APIException {
+    public IGShoppingProductAppeal execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<APINode> executeAsync() throws APIException {
+    public ListenableFuture<IGShoppingProductAppeal> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<IGShoppingProductAppeal> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINode>() {
-           public APINode apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, IGShoppingProductAppeal>() {
+           public IGShoppingProductAppeal apply(ResponseWrapper result) {
              try {
                return APIRequestCreateProductAppeal.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -2335,45 +2614,47 @@ public class IGUser extends APINode {
 
   }
 
-  public static class APIRequestGetRecentlySearchedHashtags extends APIRequest<APINode> {
+  public static class APIRequestGetRecentlySearchedHashtags extends APIRequest<ShadowIGHashtag> {
 
-    APINodeList<APINode> lastResponse = null;
+    APINodeList<ShadowIGHashtag> lastResponse = null;
     @Override
-    public APINodeList<APINode> getLastResponse() {
+    public APINodeList<ShadowIGHashtag> getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
     };
 
     public static final String[] FIELDS = {
+      "id",
+      "name",
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header);
+    public APINodeList<ShadowIGHashtag> parseResponse(String response, String header) throws APIException {
+      return ShadowIGHashtag.parseResponse(response, getContext(), this, header);
     }
 
     @Override
-    public APINodeList<APINode> execute() throws APIException {
+    public APINodeList<ShadowIGHashtag> execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+    public APINodeList<ShadowIGHashtag> execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+    public ListenableFuture<APINodeList<ShadowIGHashtag>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<APINodeList<ShadowIGHashtag>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, APINodeList<ShadowIGHashtag>>() {
+           public APINodeList<ShadowIGHashtag> apply(ResponseWrapper result) {
              try {
                return APIRequestGetRecentlySearchedHashtags.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -2437,6 +2718,20 @@ public class IGUser extends APINode {
       return this;
     }
 
+    public APIRequestGetRecentlySearchedHashtags requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetRecentlySearchedHashtags requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetRecentlySearchedHashtags requestNameField () {
+      return this.requestNameField(true);
+    }
+    public APIRequestGetRecentlySearchedHashtags requestNameField (boolean value) {
+      this.requestField("name", value);
+      return this;
+    }
   }
 
   public static class APIRequestGetStories extends APIRequest<IGMedia> {
@@ -2452,6 +2747,7 @@ public class IGUser extends APINode {
     public static final String[] FIELDS = {
       "caption",
       "comments_count",
+      "copyright_check_information",
       "id",
       "ig_id",
       "is_comment_enabled",
@@ -2571,6 +2867,13 @@ public class IGUser extends APINode {
       this.requestField("comments_count", value);
       return this;
     }
+    public APIRequestGetStories requestCopyrightCheckInformationField () {
+      return this.requestCopyrightCheckInformationField(true);
+    }
+    public APIRequestGetStories requestCopyrightCheckInformationField (boolean value) {
+      this.requestField("copyright_check_information", value);
+      return this;
+    }
     public APIRequestGetStories requestIdField () {
       return this.requestIdField(true);
     }
@@ -2684,6 +2987,7 @@ public class IGUser extends APINode {
     public static final String[] FIELDS = {
       "caption",
       "comments_count",
+      "copyright_check_information",
       "id",
       "ig_id",
       "is_comment_enabled",
@@ -2801,6 +3105,13 @@ public class IGUser extends APINode {
     }
     public APIRequestGetTags requestCommentsCountField (boolean value) {
       this.requestField("comments_count", value);
+      return this;
+    }
+    public APIRequestGetTags requestCopyrightCheckInformationField () {
+      return this.requestCopyrightCheckInformationField(true);
+    }
+    public APIRequestGetTags requestCopyrightCheckInformationField (boolean value) {
+      this.requestField("copyright_check_information", value);
       return this;
     }
     public APIRequestGetTags requestIdField () {

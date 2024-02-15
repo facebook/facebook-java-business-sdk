@@ -1,24 +1,9 @@
-/**
- * Copyright (c) 2015-present, Facebook, Inc. All rights reserved.
+/*
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ * All rights reserved.
  *
- * You are hereby granted a non-exclusive, worldwide, royalty-free license to
- * use, copy, modify, and distribute this software in source code or binary
- * form for use in connection with the web services and APIs provided by
- * Facebook.
- *
- * As with any software that integrates with the Facebook platform, your use
- * of this software is subject to the Facebook Developer Principles and
- * Policies [http://developers.facebook.com/policy/]. This copyright notice
- * shall be included in all copies or substantial portions of the software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
- * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
- * DEALINGS IN THE SOFTWARE.
- *
+ * This source code is licensed under the license found in the
+ * LICENSE file in the root directory of this source tree.
  */
 
 package com.facebook.ads.sdk;
@@ -59,6 +44,8 @@ public class IGMedia extends APINode {
   private String mCaption = null;
   @SerializedName("comments_count")
   private Long mCommentsCount = null;
+  @SerializedName("copyright_check_information")
+  private IGVideoCopyrightCheckMatchesInformation mCopyrightCheckInformation = null;
   @SerializedName("id")
   private String mId = null;
   @SerializedName("ig_id")
@@ -300,6 +287,10 @@ public class IGMedia extends APINode {
     return new APIRequestGetChildren(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetCollaborators getCollaborators() {
+    return new APIRequestGetCollaborators(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetComments getComments() {
     return new APIRequestGetComments(this.getPrefixedId().toString(), context);
   }
@@ -339,6 +330,10 @@ public class IGMedia extends APINode {
 
   public Long getFieldCommentsCount() {
     return mCommentsCount;
+  }
+
+  public IGVideoCopyrightCheckMatchesInformation getFieldCopyrightCheckInformation() {
+    return mCopyrightCheckInformation;
   }
 
   public String getFieldId() {
@@ -415,6 +410,7 @@ public class IGMedia extends APINode {
     public static final String[] FIELDS = {
       "caption",
       "comments_count",
+      "copyright_check_information",
       "id",
       "ig_id",
       "is_comment_enabled",
@@ -534,6 +530,13 @@ public class IGMedia extends APINode {
       this.requestField("comments_count", value);
       return this;
     }
+    public APIRequestGetChildren requestCopyrightCheckInformationField () {
+      return this.requestCopyrightCheckInformationField(true);
+    }
+    public APIRequestGetChildren requestCopyrightCheckInformationField (boolean value) {
+      this.requestField("copyright_check_information", value);
+      return this;
+    }
     public APIRequestGetChildren requestIdField () {
       return this.requestIdField(true);
     }
@@ -629,6 +632,134 @@ public class IGMedia extends APINode {
       return this.requestUsernameField(true);
     }
     public APIRequestGetChildren requestUsernameField (boolean value) {
+      this.requestField("username", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestGetCollaborators extends APIRequest<ShadowIGMediaCollaborators> {
+
+    APINodeList<ShadowIGMediaCollaborators> lastResponse = null;
+    @Override
+    public APINodeList<ShadowIGMediaCollaborators> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "id",
+      "invite_status",
+      "username",
+    };
+
+    @Override
+    public APINodeList<ShadowIGMediaCollaborators> parseResponse(String response, String header) throws APIException {
+      return ShadowIGMediaCollaborators.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<ShadowIGMediaCollaborators> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<ShadowIGMediaCollaborators> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<ShadowIGMediaCollaborators>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<ShadowIGMediaCollaborators>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<ShadowIGMediaCollaborators>>() {
+           public APINodeList<ShadowIGMediaCollaborators> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetCollaborators.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetCollaborators(String nodeId, APIContext context) {
+      super(context, nodeId, "/collaborators", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetCollaborators setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCollaborators setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetCollaborators requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetCollaborators requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCollaborators requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetCollaborators requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCollaborators requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCollaborators requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetCollaborators requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetCollaborators requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetCollaborators requestInviteStatusField () {
+      return this.requestInviteStatusField(true);
+    }
+    public APIRequestGetCollaborators requestInviteStatusField (boolean value) {
+      this.requestField("invite_status", value);
+      return this;
+    }
+    public APIRequestGetCollaborators requestUsernameField () {
+      return this.requestUsernameField(true);
+    }
+    public APIRequestGetCollaborators requestUsernameField (boolean value) {
       this.requestField("username", value);
       return this;
     }
@@ -1566,11 +1697,16 @@ public class IGMedia extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "primary_fb_page_id",
+      "primary_ig_user_id",
+      "secondary_fb_page_id",
+      "secondary_ig_user_id",
     };
 
     public static final String[] FIELDS = {
       "caption",
       "comments_count",
+      "copyright_check_information",
       "id",
       "ig_id",
       "is_comment_enabled",
@@ -1640,6 +1776,26 @@ public class IGMedia extends APINode {
     }
 
 
+    public APIRequestGet setPrimaryFbPageId (String primaryFbPageId) {
+      this.setParam("primary_fb_page_id", primaryFbPageId);
+      return this;
+    }
+
+    public APIRequestGet setPrimaryIgUserId (String primaryIgUserId) {
+      this.setParam("primary_ig_user_id", primaryIgUserId);
+      return this;
+    }
+
+    public APIRequestGet setSecondaryFbPageId (String secondaryFbPageId) {
+      this.setParam("secondary_fb_page_id", secondaryFbPageId);
+      return this;
+    }
+
+    public APIRequestGet setSecondaryIgUserId (String secondaryIgUserId) {
+      this.setParam("secondary_ig_user_id", secondaryIgUserId);
+      return this;
+    }
+
     public APIRequestGet requestAllFields () {
       return this.requestAllFields(true);
     }
@@ -1688,6 +1844,13 @@ public class IGMedia extends APINode {
     }
     public APIRequestGet requestCommentsCountField (boolean value) {
       this.requestField("comments_count", value);
+      return this;
+    }
+    public APIRequestGet requestCopyrightCheckInformationField () {
+      return this.requestCopyrightCheckInformationField(true);
+    }
+    public APIRequestGet requestCopyrightCheckInformationField (boolean value) {
+      this.requestField("copyright_check_information", value);
       return this;
     }
     public APIRequestGet requestIdField () {
@@ -1921,6 +2084,7 @@ public class IGMedia extends APINode {
   public IGMedia copyFrom(IGMedia instance) {
     this.mCaption = instance.mCaption;
     this.mCommentsCount = instance.mCommentsCount;
+    this.mCopyrightCheckInformation = instance.mCopyrightCheckInformation;
     this.mId = instance.mId;
     this.mIgId = instance.mIgId;
     this.mIsCommentEnabled = instance.mIsCommentEnabled;

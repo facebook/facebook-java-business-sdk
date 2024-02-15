@@ -1,24 +1,9 @@
-/**
- * Copyright (c) 2015-present, Facebook, Inc. All rights reserved.
+/*
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ * All rights reserved.
  *
- * You are hereby granted a non-exclusive, worldwide, royalty-free license to
- * use, copy, modify, and distribute this software in source code or binary
- * form for use in connection with the web services and APIs provided by
- * Facebook.
- *
- * As with any software that integrates with the Facebook platform, your use
- * of this software is subject to the Facebook Developer Principles and
- * Policies [http://developers.facebook.com/policy/]. This copyright notice
- * shall be included in all copies or substantial portions of the software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
- * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
- * DEALINGS IN THE SOFTWARE.
- *
+ * This source code is licensed under the license found in the
+ * LICENSE file in the root directory of this source tree.
  */
 
 package com.facebook.ads.sdk;
@@ -54,78 +39,76 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class GameItem extends APINode {
-  @SerializedName("count")
-  private Long mCount = null;
-  @SerializedName("created")
-  private String mCreated = null;
-  @SerializedName("ext_id")
-  private String mExtId = null;
+public class CTXPartnerAppWelcomeMessageFlow extends APINode {
+  @SerializedName("compatible_platforms")
+  private List<String> mCompatiblePlatforms = null;
+  @SerializedName("eligible_platforms")
+  private List<String> mEligiblePlatforms = null;
   @SerializedName("id")
   private String mId = null;
-  @SerializedName("item_def")
-  private String mItemDef = null;
-  @SerializedName("owner")
-  private User mOwner = null;
-  @SerializedName("status")
-  private String mStatus = null;
-  @SerializedName("updated")
-  private String mUpdated = null;
+  @SerializedName("is_used_in_ad")
+  private Boolean mIsUsedInAd = null;
+  @SerializedName("last_update_time")
+  private String mLastUpdateTime = null;
+  @SerializedName("name")
+  private String mName = null;
+  @SerializedName("welcome_message_flow")
+  private String mWelcomeMessageFlow = null;
   protected static Gson gson = null;
 
-  GameItem() {
+  CTXPartnerAppWelcomeMessageFlow() {
   }
 
-  public GameItem(Long id, APIContext context) {
+  public CTXPartnerAppWelcomeMessageFlow(Long id, APIContext context) {
     this(id.toString(), context);
   }
 
-  public GameItem(String id, APIContext context) {
+  public CTXPartnerAppWelcomeMessageFlow(String id, APIContext context) {
     this.mId = id;
 
     this.context = context;
   }
 
-  public GameItem fetch() throws APIException{
-    GameItem newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+  public CTXPartnerAppWelcomeMessageFlow fetch() throws APIException{
+    CTXPartnerAppWelcomeMessageFlow newInstance = fetchById(this.getPrefixedId().toString(), this.context);
     this.copyFrom(newInstance);
     return this;
   }
 
-  public static GameItem fetchById(Long id, APIContext context) throws APIException {
+  public static CTXPartnerAppWelcomeMessageFlow fetchById(Long id, APIContext context) throws APIException {
     return fetchById(id.toString(), context);
   }
 
-  public static ListenableFuture<GameItem> fetchByIdAsync(Long id, APIContext context) throws APIException {
+  public static ListenableFuture<CTXPartnerAppWelcomeMessageFlow> fetchByIdAsync(Long id, APIContext context) throws APIException {
     return fetchByIdAsync(id.toString(), context);
   }
 
-  public static GameItem fetchById(String id, APIContext context) throws APIException {
+  public static CTXPartnerAppWelcomeMessageFlow fetchById(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
   }
 
-  public static ListenableFuture<GameItem> fetchByIdAsync(String id, APIContext context) throws APIException {
+  public static ListenableFuture<CTXPartnerAppWelcomeMessageFlow> fetchByIdAsync(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
   }
 
-  public static APINodeList<GameItem> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<GameItem>)(
-      new APIRequest<GameItem>(context, "", "/", "GET", GameItem.getParser())
+  public static APINodeList<CTXPartnerAppWelcomeMessageFlow> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<CTXPartnerAppWelcomeMessageFlow>)(
+      new APIRequest<CTXPartnerAppWelcomeMessageFlow>(context, "", "/", "GET", CTXPartnerAppWelcomeMessageFlow.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .execute()
     );
   }
 
-  public static ListenableFuture<APINodeList<GameItem>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+  public static ListenableFuture<APINodeList<CTXPartnerAppWelcomeMessageFlow>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
     return
-      new APIRequest(context, "", "/", "GET", GameItem.getParser())
+      new APIRequest(context, "", "/", "GET", CTXPartnerAppWelcomeMessageFlow.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
@@ -138,12 +121,12 @@ public class GameItem extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static GameItem loadJSON(String json, APIContext context, String header) {
-    GameItem gameItem = getGson().fromJson(json, GameItem.class);
+  public static CTXPartnerAppWelcomeMessageFlow loadJSON(String json, APIContext context, String header) {
+    CTXPartnerAppWelcomeMessageFlow ctxPartnerAppWelcomeMessageFlow = getGson().fromJson(json, CTXPartnerAppWelcomeMessageFlow.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(gameItem.toString());
+      JsonElement o2 = parser.parse(ctxPartnerAppWelcomeMessageFlow.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -153,14 +136,14 @@ public class GameItem extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    gameItem.context = context;
-    gameItem.rawValue = json;
-    gameItem.header = header;
-    return gameItem;
+    ctxPartnerAppWelcomeMessageFlow.context = context;
+    ctxPartnerAppWelcomeMessageFlow.rawValue = json;
+    ctxPartnerAppWelcomeMessageFlow.header = header;
+    return ctxPartnerAppWelcomeMessageFlow;
   }
 
-  public static APINodeList<GameItem> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<GameItem> gameItems = new APINodeList<GameItem>(request, json, header);
+  public static APINodeList<CTXPartnerAppWelcomeMessageFlow> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<CTXPartnerAppWelcomeMessageFlow> ctxPartnerAppWelcomeMessageFlows = new APINodeList<CTXPartnerAppWelcomeMessageFlow>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -171,9 +154,9 @@ public class GameItem extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          gameItems.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          ctxPartnerAppWelcomeMessageFlows.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return gameItems;
+        return ctxPartnerAppWelcomeMessageFlows;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -183,20 +166,20 @@ public class GameItem extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                gameItems.setCursors(before, after);
+                ctxPartnerAppWelcomeMessageFlows.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            gameItems.setPaging(previous, next);
+            ctxPartnerAppWelcomeMessageFlows.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              gameItems.setAppSecret(context.getAppSecretProof());
+              ctxPartnerAppWelcomeMessageFlows.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              gameItems.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              ctxPartnerAppWelcomeMessageFlows.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -207,23 +190,23 @@ public class GameItem extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  gameItems.add(loadJSON(entry.getValue().toString(), context, header));
+                  ctxPartnerAppWelcomeMessageFlows.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              gameItems.add(loadJSON(obj.toString(), context, header));
+              ctxPartnerAppWelcomeMessageFlows.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return gameItems;
+          return ctxPartnerAppWelcomeMessageFlows;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              gameItems.add(loadJSON(entry.getValue().toString(), context, header));
+              ctxPartnerAppWelcomeMessageFlows.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return gameItems;
+          return ctxPartnerAppWelcomeMessageFlows;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -240,20 +223,20 @@ public class GameItem extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              gameItems.add(loadJSON(value.toString(), context, header));
+              ctxPartnerAppWelcomeMessageFlows.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return gameItems;
+            return ctxPartnerAppWelcomeMessageFlows;
           }
 
           // Sixth, check if it's pure JsonObject
-          gameItems.clear();
-          gameItems.add(loadJSON(json, context, header));
-          return gameItems;
+          ctxPartnerAppWelcomeMessageFlows.clear();
+          ctxPartnerAppWelcomeMessageFlows.add(loadJSON(json, context, header));
+          return ctxPartnerAppWelcomeMessageFlows;
         }
       }
     } catch (Exception e) {
@@ -285,90 +268,82 @@ public class GameItem extends APINode {
   }
 
 
-  public Long getFieldCount() {
-    return mCount;
+  public List<String> getFieldCompatiblePlatforms() {
+    return mCompatiblePlatforms;
   }
 
-  public String getFieldCreated() {
-    return mCreated;
-  }
-
-  public String getFieldExtId() {
-    return mExtId;
+  public List<String> getFieldEligiblePlatforms() {
+    return mEligiblePlatforms;
   }
 
   public String getFieldId() {
     return mId;
   }
 
-  public String getFieldItemDef() {
-    return mItemDef;
+  public Boolean getFieldIsUsedInAd() {
+    return mIsUsedInAd;
   }
 
-  public User getFieldOwner() {
-    if (mOwner != null) {
-      mOwner.context = getContext();
-    }
-    return mOwner;
+  public String getFieldLastUpdateTime() {
+    return mLastUpdateTime;
   }
 
-  public String getFieldStatus() {
-    return mStatus;
+  public String getFieldName() {
+    return mName;
   }
 
-  public String getFieldUpdated() {
-    return mUpdated;
+  public String getFieldWelcomeMessageFlow() {
+    return mWelcomeMessageFlow;
   }
 
 
 
-  public static class APIRequestGet extends APIRequest<GameItem> {
+  public static class APIRequestGet extends APIRequest<CTXPartnerAppWelcomeMessageFlow> {
 
-    GameItem lastResponse = null;
+    CTXPartnerAppWelcomeMessageFlow lastResponse = null;
     @Override
-    public GameItem getLastResponse() {
+    public CTXPartnerAppWelcomeMessageFlow getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
     };
 
     public static final String[] FIELDS = {
-      "count",
-      "created",
-      "ext_id",
+      "compatible_platforms",
+      "eligible_platforms",
       "id",
-      "item_def",
-      "owner",
-      "status",
-      "updated",
+      "is_used_in_ad",
+      "last_update_time",
+      "name",
+      "welcome_message_flow",
     };
 
     @Override
-    public GameItem parseResponse(String response, String header) throws APIException {
-      return GameItem.parseResponse(response, getContext(), this, header).head();
+    public CTXPartnerAppWelcomeMessageFlow parseResponse(String response, String header) throws APIException {
+      return CTXPartnerAppWelcomeMessageFlow.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public GameItem execute() throws APIException {
+    public CTXPartnerAppWelcomeMessageFlow execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public GameItem execute(Map<String, Object> extraParams) throws APIException {
+    public CTXPartnerAppWelcomeMessageFlow execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<GameItem> executeAsync() throws APIException {
+    public ListenableFuture<CTXPartnerAppWelcomeMessageFlow> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<GameItem> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<CTXPartnerAppWelcomeMessageFlow> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, GameItem>() {
-           public GameItem apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, CTXPartnerAppWelcomeMessageFlow>() {
+           public CTXPartnerAppWelcomeMessageFlow apply(ResponseWrapper result) {
              try {
                return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -432,25 +407,18 @@ public class GameItem extends APINode {
       return this;
     }
 
-    public APIRequestGet requestCountField () {
-      return this.requestCountField(true);
+    public APIRequestGet requestCompatiblePlatformsField () {
+      return this.requestCompatiblePlatformsField(true);
     }
-    public APIRequestGet requestCountField (boolean value) {
-      this.requestField("count", value);
+    public APIRequestGet requestCompatiblePlatformsField (boolean value) {
+      this.requestField("compatible_platforms", value);
       return this;
     }
-    public APIRequestGet requestCreatedField () {
-      return this.requestCreatedField(true);
+    public APIRequestGet requestEligiblePlatformsField () {
+      return this.requestEligiblePlatformsField(true);
     }
-    public APIRequestGet requestCreatedField (boolean value) {
-      this.requestField("created", value);
-      return this;
-    }
-    public APIRequestGet requestExtIdField () {
-      return this.requestExtIdField(true);
-    }
-    public APIRequestGet requestExtIdField (boolean value) {
-      this.requestField("ext_id", value);
+    public APIRequestGet requestEligiblePlatformsField (boolean value) {
+      this.requestField("eligible_platforms", value);
       return this;
     }
     public APIRequestGet requestIdField () {
@@ -460,55 +428,34 @@ public class GameItem extends APINode {
       this.requestField("id", value);
       return this;
     }
-    public APIRequestGet requestItemDefField () {
-      return this.requestItemDefField(true);
+    public APIRequestGet requestIsUsedInAdField () {
+      return this.requestIsUsedInAdField(true);
     }
-    public APIRequestGet requestItemDefField (boolean value) {
-      this.requestField("item_def", value);
+    public APIRequestGet requestIsUsedInAdField (boolean value) {
+      this.requestField("is_used_in_ad", value);
       return this;
     }
-    public APIRequestGet requestOwnerField () {
-      return this.requestOwnerField(true);
+    public APIRequestGet requestLastUpdateTimeField () {
+      return this.requestLastUpdateTimeField(true);
     }
-    public APIRequestGet requestOwnerField (boolean value) {
-      this.requestField("owner", value);
+    public APIRequestGet requestLastUpdateTimeField (boolean value) {
+      this.requestField("last_update_time", value);
       return this;
     }
-    public APIRequestGet requestStatusField () {
-      return this.requestStatusField(true);
+    public APIRequestGet requestNameField () {
+      return this.requestNameField(true);
     }
-    public APIRequestGet requestStatusField (boolean value) {
-      this.requestField("status", value);
+    public APIRequestGet requestNameField (boolean value) {
+      this.requestField("name", value);
       return this;
     }
-    public APIRequestGet requestUpdatedField () {
-      return this.requestUpdatedField(true);
+    public APIRequestGet requestWelcomeMessageFlowField () {
+      return this.requestWelcomeMessageFlowField(true);
     }
-    public APIRequestGet requestUpdatedField (boolean value) {
-      this.requestField("updated", value);
+    public APIRequestGet requestWelcomeMessageFlowField (boolean value) {
+      this.requestField("welcome_message_flow", value);
       return this;
     }
-  }
-
-  public static enum EnumAction {
-      @SerializedName("CONSUME")
-      VALUE_CONSUME("CONSUME"),
-      @SerializedName("DROP")
-      VALUE_DROP("DROP"),
-      @SerializedName("MARK")
-      VALUE_MARK("MARK"),
-      ;
-
-      private String value;
-
-      private EnumAction(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
   }
 
 
@@ -525,24 +472,23 @@ public class GameItem extends APINode {
     return gson;
   }
 
-  public GameItem copyFrom(GameItem instance) {
-    this.mCount = instance.mCount;
-    this.mCreated = instance.mCreated;
-    this.mExtId = instance.mExtId;
+  public CTXPartnerAppWelcomeMessageFlow copyFrom(CTXPartnerAppWelcomeMessageFlow instance) {
+    this.mCompatiblePlatforms = instance.mCompatiblePlatforms;
+    this.mEligiblePlatforms = instance.mEligiblePlatforms;
     this.mId = instance.mId;
-    this.mItemDef = instance.mItemDef;
-    this.mOwner = instance.mOwner;
-    this.mStatus = instance.mStatus;
-    this.mUpdated = instance.mUpdated;
+    this.mIsUsedInAd = instance.mIsUsedInAd;
+    this.mLastUpdateTime = instance.mLastUpdateTime;
+    this.mName = instance.mName;
+    this.mWelcomeMessageFlow = instance.mWelcomeMessageFlow;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<GameItem> getParser() {
-    return new APIRequest.ResponseParser<GameItem>() {
-      public APINodeList<GameItem> parseResponse(String response, APIContext context, APIRequest<GameItem> request, String header) throws MalformedResponseException {
-        return GameItem.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<CTXPartnerAppWelcomeMessageFlow> getParser() {
+    return new APIRequest.ResponseParser<CTXPartnerAppWelcomeMessageFlow>() {
+      public APINodeList<CTXPartnerAppWelcomeMessageFlow> parseResponse(String response, APIContext context, APIRequest<CTXPartnerAppWelcomeMessageFlow> request, String header) throws MalformedResponseException {
+        return CTXPartnerAppWelcomeMessageFlow.parseResponse(response, context, request, header);
       }
     };
   }

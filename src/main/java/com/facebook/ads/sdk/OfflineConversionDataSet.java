@@ -1,24 +1,9 @@
-/**
- * Copyright (c) 2015-present, Facebook, Inc. All rights reserved.
+/*
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ * All rights reserved.
  *
- * You are hereby granted a non-exclusive, worldwide, royalty-free license to
- * use, copy, modify, and distribute this software in source code or binary
- * form for use in connection with the web services and APIs provided by
- * Facebook.
- *
- * As with any software that integrates with the Facebook platform, your use
- * of this software is subject to the Facebook Developer Principles and
- * Policies [http://developers.facebook.com/policy/]. This copyright notice
- * shall be included in all copies or substantial portions of the software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
- * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
- * DEALINGS IN THE SOFTWARE.
- *
+ * This source code is licensed under the license found in the
+ * LICENSE file in the root directory of this source tree.
  */
 
 package com.facebook.ads.sdk;
@@ -552,6 +537,7 @@ public class OfflineConversionDataSet extends APINode {
       "ad_account_promotable_objects",
       "age",
       "agency_client_declaration",
+      "all_capabilities",
       "amount_spent",
       "attribution_spec",
       "balance",
@@ -611,6 +597,7 @@ public class OfflineConversionDataSet extends APINode {
       "timezone_name",
       "timezone_offset_hours_utc",
       "tos_accepted",
+      "user_access_expire_time",
       "user_tasks",
       "user_tos_accepted",
       "viewable_business",
@@ -743,6 +730,13 @@ public class OfflineConversionDataSet extends APINode {
     }
     public APIRequestGetAdAccounts requestAgencyClientDeclarationField (boolean value) {
       this.requestField("agency_client_declaration", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestAllCapabilitiesField () {
+      return this.requestAllCapabilitiesField(true);
+    }
+    public APIRequestGetAdAccounts requestAllCapabilitiesField (boolean value) {
+      this.requestField("all_capabilities", value);
       return this;
     }
     public APIRequestGetAdAccounts requestAmountSpentField () {
@@ -1158,6 +1152,13 @@ public class OfflineConversionDataSet extends APINode {
       this.requestField("tos_accepted", value);
       return this;
     }
+    public APIRequestGetAdAccounts requestUserAccessExpireTimeField () {
+      return this.requestUserAccessExpireTimeField(true);
+    }
+    public APIRequestGetAdAccounts requestUserAccessExpireTimeField (boolean value) {
+      this.requestField("user_access_expire_time", value);
+      return this;
+    }
     public APIRequestGetAdAccounts requestUserTasksField () {
       return this.requestUserTasksField(true);
     }
@@ -1335,6 +1336,7 @@ public class OfflineConversionDataSet extends APINode {
       "two_factor_type",
       "updated_by",
       "updated_time",
+      "user_access_expire_time",
       "verification_status",
       "vertical",
       "vertical_id",
@@ -1546,6 +1548,13 @@ public class OfflineConversionDataSet extends APINode {
     }
     public APIRequestGetAgencies requestUpdatedTimeField (boolean value) {
       this.requestField("updated_time", value);
+      return this;
+    }
+    public APIRequestGetAgencies requestUserAccessExpireTimeField () {
+      return this.requestUserAccessExpireTimeField(true);
+    }
+    public APIRequestGetAgencies requestUserAccessExpireTimeField (boolean value) {
+      this.requestField("user_access_expire_time", value);
       return this;
     }
     public APIRequestGetAgencies requestVerificationStatusField () {
@@ -2429,6 +2438,7 @@ public class OfflineConversionDataSet extends APINode {
       "two_factor_type",
       "updated_by",
       "updated_time",
+      "user_access_expire_time",
       "verification_status",
       "vertical",
       "vertical_id",
@@ -2642,6 +2652,13 @@ public class OfflineConversionDataSet extends APINode {
       this.requestField("updated_time", value);
       return this;
     }
+    public APIRequestGetServerEventsPermittedBusiness requestUserAccessExpireTimeField () {
+      return this.requestUserAccessExpireTimeField(true);
+    }
+    public APIRequestGetServerEventsPermittedBusiness requestUserAccessExpireTimeField (boolean value) {
+      this.requestField("user_access_expire_time", value);
+      return this;
+    }
     public APIRequestGetServerEventsPermittedBusiness requestVerificationStatusField () {
       return this.requestVerificationStatusField(true);
     }
@@ -2683,6 +2700,7 @@ public class OfflineConversionDataSet extends APINode {
       "ad_account_promotable_objects",
       "age",
       "agency_client_declaration",
+      "all_capabilities",
       "amount_spent",
       "attribution_spec",
       "balance",
@@ -2742,6 +2760,7 @@ public class OfflineConversionDataSet extends APINode {
       "timezone_name",
       "timezone_offset_hours_utc",
       "tos_accepted",
+      "user_access_expire_time",
       "user_tasks",
       "user_tos_accepted",
       "viewable_business",
@@ -2883,6 +2902,13 @@ public class OfflineConversionDataSet extends APINode {
     }
     public APIRequestGetSharedAccounts requestAgencyClientDeclarationField (boolean value) {
       this.requestField("agency_client_declaration", value);
+      return this;
+    }
+    public APIRequestGetSharedAccounts requestAllCapabilitiesField () {
+      return this.requestAllCapabilitiesField(true);
+    }
+    public APIRequestGetSharedAccounts requestAllCapabilitiesField (boolean value) {
+      this.requestField("all_capabilities", value);
       return this;
     }
     public APIRequestGetSharedAccounts requestAmountSpentField () {
@@ -3298,6 +3324,13 @@ public class OfflineConversionDataSet extends APINode {
       this.requestField("tos_accepted", value);
       return this;
     }
+    public APIRequestGetSharedAccounts requestUserAccessExpireTimeField () {
+      return this.requestUserAccessExpireTimeField(true);
+    }
+    public APIRequestGetSharedAccounts requestUserAccessExpireTimeField (boolean value) {
+      this.requestField("user_access_expire_time", value);
+      return this;
+    }
     public APIRequestGetSharedAccounts requestUserTasksField () {
       return this.requestUserTasksField(true);
     }
@@ -3350,6 +3383,7 @@ public class OfflineConversionDataSet extends APINode {
       "two_factor_type",
       "updated_by",
       "updated_time",
+      "user_access_expire_time",
       "verification_status",
       "vertical",
       "vertical_id",
@@ -3570,6 +3604,13 @@ public class OfflineConversionDataSet extends APINode {
     }
     public APIRequestGetSharedAgencies requestUpdatedTimeField (boolean value) {
       this.requestField("updated_time", value);
+      return this;
+    }
+    public APIRequestGetSharedAgencies requestUserAccessExpireTimeField () {
+      return this.requestUserAccessExpireTimeField(true);
+    }
+    public APIRequestGetSharedAgencies requestUserAccessExpireTimeField (boolean value) {
+      this.requestField("user_access_expire_time", value);
       return this;
     }
     public APIRequestGetSharedAgencies requestVerificationStatusField () {

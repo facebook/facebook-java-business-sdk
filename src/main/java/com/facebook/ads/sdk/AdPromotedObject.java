@@ -1,24 +1,9 @@
-/**
- * Copyright (c) 2015-present, Facebook, Inc. All rights reserved.
+/*
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ * All rights reserved.
  *
- * You are hereby granted a non-exclusive, worldwide, royalty-free license to
- * use, copy, modify, and distribute this software in source code or binary
- * form for use in connection with the web services and APIs provided by
- * Facebook.
- *
- * As with any software that integrates with the Facebook platform, your use
- * of this software is subject to the Facebook Developer Principles and
- * Policies [http://developers.facebook.com/policy/]. This copyright notice
- * shall be included in all copies or substantial portions of the software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
- * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
- * DEALINGS IN THE SOFTWARE.
- *
+ * This source code is licensed under the license found in the
+ * LICENSE file in the root directory of this source tree.
  */
 
 package com.facebook.ads.sdk;
@@ -77,6 +62,8 @@ public class AdPromotedObject extends APINode {
   private String mOfferId = null;
   @SerializedName("offline_conversion_data_set_id")
   private String mOfflineConversionDataSetId = null;
+  @SerializedName("offsite_conversion_event_id")
+  private String mOffsiteConversionEventId = null;
   @SerializedName("omnichannel_object")
   private Object mOmnichannelObject = null;
   @SerializedName("page_id")
@@ -95,10 +82,14 @@ public class AdPromotedObject extends APINode {
   private String mProductCatalogId = null;
   @SerializedName("product_item_id")
   private String mProductItemId = null;
+  @SerializedName("product_set")
+  private ProductSet mProductSet = null;
   @SerializedName("product_set_id")
   private String mProductSetId = null;
   @SerializedName("retention_days")
   private String mRetentionDays = null;
+  @SerializedName("whatsapp_phone_number")
+  private String mWhatsappPhoneNumber = null;
   protected static Gson gson = null;
 
   public AdPromotedObject() {
@@ -349,6 +340,15 @@ public class AdPromotedObject extends APINode {
     return this;
   }
 
+  public String getFieldOffsiteConversionEventId() {
+    return mOffsiteConversionEventId;
+  }
+
+  public AdPromotedObject setFieldOffsiteConversionEventId(String value) {
+    this.mOffsiteConversionEventId = value;
+    return this;
+  }
+
   public Object getFieldOmnichannelObject() {
     return mOmnichannelObject;
   }
@@ -438,6 +438,23 @@ public class AdPromotedObject extends APINode {
     return this;
   }
 
+  public ProductSet getFieldProductSet() {
+    if (mProductSet != null) {
+      mProductSet.context = getContext();
+    }
+    return mProductSet;
+  }
+
+  public AdPromotedObject setFieldProductSet(ProductSet value) {
+    this.mProductSet = value;
+    return this;
+  }
+
+  public AdPromotedObject setFieldProductSet(String value) {
+    Type type = new TypeToken<ProductSet>(){}.getType();
+    this.mProductSet = ProductSet.getGson().fromJson(value, type);
+    return this;
+  }
   public String getFieldProductSetId() {
     return mProductSetId;
   }
@@ -456,6 +473,15 @@ public class AdPromotedObject extends APINode {
     return this;
   }
 
+  public String getFieldWhatsappPhoneNumber() {
+    return mWhatsappPhoneNumber;
+  }
+
+  public AdPromotedObject setFieldWhatsappPhoneNumber(String value) {
+    this.mWhatsappPhoneNumber = value;
+    return this;
+  }
+
 
 
   public static enum EnumCustomEventType {
@@ -467,6 +493,8 @@ public class AdPromotedObject extends APINode {
       VALUE_ADD_TO_CART("ADD_TO_CART"),
       @SerializedName("ADD_TO_WISHLIST")
       VALUE_ADD_TO_WISHLIST("ADD_TO_WISHLIST"),
+      @SerializedName("AD_IMPRESSION")
+      VALUE_AD_IMPRESSION("AD_IMPRESSION"),
       @SerializedName("COMPLETE_REGISTRATION")
       VALUE_COMPLETE_REGISTRATION("COMPLETE_REGISTRATION"),
       @SerializedName("CONTACT")
@@ -555,6 +583,7 @@ public class AdPromotedObject extends APINode {
     this.mObjectStoreUrl = instance.mObjectStoreUrl;
     this.mOfferId = instance.mOfferId;
     this.mOfflineConversionDataSetId = instance.mOfflineConversionDataSetId;
+    this.mOffsiteConversionEventId = instance.mOffsiteConversionEventId;
     this.mOmnichannelObject = instance.mOmnichannelObject;
     this.mPageId = instance.mPageId;
     this.mPixelAggregationRule = instance.mPixelAggregationRule;
@@ -564,8 +593,10 @@ public class AdPromotedObject extends APINode {
     this.mPlacePageSetId = instance.mPlacePageSetId;
     this.mProductCatalogId = instance.mProductCatalogId;
     this.mProductItemId = instance.mProductItemId;
+    this.mProductSet = instance.mProductSet;
     this.mProductSetId = instance.mProductSetId;
     this.mRetentionDays = instance.mRetentionDays;
+    this.mWhatsappPhoneNumber = instance.mWhatsappPhoneNumber;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

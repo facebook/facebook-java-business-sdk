@@ -1,24 +1,9 @@
-/**
- * Copyright (c) 2015-present, Facebook, Inc. All rights reserved.
+/*
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ * All rights reserved.
  *
- * You are hereby granted a non-exclusive, worldwide, royalty-free license to
- * use, copy, modify, and distribute this software in source code or binary
- * form for use in connection with the web services and APIs provided by
- * Facebook.
- *
- * As with any software that integrates with the Facebook platform, your use
- * of this software is subject to the Facebook Developer Principles and
- * Policies [http://developers.facebook.com/policy/]. This copyright notice
- * shall be included in all copies or substantial portions of the software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
- * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
- * DEALINGS IN THE SOFTWARE.
- *
+ * This source code is licensed under the license found in the
+ * LICENSE file in the root directory of this source tree.
  */
 
 package com.facebook.ads.sdk;
@@ -381,6 +366,7 @@ public class AdStudyObjective extends APINode {
       "owner_ad_account",
       "owner_business",
       "usage",
+      "user_access_expire_time",
       "valid_entries",
     };
 
@@ -690,6 +676,13 @@ public class AdStudyObjective extends APINode {
       this.requestField("usage", value);
       return this;
     }
+    public APIRequestGetAdsPixels requestUserAccessExpireTimeField () {
+      return this.requestUserAccessExpireTimeField(true);
+    }
+    public APIRequestGetAdsPixels requestUserAccessExpireTimeField (boolean value) {
+      this.requestField("user_access_expire_time", value);
+      return this;
+    }
     public APIRequestGetAdsPixels requestValidEntriesField () {
       return this.requestValidEntriesField(true);
     }
@@ -735,6 +728,8 @@ public class AdStudyObjective extends APINode {
       "auto_event_mapping_android",
       "auto_event_mapping_ios",
       "auto_event_setup_enabled",
+      "auto_log_app_events_default",
+      "auto_log_app_events_enabled",
       "business",
       "canvas_fluid_height",
       "canvas_fluid_width",
@@ -787,6 +782,7 @@ public class AdStudyObjective extends APINode {
       "privacy_policy_url",
       "profile_section_url",
       "property_id",
+      "protected_mode_rules",
       "real_time_mode_devices",
       "restrictions",
       "restrictive_data_filter_params",
@@ -1076,6 +1072,20 @@ public class AdStudyObjective extends APINode {
     }
     public APIRequestGetApplications requestAutoEventSetupEnabledField (boolean value) {
       this.requestField("auto_event_setup_enabled", value);
+      return this;
+    }
+    public APIRequestGetApplications requestAutoLogAppEventsDefaultField () {
+      return this.requestAutoLogAppEventsDefaultField(true);
+    }
+    public APIRequestGetApplications requestAutoLogAppEventsDefaultField (boolean value) {
+      this.requestField("auto_log_app_events_default", value);
+      return this;
+    }
+    public APIRequestGetApplications requestAutoLogAppEventsEnabledField () {
+      return this.requestAutoLogAppEventsEnabledField(true);
+    }
+    public APIRequestGetApplications requestAutoLogAppEventsEnabledField (boolean value) {
+      this.requestField("auto_log_app_events_enabled", value);
       return this;
     }
     public APIRequestGetApplications requestBusinessField () {
@@ -1440,6 +1450,13 @@ public class AdStudyObjective extends APINode {
     }
     public APIRequestGetApplications requestPropertyIdField (boolean value) {
       this.requestField("property_id", value);
+      return this;
+    }
+    public APIRequestGetApplications requestProtectedModeRulesField () {
+      return this.requestProtectedModeRulesField(true);
+    }
+    public APIRequestGetApplications requestProtectedModeRulesField (boolean value) {
+      this.requestField("protected_mode_rules", value);
       return this;
     }
     public APIRequestGetApplications requestRealTimeModeDevicesField () {
@@ -2535,6 +2552,7 @@ public class AdStudyObjective extends APINode {
       "two_factor_type",
       "updated_by",
       "updated_time",
+      "user_access_expire_time",
       "verification_status",
       "vertical",
       "vertical_id",
@@ -2746,6 +2764,13 @@ public class AdStudyObjective extends APINode {
     }
     public APIRequestGetPartnerPrivateStudies requestUpdatedTimeField (boolean value) {
       this.requestField("updated_time", value);
+      return this;
+    }
+    public APIRequestGetPartnerPrivateStudies requestUserAccessExpireTimeField () {
+      return this.requestUserAccessExpireTimeField(true);
+    }
+    public APIRequestGetPartnerPrivateStudies requestUserAccessExpireTimeField (boolean value) {
+      this.requestField("user_access_expire_time", value);
       return this;
     }
     public APIRequestGetPartnerPrivateStudies requestVerificationStatusField () {

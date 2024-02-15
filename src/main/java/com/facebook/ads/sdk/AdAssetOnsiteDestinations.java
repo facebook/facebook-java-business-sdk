@@ -1,24 +1,9 @@
-/**
- * Copyright (c) 2015-present, Facebook, Inc. All rights reserved.
+/*
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ * All rights reserved.
  *
- * You are hereby granted a non-exclusive, worldwide, royalty-free license to
- * use, copy, modify, and distribute this software in source code or binary
- * form for use in connection with the web services and APIs provided by
- * Facebook.
- *
- * As with any software that integrates with the Facebook platform, your use
- * of this software is subject to the Facebook Developer Principles and
- * Policies [http://developers.facebook.com/policy/]. This copyright notice
- * shall be included in all copies or substantial portions of the software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
- * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
- * DEALINGS IN THE SOFTWARE.
- *
+ * This source code is licensed under the license found in the
+ * LICENSE file in the root directory of this source tree.
  */
 
 package com.facebook.ads.sdk;
@@ -54,27 +39,29 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class AREffectsBatchStatus extends APINode {
-  @SerializedName("errors")
-  private List<String> mErrors = null;
-  @SerializedName("product_groups")
-  private List<Object> mProductGroups = null;
-  @SerializedName("status")
-  private String mStatus = null;
+public class AdAssetOnsiteDestinations extends APINode {
+  @SerializedName("auto_optimization")
+  private String mAutoOptimization = null;
+  @SerializedName("details_page_product_id")
+  private String mDetailsPageProductId = null;
+  @SerializedName("shop_collection_product_set_id")
+  private String mShopCollectionProductSetId = null;
+  @SerializedName("storefront_shop_id")
+  private String mStorefrontShopId = null;
   protected static Gson gson = null;
 
-  public AREffectsBatchStatus() {
+  public AdAssetOnsiteDestinations() {
   }
 
   public String getId() {
     return null;
   }
-  public static AREffectsBatchStatus loadJSON(String json, APIContext context, String header) {
-    AREffectsBatchStatus arEffectsBatchStatus = getGson().fromJson(json, AREffectsBatchStatus.class);
+  public static AdAssetOnsiteDestinations loadJSON(String json, APIContext context, String header) {
+    AdAssetOnsiteDestinations adAssetOnsiteDestinations = getGson().fromJson(json, AdAssetOnsiteDestinations.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(arEffectsBatchStatus.toString());
+      JsonElement o2 = parser.parse(adAssetOnsiteDestinations.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -84,14 +71,14 @@ public class AREffectsBatchStatus extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    arEffectsBatchStatus.context = context;
-    arEffectsBatchStatus.rawValue = json;
-    arEffectsBatchStatus.header = header;
-    return arEffectsBatchStatus;
+    adAssetOnsiteDestinations.context = context;
+    adAssetOnsiteDestinations.rawValue = json;
+    adAssetOnsiteDestinations.header = header;
+    return adAssetOnsiteDestinations;
   }
 
-  public static APINodeList<AREffectsBatchStatus> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<AREffectsBatchStatus> arEffectsBatchStatuss = new APINodeList<AREffectsBatchStatus>(request, json, header);
+  public static APINodeList<AdAssetOnsiteDestinations> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdAssetOnsiteDestinations> adAssetOnsiteDestinationss = new APINodeList<AdAssetOnsiteDestinations>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -102,9 +89,9 @@ public class AREffectsBatchStatus extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          arEffectsBatchStatuss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          adAssetOnsiteDestinationss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return arEffectsBatchStatuss;
+        return adAssetOnsiteDestinationss;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -114,20 +101,20 @@ public class AREffectsBatchStatus extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                arEffectsBatchStatuss.setCursors(before, after);
+                adAssetOnsiteDestinationss.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            arEffectsBatchStatuss.setPaging(previous, next);
+            adAssetOnsiteDestinationss.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              arEffectsBatchStatuss.setAppSecret(context.getAppSecretProof());
+              adAssetOnsiteDestinationss.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              arEffectsBatchStatuss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              adAssetOnsiteDestinationss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -138,23 +125,23 @@ public class AREffectsBatchStatus extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  arEffectsBatchStatuss.add(loadJSON(entry.getValue().toString(), context, header));
+                  adAssetOnsiteDestinationss.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              arEffectsBatchStatuss.add(loadJSON(obj.toString(), context, header));
+              adAssetOnsiteDestinationss.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return arEffectsBatchStatuss;
+          return adAssetOnsiteDestinationss;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              arEffectsBatchStatuss.add(loadJSON(entry.getValue().toString(), context, header));
+              adAssetOnsiteDestinationss.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return arEffectsBatchStatuss;
+          return adAssetOnsiteDestinationss;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -171,20 +158,20 @@ public class AREffectsBatchStatus extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              arEffectsBatchStatuss.add(loadJSON(value.toString(), context, header));
+              adAssetOnsiteDestinationss.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return arEffectsBatchStatuss;
+            return adAssetOnsiteDestinationss;
           }
 
           // Sixth, check if it's pure JsonObject
-          arEffectsBatchStatuss.clear();
-          arEffectsBatchStatuss.add(loadJSON(json, context, header));
-          return arEffectsBatchStatuss;
+          adAssetOnsiteDestinationss.clear();
+          adAssetOnsiteDestinationss.add(loadJSON(json, context, header));
+          return adAssetOnsiteDestinationss;
         }
       }
     } catch (Exception e) {
@@ -212,30 +199,39 @@ public class AREffectsBatchStatus extends APINode {
   }
 
 
-  public List<String> getFieldErrors() {
-    return mErrors;
+  public String getFieldAutoOptimization() {
+    return mAutoOptimization;
   }
 
-  public AREffectsBatchStatus setFieldErrors(List<String> value) {
-    this.mErrors = value;
+  public AdAssetOnsiteDestinations setFieldAutoOptimization(String value) {
+    this.mAutoOptimization = value;
     return this;
   }
 
-  public List<Object> getFieldProductGroups() {
-    return mProductGroups;
+  public String getFieldDetailsPageProductId() {
+    return mDetailsPageProductId;
   }
 
-  public AREffectsBatchStatus setFieldProductGroups(List<Object> value) {
-    this.mProductGroups = value;
+  public AdAssetOnsiteDestinations setFieldDetailsPageProductId(String value) {
+    this.mDetailsPageProductId = value;
     return this;
   }
 
-  public String getFieldStatus() {
-    return mStatus;
+  public String getFieldShopCollectionProductSetId() {
+    return mShopCollectionProductSetId;
   }
 
-  public AREffectsBatchStatus setFieldStatus(String value) {
-    this.mStatus = value;
+  public AdAssetOnsiteDestinations setFieldShopCollectionProductSetId(String value) {
+    this.mShopCollectionProductSetId = value;
+    return this;
+  }
+
+  public String getFieldStorefrontShopId() {
+    return mStorefrontShopId;
+  }
+
+  public AdAssetOnsiteDestinations setFieldStorefrontShopId(String value) {
+    this.mStorefrontShopId = value;
     return this;
   }
 
@@ -255,19 +251,20 @@ public class AREffectsBatchStatus extends APINode {
     return gson;
   }
 
-  public AREffectsBatchStatus copyFrom(AREffectsBatchStatus instance) {
-    this.mErrors = instance.mErrors;
-    this.mProductGroups = instance.mProductGroups;
-    this.mStatus = instance.mStatus;
+  public AdAssetOnsiteDestinations copyFrom(AdAssetOnsiteDestinations instance) {
+    this.mAutoOptimization = instance.mAutoOptimization;
+    this.mDetailsPageProductId = instance.mDetailsPageProductId;
+    this.mShopCollectionProductSetId = instance.mShopCollectionProductSetId;
+    this.mStorefrontShopId = instance.mStorefrontShopId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<AREffectsBatchStatus> getParser() {
-    return new APIRequest.ResponseParser<AREffectsBatchStatus>() {
-      public APINodeList<AREffectsBatchStatus> parseResponse(String response, APIContext context, APIRequest<AREffectsBatchStatus> request, String header) throws MalformedResponseException {
-        return AREffectsBatchStatus.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<AdAssetOnsiteDestinations> getParser() {
+    return new APIRequest.ResponseParser<AdAssetOnsiteDestinations>() {
+      public APINodeList<AdAssetOnsiteDestinations> parseResponse(String response, APIContext context, APIRequest<AdAssetOnsiteDestinations> request, String header) throws MalformedResponseException {
+        return AdAssetOnsiteDestinations.parseResponse(response, context, request, header);
       }
     };
   }

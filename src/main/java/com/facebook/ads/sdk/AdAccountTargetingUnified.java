@@ -1,24 +1,9 @@
-/**
- * Copyright (c) 2015-present, Facebook, Inc. All rights reserved.
+/*
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ * All rights reserved.
  *
- * You are hereby granted a non-exclusive, worldwide, royalty-free license to
- * use, copy, modify, and distribute this software in source code or binary
- * form for use in connection with the web services and APIs provided by
- * Facebook.
- *
- * As with any software that integrates with the Facebook platform, your use
- * of this software is subject to the Facebook Developer Principles and
- * Policies [http://developers.facebook.com/policy/]. This copyright notice
- * shall be included in all copies or substantial portions of the software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
- * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
- * DEALINGS IN THE SOFTWARE.
- *
+ * This source code is licensed under the license found in the
+ * LICENSE file in the root directory of this source tree.
  */
 
 package com.facebook.ads.sdk;
@@ -1181,6 +1166,8 @@ public class AdAccountTargetingUnified extends APINode {
       VALUE_EXCLUDED_USER_DEVICE("excluded_user_device"),
       @SerializedName("exclusions")
       VALUE_EXCLUSIONS("exclusions"),
+      @SerializedName("expanded_implicit_custom_audiences")
+      VALUE_EXPANDED_IMPLICIT_CUSTOM_AUDIENCES("expanded_implicit_custom_audiences"),
       @SerializedName("facebook_positions")
       VALUE_FACEBOOK_POSITIONS("facebook_positions"),
       @SerializedName("family_statuses")
@@ -1249,6 +1236,8 @@ public class AdAccountTargetingUnified extends APINode {
       VALUE_LOCATION_CLUSTER_IDS("location_cluster_ids"),
       @SerializedName("location_expansion")
       VALUE_LOCATION_EXPANSION("location_expansion"),
+      @SerializedName("marketing_message_targeting")
+      VALUE_MARKETING_MESSAGE_TARGETING("marketing_message_targeting"),
       @SerializedName("marketplace_product_categories")
       VALUE_MARKETPLACE_PRODUCT_CATEGORIES("marketplace_product_categories"),
       @SerializedName("messenger_positions")
@@ -1289,6 +1278,8 @@ public class AdAccountTargetingUnified extends APINode {
       VALUE_RTB_FLAG("rtb_flag"),
       @SerializedName("site_category")
       VALUE_SITE_CATEGORY("site_category"),
+      @SerializedName("tafe_ca_mitigation_strategy")
+      VALUE_TAFE_CA_MITIGATION_STRATEGY("tafe_ca_mitigation_strategy"),
       @SerializedName("targeting_automation")
       VALUE_TARGETING_AUTOMATION("targeting_automation"),
       @SerializedName("targeting_optimization")
@@ -1350,6 +1341,8 @@ public class AdAccountTargetingUnified extends APINode {
       VALUE_APTOIDE_A1_STORE("aptoide_a1_store"),
       @SerializedName("bemobi_mobile_store")
       VALUE_BEMOBI_MOBILE_STORE("bemobi_mobile_store"),
+      @SerializedName("digital_turbine_store")
+      VALUE_DIGITAL_TURBINE_STORE("digital_turbine_store"),
       @SerializedName("does_not_exist")
       VALUE_DOES_NOT_EXIST("does_not_exist"),
       @SerializedName("fb_android_store")

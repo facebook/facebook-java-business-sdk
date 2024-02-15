@@ -1,24 +1,9 @@
-/**
- * Copyright (c) 2015-present, Facebook, Inc. All rights reserved.
+/*
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ * All rights reserved.
  *
- * You are hereby granted a non-exclusive, worldwide, royalty-free license to
- * use, copy, modify, and distribute this software in source code or binary
- * form for use in connection with the web services and APIs provided by
- * Facebook.
- *
- * As with any software that integrates with the Facebook platform, your use
- * of this software is subject to the Facebook Developer Principles and
- * Policies [http://developers.facebook.com/policy/]. This copyright notice
- * shall be included in all copies or substantial portions of the software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
- * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
- * DEALINGS IN THE SOFTWARE.
- *
+ * This source code is licensed under the license found in the
+ * LICENSE file in the root directory of this source tree.
  */
 
 package com.facebook.ads.sdk;
@@ -105,8 +90,12 @@ public class LocalServiceBusiness extends APINode {
   private EnumImageFetchStatus mImageFetchStatus = null;
   @SerializedName("images")
   private List<String> mImages = null;
+  @SerializedName("local_info")
+  private ProductItemLocalInfo mLocalInfo = null;
   @SerializedName("local_service_business_id")
   private String mLocalServiceBusinessId = null;
+  @SerializedName("main_local_info")
+  private ProductItemLocalInfo mMainLocalInfo = null;
   @SerializedName("phone")
   private String mPhone = null;
   @SerializedName("price")
@@ -447,8 +436,22 @@ public class LocalServiceBusiness extends APINode {
     return mImages;
   }
 
+  public ProductItemLocalInfo getFieldLocalInfo() {
+    if (mLocalInfo != null) {
+      mLocalInfo.context = getContext();
+    }
+    return mLocalInfo;
+  }
+
   public String getFieldLocalServiceBusinessId() {
     return mLocalServiceBusinessId;
+  }
+
+  public ProductItemLocalInfo getFieldMainLocalInfo() {
+    if (mMainLocalInfo != null) {
+      mMainLocalInfo.context = getContext();
+    }
+    return mMainLocalInfo;
   }
 
   public String getFieldPhone() {
@@ -653,7 +656,9 @@ public class LocalServiceBusiness extends APINode {
       "id",
       "image_fetch_status",
       "images",
+      "local_info",
       "local_service_business_id",
+      "main_local_info",
       "phone",
       "price",
       "price_range",
@@ -931,11 +936,25 @@ public class LocalServiceBusiness extends APINode {
       this.requestField("images", value);
       return this;
     }
+    public APIRequestGet requestLocalInfoField () {
+      return this.requestLocalInfoField(true);
+    }
+    public APIRequestGet requestLocalInfoField (boolean value) {
+      this.requestField("local_info", value);
+      return this;
+    }
     public APIRequestGet requestLocalServiceBusinessIdField () {
       return this.requestLocalServiceBusinessIdField(true);
     }
     public APIRequestGet requestLocalServiceBusinessIdField (boolean value) {
       this.requestField("local_service_business_id", value);
+      return this;
+    }
+    public APIRequestGet requestMainLocalInfoField () {
+      return this.requestMainLocalInfoField(true);
+    }
+    public APIRequestGet requestMainLocalInfoField (boolean value) {
+      this.requestField("main_local_info", value);
       return this;
     }
     public APIRequestGet requestPhoneField () {
@@ -1024,6 +1043,8 @@ public class LocalServiceBusiness extends APINode {
       VALUE_DISCONTINUED("DISCONTINUED"),
       @SerializedName("IN_STOCK")
       VALUE_IN_STOCK("IN_STOCK"),
+      @SerializedName("MARK_AS_SOLD")
+      VALUE_MARK_AS_SOLD("MARK_AS_SOLD"),
       @SerializedName("OUT_OF_STOCK")
       VALUE_OUT_OF_STOCK("OUT_OF_STOCK"),
       @SerializedName("PENDING")
@@ -1161,7 +1182,9 @@ public class LocalServiceBusiness extends APINode {
     this.mId = instance.mId;
     this.mImageFetchStatus = instance.mImageFetchStatus;
     this.mImages = instance.mImages;
+    this.mLocalInfo = instance.mLocalInfo;
     this.mLocalServiceBusinessId = instance.mLocalServiceBusinessId;
+    this.mMainLocalInfo = instance.mMainLocalInfo;
     this.mPhone = instance.mPhone;
     this.mPrice = instance.mPrice;
     this.mPriceRange = instance.mPriceRange;

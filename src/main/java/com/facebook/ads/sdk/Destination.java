@@ -1,24 +1,9 @@
-/**
- * Copyright (c) 2015-present, Facebook, Inc. All rights reserved.
+/*
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ * All rights reserved.
  *
- * You are hereby granted a non-exclusive, worldwide, royalty-free license to
- * use, copy, modify, and distribute this software in source code or binary
- * form for use in connection with the web services and APIs provided by
- * Facebook.
- *
- * As with any software that integrates with the Facebook platform, your use
- * of this software is subject to the Facebook Developer Principles and
- * Policies [http://developers.facebook.com/policy/]. This copyright notice
- * shall be included in all copies or substantial portions of the software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
- * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
- * DEALINGS IN THE SOFTWARE.
- *
+ * This source code is licensed under the license found in the
+ * LICENSE file in the root directory of this source tree.
  */
 
 package com.facebook.ads.sdk;
@@ -609,45 +594,49 @@ public class Destination extends APINode {
     }
   }
 
-  public static class APIRequestGetVideosMetadata extends APIRequest<APINode> {
+  public static class APIRequestGetVideosMetadata extends APIRequest<DynamicVideoMetadata> {
 
-    APINodeList<APINode> lastResponse = null;
+    APINodeList<DynamicVideoMetadata> lastResponse = null;
     @Override
-    public APINodeList<APINode> getLastResponse() {
+    public APINodeList<DynamicVideoMetadata> getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
     };
 
     public static final String[] FIELDS = {
+      "id",
+      "tags",
+      "url",
+      "video",
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header);
+    public APINodeList<DynamicVideoMetadata> parseResponse(String response, String header) throws APIException {
+      return DynamicVideoMetadata.parseResponse(response, getContext(), this, header);
     }
 
     @Override
-    public APINodeList<APINode> execute() throws APIException {
+    public APINodeList<DynamicVideoMetadata> execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+    public APINodeList<DynamicVideoMetadata> execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+    public ListenableFuture<APINodeList<DynamicVideoMetadata>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<APINodeList<DynamicVideoMetadata>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, APINodeList<DynamicVideoMetadata>>() {
+           public APINodeList<DynamicVideoMetadata> apply(ResponseWrapper result) {
              try {
                return APIRequestGetVideosMetadata.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -711,6 +700,34 @@ public class Destination extends APINode {
       return this;
     }
 
+    public APIRequestGetVideosMetadata requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetVideosMetadata requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetVideosMetadata requestTagsField () {
+      return this.requestTagsField(true);
+    }
+    public APIRequestGetVideosMetadata requestTagsField (boolean value) {
+      this.requestField("tags", value);
+      return this;
+    }
+    public APIRequestGetVideosMetadata requestUrlField () {
+      return this.requestUrlField(true);
+    }
+    public APIRequestGetVideosMetadata requestUrlField (boolean value) {
+      this.requestField("url", value);
+      return this;
+    }
+    public APIRequestGetVideosMetadata requestVideoField () {
+      return this.requestVideoField(true);
+    }
+    public APIRequestGetVideosMetadata requestVideoField (boolean value) {
+      this.requestField("video", value);
+      return this;
+    }
   }
 
   public static class APIRequestGet extends APIRequest<Destination> {

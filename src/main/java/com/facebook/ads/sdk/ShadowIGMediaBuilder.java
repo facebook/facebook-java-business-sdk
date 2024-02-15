@@ -1,24 +1,9 @@
-/**
- * Copyright (c) 2015-present, Facebook, Inc. All rights reserved.
+/*
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ * All rights reserved.
  *
- * You are hereby granted a non-exclusive, worldwide, royalty-free license to
- * use, copy, modify, and distribute this software in source code or binary
- * form for use in connection with the web services and APIs provided by
- * Facebook.
- *
- * As with any software that integrates with the Facebook platform, your use
- * of this software is subject to the Facebook Developer Principles and
- * Policies [http://developers.facebook.com/policy/]. This copyright notice
- * shall be included in all copies or substantial portions of the software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
- * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
- * DEALINGS IN THE SOFTWARE.
- *
+ * This source code is licensed under the license found in the
+ * LICENSE file in the root directory of this source tree.
  */
 
 package com.facebook.ads.sdk;
@@ -54,66 +39,70 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class DestinationCatalogSettings extends APINode {
-  @SerializedName("generate_items_from_pages")
-  private Boolean mGenerateItemsFromPages = null;
+public class ShadowIGMediaBuilder extends APINode {
+  @SerializedName("copyright_check_status")
+  private IGVideoCopyrightCheckStatus mCopyrightCheckStatus = null;
   @SerializedName("id")
   private String mId = null;
+  @SerializedName("status")
+  private String mStatus = null;
+  @SerializedName("status_code")
+  private String mStatusCode = null;
   protected static Gson gson = null;
 
-  DestinationCatalogSettings() {
+  ShadowIGMediaBuilder() {
   }
 
-  public DestinationCatalogSettings(Long id, APIContext context) {
+  public ShadowIGMediaBuilder(Long id, APIContext context) {
     this(id.toString(), context);
   }
 
-  public DestinationCatalogSettings(String id, APIContext context) {
+  public ShadowIGMediaBuilder(String id, APIContext context) {
     this.mId = id;
 
     this.context = context;
   }
 
-  public DestinationCatalogSettings fetch() throws APIException{
-    DestinationCatalogSettings newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+  public ShadowIGMediaBuilder fetch() throws APIException{
+    ShadowIGMediaBuilder newInstance = fetchById(this.getPrefixedId().toString(), this.context);
     this.copyFrom(newInstance);
     return this;
   }
 
-  public static DestinationCatalogSettings fetchById(Long id, APIContext context) throws APIException {
+  public static ShadowIGMediaBuilder fetchById(Long id, APIContext context) throws APIException {
     return fetchById(id.toString(), context);
   }
 
-  public static ListenableFuture<DestinationCatalogSettings> fetchByIdAsync(Long id, APIContext context) throws APIException {
+  public static ListenableFuture<ShadowIGMediaBuilder> fetchByIdAsync(Long id, APIContext context) throws APIException {
     return fetchByIdAsync(id.toString(), context);
   }
 
-  public static DestinationCatalogSettings fetchById(String id, APIContext context) throws APIException {
+  public static ShadowIGMediaBuilder fetchById(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
   }
 
-  public static ListenableFuture<DestinationCatalogSettings> fetchByIdAsync(String id, APIContext context) throws APIException {
+  public static ListenableFuture<ShadowIGMediaBuilder> fetchByIdAsync(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
   }
 
-  public static APINodeList<DestinationCatalogSettings> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<DestinationCatalogSettings>)(
-      new APIRequest<DestinationCatalogSettings>(context, "", "/", "GET", DestinationCatalogSettings.getParser())
+  public static APINodeList<ShadowIGMediaBuilder> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<ShadowIGMediaBuilder>)(
+      new APIRequest<ShadowIGMediaBuilder>(context, "", "/", "GET", ShadowIGMediaBuilder.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .execute()
     );
   }
 
-  public static ListenableFuture<APINodeList<DestinationCatalogSettings>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+  public static ListenableFuture<APINodeList<ShadowIGMediaBuilder>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
     return
-      new APIRequest(context, "", "/", "GET", DestinationCatalogSettings.getParser())
+      new APIRequest(context, "", "/", "GET", ShadowIGMediaBuilder.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
@@ -126,12 +115,12 @@ public class DestinationCatalogSettings extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static DestinationCatalogSettings loadJSON(String json, APIContext context, String header) {
-    DestinationCatalogSettings destinationCatalogSettings = getGson().fromJson(json, DestinationCatalogSettings.class);
+  public static ShadowIGMediaBuilder loadJSON(String json, APIContext context, String header) {
+    ShadowIGMediaBuilder shadowIGMediaBuilder = getGson().fromJson(json, ShadowIGMediaBuilder.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(destinationCatalogSettings.toString());
+      JsonElement o2 = parser.parse(shadowIGMediaBuilder.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -141,14 +130,14 @@ public class DestinationCatalogSettings extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    destinationCatalogSettings.context = context;
-    destinationCatalogSettings.rawValue = json;
-    destinationCatalogSettings.header = header;
-    return destinationCatalogSettings;
+    shadowIGMediaBuilder.context = context;
+    shadowIGMediaBuilder.rawValue = json;
+    shadowIGMediaBuilder.header = header;
+    return shadowIGMediaBuilder;
   }
 
-  public static APINodeList<DestinationCatalogSettings> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<DestinationCatalogSettings> destinationCatalogSettingss = new APINodeList<DestinationCatalogSettings>(request, json, header);
+  public static APINodeList<ShadowIGMediaBuilder> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<ShadowIGMediaBuilder> shadowIGMediaBuilders = new APINodeList<ShadowIGMediaBuilder>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -159,9 +148,9 @@ public class DestinationCatalogSettings extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          destinationCatalogSettingss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          shadowIGMediaBuilders.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return destinationCatalogSettingss;
+        return shadowIGMediaBuilders;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -171,20 +160,20 @@ public class DestinationCatalogSettings extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                destinationCatalogSettingss.setCursors(before, after);
+                shadowIGMediaBuilders.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            destinationCatalogSettingss.setPaging(previous, next);
+            shadowIGMediaBuilders.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              destinationCatalogSettingss.setAppSecret(context.getAppSecretProof());
+              shadowIGMediaBuilders.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              destinationCatalogSettingss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              shadowIGMediaBuilders.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -195,23 +184,23 @@ public class DestinationCatalogSettings extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  destinationCatalogSettingss.add(loadJSON(entry.getValue().toString(), context, header));
+                  shadowIGMediaBuilders.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              destinationCatalogSettingss.add(loadJSON(obj.toString(), context, header));
+              shadowIGMediaBuilders.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return destinationCatalogSettingss;
+          return shadowIGMediaBuilders;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              destinationCatalogSettingss.add(loadJSON(entry.getValue().toString(), context, header));
+              shadowIGMediaBuilders.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return destinationCatalogSettingss;
+          return shadowIGMediaBuilders;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -228,20 +217,20 @@ public class DestinationCatalogSettings extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              destinationCatalogSettingss.add(loadJSON(value.toString(), context, header));
+              shadowIGMediaBuilders.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return destinationCatalogSettingss;
+            return shadowIGMediaBuilders;
           }
 
           // Sixth, check if it's pure JsonObject
-          destinationCatalogSettingss.clear();
-          destinationCatalogSettingss.add(loadJSON(json, context, header));
-          return destinationCatalogSettingss;
+          shadowIGMediaBuilders.clear();
+          shadowIGMediaBuilders.add(loadJSON(json, context, header));
+          return shadowIGMediaBuilders;
         }
       }
     } catch (Exception e) {
@@ -273,57 +262,67 @@ public class DestinationCatalogSettings extends APINode {
   }
 
 
-  public Boolean getFieldGenerateItemsFromPages() {
-    return mGenerateItemsFromPages;
+  public IGVideoCopyrightCheckStatus getFieldCopyrightCheckStatus() {
+    return mCopyrightCheckStatus;
   }
 
   public String getFieldId() {
     return mId;
   }
 
+  public String getFieldStatus() {
+    return mStatus;
+  }
+
+  public String getFieldStatusCode() {
+    return mStatusCode;
+  }
 
 
-  public static class APIRequestGet extends APIRequest<DestinationCatalogSettings> {
 
-    DestinationCatalogSettings lastResponse = null;
+  public static class APIRequestGet extends APIRequest<ShadowIGMediaBuilder> {
+
+    ShadowIGMediaBuilder lastResponse = null;
     @Override
-    public DestinationCatalogSettings getLastResponse() {
+    public ShadowIGMediaBuilder getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
     };
 
     public static final String[] FIELDS = {
-      "generate_items_from_pages",
+      "copyright_check_status",
       "id",
+      "status",
+      "status_code",
     };
 
     @Override
-    public DestinationCatalogSettings parseResponse(String response, String header) throws APIException {
-      return DestinationCatalogSettings.parseResponse(response, getContext(), this, header).head();
+    public ShadowIGMediaBuilder parseResponse(String response, String header) throws APIException {
+      return ShadowIGMediaBuilder.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public DestinationCatalogSettings execute() throws APIException {
+    public ShadowIGMediaBuilder execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public DestinationCatalogSettings execute(Map<String, Object> extraParams) throws APIException {
+    public ShadowIGMediaBuilder execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<DestinationCatalogSettings> executeAsync() throws APIException {
+    public ListenableFuture<ShadowIGMediaBuilder> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<DestinationCatalogSettings> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<ShadowIGMediaBuilder> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, DestinationCatalogSettings>() {
-           public DestinationCatalogSettings apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, ShadowIGMediaBuilder>() {
+           public ShadowIGMediaBuilder apply(ResponseWrapper result) {
              try {
                return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -387,11 +386,11 @@ public class DestinationCatalogSettings extends APINode {
       return this;
     }
 
-    public APIRequestGet requestGenerateItemsFromPagesField () {
-      return this.requestGenerateItemsFromPagesField(true);
+    public APIRequestGet requestCopyrightCheckStatusField () {
+      return this.requestCopyrightCheckStatusField(true);
     }
-    public APIRequestGet requestGenerateItemsFromPagesField (boolean value) {
-      this.requestField("generate_items_from_pages", value);
+    public APIRequestGet requestCopyrightCheckStatusField (boolean value) {
+      this.requestField("copyright_check_status", value);
       return this;
     }
     public APIRequestGet requestIdField () {
@@ -399,6 +398,20 @@ public class DestinationCatalogSettings extends APINode {
     }
     public APIRequestGet requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGet requestStatusField () {
+      return this.requestStatusField(true);
+    }
+    public APIRequestGet requestStatusField (boolean value) {
+      this.requestField("status", value);
+      return this;
+    }
+    public APIRequestGet requestStatusCodeField () {
+      return this.requestStatusCodeField(true);
+    }
+    public APIRequestGet requestStatusCodeField (boolean value) {
+      this.requestField("status_code", value);
       return this;
     }
   }
@@ -417,18 +430,20 @@ public class DestinationCatalogSettings extends APINode {
     return gson;
   }
 
-  public DestinationCatalogSettings copyFrom(DestinationCatalogSettings instance) {
-    this.mGenerateItemsFromPages = instance.mGenerateItemsFromPages;
+  public ShadowIGMediaBuilder copyFrom(ShadowIGMediaBuilder instance) {
+    this.mCopyrightCheckStatus = instance.mCopyrightCheckStatus;
     this.mId = instance.mId;
+    this.mStatus = instance.mStatus;
+    this.mStatusCode = instance.mStatusCode;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<DestinationCatalogSettings> getParser() {
-    return new APIRequest.ResponseParser<DestinationCatalogSettings>() {
-      public APINodeList<DestinationCatalogSettings> parseResponse(String response, APIContext context, APIRequest<DestinationCatalogSettings> request, String header) throws MalformedResponseException {
-        return DestinationCatalogSettings.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<ShadowIGMediaBuilder> getParser() {
+    return new APIRequest.ResponseParser<ShadowIGMediaBuilder>() {
+      public APINodeList<ShadowIGMediaBuilder> parseResponse(String response, APIContext context, APIRequest<ShadowIGMediaBuilder> request, String header) throws MalformedResponseException {
+        return ShadowIGMediaBuilder.parseResponse(response, context, request, header);
       }
     };
   }

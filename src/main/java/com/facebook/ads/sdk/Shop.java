@@ -1,24 +1,9 @@
-/**
- * Copyright (c) 2015-present, Facebook, Inc. All rights reserved.
+/*
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ * All rights reserved.
  *
- * You are hereby granted a non-exclusive, worldwide, royalty-free license to
- * use, copy, modify, and distribute this software in source code or binary
- * form for use in connection with the web services and APIs provided by
- * Facebook.
- *
- * As with any software that integrates with the Facebook platform, your use
- * of this software is subject to the Facebook Developer Principles and
- * Policies [http://developers.facebook.com/policy/]. This copyright notice
- * shall be included in all copies or substantial portions of the software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
- * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
- * DEALINGS IN THE SOFTWARE.
- *
+ * This source code is licensed under the license found in the
+ * LICENSE file in the root directory of this source tree.
  */
 
 package com.facebook.ads.sdk;
@@ -61,6 +46,10 @@ public class Shop extends APINode {
   private String mId = null;
   @SerializedName("ig_sales_channel")
   private Object mIgSalesChannel = null;
+  @SerializedName("is_onsite_enabled")
+  private Boolean mIsOnsiteEnabled = null;
+  @SerializedName("shop_status")
+  private String mShopStatus = null;
   @SerializedName("workspace")
   private Object mWorkspace = null;
   protected static Gson gson = null;
@@ -289,6 +278,14 @@ public class Shop extends APINode {
     return mIgSalesChannel;
   }
 
+  public Boolean getFieldIsOnsiteEnabled() {
+    return mIsOnsiteEnabled;
+  }
+
+  public String getFieldShopStatus() {
+    return mShopStatus;
+  }
+
   public Object getFieldWorkspace() {
     return mWorkspace;
   }
@@ -309,6 +306,8 @@ public class Shop extends APINode {
       "fb_sales_channel",
       "id",
       "ig_sales_channel",
+      "is_onsite_enabled",
+      "shop_status",
       "workspace",
     };
 
@@ -422,6 +421,20 @@ public class Shop extends APINode {
       this.requestField("ig_sales_channel", value);
       return this;
     }
+    public APIRequestGet requestIsOnsiteEnabledField () {
+      return this.requestIsOnsiteEnabledField(true);
+    }
+    public APIRequestGet requestIsOnsiteEnabledField (boolean value) {
+      this.requestField("is_onsite_enabled", value);
+      return this;
+    }
+    public APIRequestGet requestShopStatusField () {
+      return this.requestShopStatusField(true);
+    }
+    public APIRequestGet requestShopStatusField (boolean value) {
+      this.requestField("shop_status", value);
+      return this;
+    }
     public APIRequestGet requestWorkspaceField () {
       return this.requestWorkspaceField(true);
     }
@@ -449,6 +462,8 @@ public class Shop extends APINode {
     this.mFbSalesChannel = instance.mFbSalesChannel;
     this.mId = instance.mId;
     this.mIgSalesChannel = instance.mIgSalesChannel;
+    this.mIsOnsiteEnabled = instance.mIsOnsiteEnabled;
+    this.mShopStatus = instance.mShopStatus;
     this.mWorkspace = instance.mWorkspace;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

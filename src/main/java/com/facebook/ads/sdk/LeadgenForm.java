@@ -1,24 +1,9 @@
-/**
- * Copyright (c) 2015-present, Facebook, Inc. All rights reserved.
+/*
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ * All rights reserved.
  *
- * You are hereby granted a non-exclusive, worldwide, royalty-free license to
- * use, copy, modify, and distribute this software in source code or binary
- * form for use in connection with the web services and APIs provided by
- * Facebook.
- *
- * As with any software that integrates with the Facebook platform, your use
- * of this software is subject to the Facebook Developer Principles and
- * Policies [http://developers.facebook.com/policy/]. This copyright notice
- * shall be included in all copies or substantial portions of the software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
- * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
- * DEALINGS IN THE SOFTWARE.
- *
+ * This source code is licensed under the license found in the
+ * LICENSE file in the root directory of this source tree.
  */
 
 package com.facebook.ads.sdk;
@@ -60,7 +45,7 @@ public class LeadgenForm extends APINode {
   @SerializedName("block_display_for_non_targeted_viewer")
   private Boolean mBlockDisplayForNonTargetedViewer = null;
   @SerializedName("context_card")
-  private Object mContextCard = null;
+  private LeadGenContextCard mContextCard = null;
   @SerializedName("created_time")
   private String mCreatedTime = null;
   @SerializedName("creator")
@@ -78,7 +63,7 @@ public class LeadgenForm extends APINode {
   @SerializedName("leads_count")
   private Long mLeadsCount = null;
   @SerializedName("legal_content")
-  private Object mLegalContent = null;
+  private LeadGenLegalContent mLegalContent = null;
   @SerializedName("locale")
   private String mLocale = null;
   @SerializedName("name")
@@ -98,7 +83,7 @@ public class LeadgenForm extends APINode {
   @SerializedName("status")
   private String mStatus = null;
   @SerializedName("thank_you_page")
-  private Object mThankYouPage = null;
+  private LeadGenThankYouPage mThankYouPage = null;
   @SerializedName("tracking_parameters")
   private List<KeyValue> mTrackingParameters = null;
   protected static Gson gson = null;
@@ -339,7 +324,7 @@ public class LeadgenForm extends APINode {
     return mBlockDisplayForNonTargetedViewer;
   }
 
-  public Object getFieldContextCard() {
+  public LeadGenContextCard getFieldContextCard() {
     return mContextCard;
   }
 
@@ -378,7 +363,7 @@ public class LeadgenForm extends APINode {
     return mLeadsCount;
   }
 
-  public Object getFieldLegalContent() {
+  public LeadGenLegalContent getFieldLegalContent() {
     return mLegalContent;
   }
 
@@ -421,7 +406,7 @@ public class LeadgenForm extends APINode {
     return mStatus;
   }
 
-  public Object getFieldThankYouPage() {
+  public LeadGenThankYouPage getFieldThankYouPage() {
     return mThankYouPage;
   }
 

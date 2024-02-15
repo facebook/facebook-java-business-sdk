@@ -1,24 +1,9 @@
-/**
- * Copyright (c) 2015-present, Facebook, Inc. All rights reserved.
+/*
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ * All rights reserved.
  *
- * You are hereby granted a non-exclusive, worldwide, royalty-free license to
- * use, copy, modify, and distribute this software in source code or binary
- * form for use in connection with the web services and APIs provided by
- * Facebook.
- *
- * As with any software that integrates with the Facebook platform, your use
- * of this software is subject to the Facebook Developer Principles and
- * Policies [http://developers.facebook.com/policy/]. This copyright notice
- * shall be included in all copies or substantial portions of the software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
- * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
- * DEALINGS IN THE SOFTWARE.
- *
+ * This source code is licensed under the license found in the
+ * LICENSE file in the root directory of this source tree.
  */
 
 package com.facebook.ads.sdk;
@@ -516,6 +501,67 @@ public class BusinessImage extends APINode {
       this.requestField("width", value);
       return this;
     }
+  }
+
+  public static enum EnumValidationAdPlacements {
+      @SerializedName("AUDIENCE_NETWORK_INSTREAM_VIDEO")
+      VALUE_AUDIENCE_NETWORK_INSTREAM_VIDEO("AUDIENCE_NETWORK_INSTREAM_VIDEO"),
+      @SerializedName("AUDIENCE_NETWORK_INSTREAM_VIDEO_MOBILE")
+      VALUE_AUDIENCE_NETWORK_INSTREAM_VIDEO_MOBILE("AUDIENCE_NETWORK_INSTREAM_VIDEO_MOBILE"),
+      @SerializedName("AUDIENCE_NETWORK_REWARDED_VIDEO")
+      VALUE_AUDIENCE_NETWORK_REWARDED_VIDEO("AUDIENCE_NETWORK_REWARDED_VIDEO"),
+      @SerializedName("DESKTOP_FEED_STANDARD")
+      VALUE_DESKTOP_FEED_STANDARD("DESKTOP_FEED_STANDARD"),
+      @SerializedName("FACEBOOK_STORY_MOBILE")
+      VALUE_FACEBOOK_STORY_MOBILE("FACEBOOK_STORY_MOBILE"),
+      @SerializedName("FACEBOOK_STORY_STICKER_MOBILE")
+      VALUE_FACEBOOK_STORY_STICKER_MOBILE("FACEBOOK_STORY_STICKER_MOBILE"),
+      @SerializedName("INSTAGRAM_STANDARD")
+      VALUE_INSTAGRAM_STANDARD("INSTAGRAM_STANDARD"),
+      @SerializedName("INSTAGRAM_STORY")
+      VALUE_INSTAGRAM_STORY("INSTAGRAM_STORY"),
+      @SerializedName("INSTANT_ARTICLE_STANDARD")
+      VALUE_INSTANT_ARTICLE_STANDARD("INSTANT_ARTICLE_STANDARD"),
+      @SerializedName("INSTREAM_BANNER_DESKTOP")
+      VALUE_INSTREAM_BANNER_DESKTOP("INSTREAM_BANNER_DESKTOP"),
+      @SerializedName("INSTREAM_BANNER_MOBILE")
+      VALUE_INSTREAM_BANNER_MOBILE("INSTREAM_BANNER_MOBILE"),
+      @SerializedName("INSTREAM_VIDEO_DESKTOP")
+      VALUE_INSTREAM_VIDEO_DESKTOP("INSTREAM_VIDEO_DESKTOP"),
+      @SerializedName("INSTREAM_VIDEO_IMAGE")
+      VALUE_INSTREAM_VIDEO_IMAGE("INSTREAM_VIDEO_IMAGE"),
+      @SerializedName("INSTREAM_VIDEO_MOBILE")
+      VALUE_INSTREAM_VIDEO_MOBILE("INSTREAM_VIDEO_MOBILE"),
+      @SerializedName("MESSENGER_MOBILE_INBOX_MEDIA")
+      VALUE_MESSENGER_MOBILE_INBOX_MEDIA("MESSENGER_MOBILE_INBOX_MEDIA"),
+      @SerializedName("MESSENGER_MOBILE_STORY_MEDIA")
+      VALUE_MESSENGER_MOBILE_STORY_MEDIA("MESSENGER_MOBILE_STORY_MEDIA"),
+      @SerializedName("MOBILE_FEED_STANDARD")
+      VALUE_MOBILE_FEED_STANDARD("MOBILE_FEED_STANDARD"),
+      @SerializedName("MOBILE_FULLWIDTH")
+      VALUE_MOBILE_FULLWIDTH("MOBILE_FULLWIDTH"),
+      @SerializedName("MOBILE_INTERSTITIAL")
+      VALUE_MOBILE_INTERSTITIAL("MOBILE_INTERSTITIAL"),
+      @SerializedName("MOBILE_MEDIUM_RECTANGLE")
+      VALUE_MOBILE_MEDIUM_RECTANGLE("MOBILE_MEDIUM_RECTANGLE"),
+      @SerializedName("MOBILE_NATIVE")
+      VALUE_MOBILE_NATIVE("MOBILE_NATIVE"),
+      @SerializedName("RIGHT_COLUMN_STANDARD")
+      VALUE_RIGHT_COLUMN_STANDARD("RIGHT_COLUMN_STANDARD"),
+      @SerializedName("SUGGESTED_VIDEO_MOBILE")
+      VALUE_SUGGESTED_VIDEO_MOBILE("SUGGESTED_VIDEO_MOBILE"),
+      ;
+
+      private String value;
+
+      private EnumValidationAdPlacements(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
   }
 
 

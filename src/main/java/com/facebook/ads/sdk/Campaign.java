@@ -1,24 +1,9 @@
-/**
- * Copyright (c) 2015-present, Facebook, Inc. All rights reserved.
+/*
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ * All rights reserved.
  *
- * You are hereby granted a non-exclusive, worldwide, royalty-free license to
- * use, copy, modify, and distribute this software in source code or binary
- * form for use in connection with the web services and APIs provided by
- * Facebook.
- *
- * As with any software that integrates with the Facebook platform, your use
- * of this software is subject to the Facebook Developer Principles and
- * Policies [http://developers.facebook.com/policy/]. This copyright notice
- * shall be included in all copies or substantial portions of the software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
- * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
- * DEALINGS IN THE SOFTWARE.
- *
+ * This source code is licensed under the license found in the
+ * LICENSE file in the root directory of this source tree.
  */
 
 package com.facebook.ads.sdk;
@@ -71,6 +56,8 @@ public class Campaign extends APINode {
   private String mBudgetRemaining = null;
   @SerializedName("buying_type")
   private String mBuyingType = null;
+  @SerializedName("campaign_group_active_time")
+  private String mCampaignGroupActiveTime = null;
   @SerializedName("can_create_brand_lift_study")
   private Boolean mCanCreateBrandLiftStudy = null;
   @SerializedName("can_use_spend_cap")
@@ -87,6 +74,8 @@ public class Campaign extends APINode {
   private Boolean mHasSecondarySkadnetworkReporting = null;
   @SerializedName(value="id", alternate={"copied_campaign_id"})
   private String mId = null;
+  @SerializedName("is_budget_schedule_enabled")
+  private Boolean mIsBudgetScheduleEnabled = null;
   @SerializedName("is_skadnetwork_attribution")
   private Boolean mIsSkadnetworkAttribution = null;
   @SerializedName("issues_info")
@@ -360,6 +349,10 @@ public class Campaign extends APINode {
     return new APIRequestGetAdSets(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestCreateBudgetSchedule createBudgetSchedule() {
+    return new APIRequestCreateBudgetSchedule(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetCopies getCopies() {
     return new APIRequestGetCopies(this.getPrefixedId().toString(), context);
   }
@@ -421,6 +414,10 @@ public class Campaign extends APINode {
     return mBuyingType;
   }
 
+  public String getFieldCampaignGroupActiveTime() {
+    return mCampaignGroupActiveTime;
+  }
+
   public Boolean getFieldCanCreateBrandLiftStudy() {
     return mCanCreateBrandLiftStudy;
   }
@@ -451,6 +448,10 @@ public class Campaign extends APINode {
 
   public String getFieldId() {
     return mId;
+  }
+
+  public Boolean getFieldIsBudgetScheduleEnabled() {
+    return mIsBudgetScheduleEnabled;
   }
 
   public Boolean getFieldIsSkadnetworkAttribution() {
@@ -1128,7 +1129,10 @@ public class Campaign extends APINode {
 
     public static final String[] FIELDS = {
       "account_id",
+      "ad_active_time",
       "ad_review_feedback",
+      "ad_schedule_end_time",
+      "ad_schedule_start_time",
       "adlabels",
       "adset",
       "adset_id",
@@ -1150,7 +1154,6 @@ public class Campaign extends APINode {
       "id",
       "issues_info",
       "last_updated_by_app_id",
-      "meta_reward_adgroup_status",
       "name",
       "preview_shareable_link",
       "priority",
@@ -1235,7 +1238,7 @@ public class Campaign extends APINode {
       return this;
     }
 
-    public APIRequestGetAds setTimeRange (Object timeRange) {
+    public APIRequestGetAds setTimeRange (Map<String, String> timeRange) {
       this.setParam("time_range", timeRange);
       return this;
     }
@@ -1296,11 +1299,32 @@ public class Campaign extends APINode {
       this.requestField("account_id", value);
       return this;
     }
+    public APIRequestGetAds requestAdActiveTimeField () {
+      return this.requestAdActiveTimeField(true);
+    }
+    public APIRequestGetAds requestAdActiveTimeField (boolean value) {
+      this.requestField("ad_active_time", value);
+      return this;
+    }
     public APIRequestGetAds requestAdReviewFeedbackField () {
       return this.requestAdReviewFeedbackField(true);
     }
     public APIRequestGetAds requestAdReviewFeedbackField (boolean value) {
       this.requestField("ad_review_feedback", value);
+      return this;
+    }
+    public APIRequestGetAds requestAdScheduleEndTimeField () {
+      return this.requestAdScheduleEndTimeField(true);
+    }
+    public APIRequestGetAds requestAdScheduleEndTimeField (boolean value) {
+      this.requestField("ad_schedule_end_time", value);
+      return this;
+    }
+    public APIRequestGetAds requestAdScheduleStartTimeField () {
+      return this.requestAdScheduleStartTimeField(true);
+    }
+    public APIRequestGetAds requestAdScheduleStartTimeField (boolean value) {
+      this.requestField("ad_schedule_start_time", value);
       return this;
     }
     public APIRequestGetAds requestAdlabelsField () {
@@ -1450,13 +1474,6 @@ public class Campaign extends APINode {
       this.requestField("last_updated_by_app_id", value);
       return this;
     }
-    public APIRequestGetAds requestMetaRewardAdgroupStatusField () {
-      return this.requestMetaRewardAdgroupStatusField(true);
-    }
-    public APIRequestGetAds requestMetaRewardAdgroupStatusField (boolean value) {
-      this.requestField("meta_reward_adgroup_status", value);
-      return this;
-    }
     public APIRequestGetAds requestNameField () {
       return this.requestNameField(true);
     }
@@ -1564,6 +1581,7 @@ public class Campaign extends APINode {
       "billing_event",
       "budget_remaining",
       "campaign",
+      "campaign_active_time",
       "campaign_attribution",
       "campaign_id",
       "configured_status",
@@ -1582,6 +1600,7 @@ public class Campaign extends APINode {
       "full_funnel_exploration_mode",
       "id",
       "instagram_actor_id",
+      "is_budget_schedule_enabled",
       "is_dynamic_creative",
       "issues_info",
       "learning_stage_info",
@@ -1691,7 +1710,7 @@ public class Campaign extends APINode {
       return this;
     }
 
-    public APIRequestGetAdSets setTimeRange (Object timeRange) {
+    public APIRequestGetAdSets setTimeRange (Map<String, String> timeRange) {
       this.setParam("time_range", timeRange);
       return this;
     }
@@ -1827,6 +1846,13 @@ public class Campaign extends APINode {
       this.requestField("campaign", value);
       return this;
     }
+    public APIRequestGetAdSets requestCampaignActiveTimeField () {
+      return this.requestCampaignActiveTimeField(true);
+    }
+    public APIRequestGetAdSets requestCampaignActiveTimeField (boolean value) {
+      this.requestField("campaign_active_time", value);
+      return this;
+    }
     public APIRequestGetAdSets requestCampaignAttributionField () {
       return this.requestCampaignAttributionField(true);
     }
@@ -1951,6 +1977,13 @@ public class Campaign extends APINode {
     }
     public APIRequestGetAdSets requestInstagramActorIdField (boolean value) {
       this.requestField("instagram_actor_id", value);
+      return this;
+    }
+    public APIRequestGetAdSets requestIsBudgetScheduleEnabledField () {
+      return this.requestIsBudgetScheduleEnabledField(true);
+    }
+    public APIRequestGetAdSets requestIsBudgetScheduleEnabledField (boolean value) {
+      this.requestField("is_budget_schedule_enabled", value);
       return this;
     }
     public APIRequestGetAdSets requestIsDynamicCreativeField () {
@@ -2144,6 +2177,150 @@ public class Campaign extends APINode {
     }
   }
 
+  public static class APIRequestCreateBudgetSchedule extends APIRequest<HighDemandPeriod> {
+
+    HighDemandPeriod lastResponse = null;
+    @Override
+    public HighDemandPeriod getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "budget_value",
+      "budget_value_type",
+      "time_end",
+      "time_start",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public HighDemandPeriod parseResponse(String response, String header) throws APIException {
+      return HighDemandPeriod.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public HighDemandPeriod execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public HighDemandPeriod execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<HighDemandPeriod> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<HighDemandPeriod> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, HighDemandPeriod>() {
+           public HighDemandPeriod apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateBudgetSchedule.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateBudgetSchedule(String nodeId, APIContext context) {
+      super(context, nodeId, "/budget_schedules", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateBudgetSchedule setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateBudgetSchedule setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateBudgetSchedule setBudgetValue (Long budgetValue) {
+      this.setParam("budget_value", budgetValue);
+      return this;
+    }
+    public APIRequestCreateBudgetSchedule setBudgetValue (String budgetValue) {
+      this.setParam("budget_value", budgetValue);
+      return this;
+    }
+
+    public APIRequestCreateBudgetSchedule setBudgetValueType (HighDemandPeriod.EnumBudgetValueType budgetValueType) {
+      this.setParam("budget_value_type", budgetValueType);
+      return this;
+    }
+    public APIRequestCreateBudgetSchedule setBudgetValueType (String budgetValueType) {
+      this.setParam("budget_value_type", budgetValueType);
+      return this;
+    }
+
+    public APIRequestCreateBudgetSchedule setTimeEnd (Long timeEnd) {
+      this.setParam("time_end", timeEnd);
+      return this;
+    }
+    public APIRequestCreateBudgetSchedule setTimeEnd (String timeEnd) {
+      this.setParam("time_end", timeEnd);
+      return this;
+    }
+
+    public APIRequestCreateBudgetSchedule setTimeStart (Long timeStart) {
+      this.setParam("time_start", timeStart);
+      return this;
+    }
+    public APIRequestCreateBudgetSchedule setTimeStart (String timeStart) {
+      this.setParam("time_start", timeStart);
+      return this;
+    }
+
+    public APIRequestCreateBudgetSchedule requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateBudgetSchedule requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateBudgetSchedule requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateBudgetSchedule requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateBudgetSchedule requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateBudgetSchedule requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGetCopies extends APIRequest<Campaign> {
 
     APINodeList<Campaign> lastResponse = null;
@@ -2167,6 +2344,7 @@ public class Campaign extends APINode {
       "budget_rebalance_flag",
       "budget_remaining",
       "buying_type",
+      "campaign_group_active_time",
       "can_create_brand_lift_study",
       "can_use_spend_cap",
       "configured_status",
@@ -2175,6 +2353,7 @@ public class Campaign extends APINode {
       "effective_status",
       "has_secondary_skadnetwork_reporting",
       "id",
+      "is_budget_schedule_enabled",
       "is_skadnetwork_attribution",
       "issues_info",
       "last_budget_toggling_time",
@@ -2279,7 +2458,7 @@ public class Campaign extends APINode {
       return this;
     }
 
-    public APIRequestGetCopies setTimeRange (Object timeRange) {
+    public APIRequestGetCopies setTimeRange (Map<String, String> timeRange) {
       this.setParam("time_range", timeRange);
       return this;
     }
@@ -2380,6 +2559,13 @@ public class Campaign extends APINode {
       this.requestField("buying_type", value);
       return this;
     }
+    public APIRequestGetCopies requestCampaignGroupActiveTimeField () {
+      return this.requestCampaignGroupActiveTimeField(true);
+    }
+    public APIRequestGetCopies requestCampaignGroupActiveTimeField (boolean value) {
+      this.requestField("campaign_group_active_time", value);
+      return this;
+    }
     public APIRequestGetCopies requestCanCreateBrandLiftStudyField () {
       return this.requestCanCreateBrandLiftStudyField(true);
     }
@@ -2434,6 +2620,13 @@ public class Campaign extends APINode {
     }
     public APIRequestGetCopies requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetCopies requestIsBudgetScheduleEnabledField () {
+      return this.requestIsBudgetScheduleEnabledField(true);
+    }
+    public APIRequestGetCopies requestIsBudgetScheduleEnabledField (boolean value) {
+      this.requestField("is_budget_schedule_enabled", value);
       return this;
     }
     public APIRequestGetCopies requestIsSkadnetworkAttributionField () {
@@ -2966,7 +3159,7 @@ public class Campaign extends APINode {
       return this;
     }
 
-    public APIRequestGetInsights setTimeRange (Object timeRange) {
+    public APIRequestGetInsights setTimeRange (Map<String, String> timeRange) {
       this.setParam("time_range", timeRange);
       return this;
     }
@@ -2975,7 +3168,7 @@ public class Campaign extends APINode {
       return this;
     }
 
-    public APIRequestGetInsights setTimeRanges (List<Object> timeRanges) {
+    public APIRequestGetInsights setTimeRanges (List<Map<String, String>> timeRanges) {
       this.setParam("time_ranges", timeRanges);
       return this;
     }
@@ -3268,7 +3461,7 @@ public class Campaign extends APINode {
       return this;
     }
 
-    public APIRequestGetInsightsAsync setTimeRange (Object timeRange) {
+    public APIRequestGetInsightsAsync setTimeRange (Map<String, String> timeRange) {
       this.setParam("time_range", timeRange);
       return this;
     }
@@ -3277,7 +3470,7 @@ public class Campaign extends APINode {
       return this;
     }
 
-    public APIRequestGetInsightsAsync setTimeRanges (List<Object> timeRanges) {
+    public APIRequestGetInsightsAsync setTimeRanges (List<Map<String, String>> timeRanges) {
       this.setParam("time_ranges", timeRanges);
       return this;
     }
@@ -3469,6 +3662,7 @@ public class Campaign extends APINode {
       "budget_rebalance_flag",
       "budget_remaining",
       "buying_type",
+      "campaign_group_active_time",
       "can_create_brand_lift_study",
       "can_use_spend_cap",
       "configured_status",
@@ -3477,6 +3671,7 @@ public class Campaign extends APINode {
       "effective_status",
       "has_secondary_skadnetwork_reporting",
       "id",
+      "is_budget_schedule_enabled",
       "is_skadnetwork_attribution",
       "issues_info",
       "last_budget_toggling_time",
@@ -3581,7 +3776,7 @@ public class Campaign extends APINode {
       return this;
     }
 
-    public APIRequestGet setTimeRange (Object timeRange) {
+    public APIRequestGet setTimeRange (Map<String, String> timeRange) {
       this.setParam("time_range", timeRange);
       return this;
     }
@@ -3682,6 +3877,13 @@ public class Campaign extends APINode {
       this.requestField("buying_type", value);
       return this;
     }
+    public APIRequestGet requestCampaignGroupActiveTimeField () {
+      return this.requestCampaignGroupActiveTimeField(true);
+    }
+    public APIRequestGet requestCampaignGroupActiveTimeField (boolean value) {
+      this.requestField("campaign_group_active_time", value);
+      return this;
+    }
     public APIRequestGet requestCanCreateBrandLiftStudyField () {
       return this.requestCanCreateBrandLiftStudyField(true);
     }
@@ -3736,6 +3938,13 @@ public class Campaign extends APINode {
     }
     public APIRequestGet requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGet requestIsBudgetScheduleEnabledField () {
+      return this.requestIsBudgetScheduleEnabledField(true);
+    }
+    public APIRequestGet requestIsBudgetScheduleEnabledField (boolean value) {
+      this.requestField("is_budget_schedule_enabled", value);
       return this;
     }
     public APIRequestGet requestIsSkadnetworkAttributionField () {
@@ -5084,6 +5293,7 @@ public class Campaign extends APINode {
     this.mBudgetRebalanceFlag = instance.mBudgetRebalanceFlag;
     this.mBudgetRemaining = instance.mBudgetRemaining;
     this.mBuyingType = instance.mBuyingType;
+    this.mCampaignGroupActiveTime = instance.mCampaignGroupActiveTime;
     this.mCanCreateBrandLiftStudy = instance.mCanCreateBrandLiftStudy;
     this.mCanUseSpendCap = instance.mCanUseSpendCap;
     this.mConfiguredStatus = instance.mConfiguredStatus;
@@ -5092,6 +5302,7 @@ public class Campaign extends APINode {
     this.mEffectiveStatus = instance.mEffectiveStatus;
     this.mHasSecondarySkadnetworkReporting = instance.mHasSecondarySkadnetworkReporting;
     this.mId = instance.mId;
+    this.mIsBudgetScheduleEnabled = instance.mIsBudgetScheduleEnabled;
     this.mIsSkadnetworkAttribution = instance.mIsSkadnetworkAttribution;
     this.mIssuesInfo = instance.mIssuesInfo;
     this.mLastBudgetTogglingTime = instance.mLastBudgetTogglingTime;

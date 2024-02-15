@@ -1,24 +1,9 @@
-/**
- * Copyright (c) 2015-present, Facebook, Inc. All rights reserved.
+/*
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ * All rights reserved.
  *
- * You are hereby granted a non-exclusive, worldwide, royalty-free license to
- * use, copy, modify, and distribute this software in source code or binary
- * form for use in connection with the web services and APIs provided by
- * Facebook.
- *
- * As with any software that integrates with the Facebook platform, your use
- * of this software is subject to the Facebook Developer Principles and
- * Policies [http://developers.facebook.com/policy/]. This copyright notice
- * shall be included in all copies or substantial portions of the software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
- * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
- * DEALINGS IN THE SOFTWARE.
- *
+ * This source code is licensed under the license found in the
+ * LICENSE file in the root directory of this source tree.
  */
 
 package com.facebook.ads.sdk;
@@ -57,6 +42,10 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class MessagingFeatureStatus extends APINode {
   @SerializedName("hop_v2")
   private Boolean mHopV2 = null;
+  @SerializedName("ig_multi_app")
+  private Boolean mIgMultiApp = null;
+  @SerializedName("msgr_multi_app")
+  private Boolean mMsgrMultiApp = null;
   protected static Gson gson = null;
 
   public MessagingFeatureStatus() {
@@ -217,6 +206,24 @@ public class MessagingFeatureStatus extends APINode {
     return this;
   }
 
+  public Boolean getFieldIgMultiApp() {
+    return mIgMultiApp;
+  }
+
+  public MessagingFeatureStatus setFieldIgMultiApp(Boolean value) {
+    this.mIgMultiApp = value;
+    return this;
+  }
+
+  public Boolean getFieldMsgrMultiApp() {
+    return mMsgrMultiApp;
+  }
+
+  public MessagingFeatureStatus setFieldMsgrMultiApp(Boolean value) {
+    this.mMsgrMultiApp = value;
+    return this;
+  }
+
 
 
 
@@ -235,6 +242,8 @@ public class MessagingFeatureStatus extends APINode {
 
   public MessagingFeatureStatus copyFrom(MessagingFeatureStatus instance) {
     this.mHopV2 = instance.mHopV2;
+    this.mIgMultiApp = instance.mIgMultiApp;
+    this.mMsgrMultiApp = instance.mMsgrMultiApp;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
