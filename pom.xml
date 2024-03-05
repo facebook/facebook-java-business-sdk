@@ -139,7 +139,7 @@
     <dependency>
       <groupId>com.google.guava</groupId>
       <artifactId>guava</artifactId>
-      <version>20.0</version>
+      <version>33.0.0-jre</version>
     </dependency>
     <dependency>
       <groupId>com.squareup.okio</groupId>

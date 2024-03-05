@@ -28,6 +28,7 @@ import com.facebook.ads.utils.AppDataAdapter;
 import com.google.common.util.concurrent.AsyncFunction;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.MoreExecutors;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.SerializedName;
@@ -456,7 +457,9 @@ public class EventRequest {
           customEndpointResponse.setCustomEndpointResponses(endpointResponses);
           return Futures.immediateFuture(customEndpointResponse);
         }
-      });
+      },
+      MoreExecutors.directExecutor()
+    );
   }
 
   private ListenableFuture<EventResponse> sendEventAsyncToCAPIAndCustomEndpoint() throws APIException {
@@ -485,7 +488,9 @@ public class EventRequest {
                           "Successfully sent %d event(s)", capiEventResponse.getEventsReceived()));
           return Futures.immediateFuture(capiEventResponse);
         }
-      });
+      },
+      MoreExecutors.directExecutor()
+    );
   }
 
   private ListenableFuture<EventResponse> sendEventToCAPIOnly() throws APIException {
@@ -502,7 +507,9 @@ public class EventRequest {
                           "Successfully sent %d event(s)", eventResponse.getEventsReceived()));
           return Futures.immediateFuture(eventResponse);
         }
-      });
+      },
+      MoreExecutors.directExecutor()
+    );
   }
 
   /**

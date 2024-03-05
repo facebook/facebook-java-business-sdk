@@ -46,6 +46,7 @@ import com.google.common.base.Function;
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.MoreExecutors;
 import com.google.common.util.concurrent.SettableFuture;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -146,7 +147,8 @@ public class APIRequest<T extends APINode> {
              throw new RuntimeException(e);
            }
          }
-       }
+       },
+       MoreExecutors.directExecutor()
     );
   };
 
@@ -227,7 +229,8 @@ public class APIRequest<T extends APINode> {
           }
           public void onFailure(Throwable t) {
           }
-        }
+        },
+        MoreExecutors.directExecutor()
       );
     } catch(IOException e) {
       throw new APIException.FailedRequestException(e);

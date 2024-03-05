@@ -19,6 +19,7 @@ import java.util.Map;
 import com.google.common.base.Function;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.MoreExecutors;
 import com.google.common.util.concurrent.SettableFuture;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonArray;
@@ -323,7 +324,8 @@ public class Persona extends APINode {
                throw new RuntimeException(e);
              }
            }
-         }
+         },
+         MoreExecutors.directExecutor()
       );
     };
 
@@ -430,7 +432,8 @@ public class Persona extends APINode {
                throw new RuntimeException(e);
              }
            }
-         }
+         },
+         MoreExecutors.directExecutor()
       );
     };
 
