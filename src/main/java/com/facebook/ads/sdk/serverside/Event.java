@@ -64,6 +64,9 @@ public class Event {
   @SerializedName("advanced_measurement_table")
   private String advancedMeasurementTable = null;
 
+  @SerializedName("messaging_channel")
+  private MessagingChannel messagingChannel = null;
+
   /**
    * Default Constructor.
    */
@@ -86,11 +89,12 @@ public class Event {
    * @param actionSource Where the conversion occurred.
    * @param appData AppData object that contains app data and device information
    * @param advancedMeasurementTable Only used for Advanced Measurement in the Advanced Analytics product.
+   * @param messagingChannel indicated the messaging channel used.
    */
   public Event(String eventName, Long eventTime, String eventSourceUrl, Boolean optOut,
       String eventId, UserData userData, CustomData customData, String[] dataProcessingOptions,
       Integer dataProcessingOptionsCountry, Integer dataProcessingOptionsState, ActionSource actionSource, AppData appData,
-      String advancedMeasurementTable) {
+      String advancedMeasurementTable, MessagingChannel messagingChannel) {
     this.eventName = eventName;
     this.eventTime = eventTime;
     this.eventSourceUrl = eventSourceUrl;
@@ -104,6 +108,7 @@ public class Event {
     this.actionSource = actionSource;
     this.appData = appData;
     this.advancedMeasurementTable = advancedMeasurementTable;
+    this.messagingChannel = messagingChannel;
   }
 
   /**
@@ -498,6 +503,35 @@ public class Event {
     this.advancedMeasurementTable = advancedMeasurementTable;
   }
 
+  /**
+   * Set messagingChannel for the event.
+   *
+   * @param messagingChannel represents where the conversation occurred.
+   * @return Event
+   */
+  public Event messagingChannel(MessagingChannel messagingChannel) {
+    this.messagingChannel = messagingChannel;
+    return this;
+  }
+
+  /**
+   * Get messagingChannel for the event.
+   *
+   * @return messagingChannel
+   */
+  public MessagingChannel getMessagingChannel() {
+    return messagingChannel;
+  }
+
+  /**
+   * Set messagingChannel for the event.
+   *
+   * @param messagingChannel represents where the conversation occurred.
+   */
+  public void setMessagingChannel(MessagingChannel messagingChannel) {
+    this.messagingChannel = messagingChannel;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -516,13 +550,14 @@ public class Event {
         && Objects.equals(this.customData, event.customData)
         && Objects.equals(this.dataProcessingOptions, event.dataProcessingOptions)
         && Objects.equals(this.dataProcessingOptionsCountry, event.dataProcessingOptionsCountry)
-        && Objects.equals(this.dataProcessingOptionsState, event.dataProcessingOptionsState);
+        && Objects.equals(this.dataProcessingOptionsState, event.dataProcessingOptionsState)
+        && Objects.equals(this.messagingChannel, event.messagingChannel);
   }
 
   @Override
   public int hashCode() {
     return Objects.hash(
-        eventName, eventTime, eventSourceUrl, optOut, eventId, userData, customData, dataProcessingOptions, dataProcessingOptionsCountry, dataProcessingOptionsState);
+        eventName, eventTime, eventSourceUrl, optOut, eventId, userData, customData, dataProcessingOptions, dataProcessingOptionsCountry, dataProcessingOptionsState , messagingChannel);
   }
 
   @Override
@@ -540,6 +575,7 @@ public class Event {
     sb.append("    dataProcessingOptions: ").append(toIndentedString(dataProcessingOptions)).append("\n");
     sb.append("    dataProcessingOptionsCountry: ").append(toIndentedString(dataProcessingOptionsCountry)).append("\n");
     sb.append("    dataProcessingOptionsState: ").append(toIndentedString(dataProcessingOptionsState)).append("\n");
+    sb.append("    messagingChannel: ").append(toIndentedString(messagingChannel)).append("\n");
     sb.append("}");
     return sb.toString();
   }

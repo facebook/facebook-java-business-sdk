@@ -131,6 +131,12 @@ public class UserData {
   @SerializedName(ServerSideApiConstants.ANONYMOUS_ID)
   private String anonId = null;
 
+  @SerializedName(ServerSideApiConstants.CTWA_CLID)
+  private String ctwaClid = null;
+
+  @SerializedName(ServerSideApiConstants.PAGE_ID)
+  private String pageId = null;
+
   /**
    * Default Constructor.
    */
@@ -166,12 +172,14 @@ public class UserData {
    * @param doby Date of birth year
    * @param madid Mobile Advertiser ID
    * @param anonId ID of a person who has installed the app anonymously
+   * @param ctwaClid ID of a conversation that was started on WhatsApp
+   * @param pageId ID of the page that the ad is associated with
    */
   public UserData(String email, String phone, GenderEnum gender, String dateOfBirth,
       String lastName, String firstName, String city, String state, String zipcode,
       String countryCode, String externalId, String clientIpAddress, String clientUserAgent,
       String fbc, String fbp, String subscriptionId, String fbLoginId, String leadId,
-      String f5first, String f5last, String fi, String dobd, String dobm, String doby, String madid, String anonId) {
+      String f5first, String f5last, String fi, String dobd, String dobm, String doby, String madid, String anonId, String ctwaClid, String pageId) {
     this.emails = Arrays.asList(email);
     this.phones = Arrays.asList(phone);
     this.genders = Arrays.asList(gender);
@@ -1395,6 +1403,64 @@ public class UserData {
     this.anonId = anonId;
   }
 
+  /**
+   * Get the ctwaClid of the conversation that was started on WhatsApp
+   *
+   * @param ctwaClid the anonymous id
+   * @return UserData
+   */
+  public UserData ctwaClid(String ctwaClid) {
+    setCtwaClid(ctwaClid);
+    return this;
+  }
+
+  /**
+   * ctwaClid of the conversation that was started on WhatsApp
+   *
+   * @return ctwaClid
+   */
+  public String getCtwaClid() {
+    return this.ctwaClid;
+  }
+
+  /**
+   * Set the ctwaClid of the conversation that was started on WhatsApp
+   *
+   * @param ctwaClid the anonymous Id
+   */
+  public void setCtwaClid(String ctwaClid) {
+    this.ctwaClid = ctwaClid;
+  }
+
+  /**
+   * Get the ID of the page that the ad is associated with
+   *
+   * @param pageId
+   * @return UserData
+   */
+  public UserData pageId(String pageId) {
+    setPageId(pageId);
+    return this;
+  }
+
+  /**
+   * ID of the page that the ad is associated with
+   *
+   * @return pageId
+   */
+  public String getPageId() {
+    return this.pageId;
+  }
+
+  /**
+   * Set the ID of the page that the ad is associated with
+   *
+   * @param pageId
+   */
+  public void setPageId(String pageId) {
+    this.pageId = pageId;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -1429,7 +1495,9 @@ public class UserData {
         && Objects.equals(this.dobm, userData.dobm)
         && Objects.equals(this.doby, userData.doby)
         && Objects.equals(this.madid, userData.madid)
-        && Objects.equals(this.anonId, userData.anonId);
+        && Objects.equals(this.anonId, userData.anonId)
+        && Objects.equals(this.ctwaClid, userData.ctwaClid)
+        && Objects.equals(this.pageId, userData.pageId);
   }
 
   @Override
@@ -1460,7 +1528,9 @@ public class UserData {
         dobm,
         doby,
         madid,
-        anonId);
+        anonId,
+        ctwaClid,
+        pageId);
   }
 
   @Override
@@ -1494,6 +1564,8 @@ public class UserData {
     sb.append("    doby: ").append(toIndentedString(doby)).append("\n");
     sb.append("    madid: ").append(toIndentedString(madid)).append("\n");
     sb.append("    anonId: ").append(toIndentedString(anonId)).append("\n");
+    sb.append("    ctwaClid: ").append(toIndentedString(ctwaClid)).append("\n");
+    sb.append("    pageId: ").append(toIndentedString(pageId)).append("\n");
     sb.append("}");
     return sb.toString();
   }

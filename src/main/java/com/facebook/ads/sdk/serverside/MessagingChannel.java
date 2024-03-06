@@ -19,53 +19,23 @@
 package com.facebook.ads.sdk.serverside;
 
 /**
- * Used to specify where the conversion occurred.
- * See https://developers.facebook.com/docs/marketing-api/conversions-api/parameters/server-event#action-source
+ * Used to specify which messaging channel was used.
+ * See https://developers.facebook.com/docs/marketing-api/conversions-api/business-messaging
  */
-public enum ActionSource {
+public enum MessagingChannel {
 
   /**
-   * Conversion happened over email.
+   * Conversation happened on Instagram Direct.
    */
-  email,
+  instagram,
 
   /**
-   * Conversion was made on your website.
+   * Conversation happened on Messenger.
    */
-  website,
+  messenger,
 
   /**
-   * Conversion was made using your app.
+   * Conversation happened on WhatsApp.
    */
-  app,
-
-  /**
-   * Conversion was made over the phone.
-   */
-  phone_call,
-
-  /**
-   * Conversion was made via a messaging app, SMS, or online messaging feature.
-   */
-  chat,
-
-  /**
-   * Conversion was made in person at your physical store.
-   */
-  physical_store,
-
-  /**
-   * Conversion happened automatically, for example, a subscription renewal that’s set on auto-pay each month.
-   */
-  system_generated,
-
-  /**
-   * Conversion happened through a business messaging channel, such as WhatsApp or Instagram Direct.
-   */
-  business_messaging,
-
-  /**
-   * Conversion happened in a way that is not listed.
-   */
-  other
+  whatsapp,
 }
