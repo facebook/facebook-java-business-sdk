@@ -670,6 +670,10 @@ public class Business extends APINode {
     return new APIRequestGetReceivedAudienceSharingRequests(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetSelfCertifiedWhatsappBusinessSubmissions getSelfCertifiedWhatsappBusinessSubmissions() {
+    return new APIRequestGetSelfCertifiedWhatsappBusinessSubmissions(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestCreateSetupManagedPartnerAdAccount createSetupManagedPartnerAdAccount() {
     return new APIRequestCreateSetupManagedPartnerAdAccount(this.getPrefixedId().toString(), context);
   }
@@ -6744,6 +6748,7 @@ public class Business extends APINode {
       "app_id",
       "artists_we_like",
       "attire",
+      "available_promo_offer_ids",
       "awards",
       "band_interests",
       "band_members",
@@ -6792,7 +6797,6 @@ public class Business extends APINode {
       "has_lead_access",
       "has_transitioned_to_new_page_experience",
       "has_whatsapp_business_number",
-      "has_whatsapp_enterprise_number_using_cloud_api",
       "has_whatsapp_number",
       "hometown",
       "hours",
@@ -6836,7 +6840,6 @@ public class Business extends APINode {
       "offer_eligible",
       "overall_star_rating",
       "owner_business",
-      "page_about_story",
       "page_token",
       "parent_page",
       "parking",
@@ -7026,6 +7029,13 @@ public class Business extends APINode {
     }
     public APIRequestGetClientPages requestAttireField (boolean value) {
       this.requestField("attire", value);
+      return this;
+    }
+    public APIRequestGetClientPages requestAvailablePromoOfferIdsField () {
+      return this.requestAvailablePromoOfferIdsField(true);
+    }
+    public APIRequestGetClientPages requestAvailablePromoOfferIdsField (boolean value) {
+      this.requestField("available_promo_offer_ids", value);
       return this;
     }
     public APIRequestGetClientPages requestAwardsField () {
@@ -7364,13 +7374,6 @@ public class Business extends APINode {
       this.requestField("has_whatsapp_business_number", value);
       return this;
     }
-    public APIRequestGetClientPages requestHasWhatsappEnterpriseNumberUsingCloudApiField () {
-      return this.requestHasWhatsappEnterpriseNumberUsingCloudApiField(true);
-    }
-    public APIRequestGetClientPages requestHasWhatsappEnterpriseNumberUsingCloudApiField (boolean value) {
-      this.requestField("has_whatsapp_enterprise_number_using_cloud_api", value);
-      return this;
-    }
     public APIRequestGetClientPages requestHasWhatsappNumberField () {
       return this.requestHasWhatsappNumberField(true);
     }
@@ -7670,13 +7673,6 @@ public class Business extends APINode {
     }
     public APIRequestGetClientPages requestOwnerBusinessField (boolean value) {
       this.requestField("owner_business", value);
-      return this;
-    }
-    public APIRequestGetClientPages requestPageAboutStoryField () {
-      return this.requestPageAboutStoryField(true);
-    }
-    public APIRequestGetClientPages requestPageAboutStoryField (boolean value) {
-      this.requestField("page_about_story", value);
       return this;
     }
     public APIRequestGetClientPages requestPageTokenField () {
@@ -8548,6 +8544,7 @@ public class Business extends APINode {
       "feed_count",
       "id",
       "is_catalog_segment",
+      "is_local_catalog",
       "name",
       "owner_business",
       "product_count",
@@ -8730,6 +8727,13 @@ public class Business extends APINode {
       this.requestField("is_catalog_segment", value);
       return this;
     }
+    public APIRequestGetClientProductCatalogs requestIsLocalCatalogField () {
+      return this.requestIsLocalCatalogField(true);
+    }
+    public APIRequestGetClientProductCatalogs requestIsLocalCatalogField (boolean value) {
+      this.requestField("is_local_catalog", value);
+      return this;
+    }
     public APIRequestGetClientProductCatalogs requestNameField () {
       return this.requestNameField(true);
     }
@@ -8794,6 +8798,7 @@ public class Business extends APINode {
       "health_status",
       "id",
       "is_enabled_for_insights",
+      "linked_commerce_account",
       "message_template_namespace",
       "name",
       "on_behalf_of_business_info",
@@ -8957,6 +8962,13 @@ public class Business extends APINode {
     }
     public APIRequestGetClientWhatsAppBusinessAccounts requestIsEnabledForInsightsField (boolean value) {
       this.requestField("is_enabled_for_insights", value);
+      return this;
+    }
+    public APIRequestGetClientWhatsAppBusinessAccounts requestLinkedCommerceAccountField () {
+      return this.requestLinkedCommerceAccountField(true);
+    }
+    public APIRequestGetClientWhatsAppBusinessAccounts requestLinkedCommerceAccountField (boolean value) {
+      this.requestField("linked_commerce_account", value);
       return this;
     }
     public APIRequestGetClientWhatsAppBusinessAccounts requestMessageTemplateNamespaceField () {
@@ -17406,6 +17418,7 @@ public class Business extends APINode {
       "app_id",
       "artists_we_like",
       "attire",
+      "available_promo_offer_ids",
       "awards",
       "band_interests",
       "band_members",
@@ -17454,7 +17467,6 @@ public class Business extends APINode {
       "has_lead_access",
       "has_transitioned_to_new_page_experience",
       "has_whatsapp_business_number",
-      "has_whatsapp_enterprise_number_using_cloud_api",
       "has_whatsapp_number",
       "hometown",
       "hours",
@@ -17498,7 +17510,6 @@ public class Business extends APINode {
       "offer_eligible",
       "overall_star_rating",
       "owner_business",
-      "page_about_story",
       "page_token",
       "parent_page",
       "parking",
@@ -17688,6 +17699,13 @@ public class Business extends APINode {
     }
     public APIRequestGetOwnedPages requestAttireField (boolean value) {
       this.requestField("attire", value);
+      return this;
+    }
+    public APIRequestGetOwnedPages requestAvailablePromoOfferIdsField () {
+      return this.requestAvailablePromoOfferIdsField(true);
+    }
+    public APIRequestGetOwnedPages requestAvailablePromoOfferIdsField (boolean value) {
+      this.requestField("available_promo_offer_ids", value);
       return this;
     }
     public APIRequestGetOwnedPages requestAwardsField () {
@@ -18026,13 +18044,6 @@ public class Business extends APINode {
       this.requestField("has_whatsapp_business_number", value);
       return this;
     }
-    public APIRequestGetOwnedPages requestHasWhatsappEnterpriseNumberUsingCloudApiField () {
-      return this.requestHasWhatsappEnterpriseNumberUsingCloudApiField(true);
-    }
-    public APIRequestGetOwnedPages requestHasWhatsappEnterpriseNumberUsingCloudApiField (boolean value) {
-      this.requestField("has_whatsapp_enterprise_number_using_cloud_api", value);
-      return this;
-    }
     public APIRequestGetOwnedPages requestHasWhatsappNumberField () {
       return this.requestHasWhatsappNumberField(true);
     }
@@ -18332,13 +18343,6 @@ public class Business extends APINode {
     }
     public APIRequestGetOwnedPages requestOwnerBusinessField (boolean value) {
       this.requestField("owner_business", value);
-      return this;
-    }
-    public APIRequestGetOwnedPages requestPageAboutStoryField () {
-      return this.requestPageAboutStoryField(true);
-    }
-    public APIRequestGetOwnedPages requestPageAboutStoryField (boolean value) {
-      this.requestField("page_about_story", value);
       return this;
     }
     public APIRequestGetOwnedPages requestPageTokenField () {
@@ -19212,6 +19216,7 @@ public class Business extends APINode {
       "feed_count",
       "id",
       "is_catalog_segment",
+      "is_local_catalog",
       "name",
       "owner_business",
       "product_count",
@@ -19394,6 +19399,13 @@ public class Business extends APINode {
       this.requestField("is_catalog_segment", value);
       return this;
     }
+    public APIRequestGetOwnedProductCatalogs requestIsLocalCatalogField () {
+      return this.requestIsLocalCatalogField(true);
+    }
+    public APIRequestGetOwnedProductCatalogs requestIsLocalCatalogField (boolean value) {
+      this.requestField("is_local_catalog", value);
+      return this;
+    }
     public APIRequestGetOwnedProductCatalogs requestNameField () {
       return this.requestNameField(true);
     }
@@ -19446,6 +19458,7 @@ public class Business extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "additional_vertical_option",
       "catalog_segment_filter",
       "catalog_segment_product_set_id",
       "da_display_settings",
@@ -19514,6 +19527,15 @@ public class Business extends APINode {
       return this;
     }
 
+
+    public APIRequestCreateOwnedProductCatalog setAdditionalVerticalOption (ProductCatalog.EnumAdditionalVerticalOption additionalVerticalOption) {
+      this.setParam("additional_vertical_option", additionalVerticalOption);
+      return this;
+    }
+    public APIRequestCreateOwnedProductCatalog setAdditionalVerticalOption (String additionalVerticalOption) {
+      this.setParam("additional_vertical_option", additionalVerticalOption);
+      return this;
+    }
 
     public APIRequestCreateOwnedProductCatalog setCatalogSegmentFilter (Object catalogSegmentFilter) {
       this.setParam("catalog_segment_filter", catalogSegmentFilter);
@@ -19651,6 +19673,7 @@ public class Business extends APINode {
       "health_status",
       "id",
       "is_enabled_for_insights",
+      "linked_commerce_account",
       "message_template_namespace",
       "name",
       "on_behalf_of_business_info",
@@ -19814,6 +19837,13 @@ public class Business extends APINode {
     }
     public APIRequestGetOwnedWhatsAppBusinessAccounts requestIsEnabledForInsightsField (boolean value) {
       this.requestField("is_enabled_for_insights", value);
+      return this;
+    }
+    public APIRequestGetOwnedWhatsAppBusinessAccounts requestLinkedCommerceAccountField () {
+      return this.requestLinkedCommerceAccountField(true);
+    }
+    public APIRequestGetOwnedWhatsAppBusinessAccounts requestLinkedCommerceAccountField (boolean value) {
+      this.requestField("linked_commerce_account", value);
       return this;
     }
     public APIRequestGetOwnedWhatsAppBusinessAccounts requestMessageTemplateNamespaceField () {
@@ -21850,6 +21880,173 @@ public class Business extends APINode {
     }
     public APIRequestGetReceivedAudienceSharingRequests requestRequestTypeField (boolean value) {
       this.requestField("request_type", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestGetSelfCertifiedWhatsappBusinessSubmissions extends APIRequest<WhatsAppBusinessPartnerClientVerificationSubmission> {
+
+    APINodeList<WhatsAppBusinessPartnerClientVerificationSubmission> lastResponse = null;
+    @Override
+    public APINodeList<WhatsAppBusinessPartnerClientVerificationSubmission> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "end_business_id",
+    };
+
+    public static final String[] FIELDS = {
+      "client_business_id",
+      "id",
+      "rejection_reasons",
+      "submitted_info",
+      "submitted_time",
+      "update_time",
+      "verification_status",
+    };
+
+    @Override
+    public APINodeList<WhatsAppBusinessPartnerClientVerificationSubmission> parseResponse(String response, String header) throws APIException {
+      return WhatsAppBusinessPartnerClientVerificationSubmission.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<WhatsAppBusinessPartnerClientVerificationSubmission> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<WhatsAppBusinessPartnerClientVerificationSubmission> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<WhatsAppBusinessPartnerClientVerificationSubmission>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<WhatsAppBusinessPartnerClientVerificationSubmission>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<WhatsAppBusinessPartnerClientVerificationSubmission>>() {
+           public APINodeList<WhatsAppBusinessPartnerClientVerificationSubmission> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetSelfCertifiedWhatsappBusinessSubmissions.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestGetSelfCertifiedWhatsappBusinessSubmissions(String nodeId, APIContext context) {
+      super(context, nodeId, "/self_certified_whatsapp_business_submissions", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetSelfCertifiedWhatsappBusinessSubmissions setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetSelfCertifiedWhatsappBusinessSubmissions setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetSelfCertifiedWhatsappBusinessSubmissions setEndBusinessId (String endBusinessId) {
+      this.setParam("end_business_id", endBusinessId);
+      return this;
+    }
+
+    public APIRequestGetSelfCertifiedWhatsappBusinessSubmissions requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetSelfCertifiedWhatsappBusinessSubmissions requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetSelfCertifiedWhatsappBusinessSubmissions requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetSelfCertifiedWhatsappBusinessSubmissions requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetSelfCertifiedWhatsappBusinessSubmissions requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetSelfCertifiedWhatsappBusinessSubmissions requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetSelfCertifiedWhatsappBusinessSubmissions requestClientBusinessIdField () {
+      return this.requestClientBusinessIdField(true);
+    }
+    public APIRequestGetSelfCertifiedWhatsappBusinessSubmissions requestClientBusinessIdField (boolean value) {
+      this.requestField("client_business_id", value);
+      return this;
+    }
+    public APIRequestGetSelfCertifiedWhatsappBusinessSubmissions requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetSelfCertifiedWhatsappBusinessSubmissions requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetSelfCertifiedWhatsappBusinessSubmissions requestRejectionReasonsField () {
+      return this.requestRejectionReasonsField(true);
+    }
+    public APIRequestGetSelfCertifiedWhatsappBusinessSubmissions requestRejectionReasonsField (boolean value) {
+      this.requestField("rejection_reasons", value);
+      return this;
+    }
+    public APIRequestGetSelfCertifiedWhatsappBusinessSubmissions requestSubmittedInfoField () {
+      return this.requestSubmittedInfoField(true);
+    }
+    public APIRequestGetSelfCertifiedWhatsappBusinessSubmissions requestSubmittedInfoField (boolean value) {
+      this.requestField("submitted_info", value);
+      return this;
+    }
+    public APIRequestGetSelfCertifiedWhatsappBusinessSubmissions requestSubmittedTimeField () {
+      return this.requestSubmittedTimeField(true);
+    }
+    public APIRequestGetSelfCertifiedWhatsappBusinessSubmissions requestSubmittedTimeField (boolean value) {
+      this.requestField("submitted_time", value);
+      return this;
+    }
+    public APIRequestGetSelfCertifiedWhatsappBusinessSubmissions requestUpdateTimeField () {
+      return this.requestUpdateTimeField(true);
+    }
+    public APIRequestGetSelfCertifiedWhatsappBusinessSubmissions requestUpdateTimeField (boolean value) {
+      this.requestField("update_time", value);
+      return this;
+    }
+    public APIRequestGetSelfCertifiedWhatsappBusinessSubmissions requestVerificationStatusField () {
+      return this.requestVerificationStatusField(true);
+    }
+    public APIRequestGetSelfCertifiedWhatsappBusinessSubmissions requestVerificationStatusField (boolean value) {
+      this.requestField("verification_status", value);
       return this;
     }
   }

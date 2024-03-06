@@ -40,27 +40,43 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class AdCreativeSourcingSpec extends APINode {
-  @SerializedName("associated_product_set_id")
-  private String mAssociatedProductSetId = null;
-  @SerializedName("promotion_metadata_spec")
-  private List<AdCreativePromotionMetadataSpec> mPromotionMetadataSpec = null;
-  @SerializedName("site_links_spec")
-  private List<AdCreativeSiteLinksSpec> mSiteLinksSpec = null;
+public class AdAssetVideo extends APINode {
+  @SerializedName("caption_ids")
+  private List<String> mCaptionIds = null;
+  @SerializedName("id")
+  private String mId = null;
+  @SerializedName("source_image_url")
+  private String mSourceImageUrl = null;
+  @SerializedName("tag")
+  private String mTag = null;
+  @SerializedName("thumbnail_hash")
+  private String mThumbnailHash = null;
+  @SerializedName("thumbnail_source")
+  private String mThumbnailSource = null;
+  @SerializedName("thumbnail_url")
+  private String mThumbnailUrl = null;
+  @SerializedName("url")
+  private String mUrl = null;
+  @SerializedName("url_tags")
+  private String mUrlTags = null;
+  @SerializedName("video_id")
+  private String mVideoId = null;
+  @SerializedName("video_name")
+  private String mVideoName = null;
   protected static Gson gson = null;
 
-  public AdCreativeSourcingSpec() {
+  public AdAssetVideo() {
   }
 
   public String getId() {
-    return null;
+    return getFieldId().toString();
   }
-  public static AdCreativeSourcingSpec loadJSON(String json, APIContext context, String header) {
-    AdCreativeSourcingSpec adCreativeSourcingSpec = getGson().fromJson(json, AdCreativeSourcingSpec.class);
+  public static AdAssetVideo loadJSON(String json, APIContext context, String header) {
+    AdAssetVideo adAssetVideo = getGson().fromJson(json, AdAssetVideo.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(adCreativeSourcingSpec.toString());
+      JsonElement o2 = parser.parse(adAssetVideo.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -70,14 +86,14 @@ public class AdCreativeSourcingSpec extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    adCreativeSourcingSpec.context = context;
-    adCreativeSourcingSpec.rawValue = json;
-    adCreativeSourcingSpec.header = header;
-    return adCreativeSourcingSpec;
+    adAssetVideo.context = context;
+    adAssetVideo.rawValue = json;
+    adAssetVideo.header = header;
+    return adAssetVideo;
   }
 
-  public static APINodeList<AdCreativeSourcingSpec> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<AdCreativeSourcingSpec> adCreativeSourcingSpecs = new APINodeList<AdCreativeSourcingSpec>(request, json, header);
+  public static APINodeList<AdAssetVideo> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdAssetVideo> adAssetVideos = new APINodeList<AdAssetVideo>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -88,9 +104,9 @@ public class AdCreativeSourcingSpec extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adCreativeSourcingSpecs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          adAssetVideos.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return adCreativeSourcingSpecs;
+        return adAssetVideos;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -100,20 +116,20 @@ public class AdCreativeSourcingSpec extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                adCreativeSourcingSpecs.setCursors(before, after);
+                adAssetVideos.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            adCreativeSourcingSpecs.setPaging(previous, next);
+            adAssetVideos.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              adCreativeSourcingSpecs.setAppSecret(context.getAppSecretProof());
+              adAssetVideos.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adCreativeSourcingSpecs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              adAssetVideos.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -124,23 +140,23 @@ public class AdCreativeSourcingSpec extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adCreativeSourcingSpecs.add(loadJSON(entry.getValue().toString(), context, header));
+                  adAssetVideos.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adCreativeSourcingSpecs.add(loadJSON(obj.toString(), context, header));
+              adAssetVideos.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return adCreativeSourcingSpecs;
+          return adAssetVideos;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adCreativeSourcingSpecs.add(loadJSON(entry.getValue().toString(), context, header));
+              adAssetVideos.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return adCreativeSourcingSpecs;
+          return adAssetVideos;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -157,20 +173,20 @@ public class AdCreativeSourcingSpec extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adCreativeSourcingSpecs.add(loadJSON(value.toString(), context, header));
+              adAssetVideos.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return adCreativeSourcingSpecs;
+            return adAssetVideos;
           }
 
           // Sixth, check if it's pure JsonObject
-          adCreativeSourcingSpecs.clear();
-          adCreativeSourcingSpecs.add(loadJSON(json, context, header));
-          return adCreativeSourcingSpecs;
+          adAssetVideos.clear();
+          adAssetVideos.add(loadJSON(json, context, header));
+          return adAssetVideos;
         }
       }
     } catch (Exception e) {
@@ -198,43 +214,105 @@ public class AdCreativeSourcingSpec extends APINode {
   }
 
 
-  public String getFieldAssociatedProductSetId() {
-    return mAssociatedProductSetId;
+  public List<String> getFieldCaptionIds() {
+    return mCaptionIds;
   }
 
-  public AdCreativeSourcingSpec setFieldAssociatedProductSetId(String value) {
-    this.mAssociatedProductSetId = value;
+  public AdAssetVideo setFieldCaptionIds(List<String> value) {
+    this.mCaptionIds = value;
     return this;
   }
 
-  public List<AdCreativePromotionMetadataSpec> getFieldPromotionMetadataSpec() {
-    return mPromotionMetadataSpec;
+  public String getFieldId() {
+    return mId;
   }
 
-  public AdCreativeSourcingSpec setFieldPromotionMetadataSpec(List<AdCreativePromotionMetadataSpec> value) {
-    this.mPromotionMetadataSpec = value;
+  public AdAssetVideo setFieldId(String value) {
+    this.mId = value;
     return this;
   }
 
-  public AdCreativeSourcingSpec setFieldPromotionMetadataSpec(String value) {
-    Type type = new TypeToken<List<AdCreativePromotionMetadataSpec>>(){}.getType();
-    this.mPromotionMetadataSpec = AdCreativePromotionMetadataSpec.getGson().fromJson(value, type);
-    return this;
-  }
-  public List<AdCreativeSiteLinksSpec> getFieldSiteLinksSpec() {
-    return mSiteLinksSpec;
+  public String getFieldSourceImageUrl() {
+    return mSourceImageUrl;
   }
 
-  public AdCreativeSourcingSpec setFieldSiteLinksSpec(List<AdCreativeSiteLinksSpec> value) {
-    this.mSiteLinksSpec = value;
+  public AdAssetVideo setFieldSourceImageUrl(String value) {
+    this.mSourceImageUrl = value;
     return this;
   }
 
-  public AdCreativeSourcingSpec setFieldSiteLinksSpec(String value) {
-    Type type = new TypeToken<List<AdCreativeSiteLinksSpec>>(){}.getType();
-    this.mSiteLinksSpec = AdCreativeSiteLinksSpec.getGson().fromJson(value, type);
+  public String getFieldTag() {
+    return mTag;
+  }
+
+  public AdAssetVideo setFieldTag(String value) {
+    this.mTag = value;
     return this;
   }
+
+  public String getFieldThumbnailHash() {
+    return mThumbnailHash;
+  }
+
+  public AdAssetVideo setFieldThumbnailHash(String value) {
+    this.mThumbnailHash = value;
+    return this;
+  }
+
+  public String getFieldThumbnailSource() {
+    return mThumbnailSource;
+  }
+
+  public AdAssetVideo setFieldThumbnailSource(String value) {
+    this.mThumbnailSource = value;
+    return this;
+  }
+
+  public String getFieldThumbnailUrl() {
+    return mThumbnailUrl;
+  }
+
+  public AdAssetVideo setFieldThumbnailUrl(String value) {
+    this.mThumbnailUrl = value;
+    return this;
+  }
+
+  public String getFieldUrl() {
+    return mUrl;
+  }
+
+  public AdAssetVideo setFieldUrl(String value) {
+    this.mUrl = value;
+    return this;
+  }
+
+  public String getFieldUrlTags() {
+    return mUrlTags;
+  }
+
+  public AdAssetVideo setFieldUrlTags(String value) {
+    this.mUrlTags = value;
+    return this;
+  }
+
+  public String getFieldVideoId() {
+    return mVideoId;
+  }
+
+  public AdAssetVideo setFieldVideoId(String value) {
+    this.mVideoId = value;
+    return this;
+  }
+
+  public String getFieldVideoName() {
+    return mVideoName;
+  }
+
+  public AdAssetVideo setFieldVideoName(String value) {
+    this.mVideoName = value;
+    return this;
+  }
+
 
 
 
@@ -251,19 +329,27 @@ public class AdCreativeSourcingSpec extends APINode {
     return gson;
   }
 
-  public AdCreativeSourcingSpec copyFrom(AdCreativeSourcingSpec instance) {
-    this.mAssociatedProductSetId = instance.mAssociatedProductSetId;
-    this.mPromotionMetadataSpec = instance.mPromotionMetadataSpec;
-    this.mSiteLinksSpec = instance.mSiteLinksSpec;
+  public AdAssetVideo copyFrom(AdAssetVideo instance) {
+    this.mCaptionIds = instance.mCaptionIds;
+    this.mId = instance.mId;
+    this.mSourceImageUrl = instance.mSourceImageUrl;
+    this.mTag = instance.mTag;
+    this.mThumbnailHash = instance.mThumbnailHash;
+    this.mThumbnailSource = instance.mThumbnailSource;
+    this.mThumbnailUrl = instance.mThumbnailUrl;
+    this.mUrl = instance.mUrl;
+    this.mUrlTags = instance.mUrlTags;
+    this.mVideoId = instance.mVideoId;
+    this.mVideoName = instance.mVideoName;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<AdCreativeSourcingSpec> getParser() {
-    return new APIRequest.ResponseParser<AdCreativeSourcingSpec>() {
-      public APINodeList<AdCreativeSourcingSpec> parseResponse(String response, APIContext context, APIRequest<AdCreativeSourcingSpec> request, String header) throws MalformedResponseException {
-        return AdCreativeSourcingSpec.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<AdAssetVideo> getParser() {
+    return new APIRequest.ResponseParser<AdAssetVideo>() {
+      public APINodeList<AdAssetVideo> parseResponse(String response, APIContext context, APIRequest<AdAssetVideo> request, String header) throws MalformedResponseException {
+        return AdAssetVideo.parseResponse(response, context, request, header);
       }
     };
   }

@@ -65,6 +65,8 @@ public class ProductCatalog extends APINode {
   private String mId = null;
   @SerializedName("is_catalog_segment")
   private Boolean mIsCatalogSegment = null;
+  @SerializedName("is_local_catalog")
+  private Boolean mIsLocalCatalog = null;
   @SerializedName("name")
   private String mName = null;
   @SerializedName("owner_business")
@@ -547,6 +549,10 @@ public class ProductCatalog extends APINode {
 
   public Boolean getFieldIsCatalogSegment() {
     return mIsCatalogSegment;
+  }
+
+  public Boolean getFieldIsLocalCatalog() {
+    return mIsLocalCatalog;
   }
 
   public String getFieldName() {
@@ -8867,9 +8873,6 @@ public class ProductCatalog extends APINode {
       "material",
       "mobile_link",
       "name",
-      "offer_price_amount",
-      "offer_price_end_date",
-      "offer_price_start_date",
       "ordering_index",
       "origin_country",
       "pattern",
@@ -9287,25 +9290,6 @@ public class ProductCatalog extends APINode {
 
     public APIRequestCreateProduct setName (String name) {
       this.setParam("name", name);
-      return this;
-    }
-
-    public APIRequestCreateProduct setOfferPriceAmount (Long offerPriceAmount) {
-      this.setParam("offer_price_amount", offerPriceAmount);
-      return this;
-    }
-    public APIRequestCreateProduct setOfferPriceAmount (String offerPriceAmount) {
-      this.setParam("offer_price_amount", offerPriceAmount);
-      return this;
-    }
-
-    public APIRequestCreateProduct setOfferPriceEndDate (String offerPriceEndDate) {
-      this.setParam("offer_price_end_date", offerPriceEndDate);
-      return this;
-    }
-
-    public APIRequestCreateProduct setOfferPriceStartDate (String offerPriceStartDate) {
-      this.setParam("offer_price_start_date", offerPriceStartDate);
       return this;
     }
 
@@ -10958,6 +10942,7 @@ public class ProductCatalog extends APINode {
       "feed_count",
       "id",
       "is_catalog_segment",
+      "is_local_catalog",
       "name",
       "owner_business",
       "product_count",
@@ -11149,6 +11134,13 @@ public class ProductCatalog extends APINode {
       this.requestField("is_catalog_segment", value);
       return this;
     }
+    public APIRequestGet requestIsLocalCatalogField () {
+      return this.requestIsLocalCatalogField(true);
+    }
+    public APIRequestGet requestIsLocalCatalogField (boolean value) {
+      this.requestField("is_local_catalog", value);
+      return this;
+    }
     public APIRequestGet requestNameField () {
       return this.requestNameField(true);
     }
@@ -11201,6 +11193,7 @@ public class ProductCatalog extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "additional_vertical_option",
       "da_display_settings",
       "default_image_url",
       "destination_catalog_settings",
@@ -11267,6 +11260,15 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
+
+    public APIRequestUpdate setAdditionalVerticalOption (ProductCatalog.EnumAdditionalVerticalOption additionalVerticalOption) {
+      this.setParam("additional_vertical_option", additionalVerticalOption);
+      return this;
+    }
+    public APIRequestUpdate setAdditionalVerticalOption (String additionalVerticalOption) {
+      this.setParam("additional_vertical_option", additionalVerticalOption);
+      return this;
+    }
 
     public APIRequestUpdate setDaDisplaySettings (Object daDisplaySettings) {
       this.setParam("da_display_settings", daDisplaySettings);
@@ -11366,6 +11368,25 @@ public class ProductCatalog extends APINode {
 
   }
 
+  public static enum EnumAdditionalVerticalOption {
+      @SerializedName("LOCAL_DA_CATALOG")
+      VALUE_LOCAL_DA_CATALOG("LOCAL_DA_CATALOG"),
+      @SerializedName("LOCAL_PRODUCTS")
+      VALUE_LOCAL_PRODUCTS("LOCAL_PRODUCTS"),
+      ;
+
+      private String value;
+
+      private EnumAdditionalVerticalOption(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
   public static enum EnumVertical {
       @SerializedName("adoptable_pets")
       VALUE_ADOPTABLE_PETS("adoptable_pets"),
@@ -11377,6 +11398,8 @@ public class ProductCatalog extends APINode {
       VALUE_DESTINATIONS("destinations"),
       @SerializedName("flights")
       VALUE_FLIGHTS("flights"),
+      @SerializedName("generic")
+      VALUE_GENERIC("generic"),
       @SerializedName("home_listings")
       VALUE_HOME_LISTINGS("home_listings"),
       @SerializedName("hotels")
@@ -11626,6 +11649,7 @@ public class ProductCatalog extends APINode {
     this.mFeedCount = instance.mFeedCount;
     this.mId = instance.mId;
     this.mIsCatalogSegment = instance.mIsCatalogSegment;
+    this.mIsLocalCatalog = instance.mIsLocalCatalog;
     this.mName = instance.mName;
     this.mOwnerBusiness = instance.mOwnerBusiness;
     this.mProductCount = instance.mProductCount;

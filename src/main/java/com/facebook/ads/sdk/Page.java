@@ -55,6 +55,8 @@ public class Page extends APINode {
   private String mArtistsWeLike = null;
   @SerializedName("attire")
   private String mAttire = null;
+  @SerializedName("available_promo_offer_ids")
+  private List<Map<String, List<Map<String, String>>>> mAvailablePromoOfferIds = null;
   @SerializedName("awards")
   private String mAwards = null;
   @SerializedName("band_interests")
@@ -151,8 +153,6 @@ public class Page extends APINode {
   private Boolean mHasTransitionedToNewPageExperience = null;
   @SerializedName("has_whatsapp_business_number")
   private Boolean mHasWhatsappBusinessNumber = null;
-  @SerializedName("has_whatsapp_enterprise_number_using_cloud_api")
-  private Boolean mHasWhatsappEnterpriseNumberUsingCloudApi = null;
   @SerializedName("has_whatsapp_number")
   private Boolean mHasWhatsappNumber = null;
   @SerializedName("hometown")
@@ -239,8 +239,6 @@ public class Page extends APINode {
   private Double mOverallStarRating = null;
   @SerializedName("owner_business")
   private Business mOwnerBusiness = null;
-  @SerializedName("page_about_story")
-  private PageAboutStory mPageAboutStory = null;
   @SerializedName("page_token")
   private String mPageToken = null;
   @SerializedName("parent_page")
@@ -1066,6 +1064,10 @@ public class Page extends APINode {
     return mAttire;
   }
 
+  public List<Map<String, List<Map<String, String>>>> getFieldAvailablePromoOfferIds() {
+    return mAvailablePromoOfferIds;
+  }
+
   public String getFieldAwards() {
     return mAwards;
   }
@@ -1273,10 +1275,6 @@ public class Page extends APINode {
     return mHasWhatsappBusinessNumber;
   }
 
-  public Boolean getFieldHasWhatsappEnterpriseNumberUsingCloudApi() {
-    return mHasWhatsappEnterpriseNumberUsingCloudApi;
-  }
-
   public Boolean getFieldHasWhatsappNumber() {
     return mHasWhatsappNumber;
   }
@@ -1459,13 +1457,6 @@ public class Page extends APINode {
       mOwnerBusiness.context = getContext();
     }
     return mOwnerBusiness;
-  }
-
-  public PageAboutStory getFieldPageAboutStory() {
-    if (mPageAboutStory != null) {
-      mPageAboutStory.context = getContext();
-    }
-    return mPageAboutStory;
   }
 
   public String getFieldPageToken() {
@@ -7780,6 +7771,7 @@ public class Page extends APINode {
       "app_id",
       "artists_we_like",
       "attire",
+      "available_promo_offer_ids",
       "awards",
       "band_interests",
       "band_members",
@@ -7828,7 +7820,6 @@ public class Page extends APINode {
       "has_lead_access",
       "has_transitioned_to_new_page_experience",
       "has_whatsapp_business_number",
-      "has_whatsapp_enterprise_number_using_cloud_api",
       "has_whatsapp_number",
       "hometown",
       "hours",
@@ -7872,7 +7863,6 @@ public class Page extends APINode {
       "offer_eligible",
       "overall_star_rating",
       "owner_business",
-      "page_about_story",
       "page_token",
       "parent_page",
       "parking",
@@ -8062,6 +8052,13 @@ public class Page extends APINode {
     }
     public APIRequestGetCrosspostWhitelistedPages requestAttireField (boolean value) {
       this.requestField("attire", value);
+      return this;
+    }
+    public APIRequestGetCrosspostWhitelistedPages requestAvailablePromoOfferIdsField () {
+      return this.requestAvailablePromoOfferIdsField(true);
+    }
+    public APIRequestGetCrosspostWhitelistedPages requestAvailablePromoOfferIdsField (boolean value) {
+      this.requestField("available_promo_offer_ids", value);
       return this;
     }
     public APIRequestGetCrosspostWhitelistedPages requestAwardsField () {
@@ -8400,13 +8397,6 @@ public class Page extends APINode {
       this.requestField("has_whatsapp_business_number", value);
       return this;
     }
-    public APIRequestGetCrosspostWhitelistedPages requestHasWhatsappEnterpriseNumberUsingCloudApiField () {
-      return this.requestHasWhatsappEnterpriseNumberUsingCloudApiField(true);
-    }
-    public APIRequestGetCrosspostWhitelistedPages requestHasWhatsappEnterpriseNumberUsingCloudApiField (boolean value) {
-      this.requestField("has_whatsapp_enterprise_number_using_cloud_api", value);
-      return this;
-    }
     public APIRequestGetCrosspostWhitelistedPages requestHasWhatsappNumberField () {
       return this.requestHasWhatsappNumberField(true);
     }
@@ -8706,13 +8696,6 @@ public class Page extends APINode {
     }
     public APIRequestGetCrosspostWhitelistedPages requestOwnerBusinessField (boolean value) {
       this.requestField("owner_business", value);
-      return this;
-    }
-    public APIRequestGetCrosspostWhitelistedPages requestPageAboutStoryField () {
-      return this.requestPageAboutStoryField(true);
-    }
-    public APIRequestGetCrosspostWhitelistedPages requestPageAboutStoryField (boolean value) {
-      this.requestField("page_about_story", value);
       return this;
     }
     public APIRequestGetCrosspostWhitelistedPages requestPageTokenField () {
@@ -12060,6 +12043,7 @@ public class Page extends APINode {
       "app_id",
       "artists_we_like",
       "attire",
+      "available_promo_offer_ids",
       "awards",
       "band_interests",
       "band_members",
@@ -12108,7 +12092,6 @@ public class Page extends APINode {
       "has_lead_access",
       "has_transitioned_to_new_page_experience",
       "has_whatsapp_business_number",
-      "has_whatsapp_enterprise_number_using_cloud_api",
       "has_whatsapp_number",
       "hometown",
       "hours",
@@ -12152,7 +12135,6 @@ public class Page extends APINode {
       "offer_eligible",
       "overall_star_rating",
       "owner_business",
-      "page_about_story",
       "page_token",
       "parent_page",
       "parking",
@@ -12342,6 +12324,13 @@ public class Page extends APINode {
     }
     public APIRequestGetGlobalBrandChildren requestAttireField (boolean value) {
       this.requestField("attire", value);
+      return this;
+    }
+    public APIRequestGetGlobalBrandChildren requestAvailablePromoOfferIdsField () {
+      return this.requestAvailablePromoOfferIdsField(true);
+    }
+    public APIRequestGetGlobalBrandChildren requestAvailablePromoOfferIdsField (boolean value) {
+      this.requestField("available_promo_offer_ids", value);
       return this;
     }
     public APIRequestGetGlobalBrandChildren requestAwardsField () {
@@ -12680,13 +12669,6 @@ public class Page extends APINode {
       this.requestField("has_whatsapp_business_number", value);
       return this;
     }
-    public APIRequestGetGlobalBrandChildren requestHasWhatsappEnterpriseNumberUsingCloudApiField () {
-      return this.requestHasWhatsappEnterpriseNumberUsingCloudApiField(true);
-    }
-    public APIRequestGetGlobalBrandChildren requestHasWhatsappEnterpriseNumberUsingCloudApiField (boolean value) {
-      this.requestField("has_whatsapp_enterprise_number_using_cloud_api", value);
-      return this;
-    }
     public APIRequestGetGlobalBrandChildren requestHasWhatsappNumberField () {
       return this.requestHasWhatsappNumberField(true);
     }
@@ -12986,13 +12968,6 @@ public class Page extends APINode {
     }
     public APIRequestGetGlobalBrandChildren requestOwnerBusinessField (boolean value) {
       this.requestField("owner_business", value);
-      return this;
-    }
-    public APIRequestGetGlobalBrandChildren requestPageAboutStoryField () {
-      return this.requestPageAboutStoryField(true);
-    }
-    public APIRequestGetGlobalBrandChildren requestPageAboutStoryField (boolean value) {
-      this.requestField("page_about_story", value);
       return this;
     }
     public APIRequestGetGlobalBrandChildren requestPageTokenField () {
@@ -15458,6 +15433,7 @@ public class Page extends APINode {
       "app_id",
       "artists_we_like",
       "attire",
+      "available_promo_offer_ids",
       "awards",
       "band_interests",
       "band_members",
@@ -15506,7 +15482,6 @@ public class Page extends APINode {
       "has_lead_access",
       "has_transitioned_to_new_page_experience",
       "has_whatsapp_business_number",
-      "has_whatsapp_enterprise_number_using_cloud_api",
       "has_whatsapp_number",
       "hometown",
       "hours",
@@ -15550,7 +15525,6 @@ public class Page extends APINode {
       "offer_eligible",
       "overall_star_rating",
       "owner_business",
-      "page_about_story",
       "page_token",
       "parent_page",
       "parking",
@@ -15745,6 +15719,13 @@ public class Page extends APINode {
     }
     public APIRequestGetLikes requestAttireField (boolean value) {
       this.requestField("attire", value);
+      return this;
+    }
+    public APIRequestGetLikes requestAvailablePromoOfferIdsField () {
+      return this.requestAvailablePromoOfferIdsField(true);
+    }
+    public APIRequestGetLikes requestAvailablePromoOfferIdsField (boolean value) {
+      this.requestField("available_promo_offer_ids", value);
       return this;
     }
     public APIRequestGetLikes requestAwardsField () {
@@ -16083,13 +16064,6 @@ public class Page extends APINode {
       this.requestField("has_whatsapp_business_number", value);
       return this;
     }
-    public APIRequestGetLikes requestHasWhatsappEnterpriseNumberUsingCloudApiField () {
-      return this.requestHasWhatsappEnterpriseNumberUsingCloudApiField(true);
-    }
-    public APIRequestGetLikes requestHasWhatsappEnterpriseNumberUsingCloudApiField (boolean value) {
-      this.requestField("has_whatsapp_enterprise_number_using_cloud_api", value);
-      return this;
-    }
     public APIRequestGetLikes requestHasWhatsappNumberField () {
       return this.requestHasWhatsappNumberField(true);
     }
@@ -16389,13 +16363,6 @@ public class Page extends APINode {
     }
     public APIRequestGetLikes requestOwnerBusinessField (boolean value) {
       this.requestField("owner_business", value);
-      return this;
-    }
-    public APIRequestGetLikes requestPageAboutStoryField () {
-      return this.requestPageAboutStoryField(true);
-    }
-    public APIRequestGetLikes requestPageAboutStoryField (boolean value) {
-      this.requestField("page_about_story", value);
       return this;
     }
     public APIRequestGetLikes requestPageTokenField () {
@@ -17563,6 +17530,7 @@ public class Page extends APINode {
       "app_id",
       "artists_we_like",
       "attire",
+      "available_promo_offer_ids",
       "awards",
       "band_interests",
       "band_members",
@@ -17611,7 +17579,6 @@ public class Page extends APINode {
       "has_lead_access",
       "has_transitioned_to_new_page_experience",
       "has_whatsapp_business_number",
-      "has_whatsapp_enterprise_number_using_cloud_api",
       "has_whatsapp_number",
       "hometown",
       "hours",
@@ -17655,7 +17622,6 @@ public class Page extends APINode {
       "offer_eligible",
       "overall_star_rating",
       "owner_business",
-      "page_about_story",
       "page_token",
       "parent_page",
       "parking",
@@ -17845,6 +17811,13 @@ public class Page extends APINode {
     }
     public APIRequestGetLocations requestAttireField (boolean value) {
       this.requestField("attire", value);
+      return this;
+    }
+    public APIRequestGetLocations requestAvailablePromoOfferIdsField () {
+      return this.requestAvailablePromoOfferIdsField(true);
+    }
+    public APIRequestGetLocations requestAvailablePromoOfferIdsField (boolean value) {
+      this.requestField("available_promo_offer_ids", value);
       return this;
     }
     public APIRequestGetLocations requestAwardsField () {
@@ -18183,13 +18156,6 @@ public class Page extends APINode {
       this.requestField("has_whatsapp_business_number", value);
       return this;
     }
-    public APIRequestGetLocations requestHasWhatsappEnterpriseNumberUsingCloudApiField () {
-      return this.requestHasWhatsappEnterpriseNumberUsingCloudApiField(true);
-    }
-    public APIRequestGetLocations requestHasWhatsappEnterpriseNumberUsingCloudApiField (boolean value) {
-      this.requestField("has_whatsapp_enterprise_number_using_cloud_api", value);
-      return this;
-    }
     public APIRequestGetLocations requestHasWhatsappNumberField () {
       return this.requestHasWhatsappNumberField(true);
     }
@@ -18489,13 +18455,6 @@ public class Page extends APINode {
     }
     public APIRequestGetLocations requestOwnerBusinessField (boolean value) {
       this.requestField("owner_business", value);
-      return this;
-    }
-    public APIRequestGetLocations requestPageAboutStoryField () {
-      return this.requestPageAboutStoryField(true);
-    }
-    public APIRequestGetLocations requestPageAboutStoryField (boolean value) {
-      this.requestField("page_about_story", value);
       return this;
     }
     public APIRequestGetLocations requestPageTokenField () {
@@ -24354,6 +24313,7 @@ public class Page extends APINode {
       "feed_count",
       "id",
       "is_catalog_segment",
+      "is_local_catalog",
       "name",
       "owner_business",
       "product_count",
@@ -24534,6 +24494,13 @@ public class Page extends APINode {
     }
     public APIRequestGetProductCatalogs requestIsCatalogSegmentField (boolean value) {
       this.requestField("is_catalog_segment", value);
+      return this;
+    }
+    public APIRequestGetProductCatalogs requestIsLocalCatalogField () {
+      return this.requestIsLocalCatalogField(true);
+    }
+    public APIRequestGetProductCatalogs requestIsLocalCatalogField (boolean value) {
+      this.requestField("is_local_catalog", value);
       return this;
     }
     public APIRequestGetProductCatalogs requestNameField () {
@@ -34799,6 +34766,7 @@ public class Page extends APINode {
       "app_id",
       "artists_we_like",
       "attire",
+      "available_promo_offer_ids",
       "awards",
       "band_interests",
       "band_members",
@@ -34847,7 +34815,6 @@ public class Page extends APINode {
       "has_lead_access",
       "has_transitioned_to_new_page_experience",
       "has_whatsapp_business_number",
-      "has_whatsapp_enterprise_number_using_cloud_api",
       "has_whatsapp_number",
       "hometown",
       "hours",
@@ -34891,7 +34858,6 @@ public class Page extends APINode {
       "offer_eligible",
       "overall_star_rating",
       "owner_business",
-      "page_about_story",
       "page_token",
       "parent_page",
       "parking",
@@ -35086,6 +35052,13 @@ public class Page extends APINode {
     }
     public APIRequestGet requestAttireField (boolean value) {
       this.requestField("attire", value);
+      return this;
+    }
+    public APIRequestGet requestAvailablePromoOfferIdsField () {
+      return this.requestAvailablePromoOfferIdsField(true);
+    }
+    public APIRequestGet requestAvailablePromoOfferIdsField (boolean value) {
+      this.requestField("available_promo_offer_ids", value);
       return this;
     }
     public APIRequestGet requestAwardsField () {
@@ -35424,13 +35397,6 @@ public class Page extends APINode {
       this.requestField("has_whatsapp_business_number", value);
       return this;
     }
-    public APIRequestGet requestHasWhatsappEnterpriseNumberUsingCloudApiField () {
-      return this.requestHasWhatsappEnterpriseNumberUsingCloudApiField(true);
-    }
-    public APIRequestGet requestHasWhatsappEnterpriseNumberUsingCloudApiField (boolean value) {
-      this.requestField("has_whatsapp_enterprise_number_using_cloud_api", value);
-      return this;
-    }
     public APIRequestGet requestHasWhatsappNumberField () {
       return this.requestHasWhatsappNumberField(true);
     }
@@ -35730,13 +35696,6 @@ public class Page extends APINode {
     }
     public APIRequestGet requestOwnerBusinessField (boolean value) {
       this.requestField("owner_business", value);
-      return this;
-    }
-    public APIRequestGet requestPageAboutStoryField () {
-      return this.requestPageAboutStoryField(true);
-    }
-    public APIRequestGet requestPageAboutStoryField (boolean value) {
-      this.requestField("page_about_story", value);
       return this;
     }
     public APIRequestGet requestPageTokenField () {
@@ -37531,6 +37490,8 @@ public class Page extends APINode {
       VALUE_MESSAGE_DELIVERIES("message_deliveries"),
       @SerializedName("message_echoes")
       VALUE_MESSAGE_ECHOES("message_echoes"),
+      @SerializedName("message_edits")
+      VALUE_MESSAGE_EDITS("message_edits"),
       @SerializedName("message_mention")
       VALUE_MESSAGE_MENTION("message_mention"),
       @SerializedName("message_reactions")
@@ -37855,6 +37816,7 @@ public class Page extends APINode {
     this.mAppId = instance.mAppId;
     this.mArtistsWeLike = instance.mArtistsWeLike;
     this.mAttire = instance.mAttire;
+    this.mAvailablePromoOfferIds = instance.mAvailablePromoOfferIds;
     this.mAwards = instance.mAwards;
     this.mBandInterests = instance.mBandInterests;
     this.mBandMembers = instance.mBandMembers;
@@ -37903,7 +37865,6 @@ public class Page extends APINode {
     this.mHasLeadAccess = instance.mHasLeadAccess;
     this.mHasTransitionedToNewPageExperience = instance.mHasTransitionedToNewPageExperience;
     this.mHasWhatsappBusinessNumber = instance.mHasWhatsappBusinessNumber;
-    this.mHasWhatsappEnterpriseNumberUsingCloudApi = instance.mHasWhatsappEnterpriseNumberUsingCloudApi;
     this.mHasWhatsappNumber = instance.mHasWhatsappNumber;
     this.mHometown = instance.mHometown;
     this.mHours = instance.mHours;
@@ -37947,7 +37908,6 @@ public class Page extends APINode {
     this.mOfferEligible = instance.mOfferEligible;
     this.mOverallStarRating = instance.mOverallStarRating;
     this.mOwnerBusiness = instance.mOwnerBusiness;
-    this.mPageAboutStory = instance.mPageAboutStory;
     this.mPageToken = instance.mPageToken;
     this.mParentPage = instance.mParentPage;
     this.mParking = instance.mParking;

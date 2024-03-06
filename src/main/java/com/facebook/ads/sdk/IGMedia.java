@@ -284,6 +284,14 @@ public class IGMedia extends APINode {
     return getGson().toJson(this);
   }
 
+  public APIRequestGetBrandedContentPartnerPromote getBrandedContentPartnerPromote() {
+    return new APIRequestGetBrandedContentPartnerPromote(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestCreateBrandedContentPartnerPromote createBrandedContentPartnerPromote() {
+    return new APIRequestCreateBrandedContentPartnerPromote(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetChildren getChildren() {
     return new APIRequestGetChildren(this.getPrefixedId().toString(), context);
   }
@@ -397,6 +405,244 @@ public class IGMedia extends APINode {
   }
 
 
+
+  public static class APIRequestGetBrandedContentPartnerPromote extends APIRequest<BrandedContentShadowIGUserID> {
+
+    APINodeList<BrandedContentShadowIGUserID> lastResponse = null;
+    @Override
+    public APINodeList<BrandedContentShadowIGUserID> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "id",
+    };
+
+    @Override
+    public APINodeList<BrandedContentShadowIGUserID> parseResponse(String response, String header) throws APIException {
+      return BrandedContentShadowIGUserID.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<BrandedContentShadowIGUserID> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<BrandedContentShadowIGUserID> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<BrandedContentShadowIGUserID>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<BrandedContentShadowIGUserID>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<BrandedContentShadowIGUserID>>() {
+           public APINodeList<BrandedContentShadowIGUserID> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetBrandedContentPartnerPromote.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestGetBrandedContentPartnerPromote(String nodeId, APIContext context) {
+      super(context, nodeId, "/branded_content_partner_promote", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetBrandedContentPartnerPromote setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetBrandedContentPartnerPromote setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetBrandedContentPartnerPromote requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetBrandedContentPartnerPromote requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetBrandedContentPartnerPromote requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetBrandedContentPartnerPromote requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetBrandedContentPartnerPromote requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetBrandedContentPartnerPromote requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetBrandedContentPartnerPromote requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetBrandedContentPartnerPromote requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestCreateBrandedContentPartnerPromote extends APIRequest<BrandedContentShadowIGUserID> {
+
+    BrandedContentShadowIGUserID lastResponse = null;
+    @Override
+    public BrandedContentShadowIGUserID getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "permission",
+      "sponsor_id",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public BrandedContentShadowIGUserID parseResponse(String response, String header) throws APIException {
+      return BrandedContentShadowIGUserID.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public BrandedContentShadowIGUserID execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public BrandedContentShadowIGUserID execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<BrandedContentShadowIGUserID> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<BrandedContentShadowIGUserID> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, BrandedContentShadowIGUserID>() {
+           public BrandedContentShadowIGUserID apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateBrandedContentPartnerPromote.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestCreateBrandedContentPartnerPromote(String nodeId, APIContext context) {
+      super(context, nodeId, "/branded_content_partner_promote", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateBrandedContentPartnerPromote setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateBrandedContentPartnerPromote setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateBrandedContentPartnerPromote setPermission (Boolean permission) {
+      this.setParam("permission", permission);
+      return this;
+    }
+    public APIRequestCreateBrandedContentPartnerPromote setPermission (String permission) {
+      this.setParam("permission", permission);
+      return this;
+    }
+
+    public APIRequestCreateBrandedContentPartnerPromote setSponsorId (Long sponsorId) {
+      this.setParam("sponsor_id", sponsorId);
+      return this;
+    }
+    public APIRequestCreateBrandedContentPartnerPromote setSponsorId (String sponsorId) {
+      this.setParam("sponsor_id", sponsorId);
+      return this;
+    }
+
+    public APIRequestCreateBrandedContentPartnerPromote requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateBrandedContentPartnerPromote requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateBrandedContentPartnerPromote requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateBrandedContentPartnerPromote requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateBrandedContentPartnerPromote requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateBrandedContentPartnerPromote requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
 
   public static class APIRequestGetChildren extends APIRequest<IGMedia> {
 

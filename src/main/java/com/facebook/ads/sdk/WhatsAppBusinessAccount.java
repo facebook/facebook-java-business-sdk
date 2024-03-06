@@ -59,6 +59,8 @@ public class WhatsAppBusinessAccount extends APINode {
   private String mId = null;
   @SerializedName("is_enabled_for_insights")
   private Boolean mIsEnabledForInsights = null;
+  @SerializedName("linked_commerce_account")
+  private CommerceMerchantSettings mLinkedCommerceAccount = null;
   @SerializedName("message_template_namespace")
   private String mMessageTemplateNamespace = null;
   @SerializedName("name")
@@ -435,6 +437,13 @@ public class WhatsAppBusinessAccount extends APINode {
 
   public Boolean getFieldIsEnabledForInsights() {
     return mIsEnabledForInsights;
+  }
+
+  public CommerceMerchantSettings getFieldLinkedCommerceAccount() {
+    if (mLinkedCommerceAccount != null) {
+      mLinkedCommerceAccount.context = getContext();
+    }
+    return mLinkedCommerceAccount;
   }
 
   public String getFieldMessageTemplateNamespace() {
@@ -2071,6 +2080,8 @@ public class WhatsAppBusinessAccount extends APINode {
       "components",
       "cta_url_link_tracking_opted_out",
       "language",
+      "library_template_button_inputs",
+      "library_template_name",
       "message_send_ttl_seconds",
       "name",
       "sub_category",
@@ -2171,6 +2182,20 @@ public class WhatsAppBusinessAccount extends APINode {
 
     public APIRequestCreateMessageTemplate setLanguage (String language) {
       this.setParam("language", language);
+      return this;
+    }
+
+    public APIRequestCreateMessageTemplate setLibraryTemplateButtonInputs (List<Map<String, String>> libraryTemplateButtonInputs) {
+      this.setParam("library_template_button_inputs", libraryTemplateButtonInputs);
+      return this;
+    }
+    public APIRequestCreateMessageTemplate setLibraryTemplateButtonInputs (String libraryTemplateButtonInputs) {
+      this.setParam("library_template_button_inputs", libraryTemplateButtonInputs);
+      return this;
+    }
+
+    public APIRequestCreateMessageTemplate setLibraryTemplateName (String libraryTemplateName) {
+      this.setParam("library_template_name", libraryTemplateName);
       return this;
     }
 
@@ -2734,6 +2759,7 @@ public class WhatsAppBusinessAccount extends APINode {
       "feed_count",
       "id",
       "is_catalog_segment",
+      "is_local_catalog",
       "name",
       "owner_business",
       "product_count",
@@ -2914,6 +2940,13 @@ public class WhatsAppBusinessAccount extends APINode {
     }
     public APIRequestGetProductCatalogs requestIsCatalogSegmentField (boolean value) {
       this.requestField("is_catalog_segment", value);
+      return this;
+    }
+    public APIRequestGetProductCatalogs requestIsLocalCatalogField () {
+      return this.requestIsLocalCatalogField(true);
+    }
+    public APIRequestGetProductCatalogs requestIsLocalCatalogField (boolean value) {
+      this.requestField("is_local_catalog", value);
       return this;
     }
     public APIRequestGetProductCatalogs requestNameField () {
@@ -3938,6 +3971,7 @@ public class WhatsAppBusinessAccount extends APINode {
       "health_status",
       "id",
       "is_enabled_for_insights",
+      "linked_commerce_account",
       "message_template_namespace",
       "name",
       "on_behalf_of_business_info",
@@ -4101,6 +4135,13 @@ public class WhatsAppBusinessAccount extends APINode {
     }
     public APIRequestGet requestIsEnabledForInsightsField (boolean value) {
       this.requestField("is_enabled_for_insights", value);
+      return this;
+    }
+    public APIRequestGet requestLinkedCommerceAccountField () {
+      return this.requestLinkedCommerceAccountField(true);
+    }
+    public APIRequestGet requestLinkedCommerceAccountField (boolean value) {
+      this.requestField("linked_commerce_account", value);
       return this;
     }
     public APIRequestGet requestMessageTemplateNamespaceField () {
@@ -4633,6 +4674,7 @@ public class WhatsAppBusinessAccount extends APINode {
     this.mHealthStatus = instance.mHealthStatus;
     this.mId = instance.mId;
     this.mIsEnabledForInsights = instance.mIsEnabledForInsights;
+    this.mLinkedCommerceAccount = instance.mLinkedCommerceAccount;
     this.mMessageTemplateNamespace = instance.mMessageTemplateNamespace;
     this.mName = instance.mName;
     this.mOnBehalfOfBusinessInfo = instance.mOnBehalfOfBusinessInfo;

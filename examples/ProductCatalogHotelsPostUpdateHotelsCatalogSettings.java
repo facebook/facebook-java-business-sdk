@@ -36,7 +36,6 @@ public class ProductCatalogHotelsPostUpdateHotelsCatalogSettings {
     APIContext context = new APIContext(access_token).enableDebug(true);
 
     new ProductCatalog(id, context).update()
-      .setParam("hotel_catalog_settings", "{\"pull_config_id\":\"<pullConfigID>\"}")
       .execute();
 
   }

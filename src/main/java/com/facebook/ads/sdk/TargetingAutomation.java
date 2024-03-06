@@ -40,27 +40,27 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class AdCreativeSourcingSpec extends APINode {
-  @SerializedName("associated_product_set_id")
-  private String mAssociatedProductSetId = null;
-  @SerializedName("promotion_metadata_spec")
-  private List<AdCreativePromotionMetadataSpec> mPromotionMetadataSpec = null;
-  @SerializedName("site_links_spec")
-  private List<AdCreativeSiteLinksSpec> mSiteLinksSpec = null;
+public class TargetingAutomation extends APINode {
+  @SerializedName("advantage_audience")
+  private Long mAdvantageAudience = null;
+  @SerializedName("shared_audiences")
+  private Long mSharedAudiences = null;
+  @SerializedName("value_expression")
+  private Long mValueExpression = null;
   protected static Gson gson = null;
 
-  public AdCreativeSourcingSpec() {
+  public TargetingAutomation() {
   }
 
   public String getId() {
     return null;
   }
-  public static AdCreativeSourcingSpec loadJSON(String json, APIContext context, String header) {
-    AdCreativeSourcingSpec adCreativeSourcingSpec = getGson().fromJson(json, AdCreativeSourcingSpec.class);
+  public static TargetingAutomation loadJSON(String json, APIContext context, String header) {
+    TargetingAutomation targetingAutomation = getGson().fromJson(json, TargetingAutomation.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(adCreativeSourcingSpec.toString());
+      JsonElement o2 = parser.parse(targetingAutomation.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -70,14 +70,14 @@ public class AdCreativeSourcingSpec extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    adCreativeSourcingSpec.context = context;
-    adCreativeSourcingSpec.rawValue = json;
-    adCreativeSourcingSpec.header = header;
-    return adCreativeSourcingSpec;
+    targetingAutomation.context = context;
+    targetingAutomation.rawValue = json;
+    targetingAutomation.header = header;
+    return targetingAutomation;
   }
 
-  public static APINodeList<AdCreativeSourcingSpec> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<AdCreativeSourcingSpec> adCreativeSourcingSpecs = new APINodeList<AdCreativeSourcingSpec>(request, json, header);
+  public static APINodeList<TargetingAutomation> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<TargetingAutomation> targetingAutomations = new APINodeList<TargetingAutomation>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -88,9 +88,9 @@ public class AdCreativeSourcingSpec extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adCreativeSourcingSpecs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          targetingAutomations.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return adCreativeSourcingSpecs;
+        return targetingAutomations;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -100,20 +100,20 @@ public class AdCreativeSourcingSpec extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                adCreativeSourcingSpecs.setCursors(before, after);
+                targetingAutomations.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            adCreativeSourcingSpecs.setPaging(previous, next);
+            targetingAutomations.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              adCreativeSourcingSpecs.setAppSecret(context.getAppSecretProof());
+              targetingAutomations.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adCreativeSourcingSpecs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              targetingAutomations.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -124,23 +124,23 @@ public class AdCreativeSourcingSpec extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adCreativeSourcingSpecs.add(loadJSON(entry.getValue().toString(), context, header));
+                  targetingAutomations.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adCreativeSourcingSpecs.add(loadJSON(obj.toString(), context, header));
+              targetingAutomations.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return adCreativeSourcingSpecs;
+          return targetingAutomations;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adCreativeSourcingSpecs.add(loadJSON(entry.getValue().toString(), context, header));
+              targetingAutomations.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return adCreativeSourcingSpecs;
+          return targetingAutomations;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -157,20 +157,20 @@ public class AdCreativeSourcingSpec extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adCreativeSourcingSpecs.add(loadJSON(value.toString(), context, header));
+              targetingAutomations.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return adCreativeSourcingSpecs;
+            return targetingAutomations;
           }
 
           // Sixth, check if it's pure JsonObject
-          adCreativeSourcingSpecs.clear();
-          adCreativeSourcingSpecs.add(loadJSON(json, context, header));
-          return adCreativeSourcingSpecs;
+          targetingAutomations.clear();
+          targetingAutomations.add(loadJSON(json, context, header));
+          return targetingAutomations;
         }
       }
     } catch (Exception e) {
@@ -198,43 +198,33 @@ public class AdCreativeSourcingSpec extends APINode {
   }
 
 
-  public String getFieldAssociatedProductSetId() {
-    return mAssociatedProductSetId;
+  public Long getFieldAdvantageAudience() {
+    return mAdvantageAudience;
   }
 
-  public AdCreativeSourcingSpec setFieldAssociatedProductSetId(String value) {
-    this.mAssociatedProductSetId = value;
+  public TargetingAutomation setFieldAdvantageAudience(Long value) {
+    this.mAdvantageAudience = value;
     return this;
   }
 
-  public List<AdCreativePromotionMetadataSpec> getFieldPromotionMetadataSpec() {
-    return mPromotionMetadataSpec;
+  public Long getFieldSharedAudiences() {
+    return mSharedAudiences;
   }
 
-  public AdCreativeSourcingSpec setFieldPromotionMetadataSpec(List<AdCreativePromotionMetadataSpec> value) {
-    this.mPromotionMetadataSpec = value;
+  public TargetingAutomation setFieldSharedAudiences(Long value) {
+    this.mSharedAudiences = value;
     return this;
   }
 
-  public AdCreativeSourcingSpec setFieldPromotionMetadataSpec(String value) {
-    Type type = new TypeToken<List<AdCreativePromotionMetadataSpec>>(){}.getType();
-    this.mPromotionMetadataSpec = AdCreativePromotionMetadataSpec.getGson().fromJson(value, type);
-    return this;
-  }
-  public List<AdCreativeSiteLinksSpec> getFieldSiteLinksSpec() {
-    return mSiteLinksSpec;
+  public Long getFieldValueExpression() {
+    return mValueExpression;
   }
 
-  public AdCreativeSourcingSpec setFieldSiteLinksSpec(List<AdCreativeSiteLinksSpec> value) {
-    this.mSiteLinksSpec = value;
+  public TargetingAutomation setFieldValueExpression(Long value) {
+    this.mValueExpression = value;
     return this;
   }
 
-  public AdCreativeSourcingSpec setFieldSiteLinksSpec(String value) {
-    Type type = new TypeToken<List<AdCreativeSiteLinksSpec>>(){}.getType();
-    this.mSiteLinksSpec = AdCreativeSiteLinksSpec.getGson().fromJson(value, type);
-    return this;
-  }
 
 
 
@@ -251,19 +241,19 @@ public class AdCreativeSourcingSpec extends APINode {
     return gson;
   }
 
-  public AdCreativeSourcingSpec copyFrom(AdCreativeSourcingSpec instance) {
-    this.mAssociatedProductSetId = instance.mAssociatedProductSetId;
-    this.mPromotionMetadataSpec = instance.mPromotionMetadataSpec;
-    this.mSiteLinksSpec = instance.mSiteLinksSpec;
+  public TargetingAutomation copyFrom(TargetingAutomation instance) {
+    this.mAdvantageAudience = instance.mAdvantageAudience;
+    this.mSharedAudiences = instance.mSharedAudiences;
+    this.mValueExpression = instance.mValueExpression;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<AdCreativeSourcingSpec> getParser() {
-    return new APIRequest.ResponseParser<AdCreativeSourcingSpec>() {
-      public APINodeList<AdCreativeSourcingSpec> parseResponse(String response, APIContext context, APIRequest<AdCreativeSourcingSpec> request, String header) throws MalformedResponseException {
-        return AdCreativeSourcingSpec.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<TargetingAutomation> getParser() {
+    return new APIRequest.ResponseParser<TargetingAutomation>() {
+      public APINodeList<TargetingAutomation> parseResponse(String response, APIContext context, APIRequest<TargetingAutomation> request, String header) throws MalformedResponseException {
+        return TargetingAutomation.parseResponse(response, context, request, header);
       }
     };
   }

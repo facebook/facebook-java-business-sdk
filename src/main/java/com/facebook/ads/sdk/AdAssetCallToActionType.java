@@ -40,35 +40,25 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class InsightsResult extends APINode {
-  @SerializedName("description")
-  private String mDescription = null;
-  @SerializedName("description_from_api_doc")
-  private String mDescriptionFromApiDoc = null;
+public class AdAssetCallToActionType extends APINode {
   @SerializedName("id")
   private String mId = null;
   @SerializedName("name")
   private String mName = null;
-  @SerializedName("period")
-  private String mPeriod = null;
-  @SerializedName("title")
-  private String mTitle = null;
-  @SerializedName("values")
-  private List<Object> mValues = null;
   protected static Gson gson = null;
 
-  public InsightsResult() {
+  public AdAssetCallToActionType() {
   }
 
   public String getId() {
     return getFieldId().toString();
   }
-  public static InsightsResult loadJSON(String json, APIContext context, String header) {
-    InsightsResult insightsResult = getGson().fromJson(json, InsightsResult.class);
+  public static AdAssetCallToActionType loadJSON(String json, APIContext context, String header) {
+    AdAssetCallToActionType adAssetCallToActionType = getGson().fromJson(json, AdAssetCallToActionType.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(insightsResult.toString());
+      JsonElement o2 = parser.parse(adAssetCallToActionType.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -78,14 +68,14 @@ public class InsightsResult extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    insightsResult.context = context;
-    insightsResult.rawValue = json;
-    insightsResult.header = header;
-    return insightsResult;
+    adAssetCallToActionType.context = context;
+    adAssetCallToActionType.rawValue = json;
+    adAssetCallToActionType.header = header;
+    return adAssetCallToActionType;
   }
 
-  public static APINodeList<InsightsResult> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<InsightsResult> insightsResults = new APINodeList<InsightsResult>(request, json, header);
+  public static APINodeList<AdAssetCallToActionType> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdAssetCallToActionType> adAssetCallToActionTypes = new APINodeList<AdAssetCallToActionType>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -96,9 +86,9 @@ public class InsightsResult extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          insightsResults.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          adAssetCallToActionTypes.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return insightsResults;
+        return adAssetCallToActionTypes;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -108,20 +98,20 @@ public class InsightsResult extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                insightsResults.setCursors(before, after);
+                adAssetCallToActionTypes.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            insightsResults.setPaging(previous, next);
+            adAssetCallToActionTypes.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              insightsResults.setAppSecret(context.getAppSecretProof());
+              adAssetCallToActionTypes.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              insightsResults.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              adAssetCallToActionTypes.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -132,23 +122,23 @@ public class InsightsResult extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  insightsResults.add(loadJSON(entry.getValue().toString(), context, header));
+                  adAssetCallToActionTypes.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              insightsResults.add(loadJSON(obj.toString(), context, header));
+              adAssetCallToActionTypes.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return insightsResults;
+          return adAssetCallToActionTypes;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              insightsResults.add(loadJSON(entry.getValue().toString(), context, header));
+              adAssetCallToActionTypes.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return insightsResults;
+          return adAssetCallToActionTypes;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -165,20 +155,20 @@ public class InsightsResult extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              insightsResults.add(loadJSON(value.toString(), context, header));
+              adAssetCallToActionTypes.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return insightsResults;
+            return adAssetCallToActionTypes;
           }
 
           // Sixth, check if it's pure JsonObject
-          insightsResults.clear();
-          insightsResults.add(loadJSON(json, context, header));
-          return insightsResults;
+          adAssetCallToActionTypes.clear();
+          adAssetCallToActionTypes.add(loadJSON(json, context, header));
+          return adAssetCallToActionTypes;
         }
       }
     } catch (Exception e) {
@@ -206,29 +196,11 @@ public class InsightsResult extends APINode {
   }
 
 
-  public String getFieldDescription() {
-    return mDescription;
-  }
-
-  public InsightsResult setFieldDescription(String value) {
-    this.mDescription = value;
-    return this;
-  }
-
-  public String getFieldDescriptionFromApiDoc() {
-    return mDescriptionFromApiDoc;
-  }
-
-  public InsightsResult setFieldDescriptionFromApiDoc(String value) {
-    this.mDescriptionFromApiDoc = value;
-    return this;
-  }
-
   public String getFieldId() {
     return mId;
   }
 
-  public InsightsResult setFieldId(String value) {
+  public AdAssetCallToActionType setFieldId(String value) {
     this.mId = value;
     return this;
   }
@@ -237,121 +209,12 @@ public class InsightsResult extends APINode {
     return mName;
   }
 
-  public InsightsResult setFieldName(String value) {
+  public AdAssetCallToActionType setFieldName(String value) {
     this.mName = value;
     return this;
   }
 
-  public String getFieldPeriod() {
-    return mPeriod;
-  }
 
-  public InsightsResult setFieldPeriod(String value) {
-    this.mPeriod = value;
-    return this;
-  }
-
-  public String getFieldTitle() {
-    return mTitle;
-  }
-
-  public InsightsResult setFieldTitle(String value) {
-    this.mTitle = value;
-    return this;
-  }
-
-  public List<Object> getFieldValues() {
-    return mValues;
-  }
-
-  public InsightsResult setFieldValues(List<Object> value) {
-    this.mValues = value;
-    return this;
-  }
-
-
-
-  public static enum EnumDatePreset {
-      @SerializedName("data_maximum")
-      VALUE_DATA_MAXIMUM("data_maximum"),
-      @SerializedName("last_14d")
-      VALUE_LAST_14D("last_14d"),
-      @SerializedName("last_28d")
-      VALUE_LAST_28D("last_28d"),
-      @SerializedName("last_30d")
-      VALUE_LAST_30D("last_30d"),
-      @SerializedName("last_3d")
-      VALUE_LAST_3D("last_3d"),
-      @SerializedName("last_7d")
-      VALUE_LAST_7D("last_7d"),
-      @SerializedName("last_90d")
-      VALUE_LAST_90D("last_90d"),
-      @SerializedName("last_month")
-      VALUE_LAST_MONTH("last_month"),
-      @SerializedName("last_quarter")
-      VALUE_LAST_QUARTER("last_quarter"),
-      @SerializedName("last_week_mon_sun")
-      VALUE_LAST_WEEK_MON_SUN("last_week_mon_sun"),
-      @SerializedName("last_week_sun_sat")
-      VALUE_LAST_WEEK_SUN_SAT("last_week_sun_sat"),
-      @SerializedName("last_year")
-      VALUE_LAST_YEAR("last_year"),
-      @SerializedName("lifetime")
-      VALUE_LIFETIME("lifetime"),
-      @SerializedName("this_month")
-      VALUE_THIS_MONTH("this_month"),
-      @SerializedName("this_quarter")
-      VALUE_THIS_QUARTER("this_quarter"),
-      @SerializedName("this_week_mon_today")
-      VALUE_THIS_WEEK_MON_TODAY("this_week_mon_today"),
-      @SerializedName("this_week_sun_today")
-      VALUE_THIS_WEEK_SUN_TODAY("this_week_sun_today"),
-      @SerializedName("this_year")
-      VALUE_THIS_YEAR("this_year"),
-      @SerializedName("today")
-      VALUE_TODAY("today"),
-      @SerializedName("yesterday")
-      VALUE_YESTERDAY("yesterday"),
-      ;
-
-      private String value;
-
-      private EnumDatePreset(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumPeriod {
-      @SerializedName("day")
-      VALUE_DAY("day"),
-      @SerializedName("days_28")
-      VALUE_DAYS_28("days_28"),
-      @SerializedName("lifetime")
-      VALUE_LIFETIME("lifetime"),
-      @SerializedName("month")
-      VALUE_MONTH("month"),
-      @SerializedName("total_over_range")
-      VALUE_TOTAL_OVER_RANGE("total_over_range"),
-      @SerializedName("week")
-      VALUE_WEEK("week"),
-      ;
-
-      private String value;
-
-      private EnumPeriod(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
 
 
   synchronized /*package*/ static Gson getGson() {
@@ -367,23 +230,18 @@ public class InsightsResult extends APINode {
     return gson;
   }
 
-  public InsightsResult copyFrom(InsightsResult instance) {
-    this.mDescription = instance.mDescription;
-    this.mDescriptionFromApiDoc = instance.mDescriptionFromApiDoc;
+  public AdAssetCallToActionType copyFrom(AdAssetCallToActionType instance) {
     this.mId = instance.mId;
     this.mName = instance.mName;
-    this.mPeriod = instance.mPeriod;
-    this.mTitle = instance.mTitle;
-    this.mValues = instance.mValues;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<InsightsResult> getParser() {
-    return new APIRequest.ResponseParser<InsightsResult>() {
-      public APINodeList<InsightsResult> parseResponse(String response, APIContext context, APIRequest<InsightsResult> request, String header) throws MalformedResponseException {
-        return InsightsResult.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<AdAssetCallToActionType> getParser() {
+    return new APIRequest.ResponseParser<AdAssetCallToActionType>() {
+      public APINodeList<AdAssetCallToActionType> parseResponse(String response, APIContext context, APIRequest<AdAssetCallToActionType> request, String header) throws MalformedResponseException {
+        return AdAssetCallToActionType.parseResponse(response, context, request, header);
       }
     };
   }

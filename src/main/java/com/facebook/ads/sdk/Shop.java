@@ -41,6 +41,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class Shop extends APINode {
+  @SerializedName("commerce_merchant_settings")
+  private CommerceMerchantSettings mCommerceMerchantSettings = null;
   @SerializedName("fb_sales_channel")
   private Object mFbSalesChannel = null;
   @SerializedName("id")
@@ -267,6 +269,13 @@ public class Shop extends APINode {
   }
 
 
+  public CommerceMerchantSettings getFieldCommerceMerchantSettings() {
+    if (mCommerceMerchantSettings != null) {
+      mCommerceMerchantSettings.context = getContext();
+    }
+    return mCommerceMerchantSettings;
+  }
+
   public Object getFieldFbSalesChannel() {
     return mFbSalesChannel;
   }
@@ -304,6 +313,7 @@ public class Shop extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "commerce_merchant_settings",
       "fb_sales_channel",
       "id",
       "ig_sales_channel",
@@ -402,6 +412,13 @@ public class Shop extends APINode {
       return this;
     }
 
+    public APIRequestGet requestCommerceMerchantSettingsField () {
+      return this.requestCommerceMerchantSettingsField(true);
+    }
+    public APIRequestGet requestCommerceMerchantSettingsField (boolean value) {
+      this.requestField("commerce_merchant_settings", value);
+      return this;
+    }
     public APIRequestGet requestFbSalesChannelField () {
       return this.requestFbSalesChannelField(true);
     }
@@ -461,6 +478,7 @@ public class Shop extends APINode {
   }
 
   public Shop copyFrom(Shop instance) {
+    this.mCommerceMerchantSettings = instance.mCommerceMerchantSettings;
     this.mFbSalesChannel = instance.mFbSalesChannel;
     this.mId = instance.mId;
     this.mIgSalesChannel = instance.mIgSalesChannel;

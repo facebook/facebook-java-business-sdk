@@ -1792,6 +1792,10 @@ public class AdReportRun extends APINode {
       VALUE_ACTION_VIDEO_SOUND("action_video_sound"),
       @SerializedName("action_video_type")
       VALUE_ACTION_VIDEO_TYPE("action_video_type"),
+      @SerializedName("conversion_destination")
+      VALUE_CONVERSION_DESTINATION("conversion_destination"),
+      @SerializedName("signal_source_bucket")
+      VALUE_SIGNAL_SOURCE_BUCKET("signal_source_bucket"),
       @SerializedName("standard_event_content_type")
       VALUE_STANDARD_EVENT_CONTENT_TYPE("standard_event_content_type"),
       ;
@@ -1842,6 +1846,8 @@ public class AdReportRun extends APINode {
       VALUE_CALL_TO_ACTION_ASSET("call_to_action_asset"),
       @SerializedName("coarse_conversion_value")
       VALUE_COARSE_CONVERSION_VALUE("coarse_conversion_value"),
+      @SerializedName("conversion_destination")
+      VALUE_CONVERSION_DESTINATION("conversion_destination"),
       @SerializedName("country")
       VALUE_COUNTRY("country"),
       @SerializedName("description_asset")
@@ -1955,8 +1961,8 @@ public class AdReportRun extends APINode {
       VALUE_LAST_WEEK_SUN_SAT("last_week_sun_sat"),
       @SerializedName("last_year")
       VALUE_LAST_YEAR("last_year"),
-      @SerializedName("maximum")
-      VALUE_MAXIMUM("maximum"),
+      @SerializedName("lifetime")
+      VALUE_LIFETIME("lifetime"),
       @SerializedName("this_month")
       VALUE_THIS_MONTH("this_month"),
       @SerializedName("this_quarter")
@@ -2029,6 +2035,10 @@ public class AdReportRun extends APINode {
       VALUE_ACTION_VIDEO_SOUND("action_video_sound"),
       @SerializedName("action_video_type")
       VALUE_ACTION_VIDEO_TYPE("action_video_type"),
+      @SerializedName("conversion_destination")
+      VALUE_CONVERSION_DESTINATION("conversion_destination"),
+      @SerializedName("signal_source_bucket")
+      VALUE_SIGNAL_SOURCE_BUCKET("signal_source_bucket"),
       @SerializedName("standard_event_content_type")
       VALUE_STANDARD_EVENT_CONTENT_TYPE("standard_event_content_type"),
       ;

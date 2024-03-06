@@ -1626,6 +1626,7 @@ public class AdVideo extends APINode {
       "app_id",
       "artists_we_like",
       "attire",
+      "available_promo_offer_ids",
       "awards",
       "band_interests",
       "band_members",
@@ -1674,7 +1675,6 @@ public class AdVideo extends APINode {
       "has_lead_access",
       "has_transitioned_to_new_page_experience",
       "has_whatsapp_business_number",
-      "has_whatsapp_enterprise_number_using_cloud_api",
       "has_whatsapp_number",
       "hometown",
       "hours",
@@ -1718,7 +1718,6 @@ public class AdVideo extends APINode {
       "offer_eligible",
       "overall_star_rating",
       "owner_business",
-      "page_about_story",
       "page_token",
       "parent_page",
       "parking",
@@ -1908,6 +1907,13 @@ public class AdVideo extends APINode {
     }
     public APIRequestGetCrosspostSharedPages requestAttireField (boolean value) {
       this.requestField("attire", value);
+      return this;
+    }
+    public APIRequestGetCrosspostSharedPages requestAvailablePromoOfferIdsField () {
+      return this.requestAvailablePromoOfferIdsField(true);
+    }
+    public APIRequestGetCrosspostSharedPages requestAvailablePromoOfferIdsField (boolean value) {
+      this.requestField("available_promo_offer_ids", value);
       return this;
     }
     public APIRequestGetCrosspostSharedPages requestAwardsField () {
@@ -2246,13 +2252,6 @@ public class AdVideo extends APINode {
       this.requestField("has_whatsapp_business_number", value);
       return this;
     }
-    public APIRequestGetCrosspostSharedPages requestHasWhatsappEnterpriseNumberUsingCloudApiField () {
-      return this.requestHasWhatsappEnterpriseNumberUsingCloudApiField(true);
-    }
-    public APIRequestGetCrosspostSharedPages requestHasWhatsappEnterpriseNumberUsingCloudApiField (boolean value) {
-      this.requestField("has_whatsapp_enterprise_number_using_cloud_api", value);
-      return this;
-    }
     public APIRequestGetCrosspostSharedPages requestHasWhatsappNumberField () {
       return this.requestHasWhatsappNumberField(true);
     }
@@ -2552,13 +2551,6 @@ public class AdVideo extends APINode {
     }
     public APIRequestGetCrosspostSharedPages requestOwnerBusinessField (boolean value) {
       this.requestField("owner_business", value);
-      return this;
-    }
-    public APIRequestGetCrosspostSharedPages requestPageAboutStoryField () {
-      return this.requestPageAboutStoryField(true);
-    }
-    public APIRequestGetCrosspostSharedPages requestPageAboutStoryField (boolean value) {
-      this.requestField("page_about_story", value);
       return this;
     }
     public APIRequestGetCrosspostSharedPages requestPageTokenField () {
@@ -3809,6 +3801,7 @@ public class AdVideo extends APINode {
       "app_id",
       "artists_we_like",
       "attire",
+      "available_promo_offer_ids",
       "awards",
       "band_interests",
       "band_members",
@@ -3857,7 +3850,6 @@ public class AdVideo extends APINode {
       "has_lead_access",
       "has_transitioned_to_new_page_experience",
       "has_whatsapp_business_number",
-      "has_whatsapp_enterprise_number_using_cloud_api",
       "has_whatsapp_number",
       "hometown",
       "hours",
@@ -3901,7 +3893,6 @@ public class AdVideo extends APINode {
       "offer_eligible",
       "overall_star_rating",
       "owner_business",
-      "page_about_story",
       "page_token",
       "parent_page",
       "parking",
@@ -4091,6 +4082,13 @@ public class AdVideo extends APINode {
     }
     public APIRequestGetSponsorTags requestAttireField (boolean value) {
       this.requestField("attire", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestAvailablePromoOfferIdsField () {
+      return this.requestAvailablePromoOfferIdsField(true);
+    }
+    public APIRequestGetSponsorTags requestAvailablePromoOfferIdsField (boolean value) {
+      this.requestField("available_promo_offer_ids", value);
       return this;
     }
     public APIRequestGetSponsorTags requestAwardsField () {
@@ -4429,13 +4427,6 @@ public class AdVideo extends APINode {
       this.requestField("has_whatsapp_business_number", value);
       return this;
     }
-    public APIRequestGetSponsorTags requestHasWhatsappEnterpriseNumberUsingCloudApiField () {
-      return this.requestHasWhatsappEnterpriseNumberUsingCloudApiField(true);
-    }
-    public APIRequestGetSponsorTags requestHasWhatsappEnterpriseNumberUsingCloudApiField (boolean value) {
-      this.requestField("has_whatsapp_enterprise_number_using_cloud_api", value);
-      return this;
-    }
     public APIRequestGetSponsorTags requestHasWhatsappNumberField () {
       return this.requestHasWhatsappNumberField(true);
     }
@@ -4735,13 +4726,6 @@ public class AdVideo extends APINode {
     }
     public APIRequestGetSponsorTags requestOwnerBusinessField (boolean value) {
       this.requestField("owner_business", value);
-      return this;
-    }
-    public APIRequestGetSponsorTags requestPageAboutStoryField () {
-      return this.requestPageAboutStoryField(true);
-    }
-    public APIRequestGetSponsorTags requestPageAboutStoryField (boolean value) {
-      this.requestField("page_about_story", value);
       return this;
     }
     public APIRequestGetSponsorTags requestPageTokenField () {
@@ -6769,8 +6753,6 @@ public class AdVideo extends APINode {
       VALUE_APP_REVIEW_SCREENCAST("APP_REVIEW_SCREENCAST"),
       @SerializedName("ASSET_MANAGER")
       VALUE_ASSET_MANAGER("ASSET_MANAGER"),
-      @SerializedName("ATLAS_VIDEO")
-      VALUE_ATLAS_VIDEO("ATLAS_VIDEO"),
       @SerializedName("AUDIO_BRIEF")
       VALUE_AUDIO_BRIEF("AUDIO_BRIEF"),
       @SerializedName("AUDIO_BROADCAST")
@@ -6801,6 +6783,8 @@ public class AdVideo extends APINode {
       VALUE_COPYRIGHT_REFERENCE_VIDEO("COPYRIGHT_REFERENCE_VIDEO"),
       @SerializedName("CREATION_ML_PRECREATION")
       VALUE_CREATION_ML_PRECREATION("CREATION_ML_PRECREATION"),
+      @SerializedName("DATAGENIX_VIDEO")
+      VALUE_DATAGENIX_VIDEO("DATAGENIX_VIDEO"),
       @SerializedName("DCO_AD_ASSET_FEED")
       VALUE_DCO_AD_ASSET_FEED("DCO_AD_ASSET_FEED"),
       @SerializedName("DCO_AUTOGEN_VIDEO")
@@ -6841,6 +6825,8 @@ public class AdVideo extends APINode {
       VALUE_FB_SHORTS_CROSS_META_POST("FB_SHORTS_CROSS_META_POST"),
       @SerializedName("FB_SHORTS_GROUP_POST")
       VALUE_FB_SHORTS_GROUP_POST("FB_SHORTS_GROUP_POST"),
+      @SerializedName("FB_SHORTS_LINKED_PRODUCT")
+      VALUE_FB_SHORTS_LINKED_PRODUCT("FB_SHORTS_LINKED_PRODUCT"),
       @SerializedName("FB_SHORTS_PMV_POST")
       VALUE_FB_SHORTS_PMV_POST("FB_SHORTS_PMV_POST"),
       @SerializedName("FB_SHORTS_PMV_POST_NO_NEWSFEED_NOR_TIMELINE")

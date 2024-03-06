@@ -4436,6 +4436,8 @@ public class Campaign extends APINode {
       VALUE_LOWEST_COST_WITHOUT_CAP("LOWEST_COST_WITHOUT_CAP"),
       @SerializedName("LOWEST_COST_WITH_BID_CAP")
       VALUE_LOWEST_COST_WITH_BID_CAP("LOWEST_COST_WITH_BID_CAP"),
+      @SerializedName("LOWEST_COST_WITH_MIN_ROAS")
+      VALUE_LOWEST_COST_WITH_MIN_ROAS("LOWEST_COST_WITH_MIN_ROAS"),
       ;
 
       private String value;
@@ -4548,8 +4550,8 @@ public class Campaign extends APINode {
       VALUE_LAST_WEEK_SUN_SAT("last_week_sun_sat"),
       @SerializedName("last_year")
       VALUE_LAST_YEAR("last_year"),
-      @SerializedName("maximum")
-      VALUE_MAXIMUM("maximum"),
+      @SerializedName("lifetime")
+      VALUE_LIFETIME("lifetime"),
       @SerializedName("this_month")
       VALUE_THIS_MONTH("this_month"),
       @SerializedName("this_quarter")

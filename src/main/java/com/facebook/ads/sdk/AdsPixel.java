@@ -344,10 +344,6 @@ public class AdsPixel extends APINode {
     return new APIRequestCreateEvent(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestCreateMeapitocapiconsolidationhelper createMeapitocapiconsolidationhelper() {
-    return new APIRequestCreateMeapitocapiconsolidationhelper(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetOfflineEventUploads getOfflineEventUploads() {
     return new APIRequestGetOfflineEventUploads(this.getPrefixedId().toString(), context);
   }
@@ -2203,111 +2199,6 @@ public class AdsPixel extends APINode {
 
     @Override
     public APIRequestCreateEvent requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
-  public static class APIRequestCreateMeapitocapiconsolidationhelper extends APIRequest<APINode> {
-
-    APINode lastResponse = null;
-    @Override
-    public APINode getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINode parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public APINode execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINode execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINode> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINode>() {
-           public APINode apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateMeapitocapiconsolidationhelper.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         },
-         MoreExecutors.directExecutor()
-      );
-    };
-
-    public APIRequestCreateMeapitocapiconsolidationhelper(String nodeId, APIContext context) {
-      super(context, nodeId, "/meapitocapiconsolidationhelper", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateMeapitocapiconsolidationhelper setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateMeapitocapiconsolidationhelper setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateMeapitocapiconsolidationhelper requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateMeapitocapiconsolidationhelper requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateMeapitocapiconsolidationhelper requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateMeapitocapiconsolidationhelper requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateMeapitocapiconsolidationhelper requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateMeapitocapiconsolidationhelper requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }

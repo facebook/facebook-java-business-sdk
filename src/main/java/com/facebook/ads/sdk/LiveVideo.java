@@ -1315,6 +1315,7 @@ public class LiveVideo extends APINode {
       "app_id",
       "artists_we_like",
       "attire",
+      "available_promo_offer_ids",
       "awards",
       "band_interests",
       "band_members",
@@ -1363,7 +1364,6 @@ public class LiveVideo extends APINode {
       "has_lead_access",
       "has_transitioned_to_new_page_experience",
       "has_whatsapp_business_number",
-      "has_whatsapp_enterprise_number_using_cloud_api",
       "has_whatsapp_number",
       "hometown",
       "hours",
@@ -1407,7 +1407,6 @@ public class LiveVideo extends APINode {
       "offer_eligible",
       "overall_star_rating",
       "owner_business",
-      "page_about_story",
       "page_token",
       "parent_page",
       "parking",
@@ -1597,6 +1596,13 @@ public class LiveVideo extends APINode {
     }
     public APIRequestGetCrosspostSharedPages requestAttireField (boolean value) {
       this.requestField("attire", value);
+      return this;
+    }
+    public APIRequestGetCrosspostSharedPages requestAvailablePromoOfferIdsField () {
+      return this.requestAvailablePromoOfferIdsField(true);
+    }
+    public APIRequestGetCrosspostSharedPages requestAvailablePromoOfferIdsField (boolean value) {
+      this.requestField("available_promo_offer_ids", value);
       return this;
     }
     public APIRequestGetCrosspostSharedPages requestAwardsField () {
@@ -1935,13 +1941,6 @@ public class LiveVideo extends APINode {
       this.requestField("has_whatsapp_business_number", value);
       return this;
     }
-    public APIRequestGetCrosspostSharedPages requestHasWhatsappEnterpriseNumberUsingCloudApiField () {
-      return this.requestHasWhatsappEnterpriseNumberUsingCloudApiField(true);
-    }
-    public APIRequestGetCrosspostSharedPages requestHasWhatsappEnterpriseNumberUsingCloudApiField (boolean value) {
-      this.requestField("has_whatsapp_enterprise_number_using_cloud_api", value);
-      return this;
-    }
     public APIRequestGetCrosspostSharedPages requestHasWhatsappNumberField () {
       return this.requestHasWhatsappNumberField(true);
     }
@@ -2241,13 +2240,6 @@ public class LiveVideo extends APINode {
     }
     public APIRequestGetCrosspostSharedPages requestOwnerBusinessField (boolean value) {
       this.requestField("owner_business", value);
-      return this;
-    }
-    public APIRequestGetCrosspostSharedPages requestPageAboutStoryField () {
-      return this.requestPageAboutStoryField(true);
-    }
-    public APIRequestGetCrosspostSharedPages requestPageAboutStoryField (boolean value) {
-      this.requestField("page_about_story", value);
       return this;
     }
     public APIRequestGetCrosspostSharedPages requestPageTokenField () {

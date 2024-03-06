@@ -2760,6 +2760,7 @@ public class Post extends APINode {
       "app_id",
       "artists_we_like",
       "attire",
+      "available_promo_offer_ids",
       "awards",
       "band_interests",
       "band_members",
@@ -2808,7 +2809,6 @@ public class Post extends APINode {
       "has_lead_access",
       "has_transitioned_to_new_page_experience",
       "has_whatsapp_business_number",
-      "has_whatsapp_enterprise_number_using_cloud_api",
       "has_whatsapp_number",
       "hometown",
       "hours",
@@ -2852,7 +2852,6 @@ public class Post extends APINode {
       "offer_eligible",
       "overall_star_rating",
       "owner_business",
-      "page_about_story",
       "page_token",
       "parent_page",
       "parking",
@@ -3042,6 +3041,13 @@ public class Post extends APINode {
     }
     public APIRequestGetSponsorTags requestAttireField (boolean value) {
       this.requestField("attire", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestAvailablePromoOfferIdsField () {
+      return this.requestAvailablePromoOfferIdsField(true);
+    }
+    public APIRequestGetSponsorTags requestAvailablePromoOfferIdsField (boolean value) {
+      this.requestField("available_promo_offer_ids", value);
       return this;
     }
     public APIRequestGetSponsorTags requestAwardsField () {
@@ -3380,13 +3386,6 @@ public class Post extends APINode {
       this.requestField("has_whatsapp_business_number", value);
       return this;
     }
-    public APIRequestGetSponsorTags requestHasWhatsappEnterpriseNumberUsingCloudApiField () {
-      return this.requestHasWhatsappEnterpriseNumberUsingCloudApiField(true);
-    }
-    public APIRequestGetSponsorTags requestHasWhatsappEnterpriseNumberUsingCloudApiField (boolean value) {
-      this.requestField("has_whatsapp_enterprise_number_using_cloud_api", value);
-      return this;
-    }
     public APIRequestGetSponsorTags requestHasWhatsappNumberField () {
       return this.requestHasWhatsappNumberField(true);
     }
@@ -3686,13 +3685,6 @@ public class Post extends APINode {
     }
     public APIRequestGetSponsorTags requestOwnerBusinessField (boolean value) {
       this.requestField("owner_business", value);
-      return this;
-    }
-    public APIRequestGetSponsorTags requestPageAboutStoryField () {
-      return this.requestPageAboutStoryField(true);
-    }
-    public APIRequestGetSponsorTags requestPageAboutStoryField (boolean value) {
-      this.requestField("page_about_story", value);
       return this;
     }
     public APIRequestGetSponsorTags requestPageTokenField () {
@@ -4353,6 +4345,8 @@ public class Post extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "primary_fb_page_id",
+      "primary_ig_user_id",
     };
 
     public static final String[] FIELDS = {
@@ -4473,6 +4467,16 @@ public class Post extends APINode {
       return this;
     }
 
+
+    public APIRequestGet setPrimaryFbPageId (String primaryFbPageId) {
+      this.setParam("primary_fb_page_id", primaryFbPageId);
+      return this;
+    }
+
+    public APIRequestGet setPrimaryIgUserId (String primaryIgUserId) {
+      this.setParam("primary_ig_user_id", primaryIgUserId);
+      return this;
+    }
 
     public APIRequestGet requestAllFields () {
       return this.requestAllFields(true);

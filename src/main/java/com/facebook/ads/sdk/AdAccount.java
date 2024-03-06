@@ -630,6 +630,10 @@ public class AdAccount extends APINode {
     return new APIRequestGetConnectedInstagramAccounts(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetConnectedInstagramAccountsWithIabp getConnectedInstagramAccountsWithIabp() {
+    return new APIRequestGetConnectedInstagramAccountsWithIabp(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetConversionGoals getConversionGoals() {
     return new APIRequestGetConversionGoals(this.getPrefixedId().toString(), context);
   }
@@ -796,6 +800,10 @@ public class AdAccount extends APINode {
 
   public APIRequestDeleteUsersOfAnyAudience deleteUsersOfAnyAudience() {
     return new APIRequestDeleteUsersOfAnyAudience(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetValueAdjustmentRulePersonaGroups getValueAdjustmentRulePersonaGroups() {
+    return new APIRequestGetValueAdjustmentRulePersonaGroups(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetValueAdjustmentRules getValueAdjustmentRules() {
@@ -17350,6 +17358,205 @@ public class AdAccount extends APINode {
     }
   }
 
+  public static class APIRequestGetConnectedInstagramAccountsWithIabp extends APIRequest<InstagramUser> {
+
+    APINodeList<InstagramUser> lastResponse = null;
+    @Override
+    public APINodeList<InstagramUser> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "business_id",
+    };
+
+    public static final String[] FIELDS = {
+      "follow_count",
+      "followed_by_count",
+      "has_profile_picture",
+      "id",
+      "is_private",
+      "is_published",
+      "media_count",
+      "mini_shop_storefront",
+      "owner_business",
+      "profile_pic",
+      "username",
+    };
+
+    @Override
+    public APINodeList<InstagramUser> parseResponse(String response, String header) throws APIException {
+      return InstagramUser.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<InstagramUser> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<InstagramUser> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<InstagramUser>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<InstagramUser>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<InstagramUser>>() {
+           public APINodeList<InstagramUser> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetConnectedInstagramAccountsWithIabp.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestGetConnectedInstagramAccountsWithIabp(String nodeId, APIContext context) {
+      super(context, nodeId, "/connected_instagram_accounts_with_iabp", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetConnectedInstagramAccountsWithIabp setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetConnectedInstagramAccountsWithIabp setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetConnectedInstagramAccountsWithIabp setBusinessId (String businessId) {
+      this.setParam("business_id", businessId);
+      return this;
+    }
+
+    public APIRequestGetConnectedInstagramAccountsWithIabp requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetConnectedInstagramAccountsWithIabp requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetConnectedInstagramAccountsWithIabp requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetConnectedInstagramAccountsWithIabp requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetConnectedInstagramAccountsWithIabp requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetConnectedInstagramAccountsWithIabp requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetConnectedInstagramAccountsWithIabp requestFollowCountField () {
+      return this.requestFollowCountField(true);
+    }
+    public APIRequestGetConnectedInstagramAccountsWithIabp requestFollowCountField (boolean value) {
+      this.requestField("follow_count", value);
+      return this;
+    }
+    public APIRequestGetConnectedInstagramAccountsWithIabp requestFollowedByCountField () {
+      return this.requestFollowedByCountField(true);
+    }
+    public APIRequestGetConnectedInstagramAccountsWithIabp requestFollowedByCountField (boolean value) {
+      this.requestField("followed_by_count", value);
+      return this;
+    }
+    public APIRequestGetConnectedInstagramAccountsWithIabp requestHasProfilePictureField () {
+      return this.requestHasProfilePictureField(true);
+    }
+    public APIRequestGetConnectedInstagramAccountsWithIabp requestHasProfilePictureField (boolean value) {
+      this.requestField("has_profile_picture", value);
+      return this;
+    }
+    public APIRequestGetConnectedInstagramAccountsWithIabp requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetConnectedInstagramAccountsWithIabp requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetConnectedInstagramAccountsWithIabp requestIsPrivateField () {
+      return this.requestIsPrivateField(true);
+    }
+    public APIRequestGetConnectedInstagramAccountsWithIabp requestIsPrivateField (boolean value) {
+      this.requestField("is_private", value);
+      return this;
+    }
+    public APIRequestGetConnectedInstagramAccountsWithIabp requestIsPublishedField () {
+      return this.requestIsPublishedField(true);
+    }
+    public APIRequestGetConnectedInstagramAccountsWithIabp requestIsPublishedField (boolean value) {
+      this.requestField("is_published", value);
+      return this;
+    }
+    public APIRequestGetConnectedInstagramAccountsWithIabp requestMediaCountField () {
+      return this.requestMediaCountField(true);
+    }
+    public APIRequestGetConnectedInstagramAccountsWithIabp requestMediaCountField (boolean value) {
+      this.requestField("media_count", value);
+      return this;
+    }
+    public APIRequestGetConnectedInstagramAccountsWithIabp requestMiniShopStorefrontField () {
+      return this.requestMiniShopStorefrontField(true);
+    }
+    public APIRequestGetConnectedInstagramAccountsWithIabp requestMiniShopStorefrontField (boolean value) {
+      this.requestField("mini_shop_storefront", value);
+      return this;
+    }
+    public APIRequestGetConnectedInstagramAccountsWithIabp requestOwnerBusinessField () {
+      return this.requestOwnerBusinessField(true);
+    }
+    public APIRequestGetConnectedInstagramAccountsWithIabp requestOwnerBusinessField (boolean value) {
+      this.requestField("owner_business", value);
+      return this;
+    }
+    public APIRequestGetConnectedInstagramAccountsWithIabp requestProfilePicField () {
+      return this.requestProfilePicField(true);
+    }
+    public APIRequestGetConnectedInstagramAccountsWithIabp requestProfilePicField (boolean value) {
+      this.requestField("profile_pic", value);
+      return this;
+    }
+    public APIRequestGetConnectedInstagramAccountsWithIabp requestUsernameField () {
+      return this.requestUsernameField(true);
+    }
+    public APIRequestGetConnectedInstagramAccountsWithIabp requestUsernameField (boolean value) {
+      this.requestField("username", value);
+      return this;
+    }
+  }
+
   public static class APIRequestGetConversionGoals extends APIRequest<APINode> {
 
     APINodeList<APINode> lastResponse = null;
@@ -22519,6 +22726,7 @@ public class AdAccount extends APINode {
       "app_id",
       "artists_we_like",
       "attire",
+      "available_promo_offer_ids",
       "awards",
       "band_interests",
       "band_members",
@@ -22567,7 +22775,6 @@ public class AdAccount extends APINode {
       "has_lead_access",
       "has_transitioned_to_new_page_experience",
       "has_whatsapp_business_number",
-      "has_whatsapp_enterprise_number_using_cloud_api",
       "has_whatsapp_number",
       "hometown",
       "hours",
@@ -22611,7 +22818,6 @@ public class AdAccount extends APINode {
       "offer_eligible",
       "overall_star_rating",
       "owner_business",
-      "page_about_story",
       "page_token",
       "parent_page",
       "parking",
@@ -22801,6 +23007,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetPromotePages requestAttireField (boolean value) {
       this.requestField("attire", value);
+      return this;
+    }
+    public APIRequestGetPromotePages requestAvailablePromoOfferIdsField () {
+      return this.requestAvailablePromoOfferIdsField(true);
+    }
+    public APIRequestGetPromotePages requestAvailablePromoOfferIdsField (boolean value) {
+      this.requestField("available_promo_offer_ids", value);
       return this;
     }
     public APIRequestGetPromotePages requestAwardsField () {
@@ -23139,13 +23352,6 @@ public class AdAccount extends APINode {
       this.requestField("has_whatsapp_business_number", value);
       return this;
     }
-    public APIRequestGetPromotePages requestHasWhatsappEnterpriseNumberUsingCloudApiField () {
-      return this.requestHasWhatsappEnterpriseNumberUsingCloudApiField(true);
-    }
-    public APIRequestGetPromotePages requestHasWhatsappEnterpriseNumberUsingCloudApiField (boolean value) {
-      this.requestField("has_whatsapp_enterprise_number_using_cloud_api", value);
-      return this;
-    }
     public APIRequestGetPromotePages requestHasWhatsappNumberField () {
       return this.requestHasWhatsappNumberField(true);
     }
@@ -23445,13 +23651,6 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetPromotePages requestOwnerBusinessField (boolean value) {
       this.requestField("owner_business", value);
-      return this;
-    }
-    public APIRequestGetPromotePages requestPageAboutStoryField () {
-      return this.requestPageAboutStoryField(true);
-    }
-    public APIRequestGetPromotePages requestPageAboutStoryField (boolean value) {
-      this.requestField("page_about_story", value);
       return this;
     }
     public APIRequestGetPromotePages requestPageTokenField () {
@@ -28194,6 +28393,111 @@ public class AdAccount extends APINode {
 
     @Override
     public APIRequestDeleteUsersOfAnyAudience requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestGetValueAdjustmentRulePersonaGroups extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetValueAdjustmentRulePersonaGroups.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestGetValueAdjustmentRulePersonaGroups(String nodeId, APIContext context) {
+      super(context, nodeId, "/value_adjustment_rule_persona_groups", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetValueAdjustmentRulePersonaGroups setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetValueAdjustmentRulePersonaGroups setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetValueAdjustmentRulePersonaGroups requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetValueAdjustmentRulePersonaGroups requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetValueAdjustmentRulePersonaGroups requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetValueAdjustmentRulePersonaGroups requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetValueAdjustmentRulePersonaGroups requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetValueAdjustmentRulePersonaGroups requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }

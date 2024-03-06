@@ -578,6 +578,8 @@ public class AdAssetFeedSpec extends APINode {
       VALUE_INSTALL_APP("INSTALL_APP"),
       @SerializedName("INSTALL_MOBILE_APP")
       VALUE_INSTALL_MOBILE_APP("INSTALL_MOBILE_APP"),
+      @SerializedName("JOIN_CHANNEL")
+      VALUE_JOIN_CHANNEL("JOIN_CHANNEL"),
       @SerializedName("LEARN_MORE")
       VALUE_LEARN_MORE("LEARN_MORE"),
       @SerializedName("LIKE_PAGE")

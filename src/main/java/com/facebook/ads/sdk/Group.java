@@ -7725,12 +7725,12 @@ public class Group extends APINode {
   }
 
   public static enum EnumPostPermissions {
-      @SerializedName("0")
-      VALUE_0("0"),
-      @SerializedName("1")
-      VALUE_1("1"),
-      @SerializedName("2")
-      VALUE_2("2"),
+      @SerializedName("ADMIN_ONLY")
+      VALUE_ADMIN_ONLY("ADMIN_ONLY"),
+      @SerializedName("ANYONE")
+      VALUE_ANYONE("ANYONE"),
+      @SerializedName("NONE")
+      VALUE_NONE("NONE"),
       ;
 
       private String value;

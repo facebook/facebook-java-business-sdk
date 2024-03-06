@@ -4243,8 +4243,8 @@ public class Ad extends APINode {
       VALUE_LAST_WEEK_SUN_SAT("last_week_sun_sat"),
       @SerializedName("last_year")
       VALUE_LAST_YEAR("last_year"),
-      @SerializedName("maximum")
-      VALUE_MAXIMUM("maximum"),
+      @SerializedName("lifetime")
+      VALUE_LIFETIME("lifetime"),
       @SerializedName("this_month")
       VALUE_THIS_MONTH("this_month"),
       @SerializedName("this_quarter")

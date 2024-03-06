@@ -1123,6 +1123,7 @@ public class SystemUser extends APINode {
       "app_id",
       "artists_we_like",
       "attire",
+      "available_promo_offer_ids",
       "awards",
       "band_interests",
       "band_members",
@@ -1171,7 +1172,6 @@ public class SystemUser extends APINode {
       "has_lead_access",
       "has_transitioned_to_new_page_experience",
       "has_whatsapp_business_number",
-      "has_whatsapp_enterprise_number_using_cloud_api",
       "has_whatsapp_number",
       "hometown",
       "hours",
@@ -1215,7 +1215,6 @@ public class SystemUser extends APINode {
       "offer_eligible",
       "overall_star_rating",
       "owner_business",
-      "page_about_story",
       "page_token",
       "parent_page",
       "parking",
@@ -1414,6 +1413,13 @@ public class SystemUser extends APINode {
     }
     public APIRequestGetAssignedPages requestAttireField (boolean value) {
       this.requestField("attire", value);
+      return this;
+    }
+    public APIRequestGetAssignedPages requestAvailablePromoOfferIdsField () {
+      return this.requestAvailablePromoOfferIdsField(true);
+    }
+    public APIRequestGetAssignedPages requestAvailablePromoOfferIdsField (boolean value) {
+      this.requestField("available_promo_offer_ids", value);
       return this;
     }
     public APIRequestGetAssignedPages requestAwardsField () {
@@ -1752,13 +1758,6 @@ public class SystemUser extends APINode {
       this.requestField("has_whatsapp_business_number", value);
       return this;
     }
-    public APIRequestGetAssignedPages requestHasWhatsappEnterpriseNumberUsingCloudApiField () {
-      return this.requestHasWhatsappEnterpriseNumberUsingCloudApiField(true);
-    }
-    public APIRequestGetAssignedPages requestHasWhatsappEnterpriseNumberUsingCloudApiField (boolean value) {
-      this.requestField("has_whatsapp_enterprise_number_using_cloud_api", value);
-      return this;
-    }
     public APIRequestGetAssignedPages requestHasWhatsappNumberField () {
       return this.requestHasWhatsappNumberField(true);
     }
@@ -2058,13 +2057,6 @@ public class SystemUser extends APINode {
     }
     public APIRequestGetAssignedPages requestOwnerBusinessField (boolean value) {
       this.requestField("owner_business", value);
-      return this;
-    }
-    public APIRequestGetAssignedPages requestPageAboutStoryField () {
-      return this.requestPageAboutStoryField(true);
-    }
-    public APIRequestGetAssignedPages requestPageAboutStoryField (boolean value) {
-      this.requestField("page_about_story", value);
       return this;
     }
     public APIRequestGetAssignedPages requestPageTokenField () {
@@ -2442,6 +2434,7 @@ public class SystemUser extends APINode {
       "feed_count",
       "id",
       "is_catalog_segment",
+      "is_local_catalog",
       "name",
       "owner_business",
       "product_count",
@@ -2622,6 +2615,13 @@ public class SystemUser extends APINode {
     }
     public APIRequestGetAssignedProductCatalogs requestIsCatalogSegmentField (boolean value) {
       this.requestField("is_catalog_segment", value);
+      return this;
+    }
+    public APIRequestGetAssignedProductCatalogs requestIsLocalCatalogField () {
+      return this.requestIsLocalCatalogField(true);
+    }
+    public APIRequestGetAssignedProductCatalogs requestIsLocalCatalogField (boolean value) {
+      this.requestField("is_local_catalog", value);
       return this;
     }
     public APIRequestGetAssignedProductCatalogs requestNameField () {

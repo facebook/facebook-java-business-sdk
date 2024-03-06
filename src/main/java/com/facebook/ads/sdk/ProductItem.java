@@ -2090,9 +2090,6 @@ public class ProductItem extends APINode {
       "material",
       "mobile_link",
       "name",
-      "offer_price_amount",
-      "offer_price_end_date",
-      "offer_price_start_date",
       "ordering_index",
       "origin_country",
       "pattern",
@@ -2509,25 +2506,6 @@ public class ProductItem extends APINode {
 
     public APIRequestUpdate setName (String name) {
       this.setParam("name", name);
-      return this;
-    }
-
-    public APIRequestUpdate setOfferPriceAmount (Long offerPriceAmount) {
-      this.setParam("offer_price_amount", offerPriceAmount);
-      return this;
-    }
-    public APIRequestUpdate setOfferPriceAmount (String offerPriceAmount) {
-      this.setParam("offer_price_amount", offerPriceAmount);
-      return this;
-    }
-
-    public APIRequestUpdate setOfferPriceEndDate (String offerPriceEndDate) {
-      this.setParam("offer_price_end_date", offerPriceEndDate);
-      return this;
-    }
-
-    public APIRequestUpdate setOfferPriceStartDate (String offerPriceStartDate) {
-      this.setParam("offer_price_start_date", offerPriceStartDate);
       return this;
     }
 
@@ -3377,6 +3355,8 @@ public class ProductItem extends APINode {
   }
 
   public static enum EnumErrorType {
+      @SerializedName("ADDRESS_BLOCKLISTED_IN_MARKET")
+      VALUE_ADDRESS_BLOCKLISTED_IN_MARKET("ADDRESS_BLOCKLISTED_IN_MARKET"),
       @SerializedName("AR_DELETED_DUE_TO_UPDATE")
       VALUE_AR_DELETED_DUE_TO_UPDATE("AR_DELETED_DUE_TO_UPDATE"),
       @SerializedName("AR_POLICY_VIOLATED")
@@ -3385,6 +3365,8 @@ public class ProductItem extends APINode {
       VALUE_AVAILABLE("AVAILABLE"),
       @SerializedName("BAD_QUALITY_IMAGE")
       VALUE_BAD_QUALITY_IMAGE("BAD_QUALITY_IMAGE"),
+      @SerializedName("BIZ_MSG_AI_AGENT_DISABLED_BY_USER")
+      VALUE_BIZ_MSG_AI_AGENT_DISABLED_BY_USER("BIZ_MSG_AI_AGENT_DISABLED_BY_USER"),
       @SerializedName("CANNOT_EDIT_SUBSCRIPTION_PRODUCTS")
       VALUE_CANNOT_EDIT_SUBSCRIPTION_PRODUCTS("CANNOT_EDIT_SUBSCRIPTION_PRODUCTS"),
       @SerializedName("CHECKOUT_DISABLED_BY_USER")
@@ -3409,10 +3391,14 @@ public class ProductItem extends APINode {
       VALUE_EMPTY_CONDITION("EMPTY_CONDITION"),
       @SerializedName("EMPTY_DESCRIPTION")
       VALUE_EMPTY_DESCRIPTION("EMPTY_DESCRIPTION"),
+      @SerializedName("EMPTY_IMAGE_URL")
+      VALUE_EMPTY_IMAGE_URL("EMPTY_IMAGE_URL"),
       @SerializedName("EMPTY_PRODUCT_URL")
       VALUE_EMPTY_PRODUCT_URL("EMPTY_PRODUCT_URL"),
       @SerializedName("EMPTY_SELLER_DESCRIPTION")
       VALUE_EMPTY_SELLER_DESCRIPTION("EMPTY_SELLER_DESCRIPTION"),
+      @SerializedName("EMPTY_TITLE")
+      VALUE_EMPTY_TITLE("EMPTY_TITLE"),
       @SerializedName("EXTERNAL_MERCHANT_ID_MISMATCH")
       VALUE_EXTERNAL_MERCHANT_ID_MISMATCH("EXTERNAL_MERCHANT_ID_MISMATCH"),
       @SerializedName("GENERIC_INVALID_FIELD")
@@ -3437,12 +3423,36 @@ public class ProductItem extends APINode {
       VALUE_INACTIVE_SHOPIFY_PRODUCT("INACTIVE_SHOPIFY_PRODUCT"),
       @SerializedName("INVALID_COMMERCE_TAX_CATEGORY")
       VALUE_INVALID_COMMERCE_TAX_CATEGORY("INVALID_COMMERCE_TAX_CATEGORY"),
+      @SerializedName("INVALID_CONSOLIDATED_LOCALITY_INFORMATION")
+      VALUE_INVALID_CONSOLIDATED_LOCALITY_INFORMATION("INVALID_CONSOLIDATED_LOCALITY_INFORMATION"),
+      @SerializedName("INVALID_DEALER_COMMUNICATION_PARAMETERS")
+      VALUE_INVALID_DEALER_COMMUNICATION_PARAMETERS("INVALID_DEALER_COMMUNICATION_PARAMETERS"),
+      @SerializedName("INVALID_DMA_CODES")
+      VALUE_INVALID_DMA_CODES("INVALID_DMA_CODES"),
+      @SerializedName("INVALID_FB_PAGE_ID")
+      VALUE_INVALID_FB_PAGE_ID("INVALID_FB_PAGE_ID"),
       @SerializedName("INVALID_IMAGES")
       VALUE_INVALID_IMAGES("INVALID_IMAGES"),
       @SerializedName("INVALID_MONETIZER_RETURN_POLICY")
       VALUE_INVALID_MONETIZER_RETURN_POLICY("INVALID_MONETIZER_RETURN_POLICY"),
+      @SerializedName("INVALID_OFFER_DISCLAIMER_URL")
+      VALUE_INVALID_OFFER_DISCLAIMER_URL("INVALID_OFFER_DISCLAIMER_URL"),
+      @SerializedName("INVALID_OFFER_END_DATE")
+      VALUE_INVALID_OFFER_END_DATE("INVALID_OFFER_END_DATE"),
       @SerializedName("INVALID_PRE_ORDER_PARAMS")
       VALUE_INVALID_PRE_ORDER_PARAMS("INVALID_PRE_ORDER_PARAMS"),
+      @SerializedName("INVALID_RANGE_FOR_AREA_SIZE")
+      VALUE_INVALID_RANGE_FOR_AREA_SIZE("INVALID_RANGE_FOR_AREA_SIZE"),
+      @SerializedName("INVALID_RANGE_FOR_BUILT_UP_AREA_SIZE")
+      VALUE_INVALID_RANGE_FOR_BUILT_UP_AREA_SIZE("INVALID_RANGE_FOR_BUILT_UP_AREA_SIZE"),
+      @SerializedName("INVALID_RANGE_FOR_NUM_OF_BATHS")
+      VALUE_INVALID_RANGE_FOR_NUM_OF_BATHS("INVALID_RANGE_FOR_NUM_OF_BATHS"),
+      @SerializedName("INVALID_RANGE_FOR_NUM_OF_BEDS")
+      VALUE_INVALID_RANGE_FOR_NUM_OF_BEDS("INVALID_RANGE_FOR_NUM_OF_BEDS"),
+      @SerializedName("INVALID_RANGE_FOR_NUM_OF_ROOMS")
+      VALUE_INVALID_RANGE_FOR_NUM_OF_ROOMS("INVALID_RANGE_FOR_NUM_OF_ROOMS"),
+      @SerializedName("INVALID_RANGE_FOR_PARKING_SPACES")
+      VALUE_INVALID_RANGE_FOR_PARKING_SPACES("INVALID_RANGE_FOR_PARKING_SPACES"),
       @SerializedName("INVALID_SHELTER_PAGE_ID")
       VALUE_INVALID_SHELTER_PAGE_ID("INVALID_SHELTER_PAGE_ID"),
       @SerializedName("INVALID_SHIPPING_PROFILE_PARAMS")
@@ -3453,6 +3463,10 @@ public class ProductItem extends APINode {
       VALUE_INVALID_SUBSCRIPTION_ENABLE_PARAMS("INVALID_SUBSCRIPTION_ENABLE_PARAMS"),
       @SerializedName("INVALID_SUBSCRIPTION_PARAMS")
       VALUE_INVALID_SUBSCRIPTION_PARAMS("INVALID_SUBSCRIPTION_PARAMS"),
+      @SerializedName("INVALID_VEHICLE_STATE")
+      VALUE_INVALID_VEHICLE_STATE("INVALID_VEHICLE_STATE"),
+      @SerializedName("INVALID_VIRTUAL_TOUR_URL_DOMAIN")
+      VALUE_INVALID_VIRTUAL_TOUR_URL_DOMAIN("INVALID_VIRTUAL_TOUR_URL_DOMAIN"),
       @SerializedName("INVENTORY_ZERO_AVAILABILITY_IN_STOCK")
       VALUE_INVENTORY_ZERO_AVAILABILITY_IN_STOCK("INVENTORY_ZERO_AVAILABILITY_IN_STOCK"),
       @SerializedName("IN_ANOTHER_PRODUCT_LAUNCH")
@@ -3491,10 +3505,14 @@ public class ProductItem extends APINode {
       VALUE_MISSING_TAX_CATEGORY("MISSING_TAX_CATEGORY"),
       @SerializedName("NEGATIVE_COMMUNITY_FEEDBACK")
       VALUE_NEGATIVE_COMMUNITY_FEEDBACK("NEGATIVE_COMMUNITY_FEEDBACK"),
+      @SerializedName("NEGATIVE_PRICE")
+      VALUE_NEGATIVE_PRICE("NEGATIVE_PRICE"),
       @SerializedName("NOT_ENOUGH_IMAGES")
       VALUE_NOT_ENOUGH_IMAGES("NOT_ENOUGH_IMAGES"),
       @SerializedName("NOT_ENOUGH_UNIQUE_PRODUCTS")
       VALUE_NOT_ENOUGH_UNIQUE_PRODUCTS("NOT_ENOUGH_UNIQUE_PRODUCTS"),
+      @SerializedName("OVERLAY_DISCLAIMER_EXCEEDED_MAX_LENGTH")
+      VALUE_OVERLAY_DISCLAIMER_EXCEEDED_MAX_LENGTH("OVERLAY_DISCLAIMER_EXCEEDED_MAX_LENGTH"),
       @SerializedName("PART_OF_PRODUCT_LAUNCH")
       VALUE_PART_OF_PRODUCT_LAUNCH("PART_OF_PRODUCT_LAUNCH"),
       @SerializedName("PRODUCT_EXPIRED")

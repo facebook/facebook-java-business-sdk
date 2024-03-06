@@ -6355,6 +6355,8 @@ public class AdSet extends APINode {
       VALUE_LOWEST_COST_WITHOUT_CAP("LOWEST_COST_WITHOUT_CAP"),
       @SerializedName("LOWEST_COST_WITH_BID_CAP")
       VALUE_LOWEST_COST_WITH_BID_CAP("LOWEST_COST_WITH_BID_CAP"),
+      @SerializedName("LOWEST_COST_WITH_MIN_ROAS")
+      VALUE_LOWEST_COST_WITH_MIN_ROAS("LOWEST_COST_WITH_MIN_ROAS"),
       ;
 
       private String value;
@@ -6483,6 +6485,8 @@ public class AdSet extends APINode {
       VALUE_LEAD_GENERATION("LEAD_GENERATION"),
       @SerializedName("LINK_CLICKS")
       VALUE_LINK_CLICKS("LINK_CLICKS"),
+      @SerializedName("MEANINGFUL_CALL_ATTEMPT")
+      VALUE_MEANINGFUL_CALL_ATTEMPT("MEANINGFUL_CALL_ATTEMPT"),
       @SerializedName("MESSAGING_APPOINTMENT_CONVERSION")
       VALUE_MESSAGING_APPOINTMENT_CONVERSION("MESSAGING_APPOINTMENT_CONVERSION"),
       @SerializedName("MESSAGING_PURCHASE_CONVERSION")
@@ -6549,46 +6553,46 @@ public class AdSet extends APINode {
   }
 
   public static enum EnumDatePreset {
-      @SerializedName("data_maximum")
-      VALUE_DATA_MAXIMUM("data_maximum"),
-      @SerializedName("last_14d")
-      VALUE_LAST_14D("last_14d"),
-      @SerializedName("last_28d")
-      VALUE_LAST_28D("last_28d"),
-      @SerializedName("last_30d")
-      VALUE_LAST_30D("last_30d"),
-      @SerializedName("last_3d")
-      VALUE_LAST_3D("last_3d"),
-      @SerializedName("last_7d")
-      VALUE_LAST_7D("last_7d"),
-      @SerializedName("last_90d")
-      VALUE_LAST_90D("last_90d"),
-      @SerializedName("last_month")
-      VALUE_LAST_MONTH("last_month"),
-      @SerializedName("last_quarter")
-      VALUE_LAST_QUARTER("last_quarter"),
-      @SerializedName("last_week_mon_sun")
-      VALUE_LAST_WEEK_MON_SUN("last_week_mon_sun"),
-      @SerializedName("last_week_sun_sat")
-      VALUE_LAST_WEEK_SUN_SAT("last_week_sun_sat"),
-      @SerializedName("last_year")
-      VALUE_LAST_YEAR("last_year"),
-      @SerializedName("maximum")
-      VALUE_MAXIMUM("maximum"),
-      @SerializedName("this_month")
-      VALUE_THIS_MONTH("this_month"),
-      @SerializedName("this_quarter")
-      VALUE_THIS_QUARTER("this_quarter"),
-      @SerializedName("this_week_mon_today")
-      VALUE_THIS_WEEK_MON_TODAY("this_week_mon_today"),
-      @SerializedName("this_week_sun_today")
-      VALUE_THIS_WEEK_SUN_TODAY("this_week_sun_today"),
-      @SerializedName("this_year")
-      VALUE_THIS_YEAR("this_year"),
-      @SerializedName("today")
-      VALUE_TODAY("today"),
-      @SerializedName("yesterday")
-      VALUE_YESTERDAY("yesterday"),
+      @SerializedName("DATA_MAXIMUM")
+      VALUE_DATA_MAXIMUM("DATA_MAXIMUM"),
+      @SerializedName("LAST_14D")
+      VALUE_LAST_14D("LAST_14D"),
+      @SerializedName("LAST_28D")
+      VALUE_LAST_28D("LAST_28D"),
+      @SerializedName("LAST_30D")
+      VALUE_LAST_30D("LAST_30D"),
+      @SerializedName("LAST_3D")
+      VALUE_LAST_3D("LAST_3D"),
+      @SerializedName("LAST_7D")
+      VALUE_LAST_7D("LAST_7D"),
+      @SerializedName("LAST_90D")
+      VALUE_LAST_90D("LAST_90D"),
+      @SerializedName("LAST_MONTH")
+      VALUE_LAST_MONTH("LAST_MONTH"),
+      @SerializedName("LAST_QUARTER")
+      VALUE_LAST_QUARTER("LAST_QUARTER"),
+      @SerializedName("LAST_WEEK_MON_SUN")
+      VALUE_LAST_WEEK_MON_SUN("LAST_WEEK_MON_SUN"),
+      @SerializedName("LAST_WEEK_SUN_SAT")
+      VALUE_LAST_WEEK_SUN_SAT("LAST_WEEK_SUN_SAT"),
+      @SerializedName("LAST_YEAR")
+      VALUE_LAST_YEAR("LAST_YEAR"),
+      @SerializedName("LIFETIME")
+      VALUE_LIFETIME("LIFETIME"),
+      @SerializedName("THIS_MONTH")
+      VALUE_THIS_MONTH("THIS_MONTH"),
+      @SerializedName("THIS_QUARTER")
+      VALUE_THIS_QUARTER("THIS_QUARTER"),
+      @SerializedName("THIS_WEEK_MON_TODAY")
+      VALUE_THIS_WEEK_MON_TODAY("THIS_WEEK_MON_TODAY"),
+      @SerializedName("THIS_WEEK_SUN_TODAY")
+      VALUE_THIS_WEEK_SUN_TODAY("THIS_WEEK_SUN_TODAY"),
+      @SerializedName("THIS_YEAR")
+      VALUE_THIS_YEAR("THIS_YEAR"),
+      @SerializedName("TODAY")
+      VALUE_TODAY("TODAY"),
+      @SerializedName("YESTERDAY")
+      VALUE_YESTERDAY("YESTERDAY"),
       ;
 
       private String value;

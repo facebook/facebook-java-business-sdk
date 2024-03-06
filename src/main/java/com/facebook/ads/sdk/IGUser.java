@@ -286,6 +286,30 @@ public class IGUser extends APINode {
     return new APIRequestGetAvailableCatalogs(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetBrandedContentAdPermissions getBrandedContentAdPermissions() {
+    return new APIRequestGetBrandedContentAdPermissions(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestCreateBrandedContentAdPermission createBrandedContentAdPermission() {
+    return new APIRequestCreateBrandedContentAdPermission(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetBrandedContentAdvertisableMedias getBrandedContentAdvertisableMedias() {
+    return new APIRequestGetBrandedContentAdvertisableMedias(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestDeleteBrandedContentTagApproval deleteBrandedContentTagApproval() {
+    return new APIRequestDeleteBrandedContentTagApproval(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetBrandedContentTagApproval getBrandedContentTagApproval() {
+    return new APIRequestGetBrandedContentTagApproval(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestCreateBrandedContentTagApproval createBrandedContentTagApproval() {
+    return new APIRequestCreateBrandedContentTagApproval(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetCatalogProductSearch getCatalogProductSearch() {
     return new APIRequestGetCatalogProductSearch(this.getPrefixedId().toString(), context);
   }
@@ -564,6 +588,772 @@ public class IGUser extends APINode {
       this.requestField("shop_name", value);
       return this;
     }
+  }
+
+  public static class APIRequestGetBrandedContentAdPermissions extends APIRequest<IGBCAdsPermission> {
+
+    APINodeList<IGBCAdsPermission> lastResponse = null;
+    @Override
+    public APINodeList<IGBCAdsPermission> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "id",
+      "permission_type",
+      "status",
+    };
+
+    @Override
+    public APINodeList<IGBCAdsPermission> parseResponse(String response, String header) throws APIException {
+      return IGBCAdsPermission.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<IGBCAdsPermission> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<IGBCAdsPermission> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<IGBCAdsPermission>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<IGBCAdsPermission>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<IGBCAdsPermission>>() {
+           public APINodeList<IGBCAdsPermission> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetBrandedContentAdPermissions.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestGetBrandedContentAdPermissions(String nodeId, APIContext context) {
+      super(context, nodeId, "/branded_content_ad_permissions", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetBrandedContentAdPermissions setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetBrandedContentAdPermissions setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetBrandedContentAdPermissions requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetBrandedContentAdPermissions requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetBrandedContentAdPermissions requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetBrandedContentAdPermissions requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetBrandedContentAdPermissions requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetBrandedContentAdPermissions requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetBrandedContentAdPermissions requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetBrandedContentAdPermissions requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetBrandedContentAdPermissions requestPermissionTypeField () {
+      return this.requestPermissionTypeField(true);
+    }
+    public APIRequestGetBrandedContentAdPermissions requestPermissionTypeField (boolean value) {
+      this.requestField("permission_type", value);
+      return this;
+    }
+    public APIRequestGetBrandedContentAdPermissions requestStatusField () {
+      return this.requestStatusField(true);
+    }
+    public APIRequestGetBrandedContentAdPermissions requestStatusField (boolean value) {
+      this.requestField("status", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestCreateBrandedContentAdPermission extends APIRequest<IGBCAdsPermission> {
+
+    IGBCAdsPermission lastResponse = null;
+    @Override
+    public IGBCAdsPermission getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "creator_instagram_account",
+      "revoke",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public IGBCAdsPermission parseResponse(String response, String header) throws APIException {
+      return IGBCAdsPermission.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public IGBCAdsPermission execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public IGBCAdsPermission execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<IGBCAdsPermission> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<IGBCAdsPermission> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, IGBCAdsPermission>() {
+           public IGBCAdsPermission apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateBrandedContentAdPermission.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestCreateBrandedContentAdPermission(String nodeId, APIContext context) {
+      super(context, nodeId, "/branded_content_ad_permissions", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateBrandedContentAdPermission setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateBrandedContentAdPermission setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateBrandedContentAdPermission setCreatorInstagramAccount (String creatorInstagramAccount) {
+      this.setParam("creator_instagram_account", creatorInstagramAccount);
+      return this;
+    }
+
+    public APIRequestCreateBrandedContentAdPermission setRevoke (Boolean revoke) {
+      this.setParam("revoke", revoke);
+      return this;
+    }
+    public APIRequestCreateBrandedContentAdPermission setRevoke (String revoke) {
+      this.setParam("revoke", revoke);
+      return this;
+    }
+
+    public APIRequestCreateBrandedContentAdPermission requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateBrandedContentAdPermission requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateBrandedContentAdPermission requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateBrandedContentAdPermission requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateBrandedContentAdPermission requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateBrandedContentAdPermission requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestGetBrandedContentAdvertisableMedias extends APIRequest<BrandedContentShadowIGMediaID> {
+
+    APINodeList<BrandedContentShadowIGMediaID> lastResponse = null;
+    @Override
+    public APINodeList<BrandedContentShadowIGMediaID> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "creator_username",
+      "only_fetch_allowlisted",
+      "permalinks",
+    };
+
+    public static final String[] FIELDS = {
+      "eligibility_errors",
+      "id",
+      "owner_id",
+      "permalink",
+    };
+
+    @Override
+    public APINodeList<BrandedContentShadowIGMediaID> parseResponse(String response, String header) throws APIException {
+      return BrandedContentShadowIGMediaID.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<BrandedContentShadowIGMediaID> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<BrandedContentShadowIGMediaID> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<BrandedContentShadowIGMediaID>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<BrandedContentShadowIGMediaID>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<BrandedContentShadowIGMediaID>>() {
+           public APINodeList<BrandedContentShadowIGMediaID> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetBrandedContentAdvertisableMedias.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestGetBrandedContentAdvertisableMedias(String nodeId, APIContext context) {
+      super(context, nodeId, "/branded_content_advertisable_medias", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetBrandedContentAdvertisableMedias setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetBrandedContentAdvertisableMedias setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetBrandedContentAdvertisableMedias setCreatorUsername (String creatorUsername) {
+      this.setParam("creator_username", creatorUsername);
+      return this;
+    }
+
+    public APIRequestGetBrandedContentAdvertisableMedias setOnlyFetchAllowlisted (Boolean onlyFetchAllowlisted) {
+      this.setParam("only_fetch_allowlisted", onlyFetchAllowlisted);
+      return this;
+    }
+    public APIRequestGetBrandedContentAdvertisableMedias setOnlyFetchAllowlisted (String onlyFetchAllowlisted) {
+      this.setParam("only_fetch_allowlisted", onlyFetchAllowlisted);
+      return this;
+    }
+
+    public APIRequestGetBrandedContentAdvertisableMedias setPermalinks (List<String> permalinks) {
+      this.setParam("permalinks", permalinks);
+      return this;
+    }
+    public APIRequestGetBrandedContentAdvertisableMedias setPermalinks (String permalinks) {
+      this.setParam("permalinks", permalinks);
+      return this;
+    }
+
+    public APIRequestGetBrandedContentAdvertisableMedias requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetBrandedContentAdvertisableMedias requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetBrandedContentAdvertisableMedias requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetBrandedContentAdvertisableMedias requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetBrandedContentAdvertisableMedias requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetBrandedContentAdvertisableMedias requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetBrandedContentAdvertisableMedias requestEligibilityErrorsField () {
+      return this.requestEligibilityErrorsField(true);
+    }
+    public APIRequestGetBrandedContentAdvertisableMedias requestEligibilityErrorsField (boolean value) {
+      this.requestField("eligibility_errors", value);
+      return this;
+    }
+    public APIRequestGetBrandedContentAdvertisableMedias requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetBrandedContentAdvertisableMedias requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetBrandedContentAdvertisableMedias requestOwnerIdField () {
+      return this.requestOwnerIdField(true);
+    }
+    public APIRequestGetBrandedContentAdvertisableMedias requestOwnerIdField (boolean value) {
+      this.requestField("owner_id", value);
+      return this;
+    }
+    public APIRequestGetBrandedContentAdvertisableMedias requestPermalinkField () {
+      return this.requestPermalinkField(true);
+    }
+    public APIRequestGetBrandedContentAdvertisableMedias requestPermalinkField (boolean value) {
+      this.requestField("permalink", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestDeleteBrandedContentTagApproval extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "user_ids",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestDeleteBrandedContentTagApproval.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestDeleteBrandedContentTagApproval(String nodeId, APIContext context) {
+      super(context, nodeId, "/branded_content_tag_approval", "DELETE", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestDeleteBrandedContentTagApproval setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteBrandedContentTagApproval setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestDeleteBrandedContentTagApproval setUserIds (List<Long> userIds) {
+      this.setParam("user_ids", userIds);
+      return this;
+    }
+    public APIRequestDeleteBrandedContentTagApproval setUserIds (String userIds) {
+      this.setParam("user_ids", userIds);
+      return this;
+    }
+
+    public APIRequestDeleteBrandedContentTagApproval requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestDeleteBrandedContentTagApproval requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteBrandedContentTagApproval requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestDeleteBrandedContentTagApproval requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteBrandedContentTagApproval requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteBrandedContentTagApproval requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestGetBrandedContentTagApproval extends APIRequest<BrandedContentShadowIGUserID> {
+
+    APINodeList<BrandedContentShadowIGUserID> lastResponse = null;
+    @Override
+    public APINodeList<BrandedContentShadowIGUserID> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "user_ids",
+    };
+
+    public static final String[] FIELDS = {
+      "id",
+    };
+
+    @Override
+    public APINodeList<BrandedContentShadowIGUserID> parseResponse(String response, String header) throws APIException {
+      return BrandedContentShadowIGUserID.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<BrandedContentShadowIGUserID> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<BrandedContentShadowIGUserID> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<BrandedContentShadowIGUserID>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<BrandedContentShadowIGUserID>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<BrandedContentShadowIGUserID>>() {
+           public APINodeList<BrandedContentShadowIGUserID> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetBrandedContentTagApproval.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestGetBrandedContentTagApproval(String nodeId, APIContext context) {
+      super(context, nodeId, "/branded_content_tag_approval", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetBrandedContentTagApproval setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetBrandedContentTagApproval setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetBrandedContentTagApproval setUserIds (List<Long> userIds) {
+      this.setParam("user_ids", userIds);
+      return this;
+    }
+    public APIRequestGetBrandedContentTagApproval setUserIds (String userIds) {
+      this.setParam("user_ids", userIds);
+      return this;
+    }
+
+    public APIRequestGetBrandedContentTagApproval requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetBrandedContentTagApproval requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetBrandedContentTagApproval requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetBrandedContentTagApproval requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetBrandedContentTagApproval requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetBrandedContentTagApproval requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetBrandedContentTagApproval requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetBrandedContentTagApproval requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestCreateBrandedContentTagApproval extends APIRequest<BrandedContentShadowIGUserID> {
+
+    BrandedContentShadowIGUserID lastResponse = null;
+    @Override
+    public BrandedContentShadowIGUserID getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "user_ids",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public BrandedContentShadowIGUserID parseResponse(String response, String header) throws APIException {
+      return BrandedContentShadowIGUserID.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public BrandedContentShadowIGUserID execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public BrandedContentShadowIGUserID execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<BrandedContentShadowIGUserID> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<BrandedContentShadowIGUserID> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, BrandedContentShadowIGUserID>() {
+           public BrandedContentShadowIGUserID apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateBrandedContentTagApproval.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestCreateBrandedContentTagApproval(String nodeId, APIContext context) {
+      super(context, nodeId, "/branded_content_tag_approval", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateBrandedContentTagApproval setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateBrandedContentTagApproval setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateBrandedContentTagApproval setUserIds (List<Long> userIds) {
+      this.setParam("user_ids", userIds);
+      return this;
+    }
+    public APIRequestCreateBrandedContentTagApproval setUserIds (String userIds) {
+      this.setParam("user_ids", userIds);
+      return this;
+    }
+
+    public APIRequestCreateBrandedContentTagApproval requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateBrandedContentTagApproval requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateBrandedContentTagApproval requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateBrandedContentTagApproval requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateBrandedContentTagApproval requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateBrandedContentTagApproval requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
   }
 
   public static class APIRequestGetCatalogProductSearch extends APIRequest<ShadowIGUserCatalogProductSearch> {

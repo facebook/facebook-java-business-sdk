@@ -1422,6 +1422,7 @@ public class CommerceOrder extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "adjustment_amount",
       "deductions",
       "idempotency_key",
       "items",
@@ -1487,6 +1488,15 @@ public class CommerceOrder extends APINode {
       return this;
     }
 
+
+    public APIRequestCreateRefund setAdjustmentAmount (Map<String, String> adjustmentAmount) {
+      this.setParam("adjustment_amount", adjustmentAmount);
+      return this;
+    }
+    public APIRequestCreateRefund setAdjustmentAmount (String adjustmentAmount) {
+      this.setParam("adjustment_amount", adjustmentAmount);
+      return this;
+    }
 
     public APIRequestCreateRefund setDeductions (List<Map<String, String>> deductions) {
       this.setParam("deductions", deductions);

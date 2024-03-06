@@ -1060,9 +1060,6 @@ public class ProductGroup extends APINode {
       "material",
       "mobile_link",
       "name",
-      "offer_price_amount",
-      "offer_price_end_date",
-      "offer_price_start_date",
       "ordering_index",
       "pattern",
       "price",
@@ -1440,25 +1437,6 @@ public class ProductGroup extends APINode {
 
     public APIRequestCreateProduct setName (String name) {
       this.setParam("name", name);
-      return this;
-    }
-
-    public APIRequestCreateProduct setOfferPriceAmount (Long offerPriceAmount) {
-      this.setParam("offer_price_amount", offerPriceAmount);
-      return this;
-    }
-    public APIRequestCreateProduct setOfferPriceAmount (String offerPriceAmount) {
-      this.setParam("offer_price_amount", offerPriceAmount);
-      return this;
-    }
-
-    public APIRequestCreateProduct setOfferPriceEndDate (String offerPriceEndDate) {
-      this.setParam("offer_price_end_date", offerPriceEndDate);
-      return this;
-    }
-
-    public APIRequestCreateProduct setOfferPriceStartDate (String offerPriceStartDate) {
-      this.setParam("offer_price_start_date", offerPriceStartDate);
       return this;
     }
 

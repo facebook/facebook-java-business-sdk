@@ -300,16 +300,6 @@ public class InstagramInsightsResult extends APINode {
   }
 
   public static enum EnumMetric {
-      @SerializedName("carousel_album_engagement")
-      VALUE_CAROUSEL_ALBUM_ENGAGEMENT("carousel_album_engagement"),
-      @SerializedName("carousel_album_impressions")
-      VALUE_CAROUSEL_ALBUM_IMPRESSIONS("carousel_album_impressions"),
-      @SerializedName("carousel_album_reach")
-      VALUE_CAROUSEL_ALBUM_REACH("carousel_album_reach"),
-      @SerializedName("carousel_album_saved")
-      VALUE_CAROUSEL_ALBUM_SAVED("carousel_album_saved"),
-      @SerializedName("carousel_album_video_views")
-      VALUE_CAROUSEL_ALBUM_VIDEO_VIEWS("carousel_album_video_views"),
       @SerializedName("clips_replays_count")
       VALUE_CLIPS_REPLAYS_COUNT("clips_replays_count"),
       @SerializedName("comments")

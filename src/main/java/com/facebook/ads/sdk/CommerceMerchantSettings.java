@@ -316,10 +316,6 @@ public class CommerceMerchantSettings extends APINode {
     return new APIRequestGetCommerceTransactions(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestGetOnsiteConversionEvents getOnsiteConversionEvents() {
-    return new APIRequestGetOnsiteConversionEvents(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetOrderManagementApps getOrderManagementApps() {
     return new APIRequestGetOrderManagementApps(this.getPrefixedId().toString(), context);
   }
@@ -1186,123 +1182,6 @@ public class CommerceMerchantSettings extends APINode {
       this.requestField("id", value);
       return this;
     }
-  }
-
-  public static class APIRequestGetOnsiteConversionEvents extends APIRequest<APINode> {
-
-    APINodeList<APINode> lastResponse = null;
-    @Override
-    public APINodeList<APINode> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "created_after",
-      "created_before",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<APINode> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetOnsiteConversionEvents.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         },
-         MoreExecutors.directExecutor()
-      );
-    };
-
-    public APIRequestGetOnsiteConversionEvents(String nodeId, APIContext context) {
-      super(context, nodeId, "/onsite_conversion_events", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetOnsiteConversionEvents setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetOnsiteConversionEvents setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetOnsiteConversionEvents setCreatedAfter (String createdAfter) {
-      this.setParam("created_after", createdAfter);
-      return this;
-    }
-
-    public APIRequestGetOnsiteConversionEvents setCreatedBefore (String createdBefore) {
-      this.setParam("created_before", createdBefore);
-      return this;
-    }
-
-    public APIRequestGetOnsiteConversionEvents requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetOnsiteConversionEvents requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetOnsiteConversionEvents requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetOnsiteConversionEvents requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetOnsiteConversionEvents requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetOnsiteConversionEvents requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
   }
 
   public static class APIRequestGetOrderManagementApps extends APIRequest<Application> {
@@ -2378,6 +2257,7 @@ public class CommerceMerchantSettings extends APINode {
       "feed_count",
       "id",
       "is_catalog_segment",
+      "is_local_catalog",
       "name",
       "owner_business",
       "product_count",
@@ -2558,6 +2438,13 @@ public class CommerceMerchantSettings extends APINode {
     }
     public APIRequestGetProductCatalogs requestIsCatalogSegmentField (boolean value) {
       this.requestField("is_catalog_segment", value);
+      return this;
+    }
+    public APIRequestGetProductCatalogs requestIsLocalCatalogField () {
+      return this.requestIsLocalCatalogField(true);
+    }
+    public APIRequestGetProductCatalogs requestIsLocalCatalogField (boolean value) {
+      this.requestField("is_local_catalog", value);
       return this;
     }
     public APIRequestGetProductCatalogs requestNameField () {
@@ -3274,6 +3161,7 @@ public class CommerceMerchantSettings extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "commerce_merchant_settings",
       "fb_sales_channel",
       "id",
       "ig_sales_channel",
@@ -3372,6 +3260,13 @@ public class CommerceMerchantSettings extends APINode {
       return this;
     }
 
+    public APIRequestGetShops requestCommerceMerchantSettingsField () {
+      return this.requestCommerceMerchantSettingsField(true);
+    }
+    public APIRequestGetShops requestCommerceMerchantSettingsField (boolean value) {
+      this.requestField("commerce_merchant_settings", value);
+      return this;
+    }
     public APIRequestGetShops requestFbSalesChannelField () {
       return this.requestFbSalesChannelField(true);
     }

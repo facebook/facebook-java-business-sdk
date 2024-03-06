@@ -47,6 +47,8 @@ public class Targeting extends APINode {
   private Long mAgeMax = null;
   @SerializedName("age_min")
   private Long mAgeMin = null;
+  @SerializedName("age_range")
+  private List<Long> mAgeRange = null;
   @SerializedName("alternate_auto_targeting_option")
   private String mAlternateAutoTargetingOption = null;
   @SerializedName("app_install_state")
@@ -201,6 +203,8 @@ public class Targeting extends APINode {
   private List<Long> mRelationshipStatuses = null;
   @SerializedName("site_category")
   private List<String> mSiteCategory = null;
+  @SerializedName("targeting_automation")
+  private TargetingAutomation mTargetingAutomation = null;
   @SerializedName("targeting_optimization")
   private String mTargetingOptimization = null;
   @SerializedName("targeting_relaxation_types")
@@ -396,6 +400,15 @@ public class Targeting extends APINode {
 
   public Targeting setFieldAgeMin(Long value) {
     this.mAgeMin = value;
+    return this;
+  }
+
+  public List<Long> getFieldAgeRange() {
+    return mAgeRange;
+  }
+
+  public Targeting setFieldAgeRange(List<Long> value) {
+    this.mAgeRange = value;
     return this;
   }
 
@@ -1272,6 +1285,20 @@ public class Targeting extends APINode {
     return this;
   }
 
+  public TargetingAutomation getFieldTargetingAutomation() {
+    return mTargetingAutomation;
+  }
+
+  public Targeting setFieldTargetingAutomation(TargetingAutomation value) {
+    this.mTargetingAutomation = value;
+    return this;
+  }
+
+  public Targeting setFieldTargetingAutomation(String value) {
+    Type type = new TypeToken<TargetingAutomation>(){}.getType();
+    this.mTargetingAutomation = TargetingAutomation.getGson().fromJson(value, type);
+    return this;
+  }
   public String getFieldTargetingOptimization() {
     return mTargetingOptimization;
   }
@@ -1440,6 +1467,7 @@ public class Targeting extends APINode {
     this.mAdgroupId = instance.mAdgroupId;
     this.mAgeMax = instance.mAgeMax;
     this.mAgeMin = instance.mAgeMin;
+    this.mAgeRange = instance.mAgeRange;
     this.mAlternateAutoTargetingOption = instance.mAlternateAutoTargetingOption;
     this.mAppInstallState = instance.mAppInstallState;
     this.mAudienceNetworkPositions = instance.mAudienceNetworkPositions;
@@ -1517,6 +1545,7 @@ public class Targeting extends APINode {
     this.mRegions = instance.mRegions;
     this.mRelationshipStatuses = instance.mRelationshipStatuses;
     this.mSiteCategory = instance.mSiteCategory;
+    this.mTargetingAutomation = instance.mTargetingAutomation;
     this.mTargetingOptimization = instance.mTargetingOptimization;
     this.mTargetingRelaxationTypes = instance.mTargetingRelaxationTypes;
     this.mUserAdclusters = instance.mUserAdclusters;

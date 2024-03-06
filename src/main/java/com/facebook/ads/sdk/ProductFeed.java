@@ -5996,6 +5996,8 @@ public class ProductFeed extends APINode {
       VALUE_LOCAL("LOCAL"),
       @SerializedName("SMART_PIXEL_LANGUAGE_OR_COUNTRY")
       VALUE_SMART_PIXEL_LANGUAGE_OR_COUNTRY("SMART_PIXEL_LANGUAGE_OR_COUNTRY"),
+      @SerializedName("VERSION")
+      VALUE_VERSION("VERSION"),
       ;
 
       private String value;
