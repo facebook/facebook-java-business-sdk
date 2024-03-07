@@ -317,9 +317,9 @@ public class AdsInsights extends APINode {
   @SerializedName("app_id")
   private String mAppId = null;
   @SerializedName("body_asset")
-  private String mBodyAsset = null;
+  private AdAssetBody mBodyAsset = null;
   @SerializedName("call_to_action_asset")
-  private String mCallToActionAsset = null;
+  private AdAssetCallToActionType mCallToActionAsset = null;
   @SerializedName("coarse_conversion_value")
   private String mCoarseConversionValue = null;
   @SerializedName("conversion_destination")
@@ -327,7 +327,7 @@ public class AdsInsights extends APINode {
   @SerializedName("country")
   private String mCountry = null;
   @SerializedName("description_asset")
-  private String mDescriptionAsset = null;
+  private AdAssetDescription mDescriptionAsset = null;
   @SerializedName("device_platform")
   private String mDevicePlatform = null;
   @SerializedName("dma")
@@ -345,7 +345,7 @@ public class AdsInsights extends APINode {
   @SerializedName("hsid")
   private String mHsid = null;
   @SerializedName("image_asset")
-  private String mImageAsset = null;
+  private AdAssetImage mImageAsset = null;
   @SerializedName("impression_device")
   private String mImpressionDevice = null;
   @SerializedName("is_conversion_id_modeled")
@@ -353,7 +353,7 @@ public class AdsInsights extends APINode {
   @SerializedName("landing_destination")
   private String mLandingDestination = null;
   @SerializedName("link_url_asset")
-  private String mLinkUrlAsset = null;
+  private AdAssetLinkURL mLinkUrlAsset = null;
   @SerializedName("marketing_messages_btn_name")
   private String mMarketingMessagesBtnName = null;
   @SerializedName("mdsa_landing_destination")
@@ -395,9 +395,9 @@ public class AdsInsights extends APINode {
   @SerializedName("standard_event_content_type")
   private String mStandardEventContentType = null;
   @SerializedName("title_asset")
-  private String mTitleAsset = null;
+  private AdAssetTitle mTitleAsset = null;
   @SerializedName("video_asset")
-  private String mVideoAsset = null;
+  private AdAssetVideo mVideoAsset = null;
   protected static Gson gson = null;
 
   public AdsInsights() {
@@ -2047,11 +2047,11 @@ public class AdsInsights extends APINode {
     return mAppId;
   }
 
-  public String getFieldBodyAsset() {
+  public AdAssetBody getFieldBodyAsset() {
     return mBodyAsset;
   }
 
-  public String getFieldCallToActionAsset() {
+  public AdAssetCallToActionType getFieldCallToActionAsset() {
     return mCallToActionAsset;
   }
 
@@ -2067,7 +2067,7 @@ public class AdsInsights extends APINode {
     return mCountry;
   }
 
-  public String getFieldDescriptionAsset() {
+  public AdAssetDescription getFieldDescriptionAsset() {
     return mDescriptionAsset;
   }
 
@@ -2103,7 +2103,7 @@ public class AdsInsights extends APINode {
     return mHsid;
   }
 
-  public String getFieldImageAsset() {
+  public AdAssetImage getFieldImageAsset() {
     return mImageAsset;
   }
 
@@ -2119,7 +2119,7 @@ public class AdsInsights extends APINode {
     return mLandingDestination;
   }
 
-  public String getFieldLinkUrlAsset() {
+  public AdAssetLinkURL getFieldLinkUrlAsset() {
     return mLinkUrlAsset;
   }
 
@@ -2203,11 +2203,11 @@ public class AdsInsights extends APINode {
     return mStandardEventContentType;
   }
 
-  public String getFieldTitleAsset() {
+  public AdAssetTitle getFieldTitleAsset() {
     return mTitleAsset;
   }
 
-  public String getFieldVideoAsset() {
+  public AdAssetVideo getFieldVideoAsset() {
     return mVideoAsset;
   }
 
