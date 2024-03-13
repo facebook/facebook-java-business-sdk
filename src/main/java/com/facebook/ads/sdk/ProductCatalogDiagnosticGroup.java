@@ -316,16 +316,34 @@ public class ProductCatalogDiagnosticGroup extends APINode {
 
 
   public static enum EnumAffectedChannels {
-      @SerializedName("business_inbox_in_messenger")
-      VALUE_BUSINESS_INBOX_IN_MESSENGER("business_inbox_in_messenger"),
+      @SerializedName("b2c_marketplace")
+      VALUE_B2C_MARKETPLACE("b2c_marketplace"),
+      @SerializedName("c2c_marketplace")
+      VALUE_C2C_MARKETPLACE("c2c_marketplace"),
+      @SerializedName("da")
+      VALUE_DA("da"),
+      @SerializedName("daily_deals")
+      VALUE_DAILY_DEALS("daily_deals"),
+      @SerializedName("daily_deals_legacy")
+      VALUE_DAILY_DEALS_LEGACY("daily_deals_legacy"),
+      @SerializedName("ig_product_tagging")
+      VALUE_IG_PRODUCT_TAGGING("ig_product_tagging"),
+      @SerializedName("marketplace")
+      VALUE_MARKETPLACE("marketplace"),
+      @SerializedName("marketplace_ads_deprecated")
+      VALUE_MARKETPLACE_ADS_DEPRECATED("marketplace_ads_deprecated"),
+      @SerializedName("marketplace_shops")
+      VALUE_MARKETPLACE_SHOPS("marketplace_shops"),
+      @SerializedName("mini_shops")
+      VALUE_MINI_SHOPS("mini_shops"),
+      @SerializedName("offline_conversions")
+      VALUE_OFFLINE_CONVERSIONS("offline_conversions"),
       @SerializedName("shops")
       VALUE_SHOPS("shops"),
-      @SerializedName("test_capability")
-      VALUE_TEST_CAPABILITY("test_capability"),
       @SerializedName("universal_checkout")
       VALUE_UNIVERSAL_CHECKOUT("universal_checkout"),
-      @SerializedName("us_marketplace")
-      VALUE_US_MARKETPLACE("us_marketplace"),
+      @SerializedName("whatsapp")
+      VALUE_WHATSAPP("whatsapp"),
       ;
 
       private String value;
