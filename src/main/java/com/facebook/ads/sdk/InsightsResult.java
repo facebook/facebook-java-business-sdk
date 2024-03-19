@@ -54,7 +54,7 @@ public class InsightsResult extends APINode {
   @SerializedName("title")
   private String mTitle = null;
   @SerializedName("values")
-  private List<Object> mValues = null;
+  private List<InsightsValue> mValues = null;
   protected static Gson gson = null;
 
   public InsightsResult() {
@@ -260,15 +260,20 @@ public class InsightsResult extends APINode {
     return this;
   }
 
-  public List<Object> getFieldValues() {
+  public List<InsightsValue> getFieldValues() {
     return mValues;
   }
 
-  public InsightsResult setFieldValues(List<Object> value) {
+  public InsightsResult setFieldValues(List<InsightsValue> value) {
     this.mValues = value;
     return this;
   }
 
+  public InsightsResult setFieldValues(String value) {
+    Type type = new TypeToken<List<InsightsValue>>(){}.getType();
+    this.mValues = InsightsValue.getGson().fromJson(value, type);
+    return this;
+  }
 
 
   public static enum EnumDatePreset {
@@ -296,8 +301,8 @@ public class InsightsResult extends APINode {
       VALUE_LAST_WEEK_SUN_SAT("last_week_sun_sat"),
       @SerializedName("last_year")
       VALUE_LAST_YEAR("last_year"),
-      @SerializedName("lifetime")
-      VALUE_LIFETIME("lifetime"),
+      @SerializedName("maximum")
+      VALUE_MAXIMUM("maximum"),
       @SerializedName("this_month")
       VALUE_THIS_MONTH("this_month"),
       @SerializedName("this_quarter")

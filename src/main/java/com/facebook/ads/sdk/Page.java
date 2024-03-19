@@ -71,6 +71,8 @@ public class Page extends APINode {
   private String mBirthday = null;
   @SerializedName("booking_agent")
   private String mBookingAgent = null;
+  @SerializedName("breaking_news_usage")
+  private Object mBreakingNewsUsage = null;
   @SerializedName("built")
   private String mBuilt = null;
   @SerializedName("business")
@@ -960,6 +962,10 @@ public class Page extends APINode {
     return new APIRequestCreateTakeThreadControl(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestCreateThreadAction createThreadAction() {
+    return new APIRequestCreateThreadAction(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetThreadOwner getThreadOwner() {
     return new APIRequestGetThreadOwner(this.getPrefixedId().toString(), context);
   }
@@ -1097,6 +1103,10 @@ public class Page extends APINode {
 
   public String getFieldBookingAgent() {
     return mBookingAgent;
+  }
+
+  public Object getFieldBreakingNewsUsage() {
+    return mBreakingNewsUsage;
   }
 
   public String getFieldBuilt() {
@@ -7779,6 +7789,7 @@ public class Page extends APINode {
       "bio",
       "birthday",
       "booking_agent",
+      "breaking_news_usage",
       "built",
       "business",
       "can_checkin",
@@ -8108,6 +8119,13 @@ public class Page extends APINode {
     }
     public APIRequestGetCrosspostWhitelistedPages requestBookingAgentField (boolean value) {
       this.requestField("booking_agent", value);
+      return this;
+    }
+    public APIRequestGetCrosspostWhitelistedPages requestBreakingNewsUsageField () {
+      return this.requestBreakingNewsUsageField(true);
+    }
+    public APIRequestGetCrosspostWhitelistedPages requestBreakingNewsUsageField (boolean value) {
+      this.requestField("breaking_news_usage", value);
       return this;
     }
     public APIRequestGetCrosspostWhitelistedPages requestBuiltField () {
@@ -11040,6 +11058,8 @@ public class Page extends APINode {
       "audience_exp",
       "backdated_time",
       "backdated_time_granularity",
+      "breaking_news",
+      "breaking_news_expiration",
       "call_to_action",
       "caption",
       "child_attachments",
@@ -11065,7 +11085,6 @@ public class Page extends APINode {
       "formatting",
       "fun_fact_prompt_id",
       "fun_fact_toastee_id",
-      "has_nickname",
       "height",
       "holiday_card",
       "home_checkin_city_id",
@@ -11298,6 +11317,24 @@ public class Page extends APINode {
       return this;
     }
 
+    public APIRequestCreateFeed setBreakingNews (Boolean breakingNews) {
+      this.setParam("breaking_news", breakingNews);
+      return this;
+    }
+    public APIRequestCreateFeed setBreakingNews (String breakingNews) {
+      this.setParam("breaking_news", breakingNews);
+      return this;
+    }
+
+    public APIRequestCreateFeed setBreakingNewsExpiration (Long breakingNewsExpiration) {
+      this.setParam("breaking_news_expiration", breakingNewsExpiration);
+      return this;
+    }
+    public APIRequestCreateFeed setBreakingNewsExpiration (String breakingNewsExpiration) {
+      this.setParam("breaking_news_expiration", breakingNewsExpiration);
+      return this;
+    }
+
     public APIRequestCreateFeed setCallToAction (Object callToAction) {
       this.setParam("call_to_action", callToAction);
       return this;
@@ -11468,15 +11505,6 @@ public class Page extends APINode {
     }
     public APIRequestCreateFeed setFunFactToasteeId (String funFactToasteeId) {
       this.setParam("fun_fact_toastee_id", funFactToasteeId);
-      return this;
-    }
-
-    public APIRequestCreateFeed setHasNickname (Boolean hasNickname) {
-      this.setParam("has_nickname", hasNickname);
-      return this;
-    }
-    public APIRequestCreateFeed setHasNickname (String hasNickname) {
-      this.setParam("has_nickname", hasNickname);
       return this;
     }
 
@@ -12051,6 +12079,7 @@ public class Page extends APINode {
       "bio",
       "birthday",
       "booking_agent",
+      "breaking_news_usage",
       "built",
       "business",
       "can_checkin",
@@ -12380,6 +12409,13 @@ public class Page extends APINode {
     }
     public APIRequestGetGlobalBrandChildren requestBookingAgentField (boolean value) {
       this.requestField("booking_agent", value);
+      return this;
+    }
+    public APIRequestGetGlobalBrandChildren requestBreakingNewsUsageField () {
+      return this.requestBreakingNewsUsageField(true);
+    }
+    public APIRequestGetGlobalBrandChildren requestBreakingNewsUsageField (boolean value) {
+      this.requestField("breaking_news_usage", value);
       return this;
     }
     public APIRequestGetGlobalBrandChildren requestBuiltField () {
@@ -15441,6 +15477,7 @@ public class Page extends APINode {
       "bio",
       "birthday",
       "booking_agent",
+      "breaking_news_usage",
       "built",
       "business",
       "can_checkin",
@@ -15775,6 +15812,13 @@ public class Page extends APINode {
     }
     public APIRequestGetLikes requestBookingAgentField (boolean value) {
       this.requestField("booking_agent", value);
+      return this;
+    }
+    public APIRequestGetLikes requestBreakingNewsUsageField () {
+      return this.requestBreakingNewsUsageField(true);
+    }
+    public APIRequestGetLikes requestBreakingNewsUsageField (boolean value) {
+      this.requestField("breaking_news_usage", value);
       return this;
     }
     public APIRequestGetLikes requestBuiltField () {
@@ -17538,6 +17582,7 @@ public class Page extends APINode {
       "bio",
       "birthday",
       "booking_agent",
+      "breaking_news_usage",
       "built",
       "business",
       "can_checkin",
@@ -17867,6 +17912,13 @@ public class Page extends APINode {
     }
     public APIRequestGetLocations requestBookingAgentField (boolean value) {
       this.requestField("booking_agent", value);
+      return this;
+    }
+    public APIRequestGetLocations requestBreakingNewsUsageField () {
+      return this.requestBreakingNewsUsageField(true);
+    }
+    public APIRequestGetLocations requestBreakingNewsUsageField (boolean value) {
+      this.requestField("breaking_news_usage", value);
       return this;
     }
     public APIRequestGetLocations requestBuiltField () {
@@ -30337,6 +30389,141 @@ public class Page extends APINode {
 
   }
 
+  public static class APIRequestCreateThreadAction extends APIRequest<Page> {
+
+    Page lastResponse = null;
+    @Override
+    public Page getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "action",
+      "action_type",
+      "user_id",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public Page parseResponse(String response, String header) throws APIException {
+      return Page.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public Page execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public Page execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<Page> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<Page> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, Page>() {
+           public Page apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateThreadAction.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestCreateThreadAction(String nodeId, APIContext context) {
+      super(context, nodeId, "/thread_action", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateThreadAction setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateThreadAction setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateThreadAction setAction (Page.EnumAction action) {
+      this.setParam("action", action);
+      return this;
+    }
+    public APIRequestCreateThreadAction setAction (String action) {
+      this.setParam("action", action);
+      return this;
+    }
+
+    public APIRequestCreateThreadAction setActionType (Page.EnumActionType actionType) {
+      this.setParam("action_type", actionType);
+      return this;
+    }
+    public APIRequestCreateThreadAction setActionType (String actionType) {
+      this.setParam("action_type", actionType);
+      return this;
+    }
+
+    public APIRequestCreateThreadAction setUserId (Map<String, String> userId) {
+      this.setParam("user_id", userId);
+      return this;
+    }
+    public APIRequestCreateThreadAction setUserId (String userId) {
+      this.setParam("user_id", userId);
+      return this;
+    }
+
+    public APIRequestCreateThreadAction requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateThreadAction requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateThreadAction requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateThreadAction requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateThreadAction requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateThreadAction requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGetThreadOwner extends APIRequest<PageThreadOwner> {
 
     APINodeList<PageThreadOwner> lastResponse = null;
@@ -32902,7 +33089,6 @@ public class Page extends APINode {
       "fun_fact_toastee_id",
       "guide",
       "guide_enabled",
-      "has_nickname",
       "holiday_card",
       "initial_heading",
       "initial_pitch",
@@ -33300,15 +33486,6 @@ public class Page extends APINode {
     }
     public APIRequestCreateVideo setGuideEnabled (String guideEnabled) {
       this.setParam("guide_enabled", guideEnabled);
-      return this;
-    }
-
-    public APIRequestCreateVideo setHasNickname (Boolean hasNickname) {
-      this.setParam("has_nickname", hasNickname);
-      return this;
-    }
-    public APIRequestCreateVideo setHasNickname (String hasNickname) {
-      this.setParam("has_nickname", hasNickname);
       return this;
     }
 
@@ -34774,6 +34951,7 @@ public class Page extends APINode {
       "bio",
       "birthday",
       "booking_agent",
+      "breaking_news_usage",
       "built",
       "business",
       "can_checkin",
@@ -35108,6 +35286,13 @@ public class Page extends APINode {
     }
     public APIRequestGet requestBookingAgentField (boolean value) {
       this.requestField("booking_agent", value);
+      return this;
+    }
+    public APIRequestGet requestBreakingNewsUsageField () {
+      return this.requestBreakingNewsUsageField(true);
+    }
+    public APIRequestGet requestBreakingNewsUsageField (boolean value) {
+      this.requestField("breaking_news_usage", value);
       return this;
     }
     public APIRequestGet requestBuiltField () {
@@ -37422,6 +37607,8 @@ public class Page extends APINode {
       VALUE_BIO("bio"),
       @SerializedName("birthday")
       VALUE_BIRTHDAY("birthday"),
+      @SerializedName("calls")
+      VALUE_CALLS("calls"),
       @SerializedName("category")
       VALUE_CATEGORY("category"),
       @SerializedName("checkins")
@@ -37550,6 +37737,8 @@ public class Page extends APINode {
       VALUE_PARKING("parking"),
       @SerializedName("payment_options")
       VALUE_PAYMENT_OPTIONS("payment_options"),
+      @SerializedName("payment_request_update")
+      VALUE_PAYMENT_REQUEST_UPDATE("payment_request_update"),
       @SerializedName("personal_info")
       VALUE_PERSONAL_INFO("personal_info"),
       @SerializedName("personal_interests")
@@ -37599,21 +37788,30 @@ public class Page extends APINode {
   }
 
   public static enum EnumAction {
-      @SerializedName("BLOCK")
-      VALUE_BLOCK("BLOCK"),
-      @SerializedName("CLAIM_AD_EARNINGS")
-      VALUE_CLAIM_AD_EARNINGS("CLAIM_AD_EARNINGS"),
-      @SerializedName("MANUAL_REVIEW")
-      VALUE_MANUAL_REVIEW("MANUAL_REVIEW"),
-      @SerializedName("MONITOR")
-      VALUE_MONITOR("MONITOR"),
-      @SerializedName("REQUEST_TAKEDOWN")
-      VALUE_REQUEST_TAKEDOWN("REQUEST_TAKEDOWN"),
+      @SerializedName("SPAM")
+      VALUE_SPAM("SPAM"),
       ;
 
       private String value;
 
       private EnumAction(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumActionType {
+      @SerializedName("REPORT_THREAD")
+      VALUE_REPORT_THREAD("REPORT_THREAD"),
+      ;
+
+      private String value;
+
+      private EnumActionType(String value) {
         this.value = value;
       }
 
@@ -37824,6 +38022,7 @@ public class Page extends APINode {
     this.mBio = instance.mBio;
     this.mBirthday = instance.mBirthday;
     this.mBookingAgent = instance.mBookingAgent;
+    this.mBreakingNewsUsage = instance.mBreakingNewsUsage;
     this.mBuilt = instance.mBuilt;
     this.mBusiness = instance.mBusiness;
     this.mCanCheckin = instance.mCanCheckin;

@@ -57,6 +57,8 @@ public class AdgroupPlacementSpecificReviewFeedback extends APINode {
   private Map<String, String> mCityCommunity = null;
   @SerializedName("commerce")
   private Map<String, String> mCommerce = null;
+  @SerializedName("compromise")
+  private Map<String, String> mCompromise = null;
   @SerializedName("daily_deals")
   private Map<String, String> mDailyDeals = null;
   @SerializedName("daily_deals_legacy")
@@ -333,6 +335,15 @@ public class AdgroupPlacementSpecificReviewFeedback extends APINode {
 
   public AdgroupPlacementSpecificReviewFeedback setFieldCommerce(Map<String, String> value) {
     this.mCommerce = value;
+    return this;
+  }
+
+  public Map<String, String> getFieldCompromise() {
+    return mCompromise;
+  }
+
+  public AdgroupPlacementSpecificReviewFeedback setFieldCompromise(Map<String, String> value) {
+    this.mCompromise = value;
     return this;
   }
 
@@ -613,6 +624,7 @@ public class AdgroupPlacementSpecificReviewFeedback extends APINode {
     this.mBsg = instance.mBsg;
     this.mCityCommunity = instance.mCityCommunity;
     this.mCommerce = instance.mCommerce;
+    this.mCompromise = instance.mCompromise;
     this.mDailyDeals = instance.mDailyDeals;
     this.mDailyDealsLegacy = instance.mDailyDealsLegacy;
     this.mDpa = instance.mDpa;

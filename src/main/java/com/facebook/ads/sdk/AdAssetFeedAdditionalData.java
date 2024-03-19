@@ -51,6 +51,8 @@ public class AdAssetFeedAdditionalData extends APINode {
   private Boolean mMultiShareEndCard = null;
   @SerializedName("page_welcome_message")
   private String mPageWelcomeMessage = null;
+  @SerializedName("partner_app_welcome_message_flow_id")
+  private String mPartnerAppWelcomeMessageFlowId = null;
   protected static Gson gson = null;
 
   public AdAssetFeedAdditionalData() {
@@ -247,6 +249,15 @@ public class AdAssetFeedAdditionalData extends APINode {
     return this;
   }
 
+  public String getFieldPartnerAppWelcomeMessageFlowId() {
+    return mPartnerAppWelcomeMessageFlowId;
+  }
+
+  public AdAssetFeedAdditionalData setFieldPartnerAppWelcomeMessageFlowId(String value) {
+    this.mPartnerAppWelcomeMessageFlowId = value;
+    return this;
+  }
+
 
 
 
@@ -269,6 +280,7 @@ public class AdAssetFeedAdditionalData extends APINode {
     this.mIsClickToMessage = instance.mIsClickToMessage;
     this.mMultiShareEndCard = instance.mMultiShareEndCard;
     this.mPageWelcomeMessage = instance.mPageWelcomeMessage;
+    this.mPartnerAppWelcomeMessageFlowId = instance.mPartnerAppWelcomeMessageFlowId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

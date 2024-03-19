@@ -11390,8 +11390,6 @@ public class ProductCatalog extends APINode {
   public static enum EnumVertical {
       @SerializedName("adoptable_pets")
       VALUE_ADOPTABLE_PETS("adoptable_pets"),
-      @SerializedName("bookable")
-      VALUE_BOOKABLE("bookable"),
       @SerializedName("commerce")
       VALUE_COMMERCE("commerce"),
       @SerializedName("destinations")
@@ -11414,8 +11412,6 @@ public class ProductCatalog extends APINode {
       VALUE_OFFER_ITEMS("offer_items"),
       @SerializedName("offline_commerce")
       VALUE_OFFLINE_COMMERCE("offline_commerce"),
-      @SerializedName("ticketed_experiences")
-      VALUE_TICKETED_EXPERIENCES("ticketed_experiences"),
       @SerializedName("transactable_items")
       VALUE_TRANSACTABLE_ITEMS("transactable_items"),
       @SerializedName("vehicles")

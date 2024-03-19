@@ -43,6 +43,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class FundingSourceDetailsCoupon extends APINode {
   @SerializedName("amount")
   private Long mAmount = null;
+  @SerializedName("campaign_ids")
+  private List<Long> mCampaignIds = null;
   @SerializedName("currency")
   private String mCurrency = null;
   @SerializedName("display_amount")
@@ -209,6 +211,15 @@ public class FundingSourceDetailsCoupon extends APINode {
     return this;
   }
 
+  public List<Long> getFieldCampaignIds() {
+    return mCampaignIds;
+  }
+
+  public FundingSourceDetailsCoupon setFieldCampaignIds(List<Long> value) {
+    this.mCampaignIds = value;
+    return this;
+  }
+
   public String getFieldCurrency() {
     return mCurrency;
   }
@@ -254,6 +265,7 @@ public class FundingSourceDetailsCoupon extends APINode {
 
   public FundingSourceDetailsCoupon copyFrom(FundingSourceDetailsCoupon instance) {
     this.mAmount = instance.mAmount;
+    this.mCampaignIds = instance.mCampaignIds;
     this.mCurrency = instance.mCurrency;
     this.mDisplayAmount = instance.mDisplayAmount;
     this.mExpiration = instance.mExpiration;

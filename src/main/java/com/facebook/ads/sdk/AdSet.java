@@ -6577,8 +6577,8 @@ public class AdSet extends APINode {
       VALUE_LAST_WEEK_SUN_SAT("LAST_WEEK_SUN_SAT"),
       @SerializedName("LAST_YEAR")
       VALUE_LAST_YEAR("LAST_YEAR"),
-      @SerializedName("LIFETIME")
-      VALUE_LIFETIME("LIFETIME"),
+      @SerializedName("MAXIMUM")
+      VALUE_MAXIMUM("MAXIMUM"),
       @SerializedName("THIS_MONTH")
       VALUE_THIS_MONTH("THIS_MONTH"),
       @SerializedName("THIS_QUARTER")

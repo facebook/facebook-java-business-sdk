@@ -1649,7 +1649,6 @@ public class Album extends APINode {
       "proxied_app_id",
       "published",
       "qn",
-      "scheduled_publish_time",
       "spherical_metadata",
       "sponsor_id",
       "sponsor_relationship",
@@ -1988,15 +1987,6 @@ public class Album extends APINode {
 
     public APIRequestCreatePhoto setQn (String qn) {
       this.setParam("qn", qn);
-      return this;
-    }
-
-    public APIRequestCreatePhoto setScheduledPublishTime (Long scheduledPublishTime) {
-      this.setParam("scheduled_publish_time", scheduledPublishTime);
-      return this;
-    }
-    public APIRequestCreatePhoto setScheduledPublishTime (String scheduledPublishTime) {
-      this.setParam("scheduled_publish_time", scheduledPublishTime);
       return this;
     }
 

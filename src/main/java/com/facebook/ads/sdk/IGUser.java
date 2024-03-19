@@ -2526,6 +2526,7 @@ public class IGUser extends APINode {
       "product_tags",
       "share_to_feed",
       "thumb_offset",
+      "upload_type",
       "user_tags",
       "video_url",
     };
@@ -2664,6 +2665,11 @@ public class IGUser extends APINode {
 
     public APIRequestCreateMedia setThumbOffset (String thumbOffset) {
       this.setParam("thumb_offset", thumbOffset);
+      return this;
+    }
+
+    public APIRequestCreateMedia setUploadType (String uploadType) {
+      this.setParam("upload_type", uploadType);
       return this;
     }
 

@@ -6756,6 +6756,7 @@ public class Business extends APINode {
       "bio",
       "birthday",
       "booking_agent",
+      "breaking_news_usage",
       "built",
       "business",
       "can_checkin",
@@ -7085,6 +7086,13 @@ public class Business extends APINode {
     }
     public APIRequestGetClientPages requestBookingAgentField (boolean value) {
       this.requestField("booking_agent", value);
+      return this;
+    }
+    public APIRequestGetClientPages requestBreakingNewsUsageField () {
+      return this.requestBreakingNewsUsageField(true);
+    }
+    public APIRequestGetClientPages requestBreakingNewsUsageField (boolean value) {
+      this.requestField("breaking_news_usage", value);
       return this;
     }
     public APIRequestGetClientPages requestBuiltField () {
@@ -17426,6 +17434,7 @@ public class Business extends APINode {
       "bio",
       "birthday",
       "booking_agent",
+      "breaking_news_usage",
       "built",
       "business",
       "can_checkin",
@@ -17755,6 +17764,13 @@ public class Business extends APINode {
     }
     public APIRequestGetOwnedPages requestBookingAgentField (boolean value) {
       this.requestField("booking_agent", value);
+      return this;
+    }
+    public APIRequestGetOwnedPages requestBreakingNewsUsageField () {
+      return this.requestBreakingNewsUsageField(true);
+    }
+    public APIRequestGetOwnedPages requestBreakingNewsUsageField (boolean value) {
+      this.requestField("breaking_news_usage", value);
       return this;
     }
     public APIRequestGetOwnedPages requestBuiltField () {
@@ -23012,7 +23028,6 @@ public class Business extends APINode {
       "fun_fact_toastee_id",
       "guide",
       "guide_enabled",
-      "has_nickname",
       "holiday_card",
       "initial_heading",
       "initial_pitch",
@@ -23338,15 +23353,6 @@ public class Business extends APINode {
     }
     public APIRequestCreateVideo setGuideEnabled (String guideEnabled) {
       this.setParam("guide_enabled", guideEnabled);
-      return this;
-    }
-
-    public APIRequestCreateVideo setHasNickname (Boolean hasNickname) {
-      this.setParam("has_nickname", hasNickname);
-      return this;
-    }
-    public APIRequestCreateVideo setHasNickname (String hasNickname) {
-      this.setParam("has_nickname", hasNickname);
       return this;
     }
 

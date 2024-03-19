@@ -40,31 +40,41 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class FundingSourceDetails extends APINode {
-  @SerializedName("coupon")
-  private FundingSourceDetailsCoupon mCoupon = null;
-  @SerializedName("coupons")
-  private List<FundingSourceDetailsCoupon> mCoupons = null;
-  @SerializedName("display_string")
-  private String mDisplayString = null;
-  @SerializedName("id")
-  private String mId = null;
-  @SerializedName("type")
-  private Long mType = null;
+public class InsightsValue extends APINode {
+  @SerializedName("campaign_id")
+  private String mCampaignId = null;
+  @SerializedName("end_time")
+  private String mEndTime = null;
+  @SerializedName("engagement_source")
+  private String mEngagementSource = null;
+  @SerializedName("message_type")
+  private String mMessageType = null;
+  @SerializedName("messaging_channel")
+  private String mMessagingChannel = null;
+  @SerializedName("recurring_notifications_entry_point")
+  private String mRecurringNotificationsEntryPoint = null;
+  @SerializedName("recurring_notifications_frequency")
+  private String mRecurringNotificationsFrequency = null;
+  @SerializedName("recurring_notifications_topic")
+  private String mRecurringNotificationsTopic = null;
+  @SerializedName("start_time")
+  private String mStartTime = null;
+  @SerializedName("value")
+  private Object mValue = null;
   protected static Gson gson = null;
 
-  public FundingSourceDetails() {
+  public InsightsValue() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
-  public static FundingSourceDetails loadJSON(String json, APIContext context, String header) {
-    FundingSourceDetails fundingSourceDetails = getGson().fromJson(json, FundingSourceDetails.class);
+  public static InsightsValue loadJSON(String json, APIContext context, String header) {
+    InsightsValue insightsValue = getGson().fromJson(json, InsightsValue.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(fundingSourceDetails.toString());
+      JsonElement o2 = parser.parse(insightsValue.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -74,14 +84,14 @@ public class FundingSourceDetails extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    fundingSourceDetails.context = context;
-    fundingSourceDetails.rawValue = json;
-    fundingSourceDetails.header = header;
-    return fundingSourceDetails;
+    insightsValue.context = context;
+    insightsValue.rawValue = json;
+    insightsValue.header = header;
+    return insightsValue;
   }
 
-  public static APINodeList<FundingSourceDetails> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<FundingSourceDetails> fundingSourceDetailss = new APINodeList<FundingSourceDetails>(request, json, header);
+  public static APINodeList<InsightsValue> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<InsightsValue> insightsValues = new APINodeList<InsightsValue>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -92,9 +102,9 @@ public class FundingSourceDetails extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          fundingSourceDetailss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          insightsValues.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return fundingSourceDetailss;
+        return insightsValues;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -104,20 +114,20 @@ public class FundingSourceDetails extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                fundingSourceDetailss.setCursors(before, after);
+                insightsValues.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            fundingSourceDetailss.setPaging(previous, next);
+            insightsValues.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              fundingSourceDetailss.setAppSecret(context.getAppSecretProof());
+              insightsValues.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              fundingSourceDetailss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              insightsValues.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -128,23 +138,23 @@ public class FundingSourceDetails extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  fundingSourceDetailss.add(loadJSON(entry.getValue().toString(), context, header));
+                  insightsValues.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              fundingSourceDetailss.add(loadJSON(obj.toString(), context, header));
+              insightsValues.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return fundingSourceDetailss;
+          return insightsValues;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              fundingSourceDetailss.add(loadJSON(entry.getValue().toString(), context, header));
+              insightsValues.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return fundingSourceDetailss;
+          return insightsValues;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -161,20 +171,20 @@ public class FundingSourceDetails extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              fundingSourceDetailss.add(loadJSON(value.toString(), context, header));
+              insightsValues.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return fundingSourceDetailss;
+            return insightsValues;
           }
 
           // Sixth, check if it's pure JsonObject
-          fundingSourceDetailss.clear();
-          fundingSourceDetailss.add(loadJSON(json, context, header));
-          return fundingSourceDetailss;
+          insightsValues.clear();
+          insightsValues.add(loadJSON(json, context, header));
+          return insightsValues;
         }
       }
     } catch (Exception e) {
@@ -202,58 +212,93 @@ public class FundingSourceDetails extends APINode {
   }
 
 
-  public FundingSourceDetailsCoupon getFieldCoupon() {
-    return mCoupon;
+  public String getFieldCampaignId() {
+    return mCampaignId;
   }
 
-  public FundingSourceDetails setFieldCoupon(FundingSourceDetailsCoupon value) {
-    this.mCoupon = value;
+  public InsightsValue setFieldCampaignId(String value) {
+    this.mCampaignId = value;
     return this;
   }
 
-  public FundingSourceDetails setFieldCoupon(String value) {
-    Type type = new TypeToken<FundingSourceDetailsCoupon>(){}.getType();
-    this.mCoupon = FundingSourceDetailsCoupon.getGson().fromJson(value, type);
-    return this;
-  }
-  public List<FundingSourceDetailsCoupon> getFieldCoupons() {
-    return mCoupons;
+  public String getFieldEndTime() {
+    return mEndTime;
   }
 
-  public FundingSourceDetails setFieldCoupons(List<FundingSourceDetailsCoupon> value) {
-    this.mCoupons = value;
+  public InsightsValue setFieldEndTime(String value) {
+    this.mEndTime = value;
     return this;
   }
 
-  public FundingSourceDetails setFieldCoupons(String value) {
-    Type type = new TypeToken<List<FundingSourceDetailsCoupon>>(){}.getType();
-    this.mCoupons = FundingSourceDetailsCoupon.getGson().fromJson(value, type);
-    return this;
-  }
-  public String getFieldDisplayString() {
-    return mDisplayString;
+  public String getFieldEngagementSource() {
+    return mEngagementSource;
   }
 
-  public FundingSourceDetails setFieldDisplayString(String value) {
-    this.mDisplayString = value;
+  public InsightsValue setFieldEngagementSource(String value) {
+    this.mEngagementSource = value;
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
+  public String getFieldMessageType() {
+    return mMessageType;
   }
 
-  public FundingSourceDetails setFieldId(String value) {
-    this.mId = value;
+  public InsightsValue setFieldMessageType(String value) {
+    this.mMessageType = value;
     return this;
   }
 
-  public Long getFieldType() {
-    return mType;
+  public String getFieldMessagingChannel() {
+    return mMessagingChannel;
   }
 
-  public FundingSourceDetails setFieldType(Long value) {
-    this.mType = value;
+  public InsightsValue setFieldMessagingChannel(String value) {
+    this.mMessagingChannel = value;
+    return this;
+  }
+
+  public String getFieldRecurringNotificationsEntryPoint() {
+    return mRecurringNotificationsEntryPoint;
+  }
+
+  public InsightsValue setFieldRecurringNotificationsEntryPoint(String value) {
+    this.mRecurringNotificationsEntryPoint = value;
+    return this;
+  }
+
+  public String getFieldRecurringNotificationsFrequency() {
+    return mRecurringNotificationsFrequency;
+  }
+
+  public InsightsValue setFieldRecurringNotificationsFrequency(String value) {
+    this.mRecurringNotificationsFrequency = value;
+    return this;
+  }
+
+  public String getFieldRecurringNotificationsTopic() {
+    return mRecurringNotificationsTopic;
+  }
+
+  public InsightsValue setFieldRecurringNotificationsTopic(String value) {
+    this.mRecurringNotificationsTopic = value;
+    return this;
+  }
+
+  public String getFieldStartTime() {
+    return mStartTime;
+  }
+
+  public InsightsValue setFieldStartTime(String value) {
+    this.mStartTime = value;
+    return this;
+  }
+
+  public Object getFieldValue() {
+    return mValue;
+  }
+
+  public InsightsValue setFieldValue(Object value) {
+    this.mValue = value;
     return this;
   }
 
@@ -273,21 +318,26 @@ public class FundingSourceDetails extends APINode {
     return gson;
   }
 
-  public FundingSourceDetails copyFrom(FundingSourceDetails instance) {
-    this.mCoupon = instance.mCoupon;
-    this.mCoupons = instance.mCoupons;
-    this.mDisplayString = instance.mDisplayString;
-    this.mId = instance.mId;
-    this.mType = instance.mType;
+  public InsightsValue copyFrom(InsightsValue instance) {
+    this.mCampaignId = instance.mCampaignId;
+    this.mEndTime = instance.mEndTime;
+    this.mEngagementSource = instance.mEngagementSource;
+    this.mMessageType = instance.mMessageType;
+    this.mMessagingChannel = instance.mMessagingChannel;
+    this.mRecurringNotificationsEntryPoint = instance.mRecurringNotificationsEntryPoint;
+    this.mRecurringNotificationsFrequency = instance.mRecurringNotificationsFrequency;
+    this.mRecurringNotificationsTopic = instance.mRecurringNotificationsTopic;
+    this.mStartTime = instance.mStartTime;
+    this.mValue = instance.mValue;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<FundingSourceDetails> getParser() {
-    return new APIRequest.ResponseParser<FundingSourceDetails>() {
-      public APINodeList<FundingSourceDetails> parseResponse(String response, APIContext context, APIRequest<FundingSourceDetails> request, String header) throws MalformedResponseException {
-        return FundingSourceDetails.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<InsightsValue> getParser() {
+    return new APIRequest.ResponseParser<InsightsValue>() {
+      public APINodeList<InsightsValue> parseResponse(String response, APIContext context, APIRequest<InsightsValue> request, String header) throws MalformedResponseException {
+        return InsightsValue.parseResponse(response, context, request, header);
       }
     };
   }

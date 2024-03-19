@@ -99,8 +99,6 @@ public class CatalogSubVerticalList extends APINode {
   private Object mLocalServiceBusinessRestaurant = null;
   @SerializedName("loyalty_offer")
   private Object mLoyaltyOffer = null;
-  @SerializedName("meetup_space")
-  private Object mMeetupSpace = null;
   @SerializedName("nursery")
   private Object mNursery = null;
   @SerializedName("printers_and_scanners")
@@ -561,15 +559,6 @@ public class CatalogSubVerticalList extends APINode {
     return this;
   }
 
-  public Object getFieldMeetupSpace() {
-    return mMeetupSpace;
-  }
-
-  public CatalogSubVerticalList setFieldMeetupSpace(Object value) {
-    this.mMeetupSpace = value;
-    return this;
-  }
-
   public Object getFieldNursery() {
     return mNursery;
   }
@@ -832,7 +821,6 @@ public class CatalogSubVerticalList extends APINode {
     this.mLocalServiceBusinessItem = instance.mLocalServiceBusinessItem;
     this.mLocalServiceBusinessRestaurant = instance.mLocalServiceBusinessRestaurant;
     this.mLoyaltyOffer = instance.mLoyaltyOffer;
-    this.mMeetupSpace = instance.mMeetupSpace;
     this.mNursery = instance.mNursery;
     this.mPrintersAndScanners = instance.mPrintersAndScanners;
     this.mPrintersScannersAndFaxMachines = instance.mPrintersScannersAndFaxMachines;

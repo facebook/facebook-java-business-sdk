@@ -277,6 +277,7 @@ public class Avatar extends APINode {
     public static final String[] PARAMS = {
       "client_name",
       "client_version",
+      "config_id",
       "force_generate",
       "platform",
       "profile",
@@ -347,6 +348,11 @@ public class Avatar extends APINode {
 
     public APIRequestGetModels setClientVersion (String clientVersion) {
       this.setParam("client_version", clientVersion);
+      return this;
+    }
+
+    public APIRequestGetModels setConfigId (String configId) {
+      this.setParam("config_id", configId);
       return this;
     }
 

@@ -2923,6 +2923,7 @@ public class PagePost extends APINode {
       "bio",
       "birthday",
       "booking_agent",
+      "breaking_news_usage",
       "built",
       "business",
       "can_checkin",
@@ -3252,6 +3253,13 @@ public class PagePost extends APINode {
     }
     public APIRequestGetSponsorTags requestBookingAgentField (boolean value) {
       this.requestField("booking_agent", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestBreakingNewsUsageField () {
+      return this.requestBreakingNewsUsageField(true);
+    }
+    public APIRequestGetSponsorTags requestBreakingNewsUsageField (boolean value) {
+      this.requestField("breaking_news_usage", value);
       return this;
     }
     public APIRequestGetSponsorTags requestBuiltField () {

@@ -1323,6 +1323,7 @@ public class LiveVideo extends APINode {
       "bio",
       "birthday",
       "booking_agent",
+      "breaking_news_usage",
       "built",
       "business",
       "can_checkin",
@@ -1652,6 +1653,13 @@ public class LiveVideo extends APINode {
     }
     public APIRequestGetCrosspostSharedPages requestBookingAgentField (boolean value) {
       this.requestField("booking_agent", value);
+      return this;
+    }
+    public APIRequestGetCrosspostSharedPages requestBreakingNewsUsageField () {
+      return this.requestBreakingNewsUsageField(true);
+    }
+    public APIRequestGetCrosspostSharedPages requestBreakingNewsUsageField (boolean value) {
+      this.requestField("breaking_news_usage", value);
       return this;
     }
     public APIRequestGetCrosspostSharedPages requestBuiltField () {

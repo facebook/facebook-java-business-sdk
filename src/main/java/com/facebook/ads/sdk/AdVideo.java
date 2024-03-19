@@ -1634,6 +1634,7 @@ public class AdVideo extends APINode {
       "bio",
       "birthday",
       "booking_agent",
+      "breaking_news_usage",
       "built",
       "business",
       "can_checkin",
@@ -1963,6 +1964,13 @@ public class AdVideo extends APINode {
     }
     public APIRequestGetCrosspostSharedPages requestBookingAgentField (boolean value) {
       this.requestField("booking_agent", value);
+      return this;
+    }
+    public APIRequestGetCrosspostSharedPages requestBreakingNewsUsageField () {
+      return this.requestBreakingNewsUsageField(true);
+    }
+    public APIRequestGetCrosspostSharedPages requestBreakingNewsUsageField (boolean value) {
+      this.requestField("breaking_news_usage", value);
       return this;
     }
     public APIRequestGetCrosspostSharedPages requestBuiltField () {
@@ -3809,6 +3817,7 @@ public class AdVideo extends APINode {
       "bio",
       "birthday",
       "booking_agent",
+      "breaking_news_usage",
       "built",
       "business",
       "can_checkin",
@@ -4138,6 +4147,13 @@ public class AdVideo extends APINode {
     }
     public APIRequestGetSponsorTags requestBookingAgentField (boolean value) {
       this.requestField("booking_agent", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestBreakingNewsUsageField () {
+      return this.requestBreakingNewsUsageField(true);
+    }
+    public APIRequestGetSponsorTags requestBreakingNewsUsageField (boolean value) {
+      this.requestField("breaking_news_usage", value);
       return this;
     }
     public APIRequestGetSponsorTags requestBuiltField () {
@@ -6927,6 +6943,8 @@ public class AdVideo extends APINode {
       VALUE_MUSIC_CLIP_IN_COMMENT("MUSIC_CLIP_IN_COMMENT"),
       @SerializedName("MUSIC_CLIP_IN_LIGHTWEIGHT_STATUS")
       VALUE_MUSIC_CLIP_IN_LIGHTWEIGHT_STATUS("MUSIC_CLIP_IN_LIGHTWEIGHT_STATUS"),
+      @SerializedName("MUSIC_CLIP_IN_MSGR_NOTE")
+      VALUE_MUSIC_CLIP_IN_MSGR_NOTE("MUSIC_CLIP_IN_MSGR_NOTE"),
       @SerializedName("MUSIC_CLIP_IN_POLL_OPTION")
       VALUE_MUSIC_CLIP_IN_POLL_OPTION("MUSIC_CLIP_IN_POLL_OPTION"),
       @SerializedName("MUSIC_CLIP_ON_DATING_PROFILE")

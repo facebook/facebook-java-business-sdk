@@ -2336,6 +2336,8 @@ public class Group extends APINode {
       "audience_exp",
       "backdated_time",
       "backdated_time_granularity",
+      "breaking_news",
+      "breaking_news_expiration",
       "call_to_action",
       "caption",
       "child_attachments",
@@ -2360,7 +2362,6 @@ public class Group extends APINode {
       "formatting",
       "fun_fact_prompt_id",
       "fun_fact_toastee_id",
-      "has_nickname",
       "height",
       "holiday_card",
       "home_checkin_city_id",
@@ -2593,6 +2594,24 @@ public class Group extends APINode {
       return this;
     }
 
+    public APIRequestCreateFeed setBreakingNews (Boolean breakingNews) {
+      this.setParam("breaking_news", breakingNews);
+      return this;
+    }
+    public APIRequestCreateFeed setBreakingNews (String breakingNews) {
+      this.setParam("breaking_news", breakingNews);
+      return this;
+    }
+
+    public APIRequestCreateFeed setBreakingNewsExpiration (Long breakingNewsExpiration) {
+      this.setParam("breaking_news_expiration", breakingNewsExpiration);
+      return this;
+    }
+    public APIRequestCreateFeed setBreakingNewsExpiration (String breakingNewsExpiration) {
+      this.setParam("breaking_news_expiration", breakingNewsExpiration);
+      return this;
+    }
+
     public APIRequestCreateFeed setCallToAction (Object callToAction) {
       this.setParam("call_to_action", callToAction);
       return this;
@@ -2754,15 +2773,6 @@ public class Group extends APINode {
     }
     public APIRequestCreateFeed setFunFactToasteeId (String funFactToasteeId) {
       this.setParam("fun_fact_toastee_id", funFactToasteeId);
-      return this;
-    }
-
-    public APIRequestCreateFeed setHasNickname (Boolean hasNickname) {
-      this.setParam("has_nickname", hasNickname);
-      return this;
-    }
-    public APIRequestCreateFeed setHasNickname (String hasNickname) {
-      this.setParam("has_nickname", hasNickname);
       return this;
     }
 
@@ -5305,7 +5315,6 @@ public class Group extends APINode {
       "proxied_app_id",
       "published",
       "qn",
-      "scheduled_publish_time",
       "spherical_metadata",
       "sponsor_id",
       "sponsor_relationship",
@@ -5644,15 +5653,6 @@ public class Group extends APINode {
 
     public APIRequestCreatePhoto setQn (String qn) {
       this.setParam("qn", qn);
-      return this;
-    }
-
-    public APIRequestCreatePhoto setScheduledPublishTime (Long scheduledPublishTime) {
-      this.setParam("scheduled_publish_time", scheduledPublishTime);
-      return this;
-    }
-    public APIRequestCreatePhoto setScheduledPublishTime (String scheduledPublishTime) {
-      this.setParam("scheduled_publish_time", scheduledPublishTime);
       return this;
     }
 
@@ -6527,7 +6527,6 @@ public class Group extends APINode {
       "fun_fact_toastee_id",
       "guide",
       "guide_enabled",
-      "has_nickname",
       "holiday_card",
       "initial_heading",
       "initial_pitch",
@@ -6837,15 +6836,6 @@ public class Group extends APINode {
     }
     public APIRequestCreateVideo setGuideEnabled (String guideEnabled) {
       this.setParam("guide_enabled", guideEnabled);
-      return this;
-    }
-
-    public APIRequestCreateVideo setHasNickname (Boolean hasNickname) {
-      this.setParam("has_nickname", hasNickname);
-      return this;
-    }
-    public APIRequestCreateVideo setHasNickname (String hasNickname) {
-      this.setParam("has_nickname", hasNickname);
       return this;
     }
 

@@ -1052,6 +1052,7 @@ public class User extends APINode {
       "bio",
       "birthday",
       "booking_agent",
+      "breaking_news_usage",
       "built",
       "business",
       "can_checkin",
@@ -1399,6 +1400,13 @@ public class User extends APINode {
     }
     public APIRequestGetAccounts requestBookingAgentField (boolean value) {
       this.requestField("booking_agent", value);
+      return this;
+    }
+    public APIRequestGetAccounts requestBreakingNewsUsageField () {
+      return this.requestBreakingNewsUsageField(true);
+    }
+    public APIRequestGetAccounts requestBreakingNewsUsageField (boolean value) {
+      this.requestField("breaking_news_usage", value);
       return this;
     }
     public APIRequestGetAccounts requestBuiltField () {
@@ -5206,6 +5214,7 @@ public class User extends APINode {
       "bio",
       "birthday",
       "booking_agent",
+      "breaking_news_usage",
       "built",
       "business",
       "can_checkin",
@@ -5544,6 +5553,13 @@ public class User extends APINode {
     }
     public APIRequestGetAssignedPages requestBookingAgentField (boolean value) {
       this.requestField("booking_agent", value);
+      return this;
+    }
+    public APIRequestGetAssignedPages requestBreakingNewsUsageField () {
+      return this.requestBreakingNewsUsageField(true);
+    }
+    public APIRequestGetAssignedPages requestBreakingNewsUsageField (boolean value) {
+      this.requestField("breaking_news_usage", value);
       return this;
     }
     public APIRequestGetAssignedPages requestBuiltField () {
@@ -9116,6 +9132,8 @@ public class User extends APINode {
       "audience_exp",
       "backdated_time",
       "backdated_time_granularity",
+      "breaking_news",
+      "breaking_news_expiration",
       "call_to_action",
       "caption",
       "child_attachments",
@@ -9140,7 +9158,6 @@ public class User extends APINode {
       "formatting",
       "fun_fact_prompt_id",
       "fun_fact_toastee_id",
-      "has_nickname",
       "height",
       "holiday_card",
       "home_checkin_city_id",
@@ -9373,6 +9390,24 @@ public class User extends APINode {
       return this;
     }
 
+    public APIRequestCreateFeed setBreakingNews (Boolean breakingNews) {
+      this.setParam("breaking_news", breakingNews);
+      return this;
+    }
+    public APIRequestCreateFeed setBreakingNews (String breakingNews) {
+      this.setParam("breaking_news", breakingNews);
+      return this;
+    }
+
+    public APIRequestCreateFeed setBreakingNewsExpiration (Long breakingNewsExpiration) {
+      this.setParam("breaking_news_expiration", breakingNewsExpiration);
+      return this;
+    }
+    public APIRequestCreateFeed setBreakingNewsExpiration (String breakingNewsExpiration) {
+      this.setParam("breaking_news_expiration", breakingNewsExpiration);
+      return this;
+    }
+
     public APIRequestCreateFeed setCallToAction (Object callToAction) {
       this.setParam("call_to_action", callToAction);
       return this;
@@ -9534,15 +9569,6 @@ public class User extends APINode {
     }
     public APIRequestCreateFeed setFunFactToasteeId (String funFactToasteeId) {
       this.setParam("fun_fact_toastee_id", funFactToasteeId);
-      return this;
-    }
-
-    public APIRequestCreateFeed setHasNickname (Boolean hasNickname) {
-      this.setParam("has_nickname", hasNickname);
-      return this;
-    }
-    public APIRequestCreateFeed setHasNickname (String hasNickname) {
-      this.setParam("has_nickname", hasNickname);
       return this;
     }
 
@@ -11896,6 +11922,7 @@ public class User extends APINode {
       "bio",
       "birthday",
       "booking_agent",
+      "breaking_news_usage",
       "built",
       "business",
       "can_checkin",
@@ -12230,6 +12257,13 @@ public class User extends APINode {
     }
     public APIRequestGetLikes requestBookingAgentField (boolean value) {
       this.requestField("booking_agent", value);
+      return this;
+    }
+    public APIRequestGetLikes requestBreakingNewsUsageField () {
+      return this.requestBreakingNewsUsageField(true);
+    }
+    public APIRequestGetLikes requestBreakingNewsUsageField (boolean value) {
+      this.requestField("breaking_news_usage", value);
       return this;
     }
     public APIRequestGetLikes requestBuiltField () {
@@ -13934,6 +13968,7 @@ public class User extends APINode {
       "bio",
       "birthday",
       "booking_agent",
+      "breaking_news_usage",
       "built",
       "business",
       "can_checkin",
@@ -14268,6 +14303,13 @@ public class User extends APINode {
     }
     public APIRequestGetMusic requestBookingAgentField (boolean value) {
       this.requestField("booking_agent", value);
+      return this;
+    }
+    public APIRequestGetMusic requestBreakingNewsUsageField () {
+      return this.requestBreakingNewsUsageField(true);
+    }
+    public APIRequestGetMusic requestBreakingNewsUsageField (boolean value) {
+      this.requestField("breaking_news_usage", value);
       return this;
     }
     public APIRequestGetMusic requestBuiltField () {
@@ -16976,7 +17018,6 @@ public class User extends APINode {
       "proxied_app_id",
       "published",
       "qn",
-      "scheduled_publish_time",
       "spherical_metadata",
       "sponsor_id",
       "sponsor_relationship",
@@ -17315,15 +17356,6 @@ public class User extends APINode {
 
     public APIRequestCreatePhoto setQn (String qn) {
       this.setParam("qn", qn);
-      return this;
-    }
-
-    public APIRequestCreatePhoto setScheduledPublishTime (Long scheduledPublishTime) {
-      this.setParam("scheduled_publish_time", scheduledPublishTime);
-      return this;
-    }
-    public APIRequestCreatePhoto setScheduledPublishTime (String scheduledPublishTime) {
-      this.setParam("scheduled_publish_time", scheduledPublishTime);
       return this;
     }
 
@@ -19286,7 +19318,6 @@ public class User extends APINode {
       "fun_fact_toastee_id",
       "guide",
       "guide_enabled",
-      "has_nickname",
       "holiday_card",
       "initial_heading",
       "initial_pitch",
@@ -19606,15 +19637,6 @@ public class User extends APINode {
     }
     public APIRequestCreateVideo setGuideEnabled (String guideEnabled) {
       this.setParam("guide_enabled", guideEnabled);
-      return this;
-    }
-
-    public APIRequestCreateVideo setHasNickname (Boolean hasNickname) {
-      this.setParam("has_nickname", hasNickname);
-      return this;
-    }
-    public APIRequestCreateVideo setHasNickname (String hasNickname) {
-      this.setParam("has_nickname", hasNickname);
       return this;
     }
 

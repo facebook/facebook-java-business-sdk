@@ -447,6 +447,7 @@ public class AdReportRun extends APINode {
       "marketing_messages_cost_per_delivered",
       "marketing_messages_cost_per_link_btn_click",
       "marketing_messages_spend",
+      "marketing_messages_website_purchase_values",
       "mobile_app_purchase_roas",
       "objective",
       "optimization_goal",
@@ -1201,6 +1202,13 @@ public class AdReportRun extends APINode {
       this.requestField("marketing_messages_spend", value);
       return this;
     }
+    public APIRequestGetInsights requestMarketingMessagesWebsitePurchaseValuesField () {
+      return this.requestMarketingMessagesWebsitePurchaseValuesField(true);
+    }
+    public APIRequestGetInsights requestMarketingMessagesWebsitePurchaseValuesField (boolean value) {
+      this.requestField("marketing_messages_website_purchase_values", value);
+      return this;
+    }
     public APIRequestGetInsights requestMobileAppPurchaseRoasField () {
       return this.requestMobileAppPurchaseRoasField(true);
     }
@@ -1745,10 +1753,18 @@ public class AdReportRun extends APINode {
       VALUE_28D_CLICK("28d_click"),
       @SerializedName("28d_view")
       VALUE_28D_VIEW("28d_view"),
+      @SerializedName("28d_view_all_conversions")
+      VALUE_28D_VIEW_ALL_CONVERSIONS("28d_view_all_conversions"),
+      @SerializedName("28d_view_first_conversion")
+      VALUE_28D_VIEW_FIRST_CONVERSION("28d_view_first_conversion"),
       @SerializedName("7d_click")
       VALUE_7D_CLICK("7d_click"),
       @SerializedName("7d_view")
       VALUE_7D_VIEW("7d_view"),
+      @SerializedName("7d_view_all_conversions")
+      VALUE_7D_VIEW_ALL_CONVERSIONS("7d_view_all_conversions"),
+      @SerializedName("7d_view_first_conversion")
+      VALUE_7D_VIEW_FIRST_CONVERSION("7d_view_first_conversion"),
       @SerializedName("dda")
       VALUE_DDA("dda"),
       @SerializedName("default")
@@ -1794,6 +1810,10 @@ public class AdReportRun extends APINode {
       VALUE_ACTION_VIDEO_TYPE("action_video_type"),
       @SerializedName("conversion_destination")
       VALUE_CONVERSION_DESTINATION("conversion_destination"),
+      @SerializedName("matched_persona_id")
+      VALUE_MATCHED_PERSONA_ID("matched_persona_id"),
+      @SerializedName("matched_persona_name")
+      VALUE_MATCHED_PERSONA_NAME("matched_persona_name"),
       @SerializedName("signal_source_bucket")
       VALUE_SIGNAL_SOURCE_BUCKET("signal_source_bucket"),
       @SerializedName("standard_event_content_type")
@@ -1961,8 +1981,8 @@ public class AdReportRun extends APINode {
       VALUE_LAST_WEEK_SUN_SAT("last_week_sun_sat"),
       @SerializedName("last_year")
       VALUE_LAST_YEAR("last_year"),
-      @SerializedName("lifetime")
-      VALUE_LIFETIME("lifetime"),
+      @SerializedName("maximum")
+      VALUE_MAXIMUM("maximum"),
       @SerializedName("this_month")
       VALUE_THIS_MONTH("this_month"),
       @SerializedName("this_quarter")
@@ -2037,6 +2057,10 @@ public class AdReportRun extends APINode {
       VALUE_ACTION_VIDEO_TYPE("action_video_type"),
       @SerializedName("conversion_destination")
       VALUE_CONVERSION_DESTINATION("conversion_destination"),
+      @SerializedName("matched_persona_id")
+      VALUE_MATCHED_PERSONA_ID("matched_persona_id"),
+      @SerializedName("matched_persona_name")
+      VALUE_MATCHED_PERSONA_NAME("matched_persona_name"),
       @SerializedName("signal_source_bucket")
       VALUE_SIGNAL_SOURCE_BUCKET("signal_source_bucket"),
       @SerializedName("standard_event_content_type")

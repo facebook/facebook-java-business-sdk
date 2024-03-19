@@ -802,10 +802,6 @@ public class AdAccount extends APINode {
     return new APIRequestDeleteUsersOfAnyAudience(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestGetValueAdjustmentRulePersonaGroups getValueAdjustmentRulePersonaGroups() {
-    return new APIRequestGetValueAdjustmentRulePersonaGroups(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetValueAdjustmentRules getValueAdjustmentRules() {
     return new APIRequestGetValueAdjustmentRules(this.getPrefixedId().toString(), context);
   }
@@ -11602,7 +11598,6 @@ public class AdAccount extends APINode {
       "fun_fact_toastee_id",
       "guide",
       "guide_enabled",
-      "has_nickname",
       "holiday_card",
       "initial_heading",
       "initial_pitch",
@@ -11925,15 +11920,6 @@ public class AdAccount extends APINode {
     }
     public APIRequestCreateAdVideo setGuideEnabled (String guideEnabled) {
       this.setParam("guide_enabled", guideEnabled);
-      return this;
-    }
-
-    public APIRequestCreateAdVideo setHasNickname (Boolean hasNickname) {
-      this.setParam("has_nickname", hasNickname);
-      return this;
-    }
-    public APIRequestCreateAdVideo setHasNickname (String hasNickname) {
-      this.setParam("has_nickname", hasNickname);
       return this;
     }
 
@@ -22734,6 +22720,7 @@ public class AdAccount extends APINode {
       "bio",
       "birthday",
       "booking_agent",
+      "breaking_news_usage",
       "built",
       "business",
       "can_checkin",
@@ -23063,6 +23050,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetPromotePages requestBookingAgentField (boolean value) {
       this.requestField("booking_agent", value);
+      return this;
+    }
+    public APIRequestGetPromotePages requestBreakingNewsUsageField () {
+      return this.requestBreakingNewsUsageField(true);
+    }
+    public APIRequestGetPromotePages requestBreakingNewsUsageField (boolean value) {
+      this.requestField("breaking_news_usage", value);
       return this;
     }
     public APIRequestGetPromotePages requestBuiltField () {
@@ -28393,111 +28387,6 @@ public class AdAccount extends APINode {
 
     @Override
     public APIRequestDeleteUsersOfAnyAudience requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
-  public static class APIRequestGetValueAdjustmentRulePersonaGroups extends APIRequest<APINode> {
-
-    APINodeList<APINode> lastResponse = null;
-    @Override
-    public APINodeList<APINode> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<APINode> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetValueAdjustmentRulePersonaGroups.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         },
-         MoreExecutors.directExecutor()
-      );
-    };
-
-    public APIRequestGetValueAdjustmentRulePersonaGroups(String nodeId, APIContext context) {
-      super(context, nodeId, "/value_adjustment_rule_persona_groups", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetValueAdjustmentRulePersonaGroups setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetValueAdjustmentRulePersonaGroups setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetValueAdjustmentRulePersonaGroups requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetValueAdjustmentRulePersonaGroups requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetValueAdjustmentRulePersonaGroups requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetValueAdjustmentRulePersonaGroups requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetValueAdjustmentRulePersonaGroups requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetValueAdjustmentRulePersonaGroups requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
