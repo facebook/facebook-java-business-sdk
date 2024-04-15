@@ -81,6 +81,8 @@ public class Hotel extends APINode {
   private List<String> mSanitizedImages = null;
   @SerializedName("star_rating")
   private Double mStarRating = null;
+  @SerializedName("tags")
+  private List<String> mTags = null;
   @SerializedName("unit_price")
   private Object mUnitPrice = null;
   @SerializedName("url")
@@ -403,6 +405,10 @@ public class Hotel extends APINode {
 
   public Double getFieldStarRating() {
     return mStarRating;
+  }
+
+  public List<String> getFieldTags() {
+    return mTags;
   }
 
   public Object getFieldUnitPrice() {
@@ -1111,6 +1117,7 @@ public class Hotel extends APINode {
       "sale_price",
       "sanitized_images",
       "star_rating",
+      "tags",
       "unit_price",
       "url",
       "visibility",
@@ -1344,6 +1351,13 @@ public class Hotel extends APINode {
     }
     public APIRequestGet requestStarRatingField (boolean value) {
       this.requestField("star_rating", value);
+      return this;
+    }
+    public APIRequestGet requestTagsField () {
+      return this.requestTagsField(true);
+    }
+    public APIRequestGet requestTagsField (boolean value) {
+      this.requestField("tags", value);
       return this;
     }
     public APIRequestGet requestUnitPriceField () {
@@ -1651,6 +1665,7 @@ public class Hotel extends APINode {
     this.mSalePrice = instance.mSalePrice;
     this.mSanitizedImages = instance.mSanitizedImages;
     this.mStarRating = instance.mStarRating;
+    this.mTags = instance.mTags;
     this.mUnitPrice = instance.mUnitPrice;
     this.mUrl = instance.mUrl;
     this.mVisibility = instance.mVisibility;

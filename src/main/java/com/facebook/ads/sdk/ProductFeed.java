@@ -849,6 +849,7 @@ public class ProductFeed extends APINode {
       "price",
       "price_change",
       "sanitized_images",
+      "tags",
       "types",
       "unit_price",
       "url",
@@ -1054,6 +1055,13 @@ public class ProductFeed extends APINode {
       this.requestField("sanitized_images", value);
       return this;
     }
+    public APIRequestGetDestinations requestTagsField () {
+      return this.requestTagsField(true);
+    }
+    public APIRequestGetDestinations requestTagsField (boolean value) {
+      this.requestField("tags", value);
+      return this;
+    }
     public APIRequestGetDestinations requestTypesField () {
       return this.requestTypesField(true);
     }
@@ -1113,6 +1121,7 @@ public class ProductFeed extends APINode {
       "origin_city",
       "price",
       "sanitized_images",
+      "tags",
       "unit_price",
       "url",
       "visibility",
@@ -1336,6 +1345,13 @@ public class ProductFeed extends APINode {
     }
     public APIRequestGetFlights requestSanitizedImagesField (boolean value) {
       this.requestField("sanitized_images", value);
+      return this;
+    }
+    public APIRequestGetFlights requestTagsField () {
+      return this.requestTagsField(true);
+    }
+    public APIRequestGetFlights requestTagsField (boolean value) {
+      this.requestField("tags", value);
       return this;
     }
     public APIRequestGetFlights requestUnitPriceField () {
@@ -1887,6 +1903,7 @@ public class ProductFeed extends APINode {
       "sale_price",
       "sanitized_images",
       "star_rating",
+      "tags",
       "unit_price",
       "url",
       "visibility",
@@ -2138,6 +2155,13 @@ public class ProductFeed extends APINode {
     }
     public APIRequestGetHotels requestStarRatingField (boolean value) {
       this.requestField("star_rating", value);
+      return this;
+    }
+    public APIRequestGetHotels requestTagsField () {
+      return this.requestTagsField(true);
+    }
+    public APIRequestGetHotels requestTagsField (boolean value) {
+      this.requestField("tags", value);
       return this;
     }
     public APIRequestGetHotels requestUnitPriceField () {

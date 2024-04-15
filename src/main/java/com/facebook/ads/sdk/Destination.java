@@ -67,6 +67,8 @@ public class Destination extends APINode {
   private String mPriceChange = null;
   @SerializedName("sanitized_images")
   private List<String> mSanitizedImages = null;
+  @SerializedName("tags")
+  private List<String> mTags = null;
   @SerializedName("types")
   private List<String> mTypes = null;
   @SerializedName("unit_price")
@@ -351,6 +353,10 @@ public class Destination extends APINode {
 
   public List<String> getFieldSanitizedImages() {
     return mSanitizedImages;
+  }
+
+  public List<String> getFieldTags() {
+    return mTags;
   }
 
   public List<String> getFieldTypes() {
@@ -758,6 +764,7 @@ public class Destination extends APINode {
       "price",
       "price_change",
       "sanitized_images",
+      "tags",
       "types",
       "unit_price",
       "url",
@@ -945,6 +952,13 @@ public class Destination extends APINode {
       this.requestField("sanitized_images", value);
       return this;
     }
+    public APIRequestGet requestTagsField () {
+      return this.requestTagsField(true);
+    }
+    public APIRequestGet requestTagsField (boolean value) {
+      this.requestField("tags", value);
+      return this;
+    }
     public APIRequestGet requestTypesField () {
       return this.requestTypesField(true);
     }
@@ -1049,6 +1063,7 @@ public class Destination extends APINode {
     this.mPrice = instance.mPrice;
     this.mPriceChange = instance.mPriceChange;
     this.mSanitizedImages = instance.mSanitizedImages;
+    this.mTags = instance.mTags;
     this.mTypes = instance.mTypes;
     this.mUnitPrice = instance.mUnitPrice;
     this.mUrl = instance.mUrl;

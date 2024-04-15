@@ -472,6 +472,10 @@ public class ProductCatalog extends APINode {
     return new APIRequestCreateVehicle(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestCreateVersionItemsBatch createVersionItemsBatch() {
+    return new APIRequestCreateVersionItemsBatch(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestDelete delete() {
     return new APIRequestDelete(this.getPrefixedId().toString(), context);
   }
@@ -3326,6 +3330,7 @@ public class ProductCatalog extends APINode {
       "price",
       "price_change",
       "sanitized_images",
+      "tags",
       "types",
       "unit_price",
       "url",
@@ -3529,6 +3534,13 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestGetDestinations requestSanitizedImagesField (boolean value) {
       this.requestField("sanitized_images", value);
+      return this;
+    }
+    public APIRequestGetDestinations requestTagsField () {
+      return this.requestTagsField(true);
+    }
+    public APIRequestGetDestinations requestTagsField (boolean value) {
+      this.requestField("tags", value);
       return this;
     }
     public APIRequestGetDestinations requestTypesField () {
@@ -4395,6 +4407,7 @@ public class ProductCatalog extends APINode {
       "origin_city",
       "price",
       "sanitized_images",
+      "tags",
       "unit_price",
       "url",
       "visibility",
@@ -4618,6 +4631,13 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestGetFlights requestSanitizedImagesField (boolean value) {
       this.requestField("sanitized_images", value);
+      return this;
+    }
+    public APIRequestGetFlights requestTagsField () {
+      return this.requestTagsField(true);
+    }
+    public APIRequestGetFlights requestTagsField (boolean value) {
+      this.requestField("tags", value);
       return this;
     }
     public APIRequestGetFlights requestUnitPriceField () {
@@ -5688,6 +5708,7 @@ public class ProductCatalog extends APINode {
       "sale_price",
       "sanitized_images",
       "star_rating",
+      "tags",
       "unit_price",
       "url",
       "visibility",
@@ -5939,6 +5960,13 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestGetHotels requestStarRatingField (boolean value) {
       this.requestField("star_rating", value);
+      return this;
+    }
+    public APIRequestGetHotels requestTagsField () {
+      return this.requestTagsField(true);
+    }
+    public APIRequestGetHotels requestTagsField (boolean value) {
+      this.requestField("tags", value);
       return this;
     }
     public APIRequestGetHotels requestUnitPriceField () {
@@ -10797,6 +10825,153 @@ public class ProductCatalog extends APINode {
 
     @Override
     public APIRequestCreateVehicle requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestCreateVersionItemsBatch extends APIRequest<ProductCatalog> {
+
+    ProductCatalog lastResponse = null;
+    @Override
+    public ProductCatalog getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "allow_upsert",
+      "item_type",
+      "item_version",
+      "requests",
+      "version",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public ProductCatalog parseResponse(String response, String header) throws APIException {
+      return ProductCatalog.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public ProductCatalog execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public ProductCatalog execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<ProductCatalog> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<ProductCatalog> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, ProductCatalog>() {
+           public ProductCatalog apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateVersionItemsBatch.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestCreateVersionItemsBatch(String nodeId, APIContext context) {
+      super(context, nodeId, "/version_items_batch", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateVersionItemsBatch setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateVersionItemsBatch setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateVersionItemsBatch setAllowUpsert (Boolean allowUpsert) {
+      this.setParam("allow_upsert", allowUpsert);
+      return this;
+    }
+    public APIRequestCreateVersionItemsBatch setAllowUpsert (String allowUpsert) {
+      this.setParam("allow_upsert", allowUpsert);
+      return this;
+    }
+
+    public APIRequestCreateVersionItemsBatch setItemType (String itemType) {
+      this.setParam("item_type", itemType);
+      return this;
+    }
+
+    public APIRequestCreateVersionItemsBatch setItemVersion (String itemVersion) {
+      this.setParam("item_version", itemVersion);
+      return this;
+    }
+
+    public APIRequestCreateVersionItemsBatch setRequests (Map<String, String> requests) {
+      this.setParam("requests", requests);
+      return this;
+    }
+    public APIRequestCreateVersionItemsBatch setRequests (String requests) {
+      this.setParam("requests", requests);
+      return this;
+    }
+
+    public APIRequestCreateVersionItemsBatch setVersion (Long version) {
+      this.setParam("version", version);
+      return this;
+    }
+    public APIRequestCreateVersionItemsBatch setVersion (String version) {
+      this.setParam("version", version);
+      return this;
+    }
+
+    public APIRequestCreateVersionItemsBatch requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateVersionItemsBatch requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateVersionItemsBatch requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateVersionItemsBatch requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateVersionItemsBatch requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateVersionItemsBatch requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }

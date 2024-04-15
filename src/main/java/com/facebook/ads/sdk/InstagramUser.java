@@ -292,6 +292,10 @@ public class InstagramUser extends APINode {
     return new APIRequestGetUpcomingEvents(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestCreateUpcomingEvent createUpcomingEvent() {
+    return new APIRequestCreateUpcomingEvent(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGet get() {
     return new APIRequestGet(this.getPrefixedId().toString(), context);
   }
@@ -748,6 +752,7 @@ public class InstagramUser extends APINode {
       "amount_spent",
       "attribution_spec",
       "balance",
+      "brand_safety_content_filter_levels",
       "business",
       "business_city",
       "business_country_code",
@@ -966,6 +971,13 @@ public class InstagramUser extends APINode {
     }
     public APIRequestGetAuthorizedAdAccounts requestBalanceField (boolean value) {
       this.requestField("balance", value);
+      return this;
+    }
+    public APIRequestGetAuthorizedAdAccounts requestBrandSafetyContentFilterLevelsField () {
+      return this.requestBrandSafetyContentFilterLevelsField(true);
+    }
+    public APIRequestGetAuthorizedAdAccounts requestBrandSafetyContentFilterLevelsField (boolean value) {
+      this.requestField("brand_safety_content_filter_levels", value);
       return this;
     }
     public APIRequestGetAuthorizedAdAccounts requestBusinessField () {
@@ -1507,45 +1519,49 @@ public class InstagramUser extends APINode {
 
   }
 
-  public static class APIRequestGetUpcomingEvents extends APIRequest<APINode> {
+  public static class APIRequestGetUpcomingEvents extends APIRequest<IGUpcomingEvent> {
 
-    APINodeList<APINode> lastResponse = null;
+    APINodeList<IGUpcomingEvent> lastResponse = null;
     @Override
-    public APINodeList<APINode> getLastResponse() {
+    public APINodeList<IGUpcomingEvent> getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
     };
 
     public static final String[] FIELDS = {
+      "end_time",
+      "id",
+      "start_time",
+      "title",
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header);
+    public APINodeList<IGUpcomingEvent> parseResponse(String response, String header) throws APIException {
+      return IGUpcomingEvent.parseResponse(response, getContext(), this, header);
     }
 
     @Override
-    public APINodeList<APINode> execute() throws APIException {
+    public APINodeList<IGUpcomingEvent> execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+    public APINodeList<IGUpcomingEvent> execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+    public ListenableFuture<APINodeList<IGUpcomingEvent>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<APINodeList<IGUpcomingEvent>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, APINodeList<IGUpcomingEvent>>() {
+           public APINodeList<IGUpcomingEvent> apply(ResponseWrapper result) {
              try {
                return APIRequestGetUpcomingEvents.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -1606,6 +1622,157 @@ public class InstagramUser extends APINode {
 
     @Override
     public APIRequestGetUpcomingEvents requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetUpcomingEvents requestEndTimeField () {
+      return this.requestEndTimeField(true);
+    }
+    public APIRequestGetUpcomingEvents requestEndTimeField (boolean value) {
+      this.requestField("end_time", value);
+      return this;
+    }
+    public APIRequestGetUpcomingEvents requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetUpcomingEvents requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetUpcomingEvents requestStartTimeField () {
+      return this.requestStartTimeField(true);
+    }
+    public APIRequestGetUpcomingEvents requestStartTimeField (boolean value) {
+      this.requestField("start_time", value);
+      return this;
+    }
+    public APIRequestGetUpcomingEvents requestTitleField () {
+      return this.requestTitleField(true);
+    }
+    public APIRequestGetUpcomingEvents requestTitleField (boolean value) {
+      this.requestField("title", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestCreateUpcomingEvent extends APIRequest<IGUpcomingEvent> {
+
+    IGUpcomingEvent lastResponse = null;
+    @Override
+    public IGUpcomingEvent getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "end_time",
+      "start_time",
+      "title",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public IGUpcomingEvent parseResponse(String response, String header) throws APIException {
+      return IGUpcomingEvent.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public IGUpcomingEvent execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public IGUpcomingEvent execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<IGUpcomingEvent> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<IGUpcomingEvent> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, IGUpcomingEvent>() {
+           public IGUpcomingEvent apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateUpcomingEvent.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestCreateUpcomingEvent(String nodeId, APIContext context) {
+      super(context, nodeId, "/upcoming_events", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateUpcomingEvent setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateUpcomingEvent setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateUpcomingEvent setEndTime (String endTime) {
+      this.setParam("end_time", endTime);
+      return this;
+    }
+
+    public APIRequestCreateUpcomingEvent setStartTime (String startTime) {
+      this.setParam("start_time", startTime);
+      return this;
+    }
+
+    public APIRequestCreateUpcomingEvent setTitle (String title) {
+      this.setParam("title", title);
+      return this;
+    }
+
+    public APIRequestCreateUpcomingEvent requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateUpcomingEvent requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateUpcomingEvent requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateUpcomingEvent requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateUpcomingEvent requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateUpcomingEvent requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }

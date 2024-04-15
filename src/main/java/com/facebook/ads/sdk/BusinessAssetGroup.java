@@ -934,6 +934,7 @@ public class BusinessAssetGroup extends APINode {
       "amount_spent",
       "attribution_spec",
       "balance",
+      "brand_safety_content_filter_levels",
       "business",
       "business_city",
       "business_country_code",
@@ -1147,6 +1148,13 @@ public class BusinessAssetGroup extends APINode {
     }
     public APIRequestGetContainedAdAccounts requestBalanceField (boolean value) {
       this.requestField("balance", value);
+      return this;
+    }
+    public APIRequestGetContainedAdAccounts requestBrandSafetyContentFilterLevelsField () {
+      return this.requestBrandSafetyContentFilterLevelsField(true);
+    }
+    public APIRequestGetContainedAdAccounts requestBrandSafetyContentFilterLevelsField (boolean value) {
+      this.requestField("brand_safety_content_filter_levels", value);
       return this;
     }
     public APIRequestGetContainedAdAccounts requestBusinessField () {
@@ -4517,6 +4525,7 @@ public class BusinessAssetGroup extends APINode {
       "is_community_page",
       "is_eligible_for_branded_content",
       "is_eligible_for_disable_connect_ig_btn_for_non_page_admin_am_web",
+      "is_eligible_for_live_boosting_expansion",
       "is_messenger_bot_get_started_enabled",
       "is_messenger_platform_bot",
       "is_owned",
@@ -5171,6 +5180,13 @@ public class BusinessAssetGroup extends APINode {
     }
     public APIRequestGetContainedPages requestIsEligibleForDisableConnectIgBtnForNonPageAdminAmWebField (boolean value) {
       this.requestField("is_eligible_for_disable_connect_ig_btn_for_non_page_admin_am_web", value);
+      return this;
+    }
+    public APIRequestGetContainedPages requestIsEligibleForLiveBoostingExpansionField () {
+      return this.requestIsEligibleForLiveBoostingExpansionField(true);
+    }
+    public APIRequestGetContainedPages requestIsEligibleForLiveBoostingExpansionField (boolean value) {
+      this.requestField("is_eligible_for_live_boosting_expansion", value);
       return this;
     }
     public APIRequestGetContainedPages requestIsMessengerBotGetStartedEnabledField () {

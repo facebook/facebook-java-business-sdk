@@ -179,6 +179,8 @@ public class Page extends APINode {
   private Boolean mIsEligibleForBrandedContent = null;
   @SerializedName("is_eligible_for_disable_connect_ig_btn_for_non_page_admin_am_web")
   private Boolean mIsEligibleForDisableConnectIgBtnForNonPageAdminAmWeb = null;
+  @SerializedName("is_eligible_for_live_boosting_expansion")
+  private Boolean mIsEligibleForLiveBoostingExpansion = null;
   @SerializedName("is_messenger_bot_get_started_enabled")
   private Boolean mIsMessengerBotGetStartedEnabled = null;
   @SerializedName("is_messenger_platform_bot")
@@ -644,10 +646,6 @@ public class Page extends APINode {
 
   public APIRequestCreateChatPlugin createChatPlugin() {
     return new APIRequestCreateChatPlugin(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestGetCommerceEligibility getCommerceEligibility() {
-    return new APIRequestGetCommerceEligibility(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetCommerceMerchantSettings getCommerceMerchantSettings() {
@@ -1334,6 +1332,10 @@ public class Page extends APINode {
 
   public Boolean getFieldIsEligibleForDisableConnectIgBtnForNonPageAdminAmWeb() {
     return mIsEligibleForDisableConnectIgBtnForNonPageAdminAmWeb;
+  }
+
+  public Boolean getFieldIsEligibleForLiveBoostingExpansion() {
+    return mIsEligibleForLiveBoostingExpansion;
   }
 
   public Boolean getFieldIsMessengerBotGetStartedEnabled() {
@@ -6304,127 +6306,6 @@ public class Page extends APINode {
 
   }
 
-  public static class APIRequestGetCommerceEligibility extends APIRequest<PageCommerceEligibility> {
-
-    APINodeList<PageCommerceEligibility> lastResponse = null;
-    @Override
-    public APINodeList<PageCommerceEligibility> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "offsite",
-      "onsite",
-    };
-
-    @Override
-    public APINodeList<PageCommerceEligibility> parseResponse(String response, String header) throws APIException {
-      return PageCommerceEligibility.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<PageCommerceEligibility> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<PageCommerceEligibility> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<PageCommerceEligibility>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<PageCommerceEligibility>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<PageCommerceEligibility>>() {
-           public APINodeList<PageCommerceEligibility> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetCommerceEligibility.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         },
-         MoreExecutors.directExecutor()
-      );
-    };
-
-    public APIRequestGetCommerceEligibility(String nodeId, APIContext context) {
-      super(context, nodeId, "/commerce_eligibility", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetCommerceEligibility setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetCommerceEligibility setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetCommerceEligibility requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetCommerceEligibility requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetCommerceEligibility requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetCommerceEligibility requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetCommerceEligibility requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetCommerceEligibility requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGetCommerceEligibility requestOffsiteField () {
-      return this.requestOffsiteField(true);
-    }
-    public APIRequestGetCommerceEligibility requestOffsiteField (boolean value) {
-      this.requestField("offsite", value);
-      return this;
-    }
-    public APIRequestGetCommerceEligibility requestOnsiteField () {
-      return this.requestOnsiteField(true);
-    }
-    public APIRequestGetCommerceEligibility requestOnsiteField (boolean value) {
-      this.requestField("onsite", value);
-      return this;
-    }
-  }
-
   public static class APIRequestGetCommerceMerchantSettings extends APIRequest<CommerceMerchantSettings> {
 
     APINodeList<CommerceMerchantSettings> lastResponse = null;
@@ -6460,7 +6341,6 @@ public class Page extends APINode {
       "supported_card_types",
       "terms",
       "terms_url_by_locale",
-      "whatsapp_channel",
     };
 
     @Override
@@ -6719,13 +6599,6 @@ public class Page extends APINode {
     }
     public APIRequestGetCommerceMerchantSettings requestTermsUrlByLocaleField (boolean value) {
       this.requestField("terms_url_by_locale", value);
-      return this;
-    }
-    public APIRequestGetCommerceMerchantSettings requestWhatsappChannelField () {
-      return this.requestWhatsappChannelField(true);
-    }
-    public APIRequestGetCommerceMerchantSettings requestWhatsappChannelField (boolean value) {
-      this.requestField("whatsapp_channel", value);
       return this;
     }
   }
@@ -7843,6 +7716,7 @@ public class Page extends APINode {
       "is_community_page",
       "is_eligible_for_branded_content",
       "is_eligible_for_disable_connect_ig_btn_for_non_page_admin_am_web",
+      "is_eligible_for_live_boosting_expansion",
       "is_messenger_bot_get_started_enabled",
       "is_messenger_platform_bot",
       "is_owned",
@@ -8497,6 +8371,13 @@ public class Page extends APINode {
     }
     public APIRequestGetCrosspostWhitelistedPages requestIsEligibleForDisableConnectIgBtnForNonPageAdminAmWebField (boolean value) {
       this.requestField("is_eligible_for_disable_connect_ig_btn_for_non_page_admin_am_web", value);
+      return this;
+    }
+    public APIRequestGetCrosspostWhitelistedPages requestIsEligibleForLiveBoostingExpansionField () {
+      return this.requestIsEligibleForLiveBoostingExpansionField(true);
+    }
+    public APIRequestGetCrosspostWhitelistedPages requestIsEligibleForLiveBoostingExpansionField (boolean value) {
+      this.requestField("is_eligible_for_live_boosting_expansion", value);
       return this;
     }
     public APIRequestGetCrosspostWhitelistedPages requestIsMessengerBotGetStartedEnabledField () {
@@ -12133,6 +12014,7 @@ public class Page extends APINode {
       "is_community_page",
       "is_eligible_for_branded_content",
       "is_eligible_for_disable_connect_ig_btn_for_non_page_admin_am_web",
+      "is_eligible_for_live_boosting_expansion",
       "is_messenger_bot_get_started_enabled",
       "is_messenger_platform_bot",
       "is_owned",
@@ -12787,6 +12669,13 @@ public class Page extends APINode {
     }
     public APIRequestGetGlobalBrandChildren requestIsEligibleForDisableConnectIgBtnForNonPageAdminAmWebField (boolean value) {
       this.requestField("is_eligible_for_disable_connect_ig_btn_for_non_page_admin_am_web", value);
+      return this;
+    }
+    public APIRequestGetGlobalBrandChildren requestIsEligibleForLiveBoostingExpansionField () {
+      return this.requestIsEligibleForLiveBoostingExpansionField(true);
+    }
+    public APIRequestGetGlobalBrandChildren requestIsEligibleForLiveBoostingExpansionField (boolean value) {
+      this.requestField("is_eligible_for_live_boosting_expansion", value);
       return this;
     }
     public APIRequestGetGlobalBrandChildren requestIsMessengerBotGetStartedEnabledField () {
@@ -15531,6 +15420,7 @@ public class Page extends APINode {
       "is_community_page",
       "is_eligible_for_branded_content",
       "is_eligible_for_disable_connect_ig_btn_for_non_page_admin_am_web",
+      "is_eligible_for_live_boosting_expansion",
       "is_messenger_bot_get_started_enabled",
       "is_messenger_platform_bot",
       "is_owned",
@@ -16190,6 +16080,13 @@ public class Page extends APINode {
     }
     public APIRequestGetLikes requestIsEligibleForDisableConnectIgBtnForNonPageAdminAmWebField (boolean value) {
       this.requestField("is_eligible_for_disable_connect_ig_btn_for_non_page_admin_am_web", value);
+      return this;
+    }
+    public APIRequestGetLikes requestIsEligibleForLiveBoostingExpansionField () {
+      return this.requestIsEligibleForLiveBoostingExpansionField(true);
+    }
+    public APIRequestGetLikes requestIsEligibleForLiveBoostingExpansionField (boolean value) {
+      this.requestField("is_eligible_for_live_boosting_expansion", value);
       return this;
     }
     public APIRequestGetLikes requestIsMessengerBotGetStartedEnabledField () {
@@ -17636,6 +17533,7 @@ public class Page extends APINode {
       "is_community_page",
       "is_eligible_for_branded_content",
       "is_eligible_for_disable_connect_ig_btn_for_non_page_admin_am_web",
+      "is_eligible_for_live_boosting_expansion",
       "is_messenger_bot_get_started_enabled",
       "is_messenger_platform_bot",
       "is_owned",
@@ -18290,6 +18188,13 @@ public class Page extends APINode {
     }
     public APIRequestGetLocations requestIsEligibleForDisableConnectIgBtnForNonPageAdminAmWebField (boolean value) {
       this.requestField("is_eligible_for_disable_connect_ig_btn_for_non_page_admin_am_web", value);
+      return this;
+    }
+    public APIRequestGetLocations requestIsEligibleForLiveBoostingExpansionField () {
+      return this.requestIsEligibleForLiveBoostingExpansionField(true);
+    }
+    public APIRequestGetLocations requestIsEligibleForLiveBoostingExpansionField (boolean value) {
+      this.requestField("is_eligible_for_live_boosting_expansion", value);
       return this;
     }
     public APIRequestGetLocations requestIsMessengerBotGetStartedEnabledField () {
@@ -35005,6 +34910,7 @@ public class Page extends APINode {
       "is_community_page",
       "is_eligible_for_branded_content",
       "is_eligible_for_disable_connect_ig_btn_for_non_page_admin_am_web",
+      "is_eligible_for_live_boosting_expansion",
       "is_messenger_bot_get_started_enabled",
       "is_messenger_platform_bot",
       "is_owned",
@@ -35664,6 +35570,13 @@ public class Page extends APINode {
     }
     public APIRequestGet requestIsEligibleForDisableConnectIgBtnForNonPageAdminAmWebField (boolean value) {
       this.requestField("is_eligible_for_disable_connect_ig_btn_for_non_page_admin_am_web", value);
+      return this;
+    }
+    public APIRequestGet requestIsEligibleForLiveBoostingExpansionField () {
+      return this.requestIsEligibleForLiveBoostingExpansionField(true);
+    }
+    public APIRequestGet requestIsEligibleForLiveBoostingExpansionField (boolean value) {
+      this.requestField("is_eligible_for_live_boosting_expansion", value);
       return this;
     }
     public APIRequestGet requestIsMessengerBotGetStartedEnabledField () {
@@ -37761,6 +37674,8 @@ public class Page extends APINode {
       VALUE_RATINGS("ratings"),
       @SerializedName("registration")
       VALUE_REGISTRATION("registration"),
+      @SerializedName("response_feedback")
+      VALUE_RESPONSE_FEEDBACK("response_feedback"),
       @SerializedName("send_cart")
       VALUE_SEND_CART("send_cart"),
       @SerializedName("standby")
@@ -38076,6 +37991,7 @@ public class Page extends APINode {
     this.mIsCommunityPage = instance.mIsCommunityPage;
     this.mIsEligibleForBrandedContent = instance.mIsEligibleForBrandedContent;
     this.mIsEligibleForDisableConnectIgBtnForNonPageAdminAmWeb = instance.mIsEligibleForDisableConnectIgBtnForNonPageAdminAmWeb;
+    this.mIsEligibleForLiveBoostingExpansion = instance.mIsEligibleForLiveBoostingExpansion;
     this.mIsMessengerBotGetStartedEnabled = instance.mIsMessengerBotGetStartedEnabled;
     this.mIsMessengerPlatformBot = instance.mIsMessengerPlatformBot;
     this.mIsOwned = instance.mIsOwned;

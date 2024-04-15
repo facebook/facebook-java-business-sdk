@@ -4923,6 +4923,7 @@ public class Business extends APINode {
       "amount_spent",
       "attribution_spec",
       "balance",
+      "brand_safety_content_filter_levels",
       "business",
       "business_city",
       "business_country_code",
@@ -5141,6 +5142,13 @@ public class Business extends APINode {
     }
     public APIRequestGetClientAdAccounts requestBalanceField (boolean value) {
       this.requestField("balance", value);
+      return this;
+    }
+    public APIRequestGetClientAdAccounts requestBrandSafetyContentFilterLevelsField () {
+      return this.requestBrandSafetyContentFilterLevelsField(true);
+    }
+    public APIRequestGetClientAdAccounts requestBrandSafetyContentFilterLevelsField (boolean value) {
+      this.requestField("brand_safety_content_filter_levels", value);
       return this;
     }
     public APIRequestGetClientAdAccounts requestBusinessField () {
@@ -6810,6 +6818,7 @@ public class Business extends APINode {
       "is_community_page",
       "is_eligible_for_branded_content",
       "is_eligible_for_disable_connect_ig_btn_for_non_page_admin_am_web",
+      "is_eligible_for_live_boosting_expansion",
       "is_messenger_bot_get_started_enabled",
       "is_messenger_platform_bot",
       "is_owned",
@@ -7464,6 +7473,13 @@ public class Business extends APINode {
     }
     public APIRequestGetClientPages requestIsEligibleForDisableConnectIgBtnForNonPageAdminAmWebField (boolean value) {
       this.requestField("is_eligible_for_disable_connect_ig_btn_for_non_page_admin_am_web", value);
+      return this;
+    }
+    public APIRequestGetClientPages requestIsEligibleForLiveBoostingExpansionField () {
+      return this.requestIsEligibleForLiveBoostingExpansionField(true);
+    }
+    public APIRequestGetClientPages requestIsEligibleForLiveBoostingExpansionField (boolean value) {
+      this.requestField("is_eligible_for_live_boosting_expansion", value);
       return this;
     }
     public APIRequestGetClientPages requestIsMessengerBotGetStartedEnabledField () {
@@ -9999,7 +10015,6 @@ public class Business extends APINode {
       "supported_card_types",
       "terms",
       "terms_url_by_locale",
-      "whatsapp_channel",
     };
 
     @Override
@@ -10258,13 +10273,6 @@ public class Business extends APINode {
     }
     public APIRequestGetCommerceMerchantSettings requestTermsUrlByLocaleField (boolean value) {
       this.requestField("terms_url_by_locale", value);
-      return this;
-    }
-    public APIRequestGetCommerceMerchantSettings requestWhatsappChannelField () {
-      return this.requestWhatsappChannelField(true);
-    }
-    public APIRequestGetCommerceMerchantSettings requestWhatsappChannelField (boolean value) {
-      this.requestField("whatsapp_channel", value);
       return this;
     }
   }
@@ -14708,6 +14716,7 @@ public class Business extends APINode {
       "amount_spent",
       "attribution_spec",
       "balance",
+      "brand_safety_content_filter_levels",
       "business",
       "business_city",
       "business_country_code",
@@ -14926,6 +14935,13 @@ public class Business extends APINode {
     }
     public APIRequestGetOwnedAdAccounts requestBalanceField (boolean value) {
       this.requestField("balance", value);
+      return this;
+    }
+    public APIRequestGetOwnedAdAccounts requestBrandSafetyContentFilterLevelsField () {
+      return this.requestBrandSafetyContentFilterLevelsField(true);
+    }
+    public APIRequestGetOwnedAdAccounts requestBrandSafetyContentFilterLevelsField (boolean value) {
+      this.requestField("brand_safety_content_filter_levels", value);
       return this;
     }
     public APIRequestGetOwnedAdAccounts requestBusinessField () {
@@ -17488,6 +17504,7 @@ public class Business extends APINode {
       "is_community_page",
       "is_eligible_for_branded_content",
       "is_eligible_for_disable_connect_ig_btn_for_non_page_admin_am_web",
+      "is_eligible_for_live_boosting_expansion",
       "is_messenger_bot_get_started_enabled",
       "is_messenger_platform_bot",
       "is_owned",
@@ -18142,6 +18159,13 @@ public class Business extends APINode {
     }
     public APIRequestGetOwnedPages requestIsEligibleForDisableConnectIgBtnForNonPageAdminAmWebField (boolean value) {
       this.requestField("is_eligible_for_disable_connect_ig_btn_for_non_page_admin_am_web", value);
+      return this;
+    }
+    public APIRequestGetOwnedPages requestIsEligibleForLiveBoostingExpansionField () {
+      return this.requestIsEligibleForLiveBoostingExpansionField(true);
+    }
+    public APIRequestGetOwnedPages requestIsEligibleForLiveBoostingExpansionField (boolean value) {
+      this.requestField("is_eligible_for_live_boosting_expansion", value);
       return this;
     }
     public APIRequestGetOwnedPages requestIsMessengerBotGetStartedEnabledField () {

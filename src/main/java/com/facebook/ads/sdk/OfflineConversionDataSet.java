@@ -542,6 +542,7 @@ public class OfflineConversionDataSet extends APINode {
       "amount_spent",
       "attribution_spec",
       "balance",
+      "brand_safety_content_filter_levels",
       "business",
       "business_city",
       "business_country_code",
@@ -760,6 +761,13 @@ public class OfflineConversionDataSet extends APINode {
     }
     public APIRequestGetAdAccounts requestBalanceField (boolean value) {
       this.requestField("balance", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestBrandSafetyContentFilterLevelsField () {
+      return this.requestBrandSafetyContentFilterLevelsField(true);
+    }
+    public APIRequestGetAdAccounts requestBrandSafetyContentFilterLevelsField (boolean value) {
+      this.requestField("brand_safety_content_filter_levels", value);
       return this;
     }
     public APIRequestGetAdAccounts requestBusinessField () {
@@ -2712,6 +2720,7 @@ public class OfflineConversionDataSet extends APINode {
       "amount_spent",
       "attribution_spec",
       "balance",
+      "brand_safety_content_filter_levels",
       "business",
       "business_city",
       "business_country_code",
@@ -2939,6 +2948,13 @@ public class OfflineConversionDataSet extends APINode {
     }
     public APIRequestGetSharedAccounts requestBalanceField (boolean value) {
       this.requestField("balance", value);
+      return this;
+    }
+    public APIRequestGetSharedAccounts requestBrandSafetyContentFilterLevelsField () {
+      return this.requestBrandSafetyContentFilterLevelsField(true);
+    }
+    public APIRequestGetSharedAccounts requestBrandSafetyContentFilterLevelsField (boolean value) {
+      this.requestField("brand_safety_content_filter_levels", value);
       return this;
     }
     public APIRequestGetSharedAccounts requestBusinessField () {

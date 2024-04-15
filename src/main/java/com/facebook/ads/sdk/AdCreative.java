@@ -2489,8 +2489,14 @@ public class AdCreative extends APINode {
       VALUE_ADD_TO_CART("ADD_TO_CART"),
       @SerializedName("APPLY_NOW")
       VALUE_APPLY_NOW("APPLY_NOW"),
+      @SerializedName("ASK_ABOUT_SERVICES")
+      VALUE_ASK_ABOUT_SERVICES("ASK_ABOUT_SERVICES"),
+      @SerializedName("ASK_FOR_MORE_INFO")
+      VALUE_ASK_FOR_MORE_INFO("ASK_FOR_MORE_INFO"),
       @SerializedName("AUDIO_CALL")
       VALUE_AUDIO_CALL("AUDIO_CALL"),
+      @SerializedName("BOOK_A_CONSULTATION")
+      VALUE_BOOK_A_CONSULTATION("BOOK_A_CONSULTATION"),
       @SerializedName("BOOK_NOW")
       VALUE_BOOK_NOW("BOOK_NOW"),
       @SerializedName("BOOK_TRAVEL")
@@ -2501,12 +2507,16 @@ public class AdCreative extends APINode {
       VALUE_BUY_NOW("BUY_NOW"),
       @SerializedName("BUY_TICKETS")
       VALUE_BUY_TICKETS("BUY_TICKETS"),
+      @SerializedName("BUY_VIA_MESSAGE")
+      VALUE_BUY_VIA_MESSAGE("BUY_VIA_MESSAGE"),
       @SerializedName("CALL")
       VALUE_CALL("CALL"),
       @SerializedName("CALL_ME")
       VALUE_CALL_ME("CALL_ME"),
       @SerializedName("CALL_NOW")
       VALUE_CALL_NOW("CALL_NOW"),
+      @SerializedName("CHAT_WITH_US")
+      VALUE_CHAT_WITH_US("CHAT_WITH_US"),
       @SerializedName("CONFIRM")
       VALUE_CONFIRM("CONFIRM"),
       @SerializedName("CONTACT")
@@ -2531,6 +2541,8 @@ public class AdCreative extends APINode {
       VALUE_FOLLOW_PAGE("FOLLOW_PAGE"),
       @SerializedName("FOLLOW_USER")
       VALUE_FOLLOW_USER("FOLLOW_USER"),
+      @SerializedName("GET_A_QUOTE")
+      VALUE_GET_A_QUOTE("GET_A_QUOTE"),
       @SerializedName("GET_DIRECTIONS")
       VALUE_GET_DIRECTIONS("GET_DIRECTIONS"),
       @SerializedName("GET_OFFER")
@@ -2561,6 +2573,8 @@ public class AdCreative extends APINode {
       VALUE_LISTEN_MUSIC("LISTEN_MUSIC"),
       @SerializedName("LISTEN_NOW")
       VALUE_LISTEN_NOW("LISTEN_NOW"),
+      @SerializedName("MAKE_AN_APPOINTMENT")
+      VALUE_MAKE_AN_APPOINTMENT("MAKE_AN_APPOINTMENT"),
       @SerializedName("MESSAGE_PAGE")
       VALUE_MESSAGE_PAGE("MESSAGE_PAGE"),
       @SerializedName("MOBILE_DOWNLOAD")

@@ -580,10 +580,6 @@ public class Application extends APINode {
     return new APIRequestGetDaChecks(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestGetEvents getEvents() {
-    return new APIRequestGetEvents(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetIapPurchases getIapPurchases() {
     return new APIRequestGetIapPurchases(this.getPrefixedId().toString(), context);
   }
@@ -1567,6 +1563,7 @@ public class Application extends APINode {
       "page_id",
       "page_scoped_user_id",
       "receipt_data",
+      "sdk_version",
       "ud",
       "url_schemes",
       "user_id",
@@ -1852,6 +1849,11 @@ public class Application extends APINode {
 
     public APIRequestCreateActivity setReceiptData (String receiptData) {
       this.setParam("receipt_data", receiptData);
+      return this;
+    }
+
+    public APIRequestCreateActivity setSdkVersion (String sdkVersion) {
+      this.setParam("sdk_version", sdkVersion);
       return this;
     }
 
@@ -5055,6 +5057,7 @@ public class Application extends APINode {
       "amount_spent",
       "attribution_spec",
       "balance",
+      "brand_safety_content_filter_levels",
       "business",
       "business_city",
       "business_country_code",
@@ -5273,6 +5276,13 @@ public class Application extends APINode {
     }
     public APIRequestGetAuthorizedAdAccounts requestBalanceField (boolean value) {
       this.requestField("balance", value);
+      return this;
+    }
+    public APIRequestGetAuthorizedAdAccounts requestBrandSafetyContentFilterLevelsField () {
+      return this.requestBrandSafetyContentFilterLevelsField(true);
+    }
+    public APIRequestGetAuthorizedAdAccounts requestBrandSafetyContentFilterLevelsField (boolean value) {
+      this.requestField("brand_safety_content_filter_levels", value);
       return this;
     }
     public APIRequestGetAuthorizedAdAccounts requestBusinessField () {
@@ -6227,419 +6237,6 @@ public class Application extends APINode {
     }
     public APIRequestGetDaChecks requestUserMessageField (boolean value) {
       this.requestField("user_message", value);
-      return this;
-    }
-  }
-
-  public static class APIRequestGetEvents extends APIRequest<Event> {
-
-    APINodeList<Event> lastResponse = null;
-    @Override
-    public APINodeList<Event> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "include_canceled",
-      "type",
-    };
-
-    public static final String[] FIELDS = {
-      "attending_count",
-      "can_guests_invite",
-      "category",
-      "cover",
-      "created_time",
-      "declined_count",
-      "description",
-      "discount_code_enabled",
-      "end_time",
-      "event_times",
-      "guest_list_enabled",
-      "id",
-      "interested_count",
-      "is_canceled",
-      "is_draft",
-      "is_online",
-      "is_page_owned",
-      "maybe_count",
-      "name",
-      "noreply_count",
-      "online_event_format",
-      "online_event_third_party_url",
-      "owner",
-      "parent_group",
-      "place",
-      "registration_setting",
-      "scheduled_publish_time",
-      "start_time",
-      "ticket_setting",
-      "ticket_uri",
-      "ticket_uri_start_sales_time",
-      "ticketing_privacy_uri",
-      "ticketing_terms_uri",
-      "timezone",
-      "type",
-      "updated_time",
-    };
-
-    @Override
-    public APINodeList<Event> parseResponse(String response, String header) throws APIException {
-      return Event.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<Event> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<Event> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<Event>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<Event>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<Event>>() {
-           public APINodeList<Event> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetEvents.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         },
-         MoreExecutors.directExecutor()
-      );
-    };
-
-    public APIRequestGetEvents(String nodeId, APIContext context) {
-      super(context, nodeId, "/events", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetEvents setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetEvents setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetEvents setIncludeCanceled (Boolean includeCanceled) {
-      this.setParam("include_canceled", includeCanceled);
-      return this;
-    }
-    public APIRequestGetEvents setIncludeCanceled (String includeCanceled) {
-      this.setParam("include_canceled", includeCanceled);
-      return this;
-    }
-
-    public APIRequestGetEvents setType (Event.EnumType type) {
-      this.setParam("type", type);
-      return this;
-    }
-    public APIRequestGetEvents setType (String type) {
-      this.setParam("type", type);
-      return this;
-    }
-
-    public APIRequestGetEvents requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetEvents requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetEvents requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetEvents requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetEvents requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetEvents requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGetEvents requestAttendingCountField () {
-      return this.requestAttendingCountField(true);
-    }
-    public APIRequestGetEvents requestAttendingCountField (boolean value) {
-      this.requestField("attending_count", value);
-      return this;
-    }
-    public APIRequestGetEvents requestCanGuestsInviteField () {
-      return this.requestCanGuestsInviteField(true);
-    }
-    public APIRequestGetEvents requestCanGuestsInviteField (boolean value) {
-      this.requestField("can_guests_invite", value);
-      return this;
-    }
-    public APIRequestGetEvents requestCategoryField () {
-      return this.requestCategoryField(true);
-    }
-    public APIRequestGetEvents requestCategoryField (boolean value) {
-      this.requestField("category", value);
-      return this;
-    }
-    public APIRequestGetEvents requestCoverField () {
-      return this.requestCoverField(true);
-    }
-    public APIRequestGetEvents requestCoverField (boolean value) {
-      this.requestField("cover", value);
-      return this;
-    }
-    public APIRequestGetEvents requestCreatedTimeField () {
-      return this.requestCreatedTimeField(true);
-    }
-    public APIRequestGetEvents requestCreatedTimeField (boolean value) {
-      this.requestField("created_time", value);
-      return this;
-    }
-    public APIRequestGetEvents requestDeclinedCountField () {
-      return this.requestDeclinedCountField(true);
-    }
-    public APIRequestGetEvents requestDeclinedCountField (boolean value) {
-      this.requestField("declined_count", value);
-      return this;
-    }
-    public APIRequestGetEvents requestDescriptionField () {
-      return this.requestDescriptionField(true);
-    }
-    public APIRequestGetEvents requestDescriptionField (boolean value) {
-      this.requestField("description", value);
-      return this;
-    }
-    public APIRequestGetEvents requestDiscountCodeEnabledField () {
-      return this.requestDiscountCodeEnabledField(true);
-    }
-    public APIRequestGetEvents requestDiscountCodeEnabledField (boolean value) {
-      this.requestField("discount_code_enabled", value);
-      return this;
-    }
-    public APIRequestGetEvents requestEndTimeField () {
-      return this.requestEndTimeField(true);
-    }
-    public APIRequestGetEvents requestEndTimeField (boolean value) {
-      this.requestField("end_time", value);
-      return this;
-    }
-    public APIRequestGetEvents requestEventTimesField () {
-      return this.requestEventTimesField(true);
-    }
-    public APIRequestGetEvents requestEventTimesField (boolean value) {
-      this.requestField("event_times", value);
-      return this;
-    }
-    public APIRequestGetEvents requestGuestListEnabledField () {
-      return this.requestGuestListEnabledField(true);
-    }
-    public APIRequestGetEvents requestGuestListEnabledField (boolean value) {
-      this.requestField("guest_list_enabled", value);
-      return this;
-    }
-    public APIRequestGetEvents requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetEvents requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGetEvents requestInterestedCountField () {
-      return this.requestInterestedCountField(true);
-    }
-    public APIRequestGetEvents requestInterestedCountField (boolean value) {
-      this.requestField("interested_count", value);
-      return this;
-    }
-    public APIRequestGetEvents requestIsCanceledField () {
-      return this.requestIsCanceledField(true);
-    }
-    public APIRequestGetEvents requestIsCanceledField (boolean value) {
-      this.requestField("is_canceled", value);
-      return this;
-    }
-    public APIRequestGetEvents requestIsDraftField () {
-      return this.requestIsDraftField(true);
-    }
-    public APIRequestGetEvents requestIsDraftField (boolean value) {
-      this.requestField("is_draft", value);
-      return this;
-    }
-    public APIRequestGetEvents requestIsOnlineField () {
-      return this.requestIsOnlineField(true);
-    }
-    public APIRequestGetEvents requestIsOnlineField (boolean value) {
-      this.requestField("is_online", value);
-      return this;
-    }
-    public APIRequestGetEvents requestIsPageOwnedField () {
-      return this.requestIsPageOwnedField(true);
-    }
-    public APIRequestGetEvents requestIsPageOwnedField (boolean value) {
-      this.requestField("is_page_owned", value);
-      return this;
-    }
-    public APIRequestGetEvents requestMaybeCountField () {
-      return this.requestMaybeCountField(true);
-    }
-    public APIRequestGetEvents requestMaybeCountField (boolean value) {
-      this.requestField("maybe_count", value);
-      return this;
-    }
-    public APIRequestGetEvents requestNameField () {
-      return this.requestNameField(true);
-    }
-    public APIRequestGetEvents requestNameField (boolean value) {
-      this.requestField("name", value);
-      return this;
-    }
-    public APIRequestGetEvents requestNoreplyCountField () {
-      return this.requestNoreplyCountField(true);
-    }
-    public APIRequestGetEvents requestNoreplyCountField (boolean value) {
-      this.requestField("noreply_count", value);
-      return this;
-    }
-    public APIRequestGetEvents requestOnlineEventFormatField () {
-      return this.requestOnlineEventFormatField(true);
-    }
-    public APIRequestGetEvents requestOnlineEventFormatField (boolean value) {
-      this.requestField("online_event_format", value);
-      return this;
-    }
-    public APIRequestGetEvents requestOnlineEventThirdPartyUrlField () {
-      return this.requestOnlineEventThirdPartyUrlField(true);
-    }
-    public APIRequestGetEvents requestOnlineEventThirdPartyUrlField (boolean value) {
-      this.requestField("online_event_third_party_url", value);
-      return this;
-    }
-    public APIRequestGetEvents requestOwnerField () {
-      return this.requestOwnerField(true);
-    }
-    public APIRequestGetEvents requestOwnerField (boolean value) {
-      this.requestField("owner", value);
-      return this;
-    }
-    public APIRequestGetEvents requestParentGroupField () {
-      return this.requestParentGroupField(true);
-    }
-    public APIRequestGetEvents requestParentGroupField (boolean value) {
-      this.requestField("parent_group", value);
-      return this;
-    }
-    public APIRequestGetEvents requestPlaceField () {
-      return this.requestPlaceField(true);
-    }
-    public APIRequestGetEvents requestPlaceField (boolean value) {
-      this.requestField("place", value);
-      return this;
-    }
-    public APIRequestGetEvents requestRegistrationSettingField () {
-      return this.requestRegistrationSettingField(true);
-    }
-    public APIRequestGetEvents requestRegistrationSettingField (boolean value) {
-      this.requestField("registration_setting", value);
-      return this;
-    }
-    public APIRequestGetEvents requestScheduledPublishTimeField () {
-      return this.requestScheduledPublishTimeField(true);
-    }
-    public APIRequestGetEvents requestScheduledPublishTimeField (boolean value) {
-      this.requestField("scheduled_publish_time", value);
-      return this;
-    }
-    public APIRequestGetEvents requestStartTimeField () {
-      return this.requestStartTimeField(true);
-    }
-    public APIRequestGetEvents requestStartTimeField (boolean value) {
-      this.requestField("start_time", value);
-      return this;
-    }
-    public APIRequestGetEvents requestTicketSettingField () {
-      return this.requestTicketSettingField(true);
-    }
-    public APIRequestGetEvents requestTicketSettingField (boolean value) {
-      this.requestField("ticket_setting", value);
-      return this;
-    }
-    public APIRequestGetEvents requestTicketUriField () {
-      return this.requestTicketUriField(true);
-    }
-    public APIRequestGetEvents requestTicketUriField (boolean value) {
-      this.requestField("ticket_uri", value);
-      return this;
-    }
-    public APIRequestGetEvents requestTicketUriStartSalesTimeField () {
-      return this.requestTicketUriStartSalesTimeField(true);
-    }
-    public APIRequestGetEvents requestTicketUriStartSalesTimeField (boolean value) {
-      this.requestField("ticket_uri_start_sales_time", value);
-      return this;
-    }
-    public APIRequestGetEvents requestTicketingPrivacyUriField () {
-      return this.requestTicketingPrivacyUriField(true);
-    }
-    public APIRequestGetEvents requestTicketingPrivacyUriField (boolean value) {
-      this.requestField("ticketing_privacy_uri", value);
-      return this;
-    }
-    public APIRequestGetEvents requestTicketingTermsUriField () {
-      return this.requestTicketingTermsUriField(true);
-    }
-    public APIRequestGetEvents requestTicketingTermsUriField (boolean value) {
-      this.requestField("ticketing_terms_uri", value);
-      return this;
-    }
-    public APIRequestGetEvents requestTimezoneField () {
-      return this.requestTimezoneField(true);
-    }
-    public APIRequestGetEvents requestTimezoneField (boolean value) {
-      this.requestField("timezone", value);
-      return this;
-    }
-    public APIRequestGetEvents requestTypeField () {
-      return this.requestTypeField(true);
-    }
-    public APIRequestGetEvents requestTypeField (boolean value) {
-      this.requestField("type", value);
-      return this;
-    }
-    public APIRequestGetEvents requestUpdatedTimeField () {
-      return this.requestUpdatedTimeField(true);
-    }
-    public APIRequestGetEvents requestUpdatedTimeField (boolean value) {
-      this.requestField("updated_time", value);
       return this;
     }
   }

@@ -1377,6 +1377,7 @@ public class LiveVideo extends APINode {
       "is_community_page",
       "is_eligible_for_branded_content",
       "is_eligible_for_disable_connect_ig_btn_for_non_page_admin_am_web",
+      "is_eligible_for_live_boosting_expansion",
       "is_messenger_bot_get_started_enabled",
       "is_messenger_platform_bot",
       "is_owned",
@@ -2031,6 +2032,13 @@ public class LiveVideo extends APINode {
     }
     public APIRequestGetCrosspostSharedPages requestIsEligibleForDisableConnectIgBtnForNonPageAdminAmWebField (boolean value) {
       this.requestField("is_eligible_for_disable_connect_ig_btn_for_non_page_admin_am_web", value);
+      return this;
+    }
+    public APIRequestGetCrosspostSharedPages requestIsEligibleForLiveBoostingExpansionField () {
+      return this.requestIsEligibleForLiveBoostingExpansionField(true);
+    }
+    public APIRequestGetCrosspostSharedPages requestIsEligibleForLiveBoostingExpansionField (boolean value) {
+      this.requestField("is_eligible_for_live_boosting_expansion", value);
       return this;
     }
     public APIRequestGetCrosspostSharedPages requestIsMessengerBotGetStartedEnabledField () {

@@ -46,7 +46,7 @@ public class WhatsAppBusinessPartnerClientVerificationSubmission extends APINode
   @SerializedName("id")
   private String mId = null;
   @SerializedName("rejection_reasons")
-  private List<String> mRejectionReasons = null;
+  private List<EnumRejectionReasons> mRejectionReasons = null;
   @SerializedName("submitted_info")
   private Object mSubmittedInfo = null;
   @SerializedName("submitted_time")
@@ -54,7 +54,7 @@ public class WhatsAppBusinessPartnerClientVerificationSubmission extends APINode
   @SerializedName("update_time")
   private String mUpdateTime = null;
   @SerializedName("verification_status")
-  private String mVerificationStatus = null;
+  private EnumVerificationStatus mVerificationStatus = null;
   protected static Gson gson = null;
 
   public WhatsAppBusinessPartnerClientVerificationSubmission() {
@@ -224,11 +224,11 @@ public class WhatsAppBusinessPartnerClientVerificationSubmission extends APINode
     return this;
   }
 
-  public List<String> getFieldRejectionReasons() {
+  public List<EnumRejectionReasons> getFieldRejectionReasons() {
     return mRejectionReasons;
   }
 
-  public WhatsAppBusinessPartnerClientVerificationSubmission setFieldRejectionReasons(List<String> value) {
+  public WhatsAppBusinessPartnerClientVerificationSubmission setFieldRejectionReasons(List<EnumRejectionReasons> value) {
     this.mRejectionReasons = value;
     return this;
   }
@@ -260,16 +260,60 @@ public class WhatsAppBusinessPartnerClientVerificationSubmission extends APINode
     return this;
   }
 
-  public String getFieldVerificationStatus() {
+  public EnumVerificationStatus getFieldVerificationStatus() {
     return mVerificationStatus;
   }
 
-  public WhatsAppBusinessPartnerClientVerificationSubmission setFieldVerificationStatus(String value) {
+  public WhatsAppBusinessPartnerClientVerificationSubmission setFieldVerificationStatus(EnumVerificationStatus value) {
     this.mVerificationStatus = value;
     return this;
   }
 
 
+
+  public static enum EnumRejectionReasons {
+      @SerializedName("ADDRESS_NOT_MATCHING")
+      VALUE_ADDRESS_NOT_MATCHING("ADDRESS_NOT_MATCHING"),
+      @SerializedName("LEGAL_NAME_NOT_MATCHING")
+      VALUE_LEGAL_NAME_NOT_MATCHING("LEGAL_NAME_NOT_MATCHING"),
+      @SerializedName("NONE")
+      VALUE_NONE("NONE"),
+      @SerializedName("WEBSITE_NOT_MATCHING")
+      VALUE_WEBSITE_NOT_MATCHING("WEBSITE_NOT_MATCHING"),
+      ;
+
+      private String value;
+
+      private EnumRejectionReasons(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumVerificationStatus {
+      @SerializedName("APPROVED")
+      VALUE_APPROVED("APPROVED"),
+      @SerializedName("FAILED")
+      VALUE_FAILED("FAILED"),
+      @SerializedName("PENDING")
+      VALUE_PENDING("PENDING"),
+      ;
+
+      private String value;
+
+      private EnumVerificationStatus(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
 
 
   synchronized /*package*/ static Gson getGson() {

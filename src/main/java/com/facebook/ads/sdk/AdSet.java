@@ -137,6 +137,8 @@ public class AdSet extends APINode {
   private List<AdRecommendation> mRecommendations = null;
   @SerializedName("recurring_budget_semantics")
   private Boolean mRecurringBudgetSemantics = null;
+  @SerializedName("regional_regulation_identities")
+  private Object mRegionalRegulationIdentities = null;
   @SerializedName("review_feedback")
   private String mReviewFeedback = null;
   @SerializedName("rf_prediction_id")
@@ -930,6 +932,15 @@ public class AdSet extends APINode {
 
   public AdSet setFieldRecurringBudgetSemantics(Boolean value) {
     this.mRecurringBudgetSemantics = value;
+    return this;
+  }
+
+  public Object getFieldRegionalRegulationIdentities() {
+    return mRegionalRegulationIdentities;
+  }
+
+  public AdSet setFieldRegionalRegulationIdentities(Object value) {
+    this.mRegionalRegulationIdentities = value;
     return this;
   }
 
@@ -3474,6 +3485,7 @@ public class AdSet extends APINode {
       "promoted_object",
       "recommendations",
       "recurring_budget_semantics",
+      "regional_regulation_identities",
       "review_feedback",
       "rf_prediction_id",
       "source_adset",
@@ -3948,6 +3960,13 @@ public class AdSet extends APINode {
     }
     public APIRequestGetCopies requestRecurringBudgetSemanticsField (boolean value) {
       this.requestField("recurring_budget_semantics", value);
+      return this;
+    }
+    public APIRequestGetCopies requestRegionalRegulationIdentitiesField () {
+      return this.requestRegionalRegulationIdentitiesField(true);
+    }
+    public APIRequestGetCopies requestRegionalRegulationIdentitiesField (boolean value) {
+      this.requestField("regional_regulation_identities", value);
       return this;
     }
     public APIRequestGetCopies requestReviewFeedbackField () {
@@ -5285,6 +5304,7 @@ public class AdSet extends APINode {
       "promoted_object",
       "recommendations",
       "recurring_budget_semantics",
+      "regional_regulation_identities",
       "review_feedback",
       "rf_prediction_id",
       "source_adset",
@@ -5759,6 +5779,13 @@ public class AdSet extends APINode {
     }
     public APIRequestGet requestRecurringBudgetSemanticsField (boolean value) {
       this.requestField("recurring_budget_semantics", value);
+      return this;
+    }
+    public APIRequestGet requestRegionalRegulationIdentitiesField () {
+      return this.requestRegionalRegulationIdentitiesField(true);
+    }
+    public APIRequestGet requestRegionalRegulationIdentitiesField (boolean value) {
+      this.requestField("regional_regulation_identities", value);
       return this;
     }
     public APIRequestGet requestReviewFeedbackField () {
@@ -6886,6 +6913,7 @@ public class AdSet extends APINode {
     this.mPromotedObject = instance.mPromotedObject;
     this.mRecommendations = instance.mRecommendations;
     this.mRecurringBudgetSemantics = instance.mRecurringBudgetSemantics;
+    this.mRegionalRegulationIdentities = instance.mRegionalRegulationIdentities;
     this.mReviewFeedback = instance.mReviewFeedback;
     this.mRfPredictionId = instance.mRfPredictionId;
     this.mSourceAdset = instance.mSourceAdset;

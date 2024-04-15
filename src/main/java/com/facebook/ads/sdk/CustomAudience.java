@@ -685,6 +685,7 @@ public class CustomAudience extends APINode {
       "amount_spent",
       "attribution_spec",
       "balance",
+      "brand_safety_content_filter_levels",
       "business",
       "business_city",
       "business_country_code",
@@ -903,6 +904,13 @@ public class CustomAudience extends APINode {
     }
     public APIRequestGetAdAccounts requestBalanceField (boolean value) {
       this.requestField("balance", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestBrandSafetyContentFilterLevelsField () {
+      return this.requestBrandSafetyContentFilterLevelsField(true);
+    }
+    public APIRequestGetAdAccounts requestBrandSafetyContentFilterLevelsField (boolean value) {
+      this.requestField("brand_safety_content_filter_levels", value);
       return this;
     }
     public APIRequestGetAdAccounts requestBusinessField () {
@@ -3725,6 +3733,8 @@ public class CustomAudience extends APINode {
       VALUE_DESTINATION("DESTINATION"),
       @SerializedName("FLIGHT")
       VALUE_FLIGHT("FLIGHT"),
+      @SerializedName("GENERIC")
+      VALUE_GENERIC("GENERIC"),
       @SerializedName("HOME_LISTING")
       VALUE_HOME_LISTING("HOME_LISTING"),
       @SerializedName("HOTEL")
@@ -3793,6 +3803,8 @@ public class CustomAudience extends APINode {
       VALUE_CUSTOM("CUSTOM"),
       @SerializedName("ENGAGEMENT")
       VALUE_ENGAGEMENT("ENGAGEMENT"),
+      @SerializedName("EXCLUSION")
+      VALUE_EXCLUSION("EXCLUSION"),
       @SerializedName("FOX")
       VALUE_FOX("FOX"),
       @SerializedName("LOOKALIKE")

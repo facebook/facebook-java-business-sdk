@@ -370,6 +370,10 @@ public class WhatsAppBusinessAccount extends APINode {
     return new APIRequestGetSchedules(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestCreateSetOboMobilityIntent createSetOboMobilityIntent() {
+    return new APIRequestCreateSetOboMobilityIntent(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestDeleteSubscribedApps deleteSubscribedApps() {
     return new APIRequestDeleteSubscribedApps(this.getPrefixedId().toString(), context);
   }
@@ -3209,6 +3213,111 @@ public class WhatsAppBusinessAccount extends APINode {
 
   }
 
+  public static class APIRequestCreateSetOboMobilityIntent extends APIRequest<APINode> {
+
+    APINode lastResponse = null;
+    @Override
+    public APINode getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public APINode execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINode execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINode> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateSetOboMobilityIntent.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestCreateSetOboMobilityIntent(String nodeId, APIContext context) {
+      super(context, nodeId, "/set_obo_mobility_intent", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateSetOboMobilityIntent setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateSetOboMobilityIntent setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateSetOboMobilityIntent requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateSetOboMobilityIntent requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateSetOboMobilityIntent requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateSetOboMobilityIntent requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateSetOboMobilityIntent requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateSetOboMobilityIntent requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestDeleteSubscribedApps extends APIRequest<APINode> {
 
     APINodeList<APINode> lastResponse = null;
@@ -4386,8 +4495,6 @@ public class WhatsAppBusinessAccount extends APINode {
   }
 
   public static enum EnumSubCategory {
-      @SerializedName("CUSTOM")
-      VALUE_CUSTOM("CUSTOM"),
       @SerializedName("ORDER_DETAILS")
       VALUE_ORDER_DETAILS("ORDER_DETAILS"),
       @SerializedName("ORDER_STATUS")
@@ -4409,6 +4516,10 @@ public class WhatsAppBusinessAccount extends APINode {
   public static enum EnumConversationCategories {
       @SerializedName("AUTHENTICATION")
       VALUE_AUTHENTICATION("AUTHENTICATION"),
+      @SerializedName("AUTHENTICATION_INTERNATIONAL")
+      VALUE_AUTHENTICATION_INTERNATIONAL("AUTHENTICATION_INTERNATIONAL"),
+      @SerializedName("FIXED_TEMPLATE_NOTIFY")
+      VALUE_FIXED_TEMPLATE_NOTIFY("FIXED_TEMPLATE_NOTIFY"),
       @SerializedName("MARKETING")
       VALUE_MARKETING("MARKETING"),
       @SerializedName("MARKETING_OPTIMIZED_DELIVERY")

@@ -89,8 +89,6 @@ public class CommerceMerchantSettings extends APINode {
   private String mTerms = null;
   @SerializedName("terms_url_by_locale")
   private List<Map<String, String>> mTermsUrlByLocale = null;
-  @SerializedName("whatsapp_channel")
-  private Object mWhatsappChannel = null;
   protected static Gson gson = null;
 
   CommerceMerchantSettings() {
@@ -332,10 +330,6 @@ public class CommerceMerchantSettings extends APINode {
     return new APIRequestGetReturns(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestGetSellerIssues getSellerIssues() {
-    return new APIRequestGetSellerIssues(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetSetupStatus getSetupStatus() {
     return new APIRequestGetSetupStatus(this.getPrefixedId().toString(), context);
   }
@@ -354,10 +348,6 @@ public class CommerceMerchantSettings extends APINode {
 
   public APIRequestGetTaxSettings getTaxSettings() {
     return new APIRequestGetTaxSettings(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestCreateWhatsappChannel createWhatsappChannel() {
-    return new APIRequestCreateWhatsappChannel(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGet get() {
@@ -462,10 +452,6 @@ public class CommerceMerchantSettings extends APINode {
 
   public List<Map<String, String>> getFieldTermsUrlByLocale() {
     return mTermsUrlByLocale;
-  }
-
-  public Object getFieldWhatsappChannel() {
-    return mWhatsappChannel;
   }
 
 
@@ -2624,111 +2610,6 @@ public class CommerceMerchantSettings extends APINode {
 
   }
 
-  public static class APIRequestGetSellerIssues extends APIRequest<APINode> {
-
-    APINodeList<APINode> lastResponse = null;
-    @Override
-    public APINodeList<APINode> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<APINode> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetSellerIssues.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         },
-         MoreExecutors.directExecutor()
-      );
-    };
-
-    public APIRequestGetSellerIssues(String nodeId, APIContext context) {
-      super(context, nodeId, "/seller_issues", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetSellerIssues setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetSellerIssues setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetSellerIssues requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetSellerIssues requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetSellerIssues requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetSellerIssues requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetSellerIssues requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetSellerIssues requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
   public static class APIRequestGetSetupStatus extends APIRequest<CommerceMerchantSettingsSetupStatus> {
 
     APINodeList<CommerceMerchantSettingsSetupStatus> lastResponse = null;
@@ -3416,131 +3297,6 @@ public class CommerceMerchantSettings extends APINode {
 
   }
 
-  public static class APIRequestCreateWhatsappChannel extends APIRequest<APINode> {
-
-    APINode lastResponse = null;
-    @Override
-    public APINode getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "op",
-      "whatsapp_business_accounts",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINode parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public APINode execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINode execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINode> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINode>() {
-           public APINode apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateWhatsappChannel.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         },
-         MoreExecutors.directExecutor()
-      );
-    };
-
-    public APIRequestCreateWhatsappChannel(String nodeId, APIContext context) {
-      super(context, nodeId, "/whatsapp_channel", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateWhatsappChannel setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateWhatsappChannel setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateWhatsappChannel setOp (EnumOp op) {
-      this.setParam("op", op);
-      return this;
-    }
-    public APIRequestCreateWhatsappChannel setOp (String op) {
-      this.setParam("op", op);
-      return this;
-    }
-
-    public APIRequestCreateWhatsappChannel setWhatsappBusinessAccounts (List<String> whatsappBusinessAccounts) {
-      this.setParam("whatsapp_business_accounts", whatsappBusinessAccounts);
-      return this;
-    }
-    public APIRequestCreateWhatsappChannel setWhatsappBusinessAccounts (String whatsappBusinessAccounts) {
-      this.setParam("whatsapp_business_accounts", whatsappBusinessAccounts);
-      return this;
-    }
-
-    public APIRequestCreateWhatsappChannel requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateWhatsappChannel requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateWhatsappChannel requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateWhatsappChannel requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateWhatsappChannel requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateWhatsappChannel requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
   public static class APIRequestGet extends APIRequest<CommerceMerchantSettings> {
 
     CommerceMerchantSettings lastResponse = null;
@@ -3576,7 +3332,6 @@ public class CommerceMerchantSettings extends APINode {
       "supported_card_types",
       "terms",
       "terms_url_by_locale",
-      "whatsapp_channel",
     };
 
     @Override
@@ -3837,13 +3592,6 @@ public class CommerceMerchantSettings extends APINode {
       this.requestField("terms_url_by_locale", value);
       return this;
     }
-    public APIRequestGet requestWhatsappChannelField () {
-      return this.requestWhatsappChannelField(true);
-    }
-    public APIRequestGet requestWhatsappChannelField (boolean value) {
-      this.requestField("whatsapp_channel", value);
-      return this;
-    }
   }
 
   public static enum EnumStatuses {
@@ -3862,25 +3610,6 @@ public class CommerceMerchantSettings extends APINode {
       private String value;
 
       private EnumStatuses(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumOp {
-      @SerializedName("ADD")
-      VALUE_ADD("ADD"),
-      @SerializedName("REMOVE")
-      VALUE_REMOVE("REMOVE"),
-      ;
-
-      private String value;
-
-      private EnumOp(String value) {
         this.value = value;
       }
 
@@ -3929,7 +3658,6 @@ public class CommerceMerchantSettings extends APINode {
     this.mSupportedCardTypes = instance.mSupportedCardTypes;
     this.mTerms = instance.mTerms;
     this.mTermsUrlByLocale = instance.mTermsUrlByLocale;
-    this.mWhatsappChannel = instance.mWhatsappChannel;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

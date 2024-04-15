@@ -43,10 +43,16 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class AdCreativeFeaturesSpec extends APINode {
   @SerializedName("advantage_plus_creative")
   private AdCreativeFeatureDetails mAdvantagePlusCreative = null;
+  @SerializedName("app_highlights")
+  private AdCreativeFeatureDetails mAppHighlights = null;
   @SerializedName("audio")
   private AdCreativeFeatureDetails mAudio = null;
   @SerializedName("carousel_to_video")
   private AdCreativeFeatureDetails mCarouselToVideo = null;
+  @SerializedName("catalog_feed_tag")
+  private AdCreativeFeatureDetails mCatalogFeedTag = null;
+  @SerializedName("customize_product_recommendation")
+  private AdCreativeFeatureDetails mCustomizeProductRecommendation = null;
   @SerializedName("cv_transformation")
   private AdCreativeFeatureDetails mCvTransformation = null;
   @SerializedName("description_automation")
@@ -83,6 +89,8 @@ public class AdCreativeFeaturesSpec extends APINode {
   private AdCreativeFeatureDetails mProductTags = null;
   @SerializedName("profile_card")
   private AdCreativeFeatureDetails mProfileCard = null;
+  @SerializedName("site_extensions")
+  private AdCreativeFeatureDetails mSiteExtensions = null;
   @SerializedName("standard_enhancements")
   private AdCreativeFeatureDetails mStandardEnhancements = null;
   @SerializedName("standard_enhancements_catalog")
@@ -260,6 +268,20 @@ public class AdCreativeFeaturesSpec extends APINode {
     this.mAdvantagePlusCreative = AdCreativeFeatureDetails.getGson().fromJson(value, type);
     return this;
   }
+  public AdCreativeFeatureDetails getFieldAppHighlights() {
+    return mAppHighlights;
+  }
+
+  public AdCreativeFeaturesSpec setFieldAppHighlights(AdCreativeFeatureDetails value) {
+    this.mAppHighlights = value;
+    return this;
+  }
+
+  public AdCreativeFeaturesSpec setFieldAppHighlights(String value) {
+    Type type = new TypeToken<AdCreativeFeatureDetails>(){}.getType();
+    this.mAppHighlights = AdCreativeFeatureDetails.getGson().fromJson(value, type);
+    return this;
+  }
   public AdCreativeFeatureDetails getFieldAudio() {
     return mAudio;
   }
@@ -286,6 +308,34 @@ public class AdCreativeFeaturesSpec extends APINode {
   public AdCreativeFeaturesSpec setFieldCarouselToVideo(String value) {
     Type type = new TypeToken<AdCreativeFeatureDetails>(){}.getType();
     this.mCarouselToVideo = AdCreativeFeatureDetails.getGson().fromJson(value, type);
+    return this;
+  }
+  public AdCreativeFeatureDetails getFieldCatalogFeedTag() {
+    return mCatalogFeedTag;
+  }
+
+  public AdCreativeFeaturesSpec setFieldCatalogFeedTag(AdCreativeFeatureDetails value) {
+    this.mCatalogFeedTag = value;
+    return this;
+  }
+
+  public AdCreativeFeaturesSpec setFieldCatalogFeedTag(String value) {
+    Type type = new TypeToken<AdCreativeFeatureDetails>(){}.getType();
+    this.mCatalogFeedTag = AdCreativeFeatureDetails.getGson().fromJson(value, type);
+    return this;
+  }
+  public AdCreativeFeatureDetails getFieldCustomizeProductRecommendation() {
+    return mCustomizeProductRecommendation;
+  }
+
+  public AdCreativeFeaturesSpec setFieldCustomizeProductRecommendation(AdCreativeFeatureDetails value) {
+    this.mCustomizeProductRecommendation = value;
+    return this;
+  }
+
+  public AdCreativeFeaturesSpec setFieldCustomizeProductRecommendation(String value) {
+    Type type = new TypeToken<AdCreativeFeatureDetails>(){}.getType();
+    this.mCustomizeProductRecommendation = AdCreativeFeatureDetails.getGson().fromJson(value, type);
     return this;
   }
   public AdCreativeFeatureDetails getFieldCvTransformation() {
@@ -540,6 +590,20 @@ public class AdCreativeFeaturesSpec extends APINode {
     this.mProfileCard = AdCreativeFeatureDetails.getGson().fromJson(value, type);
     return this;
   }
+  public AdCreativeFeatureDetails getFieldSiteExtensions() {
+    return mSiteExtensions;
+  }
+
+  public AdCreativeFeaturesSpec setFieldSiteExtensions(AdCreativeFeatureDetails value) {
+    this.mSiteExtensions = value;
+    return this;
+  }
+
+  public AdCreativeFeaturesSpec setFieldSiteExtensions(String value) {
+    Type type = new TypeToken<AdCreativeFeatureDetails>(){}.getType();
+    this.mSiteExtensions = AdCreativeFeatureDetails.getGson().fromJson(value, type);
+    return this;
+  }
   public AdCreativeFeatureDetails getFieldStandardEnhancements() {
     return mStandardEnhancements;
   }
@@ -642,8 +706,11 @@ public class AdCreativeFeaturesSpec extends APINode {
 
   public AdCreativeFeaturesSpec copyFrom(AdCreativeFeaturesSpec instance) {
     this.mAdvantagePlusCreative = instance.mAdvantagePlusCreative;
+    this.mAppHighlights = instance.mAppHighlights;
     this.mAudio = instance.mAudio;
     this.mCarouselToVideo = instance.mCarouselToVideo;
+    this.mCatalogFeedTag = instance.mCatalogFeedTag;
+    this.mCustomizeProductRecommendation = instance.mCustomizeProductRecommendation;
     this.mCvTransformation = instance.mCvTransformation;
     this.mDescriptionAutomation = instance.mDescriptionAutomation;
     this.mDhaOptimization = instance.mDhaOptimization;
@@ -662,6 +729,7 @@ public class AdCreativeFeaturesSpec extends APINode {
     this.mProductMetadataAutomation = instance.mProductMetadataAutomation;
     this.mProductTags = instance.mProductTags;
     this.mProfileCard = instance.mProfileCard;
+    this.mSiteExtensions = instance.mSiteExtensions;
     this.mStandardEnhancements = instance.mStandardEnhancements;
     this.mStandardEnhancementsCatalog = instance.mStandardEnhancementsCatalog;
     this.mTextGeneration = instance.mTextGeneration;

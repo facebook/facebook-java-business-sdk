@@ -47,6 +47,8 @@ public class AdCreativeSourcingSpec extends APINode {
   private List<AdCreativePromotionMetadataSpec> mPromotionMetadataSpec = null;
   @SerializedName("site_links_spec")
   private List<AdCreativeSiteLinksSpec> mSiteLinksSpec = null;
+  @SerializedName("source_url")
+  private String mSourceUrl = null;
   protected static Gson gson = null;
 
   public AdCreativeSourcingSpec() {
@@ -235,6 +237,15 @@ public class AdCreativeSourcingSpec extends APINode {
     this.mSiteLinksSpec = AdCreativeSiteLinksSpec.getGson().fromJson(value, type);
     return this;
   }
+  public String getFieldSourceUrl() {
+    return mSourceUrl;
+  }
+
+  public AdCreativeSourcingSpec setFieldSourceUrl(String value) {
+    this.mSourceUrl = value;
+    return this;
+  }
+
 
 
 
@@ -255,6 +266,7 @@ public class AdCreativeSourcingSpec extends APINode {
     this.mAssociatedProductSetId = instance.mAssociatedProductSetId;
     this.mPromotionMetadataSpec = instance.mPromotionMetadataSpec;
     this.mSiteLinksSpec = instance.mSiteLinksSpec;
+    this.mSourceUrl = instance.mSourceUrl;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

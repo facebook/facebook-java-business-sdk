@@ -2977,6 +2977,7 @@ public class PagePost extends APINode {
       "is_community_page",
       "is_eligible_for_branded_content",
       "is_eligible_for_disable_connect_ig_btn_for_non_page_admin_am_web",
+      "is_eligible_for_live_boosting_expansion",
       "is_messenger_bot_get_started_enabled",
       "is_messenger_platform_bot",
       "is_owned",
@@ -3631,6 +3632,13 @@ public class PagePost extends APINode {
     }
     public APIRequestGetSponsorTags requestIsEligibleForDisableConnectIgBtnForNonPageAdminAmWebField (boolean value) {
       this.requestField("is_eligible_for_disable_connect_ig_btn_for_non_page_admin_am_web", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestIsEligibleForLiveBoostingExpansionField () {
+      return this.requestIsEligibleForLiveBoostingExpansionField(true);
+    }
+    public APIRequestGetSponsorTags requestIsEligibleForLiveBoostingExpansionField (boolean value) {
+      this.requestField("is_eligible_for_live_boosting_expansion", value);
       return this;
     }
     public APIRequestGetSponsorTags requestIsMessengerBotGetStartedEnabledField () {

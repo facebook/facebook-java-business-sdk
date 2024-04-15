@@ -109,6 +109,8 @@ public class LocalServiceBusiness extends APINode {
   private List<String> mSanitizedImages = null;
   @SerializedName("size")
   private String mSize = null;
+  @SerializedName("tags")
+  private List<String> mTags = null;
   @SerializedName("title")
   private String mTitle = null;
   @SerializedName("unit_price")
@@ -479,6 +481,10 @@ public class LocalServiceBusiness extends APINode {
     return mSize;
   }
 
+  public List<String> getFieldTags() {
+    return mTags;
+  }
+
   public String getFieldTitle() {
     return mTitle;
   }
@@ -667,6 +673,7 @@ public class LocalServiceBusiness extends APINode {
       "retailer_category",
       "sanitized_images",
       "size",
+      "tags",
       "title",
       "unit_price",
       "url",
@@ -1002,6 +1009,13 @@ public class LocalServiceBusiness extends APINode {
       this.requestField("size", value);
       return this;
     }
+    public APIRequestGet requestTagsField () {
+      return this.requestTagsField(true);
+    }
+    public APIRequestGet requestTagsField (boolean value) {
+      this.requestField("tags", value);
+      return this;
+    }
     public APIRequestGet requestTitleField () {
       return this.requestTitleField(true);
     }
@@ -1194,6 +1208,7 @@ public class LocalServiceBusiness extends APINode {
     this.mRetailerCategory = instance.mRetailerCategory;
     this.mSanitizedImages = instance.mSanitizedImages;
     this.mSize = instance.mSize;
+    this.mTags = instance.mTags;
     this.mTitle = instance.mTitle;
     this.mUnitPrice = instance.mUnitPrice;
     this.mUrl = instance.mUrl;

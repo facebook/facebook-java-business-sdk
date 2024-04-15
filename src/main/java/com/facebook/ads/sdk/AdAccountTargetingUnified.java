@@ -1237,6 +1237,8 @@ public class AdAccountTargetingUnified extends APINode {
       VALUE_LOCATION_CLUSTER_IDS("location_cluster_ids"),
       @SerializedName("location_expansion")
       VALUE_LOCATION_EXPANSION("location_expansion"),
+      @SerializedName("marketing_message_channels")
+      VALUE_MARKETING_MESSAGE_CHANNELS("marketing_message_channels"),
       @SerializedName("marketing_message_targeting")
       VALUE_MARKETING_MESSAGE_TARGETING("marketing_message_targeting"),
       @SerializedName("marketplace_product_categories")

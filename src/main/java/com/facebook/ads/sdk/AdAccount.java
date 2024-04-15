@@ -59,6 +59,8 @@ public class AdAccount extends APINode {
   private List<AttributionSpec> mAttributionSpec = null;
   @SerializedName("balance")
   private String mBalance = null;
+  @SerializedName("brand_safety_content_filter_levels")
+  private List<String> mBrandSafetyContentFilterLevels = null;
   @SerializedName("business")
   private Business mBusiness = null;
   @SerializedName("business_city")
@@ -598,6 +600,10 @@ public class AdAccount extends APINode {
     return new APIRequestCreateAsyncAdRequestSet(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetAudienceFunnel getAudienceFunnel() {
+    return new APIRequestGetAudienceFunnel(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestCreateBlockListDraft createBlockListDraft() {
     return new APIRequestCreateBlockListDraft(this.getPrefixedId().toString(), context);
   }
@@ -636,6 +642,10 @@ public class AdAccount extends APINode {
 
   public APIRequestGetConversionGoals getConversionGoals() {
     return new APIRequestGetConversionGoals(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetCpaGuidance getCpaGuidance() {
+    return new APIRequestGetCpaGuidance(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetCustomAudiences getCustomAudiences() {
@@ -802,6 +812,10 @@ public class AdAccount extends APINode {
     return new APIRequestDeleteUsersOfAnyAudience(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetValueAdjustmentRuleCollections getValueAdjustmentRuleCollections() {
+    return new APIRequestGetValueAdjustmentRuleCollections(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetValueAdjustmentRules getValueAdjustmentRules() {
     return new APIRequestGetValueAdjustmentRules(this.getPrefixedId().toString(), context);
   }
@@ -849,6 +863,10 @@ public class AdAccount extends APINode {
 
   public String getFieldBalance() {
     return mBalance;
+  }
+
+  public List<String> getFieldBrandSafetyContentFilterLevels() {
+    return mBrandSafetyContentFilterLevels;
   }
 
   public Business getFieldBusiness() {
@@ -7724,6 +7742,7 @@ public class AdAccount extends APINode {
       "promoted_object",
       "recommendations",
       "recurring_budget_semantics",
+      "regional_regulation_identities",
       "review_feedback",
       "rf_prediction_id",
       "source_adset",
@@ -8207,6 +8226,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAdSets requestRecurringBudgetSemanticsField (boolean value) {
       this.requestField("recurring_budget_semantics", value);
+      return this;
+    }
+    public APIRequestGetAdSets requestRegionalRegulationIdentitiesField () {
+      return this.requestRegionalRegulationIdentitiesField(true);
+    }
+    public APIRequestGetAdSets requestRegionalRegulationIdentitiesField (boolean value) {
+      this.requestField("regional_regulation_identities", value);
       return this;
     }
     public APIRequestGetAdSets requestReviewFeedbackField () {
@@ -8899,6 +8925,7 @@ public class AdAccount extends APINode {
       "promoted_object",
       "recommendations",
       "recurring_budget_semantics",
+      "regional_regulation_identities",
       "review_feedback",
       "rf_prediction_id",
       "source_adset",
@@ -9355,6 +9382,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAdSetsByLabels requestRecurringBudgetSemanticsField (boolean value) {
       this.requestField("recurring_budget_semantics", value);
+      return this;
+    }
+    public APIRequestGetAdSetsByLabels requestRegionalRegulationIdentitiesField () {
+      return this.requestRegionalRegulationIdentitiesField(true);
+    }
+    public APIRequestGetAdSetsByLabels requestRegionalRegulationIdentitiesField (boolean value) {
+      this.requestField("regional_regulation_identities", value);
       return this;
     }
     public APIRequestGetAdSetsByLabels requestReviewFeedbackField () {
@@ -12315,6 +12349,7 @@ public class AdAccount extends APINode {
       "promoted_object",
       "recommendations",
       "recurring_budget_semantics",
+      "regional_regulation_identities",
       "review_feedback",
       "rf_prediction_id",
       "source_adset",
@@ -12753,6 +12788,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAffectedAdSets requestRecurringBudgetSemanticsField (boolean value) {
       this.requestField("recurring_budget_semantics", value);
+      return this;
+    }
+    public APIRequestGetAffectedAdSets requestRegionalRegulationIdentitiesField () {
+      return this.requestRegionalRegulationIdentitiesField(true);
+    }
+    public APIRequestGetAffectedAdSets requestRegionalRegulationIdentitiesField (boolean value) {
+      this.requestField("regional_regulation_identities", value);
       return this;
     }
     public APIRequestGetAffectedAdSets requestReviewFeedbackField () {
@@ -15332,6 +15374,111 @@ public class AdAccount extends APINode {
 
   }
 
+  public static class APIRequestGetAudienceFunnel extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetAudienceFunnel.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestGetAudienceFunnel(String nodeId, APIContext context) {
+      super(context, nodeId, "/audience_funnel", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetAudienceFunnel setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAudienceFunnel setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetAudienceFunnel requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetAudienceFunnel requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAudienceFunnel requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetAudienceFunnel requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAudienceFunnel requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAudienceFunnel requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestCreateBlockListDraft extends APIRequest<AdAccount> {
 
     AdAccount lastResponse = null;
@@ -17648,6 +17795,111 @@ public class AdAccount extends APINode {
 
   }
 
+  public static class APIRequestGetCpaGuidance extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetCpaGuidance.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestGetCpaGuidance(String nodeId, APIContext context) {
+      super(context, nodeId, "/cpa_guidance", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetCpaGuidance setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCpaGuidance setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetCpaGuidance requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetCpaGuidance requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCpaGuidance requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetCpaGuidance requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCpaGuidance requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCpaGuidance requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGetCustomAudiences extends APIRequest<CustomAudience> {
 
     APINodeList<CustomAudience> lastResponse = null;
@@ -19091,6 +19343,7 @@ public class AdAccount extends APINode {
       "promoted_object",
       "recommendations",
       "recurring_budget_semantics",
+      "regional_regulation_identities",
       "review_feedback",
       "rf_prediction_id",
       "source_adset",
@@ -19534,6 +19787,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetDeprecatedTargetingAdSets requestRecurringBudgetSemanticsField (boolean value) {
       this.requestField("recurring_budget_semantics", value);
+      return this;
+    }
+    public APIRequestGetDeprecatedTargetingAdSets requestRegionalRegulationIdentitiesField () {
+      return this.requestRegionalRegulationIdentitiesField(true);
+    }
+    public APIRequestGetDeprecatedTargetingAdSets requestRegionalRegulationIdentitiesField (boolean value) {
+      this.requestField("regional_regulation_identities", value);
       return this;
     }
     public APIRequestGetDeprecatedTargetingAdSets requestReviewFeedbackField () {
@@ -22774,6 +23034,7 @@ public class AdAccount extends APINode {
       "is_community_page",
       "is_eligible_for_branded_content",
       "is_eligible_for_disable_connect_ig_btn_for_non_page_admin_am_web",
+      "is_eligible_for_live_boosting_expansion",
       "is_messenger_bot_get_started_enabled",
       "is_messenger_platform_bot",
       "is_owned",
@@ -23428,6 +23689,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetPromotePages requestIsEligibleForDisableConnectIgBtnForNonPageAdminAmWebField (boolean value) {
       this.requestField("is_eligible_for_disable_connect_ig_btn_for_non_page_admin_am_web", value);
+      return this;
+    }
+    public APIRequestGetPromotePages requestIsEligibleForLiveBoostingExpansionField () {
+      return this.requestIsEligibleForLiveBoostingExpansionField(true);
+    }
+    public APIRequestGetPromotePages requestIsEligibleForLiveBoostingExpansionField (boolean value) {
+      this.requestField("is_eligible_for_live_boosting_expansion", value);
       return this;
     }
     public APIRequestGetPromotePages requestIsMessengerBotGetStartedEnabledField () {
@@ -26604,6 +26872,8 @@ public class AdAccount extends APINode {
       "allow_only_fat_head_interests",
       "app_store",
       "countries",
+      "is_account_level_brand_safety_exclusion",
+      "is_account_level_employer_exclusion",
       "is_exclusion",
       "limit_type",
       "objective",
@@ -26720,6 +26990,24 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetTargetingSearch setCountries (String countries) {
       this.setParam("countries", countries);
+      return this;
+    }
+
+    public APIRequestGetTargetingSearch setIsAccountLevelBrandSafetyExclusion (Boolean isAccountLevelBrandSafetyExclusion) {
+      this.setParam("is_account_level_brand_safety_exclusion", isAccountLevelBrandSafetyExclusion);
+      return this;
+    }
+    public APIRequestGetTargetingSearch setIsAccountLevelBrandSafetyExclusion (String isAccountLevelBrandSafetyExclusion) {
+      this.setParam("is_account_level_brand_safety_exclusion", isAccountLevelBrandSafetyExclusion);
+      return this;
+    }
+
+    public APIRequestGetTargetingSearch setIsAccountLevelEmployerExclusion (Boolean isAccountLevelEmployerExclusion) {
+      this.setParam("is_account_level_employer_exclusion", isAccountLevelEmployerExclusion);
+      return this;
+    }
+    public APIRequestGetTargetingSearch setIsAccountLevelEmployerExclusion (String isAccountLevelEmployerExclusion) {
+      this.setParam("is_account_level_employer_exclusion", isAccountLevelEmployerExclusion);
       return this;
     }
 
@@ -28393,6 +28681,111 @@ public class AdAccount extends APINode {
 
   }
 
+  public static class APIRequestGetValueAdjustmentRuleCollections extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetValueAdjustmentRuleCollections.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestGetValueAdjustmentRuleCollections(String nodeId, APIContext context) {
+      super(context, nodeId, "/value_adjustment_rule_collections", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetValueAdjustmentRuleCollections setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetValueAdjustmentRuleCollections setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetValueAdjustmentRuleCollections requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetValueAdjustmentRuleCollections requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetValueAdjustmentRuleCollections requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetValueAdjustmentRuleCollections requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetValueAdjustmentRuleCollections requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetValueAdjustmentRuleCollections requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGetValueAdjustmentRules extends APIRequest<APINode> {
 
     APINodeList<APINode> lastResponse = null;
@@ -28518,6 +28911,7 @@ public class AdAccount extends APINode {
       "amount_spent",
       "attribution_spec",
       "balance",
+      "brand_safety_content_filter_levels",
       "business",
       "business_city",
       "business_country_code",
@@ -28731,6 +29125,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGet requestBalanceField (boolean value) {
       this.requestField("balance", value);
+      return this;
+    }
+    public APIRequestGet requestBrandSafetyContentFilterLevelsField () {
+      return this.requestBrandSafetyContentFilterLevelsField(true);
+    }
+    public APIRequestGet requestBrandSafetyContentFilterLevelsField (boolean value) {
+      this.requestField("brand_safety_content_filter_levels", value);
       return this;
     }
     public APIRequestGet requestBusinessField () {
@@ -29615,6 +30016,8 @@ public class AdAccount extends APINode {
       VALUE_DESTINATION("DESTINATION"),
       @SerializedName("FLIGHT")
       VALUE_FLIGHT("FLIGHT"),
+      @SerializedName("GENERIC")
+      VALUE_GENERIC("GENERIC"),
       @SerializedName("HOME_LISTING")
       VALUE_HOME_LISTING("HOME_LISTING"),
       @SerializedName("HOTEL")
@@ -29662,6 +30065,8 @@ public class AdAccount extends APINode {
       VALUE_CUSTOM("CUSTOM"),
       @SerializedName("ENGAGEMENT")
       VALUE_ENGAGEMENT("ENGAGEMENT"),
+      @SerializedName("EXCLUSION")
+      VALUE_EXCLUSION("EXCLUSION"),
       @SerializedName("FOX")
       VALUE_FOX("FOX"),
       @SerializedName("LOOKALIKE")
@@ -29824,6 +30229,7 @@ public class AdAccount extends APINode {
     this.mAmountSpent = instance.mAmountSpent;
     this.mAttributionSpec = instance.mAttributionSpec;
     this.mBalance = instance.mBalance;
+    this.mBrandSafetyContentFilterLevels = instance.mBrandSafetyContentFilterLevels;
     this.mBusiness = instance.mBusiness;
     this.mBusinessCity = instance.mBusinessCity;
     this.mBusinessCountryCode = instance.mBusinessCountryCode;

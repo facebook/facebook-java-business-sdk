@@ -1621,6 +1621,7 @@ public class Campaign extends APINode {
       "promoted_object",
       "recommendations",
       "recurring_budget_semantics",
+      "regional_regulation_identities",
       "review_feedback",
       "rf_prediction_id",
       "source_adset",
@@ -2095,6 +2096,13 @@ public class Campaign extends APINode {
     }
     public APIRequestGetAdSets requestRecurringBudgetSemanticsField (boolean value) {
       this.requestField("recurring_budget_semantics", value);
+      return this;
+    }
+    public APIRequestGetAdSets requestRegionalRegulationIdentitiesField () {
+      return this.requestRegionalRegulationIdentitiesField(true);
+    }
+    public APIRequestGetAdSets requestRegionalRegulationIdentitiesField (boolean value) {
+      this.requestField("regional_regulation_identities", value);
       return this;
     }
     public APIRequestGetAdSets requestReviewFeedbackField () {

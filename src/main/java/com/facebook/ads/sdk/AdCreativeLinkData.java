@@ -627,6 +627,8 @@ public class AdCreativeLinkData extends APINode {
       VALUE_CAROUSEL_IMAGES_SINGLE_ITEM("carousel_images_single_item"),
       @SerializedName("carousel_slideshows")
       VALUE_CAROUSEL_SLIDESHOWS("carousel_slideshows"),
+      @SerializedName("collection_video")
+      VALUE_COLLECTION_VIDEO("collection_video"),
       @SerializedName("single_image")
       VALUE_SINGLE_IMAGE("single_image"),
       ;
