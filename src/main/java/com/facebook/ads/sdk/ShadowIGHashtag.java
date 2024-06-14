@@ -289,6 +289,7 @@ public class ShadowIGHashtag extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "boost_eligibility_info",
       "caption",
       "comments_count",
       "copyright_check_information",
@@ -403,6 +404,13 @@ public class ShadowIGHashtag extends APINode {
       return this;
     }
 
+    public APIRequestGetRecentMedia requestBoostEligibilityInfoField () {
+      return this.requestBoostEligibilityInfoField(true);
+    }
+    public APIRequestGetRecentMedia requestBoostEligibilityInfoField (boolean value) {
+      this.requestField("boost_eligibility_info", value);
+      return this;
+    }
     public APIRequestGetRecentMedia requestCaptionField () {
       return this.requestCaptionField(true);
     }
@@ -536,6 +544,7 @@ public class ShadowIGHashtag extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "boost_eligibility_info",
       "caption",
       "comments_count",
       "copyright_check_information",
@@ -650,6 +659,13 @@ public class ShadowIGHashtag extends APINode {
       return this;
     }
 
+    public APIRequestGetTopMedia requestBoostEligibilityInfoField () {
+      return this.requestBoostEligibilityInfoField(true);
+    }
+    public APIRequestGetTopMedia requestBoostEligibilityInfoField (boolean value) {
+      this.requestField("boost_eligibility_info", value);
+      return this;
+    }
     public APIRequestGetTopMedia requestCaptionField () {
       return this.requestCaptionField(true);
     }

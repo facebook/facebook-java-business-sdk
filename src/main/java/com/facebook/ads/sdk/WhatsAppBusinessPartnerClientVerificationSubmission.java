@@ -301,6 +301,8 @@ public class WhatsAppBusinessPartnerClientVerificationSubmission extends APINode
       VALUE_FAILED("FAILED"),
       @SerializedName("PENDING")
       VALUE_PENDING("PENDING"),
+      @SerializedName("REVOKED")
+      VALUE_REVOKED("REVOKED"),
       ;
 
       private String value;

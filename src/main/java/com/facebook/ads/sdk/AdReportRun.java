@@ -368,6 +368,7 @@ public class AdReportRun extends APINode {
       "ad_id",
       "ad_impression_actions",
       "ad_name",
+      "adjusted_offline_purchase",
       "adset_end",
       "adset_id",
       "adset_name",
@@ -388,7 +389,6 @@ public class AdReportRun extends APINode {
       "catalog_segment_value_omni_purchase_roas",
       "catalog_segment_value_website_purchase_roas",
       "clicks",
-      "conversion_lead_rate",
       "conversion_rate_ranking",
       "conversion_values",
       "conversions",
@@ -399,7 +399,6 @@ public class AdReportRun extends APINode {
       "cost_per_action_type",
       "cost_per_ad_click",
       "cost_per_conversion",
-      "cost_per_conversion_lead",
       "cost_per_dda_countby_convs",
       "cost_per_estimated_ad_recallers",
       "cost_per_inline_link_click",
@@ -450,6 +449,7 @@ public class AdReportRun extends APINode {
       "marketing_messages_website_purchase_values",
       "mobile_app_purchase_roas",
       "objective",
+      "onsite_conversion_messaging_detected_purchase_deduped",
       "optimization_goal",
       "outbound_clicks",
       "outbound_clicks_ctr",
@@ -458,6 +458,7 @@ public class AdReportRun extends APINode {
       "qualifying_question_qualify_answer_rate",
       "quality_ranking",
       "reach",
+      "shops_assisted_purchases",
       "social_spend",
       "spend",
       "total_postbacks",
@@ -649,6 +650,13 @@ public class AdReportRun extends APINode {
       this.requestField("ad_name", value);
       return this;
     }
+    public APIRequestGetInsights requestAdjustedOfflinePurchaseField () {
+      return this.requestAdjustedOfflinePurchaseField(true);
+    }
+    public APIRequestGetInsights requestAdjustedOfflinePurchaseField (boolean value) {
+      this.requestField("adjusted_offline_purchase", value);
+      return this;
+    }
     public APIRequestGetInsights requestAdsetEndField () {
       return this.requestAdsetEndField(true);
     }
@@ -789,13 +797,6 @@ public class AdReportRun extends APINode {
       this.requestField("clicks", value);
       return this;
     }
-    public APIRequestGetInsights requestConversionLeadRateField () {
-      return this.requestConversionLeadRateField(true);
-    }
-    public APIRequestGetInsights requestConversionLeadRateField (boolean value) {
-      this.requestField("conversion_lead_rate", value);
-      return this;
-    }
     public APIRequestGetInsights requestConversionRateRankingField () {
       return this.requestConversionRateRankingField(true);
     }
@@ -864,13 +865,6 @@ public class AdReportRun extends APINode {
     }
     public APIRequestGetInsights requestCostPerConversionField (boolean value) {
       this.requestField("cost_per_conversion", value);
-      return this;
-    }
-    public APIRequestGetInsights requestCostPerConversionLeadField () {
-      return this.requestCostPerConversionLeadField(true);
-    }
-    public APIRequestGetInsights requestCostPerConversionLeadField (boolean value) {
-      this.requestField("cost_per_conversion_lead", value);
       return this;
     }
     public APIRequestGetInsights requestCostPerDdaCountbyConvsField () {
@@ -1223,6 +1217,13 @@ public class AdReportRun extends APINode {
       this.requestField("objective", value);
       return this;
     }
+    public APIRequestGetInsights requestOnsiteConversionMessagingDetectedPurchaseDedupedField () {
+      return this.requestOnsiteConversionMessagingDetectedPurchaseDedupedField(true);
+    }
+    public APIRequestGetInsights requestOnsiteConversionMessagingDetectedPurchaseDedupedField (boolean value) {
+      this.requestField("onsite_conversion_messaging_detected_purchase_deduped", value);
+      return this;
+    }
     public APIRequestGetInsights requestOptimizationGoalField () {
       return this.requestOptimizationGoalField(true);
     }
@@ -1277,6 +1278,13 @@ public class AdReportRun extends APINode {
     }
     public APIRequestGetInsights requestReachField (boolean value) {
       this.requestField("reach", value);
+      return this;
+    }
+    public APIRequestGetInsights requestShopsAssistedPurchasesField () {
+      return this.requestShopsAssistedPurchasesField(true);
+    }
+    public APIRequestGetInsights requestShopsAssistedPurchasesField (boolean value) {
+      this.requestField("shops_assisted_purchases", value);
       return this;
     }
     public APIRequestGetInsights requestSocialSpendField () {
@@ -1930,6 +1938,8 @@ public class AdReportRun extends APINode {
       VALUE_REDOWNLOAD("redownload"),
       @SerializedName("region")
       VALUE_REGION("region"),
+      @SerializedName("signal_source_bucket")
+      VALUE_SIGNAL_SOURCE_BUCKET("signal_source_bucket"),
       @SerializedName("skan_campaign_id")
       VALUE_SKAN_CAMPAIGN_ID("skan_campaign_id"),
       @SerializedName("skan_conversion_id")
@@ -1940,6 +1950,10 @@ public class AdReportRun extends APINode {
       VALUE_STANDARD_EVENT_CONTENT_TYPE("standard_event_content_type"),
       @SerializedName("title_asset")
       VALUE_TITLE_ASSET("title_asset"),
+      @SerializedName("user_persona_id")
+      VALUE_USER_PERSONA_ID("user_persona_id"),
+      @SerializedName("user_persona_name")
+      VALUE_USER_PERSONA_NAME("user_persona_name"),
       @SerializedName("video_asset")
       VALUE_VIDEO_ASSET("video_asset"),
       ;

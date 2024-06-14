@@ -318,16 +318,8 @@ public class OfflineConversionDataSet extends APINode {
     return new APIRequestGetAdAccounts(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestCreateAdAccount createAdAccount() {
-    return new APIRequestCreateAdAccount(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetAgencies getAgencies() {
     return new APIRequestGetAgencies(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestCreateAgency createAgency() {
-    return new APIRequestCreateAgency(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetAudiences getAudiences() {
@@ -342,12 +334,12 @@ public class OfflineConversionDataSet extends APINode {
     return new APIRequestGetServerEventsPermittedBusiness(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestGetSharedAccounts getSharedAccounts() {
-    return new APIRequestGetSharedAccounts(this.getPrefixedId().toString(), context);
+  public APIRequestGetShareDAccounts getShareDAccounts() {
+    return new APIRequestGetShareDAccounts(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestGetSharedAgencies getSharedAgencies() {
-    return new APIRequestGetSharedAgencies(this.getPrefixedId().toString(), context);
+  public APIRequestGetShareDAgencies getShareDAgencies() {
+    return new APIRequestGetShareDAgencies(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetStats getStats() {
@@ -358,24 +350,8 @@ public class OfflineConversionDataSet extends APINode {
     return new APIRequestGetUploads(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestCreateUpload createUpload() {
-    return new APIRequestCreateUpload(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestCreateValidate createValidate() {
-    return new APIRequestCreateValidate(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestDelete delete() {
-    return new APIRequestDelete(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGet get() {
     return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestUpdate update() {
-    return new APIRequestUpdate(this.getPrefixedId().toString(), context);
   }
 
 
@@ -1192,133 +1168,6 @@ public class OfflineConversionDataSet extends APINode {
     }
   }
 
-  public static class APIRequestCreateAdAccount extends APIRequest<OfflineConversionDataSet> {
-
-    OfflineConversionDataSet lastResponse = null;
-    @Override
-    public OfflineConversionDataSet getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "account_id",
-      "auto_track_for_ads",
-      "business",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public OfflineConversionDataSet parseResponse(String response, String header) throws APIException {
-      return OfflineConversionDataSet.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public OfflineConversionDataSet execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public OfflineConversionDataSet execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<OfflineConversionDataSet> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<OfflineConversionDataSet> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, OfflineConversionDataSet>() {
-           public OfflineConversionDataSet apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateAdAccount.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         },
-         MoreExecutors.directExecutor()
-      );
-    };
-
-    public APIRequestCreateAdAccount(String nodeId, APIContext context) {
-      super(context, nodeId, "/adaccounts", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateAdAccount setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateAdAccount setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateAdAccount setAccountId (String accountId) {
-      this.setParam("account_id", accountId);
-      return this;
-    }
-
-    public APIRequestCreateAdAccount setAutoTrackForAds (Boolean autoTrackForAds) {
-      this.setParam("auto_track_for_ads", autoTrackForAds);
-      return this;
-    }
-    public APIRequestCreateAdAccount setAutoTrackForAds (String autoTrackForAds) {
-      this.setParam("auto_track_for_ads", autoTrackForAds);
-      return this;
-    }
-
-    public APIRequestCreateAdAccount setBusiness (String business) {
-      this.setParam("business", business);
-      return this;
-    }
-
-    public APIRequestCreateAdAccount requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateAdAccount requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateAdAccount requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateAdAccount requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateAdAccount requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateAdAccount requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
   public static class APIRequestGetAgencies extends APIRequest<Business> {
 
     APINodeList<Business> lastResponse = null;
@@ -1590,143 +1439,6 @@ public class OfflineConversionDataSet extends APINode {
       this.requestField("vertical_id", value);
       return this;
     }
-  }
-
-  public static class APIRequestCreateAgency extends APIRequest<OfflineConversionDataSet> {
-
-    OfflineConversionDataSet lastResponse = null;
-    @Override
-    public OfflineConversionDataSet getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "business",
-      "other_relationship",
-      "permitted_roles",
-      "relationship_type",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public OfflineConversionDataSet parseResponse(String response, String header) throws APIException {
-      return OfflineConversionDataSet.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public OfflineConversionDataSet execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public OfflineConversionDataSet execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<OfflineConversionDataSet> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<OfflineConversionDataSet> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, OfflineConversionDataSet>() {
-           public OfflineConversionDataSet apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateAgency.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         },
-         MoreExecutors.directExecutor()
-      );
-    };
-
-    public APIRequestCreateAgency(String nodeId, APIContext context) {
-      super(context, nodeId, "/agencies", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateAgency setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateAgency setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateAgency setBusiness (String business) {
-      this.setParam("business", business);
-      return this;
-    }
-
-    public APIRequestCreateAgency setOtherRelationship (String otherRelationship) {
-      this.setParam("other_relationship", otherRelationship);
-      return this;
-    }
-
-    public APIRequestCreateAgency setPermittedRoles (List<OfflineConversionDataSet.EnumPermittedRoles> permittedRoles) {
-      this.setParam("permitted_roles", permittedRoles);
-      return this;
-    }
-    public APIRequestCreateAgency setPermittedRoles (String permittedRoles) {
-      this.setParam("permitted_roles", permittedRoles);
-      return this;
-    }
-
-    public APIRequestCreateAgency setRelationshipType (List<OfflineConversionDataSet.EnumRelationshipType> relationshipType) {
-      this.setParam("relationship_type", relationshipType);
-      return this;
-    }
-    public APIRequestCreateAgency setRelationshipType (String relationshipType) {
-      this.setParam("relationship_type", relationshipType);
-      return this;
-    }
-
-    public APIRequestCreateAgency requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateAgency requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateAgency requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateAgency requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateAgency requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateAgency requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
   }
 
   public static class APIRequestGetAudiences extends APIRequest<CustomAudience> {
@@ -2698,7 +2410,7 @@ public class OfflineConversionDataSet extends APINode {
     }
   }
 
-  public static class APIRequestGetSharedAccounts extends APIRequest<AdAccount> {
+  public static class APIRequestGetShareDAccounts extends APIRequest<AdAccount> {
 
     APINodeList<AdAccount> lastResponse = null;
     @Override
@@ -2810,7 +2522,7 @@ public class OfflineConversionDataSet extends APINode {
         new Function<ResponseWrapper, APINodeList<AdAccount>>() {
            public APINodeList<AdAccount> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetSharedAccounts.this.parseResponse(result.getBody(), result.getHeader());
+               return APIRequestGetShareDAccounts.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2820,42 +2532,42 @@ public class OfflineConversionDataSet extends APINode {
       );
     };
 
-    public APIRequestGetSharedAccounts(String nodeId, APIContext context) {
+    public APIRequestGetShareDAccounts(String nodeId, APIContext context) {
       super(context, nodeId, "/shared_accounts", "GET", Arrays.asList(PARAMS));
     }
 
     @Override
-    public APIRequestGetSharedAccounts setParam(String param, Object value) {
+    public APIRequestGetShareDAccounts setParam(String param, Object value) {
       setParamInternal(param, value);
       return this;
     }
 
     @Override
-    public APIRequestGetSharedAccounts setParams(Map<String, Object> params) {
+    public APIRequestGetShareDAccounts setParams(Map<String, Object> params) {
       setParamsInternal(params);
       return this;
     }
 
 
-    public APIRequestGetSharedAccounts setActionSource (AdAccount.EnumActionSource actionSource) {
+    public APIRequestGetShareDAccounts setActionSource (AdAccount.EnumActionSource actionSource) {
       this.setParam("action_source", actionSource);
       return this;
     }
-    public APIRequestGetSharedAccounts setActionSource (String actionSource) {
+    public APIRequestGetShareDAccounts setActionSource (String actionSource) {
       this.setParam("action_source", actionSource);
       return this;
     }
 
-    public APIRequestGetSharedAccounts setBusiness (String business) {
+    public APIRequestGetShareDAccounts setBusiness (String business) {
       this.setParam("business", business);
       return this;
     }
 
-    public APIRequestGetSharedAccounts requestAllFields () {
+    public APIRequestGetShareDAccounts requestAllFields () {
       return this.requestAllFields(true);
     }
 
-    public APIRequestGetSharedAccounts requestAllFields (boolean value) {
+    public APIRequestGetShareDAccounts requestAllFields (boolean value) {
       for (String field : FIELDS) {
         this.requestField(field, value);
       }
@@ -2863,12 +2575,12 @@ public class OfflineConversionDataSet extends APINode {
     }
 
     @Override
-    public APIRequestGetSharedAccounts requestFields (List<String> fields) {
+    public APIRequestGetShareDAccounts requestFields (List<String> fields) {
       return this.requestFields(fields, true);
     }
 
     @Override
-    public APIRequestGetSharedAccounts requestFields (List<String> fields, boolean value) {
+    public APIRequestGetShareDAccounts requestFields (List<String> fields, boolean value) {
       for (String field : fields) {
         this.requestField(field, value);
       }
@@ -2876,510 +2588,510 @@ public class OfflineConversionDataSet extends APINode {
     }
 
     @Override
-    public APIRequestGetSharedAccounts requestField (String field) {
+    public APIRequestGetShareDAccounts requestField (String field) {
       this.requestField(field, true);
       return this;
     }
 
     @Override
-    public APIRequestGetSharedAccounts requestField (String field, boolean value) {
+    public APIRequestGetShareDAccounts requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
 
-    public APIRequestGetSharedAccounts requestAccountIdField () {
+    public APIRequestGetShareDAccounts requestAccountIdField () {
       return this.requestAccountIdField(true);
     }
-    public APIRequestGetSharedAccounts requestAccountIdField (boolean value) {
+    public APIRequestGetShareDAccounts requestAccountIdField (boolean value) {
       this.requestField("account_id", value);
       return this;
     }
-    public APIRequestGetSharedAccounts requestAccountStatusField () {
+    public APIRequestGetShareDAccounts requestAccountStatusField () {
       return this.requestAccountStatusField(true);
     }
-    public APIRequestGetSharedAccounts requestAccountStatusField (boolean value) {
+    public APIRequestGetShareDAccounts requestAccountStatusField (boolean value) {
       this.requestField("account_status", value);
       return this;
     }
-    public APIRequestGetSharedAccounts requestAdAccountPromotableObjectsField () {
+    public APIRequestGetShareDAccounts requestAdAccountPromotableObjectsField () {
       return this.requestAdAccountPromotableObjectsField(true);
     }
-    public APIRequestGetSharedAccounts requestAdAccountPromotableObjectsField (boolean value) {
+    public APIRequestGetShareDAccounts requestAdAccountPromotableObjectsField (boolean value) {
       this.requestField("ad_account_promotable_objects", value);
       return this;
     }
-    public APIRequestGetSharedAccounts requestAgeField () {
+    public APIRequestGetShareDAccounts requestAgeField () {
       return this.requestAgeField(true);
     }
-    public APIRequestGetSharedAccounts requestAgeField (boolean value) {
+    public APIRequestGetShareDAccounts requestAgeField (boolean value) {
       this.requestField("age", value);
       return this;
     }
-    public APIRequestGetSharedAccounts requestAgencyClientDeclarationField () {
+    public APIRequestGetShareDAccounts requestAgencyClientDeclarationField () {
       return this.requestAgencyClientDeclarationField(true);
     }
-    public APIRequestGetSharedAccounts requestAgencyClientDeclarationField (boolean value) {
+    public APIRequestGetShareDAccounts requestAgencyClientDeclarationField (boolean value) {
       this.requestField("agency_client_declaration", value);
       return this;
     }
-    public APIRequestGetSharedAccounts requestAllCapabilitiesField () {
+    public APIRequestGetShareDAccounts requestAllCapabilitiesField () {
       return this.requestAllCapabilitiesField(true);
     }
-    public APIRequestGetSharedAccounts requestAllCapabilitiesField (boolean value) {
+    public APIRequestGetShareDAccounts requestAllCapabilitiesField (boolean value) {
       this.requestField("all_capabilities", value);
       return this;
     }
-    public APIRequestGetSharedAccounts requestAmountSpentField () {
+    public APIRequestGetShareDAccounts requestAmountSpentField () {
       return this.requestAmountSpentField(true);
     }
-    public APIRequestGetSharedAccounts requestAmountSpentField (boolean value) {
+    public APIRequestGetShareDAccounts requestAmountSpentField (boolean value) {
       this.requestField("amount_spent", value);
       return this;
     }
-    public APIRequestGetSharedAccounts requestAttributionSpecField () {
+    public APIRequestGetShareDAccounts requestAttributionSpecField () {
       return this.requestAttributionSpecField(true);
     }
-    public APIRequestGetSharedAccounts requestAttributionSpecField (boolean value) {
+    public APIRequestGetShareDAccounts requestAttributionSpecField (boolean value) {
       this.requestField("attribution_spec", value);
       return this;
     }
-    public APIRequestGetSharedAccounts requestBalanceField () {
+    public APIRequestGetShareDAccounts requestBalanceField () {
       return this.requestBalanceField(true);
     }
-    public APIRequestGetSharedAccounts requestBalanceField (boolean value) {
+    public APIRequestGetShareDAccounts requestBalanceField (boolean value) {
       this.requestField("balance", value);
       return this;
     }
-    public APIRequestGetSharedAccounts requestBrandSafetyContentFilterLevelsField () {
+    public APIRequestGetShareDAccounts requestBrandSafetyContentFilterLevelsField () {
       return this.requestBrandSafetyContentFilterLevelsField(true);
     }
-    public APIRequestGetSharedAccounts requestBrandSafetyContentFilterLevelsField (boolean value) {
+    public APIRequestGetShareDAccounts requestBrandSafetyContentFilterLevelsField (boolean value) {
       this.requestField("brand_safety_content_filter_levels", value);
       return this;
     }
-    public APIRequestGetSharedAccounts requestBusinessField () {
+    public APIRequestGetShareDAccounts requestBusinessField () {
       return this.requestBusinessField(true);
     }
-    public APIRequestGetSharedAccounts requestBusinessField (boolean value) {
+    public APIRequestGetShareDAccounts requestBusinessField (boolean value) {
       this.requestField("business", value);
       return this;
     }
-    public APIRequestGetSharedAccounts requestBusinessCityField () {
+    public APIRequestGetShareDAccounts requestBusinessCityField () {
       return this.requestBusinessCityField(true);
     }
-    public APIRequestGetSharedAccounts requestBusinessCityField (boolean value) {
+    public APIRequestGetShareDAccounts requestBusinessCityField (boolean value) {
       this.requestField("business_city", value);
       return this;
     }
-    public APIRequestGetSharedAccounts requestBusinessCountryCodeField () {
+    public APIRequestGetShareDAccounts requestBusinessCountryCodeField () {
       return this.requestBusinessCountryCodeField(true);
     }
-    public APIRequestGetSharedAccounts requestBusinessCountryCodeField (boolean value) {
+    public APIRequestGetShareDAccounts requestBusinessCountryCodeField (boolean value) {
       this.requestField("business_country_code", value);
       return this;
     }
-    public APIRequestGetSharedAccounts requestBusinessNameField () {
+    public APIRequestGetShareDAccounts requestBusinessNameField () {
       return this.requestBusinessNameField(true);
     }
-    public APIRequestGetSharedAccounts requestBusinessNameField (boolean value) {
+    public APIRequestGetShareDAccounts requestBusinessNameField (boolean value) {
       this.requestField("business_name", value);
       return this;
     }
-    public APIRequestGetSharedAccounts requestBusinessStateField () {
+    public APIRequestGetShareDAccounts requestBusinessStateField () {
       return this.requestBusinessStateField(true);
     }
-    public APIRequestGetSharedAccounts requestBusinessStateField (boolean value) {
+    public APIRequestGetShareDAccounts requestBusinessStateField (boolean value) {
       this.requestField("business_state", value);
       return this;
     }
-    public APIRequestGetSharedAccounts requestBusinessStreetField () {
+    public APIRequestGetShareDAccounts requestBusinessStreetField () {
       return this.requestBusinessStreetField(true);
     }
-    public APIRequestGetSharedAccounts requestBusinessStreetField (boolean value) {
+    public APIRequestGetShareDAccounts requestBusinessStreetField (boolean value) {
       this.requestField("business_street", value);
       return this;
     }
-    public APIRequestGetSharedAccounts requestBusinessStreet2Field () {
+    public APIRequestGetShareDAccounts requestBusinessStreet2Field () {
       return this.requestBusinessStreet2Field(true);
     }
-    public APIRequestGetSharedAccounts requestBusinessStreet2Field (boolean value) {
+    public APIRequestGetShareDAccounts requestBusinessStreet2Field (boolean value) {
       this.requestField("business_street2", value);
       return this;
     }
-    public APIRequestGetSharedAccounts requestBusinessZipField () {
+    public APIRequestGetShareDAccounts requestBusinessZipField () {
       return this.requestBusinessZipField(true);
     }
-    public APIRequestGetSharedAccounts requestBusinessZipField (boolean value) {
+    public APIRequestGetShareDAccounts requestBusinessZipField (boolean value) {
       this.requestField("business_zip", value);
       return this;
     }
-    public APIRequestGetSharedAccounts requestCapabilitiesField () {
+    public APIRequestGetShareDAccounts requestCapabilitiesField () {
       return this.requestCapabilitiesField(true);
     }
-    public APIRequestGetSharedAccounts requestCapabilitiesField (boolean value) {
+    public APIRequestGetShareDAccounts requestCapabilitiesField (boolean value) {
       this.requestField("capabilities", value);
       return this;
     }
-    public APIRequestGetSharedAccounts requestCreatedTimeField () {
+    public APIRequestGetShareDAccounts requestCreatedTimeField () {
       return this.requestCreatedTimeField(true);
     }
-    public APIRequestGetSharedAccounts requestCreatedTimeField (boolean value) {
+    public APIRequestGetShareDAccounts requestCreatedTimeField (boolean value) {
       this.requestField("created_time", value);
       return this;
     }
-    public APIRequestGetSharedAccounts requestCurrencyField () {
+    public APIRequestGetShareDAccounts requestCurrencyField () {
       return this.requestCurrencyField(true);
     }
-    public APIRequestGetSharedAccounts requestCurrencyField (boolean value) {
+    public APIRequestGetShareDAccounts requestCurrencyField (boolean value) {
       this.requestField("currency", value);
       return this;
     }
-    public APIRequestGetSharedAccounts requestCustomAudienceInfoField () {
+    public APIRequestGetShareDAccounts requestCustomAudienceInfoField () {
       return this.requestCustomAudienceInfoField(true);
     }
-    public APIRequestGetSharedAccounts requestCustomAudienceInfoField (boolean value) {
+    public APIRequestGetShareDAccounts requestCustomAudienceInfoField (boolean value) {
       this.requestField("custom_audience_info", value);
       return this;
     }
-    public APIRequestGetSharedAccounts requestDefaultDsaBeneficiaryField () {
+    public APIRequestGetShareDAccounts requestDefaultDsaBeneficiaryField () {
       return this.requestDefaultDsaBeneficiaryField(true);
     }
-    public APIRequestGetSharedAccounts requestDefaultDsaBeneficiaryField (boolean value) {
+    public APIRequestGetShareDAccounts requestDefaultDsaBeneficiaryField (boolean value) {
       this.requestField("default_dsa_beneficiary", value);
       return this;
     }
-    public APIRequestGetSharedAccounts requestDefaultDsaPayorField () {
+    public APIRequestGetShareDAccounts requestDefaultDsaPayorField () {
       return this.requestDefaultDsaPayorField(true);
     }
-    public APIRequestGetSharedAccounts requestDefaultDsaPayorField (boolean value) {
+    public APIRequestGetShareDAccounts requestDefaultDsaPayorField (boolean value) {
       this.requestField("default_dsa_payor", value);
       return this;
     }
-    public APIRequestGetSharedAccounts requestDisableReasonField () {
+    public APIRequestGetShareDAccounts requestDisableReasonField () {
       return this.requestDisableReasonField(true);
     }
-    public APIRequestGetSharedAccounts requestDisableReasonField (boolean value) {
+    public APIRequestGetShareDAccounts requestDisableReasonField (boolean value) {
       this.requestField("disable_reason", value);
       return this;
     }
-    public APIRequestGetSharedAccounts requestEndAdvertiserField () {
+    public APIRequestGetShareDAccounts requestEndAdvertiserField () {
       return this.requestEndAdvertiserField(true);
     }
-    public APIRequestGetSharedAccounts requestEndAdvertiserField (boolean value) {
+    public APIRequestGetShareDAccounts requestEndAdvertiserField (boolean value) {
       this.requestField("end_advertiser", value);
       return this;
     }
-    public APIRequestGetSharedAccounts requestEndAdvertiserNameField () {
+    public APIRequestGetShareDAccounts requestEndAdvertiserNameField () {
       return this.requestEndAdvertiserNameField(true);
     }
-    public APIRequestGetSharedAccounts requestEndAdvertiserNameField (boolean value) {
+    public APIRequestGetShareDAccounts requestEndAdvertiserNameField (boolean value) {
       this.requestField("end_advertiser_name", value);
       return this;
     }
-    public APIRequestGetSharedAccounts requestExistingCustomersField () {
+    public APIRequestGetShareDAccounts requestExistingCustomersField () {
       return this.requestExistingCustomersField(true);
     }
-    public APIRequestGetSharedAccounts requestExistingCustomersField (boolean value) {
+    public APIRequestGetShareDAccounts requestExistingCustomersField (boolean value) {
       this.requestField("existing_customers", value);
       return this;
     }
-    public APIRequestGetSharedAccounts requestExtendedCreditInvoiceGroupField () {
+    public APIRequestGetShareDAccounts requestExtendedCreditInvoiceGroupField () {
       return this.requestExtendedCreditInvoiceGroupField(true);
     }
-    public APIRequestGetSharedAccounts requestExtendedCreditInvoiceGroupField (boolean value) {
+    public APIRequestGetShareDAccounts requestExtendedCreditInvoiceGroupField (boolean value) {
       this.requestField("extended_credit_invoice_group", value);
       return this;
     }
-    public APIRequestGetSharedAccounts requestFailedDeliveryChecksField () {
+    public APIRequestGetShareDAccounts requestFailedDeliveryChecksField () {
       return this.requestFailedDeliveryChecksField(true);
     }
-    public APIRequestGetSharedAccounts requestFailedDeliveryChecksField (boolean value) {
+    public APIRequestGetShareDAccounts requestFailedDeliveryChecksField (boolean value) {
       this.requestField("failed_delivery_checks", value);
       return this;
     }
-    public APIRequestGetSharedAccounts requestFbEntityField () {
+    public APIRequestGetShareDAccounts requestFbEntityField () {
       return this.requestFbEntityField(true);
     }
-    public APIRequestGetSharedAccounts requestFbEntityField (boolean value) {
+    public APIRequestGetShareDAccounts requestFbEntityField (boolean value) {
       this.requestField("fb_entity", value);
       return this;
     }
-    public APIRequestGetSharedAccounts requestFundingSourceField () {
+    public APIRequestGetShareDAccounts requestFundingSourceField () {
       return this.requestFundingSourceField(true);
     }
-    public APIRequestGetSharedAccounts requestFundingSourceField (boolean value) {
+    public APIRequestGetShareDAccounts requestFundingSourceField (boolean value) {
       this.requestField("funding_source", value);
       return this;
     }
-    public APIRequestGetSharedAccounts requestFundingSourceDetailsField () {
+    public APIRequestGetShareDAccounts requestFundingSourceDetailsField () {
       return this.requestFundingSourceDetailsField(true);
     }
-    public APIRequestGetSharedAccounts requestFundingSourceDetailsField (boolean value) {
+    public APIRequestGetShareDAccounts requestFundingSourceDetailsField (boolean value) {
       this.requestField("funding_source_details", value);
       return this;
     }
-    public APIRequestGetSharedAccounts requestHasMigratedPermissionsField () {
+    public APIRequestGetShareDAccounts requestHasMigratedPermissionsField () {
       return this.requestHasMigratedPermissionsField(true);
     }
-    public APIRequestGetSharedAccounts requestHasMigratedPermissionsField (boolean value) {
+    public APIRequestGetShareDAccounts requestHasMigratedPermissionsField (boolean value) {
       this.requestField("has_migrated_permissions", value);
       return this;
     }
-    public APIRequestGetSharedAccounts requestHasPageAuthorizedAdaccountField () {
+    public APIRequestGetShareDAccounts requestHasPageAuthorizedAdaccountField () {
       return this.requestHasPageAuthorizedAdaccountField(true);
     }
-    public APIRequestGetSharedAccounts requestHasPageAuthorizedAdaccountField (boolean value) {
+    public APIRequestGetShareDAccounts requestHasPageAuthorizedAdaccountField (boolean value) {
       this.requestField("has_page_authorized_adaccount", value);
       return this;
     }
-    public APIRequestGetSharedAccounts requestIdField () {
+    public APIRequestGetShareDAccounts requestIdField () {
       return this.requestIdField(true);
     }
-    public APIRequestGetSharedAccounts requestIdField (boolean value) {
+    public APIRequestGetShareDAccounts requestIdField (boolean value) {
       this.requestField("id", value);
       return this;
     }
-    public APIRequestGetSharedAccounts requestIoNumberField () {
+    public APIRequestGetShareDAccounts requestIoNumberField () {
       return this.requestIoNumberField(true);
     }
-    public APIRequestGetSharedAccounts requestIoNumberField (boolean value) {
+    public APIRequestGetShareDAccounts requestIoNumberField (boolean value) {
       this.requestField("io_number", value);
       return this;
     }
-    public APIRequestGetSharedAccounts requestIsAttributionSpecSystemDefaultField () {
+    public APIRequestGetShareDAccounts requestIsAttributionSpecSystemDefaultField () {
       return this.requestIsAttributionSpecSystemDefaultField(true);
     }
-    public APIRequestGetSharedAccounts requestIsAttributionSpecSystemDefaultField (boolean value) {
+    public APIRequestGetShareDAccounts requestIsAttributionSpecSystemDefaultField (boolean value) {
       this.requestField("is_attribution_spec_system_default", value);
       return this;
     }
-    public APIRequestGetSharedAccounts requestIsDirectDealsEnabledField () {
+    public APIRequestGetShareDAccounts requestIsDirectDealsEnabledField () {
       return this.requestIsDirectDealsEnabledField(true);
     }
-    public APIRequestGetSharedAccounts requestIsDirectDealsEnabledField (boolean value) {
+    public APIRequestGetShareDAccounts requestIsDirectDealsEnabledField (boolean value) {
       this.requestField("is_direct_deals_enabled", value);
       return this;
     }
-    public APIRequestGetSharedAccounts requestIsIn3dsAuthorizationEnabledMarketField () {
+    public APIRequestGetShareDAccounts requestIsIn3dsAuthorizationEnabledMarketField () {
       return this.requestIsIn3dsAuthorizationEnabledMarketField(true);
     }
-    public APIRequestGetSharedAccounts requestIsIn3dsAuthorizationEnabledMarketField (boolean value) {
+    public APIRequestGetShareDAccounts requestIsIn3dsAuthorizationEnabledMarketField (boolean value) {
       this.requestField("is_in_3ds_authorization_enabled_market", value);
       return this;
     }
-    public APIRequestGetSharedAccounts requestIsNotificationsEnabledField () {
+    public APIRequestGetShareDAccounts requestIsNotificationsEnabledField () {
       return this.requestIsNotificationsEnabledField(true);
     }
-    public APIRequestGetSharedAccounts requestIsNotificationsEnabledField (boolean value) {
+    public APIRequestGetShareDAccounts requestIsNotificationsEnabledField (boolean value) {
       this.requestField("is_notifications_enabled", value);
       return this;
     }
-    public APIRequestGetSharedAccounts requestIsPersonalField () {
+    public APIRequestGetShareDAccounts requestIsPersonalField () {
       return this.requestIsPersonalField(true);
     }
-    public APIRequestGetSharedAccounts requestIsPersonalField (boolean value) {
+    public APIRequestGetShareDAccounts requestIsPersonalField (boolean value) {
       this.requestField("is_personal", value);
       return this;
     }
-    public APIRequestGetSharedAccounts requestIsPrepayAccountField () {
+    public APIRequestGetShareDAccounts requestIsPrepayAccountField () {
       return this.requestIsPrepayAccountField(true);
     }
-    public APIRequestGetSharedAccounts requestIsPrepayAccountField (boolean value) {
+    public APIRequestGetShareDAccounts requestIsPrepayAccountField (boolean value) {
       this.requestField("is_prepay_account", value);
       return this;
     }
-    public APIRequestGetSharedAccounts requestIsTaxIdRequiredField () {
+    public APIRequestGetShareDAccounts requestIsTaxIdRequiredField () {
       return this.requestIsTaxIdRequiredField(true);
     }
-    public APIRequestGetSharedAccounts requestIsTaxIdRequiredField (boolean value) {
+    public APIRequestGetShareDAccounts requestIsTaxIdRequiredField (boolean value) {
       this.requestField("is_tax_id_required", value);
       return this;
     }
-    public APIRequestGetSharedAccounts requestLiableAddressField () {
+    public APIRequestGetShareDAccounts requestLiableAddressField () {
       return this.requestLiableAddressField(true);
     }
-    public APIRequestGetSharedAccounts requestLiableAddressField (boolean value) {
+    public APIRequestGetShareDAccounts requestLiableAddressField (boolean value) {
       this.requestField("liable_address", value);
       return this;
     }
-    public APIRequestGetSharedAccounts requestLineNumbersField () {
+    public APIRequestGetShareDAccounts requestLineNumbersField () {
       return this.requestLineNumbersField(true);
     }
-    public APIRequestGetSharedAccounts requestLineNumbersField (boolean value) {
+    public APIRequestGetShareDAccounts requestLineNumbersField (boolean value) {
       this.requestField("line_numbers", value);
       return this;
     }
-    public APIRequestGetSharedAccounts requestMediaAgencyField () {
+    public APIRequestGetShareDAccounts requestMediaAgencyField () {
       return this.requestMediaAgencyField(true);
     }
-    public APIRequestGetSharedAccounts requestMediaAgencyField (boolean value) {
+    public APIRequestGetShareDAccounts requestMediaAgencyField (boolean value) {
       this.requestField("media_agency", value);
       return this;
     }
-    public APIRequestGetSharedAccounts requestMinCampaignGroupSpendCapField () {
+    public APIRequestGetShareDAccounts requestMinCampaignGroupSpendCapField () {
       return this.requestMinCampaignGroupSpendCapField(true);
     }
-    public APIRequestGetSharedAccounts requestMinCampaignGroupSpendCapField (boolean value) {
+    public APIRequestGetShareDAccounts requestMinCampaignGroupSpendCapField (boolean value) {
       this.requestField("min_campaign_group_spend_cap", value);
       return this;
     }
-    public APIRequestGetSharedAccounts requestMinDailyBudgetField () {
+    public APIRequestGetShareDAccounts requestMinDailyBudgetField () {
       return this.requestMinDailyBudgetField(true);
     }
-    public APIRequestGetSharedAccounts requestMinDailyBudgetField (boolean value) {
+    public APIRequestGetShareDAccounts requestMinDailyBudgetField (boolean value) {
       this.requestField("min_daily_budget", value);
       return this;
     }
-    public APIRequestGetSharedAccounts requestNameField () {
+    public APIRequestGetShareDAccounts requestNameField () {
       return this.requestNameField(true);
     }
-    public APIRequestGetSharedAccounts requestNameField (boolean value) {
+    public APIRequestGetShareDAccounts requestNameField (boolean value) {
       this.requestField("name", value);
       return this;
     }
-    public APIRequestGetSharedAccounts requestOffsitePixelsTosAcceptedField () {
+    public APIRequestGetShareDAccounts requestOffsitePixelsTosAcceptedField () {
       return this.requestOffsitePixelsTosAcceptedField(true);
     }
-    public APIRequestGetSharedAccounts requestOffsitePixelsTosAcceptedField (boolean value) {
+    public APIRequestGetShareDAccounts requestOffsitePixelsTosAcceptedField (boolean value) {
       this.requestField("offsite_pixels_tos_accepted", value);
       return this;
     }
-    public APIRequestGetSharedAccounts requestOwnerField () {
+    public APIRequestGetShareDAccounts requestOwnerField () {
       return this.requestOwnerField(true);
     }
-    public APIRequestGetSharedAccounts requestOwnerField (boolean value) {
+    public APIRequestGetShareDAccounts requestOwnerField (boolean value) {
       this.requestField("owner", value);
       return this;
     }
-    public APIRequestGetSharedAccounts requestOwnerBusinessField () {
+    public APIRequestGetShareDAccounts requestOwnerBusinessField () {
       return this.requestOwnerBusinessField(true);
     }
-    public APIRequestGetSharedAccounts requestOwnerBusinessField (boolean value) {
+    public APIRequestGetShareDAccounts requestOwnerBusinessField (boolean value) {
       this.requestField("owner_business", value);
       return this;
     }
-    public APIRequestGetSharedAccounts requestPartnerField () {
+    public APIRequestGetShareDAccounts requestPartnerField () {
       return this.requestPartnerField(true);
     }
-    public APIRequestGetSharedAccounts requestPartnerField (boolean value) {
+    public APIRequestGetShareDAccounts requestPartnerField (boolean value) {
       this.requestField("partner", value);
       return this;
     }
-    public APIRequestGetSharedAccounts requestRfSpecField () {
+    public APIRequestGetShareDAccounts requestRfSpecField () {
       return this.requestRfSpecField(true);
     }
-    public APIRequestGetSharedAccounts requestRfSpecField (boolean value) {
+    public APIRequestGetShareDAccounts requestRfSpecField (boolean value) {
       this.requestField("rf_spec", value);
       return this;
     }
-    public APIRequestGetSharedAccounts requestSendBillToAddressField () {
+    public APIRequestGetShareDAccounts requestSendBillToAddressField () {
       return this.requestSendBillToAddressField(true);
     }
-    public APIRequestGetSharedAccounts requestSendBillToAddressField (boolean value) {
+    public APIRequestGetShareDAccounts requestSendBillToAddressField (boolean value) {
       this.requestField("send_bill_to_address", value);
       return this;
     }
-    public APIRequestGetSharedAccounts requestShowCheckoutExperienceField () {
+    public APIRequestGetShareDAccounts requestShowCheckoutExperienceField () {
       return this.requestShowCheckoutExperienceField(true);
     }
-    public APIRequestGetSharedAccounts requestShowCheckoutExperienceField (boolean value) {
+    public APIRequestGetShareDAccounts requestShowCheckoutExperienceField (boolean value) {
       this.requestField("show_checkout_experience", value);
       return this;
     }
-    public APIRequestGetSharedAccounts requestSoldToAddressField () {
+    public APIRequestGetShareDAccounts requestSoldToAddressField () {
       return this.requestSoldToAddressField(true);
     }
-    public APIRequestGetSharedAccounts requestSoldToAddressField (boolean value) {
+    public APIRequestGetShareDAccounts requestSoldToAddressField (boolean value) {
       this.requestField("sold_to_address", value);
       return this;
     }
-    public APIRequestGetSharedAccounts requestSpendCapField () {
+    public APIRequestGetShareDAccounts requestSpendCapField () {
       return this.requestSpendCapField(true);
     }
-    public APIRequestGetSharedAccounts requestSpendCapField (boolean value) {
+    public APIRequestGetShareDAccounts requestSpendCapField (boolean value) {
       this.requestField("spend_cap", value);
       return this;
     }
-    public APIRequestGetSharedAccounts requestTaxIdField () {
+    public APIRequestGetShareDAccounts requestTaxIdField () {
       return this.requestTaxIdField(true);
     }
-    public APIRequestGetSharedAccounts requestTaxIdField (boolean value) {
+    public APIRequestGetShareDAccounts requestTaxIdField (boolean value) {
       this.requestField("tax_id", value);
       return this;
     }
-    public APIRequestGetSharedAccounts requestTaxIdStatusField () {
+    public APIRequestGetShareDAccounts requestTaxIdStatusField () {
       return this.requestTaxIdStatusField(true);
     }
-    public APIRequestGetSharedAccounts requestTaxIdStatusField (boolean value) {
+    public APIRequestGetShareDAccounts requestTaxIdStatusField (boolean value) {
       this.requestField("tax_id_status", value);
       return this;
     }
-    public APIRequestGetSharedAccounts requestTaxIdTypeField () {
+    public APIRequestGetShareDAccounts requestTaxIdTypeField () {
       return this.requestTaxIdTypeField(true);
     }
-    public APIRequestGetSharedAccounts requestTaxIdTypeField (boolean value) {
+    public APIRequestGetShareDAccounts requestTaxIdTypeField (boolean value) {
       this.requestField("tax_id_type", value);
       return this;
     }
-    public APIRequestGetSharedAccounts requestTimezoneIdField () {
+    public APIRequestGetShareDAccounts requestTimezoneIdField () {
       return this.requestTimezoneIdField(true);
     }
-    public APIRequestGetSharedAccounts requestTimezoneIdField (boolean value) {
+    public APIRequestGetShareDAccounts requestTimezoneIdField (boolean value) {
       this.requestField("timezone_id", value);
       return this;
     }
-    public APIRequestGetSharedAccounts requestTimezoneNameField () {
+    public APIRequestGetShareDAccounts requestTimezoneNameField () {
       return this.requestTimezoneNameField(true);
     }
-    public APIRequestGetSharedAccounts requestTimezoneNameField (boolean value) {
+    public APIRequestGetShareDAccounts requestTimezoneNameField (boolean value) {
       this.requestField("timezone_name", value);
       return this;
     }
-    public APIRequestGetSharedAccounts requestTimezoneOffsetHoursUtcField () {
+    public APIRequestGetShareDAccounts requestTimezoneOffsetHoursUtcField () {
       return this.requestTimezoneOffsetHoursUtcField(true);
     }
-    public APIRequestGetSharedAccounts requestTimezoneOffsetHoursUtcField (boolean value) {
+    public APIRequestGetShareDAccounts requestTimezoneOffsetHoursUtcField (boolean value) {
       this.requestField("timezone_offset_hours_utc", value);
       return this;
     }
-    public APIRequestGetSharedAccounts requestTosAcceptedField () {
+    public APIRequestGetShareDAccounts requestTosAcceptedField () {
       return this.requestTosAcceptedField(true);
     }
-    public APIRequestGetSharedAccounts requestTosAcceptedField (boolean value) {
+    public APIRequestGetShareDAccounts requestTosAcceptedField (boolean value) {
       this.requestField("tos_accepted", value);
       return this;
     }
-    public APIRequestGetSharedAccounts requestUserAccessExpireTimeField () {
+    public APIRequestGetShareDAccounts requestUserAccessExpireTimeField () {
       return this.requestUserAccessExpireTimeField(true);
     }
-    public APIRequestGetSharedAccounts requestUserAccessExpireTimeField (boolean value) {
+    public APIRequestGetShareDAccounts requestUserAccessExpireTimeField (boolean value) {
       this.requestField("user_access_expire_time", value);
       return this;
     }
-    public APIRequestGetSharedAccounts requestUserTasksField () {
+    public APIRequestGetShareDAccounts requestUserTasksField () {
       return this.requestUserTasksField(true);
     }
-    public APIRequestGetSharedAccounts requestUserTasksField (boolean value) {
+    public APIRequestGetShareDAccounts requestUserTasksField (boolean value) {
       this.requestField("user_tasks", value);
       return this;
     }
-    public APIRequestGetSharedAccounts requestUserTosAcceptedField () {
+    public APIRequestGetShareDAccounts requestUserTosAcceptedField () {
       return this.requestUserTosAcceptedField(true);
     }
-    public APIRequestGetSharedAccounts requestUserTosAcceptedField (boolean value) {
+    public APIRequestGetShareDAccounts requestUserTosAcceptedField (boolean value) {
       this.requestField("user_tos_accepted", value);
       return this;
     }
-    public APIRequestGetSharedAccounts requestViewableBusinessField () {
+    public APIRequestGetShareDAccounts requestViewableBusinessField () {
       return this.requestViewableBusinessField(true);
     }
-    public APIRequestGetSharedAccounts requestViewableBusinessField (boolean value) {
+    public APIRequestGetShareDAccounts requestViewableBusinessField (boolean value) {
       this.requestField("viewable_business", value);
       return this;
     }
   }
 
-  public static class APIRequestGetSharedAgencies extends APIRequest<Business> {
+  public static class APIRequestGetShareDAgencies extends APIRequest<Business> {
 
     APINodeList<Business> lastResponse = null;
     @Override
@@ -3441,7 +3153,7 @@ public class OfflineConversionDataSet extends APINode {
         new Function<ResponseWrapper, APINodeList<Business>>() {
            public APINodeList<Business> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetSharedAgencies.this.parseResponse(result.getBody(), result.getHeader());
+               return APIRequestGetShareDAgencies.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3451,37 +3163,37 @@ public class OfflineConversionDataSet extends APINode {
       );
     };
 
-    public APIRequestGetSharedAgencies(String nodeId, APIContext context) {
+    public APIRequestGetShareDAgencies(String nodeId, APIContext context) {
       super(context, nodeId, "/shared_agencies", "GET", Arrays.asList(PARAMS));
     }
 
     @Override
-    public APIRequestGetSharedAgencies setParam(String param, Object value) {
+    public APIRequestGetShareDAgencies setParam(String param, Object value) {
       setParamInternal(param, value);
       return this;
     }
 
     @Override
-    public APIRequestGetSharedAgencies setParams(Map<String, Object> params) {
+    public APIRequestGetShareDAgencies setParams(Map<String, Object> params) {
       setParamsInternal(params);
       return this;
     }
 
 
-    public APIRequestGetSharedAgencies setActionSource (Business.EnumActionSource actionSource) {
+    public APIRequestGetShareDAgencies setActionSource (Business.EnumActionSource actionSource) {
       this.setParam("action_source", actionSource);
       return this;
     }
-    public APIRequestGetSharedAgencies setActionSource (String actionSource) {
+    public APIRequestGetShareDAgencies setActionSource (String actionSource) {
       this.setParam("action_source", actionSource);
       return this;
     }
 
-    public APIRequestGetSharedAgencies requestAllFields () {
+    public APIRequestGetShareDAgencies requestAllFields () {
       return this.requestAllFields(true);
     }
 
-    public APIRequestGetSharedAgencies requestAllFields (boolean value) {
+    public APIRequestGetShareDAgencies requestAllFields (boolean value) {
       for (String field : FIELDS) {
         this.requestField(field, value);
       }
@@ -3489,12 +3201,12 @@ public class OfflineConversionDataSet extends APINode {
     }
 
     @Override
-    public APIRequestGetSharedAgencies requestFields (List<String> fields) {
+    public APIRequestGetShareDAgencies requestFields (List<String> fields) {
       return this.requestFields(fields, true);
     }
 
     @Override
-    public APIRequestGetSharedAgencies requestFields (List<String> fields, boolean value) {
+    public APIRequestGetShareDAgencies requestFields (List<String> fields, boolean value) {
       for (String field : fields) {
         this.requestField(field, value);
       }
@@ -3502,161 +3214,161 @@ public class OfflineConversionDataSet extends APINode {
     }
 
     @Override
-    public APIRequestGetSharedAgencies requestField (String field) {
+    public APIRequestGetShareDAgencies requestField (String field) {
       this.requestField(field, true);
       return this;
     }
 
     @Override
-    public APIRequestGetSharedAgencies requestField (String field, boolean value) {
+    public APIRequestGetShareDAgencies requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
 
-    public APIRequestGetSharedAgencies requestBlockOfflineAnalyticsField () {
+    public APIRequestGetShareDAgencies requestBlockOfflineAnalyticsField () {
       return this.requestBlockOfflineAnalyticsField(true);
     }
-    public APIRequestGetSharedAgencies requestBlockOfflineAnalyticsField (boolean value) {
+    public APIRequestGetShareDAgencies requestBlockOfflineAnalyticsField (boolean value) {
       this.requestField("block_offline_analytics", value);
       return this;
     }
-    public APIRequestGetSharedAgencies requestCollaborativeAdsManagedPartnerBusinessInfoField () {
+    public APIRequestGetShareDAgencies requestCollaborativeAdsManagedPartnerBusinessInfoField () {
       return this.requestCollaborativeAdsManagedPartnerBusinessInfoField(true);
     }
-    public APIRequestGetSharedAgencies requestCollaborativeAdsManagedPartnerBusinessInfoField (boolean value) {
+    public APIRequestGetShareDAgencies requestCollaborativeAdsManagedPartnerBusinessInfoField (boolean value) {
       this.requestField("collaborative_ads_managed_partner_business_info", value);
       return this;
     }
-    public APIRequestGetSharedAgencies requestCollaborativeAdsManagedPartnerEligibilityField () {
+    public APIRequestGetShareDAgencies requestCollaborativeAdsManagedPartnerEligibilityField () {
       return this.requestCollaborativeAdsManagedPartnerEligibilityField(true);
     }
-    public APIRequestGetSharedAgencies requestCollaborativeAdsManagedPartnerEligibilityField (boolean value) {
+    public APIRequestGetShareDAgencies requestCollaborativeAdsManagedPartnerEligibilityField (boolean value) {
       this.requestField("collaborative_ads_managed_partner_eligibility", value);
       return this;
     }
-    public APIRequestGetSharedAgencies requestCollaborativeAdsPartnerPremiumOptionsField () {
+    public APIRequestGetShareDAgencies requestCollaborativeAdsPartnerPremiumOptionsField () {
       return this.requestCollaborativeAdsPartnerPremiumOptionsField(true);
     }
-    public APIRequestGetSharedAgencies requestCollaborativeAdsPartnerPremiumOptionsField (boolean value) {
+    public APIRequestGetShareDAgencies requestCollaborativeAdsPartnerPremiumOptionsField (boolean value) {
       this.requestField("collaborative_ads_partner_premium_options", value);
       return this;
     }
-    public APIRequestGetSharedAgencies requestCreatedByField () {
+    public APIRequestGetShareDAgencies requestCreatedByField () {
       return this.requestCreatedByField(true);
     }
-    public APIRequestGetSharedAgencies requestCreatedByField (boolean value) {
+    public APIRequestGetShareDAgencies requestCreatedByField (boolean value) {
       this.requestField("created_by", value);
       return this;
     }
-    public APIRequestGetSharedAgencies requestCreatedTimeField () {
+    public APIRequestGetShareDAgencies requestCreatedTimeField () {
       return this.requestCreatedTimeField(true);
     }
-    public APIRequestGetSharedAgencies requestCreatedTimeField (boolean value) {
+    public APIRequestGetShareDAgencies requestCreatedTimeField (boolean value) {
       this.requestField("created_time", value);
       return this;
     }
-    public APIRequestGetSharedAgencies requestExtendedUpdatedTimeField () {
+    public APIRequestGetShareDAgencies requestExtendedUpdatedTimeField () {
       return this.requestExtendedUpdatedTimeField(true);
     }
-    public APIRequestGetSharedAgencies requestExtendedUpdatedTimeField (boolean value) {
+    public APIRequestGetShareDAgencies requestExtendedUpdatedTimeField (boolean value) {
       this.requestField("extended_updated_time", value);
       return this;
     }
-    public APIRequestGetSharedAgencies requestIdField () {
+    public APIRequestGetShareDAgencies requestIdField () {
       return this.requestIdField(true);
     }
-    public APIRequestGetSharedAgencies requestIdField (boolean value) {
+    public APIRequestGetShareDAgencies requestIdField (boolean value) {
       this.requestField("id", value);
       return this;
     }
-    public APIRequestGetSharedAgencies requestIsHiddenField () {
+    public APIRequestGetShareDAgencies requestIsHiddenField () {
       return this.requestIsHiddenField(true);
     }
-    public APIRequestGetSharedAgencies requestIsHiddenField (boolean value) {
+    public APIRequestGetShareDAgencies requestIsHiddenField (boolean value) {
       this.requestField("is_hidden", value);
       return this;
     }
-    public APIRequestGetSharedAgencies requestLinkField () {
+    public APIRequestGetShareDAgencies requestLinkField () {
       return this.requestLinkField(true);
     }
-    public APIRequestGetSharedAgencies requestLinkField (boolean value) {
+    public APIRequestGetShareDAgencies requestLinkField (boolean value) {
       this.requestField("link", value);
       return this;
     }
-    public APIRequestGetSharedAgencies requestNameField () {
+    public APIRequestGetShareDAgencies requestNameField () {
       return this.requestNameField(true);
     }
-    public APIRequestGetSharedAgencies requestNameField (boolean value) {
+    public APIRequestGetShareDAgencies requestNameField (boolean value) {
       this.requestField("name", value);
       return this;
     }
-    public APIRequestGetSharedAgencies requestPrimaryPageField () {
+    public APIRequestGetShareDAgencies requestPrimaryPageField () {
       return this.requestPrimaryPageField(true);
     }
-    public APIRequestGetSharedAgencies requestPrimaryPageField (boolean value) {
+    public APIRequestGetShareDAgencies requestPrimaryPageField (boolean value) {
       this.requestField("primary_page", value);
       return this;
     }
-    public APIRequestGetSharedAgencies requestProfilePictureUriField () {
+    public APIRequestGetShareDAgencies requestProfilePictureUriField () {
       return this.requestProfilePictureUriField(true);
     }
-    public APIRequestGetSharedAgencies requestProfilePictureUriField (boolean value) {
+    public APIRequestGetShareDAgencies requestProfilePictureUriField (boolean value) {
       this.requestField("profile_picture_uri", value);
       return this;
     }
-    public APIRequestGetSharedAgencies requestTimezoneIdField () {
+    public APIRequestGetShareDAgencies requestTimezoneIdField () {
       return this.requestTimezoneIdField(true);
     }
-    public APIRequestGetSharedAgencies requestTimezoneIdField (boolean value) {
+    public APIRequestGetShareDAgencies requestTimezoneIdField (boolean value) {
       this.requestField("timezone_id", value);
       return this;
     }
-    public APIRequestGetSharedAgencies requestTwoFactorTypeField () {
+    public APIRequestGetShareDAgencies requestTwoFactorTypeField () {
       return this.requestTwoFactorTypeField(true);
     }
-    public APIRequestGetSharedAgencies requestTwoFactorTypeField (boolean value) {
+    public APIRequestGetShareDAgencies requestTwoFactorTypeField (boolean value) {
       this.requestField("two_factor_type", value);
       return this;
     }
-    public APIRequestGetSharedAgencies requestUpdatedByField () {
+    public APIRequestGetShareDAgencies requestUpdatedByField () {
       return this.requestUpdatedByField(true);
     }
-    public APIRequestGetSharedAgencies requestUpdatedByField (boolean value) {
+    public APIRequestGetShareDAgencies requestUpdatedByField (boolean value) {
       this.requestField("updated_by", value);
       return this;
     }
-    public APIRequestGetSharedAgencies requestUpdatedTimeField () {
+    public APIRequestGetShareDAgencies requestUpdatedTimeField () {
       return this.requestUpdatedTimeField(true);
     }
-    public APIRequestGetSharedAgencies requestUpdatedTimeField (boolean value) {
+    public APIRequestGetShareDAgencies requestUpdatedTimeField (boolean value) {
       this.requestField("updated_time", value);
       return this;
     }
-    public APIRequestGetSharedAgencies requestUserAccessExpireTimeField () {
+    public APIRequestGetShareDAgencies requestUserAccessExpireTimeField () {
       return this.requestUserAccessExpireTimeField(true);
     }
-    public APIRequestGetSharedAgencies requestUserAccessExpireTimeField (boolean value) {
+    public APIRequestGetShareDAgencies requestUserAccessExpireTimeField (boolean value) {
       this.requestField("user_access_expire_time", value);
       return this;
     }
-    public APIRequestGetSharedAgencies requestVerificationStatusField () {
+    public APIRequestGetShareDAgencies requestVerificationStatusField () {
       return this.requestVerificationStatusField(true);
     }
-    public APIRequestGetSharedAgencies requestVerificationStatusField (boolean value) {
+    public APIRequestGetShareDAgencies requestVerificationStatusField (boolean value) {
       this.requestField("verification_status", value);
       return this;
     }
-    public APIRequestGetSharedAgencies requestVerticalField () {
+    public APIRequestGetShareDAgencies requestVerticalField () {
       return this.requestVerticalField(true);
     }
-    public APIRequestGetSharedAgencies requestVerticalField (boolean value) {
+    public APIRequestGetShareDAgencies requestVerticalField (boolean value) {
       this.requestField("vertical", value);
       return this;
     }
-    public APIRequestGetSharedAgencies requestVerticalIdField () {
+    public APIRequestGetShareDAgencies requestVerticalIdField () {
       return this.requestVerticalIdField(true);
     }
-    public APIRequestGetSharedAgencies requestVerticalIdField (boolean value) {
+    public APIRequestGetShareDAgencies requestVerticalIdField (boolean value) {
       this.requestField("vertical_id", value);
       return this;
     }
@@ -4082,343 +3794,6 @@ public class OfflineConversionDataSet extends APINode {
     }
   }
 
-  public static class APIRequestCreateUpload extends APIRequest<OfflineConversionDataSetUpload> {
-
-    OfflineConversionDataSetUpload lastResponse = null;
-    @Override
-    public OfflineConversionDataSetUpload getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "upload_tag",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public OfflineConversionDataSetUpload parseResponse(String response, String header) throws APIException {
-      return OfflineConversionDataSetUpload.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public OfflineConversionDataSetUpload execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public OfflineConversionDataSetUpload execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<OfflineConversionDataSetUpload> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<OfflineConversionDataSetUpload> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, OfflineConversionDataSetUpload>() {
-           public OfflineConversionDataSetUpload apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateUpload.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         },
-         MoreExecutors.directExecutor()
-      );
-    };
-
-    public APIRequestCreateUpload(String nodeId, APIContext context) {
-      super(context, nodeId, "/uploads", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateUpload setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateUpload setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateUpload setUploadTag (String uploadTag) {
-      this.setParam("upload_tag", uploadTag);
-      return this;
-    }
-
-    public APIRequestCreateUpload requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateUpload requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateUpload requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateUpload requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateUpload requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateUpload requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
-  public static class APIRequestCreateValidate extends APIRequest<OfflineConversionDataSet> {
-
-    OfflineConversionDataSet lastResponse = null;
-    @Override
-    public OfflineConversionDataSet getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "data",
-      "namespace_id",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public OfflineConversionDataSet parseResponse(String response, String header) throws APIException {
-      return OfflineConversionDataSet.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public OfflineConversionDataSet execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public OfflineConversionDataSet execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<OfflineConversionDataSet> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<OfflineConversionDataSet> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, OfflineConversionDataSet>() {
-           public OfflineConversionDataSet apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateValidate.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         },
-         MoreExecutors.directExecutor()
-      );
-    };
-
-    public APIRequestCreateValidate(String nodeId, APIContext context) {
-      super(context, nodeId, "/validate", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateValidate setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateValidate setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateValidate setData (List<String> data) {
-      this.setParam("data", data);
-      return this;
-    }
-    public APIRequestCreateValidate setData (String data) {
-      this.setParam("data", data);
-      return this;
-    }
-
-    public APIRequestCreateValidate setNamespaceId (String namespaceId) {
-      this.setParam("namespace_id", namespaceId);
-      return this;
-    }
-
-    public APIRequestCreateValidate requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateValidate requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateValidate requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateValidate requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateValidate requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateValidate requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
-  public static class APIRequestDelete extends APIRequest<APINode> {
-
-    APINode lastResponse = null;
-    @Override
-    public APINode getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINode parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public APINode execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINode execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINode> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINode>() {
-           public APINode apply(ResponseWrapper result) {
-             try {
-               return APIRequestDelete.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         },
-         MoreExecutors.directExecutor()
-      );
-    };
-
-    public APIRequestDelete(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "DELETE", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestDelete setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestDelete setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestDelete requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestDelete requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestDelete requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestDelete requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestDelete requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestDelete requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
   public static class APIRequestGet extends APIRequest<OfflineConversionDataSet> {
 
     OfflineConversionDataSet lastResponse = null;
@@ -4778,189 +4153,6 @@ public class OfflineConversionDataSet extends APINode {
       this.requestField("valid_entries", value);
       return this;
     }
-  }
-
-  public static class APIRequestUpdate extends APIRequest<OfflineConversionDataSet> {
-
-    OfflineConversionDataSet lastResponse = null;
-    @Override
-    public OfflineConversionDataSet getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "auto_assign_to_new_accounts_only",
-      "description",
-      "enable_auto_assign_to_accounts",
-      "name",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public OfflineConversionDataSet parseResponse(String response, String header) throws APIException {
-      return OfflineConversionDataSet.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public OfflineConversionDataSet execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public OfflineConversionDataSet execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<OfflineConversionDataSet> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<OfflineConversionDataSet> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, OfflineConversionDataSet>() {
-           public OfflineConversionDataSet apply(ResponseWrapper result) {
-             try {
-               return APIRequestUpdate.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         },
-         MoreExecutors.directExecutor()
-      );
-    };
-
-    public APIRequestUpdate(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestUpdate setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestUpdate setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestUpdate setAutoAssignToNewAccountsOnly (Boolean autoAssignToNewAccountsOnly) {
-      this.setParam("auto_assign_to_new_accounts_only", autoAssignToNewAccountsOnly);
-      return this;
-    }
-    public APIRequestUpdate setAutoAssignToNewAccountsOnly (String autoAssignToNewAccountsOnly) {
-      this.setParam("auto_assign_to_new_accounts_only", autoAssignToNewAccountsOnly);
-      return this;
-    }
-
-    public APIRequestUpdate setDescription (String description) {
-      this.setParam("description", description);
-      return this;
-    }
-
-    public APIRequestUpdate setEnableAutoAssignToAccounts (Boolean enableAutoAssignToAccounts) {
-      this.setParam("enable_auto_assign_to_accounts", enableAutoAssignToAccounts);
-      return this;
-    }
-    public APIRequestUpdate setEnableAutoAssignToAccounts (String enableAutoAssignToAccounts) {
-      this.setParam("enable_auto_assign_to_accounts", enableAutoAssignToAccounts);
-      return this;
-    }
-
-    public APIRequestUpdate setName (String name) {
-      this.setParam("name", name);
-      return this;
-    }
-
-    public APIRequestUpdate requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestUpdate requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestUpdate requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestUpdate requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestUpdate requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestUpdate requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
-  public static enum EnumPermittedRoles {
-      @SerializedName("ADMIN")
-      VALUE_ADMIN("ADMIN"),
-      @SerializedName("ADVERTISER")
-      VALUE_ADVERTISER("ADVERTISER"),
-      @SerializedName("UPLOADER")
-      VALUE_UPLOADER("UPLOADER"),
-      ;
-
-      private String value;
-
-      private EnumPermittedRoles(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumRelationshipType {
-      @SerializedName("AD_MANAGER")
-      VALUE_AD_MANAGER("AD_MANAGER"),
-      @SerializedName("AGENCY")
-      VALUE_AGENCY("AGENCY"),
-      @SerializedName("AGGREGATOR")
-      VALUE_AGGREGATOR("AGGREGATOR"),
-      @SerializedName("AUDIENCE_MANAGER")
-      VALUE_AUDIENCE_MANAGER("AUDIENCE_MANAGER"),
-      @SerializedName("OTHER")
-      VALUE_OTHER("OTHER"),
-      ;
-
-      private String value;
-
-      private EnumRelationshipType(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
   }
 
   public static enum EnumAggrTime {

@@ -228,6 +228,8 @@ public class CustomAudienceDataSource extends APINode {
 
 
   public static enum EnumSubType {
+      @SerializedName("AD_CAMPAIGN")
+      VALUE_AD_CAMPAIGN("AD_CAMPAIGN"),
       @SerializedName("ANYTHING")
       VALUE_ANYTHING("ANYTHING"),
       @SerializedName("APP_USERS")
@@ -270,6 +272,8 @@ public class CustomAudienceDataSource extends APINode {
       VALUE_FB_EVENT_SIGNALS("FB_EVENT_SIGNALS"),
       @SerializedName("FB_PIXEL_HITS")
       VALUE_FB_PIXEL_HITS("FB_PIXEL_HITS"),
+      @SerializedName("GROUP_EVENTS")
+      VALUE_GROUP_EVENTS("GROUP_EVENTS"),
       @SerializedName("HASHES")
       VALUE_HASHES("HASHES"),
       @SerializedName("HASHES_OR_USER_IDS")

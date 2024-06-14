@@ -41,6 +41,10 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class AdCreativeFeaturesSpec extends APINode {
+  @SerializedName("adapt_to_placement")
+  private AdCreativeFeatureDetails mAdaptToPlacement = null;
+  @SerializedName("ads_with_benefits")
+  private AdCreativeFeatureDetails mAdsWithBenefits = null;
   @SerializedName("advantage_plus_creative")
   private AdCreativeFeatureDetails mAdvantagePlusCreative = null;
   @SerializedName("app_highlights")
@@ -59,12 +63,16 @@ public class AdCreativeFeaturesSpec extends APINode {
   private AdCreativeFeatureDetails mDescriptionAutomation = null;
   @SerializedName("dha_optimization")
   private AdCreativeFeatureDetails mDhaOptimization = null;
+  @SerializedName("feed_caption_optimization")
+  private AdCreativeFeatureDetails mFeedCaptionOptimization = null;
   @SerializedName("ig_glados_feed")
   private AdCreativeFeatureDetails mIgGladosFeed = null;
   @SerializedName("image_auto_crop")
   private AdCreativeFeatureDetails mImageAutoCrop = null;
   @SerializedName("image_background_gen")
   private AdCreativeFeatureDetails mImageBackgroundGen = null;
+  @SerializedName("image_brightness_and_contrast")
+  private AdCreativeFeatureDetails mImageBrightnessAndContrast = null;
   @SerializedName("image_enhancement")
   private AdCreativeFeatureDetails mImageEnhancement = null;
   @SerializedName("image_templates")
@@ -101,6 +109,8 @@ public class AdCreativeFeaturesSpec extends APINode {
   private AdCreativeFeatureDetails mTextOptimizations = null;
   @SerializedName("video_auto_crop")
   private AdCreativeFeatureDetails mVideoAutoCrop = null;
+  @SerializedName("video_filtering")
+  private AdCreativeFeatureDetails mVideoFiltering = null;
   @SerializedName("video_highlight")
   private AdCreativeFeatureDetails mVideoHighlight = null;
   protected static Gson gson = null;
@@ -254,6 +264,34 @@ public class AdCreativeFeaturesSpec extends APINode {
   }
 
 
+  public AdCreativeFeatureDetails getFieldAdaptToPlacement() {
+    return mAdaptToPlacement;
+  }
+
+  public AdCreativeFeaturesSpec setFieldAdaptToPlacement(AdCreativeFeatureDetails value) {
+    this.mAdaptToPlacement = value;
+    return this;
+  }
+
+  public AdCreativeFeaturesSpec setFieldAdaptToPlacement(String value) {
+    Type type = new TypeToken<AdCreativeFeatureDetails>(){}.getType();
+    this.mAdaptToPlacement = AdCreativeFeatureDetails.getGson().fromJson(value, type);
+    return this;
+  }
+  public AdCreativeFeatureDetails getFieldAdsWithBenefits() {
+    return mAdsWithBenefits;
+  }
+
+  public AdCreativeFeaturesSpec setFieldAdsWithBenefits(AdCreativeFeatureDetails value) {
+    this.mAdsWithBenefits = value;
+    return this;
+  }
+
+  public AdCreativeFeaturesSpec setFieldAdsWithBenefits(String value) {
+    Type type = new TypeToken<AdCreativeFeatureDetails>(){}.getType();
+    this.mAdsWithBenefits = AdCreativeFeatureDetails.getGson().fromJson(value, type);
+    return this;
+  }
   public AdCreativeFeatureDetails getFieldAdvantagePlusCreative() {
     return mAdvantagePlusCreative;
   }
@@ -380,6 +418,20 @@ public class AdCreativeFeaturesSpec extends APINode {
     this.mDhaOptimization = AdCreativeFeatureDetails.getGson().fromJson(value, type);
     return this;
   }
+  public AdCreativeFeatureDetails getFieldFeedCaptionOptimization() {
+    return mFeedCaptionOptimization;
+  }
+
+  public AdCreativeFeaturesSpec setFieldFeedCaptionOptimization(AdCreativeFeatureDetails value) {
+    this.mFeedCaptionOptimization = value;
+    return this;
+  }
+
+  public AdCreativeFeaturesSpec setFieldFeedCaptionOptimization(String value) {
+    Type type = new TypeToken<AdCreativeFeatureDetails>(){}.getType();
+    this.mFeedCaptionOptimization = AdCreativeFeatureDetails.getGson().fromJson(value, type);
+    return this;
+  }
   public AdCreativeFeatureDetails getFieldIgGladosFeed() {
     return mIgGladosFeed;
   }
@@ -420,6 +472,20 @@ public class AdCreativeFeaturesSpec extends APINode {
   public AdCreativeFeaturesSpec setFieldImageBackgroundGen(String value) {
     Type type = new TypeToken<AdCreativeFeatureDetails>(){}.getType();
     this.mImageBackgroundGen = AdCreativeFeatureDetails.getGson().fromJson(value, type);
+    return this;
+  }
+  public AdCreativeFeatureDetails getFieldImageBrightnessAndContrast() {
+    return mImageBrightnessAndContrast;
+  }
+
+  public AdCreativeFeaturesSpec setFieldImageBrightnessAndContrast(AdCreativeFeatureDetails value) {
+    this.mImageBrightnessAndContrast = value;
+    return this;
+  }
+
+  public AdCreativeFeaturesSpec setFieldImageBrightnessAndContrast(String value) {
+    Type type = new TypeToken<AdCreativeFeatureDetails>(){}.getType();
+    this.mImageBrightnessAndContrast = AdCreativeFeatureDetails.getGson().fromJson(value, type);
     return this;
   }
   public AdCreativeFeatureDetails getFieldImageEnhancement() {
@@ -674,6 +740,20 @@ public class AdCreativeFeaturesSpec extends APINode {
     this.mVideoAutoCrop = AdCreativeFeatureDetails.getGson().fromJson(value, type);
     return this;
   }
+  public AdCreativeFeatureDetails getFieldVideoFiltering() {
+    return mVideoFiltering;
+  }
+
+  public AdCreativeFeaturesSpec setFieldVideoFiltering(AdCreativeFeatureDetails value) {
+    this.mVideoFiltering = value;
+    return this;
+  }
+
+  public AdCreativeFeaturesSpec setFieldVideoFiltering(String value) {
+    Type type = new TypeToken<AdCreativeFeatureDetails>(){}.getType();
+    this.mVideoFiltering = AdCreativeFeatureDetails.getGson().fromJson(value, type);
+    return this;
+  }
   public AdCreativeFeatureDetails getFieldVideoHighlight() {
     return mVideoHighlight;
   }
@@ -705,6 +785,8 @@ public class AdCreativeFeaturesSpec extends APINode {
   }
 
   public AdCreativeFeaturesSpec copyFrom(AdCreativeFeaturesSpec instance) {
+    this.mAdaptToPlacement = instance.mAdaptToPlacement;
+    this.mAdsWithBenefits = instance.mAdsWithBenefits;
     this.mAdvantagePlusCreative = instance.mAdvantagePlusCreative;
     this.mAppHighlights = instance.mAppHighlights;
     this.mAudio = instance.mAudio;
@@ -714,9 +796,11 @@ public class AdCreativeFeaturesSpec extends APINode {
     this.mCvTransformation = instance.mCvTransformation;
     this.mDescriptionAutomation = instance.mDescriptionAutomation;
     this.mDhaOptimization = instance.mDhaOptimization;
+    this.mFeedCaptionOptimization = instance.mFeedCaptionOptimization;
     this.mIgGladosFeed = instance.mIgGladosFeed;
     this.mImageAutoCrop = instance.mImageAutoCrop;
     this.mImageBackgroundGen = instance.mImageBackgroundGen;
+    this.mImageBrightnessAndContrast = instance.mImageBrightnessAndContrast;
     this.mImageEnhancement = instance.mImageEnhancement;
     this.mImageTemplates = instance.mImageTemplates;
     this.mImageTouchups = instance.mImageTouchups;
@@ -735,6 +819,7 @@ public class AdCreativeFeaturesSpec extends APINode {
     this.mTextGeneration = instance.mTextGeneration;
     this.mTextOptimizations = instance.mTextOptimizations;
     this.mVideoAutoCrop = instance.mVideoAutoCrop;
+    this.mVideoFiltering = instance.mVideoFiltering;
     this.mVideoHighlight = instance.mVideoHighlight;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

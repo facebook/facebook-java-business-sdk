@@ -137,8 +137,10 @@ public class AdSet extends APINode {
   private List<AdRecommendation> mRecommendations = null;
   @SerializedName("recurring_budget_semantics")
   private Boolean mRecurringBudgetSemantics = null;
+  @SerializedName("regional_regulated_categories")
+  private List<String> mRegionalRegulatedCategories = null;
   @SerializedName("regional_regulation_identities")
-  private Object mRegionalRegulationIdentities = null;
+  private RegionalRegulationIdentities mRegionalRegulationIdentities = null;
   @SerializedName("review_feedback")
   private String mReviewFeedback = null;
   @SerializedName("rf_prediction_id")
@@ -935,15 +937,29 @@ public class AdSet extends APINode {
     return this;
   }
 
-  public Object getFieldRegionalRegulationIdentities() {
+  public List<String> getFieldRegionalRegulatedCategories() {
+    return mRegionalRegulatedCategories;
+  }
+
+  public AdSet setFieldRegionalRegulatedCategories(List<String> value) {
+    this.mRegionalRegulatedCategories = value;
+    return this;
+  }
+
+  public RegionalRegulationIdentities getFieldRegionalRegulationIdentities() {
     return mRegionalRegulationIdentities;
   }
 
-  public AdSet setFieldRegionalRegulationIdentities(Object value) {
+  public AdSet setFieldRegionalRegulationIdentities(RegionalRegulationIdentities value) {
     this.mRegionalRegulationIdentities = value;
     return this;
   }
 
+  public AdSet setFieldRegionalRegulationIdentities(String value) {
+    Type type = new TypeToken<RegionalRegulationIdentities>(){}.getType();
+    this.mRegionalRegulationIdentities = RegionalRegulationIdentities.getGson().fromJson(value, type);
+    return this;
+  }
   public String getFieldReviewFeedback() {
     return mReviewFeedback;
   }
@@ -1597,6 +1613,7 @@ public class AdSet extends APINode {
       "categorization_criteria",
       "category_media_source",
       "collaborative_ads_lsb_image_bank_id",
+      "contextual_multi_ads",
       "creative_sourcing_spec",
       "degrees_of_freedom_spec",
       "destination_set_id",
@@ -1622,7 +1639,6 @@ public class AdSet extends APINode {
       "link_destination_display_url",
       "link_og_id",
       "link_url",
-      "messenger_sponsored_message",
       "name",
       "object_id",
       "object_store_url",
@@ -1631,6 +1647,7 @@ public class AdSet extends APINode {
       "object_type",
       "object_url",
       "omnichannel_link_spec",
+      "page_welcome_message",
       "photo_album_source_object_story_id",
       "place_page_set_id",
       "platform_customizations",
@@ -1845,6 +1862,13 @@ public class AdSet extends APINode {
       this.requestField("collaborative_ads_lsb_image_bank_id", value);
       return this;
     }
+    public APIRequestGetAdCreatives requestContextualMultiAdsField () {
+      return this.requestContextualMultiAdsField(true);
+    }
+    public APIRequestGetAdCreatives requestContextualMultiAdsField (boolean value) {
+      this.requestField("contextual_multi_ads", value);
+      return this;
+    }
     public APIRequestGetAdCreatives requestCreativeSourcingSpecField () {
       return this.requestCreativeSourcingSpecField(true);
     }
@@ -2020,13 +2044,6 @@ public class AdSet extends APINode {
       this.requestField("link_url", value);
       return this;
     }
-    public APIRequestGetAdCreatives requestMessengerSponsoredMessageField () {
-      return this.requestMessengerSponsoredMessageField(true);
-    }
-    public APIRequestGetAdCreatives requestMessengerSponsoredMessageField (boolean value) {
-      this.requestField("messenger_sponsored_message", value);
-      return this;
-    }
     public APIRequestGetAdCreatives requestNameField () {
       return this.requestNameField(true);
     }
@@ -2081,6 +2098,13 @@ public class AdSet extends APINode {
     }
     public APIRequestGetAdCreatives requestOmnichannelLinkSpecField (boolean value) {
       this.requestField("omnichannel_link_spec", value);
+      return this;
+    }
+    public APIRequestGetAdCreatives requestPageWelcomeMessageField () {
+      return this.requestPageWelcomeMessageField(true);
+    }
+    public APIRequestGetAdCreatives requestPageWelcomeMessageField (boolean value) {
+      this.requestField("page_welcome_message", value);
       return this;
     }
     public APIRequestGetAdCreatives requestPhotoAlbumSourceObjectStoryIdField () {
@@ -2682,6 +2706,7 @@ public class AdSet extends APINode {
       "conversion_specs",
       "created_time",
       "creative",
+      "creative_asset_groups_spec",
       "demolink_hash",
       "display_sequence",
       "effective_status",
@@ -2953,6 +2978,13 @@ public class AdSet extends APINode {
     }
     public APIRequestGetAds requestCreativeField (boolean value) {
       this.requestField("creative", value);
+      return this;
+    }
+    public APIRequestGetAds requestCreativeAssetGroupsSpecField () {
+      return this.requestCreativeAssetGroupsSpecField(true);
+    }
+    public APIRequestGetAds requestCreativeAssetGroupsSpecField (boolean value) {
+      this.requestField("creative_asset_groups_spec", value);
       return this;
     }
     public APIRequestGetAds requestDemolinkHashField () {
@@ -3485,6 +3517,7 @@ public class AdSet extends APINode {
       "promoted_object",
       "recommendations",
       "recurring_budget_semantics",
+      "regional_regulated_categories",
       "regional_regulation_identities",
       "review_feedback",
       "rf_prediction_id",
@@ -3960,6 +3993,13 @@ public class AdSet extends APINode {
     }
     public APIRequestGetCopies requestRecurringBudgetSemanticsField (boolean value) {
       this.requestField("recurring_budget_semantics", value);
+      return this;
+    }
+    public APIRequestGetCopies requestRegionalRegulatedCategoriesField () {
+      return this.requestRegionalRegulatedCategoriesField(true);
+    }
+    public APIRequestGetCopies requestRegionalRegulatedCategoriesField (boolean value) {
+      this.requestField("regional_regulated_categories", value);
       return this;
     }
     public APIRequestGetCopies requestRegionalRegulationIdentitiesField () {
@@ -5304,6 +5344,7 @@ public class AdSet extends APINode {
       "promoted_object",
       "recommendations",
       "recurring_budget_semantics",
+      "regional_regulated_categories",
       "regional_regulation_identities",
       "review_feedback",
       "rf_prediction_id",
@@ -5781,6 +5822,13 @@ public class AdSet extends APINode {
       this.requestField("recurring_budget_semantics", value);
       return this;
     }
+    public APIRequestGet requestRegionalRegulatedCategoriesField () {
+      return this.requestRegionalRegulatedCategoriesField(true);
+    }
+    public APIRequestGet requestRegionalRegulatedCategoriesField (boolean value) {
+      this.requestField("regional_regulated_categories", value);
+      return this;
+    }
     public APIRequestGet requestRegionalRegulationIdentitiesField () {
       return this.requestRegionalRegulationIdentitiesField(true);
     }
@@ -5917,6 +5965,8 @@ public class AdSet extends APINode {
       "pacing_type",
       "promoted_object",
       "rb_prediction_id",
+      "regional_regulated_categories",
+      "regional_regulation_identities",
       "rf_prediction_id",
       "start_time",
       "status",
@@ -6272,6 +6322,24 @@ public class AdSet extends APINode {
       return this;
     }
 
+    public APIRequestUpdate setRegionalRegulatedCategories (List<AdSet.EnumRegionalRegulatedCategories> regionalRegulatedCategories) {
+      this.setParam("regional_regulated_categories", regionalRegulatedCategories);
+      return this;
+    }
+    public APIRequestUpdate setRegionalRegulatedCategories (String regionalRegulatedCategories) {
+      this.setParam("regional_regulated_categories", regionalRegulatedCategories);
+      return this;
+    }
+
+    public APIRequestUpdate setRegionalRegulationIdentities (Map<String, String> regionalRegulationIdentities) {
+      this.setParam("regional_regulation_identities", regionalRegulationIdentities);
+      return this;
+    }
+    public APIRequestUpdate setRegionalRegulationIdentities (String regionalRegulationIdentities) {
+      this.setParam("regional_regulation_identities", regionalRegulationIdentities);
+      return this;
+    }
+
     public APIRequestUpdate setRfPredictionId (String rfPredictionId) {
       this.setParam("rf_prediction_id", rfPredictionId);
       return this;
@@ -6526,6 +6594,8 @@ public class AdSet extends APINode {
       VALUE_PAGE_LIKES("PAGE_LIKES"),
       @SerializedName("POST_ENGAGEMENT")
       VALUE_POST_ENGAGEMENT("POST_ENGAGEMENT"),
+      @SerializedName("PROFILE_VISIT")
+      VALUE_PROFILE_VISIT("PROFILE_VISIT"),
       @SerializedName("QUALITY_CALL")
       VALUE_QUALITY_CALL("QUALITY_CALL"),
       @SerializedName("QUALITY_LEAD")
@@ -6643,6 +6713,8 @@ public class AdSet extends APINode {
       VALUE_FACEBOOK("FACEBOOK"),
       @SerializedName("INSTAGRAM_DIRECT")
       VALUE_INSTAGRAM_DIRECT("INSTAGRAM_DIRECT"),
+      @SerializedName("INSTAGRAM_PROFILE")
+      VALUE_INSTAGRAM_PROFILE("INSTAGRAM_PROFILE"),
       @SerializedName("MESSAGING_INSTAGRAM_DIRECT_MESSENGER")
       VALUE_MESSAGING_INSTAGRAM_DIRECT_MESSENGER("MESSAGING_INSTAGRAM_DIRECT_MESSENGER"),
       @SerializedName("MESSAGING_INSTAGRAM_DIRECT_MESSENGER_WHATSAPP")
@@ -6665,8 +6737,6 @@ public class AdSet extends APINode {
       VALUE_ON_VIDEO("ON_VIDEO"),
       @SerializedName("SHOP_AUTOMATIC")
       VALUE_SHOP_AUTOMATIC("SHOP_AUTOMATIC"),
-      @SerializedName("UNDEFINED")
-      VALUE_UNDEFINED("UNDEFINED"),
       @SerializedName("WEBSITE")
       VALUE_WEBSITE("WEBSITE"),
       @SerializedName("WHATSAPP")
@@ -6774,6 +6844,25 @@ public class AdSet extends APINode {
       private String value;
 
       private EnumOptimizationSubEvent(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumRegionalRegulatedCategories {
+      @SerializedName("0")
+      VALUE_0("0"),
+      @SerializedName("1")
+      VALUE_1("1"),
+      ;
+
+      private String value;
+
+      private EnumRegionalRegulatedCategories(String value) {
         this.value = value;
       }
 
@@ -6913,6 +7002,7 @@ public class AdSet extends APINode {
     this.mPromotedObject = instance.mPromotedObject;
     this.mRecommendations = instance.mRecommendations;
     this.mRecurringBudgetSemantics = instance.mRecurringBudgetSemantics;
+    this.mRegionalRegulatedCategories = instance.mRegionalRegulatedCategories;
     this.mRegionalRegulationIdentities = instance.mRegionalRegulationIdentities;
     this.mReviewFeedback = instance.mReviewFeedback;
     this.mRfPredictionId = instance.mRfPredictionId;

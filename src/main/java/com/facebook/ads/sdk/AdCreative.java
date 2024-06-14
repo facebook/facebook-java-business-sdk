@@ -71,6 +71,8 @@ public class AdCreative extends APINode {
   private String mCategoryMediaSource = null;
   @SerializedName("collaborative_ads_lsb_image_bank_id")
   private String mCollaborativeAdsLsbImageBankId = null;
+  @SerializedName("contextual_multi_ads")
+  private AdCreativeContextualMultiAds mContextualMultiAds = null;
   @SerializedName("creative_sourcing_spec")
   private AdCreativeSourcingSpec mCreativeSourcingSpec = null;
   @SerializedName("degrees_of_freedom_spec")
@@ -121,8 +123,6 @@ public class AdCreative extends APINode {
   private String mLinkOgId = null;
   @SerializedName("link_url")
   private String mLinkUrl = null;
-  @SerializedName("messenger_sponsored_message")
-  private String mMessengerSponsoredMessage = null;
   @SerializedName("name")
   private String mName = null;
   @SerializedName("object_id")
@@ -139,6 +139,8 @@ public class AdCreative extends APINode {
   private String mObjectUrl = null;
   @SerializedName("omnichannel_link_spec")
   private AdCreativeOmnichannelLinkSpec mOmnichannelLinkSpec = null;
+  @SerializedName("page_welcome_message")
+  private String mPageWelcomeMessage = null;
   @SerializedName("photo_album_source_object_story_id")
   private String mPhotoAlbumSourceObjectStoryId = null;
   @SerializedName("place_page_set_id")
@@ -562,6 +564,20 @@ public class AdCreative extends APINode {
     return this;
   }
 
+  public AdCreativeContextualMultiAds getFieldContextualMultiAds() {
+    return mContextualMultiAds;
+  }
+
+  public AdCreative setFieldContextualMultiAds(AdCreativeContextualMultiAds value) {
+    this.mContextualMultiAds = value;
+    return this;
+  }
+
+  public AdCreative setFieldContextualMultiAds(String value) {
+    Type type = new TypeToken<AdCreativeContextualMultiAds>(){}.getType();
+    this.mContextualMultiAds = AdCreativeContextualMultiAds.getGson().fromJson(value, type);
+    return this;
+  }
   public AdCreativeSourcingSpec getFieldCreativeSourcingSpec() {
     return mCreativeSourcingSpec;
   }
@@ -818,15 +834,6 @@ public class AdCreative extends APINode {
     return this;
   }
 
-  public String getFieldMessengerSponsoredMessage() {
-    return mMessengerSponsoredMessage;
-  }
-
-  public AdCreative setFieldMessengerSponsoredMessage(String value) {
-    this.mMessengerSponsoredMessage = value;
-    return this;
-  }
-
   public String getFieldName() {
     return mName;
   }
@@ -909,6 +916,15 @@ public class AdCreative extends APINode {
     this.mOmnichannelLinkSpec = AdCreativeOmnichannelLinkSpec.getGson().fromJson(value, type);
     return this;
   }
+  public String getFieldPageWelcomeMessage() {
+    return mPageWelcomeMessage;
+  }
+
+  public AdCreative setFieldPageWelcomeMessage(String value) {
+    this.mPageWelcomeMessage = value;
+    return this;
+  }
+
   public String getFieldPhotoAlbumSourceObjectStoryId() {
     return mPhotoAlbumSourceObjectStoryId;
   }
@@ -1722,6 +1738,7 @@ public class AdCreative extends APINode {
       "categorization_criteria",
       "category_media_source",
       "collaborative_ads_lsb_image_bank_id",
+      "contextual_multi_ads",
       "creative_sourcing_spec",
       "degrees_of_freedom_spec",
       "destination_set_id",
@@ -1747,7 +1764,6 @@ public class AdCreative extends APINode {
       "link_destination_display_url",
       "link_og_id",
       "link_url",
-      "messenger_sponsored_message",
       "name",
       "object_id",
       "object_store_url",
@@ -1756,6 +1772,7 @@ public class AdCreative extends APINode {
       "object_type",
       "object_url",
       "omnichannel_link_spec",
+      "page_welcome_message",
       "photo_album_source_object_story_id",
       "place_page_set_id",
       "platform_customizations",
@@ -1988,6 +2005,13 @@ public class AdCreative extends APINode {
       this.requestField("collaborative_ads_lsb_image_bank_id", value);
       return this;
     }
+    public APIRequestGet requestContextualMultiAdsField () {
+      return this.requestContextualMultiAdsField(true);
+    }
+    public APIRequestGet requestContextualMultiAdsField (boolean value) {
+      this.requestField("contextual_multi_ads", value);
+      return this;
+    }
     public APIRequestGet requestCreativeSourcingSpecField () {
       return this.requestCreativeSourcingSpecField(true);
     }
@@ -2163,13 +2187,6 @@ public class AdCreative extends APINode {
       this.requestField("link_url", value);
       return this;
     }
-    public APIRequestGet requestMessengerSponsoredMessageField () {
-      return this.requestMessengerSponsoredMessageField(true);
-    }
-    public APIRequestGet requestMessengerSponsoredMessageField (boolean value) {
-      this.requestField("messenger_sponsored_message", value);
-      return this;
-    }
     public APIRequestGet requestNameField () {
       return this.requestNameField(true);
     }
@@ -2224,6 +2241,13 @@ public class AdCreative extends APINode {
     }
     public APIRequestGet requestOmnichannelLinkSpecField (boolean value) {
       this.requestField("omnichannel_link_spec", value);
+      return this;
+    }
+    public APIRequestGet requestPageWelcomeMessageField () {
+      return this.requestPageWelcomeMessageField(true);
+    }
+    public APIRequestGet requestPageWelcomeMessageField (boolean value) {
+      this.requestField("page_welcome_message", value);
       return this;
     }
     public APIRequestGet requestPhotoAlbumSourceObjectStoryIdField () {
@@ -2641,6 +2665,8 @@ public class AdCreative extends APINode {
       VALUE_VIDEO_ANNOTATION("VIDEO_ANNOTATION"),
       @SerializedName("VIDEO_CALL")
       VALUE_VIDEO_CALL("VIDEO_CALL"),
+      @SerializedName("VIEW_PRODUCT")
+      VALUE_VIEW_PRODUCT("VIEW_PRODUCT"),
       @SerializedName("VISIT_PAGES_FEED")
       VALUE_VISIT_PAGES_FEED("VISIT_PAGES_FEED"),
       @SerializedName("WATCH_MORE")
@@ -2885,6 +2911,7 @@ public class AdCreative extends APINode {
     this.mCategorizationCriteria = instance.mCategorizationCriteria;
     this.mCategoryMediaSource = instance.mCategoryMediaSource;
     this.mCollaborativeAdsLsbImageBankId = instance.mCollaborativeAdsLsbImageBankId;
+    this.mContextualMultiAds = instance.mContextualMultiAds;
     this.mCreativeSourcingSpec = instance.mCreativeSourcingSpec;
     this.mDegreesOfFreedomSpec = instance.mDegreesOfFreedomSpec;
     this.mDestinationSetId = instance.mDestinationSetId;
@@ -2910,7 +2937,6 @@ public class AdCreative extends APINode {
     this.mLinkDestinationDisplayUrl = instance.mLinkDestinationDisplayUrl;
     this.mLinkOgId = instance.mLinkOgId;
     this.mLinkUrl = instance.mLinkUrl;
-    this.mMessengerSponsoredMessage = instance.mMessengerSponsoredMessage;
     this.mName = instance.mName;
     this.mObjectId = instance.mObjectId;
     this.mObjectStoreUrl = instance.mObjectStoreUrl;
@@ -2919,6 +2945,7 @@ public class AdCreative extends APINode {
     this.mObjectType = instance.mObjectType;
     this.mObjectUrl = instance.mObjectUrl;
     this.mOmnichannelLinkSpec = instance.mOmnichannelLinkSpec;
+    this.mPageWelcomeMessage = instance.mPageWelcomeMessage;
     this.mPhotoAlbumSourceObjectStoryId = instance.mPhotoAlbumSourceObjectStoryId;
     this.mPlacePageSetId = instance.mPlacePageSetId;
     this.mPlatformCustomizations = instance.mPlatformCustomizations;

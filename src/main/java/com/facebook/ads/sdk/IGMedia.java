@@ -41,6 +41,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class IGMedia extends APINode {
+  @SerializedName("boost_eligibility_info")
+  private IGMediaBoostEligibilityInfo mBoostEligibilityInfo = null;
   @SerializedName("caption")
   private String mCaption = null;
   @SerializedName("comments_count")
@@ -284,6 +286,10 @@ public class IGMedia extends APINode {
     return getGson().toJson(this);
   }
 
+  public APIRequestGetBoostAdsList getBoostAdsList() {
+    return new APIRequestGetBoostAdsList(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetBrandedContentPartnerPromote getBrandedContentPartnerPromote() {
     return new APIRequestGetBrandedContentPartnerPromote(this.getPrefixedId().toString(), context);
   }
@@ -332,6 +338,13 @@ public class IGMedia extends APINode {
     return new APIRequestUpdate(this.getPrefixedId().toString(), context);
   }
 
+
+  public IGMediaBoostEligibilityInfo getFieldBoostEligibilityInfo() {
+    if (mBoostEligibilityInfo != null) {
+      mBoostEligibilityInfo.context = getContext();
+    }
+    return mBoostEligibilityInfo;
+  }
 
   public String getFieldCaption() {
     return mCaption;
@@ -405,6 +418,135 @@ public class IGMedia extends APINode {
   }
 
 
+
+  public static class APIRequestGetBoostAdsList extends APIRequest<IGBoostMediaAd> {
+
+    APINodeList<IGBoostMediaAd> lastResponse = null;
+    @Override
+    public APINodeList<IGBoostMediaAd> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "ad_id",
+      "ad_status",
+      "id",
+    };
+
+    @Override
+    public APINodeList<IGBoostMediaAd> parseResponse(String response, String header) throws APIException {
+      return IGBoostMediaAd.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<IGBoostMediaAd> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<IGBoostMediaAd> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<IGBoostMediaAd>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<IGBoostMediaAd>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<IGBoostMediaAd>>() {
+           public APINodeList<IGBoostMediaAd> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetBoostAdsList.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestGetBoostAdsList(String nodeId, APIContext context) {
+      super(context, nodeId, "/boost_ads_list", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetBoostAdsList setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetBoostAdsList setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetBoostAdsList requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetBoostAdsList requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetBoostAdsList requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetBoostAdsList requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetBoostAdsList requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetBoostAdsList requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetBoostAdsList requestAdIdField () {
+      return this.requestAdIdField(true);
+    }
+    public APIRequestGetBoostAdsList requestAdIdField (boolean value) {
+      this.requestField("ad_id", value);
+      return this;
+    }
+    public APIRequestGetBoostAdsList requestAdStatusField () {
+      return this.requestAdStatusField(true);
+    }
+    public APIRequestGetBoostAdsList requestAdStatusField (boolean value) {
+      this.requestField("ad_status", value);
+      return this;
+    }
+    public APIRequestGetBoostAdsList requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetBoostAdsList requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+  }
 
   public static class APIRequestGetBrandedContentPartnerPromote extends APIRequest<BrandedContentShadowIGUserID> {
 
@@ -655,6 +797,7 @@ public class IGMedia extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "boost_eligibility_info",
       "caption",
       "comments_count",
       "copyright_check_information",
@@ -764,6 +907,13 @@ public class IGMedia extends APINode {
       return this;
     }
 
+    public APIRequestGetChildren requestBoostEligibilityInfoField () {
+      return this.requestBoostEligibilityInfoField(true);
+    }
+    public APIRequestGetChildren requestBoostEligibilityInfoField (boolean value) {
+      this.requestField("boost_eligibility_info", value);
+      return this;
+    }
     public APIRequestGetChildren requestCaptionField () {
       return this.requestCaptionField(true);
     }
@@ -1959,6 +2109,7 @@ public class IGMedia extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "boost_eligibility_info",
       "caption",
       "comments_count",
       "copyright_check_information",
@@ -2088,6 +2239,13 @@ public class IGMedia extends APINode {
       return this;
     }
 
+    public APIRequestGet requestBoostEligibilityInfoField () {
+      return this.requestBoostEligibilityInfoField(true);
+    }
+    public APIRequestGet requestBoostEligibilityInfoField (boolean value) {
+      this.requestField("boost_eligibility_info", value);
+      return this;
+    }
     public APIRequestGet requestCaptionField () {
       return this.requestCaptionField(true);
     }
@@ -2339,6 +2497,7 @@ public class IGMedia extends APINode {
   }
 
   public IGMedia copyFrom(IGMedia instance) {
+    this.mBoostEligibilityInfo = instance.mBoostEligibilityInfo;
     this.mCaption = instance.mCaption;
     this.mCommentsCount = instance.mCommentsCount;
     this.mCopyrightCheckInformation = instance.mCopyrightCheckInformation;

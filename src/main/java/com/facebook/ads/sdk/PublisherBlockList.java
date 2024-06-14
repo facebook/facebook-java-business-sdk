@@ -42,7 +42,7 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  */
 public class PublisherBlockList extends APINode {
   @SerializedName("app_publishers")
-  private List<Object> mAppPublishers = null;
+  private List<AppPublisher> mAppPublishers = null;
   @SerializedName("business_owner_id")
   private String mBusinessOwnerId = null;
   @SerializedName("id")
@@ -60,7 +60,7 @@ public class PublisherBlockList extends APINode {
   @SerializedName("owner_ad_account_id")
   private String mOwnerAdAccountId = null;
   @SerializedName("web_publishers")
-  private List<Object> mWebPublishers = null;
+  private List<WebPublisher> mWebPublishers = null;
   protected static Gson gson = null;
 
   PublisherBlockList() {
@@ -270,8 +270,8 @@ public class PublisherBlockList extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestCreateAppEndPublisherUrl createAppEndPublisherUrl() {
-    return new APIRequestCreateAppEndPublisherUrl(this.getPrefixedId().toString(), context);
+  public APIRequestCreateAppendPublisherUrl createAppendPublisherUrl() {
+    return new APIRequestCreateAppendPublisherUrl(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetPagedWebPublishers getPagedWebPublishers() {
@@ -291,7 +291,7 @@ public class PublisherBlockList extends APINode {
   }
 
 
-  public List<Object> getFieldAppPublishers() {
+  public List<AppPublisher> getFieldAppPublishers() {
     return mAppPublishers;
   }
 
@@ -327,13 +327,13 @@ public class PublisherBlockList extends APINode {
     return mOwnerAdAccountId;
   }
 
-  public List<Object> getFieldWebPublishers() {
+  public List<WebPublisher> getFieldWebPublishers() {
     return mWebPublishers;
   }
 
 
 
-  public static class APIRequestCreateAppEndPublisherUrl extends APIRequest<APINode> {
+  public static class APIRequestCreateAppendPublisherUrl extends APIRequest<APINode> {
 
     APINode lastResponse = null;
     @Override
@@ -374,7 +374,7 @@ public class PublisherBlockList extends APINode {
         new Function<ResponseWrapper, APINode>() {
            public APINode apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateAppEndPublisherUrl.this.parseResponse(result.getBody(), result.getHeader());
+               return APIRequestCreateAppendPublisherUrl.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -384,37 +384,37 @@ public class PublisherBlockList extends APINode {
       );
     };
 
-    public APIRequestCreateAppEndPublisherUrl(String nodeId, APIContext context) {
+    public APIRequestCreateAppendPublisherUrl(String nodeId, APIContext context) {
       super(context, nodeId, "/append_publisher_urls", "POST", Arrays.asList(PARAMS));
     }
 
     @Override
-    public APIRequestCreateAppEndPublisherUrl setParam(String param, Object value) {
+    public APIRequestCreateAppendPublisherUrl setParam(String param, Object value) {
       setParamInternal(param, value);
       return this;
     }
 
     @Override
-    public APIRequestCreateAppEndPublisherUrl setParams(Map<String, Object> params) {
+    public APIRequestCreateAppendPublisherUrl setParams(Map<String, Object> params) {
       setParamsInternal(params);
       return this;
     }
 
 
-    public APIRequestCreateAppEndPublisherUrl setPublisherUrls (List<String> publisherUrls) {
+    public APIRequestCreateAppendPublisherUrl setPublisherUrls (List<String> publisherUrls) {
       this.setParam("publisher_urls", publisherUrls);
       return this;
     }
-    public APIRequestCreateAppEndPublisherUrl setPublisherUrls (String publisherUrls) {
+    public APIRequestCreateAppendPublisherUrl setPublisherUrls (String publisherUrls) {
       this.setParam("publisher_urls", publisherUrls);
       return this;
     }
 
-    public APIRequestCreateAppEndPublisherUrl requestAllFields () {
+    public APIRequestCreateAppendPublisherUrl requestAllFields () {
       return this.requestAllFields(true);
     }
 
-    public APIRequestCreateAppEndPublisherUrl requestAllFields (boolean value) {
+    public APIRequestCreateAppendPublisherUrl requestAllFields (boolean value) {
       for (String field : FIELDS) {
         this.requestField(field, value);
       }
@@ -422,12 +422,12 @@ public class PublisherBlockList extends APINode {
     }
 
     @Override
-    public APIRequestCreateAppEndPublisherUrl requestFields (List<String> fields) {
+    public APIRequestCreateAppendPublisherUrl requestFields (List<String> fields) {
       return this.requestFields(fields, true);
     }
 
     @Override
-    public APIRequestCreateAppEndPublisherUrl requestFields (List<String> fields, boolean value) {
+    public APIRequestCreateAppendPublisherUrl requestFields (List<String> fields, boolean value) {
       for (String field : fields) {
         this.requestField(field, value);
       }
@@ -435,24 +435,24 @@ public class PublisherBlockList extends APINode {
     }
 
     @Override
-    public APIRequestCreateAppEndPublisherUrl requestField (String field) {
+    public APIRequestCreateAppendPublisherUrl requestField (String field) {
       this.requestField(field, true);
       return this;
     }
 
     @Override
-    public APIRequestCreateAppEndPublisherUrl requestField (String field, boolean value) {
+    public APIRequestCreateAppendPublisherUrl requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
 
   }
 
-  public static class APIRequestGetPagedWebPublishers extends APIRequest<APINode> {
+  public static class APIRequestGetPagedWebPublishers extends APIRequest<WebPublisher> {
 
-    APINodeList<APINode> lastResponse = null;
+    APINodeList<WebPublisher> lastResponse = null;
     @Override
-    public APINodeList<APINode> getLastResponse() {
+    public APINodeList<WebPublisher> getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
@@ -460,34 +460,37 @@ public class PublisherBlockList extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "domain_url",
+      "id",
+      "publisher_name",
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header);
+    public APINodeList<WebPublisher> parseResponse(String response, String header) throws APIException {
+      return WebPublisher.parseResponse(response, getContext(), this, header);
     }
 
     @Override
-    public APINodeList<APINode> execute() throws APIException {
+    public APINodeList<WebPublisher> execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+    public APINodeList<WebPublisher> execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+    public ListenableFuture<APINodeList<WebPublisher>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<APINodeList<WebPublisher>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, APINodeList<WebPublisher>>() {
+           public APINodeList<WebPublisher> apply(ResponseWrapper result) {
              try {
                return APIRequestGetPagedWebPublishers.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -557,6 +560,27 @@ public class PublisherBlockList extends APINode {
       return this;
     }
 
+    public APIRequestGetPagedWebPublishers requestDomainUrlField () {
+      return this.requestDomainUrlField(true);
+    }
+    public APIRequestGetPagedWebPublishers requestDomainUrlField (boolean value) {
+      this.requestField("domain_url", value);
+      return this;
+    }
+    public APIRequestGetPagedWebPublishers requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetPagedWebPublishers requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetPagedWebPublishers requestPublisherNameField () {
+      return this.requestPublisherNameField(true);
+    }
+    public APIRequestGetPagedWebPublishers requestPublisherNameField (boolean value) {
+      this.requestField("publisher_name", value);
+      return this;
+    }
   }
 
   public static class APIRequestDelete extends APIRequest<APINode> {

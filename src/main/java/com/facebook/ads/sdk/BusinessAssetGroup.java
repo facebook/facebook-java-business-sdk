@@ -316,18 +316,6 @@ public class BusinessAssetGroup extends APINode {
     return new APIRequestCreateContainedInstagramAccount(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestDeleteContainedOfflineConversionDataSets deleteContainedOfflineConversionDataSets() {
-    return new APIRequestDeleteContainedOfflineConversionDataSets(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestGetContainedOfflineConversionDataSets getContainedOfflineConversionDataSets() {
-    return new APIRequestGetContainedOfflineConversionDataSets(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestCreateContainedOfflineConversionDataSet createContainedOfflineConversionDataSet() {
-    return new APIRequestCreateContainedOfflineConversionDataSet(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestDeleteContainedPages deleteContainedPages() {
     return new APIRequestDeleteContainedPages(this.getPrefixedId().toString(), context);
   }
@@ -3751,589 +3739,6 @@ public class BusinessAssetGroup extends APINode {
 
   }
 
-  public static class APIRequestDeleteContainedOfflineConversionDataSets extends APIRequest<APINode> {
-
-    APINodeList<APINode> lastResponse = null;
-    @Override
-    public APINodeList<APINode> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "asset_id",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<APINode> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(ResponseWrapper result) {
-             try {
-               return APIRequestDeleteContainedOfflineConversionDataSets.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         },
-         MoreExecutors.directExecutor()
-      );
-    };
-
-    public APIRequestDeleteContainedOfflineConversionDataSets(String nodeId, APIContext context) {
-      super(context, nodeId, "/contained_offline_conversion_data_sets", "DELETE", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestDeleteContainedOfflineConversionDataSets setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteContainedOfflineConversionDataSets setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestDeleteContainedOfflineConversionDataSets setAssetId (String assetId) {
-      this.setParam("asset_id", assetId);
-      return this;
-    }
-
-    public APIRequestDeleteContainedOfflineConversionDataSets requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestDeleteContainedOfflineConversionDataSets requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteContainedOfflineConversionDataSets requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestDeleteContainedOfflineConversionDataSets requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteContainedOfflineConversionDataSets requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteContainedOfflineConversionDataSets requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
-  public static class APIRequestGetContainedOfflineConversionDataSets extends APIRequest<OfflineConversionDataSet> {
-
-    APINodeList<OfflineConversionDataSet> lastResponse = null;
-    @Override
-    public APINodeList<OfflineConversionDataSet> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "automatic_matching_fields",
-      "business",
-      "can_proxy",
-      "config",
-      "creation_time",
-      "creator",
-      "data_use_setting",
-      "description",
-      "duplicate_entries",
-      "enable_auto_assign_to_accounts",
-      "enable_automatic_matching",
-      "event_stats",
-      "event_time_max",
-      "event_time_min",
-      "first_party_cookie_status",
-      "id",
-      "is_consolidated_container",
-      "is_created_by_business",
-      "is_crm",
-      "is_mta_use",
-      "is_restricted_use",
-      "is_unavailable",
-      "last_fired_time",
-      "last_upload_app",
-      "last_upload_app_changed_time",
-      "match_rate_approx",
-      "matched_entries",
-      "name",
-      "owner_ad_account",
-      "owner_business",
-      "usage",
-      "valid_entries",
-    };
-
-    @Override
-    public APINodeList<OfflineConversionDataSet> parseResponse(String response, String header) throws APIException {
-      return OfflineConversionDataSet.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<OfflineConversionDataSet> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<OfflineConversionDataSet> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<OfflineConversionDataSet>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<OfflineConversionDataSet>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<OfflineConversionDataSet>>() {
-           public APINodeList<OfflineConversionDataSet> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetContainedOfflineConversionDataSets.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         },
-         MoreExecutors.directExecutor()
-      );
-    };
-
-    public APIRequestGetContainedOfflineConversionDataSets(String nodeId, APIContext context) {
-      super(context, nodeId, "/contained_offline_conversion_data_sets", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetContainedOfflineConversionDataSets setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetContainedOfflineConversionDataSets setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetContainedOfflineConversionDataSets requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetContainedOfflineConversionDataSets requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetContainedOfflineConversionDataSets requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetContainedOfflineConversionDataSets requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetContainedOfflineConversionDataSets requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetContainedOfflineConversionDataSets requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGetContainedOfflineConversionDataSets requestAutomaticMatchingFieldsField () {
-      return this.requestAutomaticMatchingFieldsField(true);
-    }
-    public APIRequestGetContainedOfflineConversionDataSets requestAutomaticMatchingFieldsField (boolean value) {
-      this.requestField("automatic_matching_fields", value);
-      return this;
-    }
-    public APIRequestGetContainedOfflineConversionDataSets requestBusinessField () {
-      return this.requestBusinessField(true);
-    }
-    public APIRequestGetContainedOfflineConversionDataSets requestBusinessField (boolean value) {
-      this.requestField("business", value);
-      return this;
-    }
-    public APIRequestGetContainedOfflineConversionDataSets requestCanProxyField () {
-      return this.requestCanProxyField(true);
-    }
-    public APIRequestGetContainedOfflineConversionDataSets requestCanProxyField (boolean value) {
-      this.requestField("can_proxy", value);
-      return this;
-    }
-    public APIRequestGetContainedOfflineConversionDataSets requestConfigField () {
-      return this.requestConfigField(true);
-    }
-    public APIRequestGetContainedOfflineConversionDataSets requestConfigField (boolean value) {
-      this.requestField("config", value);
-      return this;
-    }
-    public APIRequestGetContainedOfflineConversionDataSets requestCreationTimeField () {
-      return this.requestCreationTimeField(true);
-    }
-    public APIRequestGetContainedOfflineConversionDataSets requestCreationTimeField (boolean value) {
-      this.requestField("creation_time", value);
-      return this;
-    }
-    public APIRequestGetContainedOfflineConversionDataSets requestCreatorField () {
-      return this.requestCreatorField(true);
-    }
-    public APIRequestGetContainedOfflineConversionDataSets requestCreatorField (boolean value) {
-      this.requestField("creator", value);
-      return this;
-    }
-    public APIRequestGetContainedOfflineConversionDataSets requestDataUseSettingField () {
-      return this.requestDataUseSettingField(true);
-    }
-    public APIRequestGetContainedOfflineConversionDataSets requestDataUseSettingField (boolean value) {
-      this.requestField("data_use_setting", value);
-      return this;
-    }
-    public APIRequestGetContainedOfflineConversionDataSets requestDescriptionField () {
-      return this.requestDescriptionField(true);
-    }
-    public APIRequestGetContainedOfflineConversionDataSets requestDescriptionField (boolean value) {
-      this.requestField("description", value);
-      return this;
-    }
-    public APIRequestGetContainedOfflineConversionDataSets requestDuplicateEntriesField () {
-      return this.requestDuplicateEntriesField(true);
-    }
-    public APIRequestGetContainedOfflineConversionDataSets requestDuplicateEntriesField (boolean value) {
-      this.requestField("duplicate_entries", value);
-      return this;
-    }
-    public APIRequestGetContainedOfflineConversionDataSets requestEnableAutoAssignToAccountsField () {
-      return this.requestEnableAutoAssignToAccountsField(true);
-    }
-    public APIRequestGetContainedOfflineConversionDataSets requestEnableAutoAssignToAccountsField (boolean value) {
-      this.requestField("enable_auto_assign_to_accounts", value);
-      return this;
-    }
-    public APIRequestGetContainedOfflineConversionDataSets requestEnableAutomaticMatchingField () {
-      return this.requestEnableAutomaticMatchingField(true);
-    }
-    public APIRequestGetContainedOfflineConversionDataSets requestEnableAutomaticMatchingField (boolean value) {
-      this.requestField("enable_automatic_matching", value);
-      return this;
-    }
-    public APIRequestGetContainedOfflineConversionDataSets requestEventStatsField () {
-      return this.requestEventStatsField(true);
-    }
-    public APIRequestGetContainedOfflineConversionDataSets requestEventStatsField (boolean value) {
-      this.requestField("event_stats", value);
-      return this;
-    }
-    public APIRequestGetContainedOfflineConversionDataSets requestEventTimeMaxField () {
-      return this.requestEventTimeMaxField(true);
-    }
-    public APIRequestGetContainedOfflineConversionDataSets requestEventTimeMaxField (boolean value) {
-      this.requestField("event_time_max", value);
-      return this;
-    }
-    public APIRequestGetContainedOfflineConversionDataSets requestEventTimeMinField () {
-      return this.requestEventTimeMinField(true);
-    }
-    public APIRequestGetContainedOfflineConversionDataSets requestEventTimeMinField (boolean value) {
-      this.requestField("event_time_min", value);
-      return this;
-    }
-    public APIRequestGetContainedOfflineConversionDataSets requestFirstPartyCookieStatusField () {
-      return this.requestFirstPartyCookieStatusField(true);
-    }
-    public APIRequestGetContainedOfflineConversionDataSets requestFirstPartyCookieStatusField (boolean value) {
-      this.requestField("first_party_cookie_status", value);
-      return this;
-    }
-    public APIRequestGetContainedOfflineConversionDataSets requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetContainedOfflineConversionDataSets requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGetContainedOfflineConversionDataSets requestIsConsolidatedContainerField () {
-      return this.requestIsConsolidatedContainerField(true);
-    }
-    public APIRequestGetContainedOfflineConversionDataSets requestIsConsolidatedContainerField (boolean value) {
-      this.requestField("is_consolidated_container", value);
-      return this;
-    }
-    public APIRequestGetContainedOfflineConversionDataSets requestIsCreatedByBusinessField () {
-      return this.requestIsCreatedByBusinessField(true);
-    }
-    public APIRequestGetContainedOfflineConversionDataSets requestIsCreatedByBusinessField (boolean value) {
-      this.requestField("is_created_by_business", value);
-      return this;
-    }
-    public APIRequestGetContainedOfflineConversionDataSets requestIsCrmField () {
-      return this.requestIsCrmField(true);
-    }
-    public APIRequestGetContainedOfflineConversionDataSets requestIsCrmField (boolean value) {
-      this.requestField("is_crm", value);
-      return this;
-    }
-    public APIRequestGetContainedOfflineConversionDataSets requestIsMtaUseField () {
-      return this.requestIsMtaUseField(true);
-    }
-    public APIRequestGetContainedOfflineConversionDataSets requestIsMtaUseField (boolean value) {
-      this.requestField("is_mta_use", value);
-      return this;
-    }
-    public APIRequestGetContainedOfflineConversionDataSets requestIsRestrictedUseField () {
-      return this.requestIsRestrictedUseField(true);
-    }
-    public APIRequestGetContainedOfflineConversionDataSets requestIsRestrictedUseField (boolean value) {
-      this.requestField("is_restricted_use", value);
-      return this;
-    }
-    public APIRequestGetContainedOfflineConversionDataSets requestIsUnavailableField () {
-      return this.requestIsUnavailableField(true);
-    }
-    public APIRequestGetContainedOfflineConversionDataSets requestIsUnavailableField (boolean value) {
-      this.requestField("is_unavailable", value);
-      return this;
-    }
-    public APIRequestGetContainedOfflineConversionDataSets requestLastFiredTimeField () {
-      return this.requestLastFiredTimeField(true);
-    }
-    public APIRequestGetContainedOfflineConversionDataSets requestLastFiredTimeField (boolean value) {
-      this.requestField("last_fired_time", value);
-      return this;
-    }
-    public APIRequestGetContainedOfflineConversionDataSets requestLastUploadAppField () {
-      return this.requestLastUploadAppField(true);
-    }
-    public APIRequestGetContainedOfflineConversionDataSets requestLastUploadAppField (boolean value) {
-      this.requestField("last_upload_app", value);
-      return this;
-    }
-    public APIRequestGetContainedOfflineConversionDataSets requestLastUploadAppChangedTimeField () {
-      return this.requestLastUploadAppChangedTimeField(true);
-    }
-    public APIRequestGetContainedOfflineConversionDataSets requestLastUploadAppChangedTimeField (boolean value) {
-      this.requestField("last_upload_app_changed_time", value);
-      return this;
-    }
-    public APIRequestGetContainedOfflineConversionDataSets requestMatchRateApproxField () {
-      return this.requestMatchRateApproxField(true);
-    }
-    public APIRequestGetContainedOfflineConversionDataSets requestMatchRateApproxField (boolean value) {
-      this.requestField("match_rate_approx", value);
-      return this;
-    }
-    public APIRequestGetContainedOfflineConversionDataSets requestMatchedEntriesField () {
-      return this.requestMatchedEntriesField(true);
-    }
-    public APIRequestGetContainedOfflineConversionDataSets requestMatchedEntriesField (boolean value) {
-      this.requestField("matched_entries", value);
-      return this;
-    }
-    public APIRequestGetContainedOfflineConversionDataSets requestNameField () {
-      return this.requestNameField(true);
-    }
-    public APIRequestGetContainedOfflineConversionDataSets requestNameField (boolean value) {
-      this.requestField("name", value);
-      return this;
-    }
-    public APIRequestGetContainedOfflineConversionDataSets requestOwnerAdAccountField () {
-      return this.requestOwnerAdAccountField(true);
-    }
-    public APIRequestGetContainedOfflineConversionDataSets requestOwnerAdAccountField (boolean value) {
-      this.requestField("owner_ad_account", value);
-      return this;
-    }
-    public APIRequestGetContainedOfflineConversionDataSets requestOwnerBusinessField () {
-      return this.requestOwnerBusinessField(true);
-    }
-    public APIRequestGetContainedOfflineConversionDataSets requestOwnerBusinessField (boolean value) {
-      this.requestField("owner_business", value);
-      return this;
-    }
-    public APIRequestGetContainedOfflineConversionDataSets requestUsageField () {
-      return this.requestUsageField(true);
-    }
-    public APIRequestGetContainedOfflineConversionDataSets requestUsageField (boolean value) {
-      this.requestField("usage", value);
-      return this;
-    }
-    public APIRequestGetContainedOfflineConversionDataSets requestValidEntriesField () {
-      return this.requestValidEntriesField(true);
-    }
-    public APIRequestGetContainedOfflineConversionDataSets requestValidEntriesField (boolean value) {
-      this.requestField("valid_entries", value);
-      return this;
-    }
-  }
-
-  public static class APIRequestCreateContainedOfflineConversionDataSet extends APIRequest<BusinessAssetGroup> {
-
-    BusinessAssetGroup lastResponse = null;
-    @Override
-    public BusinessAssetGroup getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "asset_id",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public BusinessAssetGroup parseResponse(String response, String header) throws APIException {
-      return BusinessAssetGroup.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public BusinessAssetGroup execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public BusinessAssetGroup execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<BusinessAssetGroup> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<BusinessAssetGroup> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, BusinessAssetGroup>() {
-           public BusinessAssetGroup apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateContainedOfflineConversionDataSet.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         },
-         MoreExecutors.directExecutor()
-      );
-    };
-
-    public APIRequestCreateContainedOfflineConversionDataSet(String nodeId, APIContext context) {
-      super(context, nodeId, "/contained_offline_conversion_data_sets", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateContainedOfflineConversionDataSet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateContainedOfflineConversionDataSet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateContainedOfflineConversionDataSet setAssetId (String assetId) {
-      this.setParam("asset_id", assetId);
-      return this;
-    }
-
-    public APIRequestCreateContainedOfflineConversionDataSet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateContainedOfflineConversionDataSet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateContainedOfflineConversionDataSet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateContainedOfflineConversionDataSet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateContainedOfflineConversionDataSet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateContainedOfflineConversionDataSet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
   public static class APIRequestDeleteContainedPages extends APIRequest<APINode> {
 
     APINodeList<APINode> lastResponse = null;
@@ -4521,11 +3926,11 @@ public class BusinessAssetGroup extends APINode {
       "influences",
       "instagram_business_account",
       "is_always_open",
+      "is_calling_eligible",
       "is_chain",
       "is_community_page",
       "is_eligible_for_branded_content",
       "is_eligible_for_disable_connect_ig_btn_for_non_page_admin_am_web",
-      "is_eligible_for_live_boosting_expansion",
       "is_messenger_bot_get_started_enabled",
       "is_messenger_platform_bot",
       "is_owned",
@@ -5154,6 +4559,13 @@ public class BusinessAssetGroup extends APINode {
       this.requestField("is_always_open", value);
       return this;
     }
+    public APIRequestGetContainedPages requestIsCallingEligibleField () {
+      return this.requestIsCallingEligibleField(true);
+    }
+    public APIRequestGetContainedPages requestIsCallingEligibleField (boolean value) {
+      this.requestField("is_calling_eligible", value);
+      return this;
+    }
     public APIRequestGetContainedPages requestIsChainField () {
       return this.requestIsChainField(true);
     }
@@ -5180,13 +4592,6 @@ public class BusinessAssetGroup extends APINode {
     }
     public APIRequestGetContainedPages requestIsEligibleForDisableConnectIgBtnForNonPageAdminAmWebField (boolean value) {
       this.requestField("is_eligible_for_disable_connect_ig_btn_for_non_page_admin_am_web", value);
-      return this;
-    }
-    public APIRequestGetContainedPages requestIsEligibleForLiveBoostingExpansionField () {
-      return this.requestIsEligibleForLiveBoostingExpansionField(true);
-    }
-    public APIRequestGetContainedPages requestIsEligibleForLiveBoostingExpansionField (boolean value) {
-      this.requestField("is_eligible_for_live_boosting_expansion", value);
       return this;
     }
     public APIRequestGetContainedPages requestIsMessengerBotGetStartedEnabledField () {
@@ -6006,6 +5411,7 @@ public class BusinessAssetGroup extends APINode {
       "event_time_max",
       "event_time_min",
       "first_party_cookie_status",
+      "has_1p_pixel_event",
       "id",
       "is_consolidated_container",
       "is_created_by_business",
@@ -6219,6 +5625,13 @@ public class BusinessAssetGroup extends APINode {
     }
     public APIRequestGetContainedPixels requestFirstPartyCookieStatusField (boolean value) {
       this.requestField("first_party_cookie_status", value);
+      return this;
+    }
+    public APIRequestGetContainedPixels requestHas1pPixelEventField () {
+      return this.requestHas1pPixelEventField(true);
+    }
+    public APIRequestGetContainedPixels requestHas1pPixelEventField (boolean value) {
+      this.requestField("has_1p_pixel_event", value);
       return this;
     }
     public APIRequestGetContainedPixels requestIdField () {

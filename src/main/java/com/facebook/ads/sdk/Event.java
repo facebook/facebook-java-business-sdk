@@ -92,13 +92,13 @@ public class Event extends APINode {
   @SerializedName("place")
   private Place mPlace = null;
   @SerializedName("registration_setting")
-  private Object mRegistrationSetting = null;
+  private EventRegistrationSetting mRegistrationSetting = null;
   @SerializedName("scheduled_publish_time")
   private String mScheduledPublishTime = null;
   @SerializedName("start_time")
   private String mStartTime = null;
   @SerializedName("ticket_setting")
-  private Object mTicketSetting = null;
+  private EventTicketSetting mTicketSetting = null;
   @SerializedName("ticket_uri")
   private String mTicketUri = null;
   @SerializedName("ticket_uri_start_sales_time")
@@ -473,7 +473,10 @@ public class Event extends APINode {
     return mPlace;
   }
 
-  public Object getFieldRegistrationSetting() {
+  public EventRegistrationSetting getFieldRegistrationSetting() {
+    if (mRegistrationSetting != null) {
+      mRegistrationSetting.context = getContext();
+    }
     return mRegistrationSetting;
   }
 
@@ -485,7 +488,10 @@ public class Event extends APINode {
     return mStartTime;
   }
 
-  public Object getFieldTicketSetting() {
+  public EventTicketSetting getFieldTicketSetting() {
+    if (mTicketSetting != null) {
+      mTicketSetting.context = getContext();
+    }
     return mTicketSetting;
   }
 
@@ -1631,45 +1637,63 @@ public class Event extends APINode {
     }
   }
 
-  public static class APIRequestGetTicketTiers extends APIRequest<APINode> {
+  public static class APIRequestGetTicketTiers extends APIRequest<EventTicketTier> {
 
-    APINodeList<APINode> lastResponse = null;
+    APINodeList<EventTicketTier> lastResponse = null;
     @Override
-    public APINodeList<APINode> getLastResponse() {
+    public APINodeList<EventTicketTier> getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
     };
 
     public static final String[] FIELDS = {
+      "currency",
+      "description",
+      "end_sales_time",
+      "end_show_time",
+      "fee_settings",
+      "id",
+      "maximum_quantity",
+      "metadata",
+      "minimum_quantity",
+      "name",
+      "price",
+      "priority",
+      "retailer_id",
+      "seating_map_image_url",
+      "start_sales_time",
+      "start_show_time",
+      "status",
+      "total_quantity",
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header);
+    public APINodeList<EventTicketTier> parseResponse(String response, String header) throws APIException {
+      return EventTicketTier.parseResponse(response, getContext(), this, header);
     }
 
     @Override
-    public APINodeList<APINode> execute() throws APIException {
+    public APINodeList<EventTicketTier> execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+    public APINodeList<EventTicketTier> execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+    public ListenableFuture<APINodeList<EventTicketTier>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<APINodeList<EventTicketTier>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, APINodeList<EventTicketTier>>() {
+           public APINodeList<EventTicketTier> apply(ResponseWrapper result) {
              try {
                return APIRequestGetTicketTiers.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -1734,6 +1758,132 @@ public class Event extends APINode {
       return this;
     }
 
+    public APIRequestGetTicketTiers requestCurrencyField () {
+      return this.requestCurrencyField(true);
+    }
+    public APIRequestGetTicketTiers requestCurrencyField (boolean value) {
+      this.requestField("currency", value);
+      return this;
+    }
+    public APIRequestGetTicketTiers requestDescriptionField () {
+      return this.requestDescriptionField(true);
+    }
+    public APIRequestGetTicketTiers requestDescriptionField (boolean value) {
+      this.requestField("description", value);
+      return this;
+    }
+    public APIRequestGetTicketTiers requestEndSalesTimeField () {
+      return this.requestEndSalesTimeField(true);
+    }
+    public APIRequestGetTicketTiers requestEndSalesTimeField (boolean value) {
+      this.requestField("end_sales_time", value);
+      return this;
+    }
+    public APIRequestGetTicketTiers requestEndShowTimeField () {
+      return this.requestEndShowTimeField(true);
+    }
+    public APIRequestGetTicketTiers requestEndShowTimeField (boolean value) {
+      this.requestField("end_show_time", value);
+      return this;
+    }
+    public APIRequestGetTicketTiers requestFeeSettingsField () {
+      return this.requestFeeSettingsField(true);
+    }
+    public APIRequestGetTicketTiers requestFeeSettingsField (boolean value) {
+      this.requestField("fee_settings", value);
+      return this;
+    }
+    public APIRequestGetTicketTiers requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetTicketTiers requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetTicketTiers requestMaximumQuantityField () {
+      return this.requestMaximumQuantityField(true);
+    }
+    public APIRequestGetTicketTiers requestMaximumQuantityField (boolean value) {
+      this.requestField("maximum_quantity", value);
+      return this;
+    }
+    public APIRequestGetTicketTiers requestMetadataField () {
+      return this.requestMetadataField(true);
+    }
+    public APIRequestGetTicketTiers requestMetadataField (boolean value) {
+      this.requestField("metadata", value);
+      return this;
+    }
+    public APIRequestGetTicketTiers requestMinimumQuantityField () {
+      return this.requestMinimumQuantityField(true);
+    }
+    public APIRequestGetTicketTiers requestMinimumQuantityField (boolean value) {
+      this.requestField("minimum_quantity", value);
+      return this;
+    }
+    public APIRequestGetTicketTiers requestNameField () {
+      return this.requestNameField(true);
+    }
+    public APIRequestGetTicketTiers requestNameField (boolean value) {
+      this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetTicketTiers requestPriceField () {
+      return this.requestPriceField(true);
+    }
+    public APIRequestGetTicketTiers requestPriceField (boolean value) {
+      this.requestField("price", value);
+      return this;
+    }
+    public APIRequestGetTicketTiers requestPriorityField () {
+      return this.requestPriorityField(true);
+    }
+    public APIRequestGetTicketTiers requestPriorityField (boolean value) {
+      this.requestField("priority", value);
+      return this;
+    }
+    public APIRequestGetTicketTiers requestRetailerIdField () {
+      return this.requestRetailerIdField(true);
+    }
+    public APIRequestGetTicketTiers requestRetailerIdField (boolean value) {
+      this.requestField("retailer_id", value);
+      return this;
+    }
+    public APIRequestGetTicketTiers requestSeatingMapImageUrlField () {
+      return this.requestSeatingMapImageUrlField(true);
+    }
+    public APIRequestGetTicketTiers requestSeatingMapImageUrlField (boolean value) {
+      this.requestField("seating_map_image_url", value);
+      return this;
+    }
+    public APIRequestGetTicketTiers requestStartSalesTimeField () {
+      return this.requestStartSalesTimeField(true);
+    }
+    public APIRequestGetTicketTiers requestStartSalesTimeField (boolean value) {
+      this.requestField("start_sales_time", value);
+      return this;
+    }
+    public APIRequestGetTicketTiers requestStartShowTimeField () {
+      return this.requestStartShowTimeField(true);
+    }
+    public APIRequestGetTicketTiers requestStartShowTimeField (boolean value) {
+      this.requestField("start_show_time", value);
+      return this;
+    }
+    public APIRequestGetTicketTiers requestStatusField () {
+      return this.requestStatusField(true);
+    }
+    public APIRequestGetTicketTiers requestStatusField (boolean value) {
+      this.requestField("status", value);
+      return this;
+    }
+    public APIRequestGetTicketTiers requestTotalQuantityField () {
+      return this.requestTotalQuantityField(true);
+    }
+    public APIRequestGetTicketTiers requestTotalQuantityField (boolean value) {
+      this.requestField("total_quantity", value);
+      return this;
+    }
   }
 
   public static class APIRequestGetVideos extends APIRequest<NullNode> {

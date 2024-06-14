@@ -59,6 +59,8 @@ public class AdsInsights extends APINode {
   private List<AdsActionStats> mAdImpressionActions = null;
   @SerializedName("ad_name")
   private String mAdName = null;
+  @SerializedName("adjusted_offline_purchase")
+  private List<Object> mAdjustedOfflinePurchase = null;
   @SerializedName("adset_end")
   private String mAdsetEnd = null;
   @SerializedName("adset_id")
@@ -99,8 +101,6 @@ public class AdsInsights extends APINode {
   private List<AdsActionStats> mCatalogSegmentValueWebsitePurchaseRoas = null;
   @SerializedName("clicks")
   private String mClicks = null;
-  @SerializedName("conversion_lead_rate")
-  private String mConversionLeadRate = null;
   @SerializedName("conversion_rate_ranking")
   private String mConversionRateRanking = null;
   @SerializedName("conversion_values")
@@ -121,8 +121,6 @@ public class AdsInsights extends APINode {
   private List<AdsActionStats> mCostPerAdClick = null;
   @SerializedName("cost_per_conversion")
   private List<AdsActionStats> mCostPerConversion = null;
-  @SerializedName("cost_per_conversion_lead")
-  private String mCostPerConversionLead = null;
   @SerializedName("cost_per_dda_countby_convs")
   private String mCostPerDdaCountbyConvs = null;
   @SerializedName("cost_per_estimated_ad_recallers")
@@ -223,6 +221,8 @@ public class AdsInsights extends APINode {
   private List<AdsActionStats> mMobileAppPurchaseRoas = null;
   @SerializedName("objective")
   private String mObjective = null;
+  @SerializedName("onsite_conversion_messaging_detected_purchase_deduped")
+  private List<AdsActionStats> mOnsiteConversionMessagingDetectedPurchaseDeduped = null;
   @SerializedName("optimization_goal")
   private String mOptimizationGoal = null;
   @SerializedName("outbound_clicks")
@@ -239,6 +239,8 @@ public class AdsInsights extends APINode {
   private String mQualityRanking = null;
   @SerializedName("reach")
   private String mReach = null;
+  @SerializedName("shops_assisted_purchases")
+  private String mShopsAssistedPurchases = null;
   @SerializedName("social_spend")
   private String mSocialSpend = null;
   @SerializedName("spend")
@@ -388,6 +390,8 @@ public class AdsInsights extends APINode {
   private String mRedownload = null;
   @SerializedName("region")
   private String mRegion = null;
+  @SerializedName("signal_source_bucket")
+  private String mSignalSourceBucket = null;
   @SerializedName("skan_campaign_id")
   private String mSkanCampaignId = null;
   @SerializedName("skan_conversion_id")
@@ -398,6 +402,10 @@ public class AdsInsights extends APINode {
   private String mStandardEventContentType = null;
   @SerializedName("title_asset")
   private AdAssetTitle mTitleAsset = null;
+  @SerializedName("user_persona_id")
+  private String mUserPersonaId = null;
+  @SerializedName("user_persona_name")
+  private String mUserPersonaName = null;
   @SerializedName("video_asset")
   private AdAssetVideo mVideoAsset = null;
   protected static Gson gson = null;
@@ -652,6 +660,15 @@ public class AdsInsights extends APINode {
     return this;
   }
 
+  public List<Object> getFieldAdjustedOfflinePurchase() {
+    return mAdjustedOfflinePurchase;
+  }
+
+  public AdsInsights setFieldAdjustedOfflinePurchase(List<Object> value) {
+    this.mAdjustedOfflinePurchase = value;
+    return this;
+  }
+
   public String getFieldAdsetEnd() {
     return mAdsetEnd;
   }
@@ -857,15 +874,6 @@ public class AdsInsights extends APINode {
     return this;
   }
 
-  public String getFieldConversionLeadRate() {
-    return mConversionLeadRate;
-  }
-
-  public AdsInsights setFieldConversionLeadRate(String value) {
-    this.mConversionLeadRate = value;
-    return this;
-  }
-
   public String getFieldConversionRateRanking() {
     return mConversionRateRanking;
   }
@@ -1001,15 +1009,6 @@ public class AdsInsights extends APINode {
     this.mCostPerConversion = AdsActionStats.getGson().fromJson(value, type);
     return this;
   }
-  public String getFieldCostPerConversionLead() {
-    return mCostPerConversionLead;
-  }
-
-  public AdsInsights setFieldCostPerConversionLead(String value) {
-    this.mCostPerConversionLead = value;
-    return this;
-  }
-
   public String getFieldCostPerDdaCountbyConvs() {
     return mCostPerDdaCountbyConvs;
   }
@@ -1505,6 +1504,20 @@ public class AdsInsights extends APINode {
     return this;
   }
 
+  public List<AdsActionStats> getFieldOnsiteConversionMessagingDetectedPurchaseDeduped() {
+    return mOnsiteConversionMessagingDetectedPurchaseDeduped;
+  }
+
+  public AdsInsights setFieldOnsiteConversionMessagingDetectedPurchaseDeduped(List<AdsActionStats> value) {
+    this.mOnsiteConversionMessagingDetectedPurchaseDeduped = value;
+    return this;
+  }
+
+  public AdsInsights setFieldOnsiteConversionMessagingDetectedPurchaseDeduped(String value) {
+    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
+    this.mOnsiteConversionMessagingDetectedPurchaseDeduped = AdsActionStats.getGson().fromJson(value, type);
+    return this;
+  }
   public String getFieldOptimizationGoal() {
     return mOptimizationGoal;
   }
@@ -1589,6 +1602,15 @@ public class AdsInsights extends APINode {
 
   public AdsInsights setFieldReach(String value) {
     this.mReach = value;
+    return this;
+  }
+
+  public String getFieldShopsAssistedPurchases() {
+    return mShopsAssistedPurchases;
+  }
+
+  public AdsInsights setFieldShopsAssistedPurchases(String value) {
+    this.mShopsAssistedPurchases = value;
     return this;
   }
 
@@ -2198,6 +2220,10 @@ public class AdsInsights extends APINode {
     return mRegion;
   }
 
+  public String getFieldSignalSourceBucket() {
+    return mSignalSourceBucket;
+  }
+
   public String getFieldSkanCampaignId() {
     return mSkanCampaignId;
   }
@@ -2216,6 +2242,14 @@ public class AdsInsights extends APINode {
 
   public AdAssetTitle getFieldTitleAsset() {
     return mTitleAsset;
+  }
+
+  public String getFieldUserPersonaId() {
+    return mUserPersonaId;
+  }
+
+  public String getFieldUserPersonaName() {
+    return mUserPersonaName;
   }
 
   public AdAssetVideo getFieldVideoAsset() {
@@ -2412,6 +2446,8 @@ public class AdsInsights extends APINode {
       VALUE_REDOWNLOAD("redownload"),
       @SerializedName("region")
       VALUE_REGION("region"),
+      @SerializedName("signal_source_bucket")
+      VALUE_SIGNAL_SOURCE_BUCKET("signal_source_bucket"),
       @SerializedName("skan_campaign_id")
       VALUE_SKAN_CAMPAIGN_ID("skan_campaign_id"),
       @SerializedName("skan_conversion_id")
@@ -2422,6 +2458,10 @@ public class AdsInsights extends APINode {
       VALUE_STANDARD_EVENT_CONTENT_TYPE("standard_event_content_type"),
       @SerializedName("title_asset")
       VALUE_TITLE_ASSET("title_asset"),
+      @SerializedName("user_persona_id")
+      VALUE_USER_PERSONA_ID("user_persona_id"),
+      @SerializedName("user_persona_name")
+      VALUE_USER_PERSONA_NAME("user_persona_name"),
       @SerializedName("video_asset")
       VALUE_VIDEO_ASSET("video_asset"),
       ;
@@ -2585,6 +2625,7 @@ public class AdsInsights extends APINode {
     this.mAdId = instance.mAdId;
     this.mAdImpressionActions = instance.mAdImpressionActions;
     this.mAdName = instance.mAdName;
+    this.mAdjustedOfflinePurchase = instance.mAdjustedOfflinePurchase;
     this.mAdsetEnd = instance.mAdsetEnd;
     this.mAdsetId = instance.mAdsetId;
     this.mAdsetName = instance.mAdsetName;
@@ -2605,7 +2646,6 @@ public class AdsInsights extends APINode {
     this.mCatalogSegmentValueOmniPurchaseRoas = instance.mCatalogSegmentValueOmniPurchaseRoas;
     this.mCatalogSegmentValueWebsitePurchaseRoas = instance.mCatalogSegmentValueWebsitePurchaseRoas;
     this.mClicks = instance.mClicks;
-    this.mConversionLeadRate = instance.mConversionLeadRate;
     this.mConversionRateRanking = instance.mConversionRateRanking;
     this.mConversionValues = instance.mConversionValues;
     this.mConversions = instance.mConversions;
@@ -2616,7 +2656,6 @@ public class AdsInsights extends APINode {
     this.mCostPerActionType = instance.mCostPerActionType;
     this.mCostPerAdClick = instance.mCostPerAdClick;
     this.mCostPerConversion = instance.mCostPerConversion;
-    this.mCostPerConversionLead = instance.mCostPerConversionLead;
     this.mCostPerDdaCountbyConvs = instance.mCostPerDdaCountbyConvs;
     this.mCostPerEstimatedAdRecallers = instance.mCostPerEstimatedAdRecallers;
     this.mCostPerInlineLinkClick = instance.mCostPerInlineLinkClick;
@@ -2667,6 +2706,7 @@ public class AdsInsights extends APINode {
     this.mMarketingMessagesWebsitePurchaseValues = instance.mMarketingMessagesWebsitePurchaseValues;
     this.mMobileAppPurchaseRoas = instance.mMobileAppPurchaseRoas;
     this.mObjective = instance.mObjective;
+    this.mOnsiteConversionMessagingDetectedPurchaseDeduped = instance.mOnsiteConversionMessagingDetectedPurchaseDeduped;
     this.mOptimizationGoal = instance.mOptimizationGoal;
     this.mOutboundClicks = instance.mOutboundClicks;
     this.mOutboundClicksCtr = instance.mOutboundClicksCtr;
@@ -2675,6 +2715,7 @@ public class AdsInsights extends APINode {
     this.mQualifyingQuestionQualifyAnswerRate = instance.mQualifyingQuestionQualifyAnswerRate;
     this.mQualityRanking = instance.mQualityRanking;
     this.mReach = instance.mReach;
+    this.mShopsAssistedPurchases = instance.mShopsAssistedPurchases;
     this.mSocialSpend = instance.mSocialSpend;
     this.mSpend = instance.mSpend;
     this.mTotalPostbacks = instance.mTotalPostbacks;
@@ -2749,11 +2790,14 @@ public class AdsInsights extends APINode {
     this.mPublisherPlatform = instance.mPublisherPlatform;
     this.mRedownload = instance.mRedownload;
     this.mRegion = instance.mRegion;
+    this.mSignalSourceBucket = instance.mSignalSourceBucket;
     this.mSkanCampaignId = instance.mSkanCampaignId;
     this.mSkanConversionId = instance.mSkanConversionId;
     this.mSkanVersion = instance.mSkanVersion;
     this.mStandardEventContentType = instance.mStandardEventContentType;
     this.mTitleAsset = instance.mTitleAsset;
+    this.mUserPersonaId = instance.mUserPersonaId;
+    this.mUserPersonaName = instance.mUserPersonaName;
     this.mVideoAsset = instance.mVideoAsset;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

@@ -56,7 +56,7 @@ public class User extends APINode {
   @SerializedName("currency")
   private Currency mCurrency = null;
   @SerializedName("education")
-  private List<Object> mEducation = null;
+  private List<EducationExperience> mEducation = null;
   @SerializedName("email")
   private String mEmail = null;
   @SerializedName("favorite_athletes")
@@ -396,6 +396,10 @@ public class User extends APINode {
     return new APIRequestGetAssignedAdAccounts(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetAssignedApplications getAssignedApplications() {
+    return new APIRequestGetAssignedApplications(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetAssignedBusinessAssetGroups getAssignedBusinessAssetGroups() {
     return new APIRequestGetAssignedBusinessAssetGroups(this.getPrefixedId().toString(), context);
   }
@@ -458,10 +462,6 @@ public class User extends APINode {
 
   public APIRequestCreateFundraiser createFundraiser() {
     return new APIRequestCreateFundraiser(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestCreateGameTime createGameTime() {
-    return new APIRequestCreateGameTime(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetGroups getGroups() {
@@ -599,7 +599,7 @@ public class User extends APINode {
     return mCurrency;
   }
 
-  public List<Object> getFieldEducation() {
+  public List<EducationExperience> getFieldEducation() {
     return mEducation;
   }
 
@@ -1102,11 +1102,11 @@ public class User extends APINode {
       "influences",
       "instagram_business_account",
       "is_always_open",
+      "is_calling_eligible",
       "is_chain",
       "is_community_page",
       "is_eligible_for_branded_content",
       "is_eligible_for_disable_connect_ig_btn_for_non_page_admin_am_web",
-      "is_eligible_for_live_boosting_expansion",
       "is_messenger_bot_get_started_enabled",
       "is_messenger_platform_bot",
       "is_owned",
@@ -1753,6 +1753,13 @@ public class User extends APINode {
       this.requestField("is_always_open", value);
       return this;
     }
+    public APIRequestGetAccounts requestIsCallingEligibleField () {
+      return this.requestIsCallingEligibleField(true);
+    }
+    public APIRequestGetAccounts requestIsCallingEligibleField (boolean value) {
+      this.requestField("is_calling_eligible", value);
+      return this;
+    }
     public APIRequestGetAccounts requestIsChainField () {
       return this.requestIsChainField(true);
     }
@@ -1779,13 +1786,6 @@ public class User extends APINode {
     }
     public APIRequestGetAccounts requestIsEligibleForDisableConnectIgBtnForNonPageAdminAmWebField (boolean value) {
       this.requestField("is_eligible_for_disable_connect_ig_btn_for_non_page_admin_am_web", value);
-      return this;
-    }
-    public APIRequestGetAccounts requestIsEligibleForLiveBoostingExpansionField () {
-      return this.requestIsEligibleForLiveBoostingExpansionField(true);
-    }
-    public APIRequestGetAccounts requestIsEligibleForLiveBoostingExpansionField (boolean value) {
-      this.requestField("is_eligible_for_live_boosting_expansion", value);
       return this;
     }
     public APIRequestGetAccounts requestIsMessengerBotGetStartedEnabledField () {
@@ -5076,6 +5076,951 @@ public class User extends APINode {
     }
   }
 
+  public static class APIRequestGetAssignedApplications extends APIRequest<Application> {
+
+    APINodeList<Application> lastResponse = null;
+    @Override
+    public APINodeList<Application> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "aam_rules",
+      "an_ad_space_limit",
+      "an_platforms",
+      "android_key_hash",
+      "android_sdk_error_categories",
+      "app_domains",
+      "app_events_config",
+      "app_events_feature_bitmask",
+      "app_events_session_timeout",
+      "app_install_tracked",
+      "app_name",
+      "app_signals_binding_ios",
+      "app_type",
+      "auth_dialog_data_help_url",
+      "auth_dialog_headline",
+      "auth_dialog_perms_explanation",
+      "auth_referral_default_activity_privacy",
+      "auth_referral_enabled",
+      "auth_referral_extended_perms",
+      "auth_referral_friend_perms",
+      "auth_referral_response_type",
+      "auth_referral_user_perms",
+      "auto_event_mapping_android",
+      "auto_event_mapping_ios",
+      "auto_event_setup_enabled",
+      "auto_log_app_events_default",
+      "auto_log_app_events_enabled",
+      "business",
+      "canvas_fluid_height",
+      "canvas_fluid_width",
+      "canvas_url",
+      "category",
+      "client_config",
+      "company",
+      "configured_ios_sso",
+      "contact_email",
+      "created_time",
+      "creator_uid",
+      "daily_active_users",
+      "daily_active_users_rank",
+      "deauth_callback_url",
+      "default_share_mode",
+      "description",
+      "financial_id",
+      "gdpv4_chrome_custom_tabs_enabled",
+      "gdpv4_enabled",
+      "gdpv4_nux_content",
+      "gdpv4_nux_enabled",
+      "has_messenger_product",
+      "hosting_url",
+      "icon_url",
+      "id",
+      "ios_bundle_id",
+      "ios_sdk_dialog_flows",
+      "ios_sdk_error_categories",
+      "ios_sfvc_attr",
+      "ios_supports_native_proxy_auth_flow",
+      "ios_supports_system_auth",
+      "ipad_app_store_id",
+      "iphone_app_store_id",
+      "latest_sdk_version",
+      "link",
+      "logging_token",
+      "logo_url",
+      "migrations",
+      "mobile_profile_section_url",
+      "mobile_web_url",
+      "monthly_active_users",
+      "monthly_active_users_rank",
+      "name",
+      "namespace",
+      "object_store_urls",
+      "owner_business",
+      "page_tab_default_name",
+      "page_tab_url",
+      "photo_url",
+      "privacy_policy_url",
+      "profile_section_url",
+      "property_id",
+      "protected_mode_rules",
+      "real_time_mode_devices",
+      "restrictions",
+      "restrictive_data_filter_params",
+      "restrictive_data_filter_rules",
+      "sdk_update_message",
+      "seamless_login",
+      "secure_canvas_url",
+      "secure_page_tab_url",
+      "server_ip_whitelist",
+      "smart_login_bookmark_icon_url",
+      "smart_login_menu_icon_url",
+      "social_discovery",
+      "subcategory",
+      "suggested_events_setting",
+      "supported_platforms",
+      "supports_apprequests_fast_app_switch",
+      "supports_attribution",
+      "supports_implicit_sdk_logging",
+      "suppress_native_ios_gdp",
+      "terms_of_service_url",
+      "url_scheme_suffix",
+      "user_support_email",
+      "user_support_url",
+      "website_url",
+      "weekly_active_users",
+    };
+
+    @Override
+    public APINodeList<Application> parseResponse(String response, String header) throws APIException {
+      return Application.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<Application> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<Application> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<Application>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<Application>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<Application>>() {
+           public APINodeList<Application> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetAssignedApplications.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestGetAssignedApplications(String nodeId, APIContext context) {
+      super(context, nodeId, "/assigned_applications", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetAssignedApplications setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAssignedApplications setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetAssignedApplications requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetAssignedApplications requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAssignedApplications requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetAssignedApplications requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAssignedApplications requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAssignedApplications requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetAssignedApplications requestAamRulesField () {
+      return this.requestAamRulesField(true);
+    }
+    public APIRequestGetAssignedApplications requestAamRulesField (boolean value) {
+      this.requestField("aam_rules", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestAnAdSpaceLimitField () {
+      return this.requestAnAdSpaceLimitField(true);
+    }
+    public APIRequestGetAssignedApplications requestAnAdSpaceLimitField (boolean value) {
+      this.requestField("an_ad_space_limit", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestAnPlatformsField () {
+      return this.requestAnPlatformsField(true);
+    }
+    public APIRequestGetAssignedApplications requestAnPlatformsField (boolean value) {
+      this.requestField("an_platforms", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestAndroidKeyHashField () {
+      return this.requestAndroidKeyHashField(true);
+    }
+    public APIRequestGetAssignedApplications requestAndroidKeyHashField (boolean value) {
+      this.requestField("android_key_hash", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestAndroidSdkErrorCategoriesField () {
+      return this.requestAndroidSdkErrorCategoriesField(true);
+    }
+    public APIRequestGetAssignedApplications requestAndroidSdkErrorCategoriesField (boolean value) {
+      this.requestField("android_sdk_error_categories", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestAppDomainsField () {
+      return this.requestAppDomainsField(true);
+    }
+    public APIRequestGetAssignedApplications requestAppDomainsField (boolean value) {
+      this.requestField("app_domains", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestAppEventsConfigField () {
+      return this.requestAppEventsConfigField(true);
+    }
+    public APIRequestGetAssignedApplications requestAppEventsConfigField (boolean value) {
+      this.requestField("app_events_config", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestAppEventsFeatureBitmaskField () {
+      return this.requestAppEventsFeatureBitmaskField(true);
+    }
+    public APIRequestGetAssignedApplications requestAppEventsFeatureBitmaskField (boolean value) {
+      this.requestField("app_events_feature_bitmask", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestAppEventsSessionTimeoutField () {
+      return this.requestAppEventsSessionTimeoutField(true);
+    }
+    public APIRequestGetAssignedApplications requestAppEventsSessionTimeoutField (boolean value) {
+      this.requestField("app_events_session_timeout", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestAppInstallTrackedField () {
+      return this.requestAppInstallTrackedField(true);
+    }
+    public APIRequestGetAssignedApplications requestAppInstallTrackedField (boolean value) {
+      this.requestField("app_install_tracked", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestAppNameField () {
+      return this.requestAppNameField(true);
+    }
+    public APIRequestGetAssignedApplications requestAppNameField (boolean value) {
+      this.requestField("app_name", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestAppSignalsBindingIosField () {
+      return this.requestAppSignalsBindingIosField(true);
+    }
+    public APIRequestGetAssignedApplications requestAppSignalsBindingIosField (boolean value) {
+      this.requestField("app_signals_binding_ios", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestAppTypeField () {
+      return this.requestAppTypeField(true);
+    }
+    public APIRequestGetAssignedApplications requestAppTypeField (boolean value) {
+      this.requestField("app_type", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestAuthDialogDataHelpUrlField () {
+      return this.requestAuthDialogDataHelpUrlField(true);
+    }
+    public APIRequestGetAssignedApplications requestAuthDialogDataHelpUrlField (boolean value) {
+      this.requestField("auth_dialog_data_help_url", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestAuthDialogHeadlineField () {
+      return this.requestAuthDialogHeadlineField(true);
+    }
+    public APIRequestGetAssignedApplications requestAuthDialogHeadlineField (boolean value) {
+      this.requestField("auth_dialog_headline", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestAuthDialogPermsExplanationField () {
+      return this.requestAuthDialogPermsExplanationField(true);
+    }
+    public APIRequestGetAssignedApplications requestAuthDialogPermsExplanationField (boolean value) {
+      this.requestField("auth_dialog_perms_explanation", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestAuthReferralDefaultActivityPrivacyField () {
+      return this.requestAuthReferralDefaultActivityPrivacyField(true);
+    }
+    public APIRequestGetAssignedApplications requestAuthReferralDefaultActivityPrivacyField (boolean value) {
+      this.requestField("auth_referral_default_activity_privacy", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestAuthReferralEnabledField () {
+      return this.requestAuthReferralEnabledField(true);
+    }
+    public APIRequestGetAssignedApplications requestAuthReferralEnabledField (boolean value) {
+      this.requestField("auth_referral_enabled", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestAuthReferralExtendedPermsField () {
+      return this.requestAuthReferralExtendedPermsField(true);
+    }
+    public APIRequestGetAssignedApplications requestAuthReferralExtendedPermsField (boolean value) {
+      this.requestField("auth_referral_extended_perms", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestAuthReferralFriendPermsField () {
+      return this.requestAuthReferralFriendPermsField(true);
+    }
+    public APIRequestGetAssignedApplications requestAuthReferralFriendPermsField (boolean value) {
+      this.requestField("auth_referral_friend_perms", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestAuthReferralResponseTypeField () {
+      return this.requestAuthReferralResponseTypeField(true);
+    }
+    public APIRequestGetAssignedApplications requestAuthReferralResponseTypeField (boolean value) {
+      this.requestField("auth_referral_response_type", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestAuthReferralUserPermsField () {
+      return this.requestAuthReferralUserPermsField(true);
+    }
+    public APIRequestGetAssignedApplications requestAuthReferralUserPermsField (boolean value) {
+      this.requestField("auth_referral_user_perms", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestAutoEventMappingAndroidField () {
+      return this.requestAutoEventMappingAndroidField(true);
+    }
+    public APIRequestGetAssignedApplications requestAutoEventMappingAndroidField (boolean value) {
+      this.requestField("auto_event_mapping_android", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestAutoEventMappingIosField () {
+      return this.requestAutoEventMappingIosField(true);
+    }
+    public APIRequestGetAssignedApplications requestAutoEventMappingIosField (boolean value) {
+      this.requestField("auto_event_mapping_ios", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestAutoEventSetupEnabledField () {
+      return this.requestAutoEventSetupEnabledField(true);
+    }
+    public APIRequestGetAssignedApplications requestAutoEventSetupEnabledField (boolean value) {
+      this.requestField("auto_event_setup_enabled", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestAutoLogAppEventsDefaultField () {
+      return this.requestAutoLogAppEventsDefaultField(true);
+    }
+    public APIRequestGetAssignedApplications requestAutoLogAppEventsDefaultField (boolean value) {
+      this.requestField("auto_log_app_events_default", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestAutoLogAppEventsEnabledField () {
+      return this.requestAutoLogAppEventsEnabledField(true);
+    }
+    public APIRequestGetAssignedApplications requestAutoLogAppEventsEnabledField (boolean value) {
+      this.requestField("auto_log_app_events_enabled", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestBusinessField () {
+      return this.requestBusinessField(true);
+    }
+    public APIRequestGetAssignedApplications requestBusinessField (boolean value) {
+      this.requestField("business", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestCanvasFluidHeightField () {
+      return this.requestCanvasFluidHeightField(true);
+    }
+    public APIRequestGetAssignedApplications requestCanvasFluidHeightField (boolean value) {
+      this.requestField("canvas_fluid_height", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestCanvasFluidWidthField () {
+      return this.requestCanvasFluidWidthField(true);
+    }
+    public APIRequestGetAssignedApplications requestCanvasFluidWidthField (boolean value) {
+      this.requestField("canvas_fluid_width", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestCanvasUrlField () {
+      return this.requestCanvasUrlField(true);
+    }
+    public APIRequestGetAssignedApplications requestCanvasUrlField (boolean value) {
+      this.requestField("canvas_url", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestCategoryField () {
+      return this.requestCategoryField(true);
+    }
+    public APIRequestGetAssignedApplications requestCategoryField (boolean value) {
+      this.requestField("category", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestClientConfigField () {
+      return this.requestClientConfigField(true);
+    }
+    public APIRequestGetAssignedApplications requestClientConfigField (boolean value) {
+      this.requestField("client_config", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestCompanyField () {
+      return this.requestCompanyField(true);
+    }
+    public APIRequestGetAssignedApplications requestCompanyField (boolean value) {
+      this.requestField("company", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestConfiguredIosSsoField () {
+      return this.requestConfiguredIosSsoField(true);
+    }
+    public APIRequestGetAssignedApplications requestConfiguredIosSsoField (boolean value) {
+      this.requestField("configured_ios_sso", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestContactEmailField () {
+      return this.requestContactEmailField(true);
+    }
+    public APIRequestGetAssignedApplications requestContactEmailField (boolean value) {
+      this.requestField("contact_email", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestCreatedTimeField () {
+      return this.requestCreatedTimeField(true);
+    }
+    public APIRequestGetAssignedApplications requestCreatedTimeField (boolean value) {
+      this.requestField("created_time", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestCreatorUidField () {
+      return this.requestCreatorUidField(true);
+    }
+    public APIRequestGetAssignedApplications requestCreatorUidField (boolean value) {
+      this.requestField("creator_uid", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestDailyActiveUsersField () {
+      return this.requestDailyActiveUsersField(true);
+    }
+    public APIRequestGetAssignedApplications requestDailyActiveUsersField (boolean value) {
+      this.requestField("daily_active_users", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestDailyActiveUsersRankField () {
+      return this.requestDailyActiveUsersRankField(true);
+    }
+    public APIRequestGetAssignedApplications requestDailyActiveUsersRankField (boolean value) {
+      this.requestField("daily_active_users_rank", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestDeauthCallbackUrlField () {
+      return this.requestDeauthCallbackUrlField(true);
+    }
+    public APIRequestGetAssignedApplications requestDeauthCallbackUrlField (boolean value) {
+      this.requestField("deauth_callback_url", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestDefaultShareModeField () {
+      return this.requestDefaultShareModeField(true);
+    }
+    public APIRequestGetAssignedApplications requestDefaultShareModeField (boolean value) {
+      this.requestField("default_share_mode", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestDescriptionField () {
+      return this.requestDescriptionField(true);
+    }
+    public APIRequestGetAssignedApplications requestDescriptionField (boolean value) {
+      this.requestField("description", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestFinancialIdField () {
+      return this.requestFinancialIdField(true);
+    }
+    public APIRequestGetAssignedApplications requestFinancialIdField (boolean value) {
+      this.requestField("financial_id", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestGdpv4ChromeCustomTabsEnabledField () {
+      return this.requestGdpv4ChromeCustomTabsEnabledField(true);
+    }
+    public APIRequestGetAssignedApplications requestGdpv4ChromeCustomTabsEnabledField (boolean value) {
+      this.requestField("gdpv4_chrome_custom_tabs_enabled", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestGdpv4EnabledField () {
+      return this.requestGdpv4EnabledField(true);
+    }
+    public APIRequestGetAssignedApplications requestGdpv4EnabledField (boolean value) {
+      this.requestField("gdpv4_enabled", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestGdpv4NuxContentField () {
+      return this.requestGdpv4NuxContentField(true);
+    }
+    public APIRequestGetAssignedApplications requestGdpv4NuxContentField (boolean value) {
+      this.requestField("gdpv4_nux_content", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestGdpv4NuxEnabledField () {
+      return this.requestGdpv4NuxEnabledField(true);
+    }
+    public APIRequestGetAssignedApplications requestGdpv4NuxEnabledField (boolean value) {
+      this.requestField("gdpv4_nux_enabled", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestHasMessengerProductField () {
+      return this.requestHasMessengerProductField(true);
+    }
+    public APIRequestGetAssignedApplications requestHasMessengerProductField (boolean value) {
+      this.requestField("has_messenger_product", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestHostingUrlField () {
+      return this.requestHostingUrlField(true);
+    }
+    public APIRequestGetAssignedApplications requestHostingUrlField (boolean value) {
+      this.requestField("hosting_url", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestIconUrlField () {
+      return this.requestIconUrlField(true);
+    }
+    public APIRequestGetAssignedApplications requestIconUrlField (boolean value) {
+      this.requestField("icon_url", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetAssignedApplications requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestIosBundleIdField () {
+      return this.requestIosBundleIdField(true);
+    }
+    public APIRequestGetAssignedApplications requestIosBundleIdField (boolean value) {
+      this.requestField("ios_bundle_id", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestIosSdkDialogFlowsField () {
+      return this.requestIosSdkDialogFlowsField(true);
+    }
+    public APIRequestGetAssignedApplications requestIosSdkDialogFlowsField (boolean value) {
+      this.requestField("ios_sdk_dialog_flows", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestIosSdkErrorCategoriesField () {
+      return this.requestIosSdkErrorCategoriesField(true);
+    }
+    public APIRequestGetAssignedApplications requestIosSdkErrorCategoriesField (boolean value) {
+      this.requestField("ios_sdk_error_categories", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestIosSfvcAttrField () {
+      return this.requestIosSfvcAttrField(true);
+    }
+    public APIRequestGetAssignedApplications requestIosSfvcAttrField (boolean value) {
+      this.requestField("ios_sfvc_attr", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestIosSupportsNativeProxyAuthFlowField () {
+      return this.requestIosSupportsNativeProxyAuthFlowField(true);
+    }
+    public APIRequestGetAssignedApplications requestIosSupportsNativeProxyAuthFlowField (boolean value) {
+      this.requestField("ios_supports_native_proxy_auth_flow", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestIosSupportsSystemAuthField () {
+      return this.requestIosSupportsSystemAuthField(true);
+    }
+    public APIRequestGetAssignedApplications requestIosSupportsSystemAuthField (boolean value) {
+      this.requestField("ios_supports_system_auth", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestIpadAppStoreIdField () {
+      return this.requestIpadAppStoreIdField(true);
+    }
+    public APIRequestGetAssignedApplications requestIpadAppStoreIdField (boolean value) {
+      this.requestField("ipad_app_store_id", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestIphoneAppStoreIdField () {
+      return this.requestIphoneAppStoreIdField(true);
+    }
+    public APIRequestGetAssignedApplications requestIphoneAppStoreIdField (boolean value) {
+      this.requestField("iphone_app_store_id", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestLatestSdkVersionField () {
+      return this.requestLatestSdkVersionField(true);
+    }
+    public APIRequestGetAssignedApplications requestLatestSdkVersionField (boolean value) {
+      this.requestField("latest_sdk_version", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestLinkField () {
+      return this.requestLinkField(true);
+    }
+    public APIRequestGetAssignedApplications requestLinkField (boolean value) {
+      this.requestField("link", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestLoggingTokenField () {
+      return this.requestLoggingTokenField(true);
+    }
+    public APIRequestGetAssignedApplications requestLoggingTokenField (boolean value) {
+      this.requestField("logging_token", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestLogoUrlField () {
+      return this.requestLogoUrlField(true);
+    }
+    public APIRequestGetAssignedApplications requestLogoUrlField (boolean value) {
+      this.requestField("logo_url", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestMigrationsField () {
+      return this.requestMigrationsField(true);
+    }
+    public APIRequestGetAssignedApplications requestMigrationsField (boolean value) {
+      this.requestField("migrations", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestMobileProfileSectionUrlField () {
+      return this.requestMobileProfileSectionUrlField(true);
+    }
+    public APIRequestGetAssignedApplications requestMobileProfileSectionUrlField (boolean value) {
+      this.requestField("mobile_profile_section_url", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestMobileWebUrlField () {
+      return this.requestMobileWebUrlField(true);
+    }
+    public APIRequestGetAssignedApplications requestMobileWebUrlField (boolean value) {
+      this.requestField("mobile_web_url", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestMonthlyActiveUsersField () {
+      return this.requestMonthlyActiveUsersField(true);
+    }
+    public APIRequestGetAssignedApplications requestMonthlyActiveUsersField (boolean value) {
+      this.requestField("monthly_active_users", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestMonthlyActiveUsersRankField () {
+      return this.requestMonthlyActiveUsersRankField(true);
+    }
+    public APIRequestGetAssignedApplications requestMonthlyActiveUsersRankField (boolean value) {
+      this.requestField("monthly_active_users_rank", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestNameField () {
+      return this.requestNameField(true);
+    }
+    public APIRequestGetAssignedApplications requestNameField (boolean value) {
+      this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestNamespaceField () {
+      return this.requestNamespaceField(true);
+    }
+    public APIRequestGetAssignedApplications requestNamespaceField (boolean value) {
+      this.requestField("namespace", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestObjectStoreUrlsField () {
+      return this.requestObjectStoreUrlsField(true);
+    }
+    public APIRequestGetAssignedApplications requestObjectStoreUrlsField (boolean value) {
+      this.requestField("object_store_urls", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestOwnerBusinessField () {
+      return this.requestOwnerBusinessField(true);
+    }
+    public APIRequestGetAssignedApplications requestOwnerBusinessField (boolean value) {
+      this.requestField("owner_business", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestPageTabDefaultNameField () {
+      return this.requestPageTabDefaultNameField(true);
+    }
+    public APIRequestGetAssignedApplications requestPageTabDefaultNameField (boolean value) {
+      this.requestField("page_tab_default_name", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestPageTabUrlField () {
+      return this.requestPageTabUrlField(true);
+    }
+    public APIRequestGetAssignedApplications requestPageTabUrlField (boolean value) {
+      this.requestField("page_tab_url", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestPhotoUrlField () {
+      return this.requestPhotoUrlField(true);
+    }
+    public APIRequestGetAssignedApplications requestPhotoUrlField (boolean value) {
+      this.requestField("photo_url", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestPrivacyPolicyUrlField () {
+      return this.requestPrivacyPolicyUrlField(true);
+    }
+    public APIRequestGetAssignedApplications requestPrivacyPolicyUrlField (boolean value) {
+      this.requestField("privacy_policy_url", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestProfileSectionUrlField () {
+      return this.requestProfileSectionUrlField(true);
+    }
+    public APIRequestGetAssignedApplications requestProfileSectionUrlField (boolean value) {
+      this.requestField("profile_section_url", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestPropertyIdField () {
+      return this.requestPropertyIdField(true);
+    }
+    public APIRequestGetAssignedApplications requestPropertyIdField (boolean value) {
+      this.requestField("property_id", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestProtectedModeRulesField () {
+      return this.requestProtectedModeRulesField(true);
+    }
+    public APIRequestGetAssignedApplications requestProtectedModeRulesField (boolean value) {
+      this.requestField("protected_mode_rules", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestRealTimeModeDevicesField () {
+      return this.requestRealTimeModeDevicesField(true);
+    }
+    public APIRequestGetAssignedApplications requestRealTimeModeDevicesField (boolean value) {
+      this.requestField("real_time_mode_devices", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestRestrictionsField () {
+      return this.requestRestrictionsField(true);
+    }
+    public APIRequestGetAssignedApplications requestRestrictionsField (boolean value) {
+      this.requestField("restrictions", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestRestrictiveDataFilterParamsField () {
+      return this.requestRestrictiveDataFilterParamsField(true);
+    }
+    public APIRequestGetAssignedApplications requestRestrictiveDataFilterParamsField (boolean value) {
+      this.requestField("restrictive_data_filter_params", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestRestrictiveDataFilterRulesField () {
+      return this.requestRestrictiveDataFilterRulesField(true);
+    }
+    public APIRequestGetAssignedApplications requestRestrictiveDataFilterRulesField (boolean value) {
+      this.requestField("restrictive_data_filter_rules", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestSdkUpdateMessageField () {
+      return this.requestSdkUpdateMessageField(true);
+    }
+    public APIRequestGetAssignedApplications requestSdkUpdateMessageField (boolean value) {
+      this.requestField("sdk_update_message", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestSeamlessLoginField () {
+      return this.requestSeamlessLoginField(true);
+    }
+    public APIRequestGetAssignedApplications requestSeamlessLoginField (boolean value) {
+      this.requestField("seamless_login", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestSecureCanvasUrlField () {
+      return this.requestSecureCanvasUrlField(true);
+    }
+    public APIRequestGetAssignedApplications requestSecureCanvasUrlField (boolean value) {
+      this.requestField("secure_canvas_url", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestSecurePageTabUrlField () {
+      return this.requestSecurePageTabUrlField(true);
+    }
+    public APIRequestGetAssignedApplications requestSecurePageTabUrlField (boolean value) {
+      this.requestField("secure_page_tab_url", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestServerIpWhitelistField () {
+      return this.requestServerIpWhitelistField(true);
+    }
+    public APIRequestGetAssignedApplications requestServerIpWhitelistField (boolean value) {
+      this.requestField("server_ip_whitelist", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestSmartLoginBookmarkIconUrlField () {
+      return this.requestSmartLoginBookmarkIconUrlField(true);
+    }
+    public APIRequestGetAssignedApplications requestSmartLoginBookmarkIconUrlField (boolean value) {
+      this.requestField("smart_login_bookmark_icon_url", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestSmartLoginMenuIconUrlField () {
+      return this.requestSmartLoginMenuIconUrlField(true);
+    }
+    public APIRequestGetAssignedApplications requestSmartLoginMenuIconUrlField (boolean value) {
+      this.requestField("smart_login_menu_icon_url", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestSocialDiscoveryField () {
+      return this.requestSocialDiscoveryField(true);
+    }
+    public APIRequestGetAssignedApplications requestSocialDiscoveryField (boolean value) {
+      this.requestField("social_discovery", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestSubcategoryField () {
+      return this.requestSubcategoryField(true);
+    }
+    public APIRequestGetAssignedApplications requestSubcategoryField (boolean value) {
+      this.requestField("subcategory", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestSuggestedEventsSettingField () {
+      return this.requestSuggestedEventsSettingField(true);
+    }
+    public APIRequestGetAssignedApplications requestSuggestedEventsSettingField (boolean value) {
+      this.requestField("suggested_events_setting", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestSupportedPlatformsField () {
+      return this.requestSupportedPlatformsField(true);
+    }
+    public APIRequestGetAssignedApplications requestSupportedPlatformsField (boolean value) {
+      this.requestField("supported_platforms", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestSupportsApprequestsFastAppSwitchField () {
+      return this.requestSupportsApprequestsFastAppSwitchField(true);
+    }
+    public APIRequestGetAssignedApplications requestSupportsApprequestsFastAppSwitchField (boolean value) {
+      this.requestField("supports_apprequests_fast_app_switch", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestSupportsAttributionField () {
+      return this.requestSupportsAttributionField(true);
+    }
+    public APIRequestGetAssignedApplications requestSupportsAttributionField (boolean value) {
+      this.requestField("supports_attribution", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestSupportsImplicitSdkLoggingField () {
+      return this.requestSupportsImplicitSdkLoggingField(true);
+    }
+    public APIRequestGetAssignedApplications requestSupportsImplicitSdkLoggingField (boolean value) {
+      this.requestField("supports_implicit_sdk_logging", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestSuppressNativeIosGdpField () {
+      return this.requestSuppressNativeIosGdpField(true);
+    }
+    public APIRequestGetAssignedApplications requestSuppressNativeIosGdpField (boolean value) {
+      this.requestField("suppress_native_ios_gdp", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestTermsOfServiceUrlField () {
+      return this.requestTermsOfServiceUrlField(true);
+    }
+    public APIRequestGetAssignedApplications requestTermsOfServiceUrlField (boolean value) {
+      this.requestField("terms_of_service_url", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestUrlSchemeSuffixField () {
+      return this.requestUrlSchemeSuffixField(true);
+    }
+    public APIRequestGetAssignedApplications requestUrlSchemeSuffixField (boolean value) {
+      this.requestField("url_scheme_suffix", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestUserSupportEmailField () {
+      return this.requestUserSupportEmailField(true);
+    }
+    public APIRequestGetAssignedApplications requestUserSupportEmailField (boolean value) {
+      this.requestField("user_support_email", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestUserSupportUrlField () {
+      return this.requestUserSupportUrlField(true);
+    }
+    public APIRequestGetAssignedApplications requestUserSupportUrlField (boolean value) {
+      this.requestField("user_support_url", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestWebsiteUrlField () {
+      return this.requestWebsiteUrlField(true);
+    }
+    public APIRequestGetAssignedApplications requestWebsiteUrlField (boolean value) {
+      this.requestField("website_url", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestWeeklyActiveUsersField () {
+      return this.requestWeeklyActiveUsersField(true);
+    }
+    public APIRequestGetAssignedApplications requestWeeklyActiveUsersField (boolean value) {
+      this.requestField("weekly_active_users", value);
+      return this;
+    }
+  }
+
   public static class APIRequestGetAssignedBusinessAssetGroups extends APIRequest<BusinessAssetGroup> {
 
     APINodeList<BusinessAssetGroup> lastResponse = null;
@@ -5288,11 +6233,11 @@ public class User extends APINode {
       "influences",
       "instagram_business_account",
       "is_always_open",
+      "is_calling_eligible",
       "is_chain",
       "is_community_page",
       "is_eligible_for_branded_content",
       "is_eligible_for_disable_connect_ig_btn_for_non_page_admin_am_web",
-      "is_eligible_for_live_boosting_expansion",
       "is_messenger_bot_get_started_enabled",
       "is_messenger_platform_bot",
       "is_owned",
@@ -5930,6 +6875,13 @@ public class User extends APINode {
       this.requestField("is_always_open", value);
       return this;
     }
+    public APIRequestGetAssignedPages requestIsCallingEligibleField () {
+      return this.requestIsCallingEligibleField(true);
+    }
+    public APIRequestGetAssignedPages requestIsCallingEligibleField (boolean value) {
+      this.requestField("is_calling_eligible", value);
+      return this;
+    }
     public APIRequestGetAssignedPages requestIsChainField () {
       return this.requestIsChainField(true);
     }
@@ -5956,13 +6908,6 @@ public class User extends APINode {
     }
     public APIRequestGetAssignedPages requestIsEligibleForDisableConnectIgBtnForNonPageAdminAmWebField (boolean value) {
       this.requestField("is_eligible_for_disable_connect_ig_btn_for_non_page_admin_am_web", value);
-      return this;
-    }
-    public APIRequestGetAssignedPages requestIsEligibleForLiveBoostingExpansionField () {
-      return this.requestIsEligibleForLiveBoostingExpansionField(true);
-    }
-    public APIRequestGetAssignedPages requestIsEligibleForLiveBoostingExpansionField (boolean value) {
-      this.requestField("is_eligible_for_live_boosting_expansion", value);
       return this;
     }
     public APIRequestGetAssignedPages requestIsMessengerBotGetStartedEnabledField () {
@@ -7634,7 +8579,7 @@ public class User extends APINode {
       return this;
     }
 
-    public APIRequestCreateBusiness setTimezoneId (Long timezoneId) {
+    public APIRequestCreateBusiness setTimezoneId (Business.EnumTimezoneId timezoneId) {
       this.setParam("timezone_id", timezoneId);
       return this;
     }
@@ -9151,7 +10096,6 @@ public class User extends APINode {
     }
     public static final String[] PARAMS = {
       "actions",
-      "adaptive_type",
       "album_id",
       "android_key_hash",
       "animated_effect_id",
@@ -9236,7 +10180,6 @@ public class User extends APINode {
       "publish_event_id",
       "published",
       "quote",
-      "react_mode_metadata",
       "ref",
       "referenceable_image_ids",
       "referral_id",
@@ -9326,11 +10269,6 @@ public class User extends APINode {
     }
     public APIRequestCreateFeed setActions (String actions) {
       this.setParam("actions", actions);
-      return this;
-    }
-
-    public APIRequestCreateFeed setAdaptiveType (String adaptiveType) {
-      this.setParam("adaptive_type", adaptiveType);
       return this;
     }
 
@@ -9927,11 +10865,6 @@ public class User extends APINode {
 
     public APIRequestCreateFeed setQuote (String quote) {
       this.setParam("quote", quote);
-      return this;
-    }
-
-    public APIRequestCreateFeed setReactModeMetadata (String reactModeMetadata) {
-      this.setParam("react_mode_metadata", reactModeMetadata);
       return this;
     }
 
@@ -11146,121 +12079,6 @@ public class User extends APINode {
 
   }
 
-  public static class APIRequestCreateGameTime extends APIRequest<APINode> {
-
-    APINode lastResponse = null;
-    @Override
-    public APINode getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "action",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINode parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public APINode execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINode execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINode> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINode>() {
-           public APINode apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateGameTime.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         },
-         MoreExecutors.directExecutor()
-      );
-    };
-
-    public APIRequestCreateGameTime(String nodeId, APIContext context) {
-      super(context, nodeId, "/game_times", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateGameTime setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateGameTime setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateGameTime setAction (EnumAction action) {
-      this.setParam("action", action);
-      return this;
-    }
-    public APIRequestCreateGameTime setAction (String action) {
-      this.setParam("action", action);
-      return this;
-    }
-
-    public APIRequestCreateGameTime requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateGameTime requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateGameTime requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateGameTime requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateGameTime requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateGameTime requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
   public static class APIRequestGetGroups extends APIRequest<Group> {
 
     APINodeList<Group> lastResponse = null;
@@ -12004,11 +12822,11 @@ public class User extends APINode {
       "influences",
       "instagram_business_account",
       "is_always_open",
+      "is_calling_eligible",
       "is_chain",
       "is_community_page",
       "is_eligible_for_branded_content",
       "is_eligible_for_disable_connect_ig_btn_for_non_page_admin_am_web",
-      "is_eligible_for_live_boosting_expansion",
       "is_messenger_bot_get_started_enabled",
       "is_messenger_platform_bot",
       "is_owned",
@@ -12642,6 +13460,13 @@ public class User extends APINode {
       this.requestField("is_always_open", value);
       return this;
     }
+    public APIRequestGetLikes requestIsCallingEligibleField () {
+      return this.requestIsCallingEligibleField(true);
+    }
+    public APIRequestGetLikes requestIsCallingEligibleField (boolean value) {
+      this.requestField("is_calling_eligible", value);
+      return this;
+    }
     public APIRequestGetLikes requestIsChainField () {
       return this.requestIsChainField(true);
     }
@@ -12668,13 +13493,6 @@ public class User extends APINode {
     }
     public APIRequestGetLikes requestIsEligibleForDisableConnectIgBtnForNonPageAdminAmWebField (boolean value) {
       this.requestField("is_eligible_for_disable_connect_ig_btn_for_non_page_admin_am_web", value);
-      return this;
-    }
-    public APIRequestGetLikes requestIsEligibleForLiveBoostingExpansionField () {
-      return this.requestIsEligibleForLiveBoostingExpansionField(true);
-    }
-    public APIRequestGetLikes requestIsEligibleForLiveBoostingExpansionField (boolean value) {
-      this.requestField("is_eligible_for_live_boosting_expansion", value);
       return this;
     }
     public APIRequestGetLikes requestIsMessengerBotGetStartedEnabledField () {
@@ -14058,11 +14876,11 @@ public class User extends APINode {
       "influences",
       "instagram_business_account",
       "is_always_open",
+      "is_calling_eligible",
       "is_chain",
       "is_community_page",
       "is_eligible_for_branded_content",
       "is_eligible_for_disable_connect_ig_btn_for_non_page_admin_am_web",
-      "is_eligible_for_live_boosting_expansion",
       "is_messenger_bot_get_started_enabled",
       "is_messenger_platform_bot",
       "is_owned",
@@ -14696,6 +15514,13 @@ public class User extends APINode {
       this.requestField("is_always_open", value);
       return this;
     }
+    public APIRequestGetMusic requestIsCallingEligibleField () {
+      return this.requestIsCallingEligibleField(true);
+    }
+    public APIRequestGetMusic requestIsCallingEligibleField (boolean value) {
+      this.requestField("is_calling_eligible", value);
+      return this;
+    }
     public APIRequestGetMusic requestIsChainField () {
       return this.requestIsChainField(true);
     }
@@ -14722,13 +15547,6 @@ public class User extends APINode {
     }
     public APIRequestGetMusic requestIsEligibleForDisableConnectIgBtnForNonPageAdminAmWebField (boolean value) {
       this.requestField("is_eligible_for_disable_connect_ig_btn_for_non_page_admin_am_web", value);
-      return this;
-    }
-    public APIRequestGetMusic requestIsEligibleForLiveBoostingExpansionField () {
-      return this.requestIsEligibleForLiveBoostingExpansionField(true);
-    }
-    public APIRequestGetMusic requestIsEligibleForLiveBoostingExpansionField (boolean value) {
-      this.requestField("is_eligible_for_live_boosting_expansion", value);
       return this;
     }
     public APIRequestGetMusic requestIsMessengerBotGetStartedEnabledField () {
@@ -19344,7 +20162,6 @@ public class User extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "adaptive_type",
       "animated_effect_id",
       "application_id",
       "asked_fun_fact_prompt_id",
@@ -19395,7 +20212,6 @@ public class User extends APINode {
       "original_projection_type",
       "privacy",
       "publish_event_id",
-      "react_mode_metadata",
       "referenced_sticker_id",
       "replace_video_id",
       "slideshow_spec",
@@ -19477,11 +20293,6 @@ public class User extends APINode {
       return this;
     }
 
-
-    public APIRequestCreateVideo setAdaptiveType (String adaptiveType) {
-      this.setParam("adaptive_type", adaptiveType);
-      return this;
-    }
 
     public APIRequestCreateVideo setAnimatedEffectId (Long animatedEffectId) {
       this.setParam("animated_effect_id", animatedEffectId);
@@ -19846,11 +20657,6 @@ public class User extends APINode {
     }
     public APIRequestCreateVideo setPublishEventId (String publishEventId) {
       this.setParam("publish_event_id", publishEventId);
-      return this;
-    }
-
-    public APIRequestCreateVideo setReactModeMetadata (String reactModeMetadata) {
-      this.setParam("react_mode_metadata", reactModeMetadata);
       return this;
     }
 
@@ -20873,27 +21679,6 @@ public class User extends APINode {
       private String value;
 
       private EnumType(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumAction {
-      @SerializedName("END")
-      VALUE_END("END"),
-      @SerializedName("HEARTBEAT")
-      VALUE_HEARTBEAT("HEARTBEAT"),
-      @SerializedName("START")
-      VALUE_START("START"),
-      ;
-
-      private String value;
-
-      private EnumAction(String value) {
         this.value = value;
       }
 

@@ -304,10 +304,6 @@ public class InstagramInsightsResult extends APINode {
       VALUE_CLIPS_REPLAYS_COUNT("clips_replays_count"),
       @SerializedName("comments")
       VALUE_COMMENTS("comments"),
-      @SerializedName("engagement")
-      VALUE_ENGAGEMENT("engagement"),
-      @SerializedName("exits")
-      VALUE_EXITS("exits"),
       @SerializedName("follows")
       VALUE_FOLLOWS("follows"),
       @SerializedName("ig_reels_aggregated_all_plays_count")
@@ -336,10 +332,6 @@ public class InstagramInsightsResult extends APINode {
       VALUE_SAVED("saved"),
       @SerializedName("shares")
       VALUE_SHARES("shares"),
-      @SerializedName("taps_back")
-      VALUE_TAPS_BACK("taps_back"),
-      @SerializedName("taps_forward")
-      VALUE_TAPS_FORWARD("taps_forward"),
       @SerializedName("total_interactions")
       VALUE_TOTAL_INTERACTIONS("total_interactions"),
       @SerializedName("video_views")

@@ -43,8 +43,12 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class AdCreativeBrandedContentAds extends APINode {
   @SerializedName("ad_format")
   private Long mAdFormat = null;
+  @SerializedName("content_search_input")
+  private String mContentSearchInput = null;
   @SerializedName("creator_ad_permission_type")
   private String mCreatorAdPermissionType = null;
+  @SerializedName("facebook_boost_post_access_token")
+  private String mFacebookBoostPostAccessToken = null;
   @SerializedName("instagram_boost_post_access_token")
   private String mInstagramBoostPostAccessToken = null;
   @SerializedName("is_mca_internal")
@@ -215,12 +219,30 @@ public class AdCreativeBrandedContentAds extends APINode {
     return this;
   }
 
+  public String getFieldContentSearchInput() {
+    return mContentSearchInput;
+  }
+
+  public AdCreativeBrandedContentAds setFieldContentSearchInput(String value) {
+    this.mContentSearchInput = value;
+    return this;
+  }
+
   public String getFieldCreatorAdPermissionType() {
     return mCreatorAdPermissionType;
   }
 
   public AdCreativeBrandedContentAds setFieldCreatorAdPermissionType(String value) {
     this.mCreatorAdPermissionType = value;
+    return this;
+  }
+
+  public String getFieldFacebookBoostPostAccessToken() {
+    return mFacebookBoostPostAccessToken;
+  }
+
+  public AdCreativeBrandedContentAds setFieldFacebookBoostPostAccessToken(String value) {
+    this.mFacebookBoostPostAccessToken = value;
     return this;
   }
 
@@ -292,7 +314,9 @@ public class AdCreativeBrandedContentAds extends APINode {
 
   public AdCreativeBrandedContentAds copyFrom(AdCreativeBrandedContentAds instance) {
     this.mAdFormat = instance.mAdFormat;
+    this.mContentSearchInput = instance.mContentSearchInput;
     this.mCreatorAdPermissionType = instance.mCreatorAdPermissionType;
+    this.mFacebookBoostPostAccessToken = instance.mFacebookBoostPostAccessToken;
     this.mInstagramBoostPostAccessToken = instance.mInstagramBoostPostAccessToken;
     this.mIsMcaInternal = instance.mIsMcaInternal;
     this.mPartners = instance.mPartners;

@@ -1048,6 +1048,8 @@ public class PageCallToAction extends APINode {
       VALUE_CALL_NOW("CALL_NOW"),
       @SerializedName("CHARITY_DONATE")
       VALUE_CHARITY_DONATE("CHARITY_DONATE"),
+      @SerializedName("CHECK_IN")
+      VALUE_CHECK_IN("CHECK_IN"),
       @SerializedName("CONTACT_US")
       VALUE_CONTACT_US("CONTACT_US"),
       @SerializedName("DONATE_NOW")

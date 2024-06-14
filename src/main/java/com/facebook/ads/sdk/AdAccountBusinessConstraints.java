@@ -48,7 +48,7 @@ public class AdAccountBusinessConstraints extends APINode {
   @SerializedName("placement_controls")
   private Object mPlacementControls = null;
   @SerializedName("status")
-  private String mStatus = null;
+  private EnumStatus mStatus = null;
   protected static Gson gson = null;
 
   public AdAccountBusinessConstraints() {
@@ -227,16 +227,37 @@ public class AdAccountBusinessConstraints extends APINode {
     return this;
   }
 
-  public String getFieldStatus() {
+  public EnumStatus getFieldStatus() {
     return mStatus;
   }
 
-  public AdAccountBusinessConstraints setFieldStatus(String value) {
+  public AdAccountBusinessConstraints setFieldStatus(EnumStatus value) {
     this.mStatus = value;
     return this;
   }
 
 
+
+  public static enum EnumStatus {
+      @SerializedName("ACTIVE")
+      VALUE_ACTIVE("ACTIVE"),
+      @SerializedName("APPLICATION_IN_PROGRESS")
+      VALUE_APPLICATION_IN_PROGRESS("APPLICATION_IN_PROGRESS"),
+      @SerializedName("WITH_CAMPAIGN_ERROR")
+      VALUE_WITH_CAMPAIGN_ERROR("WITH_CAMPAIGN_ERROR"),
+      ;
+
+      private String value;
+
+      private EnumStatus(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
 
 
   synchronized /*package*/ static Gson getGson() {

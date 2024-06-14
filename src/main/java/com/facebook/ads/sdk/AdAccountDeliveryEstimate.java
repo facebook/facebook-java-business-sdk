@@ -304,6 +304,8 @@ public class AdAccountDeliveryEstimate extends APINode {
       VALUE_PAGE_LIKES("PAGE_LIKES"),
       @SerializedName("POST_ENGAGEMENT")
       VALUE_POST_ENGAGEMENT("POST_ENGAGEMENT"),
+      @SerializedName("PROFILE_VISIT")
+      VALUE_PROFILE_VISIT("PROFILE_VISIT"),
       @SerializedName("QUALITY_CALL")
       VALUE_QUALITY_CALL("QUALITY_CALL"),
       @SerializedName("QUALITY_LEAD")

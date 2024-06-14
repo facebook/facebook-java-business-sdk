@@ -55,6 +55,8 @@ public class AudioCopyright extends APINode {
   private VideoCopyrightRule mMatchRule = null;
   @SerializedName("ownership_countries")
   private List<String> mOwnershipCountries = null;
+  @SerializedName("ownership_details")
+  private List<Map<String, Object>> mOwnershipDetails = null;
   @SerializedName("reference_file_status")
   private String mReferenceFileStatus = null;
   @SerializedName("ridge_monitoring_status")
@@ -316,6 +318,10 @@ public class AudioCopyright extends APINode {
     return mOwnershipCountries;
   }
 
+  public List<Map<String, Object>> getFieldOwnershipDetails() {
+    return mOwnershipDetails;
+  }
+
   public String getFieldReferenceFileStatus() {
     return mReferenceFileStatus;
   }
@@ -342,45 +348,52 @@ public class AudioCopyright extends APINode {
 
 
 
-  public static class APIRequestGetUpdateRecords extends APIRequest<APINode> {
+  public static class APIRequestGetUpdateRecords extends APIRequest<MediaCopyrightUpdateRecord> {
 
-    APINodeList<APINode> lastResponse = null;
+    APINodeList<MediaCopyrightUpdateRecord> lastResponse = null;
     @Override
-    public APINodeList<APINode> getLastResponse() {
+    public APINodeList<MediaCopyrightUpdateRecord> getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
     };
 
     public static final String[] FIELDS = {
+      "action_types",
+      "actor",
+      "actor_type",
+      "creation_time",
+      "id",
+      "ownership_countries",
+      "whitelisted_accounts",
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header);
+    public APINodeList<MediaCopyrightUpdateRecord> parseResponse(String response, String header) throws APIException {
+      return MediaCopyrightUpdateRecord.parseResponse(response, getContext(), this, header);
     }
 
     @Override
-    public APINodeList<APINode> execute() throws APIException {
+    public APINodeList<MediaCopyrightUpdateRecord> execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+    public APINodeList<MediaCopyrightUpdateRecord> execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+    public ListenableFuture<APINodeList<MediaCopyrightUpdateRecord>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<APINodeList<MediaCopyrightUpdateRecord>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, APINodeList<MediaCopyrightUpdateRecord>>() {
+           public APINodeList<MediaCopyrightUpdateRecord> apply(ResponseWrapper result) {
              try {
                return APIRequestGetUpdateRecords.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -445,6 +458,55 @@ public class AudioCopyright extends APINode {
       return this;
     }
 
+    public APIRequestGetUpdateRecords requestActionTypesField () {
+      return this.requestActionTypesField(true);
+    }
+    public APIRequestGetUpdateRecords requestActionTypesField (boolean value) {
+      this.requestField("action_types", value);
+      return this;
+    }
+    public APIRequestGetUpdateRecords requestActorField () {
+      return this.requestActorField(true);
+    }
+    public APIRequestGetUpdateRecords requestActorField (boolean value) {
+      this.requestField("actor", value);
+      return this;
+    }
+    public APIRequestGetUpdateRecords requestActorTypeField () {
+      return this.requestActorTypeField(true);
+    }
+    public APIRequestGetUpdateRecords requestActorTypeField (boolean value) {
+      this.requestField("actor_type", value);
+      return this;
+    }
+    public APIRequestGetUpdateRecords requestCreationTimeField () {
+      return this.requestCreationTimeField(true);
+    }
+    public APIRequestGetUpdateRecords requestCreationTimeField (boolean value) {
+      this.requestField("creation_time", value);
+      return this;
+    }
+    public APIRequestGetUpdateRecords requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetUpdateRecords requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetUpdateRecords requestOwnershipCountriesField () {
+      return this.requestOwnershipCountriesField(true);
+    }
+    public APIRequestGetUpdateRecords requestOwnershipCountriesField (boolean value) {
+      this.requestField("ownership_countries", value);
+      return this;
+    }
+    public APIRequestGetUpdateRecords requestWhitelistedAccountsField () {
+      return this.requestWhitelistedAccountsField(true);
+    }
+    public APIRequestGetUpdateRecords requestWhitelistedAccountsField (boolean value) {
+      this.requestField("whitelisted_accounts", value);
+      return this;
+    }
   }
 
   public static class APIRequestGet extends APIRequest<AudioCopyright> {
@@ -465,6 +527,7 @@ public class AudioCopyright extends APINode {
       "isrc",
       "match_rule",
       "ownership_countries",
+      "ownership_details",
       "reference_file_status",
       "ridge_monitoring_status",
       "tags",
@@ -612,6 +675,13 @@ public class AudioCopyright extends APINode {
       this.requestField("ownership_countries", value);
       return this;
     }
+    public APIRequestGet requestOwnershipDetailsField () {
+      return this.requestOwnershipDetailsField(true);
+    }
+    public APIRequestGet requestOwnershipDetailsField (boolean value) {
+      this.requestField("ownership_details", value);
+      return this;
+    }
     public APIRequestGet requestReferenceFileStatusField () {
       return this.requestReferenceFileStatusField(true);
     }
@@ -678,6 +748,7 @@ public class AudioCopyright extends APINode {
     this.mIsrc = instance.mIsrc;
     this.mMatchRule = instance.mMatchRule;
     this.mOwnershipCountries = instance.mOwnershipCountries;
+    this.mOwnershipDetails = instance.mOwnershipDetails;
     this.mReferenceFileStatus = instance.mReferenceFileStatus;
     this.mRidgeMonitoringStatus = instance.mRidgeMonitoringStatus;
     this.mTags = instance.mTags;

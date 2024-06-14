@@ -356,8 +356,8 @@ public class CustomAudience extends APINode {
     return new APIRequestGetSessions(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestGetSharedAccountInfo getSharedAccountInfo() {
-    return new APIRequestGetSharedAccountInfo(this.getPrefixedId().toString(), context);
+  public APIRequestGetShareDAccountInfo getShareDAccountInfo() {
+    return new APIRequestGetShareDAccountInfo(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestDeleteUsers deleteUsers() {
@@ -1507,6 +1507,7 @@ public class CustomAudience extends APINode {
       "conversion_specs",
       "created_time",
       "creative",
+      "creative_asset_groups_spec",
       "demolink_hash",
       "display_sequence",
       "effective_status",
@@ -1760,6 +1761,13 @@ public class CustomAudience extends APINode {
     }
     public APIRequestGetAds requestCreativeField (boolean value) {
       this.requestField("creative", value);
+      return this;
+    }
+    public APIRequestGetAds requestCreativeAssetGroupsSpecField () {
+      return this.requestCreativeAssetGroupsSpecField(true);
+    }
+    public APIRequestGetAds requestCreativeAssetGroupsSpecField (boolean value) {
+      this.requestField("creative_asset_groups_spec", value);
       return this;
     }
     public APIRequestGetAds requestDemolinkHashField () {
@@ -2330,7 +2338,7 @@ public class CustomAudience extends APINode {
     }
   }
 
-  public static class APIRequestGetSharedAccountInfo extends APIRequest<CustomAudiencesharedAccountInfo> {
+  public static class APIRequestGetShareDAccountInfo extends APIRequest<CustomAudiencesharedAccountInfo> {
 
     APINodeList<CustomAudiencesharedAccountInfo> lastResponse = null;
     @Override
@@ -2375,7 +2383,7 @@ public class CustomAudience extends APINode {
         new Function<ResponseWrapper, APINodeList<CustomAudiencesharedAccountInfo>>() {
            public APINodeList<CustomAudiencesharedAccountInfo> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetSharedAccountInfo.this.parseResponse(result.getBody(), result.getHeader());
+               return APIRequestGetShareDAccountInfo.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2385,28 +2393,28 @@ public class CustomAudience extends APINode {
       );
     };
 
-    public APIRequestGetSharedAccountInfo(String nodeId, APIContext context) {
+    public APIRequestGetShareDAccountInfo(String nodeId, APIContext context) {
       super(context, nodeId, "/shared_account_info", "GET", Arrays.asList(PARAMS));
     }
 
     @Override
-    public APIRequestGetSharedAccountInfo setParam(String param, Object value) {
+    public APIRequestGetShareDAccountInfo setParam(String param, Object value) {
       setParamInternal(param, value);
       return this;
     }
 
     @Override
-    public APIRequestGetSharedAccountInfo setParams(Map<String, Object> params) {
+    public APIRequestGetShareDAccountInfo setParams(Map<String, Object> params) {
       setParamsInternal(params);
       return this;
     }
 
 
-    public APIRequestGetSharedAccountInfo requestAllFields () {
+    public APIRequestGetShareDAccountInfo requestAllFields () {
       return this.requestAllFields(true);
     }
 
-    public APIRequestGetSharedAccountInfo requestAllFields (boolean value) {
+    public APIRequestGetShareDAccountInfo requestAllFields (boolean value) {
       for (String field : FIELDS) {
         this.requestField(field, value);
       }
@@ -2414,12 +2422,12 @@ public class CustomAudience extends APINode {
     }
 
     @Override
-    public APIRequestGetSharedAccountInfo requestFields (List<String> fields) {
+    public APIRequestGetShareDAccountInfo requestFields (List<String> fields) {
       return this.requestFields(fields, true);
     }
 
     @Override
-    public APIRequestGetSharedAccountInfo requestFields (List<String> fields, boolean value) {
+    public APIRequestGetShareDAccountInfo requestFields (List<String> fields, boolean value) {
       for (String field : fields) {
         this.requestField(field, value);
       }
@@ -2427,49 +2435,49 @@ public class CustomAudience extends APINode {
     }
 
     @Override
-    public APIRequestGetSharedAccountInfo requestField (String field) {
+    public APIRequestGetShareDAccountInfo requestField (String field) {
       this.requestField(field, true);
       return this;
     }
 
     @Override
-    public APIRequestGetSharedAccountInfo requestField (String field, boolean value) {
+    public APIRequestGetShareDAccountInfo requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
 
-    public APIRequestGetSharedAccountInfo requestAccountIdField () {
+    public APIRequestGetShareDAccountInfo requestAccountIdField () {
       return this.requestAccountIdField(true);
     }
-    public APIRequestGetSharedAccountInfo requestAccountIdField (boolean value) {
+    public APIRequestGetShareDAccountInfo requestAccountIdField (boolean value) {
       this.requestField("account_id", value);
       return this;
     }
-    public APIRequestGetSharedAccountInfo requestAccountNameField () {
+    public APIRequestGetShareDAccountInfo requestAccountNameField () {
       return this.requestAccountNameField(true);
     }
-    public APIRequestGetSharedAccountInfo requestAccountNameField (boolean value) {
+    public APIRequestGetShareDAccountInfo requestAccountNameField (boolean value) {
       this.requestField("account_name", value);
       return this;
     }
-    public APIRequestGetSharedAccountInfo requestBusinessIdField () {
+    public APIRequestGetShareDAccountInfo requestBusinessIdField () {
       return this.requestBusinessIdField(true);
     }
-    public APIRequestGetSharedAccountInfo requestBusinessIdField (boolean value) {
+    public APIRequestGetShareDAccountInfo requestBusinessIdField (boolean value) {
       this.requestField("business_id", value);
       return this;
     }
-    public APIRequestGetSharedAccountInfo requestBusinessNameField () {
+    public APIRequestGetShareDAccountInfo requestBusinessNameField () {
       return this.requestBusinessNameField(true);
     }
-    public APIRequestGetSharedAccountInfo requestBusinessNameField (boolean value) {
+    public APIRequestGetShareDAccountInfo requestBusinessNameField (boolean value) {
       this.requestField("business_name", value);
       return this;
     }
-    public APIRequestGetSharedAccountInfo requestSharingStatusField () {
+    public APIRequestGetShareDAccountInfo requestSharingStatusField () {
       return this.requestSharingStatusField(true);
     }
-    public APIRequestGetSharedAccountInfo requestSharingStatusField (boolean value) {
+    public APIRequestGetShareDAccountInfo requestSharingStatusField (boolean value) {
       this.requestField("sharing_status", value);
       return this;
     }
@@ -3743,8 +3751,6 @@ public class CustomAudience extends APINode {
       VALUE_JOB("JOB"),
       @SerializedName("LOCAL_SERVICE_BUSINESS")
       VALUE_LOCAL_SERVICE_BUSINESS("LOCAL_SERVICE_BUSINESS"),
-      @SerializedName("LOCATION_BASED_ITEM")
-      VALUE_LOCATION_BASED_ITEM("LOCATION_BASED_ITEM"),
       @SerializedName("MEDIA_TITLE")
       VALUE_MEDIA_TITLE("MEDIA_TITLE"),
       @SerializedName("OFFLINE_PRODUCT")

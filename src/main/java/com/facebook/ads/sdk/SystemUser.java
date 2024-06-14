@@ -1189,11 +1189,11 @@ public class SystemUser extends APINode {
       "influences",
       "instagram_business_account",
       "is_always_open",
+      "is_calling_eligible",
       "is_chain",
       "is_community_page",
       "is_eligible_for_branded_content",
       "is_eligible_for_disable_connect_ig_btn_for_non_page_admin_am_web",
-      "is_eligible_for_live_boosting_expansion",
       "is_messenger_bot_get_started_enabled",
       "is_messenger_platform_bot",
       "is_owned",
@@ -1831,6 +1831,13 @@ public class SystemUser extends APINode {
       this.requestField("is_always_open", value);
       return this;
     }
+    public APIRequestGetAssignedPages requestIsCallingEligibleField () {
+      return this.requestIsCallingEligibleField(true);
+    }
+    public APIRequestGetAssignedPages requestIsCallingEligibleField (boolean value) {
+      this.requestField("is_calling_eligible", value);
+      return this;
+    }
     public APIRequestGetAssignedPages requestIsChainField () {
       return this.requestIsChainField(true);
     }
@@ -1857,13 +1864,6 @@ public class SystemUser extends APINode {
     }
     public APIRequestGetAssignedPages requestIsEligibleForDisableConnectIgBtnForNonPageAdminAmWebField (boolean value) {
       this.requestField("is_eligible_for_disable_connect_ig_btn_for_non_page_admin_am_web", value);
-      return this;
-    }
-    public APIRequestGetAssignedPages requestIsEligibleForLiveBoostingExpansionField () {
-      return this.requestIsEligibleForLiveBoostingExpansionField(true);
-    }
-    public APIRequestGetAssignedPages requestIsEligibleForLiveBoostingExpansionField (boolean value) {
-      this.requestField("is_eligible_for_live_boosting_expansion", value);
       return this;
     }
     public APIRequestGetAssignedPages requestIsMessengerBotGetStartedEnabledField () {

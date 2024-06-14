@@ -80,7 +80,7 @@ public class Canvas extends APINode {
   @SerializedName("property_list")
   private List<String> mPropertyList = null;
   @SerializedName("source_template")
-  private Object mSourceTemplate = null;
+  private CanvasTemplate mSourceTemplate = null;
   @SerializedName("store_url")
   private String mStoreUrl = null;
   @SerializedName("style_list")
@@ -412,7 +412,10 @@ public class Canvas extends APINode {
     return mPropertyList;
   }
 
-  public Object getFieldSourceTemplate() {
+  public CanvasTemplate getFieldSourceTemplate() {
+    if (mSourceTemplate != null) {
+      mSourceTemplate.context = getContext();
+    }
     return mSourceTemplate;
   }
 

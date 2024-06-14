@@ -41,8 +41,6 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class OpenBridgeConfiguration extends APINode {
-  @SerializedName("access_key")
-  private String mAccessKey = null;
   @SerializedName("active")
   private Boolean mActive = null;
   @SerializedName("endpoint")
@@ -57,6 +55,8 @@ public class OpenBridgeConfiguration extends APINode {
   private String mHostExternalId = null;
   @SerializedName("id")
   private String mId = null;
+  @SerializedName("instance_id")
+  private String mInstanceId = null;
   @SerializedName("pixel_id")
   private String mPixelId = null;
   protected static Gson gson = null;
@@ -281,10 +281,6 @@ public class OpenBridgeConfiguration extends APINode {
   }
 
 
-  public String getFieldAccessKey() {
-    return mAccessKey;
-  }
-
   public Boolean getFieldActive() {
     return mActive;
   }
@@ -311,6 +307,10 @@ public class OpenBridgeConfiguration extends APINode {
 
   public String getFieldId() {
     return mId;
+  }
+
+  public String getFieldInstanceId() {
+    return mInstanceId;
   }
 
   public String getFieldPixelId() {
@@ -435,7 +435,6 @@ public class OpenBridgeConfiguration extends APINode {
     };
 
     public static final String[] FIELDS = {
-      "access_key",
       "active",
       "endpoint",
       "fallback_domain",
@@ -443,6 +442,7 @@ public class OpenBridgeConfiguration extends APINode {
       "host_business_id",
       "host_external_id",
       "id",
+      "instance_id",
       "pixel_id",
     };
 
@@ -536,13 +536,6 @@ public class OpenBridgeConfiguration extends APINode {
       return this;
     }
 
-    public APIRequestGet requestAccessKeyField () {
-      return this.requestAccessKeyField(true);
-    }
-    public APIRequestGet requestAccessKeyField (boolean value) {
-      this.requestField("access_key", value);
-      return this;
-    }
     public APIRequestGet requestActiveField () {
       return this.requestActiveField(true);
     }
@@ -592,6 +585,13 @@ public class OpenBridgeConfiguration extends APINode {
       this.requestField("id", value);
       return this;
     }
+    public APIRequestGet requestInstanceIdField () {
+      return this.requestInstanceIdField(true);
+    }
+    public APIRequestGet requestInstanceIdField (boolean value) {
+      this.requestField("instance_id", value);
+      return this;
+    }
     public APIRequestGet requestPixelIdField () {
       return this.requestPixelIdField(true);
     }
@@ -609,13 +609,13 @@ public class OpenBridgeConfiguration extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "access_key",
       "active",
       "endpoint",
       "fallback_domain",
       "fallback_domain_enabled",
       "host_business_id",
       "host_external_id",
+      "instance_id",
     };
 
     public static final String[] FIELDS = {
@@ -675,11 +675,6 @@ public class OpenBridgeConfiguration extends APINode {
     }
 
 
-    public APIRequestUpdate setAccessKey (String accessKey) {
-      this.setParam("access_key", accessKey);
-      return this;
-    }
-
     public APIRequestUpdate setActive (Boolean active) {
       this.setParam("active", active);
       return this;
@@ -719,6 +714,11 @@ public class OpenBridgeConfiguration extends APINode {
 
     public APIRequestUpdate setHostExternalId (String hostExternalId) {
       this.setParam("host_external_id", hostExternalId);
+      return this;
+    }
+
+    public APIRequestUpdate setInstanceId (String instanceId) {
+      this.setParam("instance_id", instanceId);
       return this;
     }
 
@@ -775,7 +775,6 @@ public class OpenBridgeConfiguration extends APINode {
   }
 
   public OpenBridgeConfiguration copyFrom(OpenBridgeConfiguration instance) {
-    this.mAccessKey = instance.mAccessKey;
     this.mActive = instance.mActive;
     this.mEndpoint = instance.mEndpoint;
     this.mFallbackDomain = instance.mFallbackDomain;
@@ -783,6 +782,7 @@ public class OpenBridgeConfiguration extends APINode {
     this.mHostBusinessId = instance.mHostBusinessId;
     this.mHostExternalId = instance.mHostExternalId;
     this.mId = instance.mId;
+    this.mInstanceId = instance.mInstanceId;
     this.mPixelId = instance.mPixelId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

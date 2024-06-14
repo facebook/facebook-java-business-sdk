@@ -1150,6 +1150,7 @@ public class Campaign extends APINode {
       "conversion_specs",
       "created_time",
       "creative",
+      "creative_asset_groups_spec",
       "demolink_hash",
       "display_sequence",
       "effective_status",
@@ -1423,6 +1424,13 @@ public class Campaign extends APINode {
       this.requestField("creative", value);
       return this;
     }
+    public APIRequestGetAds requestCreativeAssetGroupsSpecField () {
+      return this.requestCreativeAssetGroupsSpecField(true);
+    }
+    public APIRequestGetAds requestCreativeAssetGroupsSpecField (boolean value) {
+      this.requestField("creative_asset_groups_spec", value);
+      return this;
+    }
     public APIRequestGetAds requestDemolinkHashField () {
       return this.requestDemolinkHashField(true);
     }
@@ -1621,6 +1629,7 @@ public class Campaign extends APINode {
       "promoted_object",
       "recommendations",
       "recurring_budget_semantics",
+      "regional_regulated_categories",
       "regional_regulation_identities",
       "review_feedback",
       "rf_prediction_id",
@@ -2096,6 +2105,13 @@ public class Campaign extends APINode {
     }
     public APIRequestGetAdSets requestRecurringBudgetSemanticsField (boolean value) {
       this.requestField("recurring_budget_semantics", value);
+      return this;
+    }
+    public APIRequestGetAdSets requestRegionalRegulatedCategoriesField () {
+      return this.requestRegionalRegulatedCategoriesField(true);
+    }
+    public APIRequestGetAdSets requestRegionalRegulatedCategoriesField (boolean value) {
+      this.requestField("regional_regulated_categories", value);
       return this;
     }
     public APIRequestGetAdSets requestRegionalRegulationIdentitiesField () {

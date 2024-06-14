@@ -340,6 +340,7 @@ public class AdLabel extends APINode {
       "categorization_criteria",
       "category_media_source",
       "collaborative_ads_lsb_image_bank_id",
+      "contextual_multi_ads",
       "creative_sourcing_spec",
       "degrees_of_freedom_spec",
       "destination_set_id",
@@ -365,7 +366,6 @@ public class AdLabel extends APINode {
       "link_destination_display_url",
       "link_og_id",
       "link_url",
-      "messenger_sponsored_message",
       "name",
       "object_id",
       "object_store_url",
@@ -374,6 +374,7 @@ public class AdLabel extends APINode {
       "object_type",
       "object_url",
       "omnichannel_link_spec",
+      "page_welcome_message",
       "photo_album_source_object_story_id",
       "place_page_set_id",
       "platform_customizations",
@@ -588,6 +589,13 @@ public class AdLabel extends APINode {
       this.requestField("collaborative_ads_lsb_image_bank_id", value);
       return this;
     }
+    public APIRequestGetAdCreatives requestContextualMultiAdsField () {
+      return this.requestContextualMultiAdsField(true);
+    }
+    public APIRequestGetAdCreatives requestContextualMultiAdsField (boolean value) {
+      this.requestField("contextual_multi_ads", value);
+      return this;
+    }
     public APIRequestGetAdCreatives requestCreativeSourcingSpecField () {
       return this.requestCreativeSourcingSpecField(true);
     }
@@ -763,13 +771,6 @@ public class AdLabel extends APINode {
       this.requestField("link_url", value);
       return this;
     }
-    public APIRequestGetAdCreatives requestMessengerSponsoredMessageField () {
-      return this.requestMessengerSponsoredMessageField(true);
-    }
-    public APIRequestGetAdCreatives requestMessengerSponsoredMessageField (boolean value) {
-      this.requestField("messenger_sponsored_message", value);
-      return this;
-    }
     public APIRequestGetAdCreatives requestNameField () {
       return this.requestNameField(true);
     }
@@ -824,6 +825,13 @@ public class AdLabel extends APINode {
     }
     public APIRequestGetAdCreatives requestOmnichannelLinkSpecField (boolean value) {
       this.requestField("omnichannel_link_spec", value);
+      return this;
+    }
+    public APIRequestGetAdCreatives requestPageWelcomeMessageField () {
+      return this.requestPageWelcomeMessageField(true);
+    }
+    public APIRequestGetAdCreatives requestPageWelcomeMessageField (boolean value) {
+      this.requestField("page_welcome_message", value);
       return this;
     }
     public APIRequestGetAdCreatives requestPhotoAlbumSourceObjectStoryIdField () {
@@ -976,6 +984,7 @@ public class AdLabel extends APINode {
       "conversion_specs",
       "created_time",
       "creative",
+      "creative_asset_groups_spec",
       "demolink_hash",
       "display_sequence",
       "effective_status",
@@ -1213,6 +1222,13 @@ public class AdLabel extends APINode {
       this.requestField("creative", value);
       return this;
     }
+    public APIRequestGetAds requestCreativeAssetGroupsSpecField () {
+      return this.requestCreativeAssetGroupsSpecField(true);
+    }
+    public APIRequestGetAds requestCreativeAssetGroupsSpecField (boolean value) {
+      this.requestField("creative_asset_groups_spec", value);
+      return this;
+    }
     public APIRequestGetAds requestDemolinkHashField () {
       return this.requestDemolinkHashField(true);
     }
@@ -1407,6 +1423,7 @@ public class AdLabel extends APINode {
       "promoted_object",
       "recommendations",
       "recurring_budget_semantics",
+      "regional_regulated_categories",
       "regional_regulation_identities",
       "review_feedback",
       "rf_prediction_id",
@@ -1846,6 +1863,13 @@ public class AdLabel extends APINode {
     }
     public APIRequestGetAdSets requestRecurringBudgetSemanticsField (boolean value) {
       this.requestField("recurring_budget_semantics", value);
+      return this;
+    }
+    public APIRequestGetAdSets requestRegionalRegulatedCategoriesField () {
+      return this.requestRegionalRegulatedCategoriesField(true);
+    }
+    public APIRequestGetAdSets requestRegionalRegulatedCategoriesField (boolean value) {
+      this.requestField("regional_regulated_categories", value);
       return this;
     }
     public APIRequestGetAdSets requestRegionalRegulationIdentitiesField () {

@@ -1027,6 +1027,7 @@ public class AdStudyCell extends APINode {
       "promoted_object",
       "recommendations",
       "recurring_budget_semantics",
+      "regional_regulated_categories",
       "regional_regulation_identities",
       "review_feedback",
       "rf_prediction_id",
@@ -1466,6 +1467,13 @@ public class AdStudyCell extends APINode {
     }
     public APIRequestGetAdSets requestRecurringBudgetSemanticsField (boolean value) {
       this.requestField("recurring_budget_semantics", value);
+      return this;
+    }
+    public APIRequestGetAdSets requestRegionalRegulatedCategoriesField () {
+      return this.requestRegionalRegulatedCategoriesField(true);
+    }
+    public APIRequestGetAdSets requestRegionalRegulatedCategoriesField (boolean value) {
+      this.requestField("regional_regulated_categories", value);
       return this;
     }
     public APIRequestGetAdSets requestRegionalRegulationIdentitiesField () {

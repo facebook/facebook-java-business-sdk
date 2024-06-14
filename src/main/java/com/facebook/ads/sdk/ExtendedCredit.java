@@ -304,8 +304,8 @@ public class ExtendedCredit extends APINode {
     return new APIRequestCreateOwningCreditAllocationConfig(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestCreateWhatsappCreditSharingAndAttach createWhatsappCreditSharingAndAttach() {
-    return new APIRequestCreateWhatsappCreditSharingAndAttach(this.getPrefixedId().toString(), context);
+  public APIRequestCreateWhatsAppCreditSharingAnDAttach createWhatsAppCreditSharingAnDAttach() {
+    return new APIRequestCreateWhatsAppCreditSharingAnDAttach(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGet get() {
@@ -1046,7 +1046,7 @@ public class ExtendedCredit extends APINode {
 
   }
 
-  public static class APIRequestCreateWhatsappCreditSharingAndAttach extends APIRequest<APINode> {
+  public static class APIRequestCreateWhatsAppCreditSharingAnDAttach extends APIRequest<APINode> {
 
     APINode lastResponse = null;
     @Override
@@ -1088,7 +1088,7 @@ public class ExtendedCredit extends APINode {
         new Function<ResponseWrapper, APINode>() {
            public APINode apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateWhatsappCreditSharingAndAttach.this.parseResponse(result.getBody(), result.getHeader());
+               return APIRequestCreateWhatsAppCreditSharingAnDAttach.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1098,38 +1098,38 @@ public class ExtendedCredit extends APINode {
       );
     };
 
-    public APIRequestCreateWhatsappCreditSharingAndAttach(String nodeId, APIContext context) {
+    public APIRequestCreateWhatsAppCreditSharingAnDAttach(String nodeId, APIContext context) {
       super(context, nodeId, "/whatsapp_credit_sharing_and_attach", "POST", Arrays.asList(PARAMS));
     }
 
     @Override
-    public APIRequestCreateWhatsappCreditSharingAndAttach setParam(String param, Object value) {
+    public APIRequestCreateWhatsAppCreditSharingAnDAttach setParam(String param, Object value) {
       setParamInternal(param, value);
       return this;
     }
 
     @Override
-    public APIRequestCreateWhatsappCreditSharingAndAttach setParams(Map<String, Object> params) {
+    public APIRequestCreateWhatsAppCreditSharingAnDAttach setParams(Map<String, Object> params) {
       setParamsInternal(params);
       return this;
     }
 
 
-    public APIRequestCreateWhatsappCreditSharingAndAttach setWabaCurrency (String wabaCurrency) {
+    public APIRequestCreateWhatsAppCreditSharingAnDAttach setWabaCurrency (String wabaCurrency) {
       this.setParam("waba_currency", wabaCurrency);
       return this;
     }
 
-    public APIRequestCreateWhatsappCreditSharingAndAttach setWabaId (String wabaId) {
+    public APIRequestCreateWhatsAppCreditSharingAnDAttach setWabaId (String wabaId) {
       this.setParam("waba_id", wabaId);
       return this;
     }
 
-    public APIRequestCreateWhatsappCreditSharingAndAttach requestAllFields () {
+    public APIRequestCreateWhatsAppCreditSharingAnDAttach requestAllFields () {
       return this.requestAllFields(true);
     }
 
-    public APIRequestCreateWhatsappCreditSharingAndAttach requestAllFields (boolean value) {
+    public APIRequestCreateWhatsAppCreditSharingAnDAttach requestAllFields (boolean value) {
       for (String field : FIELDS) {
         this.requestField(field, value);
       }
@@ -1137,12 +1137,12 @@ public class ExtendedCredit extends APINode {
     }
 
     @Override
-    public APIRequestCreateWhatsappCreditSharingAndAttach requestFields (List<String> fields) {
+    public APIRequestCreateWhatsAppCreditSharingAnDAttach requestFields (List<String> fields) {
       return this.requestFields(fields, true);
     }
 
     @Override
-    public APIRequestCreateWhatsappCreditSharingAndAttach requestFields (List<String> fields, boolean value) {
+    public APIRequestCreateWhatsAppCreditSharingAnDAttach requestFields (List<String> fields, boolean value) {
       for (String field : fields) {
         this.requestField(field, value);
       }
@@ -1150,13 +1150,13 @@ public class ExtendedCredit extends APINode {
     }
 
     @Override
-    public APIRequestCreateWhatsappCreditSharingAndAttach requestField (String field) {
+    public APIRequestCreateWhatsAppCreditSharingAnDAttach requestField (String field) {
       this.requestField(field, true);
       return this;
     }
 
     @Override
-    public APIRequestCreateWhatsappCreditSharingAndAttach requestField (String field, boolean value) {
+    public APIRequestCreateWhatsAppCreditSharingAnDAttach requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }

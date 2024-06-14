@@ -48,7 +48,7 @@ public class ExtendedCreditInvoiceGroup extends APINode {
   @SerializedName("customer_po_number")
   private String mCustomerPoNumber = null;
   @SerializedName("email")
-  private Object mEmail = null;
+  private ExtendedCreditEmail mEmail = null;
   @SerializedName("emails")
   private List<String> mEmails = null;
   @SerializedName("id")
@@ -308,7 +308,7 @@ public class ExtendedCreditInvoiceGroup extends APINode {
     return mCustomerPoNumber;
   }
 
-  public Object getFieldEmail() {
+  public ExtendedCreditEmail getFieldEmail() {
     return mEmail;
   }
 

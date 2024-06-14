@@ -361,6 +361,8 @@ public class ProductCatalogDiagnosticGroup extends APINode {
   public static enum EnumAffectedEntity {
       @SerializedName("product_catalog")
       VALUE_PRODUCT_CATALOG("product_catalog"),
+      @SerializedName("product_event")
+      VALUE_PRODUCT_EVENT("product_event"),
       @SerializedName("product_item")
       VALUE_PRODUCT_ITEM("product_item"),
       @SerializedName("product_set")
@@ -430,6 +432,8 @@ public class ProductCatalogDiagnosticGroup extends APINode {
       VALUE_CHECKOUT("CHECKOUT"),
       @SerializedName("DA_VISIBILITY_ISSUES")
       VALUE_DA_VISIBILITY_ISSUES("DA_VISIBILITY_ISSUES"),
+      @SerializedName("EVENT_SOURCE_ISSUES")
+      VALUE_EVENT_SOURCE_ISSUES("EVENT_SOURCE_ISSUES"),
       @SerializedName("IMAGE_QUALITY")
       VALUE_IMAGE_QUALITY("IMAGE_QUALITY"),
       @SerializedName("LOW_QUALITY_TITLE_AND_DESCRIPTION")
@@ -455,6 +459,8 @@ public class ProductCatalogDiagnosticGroup extends APINode {
   public static enum EnumAffectedEntities {
       @SerializedName("product_catalog")
       VALUE_PRODUCT_CATALOG("product_catalog"),
+      @SerializedName("product_event")
+      VALUE_PRODUCT_EVENT("product_event"),
       @SerializedName("product_item")
       VALUE_PRODUCT_ITEM("product_item"),
       @SerializedName("product_set")
@@ -505,6 +511,8 @@ public class ProductCatalogDiagnosticGroup extends APINode {
       VALUE_CHECKOUT("CHECKOUT"),
       @SerializedName("DA_VISIBILITY_ISSUES")
       VALUE_DA_VISIBILITY_ISSUES("DA_VISIBILITY_ISSUES"),
+      @SerializedName("EVENT_SOURCE_ISSUES")
+      VALUE_EVENT_SOURCE_ISSUES("EVENT_SOURCE_ISSUES"),
       @SerializedName("IMAGE_QUALITY")
       VALUE_IMAGE_QUALITY("IMAGE_QUALITY"),
       @SerializedName("LOW_QUALITY_TITLE_AND_DESCRIPTION")

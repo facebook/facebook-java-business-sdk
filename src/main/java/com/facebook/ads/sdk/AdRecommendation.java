@@ -55,6 +55,8 @@ public class AdRecommendation extends APINode {
   private AdRecommendationData mRecommendationData = null;
   @SerializedName("title")
   private String mTitle = null;
+  @SerializedName("value")
+  private String mValue = null;
   protected static Gson gson = null;
 
   public AdRecommendation() {
@@ -274,6 +276,15 @@ public class AdRecommendation extends APINode {
     return this;
   }
 
+  public String getFieldValue() {
+    return mValue;
+  }
+
+  public AdRecommendation setFieldValue(String value) {
+    this.mValue = value;
+    return this;
+  }
+
 
 
   public static enum EnumConfidence {
@@ -340,6 +351,7 @@ public class AdRecommendation extends APINode {
     this.mMessage = instance.mMessage;
     this.mRecommendationData = instance.mRecommendationData;
     this.mTitle = instance.mTitle;
+    this.mValue = instance.mValue;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

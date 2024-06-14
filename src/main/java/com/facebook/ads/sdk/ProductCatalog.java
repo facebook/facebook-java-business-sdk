@@ -336,10 +336,6 @@ public class ProductCatalog extends APINode {
     return new APIRequestGetCheckBatchRequestStatus(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestGetCollaborativeAdsEventStats getCollaborativeAdsEventStats() {
-    return new APIRequestGetCollaborativeAdsEventStats(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetCollaborativeAdsLsbImageBank getCollaborativeAdsLsbImageBank() {
     return new APIRequestGetCollaborativeAdsLsbImageBank(this.getPrefixedId().toString(), context);
   }
@@ -350,6 +346,10 @@ public class ProductCatalog extends APINode {
 
   public APIRequestCreateCpasLsbImageBank createCpasLsbImageBank() {
     return new APIRequestCreateCpasLsbImageBank(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetCreatorAssetCreatives getCreatorAssetCreatives() {
+    return new APIRequestGetCreatorAssetCreatives(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetDataSources getDataSources() {
@@ -986,6 +986,7 @@ public class ProductCatalog extends APINode {
       "business",
       "permitted_roles",
       "permitted_tasks",
+      "skip_default_utms",
       "utm_settings",
     };
 
@@ -1066,6 +1067,15 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestCreateAgency setPermittedTasks (String permittedTasks) {
       this.setParam("permitted_tasks", permittedTasks);
+      return this;
+    }
+
+    public APIRequestCreateAgency setSkipDefaultUtms (Boolean skipDefaultUtms) {
+      this.setParam("skip_default_utms", skipDefaultUtms);
+      return this;
+    }
+    public APIRequestCreateAgency setSkipDefaultUtms (String skipDefaultUtms) {
+      this.setParam("skip_default_utms", skipDefaultUtms);
       return this;
     }
 
@@ -2073,10 +2083,6 @@ public class ProductCatalog extends APINode {
     }
 
 
-    public APIRequestCreateCatalogStore setPage (Long page) {
-      this.setParam("page", page);
-      return this;
-    }
     public APIRequestCreateCatalogStore setPage (String page) {
       this.setParam("page", page);
       return this;
@@ -2603,198 +2609,48 @@ public class ProductCatalog extends APINode {
     }
   }
 
-  public static class APIRequestGetCollaborativeAdsEventStats extends APIRequest<CatalogSegmentAllMatchCountLaser> {
+  public static class APIRequestGetCollaborativeAdsLsbImageBank extends APIRequest<CPASLsbImageBank> {
 
-    APINodeList<CatalogSegmentAllMatchCountLaser> lastResponse = null;
+    APINodeList<CPASLsbImageBank> lastResponse = null;
     @Override
-    public APINodeList<CatalogSegmentAllMatchCountLaser> getLastResponse() {
+    public APINodeList<CPASLsbImageBank> getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
     };
 
     public static final String[] FIELDS = {
-      "date_start",
-      "date_stop",
-      "event",
-      "source",
-      "total_matched_content_ids",
-      "unique_matched_content_ids",
+      "ad_group_id",
+      "catalog_segment_proxy_id",
+      "id",
     };
 
     @Override
-    public APINodeList<CatalogSegmentAllMatchCountLaser> parseResponse(String response, String header) throws APIException {
-      return CatalogSegmentAllMatchCountLaser.parseResponse(response, getContext(), this, header);
+    public APINodeList<CPASLsbImageBank> parseResponse(String response, String header) throws APIException {
+      return CPASLsbImageBank.parseResponse(response, getContext(), this, header);
     }
 
     @Override
-    public APINodeList<CatalogSegmentAllMatchCountLaser> execute() throws APIException {
+    public APINodeList<CPASLsbImageBank> execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINodeList<CatalogSegmentAllMatchCountLaser> execute(Map<String, Object> extraParams) throws APIException {
+    public APINodeList<CPASLsbImageBank> execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<APINodeList<CatalogSegmentAllMatchCountLaser>> executeAsync() throws APIException {
+    public ListenableFuture<APINodeList<CPASLsbImageBank>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<APINodeList<CatalogSegmentAllMatchCountLaser>> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<APINodeList<CPASLsbImageBank>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<CatalogSegmentAllMatchCountLaser>>() {
-           public APINodeList<CatalogSegmentAllMatchCountLaser> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetCollaborativeAdsEventStats.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         },
-         MoreExecutors.directExecutor()
-      );
-    };
-
-    public APIRequestGetCollaborativeAdsEventStats(String nodeId, APIContext context) {
-      super(context, nodeId, "/collaborative_ads_event_stats", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetCollaborativeAdsEventStats setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetCollaborativeAdsEventStats setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetCollaborativeAdsEventStats requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetCollaborativeAdsEventStats requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetCollaborativeAdsEventStats requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetCollaborativeAdsEventStats requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetCollaborativeAdsEventStats requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetCollaborativeAdsEventStats requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGetCollaborativeAdsEventStats requestDateStartField () {
-      return this.requestDateStartField(true);
-    }
-    public APIRequestGetCollaborativeAdsEventStats requestDateStartField (boolean value) {
-      this.requestField("date_start", value);
-      return this;
-    }
-    public APIRequestGetCollaborativeAdsEventStats requestDateStopField () {
-      return this.requestDateStopField(true);
-    }
-    public APIRequestGetCollaborativeAdsEventStats requestDateStopField (boolean value) {
-      this.requestField("date_stop", value);
-      return this;
-    }
-    public APIRequestGetCollaborativeAdsEventStats requestEventField () {
-      return this.requestEventField(true);
-    }
-    public APIRequestGetCollaborativeAdsEventStats requestEventField (boolean value) {
-      this.requestField("event", value);
-      return this;
-    }
-    public APIRequestGetCollaborativeAdsEventStats requestSourceField () {
-      return this.requestSourceField(true);
-    }
-    public APIRequestGetCollaborativeAdsEventStats requestSourceField (boolean value) {
-      this.requestField("source", value);
-      return this;
-    }
-    public APIRequestGetCollaborativeAdsEventStats requestTotalMatchedContentIdsField () {
-      return this.requestTotalMatchedContentIdsField(true);
-    }
-    public APIRequestGetCollaborativeAdsEventStats requestTotalMatchedContentIdsField (boolean value) {
-      this.requestField("total_matched_content_ids", value);
-      return this;
-    }
-    public APIRequestGetCollaborativeAdsEventStats requestUniqueMatchedContentIdsField () {
-      return this.requestUniqueMatchedContentIdsField(true);
-    }
-    public APIRequestGetCollaborativeAdsEventStats requestUniqueMatchedContentIdsField (boolean value) {
-      this.requestField("unique_matched_content_ids", value);
-      return this;
-    }
-  }
-
-  public static class APIRequestGetCollaborativeAdsLsbImageBank extends APIRequest<APINode> {
-
-    APINodeList<APINode> lastResponse = null;
-    @Override
-    public APINodeList<APINode> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<APINode> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, APINodeList<CPASLsbImageBank>>() {
+           public APINodeList<CPASLsbImageBank> apply(ResponseWrapper result) {
              try {
                return APIRequestGetCollaborativeAdsLsbImageBank.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -2859,6 +2715,27 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
+    public APIRequestGetCollaborativeAdsLsbImageBank requestAdGroupIdField () {
+      return this.requestAdGroupIdField(true);
+    }
+    public APIRequestGetCollaborativeAdsLsbImageBank requestAdGroupIdField (boolean value) {
+      this.requestField("ad_group_id", value);
+      return this;
+    }
+    public APIRequestGetCollaborativeAdsLsbImageBank requestCatalogSegmentProxyIdField () {
+      return this.requestCatalogSegmentProxyIdField(true);
+    }
+    public APIRequestGetCollaborativeAdsLsbImageBank requestCatalogSegmentProxyIdField (boolean value) {
+      this.requestField("catalog_segment_proxy_id", value);
+      return this;
+    }
+    public APIRequestGetCollaborativeAdsLsbImageBank requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetCollaborativeAdsLsbImageBank requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
   }
 
   public static class APIRequestGetCollaborativeAdsShareSettings extends APIRequest<CollaborativeAdsShareSettings> {
@@ -3014,11 +2891,11 @@ public class ProductCatalog extends APINode {
     }
   }
 
-  public static class APIRequestCreateCpasLsbImageBank extends APIRequest<APINode> {
+  public static class APIRequestCreateCpasLsbImageBank extends APIRequest<CPASLsbImageBank> {
 
-    APINode lastResponse = null;
+    CPASLsbImageBank lastResponse = null;
     @Override
-    public APINode getLastResponse() {
+    public CPASLsbImageBank getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
@@ -3031,31 +2908,31 @@ public class ProductCatalog extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header).head();
+    public CPASLsbImageBank parseResponse(String response, String header) throws APIException {
+      return CPASLsbImageBank.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public APINode execute() throws APIException {
+    public CPASLsbImageBank execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINode execute(Map<String, Object> extraParams) throws APIException {
+    public CPASLsbImageBank execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<APINode> executeAsync() throws APIException {
+    public ListenableFuture<CPASLsbImageBank> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<CPASLsbImageBank> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINode>() {
-           public APINode apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, CPASLsbImageBank>() {
+           public CPASLsbImageBank apply(ResponseWrapper result) {
              try {
                return APIRequestCreateCpasLsbImageBank.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -3147,6 +3024,177 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
+  }
+
+  public static class APIRequestGetCreatorAssetCreatives extends APIRequest<CreatorAssetCreative> {
+
+    APINodeList<CreatorAssetCreative> lastResponse = null;
+    @Override
+    public APINodeList<CreatorAssetCreative> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "moderation_status",
+    };
+
+    public static final String[] FIELDS = {
+      "id",
+      "image_url",
+      "moderation_status",
+      "product_item_retailer_id",
+      "product_url",
+      "retailer_id",
+      "video_url",
+    };
+
+    @Override
+    public APINodeList<CreatorAssetCreative> parseResponse(String response, String header) throws APIException {
+      return CreatorAssetCreative.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<CreatorAssetCreative> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<CreatorAssetCreative> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<CreatorAssetCreative>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<CreatorAssetCreative>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<CreatorAssetCreative>>() {
+           public APINodeList<CreatorAssetCreative> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetCreatorAssetCreatives.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestGetCreatorAssetCreatives(String nodeId, APIContext context) {
+      super(context, nodeId, "/creator_asset_creatives", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetCreatorAssetCreatives setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCreatorAssetCreatives setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetCreatorAssetCreatives setModerationStatus (CreatorAssetCreative.EnumModerationStatus moderationStatus) {
+      this.setParam("moderation_status", moderationStatus);
+      return this;
+    }
+    public APIRequestGetCreatorAssetCreatives setModerationStatus (String moderationStatus) {
+      this.setParam("moderation_status", moderationStatus);
+      return this;
+    }
+
+    public APIRequestGetCreatorAssetCreatives requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetCreatorAssetCreatives requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCreatorAssetCreatives requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetCreatorAssetCreatives requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCreatorAssetCreatives requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCreatorAssetCreatives requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetCreatorAssetCreatives requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetCreatorAssetCreatives requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetCreatorAssetCreatives requestImageUrlField () {
+      return this.requestImageUrlField(true);
+    }
+    public APIRequestGetCreatorAssetCreatives requestImageUrlField (boolean value) {
+      this.requestField("image_url", value);
+      return this;
+    }
+    public APIRequestGetCreatorAssetCreatives requestModerationStatusField () {
+      return this.requestModerationStatusField(true);
+    }
+    public APIRequestGetCreatorAssetCreatives requestModerationStatusField (boolean value) {
+      this.requestField("moderation_status", value);
+      return this;
+    }
+    public APIRequestGetCreatorAssetCreatives requestProductItemRetailerIdField () {
+      return this.requestProductItemRetailerIdField(true);
+    }
+    public APIRequestGetCreatorAssetCreatives requestProductItemRetailerIdField (boolean value) {
+      this.requestField("product_item_retailer_id", value);
+      return this;
+    }
+    public APIRequestGetCreatorAssetCreatives requestProductUrlField () {
+      return this.requestProductUrlField(true);
+    }
+    public APIRequestGetCreatorAssetCreatives requestProductUrlField (boolean value) {
+      this.requestField("product_url", value);
+      return this;
+    }
+    public APIRequestGetCreatorAssetCreatives requestRetailerIdField () {
+      return this.requestRetailerIdField(true);
+    }
+    public APIRequestGetCreatorAssetCreatives requestRetailerIdField (boolean value) {
+      this.requestField("retailer_id", value);
+      return this;
+    }
+    public APIRequestGetCreatorAssetCreatives requestVideoUrlField () {
+      return this.requestVideoUrlField(true);
+    }
+    public APIRequestGetCreatorAssetCreatives requestVideoUrlField (boolean value) {
+      this.requestField("video_url", value);
+      return this;
+    }
   }
 
   public static class APIRequestGetDataSources extends APIRequest<ProductCatalogDataSource> {
@@ -11579,8 +11627,6 @@ public class ProductCatalog extends APINode {
       VALUE_HOTELS("hotels"),
       @SerializedName("jobs")
       VALUE_JOBS("jobs"),
-      @SerializedName("local_delivery_shipping_profiles")
-      VALUE_LOCAL_DELIVERY_SHIPPING_PROFILES("local_delivery_shipping_profiles"),
       @SerializedName("local_service_businesses")
       VALUE_LOCAL_SERVICE_BUSINESSES("local_service_businesses"),
       @SerializedName("offer_items")

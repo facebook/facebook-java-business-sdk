@@ -1087,6 +1087,39 @@ public class CustomConversion extends APINode {
       }
   }
 
+  public static enum EnumActionSourceType {
+      @SerializedName("app")
+      VALUE_APP("app"),
+      @SerializedName("business_messaging")
+      VALUE_BUSINESS_MESSAGING("business_messaging"),
+      @SerializedName("chat")
+      VALUE_CHAT("chat"),
+      @SerializedName("email")
+      VALUE_EMAIL("email"),
+      @SerializedName("other")
+      VALUE_OTHER("other"),
+      @SerializedName("phone_call")
+      VALUE_PHONE_CALL("phone_call"),
+      @SerializedName("physical_store")
+      VALUE_PHYSICAL_STORE("physical_store"),
+      @SerializedName("system_generated")
+      VALUE_SYSTEM_GENERATED("system_generated"),
+      @SerializedName("website")
+      VALUE_WEBSITE("website"),
+      ;
+
+      private String value;
+
+      private EnumActionSourceType(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
 
   synchronized /*package*/ static Gson getGson() {
     if (gson != null) {

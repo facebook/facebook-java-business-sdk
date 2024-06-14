@@ -42,7 +42,7 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  */
 public class AdCreativePromotionMetadataSpec extends APINode {
   @SerializedName("end_date")
-  private String mEndDate = null;
+  private Long mEndDate = null;
   @SerializedName("id")
   private String mId = null;
   @SerializedName("promotion_source")
@@ -54,7 +54,7 @@ public class AdCreativePromotionMetadataSpec extends APINode {
   @SerializedName("required_code")
   private String mRequiredCode = null;
   @SerializedName("start_date")
-  private String mStartDate = null;
+  private Long mStartDate = null;
   protected static Gson gson = null;
 
   public AdCreativePromotionMetadataSpec() {
@@ -206,11 +206,11 @@ public class AdCreativePromotionMetadataSpec extends APINode {
   }
 
 
-  public String getFieldEndDate() {
+  public Long getFieldEndDate() {
     return mEndDate;
   }
 
-  public AdCreativePromotionMetadataSpec setFieldEndDate(String value) {
+  public AdCreativePromotionMetadataSpec setFieldEndDate(Long value) {
     this.mEndDate = value;
     return this;
   }
@@ -260,11 +260,11 @@ public class AdCreativePromotionMetadataSpec extends APINode {
     return this;
   }
 
-  public String getFieldStartDate() {
+  public Long getFieldStartDate() {
     return mStartDate;
   }
 
-  public AdCreativePromotionMetadataSpec setFieldStartDate(String value) {
+  public AdCreativePromotionMetadataSpec setFieldStartDate(Long value) {
     this.mStartDate = value;
     return this;
   }

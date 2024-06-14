@@ -43,6 +43,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class BrandedContentShadowIGMediaID extends APINode {
   @SerializedName("eligibility_errors")
   private List<String> mEligibilityErrors = null;
+  @SerializedName("has_permission_for_partnership_ad")
+  private Boolean mHasPermissionForPartnershipAd = null;
   @SerializedName("id")
   private String mId = null;
   @SerializedName("owner_id")
@@ -209,6 +211,15 @@ public class BrandedContentShadowIGMediaID extends APINode {
     return this;
   }
 
+  public Boolean getFieldHasPermissionForPartnershipAd() {
+    return mHasPermissionForPartnershipAd;
+  }
+
+  public BrandedContentShadowIGMediaID setFieldHasPermissionForPartnershipAd(Boolean value) {
+    this.mHasPermissionForPartnershipAd = value;
+    return this;
+  }
+
   public String getFieldId() {
     return mId;
   }
@@ -254,6 +265,7 @@ public class BrandedContentShadowIGMediaID extends APINode {
 
   public BrandedContentShadowIGMediaID copyFrom(BrandedContentShadowIGMediaID instance) {
     this.mEligibilityErrors = instance.mEligibilityErrors;
+    this.mHasPermissionForPartnershipAd = instance.mHasPermissionForPartnershipAd;
     this.mId = instance.mId;
     this.mOwnerId = instance.mOwnerId;
     this.mPermalink = instance.mPermalink;

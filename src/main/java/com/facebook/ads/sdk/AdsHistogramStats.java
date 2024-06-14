@@ -43,18 +43,46 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class AdsHistogramStats extends APINode {
   @SerializedName("1d_click")
   private List<Long> m1dClick = null;
+  @SerializedName("1d_click_all_conversions")
+  private List<Long> m1dClickAllConversions = null;
+  @SerializedName("1d_click_first_conversion")
+  private List<Long> m1dClickFirstConversion = null;
   @SerializedName("1d_ev")
   private List<Long> m1dEv = null;
+  @SerializedName("1d_ev_all_conversions")
+  private List<Long> m1dEvAllConversions = null;
+  @SerializedName("1d_ev_first_conversion")
+  private List<Long> m1dEvFirstConversion = null;
   @SerializedName("1d_view")
   private List<Long> m1dView = null;
+  @SerializedName("1d_view_all_conversions")
+  private List<Long> m1dViewAllConversions = null;
+  @SerializedName("1d_view_first_conversion")
+  private List<Long> m1dViewFirstConversion = null;
   @SerializedName("28d_click")
   private List<Long> m28dClick = null;
+  @SerializedName("28d_click_all_conversions")
+  private List<Long> m28dClickAllConversions = null;
+  @SerializedName("28d_click_first_conversion")
+  private List<Long> m28dClickFirstConversion = null;
   @SerializedName("28d_view")
   private List<Long> m28dView = null;
+  @SerializedName("28d_view_all_conversions")
+  private List<Long> m28dViewAllConversions = null;
+  @SerializedName("28d_view_first_conversion")
+  private List<Long> m28dViewFirstConversion = null;
   @SerializedName("7d_click")
   private List<Long> m7dClick = null;
+  @SerializedName("7d_click_all_conversions")
+  private List<Long> m7dClickAllConversions = null;
+  @SerializedName("7d_click_first_conversion")
+  private List<Long> m7dClickFirstConversion = null;
   @SerializedName("7d_view")
   private List<Long> m7dView = null;
+  @SerializedName("7d_view_all_conversions")
+  private List<Long> m7dViewAllConversions = null;
+  @SerializedName("7d_view_first_conversion")
+  private List<Long> m7dViewFirstConversion = null;
   @SerializedName("action_brand")
   private String mActionBrand = null;
   @SerializedName("action_canvas_component_id")
@@ -273,12 +301,48 @@ public class AdsHistogramStats extends APINode {
     return this;
   }
 
+  public List<Long> getField1dClickAllConversions() {
+    return m1dClickAllConversions;
+  }
+
+  public AdsHistogramStats setField1dClickAllConversions(List<Long> value) {
+    this.m1dClickAllConversions = value;
+    return this;
+  }
+
+  public List<Long> getField1dClickFirstConversion() {
+    return m1dClickFirstConversion;
+  }
+
+  public AdsHistogramStats setField1dClickFirstConversion(List<Long> value) {
+    this.m1dClickFirstConversion = value;
+    return this;
+  }
+
   public List<Long> getField1dEv() {
     return m1dEv;
   }
 
   public AdsHistogramStats setField1dEv(List<Long> value) {
     this.m1dEv = value;
+    return this;
+  }
+
+  public List<Long> getField1dEvAllConversions() {
+    return m1dEvAllConversions;
+  }
+
+  public AdsHistogramStats setField1dEvAllConversions(List<Long> value) {
+    this.m1dEvAllConversions = value;
+    return this;
+  }
+
+  public List<Long> getField1dEvFirstConversion() {
+    return m1dEvFirstConversion;
+  }
+
+  public AdsHistogramStats setField1dEvFirstConversion(List<Long> value) {
+    this.m1dEvFirstConversion = value;
     return this;
   }
 
@@ -291,12 +355,48 @@ public class AdsHistogramStats extends APINode {
     return this;
   }
 
+  public List<Long> getField1dViewAllConversions() {
+    return m1dViewAllConversions;
+  }
+
+  public AdsHistogramStats setField1dViewAllConversions(List<Long> value) {
+    this.m1dViewAllConversions = value;
+    return this;
+  }
+
+  public List<Long> getField1dViewFirstConversion() {
+    return m1dViewFirstConversion;
+  }
+
+  public AdsHistogramStats setField1dViewFirstConversion(List<Long> value) {
+    this.m1dViewFirstConversion = value;
+    return this;
+  }
+
   public List<Long> getField28dClick() {
     return m28dClick;
   }
 
   public AdsHistogramStats setField28dClick(List<Long> value) {
     this.m28dClick = value;
+    return this;
+  }
+
+  public List<Long> getField28dClickAllConversions() {
+    return m28dClickAllConversions;
+  }
+
+  public AdsHistogramStats setField28dClickAllConversions(List<Long> value) {
+    this.m28dClickAllConversions = value;
+    return this;
+  }
+
+  public List<Long> getField28dClickFirstConversion() {
+    return m28dClickFirstConversion;
+  }
+
+  public AdsHistogramStats setField28dClickFirstConversion(List<Long> value) {
+    this.m28dClickFirstConversion = value;
     return this;
   }
 
@@ -309,6 +409,24 @@ public class AdsHistogramStats extends APINode {
     return this;
   }
 
+  public List<Long> getField28dViewAllConversions() {
+    return m28dViewAllConversions;
+  }
+
+  public AdsHistogramStats setField28dViewAllConversions(List<Long> value) {
+    this.m28dViewAllConversions = value;
+    return this;
+  }
+
+  public List<Long> getField28dViewFirstConversion() {
+    return m28dViewFirstConversion;
+  }
+
+  public AdsHistogramStats setField28dViewFirstConversion(List<Long> value) {
+    this.m28dViewFirstConversion = value;
+    return this;
+  }
+
   public List<Long> getField7dClick() {
     return m7dClick;
   }
@@ -318,12 +436,48 @@ public class AdsHistogramStats extends APINode {
     return this;
   }
 
+  public List<Long> getField7dClickAllConversions() {
+    return m7dClickAllConversions;
+  }
+
+  public AdsHistogramStats setField7dClickAllConversions(List<Long> value) {
+    this.m7dClickAllConversions = value;
+    return this;
+  }
+
+  public List<Long> getField7dClickFirstConversion() {
+    return m7dClickFirstConversion;
+  }
+
+  public AdsHistogramStats setField7dClickFirstConversion(List<Long> value) {
+    this.m7dClickFirstConversion = value;
+    return this;
+  }
+
   public List<Long> getField7dView() {
     return m7dView;
   }
 
   public AdsHistogramStats setField7dView(List<Long> value) {
     this.m7dView = value;
+    return this;
+  }
+
+  public List<Long> getField7dViewAllConversions() {
+    return m7dViewAllConversions;
+  }
+
+  public AdsHistogramStats setField7dViewAllConversions(List<Long> value) {
+    this.m7dViewAllConversions = value;
+    return this;
+  }
+
+  public List<Long> getField7dViewFirstConversion() {
+    return m7dViewFirstConversion;
+  }
+
+  public AdsHistogramStats setField7dViewFirstConversion(List<Long> value) {
+    this.m7dViewFirstConversion = value;
     return this;
   }
 
@@ -606,12 +760,26 @@ public class AdsHistogramStats extends APINode {
 
   public AdsHistogramStats copyFrom(AdsHistogramStats instance) {
     this.m1dClick = instance.m1dClick;
+    this.m1dClickAllConversions = instance.m1dClickAllConversions;
+    this.m1dClickFirstConversion = instance.m1dClickFirstConversion;
     this.m1dEv = instance.m1dEv;
+    this.m1dEvAllConversions = instance.m1dEvAllConversions;
+    this.m1dEvFirstConversion = instance.m1dEvFirstConversion;
     this.m1dView = instance.m1dView;
+    this.m1dViewAllConversions = instance.m1dViewAllConversions;
+    this.m1dViewFirstConversion = instance.m1dViewFirstConversion;
     this.m28dClick = instance.m28dClick;
+    this.m28dClickAllConversions = instance.m28dClickAllConversions;
+    this.m28dClickFirstConversion = instance.m28dClickFirstConversion;
     this.m28dView = instance.m28dView;
+    this.m28dViewAllConversions = instance.m28dViewAllConversions;
+    this.m28dViewFirstConversion = instance.m28dViewFirstConversion;
     this.m7dClick = instance.m7dClick;
+    this.m7dClickAllConversions = instance.m7dClickAllConversions;
+    this.m7dClickFirstConversion = instance.m7dClickFirstConversion;
     this.m7dView = instance.m7dView;
+    this.m7dViewAllConversions = instance.m7dViewAllConversions;
+    this.m7dViewFirstConversion = instance.m7dViewFirstConversion;
     this.mActionBrand = instance.mActionBrand;
     this.mActionCanvasComponentId = instance.mActionCanvasComponentId;
     this.mActionCanvasComponentName = instance.mActionCanvasComponentName;

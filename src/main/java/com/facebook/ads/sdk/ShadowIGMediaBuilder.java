@@ -49,6 +49,8 @@ public class ShadowIGMediaBuilder extends APINode {
   private String mStatus = null;
   @SerializedName("status_code")
   private String mStatusCode = null;
+  @SerializedName("video_status")
+  private IGResumableVideoUploadStatus mVideoStatus = null;
   protected static Gson gson = null;
 
   ShadowIGMediaBuilder() {
@@ -279,6 +281,10 @@ public class ShadowIGMediaBuilder extends APINode {
     return mStatusCode;
   }
 
+  public IGResumableVideoUploadStatus getFieldVideoStatus() {
+    return mVideoStatus;
+  }
+
 
 
   public static class APIRequestGet extends APIRequest<ShadowIGMediaBuilder> {
@@ -296,6 +302,7 @@ public class ShadowIGMediaBuilder extends APINode {
       "id",
       "status",
       "status_code",
+      "video_status",
     };
 
     @Override
@@ -416,6 +423,13 @@ public class ShadowIGMediaBuilder extends APINode {
       this.requestField("status_code", value);
       return this;
     }
+    public APIRequestGet requestVideoStatusField () {
+      return this.requestVideoStatusField(true);
+    }
+    public APIRequestGet requestVideoStatusField (boolean value) {
+      this.requestField("video_status", value);
+      return this;
+    }
   }
 
 
@@ -437,6 +451,7 @@ public class ShadowIGMediaBuilder extends APINode {
     this.mId = instance.mId;
     this.mStatus = instance.mStatus;
     this.mStatusCode = instance.mStatusCode;
+    this.mVideoStatus = instance.mVideoStatus;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

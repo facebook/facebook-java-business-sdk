@@ -77,6 +77,8 @@ public class Ad extends APINode {
   private String mCreatedTime = null;
   @SerializedName("creative")
   private AdCreative mCreative = null;
+  @SerializedName("creative_asset_groups_spec")
+  private AdCreativeAssetGroupsSpec mCreativeAssetGroupsSpec = null;
   @SerializedName("demolink_hash")
   private String mDemolinkHash = null;
   @SerializedName("display_sequence")
@@ -458,6 +460,10 @@ public class Ad extends APINode {
     return mCreative;
   }
 
+  public AdCreativeAssetGroupsSpec getFieldCreativeAssetGroupsSpec() {
+    return mCreativeAssetGroupsSpec;
+  }
+
   public String getFieldDemolinkHash() {
     return mDemolinkHash;
   }
@@ -565,6 +571,7 @@ public class Ad extends APINode {
       "categorization_criteria",
       "category_media_source",
       "collaborative_ads_lsb_image_bank_id",
+      "contextual_multi_ads",
       "creative_sourcing_spec",
       "degrees_of_freedom_spec",
       "destination_set_id",
@@ -590,7 +597,6 @@ public class Ad extends APINode {
       "link_destination_display_url",
       "link_og_id",
       "link_url",
-      "messenger_sponsored_message",
       "name",
       "object_id",
       "object_store_url",
@@ -599,6 +605,7 @@ public class Ad extends APINode {
       "object_type",
       "object_url",
       "omnichannel_link_spec",
+      "page_welcome_message",
       "photo_album_source_object_story_id",
       "place_page_set_id",
       "platform_customizations",
@@ -813,6 +820,13 @@ public class Ad extends APINode {
       this.requestField("collaborative_ads_lsb_image_bank_id", value);
       return this;
     }
+    public APIRequestGetAdCreatives requestContextualMultiAdsField () {
+      return this.requestContextualMultiAdsField(true);
+    }
+    public APIRequestGetAdCreatives requestContextualMultiAdsField (boolean value) {
+      this.requestField("contextual_multi_ads", value);
+      return this;
+    }
     public APIRequestGetAdCreatives requestCreativeSourcingSpecField () {
       return this.requestCreativeSourcingSpecField(true);
     }
@@ -988,13 +1002,6 @@ public class Ad extends APINode {
       this.requestField("link_url", value);
       return this;
     }
-    public APIRequestGetAdCreatives requestMessengerSponsoredMessageField () {
-      return this.requestMessengerSponsoredMessageField(true);
-    }
-    public APIRequestGetAdCreatives requestMessengerSponsoredMessageField (boolean value) {
-      this.requestField("messenger_sponsored_message", value);
-      return this;
-    }
     public APIRequestGetAdCreatives requestNameField () {
       return this.requestNameField(true);
     }
@@ -1049,6 +1056,13 @@ public class Ad extends APINode {
     }
     public APIRequestGetAdCreatives requestOmnichannelLinkSpecField (boolean value) {
       this.requestField("omnichannel_link_spec", value);
+      return this;
+    }
+    public APIRequestGetAdCreatives requestPageWelcomeMessageField () {
+      return this.requestPageWelcomeMessageField(true);
+    }
+    public APIRequestGetAdCreatives requestPageWelcomeMessageField (boolean value) {
+      this.requestField("page_welcome_message", value);
       return this;
     }
     public APIRequestGetAdCreatives requestPhotoAlbumSourceObjectStoryIdField () {
@@ -1525,6 +1539,7 @@ public class Ad extends APINode {
       "conversion_specs",
       "created_time",
       "creative",
+      "creative_asset_groups_spec",
       "demolink_hash",
       "display_sequence",
       "effective_status",
@@ -1796,6 +1811,13 @@ public class Ad extends APINode {
     }
     public APIRequestGetCopies requestCreativeField (boolean value) {
       this.requestField("creative", value);
+      return this;
+    }
+    public APIRequestGetCopies requestCreativeAssetGroupsSpecField () {
+      return this.requestCreativeAssetGroupsSpecField(true);
+    }
+    public APIRequestGetCopies requestCreativeAssetGroupsSpecField (boolean value) {
+      this.requestField("creative_asset_groups_spec", value);
       return this;
     }
     public APIRequestGetCopies requestDemolinkHashField () {
@@ -3440,6 +3462,7 @@ public class Ad extends APINode {
       "conversion_specs",
       "created_time",
       "creative",
+      "creative_asset_groups_spec",
       "demolink_hash",
       "display_sequence",
       "effective_status",
@@ -3722,6 +3745,13 @@ public class Ad extends APINode {
       this.requestField("creative", value);
       return this;
     }
+    public APIRequestGet requestCreativeAssetGroupsSpecField () {
+      return this.requestCreativeAssetGroupsSpecField(true);
+    }
+    public APIRequestGet requestCreativeAssetGroupsSpecField (boolean value) {
+      this.requestField("creative_asset_groups_spec", value);
+      return this;
+    }
     public APIRequestGet requestDemolinkHashField () {
       return this.requestDemolinkHashField(true);
     }
@@ -3873,6 +3903,7 @@ public class Ad extends APINode {
       "bid_amount",
       "conversion_domain",
       "creative",
+      "creative_asset_groups_spec",
       "display_sequence",
       "draft_adgroup_id",
       "engagement_audience",
@@ -3994,6 +4025,15 @@ public class Ad extends APINode {
     }
     public APIRequestUpdate setCreative (String creative) {
       this.setParam("creative", creative);
+      return this;
+    }
+
+    public APIRequestUpdate setCreativeAssetGroupsSpec (Object creativeAssetGroupsSpec) {
+      this.setParam("creative_asset_groups_spec", creativeAssetGroupsSpec);
+      return this;
+    }
+    public APIRequestUpdate setCreativeAssetGroupsSpec (String creativeAssetGroupsSpec) {
+      this.setParam("creative_asset_groups_spec", creativeAssetGroupsSpec);
       return this;
     }
 
@@ -4367,6 +4407,7 @@ public class Ad extends APINode {
     this.mConversionSpecs = instance.mConversionSpecs;
     this.mCreatedTime = instance.mCreatedTime;
     this.mCreative = instance.mCreative;
+    this.mCreativeAssetGroupsSpec = instance.mCreativeAssetGroupsSpec;
     this.mDemolinkHash = instance.mDemolinkHash;
     this.mDisplaySequence = instance.mDisplaySequence;
     this.mEffectiveStatus = instance.mEffectiveStatus;

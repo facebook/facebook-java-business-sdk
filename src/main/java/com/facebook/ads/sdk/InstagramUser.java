@@ -626,45 +626,51 @@ public class InstagramUser extends APINode {
     }
   }
 
-  public static class APIRequestGetArEffects extends APIRequest<APINode> {
+  public static class APIRequestGetArEffects extends APIRequest<AREffect> {
 
-    APINodeList<APINode> lastResponse = null;
+    APINodeList<AREffect> lastResponse = null;
     @Override
-    public APINodeList<APINode> getLastResponse() {
+    public APINodeList<AREffect> getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
     };
 
     public static final String[] FIELDS = {
+      "creation_time",
+      "id",
+      "last_modified_time",
+      "name",
+      "status",
+      "surfaces",
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header);
+    public APINodeList<AREffect> parseResponse(String response, String header) throws APIException {
+      return AREffect.parseResponse(response, getContext(), this, header);
     }
 
     @Override
-    public APINodeList<APINode> execute() throws APIException {
+    public APINodeList<AREffect> execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+    public APINodeList<AREffect> execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+    public ListenableFuture<APINodeList<AREffect>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<APINodeList<AREffect>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, APINodeList<AREffect>>() {
+           public APINodeList<AREffect> apply(ResponseWrapper result) {
              try {
                return APIRequestGetArEffects.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -729,6 +735,48 @@ public class InstagramUser extends APINode {
       return this;
     }
 
+    public APIRequestGetArEffects requestCreationTimeField () {
+      return this.requestCreationTimeField(true);
+    }
+    public APIRequestGetArEffects requestCreationTimeField (boolean value) {
+      this.requestField("creation_time", value);
+      return this;
+    }
+    public APIRequestGetArEffects requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetArEffects requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetArEffects requestLastModifiedTimeField () {
+      return this.requestLastModifiedTimeField(true);
+    }
+    public APIRequestGetArEffects requestLastModifiedTimeField (boolean value) {
+      this.requestField("last_modified_time", value);
+      return this;
+    }
+    public APIRequestGetArEffects requestNameField () {
+      return this.requestNameField(true);
+    }
+    public APIRequestGetArEffects requestNameField (boolean value) {
+      this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetArEffects requestStatusField () {
+      return this.requestStatusField(true);
+    }
+    public APIRequestGetArEffects requestStatusField (boolean value) {
+      this.requestField("status", value);
+      return this;
+    }
+    public APIRequestGetArEffects requestSurfacesField () {
+      return this.requestSurfacesField(true);
+    }
+    public APIRequestGetArEffects requestSurfacesField (boolean value) {
+      this.requestField("surfaces", value);
+      return this;
+    }
   }
 
   public static class APIRequestGetAuthorizedAdAccounts extends APIRequest<AdAccount> {

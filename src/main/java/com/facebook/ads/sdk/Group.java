@@ -288,12 +288,12 @@ public class Group extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestDeleteAdmins deleteAdmins() {
-    return new APIRequestDeleteAdmins(this.getPrefixedId().toString(), context);
+  public APIRequestDeleteAdMIns deleteAdMIns() {
+    return new APIRequestDeleteAdMIns(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestCreateAdmin createAdmin() {
-    return new APIRequestCreateAdmin(this.getPrefixedId().toString(), context);
+  public APIRequestCreateAdMIn createAdMIn() {
+    return new APIRequestCreateAdMIn(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetAlbums getAlbums() {
@@ -455,7 +455,7 @@ public class Group extends APINode {
 
 
 
-  public static class APIRequestDeleteAdmins extends APIRequest<APINode> {
+  public static class APIRequestDeleteAdMIns extends APIRequest<APINode> {
 
     APINodeList<APINode> lastResponse = null;
     @Override
@@ -496,7 +496,7 @@ public class Group extends APINode {
         new Function<ResponseWrapper, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(ResponseWrapper result) {
              try {
-               return APIRequestDeleteAdmins.this.parseResponse(result.getBody(), result.getHeader());
+               return APIRequestDeleteAdMIns.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -506,37 +506,37 @@ public class Group extends APINode {
       );
     };
 
-    public APIRequestDeleteAdmins(String nodeId, APIContext context) {
+    public APIRequestDeleteAdMIns(String nodeId, APIContext context) {
       super(context, nodeId, "/admins", "DELETE", Arrays.asList(PARAMS));
     }
 
     @Override
-    public APIRequestDeleteAdmins setParam(String param, Object value) {
+    public APIRequestDeleteAdMIns setParam(String param, Object value) {
       setParamInternal(param, value);
       return this;
     }
 
     @Override
-    public APIRequestDeleteAdmins setParams(Map<String, Object> params) {
+    public APIRequestDeleteAdMIns setParams(Map<String, Object> params) {
       setParamsInternal(params);
       return this;
     }
 
 
-    public APIRequestDeleteAdmins setUid (Long uid) {
+    public APIRequestDeleteAdMIns setUid (Long uid) {
       this.setParam("uid", uid);
       return this;
     }
-    public APIRequestDeleteAdmins setUid (String uid) {
+    public APIRequestDeleteAdMIns setUid (String uid) {
       this.setParam("uid", uid);
       return this;
     }
 
-    public APIRequestDeleteAdmins requestAllFields () {
+    public APIRequestDeleteAdMIns requestAllFields () {
       return this.requestAllFields(true);
     }
 
-    public APIRequestDeleteAdmins requestAllFields (boolean value) {
+    public APIRequestDeleteAdMIns requestAllFields (boolean value) {
       for (String field : FIELDS) {
         this.requestField(field, value);
       }
@@ -544,12 +544,12 @@ public class Group extends APINode {
     }
 
     @Override
-    public APIRequestDeleteAdmins requestFields (List<String> fields) {
+    public APIRequestDeleteAdMIns requestFields (List<String> fields) {
       return this.requestFields(fields, true);
     }
 
     @Override
-    public APIRequestDeleteAdmins requestFields (List<String> fields, boolean value) {
+    public APIRequestDeleteAdMIns requestFields (List<String> fields, boolean value) {
       for (String field : fields) {
         this.requestField(field, value);
       }
@@ -557,20 +557,20 @@ public class Group extends APINode {
     }
 
     @Override
-    public APIRequestDeleteAdmins requestField (String field) {
+    public APIRequestDeleteAdMIns requestField (String field) {
       this.requestField(field, true);
       return this;
     }
 
     @Override
-    public APIRequestDeleteAdmins requestField (String field, boolean value) {
+    public APIRequestDeleteAdMIns requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
 
   }
 
-  public static class APIRequestCreateAdmin extends APIRequest<Group> {
+  public static class APIRequestCreateAdMIn extends APIRequest<Group> {
 
     Group lastResponse = null;
     @Override
@@ -611,7 +611,7 @@ public class Group extends APINode {
         new Function<ResponseWrapper, Group>() {
            public Group apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateAdmin.this.parseResponse(result.getBody(), result.getHeader());
+               return APIRequestCreateAdMIn.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -621,37 +621,37 @@ public class Group extends APINode {
       );
     };
 
-    public APIRequestCreateAdmin(String nodeId, APIContext context) {
+    public APIRequestCreateAdMIn(String nodeId, APIContext context) {
       super(context, nodeId, "/admins", "POST", Arrays.asList(PARAMS));
     }
 
     @Override
-    public APIRequestCreateAdmin setParam(String param, Object value) {
+    public APIRequestCreateAdMIn setParam(String param, Object value) {
       setParamInternal(param, value);
       return this;
     }
 
     @Override
-    public APIRequestCreateAdmin setParams(Map<String, Object> params) {
+    public APIRequestCreateAdMIn setParams(Map<String, Object> params) {
       setParamsInternal(params);
       return this;
     }
 
 
-    public APIRequestCreateAdmin setUid (Long uid) {
+    public APIRequestCreateAdMIn setUid (Long uid) {
       this.setParam("uid", uid);
       return this;
     }
-    public APIRequestCreateAdmin setUid (String uid) {
+    public APIRequestCreateAdMIn setUid (String uid) {
       this.setParam("uid", uid);
       return this;
     }
 
-    public APIRequestCreateAdmin requestAllFields () {
+    public APIRequestCreateAdMIn requestAllFields () {
       return this.requestAllFields(true);
     }
 
-    public APIRequestCreateAdmin requestAllFields (boolean value) {
+    public APIRequestCreateAdMIn requestAllFields (boolean value) {
       for (String field : FIELDS) {
         this.requestField(field, value);
       }
@@ -659,12 +659,12 @@ public class Group extends APINode {
     }
 
     @Override
-    public APIRequestCreateAdmin requestFields (List<String> fields) {
+    public APIRequestCreateAdMIn requestFields (List<String> fields) {
       return this.requestFields(fields, true);
     }
 
     @Override
-    public APIRequestCreateAdmin requestFields (List<String> fields, boolean value) {
+    public APIRequestCreateAdMIn requestFields (List<String> fields, boolean value) {
       for (String field : fields) {
         this.requestField(field, value);
       }
@@ -672,13 +672,13 @@ public class Group extends APINode {
     }
 
     @Override
-    public APIRequestCreateAdmin requestField (String field) {
+    public APIRequestCreateAdMIn requestField (String field) {
       this.requestField(field, true);
       return this;
     }
 
     @Override
-    public APIRequestCreateAdmin requestField (String field, boolean value) {
+    public APIRequestCreateAdMIn requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
@@ -2323,7 +2323,6 @@ public class Group extends APINode {
     }
     public static final String[] PARAMS = {
       "actions",
-      "adaptive_type",
       "album_id",
       "android_key_hash",
       "animated_effect_id",
@@ -2408,7 +2407,6 @@ public class Group extends APINode {
       "publish_event_id",
       "published",
       "quote",
-      "react_mode_metadata",
       "ref",
       "referenceable_image_ids",
       "referral_id",
@@ -2498,11 +2496,6 @@ public class Group extends APINode {
     }
     public APIRequestCreateFeed setActions (String actions) {
       this.setParam("actions", actions);
-      return this;
-    }
-
-    public APIRequestCreateFeed setAdaptiveType (String adaptiveType) {
-      this.setParam("adaptive_type", adaptiveType);
       return this;
     }
 
@@ -3099,11 +3092,6 @@ public class Group extends APINode {
 
     public APIRequestCreateFeed setQuote (String quote) {
       this.setParam("quote", quote);
-      return this;
-    }
-
-    public APIRequestCreateFeed setReactModeMetadata (String reactModeMetadata) {
-      this.setParam("react_mode_metadata", reactModeMetadata);
       return this;
     }
 
@@ -6498,7 +6486,6 @@ public class Group extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "adaptive_type",
       "animated_effect_id",
       "application_id",
       "asked_fun_fact_prompt_id",
@@ -6547,7 +6534,6 @@ public class Group extends APINode {
       "original_projection_type",
       "publish_event_id",
       "published",
-      "react_mode_metadata",
       "referenced_sticker_id",
       "replace_video_id",
       "scheduled_publish_time",
@@ -6629,11 +6615,6 @@ public class Group extends APINode {
       return this;
     }
 
-
-    public APIRequestCreateVideo setAdaptiveType (String adaptiveType) {
-      this.setParam("adaptive_type", adaptiveType);
-      return this;
-    }
 
     public APIRequestCreateVideo setAnimatedEffectId (Long animatedEffectId) {
       this.setParam("animated_effect_id", animatedEffectId);
@@ -6984,11 +6965,6 @@ public class Group extends APINode {
     }
     public APIRequestCreateVideo setPublished (String published) {
       this.setParam("published", published);
-      return this;
-    }
-
-    public APIRequestCreateVideo setReactModeMetadata (String reactModeMetadata) {
-      this.setParam("react_mode_metadata", reactModeMetadata);
       return this;
     }
 

@@ -2135,6 +2135,25 @@ public class Comment extends APINode {
 
   }
 
+  public static enum EnumOrder {
+      @SerializedName("chronological")
+      VALUE_CHRONOLOGICAL("chronological"),
+      @SerializedName("reverse_chronological")
+      VALUE_REVERSE_CHRONOLOGICAL("reverse_chronological"),
+      ;
+
+      private String value;
+
+      private EnumOrder(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
   public static enum EnumCommentPrivacyValue {
       @SerializedName("DECLINED_BY_ADMIN_ASSISTANT")
       VALUE_DECLINED_BY_ADMIN_ASSISTANT("DECLINED_BY_ADMIN_ASSISTANT"),
@@ -2201,25 +2220,6 @@ public class Comment extends APINode {
       private String value;
 
       private EnumLiveFilter(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumOrder {
-      @SerializedName("chronological")
-      VALUE_CHRONOLOGICAL("chronological"),
-      @SerializedName("reverse_chronological")
-      VALUE_REVERSE_CHRONOLOGICAL("reverse_chronological"),
-      ;
-
-      private String value;
-
-      private EnumOrder(String value) {
         this.value = value;
       }
 

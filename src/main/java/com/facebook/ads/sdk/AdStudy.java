@@ -1726,6 +1726,8 @@ public class AdStudy extends APINode {
   }
 
   public static enum EnumType {
+      @SerializedName("BACKEND_AB_TESTING")
+      VALUE_BACKEND_AB_TESTING("BACKEND_AB_TESTING"),
       @SerializedName("CONTINUOUS_LIFT_CONFIG")
       VALUE_CONTINUOUS_LIFT_CONFIG("CONTINUOUS_LIFT_CONFIG"),
       @SerializedName("GEO_LIFT")

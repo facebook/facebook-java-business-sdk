@@ -351,6 +351,7 @@ public class AdStudyObjective extends APINode {
       "event_time_max",
       "event_time_min",
       "first_party_cookie_status",
+      "has_1p_pixel_event",
       "id",
       "is_consolidated_container",
       "is_created_by_business",
@@ -564,6 +565,13 @@ public class AdStudyObjective extends APINode {
     }
     public APIRequestGetAdsPixels requestFirstPartyCookieStatusField (boolean value) {
       this.requestField("first_party_cookie_status", value);
+      return this;
+    }
+    public APIRequestGetAdsPixels requestHas1pPixelEventField () {
+      return this.requestHas1pPixelEventField(true);
+    }
+    public APIRequestGetAdsPixels requestHas1pPixelEventField (boolean value) {
+      this.requestField("has_1p_pixel_event", value);
       return this;
     }
     public APIRequestGetAdsPixels requestIdField () {

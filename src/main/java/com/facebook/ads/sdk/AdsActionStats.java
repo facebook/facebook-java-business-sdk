@@ -43,18 +43,46 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class AdsActionStats extends APINode {
   @SerializedName("1d_click")
   private String m1dClick = null;
+  @SerializedName("1d_click_all_conversions")
+  private String m1dClickAllConversions = null;
+  @SerializedName("1d_click_first_conversion")
+  private String m1dClickFirstConversion = null;
   @SerializedName("1d_ev")
   private String m1dEv = null;
+  @SerializedName("1d_ev_all_conversions")
+  private String m1dEvAllConversions = null;
+  @SerializedName("1d_ev_first_conversion")
+  private String m1dEvFirstConversion = null;
   @SerializedName("1d_view")
   private String m1dView = null;
+  @SerializedName("1d_view_all_conversions")
+  private String m1dViewAllConversions = null;
+  @SerializedName("1d_view_first_conversion")
+  private String m1dViewFirstConversion = null;
   @SerializedName("28d_click")
   private String m28dClick = null;
+  @SerializedName("28d_click_all_conversions")
+  private String m28dClickAllConversions = null;
+  @SerializedName("28d_click_first_conversion")
+  private String m28dClickFirstConversion = null;
   @SerializedName("28d_view")
   private String m28dView = null;
+  @SerializedName("28d_view_all_conversions")
+  private String m28dViewAllConversions = null;
+  @SerializedName("28d_view_first_conversion")
+  private String m28dViewFirstConversion = null;
   @SerializedName("7d_click")
   private String m7dClick = null;
+  @SerializedName("7d_click_all_conversions")
+  private String m7dClickAllConversions = null;
+  @SerializedName("7d_click_first_conversion")
+  private String m7dClickFirstConversion = null;
   @SerializedName("7d_view")
   private String m7dView = null;
+  @SerializedName("7d_view_all_conversions")
+  private String m7dViewAllConversions = null;
+  @SerializedName("7d_view_first_conversion")
+  private String m7dViewFirstConversion = null;
   @SerializedName("action_brand")
   private String mActionBrand = null;
   @SerializedName("action_canvas_component_id")
@@ -273,12 +301,48 @@ public class AdsActionStats extends APINode {
     return this;
   }
 
+  public String getField1dClickAllConversions() {
+    return m1dClickAllConversions;
+  }
+
+  public AdsActionStats setField1dClickAllConversions(String value) {
+    this.m1dClickAllConversions = value;
+    return this;
+  }
+
+  public String getField1dClickFirstConversion() {
+    return m1dClickFirstConversion;
+  }
+
+  public AdsActionStats setField1dClickFirstConversion(String value) {
+    this.m1dClickFirstConversion = value;
+    return this;
+  }
+
   public String getField1dEv() {
     return m1dEv;
   }
 
   public AdsActionStats setField1dEv(String value) {
     this.m1dEv = value;
+    return this;
+  }
+
+  public String getField1dEvAllConversions() {
+    return m1dEvAllConversions;
+  }
+
+  public AdsActionStats setField1dEvAllConversions(String value) {
+    this.m1dEvAllConversions = value;
+    return this;
+  }
+
+  public String getField1dEvFirstConversion() {
+    return m1dEvFirstConversion;
+  }
+
+  public AdsActionStats setField1dEvFirstConversion(String value) {
+    this.m1dEvFirstConversion = value;
     return this;
   }
 
@@ -291,12 +355,48 @@ public class AdsActionStats extends APINode {
     return this;
   }
 
+  public String getField1dViewAllConversions() {
+    return m1dViewAllConversions;
+  }
+
+  public AdsActionStats setField1dViewAllConversions(String value) {
+    this.m1dViewAllConversions = value;
+    return this;
+  }
+
+  public String getField1dViewFirstConversion() {
+    return m1dViewFirstConversion;
+  }
+
+  public AdsActionStats setField1dViewFirstConversion(String value) {
+    this.m1dViewFirstConversion = value;
+    return this;
+  }
+
   public String getField28dClick() {
     return m28dClick;
   }
 
   public AdsActionStats setField28dClick(String value) {
     this.m28dClick = value;
+    return this;
+  }
+
+  public String getField28dClickAllConversions() {
+    return m28dClickAllConversions;
+  }
+
+  public AdsActionStats setField28dClickAllConversions(String value) {
+    this.m28dClickAllConversions = value;
+    return this;
+  }
+
+  public String getField28dClickFirstConversion() {
+    return m28dClickFirstConversion;
+  }
+
+  public AdsActionStats setField28dClickFirstConversion(String value) {
+    this.m28dClickFirstConversion = value;
     return this;
   }
 
@@ -309,6 +409,24 @@ public class AdsActionStats extends APINode {
     return this;
   }
 
+  public String getField28dViewAllConversions() {
+    return m28dViewAllConversions;
+  }
+
+  public AdsActionStats setField28dViewAllConversions(String value) {
+    this.m28dViewAllConversions = value;
+    return this;
+  }
+
+  public String getField28dViewFirstConversion() {
+    return m28dViewFirstConversion;
+  }
+
+  public AdsActionStats setField28dViewFirstConversion(String value) {
+    this.m28dViewFirstConversion = value;
+    return this;
+  }
+
   public String getField7dClick() {
     return m7dClick;
   }
@@ -318,12 +436,48 @@ public class AdsActionStats extends APINode {
     return this;
   }
 
+  public String getField7dClickAllConversions() {
+    return m7dClickAllConversions;
+  }
+
+  public AdsActionStats setField7dClickAllConversions(String value) {
+    this.m7dClickAllConversions = value;
+    return this;
+  }
+
+  public String getField7dClickFirstConversion() {
+    return m7dClickFirstConversion;
+  }
+
+  public AdsActionStats setField7dClickFirstConversion(String value) {
+    this.m7dClickFirstConversion = value;
+    return this;
+  }
+
   public String getField7dView() {
     return m7dView;
   }
 
   public AdsActionStats setField7dView(String value) {
     this.m7dView = value;
+    return this;
+  }
+
+  public String getField7dViewAllConversions() {
+    return m7dViewAllConversions;
+  }
+
+  public AdsActionStats setField7dViewAllConversions(String value) {
+    this.m7dViewAllConversions = value;
+    return this;
+  }
+
+  public String getField7dViewFirstConversion() {
+    return m7dViewFirstConversion;
+  }
+
+  public AdsActionStats setField7dViewFirstConversion(String value) {
+    this.m7dViewFirstConversion = value;
     return this;
   }
 
@@ -606,12 +760,26 @@ public class AdsActionStats extends APINode {
 
   public AdsActionStats copyFrom(AdsActionStats instance) {
     this.m1dClick = instance.m1dClick;
+    this.m1dClickAllConversions = instance.m1dClickAllConversions;
+    this.m1dClickFirstConversion = instance.m1dClickFirstConversion;
     this.m1dEv = instance.m1dEv;
+    this.m1dEvAllConversions = instance.m1dEvAllConversions;
+    this.m1dEvFirstConversion = instance.m1dEvFirstConversion;
     this.m1dView = instance.m1dView;
+    this.m1dViewAllConversions = instance.m1dViewAllConversions;
+    this.m1dViewFirstConversion = instance.m1dViewFirstConversion;
     this.m28dClick = instance.m28dClick;
+    this.m28dClickAllConversions = instance.m28dClickAllConversions;
+    this.m28dClickFirstConversion = instance.m28dClickFirstConversion;
     this.m28dView = instance.m28dView;
+    this.m28dViewAllConversions = instance.m28dViewAllConversions;
+    this.m28dViewFirstConversion = instance.m28dViewFirstConversion;
     this.m7dClick = instance.m7dClick;
+    this.m7dClickAllConversions = instance.m7dClickAllConversions;
+    this.m7dClickFirstConversion = instance.m7dClickFirstConversion;
     this.m7dView = instance.m7dView;
+    this.m7dViewAllConversions = instance.m7dViewAllConversions;
+    this.m7dViewFirstConversion = instance.m7dViewFirstConversion;
     this.mActionBrand = instance.mActionBrand;
     this.mActionCanvasComponentId = instance.mActionCanvasComponentId;
     this.mActionCanvasComponentName = instance.mActionCanvasComponentName;

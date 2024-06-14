@@ -318,8 +318,12 @@ public class IGUser extends APINode {
     return new APIRequestGetContentPublishingLimit(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestGetDataset getDataset() {
-    return new APIRequestGetDataset(this.getPrefixedId().toString(), context);
+  public APIRequestGetDataSet getDataSet() {
+    return new APIRequestGetDataSet(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestCreateDataSet createDataSet() {
+    return new APIRequestCreateDataSet(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetInsights getInsights() {
@@ -728,6 +732,7 @@ public class IGUser extends APINode {
     }
     public static final String[] PARAMS = {
       "creator_instagram_account",
+      "creator_instagram_username",
       "revoke",
     };
 
@@ -793,6 +798,11 @@ public class IGUser extends APINode {
       return this;
     }
 
+    public APIRequestCreateBrandedContentAdPermission setCreatorInstagramUsername (String creatorInstagramUsername) {
+      this.setParam("creator_instagram_username", creatorInstagramUsername);
+      return this;
+    }
+
     public APIRequestCreateBrandedContentAdPermission setRevoke (Boolean revoke) {
       this.setParam("revoke", revoke);
       return this;
@@ -855,6 +865,7 @@ public class IGUser extends APINode {
 
     public static final String[] FIELDS = {
       "eligibility_errors",
+      "has_permission_for_partnership_ad",
       "id",
       "owner_id",
       "permalink",
@@ -978,6 +989,13 @@ public class IGUser extends APINode {
     }
     public APIRequestGetBrandedContentAdvertisableMedias requestEligibilityErrorsField (boolean value) {
       this.requestField("eligibility_errors", value);
+      return this;
+    }
+    public APIRequestGetBrandedContentAdvertisableMedias requestHasPermissionForPartnershipAdField () {
+      return this.requestHasPermissionForPartnershipAdField(true);
+    }
+    public APIRequestGetBrandedContentAdvertisableMedias requestHasPermissionForPartnershipAdField (boolean value) {
+      this.requestField("has_permission_for_partnership_ad", value);
       return this;
     }
     public APIRequestGetBrandedContentAdvertisableMedias requestIdField () {
@@ -1664,48 +1682,81 @@ public class IGUser extends APINode {
     }
   }
 
-  public static class APIRequestGetDataset extends APIRequest<Dataset> {
+  public static class APIRequestGetDataSet extends APIRequest<AdsPixel> {
 
-    APINodeList<Dataset> lastResponse = null;
+    APINodeList<AdsPixel> lastResponse = null;
     @Override
-    public APINodeList<Dataset> getLastResponse() {
+    public APINodeList<AdsPixel> getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
     };
 
     public static final String[] FIELDS = {
+      "automatic_matching_fields",
+      "can_proxy",
+      "code",
+      "config",
+      "creation_time",
+      "creator",
+      "data_use_setting",
+      "description",
+      "duplicate_entries",
+      "enable_auto_assign_to_accounts",
+      "enable_automatic_matching",
+      "event_stats",
+      "event_time_max",
+      "event_time_min",
+      "first_party_cookie_status",
+      "has_1p_pixel_event",
       "id",
+      "is_consolidated_container",
+      "is_created_by_business",
+      "is_crm",
+      "is_mta_use",
+      "is_restricted_use",
+      "is_unavailable",
+      "last_fired_time",
+      "last_upload_app",
+      "last_upload_app_changed_time",
+      "match_rate_approx",
+      "matched_entries",
+      "name",
+      "owner_ad_account",
+      "owner_business",
+      "usage",
+      "user_access_expire_time",
+      "valid_entries",
     };
 
     @Override
-    public APINodeList<Dataset> parseResponse(String response, String header) throws APIException {
-      return Dataset.parseResponse(response, getContext(), this, header);
+    public APINodeList<AdsPixel> parseResponse(String response, String header) throws APIException {
+      return AdsPixel.parseResponse(response, getContext(), this, header);
     }
 
     @Override
-    public APINodeList<Dataset> execute() throws APIException {
+    public APINodeList<AdsPixel> execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINodeList<Dataset> execute(Map<String, Object> extraParams) throws APIException {
+    public APINodeList<AdsPixel> execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<APINodeList<Dataset>> executeAsync() throws APIException {
+    public ListenableFuture<APINodeList<AdsPixel>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<APINodeList<Dataset>> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<APINodeList<AdsPixel>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<Dataset>>() {
-           public APINodeList<Dataset> apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, APINodeList<AdsPixel>>() {
+           public APINodeList<AdsPixel> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetDataset.this.parseResponse(result.getBody(), result.getHeader());
+               return APIRequestGetDataSet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1715,28 +1766,28 @@ public class IGUser extends APINode {
       );
     };
 
-    public APIRequestGetDataset(String nodeId, APIContext context) {
+    public APIRequestGetDataSet(String nodeId, APIContext context) {
       super(context, nodeId, "/dataset", "GET", Arrays.asList(PARAMS));
     }
 
     @Override
-    public APIRequestGetDataset setParam(String param, Object value) {
+    public APIRequestGetDataSet setParam(String param, Object value) {
       setParamInternal(param, value);
       return this;
     }
 
     @Override
-    public APIRequestGetDataset setParams(Map<String, Object> params) {
+    public APIRequestGetDataSet setParams(Map<String, Object> params) {
       setParamsInternal(params);
       return this;
     }
 
 
-    public APIRequestGetDataset requestAllFields () {
+    public APIRequestGetDataSet requestAllFields () {
       return this.requestAllFields(true);
     }
 
-    public APIRequestGetDataset requestAllFields (boolean value) {
+    public APIRequestGetDataSet requestAllFields (boolean value) {
       for (String field : FIELDS) {
         this.requestField(field, value);
       }
@@ -1744,12 +1795,12 @@ public class IGUser extends APINode {
     }
 
     @Override
-    public APIRequestGetDataset requestFields (List<String> fields) {
+    public APIRequestGetDataSet requestFields (List<String> fields) {
       return this.requestFields(fields, true);
     }
 
     @Override
-    public APIRequestGetDataset requestFields (List<String> fields, boolean value) {
+    public APIRequestGetDataSet requestFields (List<String> fields, boolean value) {
       for (String field : fields) {
         this.requestField(field, value);
       }
@@ -1757,24 +1808,360 @@ public class IGUser extends APINode {
     }
 
     @Override
-    public APIRequestGetDataset requestField (String field) {
+    public APIRequestGetDataSet requestField (String field) {
       this.requestField(field, true);
       return this;
     }
 
     @Override
-    public APIRequestGetDataset requestField (String field, boolean value) {
+    public APIRequestGetDataSet requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
 
-    public APIRequestGetDataset requestIdField () {
+    public APIRequestGetDataSet requestAutomaticMatchingFieldsField () {
+      return this.requestAutomaticMatchingFieldsField(true);
+    }
+    public APIRequestGetDataSet requestAutomaticMatchingFieldsField (boolean value) {
+      this.requestField("automatic_matching_fields", value);
+      return this;
+    }
+    public APIRequestGetDataSet requestCanProxyField () {
+      return this.requestCanProxyField(true);
+    }
+    public APIRequestGetDataSet requestCanProxyField (boolean value) {
+      this.requestField("can_proxy", value);
+      return this;
+    }
+    public APIRequestGetDataSet requestCodeField () {
+      return this.requestCodeField(true);
+    }
+    public APIRequestGetDataSet requestCodeField (boolean value) {
+      this.requestField("code", value);
+      return this;
+    }
+    public APIRequestGetDataSet requestConfigField () {
+      return this.requestConfigField(true);
+    }
+    public APIRequestGetDataSet requestConfigField (boolean value) {
+      this.requestField("config", value);
+      return this;
+    }
+    public APIRequestGetDataSet requestCreationTimeField () {
+      return this.requestCreationTimeField(true);
+    }
+    public APIRequestGetDataSet requestCreationTimeField (boolean value) {
+      this.requestField("creation_time", value);
+      return this;
+    }
+    public APIRequestGetDataSet requestCreatorField () {
+      return this.requestCreatorField(true);
+    }
+    public APIRequestGetDataSet requestCreatorField (boolean value) {
+      this.requestField("creator", value);
+      return this;
+    }
+    public APIRequestGetDataSet requestDataUseSettingField () {
+      return this.requestDataUseSettingField(true);
+    }
+    public APIRequestGetDataSet requestDataUseSettingField (boolean value) {
+      this.requestField("data_use_setting", value);
+      return this;
+    }
+    public APIRequestGetDataSet requestDescriptionField () {
+      return this.requestDescriptionField(true);
+    }
+    public APIRequestGetDataSet requestDescriptionField (boolean value) {
+      this.requestField("description", value);
+      return this;
+    }
+    public APIRequestGetDataSet requestDuplicateEntriesField () {
+      return this.requestDuplicateEntriesField(true);
+    }
+    public APIRequestGetDataSet requestDuplicateEntriesField (boolean value) {
+      this.requestField("duplicate_entries", value);
+      return this;
+    }
+    public APIRequestGetDataSet requestEnableAutoAssignToAccountsField () {
+      return this.requestEnableAutoAssignToAccountsField(true);
+    }
+    public APIRequestGetDataSet requestEnableAutoAssignToAccountsField (boolean value) {
+      this.requestField("enable_auto_assign_to_accounts", value);
+      return this;
+    }
+    public APIRequestGetDataSet requestEnableAutomaticMatchingField () {
+      return this.requestEnableAutomaticMatchingField(true);
+    }
+    public APIRequestGetDataSet requestEnableAutomaticMatchingField (boolean value) {
+      this.requestField("enable_automatic_matching", value);
+      return this;
+    }
+    public APIRequestGetDataSet requestEventStatsField () {
+      return this.requestEventStatsField(true);
+    }
+    public APIRequestGetDataSet requestEventStatsField (boolean value) {
+      this.requestField("event_stats", value);
+      return this;
+    }
+    public APIRequestGetDataSet requestEventTimeMaxField () {
+      return this.requestEventTimeMaxField(true);
+    }
+    public APIRequestGetDataSet requestEventTimeMaxField (boolean value) {
+      this.requestField("event_time_max", value);
+      return this;
+    }
+    public APIRequestGetDataSet requestEventTimeMinField () {
+      return this.requestEventTimeMinField(true);
+    }
+    public APIRequestGetDataSet requestEventTimeMinField (boolean value) {
+      this.requestField("event_time_min", value);
+      return this;
+    }
+    public APIRequestGetDataSet requestFirstPartyCookieStatusField () {
+      return this.requestFirstPartyCookieStatusField(true);
+    }
+    public APIRequestGetDataSet requestFirstPartyCookieStatusField (boolean value) {
+      this.requestField("first_party_cookie_status", value);
+      return this;
+    }
+    public APIRequestGetDataSet requestHas1pPixelEventField () {
+      return this.requestHas1pPixelEventField(true);
+    }
+    public APIRequestGetDataSet requestHas1pPixelEventField (boolean value) {
+      this.requestField("has_1p_pixel_event", value);
+      return this;
+    }
+    public APIRequestGetDataSet requestIdField () {
       return this.requestIdField(true);
     }
-    public APIRequestGetDataset requestIdField (boolean value) {
+    public APIRequestGetDataSet requestIdField (boolean value) {
       this.requestField("id", value);
       return this;
     }
+    public APIRequestGetDataSet requestIsConsolidatedContainerField () {
+      return this.requestIsConsolidatedContainerField(true);
+    }
+    public APIRequestGetDataSet requestIsConsolidatedContainerField (boolean value) {
+      this.requestField("is_consolidated_container", value);
+      return this;
+    }
+    public APIRequestGetDataSet requestIsCreatedByBusinessField () {
+      return this.requestIsCreatedByBusinessField(true);
+    }
+    public APIRequestGetDataSet requestIsCreatedByBusinessField (boolean value) {
+      this.requestField("is_created_by_business", value);
+      return this;
+    }
+    public APIRequestGetDataSet requestIsCrmField () {
+      return this.requestIsCrmField(true);
+    }
+    public APIRequestGetDataSet requestIsCrmField (boolean value) {
+      this.requestField("is_crm", value);
+      return this;
+    }
+    public APIRequestGetDataSet requestIsMtaUseField () {
+      return this.requestIsMtaUseField(true);
+    }
+    public APIRequestGetDataSet requestIsMtaUseField (boolean value) {
+      this.requestField("is_mta_use", value);
+      return this;
+    }
+    public APIRequestGetDataSet requestIsRestrictedUseField () {
+      return this.requestIsRestrictedUseField(true);
+    }
+    public APIRequestGetDataSet requestIsRestrictedUseField (boolean value) {
+      this.requestField("is_restricted_use", value);
+      return this;
+    }
+    public APIRequestGetDataSet requestIsUnavailableField () {
+      return this.requestIsUnavailableField(true);
+    }
+    public APIRequestGetDataSet requestIsUnavailableField (boolean value) {
+      this.requestField("is_unavailable", value);
+      return this;
+    }
+    public APIRequestGetDataSet requestLastFiredTimeField () {
+      return this.requestLastFiredTimeField(true);
+    }
+    public APIRequestGetDataSet requestLastFiredTimeField (boolean value) {
+      this.requestField("last_fired_time", value);
+      return this;
+    }
+    public APIRequestGetDataSet requestLastUploadAppField () {
+      return this.requestLastUploadAppField(true);
+    }
+    public APIRequestGetDataSet requestLastUploadAppField (boolean value) {
+      this.requestField("last_upload_app", value);
+      return this;
+    }
+    public APIRequestGetDataSet requestLastUploadAppChangedTimeField () {
+      return this.requestLastUploadAppChangedTimeField(true);
+    }
+    public APIRequestGetDataSet requestLastUploadAppChangedTimeField (boolean value) {
+      this.requestField("last_upload_app_changed_time", value);
+      return this;
+    }
+    public APIRequestGetDataSet requestMatchRateApproxField () {
+      return this.requestMatchRateApproxField(true);
+    }
+    public APIRequestGetDataSet requestMatchRateApproxField (boolean value) {
+      this.requestField("match_rate_approx", value);
+      return this;
+    }
+    public APIRequestGetDataSet requestMatchedEntriesField () {
+      return this.requestMatchedEntriesField(true);
+    }
+    public APIRequestGetDataSet requestMatchedEntriesField (boolean value) {
+      this.requestField("matched_entries", value);
+      return this;
+    }
+    public APIRequestGetDataSet requestNameField () {
+      return this.requestNameField(true);
+    }
+    public APIRequestGetDataSet requestNameField (boolean value) {
+      this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetDataSet requestOwnerAdAccountField () {
+      return this.requestOwnerAdAccountField(true);
+    }
+    public APIRequestGetDataSet requestOwnerAdAccountField (boolean value) {
+      this.requestField("owner_ad_account", value);
+      return this;
+    }
+    public APIRequestGetDataSet requestOwnerBusinessField () {
+      return this.requestOwnerBusinessField(true);
+    }
+    public APIRequestGetDataSet requestOwnerBusinessField (boolean value) {
+      this.requestField("owner_business", value);
+      return this;
+    }
+    public APIRequestGetDataSet requestUsageField () {
+      return this.requestUsageField(true);
+    }
+    public APIRequestGetDataSet requestUsageField (boolean value) {
+      this.requestField("usage", value);
+      return this;
+    }
+    public APIRequestGetDataSet requestUserAccessExpireTimeField () {
+      return this.requestUserAccessExpireTimeField(true);
+    }
+    public APIRequestGetDataSet requestUserAccessExpireTimeField (boolean value) {
+      this.requestField("user_access_expire_time", value);
+      return this;
+    }
+    public APIRequestGetDataSet requestValidEntriesField () {
+      return this.requestValidEntriesField(true);
+    }
+    public APIRequestGetDataSet requestValidEntriesField (boolean value) {
+      this.requestField("valid_entries", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestCreateDataSet extends APIRequest<AdsPixel> {
+
+    AdsPixel lastResponse = null;
+    @Override
+    public AdsPixel getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public AdsPixel parseResponse(String response, String header) throws APIException {
+      return AdsPixel.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public AdsPixel execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public AdsPixel execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<AdsPixel> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<AdsPixel> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, AdsPixel>() {
+           public AdsPixel apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateDataSet.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestCreateDataSet(String nodeId, APIContext context) {
+      super(context, nodeId, "/dataset", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateDataSet setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateDataSet setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateDataSet requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateDataSet requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateDataSet requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateDataSet requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateDataSet requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateDataSet requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
   }
 
   public static class APIRequestGetInsights extends APIRequest<InstagramInsightsResult> {
@@ -2013,6 +2400,7 @@ public class IGUser extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "boost_eligibility_info",
       "caption",
       "comments_count",
       "copyright_check_information",
@@ -2132,6 +2520,13 @@ public class IGUser extends APINode {
       return this;
     }
 
+    public APIRequestGetLiveMedia requestBoostEligibilityInfoField () {
+      return this.requestBoostEligibilityInfoField(true);
+    }
+    public APIRequestGetLiveMedia requestBoostEligibilityInfoField (boolean value) {
+      this.requestField("boost_eligibility_info", value);
+      return this;
+    }
     public APIRequestGetLiveMedia requestCaptionField () {
       return this.requestCaptionField(true);
     }
@@ -2266,6 +2661,7 @@ public class IGUser extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "boost_eligibility_info",
       "caption",
       "comments_count",
       "copyright_check_information",
@@ -2385,6 +2781,13 @@ public class IGUser extends APINode {
       return this;
     }
 
+    public APIRequestGetMedia requestBoostEligibilityInfoField () {
+      return this.requestBoostEligibilityInfoField(true);
+    }
+    public APIRequestGetMedia requestBoostEligibilityInfoField (boolean value) {
+      this.requestField("boost_eligibility_info", value);
+      return this;
+    }
     public APIRequestGetMedia requestCaptionField () {
       return this.requestCaptionField(true);
     }
@@ -3556,6 +3959,7 @@ public class IGUser extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "boost_eligibility_info",
       "caption",
       "comments_count",
       "copyright_check_information",
@@ -3665,6 +4069,13 @@ public class IGUser extends APINode {
       return this;
     }
 
+    public APIRequestGetStories requestBoostEligibilityInfoField () {
+      return this.requestBoostEligibilityInfoField(true);
+    }
+    public APIRequestGetStories requestBoostEligibilityInfoField (boolean value) {
+      this.requestField("boost_eligibility_info", value);
+      return this;
+    }
     public APIRequestGetStories requestCaptionField () {
       return this.requestCaptionField(true);
     }
@@ -3797,6 +4208,7 @@ public class IGUser extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "boost_eligibility_info",
       "caption",
       "comments_count",
       "copyright_check_information",
@@ -3906,6 +4318,13 @@ public class IGUser extends APINode {
       return this;
     }
 
+    public APIRequestGetTags requestBoostEligibilityInfoField () {
+      return this.requestBoostEligibilityInfoField(true);
+    }
+    public APIRequestGetTags requestBoostEligibilityInfoField (boolean value) {
+      this.requestField("boost_eligibility_info", value);
+      return this;
+    }
     public APIRequestGetTags requestCaptionField () {
       return this.requestCaptionField(true);
     }

@@ -580,12 +580,12 @@ public class Application extends APINode {
     return new APIRequestGetDaChecks(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestGetIapPurchases getIapPurchases() {
-    return new APIRequestGetIapPurchases(this.getPrefixedId().toString(), context);
+  public APIRequestCreateDomainReport createDomainReport() {
+    return new APIRequestCreateDomainReport(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestGetInsightsPushSchedule getInsightsPushSchedule() {
-    return new APIRequestGetInsightsPushSchedule(this.getPrefixedId().toString(), context);
+  public APIRequestGetIapPurchases getIapPurchases() {
+    return new APIRequestGetIapPurchases(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetIosDialogConfigs getIosDialogConfigs() {
@@ -678,6 +678,14 @@ public class Application extends APINode {
 
   public APIRequestCreateUpload createUpload() {
     return new APIRequestCreateUpload(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestCreateWhatsAppBusinessSolution createWhatsAppBusinessSolution() {
+    return new APIRequestCreateWhatsAppBusinessSolution(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetWhatsAppBusinessSolutions getWhatsAppBusinessSolutions() {
+    return new APIRequestGetWhatsAppBusinessSolutions(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGet get() {
@@ -6241,6 +6249,121 @@ public class Application extends APINode {
     }
   }
 
+  public static class APIRequestCreateDomainReport extends APIRequest<APINode> {
+
+    APINode lastResponse = null;
+    @Override
+    public APINode getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "tracking_domains",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public APINode execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINode execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINode> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateDomainReport.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestCreateDomainReport(String nodeId, APIContext context) {
+      super(context, nodeId, "/domain_reports", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateDomainReport setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateDomainReport setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateDomainReport setTrackingDomains (List<String> trackingDomains) {
+      this.setParam("tracking_domains", trackingDomains);
+      return this;
+    }
+    public APIRequestCreateDomainReport setTrackingDomains (String trackingDomains) {
+      this.setParam("tracking_domains", trackingDomains);
+      return this;
+    }
+
+    public APIRequestCreateDomainReport requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateDomainReport requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateDomainReport requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateDomainReport requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateDomainReport requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateDomainReport requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGetIapPurchases extends APIRequest<APINode> {
 
     APINodeList<APINode> lastResponse = null;
@@ -6352,111 +6475,6 @@ public class Application extends APINode {
 
   }
 
-  public static class APIRequestGetInsightsPushSchedule extends APIRequest<APINode> {
-
-    APINodeList<APINode> lastResponse = null;
-    @Override
-    public APINodeList<APINode> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<APINode> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetInsightsPushSchedule.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         },
-         MoreExecutors.directExecutor()
-      );
-    };
-
-    public APIRequestGetInsightsPushSchedule(String nodeId, APIContext context) {
-      super(context, nodeId, "/insights_push_schedule", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetInsightsPushSchedule setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetInsightsPushSchedule setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetInsightsPushSchedule requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetInsightsPushSchedule requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetInsightsPushSchedule requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetInsightsPushSchedule requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetInsightsPushSchedule requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetInsightsPushSchedule requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
   public static class APIRequestGetIosDialogConfigs extends APIRequest<APINode> {
 
     APINodeList<APINode> lastResponse = null;
@@ -6562,45 +6580,97 @@ public class Application extends APINode {
 
   }
 
-  public static class APIRequestGetLinkedDataset extends APIRequest<APINode> {
+  public static class APIRequestGetLinkedDataset extends APIRequest<AdsDataset> {
 
-    APINodeList<APINode> lastResponse = null;
+    APINodeList<AdsDataset> lastResponse = null;
     @Override
-    public APINodeList<APINode> getLastResponse() {
+    public APINodeList<AdsDataset> getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
     };
 
     public static final String[] FIELDS = {
+      "can_proxy",
+      "collection_rate",
+      "config",
+      "creation_time",
+      "creator",
+      "dataset_id",
+      "description",
+      "duplicate_entries",
+      "enable_auto_assign_to_accounts",
+      "enable_automatic_events",
+      "enable_automatic_matching",
+      "enable_real_time_event_log",
+      "event_stats",
+      "event_time_max",
+      "event_time_min",
+      "first_party_cookie_status",
+      "has_bapi_domains",
+      "has_catalog_microdata_activity",
+      "has_ofa_redacted_keys",
+      "has_sent_pii",
+      "id",
+      "is_consolidated_container",
+      "is_created_by_business",
+      "is_crm",
+      "is_eligible_for_sharing_to_ad_account",
+      "is_eligible_for_sharing_to_business",
+      "is_eligible_for_value_optimization",
+      "is_mta_use",
+      "is_restricted_use",
+      "is_unavailable",
+      "last_fired_time",
+      "last_upload_app",
+      "last_upload_app_changed_time",
+      "last_upload_time",
+      "late_upload_reminder_eligibility",
+      "match_rate_approx",
+      "matched_entries",
+      "name",
+      "no_ads_tracked_for_weekly_uploaded_events_reminder_eligibility",
+      "num_active_ad_set_tracked",
+      "num_recent_offline_conversions_uploaded",
+      "num_uploads",
+      "owner_ad_account",
+      "owner_business",
+      "percentage_of_late_uploads_in_external_suboptimal_window",
+      "permissions",
+      "server_last_fired_time",
+      "show_automatic_events",
+      "upload_rate",
+      "upload_reminder_eligibility",
+      "usage",
+      "valid_entries",
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header);
+    public APINodeList<AdsDataset> parseResponse(String response, String header) throws APIException {
+      return AdsDataset.parseResponse(response, getContext(), this, header);
     }
 
     @Override
-    public APINodeList<APINode> execute() throws APIException {
+    public APINodeList<AdsDataset> execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+    public APINodeList<AdsDataset> execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+    public ListenableFuture<APINodeList<AdsDataset>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<APINodeList<AdsDataset>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, APINodeList<AdsDataset>>() {
+           public APINodeList<AdsDataset> apply(ResponseWrapper result) {
              try {
                return APIRequestGetLinkedDataset.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -6665,6 +6735,370 @@ public class Application extends APINode {
       return this;
     }
 
+    public APIRequestGetLinkedDataset requestCanProxyField () {
+      return this.requestCanProxyField(true);
+    }
+    public APIRequestGetLinkedDataset requestCanProxyField (boolean value) {
+      this.requestField("can_proxy", value);
+      return this;
+    }
+    public APIRequestGetLinkedDataset requestCollectionRateField () {
+      return this.requestCollectionRateField(true);
+    }
+    public APIRequestGetLinkedDataset requestCollectionRateField (boolean value) {
+      this.requestField("collection_rate", value);
+      return this;
+    }
+    public APIRequestGetLinkedDataset requestConfigField () {
+      return this.requestConfigField(true);
+    }
+    public APIRequestGetLinkedDataset requestConfigField (boolean value) {
+      this.requestField("config", value);
+      return this;
+    }
+    public APIRequestGetLinkedDataset requestCreationTimeField () {
+      return this.requestCreationTimeField(true);
+    }
+    public APIRequestGetLinkedDataset requestCreationTimeField (boolean value) {
+      this.requestField("creation_time", value);
+      return this;
+    }
+    public APIRequestGetLinkedDataset requestCreatorField () {
+      return this.requestCreatorField(true);
+    }
+    public APIRequestGetLinkedDataset requestCreatorField (boolean value) {
+      this.requestField("creator", value);
+      return this;
+    }
+    public APIRequestGetLinkedDataset requestDatasetIdField () {
+      return this.requestDatasetIdField(true);
+    }
+    public APIRequestGetLinkedDataset requestDatasetIdField (boolean value) {
+      this.requestField("dataset_id", value);
+      return this;
+    }
+    public APIRequestGetLinkedDataset requestDescriptionField () {
+      return this.requestDescriptionField(true);
+    }
+    public APIRequestGetLinkedDataset requestDescriptionField (boolean value) {
+      this.requestField("description", value);
+      return this;
+    }
+    public APIRequestGetLinkedDataset requestDuplicateEntriesField () {
+      return this.requestDuplicateEntriesField(true);
+    }
+    public APIRequestGetLinkedDataset requestDuplicateEntriesField (boolean value) {
+      this.requestField("duplicate_entries", value);
+      return this;
+    }
+    public APIRequestGetLinkedDataset requestEnableAutoAssignToAccountsField () {
+      return this.requestEnableAutoAssignToAccountsField(true);
+    }
+    public APIRequestGetLinkedDataset requestEnableAutoAssignToAccountsField (boolean value) {
+      this.requestField("enable_auto_assign_to_accounts", value);
+      return this;
+    }
+    public APIRequestGetLinkedDataset requestEnableAutomaticEventsField () {
+      return this.requestEnableAutomaticEventsField(true);
+    }
+    public APIRequestGetLinkedDataset requestEnableAutomaticEventsField (boolean value) {
+      this.requestField("enable_automatic_events", value);
+      return this;
+    }
+    public APIRequestGetLinkedDataset requestEnableAutomaticMatchingField () {
+      return this.requestEnableAutomaticMatchingField(true);
+    }
+    public APIRequestGetLinkedDataset requestEnableAutomaticMatchingField (boolean value) {
+      this.requestField("enable_automatic_matching", value);
+      return this;
+    }
+    public APIRequestGetLinkedDataset requestEnableRealTimeEventLogField () {
+      return this.requestEnableRealTimeEventLogField(true);
+    }
+    public APIRequestGetLinkedDataset requestEnableRealTimeEventLogField (boolean value) {
+      this.requestField("enable_real_time_event_log", value);
+      return this;
+    }
+    public APIRequestGetLinkedDataset requestEventStatsField () {
+      return this.requestEventStatsField(true);
+    }
+    public APIRequestGetLinkedDataset requestEventStatsField (boolean value) {
+      this.requestField("event_stats", value);
+      return this;
+    }
+    public APIRequestGetLinkedDataset requestEventTimeMaxField () {
+      return this.requestEventTimeMaxField(true);
+    }
+    public APIRequestGetLinkedDataset requestEventTimeMaxField (boolean value) {
+      this.requestField("event_time_max", value);
+      return this;
+    }
+    public APIRequestGetLinkedDataset requestEventTimeMinField () {
+      return this.requestEventTimeMinField(true);
+    }
+    public APIRequestGetLinkedDataset requestEventTimeMinField (boolean value) {
+      this.requestField("event_time_min", value);
+      return this;
+    }
+    public APIRequestGetLinkedDataset requestFirstPartyCookieStatusField () {
+      return this.requestFirstPartyCookieStatusField(true);
+    }
+    public APIRequestGetLinkedDataset requestFirstPartyCookieStatusField (boolean value) {
+      this.requestField("first_party_cookie_status", value);
+      return this;
+    }
+    public APIRequestGetLinkedDataset requestHasBapiDomainsField () {
+      return this.requestHasBapiDomainsField(true);
+    }
+    public APIRequestGetLinkedDataset requestHasBapiDomainsField (boolean value) {
+      this.requestField("has_bapi_domains", value);
+      return this;
+    }
+    public APIRequestGetLinkedDataset requestHasCatalogMicrodataActivityField () {
+      return this.requestHasCatalogMicrodataActivityField(true);
+    }
+    public APIRequestGetLinkedDataset requestHasCatalogMicrodataActivityField (boolean value) {
+      this.requestField("has_catalog_microdata_activity", value);
+      return this;
+    }
+    public APIRequestGetLinkedDataset requestHasOfaRedactedKeysField () {
+      return this.requestHasOfaRedactedKeysField(true);
+    }
+    public APIRequestGetLinkedDataset requestHasOfaRedactedKeysField (boolean value) {
+      this.requestField("has_ofa_redacted_keys", value);
+      return this;
+    }
+    public APIRequestGetLinkedDataset requestHasSentPiiField () {
+      return this.requestHasSentPiiField(true);
+    }
+    public APIRequestGetLinkedDataset requestHasSentPiiField (boolean value) {
+      this.requestField("has_sent_pii", value);
+      return this;
+    }
+    public APIRequestGetLinkedDataset requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetLinkedDataset requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetLinkedDataset requestIsConsolidatedContainerField () {
+      return this.requestIsConsolidatedContainerField(true);
+    }
+    public APIRequestGetLinkedDataset requestIsConsolidatedContainerField (boolean value) {
+      this.requestField("is_consolidated_container", value);
+      return this;
+    }
+    public APIRequestGetLinkedDataset requestIsCreatedByBusinessField () {
+      return this.requestIsCreatedByBusinessField(true);
+    }
+    public APIRequestGetLinkedDataset requestIsCreatedByBusinessField (boolean value) {
+      this.requestField("is_created_by_business", value);
+      return this;
+    }
+    public APIRequestGetLinkedDataset requestIsCrmField () {
+      return this.requestIsCrmField(true);
+    }
+    public APIRequestGetLinkedDataset requestIsCrmField (boolean value) {
+      this.requestField("is_crm", value);
+      return this;
+    }
+    public APIRequestGetLinkedDataset requestIsEligibleForSharingToAdAccountField () {
+      return this.requestIsEligibleForSharingToAdAccountField(true);
+    }
+    public APIRequestGetLinkedDataset requestIsEligibleForSharingToAdAccountField (boolean value) {
+      this.requestField("is_eligible_for_sharing_to_ad_account", value);
+      return this;
+    }
+    public APIRequestGetLinkedDataset requestIsEligibleForSharingToBusinessField () {
+      return this.requestIsEligibleForSharingToBusinessField(true);
+    }
+    public APIRequestGetLinkedDataset requestIsEligibleForSharingToBusinessField (boolean value) {
+      this.requestField("is_eligible_for_sharing_to_business", value);
+      return this;
+    }
+    public APIRequestGetLinkedDataset requestIsEligibleForValueOptimizationField () {
+      return this.requestIsEligibleForValueOptimizationField(true);
+    }
+    public APIRequestGetLinkedDataset requestIsEligibleForValueOptimizationField (boolean value) {
+      this.requestField("is_eligible_for_value_optimization", value);
+      return this;
+    }
+    public APIRequestGetLinkedDataset requestIsMtaUseField () {
+      return this.requestIsMtaUseField(true);
+    }
+    public APIRequestGetLinkedDataset requestIsMtaUseField (boolean value) {
+      this.requestField("is_mta_use", value);
+      return this;
+    }
+    public APIRequestGetLinkedDataset requestIsRestrictedUseField () {
+      return this.requestIsRestrictedUseField(true);
+    }
+    public APIRequestGetLinkedDataset requestIsRestrictedUseField (boolean value) {
+      this.requestField("is_restricted_use", value);
+      return this;
+    }
+    public APIRequestGetLinkedDataset requestIsUnavailableField () {
+      return this.requestIsUnavailableField(true);
+    }
+    public APIRequestGetLinkedDataset requestIsUnavailableField (boolean value) {
+      this.requestField("is_unavailable", value);
+      return this;
+    }
+    public APIRequestGetLinkedDataset requestLastFiredTimeField () {
+      return this.requestLastFiredTimeField(true);
+    }
+    public APIRequestGetLinkedDataset requestLastFiredTimeField (boolean value) {
+      this.requestField("last_fired_time", value);
+      return this;
+    }
+    public APIRequestGetLinkedDataset requestLastUploadAppField () {
+      return this.requestLastUploadAppField(true);
+    }
+    public APIRequestGetLinkedDataset requestLastUploadAppField (boolean value) {
+      this.requestField("last_upload_app", value);
+      return this;
+    }
+    public APIRequestGetLinkedDataset requestLastUploadAppChangedTimeField () {
+      return this.requestLastUploadAppChangedTimeField(true);
+    }
+    public APIRequestGetLinkedDataset requestLastUploadAppChangedTimeField (boolean value) {
+      this.requestField("last_upload_app_changed_time", value);
+      return this;
+    }
+    public APIRequestGetLinkedDataset requestLastUploadTimeField () {
+      return this.requestLastUploadTimeField(true);
+    }
+    public APIRequestGetLinkedDataset requestLastUploadTimeField (boolean value) {
+      this.requestField("last_upload_time", value);
+      return this;
+    }
+    public APIRequestGetLinkedDataset requestLateUploadReminderEligibilityField () {
+      return this.requestLateUploadReminderEligibilityField(true);
+    }
+    public APIRequestGetLinkedDataset requestLateUploadReminderEligibilityField (boolean value) {
+      this.requestField("late_upload_reminder_eligibility", value);
+      return this;
+    }
+    public APIRequestGetLinkedDataset requestMatchRateApproxField () {
+      return this.requestMatchRateApproxField(true);
+    }
+    public APIRequestGetLinkedDataset requestMatchRateApproxField (boolean value) {
+      this.requestField("match_rate_approx", value);
+      return this;
+    }
+    public APIRequestGetLinkedDataset requestMatchedEntriesField () {
+      return this.requestMatchedEntriesField(true);
+    }
+    public APIRequestGetLinkedDataset requestMatchedEntriesField (boolean value) {
+      this.requestField("matched_entries", value);
+      return this;
+    }
+    public APIRequestGetLinkedDataset requestNameField () {
+      return this.requestNameField(true);
+    }
+    public APIRequestGetLinkedDataset requestNameField (boolean value) {
+      this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetLinkedDataset requestNoAdsTrackedForWeeklyUploadedEventsReminderEligibilityField () {
+      return this.requestNoAdsTrackedForWeeklyUploadedEventsReminderEligibilityField(true);
+    }
+    public APIRequestGetLinkedDataset requestNoAdsTrackedForWeeklyUploadedEventsReminderEligibilityField (boolean value) {
+      this.requestField("no_ads_tracked_for_weekly_uploaded_events_reminder_eligibility", value);
+      return this;
+    }
+    public APIRequestGetLinkedDataset requestNumActiveAdSetTrackedField () {
+      return this.requestNumActiveAdSetTrackedField(true);
+    }
+    public APIRequestGetLinkedDataset requestNumActiveAdSetTrackedField (boolean value) {
+      this.requestField("num_active_ad_set_tracked", value);
+      return this;
+    }
+    public APIRequestGetLinkedDataset requestNumRecentOfflineConversionsUploadedField () {
+      return this.requestNumRecentOfflineConversionsUploadedField(true);
+    }
+    public APIRequestGetLinkedDataset requestNumRecentOfflineConversionsUploadedField (boolean value) {
+      this.requestField("num_recent_offline_conversions_uploaded", value);
+      return this;
+    }
+    public APIRequestGetLinkedDataset requestNumUploadsField () {
+      return this.requestNumUploadsField(true);
+    }
+    public APIRequestGetLinkedDataset requestNumUploadsField (boolean value) {
+      this.requestField("num_uploads", value);
+      return this;
+    }
+    public APIRequestGetLinkedDataset requestOwnerAdAccountField () {
+      return this.requestOwnerAdAccountField(true);
+    }
+    public APIRequestGetLinkedDataset requestOwnerAdAccountField (boolean value) {
+      this.requestField("owner_ad_account", value);
+      return this;
+    }
+    public APIRequestGetLinkedDataset requestOwnerBusinessField () {
+      return this.requestOwnerBusinessField(true);
+    }
+    public APIRequestGetLinkedDataset requestOwnerBusinessField (boolean value) {
+      this.requestField("owner_business", value);
+      return this;
+    }
+    public APIRequestGetLinkedDataset requestPercentageOfLateUploadsInExternalSuboptimalWindowField () {
+      return this.requestPercentageOfLateUploadsInExternalSuboptimalWindowField(true);
+    }
+    public APIRequestGetLinkedDataset requestPercentageOfLateUploadsInExternalSuboptimalWindowField (boolean value) {
+      this.requestField("percentage_of_late_uploads_in_external_suboptimal_window", value);
+      return this;
+    }
+    public APIRequestGetLinkedDataset requestPermissionsField () {
+      return this.requestPermissionsField(true);
+    }
+    public APIRequestGetLinkedDataset requestPermissionsField (boolean value) {
+      this.requestField("permissions", value);
+      return this;
+    }
+    public APIRequestGetLinkedDataset requestServerLastFiredTimeField () {
+      return this.requestServerLastFiredTimeField(true);
+    }
+    public APIRequestGetLinkedDataset requestServerLastFiredTimeField (boolean value) {
+      this.requestField("server_last_fired_time", value);
+      return this;
+    }
+    public APIRequestGetLinkedDataset requestShowAutomaticEventsField () {
+      return this.requestShowAutomaticEventsField(true);
+    }
+    public APIRequestGetLinkedDataset requestShowAutomaticEventsField (boolean value) {
+      this.requestField("show_automatic_events", value);
+      return this;
+    }
+    public APIRequestGetLinkedDataset requestUploadRateField () {
+      return this.requestUploadRateField(true);
+    }
+    public APIRequestGetLinkedDataset requestUploadRateField (boolean value) {
+      this.requestField("upload_rate", value);
+      return this;
+    }
+    public APIRequestGetLinkedDataset requestUploadReminderEligibilityField () {
+      return this.requestUploadReminderEligibilityField(true);
+    }
+    public APIRequestGetLinkedDataset requestUploadReminderEligibilityField (boolean value) {
+      this.requestField("upload_reminder_eligibility", value);
+      return this;
+    }
+    public APIRequestGetLinkedDataset requestUsageField () {
+      return this.requestUsageField(true);
+    }
+    public APIRequestGetLinkedDataset requestUsageField (boolean value) {
+      this.requestField("usage", value);
+      return this;
+    }
+    public APIRequestGetLinkedDataset requestValidEntriesField () {
+      return this.requestValidEntriesField(true);
+    }
+    public APIRequestGetLinkedDataset requestValidEntriesField (boolean value) {
+      this.requestField("valid_entries", value);
+      return this;
+    }
   }
 
   public static class APIRequestCreateMmpAuditing extends APIRequest<APINode> {
@@ -9336,6 +9770,258 @@ public class Application extends APINode {
 
   }
 
+  public static class APIRequestCreateWhatsAppBusinessSolution extends APIRequest<Application> {
+
+    Application lastResponse = null;
+    @Override
+    public Application getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "owner_permissions",
+      "partner_app_id",
+      "partner_permissions",
+      "solution_name",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public Application parseResponse(String response, String header) throws APIException {
+      return Application.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public Application execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public Application execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<Application> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<Application> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, Application>() {
+           public Application apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateWhatsAppBusinessSolution.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestCreateWhatsAppBusinessSolution(String nodeId, APIContext context) {
+      super(context, nodeId, "/whatsapp_business_solution", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateWhatsAppBusinessSolution setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateWhatsAppBusinessSolution setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateWhatsAppBusinessSolution setOwnerPermissions (List<Application.EnumOwnerPermissions> ownerPermissions) {
+      this.setParam("owner_permissions", ownerPermissions);
+      return this;
+    }
+    public APIRequestCreateWhatsAppBusinessSolution setOwnerPermissions (String ownerPermissions) {
+      this.setParam("owner_permissions", ownerPermissions);
+      return this;
+    }
+
+    public APIRequestCreateWhatsAppBusinessSolution setPartnerAppId (String partnerAppId) {
+      this.setParam("partner_app_id", partnerAppId);
+      return this;
+    }
+
+    public APIRequestCreateWhatsAppBusinessSolution setPartnerPermissions (List<Application.EnumPartnerPermissions> partnerPermissions) {
+      this.setParam("partner_permissions", partnerPermissions);
+      return this;
+    }
+    public APIRequestCreateWhatsAppBusinessSolution setPartnerPermissions (String partnerPermissions) {
+      this.setParam("partner_permissions", partnerPermissions);
+      return this;
+    }
+
+    public APIRequestCreateWhatsAppBusinessSolution setSolutionName (String solutionName) {
+      this.setParam("solution_name", solutionName);
+      return this;
+    }
+
+    public APIRequestCreateWhatsAppBusinessSolution requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateWhatsAppBusinessSolution requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateWhatsAppBusinessSolution requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateWhatsAppBusinessSolution requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateWhatsAppBusinessSolution requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateWhatsAppBusinessSolution requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestGetWhatsAppBusinessSolutions extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "role",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetWhatsAppBusinessSolutions.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestGetWhatsAppBusinessSolutions(String nodeId, APIContext context) {
+      super(context, nodeId, "/whatsapp_business_solutions", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetWhatsAppBusinessSolutions setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetWhatsAppBusinessSolutions setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetWhatsAppBusinessSolutions setRole (EnumRole role) {
+      this.setParam("role", role);
+      return this;
+    }
+    public APIRequestGetWhatsAppBusinessSolutions setRole (String role) {
+      this.setParam("role", role);
+      return this;
+    }
+
+    public APIRequestGetWhatsAppBusinessSolutions requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetWhatsAppBusinessSolutions requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetWhatsAppBusinessSolutions requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetWhatsAppBusinessSolutions requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetWhatsAppBusinessSolutions requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetWhatsAppBusinessSolutions requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGet extends APIRequest<Application> {
 
     Application lastResponse = null;
@@ -10818,6 +11504,76 @@ public class Application extends APINode {
       }
   }
 
+  public static enum EnumOwnerPermissions {
+      @SerializedName("DEVELOP")
+      VALUE_DEVELOP("DEVELOP"),
+      @SerializedName("MANAGE")
+      VALUE_MANAGE("MANAGE"),
+      @SerializedName("MANAGE_EXTENSIONS")
+      VALUE_MANAGE_EXTENSIONS("MANAGE_EXTENSIONS"),
+      @SerializedName("MANAGE_PHONE")
+      VALUE_MANAGE_PHONE("MANAGE_PHONE"),
+      @SerializedName("MANAGE_PHONE_ASSETS")
+      VALUE_MANAGE_PHONE_ASSETS("MANAGE_PHONE_ASSETS"),
+      @SerializedName("MANAGE_TEMPLATES")
+      VALUE_MANAGE_TEMPLATES("MANAGE_TEMPLATES"),
+      @SerializedName("MESSAGING")
+      VALUE_MESSAGING("MESSAGING"),
+      @SerializedName("VIEW_COST")
+      VALUE_VIEW_COST("VIEW_COST"),
+      @SerializedName("VIEW_PHONE_ASSETS")
+      VALUE_VIEW_PHONE_ASSETS("VIEW_PHONE_ASSETS"),
+      @SerializedName("VIEW_TEMPLATES")
+      VALUE_VIEW_TEMPLATES("VIEW_TEMPLATES"),
+      ;
+
+      private String value;
+
+      private EnumOwnerPermissions(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumPartnerPermissions {
+      @SerializedName("DEVELOP")
+      VALUE_DEVELOP("DEVELOP"),
+      @SerializedName("MANAGE")
+      VALUE_MANAGE("MANAGE"),
+      @SerializedName("MANAGE_EXTENSIONS")
+      VALUE_MANAGE_EXTENSIONS("MANAGE_EXTENSIONS"),
+      @SerializedName("MANAGE_PHONE")
+      VALUE_MANAGE_PHONE("MANAGE_PHONE"),
+      @SerializedName("MANAGE_PHONE_ASSETS")
+      VALUE_MANAGE_PHONE_ASSETS("MANAGE_PHONE_ASSETS"),
+      @SerializedName("MANAGE_TEMPLATES")
+      VALUE_MANAGE_TEMPLATES("MANAGE_TEMPLATES"),
+      @SerializedName("MESSAGING")
+      VALUE_MESSAGING("MESSAGING"),
+      @SerializedName("VIEW_COST")
+      VALUE_VIEW_COST("VIEW_COST"),
+      @SerializedName("VIEW_PHONE_ASSETS")
+      VALUE_VIEW_PHONE_ASSETS("VIEW_PHONE_ASSETS"),
+      @SerializedName("VIEW_TEMPLATES")
+      VALUE_VIEW_TEMPLATES("VIEW_TEMPLATES"),
+      ;
+
+      private String value;
+
+      private EnumPartnerPermissions(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
   public static enum EnumType {
       @SerializedName("test-users")
       VALUE_TEST_USERS("test-users"),
@@ -10900,6 +11656,25 @@ public class Application extends APINode {
       private String value;
 
       private EnumSessionType(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumRole {
+      @SerializedName("OWNER")
+      VALUE_OWNER("OWNER"),
+      @SerializedName("PARTNER")
+      VALUE_PARTNER("PARTNER"),
+      ;
+
+      private String value;
+
+      private EnumRole(String value) {
         this.value = value;
       }
 
