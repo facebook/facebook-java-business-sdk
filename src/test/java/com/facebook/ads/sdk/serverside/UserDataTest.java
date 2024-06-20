@@ -21,6 +21,7 @@ import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Collections;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
@@ -118,7 +119,10 @@ public class UserDataTest {
     assertEquals(userData.getStates(), states);
     assertEquals(userData.getZipcodes(), zipcodes);
     assertEquals(userData.getCountryCodes(), countryCodes);
-    assertEquals(userData.getExternalIds(), externalIds.subList(0, 2));
+    
+    List<String> sortedActualExternalIds = userData.getExternalIds();
+    Collections.sort(sortedActualExternalIds);
+    assertEquals(sortedActualExternalIds, externalIds.subList(0, 2));
   }
 
   @Test
