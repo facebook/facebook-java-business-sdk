@@ -23,6 +23,7 @@
 package com.facebook.ads.sdk;
 
 import java.io.PrintStream;
+import java.net.Proxy;
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -43,16 +44,22 @@ public class APIContext {
   private String appSecret;
   private String appID;
   private String version;
+  private Proxy proxy;
   protected boolean isDebug = false;
   protected PrintStream logger = System.out;
 
   public APIContext(String endpointBase, String videoEndpointBase, String version, String accessToken, String appSecret, String appID, boolean logCrash) {
+    this(endpointBase, videoEndpointBase, version, accessToken, appSecret, appID, logCrash, null);
+  }
+
+  public APIContext(String endpointBase, String videoEndpointBase, String version, String accessToken, String appSecret, String appID, boolean logCrash, Proxy proxy) {
     this.version = version;
     this.endpointBase = endpointBase;
     this.videoEndpointBase = videoEndpointBase;
     this.accessToken = accessToken;
     this.appSecret = appSecret;
     this.appID =  appID;
+    this.proxy = proxy;
     if (logCrash) {
         CrashReporter.enable(this);
     }
@@ -62,16 +69,41 @@ public class APIContext {
     this(DEFAULT_API_BASE, DEFAULT_VIDEO_API_BASE, DEFAULT_API_VERSION, accessToken, null, null, true);
   }
 
+  public APIContext(String accessToken, Proxy proxy) {
+    this(DEFAULT_API_BASE, DEFAULT_VIDEO_API_BASE, DEFAULT_API_VERSION, accessToken, null, null, true, proxy);
+  }
+
   public APIContext(String accessToken, String appSecret) {
     this(DEFAULT_API_BASE, DEFAULT_VIDEO_API_BASE, DEFAULT_API_VERSION, accessToken, appSecret, null, true);
+  }
+
+  public APIContext(String accessToken, String appSecret, Proxy proxy) {
+    this(DEFAULT_API_BASE, DEFAULT_VIDEO_API_BASE, DEFAULT_API_VERSION, accessToken, appSecret, null, true, proxy);
   }
 
   public APIContext(String accessToken, String appSecret, String appID) {
     this(DEFAULT_API_BASE, DEFAULT_VIDEO_API_BASE, DEFAULT_API_VERSION, accessToken, appSecret, appID, true);
   }
 
+  public APIContext(String accessToken, String appSecret, String appID, Proxy proxy) {
+    this(DEFAULT_API_BASE, DEFAULT_VIDEO_API_BASE, DEFAULT_API_VERSION, accessToken, appSecret, appID, true, proxy);
+  }
+
   public APIContext(String accessToken, String appSecret, String appID, boolean logCrash) {
     this(DEFAULT_API_BASE, DEFAULT_VIDEO_API_BASE, DEFAULT_API_VERSION, accessToken, appSecret, appID, logCrash);
+  }
+
+  public APIContext(String accessToken, String appSecret, String appID, boolean logCrash, Proxy proxy) {
+    this(DEFAULT_API_BASE, DEFAULT_VIDEO_API_BASE, DEFAULT_API_VERSION, accessToken, appSecret, appID, logCrash, proxy);
+  }
+
+  public Proxy getProxy() {
+    return proxy;
+  }
+
+  public APIContext setProxy(Proxy proxy) {
+    this.proxy = proxy;
+    return this;
   }
 
   public String getEndpointBase() {

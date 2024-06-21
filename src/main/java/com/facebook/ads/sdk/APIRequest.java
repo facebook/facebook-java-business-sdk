@@ -22,6 +22,7 @@
  */
 package com.facebook.ads.sdk;
 
+import java.net.HttpURLConnection;
 import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.ArrayList;
@@ -533,7 +534,13 @@ public class APIRequest<T extends APINode> {
       URL url = new URL(RequestHelper.constructUrlString(apiUrl, allParams));
       context.log("Request:");
       context.log("GET: " + url.toString());
-      HttpsURLConnection con = (HttpsURLConnection) url.openConnection();
+      HttpsURLConnection con;
+
+      if (context.getProxy() != null) { // Check if proxy is set
+        con = (HttpsURLConnection) url.openConnection(context.getProxy()); // Use proxy if set
+      } else {
+        con = (HttpsURLConnection) url.openConnection(); // Default connection
+      }
 
       con.setRequestMethod("GET");
       con.setRequestProperty("User-Agent", USER_AGENT);
@@ -546,7 +553,13 @@ public class APIRequest<T extends APINode> {
       String boundary = "--------------------------" + new Random().nextLong();
       URL url = new URL(apiUrl);
       context.log("Post: " + url.toString());
-      HttpsURLConnection con = (HttpsURLConnection) url.openConnection();
+      HttpsURLConnection con;
+
+      if (context.getProxy() != null) {
+        con = (HttpsURLConnection) url.openConnection(context.getProxy());
+      } else {
+        con = (HttpsURLConnection) url.openConnection();
+      }
 
       con.setRequestMethod("POST");
       con.setRequestProperty("User-Agent", USER_AGENT);
@@ -598,7 +611,13 @@ public class APIRequest<T extends APINode> {
     public ResponseWrapper sendDelete(String apiUrl, Map<String, Object> allParams, APIContext context) throws APIException, IOException {
       URL url = new URL(RequestHelper.constructUrlString(apiUrl, allParams));
       context.log("Delete: " + url.toString());
-      HttpsURLConnection con = (HttpsURLConnection) url.openConnection();
+      HttpsURLConnection con;
+
+      if (context.getProxy() != null) {
+        con = (HttpsURLConnection) url.openConnection(context.getProxy());
+      } else {
+        con = (HttpsURLConnection) url.openConnection();
+      }
 
       con.setRequestMethod("DELETE");
       con.setRequestProperty("User-Agent", USER_AGENT);
@@ -613,14 +632,18 @@ public class APIRequest<T extends APINode> {
 
   public static class DefaultAsyncRequestExecutor implements IAsyncRequestExecutor {
     static okhttp3.OkHttpClient client = null;
-    static void init() {
-      client = new okhttp3.OkHttpClient();
-    }
-    static {
-      init();
+    static void init(APIContext context) {
+      if (context.getProxy() != null) {
+        client = new okhttp3.OkHttpClient.Builder()
+                .proxy(context.getProxy())
+                .build();
+      } else {
+        client = new okhttp3.OkHttpClient();
+      }
     }
 
     public ListenableFuture<ResponseWrapper> execute(String method, String apiUrl, Map<String, Object> allParams, APIContext context) throws APIException, IOException {
+      init(context);
       if ("GET".equals(method)) return sendGet(apiUrl, allParams, context);
       else if ("POST".equals(method)) return sendPost(apiUrl, allParams, context);
       else if ("DELETE".equals(method)) return sendDelete(apiUrl, allParams, context);
