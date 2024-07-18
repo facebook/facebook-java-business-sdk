@@ -67,6 +67,12 @@ public class Event {
   @SerializedName("messaging_channel")
   private MessagingChannel messagingChannel = null;
 
+  @SerializedName("original_event_data")
+  private OriginalEventData originalEventData = null;
+
+  @SerializedName("attribution_data")
+  private AttributionData attributionData = null;
+
   /**
    * Default Constructor.
    */
@@ -90,11 +96,14 @@ public class Event {
    * @param appData AppData object that contains app data and device information
    * @param advancedMeasurementTable Only used for Advanced Measurement in the Advanced Analytics product.
    * @param messagingChannel indicated the messaging channel used.
+   * *@param originalEventData indicated the original event data used for attribution passback or generalized value optimization(GVO).
+   * @param attributionData indicated the attribution data used for attribution passback event to optimize the performance.
    */
   public Event(String eventName, Long eventTime, String eventSourceUrl, Boolean optOut,
       String eventId, UserData userData, CustomData customData, String[] dataProcessingOptions,
       Integer dataProcessingOptionsCountry, Integer dataProcessingOptionsState, ActionSource actionSource, AppData appData,
-      String advancedMeasurementTable, MessagingChannel messagingChannel) {
+      String advancedMeasurementTable, MessagingChannel messagingChannel, OriginalEventData originalEventData, 
+      AttributionData attributionData) {
     this.eventName = eventName;
     this.eventTime = eventTime;
     this.eventSourceUrl = eventSourceUrl;
@@ -109,6 +118,8 @@ public class Event {
     this.appData = appData;
     this.advancedMeasurementTable = advancedMeasurementTable;
     this.messagingChannel = messagingChannel;
+    this.originalEventData = originalEventData;
+    this.attributionData = attributionData;
   }
 
   /**
@@ -532,6 +543,64 @@ public class Event {
     this.messagingChannel = messagingChannel;
   }
 
+  /**
+   * Set originalEventData for the event.
+   *
+   * @param originalEventData represents where the original event used for attribution passback or generalized value optimization(GVO).
+   * @return Event
+   */
+  public Event originalEventData(OriginalEventData originalEventData) {
+    this.originalEventData = originalEventData;
+    return this;
+  }
+
+  /**
+   * Get originalEventData for the event.
+   *
+   * @return OriginalEventData
+   */
+  public OriginalEventData getOriginalEventData() {
+    return originalEventData;
+  }
+
+  /**
+   * Set originalEventData for the event.
+   *
+   * @param originalEventData represents where the original event used for attribution passback or generalized value optimization(GVO).
+   */
+  public void setOriginalEventData(OriginalEventData originalEventData) {
+    this.originalEventData = originalEventData;
+  }
+
+  /**
+   * Set attributionData for the event.
+   * 
+   * @param attributionData represents attribution data used for attribution passback event to optimize the performance.
+   * @return Event
+   */
+  public Event attributionData(AttributionData attributionData) {
+    this.attributionData = attributionData;
+    return this;
+  }
+
+  /**
+   * Get attributionData for the event.
+   * 
+   * @return AttributionData
+   */
+  public AttributionData getAttributionData() {
+    return attributionData;
+  }
+
+  /**
+   * Set attributionData for the event.
+   * 
+   * @param attributionData represents attribution data used for attribution passback event to optimize the performance.
+   */
+  public void setAttributionData(AttributionData attributionData) {
+    this.attributionData = attributionData;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -551,13 +620,15 @@ public class Event {
         && Objects.equals(this.dataProcessingOptions, event.dataProcessingOptions)
         && Objects.equals(this.dataProcessingOptionsCountry, event.dataProcessingOptionsCountry)
         && Objects.equals(this.dataProcessingOptionsState, event.dataProcessingOptionsState)
-        && Objects.equals(this.messagingChannel, event.messagingChannel);
+        && Objects.equals(this.messagingChannel, event.messagingChannel)
+        && Objects.equals(this.originalEventData, event.originalEventData)
+        && Objects.equals(this.attributionData, event.attributionData);
   }
 
   @Override
   public int hashCode() {
     return Objects.hash(
-        eventName, eventTime, eventSourceUrl, optOut, eventId, userData, customData, dataProcessingOptions, dataProcessingOptionsCountry, dataProcessingOptionsState , messagingChannel);
+        eventName, eventTime, eventSourceUrl, optOut, eventId, userData, customData, dataProcessingOptions, dataProcessingOptionsCountry, dataProcessingOptionsState , messagingChannel, originalEventData, attributionData);
   }
 
   @Override
@@ -576,6 +647,8 @@ public class Event {
     sb.append("    dataProcessingOptionsCountry: ").append(toIndentedString(dataProcessingOptionsCountry)).append("\n");
     sb.append("    dataProcessingOptionsState: ").append(toIndentedString(dataProcessingOptionsState)).append("\n");
     sb.append("    messagingChannel: ").append(toIndentedString(messagingChannel)).append("\n");
+    sb.append("    originalEventData: ").append(toIndentedString(originalEventData)).append("\n");
+    sb.append("    attributionData: ").append(toIndentedString(attributionData)).append("\n");
     sb.append("}");
     return sb.toString();
   }

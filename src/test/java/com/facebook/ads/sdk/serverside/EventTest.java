@@ -28,6 +28,8 @@ public class EventTest {
     Event event = new Event();
     UserData userData = new UserData();
     CustomData customData = new CustomData();
+    OriginalEventData originalEventData = new OriginalEventData();
+    AttributionData attributionData = new AttributionData();
     String[] dataProcessingOptions = {"1", "2"};
     String eventName = "eventName-0";
     long eventTime = 123L;
@@ -45,6 +47,8 @@ public class EventTest {
     event.setEventId(eventId);
     event.setUserData(userData);
     event.setCustomData(customData);
+    event.setOriginalEventData(originalEventData);
+    event.setAttributionData(attributionData);
     event.setDataProcessingOptions(dataProcessingOptions);
     event.setDataProcessingOptionsCountry(dataProcessingOptionsCountry);
     event.setDataProcessingOptionsState(dataProcessingOptionsState);
@@ -57,6 +61,8 @@ public class EventTest {
     assertEquals(event.getEventId(), eventId);
     assertEquals(event.getUserData(), userData);
     assertEquals(event.getCustomData(), customData);
+    assertEquals(event.getOriginalEventData(), originalEventData);
+    assertEquals(event.getAttributionData(), attributionData);
     assertArrayEquals(event.getDataProcessingOptions(), dataProcessingOptions);
     assertEquals((int) event.getDataProcessingOptionsCountry(), dataProcessingOptionsCountry);
     assertEquals((int) event.getDataProcessingOptionsState(), dataProcessingOptionsState);
