@@ -31,7 +31,7 @@ jobs:
         run: ./release.sh config_maven
         env:
           OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
-          OSSRH_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
+          OSSRH_TOKEN: ${{ secrets.OSSRH_TOKEN }}
           GPG_KEYNAME: ${{ secrets.GPG_KEYNAME }}
           GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
       - name: Publish package

@@ -8,8 +8,8 @@ main() {
 
 
 config_maven(){
-  if [[ -z "${OSSRH_USERNAME}" || -z "${OSSRH_PASSWORD}" ]]; then
-    die "ERROR: Variables OSSRH_USERNAME or OSSRH_PASSWORD not defined"
+  if [[ -z "${OSSRH_USERNAME}" || -z "${OSSRH_TOKEN}" ]]; then
+    die "ERROR: Variables OSSRH_USERNAME or OSSRH_TOKEN not defined"
     exit 201
   fi
 
@@ -37,7 +37,7 @@ config_maven(){
     <server>
       <id>ossrh</id>
       <username>${OSSRH_USERNAME}</username>
-      <password>${OSSRH_PASSWORD}</password>
+      <password>${OSSRH_TOKEN}</password>
     </server>
   </servers>
 </settings>
