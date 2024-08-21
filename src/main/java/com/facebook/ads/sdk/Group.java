@@ -288,12 +288,12 @@ public class Group extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestDeleteAdMIns deleteAdMIns() {
-    return new APIRequestDeleteAdMIns(this.getPrefixedId().toString(), context);
+  public APIRequestDeleteAdmins deleteAdmins() {
+    return new APIRequestDeleteAdmins(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestCreateAdMIn createAdMIn() {
-    return new APIRequestCreateAdMIn(this.getPrefixedId().toString(), context);
+  public APIRequestCreateAdmin createAdmin() {
+    return new APIRequestCreateAdmin(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetAlbums getAlbums() {
@@ -455,7 +455,7 @@ public class Group extends APINode {
 
 
 
-  public static class APIRequestDeleteAdMIns extends APIRequest<APINode> {
+  public static class APIRequestDeleteAdmins extends APIRequest<APINode> {
 
     APINodeList<APINode> lastResponse = null;
     @Override
@@ -496,7 +496,7 @@ public class Group extends APINode {
         new Function<ResponseWrapper, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(ResponseWrapper result) {
              try {
-               return APIRequestDeleteAdMIns.this.parseResponse(result.getBody(), result.getHeader());
+               return APIRequestDeleteAdmins.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -506,37 +506,37 @@ public class Group extends APINode {
       );
     };
 
-    public APIRequestDeleteAdMIns(String nodeId, APIContext context) {
+    public APIRequestDeleteAdmins(String nodeId, APIContext context) {
       super(context, nodeId, "/admins", "DELETE", Arrays.asList(PARAMS));
     }
 
     @Override
-    public APIRequestDeleteAdMIns setParam(String param, Object value) {
+    public APIRequestDeleteAdmins setParam(String param, Object value) {
       setParamInternal(param, value);
       return this;
     }
 
     @Override
-    public APIRequestDeleteAdMIns setParams(Map<String, Object> params) {
+    public APIRequestDeleteAdmins setParams(Map<String, Object> params) {
       setParamsInternal(params);
       return this;
     }
 
 
-    public APIRequestDeleteAdMIns setUid (Long uid) {
+    public APIRequestDeleteAdmins setUid (Long uid) {
       this.setParam("uid", uid);
       return this;
     }
-    public APIRequestDeleteAdMIns setUid (String uid) {
+    public APIRequestDeleteAdmins setUid (String uid) {
       this.setParam("uid", uid);
       return this;
     }
 
-    public APIRequestDeleteAdMIns requestAllFields () {
+    public APIRequestDeleteAdmins requestAllFields () {
       return this.requestAllFields(true);
     }
 
-    public APIRequestDeleteAdMIns requestAllFields (boolean value) {
+    public APIRequestDeleteAdmins requestAllFields (boolean value) {
       for (String field : FIELDS) {
         this.requestField(field, value);
       }
@@ -544,12 +544,12 @@ public class Group extends APINode {
     }
 
     @Override
-    public APIRequestDeleteAdMIns requestFields (List<String> fields) {
+    public APIRequestDeleteAdmins requestFields (List<String> fields) {
       return this.requestFields(fields, true);
     }
 
     @Override
-    public APIRequestDeleteAdMIns requestFields (List<String> fields, boolean value) {
+    public APIRequestDeleteAdmins requestFields (List<String> fields, boolean value) {
       for (String field : fields) {
         this.requestField(field, value);
       }
@@ -557,20 +557,20 @@ public class Group extends APINode {
     }
 
     @Override
-    public APIRequestDeleteAdMIns requestField (String field) {
+    public APIRequestDeleteAdmins requestField (String field) {
       this.requestField(field, true);
       return this;
     }
 
     @Override
-    public APIRequestDeleteAdMIns requestField (String field, boolean value) {
+    public APIRequestDeleteAdmins requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
 
   }
 
-  public static class APIRequestCreateAdMIn extends APIRequest<Group> {
+  public static class APIRequestCreateAdmin extends APIRequest<Group> {
 
     Group lastResponse = null;
     @Override
@@ -611,7 +611,7 @@ public class Group extends APINode {
         new Function<ResponseWrapper, Group>() {
            public Group apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateAdMIn.this.parseResponse(result.getBody(), result.getHeader());
+               return APIRequestCreateAdmin.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -621,37 +621,37 @@ public class Group extends APINode {
       );
     };
 
-    public APIRequestCreateAdMIn(String nodeId, APIContext context) {
+    public APIRequestCreateAdmin(String nodeId, APIContext context) {
       super(context, nodeId, "/admins", "POST", Arrays.asList(PARAMS));
     }
 
     @Override
-    public APIRequestCreateAdMIn setParam(String param, Object value) {
+    public APIRequestCreateAdmin setParam(String param, Object value) {
       setParamInternal(param, value);
       return this;
     }
 
     @Override
-    public APIRequestCreateAdMIn setParams(Map<String, Object> params) {
+    public APIRequestCreateAdmin setParams(Map<String, Object> params) {
       setParamsInternal(params);
       return this;
     }
 
 
-    public APIRequestCreateAdMIn setUid (Long uid) {
+    public APIRequestCreateAdmin setUid (Long uid) {
       this.setParam("uid", uid);
       return this;
     }
-    public APIRequestCreateAdMIn setUid (String uid) {
+    public APIRequestCreateAdmin setUid (String uid) {
       this.setParam("uid", uid);
       return this;
     }
 
-    public APIRequestCreateAdMIn requestAllFields () {
+    public APIRequestCreateAdmin requestAllFields () {
       return this.requestAllFields(true);
     }
 
-    public APIRequestCreateAdMIn requestAllFields (boolean value) {
+    public APIRequestCreateAdmin requestAllFields (boolean value) {
       for (String field : FIELDS) {
         this.requestField(field, value);
       }
@@ -659,12 +659,12 @@ public class Group extends APINode {
     }
 
     @Override
-    public APIRequestCreateAdMIn requestFields (List<String> fields) {
+    public APIRequestCreateAdmin requestFields (List<String> fields) {
       return this.requestFields(fields, true);
     }
 
     @Override
-    public APIRequestCreateAdMIn requestFields (List<String> fields, boolean value) {
+    public APIRequestCreateAdmin requestFields (List<String> fields, boolean value) {
       for (String field : fields) {
         this.requestField(field, value);
       }
@@ -672,13 +672,13 @@ public class Group extends APINode {
     }
 
     @Override
-    public APIRequestCreateAdMIn requestField (String field) {
+    public APIRequestCreateAdmin requestField (String field) {
       this.requestField(field, true);
       return this;
     }
 
     @Override
-    public APIRequestCreateAdMIn requestField (String field, boolean value) {
+    public APIRequestCreateAdmin requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }

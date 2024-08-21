@@ -708,8 +708,8 @@ public class AdAccount extends APINode {
     return new APIRequestGetIosFourteenCampaignLimits(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestCreateMAnAgeDPartnerAd createMAnAgeDPartnerAd() {
-    return new APIRequestCreateMAnAgeDPartnerAd(this.getPrefixedId().toString(), context);
+  public APIRequestCreateManagedPartnerAd createManagedPartnerAd() {
+    return new APIRequestCreateManagedPartnerAd(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetMatchedSearchApplications getMatchedSearchApplications() {
@@ -21807,7 +21807,7 @@ public class AdAccount extends APINode {
     }
   }
 
-  public static class APIRequestCreateMAnAgeDPartnerAd extends APIRequest<APINode> {
+  public static class APIRequestCreateManagedPartnerAd extends APIRequest<APINode> {
 
     APINode lastResponse = null;
     @Override
@@ -21862,7 +21862,7 @@ public class AdAccount extends APINode {
         new Function<ResponseWrapper, APINode>() {
            public APINode apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateMAnAgeDPartnerAd.this.parseResponse(result.getBody(), result.getHeader());
+               return APIRequestCreateManagedPartnerAd.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -21872,143 +21872,143 @@ public class AdAccount extends APINode {
       );
     };
 
-    public APIRequestCreateMAnAgeDPartnerAd(String nodeId, APIContext context) {
+    public APIRequestCreateManagedPartnerAd(String nodeId, APIContext context) {
       super(context, nodeId, "/managed_partner_ads", "POST", Arrays.asList(PARAMS));
     }
 
     @Override
-    public APIRequestCreateMAnAgeDPartnerAd setParam(String param, Object value) {
+    public APIRequestCreateManagedPartnerAd setParam(String param, Object value) {
       setParamInternal(param, value);
       return this;
     }
 
     @Override
-    public APIRequestCreateMAnAgeDPartnerAd setParams(Map<String, Object> params) {
+    public APIRequestCreateManagedPartnerAd setParams(Map<String, Object> params) {
       setParamsInternal(params);
       return this;
     }
 
 
-    public APIRequestCreateMAnAgeDPartnerAd setCampaignGroupId (Long campaignGroupId) {
+    public APIRequestCreateManagedPartnerAd setCampaignGroupId (Long campaignGroupId) {
       this.setParam("campaign_group_id", campaignGroupId);
       return this;
     }
-    public APIRequestCreateMAnAgeDPartnerAd setCampaignGroupId (String campaignGroupId) {
+    public APIRequestCreateManagedPartnerAd setCampaignGroupId (String campaignGroupId) {
       this.setParam("campaign_group_id", campaignGroupId);
       return this;
     }
 
-    public APIRequestCreateMAnAgeDPartnerAd setCampaignGroupStatus (EnumCampaignGroupStatus campaignGroupStatus) {
+    public APIRequestCreateManagedPartnerAd setCampaignGroupStatus (EnumCampaignGroupStatus campaignGroupStatus) {
       this.setParam("campaign_group_status", campaignGroupStatus);
       return this;
     }
-    public APIRequestCreateMAnAgeDPartnerAd setCampaignGroupStatus (String campaignGroupStatus) {
+    public APIRequestCreateManagedPartnerAd setCampaignGroupStatus (String campaignGroupStatus) {
       this.setParam("campaign_group_status", campaignGroupStatus);
       return this;
     }
 
-    public APIRequestCreateMAnAgeDPartnerAd setConversionDomain (String conversionDomain) {
+    public APIRequestCreateManagedPartnerAd setConversionDomain (String conversionDomain) {
       this.setParam("conversion_domain", conversionDomain);
       return this;
     }
 
-    public APIRequestCreateMAnAgeDPartnerAd setCustomEventType (EnumCustomEventType customEventType) {
+    public APIRequestCreateManagedPartnerAd setCustomEventType (EnumCustomEventType customEventType) {
       this.setParam("custom_event_type", customEventType);
       return this;
     }
-    public APIRequestCreateMAnAgeDPartnerAd setCustomEventType (String customEventType) {
+    public APIRequestCreateManagedPartnerAd setCustomEventType (String customEventType) {
       this.setParam("custom_event_type", customEventType);
       return this;
     }
 
-    public APIRequestCreateMAnAgeDPartnerAd setDailyBudget (Long dailyBudget) {
+    public APIRequestCreateManagedPartnerAd setDailyBudget (Long dailyBudget) {
       this.setParam("daily_budget", dailyBudget);
       return this;
     }
-    public APIRequestCreateMAnAgeDPartnerAd setDailyBudget (String dailyBudget) {
+    public APIRequestCreateManagedPartnerAd setDailyBudget (String dailyBudget) {
       this.setParam("daily_budget", dailyBudget);
       return this;
     }
 
-    public APIRequestCreateMAnAgeDPartnerAd setDsaBeneficiary (String dsaBeneficiary) {
+    public APIRequestCreateManagedPartnerAd setDsaBeneficiary (String dsaBeneficiary) {
       this.setParam("dsa_beneficiary", dsaBeneficiary);
       return this;
     }
 
-    public APIRequestCreateMAnAgeDPartnerAd setDsaPayor (String dsaPayor) {
+    public APIRequestCreateManagedPartnerAd setDsaPayor (String dsaPayor) {
       this.setParam("dsa_payor", dsaPayor);
       return this;
     }
 
-    public APIRequestCreateMAnAgeDPartnerAd setEndTime (Long endTime) {
+    public APIRequestCreateManagedPartnerAd setEndTime (Long endTime) {
       this.setParam("end_time", endTime);
       return this;
     }
-    public APIRequestCreateMAnAgeDPartnerAd setEndTime (String endTime) {
+    public APIRequestCreateManagedPartnerAd setEndTime (String endTime) {
       this.setParam("end_time", endTime);
       return this;
     }
 
-    public APIRequestCreateMAnAgeDPartnerAd setLifetimeBudget (Long lifetimeBudget) {
+    public APIRequestCreateManagedPartnerAd setLifetimeBudget (Long lifetimeBudget) {
       this.setParam("lifetime_budget", lifetimeBudget);
       return this;
     }
-    public APIRequestCreateMAnAgeDPartnerAd setLifetimeBudget (String lifetimeBudget) {
+    public APIRequestCreateManagedPartnerAd setLifetimeBudget (String lifetimeBudget) {
       this.setParam("lifetime_budget", lifetimeBudget);
       return this;
     }
 
-    public APIRequestCreateMAnAgeDPartnerAd setOverrideCreativeText (String overrideCreativeText) {
+    public APIRequestCreateManagedPartnerAd setOverrideCreativeText (String overrideCreativeText) {
       this.setParam("override_creative_text", overrideCreativeText);
       return this;
     }
 
-    public APIRequestCreateMAnAgeDPartnerAd setOverrideTargetingCountries (List<String> overrideTargetingCountries) {
+    public APIRequestCreateManagedPartnerAd setOverrideTargetingCountries (List<String> overrideTargetingCountries) {
       this.setParam("override_targeting_countries", overrideTargetingCountries);
       return this;
     }
-    public APIRequestCreateMAnAgeDPartnerAd setOverrideTargetingCountries (String overrideTargetingCountries) {
+    public APIRequestCreateManagedPartnerAd setOverrideTargetingCountries (String overrideTargetingCountries) {
       this.setParam("override_targeting_countries", overrideTargetingCountries);
       return this;
     }
 
-    public APIRequestCreateMAnAgeDPartnerAd setProductSetId (String productSetId) {
+    public APIRequestCreateManagedPartnerAd setProductSetId (String productSetId) {
       this.setParam("product_set_id", productSetId);
       return this;
     }
 
-    public APIRequestCreateMAnAgeDPartnerAd setStartTime (Long startTime) {
+    public APIRequestCreateManagedPartnerAd setStartTime (Long startTime) {
       this.setParam("start_time", startTime);
       return this;
     }
-    public APIRequestCreateMAnAgeDPartnerAd setStartTime (String startTime) {
+    public APIRequestCreateManagedPartnerAd setStartTime (String startTime) {
       this.setParam("start_time", startTime);
       return this;
     }
 
-    public APIRequestCreateMAnAgeDPartnerAd setUseMarketplaceTemplate (Boolean useMarketplaceTemplate) {
+    public APIRequestCreateManagedPartnerAd setUseMarketplaceTemplate (Boolean useMarketplaceTemplate) {
       this.setParam("use_marketplace_template", useMarketplaceTemplate);
       return this;
     }
-    public APIRequestCreateMAnAgeDPartnerAd setUseMarketplaceTemplate (String useMarketplaceTemplate) {
+    public APIRequestCreateManagedPartnerAd setUseMarketplaceTemplate (String useMarketplaceTemplate) {
       this.setParam("use_marketplace_template", useMarketplaceTemplate);
       return this;
     }
 
-    public APIRequestCreateMAnAgeDPartnerAd setUseSellerTemplate (Boolean useSellerTemplate) {
+    public APIRequestCreateManagedPartnerAd setUseSellerTemplate (Boolean useSellerTemplate) {
       this.setParam("use_seller_template", useSellerTemplate);
       return this;
     }
-    public APIRequestCreateMAnAgeDPartnerAd setUseSellerTemplate (String useSellerTemplate) {
+    public APIRequestCreateManagedPartnerAd setUseSellerTemplate (String useSellerTemplate) {
       this.setParam("use_seller_template", useSellerTemplate);
       return this;
     }
 
-    public APIRequestCreateMAnAgeDPartnerAd requestAllFields () {
+    public APIRequestCreateManagedPartnerAd requestAllFields () {
       return this.requestAllFields(true);
     }
 
-    public APIRequestCreateMAnAgeDPartnerAd requestAllFields (boolean value) {
+    public APIRequestCreateManagedPartnerAd requestAllFields (boolean value) {
       for (String field : FIELDS) {
         this.requestField(field, value);
       }
@@ -22016,12 +22016,12 @@ public class AdAccount extends APINode {
     }
 
     @Override
-    public APIRequestCreateMAnAgeDPartnerAd requestFields (List<String> fields) {
+    public APIRequestCreateManagedPartnerAd requestFields (List<String> fields) {
       return this.requestFields(fields, true);
     }
 
     @Override
-    public APIRequestCreateMAnAgeDPartnerAd requestFields (List<String> fields, boolean value) {
+    public APIRequestCreateManagedPartnerAd requestFields (List<String> fields, boolean value) {
       for (String field : fields) {
         this.requestField(field, value);
       }
@@ -22029,13 +22029,13 @@ public class AdAccount extends APINode {
     }
 
     @Override
-    public APIRequestCreateMAnAgeDPartnerAd requestField (String field) {
+    public APIRequestCreateManagedPartnerAd requestField (String field) {
       this.requestField(field, true);
       return this;
     }
 
     @Override
-    public APIRequestCreateMAnAgeDPartnerAd requestField (String field, boolean value) {
+    public APIRequestCreateManagedPartnerAd requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }

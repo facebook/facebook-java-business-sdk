@@ -356,8 +356,8 @@ public class CustomAudience extends APINode {
     return new APIRequestGetSessions(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestGetShareDAccountInfo getShareDAccountInfo() {
-    return new APIRequestGetShareDAccountInfo(this.getPrefixedId().toString(), context);
+  public APIRequestGetSharedAccountInfo getSharedAccountInfo() {
+    return new APIRequestGetSharedAccountInfo(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestDeleteUsers deleteUsers() {
@@ -2338,7 +2338,7 @@ public class CustomAudience extends APINode {
     }
   }
 
-  public static class APIRequestGetShareDAccountInfo extends APIRequest<CustomAudiencesharedAccountInfo> {
+  public static class APIRequestGetSharedAccountInfo extends APIRequest<CustomAudiencesharedAccountInfo> {
 
     APINodeList<CustomAudiencesharedAccountInfo> lastResponse = null;
     @Override
@@ -2383,7 +2383,7 @@ public class CustomAudience extends APINode {
         new Function<ResponseWrapper, APINodeList<CustomAudiencesharedAccountInfo>>() {
            public APINodeList<CustomAudiencesharedAccountInfo> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetShareDAccountInfo.this.parseResponse(result.getBody(), result.getHeader());
+               return APIRequestGetSharedAccountInfo.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2393,28 +2393,28 @@ public class CustomAudience extends APINode {
       );
     };
 
-    public APIRequestGetShareDAccountInfo(String nodeId, APIContext context) {
+    public APIRequestGetSharedAccountInfo(String nodeId, APIContext context) {
       super(context, nodeId, "/shared_account_info", "GET", Arrays.asList(PARAMS));
     }
 
     @Override
-    public APIRequestGetShareDAccountInfo setParam(String param, Object value) {
+    public APIRequestGetSharedAccountInfo setParam(String param, Object value) {
       setParamInternal(param, value);
       return this;
     }
 
     @Override
-    public APIRequestGetShareDAccountInfo setParams(Map<String, Object> params) {
+    public APIRequestGetSharedAccountInfo setParams(Map<String, Object> params) {
       setParamsInternal(params);
       return this;
     }
 
 
-    public APIRequestGetShareDAccountInfo requestAllFields () {
+    public APIRequestGetSharedAccountInfo requestAllFields () {
       return this.requestAllFields(true);
     }
 
-    public APIRequestGetShareDAccountInfo requestAllFields (boolean value) {
+    public APIRequestGetSharedAccountInfo requestAllFields (boolean value) {
       for (String field : FIELDS) {
         this.requestField(field, value);
       }
@@ -2422,12 +2422,12 @@ public class CustomAudience extends APINode {
     }
 
     @Override
-    public APIRequestGetShareDAccountInfo requestFields (List<String> fields) {
+    public APIRequestGetSharedAccountInfo requestFields (List<String> fields) {
       return this.requestFields(fields, true);
     }
 
     @Override
-    public APIRequestGetShareDAccountInfo requestFields (List<String> fields, boolean value) {
+    public APIRequestGetSharedAccountInfo requestFields (List<String> fields, boolean value) {
       for (String field : fields) {
         this.requestField(field, value);
       }
@@ -2435,49 +2435,49 @@ public class CustomAudience extends APINode {
     }
 
     @Override
-    public APIRequestGetShareDAccountInfo requestField (String field) {
+    public APIRequestGetSharedAccountInfo requestField (String field) {
       this.requestField(field, true);
       return this;
     }
 
     @Override
-    public APIRequestGetShareDAccountInfo requestField (String field, boolean value) {
+    public APIRequestGetSharedAccountInfo requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
 
-    public APIRequestGetShareDAccountInfo requestAccountIdField () {
+    public APIRequestGetSharedAccountInfo requestAccountIdField () {
       return this.requestAccountIdField(true);
     }
-    public APIRequestGetShareDAccountInfo requestAccountIdField (boolean value) {
+    public APIRequestGetSharedAccountInfo requestAccountIdField (boolean value) {
       this.requestField("account_id", value);
       return this;
     }
-    public APIRequestGetShareDAccountInfo requestAccountNameField () {
+    public APIRequestGetSharedAccountInfo requestAccountNameField () {
       return this.requestAccountNameField(true);
     }
-    public APIRequestGetShareDAccountInfo requestAccountNameField (boolean value) {
+    public APIRequestGetSharedAccountInfo requestAccountNameField (boolean value) {
       this.requestField("account_name", value);
       return this;
     }
-    public APIRequestGetShareDAccountInfo requestBusinessIdField () {
+    public APIRequestGetSharedAccountInfo requestBusinessIdField () {
       return this.requestBusinessIdField(true);
     }
-    public APIRequestGetShareDAccountInfo requestBusinessIdField (boolean value) {
+    public APIRequestGetSharedAccountInfo requestBusinessIdField (boolean value) {
       this.requestField("business_id", value);
       return this;
     }
-    public APIRequestGetShareDAccountInfo requestBusinessNameField () {
+    public APIRequestGetSharedAccountInfo requestBusinessNameField () {
       return this.requestBusinessNameField(true);
     }
-    public APIRequestGetShareDAccountInfo requestBusinessNameField (boolean value) {
+    public APIRequestGetSharedAccountInfo requestBusinessNameField (boolean value) {
       this.requestField("business_name", value);
       return this;
     }
-    public APIRequestGetShareDAccountInfo requestSharingStatusField () {
+    public APIRequestGetSharedAccountInfo requestSharingStatusField () {
       return this.requestSharingStatusField(true);
     }
-    public APIRequestGetShareDAccountInfo requestSharingStatusField (boolean value) {
+    public APIRequestGetSharedAccountInfo requestSharingStatusField (boolean value) {
       this.requestField("sharing_status", value);
       return this;
     }

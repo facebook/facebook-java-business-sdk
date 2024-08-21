@@ -294,12 +294,12 @@ public class CommerceMerchantSettings extends APINode {
     return new APIRequestGetCommerceTransactions(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestGetOrderMAnAgeMEntApps getOrderMAnAgeMEntApps() {
-    return new APIRequestGetOrderMAnAgeMEntApps(this.getPrefixedId().toString(), context);
+  public APIRequestGetOrderManagementApps getOrderManagementApps() {
+    return new APIRequestGetOrderManagementApps(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestCreateOrderMAnAgeMEntApp createOrderMAnAgeMEntApp() {
-    return new APIRequestCreateOrderMAnAgeMEntApp(this.getPrefixedId().toString(), context);
+  public APIRequestCreateOrderManagementApp createOrderManagementApp() {
+    return new APIRequestCreateOrderManagementApp(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetProductCatalogs getProductCatalogs() {
@@ -1118,7 +1118,7 @@ public class CommerceMerchantSettings extends APINode {
     }
   }
 
-  public static class APIRequestGetOrderMAnAgeMEntApps extends APIRequest<Application> {
+  public static class APIRequestGetOrderManagementApps extends APIRequest<Application> {
 
     APINodeList<Application> lastResponse = null;
     @Override
@@ -1263,7 +1263,7 @@ public class CommerceMerchantSettings extends APINode {
         new Function<ResponseWrapper, APINodeList<Application>>() {
            public APINodeList<Application> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetOrderMAnAgeMEntApps.this.parseResponse(result.getBody(), result.getHeader());
+               return APIRequestGetOrderManagementApps.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1273,28 +1273,28 @@ public class CommerceMerchantSettings extends APINode {
       );
     };
 
-    public APIRequestGetOrderMAnAgeMEntApps(String nodeId, APIContext context) {
+    public APIRequestGetOrderManagementApps(String nodeId, APIContext context) {
       super(context, nodeId, "/order_management_apps", "GET", Arrays.asList(PARAMS));
     }
 
     @Override
-    public APIRequestGetOrderMAnAgeMEntApps setParam(String param, Object value) {
+    public APIRequestGetOrderManagementApps setParam(String param, Object value) {
       setParamInternal(param, value);
       return this;
     }
 
     @Override
-    public APIRequestGetOrderMAnAgeMEntApps setParams(Map<String, Object> params) {
+    public APIRequestGetOrderManagementApps setParams(Map<String, Object> params) {
       setParamsInternal(params);
       return this;
     }
 
 
-    public APIRequestGetOrderMAnAgeMEntApps requestAllFields () {
+    public APIRequestGetOrderManagementApps requestAllFields () {
       return this.requestAllFields(true);
     }
 
-    public APIRequestGetOrderMAnAgeMEntApps requestAllFields (boolean value) {
+    public APIRequestGetOrderManagementApps requestAllFields (boolean value) {
       for (String field : FIELDS) {
         this.requestField(field, value);
       }
@@ -1302,12 +1302,12 @@ public class CommerceMerchantSettings extends APINode {
     }
 
     @Override
-    public APIRequestGetOrderMAnAgeMEntApps requestFields (List<String> fields) {
+    public APIRequestGetOrderManagementApps requestFields (List<String> fields) {
       return this.requestFields(fields, true);
     }
 
     @Override
-    public APIRequestGetOrderMAnAgeMEntApps requestFields (List<String> fields, boolean value) {
+    public APIRequestGetOrderManagementApps requestFields (List<String> fields, boolean value) {
       for (String field : fields) {
         this.requestField(field, value);
       }
@@ -1315,755 +1315,755 @@ public class CommerceMerchantSettings extends APINode {
     }
 
     @Override
-    public APIRequestGetOrderMAnAgeMEntApps requestField (String field) {
+    public APIRequestGetOrderManagementApps requestField (String field) {
       this.requestField(field, true);
       return this;
     }
 
     @Override
-    public APIRequestGetOrderMAnAgeMEntApps requestField (String field, boolean value) {
+    public APIRequestGetOrderManagementApps requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
 
-    public APIRequestGetOrderMAnAgeMEntApps requestAamRulesField () {
+    public APIRequestGetOrderManagementApps requestAamRulesField () {
       return this.requestAamRulesField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestAamRulesField (boolean value) {
+    public APIRequestGetOrderManagementApps requestAamRulesField (boolean value) {
       this.requestField("aam_rules", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestAnAdSpaceLimitField () {
+    public APIRequestGetOrderManagementApps requestAnAdSpaceLimitField () {
       return this.requestAnAdSpaceLimitField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestAnAdSpaceLimitField (boolean value) {
+    public APIRequestGetOrderManagementApps requestAnAdSpaceLimitField (boolean value) {
       this.requestField("an_ad_space_limit", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestAnPlatformsField () {
+    public APIRequestGetOrderManagementApps requestAnPlatformsField () {
       return this.requestAnPlatformsField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestAnPlatformsField (boolean value) {
+    public APIRequestGetOrderManagementApps requestAnPlatformsField (boolean value) {
       this.requestField("an_platforms", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestAndroidKeyHashField () {
+    public APIRequestGetOrderManagementApps requestAndroidKeyHashField () {
       return this.requestAndroidKeyHashField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestAndroidKeyHashField (boolean value) {
+    public APIRequestGetOrderManagementApps requestAndroidKeyHashField (boolean value) {
       this.requestField("android_key_hash", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestAndroidSdkErrorCategoriesField () {
+    public APIRequestGetOrderManagementApps requestAndroidSdkErrorCategoriesField () {
       return this.requestAndroidSdkErrorCategoriesField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestAndroidSdkErrorCategoriesField (boolean value) {
+    public APIRequestGetOrderManagementApps requestAndroidSdkErrorCategoriesField (boolean value) {
       this.requestField("android_sdk_error_categories", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestAppDomainsField () {
+    public APIRequestGetOrderManagementApps requestAppDomainsField () {
       return this.requestAppDomainsField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestAppDomainsField (boolean value) {
+    public APIRequestGetOrderManagementApps requestAppDomainsField (boolean value) {
       this.requestField("app_domains", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestAppEventsConfigField () {
+    public APIRequestGetOrderManagementApps requestAppEventsConfigField () {
       return this.requestAppEventsConfigField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestAppEventsConfigField (boolean value) {
+    public APIRequestGetOrderManagementApps requestAppEventsConfigField (boolean value) {
       this.requestField("app_events_config", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestAppEventsFeatureBitmaskField () {
+    public APIRequestGetOrderManagementApps requestAppEventsFeatureBitmaskField () {
       return this.requestAppEventsFeatureBitmaskField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestAppEventsFeatureBitmaskField (boolean value) {
+    public APIRequestGetOrderManagementApps requestAppEventsFeatureBitmaskField (boolean value) {
       this.requestField("app_events_feature_bitmask", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestAppEventsSessionTimeoutField () {
+    public APIRequestGetOrderManagementApps requestAppEventsSessionTimeoutField () {
       return this.requestAppEventsSessionTimeoutField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestAppEventsSessionTimeoutField (boolean value) {
+    public APIRequestGetOrderManagementApps requestAppEventsSessionTimeoutField (boolean value) {
       this.requestField("app_events_session_timeout", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestAppInstallTrackedField () {
+    public APIRequestGetOrderManagementApps requestAppInstallTrackedField () {
       return this.requestAppInstallTrackedField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestAppInstallTrackedField (boolean value) {
+    public APIRequestGetOrderManagementApps requestAppInstallTrackedField (boolean value) {
       this.requestField("app_install_tracked", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestAppNameField () {
+    public APIRequestGetOrderManagementApps requestAppNameField () {
       return this.requestAppNameField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestAppNameField (boolean value) {
+    public APIRequestGetOrderManagementApps requestAppNameField (boolean value) {
       this.requestField("app_name", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestAppSignalsBindingIosField () {
+    public APIRequestGetOrderManagementApps requestAppSignalsBindingIosField () {
       return this.requestAppSignalsBindingIosField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestAppSignalsBindingIosField (boolean value) {
+    public APIRequestGetOrderManagementApps requestAppSignalsBindingIosField (boolean value) {
       this.requestField("app_signals_binding_ios", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestAppTypeField () {
+    public APIRequestGetOrderManagementApps requestAppTypeField () {
       return this.requestAppTypeField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestAppTypeField (boolean value) {
+    public APIRequestGetOrderManagementApps requestAppTypeField (boolean value) {
       this.requestField("app_type", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestAuthDialogDataHelpUrlField () {
+    public APIRequestGetOrderManagementApps requestAuthDialogDataHelpUrlField () {
       return this.requestAuthDialogDataHelpUrlField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestAuthDialogDataHelpUrlField (boolean value) {
+    public APIRequestGetOrderManagementApps requestAuthDialogDataHelpUrlField (boolean value) {
       this.requestField("auth_dialog_data_help_url", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestAuthDialogHeadlineField () {
+    public APIRequestGetOrderManagementApps requestAuthDialogHeadlineField () {
       return this.requestAuthDialogHeadlineField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestAuthDialogHeadlineField (boolean value) {
+    public APIRequestGetOrderManagementApps requestAuthDialogHeadlineField (boolean value) {
       this.requestField("auth_dialog_headline", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestAuthDialogPermsExplanationField () {
+    public APIRequestGetOrderManagementApps requestAuthDialogPermsExplanationField () {
       return this.requestAuthDialogPermsExplanationField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestAuthDialogPermsExplanationField (boolean value) {
+    public APIRequestGetOrderManagementApps requestAuthDialogPermsExplanationField (boolean value) {
       this.requestField("auth_dialog_perms_explanation", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestAuthReferralDefaultActivityPrivacyField () {
+    public APIRequestGetOrderManagementApps requestAuthReferralDefaultActivityPrivacyField () {
       return this.requestAuthReferralDefaultActivityPrivacyField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestAuthReferralDefaultActivityPrivacyField (boolean value) {
+    public APIRequestGetOrderManagementApps requestAuthReferralDefaultActivityPrivacyField (boolean value) {
       this.requestField("auth_referral_default_activity_privacy", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestAuthReferralEnabledField () {
+    public APIRequestGetOrderManagementApps requestAuthReferralEnabledField () {
       return this.requestAuthReferralEnabledField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestAuthReferralEnabledField (boolean value) {
+    public APIRequestGetOrderManagementApps requestAuthReferralEnabledField (boolean value) {
       this.requestField("auth_referral_enabled", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestAuthReferralExtendedPermsField () {
+    public APIRequestGetOrderManagementApps requestAuthReferralExtendedPermsField () {
       return this.requestAuthReferralExtendedPermsField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestAuthReferralExtendedPermsField (boolean value) {
+    public APIRequestGetOrderManagementApps requestAuthReferralExtendedPermsField (boolean value) {
       this.requestField("auth_referral_extended_perms", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestAuthReferralFriendPermsField () {
+    public APIRequestGetOrderManagementApps requestAuthReferralFriendPermsField () {
       return this.requestAuthReferralFriendPermsField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestAuthReferralFriendPermsField (boolean value) {
+    public APIRequestGetOrderManagementApps requestAuthReferralFriendPermsField (boolean value) {
       this.requestField("auth_referral_friend_perms", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestAuthReferralResponseTypeField () {
+    public APIRequestGetOrderManagementApps requestAuthReferralResponseTypeField () {
       return this.requestAuthReferralResponseTypeField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestAuthReferralResponseTypeField (boolean value) {
+    public APIRequestGetOrderManagementApps requestAuthReferralResponseTypeField (boolean value) {
       this.requestField("auth_referral_response_type", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestAuthReferralUserPermsField () {
+    public APIRequestGetOrderManagementApps requestAuthReferralUserPermsField () {
       return this.requestAuthReferralUserPermsField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestAuthReferralUserPermsField (boolean value) {
+    public APIRequestGetOrderManagementApps requestAuthReferralUserPermsField (boolean value) {
       this.requestField("auth_referral_user_perms", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestAutoEventMappingAndroidField () {
+    public APIRequestGetOrderManagementApps requestAutoEventMappingAndroidField () {
       return this.requestAutoEventMappingAndroidField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestAutoEventMappingAndroidField (boolean value) {
+    public APIRequestGetOrderManagementApps requestAutoEventMappingAndroidField (boolean value) {
       this.requestField("auto_event_mapping_android", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestAutoEventMappingIosField () {
+    public APIRequestGetOrderManagementApps requestAutoEventMappingIosField () {
       return this.requestAutoEventMappingIosField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestAutoEventMappingIosField (boolean value) {
+    public APIRequestGetOrderManagementApps requestAutoEventMappingIosField (boolean value) {
       this.requestField("auto_event_mapping_ios", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestAutoEventSetupEnabledField () {
+    public APIRequestGetOrderManagementApps requestAutoEventSetupEnabledField () {
       return this.requestAutoEventSetupEnabledField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestAutoEventSetupEnabledField (boolean value) {
+    public APIRequestGetOrderManagementApps requestAutoEventSetupEnabledField (boolean value) {
       this.requestField("auto_event_setup_enabled", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestAutoLogAppEventsDefaultField () {
+    public APIRequestGetOrderManagementApps requestAutoLogAppEventsDefaultField () {
       return this.requestAutoLogAppEventsDefaultField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestAutoLogAppEventsDefaultField (boolean value) {
+    public APIRequestGetOrderManagementApps requestAutoLogAppEventsDefaultField (boolean value) {
       this.requestField("auto_log_app_events_default", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestAutoLogAppEventsEnabledField () {
+    public APIRequestGetOrderManagementApps requestAutoLogAppEventsEnabledField () {
       return this.requestAutoLogAppEventsEnabledField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestAutoLogAppEventsEnabledField (boolean value) {
+    public APIRequestGetOrderManagementApps requestAutoLogAppEventsEnabledField (boolean value) {
       this.requestField("auto_log_app_events_enabled", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestBusinessField () {
+    public APIRequestGetOrderManagementApps requestBusinessField () {
       return this.requestBusinessField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestBusinessField (boolean value) {
+    public APIRequestGetOrderManagementApps requestBusinessField (boolean value) {
       this.requestField("business", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestCanvasFluidHeightField () {
+    public APIRequestGetOrderManagementApps requestCanvasFluidHeightField () {
       return this.requestCanvasFluidHeightField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestCanvasFluidHeightField (boolean value) {
+    public APIRequestGetOrderManagementApps requestCanvasFluidHeightField (boolean value) {
       this.requestField("canvas_fluid_height", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestCanvasFluidWidthField () {
+    public APIRequestGetOrderManagementApps requestCanvasFluidWidthField () {
       return this.requestCanvasFluidWidthField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestCanvasFluidWidthField (boolean value) {
+    public APIRequestGetOrderManagementApps requestCanvasFluidWidthField (boolean value) {
       this.requestField("canvas_fluid_width", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestCanvasUrlField () {
+    public APIRequestGetOrderManagementApps requestCanvasUrlField () {
       return this.requestCanvasUrlField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestCanvasUrlField (boolean value) {
+    public APIRequestGetOrderManagementApps requestCanvasUrlField (boolean value) {
       this.requestField("canvas_url", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestCategoryField () {
+    public APIRequestGetOrderManagementApps requestCategoryField () {
       return this.requestCategoryField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestCategoryField (boolean value) {
+    public APIRequestGetOrderManagementApps requestCategoryField (boolean value) {
       this.requestField("category", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestClientConfigField () {
+    public APIRequestGetOrderManagementApps requestClientConfigField () {
       return this.requestClientConfigField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestClientConfigField (boolean value) {
+    public APIRequestGetOrderManagementApps requestClientConfigField (boolean value) {
       this.requestField("client_config", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestCompanyField () {
+    public APIRequestGetOrderManagementApps requestCompanyField () {
       return this.requestCompanyField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestCompanyField (boolean value) {
+    public APIRequestGetOrderManagementApps requestCompanyField (boolean value) {
       this.requestField("company", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestConfiguredIosSsoField () {
+    public APIRequestGetOrderManagementApps requestConfiguredIosSsoField () {
       return this.requestConfiguredIosSsoField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestConfiguredIosSsoField (boolean value) {
+    public APIRequestGetOrderManagementApps requestConfiguredIosSsoField (boolean value) {
       this.requestField("configured_ios_sso", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestContactEmailField () {
+    public APIRequestGetOrderManagementApps requestContactEmailField () {
       return this.requestContactEmailField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestContactEmailField (boolean value) {
+    public APIRequestGetOrderManagementApps requestContactEmailField (boolean value) {
       this.requestField("contact_email", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestCreatedTimeField () {
+    public APIRequestGetOrderManagementApps requestCreatedTimeField () {
       return this.requestCreatedTimeField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestCreatedTimeField (boolean value) {
+    public APIRequestGetOrderManagementApps requestCreatedTimeField (boolean value) {
       this.requestField("created_time", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestCreatorUidField () {
+    public APIRequestGetOrderManagementApps requestCreatorUidField () {
       return this.requestCreatorUidField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestCreatorUidField (boolean value) {
+    public APIRequestGetOrderManagementApps requestCreatorUidField (boolean value) {
       this.requestField("creator_uid", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestDailyActiveUsersField () {
+    public APIRequestGetOrderManagementApps requestDailyActiveUsersField () {
       return this.requestDailyActiveUsersField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestDailyActiveUsersField (boolean value) {
+    public APIRequestGetOrderManagementApps requestDailyActiveUsersField (boolean value) {
       this.requestField("daily_active_users", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestDailyActiveUsersRankField () {
+    public APIRequestGetOrderManagementApps requestDailyActiveUsersRankField () {
       return this.requestDailyActiveUsersRankField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestDailyActiveUsersRankField (boolean value) {
+    public APIRequestGetOrderManagementApps requestDailyActiveUsersRankField (boolean value) {
       this.requestField("daily_active_users_rank", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestDeauthCallbackUrlField () {
+    public APIRequestGetOrderManagementApps requestDeauthCallbackUrlField () {
       return this.requestDeauthCallbackUrlField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestDeauthCallbackUrlField (boolean value) {
+    public APIRequestGetOrderManagementApps requestDeauthCallbackUrlField (boolean value) {
       this.requestField("deauth_callback_url", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestDefaultShareModeField () {
+    public APIRequestGetOrderManagementApps requestDefaultShareModeField () {
       return this.requestDefaultShareModeField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestDefaultShareModeField (boolean value) {
+    public APIRequestGetOrderManagementApps requestDefaultShareModeField (boolean value) {
       this.requestField("default_share_mode", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestDescriptionField () {
+    public APIRequestGetOrderManagementApps requestDescriptionField () {
       return this.requestDescriptionField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestDescriptionField (boolean value) {
+    public APIRequestGetOrderManagementApps requestDescriptionField (boolean value) {
       this.requestField("description", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestFinancialIdField () {
+    public APIRequestGetOrderManagementApps requestFinancialIdField () {
       return this.requestFinancialIdField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestFinancialIdField (boolean value) {
+    public APIRequestGetOrderManagementApps requestFinancialIdField (boolean value) {
       this.requestField("financial_id", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestGdpv4ChromeCustomTabsEnabledField () {
+    public APIRequestGetOrderManagementApps requestGdpv4ChromeCustomTabsEnabledField () {
       return this.requestGdpv4ChromeCustomTabsEnabledField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestGdpv4ChromeCustomTabsEnabledField (boolean value) {
+    public APIRequestGetOrderManagementApps requestGdpv4ChromeCustomTabsEnabledField (boolean value) {
       this.requestField("gdpv4_chrome_custom_tabs_enabled", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestGdpv4EnabledField () {
+    public APIRequestGetOrderManagementApps requestGdpv4EnabledField () {
       return this.requestGdpv4EnabledField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestGdpv4EnabledField (boolean value) {
+    public APIRequestGetOrderManagementApps requestGdpv4EnabledField (boolean value) {
       this.requestField("gdpv4_enabled", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestGdpv4NuxContentField () {
+    public APIRequestGetOrderManagementApps requestGdpv4NuxContentField () {
       return this.requestGdpv4NuxContentField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestGdpv4NuxContentField (boolean value) {
+    public APIRequestGetOrderManagementApps requestGdpv4NuxContentField (boolean value) {
       this.requestField("gdpv4_nux_content", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestGdpv4NuxEnabledField () {
+    public APIRequestGetOrderManagementApps requestGdpv4NuxEnabledField () {
       return this.requestGdpv4NuxEnabledField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestGdpv4NuxEnabledField (boolean value) {
+    public APIRequestGetOrderManagementApps requestGdpv4NuxEnabledField (boolean value) {
       this.requestField("gdpv4_nux_enabled", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestHasMessengerProductField () {
+    public APIRequestGetOrderManagementApps requestHasMessengerProductField () {
       return this.requestHasMessengerProductField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestHasMessengerProductField (boolean value) {
+    public APIRequestGetOrderManagementApps requestHasMessengerProductField (boolean value) {
       this.requestField("has_messenger_product", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestHostingUrlField () {
+    public APIRequestGetOrderManagementApps requestHostingUrlField () {
       return this.requestHostingUrlField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestHostingUrlField (boolean value) {
+    public APIRequestGetOrderManagementApps requestHostingUrlField (boolean value) {
       this.requestField("hosting_url", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestIconUrlField () {
+    public APIRequestGetOrderManagementApps requestIconUrlField () {
       return this.requestIconUrlField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestIconUrlField (boolean value) {
+    public APIRequestGetOrderManagementApps requestIconUrlField (boolean value) {
       this.requestField("icon_url", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestIdField () {
+    public APIRequestGetOrderManagementApps requestIdField () {
       return this.requestIdField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestIdField (boolean value) {
+    public APIRequestGetOrderManagementApps requestIdField (boolean value) {
       this.requestField("id", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestIosBundleIdField () {
+    public APIRequestGetOrderManagementApps requestIosBundleIdField () {
       return this.requestIosBundleIdField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestIosBundleIdField (boolean value) {
+    public APIRequestGetOrderManagementApps requestIosBundleIdField (boolean value) {
       this.requestField("ios_bundle_id", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestIosSdkDialogFlowsField () {
+    public APIRequestGetOrderManagementApps requestIosSdkDialogFlowsField () {
       return this.requestIosSdkDialogFlowsField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestIosSdkDialogFlowsField (boolean value) {
+    public APIRequestGetOrderManagementApps requestIosSdkDialogFlowsField (boolean value) {
       this.requestField("ios_sdk_dialog_flows", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestIosSdkErrorCategoriesField () {
+    public APIRequestGetOrderManagementApps requestIosSdkErrorCategoriesField () {
       return this.requestIosSdkErrorCategoriesField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestIosSdkErrorCategoriesField (boolean value) {
+    public APIRequestGetOrderManagementApps requestIosSdkErrorCategoriesField (boolean value) {
       this.requestField("ios_sdk_error_categories", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestIosSfvcAttrField () {
+    public APIRequestGetOrderManagementApps requestIosSfvcAttrField () {
       return this.requestIosSfvcAttrField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestIosSfvcAttrField (boolean value) {
+    public APIRequestGetOrderManagementApps requestIosSfvcAttrField (boolean value) {
       this.requestField("ios_sfvc_attr", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestIosSupportsNativeProxyAuthFlowField () {
+    public APIRequestGetOrderManagementApps requestIosSupportsNativeProxyAuthFlowField () {
       return this.requestIosSupportsNativeProxyAuthFlowField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestIosSupportsNativeProxyAuthFlowField (boolean value) {
+    public APIRequestGetOrderManagementApps requestIosSupportsNativeProxyAuthFlowField (boolean value) {
       this.requestField("ios_supports_native_proxy_auth_flow", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestIosSupportsSystemAuthField () {
+    public APIRequestGetOrderManagementApps requestIosSupportsSystemAuthField () {
       return this.requestIosSupportsSystemAuthField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestIosSupportsSystemAuthField (boolean value) {
+    public APIRequestGetOrderManagementApps requestIosSupportsSystemAuthField (boolean value) {
       this.requestField("ios_supports_system_auth", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestIpadAppStoreIdField () {
+    public APIRequestGetOrderManagementApps requestIpadAppStoreIdField () {
       return this.requestIpadAppStoreIdField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestIpadAppStoreIdField (boolean value) {
+    public APIRequestGetOrderManagementApps requestIpadAppStoreIdField (boolean value) {
       this.requestField("ipad_app_store_id", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestIphoneAppStoreIdField () {
+    public APIRequestGetOrderManagementApps requestIphoneAppStoreIdField () {
       return this.requestIphoneAppStoreIdField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestIphoneAppStoreIdField (boolean value) {
+    public APIRequestGetOrderManagementApps requestIphoneAppStoreIdField (boolean value) {
       this.requestField("iphone_app_store_id", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestLatestSdkVersionField () {
+    public APIRequestGetOrderManagementApps requestLatestSdkVersionField () {
       return this.requestLatestSdkVersionField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestLatestSdkVersionField (boolean value) {
+    public APIRequestGetOrderManagementApps requestLatestSdkVersionField (boolean value) {
       this.requestField("latest_sdk_version", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestLinkField () {
+    public APIRequestGetOrderManagementApps requestLinkField () {
       return this.requestLinkField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestLinkField (boolean value) {
+    public APIRequestGetOrderManagementApps requestLinkField (boolean value) {
       this.requestField("link", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestLoggingTokenField () {
+    public APIRequestGetOrderManagementApps requestLoggingTokenField () {
       return this.requestLoggingTokenField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestLoggingTokenField (boolean value) {
+    public APIRequestGetOrderManagementApps requestLoggingTokenField (boolean value) {
       this.requestField("logging_token", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestLogoUrlField () {
+    public APIRequestGetOrderManagementApps requestLogoUrlField () {
       return this.requestLogoUrlField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestLogoUrlField (boolean value) {
+    public APIRequestGetOrderManagementApps requestLogoUrlField (boolean value) {
       this.requestField("logo_url", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestMigrationsField () {
+    public APIRequestGetOrderManagementApps requestMigrationsField () {
       return this.requestMigrationsField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestMigrationsField (boolean value) {
+    public APIRequestGetOrderManagementApps requestMigrationsField (boolean value) {
       this.requestField("migrations", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestMobileProfileSectionUrlField () {
+    public APIRequestGetOrderManagementApps requestMobileProfileSectionUrlField () {
       return this.requestMobileProfileSectionUrlField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestMobileProfileSectionUrlField (boolean value) {
+    public APIRequestGetOrderManagementApps requestMobileProfileSectionUrlField (boolean value) {
       this.requestField("mobile_profile_section_url", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestMobileWebUrlField () {
+    public APIRequestGetOrderManagementApps requestMobileWebUrlField () {
       return this.requestMobileWebUrlField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestMobileWebUrlField (boolean value) {
+    public APIRequestGetOrderManagementApps requestMobileWebUrlField (boolean value) {
       this.requestField("mobile_web_url", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestMonthlyActiveUsersField () {
+    public APIRequestGetOrderManagementApps requestMonthlyActiveUsersField () {
       return this.requestMonthlyActiveUsersField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestMonthlyActiveUsersField (boolean value) {
+    public APIRequestGetOrderManagementApps requestMonthlyActiveUsersField (boolean value) {
       this.requestField("monthly_active_users", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestMonthlyActiveUsersRankField () {
+    public APIRequestGetOrderManagementApps requestMonthlyActiveUsersRankField () {
       return this.requestMonthlyActiveUsersRankField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestMonthlyActiveUsersRankField (boolean value) {
+    public APIRequestGetOrderManagementApps requestMonthlyActiveUsersRankField (boolean value) {
       this.requestField("monthly_active_users_rank", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestNameField () {
+    public APIRequestGetOrderManagementApps requestNameField () {
       return this.requestNameField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestNameField (boolean value) {
+    public APIRequestGetOrderManagementApps requestNameField (boolean value) {
       this.requestField("name", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestNamespaceField () {
+    public APIRequestGetOrderManagementApps requestNamespaceField () {
       return this.requestNamespaceField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestNamespaceField (boolean value) {
+    public APIRequestGetOrderManagementApps requestNamespaceField (boolean value) {
       this.requestField("namespace", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestObjectStoreUrlsField () {
+    public APIRequestGetOrderManagementApps requestObjectStoreUrlsField () {
       return this.requestObjectStoreUrlsField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestObjectStoreUrlsField (boolean value) {
+    public APIRequestGetOrderManagementApps requestObjectStoreUrlsField (boolean value) {
       this.requestField("object_store_urls", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestOwnerBusinessField () {
+    public APIRequestGetOrderManagementApps requestOwnerBusinessField () {
       return this.requestOwnerBusinessField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestOwnerBusinessField (boolean value) {
+    public APIRequestGetOrderManagementApps requestOwnerBusinessField (boolean value) {
       this.requestField("owner_business", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestPageTabDefaultNameField () {
+    public APIRequestGetOrderManagementApps requestPageTabDefaultNameField () {
       return this.requestPageTabDefaultNameField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestPageTabDefaultNameField (boolean value) {
+    public APIRequestGetOrderManagementApps requestPageTabDefaultNameField (boolean value) {
       this.requestField("page_tab_default_name", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestPageTabUrlField () {
+    public APIRequestGetOrderManagementApps requestPageTabUrlField () {
       return this.requestPageTabUrlField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestPageTabUrlField (boolean value) {
+    public APIRequestGetOrderManagementApps requestPageTabUrlField (boolean value) {
       this.requestField("page_tab_url", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestPhotoUrlField () {
+    public APIRequestGetOrderManagementApps requestPhotoUrlField () {
       return this.requestPhotoUrlField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestPhotoUrlField (boolean value) {
+    public APIRequestGetOrderManagementApps requestPhotoUrlField (boolean value) {
       this.requestField("photo_url", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestPrivacyPolicyUrlField () {
+    public APIRequestGetOrderManagementApps requestPrivacyPolicyUrlField () {
       return this.requestPrivacyPolicyUrlField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestPrivacyPolicyUrlField (boolean value) {
+    public APIRequestGetOrderManagementApps requestPrivacyPolicyUrlField (boolean value) {
       this.requestField("privacy_policy_url", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestProfileSectionUrlField () {
+    public APIRequestGetOrderManagementApps requestProfileSectionUrlField () {
       return this.requestProfileSectionUrlField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestProfileSectionUrlField (boolean value) {
+    public APIRequestGetOrderManagementApps requestProfileSectionUrlField (boolean value) {
       this.requestField("profile_section_url", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestPropertyIdField () {
+    public APIRequestGetOrderManagementApps requestPropertyIdField () {
       return this.requestPropertyIdField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestPropertyIdField (boolean value) {
+    public APIRequestGetOrderManagementApps requestPropertyIdField (boolean value) {
       this.requestField("property_id", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestProtectedModeRulesField () {
+    public APIRequestGetOrderManagementApps requestProtectedModeRulesField () {
       return this.requestProtectedModeRulesField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestProtectedModeRulesField (boolean value) {
+    public APIRequestGetOrderManagementApps requestProtectedModeRulesField (boolean value) {
       this.requestField("protected_mode_rules", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestRealTimeModeDevicesField () {
+    public APIRequestGetOrderManagementApps requestRealTimeModeDevicesField () {
       return this.requestRealTimeModeDevicesField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestRealTimeModeDevicesField (boolean value) {
+    public APIRequestGetOrderManagementApps requestRealTimeModeDevicesField (boolean value) {
       this.requestField("real_time_mode_devices", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestRestrictionsField () {
+    public APIRequestGetOrderManagementApps requestRestrictionsField () {
       return this.requestRestrictionsField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestRestrictionsField (boolean value) {
+    public APIRequestGetOrderManagementApps requestRestrictionsField (boolean value) {
       this.requestField("restrictions", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestRestrictiveDataFilterParamsField () {
+    public APIRequestGetOrderManagementApps requestRestrictiveDataFilterParamsField () {
       return this.requestRestrictiveDataFilterParamsField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestRestrictiveDataFilterParamsField (boolean value) {
+    public APIRequestGetOrderManagementApps requestRestrictiveDataFilterParamsField (boolean value) {
       this.requestField("restrictive_data_filter_params", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestRestrictiveDataFilterRulesField () {
+    public APIRequestGetOrderManagementApps requestRestrictiveDataFilterRulesField () {
       return this.requestRestrictiveDataFilterRulesField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestRestrictiveDataFilterRulesField (boolean value) {
+    public APIRequestGetOrderManagementApps requestRestrictiveDataFilterRulesField (boolean value) {
       this.requestField("restrictive_data_filter_rules", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestSdkUpdateMessageField () {
+    public APIRequestGetOrderManagementApps requestSdkUpdateMessageField () {
       return this.requestSdkUpdateMessageField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestSdkUpdateMessageField (boolean value) {
+    public APIRequestGetOrderManagementApps requestSdkUpdateMessageField (boolean value) {
       this.requestField("sdk_update_message", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestSeamlessLoginField () {
+    public APIRequestGetOrderManagementApps requestSeamlessLoginField () {
       return this.requestSeamlessLoginField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestSeamlessLoginField (boolean value) {
+    public APIRequestGetOrderManagementApps requestSeamlessLoginField (boolean value) {
       this.requestField("seamless_login", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestSecureCanvasUrlField () {
+    public APIRequestGetOrderManagementApps requestSecureCanvasUrlField () {
       return this.requestSecureCanvasUrlField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestSecureCanvasUrlField (boolean value) {
+    public APIRequestGetOrderManagementApps requestSecureCanvasUrlField (boolean value) {
       this.requestField("secure_canvas_url", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestSecurePageTabUrlField () {
+    public APIRequestGetOrderManagementApps requestSecurePageTabUrlField () {
       return this.requestSecurePageTabUrlField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestSecurePageTabUrlField (boolean value) {
+    public APIRequestGetOrderManagementApps requestSecurePageTabUrlField (boolean value) {
       this.requestField("secure_page_tab_url", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestServerIpWhitelistField () {
+    public APIRequestGetOrderManagementApps requestServerIpWhitelistField () {
       return this.requestServerIpWhitelistField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestServerIpWhitelistField (boolean value) {
+    public APIRequestGetOrderManagementApps requestServerIpWhitelistField (boolean value) {
       this.requestField("server_ip_whitelist", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestSmartLoginBookmarkIconUrlField () {
+    public APIRequestGetOrderManagementApps requestSmartLoginBookmarkIconUrlField () {
       return this.requestSmartLoginBookmarkIconUrlField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestSmartLoginBookmarkIconUrlField (boolean value) {
+    public APIRequestGetOrderManagementApps requestSmartLoginBookmarkIconUrlField (boolean value) {
       this.requestField("smart_login_bookmark_icon_url", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestSmartLoginMenuIconUrlField () {
+    public APIRequestGetOrderManagementApps requestSmartLoginMenuIconUrlField () {
       return this.requestSmartLoginMenuIconUrlField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestSmartLoginMenuIconUrlField (boolean value) {
+    public APIRequestGetOrderManagementApps requestSmartLoginMenuIconUrlField (boolean value) {
       this.requestField("smart_login_menu_icon_url", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestSocialDiscoveryField () {
+    public APIRequestGetOrderManagementApps requestSocialDiscoveryField () {
       return this.requestSocialDiscoveryField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestSocialDiscoveryField (boolean value) {
+    public APIRequestGetOrderManagementApps requestSocialDiscoveryField (boolean value) {
       this.requestField("social_discovery", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestSubcategoryField () {
+    public APIRequestGetOrderManagementApps requestSubcategoryField () {
       return this.requestSubcategoryField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestSubcategoryField (boolean value) {
+    public APIRequestGetOrderManagementApps requestSubcategoryField (boolean value) {
       this.requestField("subcategory", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestSuggestedEventsSettingField () {
+    public APIRequestGetOrderManagementApps requestSuggestedEventsSettingField () {
       return this.requestSuggestedEventsSettingField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestSuggestedEventsSettingField (boolean value) {
+    public APIRequestGetOrderManagementApps requestSuggestedEventsSettingField (boolean value) {
       this.requestField("suggested_events_setting", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestSupportedPlatformsField () {
+    public APIRequestGetOrderManagementApps requestSupportedPlatformsField () {
       return this.requestSupportedPlatformsField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestSupportedPlatformsField (boolean value) {
+    public APIRequestGetOrderManagementApps requestSupportedPlatformsField (boolean value) {
       this.requestField("supported_platforms", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestSupportsApprequestsFastAppSwitchField () {
+    public APIRequestGetOrderManagementApps requestSupportsApprequestsFastAppSwitchField () {
       return this.requestSupportsApprequestsFastAppSwitchField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestSupportsApprequestsFastAppSwitchField (boolean value) {
+    public APIRequestGetOrderManagementApps requestSupportsApprequestsFastAppSwitchField (boolean value) {
       this.requestField("supports_apprequests_fast_app_switch", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestSupportsAttributionField () {
+    public APIRequestGetOrderManagementApps requestSupportsAttributionField () {
       return this.requestSupportsAttributionField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestSupportsAttributionField (boolean value) {
+    public APIRequestGetOrderManagementApps requestSupportsAttributionField (boolean value) {
       this.requestField("supports_attribution", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestSupportsImplicitSdkLoggingField () {
+    public APIRequestGetOrderManagementApps requestSupportsImplicitSdkLoggingField () {
       return this.requestSupportsImplicitSdkLoggingField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestSupportsImplicitSdkLoggingField (boolean value) {
+    public APIRequestGetOrderManagementApps requestSupportsImplicitSdkLoggingField (boolean value) {
       this.requestField("supports_implicit_sdk_logging", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestSuppressNativeIosGdpField () {
+    public APIRequestGetOrderManagementApps requestSuppressNativeIosGdpField () {
       return this.requestSuppressNativeIosGdpField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestSuppressNativeIosGdpField (boolean value) {
+    public APIRequestGetOrderManagementApps requestSuppressNativeIosGdpField (boolean value) {
       this.requestField("suppress_native_ios_gdp", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestTermsOfServiceUrlField () {
+    public APIRequestGetOrderManagementApps requestTermsOfServiceUrlField () {
       return this.requestTermsOfServiceUrlField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestTermsOfServiceUrlField (boolean value) {
+    public APIRequestGetOrderManagementApps requestTermsOfServiceUrlField (boolean value) {
       this.requestField("terms_of_service_url", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestUrlSchemeSuffixField () {
+    public APIRequestGetOrderManagementApps requestUrlSchemeSuffixField () {
       return this.requestUrlSchemeSuffixField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestUrlSchemeSuffixField (boolean value) {
+    public APIRequestGetOrderManagementApps requestUrlSchemeSuffixField (boolean value) {
       this.requestField("url_scheme_suffix", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestUserSupportEmailField () {
+    public APIRequestGetOrderManagementApps requestUserSupportEmailField () {
       return this.requestUserSupportEmailField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestUserSupportEmailField (boolean value) {
+    public APIRequestGetOrderManagementApps requestUserSupportEmailField (boolean value) {
       this.requestField("user_support_email", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestUserSupportUrlField () {
+    public APIRequestGetOrderManagementApps requestUserSupportUrlField () {
       return this.requestUserSupportUrlField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestUserSupportUrlField (boolean value) {
+    public APIRequestGetOrderManagementApps requestUserSupportUrlField (boolean value) {
       this.requestField("user_support_url", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestWebsiteUrlField () {
+    public APIRequestGetOrderManagementApps requestWebsiteUrlField () {
       return this.requestWebsiteUrlField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestWebsiteUrlField (boolean value) {
+    public APIRequestGetOrderManagementApps requestWebsiteUrlField (boolean value) {
       this.requestField("website_url", value);
       return this;
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestWeeklyActiveUsersField () {
+    public APIRequestGetOrderManagementApps requestWeeklyActiveUsersField () {
       return this.requestWeeklyActiveUsersField(true);
     }
-    public APIRequestGetOrderMAnAgeMEntApps requestWeeklyActiveUsersField (boolean value) {
+    public APIRequestGetOrderManagementApps requestWeeklyActiveUsersField (boolean value) {
       this.requestField("weekly_active_users", value);
       return this;
     }
   }
 
-  public static class APIRequestCreateOrderMAnAgeMEntApp extends APIRequest<CommerceMerchantSettings> {
+  public static class APIRequestCreateOrderManagementApp extends APIRequest<CommerceMerchantSettings> {
 
     CommerceMerchantSettings lastResponse = null;
     @Override
@@ -2103,7 +2103,7 @@ public class CommerceMerchantSettings extends APINode {
         new Function<ResponseWrapper, CommerceMerchantSettings>() {
            public CommerceMerchantSettings apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateOrderMAnAgeMEntApp.this.parseResponse(result.getBody(), result.getHeader());
+               return APIRequestCreateOrderManagementApp.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2113,28 +2113,28 @@ public class CommerceMerchantSettings extends APINode {
       );
     };
 
-    public APIRequestCreateOrderMAnAgeMEntApp(String nodeId, APIContext context) {
+    public APIRequestCreateOrderManagementApp(String nodeId, APIContext context) {
       super(context, nodeId, "/order_management_apps", "POST", Arrays.asList(PARAMS));
     }
 
     @Override
-    public APIRequestCreateOrderMAnAgeMEntApp setParam(String param, Object value) {
+    public APIRequestCreateOrderManagementApp setParam(String param, Object value) {
       setParamInternal(param, value);
       return this;
     }
 
     @Override
-    public APIRequestCreateOrderMAnAgeMEntApp setParams(Map<String, Object> params) {
+    public APIRequestCreateOrderManagementApp setParams(Map<String, Object> params) {
       setParamsInternal(params);
       return this;
     }
 
 
-    public APIRequestCreateOrderMAnAgeMEntApp requestAllFields () {
+    public APIRequestCreateOrderManagementApp requestAllFields () {
       return this.requestAllFields(true);
     }
 
-    public APIRequestCreateOrderMAnAgeMEntApp requestAllFields (boolean value) {
+    public APIRequestCreateOrderManagementApp requestAllFields (boolean value) {
       for (String field : FIELDS) {
         this.requestField(field, value);
       }
@@ -2142,12 +2142,12 @@ public class CommerceMerchantSettings extends APINode {
     }
 
     @Override
-    public APIRequestCreateOrderMAnAgeMEntApp requestFields (List<String> fields) {
+    public APIRequestCreateOrderManagementApp requestFields (List<String> fields) {
       return this.requestFields(fields, true);
     }
 
     @Override
-    public APIRequestCreateOrderMAnAgeMEntApp requestFields (List<String> fields, boolean value) {
+    public APIRequestCreateOrderManagementApp requestFields (List<String> fields, boolean value) {
       for (String field : fields) {
         this.requestField(field, value);
       }
@@ -2155,13 +2155,13 @@ public class CommerceMerchantSettings extends APINode {
     }
 
     @Override
-    public APIRequestCreateOrderMAnAgeMEntApp requestField (String field) {
+    public APIRequestCreateOrderManagementApp requestField (String field) {
       this.requestField(field, true);
       return this;
     }
 
     @Override
-    public APIRequestCreateOrderMAnAgeMEntApp requestField (String field, boolean value) {
+    public APIRequestCreateOrderManagementApp requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }

@@ -796,8 +796,8 @@ public class Page extends APINode {
     return new APIRequestCreateMediaFingerprint(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestCreateMessageAttachMEnt createMessageAttachMEnt() {
-    return new APIRequestCreateMessageAttachMEnt(this.getPrefixedId().toString(), context);
+  public APIRequestCreateMessageAttachment createMessageAttachment() {
+    return new APIRequestCreateMessageAttachment(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestCreateMessage createMessage() {
@@ -816,12 +816,12 @@ public class Page extends APINode {
     return new APIRequestCreateMessengerCallSetting(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestGetMessengerLeadForMs getMessengerLeadForMs() {
-    return new APIRequestGetMessengerLeadForMs(this.getPrefixedId().toString(), context);
+  public APIRequestGetMessengerLeadForms getMessengerLeadForms() {
+    return new APIRequestGetMessengerLeadForms(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestCreateMessengerLeadForM createMessengerLeadForM() {
-    return new APIRequestCreateMessengerLeadForM(this.getPrefixedId().toString(), context);
+  public APIRequestCreateMessengerLeadForm createMessengerLeadForm() {
+    return new APIRequestCreateMessengerLeadForm(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestDeleteMessengerProfile deleteMessengerProfile() {
@@ -928,8 +928,8 @@ public class Page extends APINode {
     return new APIRequestGetRtbDynamicPosts(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestGetScheduleDPosts getScheduleDPosts() {
-    return new APIRequestGetScheduleDPosts(this.getPrefixedId().toString(), context);
+  public APIRequestGetScheduledPosts getScheduledPosts() {
+    return new APIRequestGetScheduledPosts(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetSecondaryReceivers getSecondaryReceivers() {
@@ -19909,7 +19909,7 @@ public class Page extends APINode {
 
   }
 
-  public static class APIRequestCreateMessageAttachMEnt extends APIRequest<APINode> {
+  public static class APIRequestCreateMessageAttachment extends APIRequest<APINode> {
 
     APINode lastResponse = null;
     @Override
@@ -19951,7 +19951,7 @@ public class Page extends APINode {
         new Function<ResponseWrapper, APINode>() {
            public APINode apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateMessageAttachMEnt.this.parseResponse(result.getBody(), result.getHeader());
+               return APIRequestCreateMessageAttachment.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -19961,46 +19961,46 @@ public class Page extends APINode {
       );
     };
 
-    public APIRequestCreateMessageAttachMEnt(String nodeId, APIContext context) {
+    public APIRequestCreateMessageAttachment(String nodeId, APIContext context) {
       super(context, nodeId, "/message_attachments", "POST", Arrays.asList(PARAMS));
     }
 
     @Override
-    public APIRequestCreateMessageAttachMEnt setParam(String param, Object value) {
+    public APIRequestCreateMessageAttachment setParam(String param, Object value) {
       setParamInternal(param, value);
       return this;
     }
 
     @Override
-    public APIRequestCreateMessageAttachMEnt setParams(Map<String, Object> params) {
+    public APIRequestCreateMessageAttachment setParams(Map<String, Object> params) {
       setParamsInternal(params);
       return this;
     }
 
 
-    public APIRequestCreateMessageAttachMEnt setMessage (Object message) {
+    public APIRequestCreateMessageAttachment setMessage (Object message) {
       this.setParam("message", message);
       return this;
     }
-    public APIRequestCreateMessageAttachMEnt setMessage (String message) {
+    public APIRequestCreateMessageAttachment setMessage (String message) {
       this.setParam("message", message);
       return this;
     }
 
-    public APIRequestCreateMessageAttachMEnt setPlatform (EnumPlatform platform) {
+    public APIRequestCreateMessageAttachment setPlatform (EnumPlatform platform) {
       this.setParam("platform", platform);
       return this;
     }
-    public APIRequestCreateMessageAttachMEnt setPlatform (String platform) {
+    public APIRequestCreateMessageAttachment setPlatform (String platform) {
       this.setParam("platform", platform);
       return this;
     }
 
-    public APIRequestCreateMessageAttachMEnt requestAllFields () {
+    public APIRequestCreateMessageAttachment requestAllFields () {
       return this.requestAllFields(true);
     }
 
-    public APIRequestCreateMessageAttachMEnt requestAllFields (boolean value) {
+    public APIRequestCreateMessageAttachment requestAllFields (boolean value) {
       for (String field : FIELDS) {
         this.requestField(field, value);
       }
@@ -20008,12 +20008,12 @@ public class Page extends APINode {
     }
 
     @Override
-    public APIRequestCreateMessageAttachMEnt requestFields (List<String> fields) {
+    public APIRequestCreateMessageAttachment requestFields (List<String> fields) {
       return this.requestFields(fields, true);
     }
 
     @Override
-    public APIRequestCreateMessageAttachMEnt requestFields (List<String> fields, boolean value) {
+    public APIRequestCreateMessageAttachment requestFields (List<String> fields, boolean value) {
       for (String field : fields) {
         this.requestField(field, value);
       }
@@ -20021,13 +20021,13 @@ public class Page extends APINode {
     }
 
     @Override
-    public APIRequestCreateMessageAttachMEnt requestField (String field) {
+    public APIRequestCreateMessageAttachment requestField (String field) {
       this.requestField(field, true);
       return this;
     }
 
     @Override
-    public APIRequestCreateMessageAttachMEnt requestField (String field, boolean value) {
+    public APIRequestCreateMessageAttachment requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
@@ -20580,7 +20580,7 @@ public class Page extends APINode {
 
   }
 
-  public static class APIRequestGetMessengerLeadForMs extends APIRequest<MessengerAdsPartialAutomatedStepList> {
+  public static class APIRequestGetMessengerLeadForms extends APIRequest<MessengerAdsPartialAutomatedStepList> {
 
     APINodeList<MessengerAdsPartialAutomatedStepList> lastResponse = null;
     @Override
@@ -20627,7 +20627,7 @@ public class Page extends APINode {
         new Function<ResponseWrapper, APINodeList<MessengerAdsPartialAutomatedStepList>>() {
            public APINodeList<MessengerAdsPartialAutomatedStepList> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetMessengerLeadForMs.this.parseResponse(result.getBody(), result.getHeader());
+               return APIRequestGetMessengerLeadForms.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -20637,28 +20637,28 @@ public class Page extends APINode {
       );
     };
 
-    public APIRequestGetMessengerLeadForMs(String nodeId, APIContext context) {
+    public APIRequestGetMessengerLeadForms(String nodeId, APIContext context) {
       super(context, nodeId, "/messenger_lead_forms", "GET", Arrays.asList(PARAMS));
     }
 
     @Override
-    public APIRequestGetMessengerLeadForMs setParam(String param, Object value) {
+    public APIRequestGetMessengerLeadForms setParam(String param, Object value) {
       setParamInternal(param, value);
       return this;
     }
 
     @Override
-    public APIRequestGetMessengerLeadForMs setParams(Map<String, Object> params) {
+    public APIRequestGetMessengerLeadForms setParams(Map<String, Object> params) {
       setParamsInternal(params);
       return this;
     }
 
 
-    public APIRequestGetMessengerLeadForMs requestAllFields () {
+    public APIRequestGetMessengerLeadForms requestAllFields () {
       return this.requestAllFields(true);
     }
 
-    public APIRequestGetMessengerLeadForMs requestAllFields (boolean value) {
+    public APIRequestGetMessengerLeadForms requestAllFields (boolean value) {
       for (String field : FIELDS) {
         this.requestField(field, value);
       }
@@ -20666,12 +20666,12 @@ public class Page extends APINode {
     }
 
     @Override
-    public APIRequestGetMessengerLeadForMs requestFields (List<String> fields) {
+    public APIRequestGetMessengerLeadForms requestFields (List<String> fields) {
       return this.requestFields(fields, true);
     }
 
     @Override
-    public APIRequestGetMessengerLeadForMs requestFields (List<String> fields, boolean value) {
+    public APIRequestGetMessengerLeadForms requestFields (List<String> fields, boolean value) {
       for (String field : fields) {
         this.requestField(field, value);
       }
@@ -20679,69 +20679,69 @@ public class Page extends APINode {
     }
 
     @Override
-    public APIRequestGetMessengerLeadForMs requestField (String field) {
+    public APIRequestGetMessengerLeadForms requestField (String field) {
       this.requestField(field, true);
       return this;
     }
 
     @Override
-    public APIRequestGetMessengerLeadForMs requestField (String field, boolean value) {
+    public APIRequestGetMessengerLeadForms requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
 
-    public APIRequestGetMessengerLeadForMs requestFbleadFormField () {
+    public APIRequestGetMessengerLeadForms requestFbleadFormField () {
       return this.requestFbleadFormField(true);
     }
-    public APIRequestGetMessengerLeadForMs requestFbleadFormField (boolean value) {
+    public APIRequestGetMessengerLeadForms requestFbleadFormField (boolean value) {
       this.requestField("fblead_form", value);
       return this;
     }
-    public APIRequestGetMessengerLeadForMs requestFirstStepIdField () {
+    public APIRequestGetMessengerLeadForms requestFirstStepIdField () {
       return this.requestFirstStepIdField(true);
     }
-    public APIRequestGetMessengerLeadForMs requestFirstStepIdField (boolean value) {
+    public APIRequestGetMessengerLeadForms requestFirstStepIdField (boolean value) {
       this.requestField("first_step_id", value);
       return this;
     }
-    public APIRequestGetMessengerLeadForMs requestIdField () {
+    public APIRequestGetMessengerLeadForms requestIdField () {
       return this.requestIdField(true);
     }
-    public APIRequestGetMessengerLeadForMs requestIdField (boolean value) {
+    public APIRequestGetMessengerLeadForms requestIdField (boolean value) {
       this.requestField("id", value);
       return this;
     }
-    public APIRequestGetMessengerLeadForMs requestPageField () {
+    public APIRequestGetMessengerLeadForms requestPageField () {
       return this.requestPageField(true);
     }
-    public APIRequestGetMessengerLeadForMs requestPageField (boolean value) {
+    public APIRequestGetMessengerLeadForms requestPageField (boolean value) {
       this.requestField("page", value);
       return this;
     }
-    public APIRequestGetMessengerLeadForMs requestPrivacyUrlField () {
+    public APIRequestGetMessengerLeadForms requestPrivacyUrlField () {
       return this.requestPrivacyUrlField(true);
     }
-    public APIRequestGetMessengerLeadForMs requestPrivacyUrlField (boolean value) {
+    public APIRequestGetMessengerLeadForms requestPrivacyUrlField (boolean value) {
       this.requestField("privacy_url", value);
       return this;
     }
-    public APIRequestGetMessengerLeadForMs requestReminderTextField () {
+    public APIRequestGetMessengerLeadForms requestReminderTextField () {
       return this.requestReminderTextField(true);
     }
-    public APIRequestGetMessengerLeadForMs requestReminderTextField (boolean value) {
+    public APIRequestGetMessengerLeadForms requestReminderTextField (boolean value) {
       this.requestField("reminder_text", value);
       return this;
     }
-    public APIRequestGetMessengerLeadForMs requestStopQuestionMessageField () {
+    public APIRequestGetMessengerLeadForms requestStopQuestionMessageField () {
       return this.requestStopQuestionMessageField(true);
     }
-    public APIRequestGetMessengerLeadForMs requestStopQuestionMessageField (boolean value) {
+    public APIRequestGetMessengerLeadForms requestStopQuestionMessageField (boolean value) {
       this.requestField("stop_question_message", value);
       return this;
     }
   }
 
-  public static class APIRequestCreateMessengerLeadForM extends APIRequest<Page> {
+  public static class APIRequestCreateMessengerLeadForm extends APIRequest<Page> {
 
     Page lastResponse = null;
     @Override
@@ -20792,7 +20792,7 @@ public class Page extends APINode {
         new Function<ResponseWrapper, Page>() {
            public Page apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateMessengerLeadForM.this.parseResponse(result.getBody(), result.getHeader());
+               return APIRequestCreateMessengerLeadForm.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -20802,107 +20802,107 @@ public class Page extends APINode {
       );
     };
 
-    public APIRequestCreateMessengerLeadForM(String nodeId, APIContext context) {
+    public APIRequestCreateMessengerLeadForm(String nodeId, APIContext context) {
       super(context, nodeId, "/messenger_lead_forms", "POST", Arrays.asList(PARAMS));
     }
 
     @Override
-    public APIRequestCreateMessengerLeadForM setParam(String param, Object value) {
+    public APIRequestCreateMessengerLeadForm setParam(String param, Object value) {
       setParamInternal(param, value);
       return this;
     }
 
     @Override
-    public APIRequestCreateMessengerLeadForM setParams(Map<String, Object> params) {
+    public APIRequestCreateMessengerLeadForm setParams(Map<String, Object> params) {
       setParamsInternal(params);
       return this;
     }
 
 
-    public APIRequestCreateMessengerLeadForM setAccountId (Long accountId) {
+    public APIRequestCreateMessengerLeadForm setAccountId (Long accountId) {
       this.setParam("account_id", accountId);
       return this;
     }
-    public APIRequestCreateMessengerLeadForM setAccountId (String accountId) {
+    public APIRequestCreateMessengerLeadForm setAccountId (String accountId) {
       this.setParam("account_id", accountId);
       return this;
     }
 
-    public APIRequestCreateMessengerLeadForM setBlockSendApi (Boolean blockSendApi) {
+    public APIRequestCreateMessengerLeadForm setBlockSendApi (Boolean blockSendApi) {
       this.setParam("block_send_api", blockSendApi);
       return this;
     }
-    public APIRequestCreateMessengerLeadForM setBlockSendApi (String blockSendApi) {
+    public APIRequestCreateMessengerLeadForm setBlockSendApi (String blockSendApi) {
       this.setParam("block_send_api", blockSendApi);
       return this;
     }
 
-    public APIRequestCreateMessengerLeadForM setExitKeyphrases (String exitKeyphrases) {
+    public APIRequestCreateMessengerLeadForm setExitKeyphrases (String exitKeyphrases) {
       this.setParam("exit_keyphrases", exitKeyphrases);
       return this;
     }
 
-    public APIRequestCreateMessengerLeadForM setHandoverAppId (Long handoverAppId) {
+    public APIRequestCreateMessengerLeadForm setHandoverAppId (Long handoverAppId) {
       this.setParam("handover_app_id", handoverAppId);
       return this;
     }
-    public APIRequestCreateMessengerLeadForM setHandoverAppId (String handoverAppId) {
+    public APIRequestCreateMessengerLeadForm setHandoverAppId (String handoverAppId) {
       this.setParam("handover_app_id", handoverAppId);
       return this;
     }
 
-    public APIRequestCreateMessengerLeadForM setHandoverSummary (Boolean handoverSummary) {
+    public APIRequestCreateMessengerLeadForm setHandoverSummary (Boolean handoverSummary) {
       this.setParam("handover_summary", handoverSummary);
       return this;
     }
-    public APIRequestCreateMessengerLeadForM setHandoverSummary (String handoverSummary) {
+    public APIRequestCreateMessengerLeadForm setHandoverSummary (String handoverSummary) {
       this.setParam("handover_summary", handoverSummary);
       return this;
     }
 
-    public APIRequestCreateMessengerLeadForM setPrivacyUrl (String privacyUrl) {
+    public APIRequestCreateMessengerLeadForm setPrivacyUrl (String privacyUrl) {
       this.setParam("privacy_url", privacyUrl);
       return this;
     }
 
-    public APIRequestCreateMessengerLeadForM setReminderText (String reminderText) {
+    public APIRequestCreateMessengerLeadForm setReminderText (String reminderText) {
       this.setParam("reminder_text", reminderText);
       return this;
     }
 
-    public APIRequestCreateMessengerLeadForM setStepList (List<Map<String, String>> stepList) {
+    public APIRequestCreateMessengerLeadForm setStepList (List<Map<String, String>> stepList) {
       this.setParam("step_list", stepList);
       return this;
     }
-    public APIRequestCreateMessengerLeadForM setStepList (String stepList) {
+    public APIRequestCreateMessengerLeadForm setStepList (String stepList) {
       this.setParam("step_list", stepList);
       return this;
     }
 
-    public APIRequestCreateMessengerLeadForM setStopQuestionMessage (String stopQuestionMessage) {
+    public APIRequestCreateMessengerLeadForm setStopQuestionMessage (String stopQuestionMessage) {
       this.setParam("stop_question_message", stopQuestionMessage);
       return this;
     }
 
-    public APIRequestCreateMessengerLeadForM setTemplateName (String templateName) {
+    public APIRequestCreateMessengerLeadForm setTemplateName (String templateName) {
       this.setParam("template_name", templateName);
       return this;
     }
 
-    public APIRequestCreateMessengerLeadForM setTrackingParameters (Map<String, String> trackingParameters) {
+    public APIRequestCreateMessengerLeadForm setTrackingParameters (Map<String, String> trackingParameters) {
       this.setParam("tracking_parameters", trackingParameters);
       return this;
     }
-    public APIRequestCreateMessengerLeadForM setTrackingParameters (String trackingParameters) {
+    public APIRequestCreateMessengerLeadForm setTrackingParameters (String trackingParameters) {
       this.setParam("tracking_parameters", trackingParameters);
       return this;
     }
 
-    public APIRequestCreateMessengerLeadForM requestAllFields () {
+    public APIRequestCreateMessengerLeadForm requestAllFields () {
       return this.requestAllFields(true);
     }
 
-    public APIRequestCreateMessengerLeadForM requestAllFields (boolean value) {
+    public APIRequestCreateMessengerLeadForm requestAllFields (boolean value) {
       for (String field : FIELDS) {
         this.requestField(field, value);
       }
@@ -20910,12 +20910,12 @@ public class Page extends APINode {
     }
 
     @Override
-    public APIRequestCreateMessengerLeadForM requestFields (List<String> fields) {
+    public APIRequestCreateMessengerLeadForm requestFields (List<String> fields) {
       return this.requestFields(fields, true);
     }
 
     @Override
-    public APIRequestCreateMessengerLeadForM requestFields (List<String> fields, boolean value) {
+    public APIRequestCreateMessengerLeadForm requestFields (List<String> fields, boolean value) {
       for (String field : fields) {
         this.requestField(field, value);
       }
@@ -20923,13 +20923,13 @@ public class Page extends APINode {
     }
 
     @Override
-    public APIRequestCreateMessengerLeadForM requestField (String field) {
+    public APIRequestCreateMessengerLeadForm requestField (String field) {
       this.requestField(field, true);
       return this;
     }
 
     @Override
-    public APIRequestCreateMessengerLeadForM requestField (String field, boolean value) {
+    public APIRequestCreateMessengerLeadForm requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
@@ -26992,7 +26992,7 @@ public class Page extends APINode {
     }
   }
 
-  public static class APIRequestGetScheduleDPosts extends APIRequest<PagePost> {
+  public static class APIRequestGetScheduledPosts extends APIRequest<PagePost> {
 
     APINodeList<PagePost> lastResponse = null;
     @Override
@@ -27087,7 +27087,7 @@ public class Page extends APINode {
         new Function<ResponseWrapper, APINodeList<PagePost>>() {
            public APINodeList<PagePost> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetScheduleDPosts.this.parseResponse(result.getBody(), result.getHeader());
+               return APIRequestGetScheduledPosts.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -27097,28 +27097,28 @@ public class Page extends APINode {
       );
     };
 
-    public APIRequestGetScheduleDPosts(String nodeId, APIContext context) {
+    public APIRequestGetScheduledPosts(String nodeId, APIContext context) {
       super(context, nodeId, "/scheduled_posts", "GET", Arrays.asList(PARAMS));
     }
 
     @Override
-    public APIRequestGetScheduleDPosts setParam(String param, Object value) {
+    public APIRequestGetScheduledPosts setParam(String param, Object value) {
       setParamInternal(param, value);
       return this;
     }
 
     @Override
-    public APIRequestGetScheduleDPosts setParams(Map<String, Object> params) {
+    public APIRequestGetScheduledPosts setParams(Map<String, Object> params) {
       setParamsInternal(params);
       return this;
     }
 
 
-    public APIRequestGetScheduleDPosts requestAllFields () {
+    public APIRequestGetScheduledPosts requestAllFields () {
       return this.requestAllFields(true);
     }
 
-    public APIRequestGetScheduleDPosts requestAllFields (boolean value) {
+    public APIRequestGetScheduledPosts requestAllFields (boolean value) {
       for (String field : FIELDS) {
         this.requestField(field, value);
       }
@@ -27126,12 +27126,12 @@ public class Page extends APINode {
     }
 
     @Override
-    public APIRequestGetScheduleDPosts requestFields (List<String> fields) {
+    public APIRequestGetScheduledPosts requestFields (List<String> fields) {
       return this.requestFields(fields, true);
     }
 
     @Override
-    public APIRequestGetScheduleDPosts requestFields (List<String> fields, boolean value) {
+    public APIRequestGetScheduledPosts requestFields (List<String> fields, boolean value) {
       for (String field : fields) {
         this.requestField(field, value);
       }
@@ -27139,399 +27139,399 @@ public class Page extends APINode {
     }
 
     @Override
-    public APIRequestGetScheduleDPosts requestField (String field) {
+    public APIRequestGetScheduledPosts requestField (String field) {
       this.requestField(field, true);
       return this;
     }
 
     @Override
-    public APIRequestGetScheduleDPosts requestField (String field, boolean value) {
+    public APIRequestGetScheduledPosts requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
 
-    public APIRequestGetScheduleDPosts requestActionsField () {
+    public APIRequestGetScheduledPosts requestActionsField () {
       return this.requestActionsField(true);
     }
-    public APIRequestGetScheduleDPosts requestActionsField (boolean value) {
+    public APIRequestGetScheduledPosts requestActionsField (boolean value) {
       this.requestField("actions", value);
       return this;
     }
-    public APIRequestGetScheduleDPosts requestAdminCreatorField () {
+    public APIRequestGetScheduledPosts requestAdminCreatorField () {
       return this.requestAdminCreatorField(true);
     }
-    public APIRequestGetScheduleDPosts requestAdminCreatorField (boolean value) {
+    public APIRequestGetScheduledPosts requestAdminCreatorField (boolean value) {
       this.requestField("admin_creator", value);
       return this;
     }
-    public APIRequestGetScheduleDPosts requestAllowedAdvertisingObjectivesField () {
+    public APIRequestGetScheduledPosts requestAllowedAdvertisingObjectivesField () {
       return this.requestAllowedAdvertisingObjectivesField(true);
     }
-    public APIRequestGetScheduleDPosts requestAllowedAdvertisingObjectivesField (boolean value) {
+    public APIRequestGetScheduledPosts requestAllowedAdvertisingObjectivesField (boolean value) {
       this.requestField("allowed_advertising_objectives", value);
       return this;
     }
-    public APIRequestGetScheduleDPosts requestApplicationField () {
+    public APIRequestGetScheduledPosts requestApplicationField () {
       return this.requestApplicationField(true);
     }
-    public APIRequestGetScheduleDPosts requestApplicationField (boolean value) {
+    public APIRequestGetScheduledPosts requestApplicationField (boolean value) {
       this.requestField("application", value);
       return this;
     }
-    public APIRequestGetScheduleDPosts requestBackdatedTimeField () {
+    public APIRequestGetScheduledPosts requestBackdatedTimeField () {
       return this.requestBackdatedTimeField(true);
     }
-    public APIRequestGetScheduleDPosts requestBackdatedTimeField (boolean value) {
+    public APIRequestGetScheduledPosts requestBackdatedTimeField (boolean value) {
       this.requestField("backdated_time", value);
       return this;
     }
-    public APIRequestGetScheduleDPosts requestCallToActionField () {
+    public APIRequestGetScheduledPosts requestCallToActionField () {
       return this.requestCallToActionField(true);
     }
-    public APIRequestGetScheduleDPosts requestCallToActionField (boolean value) {
+    public APIRequestGetScheduledPosts requestCallToActionField (boolean value) {
       this.requestField("call_to_action", value);
       return this;
     }
-    public APIRequestGetScheduleDPosts requestCanReplyPrivatelyField () {
+    public APIRequestGetScheduledPosts requestCanReplyPrivatelyField () {
       return this.requestCanReplyPrivatelyField(true);
     }
-    public APIRequestGetScheduleDPosts requestCanReplyPrivatelyField (boolean value) {
+    public APIRequestGetScheduledPosts requestCanReplyPrivatelyField (boolean value) {
       this.requestField("can_reply_privately", value);
       return this;
     }
-    public APIRequestGetScheduleDPosts requestChildAttachmentsField () {
+    public APIRequestGetScheduledPosts requestChildAttachmentsField () {
       return this.requestChildAttachmentsField(true);
     }
-    public APIRequestGetScheduleDPosts requestChildAttachmentsField (boolean value) {
+    public APIRequestGetScheduledPosts requestChildAttachmentsField (boolean value) {
       this.requestField("child_attachments", value);
       return this;
     }
-    public APIRequestGetScheduleDPosts requestCommentsMirroringDomainField () {
+    public APIRequestGetScheduledPosts requestCommentsMirroringDomainField () {
       return this.requestCommentsMirroringDomainField(true);
     }
-    public APIRequestGetScheduleDPosts requestCommentsMirroringDomainField (boolean value) {
+    public APIRequestGetScheduledPosts requestCommentsMirroringDomainField (boolean value) {
       this.requestField("comments_mirroring_domain", value);
       return this;
     }
-    public APIRequestGetScheduleDPosts requestCoordinatesField () {
+    public APIRequestGetScheduledPosts requestCoordinatesField () {
       return this.requestCoordinatesField(true);
     }
-    public APIRequestGetScheduleDPosts requestCoordinatesField (boolean value) {
+    public APIRequestGetScheduledPosts requestCoordinatesField (boolean value) {
       this.requestField("coordinates", value);
       return this;
     }
-    public APIRequestGetScheduleDPosts requestCreatedTimeField () {
+    public APIRequestGetScheduledPosts requestCreatedTimeField () {
       return this.requestCreatedTimeField(true);
     }
-    public APIRequestGetScheduleDPosts requestCreatedTimeField (boolean value) {
+    public APIRequestGetScheduledPosts requestCreatedTimeField (boolean value) {
       this.requestField("created_time", value);
       return this;
     }
-    public APIRequestGetScheduleDPosts requestEventField () {
+    public APIRequestGetScheduledPosts requestEventField () {
       return this.requestEventField(true);
     }
-    public APIRequestGetScheduleDPosts requestEventField (boolean value) {
+    public APIRequestGetScheduledPosts requestEventField (boolean value) {
       this.requestField("event", value);
       return this;
     }
-    public APIRequestGetScheduleDPosts requestExpandedHeightField () {
+    public APIRequestGetScheduledPosts requestExpandedHeightField () {
       return this.requestExpandedHeightField(true);
     }
-    public APIRequestGetScheduleDPosts requestExpandedHeightField (boolean value) {
+    public APIRequestGetScheduledPosts requestExpandedHeightField (boolean value) {
       this.requestField("expanded_height", value);
       return this;
     }
-    public APIRequestGetScheduleDPosts requestExpandedWidthField () {
+    public APIRequestGetScheduledPosts requestExpandedWidthField () {
       return this.requestExpandedWidthField(true);
     }
-    public APIRequestGetScheduleDPosts requestExpandedWidthField (boolean value) {
+    public APIRequestGetScheduledPosts requestExpandedWidthField (boolean value) {
       this.requestField("expanded_width", value);
       return this;
     }
-    public APIRequestGetScheduleDPosts requestFeedTargetingField () {
+    public APIRequestGetScheduledPosts requestFeedTargetingField () {
       return this.requestFeedTargetingField(true);
     }
-    public APIRequestGetScheduleDPosts requestFeedTargetingField (boolean value) {
+    public APIRequestGetScheduledPosts requestFeedTargetingField (boolean value) {
       this.requestField("feed_targeting", value);
       return this;
     }
-    public APIRequestGetScheduleDPosts requestFromField () {
+    public APIRequestGetScheduledPosts requestFromField () {
       return this.requestFromField(true);
     }
-    public APIRequestGetScheduleDPosts requestFromField (boolean value) {
+    public APIRequestGetScheduledPosts requestFromField (boolean value) {
       this.requestField("from", value);
       return this;
     }
-    public APIRequestGetScheduleDPosts requestFullPictureField () {
+    public APIRequestGetScheduledPosts requestFullPictureField () {
       return this.requestFullPictureField(true);
     }
-    public APIRequestGetScheduleDPosts requestFullPictureField (boolean value) {
+    public APIRequestGetScheduledPosts requestFullPictureField (boolean value) {
       this.requestField("full_picture", value);
       return this;
     }
-    public APIRequestGetScheduleDPosts requestHeightField () {
+    public APIRequestGetScheduledPosts requestHeightField () {
       return this.requestHeightField(true);
     }
-    public APIRequestGetScheduleDPosts requestHeightField (boolean value) {
+    public APIRequestGetScheduledPosts requestHeightField (boolean value) {
       this.requestField("height", value);
       return this;
     }
-    public APIRequestGetScheduleDPosts requestIconField () {
+    public APIRequestGetScheduledPosts requestIconField () {
       return this.requestIconField(true);
     }
-    public APIRequestGetScheduleDPosts requestIconField (boolean value) {
+    public APIRequestGetScheduledPosts requestIconField (boolean value) {
       this.requestField("icon", value);
       return this;
     }
-    public APIRequestGetScheduleDPosts requestIdField () {
+    public APIRequestGetScheduledPosts requestIdField () {
       return this.requestIdField(true);
     }
-    public APIRequestGetScheduleDPosts requestIdField (boolean value) {
+    public APIRequestGetScheduledPosts requestIdField (boolean value) {
       this.requestField("id", value);
       return this;
     }
-    public APIRequestGetScheduleDPosts requestInstagramEligibilityField () {
+    public APIRequestGetScheduledPosts requestInstagramEligibilityField () {
       return this.requestInstagramEligibilityField(true);
     }
-    public APIRequestGetScheduleDPosts requestInstagramEligibilityField (boolean value) {
+    public APIRequestGetScheduledPosts requestInstagramEligibilityField (boolean value) {
       this.requestField("instagram_eligibility", value);
       return this;
     }
-    public APIRequestGetScheduleDPosts requestIsAppShareField () {
+    public APIRequestGetScheduledPosts requestIsAppShareField () {
       return this.requestIsAppShareField(true);
     }
-    public APIRequestGetScheduleDPosts requestIsAppShareField (boolean value) {
+    public APIRequestGetScheduledPosts requestIsAppShareField (boolean value) {
       this.requestField("is_app_share", value);
       return this;
     }
-    public APIRequestGetScheduleDPosts requestIsEligibleForPromotionField () {
+    public APIRequestGetScheduledPosts requestIsEligibleForPromotionField () {
       return this.requestIsEligibleForPromotionField(true);
     }
-    public APIRequestGetScheduleDPosts requestIsEligibleForPromotionField (boolean value) {
+    public APIRequestGetScheduledPosts requestIsEligibleForPromotionField (boolean value) {
       this.requestField("is_eligible_for_promotion", value);
       return this;
     }
-    public APIRequestGetScheduleDPosts requestIsExpiredField () {
+    public APIRequestGetScheduledPosts requestIsExpiredField () {
       return this.requestIsExpiredField(true);
     }
-    public APIRequestGetScheduleDPosts requestIsExpiredField (boolean value) {
+    public APIRequestGetScheduledPosts requestIsExpiredField (boolean value) {
       this.requestField("is_expired", value);
       return this;
     }
-    public APIRequestGetScheduleDPosts requestIsHiddenField () {
+    public APIRequestGetScheduledPosts requestIsHiddenField () {
       return this.requestIsHiddenField(true);
     }
-    public APIRequestGetScheduleDPosts requestIsHiddenField (boolean value) {
+    public APIRequestGetScheduledPosts requestIsHiddenField (boolean value) {
       this.requestField("is_hidden", value);
       return this;
     }
-    public APIRequestGetScheduleDPosts requestIsInlineCreatedField () {
+    public APIRequestGetScheduledPosts requestIsInlineCreatedField () {
       return this.requestIsInlineCreatedField(true);
     }
-    public APIRequestGetScheduleDPosts requestIsInlineCreatedField (boolean value) {
+    public APIRequestGetScheduledPosts requestIsInlineCreatedField (boolean value) {
       this.requestField("is_inline_created", value);
       return this;
     }
-    public APIRequestGetScheduleDPosts requestIsInstagramEligibleField () {
+    public APIRequestGetScheduledPosts requestIsInstagramEligibleField () {
       return this.requestIsInstagramEligibleField(true);
     }
-    public APIRequestGetScheduleDPosts requestIsInstagramEligibleField (boolean value) {
+    public APIRequestGetScheduledPosts requestIsInstagramEligibleField (boolean value) {
       this.requestField("is_instagram_eligible", value);
       return this;
     }
-    public APIRequestGetScheduleDPosts requestIsPopularField () {
+    public APIRequestGetScheduledPosts requestIsPopularField () {
       return this.requestIsPopularField(true);
     }
-    public APIRequestGetScheduleDPosts requestIsPopularField (boolean value) {
+    public APIRequestGetScheduledPosts requestIsPopularField (boolean value) {
       this.requestField("is_popular", value);
       return this;
     }
-    public APIRequestGetScheduleDPosts requestIsPublishedField () {
+    public APIRequestGetScheduledPosts requestIsPublishedField () {
       return this.requestIsPublishedField(true);
     }
-    public APIRequestGetScheduleDPosts requestIsPublishedField (boolean value) {
+    public APIRequestGetScheduledPosts requestIsPublishedField (boolean value) {
       this.requestField("is_published", value);
       return this;
     }
-    public APIRequestGetScheduleDPosts requestIsSphericalField () {
+    public APIRequestGetScheduledPosts requestIsSphericalField () {
       return this.requestIsSphericalField(true);
     }
-    public APIRequestGetScheduleDPosts requestIsSphericalField (boolean value) {
+    public APIRequestGetScheduledPosts requestIsSphericalField (boolean value) {
       this.requestField("is_spherical", value);
       return this;
     }
-    public APIRequestGetScheduleDPosts requestMessageField () {
+    public APIRequestGetScheduledPosts requestMessageField () {
       return this.requestMessageField(true);
     }
-    public APIRequestGetScheduleDPosts requestMessageField (boolean value) {
+    public APIRequestGetScheduledPosts requestMessageField (boolean value) {
       this.requestField("message", value);
       return this;
     }
-    public APIRequestGetScheduleDPosts requestMessageTagsField () {
+    public APIRequestGetScheduledPosts requestMessageTagsField () {
       return this.requestMessageTagsField(true);
     }
-    public APIRequestGetScheduleDPosts requestMessageTagsField (boolean value) {
+    public APIRequestGetScheduledPosts requestMessageTagsField (boolean value) {
       this.requestField("message_tags", value);
       return this;
     }
-    public APIRequestGetScheduleDPosts requestMultiShareEndCardField () {
+    public APIRequestGetScheduledPosts requestMultiShareEndCardField () {
       return this.requestMultiShareEndCardField(true);
     }
-    public APIRequestGetScheduleDPosts requestMultiShareEndCardField (boolean value) {
+    public APIRequestGetScheduledPosts requestMultiShareEndCardField (boolean value) {
       this.requestField("multi_share_end_card", value);
       return this;
     }
-    public APIRequestGetScheduleDPosts requestMultiShareOptimizedField () {
+    public APIRequestGetScheduledPosts requestMultiShareOptimizedField () {
       return this.requestMultiShareOptimizedField(true);
     }
-    public APIRequestGetScheduleDPosts requestMultiShareOptimizedField (boolean value) {
+    public APIRequestGetScheduledPosts requestMultiShareOptimizedField (boolean value) {
       this.requestField("multi_share_optimized", value);
       return this;
     }
-    public APIRequestGetScheduleDPosts requestParentIdField () {
+    public APIRequestGetScheduledPosts requestParentIdField () {
       return this.requestParentIdField(true);
     }
-    public APIRequestGetScheduleDPosts requestParentIdField (boolean value) {
+    public APIRequestGetScheduledPosts requestParentIdField (boolean value) {
       this.requestField("parent_id", value);
       return this;
     }
-    public APIRequestGetScheduleDPosts requestPermalinkUrlField () {
+    public APIRequestGetScheduledPosts requestPermalinkUrlField () {
       return this.requestPermalinkUrlField(true);
     }
-    public APIRequestGetScheduleDPosts requestPermalinkUrlField (boolean value) {
+    public APIRequestGetScheduledPosts requestPermalinkUrlField (boolean value) {
       this.requestField("permalink_url", value);
       return this;
     }
-    public APIRequestGetScheduleDPosts requestPictureField () {
+    public APIRequestGetScheduledPosts requestPictureField () {
       return this.requestPictureField(true);
     }
-    public APIRequestGetScheduleDPosts requestPictureField (boolean value) {
+    public APIRequestGetScheduledPosts requestPictureField (boolean value) {
       this.requestField("picture", value);
       return this;
     }
-    public APIRequestGetScheduleDPosts requestPlaceField () {
+    public APIRequestGetScheduledPosts requestPlaceField () {
       return this.requestPlaceField(true);
     }
-    public APIRequestGetScheduleDPosts requestPlaceField (boolean value) {
+    public APIRequestGetScheduledPosts requestPlaceField (boolean value) {
       this.requestField("place", value);
       return this;
     }
-    public APIRequestGetScheduleDPosts requestPrivacyField () {
+    public APIRequestGetScheduledPosts requestPrivacyField () {
       return this.requestPrivacyField(true);
     }
-    public APIRequestGetScheduleDPosts requestPrivacyField (boolean value) {
+    public APIRequestGetScheduledPosts requestPrivacyField (boolean value) {
       this.requestField("privacy", value);
       return this;
     }
-    public APIRequestGetScheduleDPosts requestPromotableIdField () {
+    public APIRequestGetScheduledPosts requestPromotableIdField () {
       return this.requestPromotableIdField(true);
     }
-    public APIRequestGetScheduleDPosts requestPromotableIdField (boolean value) {
+    public APIRequestGetScheduledPosts requestPromotableIdField (boolean value) {
       this.requestField("promotable_id", value);
       return this;
     }
-    public APIRequestGetScheduleDPosts requestPromotionStatusField () {
+    public APIRequestGetScheduledPosts requestPromotionStatusField () {
       return this.requestPromotionStatusField(true);
     }
-    public APIRequestGetScheduleDPosts requestPromotionStatusField (boolean value) {
+    public APIRequestGetScheduledPosts requestPromotionStatusField (boolean value) {
       this.requestField("promotion_status", value);
       return this;
     }
-    public APIRequestGetScheduleDPosts requestPropertiesField () {
+    public APIRequestGetScheduledPosts requestPropertiesField () {
       return this.requestPropertiesField(true);
     }
-    public APIRequestGetScheduleDPosts requestPropertiesField (boolean value) {
+    public APIRequestGetScheduledPosts requestPropertiesField (boolean value) {
       this.requestField("properties", value);
       return this;
     }
-    public APIRequestGetScheduleDPosts requestScheduledPublishTimeField () {
+    public APIRequestGetScheduledPosts requestScheduledPublishTimeField () {
       return this.requestScheduledPublishTimeField(true);
     }
-    public APIRequestGetScheduleDPosts requestScheduledPublishTimeField (boolean value) {
+    public APIRequestGetScheduledPosts requestScheduledPublishTimeField (boolean value) {
       this.requestField("scheduled_publish_time", value);
       return this;
     }
-    public APIRequestGetScheduleDPosts requestSharesField () {
+    public APIRequestGetScheduledPosts requestSharesField () {
       return this.requestSharesField(true);
     }
-    public APIRequestGetScheduleDPosts requestSharesField (boolean value) {
+    public APIRequestGetScheduledPosts requestSharesField (boolean value) {
       this.requestField("shares", value);
       return this;
     }
-    public APIRequestGetScheduleDPosts requestStatusTypeField () {
+    public APIRequestGetScheduledPosts requestStatusTypeField () {
       return this.requestStatusTypeField(true);
     }
-    public APIRequestGetScheduleDPosts requestStatusTypeField (boolean value) {
+    public APIRequestGetScheduledPosts requestStatusTypeField (boolean value) {
       this.requestField("status_type", value);
       return this;
     }
-    public APIRequestGetScheduleDPosts requestStoryField () {
+    public APIRequestGetScheduledPosts requestStoryField () {
       return this.requestStoryField(true);
     }
-    public APIRequestGetScheduleDPosts requestStoryField (boolean value) {
+    public APIRequestGetScheduledPosts requestStoryField (boolean value) {
       this.requestField("story", value);
       return this;
     }
-    public APIRequestGetScheduleDPosts requestStoryTagsField () {
+    public APIRequestGetScheduledPosts requestStoryTagsField () {
       return this.requestStoryTagsField(true);
     }
-    public APIRequestGetScheduleDPosts requestStoryTagsField (boolean value) {
+    public APIRequestGetScheduledPosts requestStoryTagsField (boolean value) {
       this.requestField("story_tags", value);
       return this;
     }
-    public APIRequestGetScheduleDPosts requestSubscribedField () {
+    public APIRequestGetScheduledPosts requestSubscribedField () {
       return this.requestSubscribedField(true);
     }
-    public APIRequestGetScheduleDPosts requestSubscribedField (boolean value) {
+    public APIRequestGetScheduledPosts requestSubscribedField (boolean value) {
       this.requestField("subscribed", value);
       return this;
     }
-    public APIRequestGetScheduleDPosts requestTargetField () {
+    public APIRequestGetScheduledPosts requestTargetField () {
       return this.requestTargetField(true);
     }
-    public APIRequestGetScheduleDPosts requestTargetField (boolean value) {
+    public APIRequestGetScheduledPosts requestTargetField (boolean value) {
       this.requestField("target", value);
       return this;
     }
-    public APIRequestGetScheduleDPosts requestTargetingField () {
+    public APIRequestGetScheduledPosts requestTargetingField () {
       return this.requestTargetingField(true);
     }
-    public APIRequestGetScheduleDPosts requestTargetingField (boolean value) {
+    public APIRequestGetScheduledPosts requestTargetingField (boolean value) {
       this.requestField("targeting", value);
       return this;
     }
-    public APIRequestGetScheduleDPosts requestTimelineVisibilityField () {
+    public APIRequestGetScheduledPosts requestTimelineVisibilityField () {
       return this.requestTimelineVisibilityField(true);
     }
-    public APIRequestGetScheduleDPosts requestTimelineVisibilityField (boolean value) {
+    public APIRequestGetScheduledPosts requestTimelineVisibilityField (boolean value) {
       this.requestField("timeline_visibility", value);
       return this;
     }
-    public APIRequestGetScheduleDPosts requestUpdatedTimeField () {
+    public APIRequestGetScheduledPosts requestUpdatedTimeField () {
       return this.requestUpdatedTimeField(true);
     }
-    public APIRequestGetScheduleDPosts requestUpdatedTimeField (boolean value) {
+    public APIRequestGetScheduledPosts requestUpdatedTimeField (boolean value) {
       this.requestField("updated_time", value);
       return this;
     }
-    public APIRequestGetScheduleDPosts requestViaField () {
+    public APIRequestGetScheduledPosts requestViaField () {
       return this.requestViaField(true);
     }
-    public APIRequestGetScheduleDPosts requestViaField (boolean value) {
+    public APIRequestGetScheduledPosts requestViaField (boolean value) {
       this.requestField("via", value);
       return this;
     }
-    public APIRequestGetScheduleDPosts requestVideoBuyingEligibilityField () {
+    public APIRequestGetScheduledPosts requestVideoBuyingEligibilityField () {
       return this.requestVideoBuyingEligibilityField(true);
     }
-    public APIRequestGetScheduleDPosts requestVideoBuyingEligibilityField (boolean value) {
+    public APIRequestGetScheduledPosts requestVideoBuyingEligibilityField (boolean value) {
       this.requestField("video_buying_eligibility", value);
       return this;
     }
-    public APIRequestGetScheduleDPosts requestWidthField () {
+    public APIRequestGetScheduledPosts requestWidthField () {
       return this.requestWidthField(true);
     }
-    public APIRequestGetScheduleDPosts requestWidthField (boolean value) {
+    public APIRequestGetScheduledPosts requestWidthField (boolean value) {
       this.requestField("width", value);
       return this;
     }

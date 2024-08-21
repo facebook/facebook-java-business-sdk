@@ -54,11 +54,11 @@ public class P2MInvoicePayments extends APINode {
     return null;
   }
   public static P2MInvoicePayments loadJSON(String json, APIContext context, String header) {
-    P2MInvoicePayments p2MInvoicePayments = getGson().fromJson(json, P2MInvoicePayments.class);
+    P2MInvoicePayments p2mInvoicePayments = getGson().fromJson(json, P2MInvoicePayments.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(p2MInvoicePayments.toString());
+      JsonElement o2 = parser.parse(p2mInvoicePayments.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -68,14 +68,14 @@ public class P2MInvoicePayments extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    p2MInvoicePayments.context = context;
-    p2MInvoicePayments.rawValue = json;
-    p2MInvoicePayments.header = header;
-    return p2MInvoicePayments;
+    p2mInvoicePayments.context = context;
+    p2mInvoicePayments.rawValue = json;
+    p2mInvoicePayments.header = header;
+    return p2mInvoicePayments;
   }
 
   public static APINodeList<P2MInvoicePayments> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<P2MInvoicePayments> p2MInvoicePaymentss = new APINodeList<P2MInvoicePayments>(request, json, header);
+    APINodeList<P2MInvoicePayments> p2mInvoicePaymentss = new APINodeList<P2MInvoicePayments>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -86,9 +86,9 @@ public class P2MInvoicePayments extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          p2MInvoicePaymentss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          p2mInvoicePaymentss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return p2MInvoicePaymentss;
+        return p2mInvoicePaymentss;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -98,20 +98,20 @@ public class P2MInvoicePayments extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                p2MInvoicePaymentss.setCursors(before, after);
+                p2mInvoicePaymentss.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            p2MInvoicePaymentss.setPaging(previous, next);
+            p2mInvoicePaymentss.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              p2MInvoicePaymentss.setAppSecret(context.getAppSecretProof());
+              p2mInvoicePaymentss.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              p2MInvoicePaymentss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              p2mInvoicePaymentss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -122,23 +122,23 @@ public class P2MInvoicePayments extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  p2MInvoicePaymentss.add(loadJSON(entry.getValue().toString(), context, header));
+                  p2mInvoicePaymentss.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              p2MInvoicePaymentss.add(loadJSON(obj.toString(), context, header));
+              p2mInvoicePaymentss.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return p2MInvoicePaymentss;
+          return p2mInvoicePaymentss;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              p2MInvoicePaymentss.add(loadJSON(entry.getValue().toString(), context, header));
+              p2mInvoicePaymentss.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return p2MInvoicePaymentss;
+          return p2mInvoicePaymentss;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -155,20 +155,20 @@ public class P2MInvoicePayments extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              p2MInvoicePaymentss.add(loadJSON(value.toString(), context, header));
+              p2mInvoicePaymentss.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return p2MInvoicePaymentss;
+            return p2mInvoicePaymentss;
           }
 
           // Sixth, check if it's pure JsonObject
-          p2MInvoicePaymentss.clear();
-          p2MInvoicePaymentss.add(loadJSON(json, context, header));
-          return p2MInvoicePaymentss;
+          p2mInvoicePaymentss.clear();
+          p2mInvoicePaymentss.add(loadJSON(json, context, header));
+          return p2mInvoicePaymentss;
         }
       }
     } catch (Exception e) {

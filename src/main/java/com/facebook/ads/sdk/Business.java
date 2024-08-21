@@ -514,24 +514,24 @@ public class Business extends APINode {
     return new APIRequestGetInstagramBusinessAccounts(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestDeleteMAnAgeDBusinesses deleteMAnAgeDBusinesses() {
-    return new APIRequestDeleteMAnAgeDBusinesses(this.getPrefixedId().toString(), context);
+  public APIRequestDeleteManagedBusinesses deleteManagedBusinesses() {
+    return new APIRequestDeleteManagedBusinesses(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestCreateMAnAgeDBusiness createMAnAgeDBusiness() {
-    return new APIRequestCreateMAnAgeDBusiness(this.getPrefixedId().toString(), context);
+  public APIRequestCreateManagedBusiness createManagedBusiness() {
+    return new APIRequestCreateManagedBusiness(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestCreateMAnAgeDPartnerBusinessSetup createMAnAgeDPartnerBusinessSetup() {
-    return new APIRequestCreateMAnAgeDPartnerBusinessSetup(this.getPrefixedId().toString(), context);
+  public APIRequestCreateManagedPartnerBusinessSetup createManagedPartnerBusinessSetup() {
+    return new APIRequestCreateManagedPartnerBusinessSetup(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestDeleteMAnAgeDPartnerBusinesses deleteMAnAgeDPartnerBusinesses() {
-    return new APIRequestDeleteMAnAgeDPartnerBusinesses(this.getPrefixedId().toString(), context);
+  public APIRequestDeleteManagedPartnerBusinesses deleteManagedPartnerBusinesses() {
+    return new APIRequestDeleteManagedPartnerBusinesses(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestCreateMAnAgeDPartnerBusiness createMAnAgeDPartnerBusiness() {
-    return new APIRequestCreateMAnAgeDPartnerBusiness(this.getPrefixedId().toString(), context);
+  public APIRequestCreateManagedPartnerBusiness createManagedPartnerBusiness() {
+    return new APIRequestCreateManagedPartnerBusiness(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetNegativeKeywordLists getNegativeKeywordLists() {
@@ -638,8 +638,8 @@ public class Business extends APINode {
     return new APIRequestGetPendingOwnedPages(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestGetPendingShareDOffsiteSignalContainerBusinessObjects getPendingShareDOffsiteSignalContainerBusinessObjects() {
-    return new APIRequestGetPendingShareDOffsiteSignalContainerBusinessObjects(this.getPrefixedId().toString(), context);
+  public APIRequestGetPendingSharedOffsiteSignalContainerBusinessObjects getPendingSharedOffsiteSignalContainerBusinessObjects() {
+    return new APIRequestGetPendingSharedOffsiteSignalContainerBusinessObjects(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetPendingUsers getPendingUsers() {
@@ -670,8 +670,8 @@ public class Business extends APINode {
     return new APIRequestGetSelfCertifiedWhatsappBusinessSubmissions(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestCreateSetupMAnAgeDPartnerAdAccount createSetupMAnAgeDPartnerAdAccount() {
-    return new APIRequestCreateSetupMAnAgeDPartnerAdAccount(this.getPrefixedId().toString(), context);
+  public APIRequestCreateSetupManagedPartnerAdAccount createSetupManagedPartnerAdAccount() {
+    return new APIRequestCreateSetupManagedPartnerAdAccount(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestDeleteSharePreVerifiedNumbers deleteSharePreVerifiedNumbers() {
@@ -13253,7 +13253,7 @@ public class Business extends APINode {
     }
   }
 
-  public static class APIRequestDeleteMAnAgeDBusinesses extends APIRequest<APINode> {
+  public static class APIRequestDeleteManagedBusinesses extends APIRequest<APINode> {
 
     APINodeList<APINode> lastResponse = null;
     @Override
@@ -13294,7 +13294,7 @@ public class Business extends APINode {
         new Function<ResponseWrapper, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(ResponseWrapper result) {
              try {
-               return APIRequestDeleteMAnAgeDBusinesses.this.parseResponse(result.getBody(), result.getHeader());
+               return APIRequestDeleteManagedBusinesses.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -13304,33 +13304,33 @@ public class Business extends APINode {
       );
     };
 
-    public APIRequestDeleteMAnAgeDBusinesses(String nodeId, APIContext context) {
+    public APIRequestDeleteManagedBusinesses(String nodeId, APIContext context) {
       super(context, nodeId, "/managed_businesses", "DELETE", Arrays.asList(PARAMS));
     }
 
     @Override
-    public APIRequestDeleteMAnAgeDBusinesses setParam(String param, Object value) {
+    public APIRequestDeleteManagedBusinesses setParam(String param, Object value) {
       setParamInternal(param, value);
       return this;
     }
 
     @Override
-    public APIRequestDeleteMAnAgeDBusinesses setParams(Map<String, Object> params) {
+    public APIRequestDeleteManagedBusinesses setParams(Map<String, Object> params) {
       setParamsInternal(params);
       return this;
     }
 
 
-    public APIRequestDeleteMAnAgeDBusinesses setExistingClientBusinessId (String existingClientBusinessId) {
+    public APIRequestDeleteManagedBusinesses setExistingClientBusinessId (String existingClientBusinessId) {
       this.setParam("existing_client_business_id", existingClientBusinessId);
       return this;
     }
 
-    public APIRequestDeleteMAnAgeDBusinesses requestAllFields () {
+    public APIRequestDeleteManagedBusinesses requestAllFields () {
       return this.requestAllFields(true);
     }
 
-    public APIRequestDeleteMAnAgeDBusinesses requestAllFields (boolean value) {
+    public APIRequestDeleteManagedBusinesses requestAllFields (boolean value) {
       for (String field : FIELDS) {
         this.requestField(field, value);
       }
@@ -13338,12 +13338,12 @@ public class Business extends APINode {
     }
 
     @Override
-    public APIRequestDeleteMAnAgeDBusinesses requestFields (List<String> fields) {
+    public APIRequestDeleteManagedBusinesses requestFields (List<String> fields) {
       return this.requestFields(fields, true);
     }
 
     @Override
-    public APIRequestDeleteMAnAgeDBusinesses requestFields (List<String> fields, boolean value) {
+    public APIRequestDeleteManagedBusinesses requestFields (List<String> fields, boolean value) {
       for (String field : fields) {
         this.requestField(field, value);
       }
@@ -13351,20 +13351,20 @@ public class Business extends APINode {
     }
 
     @Override
-    public APIRequestDeleteMAnAgeDBusinesses requestField (String field) {
+    public APIRequestDeleteManagedBusinesses requestField (String field) {
       this.requestField(field, true);
       return this;
     }
 
     @Override
-    public APIRequestDeleteMAnAgeDBusinesses requestField (String field, boolean value) {
+    public APIRequestDeleteManagedBusinesses requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
 
   }
 
-  public static class APIRequestCreateMAnAgeDBusiness extends APIRequest<Business> {
+  public static class APIRequestCreateManagedBusiness extends APIRequest<Business> {
 
     Business lastResponse = null;
     @Override
@@ -13413,7 +13413,7 @@ public class Business extends APINode {
         new Function<ResponseWrapper, Business>() {
            public Business apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateMAnAgeDBusiness.this.parseResponse(result.getBody(), result.getHeader());
+               return APIRequestCreateManagedBusiness.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -13423,93 +13423,93 @@ public class Business extends APINode {
       );
     };
 
-    public APIRequestCreateMAnAgeDBusiness(String nodeId, APIContext context) {
+    public APIRequestCreateManagedBusiness(String nodeId, APIContext context) {
       super(context, nodeId, "/managed_businesses", "POST", Arrays.asList(PARAMS));
     }
 
     @Override
-    public APIRequestCreateMAnAgeDBusiness setParam(String param, Object value) {
+    public APIRequestCreateManagedBusiness setParam(String param, Object value) {
       setParamInternal(param, value);
       return this;
     }
 
     @Override
-    public APIRequestCreateMAnAgeDBusiness setParams(Map<String, Object> params) {
+    public APIRequestCreateManagedBusiness setParams(Map<String, Object> params) {
       setParamsInternal(params);
       return this;
     }
 
 
-    public APIRequestCreateMAnAgeDBusiness setChildBusinessExternalId (String childBusinessExternalId) {
+    public APIRequestCreateManagedBusiness setChildBusinessExternalId (String childBusinessExternalId) {
       this.setParam("child_business_external_id", childBusinessExternalId);
       return this;
     }
 
-    public APIRequestCreateMAnAgeDBusiness setExistingClientBusinessId (String existingClientBusinessId) {
+    public APIRequestCreateManagedBusiness setExistingClientBusinessId (String existingClientBusinessId) {
       this.setParam("existing_client_business_id", existingClientBusinessId);
       return this;
     }
 
-    public APIRequestCreateMAnAgeDBusiness setName (String name) {
+    public APIRequestCreateManagedBusiness setName (String name) {
       this.setParam("name", name);
       return this;
     }
 
-    public APIRequestCreateMAnAgeDBusiness setSalesRepEmail (String salesRepEmail) {
+    public APIRequestCreateManagedBusiness setSalesRepEmail (String salesRepEmail) {
       this.setParam("sales_rep_email", salesRepEmail);
       return this;
     }
 
-    public APIRequestCreateMAnAgeDBusiness setSurveyBusinessType (Business.EnumSurveyBusinessType surveyBusinessType) {
+    public APIRequestCreateManagedBusiness setSurveyBusinessType (Business.EnumSurveyBusinessType surveyBusinessType) {
       this.setParam("survey_business_type", surveyBusinessType);
       return this;
     }
-    public APIRequestCreateMAnAgeDBusiness setSurveyBusinessType (String surveyBusinessType) {
+    public APIRequestCreateManagedBusiness setSurveyBusinessType (String surveyBusinessType) {
       this.setParam("survey_business_type", surveyBusinessType);
       return this;
     }
 
-    public APIRequestCreateMAnAgeDBusiness setSurveyNumAssets (Long surveyNumAssets) {
+    public APIRequestCreateManagedBusiness setSurveyNumAssets (Long surveyNumAssets) {
       this.setParam("survey_num_assets", surveyNumAssets);
       return this;
     }
-    public APIRequestCreateMAnAgeDBusiness setSurveyNumAssets (String surveyNumAssets) {
+    public APIRequestCreateManagedBusiness setSurveyNumAssets (String surveyNumAssets) {
       this.setParam("survey_num_assets", surveyNumAssets);
       return this;
     }
 
-    public APIRequestCreateMAnAgeDBusiness setSurveyNumPeople (Long surveyNumPeople) {
+    public APIRequestCreateManagedBusiness setSurveyNumPeople (Long surveyNumPeople) {
       this.setParam("survey_num_people", surveyNumPeople);
       return this;
     }
-    public APIRequestCreateMAnAgeDBusiness setSurveyNumPeople (String surveyNumPeople) {
+    public APIRequestCreateManagedBusiness setSurveyNumPeople (String surveyNumPeople) {
       this.setParam("survey_num_people", surveyNumPeople);
       return this;
     }
 
-    public APIRequestCreateMAnAgeDBusiness setTimezoneId (Business.EnumTimezoneId timezoneId) {
+    public APIRequestCreateManagedBusiness setTimezoneId (Business.EnumTimezoneId timezoneId) {
       this.setParam("timezone_id", timezoneId);
       return this;
     }
-    public APIRequestCreateMAnAgeDBusiness setTimezoneId (String timezoneId) {
+    public APIRequestCreateManagedBusiness setTimezoneId (String timezoneId) {
       this.setParam("timezone_id", timezoneId);
       return this;
     }
 
-    public APIRequestCreateMAnAgeDBusiness setVertical (Business.EnumVertical vertical) {
+    public APIRequestCreateManagedBusiness setVertical (Business.EnumVertical vertical) {
       this.setParam("vertical", vertical);
       return this;
     }
-    public APIRequestCreateMAnAgeDBusiness setVertical (String vertical) {
+    public APIRequestCreateManagedBusiness setVertical (String vertical) {
       this.setParam("vertical", vertical);
       return this;
     }
 
-    public APIRequestCreateMAnAgeDBusiness requestAllFields () {
+    public APIRequestCreateManagedBusiness requestAllFields () {
       return this.requestAllFields(true);
     }
 
-    public APIRequestCreateMAnAgeDBusiness requestAllFields (boolean value) {
+    public APIRequestCreateManagedBusiness requestAllFields (boolean value) {
       for (String field : FIELDS) {
         this.requestField(field, value);
       }
@@ -13517,12 +13517,12 @@ public class Business extends APINode {
     }
 
     @Override
-    public APIRequestCreateMAnAgeDBusiness requestFields (List<String> fields) {
+    public APIRequestCreateManagedBusiness requestFields (List<String> fields) {
       return this.requestFields(fields, true);
     }
 
     @Override
-    public APIRequestCreateMAnAgeDBusiness requestFields (List<String> fields, boolean value) {
+    public APIRequestCreateManagedBusiness requestFields (List<String> fields, boolean value) {
       for (String field : fields) {
         this.requestField(field, value);
       }
@@ -13530,20 +13530,20 @@ public class Business extends APINode {
     }
 
     @Override
-    public APIRequestCreateMAnAgeDBusiness requestField (String field) {
+    public APIRequestCreateManagedBusiness requestField (String field) {
       this.requestField(field, true);
       return this;
     }
 
     @Override
-    public APIRequestCreateMAnAgeDBusiness requestField (String field, boolean value) {
+    public APIRequestCreateManagedBusiness requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
 
   }
 
-  public static class APIRequestCreateMAnAgeDPartnerBusinessSetup extends APIRequest<Business> {
+  public static class APIRequestCreateManagedPartnerBusinessSetup extends APIRequest<Business> {
 
     Business lastResponse = null;
     @Override
@@ -13590,7 +13590,7 @@ public class Business extends APINode {
         new Function<ResponseWrapper, Business>() {
            public Business apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateMAnAgeDPartnerBusinessSetup.this.parseResponse(result.getBody(), result.getHeader());
+               return APIRequestCreateManagedPartnerBusinessSetup.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -13600,75 +13600,75 @@ public class Business extends APINode {
       );
     };
 
-    public APIRequestCreateMAnAgeDPartnerBusinessSetup(String nodeId, APIContext context) {
+    public APIRequestCreateManagedPartnerBusinessSetup(String nodeId, APIContext context) {
       super(context, nodeId, "/managed_partner_business_setup", "POST", Arrays.asList(PARAMS));
     }
 
     @Override
-    public APIRequestCreateMAnAgeDPartnerBusinessSetup setParam(String param, Object value) {
+    public APIRequestCreateManagedPartnerBusinessSetup setParam(String param, Object value) {
       setParamInternal(param, value);
       return this;
     }
 
     @Override
-    public APIRequestCreateMAnAgeDPartnerBusinessSetup setParams(Map<String, Object> params) {
+    public APIRequestCreateManagedPartnerBusinessSetup setParams(Map<String, Object> params) {
       setParamsInternal(params);
       return this;
     }
 
 
-    public APIRequestCreateMAnAgeDPartnerBusinessSetup setActiveAdAccountId (String activeAdAccountId) {
+    public APIRequestCreateManagedPartnerBusinessSetup setActiveAdAccountId (String activeAdAccountId) {
       this.setParam("active_ad_account_id", activeAdAccountId);
       return this;
     }
 
-    public APIRequestCreateMAnAgeDPartnerBusinessSetup setActivePageId (Long activePageId) {
+    public APIRequestCreateManagedPartnerBusinessSetup setActivePageId (Long activePageId) {
       this.setParam("active_page_id", activePageId);
       return this;
     }
-    public APIRequestCreateMAnAgeDPartnerBusinessSetup setActivePageId (String activePageId) {
+    public APIRequestCreateManagedPartnerBusinessSetup setActivePageId (String activePageId) {
       this.setParam("active_page_id", activePageId);
       return this;
     }
 
-    public APIRequestCreateMAnAgeDPartnerBusinessSetup setPartnerFacebookPageUrl (String partnerFacebookPageUrl) {
+    public APIRequestCreateManagedPartnerBusinessSetup setPartnerFacebookPageUrl (String partnerFacebookPageUrl) {
       this.setParam("partner_facebook_page_url", partnerFacebookPageUrl);
       return this;
     }
 
-    public APIRequestCreateMAnAgeDPartnerBusinessSetup setPartnerRegistrationCountries (List<String> partnerRegistrationCountries) {
+    public APIRequestCreateManagedPartnerBusinessSetup setPartnerRegistrationCountries (List<String> partnerRegistrationCountries) {
       this.setParam("partner_registration_countries", partnerRegistrationCountries);
       return this;
     }
-    public APIRequestCreateMAnAgeDPartnerBusinessSetup setPartnerRegistrationCountries (String partnerRegistrationCountries) {
+    public APIRequestCreateManagedPartnerBusinessSetup setPartnerRegistrationCountries (String partnerRegistrationCountries) {
       this.setParam("partner_registration_countries", partnerRegistrationCountries);
       return this;
     }
 
-    public APIRequestCreateMAnAgeDPartnerBusinessSetup setSellerEmailAddress (String sellerEmailAddress) {
+    public APIRequestCreateManagedPartnerBusinessSetup setSellerEmailAddress (String sellerEmailAddress) {
       this.setParam("seller_email_address", sellerEmailAddress);
       return this;
     }
 
-    public APIRequestCreateMAnAgeDPartnerBusinessSetup setSellerExternalWebsiteUrl (String sellerExternalWebsiteUrl) {
+    public APIRequestCreateManagedPartnerBusinessSetup setSellerExternalWebsiteUrl (String sellerExternalWebsiteUrl) {
       this.setParam("seller_external_website_url", sellerExternalWebsiteUrl);
       return this;
     }
 
-    public APIRequestCreateMAnAgeDPartnerBusinessSetup setTemplate (List<Map<String, String>> template) {
+    public APIRequestCreateManagedPartnerBusinessSetup setTemplate (List<Map<String, String>> template) {
       this.setParam("template", template);
       return this;
     }
-    public APIRequestCreateMAnAgeDPartnerBusinessSetup setTemplate (String template) {
+    public APIRequestCreateManagedPartnerBusinessSetup setTemplate (String template) {
       this.setParam("template", template);
       return this;
     }
 
-    public APIRequestCreateMAnAgeDPartnerBusinessSetup requestAllFields () {
+    public APIRequestCreateManagedPartnerBusinessSetup requestAllFields () {
       return this.requestAllFields(true);
     }
 
-    public APIRequestCreateMAnAgeDPartnerBusinessSetup requestAllFields (boolean value) {
+    public APIRequestCreateManagedPartnerBusinessSetup requestAllFields (boolean value) {
       for (String field : FIELDS) {
         this.requestField(field, value);
       }
@@ -13676,12 +13676,12 @@ public class Business extends APINode {
     }
 
     @Override
-    public APIRequestCreateMAnAgeDPartnerBusinessSetup requestFields (List<String> fields) {
+    public APIRequestCreateManagedPartnerBusinessSetup requestFields (List<String> fields) {
       return this.requestFields(fields, true);
     }
 
     @Override
-    public APIRequestCreateMAnAgeDPartnerBusinessSetup requestFields (List<String> fields, boolean value) {
+    public APIRequestCreateManagedPartnerBusinessSetup requestFields (List<String> fields, boolean value) {
       for (String field : fields) {
         this.requestField(field, value);
       }
@@ -13689,20 +13689,20 @@ public class Business extends APINode {
     }
 
     @Override
-    public APIRequestCreateMAnAgeDPartnerBusinessSetup requestField (String field) {
+    public APIRequestCreateManagedPartnerBusinessSetup requestField (String field) {
       this.requestField(field, true);
       return this;
     }
 
     @Override
-    public APIRequestCreateMAnAgeDPartnerBusinessSetup requestField (String field, boolean value) {
+    public APIRequestCreateManagedPartnerBusinessSetup requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
 
   }
 
-  public static class APIRequestDeleteMAnAgeDPartnerBusinesses extends APIRequest<APINode> {
+  public static class APIRequestDeleteManagedPartnerBusinesses extends APIRequest<APINode> {
 
     APINodeList<APINode> lastResponse = null;
     @Override
@@ -13744,7 +13744,7 @@ public class Business extends APINode {
         new Function<ResponseWrapper, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(ResponseWrapper result) {
              try {
-               return APIRequestDeleteMAnAgeDPartnerBusinesses.this.parseResponse(result.getBody(), result.getHeader());
+               return APIRequestDeleteManagedPartnerBusinesses.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -13754,38 +13754,38 @@ public class Business extends APINode {
       );
     };
 
-    public APIRequestDeleteMAnAgeDPartnerBusinesses(String nodeId, APIContext context) {
+    public APIRequestDeleteManagedPartnerBusinesses(String nodeId, APIContext context) {
       super(context, nodeId, "/managed_partner_businesses", "DELETE", Arrays.asList(PARAMS));
     }
 
     @Override
-    public APIRequestDeleteMAnAgeDPartnerBusinesses setParam(String param, Object value) {
+    public APIRequestDeleteManagedPartnerBusinesses setParam(String param, Object value) {
       setParamInternal(param, value);
       return this;
     }
 
     @Override
-    public APIRequestDeleteMAnAgeDPartnerBusinesses setParams(Map<String, Object> params) {
+    public APIRequestDeleteManagedPartnerBusinesses setParams(Map<String, Object> params) {
       setParamsInternal(params);
       return this;
     }
 
 
-    public APIRequestDeleteMAnAgeDPartnerBusinesses setChildBusinessExternalId (String childBusinessExternalId) {
+    public APIRequestDeleteManagedPartnerBusinesses setChildBusinessExternalId (String childBusinessExternalId) {
       this.setParam("child_business_external_id", childBusinessExternalId);
       return this;
     }
 
-    public APIRequestDeleteMAnAgeDPartnerBusinesses setChildBusinessId (String childBusinessId) {
+    public APIRequestDeleteManagedPartnerBusinesses setChildBusinessId (String childBusinessId) {
       this.setParam("child_business_id", childBusinessId);
       return this;
     }
 
-    public APIRequestDeleteMAnAgeDPartnerBusinesses requestAllFields () {
+    public APIRequestDeleteManagedPartnerBusinesses requestAllFields () {
       return this.requestAllFields(true);
     }
 
-    public APIRequestDeleteMAnAgeDPartnerBusinesses requestAllFields (boolean value) {
+    public APIRequestDeleteManagedPartnerBusinesses requestAllFields (boolean value) {
       for (String field : FIELDS) {
         this.requestField(field, value);
       }
@@ -13793,12 +13793,12 @@ public class Business extends APINode {
     }
 
     @Override
-    public APIRequestDeleteMAnAgeDPartnerBusinesses requestFields (List<String> fields) {
+    public APIRequestDeleteManagedPartnerBusinesses requestFields (List<String> fields) {
       return this.requestFields(fields, true);
     }
 
     @Override
-    public APIRequestDeleteMAnAgeDPartnerBusinesses requestFields (List<String> fields, boolean value) {
+    public APIRequestDeleteManagedPartnerBusinesses requestFields (List<String> fields, boolean value) {
       for (String field : fields) {
         this.requestField(field, value);
       }
@@ -13806,20 +13806,20 @@ public class Business extends APINode {
     }
 
     @Override
-    public APIRequestDeleteMAnAgeDPartnerBusinesses requestField (String field) {
+    public APIRequestDeleteManagedPartnerBusinesses requestField (String field) {
       this.requestField(field, true);
       return this;
     }
 
     @Override
-    public APIRequestDeleteMAnAgeDPartnerBusinesses requestField (String field, boolean value) {
+    public APIRequestDeleteManagedPartnerBusinesses requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
 
   }
 
-  public static class APIRequestCreateMAnAgeDPartnerBusiness extends APIRequest<APINode> {
+  public static class APIRequestCreateManagedPartnerBusiness extends APIRequest<APINode> {
 
     APINode lastResponse = null;
     @Override
@@ -13880,7 +13880,7 @@ public class Business extends APINode {
         new Function<ResponseWrapper, APINode>() {
            public APINode apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateMAnAgeDPartnerBusiness.this.parseResponse(result.getBody(), result.getHeader());
+               return APIRequestCreateManagedPartnerBusiness.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -13890,177 +13890,177 @@ public class Business extends APINode {
       );
     };
 
-    public APIRequestCreateMAnAgeDPartnerBusiness(String nodeId, APIContext context) {
+    public APIRequestCreateManagedPartnerBusiness(String nodeId, APIContext context) {
       super(context, nodeId, "/managed_partner_businesses", "POST", Arrays.asList(PARAMS));
     }
 
     @Override
-    public APIRequestCreateMAnAgeDPartnerBusiness setParam(String param, Object value) {
+    public APIRequestCreateManagedPartnerBusiness setParam(String param, Object value) {
       setParamInternal(param, value);
       return this;
     }
 
     @Override
-    public APIRequestCreateMAnAgeDPartnerBusiness setParams(Map<String, Object> params) {
+    public APIRequestCreateManagedPartnerBusiness setParams(Map<String, Object> params) {
       setParamsInternal(params);
       return this;
     }
 
 
-    public APIRequestCreateMAnAgeDPartnerBusiness setAdAccountCurrency (String adAccountCurrency) {
+    public APIRequestCreateManagedPartnerBusiness setAdAccountCurrency (String adAccountCurrency) {
       this.setParam("ad_account_currency", adAccountCurrency);
       return this;
     }
 
-    public APIRequestCreateMAnAgeDPartnerBusiness setCatalogId (String catalogId) {
+    public APIRequestCreateManagedPartnerBusiness setCatalogId (String catalogId) {
       this.setParam("catalog_id", catalogId);
       return this;
     }
 
-    public APIRequestCreateMAnAgeDPartnerBusiness setChildBusinessExternalId (String childBusinessExternalId) {
+    public APIRequestCreateManagedPartnerBusiness setChildBusinessExternalId (String childBusinessExternalId) {
       this.setParam("child_business_external_id", childBusinessExternalId);
       return this;
     }
 
-    public APIRequestCreateMAnAgeDPartnerBusiness setCreditLimit (Long creditLimit) {
+    public APIRequestCreateManagedPartnerBusiness setCreditLimit (Long creditLimit) {
       this.setParam("credit_limit", creditLimit);
       return this;
     }
-    public APIRequestCreateMAnAgeDPartnerBusiness setCreditLimit (String creditLimit) {
+    public APIRequestCreateManagedPartnerBusiness setCreditLimit (String creditLimit) {
       this.setParam("credit_limit", creditLimit);
       return this;
     }
 
-    public APIRequestCreateMAnAgeDPartnerBusiness setLineOfCreditId (String lineOfCreditId) {
+    public APIRequestCreateManagedPartnerBusiness setLineOfCreditId (String lineOfCreditId) {
       this.setParam("line_of_credit_id", lineOfCreditId);
       return this;
     }
 
-    public APIRequestCreateMAnAgeDPartnerBusiness setName (String name) {
+    public APIRequestCreateManagedPartnerBusiness setName (String name) {
       this.setParam("name", name);
       return this;
     }
 
-    public APIRequestCreateMAnAgeDPartnerBusiness setNoAdAccount (Boolean noAdAccount) {
+    public APIRequestCreateManagedPartnerBusiness setNoAdAccount (Boolean noAdAccount) {
       this.setParam("no_ad_account", noAdAccount);
       return this;
     }
-    public APIRequestCreateMAnAgeDPartnerBusiness setNoAdAccount (String noAdAccount) {
+    public APIRequestCreateManagedPartnerBusiness setNoAdAccount (String noAdAccount) {
       this.setParam("no_ad_account", noAdAccount);
       return this;
     }
 
-    public APIRequestCreateMAnAgeDPartnerBusiness setPageName (String pageName) {
+    public APIRequestCreateManagedPartnerBusiness setPageName (String pageName) {
       this.setParam("page_name", pageName);
       return this;
     }
 
-    public APIRequestCreateMAnAgeDPartnerBusiness setPageProfileImageUrl (String pageProfileImageUrl) {
+    public APIRequestCreateManagedPartnerBusiness setPageProfileImageUrl (String pageProfileImageUrl) {
       this.setParam("page_profile_image_url", pageProfileImageUrl);
       return this;
     }
 
-    public APIRequestCreateMAnAgeDPartnerBusiness setPartitionType (EnumPartitionType partitionType) {
+    public APIRequestCreateManagedPartnerBusiness setPartitionType (EnumPartitionType partitionType) {
       this.setParam("partition_type", partitionType);
       return this;
     }
-    public APIRequestCreateMAnAgeDPartnerBusiness setPartitionType (String partitionType) {
+    public APIRequestCreateManagedPartnerBusiness setPartitionType (String partitionType) {
       this.setParam("partition_type", partitionType);
       return this;
     }
 
-    public APIRequestCreateMAnAgeDPartnerBusiness setPartnerFacebookPageUrl (String partnerFacebookPageUrl) {
+    public APIRequestCreateManagedPartnerBusiness setPartnerFacebookPageUrl (String partnerFacebookPageUrl) {
       this.setParam("partner_facebook_page_url", partnerFacebookPageUrl);
       return this;
     }
 
-    public APIRequestCreateMAnAgeDPartnerBusiness setPartnerRegistrationCountries (List<String> partnerRegistrationCountries) {
+    public APIRequestCreateManagedPartnerBusiness setPartnerRegistrationCountries (List<String> partnerRegistrationCountries) {
       this.setParam("partner_registration_countries", partnerRegistrationCountries);
       return this;
     }
-    public APIRequestCreateMAnAgeDPartnerBusiness setPartnerRegistrationCountries (String partnerRegistrationCountries) {
+    public APIRequestCreateManagedPartnerBusiness setPartnerRegistrationCountries (String partnerRegistrationCountries) {
       this.setParam("partner_registration_countries", partnerRegistrationCountries);
       return this;
     }
 
-    public APIRequestCreateMAnAgeDPartnerBusiness setSalesRepEmail (String salesRepEmail) {
+    public APIRequestCreateManagedPartnerBusiness setSalesRepEmail (String salesRepEmail) {
       this.setParam("sales_rep_email", salesRepEmail);
       return this;
     }
 
-    public APIRequestCreateMAnAgeDPartnerBusiness setSellerExternalWebsiteUrl (String sellerExternalWebsiteUrl) {
+    public APIRequestCreateManagedPartnerBusiness setSellerExternalWebsiteUrl (String sellerExternalWebsiteUrl) {
       this.setParam("seller_external_website_url", sellerExternalWebsiteUrl);
       return this;
     }
 
-    public APIRequestCreateMAnAgeDPartnerBusiness setSellerTargetingCountries (List<String> sellerTargetingCountries) {
+    public APIRequestCreateManagedPartnerBusiness setSellerTargetingCountries (List<String> sellerTargetingCountries) {
       this.setParam("seller_targeting_countries", sellerTargetingCountries);
       return this;
     }
-    public APIRequestCreateMAnAgeDPartnerBusiness setSellerTargetingCountries (String sellerTargetingCountries) {
+    public APIRequestCreateManagedPartnerBusiness setSellerTargetingCountries (String sellerTargetingCountries) {
       this.setParam("seller_targeting_countries", sellerTargetingCountries);
       return this;
     }
 
-    public APIRequestCreateMAnAgeDPartnerBusiness setSkipPartnerPageCreation (Boolean skipPartnerPageCreation) {
+    public APIRequestCreateManagedPartnerBusiness setSkipPartnerPageCreation (Boolean skipPartnerPageCreation) {
       this.setParam("skip_partner_page_creation", skipPartnerPageCreation);
       return this;
     }
-    public APIRequestCreateMAnAgeDPartnerBusiness setSkipPartnerPageCreation (String skipPartnerPageCreation) {
+    public APIRequestCreateManagedPartnerBusiness setSkipPartnerPageCreation (String skipPartnerPageCreation) {
       this.setParam("skip_partner_page_creation", skipPartnerPageCreation);
       return this;
     }
 
-    public APIRequestCreateMAnAgeDPartnerBusiness setSurveyBusinessType (EnumSurveyBusinessType surveyBusinessType) {
+    public APIRequestCreateManagedPartnerBusiness setSurveyBusinessType (EnumSurveyBusinessType surveyBusinessType) {
       this.setParam("survey_business_type", surveyBusinessType);
       return this;
     }
-    public APIRequestCreateMAnAgeDPartnerBusiness setSurveyBusinessType (String surveyBusinessType) {
+    public APIRequestCreateManagedPartnerBusiness setSurveyBusinessType (String surveyBusinessType) {
       this.setParam("survey_business_type", surveyBusinessType);
       return this;
     }
 
-    public APIRequestCreateMAnAgeDPartnerBusiness setSurveyNumAssets (Long surveyNumAssets) {
+    public APIRequestCreateManagedPartnerBusiness setSurveyNumAssets (Long surveyNumAssets) {
       this.setParam("survey_num_assets", surveyNumAssets);
       return this;
     }
-    public APIRequestCreateMAnAgeDPartnerBusiness setSurveyNumAssets (String surveyNumAssets) {
+    public APIRequestCreateManagedPartnerBusiness setSurveyNumAssets (String surveyNumAssets) {
       this.setParam("survey_num_assets", surveyNumAssets);
       return this;
     }
 
-    public APIRequestCreateMAnAgeDPartnerBusiness setSurveyNumPeople (Long surveyNumPeople) {
+    public APIRequestCreateManagedPartnerBusiness setSurveyNumPeople (Long surveyNumPeople) {
       this.setParam("survey_num_people", surveyNumPeople);
       return this;
     }
-    public APIRequestCreateMAnAgeDPartnerBusiness setSurveyNumPeople (String surveyNumPeople) {
+    public APIRequestCreateManagedPartnerBusiness setSurveyNumPeople (String surveyNumPeople) {
       this.setParam("survey_num_people", surveyNumPeople);
       return this;
     }
 
-    public APIRequestCreateMAnAgeDPartnerBusiness setTimezoneId (EnumTimezoneId timezoneId) {
+    public APIRequestCreateManagedPartnerBusiness setTimezoneId (EnumTimezoneId timezoneId) {
       this.setParam("timezone_id", timezoneId);
       return this;
     }
-    public APIRequestCreateMAnAgeDPartnerBusiness setTimezoneId (String timezoneId) {
+    public APIRequestCreateManagedPartnerBusiness setTimezoneId (String timezoneId) {
       this.setParam("timezone_id", timezoneId);
       return this;
     }
 
-    public APIRequestCreateMAnAgeDPartnerBusiness setVertical (EnumVertical vertical) {
+    public APIRequestCreateManagedPartnerBusiness setVertical (EnumVertical vertical) {
       this.setParam("vertical", vertical);
       return this;
     }
-    public APIRequestCreateMAnAgeDPartnerBusiness setVertical (String vertical) {
+    public APIRequestCreateManagedPartnerBusiness setVertical (String vertical) {
       this.setParam("vertical", vertical);
       return this;
     }
 
-    public APIRequestCreateMAnAgeDPartnerBusiness requestAllFields () {
+    public APIRequestCreateManagedPartnerBusiness requestAllFields () {
       return this.requestAllFields(true);
     }
 
-    public APIRequestCreateMAnAgeDPartnerBusiness requestAllFields (boolean value) {
+    public APIRequestCreateManagedPartnerBusiness requestAllFields (boolean value) {
       for (String field : FIELDS) {
         this.requestField(field, value);
       }
@@ -14068,12 +14068,12 @@ public class Business extends APINode {
     }
 
     @Override
-    public APIRequestCreateMAnAgeDPartnerBusiness requestFields (List<String> fields) {
+    public APIRequestCreateManagedPartnerBusiness requestFields (List<String> fields) {
       return this.requestFields(fields, true);
     }
 
     @Override
-    public APIRequestCreateMAnAgeDPartnerBusiness requestFields (List<String> fields, boolean value) {
+    public APIRequestCreateManagedPartnerBusiness requestFields (List<String> fields, boolean value) {
       for (String field : fields) {
         this.requestField(field, value);
       }
@@ -14081,13 +14081,13 @@ public class Business extends APINode {
     }
 
     @Override
-    public APIRequestCreateMAnAgeDPartnerBusiness requestField (String field) {
+    public APIRequestCreateManagedPartnerBusiness requestField (String field) {
       this.requestField(field, true);
       return this;
     }
 
     @Override
-    public APIRequestCreateMAnAgeDPartnerBusiness requestField (String field, boolean value) {
+    public APIRequestCreateManagedPartnerBusiness requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
@@ -21036,7 +21036,7 @@ public class Business extends APINode {
     }
   }
 
-  public static class APIRequestGetPendingShareDOffsiteSignalContainerBusinessObjects extends APIRequest<OffsiteSignalContainerBusinessObject> {
+  public static class APIRequestGetPendingSharedOffsiteSignalContainerBusinessObjects extends APIRequest<OffsiteSignalContainerBusinessObject> {
 
     APINodeList<OffsiteSignalContainerBusinessObject> lastResponse = null;
     @Override
@@ -21083,7 +21083,7 @@ public class Business extends APINode {
         new Function<ResponseWrapper, APINodeList<OffsiteSignalContainerBusinessObject>>() {
            public APINodeList<OffsiteSignalContainerBusinessObject> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetPendingShareDOffsiteSignalContainerBusinessObjects.this.parseResponse(result.getBody(), result.getHeader());
+               return APIRequestGetPendingSharedOffsiteSignalContainerBusinessObjects.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -21093,28 +21093,28 @@ public class Business extends APINode {
       );
     };
 
-    public APIRequestGetPendingShareDOffsiteSignalContainerBusinessObjects(String nodeId, APIContext context) {
+    public APIRequestGetPendingSharedOffsiteSignalContainerBusinessObjects(String nodeId, APIContext context) {
       super(context, nodeId, "/pending_shared_offsite_signal_container_business_objects", "GET", Arrays.asList(PARAMS));
     }
 
     @Override
-    public APIRequestGetPendingShareDOffsiteSignalContainerBusinessObjects setParam(String param, Object value) {
+    public APIRequestGetPendingSharedOffsiteSignalContainerBusinessObjects setParam(String param, Object value) {
       setParamInternal(param, value);
       return this;
     }
 
     @Override
-    public APIRequestGetPendingShareDOffsiteSignalContainerBusinessObjects setParams(Map<String, Object> params) {
+    public APIRequestGetPendingSharedOffsiteSignalContainerBusinessObjects setParams(Map<String, Object> params) {
       setParamsInternal(params);
       return this;
     }
 
 
-    public APIRequestGetPendingShareDOffsiteSignalContainerBusinessObjects requestAllFields () {
+    public APIRequestGetPendingSharedOffsiteSignalContainerBusinessObjects requestAllFields () {
       return this.requestAllFields(true);
     }
 
-    public APIRequestGetPendingShareDOffsiteSignalContainerBusinessObjects requestAllFields (boolean value) {
+    public APIRequestGetPendingSharedOffsiteSignalContainerBusinessObjects requestAllFields (boolean value) {
       for (String field : FIELDS) {
         this.requestField(field, value);
       }
@@ -21122,12 +21122,12 @@ public class Business extends APINode {
     }
 
     @Override
-    public APIRequestGetPendingShareDOffsiteSignalContainerBusinessObjects requestFields (List<String> fields) {
+    public APIRequestGetPendingSharedOffsiteSignalContainerBusinessObjects requestFields (List<String> fields) {
       return this.requestFields(fields, true);
     }
 
     @Override
-    public APIRequestGetPendingShareDOffsiteSignalContainerBusinessObjects requestFields (List<String> fields, boolean value) {
+    public APIRequestGetPendingSharedOffsiteSignalContainerBusinessObjects requestFields (List<String> fields, boolean value) {
       for (String field : fields) {
         this.requestField(field, value);
       }
@@ -21135,63 +21135,63 @@ public class Business extends APINode {
     }
 
     @Override
-    public APIRequestGetPendingShareDOffsiteSignalContainerBusinessObjects requestField (String field) {
+    public APIRequestGetPendingSharedOffsiteSignalContainerBusinessObjects requestField (String field) {
       this.requestField(field, true);
       return this;
     }
 
     @Override
-    public APIRequestGetPendingShareDOffsiteSignalContainerBusinessObjects requestField (String field, boolean value) {
+    public APIRequestGetPendingSharedOffsiteSignalContainerBusinessObjects requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
 
-    public APIRequestGetPendingShareDOffsiteSignalContainerBusinessObjects requestBusinessField () {
+    public APIRequestGetPendingSharedOffsiteSignalContainerBusinessObjects requestBusinessField () {
       return this.requestBusinessField(true);
     }
-    public APIRequestGetPendingShareDOffsiteSignalContainerBusinessObjects requestBusinessField (boolean value) {
+    public APIRequestGetPendingSharedOffsiteSignalContainerBusinessObjects requestBusinessField (boolean value) {
       this.requestField("business", value);
       return this;
     }
-    public APIRequestGetPendingShareDOffsiteSignalContainerBusinessObjects requestIdField () {
+    public APIRequestGetPendingSharedOffsiteSignalContainerBusinessObjects requestIdField () {
       return this.requestIdField(true);
     }
-    public APIRequestGetPendingShareDOffsiteSignalContainerBusinessObjects requestIdField (boolean value) {
+    public APIRequestGetPendingSharedOffsiteSignalContainerBusinessObjects requestIdField (boolean value) {
       this.requestField("id", value);
       return this;
     }
-    public APIRequestGetPendingShareDOffsiteSignalContainerBusinessObjects requestIsEligibleForSharingToAdAccountField () {
+    public APIRequestGetPendingSharedOffsiteSignalContainerBusinessObjects requestIsEligibleForSharingToAdAccountField () {
       return this.requestIsEligibleForSharingToAdAccountField(true);
     }
-    public APIRequestGetPendingShareDOffsiteSignalContainerBusinessObjects requestIsEligibleForSharingToAdAccountField (boolean value) {
+    public APIRequestGetPendingSharedOffsiteSignalContainerBusinessObjects requestIsEligibleForSharingToAdAccountField (boolean value) {
       this.requestField("is_eligible_for_sharing_to_ad_account", value);
       return this;
     }
-    public APIRequestGetPendingShareDOffsiteSignalContainerBusinessObjects requestIsEligibleForSharingToBusinessField () {
+    public APIRequestGetPendingSharedOffsiteSignalContainerBusinessObjects requestIsEligibleForSharingToBusinessField () {
       return this.requestIsEligibleForSharingToBusinessField(true);
     }
-    public APIRequestGetPendingShareDOffsiteSignalContainerBusinessObjects requestIsEligibleForSharingToBusinessField (boolean value) {
+    public APIRequestGetPendingSharedOffsiteSignalContainerBusinessObjects requestIsEligibleForSharingToBusinessField (boolean value) {
       this.requestField("is_eligible_for_sharing_to_business", value);
       return this;
     }
-    public APIRequestGetPendingShareDOffsiteSignalContainerBusinessObjects requestIsUnavailableField () {
+    public APIRequestGetPendingSharedOffsiteSignalContainerBusinessObjects requestIsUnavailableField () {
       return this.requestIsUnavailableField(true);
     }
-    public APIRequestGetPendingShareDOffsiteSignalContainerBusinessObjects requestIsUnavailableField (boolean value) {
+    public APIRequestGetPendingSharedOffsiteSignalContainerBusinessObjects requestIsUnavailableField (boolean value) {
       this.requestField("is_unavailable", value);
       return this;
     }
-    public APIRequestGetPendingShareDOffsiteSignalContainerBusinessObjects requestNameField () {
+    public APIRequestGetPendingSharedOffsiteSignalContainerBusinessObjects requestNameField () {
       return this.requestNameField(true);
     }
-    public APIRequestGetPendingShareDOffsiteSignalContainerBusinessObjects requestNameField (boolean value) {
+    public APIRequestGetPendingSharedOffsiteSignalContainerBusinessObjects requestNameField (boolean value) {
       this.requestField("name", value);
       return this;
     }
-    public APIRequestGetPendingShareDOffsiteSignalContainerBusinessObjects requestPrimaryContainerIdField () {
+    public APIRequestGetPendingSharedOffsiteSignalContainerBusinessObjects requestPrimaryContainerIdField () {
       return this.requestPrimaryContainerIdField(true);
     }
-    public APIRequestGetPendingShareDOffsiteSignalContainerBusinessObjects requestPrimaryContainerIdField (boolean value) {
+    public APIRequestGetPendingSharedOffsiteSignalContainerBusinessObjects requestPrimaryContainerIdField (boolean value) {
       this.requestField("primary_container_id", value);
       return this;
     }
@@ -22488,7 +22488,7 @@ public class Business extends APINode {
     }
   }
 
-  public static class APIRequestCreateSetupMAnAgeDPartnerAdAccount extends APIRequest<Business> {
+  public static class APIRequestCreateSetupManagedPartnerAdAccount extends APIRequest<Business> {
 
     Business lastResponse = null;
     @Override
@@ -22533,7 +22533,7 @@ public class Business extends APINode {
         new Function<ResponseWrapper, Business>() {
            public Business apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateSetupMAnAgeDPartnerAdAccount.this.parseResponse(result.getBody(), result.getHeader());
+               return APIRequestCreateSetupManagedPartnerAdAccount.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -22543,61 +22543,61 @@ public class Business extends APINode {
       );
     };
 
-    public APIRequestCreateSetupMAnAgeDPartnerAdAccount(String nodeId, APIContext context) {
+    public APIRequestCreateSetupManagedPartnerAdAccount(String nodeId, APIContext context) {
       super(context, nodeId, "/setup_managed_partner_adaccounts", "POST", Arrays.asList(PARAMS));
     }
 
     @Override
-    public APIRequestCreateSetupMAnAgeDPartnerAdAccount setParam(String param, Object value) {
+    public APIRequestCreateSetupManagedPartnerAdAccount setParam(String param, Object value) {
       setParamInternal(param, value);
       return this;
     }
 
     @Override
-    public APIRequestCreateSetupMAnAgeDPartnerAdAccount setParams(Map<String, Object> params) {
+    public APIRequestCreateSetupManagedPartnerAdAccount setParams(Map<String, Object> params) {
       setParamsInternal(params);
       return this;
     }
 
 
-    public APIRequestCreateSetupMAnAgeDPartnerAdAccount setCreditLineId (String creditLineId) {
+    public APIRequestCreateSetupManagedPartnerAdAccount setCreditLineId (String creditLineId) {
       this.setParam("credit_line_id", creditLineId);
       return this;
     }
 
-    public APIRequestCreateSetupMAnAgeDPartnerAdAccount setMarketplaceBusinessId (String marketplaceBusinessId) {
+    public APIRequestCreateSetupManagedPartnerAdAccount setMarketplaceBusinessId (String marketplaceBusinessId) {
       this.setParam("marketplace_business_id", marketplaceBusinessId);
       return this;
     }
 
-    public APIRequestCreateSetupMAnAgeDPartnerAdAccount setSubverticalV2 (Business.EnumSubverticalV2 subverticalV2) {
+    public APIRequestCreateSetupManagedPartnerAdAccount setSubverticalV2 (Business.EnumSubverticalV2 subverticalV2) {
       this.setParam("subvertical_v2", subverticalV2);
       return this;
     }
-    public APIRequestCreateSetupMAnAgeDPartnerAdAccount setSubverticalV2 (String subverticalV2) {
+    public APIRequestCreateSetupManagedPartnerAdAccount setSubverticalV2 (String subverticalV2) {
       this.setParam("subvertical_v2", subverticalV2);
       return this;
     }
 
-    public APIRequestCreateSetupMAnAgeDPartnerAdAccount setVendorId (String vendorId) {
+    public APIRequestCreateSetupManagedPartnerAdAccount setVendorId (String vendorId) {
       this.setParam("vendor_id", vendorId);
       return this;
     }
 
-    public APIRequestCreateSetupMAnAgeDPartnerAdAccount setVerticalV2 (Business.EnumVerticalV2 verticalV2) {
+    public APIRequestCreateSetupManagedPartnerAdAccount setVerticalV2 (Business.EnumVerticalV2 verticalV2) {
       this.setParam("vertical_v2", verticalV2);
       return this;
     }
-    public APIRequestCreateSetupMAnAgeDPartnerAdAccount setVerticalV2 (String verticalV2) {
+    public APIRequestCreateSetupManagedPartnerAdAccount setVerticalV2 (String verticalV2) {
       this.setParam("vertical_v2", verticalV2);
       return this;
     }
 
-    public APIRequestCreateSetupMAnAgeDPartnerAdAccount requestAllFields () {
+    public APIRequestCreateSetupManagedPartnerAdAccount requestAllFields () {
       return this.requestAllFields(true);
     }
 
-    public APIRequestCreateSetupMAnAgeDPartnerAdAccount requestAllFields (boolean value) {
+    public APIRequestCreateSetupManagedPartnerAdAccount requestAllFields (boolean value) {
       for (String field : FIELDS) {
         this.requestField(field, value);
       }
@@ -22605,12 +22605,12 @@ public class Business extends APINode {
     }
 
     @Override
-    public APIRequestCreateSetupMAnAgeDPartnerAdAccount requestFields (List<String> fields) {
+    public APIRequestCreateSetupManagedPartnerAdAccount requestFields (List<String> fields) {
       return this.requestFields(fields, true);
     }
 
     @Override
-    public APIRequestCreateSetupMAnAgeDPartnerAdAccount requestFields (List<String> fields, boolean value) {
+    public APIRequestCreateSetupManagedPartnerAdAccount requestFields (List<String> fields, boolean value) {
       for (String field : fields) {
         this.requestField(field, value);
       }
@@ -22618,13 +22618,13 @@ public class Business extends APINode {
     }
 
     @Override
-    public APIRequestCreateSetupMAnAgeDPartnerAdAccount requestField (String field) {
+    public APIRequestCreateSetupManagedPartnerAdAccount requestField (String field) {
       this.requestField(field, true);
       return this;
     }
 
     @Override
-    public APIRequestCreateSetupMAnAgeDPartnerAdAccount requestField (String field, boolean value) {
+    public APIRequestCreateSetupManagedPartnerAdAccount requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
