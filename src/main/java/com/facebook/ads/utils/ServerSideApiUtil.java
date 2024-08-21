@@ -149,7 +149,7 @@
      // Replace white spaces and hyphens
      phoneNumber = phoneNumber.replaceAll("[\\-\\s\\(\\)]+", "");
 
-     if(phoneNumber.length() < 6 || phoneNumber.length() > 15){
+     if(phoneNumber.length() < 6 || phoneNumber.length() > 16){
        throw  new IllegalArgumentException("Invalid phone number format for the passed phone number:" + phoneNumber + ". Please check the passed phone number format.");
      }
 
