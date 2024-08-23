@@ -596,12 +596,54 @@ public class APIRequest<T extends APINode> {
     }
 
     public ResponseWrapper sendDelete(String apiUrl, Map<String, Object> allParams, APIContext context) throws APIException, IOException {
-      URL url = new URL(RequestHelper.constructUrlString(apiUrl, allParams));
+      String boundary = "--------------------------" + new Random().nextLong();
+      URL url = new URL(apiUrl);
       context.log("Delete: " + url.toString());
       HttpsURLConnection con = (HttpsURLConnection) url.openConnection();
 
       con.setRequestMethod("DELETE");
       con.setRequestProperty("User-Agent", USER_AGENT);
+      con.setRequestProperty("Content-Type","multipart/form-data; boundary=" + boundary);
+      con.setDoOutput(true);
+
+      int contentLength = RequestHelper.getContentLength(allParams, boundary, context);
+
+      con.setRequestProperty("Content-Length", "" + contentLength);
+
+      DataOutputStream wr = new DataOutputStream(con.getOutputStream());
+      for (Map.Entry entry : allParams.entrySet()) {
+        writeStringInUTF8Bytes(wr, "--" + boundary + "\r\n");
+        if (entry.getValue() instanceof File) {
+          File file = (File) entry.getValue();
+          String contentType = RequestHelper.getContentTypeForFile(file);
+          writeStringInUTF8Bytes(wr, "Content-Disposition: form-data; name=\"" + entry.getKey() + "\"; filename=\"" + file.getName() + "\"\r\n");
+          if (contentType != null) {
+            writeStringInUTF8Bytes(wr, "Content-Type: " + contentType + "\r\n");
+          }
+          writeStringInUTF8Bytes(wr, "\r\n");
+          FileInputStream fileInputStream = new FileInputStream(file);
+          byte[] buffer = new byte[1024];
+          int count = 0;
+          while ((count = fileInputStream.read(buffer)) >= 0) {
+            wr.write(buffer, 0, count);
+          }
+          writeStringInUTF8Bytes(wr, "\r\n");
+          fileInputStream.close();
+        } else if (entry.getValue() instanceof byte[]) {
+          byte[] bytes = (byte[]) entry.getValue();
+          writeStringInUTF8Bytes(wr, "Content-Disposition: form-data; name=\"" + entry.getKey() + "\"; filename=\"" + "chunkfile" + "\"\r\n\r\n");
+          wr.write(bytes, 0, bytes.length);
+          writeStringInUTF8Bytes(wr, "\r\n");
+        } else {
+          writeStringInUTF8Bytes(wr, "Content-Disposition: form-data; name=\"" + entry.getKey() + "\"\r\n\r\n");
+          writeStringInUTF8Bytes(wr, convertToString(entry.getValue()));
+          writeStringInUTF8Bytes(wr, "\r\n");
+        }
+      }
+      writeStringInUTF8Bytes(wr, "--" + boundary + "--\r\n");
+
+      wr.flush();
+      wr.close();
 
       return readResponse(con);
     }
