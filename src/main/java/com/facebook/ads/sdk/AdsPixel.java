@@ -4974,6 +4974,8 @@ public class AdsPixel extends APINode {
       VALUE_ADVERTISE("ADVERTISE"),
       @SerializedName("ANALYZE")
       VALUE_ANALYZE("ANALYZE"),
+      @SerializedName("EDIT")
+      VALUE_EDIT("EDIT"),
       @SerializedName("UPLOAD")
       VALUE_UPLOAD("UPLOAD"),
       ;

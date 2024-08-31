@@ -986,7 +986,7 @@ public class ProductCatalog extends APINode {
       "business",
       "permitted_roles",
       "permitted_tasks",
-      "skip_default_utms",
+      "skip_defaults",
       "utm_settings",
     };
 
@@ -1070,12 +1070,12 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
-    public APIRequestCreateAgency setSkipDefaultUtms (Boolean skipDefaultUtms) {
-      this.setParam("skip_default_utms", skipDefaultUtms);
+    public APIRequestCreateAgency setSkipDefaults (Boolean skipDefaults) {
+      this.setParam("skip_defaults", skipDefaults);
       return this;
     }
-    public APIRequestCreateAgency setSkipDefaultUtms (String skipDefaultUtms) {
-      this.setParam("skip_default_utms", skipDefaultUtms);
+    public APIRequestCreateAgency setSkipDefaults (String skipDefaults) {
+      this.setParam("skip_defaults", skipDefaults);
       return this;
     }
 
@@ -8157,6 +8157,8 @@ public class ProductCatalog extends APINode {
       "applinks",
       "availability",
       "brand",
+      "bundle_items",
+      "bundle_retailer_ids",
       "capability_to_review_status",
       "category",
       "category_specific_fields",
@@ -8190,6 +8192,7 @@ public class ProductCatalog extends APINode {
       "importer_name",
       "invalidation_errors",
       "inventory",
+      "is_bundle_hero",
       "manufacturer_info",
       "manufacturer_part_number",
       "marked_for_product_launch",
@@ -8409,6 +8412,20 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestGetProducts requestBrandField (boolean value) {
       this.requestField("brand", value);
+      return this;
+    }
+    public APIRequestGetProducts requestBundleItemsField () {
+      return this.requestBundleItemsField(true);
+    }
+    public APIRequestGetProducts requestBundleItemsField (boolean value) {
+      this.requestField("bundle_items", value);
+      return this;
+    }
+    public APIRequestGetProducts requestBundleRetailerIdsField () {
+      return this.requestBundleRetailerIdsField(true);
+    }
+    public APIRequestGetProducts requestBundleRetailerIdsField (boolean value) {
+      this.requestField("bundle_retailer_ids", value);
       return this;
     }
     public APIRequestGetProducts requestCapabilityToReviewStatusField () {
@@ -8640,6 +8657,13 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestGetProducts requestInventoryField (boolean value) {
       this.requestField("inventory", value);
+      return this;
+    }
+    public APIRequestGetProducts requestIsBundleHeroField () {
+      return this.requestIsBundleHeroField(true);
+    }
+    public APIRequestGetProducts requestIsBundleHeroField (boolean value) {
+      this.requestField("is_bundle_hero", value);
       return this;
     }
     public APIRequestGetProducts requestManufacturerInfoField () {
@@ -8898,7 +8922,6 @@ public class ProductCatalog extends APINode {
     }
     public static final String[] PARAMS = {
       "additional_image_urls",
-      "additional_uploaded_image_ids",
       "additional_variant_attributes",
       "android_app_name",
       "android_class",
@@ -8953,6 +8976,11 @@ public class ProductCatalog extends APINode {
       "origin_country",
       "pattern",
       "price",
+      "product_priority_0",
+      "product_priority_1",
+      "product_priority_2",
+      "product_priority_3",
+      "product_priority_4",
       "product_type",
       "quantity_to_sell_on_facebook",
       "retailer_id",
@@ -9035,15 +9063,6 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestCreateProduct setAdditionalImageUrls (String additionalImageUrls) {
       this.setParam("additional_image_urls", additionalImageUrls);
-      return this;
-    }
-
-    public APIRequestCreateProduct setAdditionalUploadedImageIds (List<String> additionalUploadedImageIds) {
-      this.setParam("additional_uploaded_image_ids", additionalUploadedImageIds);
-      return this;
-    }
-    public APIRequestCreateProduct setAdditionalUploadedImageIds (String additionalUploadedImageIds) {
-      this.setParam("additional_uploaded_image_ids", additionalUploadedImageIds);
       return this;
     }
 
@@ -9398,6 +9417,51 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestCreateProduct setPrice (String price) {
       this.setParam("price", price);
+      return this;
+    }
+
+    public APIRequestCreateProduct setProductPriority0 (Double productPriority0) {
+      this.setParam("product_priority_0", productPriority0);
+      return this;
+    }
+    public APIRequestCreateProduct setProductPriority0 (String productPriority0) {
+      this.setParam("product_priority_0", productPriority0);
+      return this;
+    }
+
+    public APIRequestCreateProduct setProductPriority1 (Double productPriority1) {
+      this.setParam("product_priority_1", productPriority1);
+      return this;
+    }
+    public APIRequestCreateProduct setProductPriority1 (String productPriority1) {
+      this.setParam("product_priority_1", productPriority1);
+      return this;
+    }
+
+    public APIRequestCreateProduct setProductPriority2 (Double productPriority2) {
+      this.setParam("product_priority_2", productPriority2);
+      return this;
+    }
+    public APIRequestCreateProduct setProductPriority2 (String productPriority2) {
+      this.setParam("product_priority_2", productPriority2);
+      return this;
+    }
+
+    public APIRequestCreateProduct setProductPriority3 (Double productPriority3) {
+      this.setParam("product_priority_3", productPriority3);
+      return this;
+    }
+    public APIRequestCreateProduct setProductPriority3 (String productPriority3) {
+      this.setParam("product_priority_3", productPriority3);
+      return this;
+    }
+
+    public APIRequestCreateProduct setProductPriority4 (Double productPriority4) {
+      this.setParam("product_priority_4", productPriority4);
+      return this;
+    }
+    public APIRequestCreateProduct setProductPriority4 (String productPriority4) {
+      this.setParam("product_priority_4", productPriority4);
       return this;
     }
 

@@ -55,6 +55,10 @@ public class ProductItem extends APINode {
   private EnumAvailability mAvailability = null;
   @SerializedName("brand")
   private String mBrand = null;
+  @SerializedName("bundle_items")
+  private List<String> mBundleItems = null;
+  @SerializedName("bundle_retailer_ids")
+  private List<String> mBundleRetailerIds = null;
   @SerializedName("capability_to_review_status")
   private List<Map<Object, Object>> mCapabilityToReviewStatus = null;
   @SerializedName("category")
@@ -121,6 +125,8 @@ public class ProductItem extends APINode {
   private List<ProductItemInvalidationError> mInvalidationErrors = null;
   @SerializedName("inventory")
   private Long mInventory = null;
+  @SerializedName("is_bundle_hero")
+  private Boolean mIsBundleHero = null;
   @SerializedName("manufacturer_info")
   private String mManufacturerInfo = null;
   @SerializedName("manufacturer_part_number")
@@ -404,6 +410,10 @@ public class ProductItem extends APINode {
     return new APIRequestGetChannelsToIntegrityStatus(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetOverrideDetails getOverrideDetails() {
+    return new APIRequestGetOverrideDetails(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetProductSets getProductSets() {
     return new APIRequestGetProductSets(this.getPrefixedId().toString(), context);
   }
@@ -451,6 +461,14 @@ public class ProductItem extends APINode {
 
   public String getFieldBrand() {
     return mBrand;
+  }
+
+  public List<String> getFieldBundleItems() {
+    return mBundleItems;
+  }
+
+  public List<String> getFieldBundleRetailerIds() {
+    return mBundleRetailerIds;
   }
 
   public List<Map<Object, Object>> getFieldCapabilityToReviewStatus() {
@@ -583,6 +601,10 @@ public class ProductItem extends APINode {
 
   public Long getFieldInventory() {
     return mInventory;
+  }
+
+  public Boolean getFieldIsBundleHero() {
+    return mIsBundleHero;
   }
 
   public String getFieldManufacturerInfo() {
@@ -856,6 +878,155 @@ public class ProductItem extends APINode {
     }
     public APIRequestGetChannelsToIntegrityStatus requestRejectionInformationField (boolean value) {
       this.requestField("rejection_information", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestGetOverrideDetails extends APIRequest<OverrideDetails> {
+
+    APINodeList<OverrideDetails> lastResponse = null;
+    @Override
+    public APINodeList<OverrideDetails> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "keys",
+      "type",
+    };
+
+    public static final String[] FIELDS = {
+      "key",
+      "type",
+      "values",
+    };
+
+    @Override
+    public APINodeList<OverrideDetails> parseResponse(String response, String header) throws APIException {
+      return OverrideDetails.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<OverrideDetails> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<OverrideDetails> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<OverrideDetails>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<OverrideDetails>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<OverrideDetails>>() {
+           public APINodeList<OverrideDetails> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetOverrideDetails.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestGetOverrideDetails(String nodeId, APIContext context) {
+      super(context, nodeId, "/override_details", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetOverrideDetails setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetOverrideDetails setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetOverrideDetails setKeys (List<String> keys) {
+      this.setParam("keys", keys);
+      return this;
+    }
+    public APIRequestGetOverrideDetails setKeys (String keys) {
+      this.setParam("keys", keys);
+      return this;
+    }
+
+    public APIRequestGetOverrideDetails setType (OverrideDetails.EnumType type) {
+      this.setParam("type", type);
+      return this;
+    }
+    public APIRequestGetOverrideDetails setType (String type) {
+      this.setParam("type", type);
+      return this;
+    }
+
+    public APIRequestGetOverrideDetails requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetOverrideDetails requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetOverrideDetails requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetOverrideDetails requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetOverrideDetails requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetOverrideDetails requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetOverrideDetails requestKeyField () {
+      return this.requestKeyField(true);
+    }
+    public APIRequestGetOverrideDetails requestKeyField (boolean value) {
+      this.requestField("key", value);
+      return this;
+    }
+    public APIRequestGetOverrideDetails requestTypeField () {
+      return this.requestTypeField(true);
+    }
+    public APIRequestGetOverrideDetails requestTypeField (boolean value) {
+      this.requestField("type", value);
+      return this;
+    }
+    public APIRequestGetOverrideDetails requestValuesField () {
+      return this.requestValuesField(true);
+    }
+    public APIRequestGetOverrideDetails requestValuesField (boolean value) {
+      this.requestField("values", value);
       return this;
     }
   }
@@ -1310,6 +1481,8 @@ public class ProductItem extends APINode {
       "applinks",
       "availability",
       "brand",
+      "bundle_items",
+      "bundle_retailer_ids",
       "capability_to_review_status",
       "category",
       "category_specific_fields",
@@ -1343,6 +1516,7 @@ public class ProductItem extends APINode {
       "importer_name",
       "invalidation_errors",
       "inventory",
+      "is_bundle_hero",
       "manufacturer_info",
       "manufacturer_part_number",
       "marked_for_product_launch",
@@ -1550,6 +1724,20 @@ public class ProductItem extends APINode {
     }
     public APIRequestGet requestBrandField (boolean value) {
       this.requestField("brand", value);
+      return this;
+    }
+    public APIRequestGet requestBundleItemsField () {
+      return this.requestBundleItemsField(true);
+    }
+    public APIRequestGet requestBundleItemsField (boolean value) {
+      this.requestField("bundle_items", value);
+      return this;
+    }
+    public APIRequestGet requestBundleRetailerIdsField () {
+      return this.requestBundleRetailerIdsField(true);
+    }
+    public APIRequestGet requestBundleRetailerIdsField (boolean value) {
+      this.requestField("bundle_retailer_ids", value);
       return this;
     }
     public APIRequestGet requestCapabilityToReviewStatusField () {
@@ -1781,6 +1969,13 @@ public class ProductItem extends APINode {
     }
     public APIRequestGet requestInventoryField (boolean value) {
       this.requestField("inventory", value);
+      return this;
+    }
+    public APIRequestGet requestIsBundleHeroField () {
+      return this.requestIsBundleHeroField(true);
+    }
+    public APIRequestGet requestIsBundleHeroField (boolean value) {
+      this.requestField("is_bundle_hero", value);
       return this;
     }
     public APIRequestGet requestManufacturerInfoField () {
@@ -2039,7 +2234,6 @@ public class ProductItem extends APINode {
     }
     public static final String[] PARAMS = {
       "additional_image_urls",
-      "additional_uploaded_image_ids",
       "additional_variant_attributes",
       "android_app_name",
       "android_class",
@@ -2094,6 +2288,11 @@ public class ProductItem extends APINode {
       "origin_country",
       "pattern",
       "price",
+      "product_priority_0",
+      "product_priority_1",
+      "product_priority_2",
+      "product_priority_3",
+      "product_priority_4",
       "product_type",
       "quantity_to_sell_on_facebook",
       "retailer_id",
@@ -2175,15 +2374,6 @@ public class ProductItem extends APINode {
     }
     public APIRequestUpdate setAdditionalImageUrls (String additionalImageUrls) {
       this.setParam("additional_image_urls", additionalImageUrls);
-      return this;
-    }
-
-    public APIRequestUpdate setAdditionalUploadedImageIds (List<String> additionalUploadedImageIds) {
-      this.setParam("additional_uploaded_image_ids", additionalUploadedImageIds);
-      return this;
-    }
-    public APIRequestUpdate setAdditionalUploadedImageIds (String additionalUploadedImageIds) {
-      this.setParam("additional_uploaded_image_ids", additionalUploadedImageIds);
       return this;
     }
 
@@ -2538,6 +2728,51 @@ public class ProductItem extends APINode {
     }
     public APIRequestUpdate setPrice (String price) {
       this.setParam("price", price);
+      return this;
+    }
+
+    public APIRequestUpdate setProductPriority0 (Double productPriority0) {
+      this.setParam("product_priority_0", productPriority0);
+      return this;
+    }
+    public APIRequestUpdate setProductPriority0 (String productPriority0) {
+      this.setParam("product_priority_0", productPriority0);
+      return this;
+    }
+
+    public APIRequestUpdate setProductPriority1 (Double productPriority1) {
+      this.setParam("product_priority_1", productPriority1);
+      return this;
+    }
+    public APIRequestUpdate setProductPriority1 (String productPriority1) {
+      this.setParam("product_priority_1", productPriority1);
+      return this;
+    }
+
+    public APIRequestUpdate setProductPriority2 (Double productPriority2) {
+      this.setParam("product_priority_2", productPriority2);
+      return this;
+    }
+    public APIRequestUpdate setProductPriority2 (String productPriority2) {
+      this.setParam("product_priority_2", productPriority2);
+      return this;
+    }
+
+    public APIRequestUpdate setProductPriority3 (Double productPriority3) {
+      this.setParam("product_priority_3", productPriority3);
+      return this;
+    }
+    public APIRequestUpdate setProductPriority3 (String productPriority3) {
+      this.setParam("product_priority_3", productPriority3);
+      return this;
+    }
+
+    public APIRequestUpdate setProductPriority4 (Double productPriority4) {
+      this.setParam("product_priority_4", productPriority4);
+      return this;
+    }
+    public APIRequestUpdate setProductPriority4 (String productPriority4) {
+      this.setParam("product_priority_4", productPriority4);
       return this;
     }
 
@@ -3373,6 +3608,8 @@ public class ProductItem extends APINode {
       VALUE_BIG_CATALOG_WITH_ALL_ITEMS_IN_STOCK("BIG_CATALOG_WITH_ALL_ITEMS_IN_STOCK"),
       @SerializedName("BIZ_MSG_AI_AGENT_DISABLED_BY_USER")
       VALUE_BIZ_MSG_AI_AGENT_DISABLED_BY_USER("BIZ_MSG_AI_AGENT_DISABLED_BY_USER"),
+      @SerializedName("BIZ_MSG_GEN_AI_POLICY_VIOLATED")
+      VALUE_BIZ_MSG_GEN_AI_POLICY_VIOLATED("BIZ_MSG_GEN_AI_POLICY_VIOLATED"),
       @SerializedName("CANNOT_EDIT_SUBSCRIPTION_PRODUCTS")
       VALUE_CANNOT_EDIT_SUBSCRIPTION_PRODUCTS("CANNOT_EDIT_SUBSCRIPTION_PRODUCTS"),
       @SerializedName("CATALOG_NOT_CONNECTED_TO_EVENT_SOURCE")
@@ -3637,6 +3874,10 @@ public class ProductItem extends APINode {
       VALUE_VIDEO_NOT_DOWNLOADABLE("VIDEO_NOT_DOWNLOADABLE"),
       @SerializedName("WHATSAPP_DISABLED_BY_USER")
       VALUE_WHATSAPP_DISABLED_BY_USER("WHATSAPP_DISABLED_BY_USER"),
+      @SerializedName("WHATSAPP_MARKETING_MESSAGE_DISABLED_BY_USER")
+      VALUE_WHATSAPP_MARKETING_MESSAGE_DISABLED_BY_USER("WHATSAPP_MARKETING_MESSAGE_DISABLED_BY_USER"),
+      @SerializedName("WHATSAPP_MARKETING_MESSAGE_POLICY_VIOLATION")
+      VALUE_WHATSAPP_MARKETING_MESSAGE_POLICY_VIOLATION("WHATSAPP_MARKETING_MESSAGE_POLICY_VIOLATION"),
       @SerializedName("WHATSAPP_POLICY_VIOLATION")
       VALUE_WHATSAPP_POLICY_VIOLATION("WHATSAPP_POLICY_VIOLATION"),
       ;
@@ -4232,6 +4473,8 @@ public class ProductItem extends APINode {
     this.mApplinks = instance.mApplinks;
     this.mAvailability = instance.mAvailability;
     this.mBrand = instance.mBrand;
+    this.mBundleItems = instance.mBundleItems;
+    this.mBundleRetailerIds = instance.mBundleRetailerIds;
     this.mCapabilityToReviewStatus = instance.mCapabilityToReviewStatus;
     this.mCategory = instance.mCategory;
     this.mCategorySpecificFields = instance.mCategorySpecificFields;
@@ -4265,6 +4508,7 @@ public class ProductItem extends APINode {
     this.mImporterName = instance.mImporterName;
     this.mInvalidationErrors = instance.mInvalidationErrors;
     this.mInventory = instance.mInventory;
+    this.mIsBundleHero = instance.mIsBundleHero;
     this.mManufacturerInfo = instance.mManufacturerInfo;
     this.mManufacturerPartNumber = instance.mManufacturerPartNumber;
     this.mMarkedForProductLaunch = instance.mMarkedForProductLaunch;

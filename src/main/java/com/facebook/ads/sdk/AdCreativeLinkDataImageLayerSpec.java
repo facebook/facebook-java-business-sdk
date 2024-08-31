@@ -45,6 +45,8 @@ public class AdCreativeLinkDataImageLayerSpec extends APINode {
   private EnumBlendingMode mBlendingMode = null;
   @SerializedName("content")
   private Object mContent = null;
+  @SerializedName("frame_auto_show_enroll_status")
+  private String mFrameAutoShowEnrollStatus = null;
   @SerializedName("frame_image_hash")
   private String mFrameImageHash = null;
   @SerializedName("frame_source")
@@ -233,6 +235,15 @@ public class AdCreativeLinkDataImageLayerSpec extends APINode {
 
   public AdCreativeLinkDataImageLayerSpec setFieldContent(Object value) {
     this.mContent = value;
+    return this;
+  }
+
+  public String getFieldFrameAutoShowEnrollStatus() {
+    return mFrameAutoShowEnrollStatus;
+  }
+
+  public AdCreativeLinkDataImageLayerSpec setFieldFrameAutoShowEnrollStatus(String value) {
+    this.mFrameAutoShowEnrollStatus = value;
     return this;
   }
 
@@ -521,6 +532,7 @@ public class AdCreativeLinkDataImageLayerSpec extends APINode {
   public AdCreativeLinkDataImageLayerSpec copyFrom(AdCreativeLinkDataImageLayerSpec instance) {
     this.mBlendingMode = instance.mBlendingMode;
     this.mContent = instance.mContent;
+    this.mFrameAutoShowEnrollStatus = instance.mFrameAutoShowEnrollStatus;
     this.mFrameImageHash = instance.mFrameImageHash;
     this.mFrameSource = instance.mFrameSource;
     this.mImageSource = instance.mImageSource;

@@ -40,80 +40,70 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class CTXPartnerAppWelcomeMessageFlow extends APINode {
-  @SerializedName("compatible_platforms")
-  private List<String> mCompatiblePlatforms = null;
-  @SerializedName("eligible_platforms")
-  private List<String> mEligiblePlatforms = null;
+public class ProductDeliveryPreference extends APINode {
+  @SerializedName("ad_object_id")
+  private String mAdObjectId = null;
   @SerializedName("id")
   private String mId = null;
-  @SerializedName("is_ig_only_flow")
-  private Boolean mIsIgOnlyFlow = null;
-  @SerializedName("is_used_in_ad")
-  private Boolean mIsUsedInAd = null;
-  @SerializedName("last_update_time")
-  private String mLastUpdateTime = null;
-  @SerializedName("name")
-  private String mName = null;
-  @SerializedName("welcome_message_flow")
-  private String mWelcomeMessageFlow = null;
-  @SerializedName("welcome_message_sequence")
-  private String mWelcomeMessageSequence = null;
+  @SerializedName("product_priority")
+  private String mProductPriority = null;
+  @SerializedName("product_priority_category")
+  private List<String> mProductPriorityCategory = null;
   protected static Gson gson = null;
 
-  CTXPartnerAppWelcomeMessageFlow() {
+  ProductDeliveryPreference() {
   }
 
-  public CTXPartnerAppWelcomeMessageFlow(Long id, APIContext context) {
+  public ProductDeliveryPreference(Long id, APIContext context) {
     this(id.toString(), context);
   }
 
-  public CTXPartnerAppWelcomeMessageFlow(String id, APIContext context) {
+  public ProductDeliveryPreference(String id, APIContext context) {
     this.mId = id;
 
     this.context = context;
   }
 
-  public CTXPartnerAppWelcomeMessageFlow fetch() throws APIException{
-    CTXPartnerAppWelcomeMessageFlow newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+  public ProductDeliveryPreference fetch() throws APIException{
+    ProductDeliveryPreference newInstance = fetchById(this.getPrefixedId().toString(), this.context);
     this.copyFrom(newInstance);
     return this;
   }
 
-  public static CTXPartnerAppWelcomeMessageFlow fetchById(Long id, APIContext context) throws APIException {
+  public static ProductDeliveryPreference fetchById(Long id, APIContext context) throws APIException {
     return fetchById(id.toString(), context);
   }
 
-  public static ListenableFuture<CTXPartnerAppWelcomeMessageFlow> fetchByIdAsync(Long id, APIContext context) throws APIException {
+  public static ListenableFuture<ProductDeliveryPreference> fetchByIdAsync(Long id, APIContext context) throws APIException {
     return fetchByIdAsync(id.toString(), context);
   }
 
-  public static CTXPartnerAppWelcomeMessageFlow fetchById(String id, APIContext context) throws APIException {
+  public static ProductDeliveryPreference fetchById(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
   }
 
-  public static ListenableFuture<CTXPartnerAppWelcomeMessageFlow> fetchByIdAsync(String id, APIContext context) throws APIException {
+  public static ListenableFuture<ProductDeliveryPreference> fetchByIdAsync(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
   }
 
-  public static APINodeList<CTXPartnerAppWelcomeMessageFlow> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<CTXPartnerAppWelcomeMessageFlow>)(
-      new APIRequest<CTXPartnerAppWelcomeMessageFlow>(context, "", "/", "GET", CTXPartnerAppWelcomeMessageFlow.getParser())
+  public static APINodeList<ProductDeliveryPreference> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<ProductDeliveryPreference>)(
+      new APIRequest<ProductDeliveryPreference>(context, "", "/", "GET", ProductDeliveryPreference.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .execute()
     );
   }
 
-  public static ListenableFuture<APINodeList<CTXPartnerAppWelcomeMessageFlow>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+  public static ListenableFuture<APINodeList<ProductDeliveryPreference>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
     return
-      new APIRequest(context, "", "/", "GET", CTXPartnerAppWelcomeMessageFlow.getParser())
+      new APIRequest(context, "", "/", "GET", ProductDeliveryPreference.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
@@ -126,12 +116,12 @@ public class CTXPartnerAppWelcomeMessageFlow extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static CTXPartnerAppWelcomeMessageFlow loadJSON(String json, APIContext context, String header) {
-    CTXPartnerAppWelcomeMessageFlow ctxPartnerAppWelcomeMessageFlow = getGson().fromJson(json, CTXPartnerAppWelcomeMessageFlow.class);
+  public static ProductDeliveryPreference loadJSON(String json, APIContext context, String header) {
+    ProductDeliveryPreference productDeliveryPreference = getGson().fromJson(json, ProductDeliveryPreference.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(ctxPartnerAppWelcomeMessageFlow.toString());
+      JsonElement o2 = parser.parse(productDeliveryPreference.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -141,14 +131,14 @@ public class CTXPartnerAppWelcomeMessageFlow extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    ctxPartnerAppWelcomeMessageFlow.context = context;
-    ctxPartnerAppWelcomeMessageFlow.rawValue = json;
-    ctxPartnerAppWelcomeMessageFlow.header = header;
-    return ctxPartnerAppWelcomeMessageFlow;
+    productDeliveryPreference.context = context;
+    productDeliveryPreference.rawValue = json;
+    productDeliveryPreference.header = header;
+    return productDeliveryPreference;
   }
 
-  public static APINodeList<CTXPartnerAppWelcomeMessageFlow> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<CTXPartnerAppWelcomeMessageFlow> ctxPartnerAppWelcomeMessageFlows = new APINodeList<CTXPartnerAppWelcomeMessageFlow>(request, json, header);
+  public static APINodeList<ProductDeliveryPreference> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<ProductDeliveryPreference> productDeliveryPreferences = new APINodeList<ProductDeliveryPreference>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -159,9 +149,9 @@ public class CTXPartnerAppWelcomeMessageFlow extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          ctxPartnerAppWelcomeMessageFlows.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          productDeliveryPreferences.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return ctxPartnerAppWelcomeMessageFlows;
+        return productDeliveryPreferences;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -171,20 +161,20 @@ public class CTXPartnerAppWelcomeMessageFlow extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                ctxPartnerAppWelcomeMessageFlows.setCursors(before, after);
+                productDeliveryPreferences.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            ctxPartnerAppWelcomeMessageFlows.setPaging(previous, next);
+            productDeliveryPreferences.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              ctxPartnerAppWelcomeMessageFlows.setAppSecret(context.getAppSecretProof());
+              productDeliveryPreferences.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              ctxPartnerAppWelcomeMessageFlows.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              productDeliveryPreferences.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -195,23 +185,23 @@ public class CTXPartnerAppWelcomeMessageFlow extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  ctxPartnerAppWelcomeMessageFlows.add(loadJSON(entry.getValue().toString(), context, header));
+                  productDeliveryPreferences.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              ctxPartnerAppWelcomeMessageFlows.add(loadJSON(obj.toString(), context, header));
+              productDeliveryPreferences.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return ctxPartnerAppWelcomeMessageFlows;
+          return productDeliveryPreferences;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              ctxPartnerAppWelcomeMessageFlows.add(loadJSON(entry.getValue().toString(), context, header));
+              productDeliveryPreferences.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return ctxPartnerAppWelcomeMessageFlows;
+          return productDeliveryPreferences;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -228,20 +218,20 @@ public class CTXPartnerAppWelcomeMessageFlow extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              ctxPartnerAppWelcomeMessageFlows.add(loadJSON(value.toString(), context, header));
+              productDeliveryPreferences.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return ctxPartnerAppWelcomeMessageFlows;
+            return productDeliveryPreferences;
           }
 
           // Sixth, check if it's pure JsonObject
-          ctxPartnerAppWelcomeMessageFlows.clear();
-          ctxPartnerAppWelcomeMessageFlows.add(loadJSON(json, context, header));
-          return ctxPartnerAppWelcomeMessageFlows;
+          productDeliveryPreferences.clear();
+          productDeliveryPreferences.add(loadJSON(json, context, header));
+          return productDeliveryPreferences;
         }
       }
     } catch (Exception e) {
@@ -273,92 +263,67 @@ public class CTXPartnerAppWelcomeMessageFlow extends APINode {
   }
 
 
-  public List<String> getFieldCompatiblePlatforms() {
-    return mCompatiblePlatforms;
-  }
-
-  public List<String> getFieldEligiblePlatforms() {
-    return mEligiblePlatforms;
+  public String getFieldAdObjectId() {
+    return mAdObjectId;
   }
 
   public String getFieldId() {
     return mId;
   }
 
-  public Boolean getFieldIsIgOnlyFlow() {
-    return mIsIgOnlyFlow;
+  public String getFieldProductPriority() {
+    return mProductPriority;
   }
 
-  public Boolean getFieldIsUsedInAd() {
-    return mIsUsedInAd;
-  }
-
-  public String getFieldLastUpdateTime() {
-    return mLastUpdateTime;
-  }
-
-  public String getFieldName() {
-    return mName;
-  }
-
-  public String getFieldWelcomeMessageFlow() {
-    return mWelcomeMessageFlow;
-  }
-
-  public String getFieldWelcomeMessageSequence() {
-    return mWelcomeMessageSequence;
+  public List<String> getFieldProductPriorityCategory() {
+    return mProductPriorityCategory;
   }
 
 
 
-  public static class APIRequestGet extends APIRequest<CTXPartnerAppWelcomeMessageFlow> {
+  public static class APIRequestGet extends APIRequest<ProductDeliveryPreference> {
 
-    CTXPartnerAppWelcomeMessageFlow lastResponse = null;
+    ProductDeliveryPreference lastResponse = null;
     @Override
-    public CTXPartnerAppWelcomeMessageFlow getLastResponse() {
+    public ProductDeliveryPreference getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
     };
 
     public static final String[] FIELDS = {
-      "compatible_platforms",
-      "eligible_platforms",
+      "ad_object_id",
       "id",
-      "is_ig_only_flow",
-      "is_used_in_ad",
-      "last_update_time",
-      "name",
-      "welcome_message_flow",
-      "welcome_message_sequence",
+      "product_priority",
+      "product_priority_category",
     };
 
     @Override
-    public CTXPartnerAppWelcomeMessageFlow parseResponse(String response, String header) throws APIException {
-      return CTXPartnerAppWelcomeMessageFlow.parseResponse(response, getContext(), this, header).head();
+    public ProductDeliveryPreference parseResponse(String response, String header) throws APIException {
+      return ProductDeliveryPreference.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public CTXPartnerAppWelcomeMessageFlow execute() throws APIException {
+    public ProductDeliveryPreference execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public CTXPartnerAppWelcomeMessageFlow execute(Map<String, Object> extraParams) throws APIException {
+    public ProductDeliveryPreference execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<CTXPartnerAppWelcomeMessageFlow> executeAsync() throws APIException {
+    public ListenableFuture<ProductDeliveryPreference> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<CTXPartnerAppWelcomeMessageFlow> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<ProductDeliveryPreference> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, CTXPartnerAppWelcomeMessageFlow>() {
-           public CTXPartnerAppWelcomeMessageFlow apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, ProductDeliveryPreference>() {
+           public ProductDeliveryPreference apply(ResponseWrapper result) {
              try {
                return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -423,18 +388,11 @@ public class CTXPartnerAppWelcomeMessageFlow extends APINode {
       return this;
     }
 
-    public APIRequestGet requestCompatiblePlatformsField () {
-      return this.requestCompatiblePlatformsField(true);
+    public APIRequestGet requestAdObjectIdField () {
+      return this.requestAdObjectIdField(true);
     }
-    public APIRequestGet requestCompatiblePlatformsField (boolean value) {
-      this.requestField("compatible_platforms", value);
-      return this;
-    }
-    public APIRequestGet requestEligiblePlatformsField () {
-      return this.requestEligiblePlatformsField(true);
-    }
-    public APIRequestGet requestEligiblePlatformsField (boolean value) {
-      this.requestField("eligible_platforms", value);
+    public APIRequestGet requestAdObjectIdField (boolean value) {
+      this.requestField("ad_object_id", value);
       return this;
     }
     public APIRequestGet requestIdField () {
@@ -444,46 +402,18 @@ public class CTXPartnerAppWelcomeMessageFlow extends APINode {
       this.requestField("id", value);
       return this;
     }
-    public APIRequestGet requestIsIgOnlyFlowField () {
-      return this.requestIsIgOnlyFlowField(true);
+    public APIRequestGet requestProductPriorityField () {
+      return this.requestProductPriorityField(true);
     }
-    public APIRequestGet requestIsIgOnlyFlowField (boolean value) {
-      this.requestField("is_ig_only_flow", value);
+    public APIRequestGet requestProductPriorityField (boolean value) {
+      this.requestField("product_priority", value);
       return this;
     }
-    public APIRequestGet requestIsUsedInAdField () {
-      return this.requestIsUsedInAdField(true);
+    public APIRequestGet requestProductPriorityCategoryField () {
+      return this.requestProductPriorityCategoryField(true);
     }
-    public APIRequestGet requestIsUsedInAdField (boolean value) {
-      this.requestField("is_used_in_ad", value);
-      return this;
-    }
-    public APIRequestGet requestLastUpdateTimeField () {
-      return this.requestLastUpdateTimeField(true);
-    }
-    public APIRequestGet requestLastUpdateTimeField (boolean value) {
-      this.requestField("last_update_time", value);
-      return this;
-    }
-    public APIRequestGet requestNameField () {
-      return this.requestNameField(true);
-    }
-    public APIRequestGet requestNameField (boolean value) {
-      this.requestField("name", value);
-      return this;
-    }
-    public APIRequestGet requestWelcomeMessageFlowField () {
-      return this.requestWelcomeMessageFlowField(true);
-    }
-    public APIRequestGet requestWelcomeMessageFlowField (boolean value) {
-      this.requestField("welcome_message_flow", value);
-      return this;
-    }
-    public APIRequestGet requestWelcomeMessageSequenceField () {
-      return this.requestWelcomeMessageSequenceField(true);
-    }
-    public APIRequestGet requestWelcomeMessageSequenceField (boolean value) {
-      this.requestField("welcome_message_sequence", value);
+    public APIRequestGet requestProductPriorityCategoryField (boolean value) {
+      this.requestField("product_priority_category", value);
       return this;
     }
   }
@@ -502,25 +432,20 @@ public class CTXPartnerAppWelcomeMessageFlow extends APINode {
     return gson;
   }
 
-  public CTXPartnerAppWelcomeMessageFlow copyFrom(CTXPartnerAppWelcomeMessageFlow instance) {
-    this.mCompatiblePlatforms = instance.mCompatiblePlatforms;
-    this.mEligiblePlatforms = instance.mEligiblePlatforms;
+  public ProductDeliveryPreference copyFrom(ProductDeliveryPreference instance) {
+    this.mAdObjectId = instance.mAdObjectId;
     this.mId = instance.mId;
-    this.mIsIgOnlyFlow = instance.mIsIgOnlyFlow;
-    this.mIsUsedInAd = instance.mIsUsedInAd;
-    this.mLastUpdateTime = instance.mLastUpdateTime;
-    this.mName = instance.mName;
-    this.mWelcomeMessageFlow = instance.mWelcomeMessageFlow;
-    this.mWelcomeMessageSequence = instance.mWelcomeMessageSequence;
+    this.mProductPriority = instance.mProductPriority;
+    this.mProductPriorityCategory = instance.mProductPriorityCategory;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<CTXPartnerAppWelcomeMessageFlow> getParser() {
-    return new APIRequest.ResponseParser<CTXPartnerAppWelcomeMessageFlow>() {
-      public APINodeList<CTXPartnerAppWelcomeMessageFlow> parseResponse(String response, APIContext context, APIRequest<CTXPartnerAppWelcomeMessageFlow> request, String header) throws MalformedResponseException {
-        return CTXPartnerAppWelcomeMessageFlow.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<ProductDeliveryPreference> getParser() {
+    return new APIRequest.ResponseParser<ProductDeliveryPreference>() {
+      public APINodeList<ProductDeliveryPreference> parseResponse(String response, APIContext context, APIRequest<ProductDeliveryPreference> request, String header) throws MalformedResponseException {
+        return ProductDeliveryPreference.parseResponse(response, context, request, header);
       }
     };
   }

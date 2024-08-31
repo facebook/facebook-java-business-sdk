@@ -101,6 +101,8 @@ public class AdCreativeLinkData extends APINode {
   private AdCreativePostClickConfiguration mPostClickConfiguration = null;
   @SerializedName("preferred_image_tags")
   private List<String> mPreferredImageTags = null;
+  @SerializedName("preferred_video_tags")
+  private List<String> mPreferredVideoTags = null;
   @SerializedName("retailer_item_ids")
   private List<String> mRetailerItemIds = null;
   @SerializedName("show_multiple_images")
@@ -575,6 +577,15 @@ public class AdCreativeLinkData extends APINode {
     return this;
   }
 
+  public List<String> getFieldPreferredVideoTags() {
+    return mPreferredVideoTags;
+  }
+
+  public AdCreativeLinkData setFieldPreferredVideoTags(List<String> value) {
+    this.mPreferredVideoTags = value;
+    return this;
+  }
+
   public List<String> getFieldRetailerItemIds() {
     return mRetailerItemIds;
   }
@@ -690,6 +701,7 @@ public class AdCreativeLinkData extends APINode {
     this.mPicture = instance.mPicture;
     this.mPostClickConfiguration = instance.mPostClickConfiguration;
     this.mPreferredImageTags = instance.mPreferredImageTags;
+    this.mPreferredVideoTags = instance.mPreferredVideoTags;
     this.mRetailerItemIds = instance.mRetailerItemIds;
     this.mShowMultipleImages = instance.mShowMultipleImages;
     this.mStaticFallbackSpec = instance.mStaticFallbackSpec;

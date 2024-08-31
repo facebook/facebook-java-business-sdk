@@ -342,12 +342,12 @@ public class HomeListing extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGetAugmentedRealitiesMetadata getAugmentedRealitiesMetadata() {
-    return new APIRequestGetAugmentedRealitiesMetadata(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetChannelsToIntegrityStatus getChannelsToIntegrityStatus() {
     return new APIRequestGetChannelsToIntegrityStatus(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetOverrideDetails getOverrideDetails() {
+    return new APIRequestGetOverrideDetails(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetVideosMetadata getVideosMetadata() {
@@ -556,207 +556,6 @@ public class HomeListing extends APINode {
 
 
 
-  public static class APIRequestGetAugmentedRealitiesMetadata extends APIRequest<DynamicARMetadata> {
-
-    APINodeList<DynamicARMetadata> lastResponse = null;
-    @Override
-    public APINodeList<DynamicARMetadata> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "anchor_point",
-      "container_effect_enum",
-      "effect_icon_url",
-      "effect_id",
-      "id",
-      "platforms",
-      "scale_factor",
-      "shadow_texture_url",
-      "source_url",
-      "state",
-      "tags",
-      "variant_picker_url",
-    };
-
-    @Override
-    public APINodeList<DynamicARMetadata> parseResponse(String response, String header) throws APIException {
-      return DynamicARMetadata.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<DynamicARMetadata> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<DynamicARMetadata> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<DynamicARMetadata>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<DynamicARMetadata>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<DynamicARMetadata>>() {
-           public APINodeList<DynamicARMetadata> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetAugmentedRealitiesMetadata.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         },
-         MoreExecutors.directExecutor()
-      );
-    };
-
-    public APIRequestGetAugmentedRealitiesMetadata(String nodeId, APIContext context) {
-      super(context, nodeId, "/augmented_realities_metadata", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetAugmentedRealitiesMetadata setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAugmentedRealitiesMetadata setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetAugmentedRealitiesMetadata requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetAugmentedRealitiesMetadata requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAugmentedRealitiesMetadata requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetAugmentedRealitiesMetadata requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAugmentedRealitiesMetadata requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAugmentedRealitiesMetadata requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGetAugmentedRealitiesMetadata requestAnchorPointField () {
-      return this.requestAnchorPointField(true);
-    }
-    public APIRequestGetAugmentedRealitiesMetadata requestAnchorPointField (boolean value) {
-      this.requestField("anchor_point", value);
-      return this;
-    }
-    public APIRequestGetAugmentedRealitiesMetadata requestContainerEffectEnumField () {
-      return this.requestContainerEffectEnumField(true);
-    }
-    public APIRequestGetAugmentedRealitiesMetadata requestContainerEffectEnumField (boolean value) {
-      this.requestField("container_effect_enum", value);
-      return this;
-    }
-    public APIRequestGetAugmentedRealitiesMetadata requestEffectIconUrlField () {
-      return this.requestEffectIconUrlField(true);
-    }
-    public APIRequestGetAugmentedRealitiesMetadata requestEffectIconUrlField (boolean value) {
-      this.requestField("effect_icon_url", value);
-      return this;
-    }
-    public APIRequestGetAugmentedRealitiesMetadata requestEffectIdField () {
-      return this.requestEffectIdField(true);
-    }
-    public APIRequestGetAugmentedRealitiesMetadata requestEffectIdField (boolean value) {
-      this.requestField("effect_id", value);
-      return this;
-    }
-    public APIRequestGetAugmentedRealitiesMetadata requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetAugmentedRealitiesMetadata requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGetAugmentedRealitiesMetadata requestPlatformsField () {
-      return this.requestPlatformsField(true);
-    }
-    public APIRequestGetAugmentedRealitiesMetadata requestPlatformsField (boolean value) {
-      this.requestField("platforms", value);
-      return this;
-    }
-    public APIRequestGetAugmentedRealitiesMetadata requestScaleFactorField () {
-      return this.requestScaleFactorField(true);
-    }
-    public APIRequestGetAugmentedRealitiesMetadata requestScaleFactorField (boolean value) {
-      this.requestField("scale_factor", value);
-      return this;
-    }
-    public APIRequestGetAugmentedRealitiesMetadata requestShadowTextureUrlField () {
-      return this.requestShadowTextureUrlField(true);
-    }
-    public APIRequestGetAugmentedRealitiesMetadata requestShadowTextureUrlField (boolean value) {
-      this.requestField("shadow_texture_url", value);
-      return this;
-    }
-    public APIRequestGetAugmentedRealitiesMetadata requestSourceUrlField () {
-      return this.requestSourceUrlField(true);
-    }
-    public APIRequestGetAugmentedRealitiesMetadata requestSourceUrlField (boolean value) {
-      this.requestField("source_url", value);
-      return this;
-    }
-    public APIRequestGetAugmentedRealitiesMetadata requestStateField () {
-      return this.requestStateField(true);
-    }
-    public APIRequestGetAugmentedRealitiesMetadata requestStateField (boolean value) {
-      this.requestField("state", value);
-      return this;
-    }
-    public APIRequestGetAugmentedRealitiesMetadata requestTagsField () {
-      return this.requestTagsField(true);
-    }
-    public APIRequestGetAugmentedRealitiesMetadata requestTagsField (boolean value) {
-      this.requestField("tags", value);
-      return this;
-    }
-    public APIRequestGetAugmentedRealitiesMetadata requestVariantPickerUrlField () {
-      return this.requestVariantPickerUrlField(true);
-    }
-    public APIRequestGetAugmentedRealitiesMetadata requestVariantPickerUrlField (boolean value) {
-      this.requestField("variant_picker_url", value);
-      return this;
-    }
-  }
-
   public static class APIRequestGetChannelsToIntegrityStatus extends APIRequest<CatalogItemChannelsToIntegrityStatus> {
 
     APINodeList<CatalogItemChannelsToIntegrityStatus> lastResponse = null;
@@ -874,6 +673,155 @@ public class HomeListing extends APINode {
     }
     public APIRequestGetChannelsToIntegrityStatus requestRejectionInformationField (boolean value) {
       this.requestField("rejection_information", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestGetOverrideDetails extends APIRequest<OverrideDetails> {
+
+    APINodeList<OverrideDetails> lastResponse = null;
+    @Override
+    public APINodeList<OverrideDetails> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "keys",
+      "type",
+    };
+
+    public static final String[] FIELDS = {
+      "key",
+      "type",
+      "values",
+    };
+
+    @Override
+    public APINodeList<OverrideDetails> parseResponse(String response, String header) throws APIException {
+      return OverrideDetails.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<OverrideDetails> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<OverrideDetails> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<OverrideDetails>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<OverrideDetails>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<OverrideDetails>>() {
+           public APINodeList<OverrideDetails> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetOverrideDetails.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestGetOverrideDetails(String nodeId, APIContext context) {
+      super(context, nodeId, "/override_details", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetOverrideDetails setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetOverrideDetails setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetOverrideDetails setKeys (List<String> keys) {
+      this.setParam("keys", keys);
+      return this;
+    }
+    public APIRequestGetOverrideDetails setKeys (String keys) {
+      this.setParam("keys", keys);
+      return this;
+    }
+
+    public APIRequestGetOverrideDetails setType (OverrideDetails.EnumType type) {
+      this.setParam("type", type);
+      return this;
+    }
+    public APIRequestGetOverrideDetails setType (String type) {
+      this.setParam("type", type);
+      return this;
+    }
+
+    public APIRequestGetOverrideDetails requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetOverrideDetails requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetOverrideDetails requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetOverrideDetails requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetOverrideDetails requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetOverrideDetails requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetOverrideDetails requestKeyField () {
+      return this.requestKeyField(true);
+    }
+    public APIRequestGetOverrideDetails requestKeyField (boolean value) {
+      this.requestField("key", value);
+      return this;
+    }
+    public APIRequestGetOverrideDetails requestTypeField () {
+      return this.requestTypeField(true);
+    }
+    public APIRequestGetOverrideDetails requestTypeField (boolean value) {
+      this.requestField("type", value);
+      return this;
+    }
+    public APIRequestGetOverrideDetails requestValuesField () {
+      return this.requestValuesField(true);
+    }
+    public APIRequestGetOverrideDetails requestValuesField (boolean value) {
+      this.requestField("values", value);
       return this;
     }
   }

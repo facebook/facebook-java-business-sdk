@@ -63,6 +63,8 @@ public class AdSet extends APINode {
   private EnumBidStrategy mBidStrategy = null;
   @SerializedName("billing_event")
   private EnumBillingEvent mBillingEvent = null;
+  @SerializedName("brand_safety_config")
+  private BrandSafetyCampaignConfig mBrandSafetyConfig = null;
   @SerializedName("budget_remaining")
   private String mBudgetRemaining = null;
   @SerializedName("campaign")
@@ -430,6 +432,10 @@ public class AdSet extends APINode {
     return new APIRequestGetInsightsAsync(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetMessageDeliveryEstimate getMessageDeliveryEstimate() {
+    return new APIRequestGetMessageDeliveryEstimate(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetTargetingSentenceLines getTargetingSentenceLines() {
     return new APIRequestGetTargetingSentenceLines(this.getPrefixedId().toString(), context);
   }
@@ -571,6 +577,20 @@ public class AdSet extends APINode {
     return this;
   }
 
+  public BrandSafetyCampaignConfig getFieldBrandSafetyConfig() {
+    return mBrandSafetyConfig;
+  }
+
+  public AdSet setFieldBrandSafetyConfig(BrandSafetyCampaignConfig value) {
+    this.mBrandSafetyConfig = value;
+    return this;
+  }
+
+  public AdSet setFieldBrandSafetyConfig(String value) {
+    Type type = new TypeToken<BrandSafetyCampaignConfig>(){}.getType();
+    this.mBrandSafetyConfig = BrandSafetyCampaignConfig.getGson().fromJson(value, type);
+    return this;
+  }
   public String getFieldBudgetRemaining() {
     return mBudgetRemaining;
   }
@@ -3480,6 +3500,7 @@ public class AdSet extends APINode {
       "bid_info",
       "bid_strategy",
       "billing_event",
+      "brand_safety_config",
       "budget_remaining",
       "campaign",
       "campaign_active_time",
@@ -3734,6 +3755,13 @@ public class AdSet extends APINode {
     }
     public APIRequestGetCopies requestBillingEventField (boolean value) {
       this.requestField("billing_event", value);
+      return this;
+    }
+    public APIRequestGetCopies requestBrandSafetyConfigField () {
+      return this.requestBrandSafetyConfigField(true);
+    }
+    public APIRequestGetCopies requestBrandSafetyConfigField (boolean value) {
+      this.requestField("brand_safety_config", value);
       return this;
     }
     public APIRequestGetCopies requestBudgetRemainingField () {
@@ -5047,6 +5075,253 @@ public class AdSet extends APINode {
 
   }
 
+  public static class APIRequestGetMessageDeliveryEstimate extends APIRequest<MessageDeliveryEstimate> {
+
+    APINodeList<MessageDeliveryEstimate> lastResponse = null;
+    @Override
+    public APINodeList<MessageDeliveryEstimate> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "bid_amount",
+      "lifetime_budget",
+      "lifetime_in_days",
+      "optimization_goal",
+      "pacing_type",
+      "promoted_object",
+      "targeting_spec",
+    };
+
+    public static final String[] FIELDS = {
+      "estimate_cost",
+      "estimate_cost_lower_bound",
+      "estimate_cost_upper_bound",
+      "estimate_coverage_lower_bound",
+      "estimate_coverage_upper_bound",
+      "estimate_delivery",
+      "estimate_delivery_lower_bound",
+      "estimate_delivery_upper_bound",
+      "estimate_status",
+    };
+
+    @Override
+    public APINodeList<MessageDeliveryEstimate> parseResponse(String response, String header) throws APIException {
+      return MessageDeliveryEstimate.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<MessageDeliveryEstimate> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<MessageDeliveryEstimate> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<MessageDeliveryEstimate>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<MessageDeliveryEstimate>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<MessageDeliveryEstimate>>() {
+           public APINodeList<MessageDeliveryEstimate> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetMessageDeliveryEstimate.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestGetMessageDeliveryEstimate(String nodeId, APIContext context) {
+      super(context, nodeId, "/message_delivery_estimate", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetMessageDeliveryEstimate setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetMessageDeliveryEstimate setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetMessageDeliveryEstimate setBidAmount (Long bidAmount) {
+      this.setParam("bid_amount", bidAmount);
+      return this;
+    }
+    public APIRequestGetMessageDeliveryEstimate setBidAmount (String bidAmount) {
+      this.setParam("bid_amount", bidAmount);
+      return this;
+    }
+
+    public APIRequestGetMessageDeliveryEstimate setLifetimeBudget (Long lifetimeBudget) {
+      this.setParam("lifetime_budget", lifetimeBudget);
+      return this;
+    }
+    public APIRequestGetMessageDeliveryEstimate setLifetimeBudget (String lifetimeBudget) {
+      this.setParam("lifetime_budget", lifetimeBudget);
+      return this;
+    }
+
+    public APIRequestGetMessageDeliveryEstimate setLifetimeInDays (Long lifetimeInDays) {
+      this.setParam("lifetime_in_days", lifetimeInDays);
+      return this;
+    }
+    public APIRequestGetMessageDeliveryEstimate setLifetimeInDays (String lifetimeInDays) {
+      this.setParam("lifetime_in_days", lifetimeInDays);
+      return this;
+    }
+
+    public APIRequestGetMessageDeliveryEstimate setOptimizationGoal (MessageDeliveryEstimate.EnumOptimizationGoal optimizationGoal) {
+      this.setParam("optimization_goal", optimizationGoal);
+      return this;
+    }
+    public APIRequestGetMessageDeliveryEstimate setOptimizationGoal (String optimizationGoal) {
+      this.setParam("optimization_goal", optimizationGoal);
+      return this;
+    }
+
+    public APIRequestGetMessageDeliveryEstimate setPacingType (MessageDeliveryEstimate.EnumPacingType pacingType) {
+      this.setParam("pacing_type", pacingType);
+      return this;
+    }
+    public APIRequestGetMessageDeliveryEstimate setPacingType (String pacingType) {
+      this.setParam("pacing_type", pacingType);
+      return this;
+    }
+
+    public APIRequestGetMessageDeliveryEstimate setPromotedObject (Object promotedObject) {
+      this.setParam("promoted_object", promotedObject);
+      return this;
+    }
+    public APIRequestGetMessageDeliveryEstimate setPromotedObject (String promotedObject) {
+      this.setParam("promoted_object", promotedObject);
+      return this;
+    }
+
+    public APIRequestGetMessageDeliveryEstimate setTargetingSpec (Targeting targetingSpec) {
+      this.setParam("targeting_spec", targetingSpec);
+      return this;
+    }
+    public APIRequestGetMessageDeliveryEstimate setTargetingSpec (String targetingSpec) {
+      this.setParam("targeting_spec", targetingSpec);
+      return this;
+    }
+
+    public APIRequestGetMessageDeliveryEstimate requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetMessageDeliveryEstimate requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetMessageDeliveryEstimate requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetMessageDeliveryEstimate requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetMessageDeliveryEstimate requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetMessageDeliveryEstimate requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetMessageDeliveryEstimate requestEstimateCostField () {
+      return this.requestEstimateCostField(true);
+    }
+    public APIRequestGetMessageDeliveryEstimate requestEstimateCostField (boolean value) {
+      this.requestField("estimate_cost", value);
+      return this;
+    }
+    public APIRequestGetMessageDeliveryEstimate requestEstimateCostLowerBoundField () {
+      return this.requestEstimateCostLowerBoundField(true);
+    }
+    public APIRequestGetMessageDeliveryEstimate requestEstimateCostLowerBoundField (boolean value) {
+      this.requestField("estimate_cost_lower_bound", value);
+      return this;
+    }
+    public APIRequestGetMessageDeliveryEstimate requestEstimateCostUpperBoundField () {
+      return this.requestEstimateCostUpperBoundField(true);
+    }
+    public APIRequestGetMessageDeliveryEstimate requestEstimateCostUpperBoundField (boolean value) {
+      this.requestField("estimate_cost_upper_bound", value);
+      return this;
+    }
+    public APIRequestGetMessageDeliveryEstimate requestEstimateCoverageLowerBoundField () {
+      return this.requestEstimateCoverageLowerBoundField(true);
+    }
+    public APIRequestGetMessageDeliveryEstimate requestEstimateCoverageLowerBoundField (boolean value) {
+      this.requestField("estimate_coverage_lower_bound", value);
+      return this;
+    }
+    public APIRequestGetMessageDeliveryEstimate requestEstimateCoverageUpperBoundField () {
+      return this.requestEstimateCoverageUpperBoundField(true);
+    }
+    public APIRequestGetMessageDeliveryEstimate requestEstimateCoverageUpperBoundField (boolean value) {
+      this.requestField("estimate_coverage_upper_bound", value);
+      return this;
+    }
+    public APIRequestGetMessageDeliveryEstimate requestEstimateDeliveryField () {
+      return this.requestEstimateDeliveryField(true);
+    }
+    public APIRequestGetMessageDeliveryEstimate requestEstimateDeliveryField (boolean value) {
+      this.requestField("estimate_delivery", value);
+      return this;
+    }
+    public APIRequestGetMessageDeliveryEstimate requestEstimateDeliveryLowerBoundField () {
+      return this.requestEstimateDeliveryLowerBoundField(true);
+    }
+    public APIRequestGetMessageDeliveryEstimate requestEstimateDeliveryLowerBoundField (boolean value) {
+      this.requestField("estimate_delivery_lower_bound", value);
+      return this;
+    }
+    public APIRequestGetMessageDeliveryEstimate requestEstimateDeliveryUpperBoundField () {
+      return this.requestEstimateDeliveryUpperBoundField(true);
+    }
+    public APIRequestGetMessageDeliveryEstimate requestEstimateDeliveryUpperBoundField (boolean value) {
+      this.requestField("estimate_delivery_upper_bound", value);
+      return this;
+    }
+    public APIRequestGetMessageDeliveryEstimate requestEstimateStatusField () {
+      return this.requestEstimateStatusField(true);
+    }
+    public APIRequestGetMessageDeliveryEstimate requestEstimateStatusField (boolean value) {
+      this.requestField("estimate_status", value);
+      return this;
+    }
+  }
+
   public static class APIRequestGetTargetingSentenceLines extends APIRequest<TargetingSentenceLine> {
 
     APINodeList<TargetingSentenceLine> lastResponse = null;
@@ -5307,6 +5582,7 @@ public class AdSet extends APINode {
       "bid_info",
       "bid_strategy",
       "billing_event",
+      "brand_safety_config",
       "budget_remaining",
       "campaign",
       "campaign_active_time",
@@ -5561,6 +5837,13 @@ public class AdSet extends APINode {
     }
     public APIRequestGet requestBillingEventField (boolean value) {
       this.requestField("billing_event", value);
+      return this;
+    }
+    public APIRequestGet requestBrandSafetyConfigField () {
+      return this.requestBrandSafetyConfigField(true);
+    }
+    public APIRequestGet requestBrandSafetyConfigField (boolean value) {
+      this.requestField("brand_safety_config", value);
       return this;
     }
     public APIRequestGet requestBudgetRemainingField () {
@@ -6711,10 +6994,14 @@ public class AdSet extends APINode {
       VALUE_APPLINKS_AUTOMATIC("APPLINKS_AUTOMATIC"),
       @SerializedName("FACEBOOK")
       VALUE_FACEBOOK("FACEBOOK"),
+      @SerializedName("FACEBOOK_PAGE")
+      VALUE_FACEBOOK_PAGE("FACEBOOK_PAGE"),
       @SerializedName("INSTAGRAM_DIRECT")
       VALUE_INSTAGRAM_DIRECT("INSTAGRAM_DIRECT"),
       @SerializedName("INSTAGRAM_PROFILE")
       VALUE_INSTAGRAM_PROFILE("INSTAGRAM_PROFILE"),
+      @SerializedName("INSTAGRAM_PROFILE_AND_FACEBOOK_PAGE")
+      VALUE_INSTAGRAM_PROFILE_AND_FACEBOOK_PAGE("INSTAGRAM_PROFILE_AND_FACEBOOK_PAGE"),
       @SerializedName("MESSAGING_INSTAGRAM_DIRECT_MESSENGER")
       VALUE_MESSAGING_INSTAGRAM_DIRECT_MESSENGER("MESSAGING_INSTAGRAM_DIRECT_MESSENGER"),
       @SerializedName("MESSAGING_INSTAGRAM_DIRECT_MESSENGER_WHATSAPP")
@@ -6965,6 +7252,7 @@ public class AdSet extends APINode {
     this.mBidInfo = instance.mBidInfo;
     this.mBidStrategy = instance.mBidStrategy;
     this.mBillingEvent = instance.mBillingEvent;
+    this.mBrandSafetyConfig = instance.mBrandSafetyConfig;
     this.mBudgetRemaining = instance.mBudgetRemaining;
     this.mCampaign = instance.mCampaign;
     this.mCampaignActiveTime = instance.mCampaignActiveTime;

@@ -57,6 +57,8 @@ public class BusinessRoleRequest extends APINode {
   private String mId = null;
   @SerializedName("invite_link")
   private String mInviteLink = null;
+  @SerializedName("invited_user_type")
+  private List<String> mInvitedUserType = null;
   @SerializedName("ip_role")
   private String mIpRole = null;
   @SerializedName("owner")
@@ -323,6 +325,10 @@ public class BusinessRoleRequest extends APINode {
     return mInviteLink;
   }
 
+  public List<String> getFieldInvitedUserType() {
+    return mInvitedUserType;
+  }
+
   public String getFieldIpRole() {
     return mIpRole;
   }
@@ -476,6 +482,7 @@ public class BusinessRoleRequest extends APINode {
       "finance_role",
       "id",
       "invite_link",
+      "invited_user_type",
       "ip_role",
       "owner",
       "role",
@@ -628,6 +635,13 @@ public class BusinessRoleRequest extends APINode {
     }
     public APIRequestGet requestInviteLinkField (boolean value) {
       this.requestField("invite_link", value);
+      return this;
+    }
+    public APIRequestGet requestInvitedUserTypeField () {
+      return this.requestInvitedUserTypeField(true);
+    }
+    public APIRequestGet requestInvitedUserTypeField (boolean value) {
+      this.requestField("invited_user_type", value);
       return this;
     }
     public APIRequestGet requestIpRoleField () {
@@ -857,6 +871,7 @@ public class BusinessRoleRequest extends APINode {
     this.mFinanceRole = instance.mFinanceRole;
     this.mId = instance.mId;
     this.mInviteLink = instance.mInviteLink;
+    this.mInvitedUserType = instance.mInvitedUserType;
     this.mIpRole = instance.mIpRole;
     this.mOwner = instance.mOwner;
     this.mRole = instance.mRole;

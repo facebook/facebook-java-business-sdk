@@ -45,6 +45,8 @@ public class IGRefreshAccessTokenForIGOnlyAPI extends APINode {
   private String mAccessToken = null;
   @SerializedName("expires_in")
   private Long mExpiresIn = null;
+  @SerializedName("permissions")
+  private String mPermissions = null;
   @SerializedName("token_type")
   private String mTokenType = null;
   @SerializedName("id")
@@ -271,6 +273,10 @@ public class IGRefreshAccessTokenForIGOnlyAPI extends APINode {
     return mExpiresIn;
   }
 
+  public String getFieldPermissions() {
+    return mPermissions;
+  }
+
   public String getFieldTokenType() {
     return mTokenType;
   }
@@ -296,6 +302,7 @@ public class IGRefreshAccessTokenForIGOnlyAPI extends APINode {
     public static final String[] FIELDS = {
       "access_token",
       "expires_in",
+      "permissions",
       "token_type",
       "id",
     };
@@ -414,6 +421,13 @@ public class IGRefreshAccessTokenForIGOnlyAPI extends APINode {
       this.requestField("expires_in", value);
       return this;
     }
+    public APIRequestGet requestPermissionsField () {
+      return this.requestPermissionsField(true);
+    }
+    public APIRequestGet requestPermissionsField (boolean value) {
+      this.requestField("permissions", value);
+      return this;
+    }
     public APIRequestGet requestTokenTypeField () {
       return this.requestTokenTypeField(true);
     }
@@ -447,6 +461,7 @@ public class IGRefreshAccessTokenForIGOnlyAPI extends APINode {
   public IGRefreshAccessTokenForIGOnlyAPI copyFrom(IGRefreshAccessTokenForIGOnlyAPI instance) {
     this.mAccessToken = instance.mAccessToken;
     this.mExpiresIn = instance.mExpiresIn;
+    this.mPermissions = instance.mPermissions;
     this.mTokenType = instance.mTokenType;
     this.mId = instance.mId;
     this.context = instance.context;

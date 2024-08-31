@@ -49,6 +49,8 @@ public class AdCreativeFeatureCustomizations extends APINode {
   private String mFontName = null;
   @SerializedName("product_recommendation_type")
   private String mProductRecommendationType = null;
+  @SerializedName("product_versioning_fallback_strategy")
+  private String mProductVersioningFallbackStrategy = null;
   @SerializedName("showcase_card_display")
   private String mShowcaseCardDisplay = null;
   @SerializedName("text_style")
@@ -242,6 +244,15 @@ public class AdCreativeFeatureCustomizations extends APINode {
     return this;
   }
 
+  public String getFieldProductVersioningFallbackStrategy() {
+    return mProductVersioningFallbackStrategy;
+  }
+
+  public AdCreativeFeatureCustomizations setFieldProductVersioningFallbackStrategy(String value) {
+    this.mProductVersioningFallbackStrategy = value;
+    return this;
+  }
+
   public String getFieldShowcaseCardDisplay() {
     return mShowcaseCardDisplay;
   }
@@ -290,6 +301,7 @@ public class AdCreativeFeatureCustomizations extends APINode {
     this.mCatalogFeedTagName = instance.mCatalogFeedTagName;
     this.mFontName = instance.mFontName;
     this.mProductRecommendationType = instance.mProductRecommendationType;
+    this.mProductVersioningFallbackStrategy = instance.mProductVersioningFallbackStrategy;
     this.mShowcaseCardDisplay = instance.mShowcaseCardDisplay;
     this.mTextStyle = instance.mTextStyle;
     this.mVideoCropStyle = instance.mVideoCropStyle;

@@ -40,27 +40,25 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class PageVideosYouCanUse extends APINode {
-  @SerializedName("description")
-  private String mDescription = null;
+public class Dataset extends APINode {
   @SerializedName("id")
   private String mId = null;
-  @SerializedName("title")
-  private String mTitle = null;
+  @SerializedName("name")
+  private String mName = null;
   protected static Gson gson = null;
 
-  public PageVideosYouCanUse() {
+  public Dataset() {
   }
 
   public String getId() {
     return getFieldId().toString();
   }
-  public static PageVideosYouCanUse loadJSON(String json, APIContext context, String header) {
-    PageVideosYouCanUse pageVideosYouCanUse = getGson().fromJson(json, PageVideosYouCanUse.class);
+  public static Dataset loadJSON(String json, APIContext context, String header) {
+    Dataset dataset = getGson().fromJson(json, Dataset.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(pageVideosYouCanUse.toString());
+      JsonElement o2 = parser.parse(dataset.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -70,14 +68,14 @@ public class PageVideosYouCanUse extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    pageVideosYouCanUse.context = context;
-    pageVideosYouCanUse.rawValue = json;
-    pageVideosYouCanUse.header = header;
-    return pageVideosYouCanUse;
+    dataset.context = context;
+    dataset.rawValue = json;
+    dataset.header = header;
+    return dataset;
   }
 
-  public static APINodeList<PageVideosYouCanUse> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<PageVideosYouCanUse> pageVideosYouCanUses = new APINodeList<PageVideosYouCanUse>(request, json, header);
+  public static APINodeList<Dataset> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<Dataset> datasets = new APINodeList<Dataset>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -88,9 +86,9 @@ public class PageVideosYouCanUse extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          pageVideosYouCanUses.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          datasets.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return pageVideosYouCanUses;
+        return datasets;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -100,20 +98,20 @@ public class PageVideosYouCanUse extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                pageVideosYouCanUses.setCursors(before, after);
+                datasets.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            pageVideosYouCanUses.setPaging(previous, next);
+            datasets.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              pageVideosYouCanUses.setAppSecret(context.getAppSecretProof());
+              datasets.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              pageVideosYouCanUses.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              datasets.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -124,23 +122,23 @@ public class PageVideosYouCanUse extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  pageVideosYouCanUses.add(loadJSON(entry.getValue().toString(), context, header));
+                  datasets.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              pageVideosYouCanUses.add(loadJSON(obj.toString(), context, header));
+              datasets.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return pageVideosYouCanUses;
+          return datasets;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              pageVideosYouCanUses.add(loadJSON(entry.getValue().toString(), context, header));
+              datasets.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return pageVideosYouCanUses;
+          return datasets;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -157,20 +155,20 @@ public class PageVideosYouCanUse extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              pageVideosYouCanUses.add(loadJSON(value.toString(), context, header));
+              datasets.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return pageVideosYouCanUses;
+            return datasets;
           }
 
           // Sixth, check if it's pure JsonObject
-          pageVideosYouCanUses.clear();
-          pageVideosYouCanUses.add(loadJSON(json, context, header));
-          return pageVideosYouCanUses;
+          datasets.clear();
+          datasets.add(loadJSON(json, context, header));
+          return datasets;
         }
       }
     } catch (Exception e) {
@@ -198,30 +196,21 @@ public class PageVideosYouCanUse extends APINode {
   }
 
 
-  public String getFieldDescription() {
-    return mDescription;
-  }
-
-  public PageVideosYouCanUse setFieldDescription(String value) {
-    this.mDescription = value;
-    return this;
-  }
-
   public String getFieldId() {
     return mId;
   }
 
-  public PageVideosYouCanUse setFieldId(String value) {
+  public Dataset setFieldId(String value) {
     this.mId = value;
     return this;
   }
 
-  public String getFieldTitle() {
-    return mTitle;
+  public String getFieldName() {
+    return mName;
   }
 
-  public PageVideosYouCanUse setFieldTitle(String value) {
-    this.mTitle = value;
+  public Dataset setFieldName(String value) {
+    this.mName = value;
     return this;
   }
 
@@ -241,19 +230,18 @@ public class PageVideosYouCanUse extends APINode {
     return gson;
   }
 
-  public PageVideosYouCanUse copyFrom(PageVideosYouCanUse instance) {
-    this.mDescription = instance.mDescription;
+  public Dataset copyFrom(Dataset instance) {
     this.mId = instance.mId;
-    this.mTitle = instance.mTitle;
+    this.mName = instance.mName;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<PageVideosYouCanUse> getParser() {
-    return new APIRequest.ResponseParser<PageVideosYouCanUse>() {
-      public APINodeList<PageVideosYouCanUse> parseResponse(String response, APIContext context, APIRequest<PageVideosYouCanUse> request, String header) throws MalformedResponseException {
-        return PageVideosYouCanUse.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<Dataset> getParser() {
+    return new APIRequest.ResponseParser<Dataset>() {
+      public APINodeList<Dataset> parseResponse(String response, APIContext context, APIRequest<Dataset> request, String header) throws MalformedResponseException {
+        return Dataset.parseResponse(response, context, request, header);
       }
     };
   }

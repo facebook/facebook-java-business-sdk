@@ -45,6 +45,10 @@ public class IGUpcomingEvent extends APINode {
   private String mEndTime = null;
   @SerializedName("id")
   private String mId = null;
+  @SerializedName("notification_subtypes")
+  private List<String> mNotificationSubtypes = null;
+  @SerializedName("notification_target_time")
+  private String mNotificationTargetTime = null;
   @SerializedName("start_time")
   private String mStartTime = null;
   @SerializedName("title")
@@ -275,6 +279,14 @@ public class IGUpcomingEvent extends APINode {
     return mId;
   }
 
+  public List<String> getFieldNotificationSubtypes() {
+    return mNotificationSubtypes;
+  }
+
+  public String getFieldNotificationTargetTime() {
+    return mNotificationTargetTime;
+  }
+
   public String getFieldStartTime() {
     return mStartTime;
   }
@@ -298,6 +310,8 @@ public class IGUpcomingEvent extends APINode {
     public static final String[] FIELDS = {
       "end_time",
       "id",
+      "notification_subtypes",
+      "notification_target_time",
       "start_time",
       "title",
     };
@@ -406,6 +420,20 @@ public class IGUpcomingEvent extends APINode {
       this.requestField("id", value);
       return this;
     }
+    public APIRequestGet requestNotificationSubtypesField () {
+      return this.requestNotificationSubtypesField(true);
+    }
+    public APIRequestGet requestNotificationSubtypesField (boolean value) {
+      this.requestField("notification_subtypes", value);
+      return this;
+    }
+    public APIRequestGet requestNotificationTargetTimeField () {
+      return this.requestNotificationTargetTimeField(true);
+    }
+    public APIRequestGet requestNotificationTargetTimeField (boolean value) {
+      this.requestField("notification_target_time", value);
+      return this;
+    }
     public APIRequestGet requestStartTimeField () {
       return this.requestStartTimeField(true);
     }
@@ -431,6 +459,8 @@ public class IGUpcomingEvent extends APINode {
     }
     public static final String[] PARAMS = {
       "end_time",
+      "notification_subtypes",
+      "notification_target_time",
       "start_time",
       "title",
     };
@@ -497,6 +527,24 @@ public class IGUpcomingEvent extends APINode {
       return this;
     }
 
+    public APIRequestUpdate setNotificationSubtypes (List<IGUpcomingEvent.EnumNotificationSubtypes> notificationSubtypes) {
+      this.setParam("notification_subtypes", notificationSubtypes);
+      return this;
+    }
+    public APIRequestUpdate setNotificationSubtypes (String notificationSubtypes) {
+      this.setParam("notification_subtypes", notificationSubtypes);
+      return this;
+    }
+
+    public APIRequestUpdate setNotificationTargetTime (IGUpcomingEvent.EnumNotificationTargetTime notificationTargetTime) {
+      this.setParam("notification_target_time", notificationTargetTime);
+      return this;
+    }
+    public APIRequestUpdate setNotificationTargetTime (String notificationTargetTime) {
+      this.setParam("notification_target_time", notificationTargetTime);
+      return this;
+    }
+
     public APIRequestUpdate setStartTime (String startTime) {
       this.setParam("start_time", startTime);
       return this;
@@ -545,6 +593,66 @@ public class IGUpcomingEvent extends APINode {
 
   }
 
+  public static enum EnumNotificationSubtypes {
+      @SerializedName("AFTER_EVENT_1DAY")
+      VALUE_AFTER_EVENT_1DAY("AFTER_EVENT_1DAY"),
+      @SerializedName("AFTER_EVENT_2DAY")
+      VALUE_AFTER_EVENT_2DAY("AFTER_EVENT_2DAY"),
+      @SerializedName("AFTER_EVENT_3DAY")
+      VALUE_AFTER_EVENT_3DAY("AFTER_EVENT_3DAY"),
+      @SerializedName("AFTER_EVENT_4DAY")
+      VALUE_AFTER_EVENT_4DAY("AFTER_EVENT_4DAY"),
+      @SerializedName("AFTER_EVENT_5DAY")
+      VALUE_AFTER_EVENT_5DAY("AFTER_EVENT_5DAY"),
+      @SerializedName("AFTER_EVENT_6DAY")
+      VALUE_AFTER_EVENT_6DAY("AFTER_EVENT_6DAY"),
+      @SerializedName("AFTER_EVENT_7DAY")
+      VALUE_AFTER_EVENT_7DAY("AFTER_EVENT_7DAY"),
+      @SerializedName("BEFORE_EVENT_15MIN")
+      VALUE_BEFORE_EVENT_15MIN("BEFORE_EVENT_15MIN"),
+      @SerializedName("BEFORE_EVENT_1DAY")
+      VALUE_BEFORE_EVENT_1DAY("BEFORE_EVENT_1DAY"),
+      @SerializedName("BEFORE_EVENT_1HOUR")
+      VALUE_BEFORE_EVENT_1HOUR("BEFORE_EVENT_1HOUR"),
+      @SerializedName("BEFORE_EVENT_2DAY")
+      VALUE_BEFORE_EVENT_2DAY("BEFORE_EVENT_2DAY"),
+      @SerializedName("EVENT_START")
+      VALUE_EVENT_START("EVENT_START"),
+      @SerializedName("RESCHEDULED")
+      VALUE_RESCHEDULED("RESCHEDULED"),
+      ;
+
+      private String value;
+
+      private EnumNotificationSubtypes(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumNotificationTargetTime {
+      @SerializedName("EVENT_END")
+      VALUE_EVENT_END("EVENT_END"),
+      @SerializedName("EVENT_START")
+      VALUE_EVENT_START("EVENT_START"),
+      ;
+
+      private String value;
+
+      private EnumNotificationTargetTime(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
 
   synchronized /*package*/ static Gson getGson() {
     if (gson != null) {
@@ -562,6 +670,8 @@ public class IGUpcomingEvent extends APINode {
   public IGUpcomingEvent copyFrom(IGUpcomingEvent instance) {
     this.mEndTime = instance.mEndTime;
     this.mId = instance.mId;
+    this.mNotificationSubtypes = instance.mNotificationSubtypes;
+    this.mNotificationTargetTime = instance.mNotificationTargetTime;
     this.mStartTime = instance.mStartTime;
     this.mTitle = instance.mTitle;
     this.context = instance.context;

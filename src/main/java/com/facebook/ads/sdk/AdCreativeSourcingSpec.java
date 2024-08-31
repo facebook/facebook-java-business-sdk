@@ -43,6 +43,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class AdCreativeSourcingSpec extends APINode {
   @SerializedName("associated_product_set_id")
   private String mAssociatedProductSetId = null;
+  @SerializedName("enable_social_feedback_preservation")
+  private Boolean mEnableSocialFeedbackPreservation = null;
   @SerializedName("promotion_metadata_spec")
   private List<AdCreativePromotionMetadataSpec> mPromotionMetadataSpec = null;
   @SerializedName("site_links_spec")
@@ -209,6 +211,15 @@ public class AdCreativeSourcingSpec extends APINode {
     return this;
   }
 
+  public Boolean getFieldEnableSocialFeedbackPreservation() {
+    return mEnableSocialFeedbackPreservation;
+  }
+
+  public AdCreativeSourcingSpec setFieldEnableSocialFeedbackPreservation(Boolean value) {
+    this.mEnableSocialFeedbackPreservation = value;
+    return this;
+  }
+
   public List<AdCreativePromotionMetadataSpec> getFieldPromotionMetadataSpec() {
     return mPromotionMetadataSpec;
   }
@@ -264,6 +275,7 @@ public class AdCreativeSourcingSpec extends APINode {
 
   public AdCreativeSourcingSpec copyFrom(AdCreativeSourcingSpec instance) {
     this.mAssociatedProductSetId = instance.mAssociatedProductSetId;
+    this.mEnableSocialFeedbackPreservation = instance.mEnableSocialFeedbackPreservation;
     this.mPromotionMetadataSpec = instance.mPromotionMetadataSpec;
     this.mSiteLinksSpec = instance.mSiteLinksSpec;
     this.mSourceUrl = instance.mSourceUrl;

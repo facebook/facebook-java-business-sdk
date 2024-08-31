@@ -53,6 +53,8 @@ public class AdAssetFeedSpec extends APINode {
   private List<String> mAutotranslate = null;
   @SerializedName("bodies")
   private List<AdAssetFeedSpecBody> mBodies = null;
+  @SerializedName("call_ads_configuration")
+  private Object mCallAdsConfiguration = null;
   @SerializedName("call_to_action_types")
   private List<EnumCallToActionTypes> mCallToActionTypes = null;
   @SerializedName("call_to_actions")
@@ -309,6 +311,15 @@ public class AdAssetFeedSpec extends APINode {
     this.mBodies = AdAssetFeedSpecBody.getGson().fromJson(value, type);
     return this;
   }
+  public Object getFieldCallAdsConfiguration() {
+    return mCallAdsConfiguration;
+  }
+
+  public AdAssetFeedSpec setFieldCallAdsConfiguration(Object value) {
+    this.mCallAdsConfiguration = value;
+    return this;
+  }
+
   public List<EnumCallToActionTypes> getFieldCallToActionTypes() {
     return mCallToActionTypes;
   }
@@ -690,6 +701,8 @@ public class AdAssetFeedSpec extends APINode {
       VALUE_VIDEO_ANNOTATION("VIDEO_ANNOTATION"),
       @SerializedName("VIDEO_CALL")
       VALUE_VIDEO_CALL("VIDEO_CALL"),
+      @SerializedName("VIEW_CHANNEL")
+      VALUE_VIEW_CHANNEL("VIEW_CHANNEL"),
       @SerializedName("VIEW_PRODUCT")
       VALUE_VIEW_PRODUCT("VIEW_PRODUCT"),
       @SerializedName("VISIT_PAGES_FEED")
@@ -737,6 +750,7 @@ public class AdAssetFeedSpec extends APINode {
     this.mAssetCustomizationRules = instance.mAssetCustomizationRules;
     this.mAutotranslate = instance.mAutotranslate;
     this.mBodies = instance.mBodies;
+    this.mCallAdsConfiguration = instance.mCallAdsConfiguration;
     this.mCallToActionTypes = instance.mCallToActionTypes;
     this.mCallToActions = instance.mCallToActions;
     this.mCaptions = instance.mCaptions;

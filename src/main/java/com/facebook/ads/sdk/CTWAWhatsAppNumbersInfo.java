@@ -49,6 +49,8 @@ public class CTWAWhatsAppNumbersInfo extends APINode {
   private Boolean mIsBusinessNumber = null;
   @SerializedName("page_whatsapp_number_id")
   private String mPageWhatsappNumberId = null;
+  @SerializedName("waba_id")
+  private String mWabaId = null;
   @SerializedName("whatsapp_number")
   private String mWhatsappNumber = null;
   @SerializedName("whatsapp_smb_device")
@@ -240,6 +242,15 @@ public class CTWAWhatsAppNumbersInfo extends APINode {
     return this;
   }
 
+  public String getFieldWabaId() {
+    return mWabaId;
+  }
+
+  public CTWAWhatsAppNumbersInfo setFieldWabaId(String value) {
+    this.mWabaId = value;
+    return this;
+  }
+
   public String getFieldWhatsappNumber() {
     return mWhatsappNumber;
   }
@@ -279,6 +290,7 @@ public class CTWAWhatsAppNumbersInfo extends APINode {
     this.mFormattedWhatsappNumber = instance.mFormattedWhatsappNumber;
     this.mIsBusinessNumber = instance.mIsBusinessNumber;
     this.mPageWhatsappNumberId = instance.mPageWhatsappNumberId;
+    this.mWabaId = instance.mWabaId;
     this.mWhatsappNumber = instance.mWhatsappNumber;
     this.mWhatsappSmbDevice = instance.mWhatsappSmbDevice;
     this.context = instance.context;

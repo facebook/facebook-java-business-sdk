@@ -40,66 +40,72 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class VidwallaBroadcast extends APINode {
+public class ALMEndAdvertiserInfo extends APINode {
+  @SerializedName("estimated_ad_budget")
+  private Long mEstimatedAdBudget = null;
   @SerializedName("id")
   private String mId = null;
-  @SerializedName("overlay_url")
-  private String mOverlayUrl = null;
+  @SerializedName("parent_advertiser_id")
+  private String mParentAdvertiserId = null;
+  @SerializedName("parent_advertiser_name")
+  private String mParentAdvertiserName = null;
+  @SerializedName("tag")
+  private List<String> mTag = null;
   protected static Gson gson = null;
 
-  VidwallaBroadcast() {
+  ALMEndAdvertiserInfo() {
   }
 
-  public VidwallaBroadcast(Long id, APIContext context) {
+  public ALMEndAdvertiserInfo(Long id, APIContext context) {
     this(id.toString(), context);
   }
 
-  public VidwallaBroadcast(String id, APIContext context) {
+  public ALMEndAdvertiserInfo(String id, APIContext context) {
     this.mId = id;
 
     this.context = context;
   }
 
-  public VidwallaBroadcast fetch() throws APIException{
-    VidwallaBroadcast newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+  public ALMEndAdvertiserInfo fetch() throws APIException{
+    ALMEndAdvertiserInfo newInstance = fetchById(this.getPrefixedId().toString(), this.context);
     this.copyFrom(newInstance);
     return this;
   }
 
-  public static VidwallaBroadcast fetchById(Long id, APIContext context) throws APIException {
+  public static ALMEndAdvertiserInfo fetchById(Long id, APIContext context) throws APIException {
     return fetchById(id.toString(), context);
   }
 
-  public static ListenableFuture<VidwallaBroadcast> fetchByIdAsync(Long id, APIContext context) throws APIException {
+  public static ListenableFuture<ALMEndAdvertiserInfo> fetchByIdAsync(Long id, APIContext context) throws APIException {
     return fetchByIdAsync(id.toString(), context);
   }
 
-  public static VidwallaBroadcast fetchById(String id, APIContext context) throws APIException {
+  public static ALMEndAdvertiserInfo fetchById(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
   }
 
-  public static ListenableFuture<VidwallaBroadcast> fetchByIdAsync(String id, APIContext context) throws APIException {
+  public static ListenableFuture<ALMEndAdvertiserInfo> fetchByIdAsync(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
   }
 
-  public static APINodeList<VidwallaBroadcast> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<VidwallaBroadcast>)(
-      new APIRequest<VidwallaBroadcast>(context, "", "/", "GET", VidwallaBroadcast.getParser())
+  public static APINodeList<ALMEndAdvertiserInfo> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<ALMEndAdvertiserInfo>)(
+      new APIRequest<ALMEndAdvertiserInfo>(context, "", "/", "GET", ALMEndAdvertiserInfo.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .execute()
     );
   }
 
-  public static ListenableFuture<APINodeList<VidwallaBroadcast>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+  public static ListenableFuture<APINodeList<ALMEndAdvertiserInfo>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
     return
-      new APIRequest(context, "", "/", "GET", VidwallaBroadcast.getParser())
+      new APIRequest(context, "", "/", "GET", ALMEndAdvertiserInfo.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
@@ -112,12 +118,12 @@ public class VidwallaBroadcast extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static VidwallaBroadcast loadJSON(String json, APIContext context, String header) {
-    VidwallaBroadcast vidwallaBroadcast = getGson().fromJson(json, VidwallaBroadcast.class);
+  public static ALMEndAdvertiserInfo loadJSON(String json, APIContext context, String header) {
+    ALMEndAdvertiserInfo almEndAdvertiserInfo = getGson().fromJson(json, ALMEndAdvertiserInfo.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(vidwallaBroadcast.toString());
+      JsonElement o2 = parser.parse(almEndAdvertiserInfo.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -127,14 +133,14 @@ public class VidwallaBroadcast extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    vidwallaBroadcast.context = context;
-    vidwallaBroadcast.rawValue = json;
-    vidwallaBroadcast.header = header;
-    return vidwallaBroadcast;
+    almEndAdvertiserInfo.context = context;
+    almEndAdvertiserInfo.rawValue = json;
+    almEndAdvertiserInfo.header = header;
+    return almEndAdvertiserInfo;
   }
 
-  public static APINodeList<VidwallaBroadcast> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<VidwallaBroadcast> vidwallaBroadcasts = new APINodeList<VidwallaBroadcast>(request, json, header);
+  public static APINodeList<ALMEndAdvertiserInfo> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<ALMEndAdvertiserInfo> almEndAdvertiserInfos = new APINodeList<ALMEndAdvertiserInfo>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -145,9 +151,9 @@ public class VidwallaBroadcast extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          vidwallaBroadcasts.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          almEndAdvertiserInfos.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return vidwallaBroadcasts;
+        return almEndAdvertiserInfos;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -157,20 +163,20 @@ public class VidwallaBroadcast extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                vidwallaBroadcasts.setCursors(before, after);
+                almEndAdvertiserInfos.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            vidwallaBroadcasts.setPaging(previous, next);
+            almEndAdvertiserInfos.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              vidwallaBroadcasts.setAppSecret(context.getAppSecretProof());
+              almEndAdvertiserInfos.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              vidwallaBroadcasts.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              almEndAdvertiserInfos.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -181,23 +187,23 @@ public class VidwallaBroadcast extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  vidwallaBroadcasts.add(loadJSON(entry.getValue().toString(), context, header));
+                  almEndAdvertiserInfos.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              vidwallaBroadcasts.add(loadJSON(obj.toString(), context, header));
+              almEndAdvertiserInfos.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return vidwallaBroadcasts;
+          return almEndAdvertiserInfos;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              vidwallaBroadcasts.add(loadJSON(entry.getValue().toString(), context, header));
+              almEndAdvertiserInfos.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return vidwallaBroadcasts;
+          return almEndAdvertiserInfos;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -214,20 +220,20 @@ public class VidwallaBroadcast extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              vidwallaBroadcasts.add(loadJSON(value.toString(), context, header));
+              almEndAdvertiserInfos.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return vidwallaBroadcasts;
+            return almEndAdvertiserInfos;
           }
 
           // Sixth, check if it's pure JsonObject
-          vidwallaBroadcasts.clear();
-          vidwallaBroadcasts.add(loadJSON(json, context, header));
-          return vidwallaBroadcasts;
+          almEndAdvertiserInfos.clear();
+          almEndAdvertiserInfos.add(loadJSON(json, context, header));
+          return almEndAdvertiserInfos;
         }
       }
     } catch (Exception e) {
@@ -259,57 +265,72 @@ public class VidwallaBroadcast extends APINode {
   }
 
 
+  public Long getFieldEstimatedAdBudget() {
+    return mEstimatedAdBudget;
+  }
+
   public String getFieldId() {
     return mId;
   }
 
-  public String getFieldOverlayUrl() {
-    return mOverlayUrl;
+  public String getFieldParentAdvertiserId() {
+    return mParentAdvertiserId;
+  }
+
+  public String getFieldParentAdvertiserName() {
+    return mParentAdvertiserName;
+  }
+
+  public List<String> getFieldTag() {
+    return mTag;
   }
 
 
 
-  public static class APIRequestGet extends APIRequest<VidwallaBroadcast> {
+  public static class APIRequestGet extends APIRequest<ALMEndAdvertiserInfo> {
 
-    VidwallaBroadcast lastResponse = null;
+    ALMEndAdvertiserInfo lastResponse = null;
     @Override
-    public VidwallaBroadcast getLastResponse() {
+    public ALMEndAdvertiserInfo getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
     };
 
     public static final String[] FIELDS = {
+      "estimated_ad_budget",
       "id",
-      "overlay_url",
+      "parent_advertiser_id",
+      "parent_advertiser_name",
+      "tag",
     };
 
     @Override
-    public VidwallaBroadcast parseResponse(String response, String header) throws APIException {
-      return VidwallaBroadcast.parseResponse(response, getContext(), this, header).head();
+    public ALMEndAdvertiserInfo parseResponse(String response, String header) throws APIException {
+      return ALMEndAdvertiserInfo.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public VidwallaBroadcast execute() throws APIException {
+    public ALMEndAdvertiserInfo execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public VidwallaBroadcast execute(Map<String, Object> extraParams) throws APIException {
+    public ALMEndAdvertiserInfo execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<VidwallaBroadcast> executeAsync() throws APIException {
+    public ListenableFuture<ALMEndAdvertiserInfo> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<VidwallaBroadcast> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<ALMEndAdvertiserInfo> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, VidwallaBroadcast>() {
-           public VidwallaBroadcast apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, ALMEndAdvertiserInfo>() {
+           public ALMEndAdvertiserInfo apply(ResponseWrapper result) {
              try {
                return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -374,6 +395,13 @@ public class VidwallaBroadcast extends APINode {
       return this;
     }
 
+    public APIRequestGet requestEstimatedAdBudgetField () {
+      return this.requestEstimatedAdBudgetField(true);
+    }
+    public APIRequestGet requestEstimatedAdBudgetField (boolean value) {
+      this.requestField("estimated_ad_budget", value);
+      return this;
+    }
     public APIRequestGet requestIdField () {
       return this.requestIdField(true);
     }
@@ -381,11 +409,25 @@ public class VidwallaBroadcast extends APINode {
       this.requestField("id", value);
       return this;
     }
-    public APIRequestGet requestOverlayUrlField () {
-      return this.requestOverlayUrlField(true);
+    public APIRequestGet requestParentAdvertiserIdField () {
+      return this.requestParentAdvertiserIdField(true);
     }
-    public APIRequestGet requestOverlayUrlField (boolean value) {
-      this.requestField("overlay_url", value);
+    public APIRequestGet requestParentAdvertiserIdField (boolean value) {
+      this.requestField("parent_advertiser_id", value);
+      return this;
+    }
+    public APIRequestGet requestParentAdvertiserNameField () {
+      return this.requestParentAdvertiserNameField(true);
+    }
+    public APIRequestGet requestParentAdvertiserNameField (boolean value) {
+      this.requestField("parent_advertiser_name", value);
+      return this;
+    }
+    public APIRequestGet requestTagField () {
+      return this.requestTagField(true);
+    }
+    public APIRequestGet requestTagField (boolean value) {
+      this.requestField("tag", value);
       return this;
     }
   }
@@ -404,18 +446,21 @@ public class VidwallaBroadcast extends APINode {
     return gson;
   }
 
-  public VidwallaBroadcast copyFrom(VidwallaBroadcast instance) {
+  public ALMEndAdvertiserInfo copyFrom(ALMEndAdvertiserInfo instance) {
+    this.mEstimatedAdBudget = instance.mEstimatedAdBudget;
     this.mId = instance.mId;
-    this.mOverlayUrl = instance.mOverlayUrl;
+    this.mParentAdvertiserId = instance.mParentAdvertiserId;
+    this.mParentAdvertiserName = instance.mParentAdvertiserName;
+    this.mTag = instance.mTag;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<VidwallaBroadcast> getParser() {
-    return new APIRequest.ResponseParser<VidwallaBroadcast>() {
-      public APINodeList<VidwallaBroadcast> parseResponse(String response, APIContext context, APIRequest<VidwallaBroadcast> request, String header) throws MalformedResponseException {
-        return VidwallaBroadcast.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<ALMEndAdvertiserInfo> getParser() {
+    return new APIRequest.ResponseParser<ALMEndAdvertiserInfo>() {
+      public APINodeList<ALMEndAdvertiserInfo> parseResponse(String response, APIContext context, APIRequest<ALMEndAdvertiserInfo> request, String header) throws MalformedResponseException {
+        return ALMEndAdvertiserInfo.parseResponse(response, context, request, header);
       }
     };
   }

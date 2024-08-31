@@ -59,8 +59,6 @@ public class AdsInsights extends APINode {
   private List<AdsActionStats> mAdImpressionActions = null;
   @SerializedName("ad_name")
   private String mAdName = null;
-  @SerializedName("adjusted_offline_purchase")
-  private List<Object> mAdjustedOfflinePurchase = null;
   @SerializedName("adset_end")
   private String mAdsetEnd = null;
   @SerializedName("adset_id")
@@ -207,6 +205,12 @@ public class AdsInsights extends APINode {
   private List<AdsActionStats> mInteractiveComponentTap = null;
   @SerializedName("labels")
   private String mLabels = null;
+  @SerializedName("landing_page_view_actions_per_link_click")
+  private List<AdsActionStats> mLandingPageViewActionsPerLinkClick = null;
+  @SerializedName("landing_page_view_per_purchase_rate")
+  private List<AdsActionStats> mLandingPageViewPerPurchaseRate = null;
+  @SerializedName("link_clicks_per_results")
+  private List<AdsActionStats> mLinkClicksPerResults = null;
   @SerializedName("location")
   private String mLocation = null;
   @SerializedName("marketing_messages_cost_per_delivered")
@@ -233,6 +237,8 @@ public class AdsInsights extends APINode {
   private String mPlacePageName = null;
   @SerializedName("purchase_roas")
   private List<AdsActionStats> mPurchaseRoas = null;
+  @SerializedName("purchases_per_link_click")
+  private List<AdsActionStats> mPurchasesPerLinkClick = null;
   @SerializedName("qualifying_question_qualify_answer_rate")
   private String mQualifyingQuestionQualifyAnswerRate = null;
   @SerializedName("quality_ranking")
@@ -354,6 +360,8 @@ public class AdsInsights extends APINode {
   private String mImpressionDevice = null;
   @SerializedName("is_conversion_id_modeled")
   private String mIsConversionIdModeled = null;
+  @SerializedName("is_rendered_as_delayed_skip_ad")
+  private String mIsRenderedAsDelayedSkipAd = null;
   @SerializedName("landing_destination")
   private String mLandingDestination = null;
   @SerializedName("link_url_asset")
@@ -657,15 +665,6 @@ public class AdsInsights extends APINode {
 
   public AdsInsights setFieldAdName(String value) {
     this.mAdName = value;
-    return this;
-  }
-
-  public List<Object> getFieldAdjustedOfflinePurchase() {
-    return mAdjustedOfflinePurchase;
-  }
-
-  public AdsInsights setFieldAdjustedOfflinePurchase(List<Object> value) {
-    this.mAdjustedOfflinePurchase = value;
     return this;
   }
 
@@ -1436,6 +1435,48 @@ public class AdsInsights extends APINode {
     return this;
   }
 
+  public List<AdsActionStats> getFieldLandingPageViewActionsPerLinkClick() {
+    return mLandingPageViewActionsPerLinkClick;
+  }
+
+  public AdsInsights setFieldLandingPageViewActionsPerLinkClick(List<AdsActionStats> value) {
+    this.mLandingPageViewActionsPerLinkClick = value;
+    return this;
+  }
+
+  public AdsInsights setFieldLandingPageViewActionsPerLinkClick(String value) {
+    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
+    this.mLandingPageViewActionsPerLinkClick = AdsActionStats.getGson().fromJson(value, type);
+    return this;
+  }
+  public List<AdsActionStats> getFieldLandingPageViewPerPurchaseRate() {
+    return mLandingPageViewPerPurchaseRate;
+  }
+
+  public AdsInsights setFieldLandingPageViewPerPurchaseRate(List<AdsActionStats> value) {
+    this.mLandingPageViewPerPurchaseRate = value;
+    return this;
+  }
+
+  public AdsInsights setFieldLandingPageViewPerPurchaseRate(String value) {
+    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
+    this.mLandingPageViewPerPurchaseRate = AdsActionStats.getGson().fromJson(value, type);
+    return this;
+  }
+  public List<AdsActionStats> getFieldLinkClicksPerResults() {
+    return mLinkClicksPerResults;
+  }
+
+  public AdsInsights setFieldLinkClicksPerResults(List<AdsActionStats> value) {
+    this.mLinkClicksPerResults = value;
+    return this;
+  }
+
+  public AdsInsights setFieldLinkClicksPerResults(String value) {
+    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
+    this.mLinkClicksPerResults = AdsActionStats.getGson().fromJson(value, type);
+    return this;
+  }
   public String getFieldLocation() {
     return mLocation;
   }
@@ -1576,6 +1617,20 @@ public class AdsInsights extends APINode {
   public AdsInsights setFieldPurchaseRoas(String value) {
     Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
     this.mPurchaseRoas = AdsActionStats.getGson().fromJson(value, type);
+    return this;
+  }
+  public List<AdsActionStats> getFieldPurchasesPerLinkClick() {
+    return mPurchasesPerLinkClick;
+  }
+
+  public AdsInsights setFieldPurchasesPerLinkClick(List<AdsActionStats> value) {
+    this.mPurchasesPerLinkClick = value;
+    return this;
+  }
+
+  public AdsInsights setFieldPurchasesPerLinkClick(String value) {
+    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
+    this.mPurchasesPerLinkClick = AdsActionStats.getGson().fromJson(value, type);
     return this;
   }
   public String getFieldQualifyingQuestionQualifyAnswerRate() {
@@ -2148,6 +2203,10 @@ public class AdsInsights extends APINode {
     return mIsConversionIdModeled;
   }
 
+  public String getFieldIsRenderedAsDelayedSkipAd() {
+    return mIsRenderedAsDelayedSkipAd;
+  }
+
   public String getFieldLandingDestination() {
     return mLandingDestination;
   }
@@ -2410,6 +2469,8 @@ public class AdsInsights extends APINode {
       VALUE_IMPRESSION_DEVICE("impression_device"),
       @SerializedName("is_conversion_id_modeled")
       VALUE_IS_CONVERSION_ID_MODELED("is_conversion_id_modeled"),
+      @SerializedName("is_rendered_as_delayed_skip_ad")
+      VALUE_IS_RENDERED_AS_DELAYED_SKIP_AD("is_rendered_as_delayed_skip_ad"),
       @SerializedName("landing_destination")
       VALUE_LANDING_DESTINATION("landing_destination"),
       @SerializedName("link_url_asset")
@@ -2625,7 +2686,6 @@ public class AdsInsights extends APINode {
     this.mAdId = instance.mAdId;
     this.mAdImpressionActions = instance.mAdImpressionActions;
     this.mAdName = instance.mAdName;
-    this.mAdjustedOfflinePurchase = instance.mAdjustedOfflinePurchase;
     this.mAdsetEnd = instance.mAdsetEnd;
     this.mAdsetId = instance.mAdsetId;
     this.mAdsetName = instance.mAdsetName;
@@ -2699,6 +2759,9 @@ public class AdsInsights extends APINode {
     this.mInstantExperienceOutboundClicks = instance.mInstantExperienceOutboundClicks;
     this.mInteractiveComponentTap = instance.mInteractiveComponentTap;
     this.mLabels = instance.mLabels;
+    this.mLandingPageViewActionsPerLinkClick = instance.mLandingPageViewActionsPerLinkClick;
+    this.mLandingPageViewPerPurchaseRate = instance.mLandingPageViewPerPurchaseRate;
+    this.mLinkClicksPerResults = instance.mLinkClicksPerResults;
     this.mLocation = instance.mLocation;
     this.mMarketingMessagesCostPerDelivered = instance.mMarketingMessagesCostPerDelivered;
     this.mMarketingMessagesCostPerLinkBtnClick = instance.mMarketingMessagesCostPerLinkBtnClick;
@@ -2712,6 +2775,7 @@ public class AdsInsights extends APINode {
     this.mOutboundClicksCtr = instance.mOutboundClicksCtr;
     this.mPlacePageName = instance.mPlacePageName;
     this.mPurchaseRoas = instance.mPurchaseRoas;
+    this.mPurchasesPerLinkClick = instance.mPurchasesPerLinkClick;
     this.mQualifyingQuestionQualifyAnswerRate = instance.mQualifyingQuestionQualifyAnswerRate;
     this.mQualityRanking = instance.mQualityRanking;
     this.mReach = instance.mReach;
@@ -2772,6 +2836,7 @@ public class AdsInsights extends APINode {
     this.mImageAsset = instance.mImageAsset;
     this.mImpressionDevice = instance.mImpressionDevice;
     this.mIsConversionIdModeled = instance.mIsConversionIdModeled;
+    this.mIsRenderedAsDelayedSkipAd = instance.mIsRenderedAsDelayedSkipAd;
     this.mLandingDestination = instance.mLandingDestination;
     this.mLinkUrlAsset = instance.mLinkUrlAsset;
     this.mMarketingMessagesBtnName = instance.mMarketingMessagesBtnName;

@@ -1131,6 +1131,8 @@ public class AdAccountTargetingUnified extends APINode {
       VALUE_EFFECTIVE_OCULUS_POSITIONS("effective_oculus_positions"),
       @SerializedName("effective_publisher_platforms")
       VALUE_EFFECTIVE_PUBLISHER_PLATFORMS("effective_publisher_platforms"),
+      @SerializedName("effective_threads_positions")
+      VALUE_EFFECTIVE_THREADS_POSITIONS("effective_threads_positions"),
       @SerializedName("effective_whatsapp_positions")
       VALUE_EFFECTIVE_WHATSAPP_POSITIONS("effective_whatsapp_positions"),
       @SerializedName("engagement_specs")
@@ -1289,6 +1291,8 @@ public class AdAccountTargetingUnified extends APINode {
       VALUE_TARGETING_OPTIMIZATION("targeting_optimization"),
       @SerializedName("targeting_relaxation_types")
       VALUE_TARGETING_RELAXATION_TYPES("targeting_relaxation_types"),
+      @SerializedName("threads_positions")
+      VALUE_THREADS_POSITIONS("threads_positions"),
       @SerializedName("timezones")
       VALUE_TIMEZONES("timezones"),
       @SerializedName("topic")

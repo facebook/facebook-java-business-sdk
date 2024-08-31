@@ -368,7 +368,6 @@ public class AdReportRun extends APINode {
       "ad_id",
       "ad_impression_actions",
       "ad_name",
-      "adjusted_offline_purchase",
       "adset_end",
       "adset_id",
       "adset_name",
@@ -442,6 +441,9 @@ public class AdReportRun extends APINode {
       "instant_experience_outbound_clicks",
       "interactive_component_tap",
       "labels",
+      "landing_page_view_actions_per_link_click",
+      "landing_page_view_per_purchase_rate",
+      "link_clicks_per_results",
       "location",
       "marketing_messages_cost_per_delivered",
       "marketing_messages_cost_per_link_btn_click",
@@ -455,6 +457,7 @@ public class AdReportRun extends APINode {
       "outbound_clicks_ctr",
       "place_page_name",
       "purchase_roas",
+      "purchases_per_link_click",
       "qualifying_question_qualify_answer_rate",
       "quality_ranking",
       "reach",
@@ -648,13 +651,6 @@ public class AdReportRun extends APINode {
     }
     public APIRequestGetInsights requestAdNameField (boolean value) {
       this.requestField("ad_name", value);
-      return this;
-    }
-    public APIRequestGetInsights requestAdjustedOfflinePurchaseField () {
-      return this.requestAdjustedOfflinePurchaseField(true);
-    }
-    public APIRequestGetInsights requestAdjustedOfflinePurchaseField (boolean value) {
-      this.requestField("adjusted_offline_purchase", value);
       return this;
     }
     public APIRequestGetInsights requestAdsetEndField () {
@@ -1168,6 +1164,27 @@ public class AdReportRun extends APINode {
       this.requestField("labels", value);
       return this;
     }
+    public APIRequestGetInsights requestLandingPageViewActionsPerLinkClickField () {
+      return this.requestLandingPageViewActionsPerLinkClickField(true);
+    }
+    public APIRequestGetInsights requestLandingPageViewActionsPerLinkClickField (boolean value) {
+      this.requestField("landing_page_view_actions_per_link_click", value);
+      return this;
+    }
+    public APIRequestGetInsights requestLandingPageViewPerPurchaseRateField () {
+      return this.requestLandingPageViewPerPurchaseRateField(true);
+    }
+    public APIRequestGetInsights requestLandingPageViewPerPurchaseRateField (boolean value) {
+      this.requestField("landing_page_view_per_purchase_rate", value);
+      return this;
+    }
+    public APIRequestGetInsights requestLinkClicksPerResultsField () {
+      return this.requestLinkClicksPerResultsField(true);
+    }
+    public APIRequestGetInsights requestLinkClicksPerResultsField (boolean value) {
+      this.requestField("link_clicks_per_results", value);
+      return this;
+    }
     public APIRequestGetInsights requestLocationField () {
       return this.requestLocationField(true);
     }
@@ -1257,6 +1274,13 @@ public class AdReportRun extends APINode {
     }
     public APIRequestGetInsights requestPurchaseRoasField (boolean value) {
       this.requestField("purchase_roas", value);
+      return this;
+    }
+    public APIRequestGetInsights requestPurchasesPerLinkClickField () {
+      return this.requestPurchasesPerLinkClickField(true);
+    }
+    public APIRequestGetInsights requestPurchasesPerLinkClickField (boolean value) {
+      this.requestField("purchases_per_link_click", value);
       return this;
     }
     public APIRequestGetInsights requestQualifyingQuestionQualifyAnswerRateField () {
@@ -1902,6 +1926,8 @@ public class AdReportRun extends APINode {
       VALUE_IMPRESSION_DEVICE("impression_device"),
       @SerializedName("is_conversion_id_modeled")
       VALUE_IS_CONVERSION_ID_MODELED("is_conversion_id_modeled"),
+      @SerializedName("is_rendered_as_delayed_skip_ad")
+      VALUE_IS_RENDERED_AS_DELAYED_SKIP_AD("is_rendered_as_delayed_skip_ad"),
       @SerializedName("landing_destination")
       VALUE_LANDING_DESTINATION("landing_destination"),
       @SerializedName("link_url_asset")

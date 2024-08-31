@@ -40,37 +40,47 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class AdCreativeObjectStorySpec extends APINode {
-  @SerializedName("instagram_actor_id")
-  private String mInstagramActorId = null;
-  @SerializedName("link_data")
-  private AdCreativeLinkData mLinkData = null;
-  @SerializedName("page_id")
-  private String mPageId = null;
-  @SerializedName("photo_data")
-  private AdCreativePhotoData mPhotoData = null;
-  @SerializedName("template_data")
-  private AdCreativeLinkData mTemplateData = null;
-  @SerializedName("text_data")
-  private AdCreativeTextData mTextData = null;
-  @SerializedName("threads_actor_id")
-  private String mThreadsActorId = null;
-  @SerializedName("video_data")
-  private AdCreativeVideoData mVideoData = null;
+public class ALMGuidanceMetrics extends APINode {
+  @SerializedName("ad_account_id")
+  private String mAdAccountId = null;
+  @SerializedName("adopted_objects")
+  private List<Object> mAdoptedObjects = null;
+  @SerializedName("guidance_name")
+  private String mGuidanceName = null;
+  @SerializedName("guidance_type")
+  private String mGuidanceType = null;
+  @SerializedName("l28_adoption")
+  private Long mL28Adoption = null;
+  @SerializedName("l28_available")
+  private Long mL28Available = null;
+  @SerializedName("l28_click")
+  private Long mL28Click = null;
+  @SerializedName("l28_conversion")
+  private Long mL28Conversion = null;
+  @SerializedName("l28_impression")
+  private Long mL28Impression = null;
+  @SerializedName("l28_pitch")
+  private Long mL28Pitch = null;
+  @SerializedName("last_pitch_ds")
+  private String mLastPitchDs = null;
+  @SerializedName("parent_advertiser_id")
+  private String mParentAdvertiserId = null;
+  @SerializedName("report_ds")
+  private String mReportDs = null;
   protected static Gson gson = null;
 
-  public AdCreativeObjectStorySpec() {
+  public ALMGuidanceMetrics() {
   }
 
   public String getId() {
     return null;
   }
-  public static AdCreativeObjectStorySpec loadJSON(String json, APIContext context, String header) {
-    AdCreativeObjectStorySpec adCreativeObjectStorySpec = getGson().fromJson(json, AdCreativeObjectStorySpec.class);
+  public static ALMGuidanceMetrics loadJSON(String json, APIContext context, String header) {
+    ALMGuidanceMetrics almGuidanceMetrics = getGson().fromJson(json, ALMGuidanceMetrics.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(adCreativeObjectStorySpec.toString());
+      JsonElement o2 = parser.parse(almGuidanceMetrics.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -80,14 +90,14 @@ public class AdCreativeObjectStorySpec extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    adCreativeObjectStorySpec.context = context;
-    adCreativeObjectStorySpec.rawValue = json;
-    adCreativeObjectStorySpec.header = header;
-    return adCreativeObjectStorySpec;
+    almGuidanceMetrics.context = context;
+    almGuidanceMetrics.rawValue = json;
+    almGuidanceMetrics.header = header;
+    return almGuidanceMetrics;
   }
 
-  public static APINodeList<AdCreativeObjectStorySpec> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<AdCreativeObjectStorySpec> adCreativeObjectStorySpecs = new APINodeList<AdCreativeObjectStorySpec>(request, json, header);
+  public static APINodeList<ALMGuidanceMetrics> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<ALMGuidanceMetrics> almGuidanceMetricss = new APINodeList<ALMGuidanceMetrics>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -98,9 +108,9 @@ public class AdCreativeObjectStorySpec extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adCreativeObjectStorySpecs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          almGuidanceMetricss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return adCreativeObjectStorySpecs;
+        return almGuidanceMetricss;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -110,20 +120,20 @@ public class AdCreativeObjectStorySpec extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                adCreativeObjectStorySpecs.setCursors(before, after);
+                almGuidanceMetricss.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            adCreativeObjectStorySpecs.setPaging(previous, next);
+            almGuidanceMetricss.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              adCreativeObjectStorySpecs.setAppSecret(context.getAppSecretProof());
+              almGuidanceMetricss.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adCreativeObjectStorySpecs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              almGuidanceMetricss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -134,23 +144,23 @@ public class AdCreativeObjectStorySpec extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adCreativeObjectStorySpecs.add(loadJSON(entry.getValue().toString(), context, header));
+                  almGuidanceMetricss.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adCreativeObjectStorySpecs.add(loadJSON(obj.toString(), context, header));
+              almGuidanceMetricss.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return adCreativeObjectStorySpecs;
+          return almGuidanceMetricss;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adCreativeObjectStorySpecs.add(loadJSON(entry.getValue().toString(), context, header));
+              almGuidanceMetricss.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return adCreativeObjectStorySpecs;
+          return almGuidanceMetricss;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -167,20 +177,20 @@ public class AdCreativeObjectStorySpec extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adCreativeObjectStorySpecs.add(loadJSON(value.toString(), context, header));
+              almGuidanceMetricss.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return adCreativeObjectStorySpecs;
+            return almGuidanceMetricss;
           }
 
           // Sixth, check if it's pure JsonObject
-          adCreativeObjectStorySpecs.clear();
-          adCreativeObjectStorySpecs.add(loadJSON(json, context, header));
-          return adCreativeObjectStorySpecs;
+          almGuidanceMetricss.clear();
+          almGuidanceMetricss.add(loadJSON(json, context, header));
+          return almGuidanceMetricss;
         }
       }
     } catch (Exception e) {
@@ -208,103 +218,123 @@ public class AdCreativeObjectStorySpec extends APINode {
   }
 
 
-  public String getFieldInstagramActorId() {
-    return mInstagramActorId;
+  public String getFieldAdAccountId() {
+    return mAdAccountId;
   }
 
-  public AdCreativeObjectStorySpec setFieldInstagramActorId(String value) {
-    this.mInstagramActorId = value;
+  public ALMGuidanceMetrics setFieldAdAccountId(String value) {
+    this.mAdAccountId = value;
     return this;
   }
 
-  public AdCreativeLinkData getFieldLinkData() {
-    return mLinkData;
+  public List<Object> getFieldAdoptedObjects() {
+    return mAdoptedObjects;
   }
 
-  public AdCreativeObjectStorySpec setFieldLinkData(AdCreativeLinkData value) {
-    this.mLinkData = value;
+  public ALMGuidanceMetrics setFieldAdoptedObjects(List<Object> value) {
+    this.mAdoptedObjects = value;
     return this;
   }
 
-  public AdCreativeObjectStorySpec setFieldLinkData(String value) {
-    Type type = new TypeToken<AdCreativeLinkData>(){}.getType();
-    this.mLinkData = AdCreativeLinkData.getGson().fromJson(value, type);
-    return this;
-  }
-  public String getFieldPageId() {
-    return mPageId;
+  public String getFieldGuidanceName() {
+    return mGuidanceName;
   }
 
-  public AdCreativeObjectStorySpec setFieldPageId(String value) {
-    this.mPageId = value;
+  public ALMGuidanceMetrics setFieldGuidanceName(String value) {
+    this.mGuidanceName = value;
     return this;
   }
 
-  public AdCreativePhotoData getFieldPhotoData() {
-    return mPhotoData;
+  public String getFieldGuidanceType() {
+    return mGuidanceType;
   }
 
-  public AdCreativeObjectStorySpec setFieldPhotoData(AdCreativePhotoData value) {
-    this.mPhotoData = value;
+  public ALMGuidanceMetrics setFieldGuidanceType(String value) {
+    this.mGuidanceType = value;
     return this;
   }
 
-  public AdCreativeObjectStorySpec setFieldPhotoData(String value) {
-    Type type = new TypeToken<AdCreativePhotoData>(){}.getType();
-    this.mPhotoData = AdCreativePhotoData.getGson().fromJson(value, type);
-    return this;
-  }
-  public AdCreativeLinkData getFieldTemplateData() {
-    return mTemplateData;
+  public Long getFieldL28Adoption() {
+    return mL28Adoption;
   }
 
-  public AdCreativeObjectStorySpec setFieldTemplateData(AdCreativeLinkData value) {
-    this.mTemplateData = value;
+  public ALMGuidanceMetrics setFieldL28Adoption(Long value) {
+    this.mL28Adoption = value;
     return this;
   }
 
-  public AdCreativeObjectStorySpec setFieldTemplateData(String value) {
-    Type type = new TypeToken<AdCreativeLinkData>(){}.getType();
-    this.mTemplateData = AdCreativeLinkData.getGson().fromJson(value, type);
-    return this;
-  }
-  public AdCreativeTextData getFieldTextData() {
-    return mTextData;
+  public Long getFieldL28Available() {
+    return mL28Available;
   }
 
-  public AdCreativeObjectStorySpec setFieldTextData(AdCreativeTextData value) {
-    this.mTextData = value;
+  public ALMGuidanceMetrics setFieldL28Available(Long value) {
+    this.mL28Available = value;
     return this;
   }
 
-  public AdCreativeObjectStorySpec setFieldTextData(String value) {
-    Type type = new TypeToken<AdCreativeTextData>(){}.getType();
-    this.mTextData = AdCreativeTextData.getGson().fromJson(value, type);
-    return this;
-  }
-  public String getFieldThreadsActorId() {
-    return mThreadsActorId;
+  public Long getFieldL28Click() {
+    return mL28Click;
   }
 
-  public AdCreativeObjectStorySpec setFieldThreadsActorId(String value) {
-    this.mThreadsActorId = value;
+  public ALMGuidanceMetrics setFieldL28Click(Long value) {
+    this.mL28Click = value;
     return this;
   }
 
-  public AdCreativeVideoData getFieldVideoData() {
-    return mVideoData;
+  public Long getFieldL28Conversion() {
+    return mL28Conversion;
   }
 
-  public AdCreativeObjectStorySpec setFieldVideoData(AdCreativeVideoData value) {
-    this.mVideoData = value;
+  public ALMGuidanceMetrics setFieldL28Conversion(Long value) {
+    this.mL28Conversion = value;
     return this;
   }
 
-  public AdCreativeObjectStorySpec setFieldVideoData(String value) {
-    Type type = new TypeToken<AdCreativeVideoData>(){}.getType();
-    this.mVideoData = AdCreativeVideoData.getGson().fromJson(value, type);
+  public Long getFieldL28Impression() {
+    return mL28Impression;
+  }
+
+  public ALMGuidanceMetrics setFieldL28Impression(Long value) {
+    this.mL28Impression = value;
     return this;
   }
+
+  public Long getFieldL28Pitch() {
+    return mL28Pitch;
+  }
+
+  public ALMGuidanceMetrics setFieldL28Pitch(Long value) {
+    this.mL28Pitch = value;
+    return this;
+  }
+
+  public String getFieldLastPitchDs() {
+    return mLastPitchDs;
+  }
+
+  public ALMGuidanceMetrics setFieldLastPitchDs(String value) {
+    this.mLastPitchDs = value;
+    return this;
+  }
+
+  public String getFieldParentAdvertiserId() {
+    return mParentAdvertiserId;
+  }
+
+  public ALMGuidanceMetrics setFieldParentAdvertiserId(String value) {
+    this.mParentAdvertiserId = value;
+    return this;
+  }
+
+  public String getFieldReportDs() {
+    return mReportDs;
+  }
+
+  public ALMGuidanceMetrics setFieldReportDs(String value) {
+    this.mReportDs = value;
+    return this;
+  }
+
 
 
 
@@ -321,24 +351,29 @@ public class AdCreativeObjectStorySpec extends APINode {
     return gson;
   }
 
-  public AdCreativeObjectStorySpec copyFrom(AdCreativeObjectStorySpec instance) {
-    this.mInstagramActorId = instance.mInstagramActorId;
-    this.mLinkData = instance.mLinkData;
-    this.mPageId = instance.mPageId;
-    this.mPhotoData = instance.mPhotoData;
-    this.mTemplateData = instance.mTemplateData;
-    this.mTextData = instance.mTextData;
-    this.mThreadsActorId = instance.mThreadsActorId;
-    this.mVideoData = instance.mVideoData;
+  public ALMGuidanceMetrics copyFrom(ALMGuidanceMetrics instance) {
+    this.mAdAccountId = instance.mAdAccountId;
+    this.mAdoptedObjects = instance.mAdoptedObjects;
+    this.mGuidanceName = instance.mGuidanceName;
+    this.mGuidanceType = instance.mGuidanceType;
+    this.mL28Adoption = instance.mL28Adoption;
+    this.mL28Available = instance.mL28Available;
+    this.mL28Click = instance.mL28Click;
+    this.mL28Conversion = instance.mL28Conversion;
+    this.mL28Impression = instance.mL28Impression;
+    this.mL28Pitch = instance.mL28Pitch;
+    this.mLastPitchDs = instance.mLastPitchDs;
+    this.mParentAdvertiserId = instance.mParentAdvertiserId;
+    this.mReportDs = instance.mReportDs;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<AdCreativeObjectStorySpec> getParser() {
-    return new APIRequest.ResponseParser<AdCreativeObjectStorySpec>() {
-      public APINodeList<AdCreativeObjectStorySpec> parseResponse(String response, APIContext context, APIRequest<AdCreativeObjectStorySpec> request, String header) throws MalformedResponseException {
-        return AdCreativeObjectStorySpec.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<ALMGuidanceMetrics> getParser() {
+    return new APIRequest.ResponseParser<ALMGuidanceMetrics>() {
+      public APINodeList<ALMGuidanceMetrics> parseResponse(String response, APIContext context, APIRequest<ALMGuidanceMetrics> request, String header) throws MalformedResponseException {
+        return ALMGuidanceMetrics.parseResponse(response, context, request, header);
       }
     };
   }

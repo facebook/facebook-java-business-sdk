@@ -41,8 +41,12 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class AdjacentContentDeliveryReport extends APINode {
+  @SerializedName("ad_id")
+  private String mAdId = null;
   @SerializedName("content")
   private List<Object> mContent = null;
+  @SerializedName("impression_id")
+  private String mImpressionId = null;
   protected static Gson gson = null;
 
   public AdjacentContentDeliveryReport() {
@@ -194,12 +198,30 @@ public class AdjacentContentDeliveryReport extends APINode {
   }
 
 
+  public String getFieldAdId() {
+    return mAdId;
+  }
+
+  public AdjacentContentDeliveryReport setFieldAdId(String value) {
+    this.mAdId = value;
+    return this;
+  }
+
   public List<Object> getFieldContent() {
     return mContent;
   }
 
   public AdjacentContentDeliveryReport setFieldContent(List<Object> value) {
     this.mContent = value;
+    return this;
+  }
+
+  public String getFieldImpressionId() {
+    return mImpressionId;
+  }
+
+  public AdjacentContentDeliveryReport setFieldImpressionId(String value) {
+    this.mImpressionId = value;
     return this;
   }
 
@@ -220,7 +242,9 @@ public class AdjacentContentDeliveryReport extends APINode {
   }
 
   public AdjacentContentDeliveryReport copyFrom(AdjacentContentDeliveryReport instance) {
+    this.mAdId = instance.mAdId;
     this.mContent = instance.mContent;
+    this.mImpressionId = instance.mImpressionId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

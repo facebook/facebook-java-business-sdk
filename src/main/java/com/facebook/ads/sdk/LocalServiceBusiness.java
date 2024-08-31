@@ -334,6 +334,10 @@ public class LocalServiceBusiness extends APINode {
     return new APIRequestGetChannelsToIntegrityStatus(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetOverrideDetails getOverrideDetails() {
+    return new APIRequestGetOverrideDetails(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGet get() {
     return new APIRequestGet(this.getPrefixedId().toString(), context);
   }
@@ -624,6 +628,155 @@ public class LocalServiceBusiness extends APINode {
     }
     public APIRequestGetChannelsToIntegrityStatus requestRejectionInformationField (boolean value) {
       this.requestField("rejection_information", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestGetOverrideDetails extends APIRequest<OverrideDetails> {
+
+    APINodeList<OverrideDetails> lastResponse = null;
+    @Override
+    public APINodeList<OverrideDetails> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "keys",
+      "type",
+    };
+
+    public static final String[] FIELDS = {
+      "key",
+      "type",
+      "values",
+    };
+
+    @Override
+    public APINodeList<OverrideDetails> parseResponse(String response, String header) throws APIException {
+      return OverrideDetails.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<OverrideDetails> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<OverrideDetails> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<OverrideDetails>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<OverrideDetails>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<OverrideDetails>>() {
+           public APINodeList<OverrideDetails> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetOverrideDetails.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestGetOverrideDetails(String nodeId, APIContext context) {
+      super(context, nodeId, "/override_details", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetOverrideDetails setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetOverrideDetails setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetOverrideDetails setKeys (List<String> keys) {
+      this.setParam("keys", keys);
+      return this;
+    }
+    public APIRequestGetOverrideDetails setKeys (String keys) {
+      this.setParam("keys", keys);
+      return this;
+    }
+
+    public APIRequestGetOverrideDetails setType (OverrideDetails.EnumType type) {
+      this.setParam("type", type);
+      return this;
+    }
+    public APIRequestGetOverrideDetails setType (String type) {
+      this.setParam("type", type);
+      return this;
+    }
+
+    public APIRequestGetOverrideDetails requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetOverrideDetails requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetOverrideDetails requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetOverrideDetails requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetOverrideDetails requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetOverrideDetails requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetOverrideDetails requestKeyField () {
+      return this.requestKeyField(true);
+    }
+    public APIRequestGetOverrideDetails requestKeyField (boolean value) {
+      this.requestField("key", value);
+      return this;
+    }
+    public APIRequestGetOverrideDetails requestTypeField () {
+      return this.requestTypeField(true);
+    }
+    public APIRequestGetOverrideDetails requestTypeField (boolean value) {
+      this.requestField("type", value);
+      return this;
+    }
+    public APIRequestGetOverrideDetails requestValuesField () {
+      return this.requestValuesField(true);
+    }
+    public APIRequestGetOverrideDetails requestValuesField (boolean value) {
+      this.requestField("values", value);
       return this;
     }
   }

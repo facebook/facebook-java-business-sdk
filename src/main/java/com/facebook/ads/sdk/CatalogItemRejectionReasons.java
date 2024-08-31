@@ -227,6 +227,8 @@ public class CatalogItemRejectionReasons extends APINode {
       VALUE_UNIVERSAL_CHECKOUT("universal_checkout"),
       @SerializedName("us_marketplace")
       VALUE_US_MARKETPLACE("us_marketplace"),
+      @SerializedName("whatsapp_marketing_message")
+      VALUE_WHATSAPP_MARKETING_MESSAGE("whatsapp_marketing_message"),
       ;
 
       private String value;

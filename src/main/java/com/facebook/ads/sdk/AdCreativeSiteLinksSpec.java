@@ -41,6 +41,12 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class AdCreativeSiteLinksSpec extends APINode {
+  @SerializedName("site_link_image_hash")
+  private String mSiteLinkImageHash = null;
+  @SerializedName("site_link_image_url")
+  private String mSiteLinkImageUrl = null;
+  @SerializedName("site_link_recommendation_type")
+  private String mSiteLinkRecommendationType = null;
   @SerializedName("site_link_title")
   private String mSiteLinkTitle = null;
   @SerializedName("site_link_url")
@@ -196,6 +202,33 @@ public class AdCreativeSiteLinksSpec extends APINode {
   }
 
 
+  public String getFieldSiteLinkImageHash() {
+    return mSiteLinkImageHash;
+  }
+
+  public AdCreativeSiteLinksSpec setFieldSiteLinkImageHash(String value) {
+    this.mSiteLinkImageHash = value;
+    return this;
+  }
+
+  public String getFieldSiteLinkImageUrl() {
+    return mSiteLinkImageUrl;
+  }
+
+  public AdCreativeSiteLinksSpec setFieldSiteLinkImageUrl(String value) {
+    this.mSiteLinkImageUrl = value;
+    return this;
+  }
+
+  public String getFieldSiteLinkRecommendationType() {
+    return mSiteLinkRecommendationType;
+  }
+
+  public AdCreativeSiteLinksSpec setFieldSiteLinkRecommendationType(String value) {
+    this.mSiteLinkRecommendationType = value;
+    return this;
+  }
+
   public String getFieldSiteLinkTitle() {
     return mSiteLinkTitle;
   }
@@ -231,6 +264,9 @@ public class AdCreativeSiteLinksSpec extends APINode {
   }
 
   public AdCreativeSiteLinksSpec copyFrom(AdCreativeSiteLinksSpec instance) {
+    this.mSiteLinkImageHash = instance.mSiteLinkImageHash;
+    this.mSiteLinkImageUrl = instance.mSiteLinkImageUrl;
+    this.mSiteLinkRecommendationType = instance.mSiteLinkRecommendationType;
     this.mSiteLinkTitle = instance.mSiteLinkTitle;
     this.mSiteLinkUrl = instance.mSiteLinkUrl;
     this.context = instance.context;

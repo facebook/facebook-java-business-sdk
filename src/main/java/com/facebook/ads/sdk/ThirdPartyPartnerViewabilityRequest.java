@@ -50,13 +50,13 @@ public class ThirdPartyPartnerViewabilityRequest extends APINode {
   @SerializedName("id")
   private String mId = null;
   @SerializedName("metric")
-  private String mMetric = null;
+  private EnumMetric mMetric = null;
   @SerializedName("modified_time")
   private String mModifiedTime = null;
   @SerializedName("owner_instance_id")
   private String mOwnerInstanceId = null;
   @SerializedName("platform")
-  private String mPlatform = null;
+  private EnumPlatform mPlatform = null;
   @SerializedName("status")
   private EnumStatus mStatus = null;
   @SerializedName("total_file_count")
@@ -291,7 +291,7 @@ public class ThirdPartyPartnerViewabilityRequest extends APINode {
     return mId;
   }
 
-  public String getFieldMetric() {
+  public EnumMetric getFieldMetric() {
     return mMetric;
   }
 
@@ -303,7 +303,7 @@ public class ThirdPartyPartnerViewabilityRequest extends APINode {
     return mOwnerInstanceId;
   }
 
-  public String getFieldPlatform() {
+  public EnumPlatform getFieldPlatform() {
     return mPlatform;
   }
 
@@ -500,6 +500,48 @@ public class ThirdPartyPartnerViewabilityRequest extends APINode {
       this.requestField("total_file_count", value);
       return this;
     }
+  }
+
+  public static enum EnumMetric {
+      @SerializedName("DISPLAY_EVENT")
+      VALUE_DISPLAY_EVENT("DISPLAY_EVENT"),
+      @SerializedName("IMPRESSION")
+      VALUE_IMPRESSION("IMPRESSION"),
+      @SerializedName("VIDEO_EVENT")
+      VALUE_VIDEO_EVENT("VIDEO_EVENT"),
+      ;
+
+      private String value;
+
+      private EnumMetric(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumPlatform {
+      @SerializedName("AUDIENCE_NETWORK")
+      VALUE_AUDIENCE_NETWORK("AUDIENCE_NETWORK"),
+      @SerializedName("FACEBOOK")
+      VALUE_FACEBOOK("FACEBOOK"),
+      @SerializedName("INSTAGRAM")
+      VALUE_INSTAGRAM("INSTAGRAM"),
+      ;
+
+      private String value;
+
+      private EnumPlatform(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
   }
 
   public static enum EnumStatus {

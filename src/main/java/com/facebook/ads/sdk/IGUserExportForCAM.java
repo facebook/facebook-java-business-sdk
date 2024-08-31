@@ -40,7 +40,7 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class BCPCreatorIgUser extends APINode {
+public class IGUserExportForCAM extends APINode {
   @SerializedName("email")
   private String mEmail = null;
   @SerializedName("id")
@@ -55,59 +55,59 @@ public class BCPCreatorIgUser extends APINode {
   private String mUsername = null;
   protected static Gson gson = null;
 
-  BCPCreatorIgUser() {
+  IGUserExportForCAM() {
   }
 
-  public BCPCreatorIgUser(Long id, APIContext context) {
+  public IGUserExportForCAM(Long id, APIContext context) {
     this(id.toString(), context);
   }
 
-  public BCPCreatorIgUser(String id, APIContext context) {
+  public IGUserExportForCAM(String id, APIContext context) {
     this.mId = id;
 
     this.context = context;
   }
 
-  public BCPCreatorIgUser fetch() throws APIException{
-    BCPCreatorIgUser newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+  public IGUserExportForCAM fetch() throws APIException{
+    IGUserExportForCAM newInstance = fetchById(this.getPrefixedId().toString(), this.context);
     this.copyFrom(newInstance);
     return this;
   }
 
-  public static BCPCreatorIgUser fetchById(Long id, APIContext context) throws APIException {
+  public static IGUserExportForCAM fetchById(Long id, APIContext context) throws APIException {
     return fetchById(id.toString(), context);
   }
 
-  public static ListenableFuture<BCPCreatorIgUser> fetchByIdAsync(Long id, APIContext context) throws APIException {
+  public static ListenableFuture<IGUserExportForCAM> fetchByIdAsync(Long id, APIContext context) throws APIException {
     return fetchByIdAsync(id.toString(), context);
   }
 
-  public static BCPCreatorIgUser fetchById(String id, APIContext context) throws APIException {
+  public static IGUserExportForCAM fetchById(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
   }
 
-  public static ListenableFuture<BCPCreatorIgUser> fetchByIdAsync(String id, APIContext context) throws APIException {
+  public static ListenableFuture<IGUserExportForCAM> fetchByIdAsync(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
   }
 
-  public static APINodeList<BCPCreatorIgUser> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<BCPCreatorIgUser>)(
-      new APIRequest<BCPCreatorIgUser>(context, "", "/", "GET", BCPCreatorIgUser.getParser())
+  public static APINodeList<IGUserExportForCAM> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<IGUserExportForCAM>)(
+      new APIRequest<IGUserExportForCAM>(context, "", "/", "GET", IGUserExportForCAM.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .execute()
     );
   }
 
-  public static ListenableFuture<APINodeList<BCPCreatorIgUser>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+  public static ListenableFuture<APINodeList<IGUserExportForCAM>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
     return
-      new APIRequest(context, "", "/", "GET", BCPCreatorIgUser.getParser())
+      new APIRequest(context, "", "/", "GET", IGUserExportForCAM.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
@@ -120,12 +120,12 @@ public class BCPCreatorIgUser extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static BCPCreatorIgUser loadJSON(String json, APIContext context, String header) {
-    BCPCreatorIgUser bcpCreatorIgUser = getGson().fromJson(json, BCPCreatorIgUser.class);
+  public static IGUserExportForCAM loadJSON(String json, APIContext context, String header) {
+    IGUserExportForCAM igUserExportForCAM = getGson().fromJson(json, IGUserExportForCAM.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(bcpCreatorIgUser.toString());
+      JsonElement o2 = parser.parse(igUserExportForCAM.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -135,14 +135,14 @@ public class BCPCreatorIgUser extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    bcpCreatorIgUser.context = context;
-    bcpCreatorIgUser.rawValue = json;
-    bcpCreatorIgUser.header = header;
-    return bcpCreatorIgUser;
+    igUserExportForCAM.context = context;
+    igUserExportForCAM.rawValue = json;
+    igUserExportForCAM.header = header;
+    return igUserExportForCAM;
   }
 
-  public static APINodeList<BCPCreatorIgUser> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<BCPCreatorIgUser> bcpCreatorIgUsers = new APINodeList<BCPCreatorIgUser>(request, json, header);
+  public static APINodeList<IGUserExportForCAM> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<IGUserExportForCAM> igUserExportForCAMs = new APINodeList<IGUserExportForCAM>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -153,9 +153,9 @@ public class BCPCreatorIgUser extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          bcpCreatorIgUsers.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          igUserExportForCAMs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return bcpCreatorIgUsers;
+        return igUserExportForCAMs;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -165,20 +165,20 @@ public class BCPCreatorIgUser extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                bcpCreatorIgUsers.setCursors(before, after);
+                igUserExportForCAMs.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            bcpCreatorIgUsers.setPaging(previous, next);
+            igUserExportForCAMs.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              bcpCreatorIgUsers.setAppSecret(context.getAppSecretProof());
+              igUserExportForCAMs.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              bcpCreatorIgUsers.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              igUserExportForCAMs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -189,23 +189,23 @@ public class BCPCreatorIgUser extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  bcpCreatorIgUsers.add(loadJSON(entry.getValue().toString(), context, header));
+                  igUserExportForCAMs.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              bcpCreatorIgUsers.add(loadJSON(obj.toString(), context, header));
+              igUserExportForCAMs.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return bcpCreatorIgUsers;
+          return igUserExportForCAMs;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              bcpCreatorIgUsers.add(loadJSON(entry.getValue().toString(), context, header));
+              igUserExportForCAMs.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return bcpCreatorIgUsers;
+          return igUserExportForCAMs;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -222,20 +222,20 @@ public class BCPCreatorIgUser extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              bcpCreatorIgUsers.add(loadJSON(value.toString(), context, header));
+              igUserExportForCAMs.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return bcpCreatorIgUsers;
+            return igUserExportForCAMs;
           }
 
           // Sixth, check if it's pure JsonObject
-          bcpCreatorIgUsers.clear();
-          bcpCreatorIgUsers.add(loadJSON(json, context, header));
-          return bcpCreatorIgUsers;
+          igUserExportForCAMs.clear();
+          igUserExportForCAMs.add(loadJSON(json, context, header));
+          return igUserExportForCAMs;
         }
       }
     } catch (Exception e) {
@@ -293,11 +293,11 @@ public class BCPCreatorIgUser extends APINode {
 
 
 
-  public static class APIRequestGet extends APIRequest<BCPCreatorIgUser> {
+  public static class APIRequestGet extends APIRequest<IGUserExportForCAM> {
 
-    BCPCreatorIgUser lastResponse = null;
+    IGUserExportForCAM lastResponse = null;
     @Override
-    public BCPCreatorIgUser getLastResponse() {
+    public IGUserExportForCAM getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
@@ -313,31 +313,31 @@ public class BCPCreatorIgUser extends APINode {
     };
 
     @Override
-    public BCPCreatorIgUser parseResponse(String response, String header) throws APIException {
-      return BCPCreatorIgUser.parseResponse(response, getContext(), this, header).head();
+    public IGUserExportForCAM parseResponse(String response, String header) throws APIException {
+      return IGUserExportForCAM.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public BCPCreatorIgUser execute() throws APIException {
+    public IGUserExportForCAM execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public BCPCreatorIgUser execute(Map<String, Object> extraParams) throws APIException {
+    public IGUserExportForCAM execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<BCPCreatorIgUser> executeAsync() throws APIException {
+    public ListenableFuture<IGUserExportForCAM> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<BCPCreatorIgUser> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<IGUserExportForCAM> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, BCPCreatorIgUser>() {
-           public BCPCreatorIgUser apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, IGUserExportForCAM>() {
+           public IGUserExportForCAM apply(ResponseWrapper result) {
              try {
                return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -460,7 +460,7 @@ public class BCPCreatorIgUser extends APINode {
     return gson;
   }
 
-  public BCPCreatorIgUser copyFrom(BCPCreatorIgUser instance) {
+  public IGUserExportForCAM copyFrom(IGUserExportForCAM instance) {
     this.mEmail = instance.mEmail;
     this.mId = instance.mId;
     this.mIsPaidPartnershipMessagesEnabled = instance.mIsPaidPartnershipMessagesEnabled;
@@ -472,10 +472,10 @@ public class BCPCreatorIgUser extends APINode {
     return this;
   }
 
-  public static APIRequest.ResponseParser<BCPCreatorIgUser> getParser() {
-    return new APIRequest.ResponseParser<BCPCreatorIgUser>() {
-      public APINodeList<BCPCreatorIgUser> parseResponse(String response, APIContext context, APIRequest<BCPCreatorIgUser> request, String header) throws MalformedResponseException {
-        return BCPCreatorIgUser.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<IGUserExportForCAM> getParser() {
+    return new APIRequest.ResponseParser<IGUserExportForCAM>() {
+      public APINodeList<IGUserExportForCAM> parseResponse(String response, APIContext context, APIRequest<IGUserExportForCAM> request, String header) throws MalformedResponseException {
+        return IGUserExportForCAM.parseResponse(response, context, request, header);
       }
     };
   }

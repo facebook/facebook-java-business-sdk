@@ -41,14 +41,24 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class CommerceOrderTransactionDetail extends APINode {
+  @SerializedName("merchant_order_id")
+  private String mMerchantOrderId = null;
   @SerializedName("net_payment_amount")
   private Object mNetPaymentAmount = null;
+  @SerializedName("order_created")
+  private String mOrderCreated = null;
   @SerializedName("order_details")
   private CommerceOrder mOrderDetails = null;
+  @SerializedName("order_id")
+  private String mOrderId = null;
   @SerializedName("payout_reference_id")
   private String mPayoutReferenceId = null;
+  @SerializedName("postal_code")
+  private String mPostalCode = null;
   @SerializedName("processing_fee")
   private Object mProcessingFee = null;
+  @SerializedName("state")
+  private String mState = null;
   @SerializedName("tax_rate")
   private String mTaxRate = null;
   @SerializedName("transaction_date")
@@ -218,12 +228,30 @@ public class CommerceOrderTransactionDetail extends APINode {
   }
 
 
+  public String getFieldMerchantOrderId() {
+    return mMerchantOrderId;
+  }
+
+  public CommerceOrderTransactionDetail setFieldMerchantOrderId(String value) {
+    this.mMerchantOrderId = value;
+    return this;
+  }
+
   public Object getFieldNetPaymentAmount() {
     return mNetPaymentAmount;
   }
 
   public CommerceOrderTransactionDetail setFieldNetPaymentAmount(Object value) {
     this.mNetPaymentAmount = value;
+    return this;
+  }
+
+  public String getFieldOrderCreated() {
+    return mOrderCreated;
+  }
+
+  public CommerceOrderTransactionDetail setFieldOrderCreated(String value) {
+    this.mOrderCreated = value;
     return this;
   }
 
@@ -244,6 +272,15 @@ public class CommerceOrderTransactionDetail extends APINode {
     this.mOrderDetails = CommerceOrder.getGson().fromJson(value, type);
     return this;
   }
+  public String getFieldOrderId() {
+    return mOrderId;
+  }
+
+  public CommerceOrderTransactionDetail setFieldOrderId(String value) {
+    this.mOrderId = value;
+    return this;
+  }
+
   public String getFieldPayoutReferenceId() {
     return mPayoutReferenceId;
   }
@@ -253,12 +290,30 @@ public class CommerceOrderTransactionDetail extends APINode {
     return this;
   }
 
+  public String getFieldPostalCode() {
+    return mPostalCode;
+  }
+
+  public CommerceOrderTransactionDetail setFieldPostalCode(String value) {
+    this.mPostalCode = value;
+    return this;
+  }
+
   public Object getFieldProcessingFee() {
     return mProcessingFee;
   }
 
   public CommerceOrderTransactionDetail setFieldProcessingFee(Object value) {
     this.mProcessingFee = value;
+    return this;
+  }
+
+  public String getFieldState() {
+    return mState;
+  }
+
+  public CommerceOrderTransactionDetail setFieldState(String value) {
+    this.mState = value;
     return this;
   }
 
@@ -534,10 +589,15 @@ public class CommerceOrderTransactionDetail extends APINode {
   }
 
   public CommerceOrderTransactionDetail copyFrom(CommerceOrderTransactionDetail instance) {
+    this.mMerchantOrderId = instance.mMerchantOrderId;
     this.mNetPaymentAmount = instance.mNetPaymentAmount;
+    this.mOrderCreated = instance.mOrderCreated;
     this.mOrderDetails = instance.mOrderDetails;
+    this.mOrderId = instance.mOrderId;
     this.mPayoutReferenceId = instance.mPayoutReferenceId;
+    this.mPostalCode = instance.mPostalCode;
     this.mProcessingFee = instance.mProcessingFee;
+    this.mState = instance.mState;
     this.mTaxRate = instance.mTaxRate;
     this.mTransactionDate = instance.mTransactionDate;
     this.mTransactionType = instance.mTransactionType;

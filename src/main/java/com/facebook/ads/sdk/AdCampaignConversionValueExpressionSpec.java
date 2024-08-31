@@ -40,25 +40,27 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class ProductCatalogMicrodataStatsPixelInfo extends APINode {
-  @SerializedName("is_already_connected")
-  private Boolean mIsAlreadyConnected = null;
-  @SerializedName("pixel_id")
-  private String mPixelId = null;
+public class AdCampaignConversionValueExpressionSpec extends APINode {
+  @SerializedName("adjustment_sign")
+  private String mAdjustmentSign = null;
+  @SerializedName("adjustment_weight")
+  private Long mAdjustmentWeight = null;
+  @SerializedName("destination_type")
+  private String mDestinationType = null;
   protected static Gson gson = null;
 
-  public ProductCatalogMicrodataStatsPixelInfo() {
+  public AdCampaignConversionValueExpressionSpec() {
   }
 
   public String getId() {
     return null;
   }
-  public static ProductCatalogMicrodataStatsPixelInfo loadJSON(String json, APIContext context, String header) {
-    ProductCatalogMicrodataStatsPixelInfo productCatalogMicrodataStatsPixelInfo = getGson().fromJson(json, ProductCatalogMicrodataStatsPixelInfo.class);
+  public static AdCampaignConversionValueExpressionSpec loadJSON(String json, APIContext context, String header) {
+    AdCampaignConversionValueExpressionSpec adCampaignConversionValueExpressionSpec = getGson().fromJson(json, AdCampaignConversionValueExpressionSpec.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(productCatalogMicrodataStatsPixelInfo.toString());
+      JsonElement o2 = parser.parse(adCampaignConversionValueExpressionSpec.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -68,14 +70,14 @@ public class ProductCatalogMicrodataStatsPixelInfo extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    productCatalogMicrodataStatsPixelInfo.context = context;
-    productCatalogMicrodataStatsPixelInfo.rawValue = json;
-    productCatalogMicrodataStatsPixelInfo.header = header;
-    return productCatalogMicrodataStatsPixelInfo;
+    adCampaignConversionValueExpressionSpec.context = context;
+    adCampaignConversionValueExpressionSpec.rawValue = json;
+    adCampaignConversionValueExpressionSpec.header = header;
+    return adCampaignConversionValueExpressionSpec;
   }
 
-  public static APINodeList<ProductCatalogMicrodataStatsPixelInfo> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<ProductCatalogMicrodataStatsPixelInfo> productCatalogMicrodataStatsPixelInfos = new APINodeList<ProductCatalogMicrodataStatsPixelInfo>(request, json, header);
+  public static APINodeList<AdCampaignConversionValueExpressionSpec> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdCampaignConversionValueExpressionSpec> adCampaignConversionValueExpressionSpecs = new APINodeList<AdCampaignConversionValueExpressionSpec>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -86,9 +88,9 @@ public class ProductCatalogMicrodataStatsPixelInfo extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          productCatalogMicrodataStatsPixelInfos.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          adCampaignConversionValueExpressionSpecs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return productCatalogMicrodataStatsPixelInfos;
+        return adCampaignConversionValueExpressionSpecs;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -98,20 +100,20 @@ public class ProductCatalogMicrodataStatsPixelInfo extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                productCatalogMicrodataStatsPixelInfos.setCursors(before, after);
+                adCampaignConversionValueExpressionSpecs.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            productCatalogMicrodataStatsPixelInfos.setPaging(previous, next);
+            adCampaignConversionValueExpressionSpecs.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              productCatalogMicrodataStatsPixelInfos.setAppSecret(context.getAppSecretProof());
+              adCampaignConversionValueExpressionSpecs.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              productCatalogMicrodataStatsPixelInfos.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              adCampaignConversionValueExpressionSpecs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -122,23 +124,23 @@ public class ProductCatalogMicrodataStatsPixelInfo extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  productCatalogMicrodataStatsPixelInfos.add(loadJSON(entry.getValue().toString(), context, header));
+                  adCampaignConversionValueExpressionSpecs.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              productCatalogMicrodataStatsPixelInfos.add(loadJSON(obj.toString(), context, header));
+              adCampaignConversionValueExpressionSpecs.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return productCatalogMicrodataStatsPixelInfos;
+          return adCampaignConversionValueExpressionSpecs;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              productCatalogMicrodataStatsPixelInfos.add(loadJSON(entry.getValue().toString(), context, header));
+              adCampaignConversionValueExpressionSpecs.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return productCatalogMicrodataStatsPixelInfos;
+          return adCampaignConversionValueExpressionSpecs;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -155,20 +157,20 @@ public class ProductCatalogMicrodataStatsPixelInfo extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              productCatalogMicrodataStatsPixelInfos.add(loadJSON(value.toString(), context, header));
+              adCampaignConversionValueExpressionSpecs.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return productCatalogMicrodataStatsPixelInfos;
+            return adCampaignConversionValueExpressionSpecs;
           }
 
           // Sixth, check if it's pure JsonObject
-          productCatalogMicrodataStatsPixelInfos.clear();
-          productCatalogMicrodataStatsPixelInfos.add(loadJSON(json, context, header));
-          return productCatalogMicrodataStatsPixelInfos;
+          adCampaignConversionValueExpressionSpecs.clear();
+          adCampaignConversionValueExpressionSpecs.add(loadJSON(json, context, header));
+          return adCampaignConversionValueExpressionSpecs;
         }
       }
     } catch (Exception e) {
@@ -196,21 +198,30 @@ public class ProductCatalogMicrodataStatsPixelInfo extends APINode {
   }
 
 
-  public Boolean getFieldIsAlreadyConnected() {
-    return mIsAlreadyConnected;
+  public String getFieldAdjustmentSign() {
+    return mAdjustmentSign;
   }
 
-  public ProductCatalogMicrodataStatsPixelInfo setFieldIsAlreadyConnected(Boolean value) {
-    this.mIsAlreadyConnected = value;
+  public AdCampaignConversionValueExpressionSpec setFieldAdjustmentSign(String value) {
+    this.mAdjustmentSign = value;
     return this;
   }
 
-  public String getFieldPixelId() {
-    return mPixelId;
+  public Long getFieldAdjustmentWeight() {
+    return mAdjustmentWeight;
   }
 
-  public ProductCatalogMicrodataStatsPixelInfo setFieldPixelId(String value) {
-    this.mPixelId = value;
+  public AdCampaignConversionValueExpressionSpec setFieldAdjustmentWeight(Long value) {
+    this.mAdjustmentWeight = value;
+    return this;
+  }
+
+  public String getFieldDestinationType() {
+    return mDestinationType;
+  }
+
+  public AdCampaignConversionValueExpressionSpec setFieldDestinationType(String value) {
+    this.mDestinationType = value;
     return this;
   }
 
@@ -230,18 +241,19 @@ public class ProductCatalogMicrodataStatsPixelInfo extends APINode {
     return gson;
   }
 
-  public ProductCatalogMicrodataStatsPixelInfo copyFrom(ProductCatalogMicrodataStatsPixelInfo instance) {
-    this.mIsAlreadyConnected = instance.mIsAlreadyConnected;
-    this.mPixelId = instance.mPixelId;
+  public AdCampaignConversionValueExpressionSpec copyFrom(AdCampaignConversionValueExpressionSpec instance) {
+    this.mAdjustmentSign = instance.mAdjustmentSign;
+    this.mAdjustmentWeight = instance.mAdjustmentWeight;
+    this.mDestinationType = instance.mDestinationType;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<ProductCatalogMicrodataStatsPixelInfo> getParser() {
-    return new APIRequest.ResponseParser<ProductCatalogMicrodataStatsPixelInfo>() {
-      public APINodeList<ProductCatalogMicrodataStatsPixelInfo> parseResponse(String response, APIContext context, APIRequest<ProductCatalogMicrodataStatsPixelInfo> request, String header) throws MalformedResponseException {
-        return ProductCatalogMicrodataStatsPixelInfo.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<AdCampaignConversionValueExpressionSpec> getParser() {
+    return new APIRequest.ResponseParser<AdCampaignConversionValueExpressionSpec>() {
+      public APINodeList<AdCampaignConversionValueExpressionSpec> parseResponse(String response, APIContext context, APIRequest<AdCampaignConversionValueExpressionSpec> request, String header) throws MalformedResponseException {
+        return AdCampaignConversionValueExpressionSpec.parseResponse(response, context, request, header);
       }
     };
   }

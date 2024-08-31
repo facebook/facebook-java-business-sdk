@@ -51,10 +51,6 @@ public class CatalogSmartPixelSettings extends APINode {
   private List<Object> mCbbCustomOverrideFilters = null;
   @SerializedName("cbb_default_filter")
   private List<Map<String, List<String>>> mCbbDefaultFilter = null;
-  @SerializedName("cbb_default_filter_crawl_params")
-  private String mCbbDefaultFilterCrawlParams = null;
-  @SerializedName("cbb_override_type_field_mapping")
-  private List<Map<String, List<String>>> mCbbOverrideTypeFieldMapping = null;
   @SerializedName("defaults")
   private List<Map<String, String>> mDefaults = null;
   @SerializedName("filters")
@@ -75,8 +71,6 @@ public class CatalogSmartPixelSettings extends APINode {
   private AdsPixel mPixel = null;
   @SerializedName("property_filter")
   private List<String> mPropertyFilter = null;
-  @SerializedName("retention_time_sec")
-  private Long mRetentionTimeSec = null;
   @SerializedName("trusted_domains")
   private List<String> mTrustedDomains = null;
   protected static Gson gson = null;
@@ -316,14 +310,6 @@ public class CatalogSmartPixelSettings extends APINode {
     return mCbbDefaultFilter;
   }
 
-  public String getFieldCbbDefaultFilterCrawlParams() {
-    return mCbbDefaultFilterCrawlParams;
-  }
-
-  public List<Map<String, List<String>>> getFieldCbbOverrideTypeFieldMapping() {
-    return mCbbOverrideTypeFieldMapping;
-  }
-
   public List<Map<String, String>> getFieldDefaults() {
     return mDefaults;
   }
@@ -367,10 +353,6 @@ public class CatalogSmartPixelSettings extends APINode {
     return mPropertyFilter;
   }
 
-  public Long getFieldRetentionTimeSec() {
-    return mRetentionTimeSec;
-  }
-
   public List<String> getFieldTrustedDomains() {
     return mTrustedDomains;
   }
@@ -393,8 +375,6 @@ public class CatalogSmartPixelSettings extends APINode {
       "catalog",
       "cbb_custom_override_filters",
       "cbb_default_filter",
-      "cbb_default_filter_crawl_params",
-      "cbb_override_type_field_mapping",
       "defaults",
       "filters",
       "id",
@@ -405,7 +385,6 @@ public class CatalogSmartPixelSettings extends APINode {
       "microdata_format_precedence",
       "pixel",
       "property_filter",
-      "retention_time_sec",
       "trusted_domains",
     };
 
@@ -534,20 +513,6 @@ public class CatalogSmartPixelSettings extends APINode {
       this.requestField("cbb_default_filter", value);
       return this;
     }
-    public APIRequestGet requestCbbDefaultFilterCrawlParamsField () {
-      return this.requestCbbDefaultFilterCrawlParamsField(true);
-    }
-    public APIRequestGet requestCbbDefaultFilterCrawlParamsField (boolean value) {
-      this.requestField("cbb_default_filter_crawl_params", value);
-      return this;
-    }
-    public APIRequestGet requestCbbOverrideTypeFieldMappingField () {
-      return this.requestCbbOverrideTypeFieldMappingField(true);
-    }
-    public APIRequestGet requestCbbOverrideTypeFieldMappingField (boolean value) {
-      this.requestField("cbb_override_type_field_mapping", value);
-      return this;
-    }
     public APIRequestGet requestDefaultsField () {
       return this.requestDefaultsField(true);
     }
@@ -618,13 +583,6 @@ public class CatalogSmartPixelSettings extends APINode {
       this.requestField("property_filter", value);
       return this;
     }
-    public APIRequestGet requestRetentionTimeSecField () {
-      return this.requestRetentionTimeSecField(true);
-    }
-    public APIRequestGet requestRetentionTimeSecField (boolean value) {
-      this.requestField("retention_time_sec", value);
-      return this;
-    }
     public APIRequestGet requestTrustedDomainsField () {
       return this.requestTrustedDomainsField(true);
     }
@@ -654,8 +612,6 @@ public class CatalogSmartPixelSettings extends APINode {
     this.mCatalog = instance.mCatalog;
     this.mCbbCustomOverrideFilters = instance.mCbbCustomOverrideFilters;
     this.mCbbDefaultFilter = instance.mCbbDefaultFilter;
-    this.mCbbDefaultFilterCrawlParams = instance.mCbbDefaultFilterCrawlParams;
-    this.mCbbOverrideTypeFieldMapping = instance.mCbbOverrideTypeFieldMapping;
     this.mDefaults = instance.mDefaults;
     this.mFilters = instance.mFilters;
     this.mId = instance.mId;
@@ -666,7 +622,6 @@ public class CatalogSmartPixelSettings extends APINode {
     this.mMicrodataFormatPrecedence = instance.mMicrodataFormatPrecedence;
     this.mPixel = instance.mPixel;
     this.mPropertyFilter = instance.mPropertyFilter;
-    this.mRetentionTimeSec = instance.mRetentionTimeSec;
     this.mTrustedDomains = instance.mTrustedDomains;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

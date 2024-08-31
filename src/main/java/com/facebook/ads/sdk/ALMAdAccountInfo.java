@@ -40,68 +40,78 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class UserSetReportingRoot extends APINode {
-  @SerializedName("creation_time")
-  private String mCreationTime = null;
+public class ALMAdAccountInfo extends APINode {
+  @SerializedName("ad_account_id")
+  private String mAdAccountId = null;
   @SerializedName("id")
   private String mId = null;
-  @SerializedName("last_modified_time")
-  private String mLastModifiedTime = null;
+  @SerializedName("managed_by")
+  private String mManagedBy = null;
+  @SerializedName("parent_advertiser_id")
+  private String mParentAdvertiserId = null;
+  @SerializedName("sub_vertical")
+  private String mSubVertical = null;
+  @SerializedName("tag")
+  private List<String> mTag = null;
+  @SerializedName("user_ids")
+  private List<String> mUserIds = null;
+  @SerializedName("vertical")
+  private String mVertical = null;
   protected static Gson gson = null;
 
-  UserSetReportingRoot() {
+  ALMAdAccountInfo() {
   }
 
-  public UserSetReportingRoot(Long id, APIContext context) {
+  public ALMAdAccountInfo(Long id, APIContext context) {
     this(id.toString(), context);
   }
 
-  public UserSetReportingRoot(String id, APIContext context) {
+  public ALMAdAccountInfo(String id, APIContext context) {
     this.mId = id;
 
     this.context = context;
   }
 
-  public UserSetReportingRoot fetch() throws APIException{
-    UserSetReportingRoot newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+  public ALMAdAccountInfo fetch() throws APIException{
+    ALMAdAccountInfo newInstance = fetchById(this.getPrefixedId().toString(), this.context);
     this.copyFrom(newInstance);
     return this;
   }
 
-  public static UserSetReportingRoot fetchById(Long id, APIContext context) throws APIException {
+  public static ALMAdAccountInfo fetchById(Long id, APIContext context) throws APIException {
     return fetchById(id.toString(), context);
   }
 
-  public static ListenableFuture<UserSetReportingRoot> fetchByIdAsync(Long id, APIContext context) throws APIException {
+  public static ListenableFuture<ALMAdAccountInfo> fetchByIdAsync(Long id, APIContext context) throws APIException {
     return fetchByIdAsync(id.toString(), context);
   }
 
-  public static UserSetReportingRoot fetchById(String id, APIContext context) throws APIException {
+  public static ALMAdAccountInfo fetchById(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
   }
 
-  public static ListenableFuture<UserSetReportingRoot> fetchByIdAsync(String id, APIContext context) throws APIException {
+  public static ListenableFuture<ALMAdAccountInfo> fetchByIdAsync(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
   }
 
-  public static APINodeList<UserSetReportingRoot> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<UserSetReportingRoot>)(
-      new APIRequest<UserSetReportingRoot>(context, "", "/", "GET", UserSetReportingRoot.getParser())
+  public static APINodeList<ALMAdAccountInfo> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<ALMAdAccountInfo>)(
+      new APIRequest<ALMAdAccountInfo>(context, "", "/", "GET", ALMAdAccountInfo.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .execute()
     );
   }
 
-  public static ListenableFuture<APINodeList<UserSetReportingRoot>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+  public static ListenableFuture<APINodeList<ALMAdAccountInfo>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
     return
-      new APIRequest(context, "", "/", "GET", UserSetReportingRoot.getParser())
+      new APIRequest(context, "", "/", "GET", ALMAdAccountInfo.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
@@ -114,12 +124,12 @@ public class UserSetReportingRoot extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static UserSetReportingRoot loadJSON(String json, APIContext context, String header) {
-    UserSetReportingRoot userSetReportingRoot = getGson().fromJson(json, UserSetReportingRoot.class);
+  public static ALMAdAccountInfo loadJSON(String json, APIContext context, String header) {
+    ALMAdAccountInfo almAdAccountInfo = getGson().fromJson(json, ALMAdAccountInfo.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(userSetReportingRoot.toString());
+      JsonElement o2 = parser.parse(almAdAccountInfo.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -129,14 +139,14 @@ public class UserSetReportingRoot extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    userSetReportingRoot.context = context;
-    userSetReportingRoot.rawValue = json;
-    userSetReportingRoot.header = header;
-    return userSetReportingRoot;
+    almAdAccountInfo.context = context;
+    almAdAccountInfo.rawValue = json;
+    almAdAccountInfo.header = header;
+    return almAdAccountInfo;
   }
 
-  public static APINodeList<UserSetReportingRoot> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<UserSetReportingRoot> userSetReportingRoots = new APINodeList<UserSetReportingRoot>(request, json, header);
+  public static APINodeList<ALMAdAccountInfo> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<ALMAdAccountInfo> almAdAccountInfos = new APINodeList<ALMAdAccountInfo>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -147,9 +157,9 @@ public class UserSetReportingRoot extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          userSetReportingRoots.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          almAdAccountInfos.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return userSetReportingRoots;
+        return almAdAccountInfos;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -159,20 +169,20 @@ public class UserSetReportingRoot extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                userSetReportingRoots.setCursors(before, after);
+                almAdAccountInfos.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            userSetReportingRoots.setPaging(previous, next);
+            almAdAccountInfos.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              userSetReportingRoots.setAppSecret(context.getAppSecretProof());
+              almAdAccountInfos.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              userSetReportingRoots.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              almAdAccountInfos.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -183,23 +193,23 @@ public class UserSetReportingRoot extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  userSetReportingRoots.add(loadJSON(entry.getValue().toString(), context, header));
+                  almAdAccountInfos.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              userSetReportingRoots.add(loadJSON(obj.toString(), context, header));
+              almAdAccountInfos.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return userSetReportingRoots;
+          return almAdAccountInfos;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              userSetReportingRoots.add(loadJSON(entry.getValue().toString(), context, header));
+              almAdAccountInfos.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return userSetReportingRoots;
+          return almAdAccountInfos;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -216,20 +226,20 @@ public class UserSetReportingRoot extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              userSetReportingRoots.add(loadJSON(value.toString(), context, header));
+              almAdAccountInfos.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return userSetReportingRoots;
+            return almAdAccountInfos;
           }
 
           // Sixth, check if it's pure JsonObject
-          userSetReportingRoots.clear();
-          userSetReportingRoots.add(loadJSON(json, context, header));
-          return userSetReportingRoots;
+          almAdAccountInfos.clear();
+          almAdAccountInfos.add(loadJSON(json, context, header));
+          return almAdAccountInfos;
         }
       }
     } catch (Exception e) {
@@ -261,62 +271,87 @@ public class UserSetReportingRoot extends APINode {
   }
 
 
-  public String getFieldCreationTime() {
-    return mCreationTime;
+  public String getFieldAdAccountId() {
+    return mAdAccountId;
   }
 
   public String getFieldId() {
     return mId;
   }
 
-  public String getFieldLastModifiedTime() {
-    return mLastModifiedTime;
+  public String getFieldManagedBy() {
+    return mManagedBy;
+  }
+
+  public String getFieldParentAdvertiserId() {
+    return mParentAdvertiserId;
+  }
+
+  public String getFieldSubVertical() {
+    return mSubVertical;
+  }
+
+  public List<String> getFieldTag() {
+    return mTag;
+  }
+
+  public List<String> getFieldUserIds() {
+    return mUserIds;
+  }
+
+  public String getFieldVertical() {
+    return mVertical;
   }
 
 
 
-  public static class APIRequestGet extends APIRequest<UserSetReportingRoot> {
+  public static class APIRequestGet extends APIRequest<ALMAdAccountInfo> {
 
-    UserSetReportingRoot lastResponse = null;
+    ALMAdAccountInfo lastResponse = null;
     @Override
-    public UserSetReportingRoot getLastResponse() {
+    public ALMAdAccountInfo getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
     };
 
     public static final String[] FIELDS = {
-      "creation_time",
+      "ad_account_id",
       "id",
-      "last_modified_time",
+      "managed_by",
+      "parent_advertiser_id",
+      "sub_vertical",
+      "tag",
+      "user_ids",
+      "vertical",
     };
 
     @Override
-    public UserSetReportingRoot parseResponse(String response, String header) throws APIException {
-      return UserSetReportingRoot.parseResponse(response, getContext(), this, header).head();
+    public ALMAdAccountInfo parseResponse(String response, String header) throws APIException {
+      return ALMAdAccountInfo.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public UserSetReportingRoot execute() throws APIException {
+    public ALMAdAccountInfo execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public UserSetReportingRoot execute(Map<String, Object> extraParams) throws APIException {
+    public ALMAdAccountInfo execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<UserSetReportingRoot> executeAsync() throws APIException {
+    public ListenableFuture<ALMAdAccountInfo> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<UserSetReportingRoot> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<ALMAdAccountInfo> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, UserSetReportingRoot>() {
-           public UserSetReportingRoot apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, ALMAdAccountInfo>() {
+           public ALMAdAccountInfo apply(ResponseWrapper result) {
              try {
                return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -381,11 +416,11 @@ public class UserSetReportingRoot extends APINode {
       return this;
     }
 
-    public APIRequestGet requestCreationTimeField () {
-      return this.requestCreationTimeField(true);
+    public APIRequestGet requestAdAccountIdField () {
+      return this.requestAdAccountIdField(true);
     }
-    public APIRequestGet requestCreationTimeField (boolean value) {
-      this.requestField("creation_time", value);
+    public APIRequestGet requestAdAccountIdField (boolean value) {
+      this.requestField("ad_account_id", value);
       return this;
     }
     public APIRequestGet requestIdField () {
@@ -395,11 +430,46 @@ public class UserSetReportingRoot extends APINode {
       this.requestField("id", value);
       return this;
     }
-    public APIRequestGet requestLastModifiedTimeField () {
-      return this.requestLastModifiedTimeField(true);
+    public APIRequestGet requestManagedByField () {
+      return this.requestManagedByField(true);
     }
-    public APIRequestGet requestLastModifiedTimeField (boolean value) {
-      this.requestField("last_modified_time", value);
+    public APIRequestGet requestManagedByField (boolean value) {
+      this.requestField("managed_by", value);
+      return this;
+    }
+    public APIRequestGet requestParentAdvertiserIdField () {
+      return this.requestParentAdvertiserIdField(true);
+    }
+    public APIRequestGet requestParentAdvertiserIdField (boolean value) {
+      this.requestField("parent_advertiser_id", value);
+      return this;
+    }
+    public APIRequestGet requestSubVerticalField () {
+      return this.requestSubVerticalField(true);
+    }
+    public APIRequestGet requestSubVerticalField (boolean value) {
+      this.requestField("sub_vertical", value);
+      return this;
+    }
+    public APIRequestGet requestTagField () {
+      return this.requestTagField(true);
+    }
+    public APIRequestGet requestTagField (boolean value) {
+      this.requestField("tag", value);
+      return this;
+    }
+    public APIRequestGet requestUserIdsField () {
+      return this.requestUserIdsField(true);
+    }
+    public APIRequestGet requestUserIdsField (boolean value) {
+      this.requestField("user_ids", value);
+      return this;
+    }
+    public APIRequestGet requestVerticalField () {
+      return this.requestVerticalField(true);
+    }
+    public APIRequestGet requestVerticalField (boolean value) {
+      this.requestField("vertical", value);
       return this;
     }
   }
@@ -418,19 +488,24 @@ public class UserSetReportingRoot extends APINode {
     return gson;
   }
 
-  public UserSetReportingRoot copyFrom(UserSetReportingRoot instance) {
-    this.mCreationTime = instance.mCreationTime;
+  public ALMAdAccountInfo copyFrom(ALMAdAccountInfo instance) {
+    this.mAdAccountId = instance.mAdAccountId;
     this.mId = instance.mId;
-    this.mLastModifiedTime = instance.mLastModifiedTime;
+    this.mManagedBy = instance.mManagedBy;
+    this.mParentAdvertiserId = instance.mParentAdvertiserId;
+    this.mSubVertical = instance.mSubVertical;
+    this.mTag = instance.mTag;
+    this.mUserIds = instance.mUserIds;
+    this.mVertical = instance.mVertical;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<UserSetReportingRoot> getParser() {
-    return new APIRequest.ResponseParser<UserSetReportingRoot>() {
-      public APINodeList<UserSetReportingRoot> parseResponse(String response, APIContext context, APIRequest<UserSetReportingRoot> request, String header) throws MalformedResponseException {
-        return UserSetReportingRoot.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<ALMAdAccountInfo> getParser() {
+    return new APIRequest.ResponseParser<ALMAdAccountInfo>() {
+      public APINodeList<ALMAdAccountInfo> parseResponse(String response, APIContext context, APIRequest<ALMAdAccountInfo> request, String header) throws MalformedResponseException {
+        return ALMAdAccountInfo.parseResponse(response, context, request, header);
       }
     };
   }

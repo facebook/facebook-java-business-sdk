@@ -40,31 +40,23 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class InstantArticleCTA extends APINode {
-  @SerializedName("id")
-  private String mId = null;
-  @SerializedName("is_enabled")
-  private Boolean mIsEnabled = null;
-  @SerializedName("publisher_defined_value")
-  private Double mPublisherDefinedValue = null;
-  @SerializedName("type")
-  private String mType = null;
-  @SerializedName("update_time")
-  private String mUpdateTime = null;
+public class AdCreativeDestinationSpec extends APINode {
+  @SerializedName("destination_type")
+  private String mDestinationType = null;
   protected static Gson gson = null;
 
-  public InstantArticleCTA() {
+  public AdCreativeDestinationSpec() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
-  public static InstantArticleCTA loadJSON(String json, APIContext context, String header) {
-    InstantArticleCTA instantArticleCTA = getGson().fromJson(json, InstantArticleCTA.class);
+  public static AdCreativeDestinationSpec loadJSON(String json, APIContext context, String header) {
+    AdCreativeDestinationSpec adCreativeDestinationSpec = getGson().fromJson(json, AdCreativeDestinationSpec.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(instantArticleCTA.toString());
+      JsonElement o2 = parser.parse(adCreativeDestinationSpec.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -74,14 +66,14 @@ public class InstantArticleCTA extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    instantArticleCTA.context = context;
-    instantArticleCTA.rawValue = json;
-    instantArticleCTA.header = header;
-    return instantArticleCTA;
+    adCreativeDestinationSpec.context = context;
+    adCreativeDestinationSpec.rawValue = json;
+    adCreativeDestinationSpec.header = header;
+    return adCreativeDestinationSpec;
   }
 
-  public static APINodeList<InstantArticleCTA> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<InstantArticleCTA> instantArticleCTAs = new APINodeList<InstantArticleCTA>(request, json, header);
+  public static APINodeList<AdCreativeDestinationSpec> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdCreativeDestinationSpec> adCreativeDestinationSpecs = new APINodeList<AdCreativeDestinationSpec>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -92,9 +84,9 @@ public class InstantArticleCTA extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          instantArticleCTAs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          adCreativeDestinationSpecs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return instantArticleCTAs;
+        return adCreativeDestinationSpecs;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -104,20 +96,20 @@ public class InstantArticleCTA extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                instantArticleCTAs.setCursors(before, after);
+                adCreativeDestinationSpecs.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            instantArticleCTAs.setPaging(previous, next);
+            adCreativeDestinationSpecs.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              instantArticleCTAs.setAppSecret(context.getAppSecretProof());
+              adCreativeDestinationSpecs.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              instantArticleCTAs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              adCreativeDestinationSpecs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -128,23 +120,23 @@ public class InstantArticleCTA extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  instantArticleCTAs.add(loadJSON(entry.getValue().toString(), context, header));
+                  adCreativeDestinationSpecs.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              instantArticleCTAs.add(loadJSON(obj.toString(), context, header));
+              adCreativeDestinationSpecs.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return instantArticleCTAs;
+          return adCreativeDestinationSpecs;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              instantArticleCTAs.add(loadJSON(entry.getValue().toString(), context, header));
+              adCreativeDestinationSpecs.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return instantArticleCTAs;
+          return adCreativeDestinationSpecs;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -161,20 +153,20 @@ public class InstantArticleCTA extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              instantArticleCTAs.add(loadJSON(value.toString(), context, header));
+              adCreativeDestinationSpecs.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return instantArticleCTAs;
+            return adCreativeDestinationSpecs;
           }
 
           // Sixth, check if it's pure JsonObject
-          instantArticleCTAs.clear();
-          instantArticleCTAs.add(loadJSON(json, context, header));
-          return instantArticleCTAs;
+          adCreativeDestinationSpecs.clear();
+          adCreativeDestinationSpecs.add(loadJSON(json, context, header));
+          return adCreativeDestinationSpecs;
         }
       }
     } catch (Exception e) {
@@ -202,48 +194,12 @@ public class InstantArticleCTA extends APINode {
   }
 
 
-  public String getFieldId() {
-    return mId;
+  public String getFieldDestinationType() {
+    return mDestinationType;
   }
 
-  public InstantArticleCTA setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
-  public Boolean getFieldIsEnabled() {
-    return mIsEnabled;
-  }
-
-  public InstantArticleCTA setFieldIsEnabled(Boolean value) {
-    this.mIsEnabled = value;
-    return this;
-  }
-
-  public Double getFieldPublisherDefinedValue() {
-    return mPublisherDefinedValue;
-  }
-
-  public InstantArticleCTA setFieldPublisherDefinedValue(Double value) {
-    this.mPublisherDefinedValue = value;
-    return this;
-  }
-
-  public String getFieldType() {
-    return mType;
-  }
-
-  public InstantArticleCTA setFieldType(String value) {
-    this.mType = value;
-    return this;
-  }
-
-  public String getFieldUpdateTime() {
-    return mUpdateTime;
-  }
-
-  public InstantArticleCTA setFieldUpdateTime(String value) {
-    this.mUpdateTime = value;
+  public AdCreativeDestinationSpec setFieldDestinationType(String value) {
+    this.mDestinationType = value;
     return this;
   }
 
@@ -263,21 +219,17 @@ public class InstantArticleCTA extends APINode {
     return gson;
   }
 
-  public InstantArticleCTA copyFrom(InstantArticleCTA instance) {
-    this.mId = instance.mId;
-    this.mIsEnabled = instance.mIsEnabled;
-    this.mPublisherDefinedValue = instance.mPublisherDefinedValue;
-    this.mType = instance.mType;
-    this.mUpdateTime = instance.mUpdateTime;
+  public AdCreativeDestinationSpec copyFrom(AdCreativeDestinationSpec instance) {
+    this.mDestinationType = instance.mDestinationType;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<InstantArticleCTA> getParser() {
-    return new APIRequest.ResponseParser<InstantArticleCTA>() {
-      public APINodeList<InstantArticleCTA> parseResponse(String response, APIContext context, APIRequest<InstantArticleCTA> request, String header) throws MalformedResponseException {
-        return InstantArticleCTA.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<AdCreativeDestinationSpec> getParser() {
+    return new APIRequest.ResponseParser<AdCreativeDestinationSpec>() {
+      public APINodeList<AdCreativeDestinationSpec> parseResponse(String response, APIContext context, APIRequest<AdCreativeDestinationSpec> request, String header) throws MalformedResponseException {
+        return AdCreativeDestinationSpec.parseResponse(response, context, request, header);
       }
     };
   }

@@ -2502,6 +2502,8 @@ public class ProductFeed extends APINode {
       "applinks",
       "availability",
       "brand",
+      "bundle_items",
+      "bundle_retailer_ids",
       "capability_to_review_status",
       "category",
       "category_specific_fields",
@@ -2535,6 +2537,7 @@ public class ProductFeed extends APINode {
       "importer_name",
       "invalidation_errors",
       "inventory",
+      "is_bundle_hero",
       "manufacturer_info",
       "manufacturer_part_number",
       "marked_for_product_launch",
@@ -2745,6 +2748,20 @@ public class ProductFeed extends APINode {
     }
     public APIRequestGetProducts requestBrandField (boolean value) {
       this.requestField("brand", value);
+      return this;
+    }
+    public APIRequestGetProducts requestBundleItemsField () {
+      return this.requestBundleItemsField(true);
+    }
+    public APIRequestGetProducts requestBundleItemsField (boolean value) {
+      this.requestField("bundle_items", value);
+      return this;
+    }
+    public APIRequestGetProducts requestBundleRetailerIdsField () {
+      return this.requestBundleRetailerIdsField(true);
+    }
+    public APIRequestGetProducts requestBundleRetailerIdsField (boolean value) {
+      this.requestField("bundle_retailer_ids", value);
       return this;
     }
     public APIRequestGetProducts requestCapabilityToReviewStatusField () {
@@ -2976,6 +2993,13 @@ public class ProductFeed extends APINode {
     }
     public APIRequestGetProducts requestInventoryField (boolean value) {
       this.requestField("inventory", value);
+      return this;
+    }
+    public APIRequestGetProducts requestIsBundleHeroField () {
+      return this.requestIsBundleHeroField(true);
+    }
+    public APIRequestGetProducts requestIsBundleHeroField (boolean value) {
+      this.requestField("is_bundle_hero", value);
       return this;
     }
     public APIRequestGetProducts requestManufacturerInfoField () {

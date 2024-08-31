@@ -45,12 +45,18 @@ public class FundingSourceDetailsCoupon extends APINode {
   private Long mAmount = null;
   @SerializedName("campaign_ids")
   private List<Long> mCampaignIds = null;
+  @SerializedName("coupon_id")
+  private String mCouponId = null;
   @SerializedName("currency")
   private String mCurrency = null;
   @SerializedName("display_amount")
   private String mDisplayAmount = null;
   @SerializedName("expiration")
   private String mExpiration = null;
+  @SerializedName("original_amount")
+  private Long mOriginalAmount = null;
+  @SerializedName("original_display_amount")
+  private String mOriginalDisplayAmount = null;
   protected static Gson gson = null;
 
   public FundingSourceDetailsCoupon() {
@@ -220,6 +226,15 @@ public class FundingSourceDetailsCoupon extends APINode {
     return this;
   }
 
+  public String getFieldCouponId() {
+    return mCouponId;
+  }
+
+  public FundingSourceDetailsCoupon setFieldCouponId(String value) {
+    this.mCouponId = value;
+    return this;
+  }
+
   public String getFieldCurrency() {
     return mCurrency;
   }
@@ -247,6 +262,24 @@ public class FundingSourceDetailsCoupon extends APINode {
     return this;
   }
 
+  public Long getFieldOriginalAmount() {
+    return mOriginalAmount;
+  }
+
+  public FundingSourceDetailsCoupon setFieldOriginalAmount(Long value) {
+    this.mOriginalAmount = value;
+    return this;
+  }
+
+  public String getFieldOriginalDisplayAmount() {
+    return mOriginalDisplayAmount;
+  }
+
+  public FundingSourceDetailsCoupon setFieldOriginalDisplayAmount(String value) {
+    this.mOriginalDisplayAmount = value;
+    return this;
+  }
+
 
 
 
@@ -266,9 +299,12 @@ public class FundingSourceDetailsCoupon extends APINode {
   public FundingSourceDetailsCoupon copyFrom(FundingSourceDetailsCoupon instance) {
     this.mAmount = instance.mAmount;
     this.mCampaignIds = instance.mCampaignIds;
+    this.mCouponId = instance.mCouponId;
     this.mCurrency = instance.mCurrency;
     this.mDisplayAmount = instance.mDisplayAmount;
     this.mExpiration = instance.mExpiration;
+    this.mOriginalAmount = instance.mOriginalAmount;
+    this.mOriginalDisplayAmount = instance.mOriginalDisplayAmount;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

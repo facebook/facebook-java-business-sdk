@@ -53,13 +53,74 @@ public class Stories extends APINode {
   private String mStatus = null;
   @SerializedName("url")
   private String mUrl = null;
+  @SerializedName("id")
+  private String mId = null;
   protected static Gson gson = null;
 
-  public Stories() {
+  Stories() {
+  }
+
+  public Stories(Long id, APIContext context) {
+    this(id.toString(), context);
+  }
+
+  public Stories(String id, APIContext context) {
+    this.mId = id;
+
+    this.context = context;
+  }
+
+  public Stories fetch() throws APIException{
+    Stories newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+    this.copyFrom(newInstance);
+    return this;
+  }
+
+  public static Stories fetchById(Long id, APIContext context) throws APIException {
+    return fetchById(id.toString(), context);
+  }
+
+  public static ListenableFuture<Stories> fetchByIdAsync(Long id, APIContext context) throws APIException {
+    return fetchByIdAsync(id.toString(), context);
+  }
+
+  public static Stories fetchById(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .execute();
+  }
+
+  public static ListenableFuture<Stories> fetchByIdAsync(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .executeAsync();
+  }
+
+  public static APINodeList<Stories> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<Stories>)(
+      new APIRequest<Stories>(context, "", "/", "GET", Stories.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .execute()
+    );
+  }
+
+  public static ListenableFuture<APINodeList<Stories>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return
+      new APIRequest(context, "", "/", "GET", Stories.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .executeAsyncBase();
+  }
+
+  private String getPrefixedId() {
+    return getId();
   }
 
   public String getId() {
-    return null;
+    return getFieldId().toString();
   }
   public static Stories loadJSON(String json, APIContext context, String header) {
     Stories stories = getGson().fromJson(json, Stories.class);
@@ -203,62 +264,376 @@ public class Stories extends APINode {
     return getGson().toJson(this);
   }
 
+  public APIRequestGetInsights getInsights() {
+    return new APIRequestGetInsights(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGet get() {
+    return new APIRequestGet(this.getPrefixedId().toString(), context);
+  }
+
 
   public String getFieldCreationTime() {
     return mCreationTime;
-  }
-
-  public Stories setFieldCreationTime(String value) {
-    this.mCreationTime = value;
-    return this;
   }
 
   public String getFieldMediaId() {
     return mMediaId;
   }
 
-  public Stories setFieldMediaId(String value) {
-    this.mMediaId = value;
-    return this;
-  }
-
   public String getFieldMediaType() {
     return mMediaType;
-  }
-
-  public Stories setFieldMediaType(String value) {
-    this.mMediaType = value;
-    return this;
   }
 
   public String getFieldPostId() {
     return mPostId;
   }
 
-  public Stories setFieldPostId(String value) {
-    this.mPostId = value;
-    return this;
-  }
-
   public String getFieldStatus() {
     return mStatus;
-  }
-
-  public Stories setFieldStatus(String value) {
-    this.mStatus = value;
-    return this;
   }
 
   public String getFieldUrl() {
     return mUrl;
   }
 
-  public Stories setFieldUrl(String value) {
-    this.mUrl = value;
-    return this;
+  public String getFieldId() {
+    return mId;
   }
 
 
+
+  public static class APIRequestGetInsights extends APIRequest<InsightsResult> {
+
+    APINodeList<InsightsResult> lastResponse = null;
+    @Override
+    public APINodeList<InsightsResult> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "metric",
+    };
+
+    public static final String[] FIELDS = {
+      "description",
+      "description_from_api_doc",
+      "id",
+      "name",
+      "period",
+      "title",
+      "values",
+    };
+
+    @Override
+    public APINodeList<InsightsResult> parseResponse(String response, String header) throws APIException {
+      return InsightsResult.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<InsightsResult> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<InsightsResult> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<InsightsResult>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<InsightsResult>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<InsightsResult>>() {
+           public APINodeList<InsightsResult> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetInsights.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestGetInsights(String nodeId, APIContext context) {
+      super(context, nodeId, "/insights", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetInsights setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetInsights setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetInsights setMetric (List<InsightsResult.EnumMetric> metric) {
+      this.setParam("metric", metric);
+      return this;
+    }
+    public APIRequestGetInsights setMetric (String metric) {
+      this.setParam("metric", metric);
+      return this;
+    }
+
+    public APIRequestGetInsights requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetInsights requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetInsights requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetInsights requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetInsights requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetInsights requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetInsights requestDescriptionField () {
+      return this.requestDescriptionField(true);
+    }
+    public APIRequestGetInsights requestDescriptionField (boolean value) {
+      this.requestField("description", value);
+      return this;
+    }
+    public APIRequestGetInsights requestDescriptionFromApiDocField () {
+      return this.requestDescriptionFromApiDocField(true);
+    }
+    public APIRequestGetInsights requestDescriptionFromApiDocField (boolean value) {
+      this.requestField("description_from_api_doc", value);
+      return this;
+    }
+    public APIRequestGetInsights requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetInsights requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetInsights requestNameField () {
+      return this.requestNameField(true);
+    }
+    public APIRequestGetInsights requestNameField (boolean value) {
+      this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetInsights requestPeriodField () {
+      return this.requestPeriodField(true);
+    }
+    public APIRequestGetInsights requestPeriodField (boolean value) {
+      this.requestField("period", value);
+      return this;
+    }
+    public APIRequestGetInsights requestTitleField () {
+      return this.requestTitleField(true);
+    }
+    public APIRequestGetInsights requestTitleField (boolean value) {
+      this.requestField("title", value);
+      return this;
+    }
+    public APIRequestGetInsights requestValuesField () {
+      return this.requestValuesField(true);
+    }
+    public APIRequestGetInsights requestValuesField (boolean value) {
+      this.requestField("values", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestGet extends APIRequest<Stories> {
+
+    Stories lastResponse = null;
+    @Override
+    public Stories getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "creation_time",
+      "media_id",
+      "media_type",
+      "post_id",
+      "status",
+      "url",
+      "id",
+    };
+
+    @Override
+    public Stories parseResponse(String response, String header) throws APIException {
+      return Stories.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public Stories execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public Stories execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<Stories> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<Stories> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, Stories>() {
+           public Stories apply(ResponseWrapper result) {
+             try {
+               return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestGet(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGet setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGet requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGet requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGet requestCreationTimeField () {
+      return this.requestCreationTimeField(true);
+    }
+    public APIRequestGet requestCreationTimeField (boolean value) {
+      this.requestField("creation_time", value);
+      return this;
+    }
+    public APIRequestGet requestMediaIdField () {
+      return this.requestMediaIdField(true);
+    }
+    public APIRequestGet requestMediaIdField (boolean value) {
+      this.requestField("media_id", value);
+      return this;
+    }
+    public APIRequestGet requestMediaTypeField () {
+      return this.requestMediaTypeField(true);
+    }
+    public APIRequestGet requestMediaTypeField (boolean value) {
+      this.requestField("media_type", value);
+      return this;
+    }
+    public APIRequestGet requestPostIdField () {
+      return this.requestPostIdField(true);
+    }
+    public APIRequestGet requestPostIdField (boolean value) {
+      this.requestField("post_id", value);
+      return this;
+    }
+    public APIRequestGet requestStatusField () {
+      return this.requestStatusField(true);
+    }
+    public APIRequestGet requestStatusField (boolean value) {
+      this.requestField("status", value);
+      return this;
+    }
+    public APIRequestGet requestUrlField () {
+      return this.requestUrlField(true);
+    }
+    public APIRequestGet requestUrlField (boolean value) {
+      this.requestField("url", value);
+      return this;
+    }
+    public APIRequestGet requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGet requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+  }
 
   public static enum EnumStatus {
       @SerializedName("ARCHIVED")
@@ -300,6 +675,7 @@ public class Stories extends APINode {
     this.mPostId = instance.mPostId;
     this.mStatus = instance.mStatus;
     this.mUrl = instance.mUrl;
+    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

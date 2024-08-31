@@ -40,80 +40,86 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class CTXPartnerAppWelcomeMessageFlow extends APINode {
-  @SerializedName("compatible_platforms")
-  private List<String> mCompatiblePlatforms = null;
-  @SerializedName("eligible_platforms")
-  private List<String> mEligiblePlatforms = null;
+public class ALMEvent extends APINode {
+  @SerializedName("ad_account_ids")
+  private List<String> mAdAccountIds = null;
+  @SerializedName("campaign_ids")
+  private List<String> mCampaignIds = null;
+  @SerializedName("channel")
+  private String mChannel = null;
+  @SerializedName("event")
+  private String mEvent = null;
+  @SerializedName("event_time")
+  private String mEventTime = null;
+  @SerializedName("guidance")
+  private String mGuidance = null;
+  @SerializedName("guidance_detail")
+  private String mGuidanceDetail = null;
   @SerializedName("id")
   private String mId = null;
-  @SerializedName("is_ig_only_flow")
-  private Boolean mIsIgOnlyFlow = null;
-  @SerializedName("is_used_in_ad")
-  private Boolean mIsUsedInAd = null;
-  @SerializedName("last_update_time")
-  private String mLastUpdateTime = null;
-  @SerializedName("name")
-  private String mName = null;
-  @SerializedName("welcome_message_flow")
-  private String mWelcomeMessageFlow = null;
-  @SerializedName("welcome_message_sequence")
-  private String mWelcomeMessageSequence = null;
+  @SerializedName("parent_advertiser_ids")
+  private List<String> mParentAdvertiserIds = null;
+  @SerializedName("reseller_business_id")
+  private String mResellerBusinessId = null;
+  @SerializedName("sub_channel")
+  private String mSubChannel = null;
+  @SerializedName("user_id")
+  private String mUserId = null;
   protected static Gson gson = null;
 
-  CTXPartnerAppWelcomeMessageFlow() {
+  ALMEvent() {
   }
 
-  public CTXPartnerAppWelcomeMessageFlow(Long id, APIContext context) {
+  public ALMEvent(Long id, APIContext context) {
     this(id.toString(), context);
   }
 
-  public CTXPartnerAppWelcomeMessageFlow(String id, APIContext context) {
+  public ALMEvent(String id, APIContext context) {
     this.mId = id;
 
     this.context = context;
   }
 
-  public CTXPartnerAppWelcomeMessageFlow fetch() throws APIException{
-    CTXPartnerAppWelcomeMessageFlow newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+  public ALMEvent fetch() throws APIException{
+    ALMEvent newInstance = fetchById(this.getPrefixedId().toString(), this.context);
     this.copyFrom(newInstance);
     return this;
   }
 
-  public static CTXPartnerAppWelcomeMessageFlow fetchById(Long id, APIContext context) throws APIException {
+  public static ALMEvent fetchById(Long id, APIContext context) throws APIException {
     return fetchById(id.toString(), context);
   }
 
-  public static ListenableFuture<CTXPartnerAppWelcomeMessageFlow> fetchByIdAsync(Long id, APIContext context) throws APIException {
+  public static ListenableFuture<ALMEvent> fetchByIdAsync(Long id, APIContext context) throws APIException {
     return fetchByIdAsync(id.toString(), context);
   }
 
-  public static CTXPartnerAppWelcomeMessageFlow fetchById(String id, APIContext context) throws APIException {
+  public static ALMEvent fetchById(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
   }
 
-  public static ListenableFuture<CTXPartnerAppWelcomeMessageFlow> fetchByIdAsync(String id, APIContext context) throws APIException {
+  public static ListenableFuture<ALMEvent> fetchByIdAsync(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
   }
 
-  public static APINodeList<CTXPartnerAppWelcomeMessageFlow> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<CTXPartnerAppWelcomeMessageFlow>)(
-      new APIRequest<CTXPartnerAppWelcomeMessageFlow>(context, "", "/", "GET", CTXPartnerAppWelcomeMessageFlow.getParser())
+  public static APINodeList<ALMEvent> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<ALMEvent>)(
+      new APIRequest<ALMEvent>(context, "", "/", "GET", ALMEvent.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .execute()
     );
   }
 
-  public static ListenableFuture<APINodeList<CTXPartnerAppWelcomeMessageFlow>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+  public static ListenableFuture<APINodeList<ALMEvent>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
     return
-      new APIRequest(context, "", "/", "GET", CTXPartnerAppWelcomeMessageFlow.getParser())
+      new APIRequest(context, "", "/", "GET", ALMEvent.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
@@ -126,12 +132,12 @@ public class CTXPartnerAppWelcomeMessageFlow extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static CTXPartnerAppWelcomeMessageFlow loadJSON(String json, APIContext context, String header) {
-    CTXPartnerAppWelcomeMessageFlow ctxPartnerAppWelcomeMessageFlow = getGson().fromJson(json, CTXPartnerAppWelcomeMessageFlow.class);
+  public static ALMEvent loadJSON(String json, APIContext context, String header) {
+    ALMEvent almEvent = getGson().fromJson(json, ALMEvent.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(ctxPartnerAppWelcomeMessageFlow.toString());
+      JsonElement o2 = parser.parse(almEvent.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -141,14 +147,14 @@ public class CTXPartnerAppWelcomeMessageFlow extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    ctxPartnerAppWelcomeMessageFlow.context = context;
-    ctxPartnerAppWelcomeMessageFlow.rawValue = json;
-    ctxPartnerAppWelcomeMessageFlow.header = header;
-    return ctxPartnerAppWelcomeMessageFlow;
+    almEvent.context = context;
+    almEvent.rawValue = json;
+    almEvent.header = header;
+    return almEvent;
   }
 
-  public static APINodeList<CTXPartnerAppWelcomeMessageFlow> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<CTXPartnerAppWelcomeMessageFlow> ctxPartnerAppWelcomeMessageFlows = new APINodeList<CTXPartnerAppWelcomeMessageFlow>(request, json, header);
+  public static APINodeList<ALMEvent> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<ALMEvent> almEvents = new APINodeList<ALMEvent>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -159,9 +165,9 @@ public class CTXPartnerAppWelcomeMessageFlow extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          ctxPartnerAppWelcomeMessageFlows.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          almEvents.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return ctxPartnerAppWelcomeMessageFlows;
+        return almEvents;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -171,20 +177,20 @@ public class CTXPartnerAppWelcomeMessageFlow extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                ctxPartnerAppWelcomeMessageFlows.setCursors(before, after);
+                almEvents.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            ctxPartnerAppWelcomeMessageFlows.setPaging(previous, next);
+            almEvents.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              ctxPartnerAppWelcomeMessageFlows.setAppSecret(context.getAppSecretProof());
+              almEvents.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              ctxPartnerAppWelcomeMessageFlows.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              almEvents.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -195,23 +201,23 @@ public class CTXPartnerAppWelcomeMessageFlow extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  ctxPartnerAppWelcomeMessageFlows.add(loadJSON(entry.getValue().toString(), context, header));
+                  almEvents.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              ctxPartnerAppWelcomeMessageFlows.add(loadJSON(obj.toString(), context, header));
+              almEvents.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return ctxPartnerAppWelcomeMessageFlows;
+          return almEvents;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              ctxPartnerAppWelcomeMessageFlows.add(loadJSON(entry.getValue().toString(), context, header));
+              almEvents.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return ctxPartnerAppWelcomeMessageFlows;
+          return almEvents;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -228,20 +234,20 @@ public class CTXPartnerAppWelcomeMessageFlow extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              ctxPartnerAppWelcomeMessageFlows.add(loadJSON(value.toString(), context, header));
+              almEvents.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return ctxPartnerAppWelcomeMessageFlows;
+            return almEvents;
           }
 
           // Sixth, check if it's pure JsonObject
-          ctxPartnerAppWelcomeMessageFlows.clear();
-          ctxPartnerAppWelcomeMessageFlows.add(loadJSON(json, context, header));
-          return ctxPartnerAppWelcomeMessageFlows;
+          almEvents.clear();
+          almEvents.add(loadJSON(json, context, header));
+          return almEvents;
         }
       }
     } catch (Exception e) {
@@ -273,92 +279,107 @@ public class CTXPartnerAppWelcomeMessageFlow extends APINode {
   }
 
 
-  public List<String> getFieldCompatiblePlatforms() {
-    return mCompatiblePlatforms;
+  public List<String> getFieldAdAccountIds() {
+    return mAdAccountIds;
   }
 
-  public List<String> getFieldEligiblePlatforms() {
-    return mEligiblePlatforms;
+  public List<String> getFieldCampaignIds() {
+    return mCampaignIds;
+  }
+
+  public String getFieldChannel() {
+    return mChannel;
+  }
+
+  public String getFieldEvent() {
+    return mEvent;
+  }
+
+  public String getFieldEventTime() {
+    return mEventTime;
+  }
+
+  public String getFieldGuidance() {
+    return mGuidance;
+  }
+
+  public String getFieldGuidanceDetail() {
+    return mGuidanceDetail;
   }
 
   public String getFieldId() {
     return mId;
   }
 
-  public Boolean getFieldIsIgOnlyFlow() {
-    return mIsIgOnlyFlow;
+  public List<String> getFieldParentAdvertiserIds() {
+    return mParentAdvertiserIds;
   }
 
-  public Boolean getFieldIsUsedInAd() {
-    return mIsUsedInAd;
+  public String getFieldResellerBusinessId() {
+    return mResellerBusinessId;
   }
 
-  public String getFieldLastUpdateTime() {
-    return mLastUpdateTime;
+  public String getFieldSubChannel() {
+    return mSubChannel;
   }
 
-  public String getFieldName() {
-    return mName;
-  }
-
-  public String getFieldWelcomeMessageFlow() {
-    return mWelcomeMessageFlow;
-  }
-
-  public String getFieldWelcomeMessageSequence() {
-    return mWelcomeMessageSequence;
+  public String getFieldUserId() {
+    return mUserId;
   }
 
 
 
-  public static class APIRequestGet extends APIRequest<CTXPartnerAppWelcomeMessageFlow> {
+  public static class APIRequestGet extends APIRequest<ALMEvent> {
 
-    CTXPartnerAppWelcomeMessageFlow lastResponse = null;
+    ALMEvent lastResponse = null;
     @Override
-    public CTXPartnerAppWelcomeMessageFlow getLastResponse() {
+    public ALMEvent getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
     };
 
     public static final String[] FIELDS = {
-      "compatible_platforms",
-      "eligible_platforms",
+      "ad_account_ids",
+      "campaign_ids",
+      "channel",
+      "event",
+      "event_time",
+      "guidance",
+      "guidance_detail",
       "id",
-      "is_ig_only_flow",
-      "is_used_in_ad",
-      "last_update_time",
-      "name",
-      "welcome_message_flow",
-      "welcome_message_sequence",
+      "parent_advertiser_ids",
+      "reseller_business_id",
+      "sub_channel",
+      "user_id",
     };
 
     @Override
-    public CTXPartnerAppWelcomeMessageFlow parseResponse(String response, String header) throws APIException {
-      return CTXPartnerAppWelcomeMessageFlow.parseResponse(response, getContext(), this, header).head();
+    public ALMEvent parseResponse(String response, String header) throws APIException {
+      return ALMEvent.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public CTXPartnerAppWelcomeMessageFlow execute() throws APIException {
+    public ALMEvent execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public CTXPartnerAppWelcomeMessageFlow execute(Map<String, Object> extraParams) throws APIException {
+    public ALMEvent execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<CTXPartnerAppWelcomeMessageFlow> executeAsync() throws APIException {
+    public ListenableFuture<ALMEvent> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<CTXPartnerAppWelcomeMessageFlow> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<ALMEvent> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, CTXPartnerAppWelcomeMessageFlow>() {
-           public CTXPartnerAppWelcomeMessageFlow apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, ALMEvent>() {
+           public ALMEvent apply(ResponseWrapper result) {
              try {
                return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -423,18 +444,53 @@ public class CTXPartnerAppWelcomeMessageFlow extends APINode {
       return this;
     }
 
-    public APIRequestGet requestCompatiblePlatformsField () {
-      return this.requestCompatiblePlatformsField(true);
+    public APIRequestGet requestAdAccountIdsField () {
+      return this.requestAdAccountIdsField(true);
     }
-    public APIRequestGet requestCompatiblePlatformsField (boolean value) {
-      this.requestField("compatible_platforms", value);
+    public APIRequestGet requestAdAccountIdsField (boolean value) {
+      this.requestField("ad_account_ids", value);
       return this;
     }
-    public APIRequestGet requestEligiblePlatformsField () {
-      return this.requestEligiblePlatformsField(true);
+    public APIRequestGet requestCampaignIdsField () {
+      return this.requestCampaignIdsField(true);
     }
-    public APIRequestGet requestEligiblePlatformsField (boolean value) {
-      this.requestField("eligible_platforms", value);
+    public APIRequestGet requestCampaignIdsField (boolean value) {
+      this.requestField("campaign_ids", value);
+      return this;
+    }
+    public APIRequestGet requestChannelField () {
+      return this.requestChannelField(true);
+    }
+    public APIRequestGet requestChannelField (boolean value) {
+      this.requestField("channel", value);
+      return this;
+    }
+    public APIRequestGet requestEventField () {
+      return this.requestEventField(true);
+    }
+    public APIRequestGet requestEventField (boolean value) {
+      this.requestField("event", value);
+      return this;
+    }
+    public APIRequestGet requestEventTimeField () {
+      return this.requestEventTimeField(true);
+    }
+    public APIRequestGet requestEventTimeField (boolean value) {
+      this.requestField("event_time", value);
+      return this;
+    }
+    public APIRequestGet requestGuidanceField () {
+      return this.requestGuidanceField(true);
+    }
+    public APIRequestGet requestGuidanceField (boolean value) {
+      this.requestField("guidance", value);
+      return this;
+    }
+    public APIRequestGet requestGuidanceDetailField () {
+      return this.requestGuidanceDetailField(true);
+    }
+    public APIRequestGet requestGuidanceDetailField (boolean value) {
+      this.requestField("guidance_detail", value);
       return this;
     }
     public APIRequestGet requestIdField () {
@@ -444,46 +500,32 @@ public class CTXPartnerAppWelcomeMessageFlow extends APINode {
       this.requestField("id", value);
       return this;
     }
-    public APIRequestGet requestIsIgOnlyFlowField () {
-      return this.requestIsIgOnlyFlowField(true);
+    public APIRequestGet requestParentAdvertiserIdsField () {
+      return this.requestParentAdvertiserIdsField(true);
     }
-    public APIRequestGet requestIsIgOnlyFlowField (boolean value) {
-      this.requestField("is_ig_only_flow", value);
+    public APIRequestGet requestParentAdvertiserIdsField (boolean value) {
+      this.requestField("parent_advertiser_ids", value);
       return this;
     }
-    public APIRequestGet requestIsUsedInAdField () {
-      return this.requestIsUsedInAdField(true);
+    public APIRequestGet requestResellerBusinessIdField () {
+      return this.requestResellerBusinessIdField(true);
     }
-    public APIRequestGet requestIsUsedInAdField (boolean value) {
-      this.requestField("is_used_in_ad", value);
+    public APIRequestGet requestResellerBusinessIdField (boolean value) {
+      this.requestField("reseller_business_id", value);
       return this;
     }
-    public APIRequestGet requestLastUpdateTimeField () {
-      return this.requestLastUpdateTimeField(true);
+    public APIRequestGet requestSubChannelField () {
+      return this.requestSubChannelField(true);
     }
-    public APIRequestGet requestLastUpdateTimeField (boolean value) {
-      this.requestField("last_update_time", value);
+    public APIRequestGet requestSubChannelField (boolean value) {
+      this.requestField("sub_channel", value);
       return this;
     }
-    public APIRequestGet requestNameField () {
-      return this.requestNameField(true);
+    public APIRequestGet requestUserIdField () {
+      return this.requestUserIdField(true);
     }
-    public APIRequestGet requestNameField (boolean value) {
-      this.requestField("name", value);
-      return this;
-    }
-    public APIRequestGet requestWelcomeMessageFlowField () {
-      return this.requestWelcomeMessageFlowField(true);
-    }
-    public APIRequestGet requestWelcomeMessageFlowField (boolean value) {
-      this.requestField("welcome_message_flow", value);
-      return this;
-    }
-    public APIRequestGet requestWelcomeMessageSequenceField () {
-      return this.requestWelcomeMessageSequenceField(true);
-    }
-    public APIRequestGet requestWelcomeMessageSequenceField (boolean value) {
-      this.requestField("welcome_message_sequence", value);
+    public APIRequestGet requestUserIdField (boolean value) {
+      this.requestField("user_id", value);
       return this;
     }
   }
@@ -502,25 +544,28 @@ public class CTXPartnerAppWelcomeMessageFlow extends APINode {
     return gson;
   }
 
-  public CTXPartnerAppWelcomeMessageFlow copyFrom(CTXPartnerAppWelcomeMessageFlow instance) {
-    this.mCompatiblePlatforms = instance.mCompatiblePlatforms;
-    this.mEligiblePlatforms = instance.mEligiblePlatforms;
+  public ALMEvent copyFrom(ALMEvent instance) {
+    this.mAdAccountIds = instance.mAdAccountIds;
+    this.mCampaignIds = instance.mCampaignIds;
+    this.mChannel = instance.mChannel;
+    this.mEvent = instance.mEvent;
+    this.mEventTime = instance.mEventTime;
+    this.mGuidance = instance.mGuidance;
+    this.mGuidanceDetail = instance.mGuidanceDetail;
     this.mId = instance.mId;
-    this.mIsIgOnlyFlow = instance.mIsIgOnlyFlow;
-    this.mIsUsedInAd = instance.mIsUsedInAd;
-    this.mLastUpdateTime = instance.mLastUpdateTime;
-    this.mName = instance.mName;
-    this.mWelcomeMessageFlow = instance.mWelcomeMessageFlow;
-    this.mWelcomeMessageSequence = instance.mWelcomeMessageSequence;
+    this.mParentAdvertiserIds = instance.mParentAdvertiserIds;
+    this.mResellerBusinessId = instance.mResellerBusinessId;
+    this.mSubChannel = instance.mSubChannel;
+    this.mUserId = instance.mUserId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<CTXPartnerAppWelcomeMessageFlow> getParser() {
-    return new APIRequest.ResponseParser<CTXPartnerAppWelcomeMessageFlow>() {
-      public APINodeList<CTXPartnerAppWelcomeMessageFlow> parseResponse(String response, APIContext context, APIRequest<CTXPartnerAppWelcomeMessageFlow> request, String header) throws MalformedResponseException {
-        return CTXPartnerAppWelcomeMessageFlow.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<ALMEvent> getParser() {
+    return new APIRequest.ResponseParser<ALMEvent>() {
+      public APINodeList<ALMEvent> parseResponse(String response, APIContext context, APIRequest<ALMEvent> request, String header) throws MalformedResponseException {
+        return ALMEvent.parseResponse(response, context, request, header);
       }
     };
   }

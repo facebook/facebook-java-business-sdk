@@ -55,8 +55,12 @@ public class AdCreativeBrandedContentAds extends APINode {
   private Boolean mIsMcaInternal = null;
   @SerializedName("partners")
   private List<AdCreativeBrandedContentAdsPartners> mPartners = null;
+  @SerializedName("product_set_partner_selection_status")
+  private String mProductSetPartnerSelectionStatus = null;
   @SerializedName("promoted_page_id")
   private String mPromotedPageId = null;
+  @SerializedName("testimonial")
+  private String mTestimonial = null;
   @SerializedName("ui_version")
   private Long mUiVersion = null;
   protected static Gson gson = null;
@@ -278,12 +282,30 @@ public class AdCreativeBrandedContentAds extends APINode {
     this.mPartners = AdCreativeBrandedContentAdsPartners.getGson().fromJson(value, type);
     return this;
   }
+  public String getFieldProductSetPartnerSelectionStatus() {
+    return mProductSetPartnerSelectionStatus;
+  }
+
+  public AdCreativeBrandedContentAds setFieldProductSetPartnerSelectionStatus(String value) {
+    this.mProductSetPartnerSelectionStatus = value;
+    return this;
+  }
+
   public String getFieldPromotedPageId() {
     return mPromotedPageId;
   }
 
   public AdCreativeBrandedContentAds setFieldPromotedPageId(String value) {
     this.mPromotedPageId = value;
+    return this;
+  }
+
+  public String getFieldTestimonial() {
+    return mTestimonial;
+  }
+
+  public AdCreativeBrandedContentAds setFieldTestimonial(String value) {
+    this.mTestimonial = value;
     return this;
   }
 
@@ -320,7 +342,9 @@ public class AdCreativeBrandedContentAds extends APINode {
     this.mInstagramBoostPostAccessToken = instance.mInstagramBoostPostAccessToken;
     this.mIsMcaInternal = instance.mIsMcaInternal;
     this.mPartners = instance.mPartners;
+    this.mProductSetPartnerSelectionStatus = instance.mProductSetPartnerSelectionStatus;
     this.mPromotedPageId = instance.mPromotedPageId;
+    this.mTestimonial = instance.mTestimonial;
     this.mUiVersion = instance.mUiVersion;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

@@ -543,6 +543,7 @@ public class CommerceMerchantSettings extends APINode {
       "last_updated",
       "merchant_order_id",
       "order_status",
+      "pre_order_details",
       "selected_shipping_option",
       "ship_by_date",
       "shipping_address",
@@ -743,6 +744,13 @@ public class CommerceMerchantSettings extends APINode {
       this.requestField("order_status", value);
       return this;
     }
+    public APIRequestGetCommerceOrders requestPreOrderDetailsField () {
+      return this.requestPreOrderDetailsField(true);
+    }
+    public APIRequestGetCommerceOrders requestPreOrderDetailsField (boolean value) {
+      this.requestField("pre_order_details", value);
+      return this;
+    }
     public APIRequestGetCommerceOrders requestSelectedShippingOptionField () {
       return this.requestSelectedShippingOptionField(true);
     }
@@ -937,10 +945,15 @@ public class CommerceMerchantSettings extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "merchant_order_id",
       "net_payment_amount",
+      "order_created",
       "order_details",
+      "order_id",
       "payout_reference_id",
+      "postal_code",
       "processing_fee",
+      "state",
       "tax_rate",
       "transaction_date",
       "transaction_type",
@@ -1053,11 +1066,25 @@ public class CommerceMerchantSettings extends APINode {
       return this;
     }
 
+    public APIRequestGetCommerceTransactions requestMerchantOrderIdField () {
+      return this.requestMerchantOrderIdField(true);
+    }
+    public APIRequestGetCommerceTransactions requestMerchantOrderIdField (boolean value) {
+      this.requestField("merchant_order_id", value);
+      return this;
+    }
     public APIRequestGetCommerceTransactions requestNetPaymentAmountField () {
       return this.requestNetPaymentAmountField(true);
     }
     public APIRequestGetCommerceTransactions requestNetPaymentAmountField (boolean value) {
       this.requestField("net_payment_amount", value);
+      return this;
+    }
+    public APIRequestGetCommerceTransactions requestOrderCreatedField () {
+      return this.requestOrderCreatedField(true);
+    }
+    public APIRequestGetCommerceTransactions requestOrderCreatedField (boolean value) {
+      this.requestField("order_created", value);
       return this;
     }
     public APIRequestGetCommerceTransactions requestOrderDetailsField () {
@@ -1067,6 +1094,13 @@ public class CommerceMerchantSettings extends APINode {
       this.requestField("order_details", value);
       return this;
     }
+    public APIRequestGetCommerceTransactions requestOrderIdField () {
+      return this.requestOrderIdField(true);
+    }
+    public APIRequestGetCommerceTransactions requestOrderIdField (boolean value) {
+      this.requestField("order_id", value);
+      return this;
+    }
     public APIRequestGetCommerceTransactions requestPayoutReferenceIdField () {
       return this.requestPayoutReferenceIdField(true);
     }
@@ -1074,11 +1108,25 @@ public class CommerceMerchantSettings extends APINode {
       this.requestField("payout_reference_id", value);
       return this;
     }
+    public APIRequestGetCommerceTransactions requestPostalCodeField () {
+      return this.requestPostalCodeField(true);
+    }
+    public APIRequestGetCommerceTransactions requestPostalCodeField (boolean value) {
+      this.requestField("postal_code", value);
+      return this;
+    }
     public APIRequestGetCommerceTransactions requestProcessingFeeField () {
       return this.requestProcessingFeeField(true);
     }
     public APIRequestGetCommerceTransactions requestProcessingFeeField (boolean value) {
       this.requestField("processing_fee", value);
+      return this;
+    }
+    public APIRequestGetCommerceTransactions requestStateField () {
+      return this.requestStateField(true);
+    }
+    public APIRequestGetCommerceTransactions requestStateField (boolean value) {
+      this.requestField("state", value);
       return this;
     }
     public APIRequestGetCommerceTransactions requestTaxRateField () {

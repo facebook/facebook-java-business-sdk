@@ -40,23 +40,27 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class ProductCatalogExampleFeed extends APINode {
-  @SerializedName("example_feed")
-  private String mExampleFeed = null;
+public class OverrideDetails extends APINode {
+  @SerializedName("key")
+  private String mKey = null;
+  @SerializedName("type")
+  private String mType = null;
+  @SerializedName("values")
+  private Object mValues = null;
   protected static Gson gson = null;
 
-  public ProductCatalogExampleFeed() {
+  public OverrideDetails() {
   }
 
   public String getId() {
     return null;
   }
-  public static ProductCatalogExampleFeed loadJSON(String json, APIContext context, String header) {
-    ProductCatalogExampleFeed productCatalogExampleFeed = getGson().fromJson(json, ProductCatalogExampleFeed.class);
+  public static OverrideDetails loadJSON(String json, APIContext context, String header) {
+    OverrideDetails overrideDetails = getGson().fromJson(json, OverrideDetails.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(productCatalogExampleFeed.toString());
+      JsonElement o2 = parser.parse(overrideDetails.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -66,14 +70,14 @@ public class ProductCatalogExampleFeed extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    productCatalogExampleFeed.context = context;
-    productCatalogExampleFeed.rawValue = json;
-    productCatalogExampleFeed.header = header;
-    return productCatalogExampleFeed;
+    overrideDetails.context = context;
+    overrideDetails.rawValue = json;
+    overrideDetails.header = header;
+    return overrideDetails;
   }
 
-  public static APINodeList<ProductCatalogExampleFeed> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<ProductCatalogExampleFeed> productCatalogExampleFeeds = new APINodeList<ProductCatalogExampleFeed>(request, json, header);
+  public static APINodeList<OverrideDetails> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<OverrideDetails> overrideDetailss = new APINodeList<OverrideDetails>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -84,9 +88,9 @@ public class ProductCatalogExampleFeed extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          productCatalogExampleFeeds.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          overrideDetailss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return productCatalogExampleFeeds;
+        return overrideDetailss;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -96,20 +100,20 @@ public class ProductCatalogExampleFeed extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                productCatalogExampleFeeds.setCursors(before, after);
+                overrideDetailss.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            productCatalogExampleFeeds.setPaging(previous, next);
+            overrideDetailss.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              productCatalogExampleFeeds.setAppSecret(context.getAppSecretProof());
+              overrideDetailss.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              productCatalogExampleFeeds.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              overrideDetailss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -120,23 +124,23 @@ public class ProductCatalogExampleFeed extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  productCatalogExampleFeeds.add(loadJSON(entry.getValue().toString(), context, header));
+                  overrideDetailss.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              productCatalogExampleFeeds.add(loadJSON(obj.toString(), context, header));
+              overrideDetailss.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return productCatalogExampleFeeds;
+          return overrideDetailss;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              productCatalogExampleFeeds.add(loadJSON(entry.getValue().toString(), context, header));
+              overrideDetailss.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return productCatalogExampleFeeds;
+          return overrideDetailss;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -153,20 +157,20 @@ public class ProductCatalogExampleFeed extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              productCatalogExampleFeeds.add(loadJSON(value.toString(), context, header));
+              overrideDetailss.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return productCatalogExampleFeeds;
+            return overrideDetailss;
           }
 
           // Sixth, check if it's pure JsonObject
-          productCatalogExampleFeeds.clear();
-          productCatalogExampleFeeds.add(loadJSON(json, context, header));
-          return productCatalogExampleFeeds;
+          overrideDetailss.clear();
+          overrideDetailss.add(loadJSON(json, context, header));
+          return overrideDetailss;
         }
       }
     } catch (Exception e) {
@@ -194,16 +198,55 @@ public class ProductCatalogExampleFeed extends APINode {
   }
 
 
-  public String getFieldExampleFeed() {
-    return mExampleFeed;
+  public String getFieldKey() {
+    return mKey;
   }
 
-  public ProductCatalogExampleFeed setFieldExampleFeed(String value) {
-    this.mExampleFeed = value;
+  public OverrideDetails setFieldKey(String value) {
+    this.mKey = value;
+    return this;
+  }
+
+  public String getFieldType() {
+    return mType;
+  }
+
+  public OverrideDetails setFieldType(String value) {
+    this.mType = value;
+    return this;
+  }
+
+  public Object getFieldValues() {
+    return mValues;
+  }
+
+  public OverrideDetails setFieldValues(Object value) {
+    this.mValues = value;
     return this;
   }
 
 
+
+  public static enum EnumType {
+      @SerializedName("COUNTRY")
+      VALUE_COUNTRY("COUNTRY"),
+      @SerializedName("LANGUAGE")
+      VALUE_LANGUAGE("LANGUAGE"),
+      @SerializedName("LANGUAGE_AND_COUNTRY")
+      VALUE_LANGUAGE_AND_COUNTRY("LANGUAGE_AND_COUNTRY"),
+      ;
+
+      private String value;
+
+      private EnumType(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
 
 
   synchronized /*package*/ static Gson getGson() {
@@ -219,17 +262,19 @@ public class ProductCatalogExampleFeed extends APINode {
     return gson;
   }
 
-  public ProductCatalogExampleFeed copyFrom(ProductCatalogExampleFeed instance) {
-    this.mExampleFeed = instance.mExampleFeed;
+  public OverrideDetails copyFrom(OverrideDetails instance) {
+    this.mKey = instance.mKey;
+    this.mType = instance.mType;
+    this.mValues = instance.mValues;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<ProductCatalogExampleFeed> getParser() {
-    return new APIRequest.ResponseParser<ProductCatalogExampleFeed>() {
-      public APINodeList<ProductCatalogExampleFeed> parseResponse(String response, APIContext context, APIRequest<ProductCatalogExampleFeed> request, String header) throws MalformedResponseException {
-        return ProductCatalogExampleFeed.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<OverrideDetails> getParser() {
+    return new APIRequest.ResponseParser<OverrideDetails>() {
+      public APINodeList<OverrideDetails> parseResponse(String response, APIContext context, APIRequest<OverrideDetails> request, String header) throws MalformedResponseException {
+        return OverrideDetails.parseResponse(response, context, request, header);
       }
     };
   }

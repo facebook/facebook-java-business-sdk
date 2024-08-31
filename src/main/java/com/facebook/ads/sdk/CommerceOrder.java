@@ -63,6 +63,8 @@ public class CommerceOrder extends APINode {
   private String mMerchantOrderId = null;
   @SerializedName("order_status")
   private Object mOrderStatus = null;
+  @SerializedName("pre_order_details")
+  private Object mPreOrderDetails = null;
   @SerializedName("selected_shipping_option")
   private Object mSelectedShippingOption = null;
   @SerializedName("ship_by_date")
@@ -286,8 +288,8 @@ public class CommerceOrder extends APINode {
     return new APIRequestGetCancellations(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestCreateCanCellATIOn createCanCellATIOn() {
-    return new APIRequestCreateCanCellATIOn(this.getPrefixedId().toString(), context);
+  public APIRequestCreateCancellation createCancellation() {
+    return new APIRequestCreateCancellation(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestCreateItemUpdate createItemUpdate() {
@@ -389,6 +391,10 @@ public class CommerceOrder extends APINode {
 
   public Object getFieldOrderStatus() {
     return mOrderStatus;
+  }
+
+  public Object getFieldPreOrderDetails() {
+    return mPreOrderDetails;
   }
 
   public Object getFieldSelectedShippingOption() {
@@ -627,7 +633,7 @@ public class CommerceOrder extends APINode {
 
   }
 
-  public static class APIRequestCreateCanCellATIOn extends APIRequest<CommerceOrder> {
+  public static class APIRequestCreateCancellation extends APIRequest<CommerceOrder> {
 
     CommerceOrder lastResponse = null;
     @Override
@@ -671,7 +677,7 @@ public class CommerceOrder extends APINode {
         new Function<ResponseWrapper, CommerceOrder>() {
            public CommerceOrder apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateCanCellATIOn.this.parseResponse(result.getBody(), result.getHeader());
+               return APIRequestCreateCancellation.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -681,60 +687,60 @@ public class CommerceOrder extends APINode {
       );
     };
 
-    public APIRequestCreateCanCellATIOn(String nodeId, APIContext context) {
+    public APIRequestCreateCancellation(String nodeId, APIContext context) {
       super(context, nodeId, "/cancellations", "POST", Arrays.asList(PARAMS));
     }
 
     @Override
-    public APIRequestCreateCanCellATIOn setParam(String param, Object value) {
+    public APIRequestCreateCancellation setParam(String param, Object value) {
       setParamInternal(param, value);
       return this;
     }
 
     @Override
-    public APIRequestCreateCanCellATIOn setParams(Map<String, Object> params) {
+    public APIRequestCreateCancellation setParams(Map<String, Object> params) {
       setParamsInternal(params);
       return this;
     }
 
 
-    public APIRequestCreateCanCellATIOn setCancelReason (Map<String, String> cancelReason) {
+    public APIRequestCreateCancellation setCancelReason (Map<String, String> cancelReason) {
       this.setParam("cancel_reason", cancelReason);
       return this;
     }
-    public APIRequestCreateCanCellATIOn setCancelReason (String cancelReason) {
+    public APIRequestCreateCancellation setCancelReason (String cancelReason) {
       this.setParam("cancel_reason", cancelReason);
       return this;
     }
 
-    public APIRequestCreateCanCellATIOn setIdempotencyKey (String idempotencyKey) {
+    public APIRequestCreateCancellation setIdempotencyKey (String idempotencyKey) {
       this.setParam("idempotency_key", idempotencyKey);
       return this;
     }
 
-    public APIRequestCreateCanCellATIOn setItems (List<Map<String, String>> items) {
+    public APIRequestCreateCancellation setItems (List<Map<String, String>> items) {
       this.setParam("items", items);
       return this;
     }
-    public APIRequestCreateCanCellATIOn setItems (String items) {
+    public APIRequestCreateCancellation setItems (String items) {
       this.setParam("items", items);
       return this;
     }
 
-    public APIRequestCreateCanCellATIOn setRestockItems (Boolean restockItems) {
+    public APIRequestCreateCancellation setRestockItems (Boolean restockItems) {
       this.setParam("restock_items", restockItems);
       return this;
     }
-    public APIRequestCreateCanCellATIOn setRestockItems (String restockItems) {
+    public APIRequestCreateCancellation setRestockItems (String restockItems) {
       this.setParam("restock_items", restockItems);
       return this;
     }
 
-    public APIRequestCreateCanCellATIOn requestAllFields () {
+    public APIRequestCreateCancellation requestAllFields () {
       return this.requestAllFields(true);
     }
 
-    public APIRequestCreateCanCellATIOn requestAllFields (boolean value) {
+    public APIRequestCreateCancellation requestAllFields (boolean value) {
       for (String field : FIELDS) {
         this.requestField(field, value);
       }
@@ -742,12 +748,12 @@ public class CommerceOrder extends APINode {
     }
 
     @Override
-    public APIRequestCreateCanCellATIOn requestFields (List<String> fields) {
+    public APIRequestCreateCancellation requestFields (List<String> fields) {
       return this.requestFields(fields, true);
     }
 
     @Override
-    public APIRequestCreateCanCellATIOn requestFields (List<String> fields, boolean value) {
+    public APIRequestCreateCancellation requestFields (List<String> fields, boolean value) {
       for (String field : fields) {
         this.requestField(field, value);
       }
@@ -755,13 +761,13 @@ public class CommerceOrder extends APINode {
     }
 
     @Override
-    public APIRequestCreateCanCellATIOn requestField (String field) {
+    public APIRequestCreateCancellation requestField (String field) {
       this.requestField(field, true);
       return this;
     }
 
     @Override
-    public APIRequestCreateCanCellATIOn requestField (String field, boolean value) {
+    public APIRequestCreateCancellation requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
@@ -2447,6 +2453,7 @@ public class CommerceOrder extends APINode {
       "last_updated",
       "merchant_order_id",
       "order_status",
+      "pre_order_details",
       "selected_shipping_option",
       "ship_by_date",
       "shipping_address",
@@ -2619,6 +2626,13 @@ public class CommerceOrder extends APINode {
       this.requestField("order_status", value);
       return this;
     }
+    public APIRequestGet requestPreOrderDetailsField () {
+      return this.requestPreOrderDetailsField(true);
+    }
+    public APIRequestGet requestPreOrderDetailsField (boolean value) {
+      this.requestField("pre_order_details", value);
+      return this;
+    }
     public APIRequestGet requestSelectedShippingOptionField () {
       return this.requestSelectedShippingOptionField(true);
     }
@@ -2780,6 +2794,7 @@ public class CommerceOrder extends APINode {
     this.mLastUpdated = instance.mLastUpdated;
     this.mMerchantOrderId = instance.mMerchantOrderId;
     this.mOrderStatus = instance.mOrderStatus;
+    this.mPreOrderDetails = instance.mPreOrderDetails;
     this.mSelectedShippingOption = instance.mSelectedShippingOption;
     this.mShipByDate = instance.mShipByDate;
     this.mShippingAddress = instance.mShippingAddress;

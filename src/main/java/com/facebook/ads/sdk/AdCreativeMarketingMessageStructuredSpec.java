@@ -47,6 +47,8 @@ public class AdCreativeMarketingMessageStructuredSpec extends APINode {
   private String mFooter = null;
   @SerializedName("greeting")
   private String mGreeting = null;
+  @SerializedName("is_optimized_text")
+  private Boolean mIsOptimizedText = null;
   @SerializedName("language")
   private String mLanguage = null;
   @SerializedName("referenced_adgroup_id")
@@ -231,6 +233,15 @@ public class AdCreativeMarketingMessageStructuredSpec extends APINode {
     return this;
   }
 
+  public Boolean getFieldIsOptimizedText() {
+    return mIsOptimizedText;
+  }
+
+  public AdCreativeMarketingMessageStructuredSpec setFieldIsOptimizedText(Boolean value) {
+    this.mIsOptimizedText = value;
+    return this;
+  }
+
   public String getFieldLanguage() {
     return mLanguage;
   }
@@ -278,6 +289,7 @@ public class AdCreativeMarketingMessageStructuredSpec extends APINode {
     this.mButtons = instance.mButtons;
     this.mFooter = instance.mFooter;
     this.mGreeting = instance.mGreeting;
+    this.mIsOptimizedText = instance.mIsOptimizedText;
     this.mLanguage = instance.mLanguage;
     this.mReferencedAdgroupId = instance.mReferencedAdgroupId;
     this.mWhatsAppBusinessPhoneNumberId = instance.mWhatsAppBusinessPhoneNumberId;

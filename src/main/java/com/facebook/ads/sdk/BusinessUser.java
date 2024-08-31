@@ -3238,6 +3238,25 @@ public class BusinessUser extends APINode {
 
   }
 
+  public static enum EnumInvitedUserType {
+      @SerializedName("FB")
+      VALUE_FB("FB"),
+      @SerializedName("MWA")
+      VALUE_MWA("MWA"),
+      ;
+
+      private String value;
+
+      private EnumInvitedUserType(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
   public static enum EnumRole {
       @SerializedName("ADMIN")
       VALUE_ADMIN("ADMIN"),

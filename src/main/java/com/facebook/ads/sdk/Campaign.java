@@ -103,6 +103,8 @@ public class Campaign extends APINode {
   private Campaign mSourceCampaign = null;
   @SerializedName("source_campaign_id")
   private String mSourceCampaignId = null;
+  @SerializedName("source_recommendation_type")
+  private String mSourceRecommendationType = null;
   @SerializedName("special_ad_categories")
   private List<String> mSpecialAdCategories = null;
   @SerializedName("special_ad_category")
@@ -508,6 +510,10 @@ public class Campaign extends APINode {
 
   public String getFieldSourceCampaignId() {
     return mSourceCampaignId;
+  }
+
+  public String getFieldSourceRecommendationType() {
+    return mSourceRecommendationType;
   }
 
   public List<String> getFieldSpecialAdCategories() {
@@ -1592,6 +1598,7 @@ public class Campaign extends APINode {
       "bid_info",
       "bid_strategy",
       "billing_event",
+      "brand_safety_config",
       "budget_remaining",
       "campaign",
       "campaign_active_time",
@@ -1846,6 +1853,13 @@ public class Campaign extends APINode {
     }
     public APIRequestGetAdSets requestBillingEventField (boolean value) {
       this.requestField("billing_event", value);
+      return this;
+    }
+    public APIRequestGetAdSets requestBrandSafetyConfigField () {
+      return this.requestBrandSafetyConfigField(true);
+    }
+    public APIRequestGetAdSets requestBrandSafetyConfigField (boolean value) {
+      this.requestField("brand_safety_config", value);
       return this;
     }
     public APIRequestGetAdSets requestBudgetRemainingField () {
@@ -2398,6 +2412,7 @@ public class Campaign extends APINode {
       "smart_promotion_type",
       "source_campaign",
       "source_campaign_id",
+      "source_recommendation_type",
       "special_ad_categories",
       "special_ad_category",
       "special_ad_category_country",
@@ -2750,6 +2765,13 @@ public class Campaign extends APINode {
     }
     public APIRequestGetCopies requestSourceCampaignIdField (boolean value) {
       this.requestField("source_campaign_id", value);
+      return this;
+    }
+    public APIRequestGetCopies requestSourceRecommendationTypeField () {
+      return this.requestSourceRecommendationTypeField(true);
+    }
+    public APIRequestGetCopies requestSourceRecommendationTypeField (boolean value) {
+      this.requestField("source_recommendation_type", value);
       return this;
     }
     public APIRequestGetCopies requestSpecialAdCategoriesField () {
@@ -3721,6 +3743,7 @@ public class Campaign extends APINode {
       "smart_promotion_type",
       "source_campaign",
       "source_campaign_id",
+      "source_recommendation_type",
       "special_ad_categories",
       "special_ad_category",
       "special_ad_category_country",
@@ -4073,6 +4096,13 @@ public class Campaign extends APINode {
     }
     public APIRequestGet requestSourceCampaignIdField (boolean value) {
       this.requestField("source_campaign_id", value);
+      return this;
+    }
+    public APIRequestGet requestSourceRecommendationTypeField () {
+      return this.requestSourceRecommendationTypeField(true);
+    }
+    public APIRequestGet requestSourceRecommendationTypeField (boolean value) {
+      this.requestField("source_recommendation_type", value);
       return this;
     }
     public APIRequestGet requestSpecialAdCategoriesField () {
@@ -5356,6 +5386,7 @@ public class Campaign extends APINode {
     this.mSmartPromotionType = instance.mSmartPromotionType;
     this.mSourceCampaign = instance.mSourceCampaign;
     this.mSourceCampaignId = instance.mSourceCampaignId;
+    this.mSourceRecommendationType = instance.mSourceRecommendationType;
     this.mSpecialAdCategories = instance.mSpecialAdCategories;
     this.mSpecialAdCategory = instance.mSpecialAdCategory;
     this.mSpecialAdCategoryCountry = instance.mSpecialAdCategoryCountry;

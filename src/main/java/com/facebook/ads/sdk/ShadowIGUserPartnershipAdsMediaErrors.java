@@ -40,29 +40,29 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class CatalogItemAppealStatus extends APINode {
-  @SerializedName("handle")
-  private String mHandle = null;
-  @SerializedName("item_id")
-  private Long mItemId = null;
-  @SerializedName("status")
-  private EnumStatus mStatus = null;
-  @SerializedName("use_cases")
-  private List<Object> mUseCases = null;
+public class ShadowIGUserPartnershipAdsMediaErrors extends APINode {
+  @SerializedName("ad_code")
+  private String mAdCode = null;
+  @SerializedName("error_codes")
+  private String mErrorCodes = null;
+  @SerializedName("errors")
+  private List<String> mErrors = null;
+  @SerializedName("permalink")
+  private String mPermalink = null;
   protected static Gson gson = null;
 
-  public CatalogItemAppealStatus() {
+  public ShadowIGUserPartnershipAdsMediaErrors() {
   }
 
   public String getId() {
     return null;
   }
-  public static CatalogItemAppealStatus loadJSON(String json, APIContext context, String header) {
-    CatalogItemAppealStatus catalogItemAppealStatus = getGson().fromJson(json, CatalogItemAppealStatus.class);
+  public static ShadowIGUserPartnershipAdsMediaErrors loadJSON(String json, APIContext context, String header) {
+    ShadowIGUserPartnershipAdsMediaErrors shadowIGUserPartnershipAdsMediaErrors = getGson().fromJson(json, ShadowIGUserPartnershipAdsMediaErrors.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(catalogItemAppealStatus.toString());
+      JsonElement o2 = parser.parse(shadowIGUserPartnershipAdsMediaErrors.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -72,14 +72,14 @@ public class CatalogItemAppealStatus extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    catalogItemAppealStatus.context = context;
-    catalogItemAppealStatus.rawValue = json;
-    catalogItemAppealStatus.header = header;
-    return catalogItemAppealStatus;
+    shadowIGUserPartnershipAdsMediaErrors.context = context;
+    shadowIGUserPartnershipAdsMediaErrors.rawValue = json;
+    shadowIGUserPartnershipAdsMediaErrors.header = header;
+    return shadowIGUserPartnershipAdsMediaErrors;
   }
 
-  public static APINodeList<CatalogItemAppealStatus> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<CatalogItemAppealStatus> catalogItemAppealStatuss = new APINodeList<CatalogItemAppealStatus>(request, json, header);
+  public static APINodeList<ShadowIGUserPartnershipAdsMediaErrors> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<ShadowIGUserPartnershipAdsMediaErrors> shadowIGUserPartnershipAdsMediaErrorss = new APINodeList<ShadowIGUserPartnershipAdsMediaErrors>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -90,9 +90,9 @@ public class CatalogItemAppealStatus extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          catalogItemAppealStatuss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          shadowIGUserPartnershipAdsMediaErrorss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return catalogItemAppealStatuss;
+        return shadowIGUserPartnershipAdsMediaErrorss;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -102,20 +102,20 @@ public class CatalogItemAppealStatus extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                catalogItemAppealStatuss.setCursors(before, after);
+                shadowIGUserPartnershipAdsMediaErrorss.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            catalogItemAppealStatuss.setPaging(previous, next);
+            shadowIGUserPartnershipAdsMediaErrorss.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              catalogItemAppealStatuss.setAppSecret(context.getAppSecretProof());
+              shadowIGUserPartnershipAdsMediaErrorss.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              catalogItemAppealStatuss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              shadowIGUserPartnershipAdsMediaErrorss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -126,23 +126,23 @@ public class CatalogItemAppealStatus extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  catalogItemAppealStatuss.add(loadJSON(entry.getValue().toString(), context, header));
+                  shadowIGUserPartnershipAdsMediaErrorss.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              catalogItemAppealStatuss.add(loadJSON(obj.toString(), context, header));
+              shadowIGUserPartnershipAdsMediaErrorss.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return catalogItemAppealStatuss;
+          return shadowIGUserPartnershipAdsMediaErrorss;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              catalogItemAppealStatuss.add(loadJSON(entry.getValue().toString(), context, header));
+              shadowIGUserPartnershipAdsMediaErrorss.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return catalogItemAppealStatuss;
+          return shadowIGUserPartnershipAdsMediaErrorss;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -159,20 +159,20 @@ public class CatalogItemAppealStatus extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              catalogItemAppealStatuss.add(loadJSON(value.toString(), context, header));
+              shadowIGUserPartnershipAdsMediaErrorss.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return catalogItemAppealStatuss;
+            return shadowIGUserPartnershipAdsMediaErrorss;
           }
 
           // Sixth, check if it's pure JsonObject
-          catalogItemAppealStatuss.clear();
-          catalogItemAppealStatuss.add(loadJSON(json, context, header));
-          return catalogItemAppealStatuss;
+          shadowIGUserPartnershipAdsMediaErrorss.clear();
+          shadowIGUserPartnershipAdsMediaErrorss.add(loadJSON(json, context, header));
+          return shadowIGUserPartnershipAdsMediaErrorss;
         }
       }
     } catch (Exception e) {
@@ -200,68 +200,43 @@ public class CatalogItemAppealStatus extends APINode {
   }
 
 
-  public String getFieldHandle() {
-    return mHandle;
+  public String getFieldAdCode() {
+    return mAdCode;
   }
 
-  public CatalogItemAppealStatus setFieldHandle(String value) {
-    this.mHandle = value;
+  public ShadowIGUserPartnershipAdsMediaErrors setFieldAdCode(String value) {
+    this.mAdCode = value;
     return this;
   }
 
-  public Long getFieldItemId() {
-    return mItemId;
+  public String getFieldErrorCodes() {
+    return mErrorCodes;
   }
 
-  public CatalogItemAppealStatus setFieldItemId(Long value) {
-    this.mItemId = value;
+  public ShadowIGUserPartnershipAdsMediaErrors setFieldErrorCodes(String value) {
+    this.mErrorCodes = value;
     return this;
   }
 
-  public EnumStatus getFieldStatus() {
-    return mStatus;
+  public List<String> getFieldErrors() {
+    return mErrors;
   }
 
-  public CatalogItemAppealStatus setFieldStatus(EnumStatus value) {
-    this.mStatus = value;
+  public ShadowIGUserPartnershipAdsMediaErrors setFieldErrors(List<String> value) {
+    this.mErrors = value;
     return this;
   }
 
-  public List<Object> getFieldUseCases() {
-    return mUseCases;
+  public String getFieldPermalink() {
+    return mPermalink;
   }
 
-  public CatalogItemAppealStatus setFieldUseCases(List<Object> value) {
-    this.mUseCases = value;
+  public ShadowIGUserPartnershipAdsMediaErrors setFieldPermalink(String value) {
+    this.mPermalink = value;
     return this;
   }
 
 
-
-  public static enum EnumStatus {
-      @SerializedName("This item cannot be appealed as it is either approved or already has an appeal")
-      VALUE_THIS_ITEM_CANNOT_BE_APPEALED_AS_IT_IS_EITHER_APPROVED_OR_ALREADY_HAS_AN_APPEAL("This item cannot be appealed as it is either approved or already has an appeal"),
-      @SerializedName("This item is not rejected for any of channels")
-      VALUE_THIS_ITEM_IS_NOT_REJECTED_FOR_ANY_OF_CHANNELS("This item is not rejected for any of channels"),
-      @SerializedName("We've encountered unexpected error while processing this request. Please try again later !")
-      VALUE_WE_VE_ENCOUNTERED_UNEXPECTED_ERROR_WHILE_PROCESSING_THIS_REQUEST_PLEASE_TRY_AGAIN_LATER_("We've encountered unexpected error while processing this request. Please try again later !"),
-      @SerializedName("You've reached the maximum number of item requests you can make this week. You'll be able to request item reviews again within the next 7 days.")
-      VALUE_YOU_VE_REACHED_THE_MAXIMUM_NUMBER_OF_ITEM_REQUESTS_YOU_CAN_MAKE_THIS_WEEK_YOU_LL_BE_ABLE_TO_REQUEST_ITEM_REVIEWS_AGAIN_WITHIN_THE_NEXT_7_DAYS_("You've reached the maximum number of item requests you can make this week. You'll be able to request item reviews again within the next 7 days."),
-      @SerializedName("Your request was received. See information below to learn more.")
-      VALUE_YOUR_REQUEST_WAS_RECEIVED_SEE_INFORMATION_BELOW_TO_LEARN_MORE_("Your request was received. See information below to learn more."),
-      ;
-
-      private String value;
-
-      private EnumStatus(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
 
 
   synchronized /*package*/ static Gson getGson() {
@@ -277,20 +252,20 @@ public class CatalogItemAppealStatus extends APINode {
     return gson;
   }
 
-  public CatalogItemAppealStatus copyFrom(CatalogItemAppealStatus instance) {
-    this.mHandle = instance.mHandle;
-    this.mItemId = instance.mItemId;
-    this.mStatus = instance.mStatus;
-    this.mUseCases = instance.mUseCases;
+  public ShadowIGUserPartnershipAdsMediaErrors copyFrom(ShadowIGUserPartnershipAdsMediaErrors instance) {
+    this.mAdCode = instance.mAdCode;
+    this.mErrorCodes = instance.mErrorCodes;
+    this.mErrors = instance.mErrors;
+    this.mPermalink = instance.mPermalink;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<CatalogItemAppealStatus> getParser() {
-    return new APIRequest.ResponseParser<CatalogItemAppealStatus>() {
-      public APINodeList<CatalogItemAppealStatus> parseResponse(String response, APIContext context, APIRequest<CatalogItemAppealStatus> request, String header) throws MalformedResponseException {
-        return CatalogItemAppealStatus.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<ShadowIGUserPartnershipAdsMediaErrors> getParser() {
+    return new APIRequest.ResponseParser<ShadowIGUserPartnershipAdsMediaErrors>() {
+      public APINodeList<ShadowIGUserPartnershipAdsMediaErrors> parseResponse(String response, APIContext context, APIRequest<ShadowIGUserPartnershipAdsMediaErrors> request, String header) throws MalformedResponseException {
+        return ShadowIGUserPartnershipAdsMediaErrors.parseResponse(response, context, request, header);
       }
     };
   }

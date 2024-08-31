@@ -318,8 +318,12 @@ public class IGMedia extends APINode {
     return new APIRequestGetInsights(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestDeleteProductTags deleteProductTags() {
-    return new APIRequestDeleteProductTags(this.getPrefixedId().toString(), context);
+  public APIRequestDeletePartnershipAdCode deletePartnershipAdCode() {
+    return new APIRequestDeletePartnershipAdCode(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestCreatePartnershipAdCode createPartnershipAdCode() {
+    return new APIRequestCreatePartnershipAdCode(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetProductTags getProductTags() {
@@ -1651,7 +1655,7 @@ public class IGMedia extends APINode {
     }
   }
 
-  public static class APIRequestDeleteProductTags extends APIRequest<APINode> {
+  public static class APIRequestDeletePartnershipAdCode extends APIRequest<APINode> {
 
     APINodeList<APINode> lastResponse = null;
     @Override
@@ -1659,8 +1663,6 @@ public class IGMedia extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "child_index",
-      "deleted_tags",
     };
 
     public static final String[] FIELDS = {
@@ -1693,7 +1695,7 @@ public class IGMedia extends APINode {
         new Function<ResponseWrapper, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(ResponseWrapper result) {
              try {
-               return APIRequestDeleteProductTags.this.parseResponse(result.getBody(), result.getHeader());
+               return APIRequestDeletePartnershipAdCode.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1703,46 +1705,28 @@ public class IGMedia extends APINode {
       );
     };
 
-    public APIRequestDeleteProductTags(String nodeId, APIContext context) {
-      super(context, nodeId, "/product_tags", "DELETE", Arrays.asList(PARAMS));
+    public APIRequestDeletePartnershipAdCode(String nodeId, APIContext context) {
+      super(context, nodeId, "/partnership_ad_code", "DELETE", Arrays.asList(PARAMS));
     }
 
     @Override
-    public APIRequestDeleteProductTags setParam(String param, Object value) {
+    public APIRequestDeletePartnershipAdCode setParam(String param, Object value) {
       setParamInternal(param, value);
       return this;
     }
 
     @Override
-    public APIRequestDeleteProductTags setParams(Map<String, Object> params) {
+    public APIRequestDeletePartnershipAdCode setParams(Map<String, Object> params) {
       setParamsInternal(params);
       return this;
     }
 
 
-    public APIRequestDeleteProductTags setChildIndex (Long childIndex) {
-      this.setParam("child_index", childIndex);
-      return this;
-    }
-    public APIRequestDeleteProductTags setChildIndex (String childIndex) {
-      this.setParam("child_index", childIndex);
-      return this;
-    }
-
-    public APIRequestDeleteProductTags setDeletedTags (List<Map<String, String>> deletedTags) {
-      this.setParam("deleted_tags", deletedTags);
-      return this;
-    }
-    public APIRequestDeleteProductTags setDeletedTags (String deletedTags) {
-      this.setParam("deleted_tags", deletedTags);
-      return this;
-    }
-
-    public APIRequestDeleteProductTags requestAllFields () {
+    public APIRequestDeletePartnershipAdCode requestAllFields () {
       return this.requestAllFields(true);
     }
 
-    public APIRequestDeleteProductTags requestAllFields (boolean value) {
+    public APIRequestDeletePartnershipAdCode requestAllFields (boolean value) {
       for (String field : FIELDS) {
         this.requestField(field, value);
       }
@@ -1750,12 +1734,12 @@ public class IGMedia extends APINode {
     }
 
     @Override
-    public APIRequestDeleteProductTags requestFields (List<String> fields) {
+    public APIRequestDeletePartnershipAdCode requestFields (List<String> fields) {
       return this.requestFields(fields, true);
     }
 
     @Override
-    public APIRequestDeleteProductTags requestFields (List<String> fields, boolean value) {
+    public APIRequestDeletePartnershipAdCode requestFields (List<String> fields, boolean value) {
       for (String field : fields) {
         this.requestField(field, value);
       }
@@ -1763,13 +1747,118 @@ public class IGMedia extends APINode {
     }
 
     @Override
-    public APIRequestDeleteProductTags requestField (String field) {
+    public APIRequestDeletePartnershipAdCode requestField (String field) {
       this.requestField(field, true);
       return this;
     }
 
     @Override
-    public APIRequestDeleteProductTags requestField (String field, boolean value) {
+    public APIRequestDeletePartnershipAdCode requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestCreatePartnershipAdCode extends APIRequest<APINode> {
+
+    APINode lastResponse = null;
+    @Override
+    public APINode getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public APINode execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINode execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINode> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreatePartnershipAdCode.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestCreatePartnershipAdCode(String nodeId, APIContext context) {
+      super(context, nodeId, "/partnership_ad_code", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreatePartnershipAdCode setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreatePartnershipAdCode setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreatePartnershipAdCode requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreatePartnershipAdCode requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreatePartnershipAdCode requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreatePartnershipAdCode requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreatePartnershipAdCode requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreatePartnershipAdCode requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }

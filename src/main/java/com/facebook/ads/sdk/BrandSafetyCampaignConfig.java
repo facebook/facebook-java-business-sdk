@@ -40,31 +40,23 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class CPASSetupCatalogProgress extends APINode {
-  @SerializedName("child_catalog_count")
-  private Long mChildCatalogCount = null;
-  @SerializedName("child_catalog_issues")
-  private List<Object> mChildCatalogIssues = null;
-  @SerializedName("id")
-  private String mId = null;
-  @SerializedName("issues")
-  private List<Object> mIssues = null;
-  @SerializedName("name")
-  private String mName = null;
+public class BrandSafetyCampaignConfig extends APINode {
+  @SerializedName("comment_moderation_filter")
+  private String mCommentModerationFilter = null;
   protected static Gson gson = null;
 
-  public CPASSetupCatalogProgress() {
+  public BrandSafetyCampaignConfig() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
-  public static CPASSetupCatalogProgress loadJSON(String json, APIContext context, String header) {
-    CPASSetupCatalogProgress cpasSetupCatalogProgress = getGson().fromJson(json, CPASSetupCatalogProgress.class);
+  public static BrandSafetyCampaignConfig loadJSON(String json, APIContext context, String header) {
+    BrandSafetyCampaignConfig brandSafetyCampaignConfig = getGson().fromJson(json, BrandSafetyCampaignConfig.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(cpasSetupCatalogProgress.toString());
+      JsonElement o2 = parser.parse(brandSafetyCampaignConfig.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -74,14 +66,14 @@ public class CPASSetupCatalogProgress extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    cpasSetupCatalogProgress.context = context;
-    cpasSetupCatalogProgress.rawValue = json;
-    cpasSetupCatalogProgress.header = header;
-    return cpasSetupCatalogProgress;
+    brandSafetyCampaignConfig.context = context;
+    brandSafetyCampaignConfig.rawValue = json;
+    brandSafetyCampaignConfig.header = header;
+    return brandSafetyCampaignConfig;
   }
 
-  public static APINodeList<CPASSetupCatalogProgress> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<CPASSetupCatalogProgress> cpasSetupCatalogProgresss = new APINodeList<CPASSetupCatalogProgress>(request, json, header);
+  public static APINodeList<BrandSafetyCampaignConfig> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<BrandSafetyCampaignConfig> brandSafetyCampaignConfigs = new APINodeList<BrandSafetyCampaignConfig>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -92,9 +84,9 @@ public class CPASSetupCatalogProgress extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          cpasSetupCatalogProgresss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          brandSafetyCampaignConfigs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return cpasSetupCatalogProgresss;
+        return brandSafetyCampaignConfigs;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -104,20 +96,20 @@ public class CPASSetupCatalogProgress extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                cpasSetupCatalogProgresss.setCursors(before, after);
+                brandSafetyCampaignConfigs.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            cpasSetupCatalogProgresss.setPaging(previous, next);
+            brandSafetyCampaignConfigs.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              cpasSetupCatalogProgresss.setAppSecret(context.getAppSecretProof());
+              brandSafetyCampaignConfigs.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              cpasSetupCatalogProgresss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              brandSafetyCampaignConfigs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -128,23 +120,23 @@ public class CPASSetupCatalogProgress extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  cpasSetupCatalogProgresss.add(loadJSON(entry.getValue().toString(), context, header));
+                  brandSafetyCampaignConfigs.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              cpasSetupCatalogProgresss.add(loadJSON(obj.toString(), context, header));
+              brandSafetyCampaignConfigs.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return cpasSetupCatalogProgresss;
+          return brandSafetyCampaignConfigs;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              cpasSetupCatalogProgresss.add(loadJSON(entry.getValue().toString(), context, header));
+              brandSafetyCampaignConfigs.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return cpasSetupCatalogProgresss;
+          return brandSafetyCampaignConfigs;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -161,20 +153,20 @@ public class CPASSetupCatalogProgress extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              cpasSetupCatalogProgresss.add(loadJSON(value.toString(), context, header));
+              brandSafetyCampaignConfigs.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return cpasSetupCatalogProgresss;
+            return brandSafetyCampaignConfigs;
           }
 
           // Sixth, check if it's pure JsonObject
-          cpasSetupCatalogProgresss.clear();
-          cpasSetupCatalogProgresss.add(loadJSON(json, context, header));
-          return cpasSetupCatalogProgresss;
+          brandSafetyCampaignConfigs.clear();
+          brandSafetyCampaignConfigs.add(loadJSON(json, context, header));
+          return brandSafetyCampaignConfigs;
         }
       }
     } catch (Exception e) {
@@ -202,48 +194,12 @@ public class CPASSetupCatalogProgress extends APINode {
   }
 
 
-  public Long getFieldChildCatalogCount() {
-    return mChildCatalogCount;
+  public String getFieldCommentModerationFilter() {
+    return mCommentModerationFilter;
   }
 
-  public CPASSetupCatalogProgress setFieldChildCatalogCount(Long value) {
-    this.mChildCatalogCount = value;
-    return this;
-  }
-
-  public List<Object> getFieldChildCatalogIssues() {
-    return mChildCatalogIssues;
-  }
-
-  public CPASSetupCatalogProgress setFieldChildCatalogIssues(List<Object> value) {
-    this.mChildCatalogIssues = value;
-    return this;
-  }
-
-  public String getFieldId() {
-    return mId;
-  }
-
-  public CPASSetupCatalogProgress setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
-  public List<Object> getFieldIssues() {
-    return mIssues;
-  }
-
-  public CPASSetupCatalogProgress setFieldIssues(List<Object> value) {
-    this.mIssues = value;
-    return this;
-  }
-
-  public String getFieldName() {
-    return mName;
-  }
-
-  public CPASSetupCatalogProgress setFieldName(String value) {
-    this.mName = value;
+  public BrandSafetyCampaignConfig setFieldCommentModerationFilter(String value) {
+    this.mCommentModerationFilter = value;
     return this;
   }
 
@@ -263,21 +219,17 @@ public class CPASSetupCatalogProgress extends APINode {
     return gson;
   }
 
-  public CPASSetupCatalogProgress copyFrom(CPASSetupCatalogProgress instance) {
-    this.mChildCatalogCount = instance.mChildCatalogCount;
-    this.mChildCatalogIssues = instance.mChildCatalogIssues;
-    this.mId = instance.mId;
-    this.mIssues = instance.mIssues;
-    this.mName = instance.mName;
+  public BrandSafetyCampaignConfig copyFrom(BrandSafetyCampaignConfig instance) {
+    this.mCommentModerationFilter = instance.mCommentModerationFilter;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<CPASSetupCatalogProgress> getParser() {
-    return new APIRequest.ResponseParser<CPASSetupCatalogProgress>() {
-      public APINodeList<CPASSetupCatalogProgress> parseResponse(String response, APIContext context, APIRequest<CPASSetupCatalogProgress> request, String header) throws MalformedResponseException {
-        return CPASSetupCatalogProgress.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<BrandSafetyCampaignConfig> getParser() {
+    return new APIRequest.ResponseParser<BrandSafetyCampaignConfig>() {
+      public APINodeList<BrandSafetyCampaignConfig> parseResponse(String response, APIContext context, APIRequest<BrandSafetyCampaignConfig> request, String header) throws MalformedResponseException {
+        return BrandSafetyCampaignConfig.parseResponse(response, context, request, header);
       }
     };
   }

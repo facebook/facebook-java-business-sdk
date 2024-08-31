@@ -1386,6 +1386,7 @@ public class AdLabel extends APINode {
       "bid_info",
       "bid_strategy",
       "billing_event",
+      "brand_safety_config",
       "budget_remaining",
       "campaign",
       "campaign_active_time",
@@ -1604,6 +1605,13 @@ public class AdLabel extends APINode {
     }
     public APIRequestGetAdSets requestBillingEventField (boolean value) {
       this.requestField("billing_event", value);
+      return this;
+    }
+    public APIRequestGetAdSets requestBrandSafetyConfigField () {
+      return this.requestBrandSafetyConfigField(true);
+    }
+    public APIRequestGetAdSets requestBrandSafetyConfigField (boolean value) {
+      this.requestField("brand_safety_config", value);
       return this;
     }
     public APIRequestGetAdSets requestBudgetRemainingField () {
@@ -2007,6 +2015,7 @@ public class AdLabel extends APINode {
       "smart_promotion_type",
       "source_campaign",
       "source_campaign_id",
+      "source_recommendation_type",
       "special_ad_categories",
       "special_ad_category",
       "special_ad_category_country",
@@ -2323,6 +2332,13 @@ public class AdLabel extends APINode {
     }
     public APIRequestGetCampaigns requestSourceCampaignIdField (boolean value) {
       this.requestField("source_campaign_id", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestSourceRecommendationTypeField () {
+      return this.requestSourceRecommendationTypeField(true);
+    }
+    public APIRequestGetCampaigns requestSourceRecommendationTypeField (boolean value) {
+      this.requestField("source_recommendation_type", value);
       return this;
     }
     public APIRequestGetCampaigns requestSpecialAdCategoriesField () {

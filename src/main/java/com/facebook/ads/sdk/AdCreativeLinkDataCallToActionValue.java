@@ -57,6 +57,8 @@ public class AdCreativeLinkDataCallToActionValue extends APINode {
   private String mLinkCaption = null;
   @SerializedName("link_format")
   private String mLinkFormat = null;
+  @SerializedName("object_store_urls")
+  private List<String> mObjectStoreUrls = null;
   @SerializedName("page")
   private String mPage = null;
   @SerializedName("product_link")
@@ -286,6 +288,15 @@ public class AdCreativeLinkDataCallToActionValue extends APINode {
     return this;
   }
 
+  public List<String> getFieldObjectStoreUrls() {
+    return mObjectStoreUrls;
+  }
+
+  public AdCreativeLinkDataCallToActionValue setFieldObjectStoreUrls(List<String> value) {
+    this.mObjectStoreUrls = value;
+    return this;
+  }
+
   public String getFieldPage() {
     return mPage;
   }
@@ -338,6 +349,7 @@ public class AdCreativeLinkDataCallToActionValue extends APINode {
     this.mLink = instance.mLink;
     this.mLinkCaption = instance.mLinkCaption;
     this.mLinkFormat = instance.mLinkFormat;
+    this.mObjectStoreUrls = instance.mObjectStoreUrls;
     this.mPage = instance.mPage;
     this.mProductLink = instance.mProductLink;
     this.mWhatsappNumber = instance.mWhatsappNumber;

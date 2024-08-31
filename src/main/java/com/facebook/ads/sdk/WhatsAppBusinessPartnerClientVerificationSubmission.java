@@ -274,6 +274,10 @@ public class WhatsAppBusinessPartnerClientVerificationSubmission extends APINode
   public static enum EnumRejectionReasons {
       @SerializedName("ADDRESS_NOT_MATCHING")
       VALUE_ADDRESS_NOT_MATCHING("ADDRESS_NOT_MATCHING"),
+      @SerializedName("BUSINESS_NOT_ELIGIBLE")
+      VALUE_BUSINESS_NOT_ELIGIBLE("BUSINESS_NOT_ELIGIBLE"),
+      @SerializedName("LEGAL_NAME_NOT_FOUND_IN_DOCUMENTS")
+      VALUE_LEGAL_NAME_NOT_FOUND_IN_DOCUMENTS("LEGAL_NAME_NOT_FOUND_IN_DOCUMENTS"),
       @SerializedName("LEGAL_NAME_NOT_MATCHING")
       VALUE_LEGAL_NAME_NOT_MATCHING("LEGAL_NAME_NOT_MATCHING"),
       @SerializedName("NONE")

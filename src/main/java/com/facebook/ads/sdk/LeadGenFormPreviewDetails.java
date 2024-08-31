@@ -41,6 +41,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class LeadGenFormPreviewDetails extends APINode {
+  @SerializedName("call_business_text")
+  private String mCallBusinessText = null;
   @SerializedName("call_to_action_title")
   private String mCallToActionTitle = null;
   @SerializedName("contact_information_text")
@@ -89,6 +91,8 @@ public class LeadGenFormPreviewDetails extends APINode {
   private String mPersonalInfoText = null;
   @SerializedName("phone_number_inline_context_text")
   private String mPhoneNumberInlineContextText = null;
+  @SerializedName("privacy_policy_link_text")
+  private String mPrivacyPolicyLinkText = null;
   @SerializedName("privacy_policy_title_section_title_text")
   private String mPrivacyPolicyTitleSectionTitleText = null;
   @SerializedName("privacy_setting_description")
@@ -97,6 +101,8 @@ public class LeadGenFormPreviewDetails extends APINode {
   private List<Map<String, String>> mProductsSectionHeaders = null;
   @SerializedName("qualified_thank_you_card_transparency_info_text")
   private String mQualifiedThankYouCardTransparencyInfoText = null;
+  @SerializedName("redeem_promo_code_text")
+  private String mRedeemPromoCodeText = null;
   @SerializedName("review_your_info_text")
   private String mReviewYourInfoText = null;
   @SerializedName("secure_sharing_text")
@@ -107,6 +113,8 @@ public class LeadGenFormPreviewDetails extends APINode {
   private List<Map<String, String>> mSocialProofSectionHeaders = null;
   @SerializedName("submit_button_text")
   private String mSubmitButtonText = null;
+  @SerializedName("view_file_text")
+  private String mViewFileText = null;
   protected static Gson gson = null;
 
   public LeadGenFormPreviewDetails() {
@@ -257,6 +265,15 @@ public class LeadGenFormPreviewDetails extends APINode {
     return getGson().toJson(this);
   }
 
+
+  public String getFieldCallBusinessText() {
+    return mCallBusinessText;
+  }
+
+  public LeadGenFormPreviewDetails setFieldCallBusinessText(String value) {
+    this.mCallBusinessText = value;
+    return this;
+  }
 
   public String getFieldCallToActionTitle() {
     return mCallToActionTitle;
@@ -474,6 +491,15 @@ public class LeadGenFormPreviewDetails extends APINode {
     return this;
   }
 
+  public String getFieldPrivacyPolicyLinkText() {
+    return mPrivacyPolicyLinkText;
+  }
+
+  public LeadGenFormPreviewDetails setFieldPrivacyPolicyLinkText(String value) {
+    this.mPrivacyPolicyLinkText = value;
+    return this;
+  }
+
   public String getFieldPrivacyPolicyTitleSectionTitleText() {
     return mPrivacyPolicyTitleSectionTitleText;
   }
@@ -507,6 +533,15 @@ public class LeadGenFormPreviewDetails extends APINode {
 
   public LeadGenFormPreviewDetails setFieldQualifiedThankYouCardTransparencyInfoText(String value) {
     this.mQualifiedThankYouCardTransparencyInfoText = value;
+    return this;
+  }
+
+  public String getFieldRedeemPromoCodeText() {
+    return mRedeemPromoCodeText;
+  }
+
+  public LeadGenFormPreviewDetails setFieldRedeemPromoCodeText(String value) {
+    this.mRedeemPromoCodeText = value;
     return this;
   }
 
@@ -555,6 +590,15 @@ public class LeadGenFormPreviewDetails extends APINode {
     return this;
   }
 
+  public String getFieldViewFileText() {
+    return mViewFileText;
+  }
+
+  public LeadGenFormPreviewDetails setFieldViewFileText(String value) {
+    this.mViewFileText = value;
+    return this;
+  }
+
 
 
 
@@ -572,6 +616,7 @@ public class LeadGenFormPreviewDetails extends APINode {
   }
 
   public LeadGenFormPreviewDetails copyFrom(LeadGenFormPreviewDetails instance) {
+    this.mCallBusinessText = instance.mCallBusinessText;
     this.mCallToActionTitle = instance.mCallToActionTitle;
     this.mContactInformationText = instance.mContactInformationText;
     this.mCreativesOverviewDefaultText = instance.mCreativesOverviewDefaultText;
@@ -596,15 +641,18 @@ public class LeadGenFormPreviewDetails extends APINode {
     this.mOptionalQuestionText = instance.mOptionalQuestionText;
     this.mPersonalInfoText = instance.mPersonalInfoText;
     this.mPhoneNumberInlineContextText = instance.mPhoneNumberInlineContextText;
+    this.mPrivacyPolicyLinkText = instance.mPrivacyPolicyLinkText;
     this.mPrivacyPolicyTitleSectionTitleText = instance.mPrivacyPolicyTitleSectionTitleText;
     this.mPrivacySettingDescription = instance.mPrivacySettingDescription;
     this.mProductsSectionHeaders = instance.mProductsSectionHeaders;
     this.mQualifiedThankYouCardTransparencyInfoText = instance.mQualifiedThankYouCardTransparencyInfoText;
+    this.mRedeemPromoCodeText = instance.mRedeemPromoCodeText;
     this.mReviewYourInfoText = instance.mReviewYourInfoText;
     this.mSecureSharingText = instance.mSecureSharingText;
     this.mSlideToSubmitText = instance.mSlideToSubmitText;
     this.mSocialProofSectionHeaders = instance.mSocialProofSectionHeaders;
     this.mSubmitButtonText = instance.mSubmitButtonText;
+    this.mViewFileText = instance.mViewFileText;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

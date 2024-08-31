@@ -40,25 +40,27 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class AdCreativeLinkDataMoment extends APINode {
-  @SerializedName("id")
-  private String mId = null;
-  @SerializedName("type")
-  private EnumType mType = null;
+public class PageCTXMessagingFeatureLimit extends APINode {
+  @SerializedName("messaging_feature_limit_duration")
+  private Long mMessagingFeatureLimitDuration = null;
+  @SerializedName("messaging_feature_limit_type")
+  private String mMessagingFeatureLimitType = null;
+  @SerializedName("messaging_violation_type")
+  private String mMessagingViolationType = null;
   protected static Gson gson = null;
 
-  public AdCreativeLinkDataMoment() {
+  public PageCTXMessagingFeatureLimit() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
-  public static AdCreativeLinkDataMoment loadJSON(String json, APIContext context, String header) {
-    AdCreativeLinkDataMoment adCreativeLinkDataMoment = getGson().fromJson(json, AdCreativeLinkDataMoment.class);
+  public static PageCTXMessagingFeatureLimit loadJSON(String json, APIContext context, String header) {
+    PageCTXMessagingFeatureLimit pageCTXMessagingFeatureLimit = getGson().fromJson(json, PageCTXMessagingFeatureLimit.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(adCreativeLinkDataMoment.toString());
+      JsonElement o2 = parser.parse(pageCTXMessagingFeatureLimit.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -68,14 +70,14 @@ public class AdCreativeLinkDataMoment extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    adCreativeLinkDataMoment.context = context;
-    adCreativeLinkDataMoment.rawValue = json;
-    adCreativeLinkDataMoment.header = header;
-    return adCreativeLinkDataMoment;
+    pageCTXMessagingFeatureLimit.context = context;
+    pageCTXMessagingFeatureLimit.rawValue = json;
+    pageCTXMessagingFeatureLimit.header = header;
+    return pageCTXMessagingFeatureLimit;
   }
 
-  public static APINodeList<AdCreativeLinkDataMoment> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<AdCreativeLinkDataMoment> adCreativeLinkDataMoments = new APINodeList<AdCreativeLinkDataMoment>(request, json, header);
+  public static APINodeList<PageCTXMessagingFeatureLimit> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<PageCTXMessagingFeatureLimit> pageCTXMessagingFeatureLimits = new APINodeList<PageCTXMessagingFeatureLimit>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -86,9 +88,9 @@ public class AdCreativeLinkDataMoment extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adCreativeLinkDataMoments.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          pageCTXMessagingFeatureLimits.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return adCreativeLinkDataMoments;
+        return pageCTXMessagingFeatureLimits;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -98,20 +100,20 @@ public class AdCreativeLinkDataMoment extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                adCreativeLinkDataMoments.setCursors(before, after);
+                pageCTXMessagingFeatureLimits.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            adCreativeLinkDataMoments.setPaging(previous, next);
+            pageCTXMessagingFeatureLimits.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              adCreativeLinkDataMoments.setAppSecret(context.getAppSecretProof());
+              pageCTXMessagingFeatureLimits.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adCreativeLinkDataMoments.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              pageCTXMessagingFeatureLimits.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -122,23 +124,23 @@ public class AdCreativeLinkDataMoment extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adCreativeLinkDataMoments.add(loadJSON(entry.getValue().toString(), context, header));
+                  pageCTXMessagingFeatureLimits.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adCreativeLinkDataMoments.add(loadJSON(obj.toString(), context, header));
+              pageCTXMessagingFeatureLimits.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return adCreativeLinkDataMoments;
+          return pageCTXMessagingFeatureLimits;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adCreativeLinkDataMoments.add(loadJSON(entry.getValue().toString(), context, header));
+              pageCTXMessagingFeatureLimits.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return adCreativeLinkDataMoments;
+          return pageCTXMessagingFeatureLimits;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -155,20 +157,20 @@ public class AdCreativeLinkDataMoment extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adCreativeLinkDataMoments.add(loadJSON(value.toString(), context, header));
+              pageCTXMessagingFeatureLimits.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return adCreativeLinkDataMoments;
+            return pageCTXMessagingFeatureLimits;
           }
 
           // Sixth, check if it's pure JsonObject
-          adCreativeLinkDataMoments.clear();
-          adCreativeLinkDataMoments.add(loadJSON(json, context, header));
-          return adCreativeLinkDataMoments;
+          pageCTXMessagingFeatureLimits.clear();
+          pageCTXMessagingFeatureLimits.add(loadJSON(json, context, header));
+          return pageCTXMessagingFeatureLimits;
         }
       }
     } catch (Exception e) {
@@ -196,44 +198,34 @@ public class AdCreativeLinkDataMoment extends APINode {
   }
 
 
-  public String getFieldId() {
-    return mId;
+  public Long getFieldMessagingFeatureLimitDuration() {
+    return mMessagingFeatureLimitDuration;
   }
 
-  public AdCreativeLinkDataMoment setFieldId(String value) {
-    this.mId = value;
+  public PageCTXMessagingFeatureLimit setFieldMessagingFeatureLimitDuration(Long value) {
+    this.mMessagingFeatureLimitDuration = value;
     return this;
   }
 
-  public EnumType getFieldType() {
-    return mType;
+  public String getFieldMessagingFeatureLimitType() {
+    return mMessagingFeatureLimitType;
   }
 
-  public AdCreativeLinkDataMoment setFieldType(EnumType value) {
-    this.mType = value;
+  public PageCTXMessagingFeatureLimit setFieldMessagingFeatureLimitType(String value) {
+    this.mMessagingFeatureLimitType = value;
+    return this;
+  }
+
+  public String getFieldMessagingViolationType() {
+    return mMessagingViolationType;
+  }
+
+  public PageCTXMessagingFeatureLimit setFieldMessagingViolationType(String value) {
+    this.mMessagingViolationType = value;
     return this;
   }
 
 
-
-  public static enum EnumType {
-      @SerializedName("FB_LIVE_SHOPPING")
-      VALUE_FB_LIVE_SHOPPING("FB_LIVE_SHOPPING"),
-      @SerializedName("IG_LIVE_SHOPPING")
-      VALUE_IG_LIVE_SHOPPING("IG_LIVE_SHOPPING"),
-      ;
-
-      private String value;
-
-      private EnumType(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
 
 
   synchronized /*package*/ static Gson getGson() {
@@ -249,18 +241,19 @@ public class AdCreativeLinkDataMoment extends APINode {
     return gson;
   }
 
-  public AdCreativeLinkDataMoment copyFrom(AdCreativeLinkDataMoment instance) {
-    this.mId = instance.mId;
-    this.mType = instance.mType;
+  public PageCTXMessagingFeatureLimit copyFrom(PageCTXMessagingFeatureLimit instance) {
+    this.mMessagingFeatureLimitDuration = instance.mMessagingFeatureLimitDuration;
+    this.mMessagingFeatureLimitType = instance.mMessagingFeatureLimitType;
+    this.mMessagingViolationType = instance.mMessagingViolationType;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<AdCreativeLinkDataMoment> getParser() {
-    return new APIRequest.ResponseParser<AdCreativeLinkDataMoment>() {
-      public APINodeList<AdCreativeLinkDataMoment> parseResponse(String response, APIContext context, APIRequest<AdCreativeLinkDataMoment> request, String header) throws MalformedResponseException {
-        return AdCreativeLinkDataMoment.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<PageCTXMessagingFeatureLimit> getParser() {
+    return new APIRequest.ResponseParser<PageCTXMessagingFeatureLimit>() {
+      public APINodeList<PageCTXMessagingFeatureLimit> parseResponse(String response, APIContext context, APIRequest<PageCTXMessagingFeatureLimit> request, String header) throws MalformedResponseException {
+        return PageCTXMessagingFeatureLimit.parseResponse(response, context, request, header);
       }
     };
   }

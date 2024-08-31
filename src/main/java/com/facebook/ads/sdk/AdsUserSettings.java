@@ -45,6 +45,8 @@ public class AdsUserSettings extends APINode {
   private Boolean mAPlusCSurveySeen = null;
   @SerializedName("adgroup_name_template")
   private Object mAdgroupNameTemplate = null;
+  @SerializedName("ads_cs_catalog_opt_out_timestamp")
+  private List<Map<String, Long>> mAdsCsCatalogOptOutTimestamp = null;
   @SerializedName("ads_tool_visits")
   private List<Object> mAdsToolVisits = null;
   @SerializedName("aplusc_carousel_cda_opt_in_status")
@@ -61,6 +63,8 @@ public class AdsUserSettings extends APINode {
   private Boolean mAutoflowLiteShouldOptIn = null;
   @SerializedName("blended_ads_creation_defaulting_opt_in_status")
   private String mBlendedAdsCreationDefaultingOptInStatus = null;
+  @SerializedName("blended_ads_creation_defaulting_opt_out_campaign_group_ids")
+  private List<Long> mBlendedAdsCreationDefaultingOptOutCampaignGroupIds = null;
   @SerializedName("bookmarked_pages")
   private List<Page> mBookmarkedPages = null;
   @SerializedName("campaign_group_name_template")
@@ -93,8 +97,6 @@ public class AdsUserSettings extends APINode {
   private String mLastUsedPostFormat = null;
   @SerializedName("last_visited_time")
   private String mLastVisitedTime = null;
-  @SerializedName("multi_ads_settings")
-  private List<Map<String, String>> mMultiAdsSettings = null;
   @SerializedName("music_on_reels_opt_in")
   private List<Map<String, String>> mMusicOnReelsOptIn = null;
   @SerializedName("muted_cbo_midflight_education_messages")
@@ -145,6 +147,8 @@ public class AdsUserSettings extends APINode {
   private Long mTotalCouponSydDismissals = null;
   @SerializedName("total_coupon_upsell_dismissals")
   private Long mTotalCouponUpsellDismissals = null;
+  @SerializedName("url_prefill_removal_timestamp")
+  private Long mUrlPrefillRemovalTimestamp = null;
   @SerializedName("use_pe_create_flow")
   private Boolean mUsePeCreateFlow = null;
   @SerializedName("use_stepper_primary_entry")
@@ -373,6 +377,10 @@ public class AdsUserSettings extends APINode {
     return mAdgroupNameTemplate;
   }
 
+  public List<Map<String, Long>> getFieldAdsCsCatalogOptOutTimestamp() {
+    return mAdsCsCatalogOptOutTimestamp;
+  }
+
   public List<Object> getFieldAdsToolVisits() {
     return mAdsToolVisits;
   }
@@ -403,6 +411,10 @@ public class AdsUserSettings extends APINode {
 
   public String getFieldBlendedAdsCreationDefaultingOptInStatus() {
     return mBlendedAdsCreationDefaultingOptInStatus;
+  }
+
+  public List<Long> getFieldBlendedAdsCreationDefaultingOptOutCampaignGroupIds() {
+    return mBlendedAdsCreationDefaultingOptOutCampaignGroupIds;
   }
 
   public List<Page> getFieldBookmarkedPages() {
@@ -467,10 +479,6 @@ public class AdsUserSettings extends APINode {
 
   public String getFieldLastVisitedTime() {
     return mLastVisitedTime;
-  }
-
-  public List<Map<String, String>> getFieldMultiAdsSettings() {
-    return mMultiAdsSettings;
   }
 
   public List<Map<String, String>> getFieldMusicOnReelsOptIn() {
@@ -579,6 +587,10 @@ public class AdsUserSettings extends APINode {
     return mTotalCouponUpsellDismissals;
   }
 
+  public Long getFieldUrlPrefillRemovalTimestamp() {
+    return mUrlPrefillRemovalTimestamp;
+  }
+
   public Boolean getFieldUsePeCreateFlow() {
     return mUsePeCreateFlow;
   }
@@ -609,6 +621,7 @@ public class AdsUserSettings extends APINode {
     public static final String[] FIELDS = {
       "a_plus_c_survey_seen",
       "adgroup_name_template",
+      "ads_cs_catalog_opt_out_timestamp",
       "ads_tool_visits",
       "aplusc_carousel_cda_opt_in_status",
       "aplusc_carousel_inline_comment_opt_in_status",
@@ -617,6 +630,7 @@ public class AdsUserSettings extends APINode {
       "autoflow_lite_opt_in_status",
       "autoflow_lite_should_opt_in",
       "blended_ads_creation_defaulting_opt_in_status",
+      "blended_ads_creation_defaulting_opt_out_campaign_group_ids",
       "bookmarked_pages",
       "campaign_group_name_template",
       "campaign_name_template",
@@ -633,7 +647,6 @@ public class AdsUserSettings extends APINode {
       "is_se_removal_guidance_dismissed",
       "last_used_post_format",
       "last_visited_time",
-      "multi_ads_settings",
       "music_on_reels_opt_in",
       "muted_cbo_midflight_education_messages",
       "onsite_destination_optimization_opt_in",
@@ -659,6 +672,7 @@ public class AdsUserSettings extends APINode {
       "syd_campaign_trends_metric",
       "total_coupon_syd_dismissals",
       "total_coupon_upsell_dismissals",
+      "url_prefill_removal_timestamp",
       "use_pe_create_flow",
       "use_stepper_primary_entry",
       "user",
@@ -768,6 +782,13 @@ public class AdsUserSettings extends APINode {
       this.requestField("adgroup_name_template", value);
       return this;
     }
+    public APIRequestGet requestAdsCsCatalogOptOutTimestampField () {
+      return this.requestAdsCsCatalogOptOutTimestampField(true);
+    }
+    public APIRequestGet requestAdsCsCatalogOptOutTimestampField (boolean value) {
+      this.requestField("ads_cs_catalog_opt_out_timestamp", value);
+      return this;
+    }
     public APIRequestGet requestAdsToolVisitsField () {
       return this.requestAdsToolVisitsField(true);
     }
@@ -822,6 +843,13 @@ public class AdsUserSettings extends APINode {
     }
     public APIRequestGet requestBlendedAdsCreationDefaultingOptInStatusField (boolean value) {
       this.requestField("blended_ads_creation_defaulting_opt_in_status", value);
+      return this;
+    }
+    public APIRequestGet requestBlendedAdsCreationDefaultingOptOutCampaignGroupIdsField () {
+      return this.requestBlendedAdsCreationDefaultingOptOutCampaignGroupIdsField(true);
+    }
+    public APIRequestGet requestBlendedAdsCreationDefaultingOptOutCampaignGroupIdsField (boolean value) {
+      this.requestField("blended_ads_creation_defaulting_opt_out_campaign_group_ids", value);
       return this;
     }
     public APIRequestGet requestBookmarkedPagesField () {
@@ -934,13 +962,6 @@ public class AdsUserSettings extends APINode {
     }
     public APIRequestGet requestLastVisitedTimeField (boolean value) {
       this.requestField("last_visited_time", value);
-      return this;
-    }
-    public APIRequestGet requestMultiAdsSettingsField () {
-      return this.requestMultiAdsSettingsField(true);
-    }
-    public APIRequestGet requestMultiAdsSettingsField (boolean value) {
-      this.requestField("multi_ads_settings", value);
       return this;
     }
     public APIRequestGet requestMusicOnReelsOptInField () {
@@ -1118,6 +1139,13 @@ public class AdsUserSettings extends APINode {
       this.requestField("total_coupon_upsell_dismissals", value);
       return this;
     }
+    public APIRequestGet requestUrlPrefillRemovalTimestampField () {
+      return this.requestUrlPrefillRemovalTimestampField(true);
+    }
+    public APIRequestGet requestUrlPrefillRemovalTimestampField (boolean value) {
+      this.requestField("url_prefill_removal_timestamp", value);
+      return this;
+    }
     public APIRequestGet requestUsePeCreateFlowField () {
       return this.requestUsePeCreateFlowField(true);
     }
@@ -1158,6 +1186,7 @@ public class AdsUserSettings extends APINode {
   public AdsUserSettings copyFrom(AdsUserSettings instance) {
     this.mAPlusCSurveySeen = instance.mAPlusCSurveySeen;
     this.mAdgroupNameTemplate = instance.mAdgroupNameTemplate;
+    this.mAdsCsCatalogOptOutTimestamp = instance.mAdsCsCatalogOptOutTimestamp;
     this.mAdsToolVisits = instance.mAdsToolVisits;
     this.mApluscCarouselCdaOptInStatus = instance.mApluscCarouselCdaOptInStatus;
     this.mApluscCarouselInlineCommentOptInStatus = instance.mApluscCarouselInlineCommentOptInStatus;
@@ -1166,6 +1195,7 @@ public class AdsUserSettings extends APINode {
     this.mAutoflowLiteOptInStatus = instance.mAutoflowLiteOptInStatus;
     this.mAutoflowLiteShouldOptIn = instance.mAutoflowLiteShouldOptIn;
     this.mBlendedAdsCreationDefaultingOptInStatus = instance.mBlendedAdsCreationDefaultingOptInStatus;
+    this.mBlendedAdsCreationDefaultingOptOutCampaignGroupIds = instance.mBlendedAdsCreationDefaultingOptOutCampaignGroupIds;
     this.mBookmarkedPages = instance.mBookmarkedPages;
     this.mCampaignGroupNameTemplate = instance.mCampaignGroupNameTemplate;
     this.mCampaignNameTemplate = instance.mCampaignNameTemplate;
@@ -1182,7 +1212,6 @@ public class AdsUserSettings extends APINode {
     this.mIsSeRemovalGuidanceDismissed = instance.mIsSeRemovalGuidanceDismissed;
     this.mLastUsedPostFormat = instance.mLastUsedPostFormat;
     this.mLastVisitedTime = instance.mLastVisitedTime;
-    this.mMultiAdsSettings = instance.mMultiAdsSettings;
     this.mMusicOnReelsOptIn = instance.mMusicOnReelsOptIn;
     this.mMutedCboMidflightEducationMessages = instance.mMutedCboMidflightEducationMessages;
     this.mOnsiteDestinationOptimizationOptIn = instance.mOnsiteDestinationOptimizationOptIn;
@@ -1208,6 +1237,7 @@ public class AdsUserSettings extends APINode {
     this.mSydCampaignTrendsMetric = instance.mSydCampaignTrendsMetric;
     this.mTotalCouponSydDismissals = instance.mTotalCouponSydDismissals;
     this.mTotalCouponUpsellDismissals = instance.mTotalCouponUpsellDismissals;
+    this.mUrlPrefillRemovalTimestamp = instance.mUrlPrefillRemovalTimestamp;
     this.mUsePeCreateFlow = instance.mUsePeCreateFlow;
     this.mUseStepperPrimaryEntry = instance.mUseStepperPrimaryEntry;
     this.mUser = instance.mUser;

@@ -608,6 +608,10 @@ public class AdAccount extends APINode {
     return new APIRequestCreateBlockListDraft(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestCreateBrandSafetyContentFilterLevel createBrandSafetyContentFilterLevel() {
+    return new APIRequestCreateBrandSafetyContentFilterLevel(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetBroadTargetingCategories getBroadTargetingCategories() {
     return new APIRequestGetBroadTargetingCategories(this.getPrefixedId().toString(), context);
   }
@@ -754,6 +758,14 @@ public class AdAccount extends APINode {
 
   public APIRequestCreateReachFrequencyPrediction createReachFrequencyPrediction() {
     return new APIRequestCreateReachFrequencyPrediction(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetRecommendations getRecommendations() {
+    return new APIRequestGetRecommendations(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestCreateRecommendation createRecommendation() {
+    return new APIRequestCreateRecommendation(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetSavedAudiences getSavedAudiences() {
@@ -7853,6 +7865,7 @@ public class AdAccount extends APINode {
       "bid_info",
       "bid_strategy",
       "billing_event",
+      "brand_safety_config",
       "budget_remaining",
       "campaign",
       "campaign_active_time",
@@ -8116,6 +8129,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAdSets requestBillingEventField (boolean value) {
       this.requestField("billing_event", value);
+      return this;
+    }
+    public APIRequestGetAdSets requestBrandSafetyConfigField () {
+      return this.requestBrandSafetyConfigField(true);
+    }
+    public APIRequestGetAdSets requestBrandSafetyConfigField (boolean value) {
+      this.requestField("brand_safety_config", value);
       return this;
     }
     public APIRequestGetAdSets requestBudgetRemainingField () {
@@ -9064,6 +9084,7 @@ public class AdAccount extends APINode {
       "bid_info",
       "bid_strategy",
       "billing_event",
+      "brand_safety_config",
       "budget_remaining",
       "campaign",
       "campaign_active_time",
@@ -9300,6 +9321,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAdSetsByLabels requestBillingEventField (boolean value) {
       this.requestField("billing_event", value);
+      return this;
+    }
+    public APIRequestGetAdSetsByLabels requestBrandSafetyConfigField () {
+      return this.requestBrandSafetyConfigField(true);
+    }
+    public APIRequestGetAdSetsByLabels requestBrandSafetyConfigField (boolean value) {
+      this.requestField("brand_safety_config", value);
       return this;
     }
     public APIRequestGetAdSetsByLabels requestBudgetRemainingField () {
@@ -11794,7 +11822,6 @@ public class AdAccount extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "animated_effect_id",
       "application_id",
       "asked_fun_fact_prompt_id",
       "audio_story_wave_animation_handle",
@@ -11930,15 +11957,6 @@ public class AdAccount extends APINode {
 
     public APIRequestCreateAdVideo setUseVideoEndpoint(boolean useVideoEndpoint) {
       this.useVideoEndpoint = useVideoEndpoint;
-      return this;
-    }
-
-    public APIRequestCreateAdVideo setAnimatedEffectId (Long animatedEffectId) {
-      this.setParam("animated_effect_id", animatedEffectId);
-      return this;
-    }
-    public APIRequestCreateAdVideo setAnimatedEffectId (String animatedEffectId) {
-      this.setParam("animated_effect_id", animatedEffectId);
       return this;
     }
 
@@ -12492,6 +12510,7 @@ public class AdAccount extends APINode {
       "bid_info",
       "bid_strategy",
       "billing_event",
+      "brand_safety_config",
       "budget_remaining",
       "campaign",
       "campaign_active_time",
@@ -12710,6 +12729,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAffectedAdSets requestBillingEventField (boolean value) {
       this.requestField("billing_event", value);
+      return this;
+    }
+    public APIRequestGetAffectedAdSets requestBrandSafetyConfigField () {
+      return this.requestBrandSafetyConfigField(true);
+    }
+    public APIRequestGetAffectedAdSets requestBrandSafetyConfigField (boolean value) {
+      this.requestField("brand_safety_config", value);
       return this;
     }
     public APIRequestGetAffectedAdSets requestBudgetRemainingField () {
@@ -15806,6 +15832,127 @@ public class AdAccount extends APINode {
 
   }
 
+  public static class APIRequestCreateBrandSafetyContentFilterLevel extends APIRequest<AdAccount> {
+
+    AdAccount lastResponse = null;
+    @Override
+    public AdAccount getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "brand_safety_content_filter_levels",
+      "business_id",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public AdAccount parseResponse(String response, String header) throws APIException {
+      return AdAccount.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public AdAccount execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public AdAccount execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<AdAccount> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<AdAccount> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, AdAccount>() {
+           public AdAccount apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateBrandSafetyContentFilterLevel.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestCreateBrandSafetyContentFilterLevel(String nodeId, APIContext context) {
+      super(context, nodeId, "/brand_safety_content_filter_levels", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateBrandSafetyContentFilterLevel setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateBrandSafetyContentFilterLevel setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateBrandSafetyContentFilterLevel setBrandSafetyContentFilterLevels (List<AdAccount.EnumBrandSafetyContentFilterLevels> brandSafetyContentFilterLevels) {
+      this.setParam("brand_safety_content_filter_levels", brandSafetyContentFilterLevels);
+      return this;
+    }
+    public APIRequestCreateBrandSafetyContentFilterLevel setBrandSafetyContentFilterLevels (String brandSafetyContentFilterLevels) {
+      this.setParam("brand_safety_content_filter_levels", brandSafetyContentFilterLevels);
+      return this;
+    }
+
+    public APIRequestCreateBrandSafetyContentFilterLevel setBusinessId (String businessId) {
+      this.setParam("business_id", businessId);
+      return this;
+    }
+
+    public APIRequestCreateBrandSafetyContentFilterLevel requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateBrandSafetyContentFilterLevel requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateBrandSafetyContentFilterLevel requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateBrandSafetyContentFilterLevel requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateBrandSafetyContentFilterLevel requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateBrandSafetyContentFilterLevel requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGetBroadTargetingCategories extends APIRequest<BroadTargetingCategories> {
 
     APINodeList<BroadTargetingCategories> lastResponse = null;
@@ -16355,6 +16502,7 @@ public class AdAccount extends APINode {
       "smart_promotion_type",
       "source_campaign",
       "source_campaign_id",
+      "source_recommendation_type",
       "special_ad_categories",
       "special_ad_category",
       "special_ad_category_country",
@@ -16707,6 +16855,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetCampaigns requestSourceCampaignIdField (boolean value) {
       this.requestField("source_campaign_id", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestSourceRecommendationTypeField () {
+      return this.requestSourceRecommendationTypeField(true);
+    }
+    public APIRequestGetCampaigns requestSourceRecommendationTypeField (boolean value) {
+      this.requestField("source_recommendation_type", value);
       return this;
     }
     public APIRequestGetCampaigns requestSpecialAdCategoriesField () {
@@ -17109,6 +17264,7 @@ public class AdAccount extends APINode {
       "smart_promotion_type",
       "source_campaign",
       "source_campaign_id",
+      "source_recommendation_type",
       "special_ad_categories",
       "special_ad_category",
       "special_ad_category_country",
@@ -17443,6 +17599,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetCampaignsByLabels requestSourceCampaignIdField (boolean value) {
       this.requestField("source_campaign_id", value);
+      return this;
+    }
+    public APIRequestGetCampaignsByLabels requestSourceRecommendationTypeField () {
+      return this.requestSourceRecommendationTypeField(true);
+    }
+    public APIRequestGetCampaignsByLabels requestSourceRecommendationTypeField (boolean value) {
+      this.requestField("source_recommendation_type", value);
       return this;
     }
     public APIRequestGetCampaignsByLabels requestSpecialAdCategoriesField () {
@@ -19672,6 +19835,7 @@ public class AdAccount extends APINode {
       "bid_info",
       "bid_strategy",
       "billing_event",
+      "brand_safety_config",
       "budget_remaining",
       "campaign",
       "campaign_active_time",
@@ -19895,6 +20059,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetDeprecatedTargetingAdSets requestBillingEventField (boolean value) {
       this.requestField("billing_event", value);
+      return this;
+    }
+    public APIRequestGetDeprecatedTargetingAdSets requestBrandSafetyConfigField () {
+      return this.requestBrandSafetyConfigField(true);
+    }
+    public APIRequestGetDeprecatedTargetingAdSets requestBrandSafetyConfigField (boolean value) {
+      this.requestField("brand_safety_config", value);
       return this;
     }
     public APIRequestGetDeprecatedTargetingAdSets requestBudgetRemainingField () {
@@ -26045,6 +26216,230 @@ public class AdAccount extends APINode {
 
   }
 
+  public static class APIRequestGetRecommendations extends APIRequest<AdAccountRecommendations> {
+
+    APINodeList<AdAccountRecommendations> lastResponse = null;
+    @Override
+    public APINodeList<AdAccountRecommendations> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "recommendations",
+    };
+
+    @Override
+    public APINodeList<AdAccountRecommendations> parseResponse(String response, String header) throws APIException {
+      return AdAccountRecommendations.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<AdAccountRecommendations> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<AdAccountRecommendations> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<AdAccountRecommendations>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<AdAccountRecommendations>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<AdAccountRecommendations>>() {
+           public APINodeList<AdAccountRecommendations> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetRecommendations.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestGetRecommendations(String nodeId, APIContext context) {
+      super(context, nodeId, "/recommendations", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetRecommendations setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetRecommendations setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetRecommendations requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetRecommendations requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetRecommendations requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetRecommendations requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetRecommendations requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetRecommendations requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetRecommendations requestRecommendationsField () {
+      return this.requestRecommendationsField(true);
+    }
+    public APIRequestGetRecommendations requestRecommendationsField (boolean value) {
+      this.requestField("recommendations", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestCreateRecommendation extends APIRequest<AdAccountRecommendations> {
+
+    AdAccountRecommendations lastResponse = null;
+    @Override
+    public AdAccountRecommendations getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "recommendation_signature",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public AdAccountRecommendations parseResponse(String response, String header) throws APIException {
+      return AdAccountRecommendations.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public AdAccountRecommendations execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public AdAccountRecommendations execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<AdAccountRecommendations> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<AdAccountRecommendations> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, AdAccountRecommendations>() {
+           public AdAccountRecommendations apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateRecommendation.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestCreateRecommendation(String nodeId, APIContext context) {
+      super(context, nodeId, "/recommendations", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateRecommendation setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateRecommendation setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateRecommendation setRecommendationSignature (String recommendationSignature) {
+      this.setParam("recommendation_signature", recommendationSignature);
+      return this;
+    }
+
+    public APIRequestCreateRecommendation requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateRecommendation requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateRecommendation requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateRecommendation requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateRecommendation requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateRecommendation requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGetSavedAudiences extends APIRequest<SavedAudience> {
 
     APINodeList<SavedAudience> lastResponse = null;
@@ -30014,6 +30409,45 @@ public class AdAccount extends APINode {
       private String value;
 
       private EnumTasks(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumBrandSafetyContentFilterLevels {
+      @SerializedName("AN_RELAXED")
+      VALUE_AN_RELAXED("AN_RELAXED"),
+      @SerializedName("AN_STANDARD")
+      VALUE_AN_STANDARD("AN_STANDARD"),
+      @SerializedName("AN_STRICT")
+      VALUE_AN_STRICT("AN_STRICT"),
+      @SerializedName("FACEBOOK_RELAXED")
+      VALUE_FACEBOOK_RELAXED("FACEBOOK_RELAXED"),
+      @SerializedName("FACEBOOK_STANDARD")
+      VALUE_FACEBOOK_STANDARD("FACEBOOK_STANDARD"),
+      @SerializedName("FACEBOOK_STRICT")
+      VALUE_FACEBOOK_STRICT("FACEBOOK_STRICT"),
+      @SerializedName("FEED_DNM")
+      VALUE_FEED_DNM("FEED_DNM"),
+      @SerializedName("FEED_RELAXED")
+      VALUE_FEED_RELAXED("FEED_RELAXED"),
+      @SerializedName("FEED_STANDARD")
+      VALUE_FEED_STANDARD("FEED_STANDARD"),
+      @SerializedName("FEED_STRICT")
+      VALUE_FEED_STRICT("FEED_STRICT"),
+      @SerializedName("UNINITIALIZED")
+      VALUE_UNINITIALIZED("UNINITIALIZED"),
+      @SerializedName("UNKNOWN")
+      VALUE_UNKNOWN("UNKNOWN"),
+      ;
+
+      private String value;
+
+      private EnumBrandSafetyContentFilterLevels(String value) {
         this.value = value;
       }
 

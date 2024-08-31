@@ -43,6 +43,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class AdPromotedObject extends APINode {
   @SerializedName("application_id")
   private String mApplicationId = null;
+  @SerializedName("boosted_product_set_id")
+  private String mBoostedProductSetId = null;
   @SerializedName("conversion_goal_id")
   private String mConversionGoalId = null;
   @SerializedName("custom_conversion_id")
@@ -248,6 +250,15 @@ public class AdPromotedObject extends APINode {
 
   public AdPromotedObject setFieldApplicationId(String value) {
     this.mApplicationId = value;
+    return this;
+  }
+
+  public String getFieldBoostedProductSetId() {
+    return mBoostedProductSetId;
+  }
+
+  public AdPromotedObject setFieldBoostedProductSetId(String value) {
+    this.mBoostedProductSetId = value;
     return this;
   }
 
@@ -574,6 +585,7 @@ public class AdPromotedObject extends APINode {
 
   public AdPromotedObject copyFrom(AdPromotedObject instance) {
     this.mApplicationId = instance.mApplicationId;
+    this.mBoostedProductSetId = instance.mBoostedProductSetId;
     this.mConversionGoalId = instance.mConversionGoalId;
     this.mCustomConversionId = instance.mCustomConversionId;
     this.mCustomEventStr = instance.mCustomEventStr;

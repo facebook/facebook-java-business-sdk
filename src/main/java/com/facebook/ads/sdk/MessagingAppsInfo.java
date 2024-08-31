@@ -41,6 +41,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class MessagingAppsInfo extends APINode {
+  @SerializedName("ctd_support_only_for_ig_app")
+  private Boolean mCtdSupportOnlyForIgApp = null;
   @SerializedName("has_instagram_messaging_permission")
   private Boolean mHasInstagramMessagingPermission = null;
   @SerializedName("has_messenger_messaging_permission")
@@ -200,6 +202,15 @@ public class MessagingAppsInfo extends APINode {
   }
 
 
+  public Boolean getFieldCtdSupportOnlyForIgApp() {
+    return mCtdSupportOnlyForIgApp;
+  }
+
+  public MessagingAppsInfo setFieldCtdSupportOnlyForIgApp(Boolean value) {
+    this.mCtdSupportOnlyForIgApp = value;
+    return this;
+  }
+
   public Boolean getFieldHasInstagramMessagingPermission() {
     return mHasInstagramMessagingPermission;
   }
@@ -253,6 +264,7 @@ public class MessagingAppsInfo extends APINode {
   }
 
   public MessagingAppsInfo copyFrom(MessagingAppsInfo instance) {
+    this.mCtdSupportOnlyForIgApp = instance.mCtdSupportOnlyForIgApp;
     this.mHasInstagramMessagingPermission = instance.mHasInstagramMessagingPermission;
     this.mHasMessengerMessagingPermission = instance.mHasMessengerMessagingPermission;
     this.mId = instance.mId;

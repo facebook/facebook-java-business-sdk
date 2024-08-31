@@ -53,14 +53,8 @@ public class ResellerGuidance extends APINode {
   private Boolean mAttributedToResellerL7d = null;
   @SerializedName("available_guidance")
   private List<String> mAvailableGuidance = null;
-  @SerializedName("benchmark_report_link")
-  private String mBenchmarkReportLink = null;
   @SerializedName("guidance_adoption_rate_l7d")
   private Double mGuidanceAdoptionRateL7d = null;
-  @SerializedName("no_adsets_gte_benchmark")
-  private Long mNoAdsetsGteBenchmark = null;
-  @SerializedName("no_adsets_lt_benchmark")
-  private Long mNoAdsetsLtBenchmark = null;
   @SerializedName("nurtured_by_reseller_l7d")
   private Boolean mNurturedByResellerL7d = null;
   @SerializedName("planning_agency_name")
@@ -280,39 +274,12 @@ public class ResellerGuidance extends APINode {
     return this;
   }
 
-  public String getFieldBenchmarkReportLink() {
-    return mBenchmarkReportLink;
-  }
-
-  public ResellerGuidance setFieldBenchmarkReportLink(String value) {
-    this.mBenchmarkReportLink = value;
-    return this;
-  }
-
   public Double getFieldGuidanceAdoptionRateL7d() {
     return mGuidanceAdoptionRateL7d;
   }
 
   public ResellerGuidance setFieldGuidanceAdoptionRateL7d(Double value) {
     this.mGuidanceAdoptionRateL7d = value;
-    return this;
-  }
-
-  public Long getFieldNoAdsetsGteBenchmark() {
-    return mNoAdsetsGteBenchmark;
-  }
-
-  public ResellerGuidance setFieldNoAdsetsGteBenchmark(Long value) {
-    this.mNoAdsetsGteBenchmark = value;
-    return this;
-  }
-
-  public Long getFieldNoAdsetsLtBenchmark() {
-    return mNoAdsetsLtBenchmark;
-  }
-
-  public ResellerGuidance setFieldNoAdsetsLtBenchmark(Long value) {
-    this.mNoAdsetsLtBenchmark = value;
     return this;
   }
 
@@ -410,10 +377,7 @@ public class ResellerGuidance extends APINode {
     this.mAdvertiserName = instance.mAdvertiserName;
     this.mAttributedToResellerL7d = instance.mAttributedToResellerL7d;
     this.mAvailableGuidance = instance.mAvailableGuidance;
-    this.mBenchmarkReportLink = instance.mBenchmarkReportLink;
     this.mGuidanceAdoptionRateL7d = instance.mGuidanceAdoptionRateL7d;
-    this.mNoAdsetsGteBenchmark = instance.mNoAdsetsGteBenchmark;
-    this.mNoAdsetsLtBenchmark = instance.mNoAdsetsLtBenchmark;
     this.mNurturedByResellerL7d = instance.mNurturedByResellerL7d;
     this.mPlanningAgencyName = instance.mPlanningAgencyName;
     this.mRecommendationTime = instance.mRecommendationTime;

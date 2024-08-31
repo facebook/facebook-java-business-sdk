@@ -402,10 +402,6 @@ public class AdVideo extends APINode {
     return new APIRequestGetTags(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestCreateTag createTag() {
-    return new APIRequestCreateTag(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetThumbnails getThumbnails() {
     return new APIRequestGetThumbnails(this.getPrefixedId().toString(), context);
   }
@@ -5236,137 +5232,6 @@ public class AdVideo extends APINode {
     }
   }
 
-  public static class APIRequestCreateTag extends APIRequest<AdVideo> {
-
-    AdVideo lastResponse = null;
-    @Override
-    public AdVideo getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "tag_uid",
-      "uid",
-      "vid",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public AdVideo parseResponse(String response, String header) throws APIException {
-      return AdVideo.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public AdVideo execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public AdVideo execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<AdVideo> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<AdVideo> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, AdVideo>() {
-           public AdVideo apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateTag.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         },
-         MoreExecutors.directExecutor()
-      );
-    };
-
-    public APIRequestCreateTag(String nodeId, APIContext context) {
-      super(context, nodeId, "/tags", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateTag setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateTag setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateTag setTagUid (Long tagUid) {
-      this.setParam("tag_uid", tagUid);
-      return this;
-    }
-    public APIRequestCreateTag setTagUid (String tagUid) {
-      this.setParam("tag_uid", tagUid);
-      return this;
-    }
-
-    public APIRequestCreateTag setUid (Long uid) {
-      this.setParam("uid", uid);
-      return this;
-    }
-    public APIRequestCreateTag setUid (String uid) {
-      this.setParam("uid", uid);
-      return this;
-    }
-
-    public APIRequestCreateTag setVid (String vid) {
-      this.setParam("vid", vid);
-      return this;
-    }
-
-    public APIRequestCreateTag requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateTag requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateTag requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateTag requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateTag requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateTag requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
   public static class APIRequestGetThumbnails extends APIRequest<VideoThumbnail> {
 
     APINodeList<VideoThumbnail> lastResponse = null;
@@ -6836,6 +6701,8 @@ public class AdVideo extends APINode {
       VALUE_COPYRIGHT_REFERENCE_VIDEO("COPYRIGHT_REFERENCE_VIDEO"),
       @SerializedName("CREATION_ML_PRECREATION")
       VALUE_CREATION_ML_PRECREATION("CREATION_ML_PRECREATION"),
+      @SerializedName("CREATOR_STOREFRONT_PERSONALIZED_VIDEO")
+      VALUE_CREATOR_STOREFRONT_PERSONALIZED_VIDEO("CREATOR_STOREFRONT_PERSONALIZED_VIDEO"),
       @SerializedName("DATAGENIX_VIDEO")
       VALUE_DATAGENIX_VIDEO("DATAGENIX_VIDEO"),
       @SerializedName("DCO_AD_ASSET_FEED")
@@ -7002,6 +6869,8 @@ public class AdVideo extends APINode {
       VALUE_OCULUS_VENUES_BROADCAST("OCULUS_VENUES_BROADCAST"),
       @SerializedName("OFFERS_VIDEO")
       VALUE_OFFERS_VIDEO("OFFERS_VIDEO"),
+      @SerializedName("ORIGINALITY_SELF_ADVOCACY")
+      VALUE_ORIGINALITY_SELF_ADVOCACY("ORIGINALITY_SELF_ADVOCACY"),
       @SerializedName("PAGES_COVER_VIDEO")
       VALUE_PAGES_COVER_VIDEO("PAGES_COVER_VIDEO"),
       @SerializedName("PAGE_REVIEW_SCREENCAST")

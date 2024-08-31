@@ -75,6 +75,8 @@ public class AdAccountUserSettings extends APINode {
   private Boolean mExportSummaryRow = null;
   @SerializedName("has_seen_groups_column_flexing_experience")
   private Boolean mHasSeenGroupsColumnFlexingExperience = null;
+  @SerializedName("has_seen_instagram_column_flexing_experience")
+  private Boolean mHasSeenInstagramColumnFlexingExperience = null;
   @SerializedName("has_seen_leads_column_flexing_experience")
   private Boolean mHasSeenLeadsColumnFlexingExperience = null;
   @SerializedName("has_seen_shops_ads_metrics_onboarding_tour")
@@ -434,6 +436,10 @@ public class AdAccountUserSettings extends APINode {
     return mHasSeenGroupsColumnFlexingExperience;
   }
 
+  public Boolean getFieldHasSeenInstagramColumnFlexingExperience() {
+    return mHasSeenInstagramColumnFlexingExperience;
+  }
+
   public Boolean getFieldHasSeenLeadsColumnFlexingExperience() {
     return mHasSeenLeadsColumnFlexingExperience;
   }
@@ -615,6 +621,7 @@ public class AdAccountUserSettings extends APINode {
       "export_deleted_items_with_delivery",
       "export_summary_row",
       "has_seen_groups_column_flexing_experience",
+      "has_seen_instagram_column_flexing_experience",
       "has_seen_leads_column_flexing_experience",
       "has_seen_shops_ads_metrics_onboarding_tour",
       "has_seen_shops_column_flexing_experience",
@@ -861,6 +868,13 @@ public class AdAccountUserSettings extends APINode {
     }
     public APIRequestGet requestHasSeenGroupsColumnFlexingExperienceField (boolean value) {
       this.requestField("has_seen_groups_column_flexing_experience", value);
+      return this;
+    }
+    public APIRequestGet requestHasSeenInstagramColumnFlexingExperienceField () {
+      return this.requestHasSeenInstagramColumnFlexingExperienceField(true);
+    }
+    public APIRequestGet requestHasSeenInstagramColumnFlexingExperienceField (boolean value) {
+      this.requestField("has_seen_instagram_column_flexing_experience", value);
       return this;
     }
     public APIRequestGet requestHasSeenLeadsColumnFlexingExperienceField () {
@@ -1213,6 +1227,7 @@ public class AdAccountUserSettings extends APINode {
     this.mExportDeletedItemsWithDelivery = instance.mExportDeletedItemsWithDelivery;
     this.mExportSummaryRow = instance.mExportSummaryRow;
     this.mHasSeenGroupsColumnFlexingExperience = instance.mHasSeenGroupsColumnFlexingExperience;
+    this.mHasSeenInstagramColumnFlexingExperience = instance.mHasSeenInstagramColumnFlexingExperience;
     this.mHasSeenLeadsColumnFlexingExperience = instance.mHasSeenLeadsColumnFlexingExperience;
     this.mHasSeenShopsAdsMetricsOnboardingTour = instance.mHasSeenShopsAdsMetricsOnboardingTour;
     this.mHasSeenShopsColumnFlexingExperience = instance.mHasSeenShopsColumnFlexingExperience;

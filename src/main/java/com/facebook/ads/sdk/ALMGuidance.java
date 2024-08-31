@@ -40,27 +40,29 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class ProductFeedMissingFeedItemReplacement extends APINode {
-  @SerializedName("home_listing")
-  private Object mHomeListing = null;
-  @SerializedName("product_item")
-  private Object mProductItem = null;
-  @SerializedName("vehicle")
-  private Object mVehicle = null;
+public class ALMGuidance extends APINode {
+  @SerializedName("ad_account_id")
+  private String mAdAccountId = null;
+  @SerializedName("guidances")
+  private List<Object> mGuidances = null;
+  @SerializedName("parent_advertiser_id")
+  private String mParentAdvertiserId = null;
+  @SerializedName("parent_advertiser_name")
+  private String mParentAdvertiserName = null;
   protected static Gson gson = null;
 
-  public ProductFeedMissingFeedItemReplacement() {
+  public ALMGuidance() {
   }
 
   public String getId() {
     return null;
   }
-  public static ProductFeedMissingFeedItemReplacement loadJSON(String json, APIContext context, String header) {
-    ProductFeedMissingFeedItemReplacement productFeedMissingFeedItemReplacement = getGson().fromJson(json, ProductFeedMissingFeedItemReplacement.class);
+  public static ALMGuidance loadJSON(String json, APIContext context, String header) {
+    ALMGuidance almGuidance = getGson().fromJson(json, ALMGuidance.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(productFeedMissingFeedItemReplacement.toString());
+      JsonElement o2 = parser.parse(almGuidance.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -70,14 +72,14 @@ public class ProductFeedMissingFeedItemReplacement extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    productFeedMissingFeedItemReplacement.context = context;
-    productFeedMissingFeedItemReplacement.rawValue = json;
-    productFeedMissingFeedItemReplacement.header = header;
-    return productFeedMissingFeedItemReplacement;
+    almGuidance.context = context;
+    almGuidance.rawValue = json;
+    almGuidance.header = header;
+    return almGuidance;
   }
 
-  public static APINodeList<ProductFeedMissingFeedItemReplacement> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<ProductFeedMissingFeedItemReplacement> productFeedMissingFeedItemReplacements = new APINodeList<ProductFeedMissingFeedItemReplacement>(request, json, header);
+  public static APINodeList<ALMGuidance> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<ALMGuidance> almGuidances = new APINodeList<ALMGuidance>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -88,9 +90,9 @@ public class ProductFeedMissingFeedItemReplacement extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          productFeedMissingFeedItemReplacements.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          almGuidances.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return productFeedMissingFeedItemReplacements;
+        return almGuidances;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -100,20 +102,20 @@ public class ProductFeedMissingFeedItemReplacement extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                productFeedMissingFeedItemReplacements.setCursors(before, after);
+                almGuidances.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            productFeedMissingFeedItemReplacements.setPaging(previous, next);
+            almGuidances.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              productFeedMissingFeedItemReplacements.setAppSecret(context.getAppSecretProof());
+              almGuidances.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              productFeedMissingFeedItemReplacements.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              almGuidances.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -124,23 +126,23 @@ public class ProductFeedMissingFeedItemReplacement extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  productFeedMissingFeedItemReplacements.add(loadJSON(entry.getValue().toString(), context, header));
+                  almGuidances.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              productFeedMissingFeedItemReplacements.add(loadJSON(obj.toString(), context, header));
+              almGuidances.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return productFeedMissingFeedItemReplacements;
+          return almGuidances;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              productFeedMissingFeedItemReplacements.add(loadJSON(entry.getValue().toString(), context, header));
+              almGuidances.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return productFeedMissingFeedItemReplacements;
+          return almGuidances;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -157,20 +159,20 @@ public class ProductFeedMissingFeedItemReplacement extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              productFeedMissingFeedItemReplacements.add(loadJSON(value.toString(), context, header));
+              almGuidances.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return productFeedMissingFeedItemReplacements;
+            return almGuidances;
           }
 
           // Sixth, check if it's pure JsonObject
-          productFeedMissingFeedItemReplacements.clear();
-          productFeedMissingFeedItemReplacements.add(loadJSON(json, context, header));
-          return productFeedMissingFeedItemReplacements;
+          almGuidances.clear();
+          almGuidances.add(loadJSON(json, context, header));
+          return almGuidances;
         }
       }
     } catch (Exception e) {
@@ -198,30 +200,39 @@ public class ProductFeedMissingFeedItemReplacement extends APINode {
   }
 
 
-  public Object getFieldHomeListing() {
-    return mHomeListing;
+  public String getFieldAdAccountId() {
+    return mAdAccountId;
   }
 
-  public ProductFeedMissingFeedItemReplacement setFieldHomeListing(Object value) {
-    this.mHomeListing = value;
+  public ALMGuidance setFieldAdAccountId(String value) {
+    this.mAdAccountId = value;
     return this;
   }
 
-  public Object getFieldProductItem() {
-    return mProductItem;
+  public List<Object> getFieldGuidances() {
+    return mGuidances;
   }
 
-  public ProductFeedMissingFeedItemReplacement setFieldProductItem(Object value) {
-    this.mProductItem = value;
+  public ALMGuidance setFieldGuidances(List<Object> value) {
+    this.mGuidances = value;
     return this;
   }
 
-  public Object getFieldVehicle() {
-    return mVehicle;
+  public String getFieldParentAdvertiserId() {
+    return mParentAdvertiserId;
   }
 
-  public ProductFeedMissingFeedItemReplacement setFieldVehicle(Object value) {
-    this.mVehicle = value;
+  public ALMGuidance setFieldParentAdvertiserId(String value) {
+    this.mParentAdvertiserId = value;
+    return this;
+  }
+
+  public String getFieldParentAdvertiserName() {
+    return mParentAdvertiserName;
+  }
+
+  public ALMGuidance setFieldParentAdvertiserName(String value) {
+    this.mParentAdvertiserName = value;
     return this;
   }
 
@@ -241,19 +252,20 @@ public class ProductFeedMissingFeedItemReplacement extends APINode {
     return gson;
   }
 
-  public ProductFeedMissingFeedItemReplacement copyFrom(ProductFeedMissingFeedItemReplacement instance) {
-    this.mHomeListing = instance.mHomeListing;
-    this.mProductItem = instance.mProductItem;
-    this.mVehicle = instance.mVehicle;
+  public ALMGuidance copyFrom(ALMGuidance instance) {
+    this.mAdAccountId = instance.mAdAccountId;
+    this.mGuidances = instance.mGuidances;
+    this.mParentAdvertiserId = instance.mParentAdvertiserId;
+    this.mParentAdvertiserName = instance.mParentAdvertiserName;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<ProductFeedMissingFeedItemReplacement> getParser() {
-    return new APIRequest.ResponseParser<ProductFeedMissingFeedItemReplacement>() {
-      public APINodeList<ProductFeedMissingFeedItemReplacement> parseResponse(String response, APIContext context, APIRequest<ProductFeedMissingFeedItemReplacement> request, String header) throws MalformedResponseException {
-        return ProductFeedMissingFeedItemReplacement.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<ALMGuidance> getParser() {
+    return new APIRequest.ResponseParser<ALMGuidance>() {
+      public APINodeList<ALMGuidance> parseResponse(String response, APIContext context, APIRequest<ALMGuidance> request, String header) throws MalformedResponseException {
+        return ALMGuidance.parseResponse(response, context, request, header);
       }
     };
   }

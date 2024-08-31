@@ -2325,7 +2325,6 @@ public class Group extends APINode {
       "actions",
       "album_id",
       "android_key_hash",
-      "animated_effect_id",
       "application_id",
       "asked_fun_fact_prompt_id",
       "asset3d_id",
@@ -2506,15 +2505,6 @@ public class Group extends APINode {
 
     public APIRequestCreateFeed setAndroidKeyHash (String androidKeyHash) {
       this.setParam("android_key_hash", androidKeyHash);
-      return this;
-    }
-
-    public APIRequestCreateFeed setAnimatedEffectId (Long animatedEffectId) {
-      this.setParam("animated_effect_id", animatedEffectId);
-      return this;
-    }
-    public APIRequestCreateFeed setAnimatedEffectId (String animatedEffectId) {
-      this.setParam("animated_effect_id", animatedEffectId);
       return this;
     }
 
@@ -6486,7 +6476,6 @@ public class Group extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "animated_effect_id",
       "application_id",
       "asked_fun_fact_prompt_id",
       "audio_story_wave_animation_handle",
@@ -6615,15 +6604,6 @@ public class Group extends APINode {
       return this;
     }
 
-
-    public APIRequestCreateVideo setAnimatedEffectId (Long animatedEffectId) {
-      this.setParam("animated_effect_id", animatedEffectId);
-      return this;
-    }
-    public APIRequestCreateVideo setAnimatedEffectId (String animatedEffectId) {
-      this.setParam("animated_effect_id", animatedEffectId);
-      return this;
-    }
 
     public APIRequestCreateVideo setApplicationId (String applicationId) {
       this.setParam("application_id", applicationId);

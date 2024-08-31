@@ -1580,6 +1580,8 @@ public class InstagramUser extends APINode {
     public static final String[] FIELDS = {
       "end_time",
       "id",
+      "notification_subtypes",
+      "notification_target_time",
       "start_time",
       "title",
     };
@@ -1688,6 +1690,20 @@ public class InstagramUser extends APINode {
       this.requestField("id", value);
       return this;
     }
+    public APIRequestGetUpcomingEvents requestNotificationSubtypesField () {
+      return this.requestNotificationSubtypesField(true);
+    }
+    public APIRequestGetUpcomingEvents requestNotificationSubtypesField (boolean value) {
+      this.requestField("notification_subtypes", value);
+      return this;
+    }
+    public APIRequestGetUpcomingEvents requestNotificationTargetTimeField () {
+      return this.requestNotificationTargetTimeField(true);
+    }
+    public APIRequestGetUpcomingEvents requestNotificationTargetTimeField (boolean value) {
+      this.requestField("notification_target_time", value);
+      return this;
+    }
     public APIRequestGetUpcomingEvents requestStartTimeField () {
       return this.requestStartTimeField(true);
     }
@@ -1713,6 +1729,8 @@ public class InstagramUser extends APINode {
     }
     public static final String[] PARAMS = {
       "end_time",
+      "notification_subtypes",
+      "notification_target_time",
       "start_time",
       "title",
     };
@@ -1776,6 +1794,24 @@ public class InstagramUser extends APINode {
 
     public APIRequestCreateUpcomingEvent setEndTime (String endTime) {
       this.setParam("end_time", endTime);
+      return this;
+    }
+
+    public APIRequestCreateUpcomingEvent setNotificationSubtypes (List<IGUpcomingEvent.EnumNotificationSubtypes> notificationSubtypes) {
+      this.setParam("notification_subtypes", notificationSubtypes);
+      return this;
+    }
+    public APIRequestCreateUpcomingEvent setNotificationSubtypes (String notificationSubtypes) {
+      this.setParam("notification_subtypes", notificationSubtypes);
+      return this;
+    }
+
+    public APIRequestCreateUpcomingEvent setNotificationTargetTime (IGUpcomingEvent.EnumNotificationTargetTime notificationTargetTime) {
+      this.setParam("notification_target_time", notificationTargetTime);
+      return this;
+    }
+    public APIRequestCreateUpcomingEvent setNotificationTargetTime (String notificationTargetTime) {
+      this.setParam("notification_target_time", notificationTargetTime);
       return this;
     }
 
