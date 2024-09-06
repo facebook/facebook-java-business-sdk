@@ -216,4 +216,11 @@ public class ServerSideApiUtilTest {
       assertNull(normalize(" \t   ", param));
     }
   }
+
+  @Test
+  public void NormalizeHyphenPostalCodeThrowsIllegalArgumentException() {
+    thrown.expect(IllegalArgumentException.class);
+    thrown.expectMessage("Invalid postalcode for the passed postalCode: '-'.");
+    normalize("-", ZIP_CODE);
+  }
 }
