@@ -49,7 +49,7 @@
     * Checks whether the input is already hashed with SHA256 or MD5.
     *
     * @param input value that need to be validated.
-    * @return bool representing the whether the input is hashed
+    * @return bool representing whether the input is hashed
     */
    public static boolean isAlreadyHashed(String input) {
 
@@ -170,9 +170,15 @@
      // Remove space characters in the Zip Code
      postalCode = postalCode.replaceAll("[\\s]+", "");
 
-     // If the code has more than one part, retain the first part.
-     postalCode = postalCode.split("-")[0];
+     // If the code is just a hyphen throw a descriptive IllegalArgumentException instead of
+     // ArrayIndexOutOfBoundsException below.
+     String[] postalCodeArray = postalCode.split("-");
+     if (postalCodeArray.length == 0) {
+       throw new IllegalArgumentException("Invalid postalcode for the passed postalCode: '" + postalCode + "'.");
+     }
 
+     // If the code has more than one part, retain the first part.
+     postalCode = postalCodeArray[0];
      if (postalCode.length() < 2) {
        throw new IllegalArgumentException("Invalid postalcode format for the passed postalCode:" + postalCode + ". Please check the passed postalcode.");
      }
