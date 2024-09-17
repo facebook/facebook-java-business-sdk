@@ -41,22 +41,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class AdCreativeFeatureCustomizations extends APINode {
-  @SerializedName("background_color")
-  private String mBackgroundColor = null;
-  @SerializedName("catalog_feed_tag_name")
-  private String mCatalogFeedTagName = null;
-  @SerializedName("font_name")
-  private String mFontName = null;
-  @SerializedName("product_recommendation_type")
-  private String mProductRecommendationType = null;
-  @SerializedName("product_versioning_fallback_strategy")
-  private String mProductVersioningFallbackStrategy = null;
   @SerializedName("showcase_card_display")
   private String mShowcaseCardDisplay = null;
-  @SerializedName("text_style")
-  private String mTextStyle = null;
-  @SerializedName("video_crop_style")
-  private String mVideoCropStyle = null;
   protected static Gson gson = null;
 
   public AdCreativeFeatureCustomizations() {
@@ -208,75 +194,12 @@ public class AdCreativeFeatureCustomizations extends APINode {
   }
 
 
-  public String getFieldBackgroundColor() {
-    return mBackgroundColor;
-  }
-
-  public AdCreativeFeatureCustomizations setFieldBackgroundColor(String value) {
-    this.mBackgroundColor = value;
-    return this;
-  }
-
-  public String getFieldCatalogFeedTagName() {
-    return mCatalogFeedTagName;
-  }
-
-  public AdCreativeFeatureCustomizations setFieldCatalogFeedTagName(String value) {
-    this.mCatalogFeedTagName = value;
-    return this;
-  }
-
-  public String getFieldFontName() {
-    return mFontName;
-  }
-
-  public AdCreativeFeatureCustomizations setFieldFontName(String value) {
-    this.mFontName = value;
-    return this;
-  }
-
-  public String getFieldProductRecommendationType() {
-    return mProductRecommendationType;
-  }
-
-  public AdCreativeFeatureCustomizations setFieldProductRecommendationType(String value) {
-    this.mProductRecommendationType = value;
-    return this;
-  }
-
-  public String getFieldProductVersioningFallbackStrategy() {
-    return mProductVersioningFallbackStrategy;
-  }
-
-  public AdCreativeFeatureCustomizations setFieldProductVersioningFallbackStrategy(String value) {
-    this.mProductVersioningFallbackStrategy = value;
-    return this;
-  }
-
   public String getFieldShowcaseCardDisplay() {
     return mShowcaseCardDisplay;
   }
 
   public AdCreativeFeatureCustomizations setFieldShowcaseCardDisplay(String value) {
     this.mShowcaseCardDisplay = value;
-    return this;
-  }
-
-  public String getFieldTextStyle() {
-    return mTextStyle;
-  }
-
-  public AdCreativeFeatureCustomizations setFieldTextStyle(String value) {
-    this.mTextStyle = value;
-    return this;
-  }
-
-  public String getFieldVideoCropStyle() {
-    return mVideoCropStyle;
-  }
-
-  public AdCreativeFeatureCustomizations setFieldVideoCropStyle(String value) {
-    this.mVideoCropStyle = value;
     return this;
   }
 
@@ -297,14 +220,7 @@ public class AdCreativeFeatureCustomizations extends APINode {
   }
 
   public AdCreativeFeatureCustomizations copyFrom(AdCreativeFeatureCustomizations instance) {
-    this.mBackgroundColor = instance.mBackgroundColor;
-    this.mCatalogFeedTagName = instance.mCatalogFeedTagName;
-    this.mFontName = instance.mFontName;
-    this.mProductRecommendationType = instance.mProductRecommendationType;
-    this.mProductVersioningFallbackStrategy = instance.mProductVersioningFallbackStrategy;
     this.mShowcaseCardDisplay = instance.mShowcaseCardDisplay;
-    this.mTextStyle = instance.mTextStyle;
-    this.mVideoCropStyle = instance.mVideoCropStyle;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

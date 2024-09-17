@@ -41,6 +41,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class AdCreativeFeatureDetails extends APINode {
+  @SerializedName("customizations")
+  private AdCreativeFeatureCustomizations mCustomizations = null;
   @SerializedName("enroll_status")
   private String mEnrollStatus = null;
   protected static Gson gson = null;
@@ -194,6 +196,20 @@ public class AdCreativeFeatureDetails extends APINode {
   }
 
 
+  public AdCreativeFeatureCustomizations getFieldCustomizations() {
+    return mCustomizations;
+  }
+
+  public AdCreativeFeatureDetails setFieldCustomizations(AdCreativeFeatureCustomizations value) {
+    this.mCustomizations = value;
+    return this;
+  }
+
+  public AdCreativeFeatureDetails setFieldCustomizations(String value) {
+    Type type = new TypeToken<AdCreativeFeatureCustomizations>(){}.getType();
+    this.mCustomizations = AdCreativeFeatureCustomizations.getGson().fromJson(value, type);
+    return this;
+  }
   public String getFieldEnrollStatus() {
     return mEnrollStatus;
   }
@@ -220,6 +236,7 @@ public class AdCreativeFeatureDetails extends APINode {
   }
 
   public AdCreativeFeatureDetails copyFrom(AdCreativeFeatureDetails instance) {
+    this.mCustomizations = instance.mCustomizations;
     this.mEnrollStatus = instance.mEnrollStatus;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
