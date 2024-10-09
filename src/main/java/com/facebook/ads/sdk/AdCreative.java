@@ -123,6 +123,8 @@ public class AdCreative extends APINode {
   private String mLinkOgId = null;
   @SerializedName("link_url")
   private String mLinkUrl = null;
+  @SerializedName("messenger_sponsored_message")
+  private String mMessengerSponsoredMessage = null;
   @SerializedName("name")
   private String mName = null;
   @SerializedName("object_id")
@@ -831,6 +833,15 @@ public class AdCreative extends APINode {
 
   public AdCreative setFieldLinkUrl(String value) {
     this.mLinkUrl = value;
+    return this;
+  }
+
+  public String getFieldMessengerSponsoredMessage() {
+    return mMessengerSponsoredMessage;
+  }
+
+  public AdCreative setFieldMessengerSponsoredMessage(String value) {
+    this.mMessengerSponsoredMessage = value;
     return this;
   }
 
@@ -1764,6 +1775,7 @@ public class AdCreative extends APINode {
       "link_destination_display_url",
       "link_og_id",
       "link_url",
+      "messenger_sponsored_message",
       "name",
       "object_id",
       "object_store_url",
@@ -2185,6 +2197,13 @@ public class AdCreative extends APINode {
     }
     public APIRequestGet requestLinkUrlField (boolean value) {
       this.requestField("link_url", value);
+      return this;
+    }
+    public APIRequestGet requestMessengerSponsoredMessageField () {
+      return this.requestMessengerSponsoredMessageField(true);
+    }
+    public APIRequestGet requestMessengerSponsoredMessageField (boolean value) {
+      this.requestField("messenger_sponsored_message", value);
       return this;
     }
     public APIRequestGet requestNameField () {
@@ -2939,6 +2958,7 @@ public class AdCreative extends APINode {
     this.mLinkDestinationDisplayUrl = instance.mLinkDestinationDisplayUrl;
     this.mLinkOgId = instance.mLinkOgId;
     this.mLinkUrl = instance.mLinkUrl;
+    this.mMessengerSponsoredMessage = instance.mMessengerSponsoredMessage;
     this.mName = instance.mName;
     this.mObjectId = instance.mObjectId;
     this.mObjectStoreUrl = instance.mObjectStoreUrl;

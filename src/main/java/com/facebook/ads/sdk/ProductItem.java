@@ -60,7 +60,7 @@ public class ProductItem extends APINode {
   @SerializedName("bundle_retailer_ids")
   private List<String> mBundleRetailerIds = null;
   @SerializedName("capability_to_review_status")
-  private List<Map<Object, Object>> mCapabilityToReviewStatus = null;
+  private List<Map<String, EnumCapabilityToReviewStatus>> mCapabilityToReviewStatus = null;
   @SerializedName("category")
   private String mCategory = null;
   @SerializedName("category_specific_fields")
@@ -471,7 +471,7 @@ public class ProductItem extends APINode {
     return mBundleRetailerIds;
   }
 
-  public List<Map<Object, Object>> getFieldCapabilityToReviewStatus() {
+  public List<Map<String, EnumCapabilityToReviewStatus>> getFieldCapabilityToReviewStatus() {
     return mCapabilityToReviewStatus;
   }
 
@@ -2972,6 +2972,31 @@ public class ProductItem extends APINode {
       }
   }
 
+  public static enum EnumCapabilityToReviewStatus {
+      @SerializedName("APPROVED")
+      VALUE_APPROVED("APPROVED"),
+      @SerializedName("NO_REVIEW")
+      VALUE_NO_REVIEW("NO_REVIEW"),
+      @SerializedName("OUTDATED")
+      VALUE_OUTDATED("OUTDATED"),
+      @SerializedName("PENDING")
+      VALUE_PENDING("PENDING"),
+      @SerializedName("REJECTED")
+      VALUE_REJECTED("REJECTED"),
+      ;
+
+      private String value;
+
+      private EnumCapabilityToReviewStatus(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
   public static enum EnumCondition {
       @SerializedName("cpo")
       VALUE_CPO("cpo"),
@@ -3720,6 +3745,8 @@ public class ProductItem extends APINode {
       VALUE_INVALID_SUBSCRIPTION_ENABLE_PARAMS("INVALID_SUBSCRIPTION_ENABLE_PARAMS"),
       @SerializedName("INVALID_SUBSCRIPTION_PARAMS")
       VALUE_INVALID_SUBSCRIPTION_PARAMS("INVALID_SUBSCRIPTION_PARAMS"),
+      @SerializedName("INVALID_TAX_EXTENSION_STATE")
+      VALUE_INVALID_TAX_EXTENSION_STATE("INVALID_TAX_EXTENSION_STATE"),
       @SerializedName("INVALID_VEHICLE_STATE")
       VALUE_INVALID_VEHICLE_STATE("INVALID_VEHICLE_STATE"),
       @SerializedName("INVALID_VIRTUAL_TOUR_URL_DOMAIN")

@@ -41,8 +41,6 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class SavedMessageResponse extends APINode {
-  @SerializedName("category")
-  private String mCategory = null;
   @SerializedName("id")
   private String mId = null;
   @SerializedName("image")
@@ -267,10 +265,6 @@ public class SavedMessageResponse extends APINode {
   }
 
 
-  public String getFieldCategory() {
-    return mCategory;
-  }
-
   public String getFieldId() {
     return mId;
   }
@@ -304,7 +298,6 @@ public class SavedMessageResponse extends APINode {
     };
 
     public static final String[] FIELDS = {
-      "category",
       "id",
       "image",
       "is_enabled",
@@ -402,13 +395,6 @@ public class SavedMessageResponse extends APINode {
       return this;
     }
 
-    public APIRequestGet requestCategoryField () {
-      return this.requestCategoryField(true);
-    }
-    public APIRequestGet requestCategoryField (boolean value) {
-      this.requestField("category", value);
-      return this;
-    }
     public APIRequestGet requestIdField () {
       return this.requestIdField(true);
     }
@@ -461,7 +447,6 @@ public class SavedMessageResponse extends APINode {
   }
 
   public SavedMessageResponse copyFrom(SavedMessageResponse instance) {
-    this.mCategory = instance.mCategory;
     this.mId = instance.mId;
     this.mImage = instance.mImage;
     this.mIsEnabled = instance.mIsEnabled;

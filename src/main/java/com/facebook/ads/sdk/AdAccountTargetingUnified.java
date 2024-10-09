@@ -519,6 +519,8 @@ public class AdAccountTargetingUnified extends APINode {
       VALUE_CREDIT("CREDIT"),
       @SerializedName("EMPLOYMENT")
       VALUE_EMPLOYMENT("EMPLOYMENT"),
+      @SerializedName("FINANCIAL_PRODUCTS_SERVICES")
+      VALUE_FINANCIAL_PRODUCTS_SERVICES("FINANCIAL_PRODUCTS_SERVICES"),
       @SerializedName("HOUSING")
       VALUE_HOUSING("HOUSING"),
       @SerializedName("ISSUES_ELECTIONS_POLITICS")

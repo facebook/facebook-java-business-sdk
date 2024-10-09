@@ -40,68 +40,78 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class DogNotificationSettings extends APINode {
-  @SerializedName("dog_check_key")
-  private String mDogCheckKey = null;
+public class AdsQuickViews extends APINode {
+  @SerializedName("attribution_windows")
+  private List<String> mAttributionWindows = null;
+  @SerializedName("breakdowns")
+  private List<String> mBreakdowns = null;
+  @SerializedName("column_fields")
+  private List<String> mColumnFields = null;
+  @SerializedName("description")
+  private String mDescription = null;
   @SerializedName("id")
   private String mId = null;
-  @SerializedName("subscription_status_per_channel")
-  private List<Map<String, String>> mSubscriptionStatusPerChannel = null;
+  @SerializedName("name")
+  private String mName = null;
+  @SerializedName("permission")
+  private String mPermission = null;
+  @SerializedName("sort")
+  private List<Object> mSort = null;
   protected static Gson gson = null;
 
-  DogNotificationSettings() {
+  AdsQuickViews() {
   }
 
-  public DogNotificationSettings(Long id, APIContext context) {
+  public AdsQuickViews(Long id, APIContext context) {
     this(id.toString(), context);
   }
 
-  public DogNotificationSettings(String id, APIContext context) {
+  public AdsQuickViews(String id, APIContext context) {
     this.mId = id;
 
     this.context = context;
   }
 
-  public DogNotificationSettings fetch() throws APIException{
-    DogNotificationSettings newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+  public AdsQuickViews fetch() throws APIException{
+    AdsQuickViews newInstance = fetchById(this.getPrefixedId().toString(), this.context);
     this.copyFrom(newInstance);
     return this;
   }
 
-  public static DogNotificationSettings fetchById(Long id, APIContext context) throws APIException {
+  public static AdsQuickViews fetchById(Long id, APIContext context) throws APIException {
     return fetchById(id.toString(), context);
   }
 
-  public static ListenableFuture<DogNotificationSettings> fetchByIdAsync(Long id, APIContext context) throws APIException {
+  public static ListenableFuture<AdsQuickViews> fetchByIdAsync(Long id, APIContext context) throws APIException {
     return fetchByIdAsync(id.toString(), context);
   }
 
-  public static DogNotificationSettings fetchById(String id, APIContext context) throws APIException {
+  public static AdsQuickViews fetchById(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
   }
 
-  public static ListenableFuture<DogNotificationSettings> fetchByIdAsync(String id, APIContext context) throws APIException {
+  public static ListenableFuture<AdsQuickViews> fetchByIdAsync(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
   }
 
-  public static APINodeList<DogNotificationSettings> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<DogNotificationSettings>)(
-      new APIRequest<DogNotificationSettings>(context, "", "/", "GET", DogNotificationSettings.getParser())
+  public static APINodeList<AdsQuickViews> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<AdsQuickViews>)(
+      new APIRequest<AdsQuickViews>(context, "", "/", "GET", AdsQuickViews.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .execute()
     );
   }
 
-  public static ListenableFuture<APINodeList<DogNotificationSettings>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+  public static ListenableFuture<APINodeList<AdsQuickViews>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
     return
-      new APIRequest(context, "", "/", "GET", DogNotificationSettings.getParser())
+      new APIRequest(context, "", "/", "GET", AdsQuickViews.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
@@ -114,12 +124,12 @@ public class DogNotificationSettings extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static DogNotificationSettings loadJSON(String json, APIContext context, String header) {
-    DogNotificationSettings dogNotificationSettings = getGson().fromJson(json, DogNotificationSettings.class);
+  public static AdsQuickViews loadJSON(String json, APIContext context, String header) {
+    AdsQuickViews adsQuickViews = getGson().fromJson(json, AdsQuickViews.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(dogNotificationSettings.toString());
+      JsonElement o2 = parser.parse(adsQuickViews.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -129,14 +139,14 @@ public class DogNotificationSettings extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    dogNotificationSettings.context = context;
-    dogNotificationSettings.rawValue = json;
-    dogNotificationSettings.header = header;
-    return dogNotificationSettings;
+    adsQuickViews.context = context;
+    adsQuickViews.rawValue = json;
+    adsQuickViews.header = header;
+    return adsQuickViews;
   }
 
-  public static APINodeList<DogNotificationSettings> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<DogNotificationSettings> dogNotificationSettingss = new APINodeList<DogNotificationSettings>(request, json, header);
+  public static APINodeList<AdsQuickViews> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdsQuickViews> adsQuickViewss = new APINodeList<AdsQuickViews>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -147,9 +157,9 @@ public class DogNotificationSettings extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          dogNotificationSettingss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          adsQuickViewss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return dogNotificationSettingss;
+        return adsQuickViewss;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -159,20 +169,20 @@ public class DogNotificationSettings extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                dogNotificationSettingss.setCursors(before, after);
+                adsQuickViewss.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            dogNotificationSettingss.setPaging(previous, next);
+            adsQuickViewss.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              dogNotificationSettingss.setAppSecret(context.getAppSecretProof());
+              adsQuickViewss.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              dogNotificationSettingss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              adsQuickViewss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -183,23 +193,23 @@ public class DogNotificationSettings extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  dogNotificationSettingss.add(loadJSON(entry.getValue().toString(), context, header));
+                  adsQuickViewss.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              dogNotificationSettingss.add(loadJSON(obj.toString(), context, header));
+              adsQuickViewss.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return dogNotificationSettingss;
+          return adsQuickViewss;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              dogNotificationSettingss.add(loadJSON(entry.getValue().toString(), context, header));
+              adsQuickViewss.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return dogNotificationSettingss;
+          return adsQuickViewss;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -216,20 +226,20 @@ public class DogNotificationSettings extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              dogNotificationSettingss.add(loadJSON(value.toString(), context, header));
+              adsQuickViewss.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return dogNotificationSettingss;
+            return adsQuickViewss;
           }
 
           // Sixth, check if it's pure JsonObject
-          dogNotificationSettingss.clear();
-          dogNotificationSettingss.add(loadJSON(json, context, header));
-          return dogNotificationSettingss;
+          adsQuickViewss.clear();
+          adsQuickViewss.add(loadJSON(json, context, header));
+          return adsQuickViewss;
         }
       }
     } catch (Exception e) {
@@ -261,62 +271,87 @@ public class DogNotificationSettings extends APINode {
   }
 
 
-  public String getFieldDogCheckKey() {
-    return mDogCheckKey;
+  public List<String> getFieldAttributionWindows() {
+    return mAttributionWindows;
+  }
+
+  public List<String> getFieldBreakdowns() {
+    return mBreakdowns;
+  }
+
+  public List<String> getFieldColumnFields() {
+    return mColumnFields;
+  }
+
+  public String getFieldDescription() {
+    return mDescription;
   }
 
   public String getFieldId() {
     return mId;
   }
 
-  public List<Map<String, String>> getFieldSubscriptionStatusPerChannel() {
-    return mSubscriptionStatusPerChannel;
+  public String getFieldName() {
+    return mName;
+  }
+
+  public String getFieldPermission() {
+    return mPermission;
+  }
+
+  public List<Object> getFieldSort() {
+    return mSort;
   }
 
 
 
-  public static class APIRequestGet extends APIRequest<DogNotificationSettings> {
+  public static class APIRequestGet extends APIRequest<AdsQuickViews> {
 
-    DogNotificationSettings lastResponse = null;
+    AdsQuickViews lastResponse = null;
     @Override
-    public DogNotificationSettings getLastResponse() {
+    public AdsQuickViews getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
     };
 
     public static final String[] FIELDS = {
-      "dog_check_key",
+      "attribution_windows",
+      "breakdowns",
+      "column_fields",
+      "description",
       "id",
-      "subscription_status_per_channel",
+      "name",
+      "permission",
+      "sort",
     };
 
     @Override
-    public DogNotificationSettings parseResponse(String response, String header) throws APIException {
-      return DogNotificationSettings.parseResponse(response, getContext(), this, header).head();
+    public AdsQuickViews parseResponse(String response, String header) throws APIException {
+      return AdsQuickViews.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public DogNotificationSettings execute() throws APIException {
+    public AdsQuickViews execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public DogNotificationSettings execute(Map<String, Object> extraParams) throws APIException {
+    public AdsQuickViews execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<DogNotificationSettings> executeAsync() throws APIException {
+    public ListenableFuture<AdsQuickViews> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<DogNotificationSettings> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<AdsQuickViews> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, DogNotificationSettings>() {
-           public DogNotificationSettings apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, AdsQuickViews>() {
+           public AdsQuickViews apply(ResponseWrapper result) {
              try {
                return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -381,11 +416,32 @@ public class DogNotificationSettings extends APINode {
       return this;
     }
 
-    public APIRequestGet requestDogCheckKeyField () {
-      return this.requestDogCheckKeyField(true);
+    public APIRequestGet requestAttributionWindowsField () {
+      return this.requestAttributionWindowsField(true);
     }
-    public APIRequestGet requestDogCheckKeyField (boolean value) {
-      this.requestField("dog_check_key", value);
+    public APIRequestGet requestAttributionWindowsField (boolean value) {
+      this.requestField("attribution_windows", value);
+      return this;
+    }
+    public APIRequestGet requestBreakdownsField () {
+      return this.requestBreakdownsField(true);
+    }
+    public APIRequestGet requestBreakdownsField (boolean value) {
+      this.requestField("breakdowns", value);
+      return this;
+    }
+    public APIRequestGet requestColumnFieldsField () {
+      return this.requestColumnFieldsField(true);
+    }
+    public APIRequestGet requestColumnFieldsField (boolean value) {
+      this.requestField("column_fields", value);
+      return this;
+    }
+    public APIRequestGet requestDescriptionField () {
+      return this.requestDescriptionField(true);
+    }
+    public APIRequestGet requestDescriptionField (boolean value) {
+      this.requestField("description", value);
       return this;
     }
     public APIRequestGet requestIdField () {
@@ -395,11 +451,25 @@ public class DogNotificationSettings extends APINode {
       this.requestField("id", value);
       return this;
     }
-    public APIRequestGet requestSubscriptionStatusPerChannelField () {
-      return this.requestSubscriptionStatusPerChannelField(true);
+    public APIRequestGet requestNameField () {
+      return this.requestNameField(true);
     }
-    public APIRequestGet requestSubscriptionStatusPerChannelField (boolean value) {
-      this.requestField("subscription_status_per_channel", value);
+    public APIRequestGet requestNameField (boolean value) {
+      this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGet requestPermissionField () {
+      return this.requestPermissionField(true);
+    }
+    public APIRequestGet requestPermissionField (boolean value) {
+      this.requestField("permission", value);
+      return this;
+    }
+    public APIRequestGet requestSortField () {
+      return this.requestSortField(true);
+    }
+    public APIRequestGet requestSortField (boolean value) {
+      this.requestField("sort", value);
       return this;
     }
   }
@@ -418,19 +488,24 @@ public class DogNotificationSettings extends APINode {
     return gson;
   }
 
-  public DogNotificationSettings copyFrom(DogNotificationSettings instance) {
-    this.mDogCheckKey = instance.mDogCheckKey;
+  public AdsQuickViews copyFrom(AdsQuickViews instance) {
+    this.mAttributionWindows = instance.mAttributionWindows;
+    this.mBreakdowns = instance.mBreakdowns;
+    this.mColumnFields = instance.mColumnFields;
+    this.mDescription = instance.mDescription;
     this.mId = instance.mId;
-    this.mSubscriptionStatusPerChannel = instance.mSubscriptionStatusPerChannel;
+    this.mName = instance.mName;
+    this.mPermission = instance.mPermission;
+    this.mSort = instance.mSort;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<DogNotificationSettings> getParser() {
-    return new APIRequest.ResponseParser<DogNotificationSettings>() {
-      public APINodeList<DogNotificationSettings> parseResponse(String response, APIContext context, APIRequest<DogNotificationSettings> request, String header) throws MalformedResponseException {
-        return DogNotificationSettings.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<AdsQuickViews> getParser() {
+    return new APIRequest.ResponseParser<AdsQuickViews>() {
+      public APINodeList<AdsQuickViews> parseResponse(String response, APIContext context, APIRequest<AdsQuickViews> request, String header) throws MalformedResponseException {
+        return AdsQuickViews.parseResponse(response, context, request, header);
       }
     };
   }

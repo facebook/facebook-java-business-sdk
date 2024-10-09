@@ -53,6 +53,10 @@ public class AdCreativeBrandedContentAds extends APINode {
   private String mInstagramBoostPostAccessToken = null;
   @SerializedName("is_mca_internal")
   private Boolean mIsMcaInternal = null;
+  @SerializedName("parent_source_facebook_post_id")
+  private String mParentSourceFacebookPostId = null;
+  @SerializedName("parent_source_instagram_media_id")
+  private String mParentSourceInstagramMediaId = null;
   @SerializedName("partners")
   private List<AdCreativeBrandedContentAdsPartners> mPartners = null;
   @SerializedName("product_set_partner_selection_status")
@@ -268,6 +272,24 @@ public class AdCreativeBrandedContentAds extends APINode {
     return this;
   }
 
+  public String getFieldParentSourceFacebookPostId() {
+    return mParentSourceFacebookPostId;
+  }
+
+  public AdCreativeBrandedContentAds setFieldParentSourceFacebookPostId(String value) {
+    this.mParentSourceFacebookPostId = value;
+    return this;
+  }
+
+  public String getFieldParentSourceInstagramMediaId() {
+    return mParentSourceInstagramMediaId;
+  }
+
+  public AdCreativeBrandedContentAds setFieldParentSourceInstagramMediaId(String value) {
+    this.mParentSourceInstagramMediaId = value;
+    return this;
+  }
+
   public List<AdCreativeBrandedContentAdsPartners> getFieldPartners() {
     return mPartners;
   }
@@ -341,6 +363,8 @@ public class AdCreativeBrandedContentAds extends APINode {
     this.mFacebookBoostPostAccessToken = instance.mFacebookBoostPostAccessToken;
     this.mInstagramBoostPostAccessToken = instance.mInstagramBoostPostAccessToken;
     this.mIsMcaInternal = instance.mIsMcaInternal;
+    this.mParentSourceFacebookPostId = instance.mParentSourceFacebookPostId;
+    this.mParentSourceInstagramMediaId = instance.mParentSourceInstagramMediaId;
     this.mPartners = instance.mPartners;
     this.mProductSetPartnerSelectionStatus = instance.mProductSetPartnerSelectionStatus;
     this.mPromotedPageId = instance.mPromotedPageId;

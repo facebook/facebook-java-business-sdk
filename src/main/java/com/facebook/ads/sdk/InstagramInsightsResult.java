@@ -340,6 +340,8 @@ public class InstagramInsightsResult extends APINode {
       VALUE_SHARES("shares"),
       @SerializedName("thread_replies")
       VALUE_THREAD_REPLIES("thread_replies"),
+      @SerializedName("thread_shares")
+      VALUE_THREAD_SHARES("thread_shares"),
       @SerializedName("total_interactions")
       VALUE_TOTAL_INTERACTIONS("total_interactions"),
       @SerializedName("video_views")

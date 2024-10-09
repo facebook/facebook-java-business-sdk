@@ -47,6 +47,8 @@ public class AdRule extends APINode {
   private User mCreatedBy = null;
   @SerializedName("created_time")
   private String mCreatedTime = null;
+  @SerializedName("disable_error_code")
+  private Long mDisableErrorCode = null;
   @SerializedName("evaluation_spec")
   private AdRuleEvaluationSpec mEvaluationSpec = null;
   @SerializedName("execution_spec")
@@ -308,6 +310,10 @@ public class AdRule extends APINode {
 
   public String getFieldCreatedTime() {
     return mCreatedTime;
+  }
+
+  public Long getFieldDisableErrorCode() {
+    return mDisableErrorCode;
   }
 
   public AdRuleEvaluationSpec getFieldEvaluationSpec() {
@@ -870,6 +876,7 @@ public class AdRule extends APINode {
       "account_id",
       "created_by",
       "created_time",
+      "disable_error_code",
       "evaluation_spec",
       "execution_spec",
       "id",
@@ -988,6 +995,13 @@ public class AdRule extends APINode {
     }
     public APIRequestGet requestCreatedTimeField (boolean value) {
       this.requestField("created_time", value);
+      return this;
+    }
+    public APIRequestGet requestDisableErrorCodeField () {
+      return this.requestDisableErrorCodeField(true);
+    }
+    public APIRequestGet requestDisableErrorCodeField (boolean value) {
+      this.requestField("disable_error_code", value);
       return this;
     }
     public APIRequestGet requestEvaluationSpecField () {
@@ -1306,6 +1320,7 @@ public class AdRule extends APINode {
     this.mAccountId = instance.mAccountId;
     this.mCreatedBy = instance.mCreatedBy;
     this.mCreatedTime = instance.mCreatedTime;
+    this.mDisableErrorCode = instance.mDisableErrorCode;
     this.mEvaluationSpec = instance.mEvaluationSpec;
     this.mExecutionSpec = instance.mExecutionSpec;
     this.mId = instance.mId;

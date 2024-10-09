@@ -47,6 +47,8 @@ public class CTWAWhatsAppNumbersInfo extends APINode {
   private String mFormattedWhatsappNumber = null;
   @SerializedName("is_business_number")
   private Boolean mIsBusinessNumber = null;
+  @SerializedName("number_country_prefix")
+  private String mNumberCountryPrefix = null;
   @SerializedName("page_whatsapp_number_id")
   private String mPageWhatsappNumberId = null;
   @SerializedName("waba_id")
@@ -233,6 +235,15 @@ public class CTWAWhatsAppNumbersInfo extends APINode {
     return this;
   }
 
+  public String getFieldNumberCountryPrefix() {
+    return mNumberCountryPrefix;
+  }
+
+  public CTWAWhatsAppNumbersInfo setFieldNumberCountryPrefix(String value) {
+    this.mNumberCountryPrefix = value;
+    return this;
+  }
+
   public String getFieldPageWhatsappNumberId() {
     return mPageWhatsappNumberId;
   }
@@ -289,6 +300,7 @@ public class CTWAWhatsAppNumbersInfo extends APINode {
     this.mCanManageWaFlows = instance.mCanManageWaFlows;
     this.mFormattedWhatsappNumber = instance.mFormattedWhatsappNumber;
     this.mIsBusinessNumber = instance.mIsBusinessNumber;
+    this.mNumberCountryPrefix = instance.mNumberCountryPrefix;
     this.mPageWhatsappNumberId = instance.mPageWhatsappNumberId;
     this.mWabaId = instance.mWabaId;
     this.mWhatsappNumber = instance.mWhatsappNumber;

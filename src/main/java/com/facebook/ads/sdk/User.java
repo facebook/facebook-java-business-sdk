@@ -954,10 +954,6 @@ public class User extends APINode {
     }
 
 
-    public APIRequestCreateAccessToken setBusinessApp (Long businessApp) {
-      this.setParam("business_app", businessApp);
-      return this;
-    }
     public APIRequestCreateAccessToken setBusinessApp (String businessApp) {
       this.setParam("business_app", businessApp);
       return this;
@@ -968,7 +964,7 @@ public class User extends APINode {
       return this;
     }
 
-    public APIRequestCreateAccessToken setScope (List<Permission> scope) {
+    public APIRequestCreateAccessToken setScope (List<String> scope) {
       this.setParam("scope", scope);
       return this;
     }
@@ -10140,7 +10136,6 @@ public class User extends APINode {
       "fun_fact_prompt_id",
       "fun_fact_toastee_id",
       "height",
-      "holiday_card",
       "home_checkin_city_id",
       "image_crops",
       "implicit_with_tags",
@@ -10161,7 +10156,6 @@ public class User extends APINode {
       "name",
       "nectar_module",
       "object_attachment",
-      "offer_like_post_id",
       "og_action_type_id",
       "og_hide_object_attachment",
       "og_icon_id",
@@ -10301,10 +10295,6 @@ public class User extends APINode {
       return this;
     }
 
-    public APIRequestCreateFeed setAsset3dId (Long asset3dId) {
-      this.setParam("asset3d_id", asset3dId);
-      return this;
-    }
     public APIRequestCreateFeed setAsset3dId (String asset3dId) {
       this.setParam("asset3d_id", asset3dId);
       return this;
@@ -10520,10 +10510,6 @@ public class User extends APINode {
       return this;
     }
 
-    public APIRequestCreateFeed setFunFactPromptId (Long funFactPromptId) {
-      this.setParam("fun_fact_prompt_id", funFactPromptId);
-      return this;
-    }
     public APIRequestCreateFeed setFunFactPromptId (String funFactPromptId) {
       this.setParam("fun_fact_prompt_id", funFactPromptId);
       return this;
@@ -10544,11 +10530,6 @@ public class User extends APINode {
     }
     public APIRequestCreateFeed setHeight (String height) {
       this.setParam("height", height);
-      return this;
-    }
-
-    public APIRequestCreateFeed setHolidayCard (String holidayCard) {
-      this.setParam("holiday_card", holidayCard);
       return this;
     }
 
@@ -10697,15 +10678,6 @@ public class User extends APINode {
 
     public APIRequestCreateFeed setObjectAttachment (String objectAttachment) {
       this.setParam("object_attachment", objectAttachment);
-      return this;
-    }
-
-    public APIRequestCreateFeed setOfferLikePostId (Long offerLikePostId) {
-      this.setParam("offer_like_post_id", offerLikePostId);
-      return this;
-    }
-    public APIRequestCreateFeed setOfferLikePostId (String offerLikePostId) {
-      this.setParam("offer_like_post_id", offerLikePostId);
       return this;
     }
 
@@ -20186,7 +20158,6 @@ public class User extends APINode {
       "fun_fact_toastee_id",
       "guide",
       "guide_enabled",
-      "holiday_card",
       "initial_heading",
       "initial_pitch",
       "instant_game_entry_point_data",
@@ -20197,7 +20168,6 @@ public class User extends APINode {
       "location_source_id",
       "manual_privacy",
       "no_story",
-      "offer_like_post_id",
       "og_action_type_id",
       "og_icon_id",
       "og_object_id",
@@ -20457,10 +20427,6 @@ public class User extends APINode {
       return this;
     }
 
-    public APIRequestCreateVideo setFunFactPromptId (Long funFactPromptId) {
-      this.setParam("fun_fact_prompt_id", funFactPromptId);
-      return this;
-    }
     public APIRequestCreateVideo setFunFactPromptId (String funFactPromptId) {
       this.setParam("fun_fact_prompt_id", funFactPromptId);
       return this;
@@ -20490,11 +20456,6 @@ public class User extends APINode {
     }
     public APIRequestCreateVideo setGuideEnabled (String guideEnabled) {
       this.setParam("guide_enabled", guideEnabled);
-      return this;
-    }
-
-    public APIRequestCreateVideo setHolidayCard (String holidayCard) {
-      this.setParam("holiday_card", holidayCard);
       return this;
     }
 
@@ -20577,15 +20538,6 @@ public class User extends APINode {
     }
     public APIRequestCreateVideo setNoStory (String noStory) {
       this.setParam("no_story", noStory);
-      return this;
-    }
-
-    public APIRequestCreateVideo setOfferLikePostId (Long offerLikePostId) {
-      this.setParam("offer_like_post_id", offerLikePostId);
-      return this;
-    }
-    public APIRequestCreateVideo setOfferLikePostId (String offerLikePostId) {
-      this.setParam("offer_like_post_id", offerLikePostId);
       return this;
     }
 

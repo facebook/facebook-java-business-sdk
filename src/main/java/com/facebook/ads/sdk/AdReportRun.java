@@ -377,6 +377,7 @@ public class AdReportRun extends APINode {
       "auction_bid",
       "auction_competitiveness",
       "auction_max_competitor_bid",
+      "average_purchases_conversion_value",
       "buying_type",
       "campaign_id",
       "campaign_name",
@@ -441,9 +442,6 @@ public class AdReportRun extends APINode {
       "instant_experience_outbound_clicks",
       "interactive_component_tap",
       "labels",
-      "landing_page_view_actions_per_link_click",
-      "landing_page_view_per_purchase_rate",
-      "link_clicks_per_results",
       "location",
       "marketing_messages_cost_per_delivered",
       "marketing_messages_cost_per_link_btn_click",
@@ -457,7 +455,6 @@ public class AdReportRun extends APINode {
       "outbound_clicks_ctr",
       "place_page_name",
       "purchase_roas",
-      "purchases_per_link_click",
       "qualifying_question_qualify_answer_rate",
       "quality_ranking",
       "reach",
@@ -714,6 +711,13 @@ public class AdReportRun extends APINode {
     }
     public APIRequestGetInsights requestAuctionMaxCompetitorBidField (boolean value) {
       this.requestField("auction_max_competitor_bid", value);
+      return this;
+    }
+    public APIRequestGetInsights requestAveragePurchasesConversionValueField () {
+      return this.requestAveragePurchasesConversionValueField(true);
+    }
+    public APIRequestGetInsights requestAveragePurchasesConversionValueField (boolean value) {
+      this.requestField("average_purchases_conversion_value", value);
       return this;
     }
     public APIRequestGetInsights requestBuyingTypeField () {
@@ -1164,27 +1168,6 @@ public class AdReportRun extends APINode {
       this.requestField("labels", value);
       return this;
     }
-    public APIRequestGetInsights requestLandingPageViewActionsPerLinkClickField () {
-      return this.requestLandingPageViewActionsPerLinkClickField(true);
-    }
-    public APIRequestGetInsights requestLandingPageViewActionsPerLinkClickField (boolean value) {
-      this.requestField("landing_page_view_actions_per_link_click", value);
-      return this;
-    }
-    public APIRequestGetInsights requestLandingPageViewPerPurchaseRateField () {
-      return this.requestLandingPageViewPerPurchaseRateField(true);
-    }
-    public APIRequestGetInsights requestLandingPageViewPerPurchaseRateField (boolean value) {
-      this.requestField("landing_page_view_per_purchase_rate", value);
-      return this;
-    }
-    public APIRequestGetInsights requestLinkClicksPerResultsField () {
-      return this.requestLinkClicksPerResultsField(true);
-    }
-    public APIRequestGetInsights requestLinkClicksPerResultsField (boolean value) {
-      this.requestField("link_clicks_per_results", value);
-      return this;
-    }
     public APIRequestGetInsights requestLocationField () {
       return this.requestLocationField(true);
     }
@@ -1274,13 +1257,6 @@ public class AdReportRun extends APINode {
     }
     public APIRequestGetInsights requestPurchaseRoasField (boolean value) {
       this.requestField("purchase_roas", value);
-      return this;
-    }
-    public APIRequestGetInsights requestPurchasesPerLinkClickField () {
-      return this.requestPurchasesPerLinkClickField(true);
-    }
-    public APIRequestGetInsights requestPurchasesPerLinkClickField (boolean value) {
-      this.requestField("purchases_per_link_click", value);
       return this;
     }
     public APIRequestGetInsights requestQualifyingQuestionQualifyAnswerRateField () {
@@ -1894,6 +1870,8 @@ public class AdReportRun extends APINode {
       VALUE_APP_ID("app_id"),
       @SerializedName("body_asset")
       VALUE_BODY_ASSET("body_asset"),
+      @SerializedName("breakdown_reporting_ad_id")
+      VALUE_BREAKDOWN_REPORTING_AD_ID("breakdown_reporting_ad_id"),
       @SerializedName("call_to_action_asset")
       VALUE_CALL_TO_ACTION_ASSET("call_to_action_asset"),
       @SerializedName("coarse_conversion_value")
@@ -1948,6 +1926,8 @@ public class AdReportRun extends APINode {
       VALUE_MEDIA_ORIGIN_URL("media_origin_url"),
       @SerializedName("media_text_content")
       VALUE_MEDIA_TEXT_CONTENT("media_text_content"),
+      @SerializedName("media_type")
+      VALUE_MEDIA_TYPE("media_type"),
       @SerializedName("mmm")
       VALUE_MMM("mmm"),
       @SerializedName("place_page_id")

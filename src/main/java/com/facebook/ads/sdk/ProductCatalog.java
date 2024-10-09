@@ -416,6 +416,10 @@ public class ProductCatalog extends APINode {
     return new APIRequestCreateLocalizedItemsBatch(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestCreateMarketPlacePartnerSellersDetail createMarketPlacePartnerSellersDetail() {
+    return new APIRequestCreateMarketPlacePartnerSellersDetail(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetPricingVariablesBatch getPricingVariablesBatch() {
     return new APIRequestGetPricingVariablesBatch(this.getPrefixedId().toString(), context);
   }
@@ -5753,6 +5757,11 @@ public class ProductCatalog extends APINode {
       "margin_level",
       "name",
       "phone",
+      "product_priority_0",
+      "product_priority_1",
+      "product_priority_2",
+      "product_priority_3",
+      "product_priority_4",
       "sale_price",
       "sanitized_images",
       "star_rating",
@@ -5987,6 +5996,41 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestGetHotels requestPhoneField (boolean value) {
       this.requestField("phone", value);
+      return this;
+    }
+    public APIRequestGetHotels requestProductPriority0Field () {
+      return this.requestProductPriority0Field(true);
+    }
+    public APIRequestGetHotels requestProductPriority0Field (boolean value) {
+      this.requestField("product_priority_0", value);
+      return this;
+    }
+    public APIRequestGetHotels requestProductPriority1Field () {
+      return this.requestProductPriority1Field(true);
+    }
+    public APIRequestGetHotels requestProductPriority1Field (boolean value) {
+      this.requestField("product_priority_1", value);
+      return this;
+    }
+    public APIRequestGetHotels requestProductPriority2Field () {
+      return this.requestProductPriority2Field(true);
+    }
+    public APIRequestGetHotels requestProductPriority2Field (boolean value) {
+      this.requestField("product_priority_2", value);
+      return this;
+    }
+    public APIRequestGetHotels requestProductPriority3Field () {
+      return this.requestProductPriority3Field(true);
+    }
+    public APIRequestGetHotels requestProductPriority3Field (boolean value) {
+      this.requestField("product_priority_3", value);
+      return this;
+    }
+    public APIRequestGetHotels requestProductPriority4Field () {
+      return this.requestProductPriority4Field(true);
+    }
+    public APIRequestGetHotels requestProductPriority4Field (boolean value) {
+      this.requestField("product_priority_4", value);
       return this;
     }
     public APIRequestGetHotels requestSalePriceField () {
@@ -6533,6 +6577,121 @@ public class ProductCatalog extends APINode {
 
     @Override
     public APIRequestCreateLocalizedItemsBatch requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestCreateMarketPlacePartnerSellersDetail extends APIRequest<ProductCatalog> {
+
+    ProductCatalog lastResponse = null;
+    @Override
+    public ProductCatalog getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "requests",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public ProductCatalog parseResponse(String response, String header) throws APIException {
+      return ProductCatalog.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public ProductCatalog execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public ProductCatalog execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<ProductCatalog> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<ProductCatalog> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, ProductCatalog>() {
+           public ProductCatalog apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateMarketPlacePartnerSellersDetail.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestCreateMarketPlacePartnerSellersDetail(String nodeId, APIContext context) {
+      super(context, nodeId, "/marketplace_partner_sellers_details", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateMarketPlacePartnerSellersDetail setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateMarketPlacePartnerSellersDetail setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateMarketPlacePartnerSellersDetail setRequests (Map<String, String> requests) {
+      this.setParam("requests", requests);
+      return this;
+    }
+    public APIRequestCreateMarketPlacePartnerSellersDetail setRequests (String requests) {
+      this.setParam("requests", requests);
+      return this;
+    }
+
+    public APIRequestCreateMarketPlacePartnerSellersDetail requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateMarketPlacePartnerSellersDetail requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateMarketPlacePartnerSellersDetail requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateMarketPlacePartnerSellersDetail requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateMarketPlacePartnerSellersDetail requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateMarketPlacePartnerSellersDetail requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
@@ -9653,6 +9812,11 @@ public class ProductCatalog extends APINode {
       "offer_disclaimer",
       "offer_type",
       "price",
+      "product_priority_0",
+      "product_priority_1",
+      "product_priority_2",
+      "product_priority_3",
+      "product_priority_4",
       "sanitized_images",
       "start_date",
       "start_time",
@@ -10000,6 +10164,41 @@ public class ProductCatalog extends APINode {
       this.requestField("price", value);
       return this;
     }
+    public APIRequestGetVehicleOffers requestProductPriority0Field () {
+      return this.requestProductPriority0Field(true);
+    }
+    public APIRequestGetVehicleOffers requestProductPriority0Field (boolean value) {
+      this.requestField("product_priority_0", value);
+      return this;
+    }
+    public APIRequestGetVehicleOffers requestProductPriority1Field () {
+      return this.requestProductPriority1Field(true);
+    }
+    public APIRequestGetVehicleOffers requestProductPriority1Field (boolean value) {
+      this.requestField("product_priority_1", value);
+      return this;
+    }
+    public APIRequestGetVehicleOffers requestProductPriority2Field () {
+      return this.requestProductPriority2Field(true);
+    }
+    public APIRequestGetVehicleOffers requestProductPriority2Field (boolean value) {
+      this.requestField("product_priority_2", value);
+      return this;
+    }
+    public APIRequestGetVehicleOffers requestProductPriority3Field () {
+      return this.requestProductPriority3Field(true);
+    }
+    public APIRequestGetVehicleOffers requestProductPriority3Field (boolean value) {
+      this.requestField("product_priority_3", value);
+      return this;
+    }
+    public APIRequestGetVehicleOffers requestProductPriority4Field () {
+      return this.requestProductPriority4Field(true);
+    }
+    public APIRequestGetVehicleOffers requestProductPriority4Field (boolean value) {
+      this.requestField("product_priority_4", value);
+      return this;
+    }
     public APIRequestGetVehicleOffers requestSanitizedImagesField () {
       return this.requestSanitizedImagesField(true);
     }
@@ -10138,6 +10337,11 @@ public class ProductCatalog extends APINode {
       "previous_currency",
       "previous_price",
       "price",
+      "product_priority_0",
+      "product_priority_1",
+      "product_priority_2",
+      "product_priority_3",
+      "product_priority_4",
       "sale_currency",
       "sale_price",
       "sanitized_images",
@@ -10486,6 +10690,41 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestGetVehicles requestPriceField (boolean value) {
       this.requestField("price", value);
+      return this;
+    }
+    public APIRequestGetVehicles requestProductPriority0Field () {
+      return this.requestProductPriority0Field(true);
+    }
+    public APIRequestGetVehicles requestProductPriority0Field (boolean value) {
+      this.requestField("product_priority_0", value);
+      return this;
+    }
+    public APIRequestGetVehicles requestProductPriority1Field () {
+      return this.requestProductPriority1Field(true);
+    }
+    public APIRequestGetVehicles requestProductPriority1Field (boolean value) {
+      this.requestField("product_priority_1", value);
+      return this;
+    }
+    public APIRequestGetVehicles requestProductPriority2Field () {
+      return this.requestProductPriority2Field(true);
+    }
+    public APIRequestGetVehicles requestProductPriority2Field (boolean value) {
+      this.requestField("product_priority_2", value);
+      return this;
+    }
+    public APIRequestGetVehicles requestProductPriority3Field () {
+      return this.requestProductPriority3Field(true);
+    }
+    public APIRequestGetVehicles requestProductPriority3Field (boolean value) {
+      this.requestField("product_priority_3", value);
+      return this;
+    }
+    public APIRequestGetVehicles requestProductPriority4Field () {
+      return this.requestProductPriority4Field(true);
+    }
+    public APIRequestGetVehicles requestProductPriority4Field (boolean value) {
+      this.requestField("product_priority_4", value);
       return this;
     }
     public APIRequestGetVehicles requestSaleCurrencyField () {

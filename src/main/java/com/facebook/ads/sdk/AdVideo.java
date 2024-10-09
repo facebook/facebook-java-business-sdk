@@ -6452,10 +6452,6 @@ public class AdVideo extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setCustomLabels (List<String> customLabels) {
-      this.setParam("custom_labels", customLabels);
-      return this;
-    }
     public APIRequestUpdate setCustomLabels (String customLabels) {
       this.setParam("custom_labels", customLabels);
       return this;

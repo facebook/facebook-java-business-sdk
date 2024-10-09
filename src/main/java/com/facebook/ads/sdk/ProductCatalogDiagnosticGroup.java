@@ -42,7 +42,7 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  */
 public class ProductCatalogDiagnosticGroup extends APINode {
   @SerializedName("affected_channels")
-  private List<EnumAffectedChannels> mAffectedChannels = null;
+  private List<String> mAffectedChannels = null;
   @SerializedName("affected_entity")
   private EnumAffectedEntity mAffectedEntity = null;
   @SerializedName("affected_features")
@@ -214,11 +214,11 @@ public class ProductCatalogDiagnosticGroup extends APINode {
   }
 
 
-  public List<EnumAffectedChannels> getFieldAffectedChannels() {
+  public List<String> getFieldAffectedChannels() {
     return mAffectedChannels;
   }
 
-  public ProductCatalogDiagnosticGroup setFieldAffectedChannels(List<EnumAffectedChannels> value) {
+  public ProductCatalogDiagnosticGroup setFieldAffectedChannels(List<String> value) {
     this.mAffectedChannels = value;
     return this;
   }
@@ -315,49 +315,6 @@ public class ProductCatalogDiagnosticGroup extends APINode {
 
 
 
-  public static enum EnumAffectedChannels {
-      @SerializedName("b2c_marketplace")
-      VALUE_B2C_MARKETPLACE("b2c_marketplace"),
-      @SerializedName("c2c_marketplace")
-      VALUE_C2C_MARKETPLACE("c2c_marketplace"),
-      @SerializedName("da")
-      VALUE_DA("da"),
-      @SerializedName("daily_deals")
-      VALUE_DAILY_DEALS("daily_deals"),
-      @SerializedName("daily_deals_legacy")
-      VALUE_DAILY_DEALS_LEGACY("daily_deals_legacy"),
-      @SerializedName("ig_product_tagging")
-      VALUE_IG_PRODUCT_TAGGING("ig_product_tagging"),
-      @SerializedName("marketplace")
-      VALUE_MARKETPLACE("marketplace"),
-      @SerializedName("marketplace_ads_deprecated")
-      VALUE_MARKETPLACE_ADS_DEPRECATED("marketplace_ads_deprecated"),
-      @SerializedName("marketplace_shops")
-      VALUE_MARKETPLACE_SHOPS("marketplace_shops"),
-      @SerializedName("mini_shops")
-      VALUE_MINI_SHOPS("mini_shops"),
-      @SerializedName("offline_conversions")
-      VALUE_OFFLINE_CONVERSIONS("offline_conversions"),
-      @SerializedName("shops")
-      VALUE_SHOPS("shops"),
-      @SerializedName("universal_checkout")
-      VALUE_UNIVERSAL_CHECKOUT("universal_checkout"),
-      @SerializedName("whatsapp")
-      VALUE_WHATSAPP("whatsapp"),
-      ;
-
-      private String value;
-
-      private EnumAffectedChannels(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
   public static enum EnumAffectedEntity {
       @SerializedName("product_catalog")
       VALUE_PRODUCT_CATALOG("product_catalog"),
@@ -447,6 +404,49 @@ public class ProductCatalogDiagnosticGroup extends APINode {
       private String value;
 
       private EnumType(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumAffectedChannels {
+      @SerializedName("b2c_marketplace")
+      VALUE_B2C_MARKETPLACE("b2c_marketplace"),
+      @SerializedName("c2c_marketplace")
+      VALUE_C2C_MARKETPLACE("c2c_marketplace"),
+      @SerializedName("da")
+      VALUE_DA("da"),
+      @SerializedName("daily_deals")
+      VALUE_DAILY_DEALS("daily_deals"),
+      @SerializedName("daily_deals_legacy")
+      VALUE_DAILY_DEALS_LEGACY("daily_deals_legacy"),
+      @SerializedName("ig_product_tagging")
+      VALUE_IG_PRODUCT_TAGGING("ig_product_tagging"),
+      @SerializedName("marketplace")
+      VALUE_MARKETPLACE("marketplace"),
+      @SerializedName("marketplace_ads_deprecated")
+      VALUE_MARKETPLACE_ADS_DEPRECATED("marketplace_ads_deprecated"),
+      @SerializedName("marketplace_shops")
+      VALUE_MARKETPLACE_SHOPS("marketplace_shops"),
+      @SerializedName("mini_shops")
+      VALUE_MINI_SHOPS("mini_shops"),
+      @SerializedName("offline_conversions")
+      VALUE_OFFLINE_CONVERSIONS("offline_conversions"),
+      @SerializedName("shops")
+      VALUE_SHOPS("shops"),
+      @SerializedName("universal_checkout")
+      VALUE_UNIVERSAL_CHECKOUT("universal_checkout"),
+      @SerializedName("whatsapp")
+      VALUE_WHATSAPP("whatsapp"),
+      ;
+
+      private String value;
+
+      private EnumAffectedChannels(String value) {
         this.value = value;
       }
 

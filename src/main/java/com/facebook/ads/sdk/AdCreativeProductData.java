@@ -40,31 +40,25 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class AdCreativeBrandedContentAdsPartners extends APINode {
-  @SerializedName("fb_page_id")
-  private String mFbPageId = null;
-  @SerializedName("has_create_ads_access")
-  private Boolean mHasCreateAdsAccess = null;
-  @SerializedName("identity_type")
-  private String mIdentityType = null;
-  @SerializedName("ig_asset_id")
-  private String mIgAssetId = null;
-  @SerializedName("ig_user_id")
-  private String mIgUserId = null;
+public class AdCreativeProductData extends APINode {
+  @SerializedName("product_id")
+  private String mProductId = null;
+  @SerializedName("product_source")
+  private String mProductSource = null;
   protected static Gson gson = null;
 
-  public AdCreativeBrandedContentAdsPartners() {
+  public AdCreativeProductData() {
   }
 
   public String getId() {
     return null;
   }
-  public static AdCreativeBrandedContentAdsPartners loadJSON(String json, APIContext context, String header) {
-    AdCreativeBrandedContentAdsPartners adCreativeBrandedContentAdsPartners = getGson().fromJson(json, AdCreativeBrandedContentAdsPartners.class);
+  public static AdCreativeProductData loadJSON(String json, APIContext context, String header) {
+    AdCreativeProductData adCreativeProductData = getGson().fromJson(json, AdCreativeProductData.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(adCreativeBrandedContentAdsPartners.toString());
+      JsonElement o2 = parser.parse(adCreativeProductData.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -74,14 +68,14 @@ public class AdCreativeBrandedContentAdsPartners extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    adCreativeBrandedContentAdsPartners.context = context;
-    adCreativeBrandedContentAdsPartners.rawValue = json;
-    adCreativeBrandedContentAdsPartners.header = header;
-    return adCreativeBrandedContentAdsPartners;
+    adCreativeProductData.context = context;
+    adCreativeProductData.rawValue = json;
+    adCreativeProductData.header = header;
+    return adCreativeProductData;
   }
 
-  public static APINodeList<AdCreativeBrandedContentAdsPartners> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<AdCreativeBrandedContentAdsPartners> adCreativeBrandedContentAdsPartnerss = new APINodeList<AdCreativeBrandedContentAdsPartners>(request, json, header);
+  public static APINodeList<AdCreativeProductData> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdCreativeProductData> adCreativeProductDatas = new APINodeList<AdCreativeProductData>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -92,9 +86,9 @@ public class AdCreativeBrandedContentAdsPartners extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adCreativeBrandedContentAdsPartnerss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          adCreativeProductDatas.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return adCreativeBrandedContentAdsPartnerss;
+        return adCreativeProductDatas;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -104,20 +98,20 @@ public class AdCreativeBrandedContentAdsPartners extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                adCreativeBrandedContentAdsPartnerss.setCursors(before, after);
+                adCreativeProductDatas.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            adCreativeBrandedContentAdsPartnerss.setPaging(previous, next);
+            adCreativeProductDatas.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              adCreativeBrandedContentAdsPartnerss.setAppSecret(context.getAppSecretProof());
+              adCreativeProductDatas.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adCreativeBrandedContentAdsPartnerss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              adCreativeProductDatas.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -128,23 +122,23 @@ public class AdCreativeBrandedContentAdsPartners extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adCreativeBrandedContentAdsPartnerss.add(loadJSON(entry.getValue().toString(), context, header));
+                  adCreativeProductDatas.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adCreativeBrandedContentAdsPartnerss.add(loadJSON(obj.toString(), context, header));
+              adCreativeProductDatas.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return adCreativeBrandedContentAdsPartnerss;
+          return adCreativeProductDatas;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adCreativeBrandedContentAdsPartnerss.add(loadJSON(entry.getValue().toString(), context, header));
+              adCreativeProductDatas.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return adCreativeBrandedContentAdsPartnerss;
+          return adCreativeProductDatas;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -161,20 +155,20 @@ public class AdCreativeBrandedContentAdsPartners extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adCreativeBrandedContentAdsPartnerss.add(loadJSON(value.toString(), context, header));
+              adCreativeProductDatas.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return adCreativeBrandedContentAdsPartnerss;
+            return adCreativeProductDatas;
           }
 
           // Sixth, check if it's pure JsonObject
-          adCreativeBrandedContentAdsPartnerss.clear();
-          adCreativeBrandedContentAdsPartnerss.add(loadJSON(json, context, header));
-          return adCreativeBrandedContentAdsPartnerss;
+          adCreativeProductDatas.clear();
+          adCreativeProductDatas.add(loadJSON(json, context, header));
+          return adCreativeProductDatas;
         }
       }
     } catch (Exception e) {
@@ -202,48 +196,21 @@ public class AdCreativeBrandedContentAdsPartners extends APINode {
   }
 
 
-  public String getFieldFbPageId() {
-    return mFbPageId;
+  public String getFieldProductId() {
+    return mProductId;
   }
 
-  public AdCreativeBrandedContentAdsPartners setFieldFbPageId(String value) {
-    this.mFbPageId = value;
+  public AdCreativeProductData setFieldProductId(String value) {
+    this.mProductId = value;
     return this;
   }
 
-  public Boolean getFieldHasCreateAdsAccess() {
-    return mHasCreateAdsAccess;
+  public String getFieldProductSource() {
+    return mProductSource;
   }
 
-  public AdCreativeBrandedContentAdsPartners setFieldHasCreateAdsAccess(Boolean value) {
-    this.mHasCreateAdsAccess = value;
-    return this;
-  }
-
-  public String getFieldIdentityType() {
-    return mIdentityType;
-  }
-
-  public AdCreativeBrandedContentAdsPartners setFieldIdentityType(String value) {
-    this.mIdentityType = value;
-    return this;
-  }
-
-  public String getFieldIgAssetId() {
-    return mIgAssetId;
-  }
-
-  public AdCreativeBrandedContentAdsPartners setFieldIgAssetId(String value) {
-    this.mIgAssetId = value;
-    return this;
-  }
-
-  public String getFieldIgUserId() {
-    return mIgUserId;
-  }
-
-  public AdCreativeBrandedContentAdsPartners setFieldIgUserId(String value) {
-    this.mIgUserId = value;
+  public AdCreativeProductData setFieldProductSource(String value) {
+    this.mProductSource = value;
     return this;
   }
 
@@ -263,21 +230,18 @@ public class AdCreativeBrandedContentAdsPartners extends APINode {
     return gson;
   }
 
-  public AdCreativeBrandedContentAdsPartners copyFrom(AdCreativeBrandedContentAdsPartners instance) {
-    this.mFbPageId = instance.mFbPageId;
-    this.mHasCreateAdsAccess = instance.mHasCreateAdsAccess;
-    this.mIdentityType = instance.mIdentityType;
-    this.mIgAssetId = instance.mIgAssetId;
-    this.mIgUserId = instance.mIgUserId;
+  public AdCreativeProductData copyFrom(AdCreativeProductData instance) {
+    this.mProductId = instance.mProductId;
+    this.mProductSource = instance.mProductSource;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<AdCreativeBrandedContentAdsPartners> getParser() {
-    return new APIRequest.ResponseParser<AdCreativeBrandedContentAdsPartners>() {
-      public APINodeList<AdCreativeBrandedContentAdsPartners> parseResponse(String response, APIContext context, APIRequest<AdCreativeBrandedContentAdsPartners> request, String header) throws MalformedResponseException {
-        return AdCreativeBrandedContentAdsPartners.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<AdCreativeProductData> getParser() {
+    return new APIRequest.ResponseParser<AdCreativeProductData>() {
+      public APINodeList<AdCreativeProductData> parseResponse(String response, APIContext context, APIRequest<AdCreativeProductData> request, String header) throws MalformedResponseException {
+        return AdCreativeProductData.parseResponse(response, context, request, header);
       }
     };
   }

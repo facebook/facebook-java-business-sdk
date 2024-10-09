@@ -680,6 +680,10 @@ public class Page extends APINode {
     return new APIRequestGetCrosspostWhitelistedPages(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetCtxOptimizationEligibility getCtxOptimizationEligibility() {
+    return new APIRequestGetCtxOptimizationEligibility(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetCustomLabels getCustomLabels() {
     return new APIRequestGetCustomLabels(this.getPrefixedId().toString(), context);
   }
@@ -9180,6 +9184,119 @@ public class Page extends APINode {
     }
   }
 
+  public static class APIRequestGetCtxOptimizationEligibility extends APIRequest<CTXOptimizationEligibility> {
+
+    APINodeList<CTXOptimizationEligibility> lastResponse = null;
+    @Override
+    public APINodeList<CTXOptimizationEligibility> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "ctm",
+    };
+
+    @Override
+    public APINodeList<CTXOptimizationEligibility> parseResponse(String response, String header) throws APIException {
+      return CTXOptimizationEligibility.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<CTXOptimizationEligibility> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<CTXOptimizationEligibility> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<CTXOptimizationEligibility>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<CTXOptimizationEligibility>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<CTXOptimizationEligibility>>() {
+           public APINodeList<CTXOptimizationEligibility> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetCtxOptimizationEligibility.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestGetCtxOptimizationEligibility(String nodeId, APIContext context) {
+      super(context, nodeId, "/ctx_optimization_eligibility", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetCtxOptimizationEligibility setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCtxOptimizationEligibility setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetCtxOptimizationEligibility requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetCtxOptimizationEligibility requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCtxOptimizationEligibility requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetCtxOptimizationEligibility requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCtxOptimizationEligibility requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCtxOptimizationEligibility requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetCtxOptimizationEligibility requestCtmField () {
+      return this.requestCtmField(true);
+    }
+    public APIRequestGetCtxOptimizationEligibility requestCtmField (boolean value) {
+      this.requestField("ctm", value);
+      return this;
+    }
+  }
+
   public static class APIRequestGetCustomLabels extends APIRequest<PageUserMessageThreadLabel> {
 
     APINodeList<PageUserMessageThreadLabel> lastResponse = null;
@@ -11331,7 +11448,6 @@ public class Page extends APINode {
       "fun_fact_prompt_id",
       "fun_fact_toastee_id",
       "height",
-      "holiday_card",
       "home_checkin_city_id",
       "image_crops",
       "implicit_with_tags",
@@ -11352,7 +11468,6 @@ public class Page extends APINode {
       "name",
       "nectar_module",
       "object_attachment",
-      "offer_like_post_id",
       "og_action_type_id",
       "og_hide_object_attachment",
       "og_icon_id",
@@ -11492,10 +11607,6 @@ public class Page extends APINode {
       return this;
     }
 
-    public APIRequestCreateFeed setAsset3dId (Long asset3dId) {
-      this.setParam("asset3d_id", asset3dId);
-      return this;
-    }
     public APIRequestCreateFeed setAsset3dId (String asset3dId) {
       this.setParam("asset3d_id", asset3dId);
       return this;
@@ -11720,10 +11831,6 @@ public class Page extends APINode {
       return this;
     }
 
-    public APIRequestCreateFeed setFunFactPromptId (Long funFactPromptId) {
-      this.setParam("fun_fact_prompt_id", funFactPromptId);
-      return this;
-    }
     public APIRequestCreateFeed setFunFactPromptId (String funFactPromptId) {
       this.setParam("fun_fact_prompt_id", funFactPromptId);
       return this;
@@ -11744,11 +11851,6 @@ public class Page extends APINode {
     }
     public APIRequestCreateFeed setHeight (String height) {
       this.setParam("height", height);
-      return this;
-    }
-
-    public APIRequestCreateFeed setHolidayCard (String holidayCard) {
-      this.setParam("holiday_card", holidayCard);
       return this;
     }
 
@@ -11897,15 +11999,6 @@ public class Page extends APINode {
 
     public APIRequestCreateFeed setObjectAttachment (String objectAttachment) {
       this.setParam("object_attachment", objectAttachment);
-      return this;
-    }
-
-    public APIRequestCreateFeed setOfferLikePostId (Long offerLikePostId) {
-      this.setParam("offer_like_post_id", offerLikePostId);
-      return this;
-    }
-    public APIRequestCreateFeed setOfferLikePostId (String offerLikePostId) {
-      this.setParam("offer_like_post_id", offerLikePostId);
       return this;
     }
 
@@ -33295,7 +33388,6 @@ public class Page extends APINode {
       "fun_fact_toastee_id",
       "guide",
       "guide_enabled",
-      "holiday_card",
       "initial_heading",
       "initial_pitch",
       "instant_game_entry_point_data",
@@ -33307,7 +33399,6 @@ public class Page extends APINode {
       "manual_privacy",
       "multilingual_data",
       "no_story",
-      "offer_like_post_id",
       "og_action_type_id",
       "og_icon_id",
       "og_object_id",
@@ -33644,10 +33735,6 @@ public class Page extends APINode {
       return this;
     }
 
-    public APIRequestCreateVideo setFunFactPromptId (Long funFactPromptId) {
-      this.setParam("fun_fact_prompt_id", funFactPromptId);
-      return this;
-    }
     public APIRequestCreateVideo setFunFactPromptId (String funFactPromptId) {
       this.setParam("fun_fact_prompt_id", funFactPromptId);
       return this;
@@ -33677,11 +33764,6 @@ public class Page extends APINode {
     }
     public APIRequestCreateVideo setGuideEnabled (String guideEnabled) {
       this.setParam("guide_enabled", guideEnabled);
-      return this;
-    }
-
-    public APIRequestCreateVideo setHolidayCard (String holidayCard) {
-      this.setParam("holiday_card", holidayCard);
       return this;
     }
 
@@ -33773,15 +33855,6 @@ public class Page extends APINode {
     }
     public APIRequestCreateVideo setNoStory (String noStory) {
       this.setParam("no_story", noStory);
-      return this;
-    }
-
-    public APIRequestCreateVideo setOfferLikePostId (Long offerLikePostId) {
-      this.setParam("offer_like_post_id", offerLikePostId);
-      return this;
-    }
-    public APIRequestCreateVideo setOfferLikePostId (String offerLikePostId) {
-      this.setParam("offer_like_post_id", offerLikePostId);
       return this;
     }
 

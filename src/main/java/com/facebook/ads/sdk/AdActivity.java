@@ -351,6 +351,8 @@ public class AdActivity extends APINode {
       VALUE_AD_ACCOUNT_RESET_SPEND_LIMIT("ad_account_reset_spend_limit"),
       @SerializedName("ad_account_set_business_information")
       VALUE_AD_ACCOUNT_SET_BUSINESS_INFORMATION("ad_account_set_business_information"),
+      @SerializedName("ad_account_update_audience_type_url_parameter")
+      VALUE_AD_ACCOUNT_UPDATE_AUDIENCE_TYPE_URL_PARAMETER("ad_account_update_audience_type_url_parameter"),
       @SerializedName("ad_account_update_spend_limit")
       VALUE_AD_ACCOUNT_UPDATE_SPEND_LIMIT("ad_account_update_spend_limit"),
       @SerializedName("ad_account_update_status")
@@ -359,6 +361,8 @@ public class AdActivity extends APINode {
       VALUE_AD_REVIEW_APPROVED("ad_review_approved"),
       @SerializedName("ad_review_declined")
       VALUE_AD_REVIEW_DECLINED("ad_review_declined"),
+      @SerializedName("adaccount_update_audience_segment")
+      VALUE_ADACCOUNT_UPDATE_AUDIENCE_SEGMENT("adaccount_update_audience_segment"),
       @SerializedName("add_funding_source")
       VALUE_ADD_FUNDING_SOURCE("add_funding_source"),
       @SerializedName("add_images")
@@ -469,6 +473,8 @@ public class AdActivity extends APINode {
       VALUE_UPDATE_CAMPAIGN_BUDGET_SCHEDULING_STATE("update_campaign_budget_scheduling_state"),
       @SerializedName("update_campaign_conversion_goal")
       VALUE_UPDATE_CAMPAIGN_CONVERSION_GOAL("update_campaign_conversion_goal"),
+      @SerializedName("update_campaign_delivery_destination")
+      VALUE_UPDATE_CAMPAIGN_DELIVERY_DESTINATION("update_campaign_delivery_destination"),
       @SerializedName("update_campaign_delivery_type")
       VALUE_UPDATE_CAMPAIGN_DELIVERY_TYPE("update_campaign_delivery_type"),
       @SerializedName("update_campaign_group_ad_scheduling")

@@ -366,6 +366,7 @@ public class AdLabel extends APINode {
       "link_destination_display_url",
       "link_og_id",
       "link_url",
+      "messenger_sponsored_message",
       "name",
       "object_id",
       "object_store_url",
@@ -771,6 +772,13 @@ public class AdLabel extends APINode {
       this.requestField("link_url", value);
       return this;
     }
+    public APIRequestGetAdCreatives requestMessengerSponsoredMessageField () {
+      return this.requestMessengerSponsoredMessageField(true);
+    }
+    public APIRequestGetAdCreatives requestMessengerSponsoredMessageField (boolean value) {
+      this.requestField("messenger_sponsored_message", value);
+      return this;
+    }
     public APIRequestGetAdCreatives requestNameField () {
       return this.requestNameField(true);
     }
@@ -994,6 +1002,7 @@ public class AdLabel extends APINode {
       "issues_info",
       "last_updated_by_app_id",
       "name",
+      "placement",
       "preview_shareable_link",
       "priority",
       "recommendations",
@@ -1292,6 +1301,13 @@ public class AdLabel extends APINode {
       this.requestField("name", value);
       return this;
     }
+    public APIRequestGetAds requestPlacementField () {
+      return this.requestPlacementField(true);
+    }
+    public APIRequestGetAds requestPlacementField (boolean value) {
+      this.requestField("placement", value);
+      return this;
+    }
     public APIRequestGetAds requestPreviewShareableLinkField () {
       return this.requestPreviewShareableLinkField(true);
     }
@@ -1416,6 +1432,8 @@ public class AdLabel extends APINode {
       "lifetime_imps",
       "lifetime_min_spend_target",
       "lifetime_spend_cap",
+      "max_budget_spend_percentage",
+      "min_budget_spend_percentage",
       "multi_optimization_goal_weight",
       "name",
       "optimization_goal",
@@ -1815,6 +1833,20 @@ public class AdLabel extends APINode {
     }
     public APIRequestGetAdSets requestLifetimeSpendCapField (boolean value) {
       this.requestField("lifetime_spend_cap", value);
+      return this;
+    }
+    public APIRequestGetAdSets requestMaxBudgetSpendPercentageField () {
+      return this.requestMaxBudgetSpendPercentageField(true);
+    }
+    public APIRequestGetAdSets requestMaxBudgetSpendPercentageField (boolean value) {
+      this.requestField("max_budget_spend_percentage", value);
+      return this;
+    }
+    public APIRequestGetAdSets requestMinBudgetSpendPercentageField () {
+      return this.requestMinBudgetSpendPercentageField(true);
+    }
+    public APIRequestGetAdSets requestMinBudgetSpendPercentageField (boolean value) {
+      this.requestField("min_budget_spend_percentage", value);
       return this;
     }
     public APIRequestGetAdSets requestMultiOptimizationGoalWeightField () {

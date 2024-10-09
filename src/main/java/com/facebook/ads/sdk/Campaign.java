@@ -943,6 +943,7 @@ public class Campaign extends APINode {
       "account_id",
       "created_by",
       "created_time",
+      "disable_error_code",
       "evaluation_spec",
       "execution_spec",
       "id",
@@ -1072,6 +1073,13 @@ public class Campaign extends APINode {
       this.requestField("created_time", value);
       return this;
     }
+    public APIRequestGetAdRulesGoverned requestDisableErrorCodeField () {
+      return this.requestDisableErrorCodeField(true);
+    }
+    public APIRequestGetAdRulesGoverned requestDisableErrorCodeField (boolean value) {
+      this.requestField("disable_error_code", value);
+      return this;
+    }
     public APIRequestGetAdRulesGoverned requestEvaluationSpecField () {
       return this.requestEvaluationSpecField(true);
     }
@@ -1166,6 +1174,7 @@ public class Campaign extends APINode {
       "issues_info",
       "last_updated_by_app_id",
       "name",
+      "placement",
       "preview_shareable_link",
       "priority",
       "recommendations",
@@ -1500,6 +1509,13 @@ public class Campaign extends APINode {
       this.requestField("name", value);
       return this;
     }
+    public APIRequestGetAds requestPlacementField () {
+      return this.requestPlacementField(true);
+    }
+    public APIRequestGetAds requestPlacementField (boolean value) {
+      this.requestField("placement", value);
+      return this;
+    }
     public APIRequestGetAds requestPreviewShareableLinkField () {
       return this.requestPreviewShareableLinkField(true);
     }
@@ -1628,6 +1644,8 @@ public class Campaign extends APINode {
       "lifetime_imps",
       "lifetime_min_spend_target",
       "lifetime_spend_cap",
+      "max_budget_spend_percentage",
+      "min_budget_spend_percentage",
       "multi_optimization_goal_weight",
       "name",
       "optimization_goal",
@@ -2063,6 +2081,20 @@ public class Campaign extends APINode {
     }
     public APIRequestGetAdSets requestLifetimeSpendCapField (boolean value) {
       this.requestField("lifetime_spend_cap", value);
+      return this;
+    }
+    public APIRequestGetAdSets requestMaxBudgetSpendPercentageField () {
+      return this.requestMaxBudgetSpendPercentageField(true);
+    }
+    public APIRequestGetAdSets requestMaxBudgetSpendPercentageField (boolean value) {
+      this.requestField("max_budget_spend_percentage", value);
+      return this;
+    }
+    public APIRequestGetAdSets requestMinBudgetSpendPercentageField () {
+      return this.requestMinBudgetSpendPercentageField(true);
+    }
+    public APIRequestGetAdSets requestMinBudgetSpendPercentageField (boolean value) {
+      this.requestField("min_budget_spend_percentage", value);
       return this;
     }
     public APIRequestGetAdSets requestMultiOptimizationGoalWeightField () {
@@ -4734,6 +4766,8 @@ public class Campaign extends APINode {
       VALUE_CREDIT("CREDIT"),
       @SerializedName("EMPLOYMENT")
       VALUE_EMPLOYMENT("EMPLOYMENT"),
+      @SerializedName("FINANCIAL_PRODUCTS_SERVICES")
+      VALUE_FINANCIAL_PRODUCTS_SERVICES("FINANCIAL_PRODUCTS_SERVICES"),
       @SerializedName("HOUSING")
       VALUE_HOUSING("HOUSING"),
       @SerializedName("ISSUES_ELECTIONS_POLITICS")
@@ -5297,6 +5331,8 @@ public class Campaign extends APINode {
       VALUE_CREDIT("CREDIT"),
       @SerializedName("EMPLOYMENT")
       VALUE_EMPLOYMENT("EMPLOYMENT"),
+      @SerializedName("FINANCIAL_PRODUCTS_SERVICES")
+      VALUE_FINANCIAL_PRODUCTS_SERVICES("FINANCIAL_PRODUCTS_SERVICES"),
       @SerializedName("HOUSING")
       VALUE_HOUSING("HOUSING"),
       @SerializedName("ISSUES_ELECTIONS_POLITICS")

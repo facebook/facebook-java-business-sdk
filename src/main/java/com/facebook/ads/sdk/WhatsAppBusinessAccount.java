@@ -314,6 +314,10 @@ public class WhatsAppBusinessAccount extends APINode {
     return new APIRequestGetAudiences(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetCallAnalytics getCallAnalytics() {
+    return new APIRequestGetCallAnalytics(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetConversationAnalytics getConversationAnalytics() {
     return new APIRequestGetConversationAnalytics(this.getPrefixedId().toString(), context);
   }
@@ -1142,6 +1146,191 @@ public class WhatsAppBusinessAccount extends APINode {
 
     @Override
     public APIRequestGetAudiences requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestGetCallAnalytics extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "country_codes",
+      "dimensions",
+      "directions",
+      "end",
+      "granularity",
+      "metric_types",
+      "phone_numbers",
+      "start",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetCallAnalytics.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestGetCallAnalytics(String nodeId, APIContext context) {
+      super(context, nodeId, "/call_analytics", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetCallAnalytics setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCallAnalytics setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetCallAnalytics setCountryCodes (List<String> countryCodes) {
+      this.setParam("country_codes", countryCodes);
+      return this;
+    }
+    public APIRequestGetCallAnalytics setCountryCodes (String countryCodes) {
+      this.setParam("country_codes", countryCodes);
+      return this;
+    }
+
+    public APIRequestGetCallAnalytics setDimensions (List<EnumDimensions> dimensions) {
+      this.setParam("dimensions", dimensions);
+      return this;
+    }
+    public APIRequestGetCallAnalytics setDimensions (String dimensions) {
+      this.setParam("dimensions", dimensions);
+      return this;
+    }
+
+    public APIRequestGetCallAnalytics setDirections (List<EnumDirections> directions) {
+      this.setParam("directions", directions);
+      return this;
+    }
+    public APIRequestGetCallAnalytics setDirections (String directions) {
+      this.setParam("directions", directions);
+      return this;
+    }
+
+    public APIRequestGetCallAnalytics setEnd (Long end) {
+      this.setParam("end", end);
+      return this;
+    }
+    public APIRequestGetCallAnalytics setEnd (String end) {
+      this.setParam("end", end);
+      return this;
+    }
+
+    public APIRequestGetCallAnalytics setGranularity (EnumGranularity granularity) {
+      this.setParam("granularity", granularity);
+      return this;
+    }
+    public APIRequestGetCallAnalytics setGranularity (String granularity) {
+      this.setParam("granularity", granularity);
+      return this;
+    }
+
+    public APIRequestGetCallAnalytics setMetricTypes (List<EnumMetricTypes> metricTypes) {
+      this.setParam("metric_types", metricTypes);
+      return this;
+    }
+    public APIRequestGetCallAnalytics setMetricTypes (String metricTypes) {
+      this.setParam("metric_types", metricTypes);
+      return this;
+    }
+
+    public APIRequestGetCallAnalytics setPhoneNumbers (List<String> phoneNumbers) {
+      this.setParam("phone_numbers", phoneNumbers);
+      return this;
+    }
+    public APIRequestGetCallAnalytics setPhoneNumbers (String phoneNumbers) {
+      this.setParam("phone_numbers", phoneNumbers);
+      return this;
+    }
+
+    public APIRequestGetCallAnalytics setStart (Long start) {
+      this.setParam("start", start);
+      return this;
+    }
+    public APIRequestGetCallAnalytics setStart (String start) {
+      this.setParam("start", start);
+      return this;
+    }
+
+    public APIRequestGetCallAnalytics requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetCallAnalytics requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCallAnalytics requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetCallAnalytics requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCallAnalytics requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCallAnalytics requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
@@ -2599,6 +2788,7 @@ public class WhatsAppBusinessAccount extends APINode {
       "cta_url_link_tracking_opted_out",
       "display_format",
       "language",
+      "library_template_body_inputs",
       "library_template_button_inputs",
       "library_template_name",
       "message_send_ttl_seconds",
@@ -2710,6 +2900,15 @@ public class WhatsAppBusinessAccount extends APINode {
 
     public APIRequestCreateMessageTemplate setLanguage (String language) {
       this.setParam("language", language);
+      return this;
+    }
+
+    public APIRequestCreateMessageTemplate setLibraryTemplateBodyInputs (Map<String, String> libraryTemplateBodyInputs) {
+      this.setParam("library_template_body_inputs", libraryTemplateBodyInputs);
+      return this;
+    }
+    public APIRequestCreateMessageTemplate setLibraryTemplateBodyInputs (String libraryTemplateBodyInputs) {
+      this.setParam("library_template_body_inputs", libraryTemplateBodyInputs);
       return this;
     }
 
@@ -6097,6 +6296,8 @@ public class WhatsAppBusinessAccount extends APINode {
   }
 
   public static enum EnumProviderName {
+      @SerializedName("BILLDESK")
+      VALUE_BILLDESK("BILLDESK"),
       @SerializedName("PAYU")
       VALUE_PAYU("PAYU"),
       @SerializedName("RAZORPAY")
@@ -6110,6 +6311,94 @@ public class WhatsAppBusinessAccount extends APINode {
       private String value;
 
       private EnumProviderName(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumDimensions {
+      @SerializedName("COUNTRY")
+      VALUE_COUNTRY("COUNTRY"),
+      @SerializedName("DIRECTION")
+      VALUE_DIRECTION("DIRECTION"),
+      @SerializedName("PHONE")
+      VALUE_PHONE("PHONE"),
+      @SerializedName("UNKNOWN")
+      VALUE_UNKNOWN("UNKNOWN"),
+      ;
+
+      private String value;
+
+      private EnumDimensions(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumDirections {
+      @SerializedName("BUSINESS_INITIATED")
+      VALUE_BUSINESS_INITIATED("BUSINESS_INITIATED"),
+      @SerializedName("UNKNOWN")
+      VALUE_UNKNOWN("UNKNOWN"),
+      @SerializedName("USER_INITIATED")
+      VALUE_USER_INITIATED("USER_INITIATED"),
+      ;
+
+      private String value;
+
+      private EnumDirections(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumGranularity {
+      @SerializedName("DAILY")
+      VALUE_DAILY("DAILY"),
+      @SerializedName("HALF_HOUR")
+      VALUE_HALF_HOUR("HALF_HOUR"),
+      @SerializedName("MONTHLY")
+      VALUE_MONTHLY("MONTHLY"),
+      ;
+
+      private String value;
+
+      private EnumGranularity(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumMetricTypes {
+      @SerializedName("AVERAGE_DURATION")
+      VALUE_AVERAGE_DURATION("AVERAGE_DURATION"),
+      @SerializedName("COST")
+      VALUE_COST("COST"),
+      @SerializedName("COUNT")
+      VALUE_COUNT("COUNT"),
+      @SerializedName("UNKNOWN")
+      VALUE_UNKNOWN("UNKNOWN"),
+      ;
+
+      private String value;
+
+      private EnumMetricTypes(String value) {
         this.value = value;
       }
 
@@ -6185,75 +6474,6 @@ public class WhatsAppBusinessAccount extends APINode {
       private String value;
 
       private EnumConversationTypes(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumDimensions {
-      @SerializedName("CONVERSATION_CATEGORY")
-      VALUE_CONVERSATION_CATEGORY("CONVERSATION_CATEGORY"),
-      @SerializedName("CONVERSATION_DIRECTION")
-      VALUE_CONVERSATION_DIRECTION("CONVERSATION_DIRECTION"),
-      @SerializedName("CONVERSATION_TYPE")
-      VALUE_CONVERSATION_TYPE("CONVERSATION_TYPE"),
-      @SerializedName("COUNTRY")
-      VALUE_COUNTRY("COUNTRY"),
-      @SerializedName("PHONE")
-      VALUE_PHONE("PHONE"),
-      @SerializedName("UNKNOWN")
-      VALUE_UNKNOWN("UNKNOWN"),
-      ;
-
-      private String value;
-
-      private EnumDimensions(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumGranularity {
-      @SerializedName("DAILY")
-      VALUE_DAILY("DAILY"),
-      @SerializedName("HALF_HOUR")
-      VALUE_HALF_HOUR("HALF_HOUR"),
-      @SerializedName("MONTHLY")
-      VALUE_MONTHLY("MONTHLY"),
-      ;
-
-      private String value;
-
-      private EnumGranularity(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumMetricTypes {
-      @SerializedName("CONVERSATION")
-      VALUE_CONVERSATION("CONVERSATION"),
-      @SerializedName("COST")
-      VALUE_COST("COST"),
-      @SerializedName("UNKNOWN")
-      VALUE_UNKNOWN("UNKNOWN"),
-      ;
-
-      private String value;
-
-      private EnumMetricTypes(String value) {
         this.value = value;
       }
 

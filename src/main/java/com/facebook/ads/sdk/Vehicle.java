@@ -105,6 +105,16 @@ public class Vehicle extends APINode {
   private String mPreviousPrice = null;
   @SerializedName("price")
   private String mPrice = null;
+  @SerializedName("product_priority_0")
+  private Double mProductPriority0 = null;
+  @SerializedName("product_priority_1")
+  private Double mProductPriority1 = null;
+  @SerializedName("product_priority_2")
+  private Double mProductPriority2 = null;
+  @SerializedName("product_priority_3")
+  private Double mProductPriority3 = null;
+  @SerializedName("product_priority_4")
+  private Double mProductPriority4 = null;
   @SerializedName("sale_currency")
   private String mSaleCurrency = null;
   @SerializedName("sale_price")
@@ -496,6 +506,26 @@ public class Vehicle extends APINode {
 
   public String getFieldPrice() {
     return mPrice;
+  }
+
+  public Double getFieldProductPriority0() {
+    return mProductPriority0;
+  }
+
+  public Double getFieldProductPriority1() {
+    return mProductPriority1;
+  }
+
+  public Double getFieldProductPriority2() {
+    return mProductPriority2;
+  }
+
+  public Double getFieldProductPriority3() {
+    return mProductPriority3;
+  }
+
+  public Double getFieldProductPriority4() {
+    return mProductPriority4;
   }
 
   public String getFieldSaleCurrency() {
@@ -1014,6 +1044,11 @@ public class Vehicle extends APINode {
       "previous_currency",
       "previous_price",
       "price",
+      "product_priority_0",
+      "product_priority_1",
+      "product_priority_2",
+      "product_priority_3",
+      "product_priority_4",
       "sale_currency",
       "sale_price",
       "sanitized_images",
@@ -1344,6 +1379,41 @@ public class Vehicle extends APINode {
     }
     public APIRequestGet requestPriceField (boolean value) {
       this.requestField("price", value);
+      return this;
+    }
+    public APIRequestGet requestProductPriority0Field () {
+      return this.requestProductPriority0Field(true);
+    }
+    public APIRequestGet requestProductPriority0Field (boolean value) {
+      this.requestField("product_priority_0", value);
+      return this;
+    }
+    public APIRequestGet requestProductPriority1Field () {
+      return this.requestProductPriority1Field(true);
+    }
+    public APIRequestGet requestProductPriority1Field (boolean value) {
+      this.requestField("product_priority_1", value);
+      return this;
+    }
+    public APIRequestGet requestProductPriority2Field () {
+      return this.requestProductPriority2Field(true);
+    }
+    public APIRequestGet requestProductPriority2Field (boolean value) {
+      this.requestField("product_priority_2", value);
+      return this;
+    }
+    public APIRequestGet requestProductPriority3Field () {
+      return this.requestProductPriority3Field(true);
+    }
+    public APIRequestGet requestProductPriority3Field (boolean value) {
+      this.requestField("product_priority_3", value);
+      return this;
+    }
+    public APIRequestGet requestProductPriority4Field () {
+      return this.requestProductPriority4Field(true);
+    }
+    public APIRequestGet requestProductPriority4Field (boolean value) {
+      this.requestField("product_priority_4", value);
       return this;
     }
     public APIRequestGet requestSaleCurrencyField () {
@@ -2136,6 +2206,11 @@ public class Vehicle extends APINode {
     this.mPreviousCurrency = instance.mPreviousCurrency;
     this.mPreviousPrice = instance.mPreviousPrice;
     this.mPrice = instance.mPrice;
+    this.mProductPriority0 = instance.mProductPriority0;
+    this.mProductPriority1 = instance.mProductPriority1;
+    this.mProductPriority2 = instance.mProductPriority2;
+    this.mProductPriority3 = instance.mProductPriority3;
+    this.mProductPriority4 = instance.mProductPriority4;
     this.mSaleCurrency = instance.mSaleCurrency;
     this.mSalePrice = instance.mSalePrice;
     this.mSanitizedImages = instance.mSanitizedImages;

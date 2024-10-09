@@ -47,6 +47,8 @@ public class ALMAdAccountInfo extends APINode {
   private String mId = null;
   @SerializedName("managed_by")
   private String mManagedBy = null;
+  @SerializedName("owned_by")
+  private String mOwnedBy = null;
   @SerializedName("parent_advertiser_id")
   private String mParentAdvertiserId = null;
   @SerializedName("sub_vertical")
@@ -283,6 +285,10 @@ public class ALMAdAccountInfo extends APINode {
     return mManagedBy;
   }
 
+  public String getFieldOwnedBy() {
+    return mOwnedBy;
+  }
+
   public String getFieldParentAdvertiserId() {
     return mParentAdvertiserId;
   }
@@ -319,6 +325,7 @@ public class ALMAdAccountInfo extends APINode {
       "ad_account_id",
       "id",
       "managed_by",
+      "owned_by",
       "parent_advertiser_id",
       "sub_vertical",
       "tag",
@@ -437,6 +444,13 @@ public class ALMAdAccountInfo extends APINode {
       this.requestField("managed_by", value);
       return this;
     }
+    public APIRequestGet requestOwnedByField () {
+      return this.requestOwnedByField(true);
+    }
+    public APIRequestGet requestOwnedByField (boolean value) {
+      this.requestField("owned_by", value);
+      return this;
+    }
     public APIRequestGet requestParentAdvertiserIdField () {
       return this.requestParentAdvertiserIdField(true);
     }
@@ -492,6 +506,7 @@ public class ALMAdAccountInfo extends APINode {
     this.mAdAccountId = instance.mAdAccountId;
     this.mId = instance.mId;
     this.mManagedBy = instance.mManagedBy;
+    this.mOwnedBy = instance.mOwnedBy;
     this.mParentAdvertiserId = instance.mParentAdvertiserId;
     this.mSubVertical = instance.mSubVertical;
     this.mTag = instance.mTag;

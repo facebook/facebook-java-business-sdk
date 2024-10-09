@@ -2191,6 +2191,8 @@ public class IGMedia extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "ad_account_id",
+      "business_id",
       "primary_fb_page_id",
       "primary_ig_user_id",
       "secondary_fb_page_id",
@@ -2271,6 +2273,20 @@ public class IGMedia extends APINode {
       return this;
     }
 
+
+    public APIRequestGet setAdAccountId (Long adAccountId) {
+      this.setParam("ad_account_id", adAccountId);
+      return this;
+    }
+    public APIRequestGet setAdAccountId (String adAccountId) {
+      this.setParam("ad_account_id", adAccountId);
+      return this;
+    }
+
+    public APIRequestGet setBusinessId (String businessId) {
+      this.setParam("business_id", businessId);
+      return this;
+    }
 
     public APIRequestGet setPrimaryFbPageId (String primaryFbPageId) {
       this.setParam("primary_fb_page_id", primaryFbPageId);

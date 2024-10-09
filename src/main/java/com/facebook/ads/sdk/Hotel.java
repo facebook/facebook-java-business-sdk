@@ -75,6 +75,16 @@ public class Hotel extends APINode {
   private String mName = null;
   @SerializedName("phone")
   private String mPhone = null;
+  @SerializedName("product_priority_0")
+  private Double mProductPriority0 = null;
+  @SerializedName("product_priority_1")
+  private Double mProductPriority1 = null;
+  @SerializedName("product_priority_2")
+  private Double mProductPriority2 = null;
+  @SerializedName("product_priority_3")
+  private Double mProductPriority3 = null;
+  @SerializedName("product_priority_4")
+  private Double mProductPriority4 = null;
   @SerializedName("sale_price")
   private String mSalePrice = null;
   @SerializedName("sanitized_images")
@@ -393,6 +403,26 @@ public class Hotel extends APINode {
 
   public String getFieldPhone() {
     return mPhone;
+  }
+
+  public Double getFieldProductPriority0() {
+    return mProductPriority0;
+  }
+
+  public Double getFieldProductPriority1() {
+    return mProductPriority1;
+  }
+
+  public Double getFieldProductPriority2() {
+    return mProductPriority2;
+  }
+
+  public Double getFieldProductPriority3() {
+    return mProductPriority3;
+  }
+
+  public Double getFieldProductPriority4() {
+    return mProductPriority4;
   }
 
   public String getFieldSalePrice() {
@@ -1158,6 +1188,11 @@ public class Hotel extends APINode {
       "margin_level",
       "name",
       "phone",
+      "product_priority_0",
+      "product_priority_1",
+      "product_priority_2",
+      "product_priority_3",
+      "product_priority_4",
       "sale_price",
       "sanitized_images",
       "star_rating",
@@ -1374,6 +1409,41 @@ public class Hotel extends APINode {
     }
     public APIRequestGet requestPhoneField (boolean value) {
       this.requestField("phone", value);
+      return this;
+    }
+    public APIRequestGet requestProductPriority0Field () {
+      return this.requestProductPriority0Field(true);
+    }
+    public APIRequestGet requestProductPriority0Field (boolean value) {
+      this.requestField("product_priority_0", value);
+      return this;
+    }
+    public APIRequestGet requestProductPriority1Field () {
+      return this.requestProductPriority1Field(true);
+    }
+    public APIRequestGet requestProductPriority1Field (boolean value) {
+      this.requestField("product_priority_1", value);
+      return this;
+    }
+    public APIRequestGet requestProductPriority2Field () {
+      return this.requestProductPriority2Field(true);
+    }
+    public APIRequestGet requestProductPriority2Field (boolean value) {
+      this.requestField("product_priority_2", value);
+      return this;
+    }
+    public APIRequestGet requestProductPriority3Field () {
+      return this.requestProductPriority3Field(true);
+    }
+    public APIRequestGet requestProductPriority3Field (boolean value) {
+      this.requestField("product_priority_3", value);
+      return this;
+    }
+    public APIRequestGet requestProductPriority4Field () {
+      return this.requestProductPriority4Field(true);
+    }
+    public APIRequestGet requestProductPriority4Field (boolean value) {
+      this.requestField("product_priority_4", value);
       return this;
     }
     public APIRequestGet requestSalePriceField () {
@@ -1706,6 +1776,11 @@ public class Hotel extends APINode {
     this.mMarginLevel = instance.mMarginLevel;
     this.mName = instance.mName;
     this.mPhone = instance.mPhone;
+    this.mProductPriority0 = instance.mProductPriority0;
+    this.mProductPriority1 = instance.mProductPriority1;
+    this.mProductPriority2 = instance.mProductPriority2;
+    this.mProductPriority3 = instance.mProductPriority3;
+    this.mProductPriority4 = instance.mProductPriority4;
     this.mSalePrice = instance.mSalePrice;
     this.mSanitizedImages = instance.mSanitizedImages;
     this.mStarRating = instance.mStarRating;

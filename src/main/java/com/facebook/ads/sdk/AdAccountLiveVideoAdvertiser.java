@@ -40,33 +40,27 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class ExternalEventSourceDAStatsResult extends APINode {
-  @SerializedName("count_content_ids")
-  private Long mCountContentIds = null;
-  @SerializedName("count_content_ids_match_any_catalog")
-  private Long mCountContentIdsMatchAnyCatalog = null;
-  @SerializedName("count_fires")
-  private Long mCountFires = null;
-  @SerializedName("count_fires_match_any_catalog")
-  private Long mCountFiresMatchAnyCatalog = null;
-  @SerializedName("date")
-  private String mDate = null;
-  @SerializedName("percentage_missed_users")
-  private Double mPercentageMissedUsers = null;
+public class AdAccountLiveVideoAdvertiser extends APINode {
+  @SerializedName("is_lva_toggle_on")
+  private Boolean mIsLvaToggleOn = null;
+  @SerializedName("lva_default_budget")
+  private Long mLvaDefaultBudget = null;
+  @SerializedName("should_show_lva_toggle")
+  private Boolean mShouldShowLvaToggle = null;
   protected static Gson gson = null;
 
-  public ExternalEventSourceDAStatsResult() {
+  public AdAccountLiveVideoAdvertiser() {
   }
 
   public String getId() {
     return null;
   }
-  public static ExternalEventSourceDAStatsResult loadJSON(String json, APIContext context, String header) {
-    ExternalEventSourceDAStatsResult externalEventSourceDAStatsResult = getGson().fromJson(json, ExternalEventSourceDAStatsResult.class);
+  public static AdAccountLiveVideoAdvertiser loadJSON(String json, APIContext context, String header) {
+    AdAccountLiveVideoAdvertiser adAccountLiveVideoAdvertiser = getGson().fromJson(json, AdAccountLiveVideoAdvertiser.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(externalEventSourceDAStatsResult.toString());
+      JsonElement o2 = parser.parse(adAccountLiveVideoAdvertiser.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -76,14 +70,14 @@ public class ExternalEventSourceDAStatsResult extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    externalEventSourceDAStatsResult.context = context;
-    externalEventSourceDAStatsResult.rawValue = json;
-    externalEventSourceDAStatsResult.header = header;
-    return externalEventSourceDAStatsResult;
+    adAccountLiveVideoAdvertiser.context = context;
+    adAccountLiveVideoAdvertiser.rawValue = json;
+    adAccountLiveVideoAdvertiser.header = header;
+    return adAccountLiveVideoAdvertiser;
   }
 
-  public static APINodeList<ExternalEventSourceDAStatsResult> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<ExternalEventSourceDAStatsResult> externalEventSourceDAStatsResults = new APINodeList<ExternalEventSourceDAStatsResult>(request, json, header);
+  public static APINodeList<AdAccountLiveVideoAdvertiser> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdAccountLiveVideoAdvertiser> adAccountLiveVideoAdvertisers = new APINodeList<AdAccountLiveVideoAdvertiser>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -94,9 +88,9 @@ public class ExternalEventSourceDAStatsResult extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          externalEventSourceDAStatsResults.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          adAccountLiveVideoAdvertisers.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return externalEventSourceDAStatsResults;
+        return adAccountLiveVideoAdvertisers;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -106,20 +100,20 @@ public class ExternalEventSourceDAStatsResult extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                externalEventSourceDAStatsResults.setCursors(before, after);
+                adAccountLiveVideoAdvertisers.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            externalEventSourceDAStatsResults.setPaging(previous, next);
+            adAccountLiveVideoAdvertisers.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              externalEventSourceDAStatsResults.setAppSecret(context.getAppSecretProof());
+              adAccountLiveVideoAdvertisers.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              externalEventSourceDAStatsResults.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              adAccountLiveVideoAdvertisers.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -130,23 +124,23 @@ public class ExternalEventSourceDAStatsResult extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  externalEventSourceDAStatsResults.add(loadJSON(entry.getValue().toString(), context, header));
+                  adAccountLiveVideoAdvertisers.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              externalEventSourceDAStatsResults.add(loadJSON(obj.toString(), context, header));
+              adAccountLiveVideoAdvertisers.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return externalEventSourceDAStatsResults;
+          return adAccountLiveVideoAdvertisers;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              externalEventSourceDAStatsResults.add(loadJSON(entry.getValue().toString(), context, header));
+              adAccountLiveVideoAdvertisers.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return externalEventSourceDAStatsResults;
+          return adAccountLiveVideoAdvertisers;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -163,20 +157,20 @@ public class ExternalEventSourceDAStatsResult extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              externalEventSourceDAStatsResults.add(loadJSON(value.toString(), context, header));
+              adAccountLiveVideoAdvertisers.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return externalEventSourceDAStatsResults;
+            return adAccountLiveVideoAdvertisers;
           }
 
           // Sixth, check if it's pure JsonObject
-          externalEventSourceDAStatsResults.clear();
-          externalEventSourceDAStatsResults.add(loadJSON(json, context, header));
-          return externalEventSourceDAStatsResults;
+          adAccountLiveVideoAdvertisers.clear();
+          adAccountLiveVideoAdvertisers.add(loadJSON(json, context, header));
+          return adAccountLiveVideoAdvertisers;
         }
       }
     } catch (Exception e) {
@@ -204,57 +198,30 @@ public class ExternalEventSourceDAStatsResult extends APINode {
   }
 
 
-  public Long getFieldCountContentIds() {
-    return mCountContentIds;
+  public Boolean getFieldIsLvaToggleOn() {
+    return mIsLvaToggleOn;
   }
 
-  public ExternalEventSourceDAStatsResult setFieldCountContentIds(Long value) {
-    this.mCountContentIds = value;
+  public AdAccountLiveVideoAdvertiser setFieldIsLvaToggleOn(Boolean value) {
+    this.mIsLvaToggleOn = value;
     return this;
   }
 
-  public Long getFieldCountContentIdsMatchAnyCatalog() {
-    return mCountContentIdsMatchAnyCatalog;
+  public Long getFieldLvaDefaultBudget() {
+    return mLvaDefaultBudget;
   }
 
-  public ExternalEventSourceDAStatsResult setFieldCountContentIdsMatchAnyCatalog(Long value) {
-    this.mCountContentIdsMatchAnyCatalog = value;
+  public AdAccountLiveVideoAdvertiser setFieldLvaDefaultBudget(Long value) {
+    this.mLvaDefaultBudget = value;
     return this;
   }
 
-  public Long getFieldCountFires() {
-    return mCountFires;
+  public Boolean getFieldShouldShowLvaToggle() {
+    return mShouldShowLvaToggle;
   }
 
-  public ExternalEventSourceDAStatsResult setFieldCountFires(Long value) {
-    this.mCountFires = value;
-    return this;
-  }
-
-  public Long getFieldCountFiresMatchAnyCatalog() {
-    return mCountFiresMatchAnyCatalog;
-  }
-
-  public ExternalEventSourceDAStatsResult setFieldCountFiresMatchAnyCatalog(Long value) {
-    this.mCountFiresMatchAnyCatalog = value;
-    return this;
-  }
-
-  public String getFieldDate() {
-    return mDate;
-  }
-
-  public ExternalEventSourceDAStatsResult setFieldDate(String value) {
-    this.mDate = value;
-    return this;
-  }
-
-  public Double getFieldPercentageMissedUsers() {
-    return mPercentageMissedUsers;
-  }
-
-  public ExternalEventSourceDAStatsResult setFieldPercentageMissedUsers(Double value) {
-    this.mPercentageMissedUsers = value;
+  public AdAccountLiveVideoAdvertiser setFieldShouldShowLvaToggle(Boolean value) {
+    this.mShouldShowLvaToggle = value;
     return this;
   }
 
@@ -274,22 +241,19 @@ public class ExternalEventSourceDAStatsResult extends APINode {
     return gson;
   }
 
-  public ExternalEventSourceDAStatsResult copyFrom(ExternalEventSourceDAStatsResult instance) {
-    this.mCountContentIds = instance.mCountContentIds;
-    this.mCountContentIdsMatchAnyCatalog = instance.mCountContentIdsMatchAnyCatalog;
-    this.mCountFires = instance.mCountFires;
-    this.mCountFiresMatchAnyCatalog = instance.mCountFiresMatchAnyCatalog;
-    this.mDate = instance.mDate;
-    this.mPercentageMissedUsers = instance.mPercentageMissedUsers;
+  public AdAccountLiveVideoAdvertiser copyFrom(AdAccountLiveVideoAdvertiser instance) {
+    this.mIsLvaToggleOn = instance.mIsLvaToggleOn;
+    this.mLvaDefaultBudget = instance.mLvaDefaultBudget;
+    this.mShouldShowLvaToggle = instance.mShouldShowLvaToggle;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<ExternalEventSourceDAStatsResult> getParser() {
-    return new APIRequest.ResponseParser<ExternalEventSourceDAStatsResult>() {
-      public APINodeList<ExternalEventSourceDAStatsResult> parseResponse(String response, APIContext context, APIRequest<ExternalEventSourceDAStatsResult> request, String header) throws MalformedResponseException {
-        return ExternalEventSourceDAStatsResult.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<AdAccountLiveVideoAdvertiser> getParser() {
+    return new APIRequest.ResponseParser<AdAccountLiveVideoAdvertiser>() {
+      public APINodeList<AdAccountLiveVideoAdvertiser> parseResponse(String response, APIContext context, APIRequest<AdAccountLiveVideoAdvertiser> request, String header) throws MalformedResponseException {
+        return AdAccountLiveVideoAdvertiser.parseResponse(response, context, request, header);
       }
     };
   }

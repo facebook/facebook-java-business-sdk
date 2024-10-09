@@ -41,10 +41,16 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class PartnershipAdContentSearchMedia extends APINode {
+  @SerializedName("ig_ad_code_sponsor_count")
+  private Long mIgAdCodeSponsorCount = null;
+  @SerializedName("ig_ad_code_sponsors")
+  private List<FBPageAndInstagramAccount> mIgAdCodeSponsors = null;
   @SerializedName("ig_media")
   private IGMedia mIgMedia = null;
   @SerializedName("ig_media_has_product_tags")
   private Boolean mIgMediaHasProductTags = null;
+  @SerializedName("is_ad_code_eligible_for_boosting_by_two_sponsors")
+  private Boolean mIsAdCodeEligibleForBoostingByTwoSponsors = null;
   @SerializedName("is_ad_code_entry")
   private Boolean mIsAdCodeEntry = null;
   protected static Gson gson = null;
@@ -198,6 +204,29 @@ public class PartnershipAdContentSearchMedia extends APINode {
   }
 
 
+  public Long getFieldIgAdCodeSponsorCount() {
+    return mIgAdCodeSponsorCount;
+  }
+
+  public PartnershipAdContentSearchMedia setFieldIgAdCodeSponsorCount(Long value) {
+    this.mIgAdCodeSponsorCount = value;
+    return this;
+  }
+
+  public List<FBPageAndInstagramAccount> getFieldIgAdCodeSponsors() {
+    return mIgAdCodeSponsors;
+  }
+
+  public PartnershipAdContentSearchMedia setFieldIgAdCodeSponsors(List<FBPageAndInstagramAccount> value) {
+    this.mIgAdCodeSponsors = value;
+    return this;
+  }
+
+  public PartnershipAdContentSearchMedia setFieldIgAdCodeSponsors(String value) {
+    Type type = new TypeToken<List<FBPageAndInstagramAccount>>(){}.getType();
+    this.mIgAdCodeSponsors = FBPageAndInstagramAccount.getGson().fromJson(value, type);
+    return this;
+  }
   public IGMedia getFieldIgMedia() {
     if (mIgMedia != null) {
       mIgMedia.context = getContext();
@@ -221,6 +250,15 @@ public class PartnershipAdContentSearchMedia extends APINode {
 
   public PartnershipAdContentSearchMedia setFieldIgMediaHasProductTags(Boolean value) {
     this.mIgMediaHasProductTags = value;
+    return this;
+  }
+
+  public Boolean getFieldIsAdCodeEligibleForBoostingByTwoSponsors() {
+    return mIsAdCodeEligibleForBoostingByTwoSponsors;
+  }
+
+  public PartnershipAdContentSearchMedia setFieldIsAdCodeEligibleForBoostingByTwoSponsors(Boolean value) {
+    this.mIsAdCodeEligibleForBoostingByTwoSponsors = value;
     return this;
   }
 
@@ -250,8 +288,11 @@ public class PartnershipAdContentSearchMedia extends APINode {
   }
 
   public PartnershipAdContentSearchMedia copyFrom(PartnershipAdContentSearchMedia instance) {
+    this.mIgAdCodeSponsorCount = instance.mIgAdCodeSponsorCount;
+    this.mIgAdCodeSponsors = instance.mIgAdCodeSponsors;
     this.mIgMedia = instance.mIgMedia;
     this.mIgMediaHasProductTags = instance.mIgMediaHasProductTags;
+    this.mIsAdCodeEligibleForBoostingByTwoSponsors = instance.mIsAdCodeEligibleForBoostingByTwoSponsors;
     this.mIsAdCodeEntry = instance.mIsAdCodeEntry;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

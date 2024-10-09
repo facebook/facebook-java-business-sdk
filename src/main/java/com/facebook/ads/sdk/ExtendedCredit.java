@@ -304,6 +304,14 @@ public class ExtendedCredit extends APINode {
     return new APIRequestCreateOwningCreditAllocationConfig(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestCreateWhatsAppCreditAttach createWhatsAppCreditAttach() {
+    return new APIRequestCreateWhatsAppCreditAttach(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestCreateWhatsAppCreditSharing createWhatsAppCreditSharing() {
+    return new APIRequestCreateWhatsAppCreditSharing(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestCreateWhatsAppCreditSharingAndAttach createWhatsAppCreditSharingAndAttach() {
     return new APIRequestCreateWhatsAppCreditSharingAndAttach(this.getPrefixedId().toString(), context);
   }
@@ -1040,6 +1048,234 @@ public class ExtendedCredit extends APINode {
 
     @Override
     public APIRequestCreateOwningCreditAllocationConfig requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestCreateWhatsAppCreditAttach extends APIRequest<APINode> {
+
+    APINode lastResponse = null;
+    @Override
+    public APINode getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "waba_currency",
+      "waba_id",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public APINode execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINode execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINode> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateWhatsAppCreditAttach.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestCreateWhatsAppCreditAttach(String nodeId, APIContext context) {
+      super(context, nodeId, "/whatsapp_credit_attach", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateWhatsAppCreditAttach setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateWhatsAppCreditAttach setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateWhatsAppCreditAttach setWabaCurrency (String wabaCurrency) {
+      this.setParam("waba_currency", wabaCurrency);
+      return this;
+    }
+
+    public APIRequestCreateWhatsAppCreditAttach setWabaId (String wabaId) {
+      this.setParam("waba_id", wabaId);
+      return this;
+    }
+
+    public APIRequestCreateWhatsAppCreditAttach requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateWhatsAppCreditAttach requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateWhatsAppCreditAttach requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateWhatsAppCreditAttach requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateWhatsAppCreditAttach requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateWhatsAppCreditAttach requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestCreateWhatsAppCreditSharing extends APIRequest<APINode> {
+
+    APINode lastResponse = null;
+    @Override
+    public APINode getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "receiving_business_id",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public APINode execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINode execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINode> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateWhatsAppCreditSharing.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestCreateWhatsAppCreditSharing(String nodeId, APIContext context) {
+      super(context, nodeId, "/whatsapp_credit_sharing", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateWhatsAppCreditSharing setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateWhatsAppCreditSharing setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateWhatsAppCreditSharing setReceivingBusinessId (String receivingBusinessId) {
+      this.setParam("receiving_business_id", receivingBusinessId);
+      return this;
+    }
+
+    public APIRequestCreateWhatsAppCreditSharing requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateWhatsAppCreditSharing requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateWhatsAppCreditSharing requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateWhatsAppCreditSharing requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateWhatsAppCreditSharing requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateWhatsAppCreditSharing requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }

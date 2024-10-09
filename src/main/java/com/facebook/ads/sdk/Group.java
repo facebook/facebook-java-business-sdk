@@ -300,10 +300,6 @@ public class Group extends APINode {
     return new APIRequestGetAlbums(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestCreateAlbum createAlbum() {
-    return new APIRequestCreateAlbum(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetDocs getDocs() {
     return new APIRequestGetDocs(this.getPrefixedId().toString(), context);
   }
@@ -972,203 +968,6 @@ public class Group extends APINode {
       this.requestField("video_count", value);
       return this;
     }
-  }
-
-  public static class APIRequestCreateAlbum extends APIRequest<Album> {
-
-    Album lastResponse = null;
-    @Override
-    public Album getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "contributors",
-      "description",
-      "is_default",
-      "location",
-      "make_shared_album",
-      "message",
-      "name",
-      "place",
-      "privacy",
-      "session_id",
-      "tags",
-      "visible",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public Album parseResponse(String response, String header) throws APIException {
-      return Album.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public Album execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public Album execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<Album> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<Album> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, Album>() {
-           public Album apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateAlbum.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         },
-         MoreExecutors.directExecutor()
-      );
-    };
-
-    public APIRequestCreateAlbum(String nodeId, APIContext context) {
-      super(context, nodeId, "/albums", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateAlbum setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateAlbum setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateAlbum setContributors (List<Long> contributors) {
-      this.setParam("contributors", contributors);
-      return this;
-    }
-    public APIRequestCreateAlbum setContributors (String contributors) {
-      this.setParam("contributors", contributors);
-      return this;
-    }
-
-    public APIRequestCreateAlbum setDescription (String description) {
-      this.setParam("description", description);
-      return this;
-    }
-
-    public APIRequestCreateAlbum setIsDefault (Boolean isDefault) {
-      this.setParam("is_default", isDefault);
-      return this;
-    }
-    public APIRequestCreateAlbum setIsDefault (String isDefault) {
-      this.setParam("is_default", isDefault);
-      return this;
-    }
-
-    public APIRequestCreateAlbum setLocation (String location) {
-      this.setParam("location", location);
-      return this;
-    }
-
-    public APIRequestCreateAlbum setMakeSharedAlbum (Boolean makeSharedAlbum) {
-      this.setParam("make_shared_album", makeSharedAlbum);
-      return this;
-    }
-    public APIRequestCreateAlbum setMakeSharedAlbum (String makeSharedAlbum) {
-      this.setParam("make_shared_album", makeSharedAlbum);
-      return this;
-    }
-
-    public APIRequestCreateAlbum setMessage (String message) {
-      this.setParam("message", message);
-      return this;
-    }
-
-    public APIRequestCreateAlbum setName (String name) {
-      this.setParam("name", name);
-      return this;
-    }
-
-    public APIRequestCreateAlbum setPlace (Object place) {
-      this.setParam("place", place);
-      return this;
-    }
-    public APIRequestCreateAlbum setPlace (String place) {
-      this.setParam("place", place);
-      return this;
-    }
-
-    public APIRequestCreateAlbum setPrivacy (String privacy) {
-      this.setParam("privacy", privacy);
-      return this;
-    }
-
-    public APIRequestCreateAlbum setSessionId (String sessionId) {
-      this.setParam("session_id", sessionId);
-      return this;
-    }
-
-    public APIRequestCreateAlbum setTags (List<Long> tags) {
-      this.setParam("tags", tags);
-      return this;
-    }
-    public APIRequestCreateAlbum setTags (String tags) {
-      this.setParam("tags", tags);
-      return this;
-    }
-
-    public APIRequestCreateAlbum setVisible (String visible) {
-      this.setParam("visible", visible);
-      return this;
-    }
-
-    public APIRequestCreateAlbum requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateAlbum requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateAlbum requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateAlbum requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateAlbum requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateAlbum requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
   }
 
   public static class APIRequestGetDocs extends APIRequest<APINode> {
@@ -2361,7 +2160,6 @@ public class Group extends APINode {
       "fun_fact_prompt_id",
       "fun_fact_toastee_id",
       "height",
-      "holiday_card",
       "home_checkin_city_id",
       "image_crops",
       "implicit_with_tags",
@@ -2382,7 +2180,6 @@ public class Group extends APINode {
       "name",
       "nectar_module",
       "object_attachment",
-      "offer_like_post_id",
       "og_action_type_id",
       "og_hide_object_attachment",
       "og_icon_id",
@@ -2522,10 +2319,6 @@ public class Group extends APINode {
       return this;
     }
 
-    public APIRequestCreateFeed setAsset3dId (Long asset3dId) {
-      this.setParam("asset3d_id", asset3dId);
-      return this;
-    }
     public APIRequestCreateFeed setAsset3dId (String asset3dId) {
       this.setParam("asset3d_id", asset3dId);
       return this;
@@ -2741,10 +2534,6 @@ public class Group extends APINode {
       return this;
     }
 
-    public APIRequestCreateFeed setFunFactPromptId (Long funFactPromptId) {
-      this.setParam("fun_fact_prompt_id", funFactPromptId);
-      return this;
-    }
     public APIRequestCreateFeed setFunFactPromptId (String funFactPromptId) {
       this.setParam("fun_fact_prompt_id", funFactPromptId);
       return this;
@@ -2765,11 +2554,6 @@ public class Group extends APINode {
     }
     public APIRequestCreateFeed setHeight (String height) {
       this.setParam("height", height);
-      return this;
-    }
-
-    public APIRequestCreateFeed setHolidayCard (String holidayCard) {
-      this.setParam("holiday_card", holidayCard);
       return this;
     }
 
@@ -2918,15 +2702,6 @@ public class Group extends APINode {
 
     public APIRequestCreateFeed setObjectAttachment (String objectAttachment) {
       this.setParam("object_attachment", objectAttachment);
-      return this;
-    }
-
-    public APIRequestCreateFeed setOfferLikePostId (Long offerLikePostId) {
-      this.setParam("offer_like_post_id", offerLikePostId);
-      return this;
-    }
-    public APIRequestCreateFeed setOfferLikePostId (String offerLikePostId) {
-      this.setParam("offer_like_post_id", offerLikePostId);
       return this;
     }
 
@@ -6503,7 +6278,6 @@ public class Group extends APINode {
       "fun_fact_toastee_id",
       "guide",
       "guide_enabled",
-      "holiday_card",
       "initial_heading",
       "initial_pitch",
       "instant_game_entry_point_data",
@@ -6513,7 +6287,6 @@ public class Group extends APINode {
       "is_voice_clip",
       "location_source_id",
       "manual_privacy",
-      "offer_like_post_id",
       "og_action_type_id",
       "og_icon_id",
       "og_object_id",
@@ -6764,10 +6537,6 @@ public class Group extends APINode {
       return this;
     }
 
-    public APIRequestCreateVideo setFunFactPromptId (Long funFactPromptId) {
-      this.setParam("fun_fact_prompt_id", funFactPromptId);
-      return this;
-    }
     public APIRequestCreateVideo setFunFactPromptId (String funFactPromptId) {
       this.setParam("fun_fact_prompt_id", funFactPromptId);
       return this;
@@ -6797,11 +6566,6 @@ public class Group extends APINode {
     }
     public APIRequestCreateVideo setGuideEnabled (String guideEnabled) {
       this.setParam("guide_enabled", guideEnabled);
-      return this;
-    }
-
-    public APIRequestCreateVideo setHolidayCard (String holidayCard) {
-      this.setParam("holiday_card", holidayCard);
       return this;
     }
 
@@ -6875,15 +6639,6 @@ public class Group extends APINode {
     }
     public APIRequestCreateVideo setManualPrivacy (String manualPrivacy) {
       this.setParam("manual_privacy", manualPrivacy);
-      return this;
-    }
-
-    public APIRequestCreateVideo setOfferLikePostId (Long offerLikePostId) {
-      this.setParam("offer_like_post_id", offerLikePostId);
-      return this;
-    }
-    public APIRequestCreateVideo setOfferLikePostId (String offerLikePostId) {
-      this.setParam("offer_like_post_id", offerLikePostId);
       return this;
     }
 

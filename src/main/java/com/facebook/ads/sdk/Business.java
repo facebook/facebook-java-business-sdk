@@ -966,6 +966,7 @@ public class Business extends APINode {
       "ad_account_id",
       "id",
       "managed_by",
+      "owned_by",
       "parent_advertiser_id",
       "sub_vertical",
       "tag",
@@ -1097,6 +1098,13 @@ public class Business extends APINode {
     }
     public APIRequestGetAdAccountInfos requestManagedByField (boolean value) {
       this.requestField("managed_by", value);
+      return this;
+    }
+    public APIRequestGetAdAccountInfos requestOwnedByField () {
+      return this.requestOwnedByField(true);
+    }
+    public APIRequestGetAdAccountInfos requestOwnedByField (boolean value) {
+      this.requestField("owned_by", value);
       return this;
     }
     public APIRequestGetAdAccountInfos requestParentAdvertiserIdField () {
@@ -23910,7 +23918,6 @@ public class Business extends APINode {
       "fun_fact_toastee_id",
       "guide",
       "guide_enabled",
-      "holiday_card",
       "initial_heading",
       "initial_pitch",
       "instant_game_entry_point_data",
@@ -23918,7 +23925,6 @@ public class Business extends APINode {
       "is_group_linking_post",
       "is_voice_clip",
       "location_source_id",
-      "offer_like_post_id",
       "og_action_type_id",
       "og_icon_id",
       "og_object_id",
@@ -24187,10 +24193,6 @@ public class Business extends APINode {
       return this;
     }
 
-    public APIRequestCreateVideo setFunFactPromptId (Long funFactPromptId) {
-      this.setParam("fun_fact_prompt_id", funFactPromptId);
-      return this;
-    }
     public APIRequestCreateVideo setFunFactPromptId (String funFactPromptId) {
       this.setParam("fun_fact_prompt_id", funFactPromptId);
       return this;
@@ -24220,11 +24222,6 @@ public class Business extends APINode {
     }
     public APIRequestCreateVideo setGuideEnabled (String guideEnabled) {
       this.setParam("guide_enabled", guideEnabled);
-      return this;
-    }
-
-    public APIRequestCreateVideo setHolidayCard (String holidayCard) {
-      this.setParam("holiday_card", holidayCard);
       return this;
     }
 
@@ -24280,15 +24277,6 @@ public class Business extends APINode {
 
     public APIRequestCreateVideo setLocationSourceId (String locationSourceId) {
       this.setParam("location_source_id", locationSourceId);
-      return this;
-    }
-
-    public APIRequestCreateVideo setOfferLikePostId (Long offerLikePostId) {
-      this.setParam("offer_like_post_id", offerLikePostId);
-      return this;
-    }
-    public APIRequestCreateVideo setOfferLikePostId (String offerLikePostId) {
-      this.setParam("offer_like_post_id", offerLikePostId);
       return this;
     }
 

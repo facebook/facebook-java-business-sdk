@@ -42,7 +42,7 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  */
 public class CatalogItemRejectionReasons extends APINode {
   @SerializedName("capability")
-  private EnumCapability mCapability = null;
+  private String mCapability = null;
   @SerializedName("rejection_information")
   private List<Object> mRejectionInformation = null;
   protected static Gson gson = null;
@@ -196,11 +196,11 @@ public class CatalogItemRejectionReasons extends APINode {
   }
 
 
-  public EnumCapability getFieldCapability() {
+  public String getFieldCapability() {
     return mCapability;
   }
 
-  public CatalogItemRejectionReasons setFieldCapability(EnumCapability value) {
+  public CatalogItemRejectionReasons setFieldCapability(String value) {
     this.mCapability = value;
     return this;
   }
@@ -215,33 +215,6 @@ public class CatalogItemRejectionReasons extends APINode {
   }
 
 
-
-  public static enum EnumCapability {
-      @SerializedName("business_inbox_in_messenger")
-      VALUE_BUSINESS_INBOX_IN_MESSENGER("business_inbox_in_messenger"),
-      @SerializedName("shops")
-      VALUE_SHOPS("shops"),
-      @SerializedName("test_capability")
-      VALUE_TEST_CAPABILITY("test_capability"),
-      @SerializedName("universal_checkout")
-      VALUE_UNIVERSAL_CHECKOUT("universal_checkout"),
-      @SerializedName("us_marketplace")
-      VALUE_US_MARKETPLACE("us_marketplace"),
-      @SerializedName("whatsapp_marketing_message")
-      VALUE_WHATSAPP_MARKETING_MESSAGE("whatsapp_marketing_message"),
-      ;
-
-      private String value;
-
-      private EnumCapability(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
 
 
   synchronized /*package*/ static Gson getGson() {

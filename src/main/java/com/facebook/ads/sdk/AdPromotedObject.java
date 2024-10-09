@@ -57,6 +57,8 @@ public class AdPromotedObject extends APINode {
   private String mEventId = null;
   @SerializedName("fundraiser_campaign_id")
   private String mFundraiserCampaignId = null;
+  @SerializedName("lead_ads_form_event_source_type")
+  private String mLeadAdsFormEventSourceType = null;
   @SerializedName("mcme_conversion_id")
   private String mMcmeConversionId = null;
   @SerializedName("object_store_url")
@@ -91,6 +93,10 @@ public class AdPromotedObject extends APINode {
   private String mProductSetId = null;
   @SerializedName("retention_days")
   private String mRetentionDays = null;
+  @SerializedName("value_semantic_type")
+  private String mValueSemanticType = null;
+  @SerializedName("variation")
+  private String mVariation = null;
   @SerializedName("whatsapp_phone_number")
   private String mWhatsappPhoneNumber = null;
   protected static Gson gson = null;
@@ -316,6 +322,15 @@ public class AdPromotedObject extends APINode {
     return this;
   }
 
+  public String getFieldLeadAdsFormEventSourceType() {
+    return mLeadAdsFormEventSourceType;
+  }
+
+  public AdPromotedObject setFieldLeadAdsFormEventSourceType(String value) {
+    this.mLeadAdsFormEventSourceType = value;
+    return this;
+  }
+
   public String getFieldMcmeConversionId() {
     return mMcmeConversionId;
   }
@@ -485,6 +500,24 @@ public class AdPromotedObject extends APINode {
     return this;
   }
 
+  public String getFieldValueSemanticType() {
+    return mValueSemanticType;
+  }
+
+  public AdPromotedObject setFieldValueSemanticType(String value) {
+    this.mValueSemanticType = value;
+    return this;
+  }
+
+  public String getFieldVariation() {
+    return mVariation;
+  }
+
+  public AdPromotedObject setFieldVariation(String value) {
+    this.mVariation = value;
+    return this;
+  }
+
   public String getFieldWhatsappPhoneNumber() {
     return mWhatsappPhoneNumber;
   }
@@ -592,6 +625,7 @@ public class AdPromotedObject extends APINode {
     this.mCustomEventType = instance.mCustomEventType;
     this.mEventId = instance.mEventId;
     this.mFundraiserCampaignId = instance.mFundraiserCampaignId;
+    this.mLeadAdsFormEventSourceType = instance.mLeadAdsFormEventSourceType;
     this.mMcmeConversionId = instance.mMcmeConversionId;
     this.mObjectStoreUrl = instance.mObjectStoreUrl;
     this.mOfferId = instance.mOfferId;
@@ -609,6 +643,8 @@ public class AdPromotedObject extends APINode {
     this.mProductSet = instance.mProductSet;
     this.mProductSetId = instance.mProductSetId;
     this.mRetentionDays = instance.mRetentionDays;
+    this.mValueSemanticType = instance.mValueSemanticType;
+    this.mVariation = instance.mVariation;
     this.mWhatsappPhoneNumber = instance.mWhatsappPhoneNumber;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

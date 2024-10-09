@@ -97,6 +97,8 @@ public class Ad extends APINode {
   private String mLastUpdatedByAppId = null;
   @SerializedName("name")
   private String mName = null;
+  @SerializedName("placement")
+  private Placement mPlacement = null;
   @SerializedName("preview_shareable_link")
   private String mPreviewShareableLink = null;
   @SerializedName("priority")
@@ -500,6 +502,10 @@ public class Ad extends APINode {
     return mName;
   }
 
+  public Placement getFieldPlacement() {
+    return mPlacement;
+  }
+
   public String getFieldPreviewShareableLink() {
     return mPreviewShareableLink;
   }
@@ -597,6 +603,7 @@ public class Ad extends APINode {
       "link_destination_display_url",
       "link_og_id",
       "link_url",
+      "messenger_sponsored_message",
       "name",
       "object_id",
       "object_store_url",
@@ -1002,6 +1009,13 @@ public class Ad extends APINode {
       this.requestField("link_url", value);
       return this;
     }
+    public APIRequestGetAdCreatives requestMessengerSponsoredMessageField () {
+      return this.requestMessengerSponsoredMessageField(true);
+    }
+    public APIRequestGetAdCreatives requestMessengerSponsoredMessageField (boolean value) {
+      this.requestField("messenger_sponsored_message", value);
+      return this;
+    }
     public APIRequestGetAdCreatives requestNameField () {
       return this.requestNameField(true);
     }
@@ -1326,6 +1340,7 @@ public class Ad extends APINode {
       "account_id",
       "created_by",
       "created_time",
+      "disable_error_code",
       "evaluation_spec",
       "execution_spec",
       "id",
@@ -1455,6 +1470,13 @@ public class Ad extends APINode {
       this.requestField("created_time", value);
       return this;
     }
+    public APIRequestGetAdRulesGoverned requestDisableErrorCodeField () {
+      return this.requestDisableErrorCodeField(true);
+    }
+    public APIRequestGetAdRulesGoverned requestDisableErrorCodeField (boolean value) {
+      this.requestField("disable_error_code", value);
+      return this;
+    }
     public APIRequestGetAdRulesGoverned requestEvaluationSpecField () {
       return this.requestEvaluationSpecField(true);
     }
@@ -1549,6 +1571,7 @@ public class Ad extends APINode {
       "issues_info",
       "last_updated_by_app_id",
       "name",
+      "placement",
       "preview_shareable_link",
       "priority",
       "recommendations",
@@ -1881,6 +1904,13 @@ public class Ad extends APINode {
     }
     public APIRequestGetCopies requestNameField (boolean value) {
       this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetCopies requestPlacementField () {
+      return this.requestPlacementField(true);
+    }
+    public APIRequestGetCopies requestPlacementField (boolean value) {
+      this.requestField("placement", value);
       return this;
     }
     public APIRequestGetCopies requestPreviewShareableLinkField () {
@@ -3472,6 +3502,7 @@ public class Ad extends APINode {
       "issues_info",
       "last_updated_by_app_id",
       "name",
+      "placement",
       "preview_shareable_link",
       "priority",
       "recommendations",
@@ -3813,6 +3844,13 @@ public class Ad extends APINode {
     }
     public APIRequestGet requestNameField (boolean value) {
       this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGet requestPlacementField () {
+      return this.requestPlacementField(true);
+    }
+    public APIRequestGet requestPlacementField (boolean value) {
+      this.requestField("placement", value);
       return this;
     }
     public APIRequestGet requestPreviewShareableLinkField () {
@@ -4417,6 +4455,7 @@ public class Ad extends APINode {
     this.mIssuesInfo = instance.mIssuesInfo;
     this.mLastUpdatedByAppId = instance.mLastUpdatedByAppId;
     this.mName = instance.mName;
+    this.mPlacement = instance.mPlacement;
     this.mPreviewShareableLink = instance.mPreviewShareableLink;
     this.mPriority = instance.mPriority;
     this.mRecommendations = instance.mRecommendations;

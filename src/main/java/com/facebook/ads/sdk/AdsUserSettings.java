@@ -43,6 +43,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class AdsUserSettings extends APINode {
   @SerializedName("a_plus_c_survey_seen")
   private Boolean mAPlusCSurveySeen = null;
+  @SerializedName("add_overlays_opt_in_status")
+  private String mAddOverlaysOptInStatus = null;
   @SerializedName("adgroup_name_template")
   private Object mAdgroupNameTemplate = null;
   @SerializedName("ads_cs_catalog_opt_out_timestamp")
@@ -85,6 +87,8 @@ public class AdsUserSettings extends APINode {
   private Long mGenAiAlphaTestStatus = null;
   @SerializedName("id")
   private String mId = null;
+  @SerializedName("image_background_generation_opt_in_status")
+  private String mImageBackgroundGenerationOptInStatus = null;
   @SerializedName("image_expansion_opt_in_status")
   private String mImageExpansionOptInStatus = null;
   @SerializedName("is_ads_ai_consented")
@@ -373,6 +377,10 @@ public class AdsUserSettings extends APINode {
     return mAPlusCSurveySeen;
   }
 
+  public String getFieldAddOverlaysOptInStatus() {
+    return mAddOverlaysOptInStatus;
+  }
+
   public Object getFieldAdgroupNameTemplate() {
     return mAdgroupNameTemplate;
   }
@@ -455,6 +463,10 @@ public class AdsUserSettings extends APINode {
 
   public String getFieldId() {
     return mId;
+  }
+
+  public String getFieldImageBackgroundGenerationOptInStatus() {
+    return mImageBackgroundGenerationOptInStatus;
   }
 
   public String getFieldImageExpansionOptInStatus() {
@@ -620,6 +632,7 @@ public class AdsUserSettings extends APINode {
 
     public static final String[] FIELDS = {
       "a_plus_c_survey_seen",
+      "add_overlays_opt_in_status",
       "adgroup_name_template",
       "ads_cs_catalog_opt_out_timestamp",
       "ads_tool_visits",
@@ -641,6 +654,7 @@ public class AdsUserSettings extends APINode {
       "focus_mode_default",
       "gen_ai_alpha_test_status",
       "id",
+      "image_background_generation_opt_in_status",
       "image_expansion_opt_in_status",
       "is_ads_ai_consented",
       "is_cbo_default_on",
@@ -773,6 +787,13 @@ public class AdsUserSettings extends APINode {
     }
     public APIRequestGet requestAPlusCSurveySeenField (boolean value) {
       this.requestField("a_plus_c_survey_seen", value);
+      return this;
+    }
+    public APIRequestGet requestAddOverlaysOptInStatusField () {
+      return this.requestAddOverlaysOptInStatusField(true);
+    }
+    public APIRequestGet requestAddOverlaysOptInStatusField (boolean value) {
+      this.requestField("add_overlays_opt_in_status", value);
       return this;
     }
     public APIRequestGet requestAdgroupNameTemplateField () {
@@ -920,6 +941,13 @@ public class AdsUserSettings extends APINode {
     }
     public APIRequestGet requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGet requestImageBackgroundGenerationOptInStatusField () {
+      return this.requestImageBackgroundGenerationOptInStatusField(true);
+    }
+    public APIRequestGet requestImageBackgroundGenerationOptInStatusField (boolean value) {
+      this.requestField("image_background_generation_opt_in_status", value);
       return this;
     }
     public APIRequestGet requestImageExpansionOptInStatusField () {
@@ -1185,6 +1213,7 @@ public class AdsUserSettings extends APINode {
 
   public AdsUserSettings copyFrom(AdsUserSettings instance) {
     this.mAPlusCSurveySeen = instance.mAPlusCSurveySeen;
+    this.mAddOverlaysOptInStatus = instance.mAddOverlaysOptInStatus;
     this.mAdgroupNameTemplate = instance.mAdgroupNameTemplate;
     this.mAdsCsCatalogOptOutTimestamp = instance.mAdsCsCatalogOptOutTimestamp;
     this.mAdsToolVisits = instance.mAdsToolVisits;
@@ -1206,6 +1235,7 @@ public class AdsUserSettings extends APINode {
     this.mFocusModeDefault = instance.mFocusModeDefault;
     this.mGenAiAlphaTestStatus = instance.mGenAiAlphaTestStatus;
     this.mId = instance.mId;
+    this.mImageBackgroundGenerationOptInStatus = instance.mImageBackgroundGenerationOptInStatus;
     this.mImageExpansionOptInStatus = instance.mImageExpansionOptInStatus;
     this.mIsAdsAiConsented = instance.mIsAdsAiConsented;
     this.mIsCboDefaultOn = instance.mIsCboDefaultOn;

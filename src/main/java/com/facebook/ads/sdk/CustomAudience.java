@@ -1517,6 +1517,7 @@ public class CustomAudience extends APINode {
       "issues_info",
       "last_updated_by_app_id",
       "name",
+      "placement",
       "preview_shareable_link",
       "priority",
       "recommendations",
@@ -1831,6 +1832,13 @@ public class CustomAudience extends APINode {
     }
     public APIRequestGetAds requestNameField (boolean value) {
       this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetAds requestPlacementField () {
+      return this.requestPlacementField(true);
+    }
+    public APIRequestGetAds requestPlacementField (boolean value) {
+      this.requestField("placement", value);
       return this;
     }
     public APIRequestGetAds requestPreviewShareableLinkField () {
@@ -3796,6 +3804,25 @@ public class CustomAudience extends APINode {
       }
   }
 
+  public static enum EnumSubscriptionInfo {
+      @SerializedName("MESSENGER")
+      VALUE_MESSENGER("MESSENGER"),
+      @SerializedName("WHATSAPP")
+      VALUE_WHATSAPP("WHATSAPP"),
+      ;
+
+      private String value;
+
+      private EnumSubscriptionInfo(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
   public static enum EnumSubtype {
       @SerializedName("APP")
       VALUE_APP("APP"),
@@ -3819,6 +3846,8 @@ public class CustomAudience extends APINode {
       VALUE_MANAGED("MANAGED"),
       @SerializedName("MEASUREMENT")
       VALUE_MEASUREMENT("MEASUREMENT"),
+      @SerializedName("MESSENGER_SUBSCRIBER_LIST")
+      VALUE_MESSENGER_SUBSCRIBER_LIST("MESSENGER_SUBSCRIBER_LIST"),
       @SerializedName("OFFLINE_CONVERSION")
       VALUE_OFFLINE_CONVERSION("OFFLINE_CONVERSION"),
       @SerializedName("PARTNER")
@@ -3840,6 +3869,25 @@ public class CustomAudience extends APINode {
       private String value;
 
       private EnumSubtype(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumUseForProducts {
+      @SerializedName("ADS")
+      VALUE_ADS("ADS"),
+      @SerializedName("MARKETING_MESSAGES")
+      VALUE_MARKETING_MESSAGES("MARKETING_MESSAGES"),
+      ;
+
+      private String value;
+
+      private EnumUseForProducts(String value) {
         this.value = value;
       }
 

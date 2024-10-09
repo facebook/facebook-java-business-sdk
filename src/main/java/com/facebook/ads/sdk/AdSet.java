@@ -123,6 +123,10 @@ public class AdSet extends APINode {
   private String mLifetimeMinSpendTarget = null;
   @SerializedName("lifetime_spend_cap")
   private String mLifetimeSpendCap = null;
+  @SerializedName("max_budget_spend_percentage")
+  private String mMaxBudgetSpendPercentage = null;
+  @SerializedName("min_budget_spend_percentage")
+  private String mMinBudgetSpendPercentage = null;
   @SerializedName("multi_optimization_goal_weight")
   private String mMultiOptimizationGoalWeight = null;
   @SerializedName("name")
@@ -872,6 +876,24 @@ public class AdSet extends APINode {
 
   public AdSet setFieldLifetimeSpendCap(String value) {
     this.mLifetimeSpendCap = value;
+    return this;
+  }
+
+  public String getFieldMaxBudgetSpendPercentage() {
+    return mMaxBudgetSpendPercentage;
+  }
+
+  public AdSet setFieldMaxBudgetSpendPercentage(String value) {
+    this.mMaxBudgetSpendPercentage = value;
+    return this;
+  }
+
+  public String getFieldMinBudgetSpendPercentage() {
+    return mMinBudgetSpendPercentage;
+  }
+
+  public AdSet setFieldMinBudgetSpendPercentage(String value) {
+    this.mMinBudgetSpendPercentage = value;
     return this;
   }
 
@@ -1659,6 +1681,7 @@ public class AdSet extends APINode {
       "link_destination_display_url",
       "link_og_id",
       "link_url",
+      "messenger_sponsored_message",
       "name",
       "object_id",
       "object_store_url",
@@ -2062,6 +2085,13 @@ public class AdSet extends APINode {
     }
     public APIRequestGetAdCreatives requestLinkUrlField (boolean value) {
       this.requestField("link_url", value);
+      return this;
+    }
+    public APIRequestGetAdCreatives requestMessengerSponsoredMessageField () {
+      return this.requestMessengerSponsoredMessageField(true);
+    }
+    public APIRequestGetAdCreatives requestMessengerSponsoredMessageField (boolean value) {
+      this.requestField("messenger_sponsored_message", value);
       return this;
     }
     public APIRequestGetAdCreatives requestNameField () {
@@ -2513,6 +2543,7 @@ public class AdSet extends APINode {
       "account_id",
       "created_by",
       "created_time",
+      "disable_error_code",
       "evaluation_spec",
       "execution_spec",
       "id",
@@ -2642,6 +2673,13 @@ public class AdSet extends APINode {
       this.requestField("created_time", value);
       return this;
     }
+    public APIRequestGetAdRulesGoverned requestDisableErrorCodeField () {
+      return this.requestDisableErrorCodeField(true);
+    }
+    public APIRequestGetAdRulesGoverned requestDisableErrorCodeField (boolean value) {
+      this.requestField("disable_error_code", value);
+      return this;
+    }
     public APIRequestGetAdRulesGoverned requestEvaluationSpecField () {
       return this.requestEvaluationSpecField(true);
     }
@@ -2736,6 +2774,7 @@ public class AdSet extends APINode {
       "issues_info",
       "last_updated_by_app_id",
       "name",
+      "placement",
       "preview_shareable_link",
       "priority",
       "recommendations",
@@ -3068,6 +3107,13 @@ public class AdSet extends APINode {
     }
     public APIRequestGetAds requestNameField (boolean value) {
       this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetAds requestPlacementField () {
+      return this.requestPlacementField(true);
+    }
+    public APIRequestGetAds requestPlacementField (boolean value) {
+      this.requestField("placement", value);
       return this;
     }
     public APIRequestGetAds requestPreviewShareableLinkField () {
@@ -3530,6 +3576,8 @@ public class AdSet extends APINode {
       "lifetime_imps",
       "lifetime_min_spend_target",
       "lifetime_spend_cap",
+      "max_budget_spend_percentage",
+      "min_budget_spend_percentage",
       "multi_optimization_goal_weight",
       "name",
       "optimization_goal",
@@ -3965,6 +4013,20 @@ public class AdSet extends APINode {
     }
     public APIRequestGetCopies requestLifetimeSpendCapField (boolean value) {
       this.requestField("lifetime_spend_cap", value);
+      return this;
+    }
+    public APIRequestGetCopies requestMaxBudgetSpendPercentageField () {
+      return this.requestMaxBudgetSpendPercentageField(true);
+    }
+    public APIRequestGetCopies requestMaxBudgetSpendPercentageField (boolean value) {
+      this.requestField("max_budget_spend_percentage", value);
+      return this;
+    }
+    public APIRequestGetCopies requestMinBudgetSpendPercentageField () {
+      return this.requestMinBudgetSpendPercentageField(true);
+    }
+    public APIRequestGetCopies requestMinBudgetSpendPercentageField (boolean value) {
+      this.requestField("min_budget_spend_percentage", value);
       return this;
     }
     public APIRequestGetCopies requestMultiOptimizationGoalWeightField () {
@@ -5612,6 +5674,8 @@ public class AdSet extends APINode {
       "lifetime_imps",
       "lifetime_min_spend_target",
       "lifetime_spend_cap",
+      "max_budget_spend_percentage",
+      "min_budget_spend_percentage",
       "multi_optimization_goal_weight",
       "name",
       "optimization_goal",
@@ -6049,6 +6113,20 @@ public class AdSet extends APINode {
       this.requestField("lifetime_spend_cap", value);
       return this;
     }
+    public APIRequestGet requestMaxBudgetSpendPercentageField () {
+      return this.requestMaxBudgetSpendPercentageField(true);
+    }
+    public APIRequestGet requestMaxBudgetSpendPercentageField (boolean value) {
+      this.requestField("max_budget_spend_percentage", value);
+      return this;
+    }
+    public APIRequestGet requestMinBudgetSpendPercentageField () {
+      return this.requestMinBudgetSpendPercentageField(true);
+    }
+    public APIRequestGet requestMinBudgetSpendPercentageField (boolean value) {
+      this.requestField("min_budget_spend_percentage", value);
+      return this;
+    }
     public APIRequestGet requestMultiOptimizationGoalWeightField () {
       return this.requestMultiOptimizationGoalWeightField(true);
     }
@@ -6241,6 +6319,8 @@ public class AdSet extends APINode {
       "lifetime_imps",
       "lifetime_min_spend_target",
       "lifetime_spend_cap",
+      "max_budget_spend_percentage",
+      "min_budget_spend_percentage",
       "multi_optimization_goal_weight",
       "name",
       "optimization_goal",
@@ -6547,6 +6627,24 @@ public class AdSet extends APINode {
     }
     public APIRequestUpdate setLifetimeSpendCap (String lifetimeSpendCap) {
       this.setParam("lifetime_spend_cap", lifetimeSpendCap);
+      return this;
+    }
+
+    public APIRequestUpdate setMaxBudgetSpendPercentage (Long maxBudgetSpendPercentage) {
+      this.setParam("max_budget_spend_percentage", maxBudgetSpendPercentage);
+      return this;
+    }
+    public APIRequestUpdate setMaxBudgetSpendPercentage (String maxBudgetSpendPercentage) {
+      this.setParam("max_budget_spend_percentage", maxBudgetSpendPercentage);
+      return this;
+    }
+
+    public APIRequestUpdate setMinBudgetSpendPercentage (Long minBudgetSpendPercentage) {
+      this.setParam("min_budget_spend_percentage", minBudgetSpendPercentage);
+      return this;
+    }
+    public APIRequestUpdate setMinBudgetSpendPercentage (String minBudgetSpendPercentage) {
+      this.setParam("min_budget_spend_percentage", minBudgetSpendPercentage);
       return this;
     }
 
@@ -7145,6 +7243,8 @@ public class AdSet extends APINode {
       VALUE_0("0"),
       @SerializedName("1")
       VALUE_1("1"),
+      @SerializedName("2")
+      VALUE_2("2"),
       ;
 
       private String value;
@@ -7164,6 +7264,8 @@ public class AdSet extends APINode {
       VALUE_CREDIT("CREDIT"),
       @SerializedName("EMPLOYMENT")
       VALUE_EMPLOYMENT("EMPLOYMENT"),
+      @SerializedName("FINANCIAL_PRODUCTS_SERVICES")
+      VALUE_FINANCIAL_PRODUCTS_SERVICES("FINANCIAL_PRODUCTS_SERVICES"),
       @SerializedName("HOUSING")
       VALUE_HOUSING("HOUSING"),
       @SerializedName("ISSUES_ELECTIONS_POLITICS")
@@ -7282,6 +7384,8 @@ public class AdSet extends APINode {
     this.mLifetimeImps = instance.mLifetimeImps;
     this.mLifetimeMinSpendTarget = instance.mLifetimeMinSpendTarget;
     this.mLifetimeSpendCap = instance.mLifetimeSpendCap;
+    this.mMaxBudgetSpendPercentage = instance.mMaxBudgetSpendPercentage;
+    this.mMinBudgetSpendPercentage = instance.mMinBudgetSpendPercentage;
     this.mMultiOptimizationGoalWeight = instance.mMultiOptimizationGoalWeight;
     this.mName = instance.mName;
     this.mOptimizationGoal = instance.mOptimizationGoal;

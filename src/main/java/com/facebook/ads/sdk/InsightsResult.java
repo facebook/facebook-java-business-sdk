@@ -276,6 +276,119 @@ public class InsightsResult extends APINode {
   }
 
 
+  public static enum EnumBreakdown {
+      @SerializedName("action_type")
+      VALUE_ACTION_TYPE("action_type"),
+      @SerializedName("follow_type")
+      VALUE_FOLLOW_TYPE("follow_type"),
+      @SerializedName("story_navigation_action_type")
+      VALUE_STORY_NAVIGATION_ACTION_TYPE("story_navigation_action_type"),
+      @SerializedName("surface_type")
+      VALUE_SURFACE_TYPE("surface_type"),
+      ;
+
+      private String value;
+
+      private EnumBreakdown(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumMetric {
+      @SerializedName("clips_replays_count")
+      VALUE_CLIPS_REPLAYS_COUNT("clips_replays_count"),
+      @SerializedName("comments")
+      VALUE_COMMENTS("comments"),
+      @SerializedName("follows")
+      VALUE_FOLLOWS("follows"),
+      @SerializedName("ig_reels_aggregated_all_plays_count")
+      VALUE_IG_REELS_AGGREGATED_ALL_PLAYS_COUNT("ig_reels_aggregated_all_plays_count"),
+      @SerializedName("ig_reels_avg_watch_time")
+      VALUE_IG_REELS_AVG_WATCH_TIME("ig_reels_avg_watch_time"),
+      @SerializedName("ig_reels_video_view_total_time")
+      VALUE_IG_REELS_VIDEO_VIEW_TOTAL_TIME("ig_reels_video_view_total_time"),
+      @SerializedName("impressions")
+      VALUE_IMPRESSIONS("impressions"),
+      @SerializedName("likes")
+      VALUE_LIKES("likes"),
+      @SerializedName("navigation")
+      VALUE_NAVIGATION("navigation"),
+      @SerializedName("peak_concurrent_viewers")
+      VALUE_PEAK_CONCURRENT_VIEWERS("peak_concurrent_viewers"),
+      @SerializedName("plays")
+      VALUE_PLAYS("plays"),
+      @SerializedName("profile_activity")
+      VALUE_PROFILE_ACTIVITY("profile_activity"),
+      @SerializedName("profile_visits")
+      VALUE_PROFILE_VISITS("profile_visits"),
+      @SerializedName("quotes")
+      VALUE_QUOTES("quotes"),
+      @SerializedName("reach")
+      VALUE_REACH("reach"),
+      @SerializedName("replies")
+      VALUE_REPLIES("replies"),
+      @SerializedName("reposts")
+      VALUE_REPOSTS("reposts"),
+      @SerializedName("saved")
+      VALUE_SAVED("saved"),
+      @SerializedName("shares")
+      VALUE_SHARES("shares"),
+      @SerializedName("thread_replies")
+      VALUE_THREAD_REPLIES("thread_replies"),
+      @SerializedName("thread_shares")
+      VALUE_THREAD_SHARES("thread_shares"),
+      @SerializedName("total_interactions")
+      VALUE_TOTAL_INTERACTIONS("total_interactions"),
+      @SerializedName("video_views")
+      VALUE_VIDEO_VIEWS("video_views"),
+      @SerializedName("views")
+      VALUE_VIEWS("views"),
+      ;
+
+      private String value;
+
+      private EnumMetric(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumPeriod {
+      @SerializedName("day")
+      VALUE_DAY("day"),
+      @SerializedName("days_28")
+      VALUE_DAYS_28("days_28"),
+      @SerializedName("lifetime")
+      VALUE_LIFETIME("lifetime"),
+      @SerializedName("month")
+      VALUE_MONTH("month"),
+      @SerializedName("total_over_range")
+      VALUE_TOTAL_OVER_RANGE("total_over_range"),
+      @SerializedName("week")
+      VALUE_WEEK("week"),
+      ;
+
+      private String value;
+
+      private EnumPeriod(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
   public static enum EnumDatePreset {
       @SerializedName("data_maximum")
       VALUE_DATA_MAXIMUM("data_maximum"),
@@ -322,62 +435,6 @@ public class InsightsResult extends APINode {
       private String value;
 
       private EnumDatePreset(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumPeriod {
-      @SerializedName("day")
-      VALUE_DAY("day"),
-      @SerializedName("days_28")
-      VALUE_DAYS_28("days_28"),
-      @SerializedName("lifetime")
-      VALUE_LIFETIME("lifetime"),
-      @SerializedName("month")
-      VALUE_MONTH("month"),
-      @SerializedName("total_over_range")
-      VALUE_TOTAL_OVER_RANGE("total_over_range"),
-      @SerializedName("week")
-      VALUE_WEEK("week"),
-      ;
-
-      private String value;
-
-      private EnumPeriod(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumMetric {
-      @SerializedName("PAGES_FB_STORY_REPLIES")
-      VALUE_PAGES_FB_STORY_REPLIES("PAGES_FB_STORY_REPLIES"),
-      @SerializedName("PAGES_FB_STORY_SHARES")
-      VALUE_PAGES_FB_STORY_SHARES("PAGES_FB_STORY_SHARES"),
-      @SerializedName("PAGES_FB_STORY_STICKER_INTERACTIONS")
-      VALUE_PAGES_FB_STORY_STICKER_INTERACTIONS("PAGES_FB_STORY_STICKER_INTERACTIONS"),
-      @SerializedName("PAGES_FB_STORY_THREAD_LIGHTWEIGHT_REACTIONS")
-      VALUE_PAGES_FB_STORY_THREAD_LIGHTWEIGHT_REACTIONS("PAGES_FB_STORY_THREAD_LIGHTWEIGHT_REACTIONS"),
-      @SerializedName("PAGE_STORY_IMPRESSIONS_BY_STORY_ID")
-      VALUE_PAGE_STORY_IMPRESSIONS_BY_STORY_ID("PAGE_STORY_IMPRESSIONS_BY_STORY_ID"),
-      @SerializedName("PAGE_STORY_IMPRESSIONS_BY_STORY_ID_UNIQUE")
-      VALUE_PAGE_STORY_IMPRESSIONS_BY_STORY_ID_UNIQUE("PAGE_STORY_IMPRESSIONS_BY_STORY_ID_UNIQUE"),
-      @SerializedName("STORY_INTERACTION")
-      VALUE_STORY_INTERACTION("STORY_INTERACTION"),
-      ;
-
-      private String value;
-
-      private EnumMetric(String value) {
         this.value = value;
       }
 

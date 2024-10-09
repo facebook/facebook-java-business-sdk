@@ -40,82 +40,84 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class PanelAPIReport extends APINode {
-  @SerializedName("checksum")
-  private String mChecksum = null;
-  @SerializedName("download_url")
-  private String mDownloadUrl = null;
-  @SerializedName("end_date")
-  private String mEndDate = null;
-  @SerializedName("export_file_type")
-  private String mExportFileType = null;
+public class MessengerBusinessTemplate extends APINode {
+  @SerializedName("category")
+  private String mCategory = null;
+  @SerializedName("components")
+  private List<Object> mComponents = null;
+  @SerializedName("creation_time")
+  private Long mCreationTime = null;
   @SerializedName("id")
   private String mId = null;
-  @SerializedName("index")
-  private Long mIndex = null;
+  @SerializedName("language")
+  private String mLanguage = null;
+  @SerializedName("language_count")
+  private Long mLanguageCount = null;
+  @SerializedName("last_updated_time")
+  private String mLastUpdatedTime = null;
+  @SerializedName("library_template_name")
+  private String mLibraryTemplateName = null;
   @SerializedName("name")
   private String mName = null;
-  @SerializedName("number_of_chunks")
-  private Long mNumberOfChunks = null;
-  @SerializedName("start_date")
-  private String mStartDate = null;
-  @SerializedName("upload_date")
-  private String mUploadDate = null;
+  @SerializedName("rejected_reason")
+  private String mRejectedReason = null;
+  @SerializedName("status")
+  private String mStatus = null;
   protected static Gson gson = null;
 
-  PanelAPIReport() {
+  MessengerBusinessTemplate() {
   }
 
-  public PanelAPIReport(Long id, APIContext context) {
+  public MessengerBusinessTemplate(Long id, APIContext context) {
     this(id.toString(), context);
   }
 
-  public PanelAPIReport(String id, APIContext context) {
+  public MessengerBusinessTemplate(String id, APIContext context) {
     this.mId = id;
 
     this.context = context;
   }
 
-  public PanelAPIReport fetch() throws APIException{
-    PanelAPIReport newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+  public MessengerBusinessTemplate fetch() throws APIException{
+    MessengerBusinessTemplate newInstance = fetchById(this.getPrefixedId().toString(), this.context);
     this.copyFrom(newInstance);
     return this;
   }
 
-  public static PanelAPIReport fetchById(Long id, APIContext context) throws APIException {
+  public static MessengerBusinessTemplate fetchById(Long id, APIContext context) throws APIException {
     return fetchById(id.toString(), context);
   }
 
-  public static ListenableFuture<PanelAPIReport> fetchByIdAsync(Long id, APIContext context) throws APIException {
+  public static ListenableFuture<MessengerBusinessTemplate> fetchByIdAsync(Long id, APIContext context) throws APIException {
     return fetchByIdAsync(id.toString(), context);
   }
 
-  public static PanelAPIReport fetchById(String id, APIContext context) throws APIException {
+  public static MessengerBusinessTemplate fetchById(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
   }
 
-  public static ListenableFuture<PanelAPIReport> fetchByIdAsync(String id, APIContext context) throws APIException {
+  public static ListenableFuture<MessengerBusinessTemplate> fetchByIdAsync(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
   }
 
-  public static APINodeList<PanelAPIReport> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<PanelAPIReport>)(
-      new APIRequest<PanelAPIReport>(context, "", "/", "GET", PanelAPIReport.getParser())
+  public static APINodeList<MessengerBusinessTemplate> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<MessengerBusinessTemplate>)(
+      new APIRequest<MessengerBusinessTemplate>(context, "", "/", "GET", MessengerBusinessTemplate.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .execute()
     );
   }
 
-  public static ListenableFuture<APINodeList<PanelAPIReport>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+  public static ListenableFuture<APINodeList<MessengerBusinessTemplate>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
     return
-      new APIRequest(context, "", "/", "GET", PanelAPIReport.getParser())
+      new APIRequest(context, "", "/", "GET", MessengerBusinessTemplate.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
@@ -128,12 +130,12 @@ public class PanelAPIReport extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static PanelAPIReport loadJSON(String json, APIContext context, String header) {
-    PanelAPIReport panelAPIReport = getGson().fromJson(json, PanelAPIReport.class);
+  public static MessengerBusinessTemplate loadJSON(String json, APIContext context, String header) {
+    MessengerBusinessTemplate messengerBusinessTemplate = getGson().fromJson(json, MessengerBusinessTemplate.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(panelAPIReport.toString());
+      JsonElement o2 = parser.parse(messengerBusinessTemplate.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -143,14 +145,14 @@ public class PanelAPIReport extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    panelAPIReport.context = context;
-    panelAPIReport.rawValue = json;
-    panelAPIReport.header = header;
-    return panelAPIReport;
+    messengerBusinessTemplate.context = context;
+    messengerBusinessTemplate.rawValue = json;
+    messengerBusinessTemplate.header = header;
+    return messengerBusinessTemplate;
   }
 
-  public static APINodeList<PanelAPIReport> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<PanelAPIReport> panelAPIReports = new APINodeList<PanelAPIReport>(request, json, header);
+  public static APINodeList<MessengerBusinessTemplate> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<MessengerBusinessTemplate> messengerBusinessTemplates = new APINodeList<MessengerBusinessTemplate>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -161,9 +163,9 @@ public class PanelAPIReport extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          panelAPIReports.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          messengerBusinessTemplates.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return panelAPIReports;
+        return messengerBusinessTemplates;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -173,20 +175,20 @@ public class PanelAPIReport extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                panelAPIReports.setCursors(before, after);
+                messengerBusinessTemplates.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            panelAPIReports.setPaging(previous, next);
+            messengerBusinessTemplates.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              panelAPIReports.setAppSecret(context.getAppSecretProof());
+              messengerBusinessTemplates.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              panelAPIReports.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              messengerBusinessTemplates.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -197,23 +199,23 @@ public class PanelAPIReport extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  panelAPIReports.add(loadJSON(entry.getValue().toString(), context, header));
+                  messengerBusinessTemplates.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              panelAPIReports.add(loadJSON(obj.toString(), context, header));
+              messengerBusinessTemplates.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return panelAPIReports;
+          return messengerBusinessTemplates;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              panelAPIReports.add(loadJSON(entry.getValue().toString(), context, header));
+              messengerBusinessTemplates.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return panelAPIReports;
+          return messengerBusinessTemplates;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -230,20 +232,20 @@ public class PanelAPIReport extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              panelAPIReports.add(loadJSON(value.toString(), context, header));
+              messengerBusinessTemplates.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return panelAPIReports;
+            return messengerBusinessTemplates;
           }
 
           // Sixth, check if it's pure JsonObject
-          panelAPIReports.clear();
-          panelAPIReports.add(loadJSON(json, context, header));
-          return panelAPIReports;
+          messengerBusinessTemplates.clear();
+          messengerBusinessTemplates.add(loadJSON(json, context, header));
+          return messengerBusinessTemplates;
         }
       }
     } catch (Exception e) {
@@ -275,97 +277,102 @@ public class PanelAPIReport extends APINode {
   }
 
 
-  public String getFieldChecksum() {
-    return mChecksum;
+  public String getFieldCategory() {
+    return mCategory;
   }
 
-  public String getFieldDownloadUrl() {
-    return mDownloadUrl;
+  public List<Object> getFieldComponents() {
+    return mComponents;
   }
 
-  public String getFieldEndDate() {
-    return mEndDate;
-  }
-
-  public String getFieldExportFileType() {
-    return mExportFileType;
+  public Long getFieldCreationTime() {
+    return mCreationTime;
   }
 
   public String getFieldId() {
     return mId;
   }
 
-  public Long getFieldIndex() {
-    return mIndex;
+  public String getFieldLanguage() {
+    return mLanguage;
+  }
+
+  public Long getFieldLanguageCount() {
+    return mLanguageCount;
+  }
+
+  public String getFieldLastUpdatedTime() {
+    return mLastUpdatedTime;
+  }
+
+  public String getFieldLibraryTemplateName() {
+    return mLibraryTemplateName;
   }
 
   public String getFieldName() {
     return mName;
   }
 
-  public Long getFieldNumberOfChunks() {
-    return mNumberOfChunks;
+  public String getFieldRejectedReason() {
+    return mRejectedReason;
   }
 
-  public String getFieldStartDate() {
-    return mStartDate;
-  }
-
-  public String getFieldUploadDate() {
-    return mUploadDate;
+  public String getFieldStatus() {
+    return mStatus;
   }
 
 
 
-  public static class APIRequestGet extends APIRequest<PanelAPIReport> {
+  public static class APIRequestGet extends APIRequest<MessengerBusinessTemplate> {
 
-    PanelAPIReport lastResponse = null;
+    MessengerBusinessTemplate lastResponse = null;
     @Override
-    public PanelAPIReport getLastResponse() {
+    public MessengerBusinessTemplate getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
     };
 
     public static final String[] FIELDS = {
-      "checksum",
-      "download_url",
-      "end_date",
-      "export_file_type",
+      "category",
+      "components",
+      "creation_time",
       "id",
-      "index",
+      "language",
+      "language_count",
+      "last_updated_time",
+      "library_template_name",
       "name",
-      "number_of_chunks",
-      "start_date",
-      "upload_date",
+      "rejected_reason",
+      "status",
     };
 
     @Override
-    public PanelAPIReport parseResponse(String response, String header) throws APIException {
-      return PanelAPIReport.parseResponse(response, getContext(), this, header).head();
+    public MessengerBusinessTemplate parseResponse(String response, String header) throws APIException {
+      return MessengerBusinessTemplate.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public PanelAPIReport execute() throws APIException {
+    public MessengerBusinessTemplate execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public PanelAPIReport execute(Map<String, Object> extraParams) throws APIException {
+    public MessengerBusinessTemplate execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<PanelAPIReport> executeAsync() throws APIException {
+    public ListenableFuture<MessengerBusinessTemplate> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<PanelAPIReport> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<MessengerBusinessTemplate> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, PanelAPIReport>() {
-           public PanelAPIReport apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, MessengerBusinessTemplate>() {
+           public MessengerBusinessTemplate apply(ResponseWrapper result) {
              try {
                return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -430,32 +437,25 @@ public class PanelAPIReport extends APINode {
       return this;
     }
 
-    public APIRequestGet requestChecksumField () {
-      return this.requestChecksumField(true);
+    public APIRequestGet requestCategoryField () {
+      return this.requestCategoryField(true);
     }
-    public APIRequestGet requestChecksumField (boolean value) {
-      this.requestField("checksum", value);
+    public APIRequestGet requestCategoryField (boolean value) {
+      this.requestField("category", value);
       return this;
     }
-    public APIRequestGet requestDownloadUrlField () {
-      return this.requestDownloadUrlField(true);
+    public APIRequestGet requestComponentsField () {
+      return this.requestComponentsField(true);
     }
-    public APIRequestGet requestDownloadUrlField (boolean value) {
-      this.requestField("download_url", value);
+    public APIRequestGet requestComponentsField (boolean value) {
+      this.requestField("components", value);
       return this;
     }
-    public APIRequestGet requestEndDateField () {
-      return this.requestEndDateField(true);
+    public APIRequestGet requestCreationTimeField () {
+      return this.requestCreationTimeField(true);
     }
-    public APIRequestGet requestEndDateField (boolean value) {
-      this.requestField("end_date", value);
-      return this;
-    }
-    public APIRequestGet requestExportFileTypeField () {
-      return this.requestExportFileTypeField(true);
-    }
-    public APIRequestGet requestExportFileTypeField (boolean value) {
-      this.requestField("export_file_type", value);
+    public APIRequestGet requestCreationTimeField (boolean value) {
+      this.requestField("creation_time", value);
       return this;
     }
     public APIRequestGet requestIdField () {
@@ -465,11 +465,32 @@ public class PanelAPIReport extends APINode {
       this.requestField("id", value);
       return this;
     }
-    public APIRequestGet requestIndexField () {
-      return this.requestIndexField(true);
+    public APIRequestGet requestLanguageField () {
+      return this.requestLanguageField(true);
     }
-    public APIRequestGet requestIndexField (boolean value) {
-      this.requestField("index", value);
+    public APIRequestGet requestLanguageField (boolean value) {
+      this.requestField("language", value);
+      return this;
+    }
+    public APIRequestGet requestLanguageCountField () {
+      return this.requestLanguageCountField(true);
+    }
+    public APIRequestGet requestLanguageCountField (boolean value) {
+      this.requestField("language_count", value);
+      return this;
+    }
+    public APIRequestGet requestLastUpdatedTimeField () {
+      return this.requestLastUpdatedTimeField(true);
+    }
+    public APIRequestGet requestLastUpdatedTimeField (boolean value) {
+      this.requestField("last_updated_time", value);
+      return this;
+    }
+    public APIRequestGet requestLibraryTemplateNameField () {
+      return this.requestLibraryTemplateNameField(true);
+    }
+    public APIRequestGet requestLibraryTemplateNameField (boolean value) {
+      this.requestField("library_template_name", value);
       return this;
     }
     public APIRequestGet requestNameField () {
@@ -479,25 +500,18 @@ public class PanelAPIReport extends APINode {
       this.requestField("name", value);
       return this;
     }
-    public APIRequestGet requestNumberOfChunksField () {
-      return this.requestNumberOfChunksField(true);
+    public APIRequestGet requestRejectedReasonField () {
+      return this.requestRejectedReasonField(true);
     }
-    public APIRequestGet requestNumberOfChunksField (boolean value) {
-      this.requestField("number_of_chunks", value);
+    public APIRequestGet requestRejectedReasonField (boolean value) {
+      this.requestField("rejected_reason", value);
       return this;
     }
-    public APIRequestGet requestStartDateField () {
-      return this.requestStartDateField(true);
+    public APIRequestGet requestStatusField () {
+      return this.requestStatusField(true);
     }
-    public APIRequestGet requestStartDateField (boolean value) {
-      this.requestField("start_date", value);
-      return this;
-    }
-    public APIRequestGet requestUploadDateField () {
-      return this.requestUploadDateField(true);
-    }
-    public APIRequestGet requestUploadDateField (boolean value) {
-      this.requestField("upload_date", value);
+    public APIRequestGet requestStatusField (boolean value) {
+      this.requestField("status", value);
       return this;
     }
   }
@@ -516,26 +530,27 @@ public class PanelAPIReport extends APINode {
     return gson;
   }
 
-  public PanelAPIReport copyFrom(PanelAPIReport instance) {
-    this.mChecksum = instance.mChecksum;
-    this.mDownloadUrl = instance.mDownloadUrl;
-    this.mEndDate = instance.mEndDate;
-    this.mExportFileType = instance.mExportFileType;
+  public MessengerBusinessTemplate copyFrom(MessengerBusinessTemplate instance) {
+    this.mCategory = instance.mCategory;
+    this.mComponents = instance.mComponents;
+    this.mCreationTime = instance.mCreationTime;
     this.mId = instance.mId;
-    this.mIndex = instance.mIndex;
+    this.mLanguage = instance.mLanguage;
+    this.mLanguageCount = instance.mLanguageCount;
+    this.mLastUpdatedTime = instance.mLastUpdatedTime;
+    this.mLibraryTemplateName = instance.mLibraryTemplateName;
     this.mName = instance.mName;
-    this.mNumberOfChunks = instance.mNumberOfChunks;
-    this.mStartDate = instance.mStartDate;
-    this.mUploadDate = instance.mUploadDate;
+    this.mRejectedReason = instance.mRejectedReason;
+    this.mStatus = instance.mStatus;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<PanelAPIReport> getParser() {
-    return new APIRequest.ResponseParser<PanelAPIReport>() {
-      public APINodeList<PanelAPIReport> parseResponse(String response, APIContext context, APIRequest<PanelAPIReport> request, String header) throws MalformedResponseException {
-        return PanelAPIReport.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<MessengerBusinessTemplate> getParser() {
+    return new APIRequest.ResponseParser<MessengerBusinessTemplate>() {
+      public APINodeList<MessengerBusinessTemplate> parseResponse(String response, APIContext context, APIRequest<MessengerBusinessTemplate> request, String header) throws MalformedResponseException {
+        return MessengerBusinessTemplate.parseResponse(response, context, request, header);
       }
     };
   }

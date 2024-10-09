@@ -254,8 +254,8 @@ public class AdsValueAdjustmentRuleCollection extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGetPersonas getPersonas() {
-    return new APIRequestGetPersonas(this.getPrefixedId().toString(), context);
+  public APIRequestGetRules getRules() {
+    return new APIRequestGetRules(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGet get() {
@@ -273,7 +273,7 @@ public class AdsValueAdjustmentRuleCollection extends APINode {
 
 
 
-  public static class APIRequestGetPersonas extends APIRequest<APINode> {
+  public static class APIRequestGetRules extends APIRequest<APINode> {
 
     APINodeList<APINode> lastResponse = null;
     @Override
@@ -313,7 +313,7 @@ public class AdsValueAdjustmentRuleCollection extends APINode {
         new Function<ResponseWrapper, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetPersonas.this.parseResponse(result.getBody(), result.getHeader());
+               return APIRequestGetRules.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -323,28 +323,28 @@ public class AdsValueAdjustmentRuleCollection extends APINode {
       );
     };
 
-    public APIRequestGetPersonas(String nodeId, APIContext context) {
-      super(context, nodeId, "/personas", "GET", Arrays.asList(PARAMS));
+    public APIRequestGetRules(String nodeId, APIContext context) {
+      super(context, nodeId, "/rules", "GET", Arrays.asList(PARAMS));
     }
 
     @Override
-    public APIRequestGetPersonas setParam(String param, Object value) {
+    public APIRequestGetRules setParam(String param, Object value) {
       setParamInternal(param, value);
       return this;
     }
 
     @Override
-    public APIRequestGetPersonas setParams(Map<String, Object> params) {
+    public APIRequestGetRules setParams(Map<String, Object> params) {
       setParamsInternal(params);
       return this;
     }
 
 
-    public APIRequestGetPersonas requestAllFields () {
+    public APIRequestGetRules requestAllFields () {
       return this.requestAllFields(true);
     }
 
-    public APIRequestGetPersonas requestAllFields (boolean value) {
+    public APIRequestGetRules requestAllFields (boolean value) {
       for (String field : FIELDS) {
         this.requestField(field, value);
       }
@@ -352,12 +352,12 @@ public class AdsValueAdjustmentRuleCollection extends APINode {
     }
 
     @Override
-    public APIRequestGetPersonas requestFields (List<String> fields) {
+    public APIRequestGetRules requestFields (List<String> fields) {
       return this.requestFields(fields, true);
     }
 
     @Override
-    public APIRequestGetPersonas requestFields (List<String> fields, boolean value) {
+    public APIRequestGetRules requestFields (List<String> fields, boolean value) {
       for (String field : fields) {
         this.requestField(field, value);
       }
@@ -365,13 +365,13 @@ public class AdsValueAdjustmentRuleCollection extends APINode {
     }
 
     @Override
-    public APIRequestGetPersonas requestField (String field) {
+    public APIRequestGetRules requestField (String field) {
       this.requestField(field, true);
       return this;
     }
 
     @Override
-    public APIRequestGetPersonas requestField (String field, boolean value) {
+    public APIRequestGetRules requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }

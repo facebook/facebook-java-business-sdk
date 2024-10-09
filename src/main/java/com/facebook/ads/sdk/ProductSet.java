@@ -1806,6 +1806,11 @@ public class ProductSet extends APINode {
       "margin_level",
       "name",
       "phone",
+      "product_priority_0",
+      "product_priority_1",
+      "product_priority_2",
+      "product_priority_3",
+      "product_priority_4",
       "sale_price",
       "sanitized_images",
       "star_rating",
@@ -2040,6 +2045,41 @@ public class ProductSet extends APINode {
     }
     public APIRequestGetHotels requestPhoneField (boolean value) {
       this.requestField("phone", value);
+      return this;
+    }
+    public APIRequestGetHotels requestProductPriority0Field () {
+      return this.requestProductPriority0Field(true);
+    }
+    public APIRequestGetHotels requestProductPriority0Field (boolean value) {
+      this.requestField("product_priority_0", value);
+      return this;
+    }
+    public APIRequestGetHotels requestProductPriority1Field () {
+      return this.requestProductPriority1Field(true);
+    }
+    public APIRequestGetHotels requestProductPriority1Field (boolean value) {
+      this.requestField("product_priority_1", value);
+      return this;
+    }
+    public APIRequestGetHotels requestProductPriority2Field () {
+      return this.requestProductPriority2Field(true);
+    }
+    public APIRequestGetHotels requestProductPriority2Field (boolean value) {
+      this.requestField("product_priority_2", value);
+      return this;
+    }
+    public APIRequestGetHotels requestProductPriority3Field () {
+      return this.requestProductPriority3Field(true);
+    }
+    public APIRequestGetHotels requestProductPriority3Field (boolean value) {
+      this.requestField("product_priority_3", value);
+      return this;
+    }
+    public APIRequestGetHotels requestProductPriority4Field () {
+      return this.requestProductPriority4Field(true);
+    }
+    public APIRequestGetHotels requestProductPriority4Field (boolean value) {
+      this.requestField("product_priority_4", value);
       return this;
     }
     public APIRequestGetHotels requestSalePriceField () {
@@ -3200,6 +3240,11 @@ public class ProductSet extends APINode {
       "offer_disclaimer",
       "offer_type",
       "price",
+      "product_priority_0",
+      "product_priority_1",
+      "product_priority_2",
+      "product_priority_3",
+      "product_priority_4",
       "sanitized_images",
       "start_date",
       "start_time",
@@ -3547,6 +3592,41 @@ public class ProductSet extends APINode {
       this.requestField("price", value);
       return this;
     }
+    public APIRequestGetVehicleOffers requestProductPriority0Field () {
+      return this.requestProductPriority0Field(true);
+    }
+    public APIRequestGetVehicleOffers requestProductPriority0Field (boolean value) {
+      this.requestField("product_priority_0", value);
+      return this;
+    }
+    public APIRequestGetVehicleOffers requestProductPriority1Field () {
+      return this.requestProductPriority1Field(true);
+    }
+    public APIRequestGetVehicleOffers requestProductPriority1Field (boolean value) {
+      this.requestField("product_priority_1", value);
+      return this;
+    }
+    public APIRequestGetVehicleOffers requestProductPriority2Field () {
+      return this.requestProductPriority2Field(true);
+    }
+    public APIRequestGetVehicleOffers requestProductPriority2Field (boolean value) {
+      this.requestField("product_priority_2", value);
+      return this;
+    }
+    public APIRequestGetVehicleOffers requestProductPriority3Field () {
+      return this.requestProductPriority3Field(true);
+    }
+    public APIRequestGetVehicleOffers requestProductPriority3Field (boolean value) {
+      this.requestField("product_priority_3", value);
+      return this;
+    }
+    public APIRequestGetVehicleOffers requestProductPriority4Field () {
+      return this.requestProductPriority4Field(true);
+    }
+    public APIRequestGetVehicleOffers requestProductPriority4Field (boolean value) {
+      this.requestField("product_priority_4", value);
+      return this;
+    }
     public APIRequestGetVehicleOffers requestSanitizedImagesField () {
       return this.requestSanitizedImagesField(true);
     }
@@ -3685,6 +3765,11 @@ public class ProductSet extends APINode {
       "previous_currency",
       "previous_price",
       "price",
+      "product_priority_0",
+      "product_priority_1",
+      "product_priority_2",
+      "product_priority_3",
+      "product_priority_4",
       "sale_currency",
       "sale_price",
       "sanitized_images",
@@ -4033,6 +4118,41 @@ public class ProductSet extends APINode {
     }
     public APIRequestGetVehicles requestPriceField (boolean value) {
       this.requestField("price", value);
+      return this;
+    }
+    public APIRequestGetVehicles requestProductPriority0Field () {
+      return this.requestProductPriority0Field(true);
+    }
+    public APIRequestGetVehicles requestProductPriority0Field (boolean value) {
+      this.requestField("product_priority_0", value);
+      return this;
+    }
+    public APIRequestGetVehicles requestProductPriority1Field () {
+      return this.requestProductPriority1Field(true);
+    }
+    public APIRequestGetVehicles requestProductPriority1Field (boolean value) {
+      this.requestField("product_priority_1", value);
+      return this;
+    }
+    public APIRequestGetVehicles requestProductPriority2Field () {
+      return this.requestProductPriority2Field(true);
+    }
+    public APIRequestGetVehicles requestProductPriority2Field (boolean value) {
+      this.requestField("product_priority_2", value);
+      return this;
+    }
+    public APIRequestGetVehicles requestProductPriority3Field () {
+      return this.requestProductPriority3Field(true);
+    }
+    public APIRequestGetVehicles requestProductPriority3Field (boolean value) {
+      this.requestField("product_priority_3", value);
+      return this;
+    }
+    public APIRequestGetVehicles requestProductPriority4Field () {
+      return this.requestProductPriority4Field(true);
+    }
+    public APIRequestGetVehicles requestProductPriority4Field (boolean value) {
+      this.requestField("product_priority_4", value);
       return this;
     }
     public APIRequestGetVehicles requestSaleCurrencyField () {

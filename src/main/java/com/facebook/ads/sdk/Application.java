@@ -596,6 +596,10 @@ public class Application extends APINode {
     return new APIRequestGetLinkedDataset(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetMessageTemplates getMessageTemplates() {
+    return new APIRequestGetMessageTemplates(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestCreateMmpAuditing createMmpAuditing() {
     return new APIRequestCreateMmpAuditing(this.getPrefixedId().toString(), context);
   }
@@ -622,10 +626,6 @@ public class Application extends APINode {
 
   public APIRequestCreateOccludesPopup createOccludesPopup() {
     return new APIRequestCreateOccludesPopup(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestCreatePageActivity createPageActivity() {
-    return new APIRequestCreatePageActivity(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestCreatePaymentCurrency createPaymentCurrency() {
@@ -1564,6 +1564,7 @@ public class Application extends APINode {
       "data_processing_options_state",
       "device_token",
       "event",
+      "event_id",
       "extinfo",
       "include_dwell_data",
       "include_video_data",
@@ -1778,6 +1779,11 @@ public class Application extends APINode {
     }
     public APIRequestCreateActivity setEvent (String event) {
       this.setParam("event", event);
+      return this;
+    }
+
+    public APIRequestCreateActivity setEventId (String eventId) {
+      this.setParam("event_id", eventId);
       return this;
     }
 
@@ -7105,6 +7111,117 @@ public class Application extends APINode {
     }
   }
 
+  public static class APIRequestGetMessageTemplates extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "template_id",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetMessageTemplates.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestGetMessageTemplates(String nodeId, APIContext context) {
+      super(context, nodeId, "/message_templates", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetMessageTemplates setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetMessageTemplates setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetMessageTemplates setTemplateId (String templateId) {
+      this.setParam("template_id", templateId);
+      return this;
+    }
+
+    public APIRequestGetMessageTemplates requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetMessageTemplates requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetMessageTemplates requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetMessageTemplates requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetMessageTemplates requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetMessageTemplates requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestCreateMmpAuditing extends APIRequest<APINode> {
 
     APINode lastResponse = null;
@@ -8036,181 +8153,6 @@ public class Application extends APINode {
 
     @Override
     public APIRequestCreateOccludesPopup requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
-  public static class APIRequestCreatePageActivity extends APIRequest<Application> {
-
-    Application lastResponse = null;
-    @Override
-    public Application getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "advertiser_tracking_enabled",
-      "application_tracking_enabled",
-      "custom_events",
-      "logging_source",
-      "logging_target",
-      "page_id",
-      "page_scoped_user_id",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public Application parseResponse(String response, String header) throws APIException {
-      return Application.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public Application execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public Application execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<Application> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<Application> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, Application>() {
-           public Application apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreatePageActivity.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         },
-         MoreExecutors.directExecutor()
-      );
-    };
-
-    public APIRequestCreatePageActivity(String nodeId, APIContext context) {
-      super(context, nodeId, "/page_activities", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreatePageActivity setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreatePageActivity setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreatePageActivity setAdvertiserTrackingEnabled (Boolean advertiserTrackingEnabled) {
-      this.setParam("advertiser_tracking_enabled", advertiserTrackingEnabled);
-      return this;
-    }
-    public APIRequestCreatePageActivity setAdvertiserTrackingEnabled (String advertiserTrackingEnabled) {
-      this.setParam("advertiser_tracking_enabled", advertiserTrackingEnabled);
-      return this;
-    }
-
-    public APIRequestCreatePageActivity setApplicationTrackingEnabled (Boolean applicationTrackingEnabled) {
-      this.setParam("application_tracking_enabled", applicationTrackingEnabled);
-      return this;
-    }
-    public APIRequestCreatePageActivity setApplicationTrackingEnabled (String applicationTrackingEnabled) {
-      this.setParam("application_tracking_enabled", applicationTrackingEnabled);
-      return this;
-    }
-
-    public APIRequestCreatePageActivity setCustomEvents (List<Object> customEvents) {
-      this.setParam("custom_events", customEvents);
-      return this;
-    }
-    public APIRequestCreatePageActivity setCustomEvents (String customEvents) {
-      this.setParam("custom_events", customEvents);
-      return this;
-    }
-
-    public APIRequestCreatePageActivity setLoggingSource (Application.EnumLoggingSource loggingSource) {
-      this.setParam("logging_source", loggingSource);
-      return this;
-    }
-    public APIRequestCreatePageActivity setLoggingSource (String loggingSource) {
-      this.setParam("logging_source", loggingSource);
-      return this;
-    }
-
-    public APIRequestCreatePageActivity setLoggingTarget (Application.EnumLoggingTarget loggingTarget) {
-      this.setParam("logging_target", loggingTarget);
-      return this;
-    }
-    public APIRequestCreatePageActivity setLoggingTarget (String loggingTarget) {
-      this.setParam("logging_target", loggingTarget);
-      return this;
-    }
-
-    public APIRequestCreatePageActivity setPageId (Long pageId) {
-      this.setParam("page_id", pageId);
-      return this;
-    }
-    public APIRequestCreatePageActivity setPageId (String pageId) {
-      this.setParam("page_id", pageId);
-      return this;
-    }
-
-    public APIRequestCreatePageActivity setPageScopedUserId (Long pageScopedUserId) {
-      this.setParam("page_scoped_user_id", pageScopedUserId);
-      return this;
-    }
-    public APIRequestCreatePageActivity setPageScopedUserId (String pageScopedUserId) {
-      this.setParam("page_scoped_user_id", pageScopedUserId);
-      return this;
-    }
-
-    public APIRequestCreatePageActivity requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreatePageActivity requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreatePageActivity requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreatePageActivity requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreatePageActivity requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreatePageActivity requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
@@ -11564,46 +11506,6 @@ public class Application extends APINode {
       private String value;
 
       private EnumPostMethod(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumLoggingSource {
-      @SerializedName("DETECTION")
-      VALUE_DETECTION("DETECTION"),
-      @SerializedName("MESSENGER_BOT")
-      VALUE_MESSENGER_BOT("MESSENGER_BOT"),
-      ;
-
-      private String value;
-
-      private EnumLoggingSource(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumLoggingTarget {
-      @SerializedName("APP")
-      VALUE_APP("APP"),
-      @SerializedName("APP_AND_PAGE")
-      VALUE_APP_AND_PAGE("APP_AND_PAGE"),
-      @SerializedName("PAGE")
-      VALUE_PAGE("PAGE"),
-      ;
-
-      private String value;
-
-      private EnumLoggingTarget(String value) {
         this.value = value;
       }
 
