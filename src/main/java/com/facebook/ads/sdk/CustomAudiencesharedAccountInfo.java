@@ -62,9 +62,8 @@ public class CustomAudiencesharedAccountInfo extends APINode {
   public static CustomAudiencesharedAccountInfo loadJSON(String json, APIContext context, String header) {
     CustomAudiencesharedAccountInfo customAudiencesharedAccountInfo = getGson().fromJson(json, CustomAudiencesharedAccountInfo.class);
     if (context.isDebug()) {
-      JsonParser parser = new JsonParser();
-      JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(customAudiencesharedAccountInfo.toString());
+      JsonElement o1 = JsonParser.parseString(json);
+      JsonElement o2 = JsonParser.parseString(customAudiencesharedAccountInfo.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -84,10 +83,9 @@ public class CustomAudiencesharedAccountInfo extends APINode {
     APINodeList<CustomAudiencesharedAccountInfo> customAudiencesharedAccountInfos = new APINodeList<CustomAudiencesharedAccountInfo>(request, json, header);
     JsonArray arr;
     JsonObject obj;
-    JsonParser parser = new JsonParser();
     Exception exception = null;
     try{
-      JsonElement result = parser.parse(json);
+      JsonElement result = JsonParser.parseString(json);
       if (result.isJsonArray()) {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();

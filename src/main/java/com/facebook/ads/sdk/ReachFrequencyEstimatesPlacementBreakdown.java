@@ -84,9 +84,8 @@ public class ReachFrequencyEstimatesPlacementBreakdown extends APINode {
   public static ReachFrequencyEstimatesPlacementBreakdown loadJSON(String json, APIContext context, String header) {
     ReachFrequencyEstimatesPlacementBreakdown reachFrequencyEstimatesPlacementBreakdown = getGson().fromJson(json, ReachFrequencyEstimatesPlacementBreakdown.class);
     if (context.isDebug()) {
-      JsonParser parser = new JsonParser();
-      JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(reachFrequencyEstimatesPlacementBreakdown.toString());
+      JsonElement o1 = JsonParser.parseString(json);
+      JsonElement o2 = JsonParser.parseString(reachFrequencyEstimatesPlacementBreakdown.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -106,10 +105,9 @@ public class ReachFrequencyEstimatesPlacementBreakdown extends APINode {
     APINodeList<ReachFrequencyEstimatesPlacementBreakdown> reachFrequencyEstimatesPlacementBreakdowns = new APINodeList<ReachFrequencyEstimatesPlacementBreakdown>(request, json, header);
     JsonArray arr;
     JsonObject obj;
-    JsonParser parser = new JsonParser();
     Exception exception = null;
     try{
-      JsonElement result = parser.parse(json);
+      JsonElement result = JsonParser.parseString(json);
       if (result.isJsonArray()) {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();

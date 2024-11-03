@@ -211,9 +211,8 @@ public class VehicleOffer extends APINode {
   public static VehicleOffer loadJSON(String json, APIContext context, String header) {
     VehicleOffer vehicleOffer = getGson().fromJson(json, VehicleOffer.class);
     if (context.isDebug()) {
-      JsonParser parser = new JsonParser();
-      JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(vehicleOffer.toString());
+      JsonElement o1 = JsonParser.parseString(json);
+      JsonElement o2 = JsonParser.parseString(vehicleOffer.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -233,10 +232,9 @@ public class VehicleOffer extends APINode {
     APINodeList<VehicleOffer> vehicleOffers = new APINodeList<VehicleOffer>(request, json, header);
     JsonArray arr;
     JsonObject obj;
-    JsonParser parser = new JsonParser();
     Exception exception = null;
     try{
-      JsonElement result = parser.parse(json);
+      JsonElement result = JsonParser.parseString(json);
       if (result.isJsonArray()) {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();

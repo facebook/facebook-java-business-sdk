@@ -52,9 +52,8 @@ public class SecuritySettings extends APINode {
   public static SecuritySettings loadJSON(String json, APIContext context, String header) {
     SecuritySettings securitySettings = getGson().fromJson(json, SecuritySettings.class);
     if (context.isDebug()) {
-      JsonParser parser = new JsonParser();
-      JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(securitySettings.toString());
+      JsonElement o1 = JsonParser.parseString(json);
+      JsonElement o2 = JsonParser.parseString(securitySettings.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -74,10 +73,9 @@ public class SecuritySettings extends APINode {
     APINodeList<SecuritySettings> securitySettingss = new APINodeList<SecuritySettings>(request, json, header);
     JsonArray arr;
     JsonObject obj;
-    JsonParser parser = new JsonParser();
     Exception exception = null;
     try{
-      JsonElement result = parser.parse(json);
+      JsonElement result = JsonParser.parseString(json);
       if (result.isJsonArray()) {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();

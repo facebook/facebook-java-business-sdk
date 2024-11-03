@@ -141,9 +141,8 @@ public class AsyncSession extends APINode {
   public static AsyncSession loadJSON(String json, APIContext context, String header) {
     AsyncSession asyncSession = getGson().fromJson(json, AsyncSession.class);
     if (context.isDebug()) {
-      JsonParser parser = new JsonParser();
-      JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(asyncSession.toString());
+      JsonElement o1 = JsonParser.parseString(json);
+      JsonElement o2 = JsonParser.parseString(asyncSession.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -163,10 +162,9 @@ public class AsyncSession extends APINode {
     APINodeList<AsyncSession> asyncSessions = new APINodeList<AsyncSession>(request, json, header);
     JsonArray arr;
     JsonObject obj;
-    JsonParser parser = new JsonParser();
     Exception exception = null;
     try{
-      JsonElement result = parser.parse(json);
+      JsonElement result = JsonParser.parseString(json);
       if (result.isJsonArray()) {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();

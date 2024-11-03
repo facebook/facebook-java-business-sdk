@@ -63,8 +63,7 @@ public class APINode implements APIResponse {
 
   public String getId() {
     try {
-      JsonParser parser = new JsonParser();
-      return parser.parse(rawValue).getAsJsonObject().get("id").getAsString();
+      return JsonParser.parseString(rawValue).getAsJsonObject().get("id").getAsString();
     } catch (Exception e) {
       return null;
     }
@@ -81,9 +80,8 @@ public class APINode implements APIResponse {
 
   @Override
   public JsonObject getRawResponseAsJsonObject() {
-    JsonParser parser = new JsonParser();
     try {
-      return parser.parse(rawValue).getAsJsonObject();
+      return JsonParser.parseString(rawValue).getAsJsonObject();
     } catch (Exception e) {
       return null;
     }
@@ -103,10 +101,9 @@ public class APINode implements APIResponse {
     APINodeList<APINode> nodes = new APINodeList<APINode>(request, json, header);
     JsonArray arr;
     JsonObject obj;
-    JsonParser parser = new JsonParser();
     Exception exception = null;
     try{
-      JsonElement result = parser.parse(json);
+      JsonElement result = JsonParser.parseString(json);
       if (result.isJsonArray()) {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();

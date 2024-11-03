@@ -113,9 +113,8 @@ public class WithAsset3D extends APINode {
   public static WithAsset3D loadJSON(String json, APIContext context, String header) {
     WithAsset3D withAsset3D = getGson().fromJson(json, WithAsset3D.class);
     if (context.isDebug()) {
-      JsonParser parser = new JsonParser();
-      JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(withAsset3D.toString());
+      JsonElement o1 = JsonParser.parseString(json);
+      JsonElement o2 = JsonParser.parseString(withAsset3D.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -135,10 +134,9 @@ public class WithAsset3D extends APINode {
     APINodeList<WithAsset3D> withAsset3Ds = new APINodeList<WithAsset3D>(request, json, header);
     JsonArray arr;
     JsonObject obj;
-    JsonParser parser = new JsonParser();
     Exception exception = null;
     try{
-      JsonElement result = parser.parse(json);
+      JsonElement result = JsonParser.parseString(json);
       if (result.isJsonArray()) {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
