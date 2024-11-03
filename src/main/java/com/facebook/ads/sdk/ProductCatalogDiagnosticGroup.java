@@ -74,9 +74,8 @@ public class ProductCatalogDiagnosticGroup extends APINode {
   public static ProductCatalogDiagnosticGroup loadJSON(String json, APIContext context, String header) {
     ProductCatalogDiagnosticGroup productCatalogDiagnosticGroup = getGson().fromJson(json, ProductCatalogDiagnosticGroup.class);
     if (context.isDebug()) {
-      JsonParser parser = new JsonParser();
-      JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(productCatalogDiagnosticGroup.toString());
+      JsonElement o1 = JsonParser.parseString(json);
+      JsonElement o2 = JsonParser.parseString(productCatalogDiagnosticGroup.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -96,10 +95,9 @@ public class ProductCatalogDiagnosticGroup extends APINode {
     APINodeList<ProductCatalogDiagnosticGroup> productCatalogDiagnosticGroups = new APINodeList<ProductCatalogDiagnosticGroup>(request, json, header);
     JsonArray arr;
     JsonObject obj;
-    JsonParser parser = new JsonParser();
     Exception exception = null;
     try{
-      JsonElement result = parser.parse(json);
+      JsonElement result = JsonParser.parseString(json);
       if (result.isJsonArray()) {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();

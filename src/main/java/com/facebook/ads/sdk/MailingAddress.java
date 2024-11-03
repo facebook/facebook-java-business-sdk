@@ -127,9 +127,8 @@ public class MailingAddress extends APINode {
   public static MailingAddress loadJSON(String json, APIContext context, String header) {
     MailingAddress mailingAddress = getGson().fromJson(json, MailingAddress.class);
     if (context.isDebug()) {
-      JsonParser parser = new JsonParser();
-      JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(mailingAddress.toString());
+      JsonElement o1 = JsonParser.parseString(json);
+      JsonElement o2 = JsonParser.parseString(mailingAddress.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -149,10 +148,9 @@ public class MailingAddress extends APINode {
     APINodeList<MailingAddress> mailingAddresss = new APINodeList<MailingAddress>(request, json, header);
     JsonArray arr;
     JsonObject obj;
-    JsonParser parser = new JsonParser();
     Exception exception = null;
     try{
-      JsonElement result = parser.parse(json);
+      JsonElement result = JsonParser.parseString(json);
       if (result.isJsonArray()) {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();

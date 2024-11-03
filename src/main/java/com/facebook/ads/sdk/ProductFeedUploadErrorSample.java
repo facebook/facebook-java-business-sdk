@@ -117,9 +117,8 @@ public class ProductFeedUploadErrorSample extends APINode {
   public static ProductFeedUploadErrorSample loadJSON(String json, APIContext context, String header) {
     ProductFeedUploadErrorSample productFeedUploadErrorSample = getGson().fromJson(json, ProductFeedUploadErrorSample.class);
     if (context.isDebug()) {
-      JsonParser parser = new JsonParser();
-      JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(productFeedUploadErrorSample.toString());
+      JsonElement o1 = JsonParser.parseString(json);
+      JsonElement o2 = JsonParser.parseString(productFeedUploadErrorSample.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -139,10 +138,9 @@ public class ProductFeedUploadErrorSample extends APINode {
     APINodeList<ProductFeedUploadErrorSample> productFeedUploadErrorSamples = new APINodeList<ProductFeedUploadErrorSample>(request, json, header);
     JsonArray arr;
     JsonObject obj;
-    JsonParser parser = new JsonParser();
     Exception exception = null;
     try{
-      JsonElement result = parser.parse(json);
+      JsonElement result = JsonParser.parseString(json);
       if (result.isJsonArray()) {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();

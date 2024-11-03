@@ -66,9 +66,8 @@ public class SalesRightsInventoryManagement extends APINode {
   public static SalesRightsInventoryManagement loadJSON(String json, APIContext context, String header) {
     SalesRightsInventoryManagement salesRightsInventoryManagement = getGson().fromJson(json, SalesRightsInventoryManagement.class);
     if (context.isDebug()) {
-      JsonParser parser = new JsonParser();
-      JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(salesRightsInventoryManagement.toString());
+      JsonElement o1 = JsonParser.parseString(json);
+      JsonElement o2 = JsonParser.parseString(salesRightsInventoryManagement.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -88,10 +87,9 @@ public class SalesRightsInventoryManagement extends APINode {
     APINodeList<SalesRightsInventoryManagement> salesRightsInventoryManagements = new APINodeList<SalesRightsInventoryManagement>(request, json, header);
     JsonArray arr;
     JsonObject obj;
-    JsonParser parser = new JsonParser();
     Exception exception = null;
     try{
-      JsonElement result = parser.parse(json);
+      JsonElement result = JsonParser.parseString(json);
       if (result.isJsonArray()) {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();

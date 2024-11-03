@@ -68,8 +68,7 @@ public class APIException extends Exception implements APIResponse {
 
   @Override
   public JsonObject getRawResponseAsJsonObject() {
-    JsonParser parser = new JsonParser();
-    return parser.parse(this.getMessage()).getAsJsonObject();
+    return JsonParser.parseString(this.getMessage()).getAsJsonObject();
   }
 
   @Override
