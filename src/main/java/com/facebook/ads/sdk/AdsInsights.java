@@ -213,6 +213,18 @@ public class AdsInsights extends APINode {
   private String mMarketingMessagesCostPerDelivered = null;
   @SerializedName("marketing_messages_cost_per_link_btn_click")
   private String mMarketingMessagesCostPerLinkBtnClick = null;
+  @SerializedName("marketing_messages_delivery_rate")
+  private String mMarketingMessagesDeliveryRate = null;
+  @SerializedName("marketing_messages_link_btn_click_rate")
+  private String mMarketingMessagesLinkBtnClickRate = null;
+  @SerializedName("marketing_messages_media_view_rate")
+  private String mMarketingMessagesMediaViewRate = null;
+  @SerializedName("marketing_messages_phone_call_btn_click_rate")
+  private String mMarketingMessagesPhoneCallBtnClickRate = null;
+  @SerializedName("marketing_messages_quick_reply_btn_click_rate")
+  private String mMarketingMessagesQuickReplyBtnClickRate = null;
+  @SerializedName("marketing_messages_read_rate")
+  private String mMarketingMessagesReadRate = null;
   @SerializedName("marketing_messages_spend")
   private String mMarketingMessagesSpend = null;
   @SerializedName("marketing_messages_website_purchase_values")
@@ -404,6 +416,16 @@ public class AdsInsights extends APINode {
   private String mSkanConversionId = null;
   @SerializedName("skan_version")
   private String mSkanVersion = null;
+  @SerializedName("sot_attribution_model_type")
+  private String mSotAttributionModelType = null;
+  @SerializedName("sot_attribution_window")
+  private String mSotAttributionWindow = null;
+  @SerializedName("sot_channel")
+  private String mSotChannel = null;
+  @SerializedName("sot_event_type")
+  private String mSotEventType = null;
+  @SerializedName("sot_source")
+  private String mSotSource = null;
   @SerializedName("standard_event_content_type")
   private String mStandardEventContentType = null;
   @SerializedName("title_asset")
@@ -1474,6 +1496,60 @@ public class AdsInsights extends APINode {
     return this;
   }
 
+  public String getFieldMarketingMessagesDeliveryRate() {
+    return mMarketingMessagesDeliveryRate;
+  }
+
+  public AdsInsights setFieldMarketingMessagesDeliveryRate(String value) {
+    this.mMarketingMessagesDeliveryRate = value;
+    return this;
+  }
+
+  public String getFieldMarketingMessagesLinkBtnClickRate() {
+    return mMarketingMessagesLinkBtnClickRate;
+  }
+
+  public AdsInsights setFieldMarketingMessagesLinkBtnClickRate(String value) {
+    this.mMarketingMessagesLinkBtnClickRate = value;
+    return this;
+  }
+
+  public String getFieldMarketingMessagesMediaViewRate() {
+    return mMarketingMessagesMediaViewRate;
+  }
+
+  public AdsInsights setFieldMarketingMessagesMediaViewRate(String value) {
+    this.mMarketingMessagesMediaViewRate = value;
+    return this;
+  }
+
+  public String getFieldMarketingMessagesPhoneCallBtnClickRate() {
+    return mMarketingMessagesPhoneCallBtnClickRate;
+  }
+
+  public AdsInsights setFieldMarketingMessagesPhoneCallBtnClickRate(String value) {
+    this.mMarketingMessagesPhoneCallBtnClickRate = value;
+    return this;
+  }
+
+  public String getFieldMarketingMessagesQuickReplyBtnClickRate() {
+    return mMarketingMessagesQuickReplyBtnClickRate;
+  }
+
+  public AdsInsights setFieldMarketingMessagesQuickReplyBtnClickRate(String value) {
+    this.mMarketingMessagesQuickReplyBtnClickRate = value;
+    return this;
+  }
+
+  public String getFieldMarketingMessagesReadRate() {
+    return mMarketingMessagesReadRate;
+  }
+
+  public AdsInsights setFieldMarketingMessagesReadRate(String value) {
+    this.mMarketingMessagesReadRate = value;
+    return this;
+  }
+
   public String getFieldMarketingMessagesSpend() {
     return mMarketingMessagesSpend;
   }
@@ -2259,6 +2335,26 @@ public class AdsInsights extends APINode {
     return mSkanVersion;
   }
 
+  public String getFieldSotAttributionModelType() {
+    return mSotAttributionModelType;
+  }
+
+  public String getFieldSotAttributionWindow() {
+    return mSotAttributionWindow;
+  }
+
+  public String getFieldSotChannel() {
+    return mSotChannel;
+  }
+
+  public String getFieldSotEventType() {
+    return mSotEventType;
+  }
+
+  public String getFieldSotSource() {
+    return mSotSource;
+  }
+
   public String getFieldStandardEventContentType() {
     return mStandardEventContentType;
   }
@@ -2483,6 +2579,16 @@ public class AdsInsights extends APINode {
       VALUE_SKAN_CONVERSION_ID("skan_conversion_id"),
       @SerializedName("skan_version")
       VALUE_SKAN_VERSION("skan_version"),
+      @SerializedName("sot_attribution_model_type")
+      VALUE_SOT_ATTRIBUTION_MODEL_TYPE("sot_attribution_model_type"),
+      @SerializedName("sot_attribution_window")
+      VALUE_SOT_ATTRIBUTION_WINDOW("sot_attribution_window"),
+      @SerializedName("sot_channel")
+      VALUE_SOT_CHANNEL("sot_channel"),
+      @SerializedName("sot_event_type")
+      VALUE_SOT_EVENT_TYPE("sot_event_type"),
+      @SerializedName("sot_source")
+      VALUE_SOT_SOURCE("sot_source"),
       @SerializedName("standard_event_content_type")
       VALUE_STANDARD_EVENT_CONTENT_TYPE("standard_event_content_type"),
       @SerializedName("title_asset")
@@ -2731,6 +2837,12 @@ public class AdsInsights extends APINode {
     this.mLocation = instance.mLocation;
     this.mMarketingMessagesCostPerDelivered = instance.mMarketingMessagesCostPerDelivered;
     this.mMarketingMessagesCostPerLinkBtnClick = instance.mMarketingMessagesCostPerLinkBtnClick;
+    this.mMarketingMessagesDeliveryRate = instance.mMarketingMessagesDeliveryRate;
+    this.mMarketingMessagesLinkBtnClickRate = instance.mMarketingMessagesLinkBtnClickRate;
+    this.mMarketingMessagesMediaViewRate = instance.mMarketingMessagesMediaViewRate;
+    this.mMarketingMessagesPhoneCallBtnClickRate = instance.mMarketingMessagesPhoneCallBtnClickRate;
+    this.mMarketingMessagesQuickReplyBtnClickRate = instance.mMarketingMessagesQuickReplyBtnClickRate;
+    this.mMarketingMessagesReadRate = instance.mMarketingMessagesReadRate;
     this.mMarketingMessagesSpend = instance.mMarketingMessagesSpend;
     this.mMarketingMessagesWebsitePurchaseValues = instance.mMarketingMessagesWebsitePurchaseValues;
     this.mMobileAppPurchaseRoas = instance.mMobileAppPurchaseRoas;
@@ -2826,6 +2938,11 @@ public class AdsInsights extends APINode {
     this.mSkanCampaignId = instance.mSkanCampaignId;
     this.mSkanConversionId = instance.mSkanConversionId;
     this.mSkanVersion = instance.mSkanVersion;
+    this.mSotAttributionModelType = instance.mSotAttributionModelType;
+    this.mSotAttributionWindow = instance.mSotAttributionWindow;
+    this.mSotChannel = instance.mSotChannel;
+    this.mSotEventType = instance.mSotEventType;
+    this.mSotSource = instance.mSotSource;
     this.mStandardEventContentType = instance.mStandardEventContentType;
     this.mTitleAsset = instance.mTitleAsset;
     this.mUserPersonaId = instance.mUserPersonaId;

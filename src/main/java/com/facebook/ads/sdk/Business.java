@@ -80,7 +80,7 @@ public class Business extends APINode {
   @SerializedName("user_access_expire_time")
   private String mUserAccessExpireTime = null;
   @SerializedName("verification_status")
-  private String mVerificationStatus = null;
+  private EnumVerificationStatus mVerificationStatus = null;
   @SerializedName("vertical")
   private String mVertical = null;
   @SerializedName("vertical_id")
@@ -682,6 +682,10 @@ public class Business extends APINode {
     return new APIRequestGetSelfCertifiedWhatsAppBusinessSubmissions(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestCreateSelfCertifyWhatsAppBusiness createSelfCertifyWhatsAppBusiness() {
+    return new APIRequestCreateSelfCertifyWhatsAppBusiness(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestCreateSetupManagedPartnerAdAccount createSetupManagedPartnerAdAccount() {
     return new APIRequestCreateSetupManagedPartnerAdAccount(this.getPrefixedId().toString(), context);
   }
@@ -802,7 +806,7 @@ public class Business extends APINode {
     return mUserAccessExpireTime;
   }
 
-  public String getFieldVerificationStatus() {
+  public EnumVerificationStatus getFieldVerificationStatus() {
     return mVerificationStatus;
   }
 
@@ -2276,6 +2280,7 @@ public class Business extends APINode {
       "metrics",
       "ordering_column",
       "ordering_type",
+      "should_include_until",
       "since",
       "until",
     };
@@ -2400,6 +2405,15 @@ public class Business extends APINode {
     }
     public APIRequestGetAdNetworkAnalytics setOrderingType (String orderingType) {
       this.setParam("ordering_type", orderingType);
+      return this;
+    }
+
+    public APIRequestGetAdNetworkAnalytics setShouldIncludeUntil (Boolean shouldIncludeUntil) {
+      this.setParam("should_include_until", shouldIncludeUntil);
+      return this;
+    }
+    public APIRequestGetAdNetworkAnalytics setShouldIncludeUntil (String shouldIncludeUntil) {
+      this.setParam("should_include_until", shouldIncludeUntil);
       return this;
     }
 
@@ -2672,7 +2686,6 @@ public class Business extends APINode {
 
     public static final String[] FIELDS = {
       "data",
-      "error",
       "omitted_results",
       "query_id",
       "results",
@@ -2783,13 +2796,6 @@ public class Business extends APINode {
     }
     public APIRequestGetAdNetworkAnalyticsResults requestDataField (boolean value) {
       this.requestField("data", value);
-      return this;
-    }
-    public APIRequestGetAdNetworkAnalyticsResults requestErrorField () {
-      return this.requestErrorField(true);
-    }
-    public APIRequestGetAdNetworkAnalyticsResults requestErrorField (boolean value) {
-      this.requestField("error", value);
       return this;
     }
     public APIRequestGetAdNetworkAnalyticsResults requestOmittedResultsField () {
@@ -5537,6 +5543,7 @@ public class Business extends APINode {
       "end_advertiser",
       "end_advertiser_name",
       "existing_customers",
+      "expired_funding_source_details",
       "extended_credit_invoice_group",
       "failed_delivery_checks",
       "fb_entity",
@@ -5870,6 +5877,13 @@ public class Business extends APINode {
     }
     public APIRequestGetClientAdAccounts requestExistingCustomersField (boolean value) {
       this.requestField("existing_customers", value);
+      return this;
+    }
+    public APIRequestGetClientAdAccounts requestExpiredFundingSourceDetailsField () {
+      return this.requestExpiredFundingSourceDetailsField(true);
+    }
+    public APIRequestGetClientAdAccounts requestExpiredFundingSourceDetailsField (boolean value) {
+      this.requestField("expired_funding_source_details", value);
       return this;
     }
     public APIRequestGetClientAdAccounts requestExtendedCreditInvoiceGroupField () {
@@ -6222,6 +6236,7 @@ public class Business extends APINode {
       "deauth_callback_url",
       "default_share_mode",
       "description",
+      "enigma_config",
       "financial_id",
       "gdpv4_chrome_custom_tabs_enabled",
       "gdpv4_enabled",
@@ -6675,6 +6690,13 @@ public class Business extends APINode {
     }
     public APIRequestGetClientApps requestDescriptionField (boolean value) {
       this.requestField("description", value);
+      return this;
+    }
+    public APIRequestGetClientApps requestEnigmaConfigField () {
+      return this.requestEnigmaConfigField(true);
+    }
+    public APIRequestGetClientApps requestEnigmaConfigField (boolean value) {
+      this.requestField("enigma_config", value);
       return this;
     }
     public APIRequestGetClientApps requestFinancialIdField () {
@@ -13289,6 +13311,7 @@ public class Business extends APINode {
       "followed_by_count",
       "has_profile_picture",
       "id",
+      "ig_user_id",
       "is_private",
       "is_published",
       "media_count",
@@ -13416,6 +13439,13 @@ public class Business extends APINode {
       this.requestField("id", value);
       return this;
     }
+    public APIRequestGetInstagramAccounts requestIgUserIdField () {
+      return this.requestIgUserIdField(true);
+    }
+    public APIRequestGetInstagramAccounts requestIgUserIdField (boolean value) {
+      this.requestField("ig_user_id", value);
+      return this;
+    }
     public APIRequestGetInstagramAccounts requestIsPrivateField () {
       return this.requestIsPrivateField(true);
     }
@@ -13484,6 +13514,7 @@ public class Business extends APINode {
       "follows_count",
       "id",
       "ig_id",
+      "legacy_instagram_user_id",
       "media_count",
       "mentioned_comment",
       "mentioned_media",
@@ -13626,6 +13657,13 @@ public class Business extends APINode {
     }
     public APIRequestGetInstagramBusinessAccounts requestIgIdField (boolean value) {
       this.requestField("ig_id", value);
+      return this;
+    }
+    public APIRequestGetInstagramBusinessAccounts requestLegacyInstagramUserIdField () {
+      return this.requestLegacyInstagramUserIdField(true);
+    }
+    public APIRequestGetInstagramBusinessAccounts requestLegacyInstagramUserIdField (boolean value) {
+      this.requestField("legacy_instagram_user_id", value);
       return this;
     }
     public APIRequestGetInstagramBusinessAccounts requestMediaCountField () {
@@ -14754,13 +14792,20 @@ public class Business extends APINode {
 
     public static final String[] FIELDS = {
       "active",
+      "cloud_provider",
+      "cloud_region",
+      "destination_id",
       "endpoint",
       "fallback_domain",
       "fallback_domain_enabled",
+      "first_party_domain",
       "host_business_id",
       "host_external_id",
       "id",
       "instance_id",
+      "instance_version",
+      "is_sgw_instance",
+      "partner_name",
       "pixel_id",
     };
 
@@ -14861,6 +14906,27 @@ public class Business extends APINode {
       this.requestField("active", value);
       return this;
     }
+    public APIRequestGetOpenBridgeConfigurations requestCloudProviderField () {
+      return this.requestCloudProviderField(true);
+    }
+    public APIRequestGetOpenBridgeConfigurations requestCloudProviderField (boolean value) {
+      this.requestField("cloud_provider", value);
+      return this;
+    }
+    public APIRequestGetOpenBridgeConfigurations requestCloudRegionField () {
+      return this.requestCloudRegionField(true);
+    }
+    public APIRequestGetOpenBridgeConfigurations requestCloudRegionField (boolean value) {
+      this.requestField("cloud_region", value);
+      return this;
+    }
+    public APIRequestGetOpenBridgeConfigurations requestDestinationIdField () {
+      return this.requestDestinationIdField(true);
+    }
+    public APIRequestGetOpenBridgeConfigurations requestDestinationIdField (boolean value) {
+      this.requestField("destination_id", value);
+      return this;
+    }
     public APIRequestGetOpenBridgeConfigurations requestEndpointField () {
       return this.requestEndpointField(true);
     }
@@ -14880,6 +14946,13 @@ public class Business extends APINode {
     }
     public APIRequestGetOpenBridgeConfigurations requestFallbackDomainEnabledField (boolean value) {
       this.requestField("fallback_domain_enabled", value);
+      return this;
+    }
+    public APIRequestGetOpenBridgeConfigurations requestFirstPartyDomainField () {
+      return this.requestFirstPartyDomainField(true);
+    }
+    public APIRequestGetOpenBridgeConfigurations requestFirstPartyDomainField (boolean value) {
+      this.requestField("first_party_domain", value);
       return this;
     }
     public APIRequestGetOpenBridgeConfigurations requestHostBusinessIdField () {
@@ -14910,6 +14983,27 @@ public class Business extends APINode {
       this.requestField("instance_id", value);
       return this;
     }
+    public APIRequestGetOpenBridgeConfigurations requestInstanceVersionField () {
+      return this.requestInstanceVersionField(true);
+    }
+    public APIRequestGetOpenBridgeConfigurations requestInstanceVersionField (boolean value) {
+      this.requestField("instance_version", value);
+      return this;
+    }
+    public APIRequestGetOpenBridgeConfigurations requestIsSgwInstanceField () {
+      return this.requestIsSgwInstanceField(true);
+    }
+    public APIRequestGetOpenBridgeConfigurations requestIsSgwInstanceField (boolean value) {
+      this.requestField("is_sgw_instance", value);
+      return this;
+    }
+    public APIRequestGetOpenBridgeConfigurations requestPartnerNameField () {
+      return this.requestPartnerNameField(true);
+    }
+    public APIRequestGetOpenBridgeConfigurations requestPartnerNameField (boolean value) {
+      this.requestField("partner_name", value);
+      return this;
+    }
     public APIRequestGetOpenBridgeConfigurations requestPixelIdField () {
       return this.requestPixelIdField(true);
     }
@@ -14928,12 +15022,19 @@ public class Business extends APINode {
     }
     public static final String[] PARAMS = {
       "active",
+      "cloud_provider",
+      "cloud_region",
+      "destination_id",
       "endpoint",
       "fallback_domain",
       "fallback_domain_enabled",
+      "first_party_domain",
       "host_business_id",
       "host_external_id",
       "instance_id",
+      "instance_version",
+      "is_sgw_instance",
+      "partner_name",
       "pixel_id",
     };
 
@@ -15003,6 +15104,21 @@ public class Business extends APINode {
       return this;
     }
 
+    public APIRequestCreateOpenBridgeConfiguration setCloudProvider (String cloudProvider) {
+      this.setParam("cloud_provider", cloudProvider);
+      return this;
+    }
+
+    public APIRequestCreateOpenBridgeConfiguration setCloudRegion (String cloudRegion) {
+      this.setParam("cloud_region", cloudRegion);
+      return this;
+    }
+
+    public APIRequestCreateOpenBridgeConfiguration setDestinationId (String destinationId) {
+      this.setParam("destination_id", destinationId);
+      return this;
+    }
+
     public APIRequestCreateOpenBridgeConfiguration setEndpoint (String endpoint) {
       this.setParam("endpoint", endpoint);
       return this;
@@ -15022,6 +15138,11 @@ public class Business extends APINode {
       return this;
     }
 
+    public APIRequestCreateOpenBridgeConfiguration setFirstPartyDomain (String firstPartyDomain) {
+      this.setParam("first_party_domain", firstPartyDomain);
+      return this;
+    }
+
     public APIRequestCreateOpenBridgeConfiguration setHostBusinessId (Long hostBusinessId) {
       this.setParam("host_business_id", hostBusinessId);
       return this;
@@ -15038,6 +15159,25 @@ public class Business extends APINode {
 
     public APIRequestCreateOpenBridgeConfiguration setInstanceId (String instanceId) {
       this.setParam("instance_id", instanceId);
+      return this;
+    }
+
+    public APIRequestCreateOpenBridgeConfiguration setInstanceVersion (String instanceVersion) {
+      this.setParam("instance_version", instanceVersion);
+      return this;
+    }
+
+    public APIRequestCreateOpenBridgeConfiguration setIsSgwInstance (Boolean isSgwInstance) {
+      this.setParam("is_sgw_instance", isSgwInstance);
+      return this;
+    }
+    public APIRequestCreateOpenBridgeConfiguration setIsSgwInstance (String isSgwInstance) {
+      this.setParam("is_sgw_instance", isSgwInstance);
+      return this;
+    }
+
+    public APIRequestCreateOpenBridgeConfiguration setPartnerName (String partnerName) {
+      this.setParam("partner_name", partnerName);
       return this;
     }
 
@@ -15128,6 +15268,7 @@ public class Business extends APINode {
       "end_advertiser",
       "end_advertiser_name",
       "existing_customers",
+      "expired_funding_source_details",
       "extended_credit_invoice_group",
       "failed_delivery_checks",
       "fb_entity",
@@ -15461,6 +15602,13 @@ public class Business extends APINode {
     }
     public APIRequestGetOwnedAdAccounts requestExistingCustomersField (boolean value) {
       this.requestField("existing_customers", value);
+      return this;
+    }
+    public APIRequestGetOwnedAdAccounts requestExpiredFundingSourceDetailsField () {
+      return this.requestExpiredFundingSourceDetailsField(true);
+    }
+    public APIRequestGetOwnedAdAccounts requestExpiredFundingSourceDetailsField (boolean value) {
+      this.requestField("expired_funding_source_details", value);
       return this;
     }
     public APIRequestGetOwnedAdAccounts requestExtendedCreditInvoiceGroupField () {
@@ -15924,6 +16072,7 @@ public class Business extends APINode {
       "deauth_callback_url",
       "default_share_mode",
       "description",
+      "enigma_config",
       "financial_id",
       "gdpv4_chrome_custom_tabs_enabled",
       "gdpv4_enabled",
@@ -16377,6 +16526,13 @@ public class Business extends APINode {
     }
     public APIRequestGetOwnedApps requestDescriptionField (boolean value) {
       this.requestField("description", value);
+      return this;
+    }
+    public APIRequestGetOwnedApps requestEnigmaConfigField () {
+      return this.requestEnigmaConfigField(true);
+    }
+    public APIRequestGetOwnedApps requestEnigmaConfigField (boolean value) {
+      this.requestField("enigma_config", value);
       return this;
     }
     public APIRequestGetOwnedApps requestFinancialIdField () {
@@ -17544,6 +17700,7 @@ public class Business extends APINode {
       "followed_by_count",
       "has_profile_picture",
       "id",
+      "ig_user_id",
       "is_private",
       "is_published",
       "media_count",
@@ -17669,6 +17826,13 @@ public class Business extends APINode {
     }
     public APIRequestGetOwnedInstagramAccounts requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetOwnedInstagramAccounts requestIgUserIdField () {
+      return this.requestIgUserIdField(true);
+    }
+    public APIRequestGetOwnedInstagramAccounts requestIgUserIdField (boolean value) {
+      this.requestField("ig_user_id", value);
       return this;
     }
     public APIRequestGetOwnedInstagramAccounts requestIsPrivateField () {
@@ -22919,6 +23083,189 @@ public class Business extends APINode {
     }
   }
 
+  public static class APIRequestCreateSelfCertifyWhatsAppBusiness extends APIRequest<Business> {
+
+    Business lastResponse = null;
+    @Override
+    public Business getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "average_monthly_revenue_spend_with_partner",
+      "business_documents",
+      "business_vertical",
+      "end_business_address",
+      "end_business_id",
+      "end_business_legal_name",
+      "end_business_trade_names",
+      "end_business_website",
+      "num_billing_cycles_with_partner",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public Business parseResponse(String response, String header) throws APIException {
+      return Business.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public Business execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public Business execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<Business> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<Business> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, Business>() {
+           public Business apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateSelfCertifyWhatsAppBusiness.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestCreateSelfCertifyWhatsAppBusiness(String nodeId, APIContext context) {
+      super(context, nodeId, "/self_certify_whatsapp_business", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateSelfCertifyWhatsAppBusiness setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateSelfCertifyWhatsAppBusiness setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateSelfCertifyWhatsAppBusiness setAverageMonthlyRevenueSpendWithPartner (Map<String, String> averageMonthlyRevenueSpendWithPartner) {
+      this.setParam("average_monthly_revenue_spend_with_partner", averageMonthlyRevenueSpendWithPartner);
+      return this;
+    }
+    public APIRequestCreateSelfCertifyWhatsAppBusiness setAverageMonthlyRevenueSpendWithPartner (String averageMonthlyRevenueSpendWithPartner) {
+      this.setParam("average_monthly_revenue_spend_with_partner", averageMonthlyRevenueSpendWithPartner);
+      return this;
+    }
+
+    public APIRequestCreateSelfCertifyWhatsAppBusiness setBusinessDocuments (List<File> businessDocuments) {
+      this.setParam("business_documents", businessDocuments);
+      return this;
+    }
+    public APIRequestCreateSelfCertifyWhatsAppBusiness setBusinessDocuments (String businessDocuments) {
+      this.setParam("business_documents", businessDocuments);
+      return this;
+    }
+
+    public APIRequestCreateSelfCertifyWhatsAppBusiness setBusinessVertical (Business.EnumBusinessVertical businessVertical) {
+      this.setParam("business_vertical", businessVertical);
+      return this;
+    }
+    public APIRequestCreateSelfCertifyWhatsAppBusiness setBusinessVertical (String businessVertical) {
+      this.setParam("business_vertical", businessVertical);
+      return this;
+    }
+
+    public APIRequestCreateSelfCertifyWhatsAppBusiness setEndBusinessAddress (Map<String, String> endBusinessAddress) {
+      this.setParam("end_business_address", endBusinessAddress);
+      return this;
+    }
+    public APIRequestCreateSelfCertifyWhatsAppBusiness setEndBusinessAddress (String endBusinessAddress) {
+      this.setParam("end_business_address", endBusinessAddress);
+      return this;
+    }
+
+    public APIRequestCreateSelfCertifyWhatsAppBusiness setEndBusinessId (String endBusinessId) {
+      this.setParam("end_business_id", endBusinessId);
+      return this;
+    }
+
+    public APIRequestCreateSelfCertifyWhatsAppBusiness setEndBusinessLegalName (String endBusinessLegalName) {
+      this.setParam("end_business_legal_name", endBusinessLegalName);
+      return this;
+    }
+
+    public APIRequestCreateSelfCertifyWhatsAppBusiness setEndBusinessTradeNames (List<String> endBusinessTradeNames) {
+      this.setParam("end_business_trade_names", endBusinessTradeNames);
+      return this;
+    }
+    public APIRequestCreateSelfCertifyWhatsAppBusiness setEndBusinessTradeNames (String endBusinessTradeNames) {
+      this.setParam("end_business_trade_names", endBusinessTradeNames);
+      return this;
+    }
+
+    public APIRequestCreateSelfCertifyWhatsAppBusiness setEndBusinessWebsite (String endBusinessWebsite) {
+      this.setParam("end_business_website", endBusinessWebsite);
+      return this;
+    }
+
+    public APIRequestCreateSelfCertifyWhatsAppBusiness setNumBillingCyclesWithPartner (Long numBillingCyclesWithPartner) {
+      this.setParam("num_billing_cycles_with_partner", numBillingCyclesWithPartner);
+      return this;
+    }
+    public APIRequestCreateSelfCertifyWhatsAppBusiness setNumBillingCyclesWithPartner (String numBillingCyclesWithPartner) {
+      this.setParam("num_billing_cycles_with_partner", numBillingCyclesWithPartner);
+      return this;
+    }
+
+    public APIRequestCreateSelfCertifyWhatsAppBusiness requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateSelfCertifyWhatsAppBusiness requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateSelfCertifyWhatsAppBusiness requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateSelfCertifyWhatsAppBusiness requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateSelfCertifyWhatsAppBusiness requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateSelfCertifyWhatsAppBusiness requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestCreateSetupManagedPartnerAdAccount extends APIRequest<Business> {
 
     Business lastResponse = null;
@@ -23942,7 +24289,6 @@ public class Business extends APINode {
       "start_offset",
       "swap_mode",
       "text_format_metadata",
-      "throwback_camera_roll_media",
       "thumb",
       "time_since_original_post",
       "title",
@@ -24390,11 +24736,6 @@ public class Business extends APINode {
 
     public APIRequestCreateVideo setTextFormatMetadata (String textFormatMetadata) {
       this.setParam("text_format_metadata", textFormatMetadata);
-      return this;
-    }
-
-    public APIRequestCreateVideo setThrowbackCameraRollMedia (String throwbackCameraRollMedia) {
-      this.setParam("throwback_camera_roll_media", throwbackCameraRollMedia);
       return this;
     }
 
@@ -24949,6 +25290,41 @@ public class Business extends APINode {
       return this;
     }
 
+  }
+
+  public static enum EnumVerificationStatus {
+      @SerializedName("expired")
+      VALUE_EXPIRED("expired"),
+      @SerializedName("failed")
+      VALUE_FAILED("failed"),
+      @SerializedName("ineligible")
+      VALUE_INELIGIBLE("ineligible"),
+      @SerializedName("not_verified")
+      VALUE_NOT_VERIFIED("not_verified"),
+      @SerializedName("pending")
+      VALUE_PENDING("pending"),
+      @SerializedName("pending_need_more_info")
+      VALUE_PENDING_NEED_MORE_INFO("pending_need_more_info"),
+      @SerializedName("pending_submission")
+      VALUE_PENDING_SUBMISSION("pending_submission"),
+      @SerializedName("rejected")
+      VALUE_REJECTED("rejected"),
+      @SerializedName("revoked")
+      VALUE_REVOKED("revoked"),
+      @SerializedName("verified")
+      VALUE_VERIFIED("verified"),
+      ;
+
+      private String value;
+
+      private EnumVerificationStatus(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
   }
 
   public static enum EnumTwoFactorType {
@@ -26154,6 +26530,79 @@ public class Business extends APINode {
       private String value;
 
       private EnumPagePermittedTasks(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumBusinessVertical {
+      @SerializedName("ADULT_PRODUCTS_AND_SERVICES")
+      VALUE_ADULT_PRODUCTS_AND_SERVICES("ADULT_PRODUCTS_AND_SERVICES"),
+      @SerializedName("ALCOHOL_AND_TOBACCO")
+      VALUE_ALCOHOL_AND_TOBACCO("ALCOHOL_AND_TOBACCO"),
+      @SerializedName("AUTOMOTIVE_DEALERS")
+      VALUE_AUTOMOTIVE_DEALERS("AUTOMOTIVE_DEALERS"),
+      @SerializedName("BODY_PARTS_FLUIDS")
+      VALUE_BODY_PARTS_FLUIDS("BODY_PARTS_FLUIDS"),
+      @SerializedName("BUSINESS_AND_UTILITY")
+      VALUE_BUSINESS_AND_UTILITY("BUSINESS_AND_UTILITY"),
+      @SerializedName("CONTENT_AND_APPS")
+      VALUE_CONTENT_AND_APPS("CONTENT_AND_APPS"),
+      @SerializedName("CREATORS_AND_CELEBRITIES")
+      VALUE_CREATORS_AND_CELEBRITIES("CREATORS_AND_CELEBRITIES"),
+      @SerializedName("DATING")
+      VALUE_DATING("DATING"),
+      @SerializedName("DRUGS")
+      VALUE_DRUGS("DRUGS"),
+      @SerializedName("ENDANGERED_SPECIES")
+      VALUE_ENDANGERED_SPECIES("ENDANGERED_SPECIES"),
+      @SerializedName("FIREARMS")
+      VALUE_FIREARMS("FIREARMS"),
+      @SerializedName("FRAUDULENT_MISLEADING_OFFENSIVE")
+      VALUE_FRAUDULENT_MISLEADING_OFFENSIVE("FRAUDULENT_MISLEADING_OFFENSIVE"),
+      @SerializedName("GAMBLING")
+      VALUE_GAMBLING("GAMBLING"),
+      @SerializedName("GROCERY_AND_CONVENIENCE_STORE")
+      VALUE_GROCERY_AND_CONVENIENCE_STORE("GROCERY_AND_CONVENIENCE_STORE"),
+      @SerializedName("HAZARDOUS_GOODS_AND_MATERIALS")
+      VALUE_HAZARDOUS_GOODS_AND_MATERIALS("HAZARDOUS_GOODS_AND_MATERIALS"),
+      @SerializedName("HOME")
+      VALUE_HOME("HOME"),
+      @SerializedName("HOME_AND_AUTO_MANUFACTURING")
+      VALUE_HOME_AND_AUTO_MANUFACTURING("HOME_AND_AUTO_MANUFACTURING"),
+      @SerializedName("LIFESTYLE")
+      VALUE_LIFESTYLE("LIFESTYLE"),
+      @SerializedName("LIVE_NON_ENDANGERED_SPECIES")
+      VALUE_LIVE_NON_ENDANGERED_SPECIES("LIVE_NON_ENDANGERED_SPECIES"),
+      @SerializedName("LOANS_DEBT_COLLECTION_BAIL_BONDS")
+      VALUE_LOANS_DEBT_COLLECTION_BAIL_BONDS("LOANS_DEBT_COLLECTION_BAIL_BONDS"),
+      @SerializedName("LOCAL_EVENTS")
+      VALUE_LOCAL_EVENTS("LOCAL_EVENTS"),
+      @SerializedName("MEDICAL_HEALTHCARE")
+      VALUE_MEDICAL_HEALTHCARE("MEDICAL_HEALTHCARE"),
+      @SerializedName("MULTILEVEL_MARKETING")
+      VALUE_MULTILEVEL_MARKETING("MULTILEVEL_MARKETING"),
+      @SerializedName("NON_PROFIT_AND_RELIGIOUS_ORGS")
+      VALUE_NON_PROFIT_AND_RELIGIOUS_ORGS("NON_PROFIT_AND_RELIGIOUS_ORGS"),
+      @SerializedName("PROFESSIONAL")
+      VALUE_PROFESSIONAL("PROFESSIONAL"),
+      @SerializedName("REAL_VIRTUAL_FAKE_CURRENCY")
+      VALUE_REAL_VIRTUAL_FAKE_CURRENCY("REAL_VIRTUAL_FAKE_CURRENCY"),
+      @SerializedName("RESTAURANTS")
+      VALUE_RESTAURANTS("RESTAURANTS"),
+      @SerializedName("RETAIL")
+      VALUE_RETAIL("RETAIL"),
+      @SerializedName("TRANSPORTATION_AND_ACCOMMODATION")
+      VALUE_TRANSPORTATION_AND_ACCOMMODATION("TRANSPORTATION_AND_ACCOMMODATION"),
+      ;
+
+      private String value;
+
+      private EnumBusinessVertical(String value) {
         this.value = value;
       }
 

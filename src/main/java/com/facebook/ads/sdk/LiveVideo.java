@@ -498,6 +498,7 @@ public class LiveVideo extends APINode {
       "id",
       "id_for_avatars",
       "inspirational_people",
+      "instagram_user_self_asset",
       "install_type",
       "installed",
       "is_guest_user",
@@ -518,6 +519,7 @@ public class LiveVideo extends APINode {
       "profile_pic",
       "quotes",
       "relationship_status",
+      "religion",
       "shared_login_upgrade_required_by",
       "short_name",
       "significant_other",
@@ -746,6 +748,13 @@ public class LiveVideo extends APINode {
       this.requestField("inspirational_people", value);
       return this;
     }
+    public APIRequestGetBlockedUsers requestInstagramUserSelfAssetField () {
+      return this.requestInstagramUserSelfAssetField(true);
+    }
+    public APIRequestGetBlockedUsers requestInstagramUserSelfAssetField (boolean value) {
+      this.requestField("instagram_user_self_asset", value);
+      return this;
+    }
     public APIRequestGetBlockedUsers requestInstallTypeField () {
       return this.requestInstallTypeField(true);
     }
@@ -884,6 +893,13 @@ public class LiveVideo extends APINode {
     }
     public APIRequestGetBlockedUsers requestRelationshipStatusField (boolean value) {
       this.requestField("relationship_status", value);
+      return this;
+    }
+    public APIRequestGetBlockedUsers requestReligionField () {
+      return this.requestReligionField(true);
+    }
+    public APIRequestGetBlockedUsers requestReligionField (boolean value) {
+      this.requestField("religion", value);
       return this;
     }
     public APIRequestGetBlockedUsers requestSharedLoginUpgradeRequiredByField () {

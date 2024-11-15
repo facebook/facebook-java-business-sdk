@@ -327,6 +327,7 @@ public class AdLabel extends APINode {
     public static final String[] FIELDS = {
       "account_id",
       "actor_id",
+      "ad_disclaimer_spec",
       "adlabels",
       "applink_treatment",
       "asset_feed_spec",
@@ -381,6 +382,7 @@ public class AdLabel extends APINode {
       "platform_customizations",
       "playable_asset_id",
       "portrait_customizations",
+      "product_data",
       "product_set_id",
       "recommender_settings",
       "source_instagram_media_id",
@@ -497,6 +499,13 @@ public class AdLabel extends APINode {
     }
     public APIRequestGetAdCreatives requestActorIdField (boolean value) {
       this.requestField("actor_id", value);
+      return this;
+    }
+    public APIRequestGetAdCreatives requestAdDisclaimerSpecField () {
+      return this.requestAdDisclaimerSpecField(true);
+    }
+    public APIRequestGetAdCreatives requestAdDisclaimerSpecField (boolean value) {
+      this.requestField("ad_disclaimer_spec", value);
       return this;
     }
     public APIRequestGetAdCreatives requestAdlabelsField () {
@@ -875,6 +884,13 @@ public class AdLabel extends APINode {
     }
     public APIRequestGetAdCreatives requestPortraitCustomizationsField (boolean value) {
       this.requestField("portrait_customizations", value);
+      return this;
+    }
+    public APIRequestGetAdCreatives requestProductDataField () {
+      return this.requestProductDataField(true);
+    }
+    public APIRequestGetAdCreatives requestProductDataField (boolean value) {
+      this.requestField("product_data", value);
       return this;
     }
     public APIRequestGetAdCreatives requestProductSetIdField () {

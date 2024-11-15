@@ -195,6 +195,7 @@ public class AdCreativeFeatureCustomizations extends APINode {
     return getGson().toJson(this);
   }
 
+
   public String getFieldImageCropStyle() {
     return mImageCropStyle;
   }

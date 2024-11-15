@@ -127,6 +127,8 @@ public class Application extends APINode {
   private String mDefaultShareMode = null;
   @SerializedName("description")
   private String mDescription = null;
+  @SerializedName("enigma_config")
+  private Object mEnigmaConfig = null;
   @SerializedName("financial_id")
   private String mFinancialId = null;
   @SerializedName("gdpv4_chrome_custom_tabs_enabled")
@@ -874,6 +876,10 @@ public class Application extends APINode {
 
   public String getFieldDescription() {
     return mDescription;
+  }
+
+  public Object getFieldEnigmaConfig() {
+    return mEnigmaConfig;
   }
 
   public String getFieldFinancialId() {
@@ -2258,6 +2264,7 @@ public class Application extends APINode {
       "metrics",
       "ordering_column",
       "ordering_type",
+      "should_include_until",
       "since",
       "until",
     };
@@ -2382,6 +2389,15 @@ public class Application extends APINode {
     }
     public APIRequestGetAdNetworkAnalytics setOrderingType (String orderingType) {
       this.setParam("ordering_type", orderingType);
+      return this;
+    }
+
+    public APIRequestGetAdNetworkAnalytics setShouldIncludeUntil (Boolean shouldIncludeUntil) {
+      this.setParam("should_include_until", shouldIncludeUntil);
+      return this;
+    }
+    public APIRequestGetAdNetworkAnalytics setShouldIncludeUntil (String shouldIncludeUntil) {
+      this.setParam("should_include_until", shouldIncludeUntil);
       return this;
     }
 
@@ -2654,7 +2670,6 @@ public class Application extends APINode {
 
     public static final String[] FIELDS = {
       "data",
-      "error",
       "omitted_results",
       "query_id",
       "results",
@@ -2765,13 +2780,6 @@ public class Application extends APINode {
     }
     public APIRequestGetAdNetworkAnalyticsResults requestDataField (boolean value) {
       this.requestField("data", value);
-      return this;
-    }
-    public APIRequestGetAdNetworkAnalyticsResults requestErrorField () {
-      return this.requestErrorField(true);
-    }
-    public APIRequestGetAdNetworkAnalyticsResults requestErrorField (boolean value) {
-      this.requestField("error", value);
       return this;
     }
     public APIRequestGetAdNetworkAnalyticsResults requestOmittedResultsField () {
@@ -5094,6 +5102,7 @@ public class Application extends APINode {
       "end_advertiser",
       "end_advertiser_name",
       "existing_customers",
+      "expired_funding_source_details",
       "extended_credit_invoice_group",
       "failed_delivery_checks",
       "fb_entity",
@@ -5427,6 +5436,13 @@ public class Application extends APINode {
     }
     public APIRequestGetAuthorizedAdAccounts requestExistingCustomersField (boolean value) {
       this.requestField("existing_customers", value);
+      return this;
+    }
+    public APIRequestGetAuthorizedAdAccounts requestExpiredFundingSourceDetailsField () {
+      return this.requestExpiredFundingSourceDetailsField(true);
+    }
+    public APIRequestGetAuthorizedAdAccounts requestExpiredFundingSourceDetailsField (boolean value) {
+      this.requestField("expired_funding_source_details", value);
       return this;
     }
     public APIRequestGetAuthorizedAdAccounts requestExtendedCreditInvoiceGroupField () {
@@ -10128,6 +10144,7 @@ public class Application extends APINode {
       "deauth_callback_url",
       "default_share_mode",
       "description",
+      "enigma_config",
       "financial_id",
       "gdpv4_chrome_custom_tabs_enabled",
       "gdpv4_enabled",
@@ -10588,6 +10605,13 @@ public class Application extends APINode {
       this.requestField("description", value);
       return this;
     }
+    public APIRequestGet requestEnigmaConfigField () {
+      return this.requestEnigmaConfigField(true);
+    }
+    public APIRequestGet requestEnigmaConfigField (boolean value) {
+      this.requestField("enigma_config", value);
+      return this;
+    }
     public APIRequestGet requestFinancialIdField () {
       return this.requestFinancialIdField(true);
     }
@@ -11039,7 +11063,6 @@ public class Application extends APINode {
       "app_type",
       "auth_dialog_headline",
       "auth_dialog_perms_explanation",
-      "auth_referral_default_activity_privacy",
       "auth_referral_enabled",
       "auth_referral_extended_perms",
       "auth_referral_friend_perms",
@@ -11170,11 +11193,6 @@ public class Application extends APINode {
 
     public APIRequestUpdate setAuthDialogPermsExplanation (String authDialogPermsExplanation) {
       this.setParam("auth_dialog_perms_explanation", authDialogPermsExplanation);
-      return this;
-    }
-
-    public APIRequestUpdate setAuthReferralDefaultActivityPrivacy (String authReferralDefaultActivityPrivacy) {
-      this.setParam("auth_referral_default_activity_privacy", authReferralDefaultActivityPrivacy);
       return this;
     }
 
@@ -11753,6 +11771,7 @@ public class Application extends APINode {
     this.mDeauthCallbackUrl = instance.mDeauthCallbackUrl;
     this.mDefaultShareMode = instance.mDefaultShareMode;
     this.mDescription = instance.mDescription;
+    this.mEnigmaConfig = instance.mEnigmaConfig;
     this.mFinancialId = instance.mFinancialId;
     this.mGdpv4ChromeCustomTabsEnabled = instance.mGdpv4ChromeCustomTabsEnabled;
     this.mGdpv4Enabled = instance.mGdpv4Enabled;

@@ -40,68 +40,66 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class CatalogWebsiteOnboardingSettings extends APINode {
+public class LiveVideoAdCampaignConfig extends APINode {
   @SerializedName("id")
   private String mId = null;
-  @SerializedName("quality_band")
-  private String mQualityBand = null;
-  @SerializedName("status")
-  private String mStatus = null;
+  @SerializedName("live_video_ad_type")
+  private String mLiveVideoAdType = null;
   protected static Gson gson = null;
 
-  CatalogWebsiteOnboardingSettings() {
+  LiveVideoAdCampaignConfig() {
   }
 
-  public CatalogWebsiteOnboardingSettings(Long id, APIContext context) {
+  public LiveVideoAdCampaignConfig(Long id, APIContext context) {
     this(id.toString(), context);
   }
 
-  public CatalogWebsiteOnboardingSettings(String id, APIContext context) {
+  public LiveVideoAdCampaignConfig(String id, APIContext context) {
     this.mId = id;
 
     this.context = context;
   }
 
-  public CatalogWebsiteOnboardingSettings fetch() throws APIException{
-    CatalogWebsiteOnboardingSettings newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+  public LiveVideoAdCampaignConfig fetch() throws APIException{
+    LiveVideoAdCampaignConfig newInstance = fetchById(this.getPrefixedId().toString(), this.context);
     this.copyFrom(newInstance);
     return this;
   }
 
-  public static CatalogWebsiteOnboardingSettings fetchById(Long id, APIContext context) throws APIException {
+  public static LiveVideoAdCampaignConfig fetchById(Long id, APIContext context) throws APIException {
     return fetchById(id.toString(), context);
   }
 
-  public static ListenableFuture<CatalogWebsiteOnboardingSettings> fetchByIdAsync(Long id, APIContext context) throws APIException {
+  public static ListenableFuture<LiveVideoAdCampaignConfig> fetchByIdAsync(Long id, APIContext context) throws APIException {
     return fetchByIdAsync(id.toString(), context);
   }
 
-  public static CatalogWebsiteOnboardingSettings fetchById(String id, APIContext context) throws APIException {
+  public static LiveVideoAdCampaignConfig fetchById(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
   }
 
-  public static ListenableFuture<CatalogWebsiteOnboardingSettings> fetchByIdAsync(String id, APIContext context) throws APIException {
+  public static ListenableFuture<LiveVideoAdCampaignConfig> fetchByIdAsync(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
   }
 
-  public static APINodeList<CatalogWebsiteOnboardingSettings> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<CatalogWebsiteOnboardingSettings>)(
-      new APIRequest<CatalogWebsiteOnboardingSettings>(context, "", "/", "GET", CatalogWebsiteOnboardingSettings.getParser())
+  public static APINodeList<LiveVideoAdCampaignConfig> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<LiveVideoAdCampaignConfig>)(
+      new APIRequest<LiveVideoAdCampaignConfig>(context, "", "/", "GET", LiveVideoAdCampaignConfig.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .execute()
     );
   }
 
-  public static ListenableFuture<APINodeList<CatalogWebsiteOnboardingSettings>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+  public static ListenableFuture<APINodeList<LiveVideoAdCampaignConfig>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
     return
-      new APIRequest(context, "", "/", "GET", CatalogWebsiteOnboardingSettings.getParser())
+      new APIRequest(context, "", "/", "GET", LiveVideoAdCampaignConfig.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
@@ -114,12 +112,12 @@ public class CatalogWebsiteOnboardingSettings extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static CatalogWebsiteOnboardingSettings loadJSON(String json, APIContext context, String header) {
-    CatalogWebsiteOnboardingSettings catalogWebsiteOnboardingSettings = getGson().fromJson(json, CatalogWebsiteOnboardingSettings.class);
+  public static LiveVideoAdCampaignConfig loadJSON(String json, APIContext context, String header) {
+    LiveVideoAdCampaignConfig liveVideoAdCampaignConfig = getGson().fromJson(json, LiveVideoAdCampaignConfig.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(catalogWebsiteOnboardingSettings.toString());
+      JsonElement o2 = parser.parse(liveVideoAdCampaignConfig.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -129,14 +127,14 @@ public class CatalogWebsiteOnboardingSettings extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    catalogWebsiteOnboardingSettings.context = context;
-    catalogWebsiteOnboardingSettings.rawValue = json;
-    catalogWebsiteOnboardingSettings.header = header;
-    return catalogWebsiteOnboardingSettings;
+    liveVideoAdCampaignConfig.context = context;
+    liveVideoAdCampaignConfig.rawValue = json;
+    liveVideoAdCampaignConfig.header = header;
+    return liveVideoAdCampaignConfig;
   }
 
-  public static APINodeList<CatalogWebsiteOnboardingSettings> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<CatalogWebsiteOnboardingSettings> catalogWebsiteOnboardingSettingss = new APINodeList<CatalogWebsiteOnboardingSettings>(request, json, header);
+  public static APINodeList<LiveVideoAdCampaignConfig> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<LiveVideoAdCampaignConfig> liveVideoAdCampaignConfigs = new APINodeList<LiveVideoAdCampaignConfig>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -147,9 +145,9 @@ public class CatalogWebsiteOnboardingSettings extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          catalogWebsiteOnboardingSettingss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          liveVideoAdCampaignConfigs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return catalogWebsiteOnboardingSettingss;
+        return liveVideoAdCampaignConfigs;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -159,20 +157,20 @@ public class CatalogWebsiteOnboardingSettings extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                catalogWebsiteOnboardingSettingss.setCursors(before, after);
+                liveVideoAdCampaignConfigs.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            catalogWebsiteOnboardingSettingss.setPaging(previous, next);
+            liveVideoAdCampaignConfigs.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              catalogWebsiteOnboardingSettingss.setAppSecret(context.getAppSecretProof());
+              liveVideoAdCampaignConfigs.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              catalogWebsiteOnboardingSettingss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              liveVideoAdCampaignConfigs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -183,23 +181,23 @@ public class CatalogWebsiteOnboardingSettings extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  catalogWebsiteOnboardingSettingss.add(loadJSON(entry.getValue().toString(), context, header));
+                  liveVideoAdCampaignConfigs.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              catalogWebsiteOnboardingSettingss.add(loadJSON(obj.toString(), context, header));
+              liveVideoAdCampaignConfigs.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return catalogWebsiteOnboardingSettingss;
+          return liveVideoAdCampaignConfigs;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              catalogWebsiteOnboardingSettingss.add(loadJSON(entry.getValue().toString(), context, header));
+              liveVideoAdCampaignConfigs.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return catalogWebsiteOnboardingSettingss;
+          return liveVideoAdCampaignConfigs;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -216,20 +214,20 @@ public class CatalogWebsiteOnboardingSettings extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              catalogWebsiteOnboardingSettingss.add(loadJSON(value.toString(), context, header));
+              liveVideoAdCampaignConfigs.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return catalogWebsiteOnboardingSettingss;
+            return liveVideoAdCampaignConfigs;
           }
 
           // Sixth, check if it's pure JsonObject
-          catalogWebsiteOnboardingSettingss.clear();
-          catalogWebsiteOnboardingSettingss.add(loadJSON(json, context, header));
-          return catalogWebsiteOnboardingSettingss;
+          liveVideoAdCampaignConfigs.clear();
+          liveVideoAdCampaignConfigs.add(loadJSON(json, context, header));
+          return liveVideoAdCampaignConfigs;
         }
       }
     } catch (Exception e) {
@@ -265,21 +263,17 @@ public class CatalogWebsiteOnboardingSettings extends APINode {
     return mId;
   }
 
-  public String getFieldQualityBand() {
-    return mQualityBand;
-  }
-
-  public String getFieldStatus() {
-    return mStatus;
+  public String getFieldLiveVideoAdType() {
+    return mLiveVideoAdType;
   }
 
 
 
-  public static class APIRequestGet extends APIRequest<CatalogWebsiteOnboardingSettings> {
+  public static class APIRequestGet extends APIRequest<LiveVideoAdCampaignConfig> {
 
-    CatalogWebsiteOnboardingSettings lastResponse = null;
+    LiveVideoAdCampaignConfig lastResponse = null;
     @Override
-    public CatalogWebsiteOnboardingSettings getLastResponse() {
+    public LiveVideoAdCampaignConfig getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
@@ -287,36 +281,35 @@ public class CatalogWebsiteOnboardingSettings extends APINode {
 
     public static final String[] FIELDS = {
       "id",
-      "quality_band",
-      "status",
+      "live_video_ad_type",
     };
 
     @Override
-    public CatalogWebsiteOnboardingSettings parseResponse(String response, String header) throws APIException {
-      return CatalogWebsiteOnboardingSettings.parseResponse(response, getContext(), this, header).head();
+    public LiveVideoAdCampaignConfig parseResponse(String response, String header) throws APIException {
+      return LiveVideoAdCampaignConfig.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public CatalogWebsiteOnboardingSettings execute() throws APIException {
+    public LiveVideoAdCampaignConfig execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public CatalogWebsiteOnboardingSettings execute(Map<String, Object> extraParams) throws APIException {
+    public LiveVideoAdCampaignConfig execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<CatalogWebsiteOnboardingSettings> executeAsync() throws APIException {
+    public ListenableFuture<LiveVideoAdCampaignConfig> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<CatalogWebsiteOnboardingSettings> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<LiveVideoAdCampaignConfig> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, CatalogWebsiteOnboardingSettings>() {
-           public CatalogWebsiteOnboardingSettings apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, LiveVideoAdCampaignConfig>() {
+           public LiveVideoAdCampaignConfig apply(ResponseWrapper result) {
              try {
                return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -388,18 +381,11 @@ public class CatalogWebsiteOnboardingSettings extends APINode {
       this.requestField("id", value);
       return this;
     }
-    public APIRequestGet requestQualityBandField () {
-      return this.requestQualityBandField(true);
+    public APIRequestGet requestLiveVideoAdTypeField () {
+      return this.requestLiveVideoAdTypeField(true);
     }
-    public APIRequestGet requestQualityBandField (boolean value) {
-      this.requestField("quality_band", value);
-      return this;
-    }
-    public APIRequestGet requestStatusField () {
-      return this.requestStatusField(true);
-    }
-    public APIRequestGet requestStatusField (boolean value) {
-      this.requestField("status", value);
+    public APIRequestGet requestLiveVideoAdTypeField (boolean value) {
+      this.requestField("live_video_ad_type", value);
       return this;
     }
   }
@@ -418,19 +404,18 @@ public class CatalogWebsiteOnboardingSettings extends APINode {
     return gson;
   }
 
-  public CatalogWebsiteOnboardingSettings copyFrom(CatalogWebsiteOnboardingSettings instance) {
+  public LiveVideoAdCampaignConfig copyFrom(LiveVideoAdCampaignConfig instance) {
     this.mId = instance.mId;
-    this.mQualityBand = instance.mQualityBand;
-    this.mStatus = instance.mStatus;
+    this.mLiveVideoAdType = instance.mLiveVideoAdType;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<CatalogWebsiteOnboardingSettings> getParser() {
-    return new APIRequest.ResponseParser<CatalogWebsiteOnboardingSettings>() {
-      public APINodeList<CatalogWebsiteOnboardingSettings> parseResponse(String response, APIContext context, APIRequest<CatalogWebsiteOnboardingSettings> request, String header) throws MalformedResponseException {
-        return CatalogWebsiteOnboardingSettings.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<LiveVideoAdCampaignConfig> getParser() {
+    return new APIRequest.ResponseParser<LiveVideoAdCampaignConfig>() {
+      public APINodeList<LiveVideoAdCampaignConfig> parseResponse(String response, APIContext context, APIRequest<LiveVideoAdCampaignConfig> request, String header) throws MalformedResponseException {
+        return LiveVideoAdCampaignConfig.parseResponse(response, context, request, header);
       }
     };
   }

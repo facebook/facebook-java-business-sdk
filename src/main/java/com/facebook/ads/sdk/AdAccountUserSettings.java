@@ -131,6 +131,8 @@ public class AdAccountUserSettings extends APINode {
   private Boolean mShouldDefaultTextSwappingOptimization = null;
   @SerializedName("should_logout_of_3p_sourcing")
   private Boolean mShouldLogoutOf3pSourcing = null;
+  @SerializedName("should_show_shops_ads_metrics_onboarding_tour")
+  private Boolean mShouldShowShopsAdsMetricsOnboardingTour = null;
   @SerializedName("show_archived_data")
   private Boolean mShowArchivedData = null;
   @SerializedName("show_text_variation_nux_tooltip")
@@ -548,6 +550,10 @@ public class AdAccountUserSettings extends APINode {
     return mShouldLogoutOf3pSourcing;
   }
 
+  public Boolean getFieldShouldShowShopsAdsMetricsOnboardingTour() {
+    return mShouldShowShopsAdsMetricsOnboardingTour;
+  }
+
   public Boolean getFieldShowArchivedData() {
     return mShowArchivedData;
   }
@@ -649,6 +655,7 @@ public class AdAccountUserSettings extends APINode {
       "should_default_instagram_profile_card_optimization",
       "should_default_text_swapping_optimization",
       "should_logout_of_3p_sourcing",
+      "should_show_shops_ads_metrics_onboarding_tour",
       "show_archived_data",
       "show_text_variation_nux_tooltip",
       "syd_campaign_trends_activemetric",
@@ -1066,6 +1073,13 @@ public class AdAccountUserSettings extends APINode {
       this.requestField("should_logout_of_3p_sourcing", value);
       return this;
     }
+    public APIRequestGet requestShouldShowShopsAdsMetricsOnboardingTourField () {
+      return this.requestShouldShowShopsAdsMetricsOnboardingTourField(true);
+    }
+    public APIRequestGet requestShouldShowShopsAdsMetricsOnboardingTourField (boolean value) {
+      this.requestField("should_show_shops_ads_metrics_onboarding_tour", value);
+      return this;
+    }
     public APIRequestGet requestShowArchivedDataField () {
       return this.requestShowArchivedDataField(true);
     }
@@ -1255,6 +1269,7 @@ public class AdAccountUserSettings extends APINode {
     this.mShouldDefaultInstagramProfileCardOptimization = instance.mShouldDefaultInstagramProfileCardOptimization;
     this.mShouldDefaultTextSwappingOptimization = instance.mShouldDefaultTextSwappingOptimization;
     this.mShouldLogoutOf3pSourcing = instance.mShouldLogoutOf3pSourcing;
+    this.mShouldShowShopsAdsMetricsOnboardingTour = instance.mShouldShowShopsAdsMetricsOnboardingTour;
     this.mShowArchivedData = instance.mShowArchivedData;
     this.mShowTextVariationNuxTooltip = instance.mShowTextVariationNuxTooltip;
     this.mSydCampaignTrendsActivemetric = instance.mSydCampaignTrendsActivemetric;

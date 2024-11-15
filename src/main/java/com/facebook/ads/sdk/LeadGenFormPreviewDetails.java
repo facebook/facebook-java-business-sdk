@@ -45,6 +45,10 @@ public class LeadGenFormPreviewDetails extends APINode {
   private String mCallBusinessText = null;
   @SerializedName("call_to_action_title")
   private String mCallToActionTitle = null;
+  @SerializedName("chat_on_messenger_text")
+  private String mChatOnMessengerText = null;
+  @SerializedName("chat_on_whatsapp_text")
+  private String mChatOnWhatsappText = null;
   @SerializedName("contact_information_text")
   private String mContactInformationText = null;
   @SerializedName("creatives_overview_default_text")
@@ -281,6 +285,24 @@ public class LeadGenFormPreviewDetails extends APINode {
 
   public LeadGenFormPreviewDetails setFieldCallToActionTitle(String value) {
     this.mCallToActionTitle = value;
+    return this;
+  }
+
+  public String getFieldChatOnMessengerText() {
+    return mChatOnMessengerText;
+  }
+
+  public LeadGenFormPreviewDetails setFieldChatOnMessengerText(String value) {
+    this.mChatOnMessengerText = value;
+    return this;
+  }
+
+  public String getFieldChatOnWhatsappText() {
+    return mChatOnWhatsappText;
+  }
+
+  public LeadGenFormPreviewDetails setFieldChatOnWhatsappText(String value) {
+    this.mChatOnWhatsappText = value;
     return this;
   }
 
@@ -618,6 +640,8 @@ public class LeadGenFormPreviewDetails extends APINode {
   public LeadGenFormPreviewDetails copyFrom(LeadGenFormPreviewDetails instance) {
     this.mCallBusinessText = instance.mCallBusinessText;
     this.mCallToActionTitle = instance.mCallToActionTitle;
+    this.mChatOnMessengerText = instance.mChatOnMessengerText;
+    this.mChatOnWhatsappText = instance.mChatOnWhatsappText;
     this.mContactInformationText = instance.mContactInformationText;
     this.mCreativesOverviewDefaultText = instance.mCreativesOverviewDefaultText;
     this.mDataPrivacyPolicySettingDescription = instance.mDataPrivacyPolicySettingDescription;

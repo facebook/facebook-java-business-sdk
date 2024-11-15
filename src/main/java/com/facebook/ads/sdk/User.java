@@ -75,6 +75,8 @@ public class User extends APINode {
   private String mIdForAvatars = null;
   @SerializedName("inspirational_people")
   private List<Experience> mInspirationalPeople = null;
+  @SerializedName("instagram_user_self_asset")
+  private InstagramUser mInstagramUserSelfAsset = null;
   @SerializedName("install_type")
   private String mInstallType = null;
   @SerializedName("installed")
@@ -115,6 +117,8 @@ public class User extends APINode {
   private String mQuotes = null;
   @SerializedName("relationship_status")
   private String mRelationshipStatus = null;
+  @SerializedName("religion")
+  private String mReligion = null;
   @SerializedName("shared_login_upgrade_required_by")
   private String mSharedLoginUpgradeRequiredBy = null;
   @SerializedName("short_name")
@@ -642,6 +646,13 @@ public class User extends APINode {
     return mInspirationalPeople;
   }
 
+  public InstagramUser getFieldInstagramUserSelfAsset() {
+    if (mInstagramUserSelfAsset != null) {
+      mInstagramUserSelfAsset.context = getContext();
+    }
+    return mInstagramUserSelfAsset;
+  }
+
   public String getFieldInstallType() {
     return mInstallType;
   }
@@ -723,6 +734,10 @@ public class User extends APINode {
 
   public String getFieldRelationshipStatus() {
     return mRelationshipStatus;
+  }
+
+  public String getFieldReligion() {
+    return mReligion;
   }
 
   public String getFieldSharedLoginUpgradeRequiredBy() {
@@ -3085,6 +3100,7 @@ public class User extends APINode {
       "end_advertiser",
       "end_advertiser_name",
       "existing_customers",
+      "expired_funding_source_details",
       "extended_credit_invoice_group",
       "failed_delivery_checks",
       "fb_entity",
@@ -3413,6 +3429,13 @@ public class User extends APINode {
     }
     public APIRequestGetAdAccounts requestExistingCustomersField (boolean value) {
       this.requestField("existing_customers", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestExpiredFundingSourceDetailsField () {
+      return this.requestExpiredFundingSourceDetailsField(true);
+    }
+    public APIRequestGetAdAccounts requestExpiredFundingSourceDetailsField (boolean value) {
+      this.requestField("expired_funding_source_details", value);
       return this;
     }
     public APIRequestGetAdAccounts requestExtendedCreditInvoiceGroupField () {
@@ -4452,6 +4475,7 @@ public class User extends APINode {
       "end_advertiser",
       "end_advertiser_name",
       "existing_customers",
+      "expired_funding_source_details",
       "extended_credit_invoice_group",
       "failed_delivery_checks",
       "fb_entity",
@@ -4780,6 +4804,13 @@ public class User extends APINode {
     }
     public APIRequestGetAssignedAdAccounts requestExistingCustomersField (boolean value) {
       this.requestField("existing_customers", value);
+      return this;
+    }
+    public APIRequestGetAssignedAdAccounts requestExpiredFundingSourceDetailsField () {
+      return this.requestExpiredFundingSourceDetailsField(true);
+    }
+    public APIRequestGetAssignedAdAccounts requestExpiredFundingSourceDetailsField (boolean value) {
+      this.requestField("expired_funding_source_details", value);
       return this;
     }
     public APIRequestGetAssignedAdAccounts requestExtendedCreditInvoiceGroupField () {
@@ -5132,6 +5163,7 @@ public class User extends APINode {
       "deauth_callback_url",
       "default_share_mode",
       "description",
+      "enigma_config",
       "financial_id",
       "gdpv4_chrome_custom_tabs_enabled",
       "gdpv4_enabled",
@@ -5585,6 +5617,13 @@ public class User extends APINode {
     }
     public APIRequestGetAssignedApplications requestDescriptionField (boolean value) {
       this.requestField("description", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestEnigmaConfigField () {
+      return this.requestEnigmaConfigField(true);
+    }
+    public APIRequestGetAssignedApplications requestEnigmaConfigField (boolean value) {
+      this.requestField("enigma_config", value);
       return this;
     }
     public APIRequestGetAssignedApplications requestFinancialIdField () {
@@ -10193,7 +10232,6 @@ public class User extends APINode {
       "text_format_metadata",
       "text_format_preset_id",
       "text_only_place",
-      "throwback_camera_roll_media",
       "thumbnail",
       "time_since_original_post",
       "title",
@@ -10934,11 +10972,6 @@ public class User extends APINode {
       return this;
     }
 
-    public APIRequestCreateFeed setThrowbackCameraRollMedia (String throwbackCameraRollMedia) {
-      this.setParam("throwback_camera_roll_media", throwbackCameraRollMedia);
-      return this;
-    }
-
     public APIRequestCreateFeed setThumbnail (File thumbnail) {
       this.setParam("thumbnail", thumbnail);
       return this;
@@ -11079,6 +11112,7 @@ public class User extends APINode {
       "id",
       "id_for_avatars",
       "inspirational_people",
+      "instagram_user_self_asset",
       "install_type",
       "installed",
       "is_guest_user",
@@ -11099,6 +11133,7 @@ public class User extends APINode {
       "profile_pic",
       "quotes",
       "relationship_status",
+      "religion",
       "shared_login_upgrade_required_by",
       "short_name",
       "significant_other",
@@ -11331,6 +11366,13 @@ public class User extends APINode {
       this.requestField("inspirational_people", value);
       return this;
     }
+    public APIRequestGetFriends requestInstagramUserSelfAssetField () {
+      return this.requestInstagramUserSelfAssetField(true);
+    }
+    public APIRequestGetFriends requestInstagramUserSelfAssetField (boolean value) {
+      this.requestField("instagram_user_self_asset", value);
+      return this;
+    }
     public APIRequestGetFriends requestInstallTypeField () {
       return this.requestInstallTypeField(true);
     }
@@ -11469,6 +11511,13 @@ public class User extends APINode {
     }
     public APIRequestGetFriends requestRelationshipStatusField (boolean value) {
       this.requestField("relationship_status", value);
+      return this;
+    }
+    public APIRequestGetFriends requestReligionField () {
+      return this.requestReligionField(true);
+    }
+    public APIRequestGetFriends requestReligionField (boolean value) {
+      this.requestField("religion", value);
       return this;
     }
     public APIRequestGetFriends requestSharedLoginUpgradeRequiredByField () {
@@ -16857,6 +16906,7 @@ public class User extends APINode {
       "end_advertiser",
       "end_advertiser_name",
       "existing_customers",
+      "expired_funding_source_details",
       "extended_credit_invoice_group",
       "failed_delivery_checks",
       "fb_entity",
@@ -17185,6 +17235,13 @@ public class User extends APINode {
     }
     public APIRequestGetPersonalAdAccounts requestExistingCustomersField (boolean value) {
       this.requestField("existing_customers", value);
+      return this;
+    }
+    public APIRequestGetPersonalAdAccounts requestExpiredFundingSourceDetailsField () {
+      return this.requestExpiredFundingSourceDetailsField(true);
+    }
+    public APIRequestGetPersonalAdAccounts requestExpiredFundingSourceDetailsField (boolean value) {
+      this.requestField("expired_funding_source_details", value);
       return this;
     }
     public APIRequestGetPersonalAdAccounts requestExtendedCreditInvoiceGroupField () {
@@ -20187,7 +20244,6 @@ public class User extends APINode {
       "start_offset",
       "swap_mode",
       "text_format_metadata",
-      "throwback_camera_roll_media",
       "thumb",
       "time_since_original_post",
       "title",
@@ -20664,11 +20720,6 @@ public class User extends APINode {
       return this;
     }
 
-    public APIRequestCreateVideo setThrowbackCameraRollMedia (String throwbackCameraRollMedia) {
-      this.setParam("throwback_camera_roll_media", throwbackCameraRollMedia);
-      return this;
-    }
-
     public APIRequestCreateVideo setThumb (File thumb) {
       this.setParam("thumb", thumb);
       return this;
@@ -20920,6 +20971,7 @@ public class User extends APINode {
       "id",
       "id_for_avatars",
       "inspirational_people",
+      "instagram_user_self_asset",
       "install_type",
       "installed",
       "is_guest_user",
@@ -20940,6 +20992,7 @@ public class User extends APINode {
       "profile_pic",
       "quotes",
       "relationship_status",
+      "religion",
       "shared_login_upgrade_required_by",
       "short_name",
       "significant_other",
@@ -21163,6 +21216,13 @@ public class User extends APINode {
       this.requestField("inspirational_people", value);
       return this;
     }
+    public APIRequestGet requestInstagramUserSelfAssetField () {
+      return this.requestInstagramUserSelfAssetField(true);
+    }
+    public APIRequestGet requestInstagramUserSelfAssetField (boolean value) {
+      this.requestField("instagram_user_self_asset", value);
+      return this;
+    }
     public APIRequestGet requestInstallTypeField () {
       return this.requestInstallTypeField(true);
     }
@@ -21301,6 +21361,13 @@ public class User extends APINode {
     }
     public APIRequestGet requestRelationshipStatusField (boolean value) {
       this.requestField("relationship_status", value);
+      return this;
+    }
+    public APIRequestGet requestReligionField () {
+      return this.requestReligionField(true);
+    }
+    public APIRequestGet requestReligionField (boolean value) {
+      this.requestField("religion", value);
       return this;
     }
     public APIRequestGet requestSharedLoginUpgradeRequiredByField () {
@@ -21658,6 +21725,7 @@ public class User extends APINode {
     this.mId = instance.mId;
     this.mIdForAvatars = instance.mIdForAvatars;
     this.mInspirationalPeople = instance.mInspirationalPeople;
+    this.mInstagramUserSelfAsset = instance.mInstagramUserSelfAsset;
     this.mInstallType = instance.mInstallType;
     this.mInstalled = instance.mInstalled;
     this.mIsGuestUser = instance.mIsGuestUser;
@@ -21678,6 +21746,7 @@ public class User extends APINode {
     this.mProfilePic = instance.mProfilePic;
     this.mQuotes = instance.mQuotes;
     this.mRelationshipStatus = instance.mRelationshipStatus;
+    this.mReligion = instance.mReligion;
     this.mSharedLoginUpgradeRequiredBy = instance.mSharedLoginUpgradeRequiredBy;
     this.mShortName = instance.mShortName;
     this.mSignificantOther = instance.mSignificantOther;

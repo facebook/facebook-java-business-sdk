@@ -49,6 +49,8 @@ public class InstagramUser extends APINode {
   private Boolean mHasProfilePicture = null;
   @SerializedName("id")
   private String mId = null;
+  @SerializedName("ig_user_id")
+  private String mIgUserId = null;
   @SerializedName("is_private")
   private Boolean mIsPrivate = null;
   @SerializedName("is_published")
@@ -315,6 +317,10 @@ public class InstagramUser extends APINode {
 
   public String getFieldId() {
     return mId;
+  }
+
+  public String getFieldIgUserId() {
+    return mIgUserId;
   }
 
   public Boolean getFieldIsPrivate() {
@@ -819,6 +825,7 @@ public class InstagramUser extends APINode {
       "end_advertiser",
       "end_advertiser_name",
       "existing_customers",
+      "expired_funding_source_details",
       "extended_credit_invoice_group",
       "failed_delivery_checks",
       "fb_entity",
@@ -1152,6 +1159,13 @@ public class InstagramUser extends APINode {
     }
     public APIRequestGetAuthorizedAdAccounts requestExistingCustomersField (boolean value) {
       this.requestField("existing_customers", value);
+      return this;
+    }
+    public APIRequestGetAuthorizedAdAccounts requestExpiredFundingSourceDetailsField () {
+      return this.requestExpiredFundingSourceDetailsField(true);
+    }
+    public APIRequestGetAuthorizedAdAccounts requestExpiredFundingSourceDetailsField (boolean value) {
+      this.requestField("expired_funding_source_details", value);
       return this;
     }
     public APIRequestGetAuthorizedAdAccounts requestExtendedCreditInvoiceGroupField () {
@@ -1879,6 +1893,7 @@ public class InstagramUser extends APINode {
       "followed_by_count",
       "has_profile_picture",
       "id",
+      "ig_user_id",
       "is_private",
       "is_published",
       "media_count",
@@ -2011,6 +2026,13 @@ public class InstagramUser extends APINode {
       this.requestField("id", value);
       return this;
     }
+    public APIRequestGet requestIgUserIdField () {
+      return this.requestIgUserIdField(true);
+    }
+    public APIRequestGet requestIgUserIdField (boolean value) {
+      this.requestField("ig_user_id", value);
+      return this;
+    }
     public APIRequestGet requestIsPrivateField () {
       return this.requestIsPrivateField(true);
     }
@@ -2081,6 +2103,7 @@ public class InstagramUser extends APINode {
     this.mFollowedByCount = instance.mFollowedByCount;
     this.mHasProfilePicture = instance.mHasProfilePicture;
     this.mId = instance.mId;
+    this.mIgUserId = instance.mIgUserId;
     this.mIsPrivate = instance.mIsPrivate;
     this.mIsPublished = instance.mIsPublished;
     this.mMediaCount = instance.mMediaCount;

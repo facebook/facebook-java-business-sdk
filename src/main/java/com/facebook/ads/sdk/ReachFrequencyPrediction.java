@@ -173,6 +173,8 @@ public class ReachFrequencyPrediction extends APINode {
   private String mOptimizationGoalName = null;
   @SerializedName("pause_periods")
   private List<Object> mPausePeriods = null;
+  @SerializedName("percent_reach_at_target_frequency")
+  private Long mPercentReachAtTargetFrequency = null;
   @SerializedName("placement_breakdown")
   private ReachFrequencyEstimatesPlacementBreakdown mPlacementBreakdown = null;
   @SerializedName("placement_breakdown_map")
@@ -691,6 +693,10 @@ public class ReachFrequencyPrediction extends APINode {
     return mPausePeriods;
   }
 
+  public Long getFieldPercentReachAtTargetFrequency() {
+    return mPercentReachAtTargetFrequency;
+  }
+
   public ReachFrequencyEstimatesPlacementBreakdown getFieldPlacementBreakdown() {
     return mPlacementBreakdown;
   }
@@ -850,6 +856,7 @@ public class ReachFrequencyPrediction extends APINode {
       "optimization_goal",
       "optimization_goal_name",
       "pause_periods",
+      "percent_reach_at_target_frequency",
       "placement_breakdown",
       "placement_breakdown_map",
       "plan_name",
@@ -1424,6 +1431,13 @@ public class ReachFrequencyPrediction extends APINode {
       this.requestField("pause_periods", value);
       return this;
     }
+    public APIRequestGet requestPercentReachAtTargetFrequencyField () {
+      return this.requestPercentReachAtTargetFrequencyField(true);
+    }
+    public APIRequestGet requestPercentReachAtTargetFrequencyField (boolean value) {
+      this.requestField("percent_reach_at_target_frequency", value);
+      return this;
+    }
     public APIRequestGet requestPlacementBreakdownField () {
       return this.requestPlacementBreakdownField(true);
     }
@@ -1740,6 +1754,7 @@ public class ReachFrequencyPrediction extends APINode {
     this.mOptimizationGoal = instance.mOptimizationGoal;
     this.mOptimizationGoalName = instance.mOptimizationGoalName;
     this.mPausePeriods = instance.mPausePeriods;
+    this.mPercentReachAtTargetFrequency = instance.mPercentReachAtTargetFrequency;
     this.mPlacementBreakdown = instance.mPlacementBreakdown;
     this.mPlacementBreakdownMap = instance.mPlacementBreakdownMap;
     this.mPlanName = instance.mPlanName;

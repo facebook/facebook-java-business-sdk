@@ -276,6 +276,10 @@ public class MessengerBusinessTemplate extends APINode {
     return new APIRequestGet(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestUpdate update() {
+    return new APIRequestUpdate(this.getPrefixedId().toString(), context);
+  }
+
 
   public String getFieldCategory() {
     return mCategory;
@@ -514,6 +518,156 @@ public class MessengerBusinessTemplate extends APINode {
       this.requestField("status", value);
       return this;
     }
+  }
+
+  public static class APIRequestUpdate extends APIRequest<MessengerBusinessTemplate> {
+
+    MessengerBusinessTemplate lastResponse = null;
+    @Override
+    public MessengerBusinessTemplate getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "components",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public MessengerBusinessTemplate parseResponse(String response, String header) throws APIException {
+      return MessengerBusinessTemplate.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public MessengerBusinessTemplate execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public MessengerBusinessTemplate execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<MessengerBusinessTemplate> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<MessengerBusinessTemplate> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, MessengerBusinessTemplate>() {
+           public MessengerBusinessTemplate apply(ResponseWrapper result) {
+             try {
+               return APIRequestUpdate.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestUpdate(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestUpdate setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestUpdate setComponents (List<Map<String, String>> components) {
+      this.setParam("components", components);
+      return this;
+    }
+    public APIRequestUpdate setComponents (String components) {
+      this.setParam("components", components);
+      return this;
+    }
+
+    public APIRequestUpdate requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestUpdate requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestUpdate requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static enum EnumStatus {
+      @SerializedName("APPROVED")
+      VALUE_APPROVED("APPROVED"),
+      @SerializedName("ARCHIVED")
+      VALUE_ARCHIVED("ARCHIVED"),
+      @SerializedName("DELETED")
+      VALUE_DELETED("DELETED"),
+      @SerializedName("DISABLED")
+      VALUE_DISABLED("DISABLED"),
+      @SerializedName("IN_APPEAL")
+      VALUE_IN_APPEAL("IN_APPEAL"),
+      @SerializedName("LIMIT_EXCEEDED")
+      VALUE_LIMIT_EXCEEDED("LIMIT_EXCEEDED"),
+      @SerializedName("PAUSED")
+      VALUE_PAUSED("PAUSED"),
+      @SerializedName("PENDING")
+      VALUE_PENDING("PENDING"),
+      @SerializedName("PENDING_DELETION")
+      VALUE_PENDING_DELETION("PENDING_DELETION"),
+      @SerializedName("REJECTED")
+      VALUE_REJECTED("REJECTED"),
+      ;
+
+      private String value;
+
+      private EnumStatus(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
   }
 
 

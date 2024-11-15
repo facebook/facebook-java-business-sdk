@@ -386,6 +386,7 @@ public class ProductGroup extends APINode {
       "start_date",
       "tags",
       "url",
+      "vendor_id",
       "video_fetch_status",
       "visibility",
       "wa_compliance_category",
@@ -1004,6 +1005,13 @@ public class ProductGroup extends APINode {
     }
     public APIRequestGetProducts requestUrlField (boolean value) {
       this.requestField("url", value);
+      return this;
+    }
+    public APIRequestGetProducts requestVendorIdField () {
+      return this.requestVendorIdField(true);
+    }
+    public APIRequestGetProducts requestVendorIdField (boolean value) {
+      this.requestField("vendor_id", value);
       return this;
     }
     public APIRequestGetProducts requestVideoFetchStatusField () {
