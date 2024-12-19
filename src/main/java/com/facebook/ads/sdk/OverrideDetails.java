@@ -58,9 +58,8 @@ public class OverrideDetails extends APINode {
   public static OverrideDetails loadJSON(String json, APIContext context, String header) {
     OverrideDetails overrideDetails = getGson().fromJson(json, OverrideDetails.class);
     if (context.isDebug()) {
-      JsonParser parser = new JsonParser();
-      JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(overrideDetails.toString());
+      JsonElement o1 = JsonParser.parseString(json);
+      JsonElement o2 = JsonParser.parseString(overrideDetails.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -80,10 +79,9 @@ public class OverrideDetails extends APINode {
     APINodeList<OverrideDetails> overrideDetailss = new APINodeList<OverrideDetails>(request, json, header);
     JsonArray arr;
     JsonObject obj;
-    JsonParser parser = new JsonParser();
     Exception exception = null;
     try{
-      JsonElement result = parser.parse(json);
+      JsonElement result = JsonParser.parseString(json);
       if (result.isJsonArray()) {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();

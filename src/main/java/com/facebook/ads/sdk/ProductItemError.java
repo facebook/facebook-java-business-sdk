@@ -60,9 +60,8 @@ public class ProductItemError extends APINode {
   public static ProductItemError loadJSON(String json, APIContext context, String header) {
     ProductItemError productItemError = getGson().fromJson(json, ProductItemError.class);
     if (context.isDebug()) {
-      JsonParser parser = new JsonParser();
-      JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(productItemError.toString());
+      JsonElement o1 = JsonParser.parseString(json);
+      JsonElement o2 = JsonParser.parseString(productItemError.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -82,10 +81,9 @@ public class ProductItemError extends APINode {
     APINodeList<ProductItemError> productItemErrors = new APINodeList<ProductItemError>(request, json, header);
     JsonArray arr;
     JsonObject obj;
-    JsonParser parser = new JsonParser();
     Exception exception = null;
     try{
-      JsonElement result = parser.parse(json);
+      JsonElement result = JsonParser.parseString(json);
       if (result.isJsonArray()) {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();

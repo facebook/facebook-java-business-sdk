@@ -115,9 +115,8 @@ public class WebsiteCreativeAssetSource extends APINode {
   public static WebsiteCreativeAssetSource loadJSON(String json, APIContext context, String header) {
     WebsiteCreativeAssetSource websiteCreativeAssetSource = getGson().fromJson(json, WebsiteCreativeAssetSource.class);
     if (context.isDebug()) {
-      JsonParser parser = new JsonParser();
-      JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(websiteCreativeAssetSource.toString());
+      JsonElement o1 = JsonParser.parseString(json);
+      JsonElement o2 = JsonParser.parseString(websiteCreativeAssetSource.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -137,10 +136,9 @@ public class WebsiteCreativeAssetSource extends APINode {
     APINodeList<WebsiteCreativeAssetSource> websiteCreativeAssetSources = new APINodeList<WebsiteCreativeAssetSource>(request, json, header);
     JsonArray arr;
     JsonObject obj;
-    JsonParser parser = new JsonParser();
     Exception exception = null;
     try{
-      JsonElement result = parser.parse(json);
+      JsonElement result = JsonParser.parseString(json);
       if (result.isJsonArray()) {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();

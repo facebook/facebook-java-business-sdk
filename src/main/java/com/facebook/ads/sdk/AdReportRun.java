@@ -141,9 +141,8 @@ public class AdReportRun extends APINode {
   public static AdReportRun loadJSON(String json, APIContext context, String header) {
     AdReportRun adReportRun = getGson().fromJson(json, AdReportRun.class);
     if (context.isDebug()) {
-      JsonParser parser = new JsonParser();
-      JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(adReportRun.toString());
+      JsonElement o1 = JsonParser.parseString(json);
+      JsonElement o2 = JsonParser.parseString(adReportRun.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -156,8 +155,7 @@ public class AdReportRun extends APINode {
     adReportRun.context = context;
     adReportRun.rawValue = json;
     adReportRun.header = header;
-    JsonParser parser = new JsonParser();
-    JsonObject o = parser.parse(json).getAsJsonObject();
+    JsonObject o = JsonParser.parseString(json).getAsJsonObject();
     String reportRunId = null;
     if (o.has("report_run_id")) {
       reportRunId = o.get("report_run_id").getAsString();
@@ -172,10 +170,9 @@ public class AdReportRun extends APINode {
     APINodeList<AdReportRun> adReportRuns = new APINodeList<AdReportRun>(request, json, header);
     JsonArray arr;
     JsonObject obj;
-    JsonParser parser = new JsonParser();
     Exception exception = null;
     try{
-      JsonElement result = parser.parse(json);
+      JsonElement result = JsonParser.parseString(json);
       if (result.isJsonArray()) {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();

@@ -62,9 +62,8 @@ public class AdgroupMetadata extends APINode {
   public static AdgroupMetadata loadJSON(String json, APIContext context, String header) {
     AdgroupMetadata adgroupMetadata = getGson().fromJson(json, AdgroupMetadata.class);
     if (context.isDebug()) {
-      JsonParser parser = new JsonParser();
-      JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(adgroupMetadata.toString());
+      JsonElement o1 = JsonParser.parseString(json);
+      JsonElement o2 = JsonParser.parseString(adgroupMetadata.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -84,10 +83,9 @@ public class AdgroupMetadata extends APINode {
     APINodeList<AdgroupMetadata> adgroupMetadatas = new APINodeList<AdgroupMetadata>(request, json, header);
     JsonArray arr;
     JsonObject obj;
-    JsonParser parser = new JsonParser();
     Exception exception = null;
     try{
-      JsonElement result = parser.parse(json);
+      JsonElement result = JsonParser.parseString(json);
       if (result.isJsonArray()) {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();

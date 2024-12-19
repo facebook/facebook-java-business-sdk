@@ -72,9 +72,8 @@ public class AdCampaignGroupIncrementalConversionOptimizationConfig extends APIN
   public static AdCampaignGroupIncrementalConversionOptimizationConfig loadJSON(String json, APIContext context, String header) {
     AdCampaignGroupIncrementalConversionOptimizationConfig adCampaignGroupIncrementalConversionOptimizationConfig = getGson().fromJson(json, AdCampaignGroupIncrementalConversionOptimizationConfig.class);
     if (context.isDebug()) {
-      JsonParser parser = new JsonParser();
-      JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(adCampaignGroupIncrementalConversionOptimizationConfig.toString());
+      JsonElement o1 = JsonParser.parseString(json);
+      JsonElement o2 = JsonParser.parseString(adCampaignGroupIncrementalConversionOptimizationConfig.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -94,10 +93,9 @@ public class AdCampaignGroupIncrementalConversionOptimizationConfig extends APIN
     APINodeList<AdCampaignGroupIncrementalConversionOptimizationConfig> adCampaignGroupIncrementalConversionOptimizationConfigs = new APINodeList<AdCampaignGroupIncrementalConversionOptimizationConfig>(request, json, header);
     JsonArray arr;
     JsonObject obj;
-    JsonParser parser = new JsonParser();
     Exception exception = null;
     try{
-      JsonElement result = parser.parse(json);
+      JsonElement result = JsonParser.parseString(json);
       if (result.isJsonArray()) {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();

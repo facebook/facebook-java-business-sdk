@@ -66,9 +66,8 @@ public class ManagedPartnerBusiness extends APINode {
   public static ManagedPartnerBusiness loadJSON(String json, APIContext context, String header) {
     ManagedPartnerBusiness managedPartnerBusiness = getGson().fromJson(json, ManagedPartnerBusiness.class);
     if (context.isDebug()) {
-      JsonParser parser = new JsonParser();
-      JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(managedPartnerBusiness.toString());
+      JsonElement o1 = JsonParser.parseString(json);
+      JsonElement o2 = JsonParser.parseString(managedPartnerBusiness.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -88,10 +87,9 @@ public class ManagedPartnerBusiness extends APINode {
     APINodeList<ManagedPartnerBusiness> managedPartnerBusinesss = new APINodeList<ManagedPartnerBusiness>(request, json, header);
     JsonArray arr;
     JsonObject obj;
-    JsonParser parser = new JsonParser();
     Exception exception = null;
     try{
-      JsonElement result = parser.parse(json);
+      JsonElement result = JsonParser.parseString(json);
       if (result.isJsonArray()) {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();

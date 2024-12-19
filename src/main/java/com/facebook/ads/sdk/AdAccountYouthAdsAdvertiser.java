@@ -54,9 +54,8 @@ public class AdAccountYouthAdsAdvertiser extends APINode {
   public static AdAccountYouthAdsAdvertiser loadJSON(String json, APIContext context, String header) {
     AdAccountYouthAdsAdvertiser adAccountYouthAdsAdvertiser = getGson().fromJson(json, AdAccountYouthAdsAdvertiser.class);
     if (context.isDebug()) {
-      JsonParser parser = new JsonParser();
-      JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(adAccountYouthAdsAdvertiser.toString());
+      JsonElement o1 = JsonParser.parseString(json);
+      JsonElement o2 = JsonParser.parseString(adAccountYouthAdsAdvertiser.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -76,10 +75,9 @@ public class AdAccountYouthAdsAdvertiser extends APINode {
     APINodeList<AdAccountYouthAdsAdvertiser> adAccountYouthAdsAdvertisers = new APINodeList<AdAccountYouthAdsAdvertiser>(request, json, header);
     JsonArray arr;
     JsonObject obj;
-    JsonParser parser = new JsonParser();
     Exception exception = null;
     try{
-      JsonElement result = parser.parse(json);
+      JsonElement result = JsonParser.parseString(json);
       if (result.isJsonArray()) {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();

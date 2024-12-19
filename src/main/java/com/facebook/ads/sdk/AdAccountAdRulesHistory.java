@@ -70,9 +70,8 @@ public class AdAccountAdRulesHistory extends APINode {
   public static AdAccountAdRulesHistory loadJSON(String json, APIContext context, String header) {
     AdAccountAdRulesHistory adAccountAdRulesHistory = getGson().fromJson(json, AdAccountAdRulesHistory.class);
     if (context.isDebug()) {
-      JsonParser parser = new JsonParser();
-      JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(adAccountAdRulesHistory.toString());
+      JsonElement o1 = JsonParser.parseString(json);
+      JsonElement o2 = JsonParser.parseString(adAccountAdRulesHistory.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -92,10 +91,9 @@ public class AdAccountAdRulesHistory extends APINode {
     APINodeList<AdAccountAdRulesHistory> adAccountAdRulesHistorys = new APINodeList<AdAccountAdRulesHistory>(request, json, header);
     JsonArray arr;
     JsonObject obj;
-    JsonParser parser = new JsonParser();
     Exception exception = null;
     try{
-      JsonElement result = parser.parse(json);
+      JsonElement result = JsonParser.parseString(json);
       if (result.isJsonArray()) {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
