@@ -299,6 +299,7 @@ public class AdMonetizationProperty extends APINode {
       "metrics",
       "ordering_column",
       "ordering_type",
+      "should_include_until",
       "since",
       "until",
     };
@@ -423,6 +424,15 @@ public class AdMonetizationProperty extends APINode {
     }
     public APIRequestGetAdNetworkAnalytics setOrderingType (String orderingType) {
       this.setParam("ordering_type", orderingType);
+      return this;
+    }
+
+    public APIRequestGetAdNetworkAnalytics setShouldIncludeUntil (Boolean shouldIncludeUntil) {
+      this.setParam("should_include_until", shouldIncludeUntil);
+      return this;
+    }
+    public APIRequestGetAdNetworkAnalytics setShouldIncludeUntil (String shouldIncludeUntil) {
+      this.setParam("should_include_until", shouldIncludeUntil);
       return this;
     }
 
@@ -695,7 +705,6 @@ public class AdMonetizationProperty extends APINode {
 
     public static final String[] FIELDS = {
       "data",
-      "error",
       "omitted_results",
       "query_id",
       "results",
@@ -806,13 +815,6 @@ public class AdMonetizationProperty extends APINode {
     }
     public APIRequestGetAdNetworkAnalyticsResults requestDataField (boolean value) {
       this.requestField("data", value);
-      return this;
-    }
-    public APIRequestGetAdNetworkAnalyticsResults requestErrorField () {
-      return this.requestErrorField(true);
-    }
-    public APIRequestGetAdNetworkAnalyticsResults requestErrorField (boolean value) {
-      this.requestField("error", value);
       return this;
     }
     public APIRequestGetAdNetworkAnalyticsResults requestOmittedResultsField () {

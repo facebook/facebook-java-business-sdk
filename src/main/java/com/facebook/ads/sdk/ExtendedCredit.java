@@ -1282,11 +1282,11 @@ public class ExtendedCredit extends APINode {
 
   }
 
-  public static class APIRequestCreateWhatsAppCreditSharingAndAttach extends APIRequest<APINode> {
+  public static class APIRequestCreateWhatsAppCreditSharingAndAttach extends APIRequest<ExtendedCreditAllocationConfig> {
 
-    APINode lastResponse = null;
+    ExtendedCreditAllocationConfig lastResponse = null;
     @Override
-    public APINode getLastResponse() {
+    public ExtendedCreditAllocationConfig getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
@@ -1298,31 +1298,31 @@ public class ExtendedCredit extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header).head();
+    public ExtendedCreditAllocationConfig parseResponse(String response, String header) throws APIException {
+      return ExtendedCreditAllocationConfig.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public APINode execute() throws APIException {
+    public ExtendedCreditAllocationConfig execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINode execute(Map<String, Object> extraParams) throws APIException {
+    public ExtendedCreditAllocationConfig execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<APINode> executeAsync() throws APIException {
+    public ListenableFuture<ExtendedCreditAllocationConfig> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<ExtendedCreditAllocationConfig> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINode>() {
-           public APINode apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, ExtendedCreditAllocationConfig>() {
+           public ExtendedCreditAllocationConfig apply(ResponseWrapper result) {
              try {
                return APIRequestCreateWhatsAppCreditSharingAndAttach.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {

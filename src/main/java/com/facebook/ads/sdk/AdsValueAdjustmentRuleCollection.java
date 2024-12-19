@@ -43,6 +43,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class AdsValueAdjustmentRuleCollection extends APINode {
   @SerializedName("id")
   private String mId = null;
+  @SerializedName("is_default_setting")
+  private Boolean mIsDefaultSetting = null;
   @SerializedName("name")
   private String mName = null;
   protected static Gson gson = null;
@@ -267,6 +269,10 @@ public class AdsValueAdjustmentRuleCollection extends APINode {
     return mId;
   }
 
+  public Boolean getFieldIsDefaultSetting() {
+    return mIsDefaultSetting;
+  }
+
   public String getFieldName() {
     return mName;
   }
@@ -390,6 +396,7 @@ public class AdsValueAdjustmentRuleCollection extends APINode {
 
     public static final String[] FIELDS = {
       "id",
+      "is_default_setting",
       "name",
     };
 
@@ -490,6 +497,13 @@ public class AdsValueAdjustmentRuleCollection extends APINode {
       this.requestField("id", value);
       return this;
     }
+    public APIRequestGet requestIsDefaultSettingField () {
+      return this.requestIsDefaultSettingField(true);
+    }
+    public APIRequestGet requestIsDefaultSettingField (boolean value) {
+      this.requestField("is_default_setting", value);
+      return this;
+    }
     public APIRequestGet requestNameField () {
       return this.requestNameField(true);
     }
@@ -515,6 +529,7 @@ public class AdsValueAdjustmentRuleCollection extends APINode {
 
   public AdsValueAdjustmentRuleCollection copyFrom(AdsValueAdjustmentRuleCollection instance) {
     this.mId = instance.mId;
+    this.mIsDefaultSetting = instance.mIsDefaultSetting;
     this.mName = instance.mName;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

@@ -49,6 +49,8 @@ public class AdAssetFeedSpecLinkURL extends APINode {
   private String mDeeplinkUrl = null;
   @SerializedName("display_url")
   private String mDisplayUrl = null;
+  @SerializedName("object_store_urls")
+  private List<String> mObjectStoreUrls = null;
   @SerializedName("url_tags")
   private String mUrlTags = null;
   @SerializedName("website_url")
@@ -245,6 +247,15 @@ public class AdAssetFeedSpecLinkURL extends APINode {
     return this;
   }
 
+  public List<String> getFieldObjectStoreUrls() {
+    return mObjectStoreUrls;
+  }
+
+  public AdAssetFeedSpecLinkURL setFieldObjectStoreUrls(List<String> value) {
+    this.mObjectStoreUrls = value;
+    return this;
+  }
+
   public String getFieldUrlTags() {
     return mUrlTags;
   }
@@ -284,6 +295,7 @@ public class AdAssetFeedSpecLinkURL extends APINode {
     this.mCarouselSeeMoreUrl = instance.mCarouselSeeMoreUrl;
     this.mDeeplinkUrl = instance.mDeeplinkUrl;
     this.mDisplayUrl = instance.mDisplayUrl;
+    this.mObjectStoreUrls = instance.mObjectStoreUrls;
     this.mUrlTags = instance.mUrlTags;
     this.mWebsiteUrl = instance.mWebsiteUrl;
     this.context = instance.context;

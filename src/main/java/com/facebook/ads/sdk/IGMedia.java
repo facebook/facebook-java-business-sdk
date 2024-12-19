@@ -57,6 +57,8 @@ public class IGMedia extends APINode {
   private Boolean mIsCommentEnabled = null;
   @SerializedName("is_shared_to_feed")
   private Boolean mIsSharedToFeed = null;
+  @SerializedName("legacy_instagram_media_id")
+  private String mLegacyInstagramMediaId = null;
   @SerializedName("like_count")
   private Long mLikeCount = null;
   @SerializedName("media_product_type")
@@ -376,6 +378,10 @@ public class IGMedia extends APINode {
 
   public Boolean getFieldIsSharedToFeed() {
     return mIsSharedToFeed;
+  }
+
+  public String getFieldLegacyInstagramMediaId() {
+    return mLegacyInstagramMediaId;
   }
 
   public Long getFieldLikeCount() {
@@ -809,6 +815,7 @@ public class IGMedia extends APINode {
       "ig_id",
       "is_comment_enabled",
       "is_shared_to_feed",
+      "legacy_instagram_media_id",
       "like_count",
       "media_product_type",
       "media_type",
@@ -965,6 +972,13 @@ public class IGMedia extends APINode {
     }
     public APIRequestGetChildren requestIsSharedToFeedField (boolean value) {
       this.requestField("is_shared_to_feed", value);
+      return this;
+    }
+    public APIRequestGetChildren requestLegacyInstagramMediaIdField () {
+      return this.requestLegacyInstagramMediaIdField(true);
+    }
+    public APIRequestGetChildren requestLegacyInstagramMediaIdField (boolean value) {
+      this.requestField("legacy_instagram_media_id", value);
       return this;
     }
     public APIRequestGetChildren requestLikeCountField () {
@@ -1182,6 +1196,7 @@ public class IGMedia extends APINode {
       "from",
       "hidden",
       "id",
+      "legacy_instagram_comment_id",
       "like_count",
       "media",
       "parent_id",
@@ -1300,6 +1315,13 @@ public class IGMedia extends APINode {
     }
     public APIRequestGetComments requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetComments requestLegacyInstagramCommentIdField () {
+      return this.requestLegacyInstagramCommentIdField(true);
+    }
+    public APIRequestGetComments requestLegacyInstagramCommentIdField (boolean value) {
+      this.requestField("legacy_instagram_comment_id", value);
       return this;
     }
     public APIRequestGetComments requestLikeCountField () {
@@ -2208,6 +2230,7 @@ public class IGMedia extends APINode {
       "ig_id",
       "is_comment_enabled",
       "is_shared_to_feed",
+      "legacy_instagram_media_id",
       "like_count",
       "media_product_type",
       "media_type",
@@ -2398,6 +2421,13 @@ public class IGMedia extends APINode {
     }
     public APIRequestGet requestIsSharedToFeedField (boolean value) {
       this.requestField("is_shared_to_feed", value);
+      return this;
+    }
+    public APIRequestGet requestLegacyInstagramMediaIdField () {
+      return this.requestLegacyInstagramMediaIdField(true);
+    }
+    public APIRequestGet requestLegacyInstagramMediaIdField (boolean value) {
+      this.requestField("legacy_instagram_media_id", value);
       return this;
     }
     public APIRequestGet requestLikeCountField () {
@@ -2610,6 +2640,7 @@ public class IGMedia extends APINode {
     this.mIgId = instance.mIgId;
     this.mIsCommentEnabled = instance.mIsCommentEnabled;
     this.mIsSharedToFeed = instance.mIsSharedToFeed;
+    this.mLegacyInstagramMediaId = instance.mLegacyInstagramMediaId;
     this.mLikeCount = instance.mLikeCount;
     this.mMediaProductType = instance.mMediaProductType;
     this.mMediaType = instance.mMediaType;

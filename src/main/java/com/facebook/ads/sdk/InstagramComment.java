@@ -47,6 +47,8 @@ public class InstagramComment extends APINode {
   private String mCreatedAt = null;
   @SerializedName("id")
   private String mId = null;
+  @SerializedName("ig_comment_id")
+  private String mIgCommentId = null;
   @SerializedName("instagram_comment_id")
   private String mInstagramCommentId = null;
   @SerializedName("instagram_user")
@@ -299,6 +301,10 @@ public class InstagramComment extends APINode {
     return mId;
   }
 
+  public String getFieldIgCommentId() {
+    return mIgCommentId;
+  }
+
   public String getFieldInstagramCommentId() {
     return mInstagramCommentId;
   }
@@ -338,6 +344,7 @@ public class InstagramComment extends APINode {
       "comment_type",
       "created_at",
       "id",
+      "ig_comment_id",
       "instagram_comment_id",
       "instagram_user",
       "mentioned_instagram_users",
@@ -454,6 +461,13 @@ public class InstagramComment extends APINode {
     }
     public APIRequestGetReplies requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetReplies requestIgCommentIdField () {
+      return this.requestIgCommentIdField(true);
+    }
+    public APIRequestGetReplies requestIgCommentIdField (boolean value) {
+      this.requestField("ig_comment_id", value);
       return this;
     }
     public APIRequestGetReplies requestInstagramCommentIdField () {
@@ -735,6 +749,7 @@ public class InstagramComment extends APINode {
       "comment_type",
       "created_at",
       "id",
+      "ig_comment_id",
       "instagram_comment_id",
       "instagram_user",
       "mentioned_instagram_users",
@@ -851,6 +866,13 @@ public class InstagramComment extends APINode {
     }
     public APIRequestGet requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGet requestIgCommentIdField () {
+      return this.requestIgCommentIdField(true);
+    }
+    public APIRequestGet requestIgCommentIdField (boolean value) {
+      this.requestField("ig_comment_id", value);
       return this;
     }
     public APIRequestGet requestInstagramCommentIdField () {
@@ -1029,6 +1051,7 @@ public class InstagramComment extends APINode {
     this.mCommentType = instance.mCommentType;
     this.mCreatedAt = instance.mCreatedAt;
     this.mId = instance.mId;
+    this.mIgCommentId = instance.mIgCommentId;
     this.mInstagramCommentId = instance.mInstagramCommentId;
     this.mInstagramUser = instance.mInstagramUser;
     this.mMentionedInstagramUsers = instance.mMentionedInstagramUsers;

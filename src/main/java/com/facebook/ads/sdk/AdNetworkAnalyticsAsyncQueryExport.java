@@ -41,8 +41,6 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class AdNetworkAnalyticsAsyncQueryExport extends APINode {
-  @SerializedName("error")
-  private Object mError = null;
   @SerializedName("export_link")
   private String mExportLink = null;
   @SerializedName("query_id")
@@ -200,15 +198,6 @@ public class AdNetworkAnalyticsAsyncQueryExport extends APINode {
   }
 
 
-  public Object getFieldError() {
-    return mError;
-  }
-
-  public AdNetworkAnalyticsAsyncQueryExport setFieldError(Object value) {
-    this.mError = value;
-    return this;
-  }
-
   public String getFieldExportLink() {
     return mExportLink;
   }
@@ -253,7 +242,6 @@ public class AdNetworkAnalyticsAsyncQueryExport extends APINode {
   }
 
   public AdNetworkAnalyticsAsyncQueryExport copyFrom(AdNetworkAnalyticsAsyncQueryExport instance) {
-    this.mError = instance.mError;
     this.mExportLink = instance.mExportLink;
     this.mQueryId = instance.mQueryId;
     this.mStatus = instance.mStatus;

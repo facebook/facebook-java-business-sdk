@@ -45,6 +45,8 @@ public class AdReportRun extends APINode {
   private String mAccountId = null;
   @SerializedName("async_percent_completion")
   private Long mAsyncPercentCompletion = null;
+  @SerializedName("async_report_url")
+  private String mAsyncReportUrl = null;
   @SerializedName("async_status")
   private String mAsyncStatus = null;
   @SerializedName("date_start")
@@ -57,6 +59,8 @@ public class AdReportRun extends APINode {
   private String mFriendlyName = null;
   @SerializedName("id")
   private String mId = null;
+  @SerializedName("is_async_export")
+  private Long mIsAsyncExport = null;
   @SerializedName("is_bookmarked")
   private Boolean mIsBookmarked = null;
   @SerializedName("is_running")
@@ -302,6 +306,10 @@ public class AdReportRun extends APINode {
     return mAsyncPercentCompletion;
   }
 
+  public String getFieldAsyncReportUrl() {
+    return mAsyncReportUrl;
+  }
+
   public String getFieldAsyncStatus() {
     return mAsyncStatus;
   }
@@ -324,6 +332,10 @@ public class AdReportRun extends APINode {
 
   public String getFieldId() {
     return mId;
+  }
+
+  public Long getFieldIsAsyncExport() {
+    return mIsAsyncExport;
   }
 
   public Boolean getFieldIsBookmarked() {
@@ -445,6 +457,12 @@ public class AdReportRun extends APINode {
       "location",
       "marketing_messages_cost_per_delivered",
       "marketing_messages_cost_per_link_btn_click",
+      "marketing_messages_delivery_rate",
+      "marketing_messages_link_btn_click_rate",
+      "marketing_messages_media_view_rate",
+      "marketing_messages_phone_call_btn_click_rate",
+      "marketing_messages_quick_reply_btn_click_rate",
+      "marketing_messages_read_rate",
       "marketing_messages_spend",
       "marketing_messages_website_purchase_values",
       "mobile_app_purchase_roas",
@@ -1189,6 +1207,48 @@ public class AdReportRun extends APINode {
       this.requestField("marketing_messages_cost_per_link_btn_click", value);
       return this;
     }
+    public APIRequestGetInsights requestMarketingMessagesDeliveryRateField () {
+      return this.requestMarketingMessagesDeliveryRateField(true);
+    }
+    public APIRequestGetInsights requestMarketingMessagesDeliveryRateField (boolean value) {
+      this.requestField("marketing_messages_delivery_rate", value);
+      return this;
+    }
+    public APIRequestGetInsights requestMarketingMessagesLinkBtnClickRateField () {
+      return this.requestMarketingMessagesLinkBtnClickRateField(true);
+    }
+    public APIRequestGetInsights requestMarketingMessagesLinkBtnClickRateField (boolean value) {
+      this.requestField("marketing_messages_link_btn_click_rate", value);
+      return this;
+    }
+    public APIRequestGetInsights requestMarketingMessagesMediaViewRateField () {
+      return this.requestMarketingMessagesMediaViewRateField(true);
+    }
+    public APIRequestGetInsights requestMarketingMessagesMediaViewRateField (boolean value) {
+      this.requestField("marketing_messages_media_view_rate", value);
+      return this;
+    }
+    public APIRequestGetInsights requestMarketingMessagesPhoneCallBtnClickRateField () {
+      return this.requestMarketingMessagesPhoneCallBtnClickRateField(true);
+    }
+    public APIRequestGetInsights requestMarketingMessagesPhoneCallBtnClickRateField (boolean value) {
+      this.requestField("marketing_messages_phone_call_btn_click_rate", value);
+      return this;
+    }
+    public APIRequestGetInsights requestMarketingMessagesQuickReplyBtnClickRateField () {
+      return this.requestMarketingMessagesQuickReplyBtnClickRateField(true);
+    }
+    public APIRequestGetInsights requestMarketingMessagesQuickReplyBtnClickRateField (boolean value) {
+      this.requestField("marketing_messages_quick_reply_btn_click_rate", value);
+      return this;
+    }
+    public APIRequestGetInsights requestMarketingMessagesReadRateField () {
+      return this.requestMarketingMessagesReadRateField(true);
+    }
+    public APIRequestGetInsights requestMarketingMessagesReadRateField (boolean value) {
+      this.requestField("marketing_messages_read_rate", value);
+      return this;
+    }
     public APIRequestGetInsights requestMarketingMessagesSpendField () {
       return this.requestMarketingMessagesSpendField(true);
     }
@@ -1554,12 +1614,14 @@ public class AdReportRun extends APINode {
     public static final String[] FIELDS = {
       "account_id",
       "async_percent_completion",
+      "async_report_url",
       "async_status",
       "date_start",
       "date_stop",
       "emails",
       "friendly_name",
       "id",
+      "is_async_export",
       "is_bookmarked",
       "is_running",
       "schedule_id",
@@ -1671,6 +1733,13 @@ public class AdReportRun extends APINode {
       this.requestField("async_percent_completion", value);
       return this;
     }
+    public APIRequestGet requestAsyncReportUrlField () {
+      return this.requestAsyncReportUrlField(true);
+    }
+    public APIRequestGet requestAsyncReportUrlField (boolean value) {
+      this.requestField("async_report_url", value);
+      return this;
+    }
     public APIRequestGet requestAsyncStatusField () {
       return this.requestAsyncStatusField(true);
     }
@@ -1711,6 +1780,13 @@ public class AdReportRun extends APINode {
     }
     public APIRequestGet requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGet requestIsAsyncExportField () {
+      return this.requestIsAsyncExportField(true);
+    }
+    public APIRequestGet requestIsAsyncExportField (boolean value) {
+      this.requestField("is_async_export", value);
       return this;
     }
     public APIRequestGet requestIsBookmarkedField () {
@@ -1952,6 +2028,16 @@ public class AdReportRun extends APINode {
       VALUE_SKAN_CONVERSION_ID("skan_conversion_id"),
       @SerializedName("skan_version")
       VALUE_SKAN_VERSION("skan_version"),
+      @SerializedName("sot_attribution_model_type")
+      VALUE_SOT_ATTRIBUTION_MODEL_TYPE("sot_attribution_model_type"),
+      @SerializedName("sot_attribution_window")
+      VALUE_SOT_ATTRIBUTION_WINDOW("sot_attribution_window"),
+      @SerializedName("sot_channel")
+      VALUE_SOT_CHANNEL("sot_channel"),
+      @SerializedName("sot_event_type")
+      VALUE_SOT_EVENT_TYPE("sot_event_type"),
+      @SerializedName("sot_source")
+      VALUE_SOT_SOURCE("sot_source"),
       @SerializedName("standard_event_content_type")
       VALUE_STANDARD_EVENT_CONTENT_TYPE("standard_event_content_type"),
       @SerializedName("title_asset")
@@ -2116,12 +2202,14 @@ public class AdReportRun extends APINode {
   public AdReportRun copyFrom(AdReportRun instance) {
     this.mAccountId = instance.mAccountId;
     this.mAsyncPercentCompletion = instance.mAsyncPercentCompletion;
+    this.mAsyncReportUrl = instance.mAsyncReportUrl;
     this.mAsyncStatus = instance.mAsyncStatus;
     this.mDateStart = instance.mDateStart;
     this.mDateStop = instance.mDateStop;
     this.mEmails = instance.mEmails;
     this.mFriendlyName = instance.mFriendlyName;
     this.mId = instance.mId;
+    this.mIsAsyncExport = instance.mIsAsyncExport;
     this.mIsBookmarked = instance.mIsBookmarked;
     this.mIsRunning = instance.mIsRunning;
     this.mScheduleId = instance.mScheduleId;

@@ -3373,6 +3373,12 @@ public class ProductCatalog extends APINode {
       "applinks",
       "category_specific_fields",
       "currency",
+      "custom_label_0",
+      "custom_label_1",
+      "custom_label_2",
+      "custom_number_0",
+      "custom_number_1",
+      "custom_number_2",
       "description",
       "destination_id",
       "id",
@@ -3523,6 +3529,48 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestGetDestinations requestCurrencyField (boolean value) {
       this.requestField("currency", value);
+      return this;
+    }
+    public APIRequestGetDestinations requestCustomLabel0Field () {
+      return this.requestCustomLabel0Field(true);
+    }
+    public APIRequestGetDestinations requestCustomLabel0Field (boolean value) {
+      this.requestField("custom_label_0", value);
+      return this;
+    }
+    public APIRequestGetDestinations requestCustomLabel1Field () {
+      return this.requestCustomLabel1Field(true);
+    }
+    public APIRequestGetDestinations requestCustomLabel1Field (boolean value) {
+      this.requestField("custom_label_1", value);
+      return this;
+    }
+    public APIRequestGetDestinations requestCustomLabel2Field () {
+      return this.requestCustomLabel2Field(true);
+    }
+    public APIRequestGetDestinations requestCustomLabel2Field (boolean value) {
+      this.requestField("custom_label_2", value);
+      return this;
+    }
+    public APIRequestGetDestinations requestCustomNumber0Field () {
+      return this.requestCustomNumber0Field(true);
+    }
+    public APIRequestGetDestinations requestCustomNumber0Field (boolean value) {
+      this.requestField("custom_number_0", value);
+      return this;
+    }
+    public APIRequestGetDestinations requestCustomNumber1Field () {
+      return this.requestCustomNumber1Field(true);
+    }
+    public APIRequestGetDestinations requestCustomNumber1Field (boolean value) {
+      this.requestField("custom_number_1", value);
+      return this;
+    }
+    public APIRequestGetDestinations requestCustomNumber2Field () {
+      return this.requestCustomNumber2Field(true);
+    }
+    public APIRequestGetDestinations requestCustomNumber2Field (boolean value) {
+      this.requestField("custom_number_2", value);
       return this;
     }
     public APIRequestGetDestinations requestDescriptionField () {
@@ -8384,6 +8432,7 @@ public class ProductCatalog extends APINode {
       "start_date",
       "tags",
       "url",
+      "vendor_id",
       "video_fetch_status",
       "visibility",
       "wa_compliance_category",
@@ -9047,6 +9096,13 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestGetProducts requestUrlField (boolean value) {
       this.requestField("url", value);
+      return this;
+    }
+    public APIRequestGetProducts requestVendorIdField () {
+      return this.requestVendorIdField(true);
+    }
+    public APIRequestGetProducts requestVendorIdField (boolean value) {
+      this.requestField("vendor_id", value);
       return this;
     }
     public APIRequestGetProducts requestVideoFetchStatusField () {
@@ -12114,8 +12170,6 @@ public class ProductCatalog extends APINode {
       VALUE_COLLAB_ADS_FOR_MARKETPLACE_PARTNER("COLLAB_ADS_FOR_MARKETPLACE_PARTNER"),
       @SerializedName("COLLAB_ADS_SEGMENT_WITHOUT_SEGMENT_SYNCING")
       VALUE_COLLAB_ADS_SEGMENT_WITHOUT_SEGMENT_SYNCING("COLLAB_ADS_SEGMENT_WITHOUT_SEGMENT_SYNCING"),
-      @SerializedName("CREATORS_AS_SELLERS")
-      VALUE_CREATORS_AS_SELLERS("CREATORS_AS_SELLERS"),
       @SerializedName("DIGITAL_CIRCULARS")
       VALUE_DIGITAL_CIRCULARS("DIGITAL_CIRCULARS"),
       @SerializedName("FB_LIVE_SHOPPING")

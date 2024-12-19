@@ -49,6 +49,18 @@ public class Destination extends APINode {
   private CatalogSubVerticalList mCategorySpecificFields = null;
   @SerializedName("currency")
   private String mCurrency = null;
+  @SerializedName("custom_label_0")
+  private String mCustomLabel0 = null;
+  @SerializedName("custom_label_1")
+  private String mCustomLabel1 = null;
+  @SerializedName("custom_label_2")
+  private String mCustomLabel2 = null;
+  @SerializedName("custom_number_0")
+  private Long mCustomNumber0 = null;
+  @SerializedName("custom_number_1")
+  private Long mCustomNumber1 = null;
+  @SerializedName("custom_number_2")
+  private Long mCustomNumber2 = null;
   @SerializedName("description")
   private String mDescription = null;
   @SerializedName("destination_id")
@@ -317,6 +329,30 @@ public class Destination extends APINode {
 
   public String getFieldCurrency() {
     return mCurrency;
+  }
+
+  public String getFieldCustomLabel0() {
+    return mCustomLabel0;
+  }
+
+  public String getFieldCustomLabel1() {
+    return mCustomLabel1;
+  }
+
+  public String getFieldCustomLabel2() {
+    return mCustomLabel2;
+  }
+
+  public Long getFieldCustomNumber0() {
+    return mCustomNumber0;
+  }
+
+  public Long getFieldCustomNumber1() {
+    return mCustomNumber1;
+  }
+
+  public Long getFieldCustomNumber2() {
+    return mCustomNumber2;
   }
 
   public String getFieldDescription() {
@@ -799,6 +835,12 @@ public class Destination extends APINode {
       "applinks",
       "category_specific_fields",
       "currency",
+      "custom_label_0",
+      "custom_label_1",
+      "custom_label_2",
+      "custom_number_0",
+      "custom_number_1",
+      "custom_number_2",
       "description",
       "destination_id",
       "id",
@@ -931,6 +973,48 @@ public class Destination extends APINode {
     }
     public APIRequestGet requestCurrencyField (boolean value) {
       this.requestField("currency", value);
+      return this;
+    }
+    public APIRequestGet requestCustomLabel0Field () {
+      return this.requestCustomLabel0Field(true);
+    }
+    public APIRequestGet requestCustomLabel0Field (boolean value) {
+      this.requestField("custom_label_0", value);
+      return this;
+    }
+    public APIRequestGet requestCustomLabel1Field () {
+      return this.requestCustomLabel1Field(true);
+    }
+    public APIRequestGet requestCustomLabel1Field (boolean value) {
+      this.requestField("custom_label_1", value);
+      return this;
+    }
+    public APIRequestGet requestCustomLabel2Field () {
+      return this.requestCustomLabel2Field(true);
+    }
+    public APIRequestGet requestCustomLabel2Field (boolean value) {
+      this.requestField("custom_label_2", value);
+      return this;
+    }
+    public APIRequestGet requestCustomNumber0Field () {
+      return this.requestCustomNumber0Field(true);
+    }
+    public APIRequestGet requestCustomNumber0Field (boolean value) {
+      this.requestField("custom_number_0", value);
+      return this;
+    }
+    public APIRequestGet requestCustomNumber1Field () {
+      return this.requestCustomNumber1Field(true);
+    }
+    public APIRequestGet requestCustomNumber1Field (boolean value) {
+      this.requestField("custom_number_1", value);
+      return this;
+    }
+    public APIRequestGet requestCustomNumber2Field () {
+      return this.requestCustomNumber2Field(true);
+    }
+    public APIRequestGet requestCustomNumber2Field (boolean value) {
+      this.requestField("custom_number_2", value);
       return this;
     }
     public APIRequestGet requestDescriptionField () {
@@ -1098,6 +1182,12 @@ public class Destination extends APINode {
     this.mApplinks = instance.mApplinks;
     this.mCategorySpecificFields = instance.mCategorySpecificFields;
     this.mCurrency = instance.mCurrency;
+    this.mCustomLabel0 = instance.mCustomLabel0;
+    this.mCustomLabel1 = instance.mCustomLabel1;
+    this.mCustomLabel2 = instance.mCustomLabel2;
+    this.mCustomNumber0 = instance.mCustomNumber0;
+    this.mCustomNumber1 = instance.mCustomNumber1;
+    this.mCustomNumber2 = instance.mCustomNumber2;
     this.mDescription = instance.mDescription;
     this.mDestinationId = instance.mDestinationId;
     this.mId = instance.mId;

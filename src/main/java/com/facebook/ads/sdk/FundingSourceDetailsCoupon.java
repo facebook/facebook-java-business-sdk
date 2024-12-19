@@ -57,6 +57,8 @@ public class FundingSourceDetailsCoupon extends APINode {
   private Long mOriginalAmount = null;
   @SerializedName("original_display_amount")
   private String mOriginalDisplayAmount = null;
+  @SerializedName("start_date")
+  private String mStartDate = null;
   protected static Gson gson = null;
 
   public FundingSourceDetailsCoupon() {
@@ -280,6 +282,15 @@ public class FundingSourceDetailsCoupon extends APINode {
     return this;
   }
 
+  public String getFieldStartDate() {
+    return mStartDate;
+  }
+
+  public FundingSourceDetailsCoupon setFieldStartDate(String value) {
+    this.mStartDate = value;
+    return this;
+  }
+
 
 
 
@@ -305,6 +316,7 @@ public class FundingSourceDetailsCoupon extends APINode {
     this.mExpiration = instance.mExpiration;
     this.mOriginalAmount = instance.mOriginalAmount;
     this.mOriginalDisplayAmount = instance.mOriginalDisplayAmount;
+    this.mStartDate = instance.mStartDate;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

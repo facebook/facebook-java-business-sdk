@@ -40,29 +40,25 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class AnalyticsCohortQueryResult extends APINode {
-  @SerializedName("data")
-  private Object mData = null;
-  @SerializedName("error")
-  private Object mError = null;
-  @SerializedName("query_id")
-  private String mQueryId = null;
-  @SerializedName("status")
-  private String mStatus = null;
+public class CatalogAdvertiserInsight extends APINode {
+  @SerializedName("category")
+  private String mCategory = null;
+  @SerializedName("country")
+  private String mCountry = null;
   protected static Gson gson = null;
 
-  public AnalyticsCohortQueryResult() {
+  public CatalogAdvertiserInsight() {
   }
 
   public String getId() {
     return null;
   }
-  public static AnalyticsCohortQueryResult loadJSON(String json, APIContext context, String header) {
-    AnalyticsCohortQueryResult analyticsCohortQueryResult = getGson().fromJson(json, AnalyticsCohortQueryResult.class);
+  public static CatalogAdvertiserInsight loadJSON(String json, APIContext context, String header) {
+    CatalogAdvertiserInsight catalogAdvertiserInsight = getGson().fromJson(json, CatalogAdvertiserInsight.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(analyticsCohortQueryResult.toString());
+      JsonElement o2 = parser.parse(catalogAdvertiserInsight.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -72,14 +68,14 @@ public class AnalyticsCohortQueryResult extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    analyticsCohortQueryResult.context = context;
-    analyticsCohortQueryResult.rawValue = json;
-    analyticsCohortQueryResult.header = header;
-    return analyticsCohortQueryResult;
+    catalogAdvertiserInsight.context = context;
+    catalogAdvertiserInsight.rawValue = json;
+    catalogAdvertiserInsight.header = header;
+    return catalogAdvertiserInsight;
   }
 
-  public static APINodeList<AnalyticsCohortQueryResult> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<AnalyticsCohortQueryResult> analyticsCohortQueryResults = new APINodeList<AnalyticsCohortQueryResult>(request, json, header);
+  public static APINodeList<CatalogAdvertiserInsight> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<CatalogAdvertiserInsight> catalogAdvertiserInsights = new APINodeList<CatalogAdvertiserInsight>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -90,9 +86,9 @@ public class AnalyticsCohortQueryResult extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          analyticsCohortQueryResults.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          catalogAdvertiserInsights.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return analyticsCohortQueryResults;
+        return catalogAdvertiserInsights;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -102,20 +98,20 @@ public class AnalyticsCohortQueryResult extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                analyticsCohortQueryResults.setCursors(before, after);
+                catalogAdvertiserInsights.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            analyticsCohortQueryResults.setPaging(previous, next);
+            catalogAdvertiserInsights.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              analyticsCohortQueryResults.setAppSecret(context.getAppSecretProof());
+              catalogAdvertiserInsights.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              analyticsCohortQueryResults.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              catalogAdvertiserInsights.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -126,23 +122,23 @@ public class AnalyticsCohortQueryResult extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  analyticsCohortQueryResults.add(loadJSON(entry.getValue().toString(), context, header));
+                  catalogAdvertiserInsights.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              analyticsCohortQueryResults.add(loadJSON(obj.toString(), context, header));
+              catalogAdvertiserInsights.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return analyticsCohortQueryResults;
+          return catalogAdvertiserInsights;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              analyticsCohortQueryResults.add(loadJSON(entry.getValue().toString(), context, header));
+              catalogAdvertiserInsights.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return analyticsCohortQueryResults;
+          return catalogAdvertiserInsights;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -159,20 +155,20 @@ public class AnalyticsCohortQueryResult extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              analyticsCohortQueryResults.add(loadJSON(value.toString(), context, header));
+              catalogAdvertiserInsights.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return analyticsCohortQueryResults;
+            return catalogAdvertiserInsights;
           }
 
           // Sixth, check if it's pure JsonObject
-          analyticsCohortQueryResults.clear();
-          analyticsCohortQueryResults.add(loadJSON(json, context, header));
-          return analyticsCohortQueryResults;
+          catalogAdvertiserInsights.clear();
+          catalogAdvertiserInsights.add(loadJSON(json, context, header));
+          return catalogAdvertiserInsights;
         }
       }
     } catch (Exception e) {
@@ -200,39 +196,21 @@ public class AnalyticsCohortQueryResult extends APINode {
   }
 
 
-  public Object getFieldData() {
-    return mData;
+  public String getFieldCategory() {
+    return mCategory;
   }
 
-  public AnalyticsCohortQueryResult setFieldData(Object value) {
-    this.mData = value;
+  public CatalogAdvertiserInsight setFieldCategory(String value) {
+    this.mCategory = value;
     return this;
   }
 
-  public Object getFieldError() {
-    return mError;
+  public String getFieldCountry() {
+    return mCountry;
   }
 
-  public AnalyticsCohortQueryResult setFieldError(Object value) {
-    this.mError = value;
-    return this;
-  }
-
-  public String getFieldQueryId() {
-    return mQueryId;
-  }
-
-  public AnalyticsCohortQueryResult setFieldQueryId(String value) {
-    this.mQueryId = value;
-    return this;
-  }
-
-  public String getFieldStatus() {
-    return mStatus;
-  }
-
-  public AnalyticsCohortQueryResult setFieldStatus(String value) {
-    this.mStatus = value;
+  public CatalogAdvertiserInsight setFieldCountry(String value) {
+    this.mCountry = value;
     return this;
   }
 
@@ -252,20 +230,18 @@ public class AnalyticsCohortQueryResult extends APINode {
     return gson;
   }
 
-  public AnalyticsCohortQueryResult copyFrom(AnalyticsCohortQueryResult instance) {
-    this.mData = instance.mData;
-    this.mError = instance.mError;
-    this.mQueryId = instance.mQueryId;
-    this.mStatus = instance.mStatus;
+  public CatalogAdvertiserInsight copyFrom(CatalogAdvertiserInsight instance) {
+    this.mCategory = instance.mCategory;
+    this.mCountry = instance.mCountry;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<AnalyticsCohortQueryResult> getParser() {
-    return new APIRequest.ResponseParser<AnalyticsCohortQueryResult>() {
-      public APINodeList<AnalyticsCohortQueryResult> parseResponse(String response, APIContext context, APIRequest<AnalyticsCohortQueryResult> request, String header) throws MalformedResponseException {
-        return AnalyticsCohortQueryResult.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<CatalogAdvertiserInsight> getParser() {
+    return new APIRequest.ResponseParser<CatalogAdvertiserInsight>() {
+      public APINodeList<CatalogAdvertiserInsight> parseResponse(String response, APIContext context, APIRequest<CatalogAdvertiserInsight> request, String header) throws MalformedResponseException {
+        return CatalogAdvertiserInsight.parseResponse(response, context, request, header);
       }
     };
   }

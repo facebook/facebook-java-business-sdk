@@ -301,6 +301,7 @@ public class WorkSkill extends APINode {
       "id",
       "id_for_avatars",
       "inspirational_people",
+      "instagram_user_self_asset",
       "install_type",
       "installed",
       "is_guest_user",
@@ -321,6 +322,7 @@ public class WorkSkill extends APINode {
       "profile_pic",
       "quotes",
       "relationship_status",
+      "religion",
       "shared_login_upgrade_required_by",
       "short_name",
       "significant_other",
@@ -544,6 +546,13 @@ public class WorkSkill extends APINode {
       this.requestField("inspirational_people", value);
       return this;
     }
+    public APIRequestGetUsers requestInstagramUserSelfAssetField () {
+      return this.requestInstagramUserSelfAssetField(true);
+    }
+    public APIRequestGetUsers requestInstagramUserSelfAssetField (boolean value) {
+      this.requestField("instagram_user_self_asset", value);
+      return this;
+    }
     public APIRequestGetUsers requestInstallTypeField () {
       return this.requestInstallTypeField(true);
     }
@@ -682,6 +691,13 @@ public class WorkSkill extends APINode {
     }
     public APIRequestGetUsers requestRelationshipStatusField (boolean value) {
       this.requestField("relationship_status", value);
+      return this;
+    }
+    public APIRequestGetUsers requestReligionField () {
+      return this.requestReligionField(true);
+    }
+    public APIRequestGetUsers requestReligionField (boolean value) {
+      this.requestField("religion", value);
       return this;
     }
     public APIRequestGetUsers requestSharedLoginUpgradeRequiredByField () {

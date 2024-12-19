@@ -53,6 +53,8 @@ public class IGUser extends APINode {
   private String mId = null;
   @SerializedName("ig_id")
   private Long mIgId = null;
+  @SerializedName("legacy_instagram_user_id")
+  private String mLegacyInstagramUserId = null;
   @SerializedName("media_count")
   private Long mMediaCount = null;
   @SerializedName("mentioned_comment")
@@ -374,6 +376,10 @@ public class IGUser extends APINode {
     return new APIRequestGetTags(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestCreateUpcomingEvent createUpcomingEvent() {
+    return new APIRequestCreateUpcomingEvent(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGet get() {
     return new APIRequestGet(this.getPrefixedId().toString(), context);
   }
@@ -404,6 +410,10 @@ public class IGUser extends APINode {
 
   public Long getFieldIgId() {
     return mIgId;
+  }
+
+  public String getFieldLegacyInstagramUserId() {
+    return mLegacyInstagramUserId;
   }
 
   public Long getFieldMediaCount() {
@@ -2164,6 +2174,7 @@ public class IGUser extends APINode {
       "ig_id",
       "is_comment_enabled",
       "is_shared_to_feed",
+      "legacy_instagram_media_id",
       "like_count",
       "media_product_type",
       "media_type",
@@ -2332,6 +2343,13 @@ public class IGUser extends APINode {
       this.requestField("is_shared_to_feed", value);
       return this;
     }
+    public APIRequestGetLiveMedia requestLegacyInstagramMediaIdField () {
+      return this.requestLegacyInstagramMediaIdField(true);
+    }
+    public APIRequestGetLiveMedia requestLegacyInstagramMediaIdField (boolean value) {
+      this.requestField("legacy_instagram_media_id", value);
+      return this;
+    }
     public APIRequestGetLiveMedia requestLikeCountField () {
       return this.requestLikeCountField(true);
     }
@@ -2425,6 +2443,7 @@ public class IGUser extends APINode {
       "ig_id",
       "is_comment_enabled",
       "is_shared_to_feed",
+      "legacy_instagram_media_id",
       "like_count",
       "media_product_type",
       "media_type",
@@ -2591,6 +2610,13 @@ public class IGUser extends APINode {
     }
     public APIRequestGetMedia requestIsSharedToFeedField (boolean value) {
       this.requestField("is_shared_to_feed", value);
+      return this;
+    }
+    public APIRequestGetMedia requestLegacyInstagramMediaIdField () {
+      return this.requestLegacyInstagramMediaIdField(true);
+    }
+    public APIRequestGetMedia requestLegacyInstagramMediaIdField (boolean value) {
+      this.requestField("legacy_instagram_media_id", value);
       return this;
     }
     public APIRequestGetMedia requestLikeCountField () {
@@ -3723,6 +3749,7 @@ public class IGUser extends APINode {
       "ig_id",
       "is_comment_enabled",
       "is_shared_to_feed",
+      "legacy_instagram_media_id",
       "like_count",
       "media_product_type",
       "media_type",
@@ -3881,6 +3908,13 @@ public class IGUser extends APINode {
       this.requestField("is_shared_to_feed", value);
       return this;
     }
+    public APIRequestGetStories requestLegacyInstagramMediaIdField () {
+      return this.requestLegacyInstagramMediaIdField(true);
+    }
+    public APIRequestGetStories requestLegacyInstagramMediaIdField (boolean value) {
+      this.requestField("legacy_instagram_media_id", value);
+      return this;
+    }
     public APIRequestGetStories requestLikeCountField () {
       return this.requestLikeCountField(true);
     }
@@ -3972,6 +4006,7 @@ public class IGUser extends APINode {
       "ig_id",
       "is_comment_enabled",
       "is_shared_to_feed",
+      "legacy_instagram_media_id",
       "like_count",
       "media_product_type",
       "media_type",
@@ -4130,6 +4165,13 @@ public class IGUser extends APINode {
       this.requestField("is_shared_to_feed", value);
       return this;
     }
+    public APIRequestGetTags requestLegacyInstagramMediaIdField () {
+      return this.requestLegacyInstagramMediaIdField(true);
+    }
+    public APIRequestGetTags requestLegacyInstagramMediaIdField (boolean value) {
+      this.requestField("legacy_instagram_media_id", value);
+      return this;
+    }
     public APIRequestGetTags requestLikeCountField () {
       return this.requestLikeCountField(true);
     }
@@ -4202,6 +4244,139 @@ public class IGUser extends APINode {
     }
   }
 
+  public static class APIRequestCreateUpcomingEvent extends APIRequest<APINode> {
+
+    APINode lastResponse = null;
+    @Override
+    public APINode getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "end_time",
+      "notification_subtypes",
+      "start_time",
+      "title",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public APINode execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINode execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINode> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateUpcomingEvent.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestCreateUpcomingEvent(String nodeId, APIContext context) {
+      super(context, nodeId, "/upcoming_events", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateUpcomingEvent setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateUpcomingEvent setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateUpcomingEvent setEndTime (String endTime) {
+      this.setParam("end_time", endTime);
+      return this;
+    }
+
+    public APIRequestCreateUpcomingEvent setNotificationSubtypes (List<EnumNotificationSubtypes> notificationSubtypes) {
+      this.setParam("notification_subtypes", notificationSubtypes);
+      return this;
+    }
+    public APIRequestCreateUpcomingEvent setNotificationSubtypes (String notificationSubtypes) {
+      this.setParam("notification_subtypes", notificationSubtypes);
+      return this;
+    }
+
+    public APIRequestCreateUpcomingEvent setStartTime (String startTime) {
+      this.setParam("start_time", startTime);
+      return this;
+    }
+
+    public APIRequestCreateUpcomingEvent setTitle (String title) {
+      this.setParam("title", title);
+      return this;
+    }
+
+    public APIRequestCreateUpcomingEvent requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateUpcomingEvent requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateUpcomingEvent requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateUpcomingEvent requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateUpcomingEvent requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateUpcomingEvent requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGet extends APIRequest<IGUser> {
 
     IGUser lastResponse = null;
@@ -4220,6 +4395,7 @@ public class IGUser extends APINode {
       "follows_count",
       "id",
       "ig_id",
+      "legacy_instagram_user_id",
       "media_count",
       "mentioned_comment",
       "mentioned_media",
@@ -4369,6 +4545,13 @@ public class IGUser extends APINode {
       this.requestField("ig_id", value);
       return this;
     }
+    public APIRequestGet requestLegacyInstagramUserIdField () {
+      return this.requestLegacyInstagramUserIdField(true);
+    }
+    public APIRequestGet requestLegacyInstagramUserIdField (boolean value) {
+      this.requestField("legacy_instagram_user_id", value);
+      return this;
+    }
     public APIRequestGet requestMediaCountField () {
       return this.requestMediaCountField(true);
     }
@@ -4441,6 +4624,47 @@ public class IGUser extends APINode {
     }
   }
 
+  public static enum EnumNotificationSubtypes {
+      @SerializedName("AFTER_EVENT_1DAY")
+      VALUE_AFTER_EVENT_1DAY("AFTER_EVENT_1DAY"),
+      @SerializedName("AFTER_EVENT_2DAY")
+      VALUE_AFTER_EVENT_2DAY("AFTER_EVENT_2DAY"),
+      @SerializedName("AFTER_EVENT_3DAY")
+      VALUE_AFTER_EVENT_3DAY("AFTER_EVENT_3DAY"),
+      @SerializedName("AFTER_EVENT_4DAY")
+      VALUE_AFTER_EVENT_4DAY("AFTER_EVENT_4DAY"),
+      @SerializedName("AFTER_EVENT_5DAY")
+      VALUE_AFTER_EVENT_5DAY("AFTER_EVENT_5DAY"),
+      @SerializedName("AFTER_EVENT_6DAY")
+      VALUE_AFTER_EVENT_6DAY("AFTER_EVENT_6DAY"),
+      @SerializedName("AFTER_EVENT_7DAY")
+      VALUE_AFTER_EVENT_7DAY("AFTER_EVENT_7DAY"),
+      @SerializedName("BEFORE_EVENT_15MIN")
+      VALUE_BEFORE_EVENT_15MIN("BEFORE_EVENT_15MIN"),
+      @SerializedName("BEFORE_EVENT_1DAY")
+      VALUE_BEFORE_EVENT_1DAY("BEFORE_EVENT_1DAY"),
+      @SerializedName("BEFORE_EVENT_1HOUR")
+      VALUE_BEFORE_EVENT_1HOUR("BEFORE_EVENT_1HOUR"),
+      @SerializedName("BEFORE_EVENT_2DAY")
+      VALUE_BEFORE_EVENT_2DAY("BEFORE_EVENT_2DAY"),
+      @SerializedName("EVENT_START")
+      VALUE_EVENT_START("EVENT_START"),
+      @SerializedName("RESCHEDULED")
+      VALUE_RESCHEDULED("RESCHEDULED"),
+      ;
+
+      private String value;
+
+      private EnumNotificationSubtypes(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
 
   synchronized /*package*/ static Gson getGson() {
     if (gson != null) {
@@ -4462,6 +4686,7 @@ public class IGUser extends APINode {
     this.mFollowsCount = instance.mFollowsCount;
     this.mId = instance.mId;
     this.mIgId = instance.mIgId;
+    this.mLegacyInstagramUserId = instance.mLegacyInstagramUserId;
     this.mMediaCount = instance.mMediaCount;
     this.mMentionedComment = instance.mMentionedComment;
     this.mMentionedMedia = instance.mMentionedMedia;

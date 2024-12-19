@@ -756,6 +756,7 @@ public class AdStudyObjective extends APINode {
       "deauth_callback_url",
       "default_share_mode",
       "description",
+      "enigma_config",
       "financial_id",
       "gdpv4_chrome_custom_tabs_enabled",
       "gdpv4_enabled",
@@ -1209,6 +1210,13 @@ public class AdStudyObjective extends APINode {
     }
     public APIRequestGetApplications requestDescriptionField (boolean value) {
       this.requestField("description", value);
+      return this;
+    }
+    public APIRequestGetApplications requestEnigmaConfigField () {
+      return this.requestEnigmaConfigField(true);
+    }
+    public APIRequestGetApplications requestEnigmaConfigField (boolean value) {
+      this.requestField("enigma_config", value);
       return this;
     }
     public APIRequestGetApplications requestFinancialIdField () {

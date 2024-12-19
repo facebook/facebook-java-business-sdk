@@ -51,6 +51,8 @@ public class AdCreativeLinkData extends APINode {
   private String mAttachmentStyle = null;
   @SerializedName("automated_product_tags")
   private Boolean mAutomatedProductTags = null;
+  @SerializedName("boosted_product_set_id")
+  private String mBoostedProductSetId = null;
   @SerializedName("branded_content_shared_to_sponsor_status")
   private String mBrandedContentSharedToSponsorStatus = null;
   @SerializedName("branded_content_sponsor_page_id")
@@ -309,6 +311,15 @@ public class AdCreativeLinkData extends APINode {
 
   public AdCreativeLinkData setFieldAutomatedProductTags(Boolean value) {
     this.mAutomatedProductTags = value;
+    return this;
+  }
+
+  public String getFieldBoostedProductSetId() {
+    return mBoostedProductSetId;
+  }
+
+  public AdCreativeLinkData setFieldBoostedProductSetId(String value) {
+    this.mBoostedProductSetId = value;
     return this;
   }
 
@@ -676,6 +687,7 @@ public class AdCreativeLinkData extends APINode {
     this.mAppLinkSpec = instance.mAppLinkSpec;
     this.mAttachmentStyle = instance.mAttachmentStyle;
     this.mAutomatedProductTags = instance.mAutomatedProductTags;
+    this.mBoostedProductSetId = instance.mBoostedProductSetId;
     this.mBrandedContentSharedToSponsorStatus = instance.mBrandedContentSharedToSponsorStatus;
     this.mBrandedContentSponsorPageId = instance.mBrandedContentSponsorPageId;
     this.mCallToAction = instance.mCallToAction;

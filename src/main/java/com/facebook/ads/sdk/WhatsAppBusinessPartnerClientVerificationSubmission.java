@@ -280,6 +280,8 @@ public class WhatsAppBusinessPartnerClientVerificationSubmission extends APINode
       VALUE_LEGAL_NAME_NOT_FOUND_IN_DOCUMENTS("LEGAL_NAME_NOT_FOUND_IN_DOCUMENTS"),
       @SerializedName("LEGAL_NAME_NOT_MATCHING")
       VALUE_LEGAL_NAME_NOT_MATCHING("LEGAL_NAME_NOT_MATCHING"),
+      @SerializedName("MALFORMED_DOCUMENTS")
+      VALUE_MALFORMED_DOCUMENTS("MALFORMED_DOCUMENTS"),
       @SerializedName("NONE")
       VALUE_NONE("NONE"),
       @SerializedName("WEBSITE_NOT_MATCHING")

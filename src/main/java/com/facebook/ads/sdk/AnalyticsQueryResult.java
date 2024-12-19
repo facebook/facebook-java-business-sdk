@@ -41,12 +41,6 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class AnalyticsQueryResult extends APINode {
-  @SerializedName("columns")
-  private Object mColumns = null;
-  @SerializedName("datapoints")
-  private List<Object> mDatapoints = null;
-  @SerializedName("error")
-  private Object mError = null;
   @SerializedName("query_id")
   private String mQueryId = null;
   @SerializedName("status")
@@ -202,33 +196,6 @@ public class AnalyticsQueryResult extends APINode {
   }
 
 
-  public Object getFieldColumns() {
-    return mColumns;
-  }
-
-  public AnalyticsQueryResult setFieldColumns(Object value) {
-    this.mColumns = value;
-    return this;
-  }
-
-  public List<Object> getFieldDatapoints() {
-    return mDatapoints;
-  }
-
-  public AnalyticsQueryResult setFieldDatapoints(List<Object> value) {
-    this.mDatapoints = value;
-    return this;
-  }
-
-  public Object getFieldError() {
-    return mError;
-  }
-
-  public AnalyticsQueryResult setFieldError(Object value) {
-    this.mError = value;
-    return this;
-  }
-
   public String getFieldQueryId() {
     return mQueryId;
   }
@@ -264,9 +231,6 @@ public class AnalyticsQueryResult extends APINode {
   }
 
   public AnalyticsQueryResult copyFrom(AnalyticsQueryResult instance) {
-    this.mColumns = instance.mColumns;
-    this.mDatapoints = instance.mDatapoints;
-    this.mError = instance.mError;
     this.mQueryId = instance.mQueryId;
     this.mStatus = instance.mStatus;
     this.context = instance.context;

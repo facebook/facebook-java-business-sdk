@@ -941,6 +941,7 @@ public class BusinessAssetGroup extends APINode {
       "end_advertiser",
       "end_advertiser_name",
       "existing_customers",
+      "expired_funding_source_details",
       "extended_credit_invoice_group",
       "failed_delivery_checks",
       "fb_entity",
@@ -1269,6 +1270,13 @@ public class BusinessAssetGroup extends APINode {
     }
     public APIRequestGetContainedAdAccounts requestExistingCustomersField (boolean value) {
       this.requestField("existing_customers", value);
+      return this;
+    }
+    public APIRequestGetContainedAdAccounts requestExpiredFundingSourceDetailsField () {
+      return this.requestExpiredFundingSourceDetailsField(true);
+    }
+    public APIRequestGetContainedAdAccounts requestExpiredFundingSourceDetailsField (boolean value) {
+      this.requestField("expired_funding_source_details", value);
       return this;
     }
     public APIRequestGetContainedAdAccounts requestExtendedCreditInvoiceGroupField () {
@@ -1843,6 +1851,7 @@ public class BusinessAssetGroup extends APINode {
       "deauth_callback_url",
       "default_share_mode",
       "description",
+      "enigma_config",
       "financial_id",
       "gdpv4_chrome_custom_tabs_enabled",
       "gdpv4_enabled",
@@ -2296,6 +2305,13 @@ public class BusinessAssetGroup extends APINode {
     }
     public APIRequestGetContainedApplications requestDescriptionField (boolean value) {
       this.requestField("description", value);
+      return this;
+    }
+    public APIRequestGetContainedApplications requestEnigmaConfigField () {
+      return this.requestEnigmaConfigField(true);
+    }
+    public APIRequestGetContainedApplications requestEnigmaConfigField (boolean value) {
+      this.requestField("enigma_config", value);
       return this;
     }
     public APIRequestGetContainedApplications requestFinancialIdField () {
@@ -3450,6 +3466,7 @@ public class BusinessAssetGroup extends APINode {
       "followed_by_count",
       "has_profile_picture",
       "id",
+      "ig_user_id",
       "is_private",
       "is_published",
       "media_count",
@@ -3575,6 +3592,13 @@ public class BusinessAssetGroup extends APINode {
     }
     public APIRequestGetContainedInstagramAccounts requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetContainedInstagramAccounts requestIgUserIdField () {
+      return this.requestIgUserIdField(true);
+    }
+    public APIRequestGetContainedInstagramAccounts requestIgUserIdField (boolean value) {
+      this.requestField("ig_user_id", value);
       return this;
     }
     public APIRequestGetContainedInstagramAccounts requestIsPrivateField () {

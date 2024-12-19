@@ -41,10 +41,6 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class AnalyticsFunnelQueryResult extends APINode {
-  @SerializedName("data")
-  private Object mData = null;
-  @SerializedName("error")
-  private Object mError = null;
   @SerializedName("query_id")
   private String mQueryId = null;
   @SerializedName("status")
@@ -200,24 +196,6 @@ public class AnalyticsFunnelQueryResult extends APINode {
   }
 
 
-  public Object getFieldData() {
-    return mData;
-  }
-
-  public AnalyticsFunnelQueryResult setFieldData(Object value) {
-    this.mData = value;
-    return this;
-  }
-
-  public Object getFieldError() {
-    return mError;
-  }
-
-  public AnalyticsFunnelQueryResult setFieldError(Object value) {
-    this.mError = value;
-    return this;
-  }
-
   public String getFieldQueryId() {
     return mQueryId;
   }
@@ -253,8 +231,6 @@ public class AnalyticsFunnelQueryResult extends APINode {
   }
 
   public AnalyticsFunnelQueryResult copyFrom(AnalyticsFunnelQueryResult instance) {
-    this.mData = instance.mData;
-    this.mError = instance.mError;
     this.mQueryId = instance.mQueryId;
     this.mStatus = instance.mStatus;
     this.context = instance.context;

@@ -45,6 +45,10 @@ public class CustomAudienceSalts extends APINode {
   private Long mAppId = null;
   @SerializedName("public_key")
   private String mPublicKey = null;
+  @SerializedName("salts")
+  private List<Object> mSalts = null;
+  @SerializedName("user_id")
+  private Long mUserId = null;
   protected static Gson gson = null;
 
   public CustomAudienceSalts() {
@@ -214,6 +218,24 @@ public class CustomAudienceSalts extends APINode {
     return this;
   }
 
+  public List<Object> getFieldSalts() {
+    return mSalts;
+  }
+
+  public CustomAudienceSalts setFieldSalts(List<Object> value) {
+    this.mSalts = value;
+    return this;
+  }
+
+  public Long getFieldUserId() {
+    return mUserId;
+  }
+
+  public CustomAudienceSalts setFieldUserId(Long value) {
+    this.mUserId = value;
+    return this;
+  }
+
 
 
 
@@ -233,6 +255,8 @@ public class CustomAudienceSalts extends APINode {
   public CustomAudienceSalts copyFrom(CustomAudienceSalts instance) {
     this.mAppId = instance.mAppId;
     this.mPublicKey = instance.mPublicKey;
+    this.mSalts = instance.mSalts;
+    this.mUserId = instance.mUserId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

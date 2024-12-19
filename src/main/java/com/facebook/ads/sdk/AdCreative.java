@@ -45,6 +45,8 @@ public class AdCreative extends APINode {
   private String mAccountId = null;
   @SerializedName("actor_id")
   private String mActorId = null;
+  @SerializedName("ad_disclaimer_spec")
+  private AdCreativeAdDisclaimer mAdDisclaimerSpec = null;
   @SerializedName("adlabels")
   private List<AdLabel> mAdlabels = null;
   @SerializedName("applink_treatment")
@@ -153,6 +155,8 @@ public class AdCreative extends APINode {
   private String mPlayableAssetId = null;
   @SerializedName("portrait_customizations")
   private AdCreativePortraitCustomizations mPortraitCustomizations = null;
+  @SerializedName("product_data")
+  private List<AdCreativeProductData> mProductData = null;
   @SerializedName("product_set_id")
   private String mProductSetId = null;
   @SerializedName("recommender_settings")
@@ -434,6 +438,20 @@ public class AdCreative extends APINode {
     return this;
   }
 
+  public AdCreativeAdDisclaimer getFieldAdDisclaimerSpec() {
+    return mAdDisclaimerSpec;
+  }
+
+  public AdCreative setFieldAdDisclaimerSpec(AdCreativeAdDisclaimer value) {
+    this.mAdDisclaimerSpec = value;
+    return this;
+  }
+
+  public AdCreative setFieldAdDisclaimerSpec(String value) {
+    Type type = new TypeToken<AdCreativeAdDisclaimer>(){}.getType();
+    this.mAdDisclaimerSpec = AdCreativeAdDisclaimer.getGson().fromJson(value, type);
+    return this;
+  }
   public List<AdLabel> getFieldAdlabels() {
     return mAdlabels;
   }
@@ -989,6 +1007,20 @@ public class AdCreative extends APINode {
   public AdCreative setFieldPortraitCustomizations(String value) {
     Type type = new TypeToken<AdCreativePortraitCustomizations>(){}.getType();
     this.mPortraitCustomizations = AdCreativePortraitCustomizations.getGson().fromJson(value, type);
+    return this;
+  }
+  public List<AdCreativeProductData> getFieldProductData() {
+    return mProductData;
+  }
+
+  public AdCreative setFieldProductData(List<AdCreativeProductData> value) {
+    this.mProductData = value;
+    return this;
+  }
+
+  public AdCreative setFieldProductData(String value) {
+    Type type = new TypeToken<List<AdCreativeProductData>>(){}.getType();
+    this.mProductData = AdCreativeProductData.getGson().fromJson(value, type);
     return this;
   }
   public String getFieldProductSetId() {
@@ -1736,6 +1768,7 @@ public class AdCreative extends APINode {
     public static final String[] FIELDS = {
       "account_id",
       "actor_id",
+      "ad_disclaimer_spec",
       "adlabels",
       "applink_treatment",
       "asset_feed_spec",
@@ -1790,6 +1823,7 @@ public class AdCreative extends APINode {
       "platform_customizations",
       "playable_asset_id",
       "portrait_customizations",
+      "product_data",
       "product_set_id",
       "recommender_settings",
       "source_instagram_media_id",
@@ -1924,6 +1958,13 @@ public class AdCreative extends APINode {
     }
     public APIRequestGet requestActorIdField (boolean value) {
       this.requestField("actor_id", value);
+      return this;
+    }
+    public APIRequestGet requestAdDisclaimerSpecField () {
+      return this.requestAdDisclaimerSpecField(true);
+    }
+    public APIRequestGet requestAdDisclaimerSpecField (boolean value) {
+      this.requestField("ad_disclaimer_spec", value);
       return this;
     }
     public APIRequestGet requestAdlabelsField () {
@@ -2302,6 +2343,13 @@ public class AdCreative extends APINode {
     }
     public APIRequestGet requestPortraitCustomizationsField (boolean value) {
       this.requestField("portrait_customizations", value);
+      return this;
+    }
+    public APIRequestGet requestProductDataField () {
+      return this.requestProductDataField(true);
+    }
+    public APIRequestGet requestProductDataField (boolean value) {
+      this.requestField("product_data", value);
       return this;
     }
     public APIRequestGet requestProductSetIdField () {
@@ -2919,6 +2967,7 @@ public class AdCreative extends APINode {
   public AdCreative copyFrom(AdCreative instance) {
     this.mAccountId = instance.mAccountId;
     this.mActorId = instance.mActorId;
+    this.mAdDisclaimerSpec = instance.mAdDisclaimerSpec;
     this.mAdlabels = instance.mAdlabels;
     this.mApplinkTreatment = instance.mApplinkTreatment;
     this.mAssetFeedSpec = instance.mAssetFeedSpec;
@@ -2973,6 +3022,7 @@ public class AdCreative extends APINode {
     this.mPlatformCustomizations = instance.mPlatformCustomizations;
     this.mPlayableAssetId = instance.mPlayableAssetId;
     this.mPortraitCustomizations = instance.mPortraitCustomizations;
+    this.mProductData = instance.mProductData;
     this.mProductSetId = instance.mProductSetId;
     this.mRecommenderSettings = instance.mRecommenderSettings;
     this.mSourceInstagramMediaId = instance.mSourceInstagramMediaId;

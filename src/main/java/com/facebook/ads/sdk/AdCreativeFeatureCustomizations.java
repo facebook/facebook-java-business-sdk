@@ -41,6 +41,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class AdCreativeFeatureCustomizations extends APINode {
+  @SerializedName("image_crop_style")
+  private String mImageCropStyle = null;
   @SerializedName("showcase_card_display")
   private String mShowcaseCardDisplay = null;
   protected static Gson gson = null;
@@ -194,6 +196,15 @@ public class AdCreativeFeatureCustomizations extends APINode {
   }
 
 
+  public String getFieldImageCropStyle() {
+    return mImageCropStyle;
+  }
+
+  public AdCreativeFeatureCustomizations setFieldImageCropStyle(String value) {
+    this.mImageCropStyle = value;
+    return this;
+  }
+
   public String getFieldShowcaseCardDisplay() {
     return mShowcaseCardDisplay;
   }
@@ -220,6 +231,7 @@ public class AdCreativeFeatureCustomizations extends APINode {
   }
 
   public AdCreativeFeatureCustomizations copyFrom(AdCreativeFeatureCustomizations instance) {
+    this.mImageCropStyle = instance.mImageCropStyle;
     this.mShowcaseCardDisplay = instance.mShowcaseCardDisplay;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
