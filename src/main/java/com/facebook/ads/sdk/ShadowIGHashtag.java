@@ -115,9 +115,8 @@ public class ShadowIGHashtag extends APINode {
   public static ShadowIGHashtag loadJSON(String json, APIContext context, String header) {
     ShadowIGHashtag shadowIGHashtag = getGson().fromJson(json, ShadowIGHashtag.class);
     if (context.isDebug()) {
-      JsonParser parser = new JsonParser();
-      JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(shadowIGHashtag.toString());
+      JsonElement o1 = JsonParser.parseString(json);
+      JsonElement o2 = JsonParser.parseString(shadowIGHashtag.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -137,10 +136,9 @@ public class ShadowIGHashtag extends APINode {
     APINodeList<ShadowIGHashtag> shadowIGHashtags = new APINodeList<ShadowIGHashtag>(request, json, header);
     JsonArray arr;
     JsonObject obj;
-    JsonParser parser = new JsonParser();
     Exception exception = null;
     try{
-      JsonElement result = parser.parse(json);
+      JsonElement result = JsonParser.parseString(json);
       if (result.isJsonArray()) {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
@@ -297,6 +295,7 @@ public class ShadowIGHashtag extends APINode {
       "ig_id",
       "is_comment_enabled",
       "is_shared_to_feed",
+      "legacy_instagram_media_id",
       "like_count",
       "media_product_type",
       "media_type",
@@ -460,6 +459,13 @@ public class ShadowIGHashtag extends APINode {
       this.requestField("is_shared_to_feed", value);
       return this;
     }
+    public APIRequestGetRecentMedia requestLegacyInstagramMediaIdField () {
+      return this.requestLegacyInstagramMediaIdField(true);
+    }
+    public APIRequestGetRecentMedia requestLegacyInstagramMediaIdField (boolean value) {
+      this.requestField("legacy_instagram_media_id", value);
+      return this;
+    }
     public APIRequestGetRecentMedia requestLikeCountField () {
       return this.requestLikeCountField(true);
     }
@@ -552,6 +558,7 @@ public class ShadowIGHashtag extends APINode {
       "ig_id",
       "is_comment_enabled",
       "is_shared_to_feed",
+      "legacy_instagram_media_id",
       "like_count",
       "media_product_type",
       "media_type",
@@ -713,6 +720,13 @@ public class ShadowIGHashtag extends APINode {
     }
     public APIRequestGetTopMedia requestIsSharedToFeedField (boolean value) {
       this.requestField("is_shared_to_feed", value);
+      return this;
+    }
+    public APIRequestGetTopMedia requestLegacyInstagramMediaIdField () {
+      return this.requestLegacyInstagramMediaIdField(true);
+    }
+    public APIRequestGetTopMedia requestLegacyInstagramMediaIdField (boolean value) {
+      this.requestField("legacy_instagram_media_id", value);
       return this;
     }
     public APIRequestGetTopMedia requestLikeCountField () {

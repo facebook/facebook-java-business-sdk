@@ -53,6 +53,8 @@ public class InstagramMedia extends APINode {
   private String mFilterName = null;
   @SerializedName("id")
   private String mId = null;
+  @SerializedName("ig_media_id")
+  private String mIgMediaId = null;
   @SerializedName("latitude")
   private Double mLatitude = null;
   @SerializedName("like_count")
@@ -141,9 +143,8 @@ public class InstagramMedia extends APINode {
   public static InstagramMedia loadJSON(String json, APIContext context, String header) {
     InstagramMedia instagramMedia = getGson().fromJson(json, InstagramMedia.class);
     if (context.isDebug()) {
-      JsonParser parser = new JsonParser();
-      JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(instagramMedia.toString());
+      JsonElement o1 = JsonParser.parseString(json);
+      JsonElement o2 = JsonParser.parseString(instagramMedia.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -163,10 +164,9 @@ public class InstagramMedia extends APINode {
     APINodeList<InstagramMedia> instagramMedias = new APINodeList<InstagramMedia>(request, json, header);
     JsonArray arr;
     JsonObject obj;
-    JsonParser parser = new JsonParser();
     Exception exception = null;
     try{
-      JsonElement result = parser.parse(json);
+      JsonElement result = JsonParser.parseString(json);
       if (result.isJsonArray()) {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
@@ -317,6 +317,10 @@ public class InstagramMedia extends APINode {
     return mId;
   }
 
+  public String getFieldIgMediaId() {
+    return mIgMediaId;
+  }
+
   public Double getFieldLatitude() {
     return mLatitude;
   }
@@ -372,6 +376,7 @@ public class InstagramMedia extends APINode {
       "comment_type",
       "created_at",
       "id",
+      "ig_comment_id",
       "instagram_comment_id",
       "instagram_user",
       "mentioned_instagram_users",
@@ -488,6 +493,13 @@ public class InstagramMedia extends APINode {
     }
     public APIRequestGetComments requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetComments requestIgCommentIdField () {
+      return this.requestIgCommentIdField(true);
+    }
+    public APIRequestGetComments requestIgCommentIdField (boolean value) {
+      this.requestField("ig_comment_id", value);
       return this;
     }
     public APIRequestGetComments requestInstagramCommentIdField () {
@@ -661,6 +673,7 @@ public class InstagramMedia extends APINode {
       "display_url",
       "filter_name",
       "id",
+      "ig_media_id",
       "latitude",
       "like_count",
       "location",
@@ -804,6 +817,13 @@ public class InstagramMedia extends APINode {
       this.requestField("id", value);
       return this;
     }
+    public APIRequestGet requestIgMediaIdField () {
+      return this.requestIgMediaIdField(true);
+    }
+    public APIRequestGet requestIgMediaIdField (boolean value) {
+      this.requestField("ig_media_id", value);
+      return this;
+    }
     public APIRequestGet requestLatitudeField () {
       return this.requestLatitudeField(true);
     }
@@ -890,6 +910,7 @@ public class InstagramMedia extends APINode {
     this.mDisplayUrl = instance.mDisplayUrl;
     this.mFilterName = instance.mFilterName;
     this.mId = instance.mId;
+    this.mIgMediaId = instance.mIgMediaId;
     this.mLatitude = instance.mLatitude;
     this.mLikeCount = instance.mLikeCount;
     this.mLocation = instance.mLocation;

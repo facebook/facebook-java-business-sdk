@@ -49,6 +49,8 @@ public class AdAssetFeedSpecLinkURL extends APINode {
   private String mDeeplinkUrl = null;
   @SerializedName("display_url")
   private String mDisplayUrl = null;
+  @SerializedName("object_store_urls")
+  private List<String> mObjectStoreUrls = null;
   @SerializedName("url_tags")
   private String mUrlTags = null;
   @SerializedName("website_url")
@@ -64,9 +66,8 @@ public class AdAssetFeedSpecLinkURL extends APINode {
   public static AdAssetFeedSpecLinkURL loadJSON(String json, APIContext context, String header) {
     AdAssetFeedSpecLinkURL adAssetFeedSpecLinkURL = getGson().fromJson(json, AdAssetFeedSpecLinkURL.class);
     if (context.isDebug()) {
-      JsonParser parser = new JsonParser();
-      JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(adAssetFeedSpecLinkURL.toString());
+      JsonElement o1 = JsonParser.parseString(json);
+      JsonElement o2 = JsonParser.parseString(adAssetFeedSpecLinkURL.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -86,10 +87,9 @@ public class AdAssetFeedSpecLinkURL extends APINode {
     APINodeList<AdAssetFeedSpecLinkURL> adAssetFeedSpecLinkURLs = new APINodeList<AdAssetFeedSpecLinkURL>(request, json, header);
     JsonArray arr;
     JsonObject obj;
-    JsonParser parser = new JsonParser();
     Exception exception = null;
     try{
-      JsonElement result = parser.parse(json);
+      JsonElement result = JsonParser.parseString(json);
       if (result.isJsonArray()) {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
@@ -245,6 +245,15 @@ public class AdAssetFeedSpecLinkURL extends APINode {
     return this;
   }
 
+  public List<String> getFieldObjectStoreUrls() {
+    return mObjectStoreUrls;
+  }
+
+  public AdAssetFeedSpecLinkURL setFieldObjectStoreUrls(List<String> value) {
+    this.mObjectStoreUrls = value;
+    return this;
+  }
+
   public String getFieldUrlTags() {
     return mUrlTags;
   }
@@ -284,6 +293,7 @@ public class AdAssetFeedSpecLinkURL extends APINode {
     this.mCarouselSeeMoreUrl = instance.mCarouselSeeMoreUrl;
     this.mDeeplinkUrl = instance.mDeeplinkUrl;
     this.mDisplayUrl = instance.mDisplayUrl;
+    this.mObjectStoreUrls = instance.mObjectStoreUrls;
     this.mUrlTags = instance.mUrlTags;
     this.mWebsiteUrl = instance.mWebsiteUrl;
     this.context = instance.context;

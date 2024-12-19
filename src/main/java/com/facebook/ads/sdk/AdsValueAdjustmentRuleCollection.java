@@ -43,6 +43,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class AdsValueAdjustmentRuleCollection extends APINode {
   @SerializedName("id")
   private String mId = null;
+  @SerializedName("is_default_setting")
+  private Boolean mIsDefaultSetting = null;
   @SerializedName("name")
   private String mName = null;
   protected static Gson gson = null;
@@ -115,9 +117,8 @@ public class AdsValueAdjustmentRuleCollection extends APINode {
   public static AdsValueAdjustmentRuleCollection loadJSON(String json, APIContext context, String header) {
     AdsValueAdjustmentRuleCollection adsValueAdjustmentRuleCollection = getGson().fromJson(json, AdsValueAdjustmentRuleCollection.class);
     if (context.isDebug()) {
-      JsonParser parser = new JsonParser();
-      JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(adsValueAdjustmentRuleCollection.toString());
+      JsonElement o1 = JsonParser.parseString(json);
+      JsonElement o2 = JsonParser.parseString(adsValueAdjustmentRuleCollection.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -137,10 +138,9 @@ public class AdsValueAdjustmentRuleCollection extends APINode {
     APINodeList<AdsValueAdjustmentRuleCollection> adsValueAdjustmentRuleCollections = new APINodeList<AdsValueAdjustmentRuleCollection>(request, json, header);
     JsonArray arr;
     JsonObject obj;
-    JsonParser parser = new JsonParser();
     Exception exception = null;
     try{
-      JsonElement result = parser.parse(json);
+      JsonElement result = JsonParser.parseString(json);
       if (result.isJsonArray()) {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
@@ -267,6 +267,10 @@ public class AdsValueAdjustmentRuleCollection extends APINode {
     return mId;
   }
 
+  public Boolean getFieldIsDefaultSetting() {
+    return mIsDefaultSetting;
+  }
+
   public String getFieldName() {
     return mName;
   }
@@ -390,6 +394,7 @@ public class AdsValueAdjustmentRuleCollection extends APINode {
 
     public static final String[] FIELDS = {
       "id",
+      "is_default_setting",
       "name",
     };
 
@@ -490,6 +495,13 @@ public class AdsValueAdjustmentRuleCollection extends APINode {
       this.requestField("id", value);
       return this;
     }
+    public APIRequestGet requestIsDefaultSettingField () {
+      return this.requestIsDefaultSettingField(true);
+    }
+    public APIRequestGet requestIsDefaultSettingField (boolean value) {
+      this.requestField("is_default_setting", value);
+      return this;
+    }
     public APIRequestGet requestNameField () {
       return this.requestNameField(true);
     }
@@ -515,6 +527,7 @@ public class AdsValueAdjustmentRuleCollection extends APINode {
 
   public AdsValueAdjustmentRuleCollection copyFrom(AdsValueAdjustmentRuleCollection instance) {
     this.mId = instance.mId;
+    this.mIsDefaultSetting = instance.mIsDefaultSetting;
     this.mName = instance.mName;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

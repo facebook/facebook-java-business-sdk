@@ -149,9 +149,8 @@ public class Group extends APINode {
   public static Group loadJSON(String json, APIContext context, String header) {
     Group group = getGson().fromJson(json, Group.class);
     if (context.isDebug()) {
-      JsonParser parser = new JsonParser();
-      JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(group.toString());
+      JsonElement o1 = JsonParser.parseString(json);
+      JsonElement o2 = JsonParser.parseString(group.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -171,10 +170,9 @@ public class Group extends APINode {
     APINodeList<Group> groups = new APINodeList<Group>(request, json, header);
     JsonArray arr;
     JsonObject obj;
-    JsonParser parser = new JsonParser();
     Exception exception = null;
     try{
-      JsonElement result = parser.parse(json);
+      JsonElement result = JsonParser.parseString(json);
       if (result.isJsonArray()) {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
@@ -2217,7 +2215,6 @@ public class Group extends APINode {
       "text_format_metadata",
       "text_format_preset_id",
       "text_only_place",
-      "throwback_camera_roll_media",
       "thumbnail",
       "time_since_original_post",
       "title",
@@ -2955,11 +2952,6 @@ public class Group extends APINode {
 
     public APIRequestCreateFeed setTextOnlyPlace (String textOnlyPlace) {
       this.setParam("text_only_place", textOnlyPlace);
-      return this;
-    }
-
-    public APIRequestCreateFeed setThrowbackCameraRollMedia (String throwbackCameraRollMedia) {
-      this.setParam("throwback_camera_roll_media", throwbackCameraRollMedia);
       return this;
     }
 
@@ -4553,6 +4545,7 @@ public class Group extends APINode {
       "id",
       "id_for_avatars",
       "inspirational_people",
+      "instagram_user_self_asset",
       "install_type",
       "installed",
       "is_guest_user",
@@ -4573,6 +4566,7 @@ public class Group extends APINode {
       "profile_pic",
       "quotes",
       "relationship_status",
+      "religion",
       "shared_login_upgrade_required_by",
       "short_name",
       "significant_other",
@@ -4796,6 +4790,13 @@ public class Group extends APINode {
       this.requestField("inspirational_people", value);
       return this;
     }
+    public APIRequestGetOptedInMembers requestInstagramUserSelfAssetField () {
+      return this.requestInstagramUserSelfAssetField(true);
+    }
+    public APIRequestGetOptedInMembers requestInstagramUserSelfAssetField (boolean value) {
+      this.requestField("instagram_user_self_asset", value);
+      return this;
+    }
     public APIRequestGetOptedInMembers requestInstallTypeField () {
       return this.requestInstallTypeField(true);
     }
@@ -4934,6 +4935,13 @@ public class Group extends APINode {
     }
     public APIRequestGetOptedInMembers requestRelationshipStatusField (boolean value) {
       this.requestField("relationship_status", value);
+      return this;
+    }
+    public APIRequestGetOptedInMembers requestReligionField () {
+      return this.requestReligionField(true);
+    }
+    public APIRequestGetOptedInMembers requestReligionField (boolean value) {
+      this.requestField("religion", value);
       return this;
     }
     public APIRequestGetOptedInMembers requestSharedLoginUpgradeRequiredByField () {
@@ -6306,7 +6314,6 @@ public class Group extends APINode {
       "start_offset",
       "swap_mode",
       "text_format_metadata",
-      "throwback_camera_roll_media",
       "thumb",
       "time_since_original_post",
       "title",
@@ -6770,11 +6777,6 @@ public class Group extends APINode {
 
     public APIRequestCreateVideo setTextFormatMetadata (String textFormatMetadata) {
       this.setParam("text_format_metadata", textFormatMetadata);
-      return this;
-    }
-
-    public APIRequestCreateVideo setThrowbackCameraRollMedia (String throwbackCameraRollMedia) {
-      this.setParam("throwback_camera_roll_media", throwbackCameraRollMedia);
       return this;
     }
 

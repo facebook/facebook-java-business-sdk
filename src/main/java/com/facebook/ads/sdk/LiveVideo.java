@@ -165,9 +165,8 @@ public class LiveVideo extends APINode {
   public static LiveVideo loadJSON(String json, APIContext context, String header) {
     LiveVideo liveVideo = getGson().fromJson(json, LiveVideo.class);
     if (context.isDebug()) {
-      JsonParser parser = new JsonParser();
-      JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(liveVideo.toString());
+      JsonElement o1 = JsonParser.parseString(json);
+      JsonElement o2 = JsonParser.parseString(liveVideo.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -187,10 +186,9 @@ public class LiveVideo extends APINode {
     APINodeList<LiveVideo> liveVideos = new APINodeList<LiveVideo>(request, json, header);
     JsonArray arr;
     JsonObject obj;
-    JsonParser parser = new JsonParser();
     Exception exception = null;
     try{
-      JsonElement result = parser.parse(json);
+      JsonElement result = JsonParser.parseString(json);
       if (result.isJsonArray()) {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
@@ -498,6 +496,7 @@ public class LiveVideo extends APINode {
       "id",
       "id_for_avatars",
       "inspirational_people",
+      "instagram_user_self_asset",
       "install_type",
       "installed",
       "is_guest_user",
@@ -518,6 +517,7 @@ public class LiveVideo extends APINode {
       "profile_pic",
       "quotes",
       "relationship_status",
+      "religion",
       "shared_login_upgrade_required_by",
       "short_name",
       "significant_other",
@@ -746,6 +746,13 @@ public class LiveVideo extends APINode {
       this.requestField("inspirational_people", value);
       return this;
     }
+    public APIRequestGetBlockedUsers requestInstagramUserSelfAssetField () {
+      return this.requestInstagramUserSelfAssetField(true);
+    }
+    public APIRequestGetBlockedUsers requestInstagramUserSelfAssetField (boolean value) {
+      this.requestField("instagram_user_self_asset", value);
+      return this;
+    }
     public APIRequestGetBlockedUsers requestInstallTypeField () {
       return this.requestInstallTypeField(true);
     }
@@ -884,6 +891,13 @@ public class LiveVideo extends APINode {
     }
     public APIRequestGetBlockedUsers requestRelationshipStatusField (boolean value) {
       this.requestField("relationship_status", value);
+      return this;
+    }
+    public APIRequestGetBlockedUsers requestReligionField () {
+      return this.requestReligionField(true);
+    }
+    public APIRequestGetBlockedUsers requestReligionField (boolean value) {
+      this.requestField("religion", value);
       return this;
     }
     public APIRequestGetBlockedUsers requestSharedLoginUpgradeRequiredByField () {

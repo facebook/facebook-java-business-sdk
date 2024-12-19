@@ -51,6 +51,8 @@ public class InstagramCarousel extends APINode {
   private String mDisplayUrl = null;
   @SerializedName("id")
   private String mId = null;
+  @SerializedName("ig_media_id")
+  private String mIgMediaId = null;
   @SerializedName("like_count")
   private Long mLikeCount = null;
   @SerializedName("owner_instagram_user")
@@ -131,9 +133,8 @@ public class InstagramCarousel extends APINode {
   public static InstagramCarousel loadJSON(String json, APIContext context, String header) {
     InstagramCarousel instagramCarousel = getGson().fromJson(json, InstagramCarousel.class);
     if (context.isDebug()) {
-      JsonParser parser = new JsonParser();
-      JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(instagramCarousel.toString());
+      JsonElement o1 = JsonParser.parseString(json);
+      JsonElement o2 = JsonParser.parseString(instagramCarousel.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -153,10 +154,9 @@ public class InstagramCarousel extends APINode {
     APINodeList<InstagramCarousel> instagramCarousels = new APINodeList<InstagramCarousel>(request, json, header);
     JsonArray arr;
     JsonObject obj;
-    JsonParser parser = new JsonParser();
     Exception exception = null;
     try{
-      JsonElement result = parser.parse(json);
+      JsonElement result = JsonParser.parseString(json);
       if (result.isJsonArray()) {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
@@ -303,6 +303,10 @@ public class InstagramCarousel extends APINode {
     return mId;
   }
 
+  public String getFieldIgMediaId() {
+    return mIgMediaId;
+  }
+
   public Long getFieldLikeCount() {
     return mLikeCount;
   }
@@ -342,6 +346,7 @@ public class InstagramCarousel extends APINode {
       "comment_type",
       "created_at",
       "id",
+      "ig_comment_id",
       "instagram_comment_id",
       "instagram_user",
       "mentioned_instagram_users",
@@ -458,6 +463,13 @@ public class InstagramCarousel extends APINode {
     }
     public APIRequestGetComments requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetComments requestIgCommentIdField () {
+      return this.requestIgCommentIdField(true);
+    }
+    public APIRequestGetComments requestIgCommentIdField (boolean value) {
+      this.requestField("ig_comment_id", value);
       return this;
     }
     public APIRequestGetComments requestInstagramCommentIdField () {
@@ -630,6 +642,7 @@ public class InstagramCarousel extends APINode {
       "content_type",
       "display_url",
       "id",
+      "ig_media_id",
       "like_count",
       "owner_instagram_user",
       "permalink",
@@ -762,6 +775,13 @@ public class InstagramCarousel extends APINode {
       this.requestField("id", value);
       return this;
     }
+    public APIRequestGet requestIgMediaIdField () {
+      return this.requestIgMediaIdField(true);
+    }
+    public APIRequestGet requestIgMediaIdField (boolean value) {
+      this.requestField("ig_media_id", value);
+      return this;
+    }
     public APIRequestGet requestLikeCountField () {
       return this.requestLikeCountField(true);
     }
@@ -819,6 +839,7 @@ public class InstagramCarousel extends APINode {
     this.mContentType = instance.mContentType;
     this.mDisplayUrl = instance.mDisplayUrl;
     this.mId = instance.mId;
+    this.mIgMediaId = instance.mIgMediaId;
     this.mLikeCount = instance.mLikeCount;
     this.mOwnerInstagramUser = instance.mOwnerInstagramUser;
     this.mPermalink = instance.mPermalink;

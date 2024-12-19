@@ -41,6 +41,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class AdCreativeFeatureCustomizations extends APINode {
+  @SerializedName("image_crop_style")
+  private String mImageCropStyle = null;
   @SerializedName("showcase_card_display")
   private String mShowcaseCardDisplay = null;
   protected static Gson gson = null;
@@ -54,9 +56,8 @@ public class AdCreativeFeatureCustomizations extends APINode {
   public static AdCreativeFeatureCustomizations loadJSON(String json, APIContext context, String header) {
     AdCreativeFeatureCustomizations adCreativeFeatureCustomizations = getGson().fromJson(json, AdCreativeFeatureCustomizations.class);
     if (context.isDebug()) {
-      JsonParser parser = new JsonParser();
-      JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(adCreativeFeatureCustomizations.toString());
+      JsonElement o1 = JsonParser.parseString(json);
+      JsonElement o2 = JsonParser.parseString(adCreativeFeatureCustomizations.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -76,10 +77,9 @@ public class AdCreativeFeatureCustomizations extends APINode {
     APINodeList<AdCreativeFeatureCustomizations> adCreativeFeatureCustomizationss = new APINodeList<AdCreativeFeatureCustomizations>(request, json, header);
     JsonArray arr;
     JsonObject obj;
-    JsonParser parser = new JsonParser();
     Exception exception = null;
     try{
-      JsonElement result = parser.parse(json);
+      JsonElement result = JsonParser.parseString(json);
       if (result.isJsonArray()) {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
@@ -194,6 +194,15 @@ public class AdCreativeFeatureCustomizations extends APINode {
   }
 
 
+  public String getFieldImageCropStyle() {
+    return mImageCropStyle;
+  }
+
+  public AdCreativeFeatureCustomizations setFieldImageCropStyle(String value) {
+    this.mImageCropStyle = value;
+    return this;
+  }
+
   public String getFieldShowcaseCardDisplay() {
     return mShowcaseCardDisplay;
   }
@@ -220,6 +229,7 @@ public class AdCreativeFeatureCustomizations extends APINode {
   }
 
   public AdCreativeFeatureCustomizations copyFrom(AdCreativeFeatureCustomizations instance) {
+    this.mImageCropStyle = instance.mImageCropStyle;
     this.mShowcaseCardDisplay = instance.mShowcaseCardDisplay;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

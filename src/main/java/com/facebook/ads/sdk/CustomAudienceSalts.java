@@ -45,6 +45,10 @@ public class CustomAudienceSalts extends APINode {
   private Long mAppId = null;
   @SerializedName("public_key")
   private String mPublicKey = null;
+  @SerializedName("salts")
+  private List<Object> mSalts = null;
+  @SerializedName("user_id")
+  private Long mUserId = null;
   protected static Gson gson = null;
 
   public CustomAudienceSalts() {
@@ -56,9 +60,8 @@ public class CustomAudienceSalts extends APINode {
   public static CustomAudienceSalts loadJSON(String json, APIContext context, String header) {
     CustomAudienceSalts customAudienceSalts = getGson().fromJson(json, CustomAudienceSalts.class);
     if (context.isDebug()) {
-      JsonParser parser = new JsonParser();
-      JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(customAudienceSalts.toString());
+      JsonElement o1 = JsonParser.parseString(json);
+      JsonElement o2 = JsonParser.parseString(customAudienceSalts.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -78,10 +81,9 @@ public class CustomAudienceSalts extends APINode {
     APINodeList<CustomAudienceSalts> customAudienceSaltss = new APINodeList<CustomAudienceSalts>(request, json, header);
     JsonArray arr;
     JsonObject obj;
-    JsonParser parser = new JsonParser();
     Exception exception = null;
     try{
-      JsonElement result = parser.parse(json);
+      JsonElement result = JsonParser.parseString(json);
       if (result.isJsonArray()) {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
@@ -214,6 +216,24 @@ public class CustomAudienceSalts extends APINode {
     return this;
   }
 
+  public List<Object> getFieldSalts() {
+    return mSalts;
+  }
+
+  public CustomAudienceSalts setFieldSalts(List<Object> value) {
+    this.mSalts = value;
+    return this;
+  }
+
+  public Long getFieldUserId() {
+    return mUserId;
+  }
+
+  public CustomAudienceSalts setFieldUserId(Long value) {
+    this.mUserId = value;
+    return this;
+  }
+
 
 
 
@@ -233,6 +253,8 @@ public class CustomAudienceSalts extends APINode {
   public CustomAudienceSalts copyFrom(CustomAudienceSalts instance) {
     this.mAppId = instance.mAppId;
     this.mPublicKey = instance.mPublicKey;
+    this.mSalts = instance.mSalts;
+    this.mUserId = instance.mUserId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

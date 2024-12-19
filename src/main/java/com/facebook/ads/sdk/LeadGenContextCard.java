@@ -64,9 +64,8 @@ public class LeadGenContextCard extends APINode {
   public static LeadGenContextCard loadJSON(String json, APIContext context, String header) {
     LeadGenContextCard leadGenContextCard = getGson().fromJson(json, LeadGenContextCard.class);
     if (context.isDebug()) {
-      JsonParser parser = new JsonParser();
-      JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(leadGenContextCard.toString());
+      JsonElement o1 = JsonParser.parseString(json);
+      JsonElement o2 = JsonParser.parseString(leadGenContextCard.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -86,10 +85,9 @@ public class LeadGenContextCard extends APINode {
     APINodeList<LeadGenContextCard> leadGenContextCards = new APINodeList<LeadGenContextCard>(request, json, header);
     JsonArray arr;
     JsonObject obj;
-    JsonParser parser = new JsonParser();
     Exception exception = null;
     try{
-      JsonElement result = parser.parse(json);
+      JsonElement result = JsonParser.parseString(json);
       if (result.isJsonArray()) {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();

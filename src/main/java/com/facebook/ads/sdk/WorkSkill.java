@@ -115,9 +115,8 @@ public class WorkSkill extends APINode {
   public static WorkSkill loadJSON(String json, APIContext context, String header) {
     WorkSkill workSkill = getGson().fromJson(json, WorkSkill.class);
     if (context.isDebug()) {
-      JsonParser parser = new JsonParser();
-      JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(workSkill.toString());
+      JsonElement o1 = JsonParser.parseString(json);
+      JsonElement o2 = JsonParser.parseString(workSkill.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -137,10 +136,9 @@ public class WorkSkill extends APINode {
     APINodeList<WorkSkill> workSkills = new APINodeList<WorkSkill>(request, json, header);
     JsonArray arr;
     JsonObject obj;
-    JsonParser parser = new JsonParser();
     Exception exception = null;
     try{
-      JsonElement result = parser.parse(json);
+      JsonElement result = JsonParser.parseString(json);
       if (result.isJsonArray()) {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
@@ -301,6 +299,7 @@ public class WorkSkill extends APINode {
       "id",
       "id_for_avatars",
       "inspirational_people",
+      "instagram_user_self_asset",
       "install_type",
       "installed",
       "is_guest_user",
@@ -321,6 +320,7 @@ public class WorkSkill extends APINode {
       "profile_pic",
       "quotes",
       "relationship_status",
+      "religion",
       "shared_login_upgrade_required_by",
       "short_name",
       "significant_other",
@@ -544,6 +544,13 @@ public class WorkSkill extends APINode {
       this.requestField("inspirational_people", value);
       return this;
     }
+    public APIRequestGetUsers requestInstagramUserSelfAssetField () {
+      return this.requestInstagramUserSelfAssetField(true);
+    }
+    public APIRequestGetUsers requestInstagramUserSelfAssetField (boolean value) {
+      this.requestField("instagram_user_self_asset", value);
+      return this;
+    }
     public APIRequestGetUsers requestInstallTypeField () {
       return this.requestInstallTypeField(true);
     }
@@ -682,6 +689,13 @@ public class WorkSkill extends APINode {
     }
     public APIRequestGetUsers requestRelationshipStatusField (boolean value) {
       this.requestField("relationship_status", value);
+      return this;
+    }
+    public APIRequestGetUsers requestReligionField () {
+      return this.requestReligionField(true);
+    }
+    public APIRequestGetUsers requestReligionField (boolean value) {
+      this.requestField("religion", value);
       return this;
     }
     public APIRequestGetUsers requestSharedLoginUpgradeRequiredByField () {

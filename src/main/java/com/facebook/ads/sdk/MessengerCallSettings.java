@@ -43,6 +43,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class MessengerCallSettings extends APINode {
   @SerializedName("audio_enabled")
   private Boolean mAudioEnabled = null;
+  @SerializedName("icon_enabled")
+  private Boolean mIconEnabled = null;
   protected static Gson gson = null;
 
   public MessengerCallSettings() {
@@ -54,9 +56,8 @@ public class MessengerCallSettings extends APINode {
   public static MessengerCallSettings loadJSON(String json, APIContext context, String header) {
     MessengerCallSettings messengerCallSettings = getGson().fromJson(json, MessengerCallSettings.class);
     if (context.isDebug()) {
-      JsonParser parser = new JsonParser();
-      JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(messengerCallSettings.toString());
+      JsonElement o1 = JsonParser.parseString(json);
+      JsonElement o2 = JsonParser.parseString(messengerCallSettings.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -76,10 +77,9 @@ public class MessengerCallSettings extends APINode {
     APINodeList<MessengerCallSettings> messengerCallSettingss = new APINodeList<MessengerCallSettings>(request, json, header);
     JsonArray arr;
     JsonObject obj;
-    JsonParser parser = new JsonParser();
     Exception exception = null;
     try{
-      JsonElement result = parser.parse(json);
+      JsonElement result = JsonParser.parseString(json);
       if (result.isJsonArray()) {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
@@ -203,6 +203,15 @@ public class MessengerCallSettings extends APINode {
     return this;
   }
 
+  public Boolean getFieldIconEnabled() {
+    return mIconEnabled;
+  }
+
+  public MessengerCallSettings setFieldIconEnabled(Boolean value) {
+    this.mIconEnabled = value;
+    return this;
+  }
+
 
 
 
@@ -221,6 +230,7 @@ public class MessengerCallSettings extends APINode {
 
   public MessengerCallSettings copyFrom(MessengerCallSettings instance) {
     this.mAudioEnabled = instance.mAudioEnabled;
+    this.mIconEnabled = instance.mIconEnabled;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

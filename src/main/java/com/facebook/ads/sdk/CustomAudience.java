@@ -189,9 +189,8 @@ public class CustomAudience extends APINode {
   public static CustomAudience loadJSON(String json, APIContext context, String header) {
     CustomAudience customAudience = getGson().fromJson(json, CustomAudience.class);
     if (context.isDebug()) {
-      JsonParser parser = new JsonParser();
-      JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(customAudience.toString());
+      JsonElement o1 = JsonParser.parseString(json);
+      JsonElement o2 = JsonParser.parseString(customAudience.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -211,10 +210,9 @@ public class CustomAudience extends APINode {
     APINodeList<CustomAudience> customAudiences = new APINodeList<CustomAudience>(request, json, header);
     JsonArray arr;
     JsonObject obj;
-    JsonParser parser = new JsonParser();
     Exception exception = null;
     try{
-      JsonElement result = parser.parse(json);
+      JsonElement result = JsonParser.parseString(json);
       if (result.isJsonArray()) {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
@@ -704,6 +702,7 @@ public class CustomAudience extends APINode {
       "end_advertiser",
       "end_advertiser_name",
       "existing_customers",
+      "expired_funding_source_details",
       "extended_credit_invoice_group",
       "failed_delivery_checks",
       "fb_entity",
@@ -1037,6 +1036,13 @@ public class CustomAudience extends APINode {
     }
     public APIRequestGetAdAccounts requestExistingCustomersField (boolean value) {
       this.requestField("existing_customers", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestExpiredFundingSourceDetailsField () {
+      return this.requestExpiredFundingSourceDetailsField(true);
+    }
+    public APIRequestGetAdAccounts requestExpiredFundingSourceDetailsField (boolean value) {
+      this.requestField("expired_funding_source_details", value);
       return this;
     }
     public APIRequestGetAdAccounts requestExtendedCreditInvoiceGroupField () {
@@ -1927,6 +1933,8 @@ public class CustomAudience extends APINode {
     public static final String[] FIELDS = {
       "app_id",
       "public_key",
+      "salts",
+      "user_id",
     };
 
     @Override
@@ -2040,6 +2048,20 @@ public class CustomAudience extends APINode {
     }
     public APIRequestGetSalts requestPublicKeyField (boolean value) {
       this.requestField("public_key", value);
+      return this;
+    }
+    public APIRequestGetSalts requestSaltsField () {
+      return this.requestSaltsField(true);
+    }
+    public APIRequestGetSalts requestSaltsField (boolean value) {
+      this.requestField("salts", value);
+      return this;
+    }
+    public APIRequestGetSalts requestUserIdField () {
+      return this.requestUserIdField(true);
+    }
+    public APIRequestGetSalts requestUserIdField (boolean value) {
+      this.requestField("user_id", value);
       return this;
     }
   }

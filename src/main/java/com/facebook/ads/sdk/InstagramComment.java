@@ -47,6 +47,8 @@ public class InstagramComment extends APINode {
   private String mCreatedAt = null;
   @SerializedName("id")
   private String mId = null;
+  @SerializedName("ig_comment_id")
+  private String mIgCommentId = null;
   @SerializedName("instagram_comment_id")
   private String mInstagramCommentId = null;
   @SerializedName("instagram_user")
@@ -127,9 +129,8 @@ public class InstagramComment extends APINode {
   public static InstagramComment loadJSON(String json, APIContext context, String header) {
     InstagramComment instagramComment = getGson().fromJson(json, InstagramComment.class);
     if (context.isDebug()) {
-      JsonParser parser = new JsonParser();
-      JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(instagramComment.toString());
+      JsonElement o1 = JsonParser.parseString(json);
+      JsonElement o2 = JsonParser.parseString(instagramComment.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -149,10 +150,9 @@ public class InstagramComment extends APINode {
     APINodeList<InstagramComment> instagramComments = new APINodeList<InstagramComment>(request, json, header);
     JsonArray arr;
     JsonObject obj;
-    JsonParser parser = new JsonParser();
     Exception exception = null;
     try{
-      JsonElement result = parser.parse(json);
+      JsonElement result = JsonParser.parseString(json);
       if (result.isJsonArray()) {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
@@ -299,6 +299,10 @@ public class InstagramComment extends APINode {
     return mId;
   }
 
+  public String getFieldIgCommentId() {
+    return mIgCommentId;
+  }
+
   public String getFieldInstagramCommentId() {
     return mInstagramCommentId;
   }
@@ -338,6 +342,7 @@ public class InstagramComment extends APINode {
       "comment_type",
       "created_at",
       "id",
+      "ig_comment_id",
       "instagram_comment_id",
       "instagram_user",
       "mentioned_instagram_users",
@@ -454,6 +459,13 @@ public class InstagramComment extends APINode {
     }
     public APIRequestGetReplies requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetReplies requestIgCommentIdField () {
+      return this.requestIgCommentIdField(true);
+    }
+    public APIRequestGetReplies requestIgCommentIdField (boolean value) {
+      this.requestField("ig_comment_id", value);
       return this;
     }
     public APIRequestGetReplies requestInstagramCommentIdField () {
@@ -735,6 +747,7 @@ public class InstagramComment extends APINode {
       "comment_type",
       "created_at",
       "id",
+      "ig_comment_id",
       "instagram_comment_id",
       "instagram_user",
       "mentioned_instagram_users",
@@ -851,6 +864,13 @@ public class InstagramComment extends APINode {
     }
     public APIRequestGet requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGet requestIgCommentIdField () {
+      return this.requestIgCommentIdField(true);
+    }
+    public APIRequestGet requestIgCommentIdField (boolean value) {
+      this.requestField("ig_comment_id", value);
       return this;
     }
     public APIRequestGet requestInstagramCommentIdField () {
@@ -1029,6 +1049,7 @@ public class InstagramComment extends APINode {
     this.mCommentType = instance.mCommentType;
     this.mCreatedAt = instance.mCreatedAt;
     this.mId = instance.mId;
+    this.mIgCommentId = instance.mIgCommentId;
     this.mInstagramCommentId = instance.mInstagramCommentId;
     this.mInstagramUser = instance.mInstagramUser;
     this.mMentionedInstagramUsers = instance.mMentionedInstagramUsers;

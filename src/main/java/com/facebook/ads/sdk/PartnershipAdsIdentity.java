@@ -41,6 +41,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class PartnershipAdsIdentity extends APINode {
+  @SerializedName("is_saved")
+  private Boolean mIsSaved = null;
   @SerializedName("post_types")
   private List<String> mPostTypes = null;
   @SerializedName("secondary_identities")
@@ -56,9 +58,8 @@ public class PartnershipAdsIdentity extends APINode {
   public static PartnershipAdsIdentity loadJSON(String json, APIContext context, String header) {
     PartnershipAdsIdentity partnershipAdsIdentity = getGson().fromJson(json, PartnershipAdsIdentity.class);
     if (context.isDebug()) {
-      JsonParser parser = new JsonParser();
-      JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(partnershipAdsIdentity.toString());
+      JsonElement o1 = JsonParser.parseString(json);
+      JsonElement o2 = JsonParser.parseString(partnershipAdsIdentity.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -78,10 +79,9 @@ public class PartnershipAdsIdentity extends APINode {
     APINodeList<PartnershipAdsIdentity> partnershipAdsIdentitys = new APINodeList<PartnershipAdsIdentity>(request, json, header);
     JsonArray arr;
     JsonObject obj;
-    JsonParser parser = new JsonParser();
     Exception exception = null;
     try{
-      JsonElement result = parser.parse(json);
+      JsonElement result = JsonParser.parseString(json);
       if (result.isJsonArray()) {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
@@ -196,6 +196,15 @@ public class PartnershipAdsIdentity extends APINode {
   }
 
 
+  public Boolean getFieldIsSaved() {
+    return mIsSaved;
+  }
+
+  public PartnershipAdsIdentity setFieldIsSaved(Boolean value) {
+    this.mIsSaved = value;
+    return this;
+  }
+
   public List<String> getFieldPostTypes() {
     return mPostTypes;
   }
@@ -231,6 +240,7 @@ public class PartnershipAdsIdentity extends APINode {
   }
 
   public PartnershipAdsIdentity copyFrom(PartnershipAdsIdentity instance) {
+    this.mIsSaved = instance.mIsSaved;
     this.mPostTypes = instance.mPostTypes;
     this.mSecondaryIdentities = instance.mSecondaryIdentities;
     this.context = instance.context;

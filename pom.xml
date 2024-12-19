@@ -4,7 +4,7 @@
   <groupId>com.facebook.business.sdk</groupId>
   <artifactId>facebook-java-business-sdk</artifactId>
   <packaging>jar</packaging>
-  <version>21.0.0</version>
+  <version>21.0.2</version>
   <name>${project.groupId}:${project.artifactId}</name>
   <description>Facebook Business Solutions SDK for Java</description>
   <url>https://developers.facebook.com/docs/marketing-api/sdks</url>
@@ -95,7 +95,7 @@
           <execution>
             <phase>package</phase>
             <goals>
-               <goal>shade</goal>
+              <goal>shade</goal>
             </goals>
             <configuration>
               <shadedArtifactAttached>true</shadedArtifactAttached>
@@ -106,22 +106,22 @@
       </plugin>
       <!-- compile kotlin in test file-->
       <plugin>
-          <artifactId>kotlin-maven-plugin</artifactId>
-          <groupId>org.jetbrains.kotlin</groupId>
-          <version>${kotlin.version}</version>
-          <executions>
-              <execution>
-                  <id>test-compile</id>
-                  <goals>
-                    <goal>test-compile</goal>
-                  </goals>
-                  <configuration>
-                      <sourceDirs>
-                          <sourceDir>${project.basedir}/src/test/kotlin</sourceDir>
-                      </sourceDirs>
-                  </configuration>
-              </execution>
-          </executions>
+        <artifactId>kotlin-maven-plugin</artifactId>
+        <groupId>org.jetbrains.kotlin</groupId>
+        <version>${kotlin.version}</version>
+        <executions>
+          <execution>
+            <id>test-compile</id>
+            <goals>
+              <goal>test-compile</goal>
+            </goals>
+            <configuration>
+              <sourceDirs>
+                <sourceDir>${project.basedir}/src/test/kotlin</sourceDir>
+              </sourceDirs>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>
@@ -129,27 +129,27 @@
     <dependency>
       <groupId>com.google.code.gson</groupId>
       <artifactId>gson</artifactId>
-      <version>2.8.9</version>
+      <version>2.11.0</version>
     </dependency>
     <dependency>
       <groupId>com.squareup.okhttp3</groupId>
       <artifactId>okhttp</artifactId>
-      <version>3.9.1</version>
+      <version>4.12.0</version>
     </dependency>
     <dependency>
       <groupId>com.google.guava</groupId>
       <artifactId>guava</artifactId>
-      <version>33.0.0-jre</version>
+      <version>33.3.1-jre</version>
     </dependency>
     <dependency>
       <groupId>com.squareup.okio</groupId>
       <artifactId>okio</artifactId>
-      <version>3.4.0</version>
+      <version>3.9.1</version>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.13.1</version>
+      <version>4.13.2</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -159,10 +159,10 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-        <groupId>org.jetbrains.kotlin</groupId>
-        <artifactId>kotlin-stdlib</artifactId>
-        <version>${kotlin.version}</version>
-        <scope>test</scope>
+      <groupId>org.jetbrains.kotlin</groupId>
+      <artifactId>kotlin-stdlib</artifactId>
+      <version>${kotlin.version}</version>
+      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>io.mockk</groupId>

@@ -79,6 +79,8 @@ public class AdsUserSettings extends APINode {
   private String mConnectedSourcesCatalogOptInStatus = null;
   @SerializedName("default_creation_mode")
   private String mDefaultCreationMode = null;
+  @SerializedName("enhance_cta_text_extraction_opt_in_status")
+  private String mEnhanceCtaTextExtractionOptInStatus = null;
   @SerializedName("export_format_default")
   private String mExportFormatDefault = null;
   @SerializedName("focus_mode_default")
@@ -147,6 +149,10 @@ public class AdsUserSettings extends APINode {
   private String mStickySettingAfterDefaultOn = null;
   @SerializedName("syd_campaign_trends_metric")
   private String mSydCampaignTrendsMetric = null;
+  @SerializedName("text_optimizations_text_extraction_opt_in_status")
+  private String mTextOptimizationsTextExtractionOptInStatus = null;
+  @SerializedName("text_variations_sticky_opt_in_status")
+  private String mTextVariationsStickyOptInStatus = null;
   @SerializedName("total_coupon_syd_dismissals")
   private Long mTotalCouponSydDismissals = null;
   @SerializedName("total_coupon_upsell_dismissals")
@@ -229,9 +235,8 @@ public class AdsUserSettings extends APINode {
   public static AdsUserSettings loadJSON(String json, APIContext context, String header) {
     AdsUserSettings adsUserSettings = getGson().fromJson(json, AdsUserSettings.class);
     if (context.isDebug()) {
-      JsonParser parser = new JsonParser();
-      JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(adsUserSettings.toString());
+      JsonElement o1 = JsonParser.parseString(json);
+      JsonElement o2 = JsonParser.parseString(adsUserSettings.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -251,10 +256,9 @@ public class AdsUserSettings extends APINode {
     APINodeList<AdsUserSettings> adsUserSettingss = new APINodeList<AdsUserSettings>(request, json, header);
     JsonArray arr;
     JsonObject obj;
-    JsonParser parser = new JsonParser();
     Exception exception = null;
     try{
-      JsonElement result = parser.parse(json);
+      JsonElement result = JsonParser.parseString(json);
       if (result.isJsonArray()) {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
@@ -449,6 +453,10 @@ public class AdsUserSettings extends APINode {
     return mDefaultCreationMode;
   }
 
+  public String getFieldEnhanceCtaTextExtractionOptInStatus() {
+    return mEnhanceCtaTextExtractionOptInStatus;
+  }
+
   public String getFieldExportFormatDefault() {
     return mExportFormatDefault;
   }
@@ -591,6 +599,14 @@ public class AdsUserSettings extends APINode {
     return mSydCampaignTrendsMetric;
   }
 
+  public String getFieldTextOptimizationsTextExtractionOptInStatus() {
+    return mTextOptimizationsTextExtractionOptInStatus;
+  }
+
+  public String getFieldTextVariationsStickyOptInStatus() {
+    return mTextVariationsStickyOptInStatus;
+  }
+
   public Long getFieldTotalCouponSydDismissals() {
     return mTotalCouponSydDismissals;
   }
@@ -650,6 +666,7 @@ public class AdsUserSettings extends APINode {
       "carousel_to_video_opt_in_status",
       "connected_sources_catalog_opt_in_status",
       "default_creation_mode",
+      "enhance_cta_text_extraction_opt_in_status",
       "export_format_default",
       "focus_mode_default",
       "gen_ai_alpha_test_status",
@@ -684,6 +701,8 @@ public class AdsUserSettings extends APINode {
       "static_ad_product_extensions_opt_in",
       "sticky_setting_after_default_on",
       "syd_campaign_trends_metric",
+      "text_optimizations_text_extraction_opt_in_status",
+      "text_variations_sticky_opt_in_status",
       "total_coupon_syd_dismissals",
       "total_coupon_upsell_dismissals",
       "url_prefill_removal_timestamp",
@@ -913,6 +932,13 @@ public class AdsUserSettings extends APINode {
     }
     public APIRequestGet requestDefaultCreationModeField (boolean value) {
       this.requestField("default_creation_mode", value);
+      return this;
+    }
+    public APIRequestGet requestEnhanceCtaTextExtractionOptInStatusField () {
+      return this.requestEnhanceCtaTextExtractionOptInStatusField(true);
+    }
+    public APIRequestGet requestEnhanceCtaTextExtractionOptInStatusField (boolean value) {
+      this.requestField("enhance_cta_text_extraction_opt_in_status", value);
       return this;
     }
     public APIRequestGet requestExportFormatDefaultField () {
@@ -1153,6 +1179,20 @@ public class AdsUserSettings extends APINode {
       this.requestField("syd_campaign_trends_metric", value);
       return this;
     }
+    public APIRequestGet requestTextOptimizationsTextExtractionOptInStatusField () {
+      return this.requestTextOptimizationsTextExtractionOptInStatusField(true);
+    }
+    public APIRequestGet requestTextOptimizationsTextExtractionOptInStatusField (boolean value) {
+      this.requestField("text_optimizations_text_extraction_opt_in_status", value);
+      return this;
+    }
+    public APIRequestGet requestTextVariationsStickyOptInStatusField () {
+      return this.requestTextVariationsStickyOptInStatusField(true);
+    }
+    public APIRequestGet requestTextVariationsStickyOptInStatusField (boolean value) {
+      this.requestField("text_variations_sticky_opt_in_status", value);
+      return this;
+    }
     public APIRequestGet requestTotalCouponSydDismissalsField () {
       return this.requestTotalCouponSydDismissalsField(true);
     }
@@ -1231,6 +1271,7 @@ public class AdsUserSettings extends APINode {
     this.mCarouselToVideoOptInStatus = instance.mCarouselToVideoOptInStatus;
     this.mConnectedSourcesCatalogOptInStatus = instance.mConnectedSourcesCatalogOptInStatus;
     this.mDefaultCreationMode = instance.mDefaultCreationMode;
+    this.mEnhanceCtaTextExtractionOptInStatus = instance.mEnhanceCtaTextExtractionOptInStatus;
     this.mExportFormatDefault = instance.mExportFormatDefault;
     this.mFocusModeDefault = instance.mFocusModeDefault;
     this.mGenAiAlphaTestStatus = instance.mGenAiAlphaTestStatus;
@@ -1265,6 +1306,8 @@ public class AdsUserSettings extends APINode {
     this.mStaticAdProductExtensionsOptIn = instance.mStaticAdProductExtensionsOptIn;
     this.mStickySettingAfterDefaultOn = instance.mStickySettingAfterDefaultOn;
     this.mSydCampaignTrendsMetric = instance.mSydCampaignTrendsMetric;
+    this.mTextOptimizationsTextExtractionOptInStatus = instance.mTextOptimizationsTextExtractionOptInStatus;
+    this.mTextVariationsStickyOptInStatus = instance.mTextVariationsStickyOptInStatus;
     this.mTotalCouponSydDismissals = instance.mTotalCouponSydDismissals;
     this.mTotalCouponUpsellDismissals = instance.mTotalCouponUpsellDismissals;
     this.mUrlPrefillRemovalTimestamp = instance.mUrlPrefillRemovalTimestamp;

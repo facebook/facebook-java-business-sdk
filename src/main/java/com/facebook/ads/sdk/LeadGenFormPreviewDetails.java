@@ -45,6 +45,10 @@ public class LeadGenFormPreviewDetails extends APINode {
   private String mCallBusinessText = null;
   @SerializedName("call_to_action_title")
   private String mCallToActionTitle = null;
+  @SerializedName("chat_on_messenger_text")
+  private String mChatOnMessengerText = null;
+  @SerializedName("chat_on_whatsapp_text")
+  private String mChatOnWhatsappText = null;
   @SerializedName("contact_information_text")
   private String mContactInformationText = null;
   @SerializedName("creatives_overview_default_text")
@@ -126,9 +130,8 @@ public class LeadGenFormPreviewDetails extends APINode {
   public static LeadGenFormPreviewDetails loadJSON(String json, APIContext context, String header) {
     LeadGenFormPreviewDetails leadGenFormPreviewDetails = getGson().fromJson(json, LeadGenFormPreviewDetails.class);
     if (context.isDebug()) {
-      JsonParser parser = new JsonParser();
-      JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(leadGenFormPreviewDetails.toString());
+      JsonElement o1 = JsonParser.parseString(json);
+      JsonElement o2 = JsonParser.parseString(leadGenFormPreviewDetails.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -148,10 +151,9 @@ public class LeadGenFormPreviewDetails extends APINode {
     APINodeList<LeadGenFormPreviewDetails> leadGenFormPreviewDetailss = new APINodeList<LeadGenFormPreviewDetails>(request, json, header);
     JsonArray arr;
     JsonObject obj;
-    JsonParser parser = new JsonParser();
     Exception exception = null;
     try{
-      JsonElement result = parser.parse(json);
+      JsonElement result = JsonParser.parseString(json);
       if (result.isJsonArray()) {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
@@ -281,6 +283,24 @@ public class LeadGenFormPreviewDetails extends APINode {
 
   public LeadGenFormPreviewDetails setFieldCallToActionTitle(String value) {
     this.mCallToActionTitle = value;
+    return this;
+  }
+
+  public String getFieldChatOnMessengerText() {
+    return mChatOnMessengerText;
+  }
+
+  public LeadGenFormPreviewDetails setFieldChatOnMessengerText(String value) {
+    this.mChatOnMessengerText = value;
+    return this;
+  }
+
+  public String getFieldChatOnWhatsappText() {
+    return mChatOnWhatsappText;
+  }
+
+  public LeadGenFormPreviewDetails setFieldChatOnWhatsappText(String value) {
+    this.mChatOnWhatsappText = value;
     return this;
   }
 
@@ -618,6 +638,8 @@ public class LeadGenFormPreviewDetails extends APINode {
   public LeadGenFormPreviewDetails copyFrom(LeadGenFormPreviewDetails instance) {
     this.mCallBusinessText = instance.mCallBusinessText;
     this.mCallToActionTitle = instance.mCallToActionTitle;
+    this.mChatOnMessengerText = instance.mChatOnMessengerText;
+    this.mChatOnWhatsappText = instance.mChatOnWhatsappText;
     this.mContactInformationText = instance.mContactInformationText;
     this.mCreativesOverviewDefaultText = instance.mCreativesOverviewDefaultText;
     this.mDataPrivacyPolicySettingDescription = instance.mDataPrivacyPolicySettingDescription;

@@ -111,6 +111,8 @@ public class AdCreativeFeaturesSpec extends APINode {
   private AdCreativeFeatureDetails mMediaOrder = null;
   @SerializedName("media_type_automation")
   private AdCreativeFeatureDetails mMediaTypeAutomation = null;
+  @SerializedName("multi_photo_to_video")
+  private AdCreativeFeatureDetails mMultiPhotoToVideo = null;
   @SerializedName("pac_relaxation")
   private AdCreativeFeatureDetails mPacRelaxation = null;
   @SerializedName("product_extensions")
@@ -150,9 +152,8 @@ public class AdCreativeFeaturesSpec extends APINode {
   public static AdCreativeFeaturesSpec loadJSON(String json, APIContext context, String header) {
     AdCreativeFeaturesSpec adCreativeFeaturesSpec = getGson().fromJson(json, AdCreativeFeaturesSpec.class);
     if (context.isDebug()) {
-      JsonParser parser = new JsonParser();
-      JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(adCreativeFeaturesSpec.toString());
+      JsonElement o1 = JsonParser.parseString(json);
+      JsonElement o2 = JsonParser.parseString(adCreativeFeaturesSpec.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -172,10 +173,9 @@ public class AdCreativeFeaturesSpec extends APINode {
     APINodeList<AdCreativeFeaturesSpec> adCreativeFeaturesSpecs = new APINodeList<AdCreativeFeaturesSpec>(request, json, header);
     JsonArray arr;
     JsonObject obj;
-    JsonParser parser = new JsonParser();
     Exception exception = null;
     try{
-      JsonElement result = parser.parse(json);
+      JsonElement result = JsonParser.parseString(json);
       if (result.isJsonArray()) {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
@@ -780,6 +780,20 @@ public class AdCreativeFeaturesSpec extends APINode {
     this.mMediaTypeAutomation = AdCreativeFeatureDetails.getGson().fromJson(value, type);
     return this;
   }
+  public AdCreativeFeatureDetails getFieldMultiPhotoToVideo() {
+    return mMultiPhotoToVideo;
+  }
+
+  public AdCreativeFeaturesSpec setFieldMultiPhotoToVideo(AdCreativeFeatureDetails value) {
+    this.mMultiPhotoToVideo = value;
+    return this;
+  }
+
+  public AdCreativeFeaturesSpec setFieldMultiPhotoToVideo(String value) {
+    Type type = new TypeToken<AdCreativeFeatureDetails>(){}.getType();
+    this.mMultiPhotoToVideo = AdCreativeFeatureDetails.getGson().fromJson(value, type);
+    return this;
+  }
   public AdCreativeFeatureDetails getFieldPacRelaxation() {
     return mPacRelaxation;
   }
@@ -1028,6 +1042,7 @@ public class AdCreativeFeaturesSpec extends APINode {
     this.mMediaLiquidityAnimatedImage = instance.mMediaLiquidityAnimatedImage;
     this.mMediaOrder = instance.mMediaOrder;
     this.mMediaTypeAutomation = instance.mMediaTypeAutomation;
+    this.mMultiPhotoToVideo = instance.mMultiPhotoToVideo;
     this.mPacRelaxation = instance.mPacRelaxation;
     this.mProductExtensions = instance.mProductExtensions;
     this.mProductMetadataAutomation = instance.mProductMetadataAutomation;

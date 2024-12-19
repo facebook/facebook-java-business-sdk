@@ -43,6 +43,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class CatalogWebsiteOnboardingSettings extends APINode {
   @SerializedName("id")
   private String mId = null;
+  @SerializedName("quality_band")
+  private String mQualityBand = null;
   @SerializedName("status")
   private String mStatus = null;
   protected static Gson gson = null;
@@ -115,9 +117,8 @@ public class CatalogWebsiteOnboardingSettings extends APINode {
   public static CatalogWebsiteOnboardingSettings loadJSON(String json, APIContext context, String header) {
     CatalogWebsiteOnboardingSettings catalogWebsiteOnboardingSettings = getGson().fromJson(json, CatalogWebsiteOnboardingSettings.class);
     if (context.isDebug()) {
-      JsonParser parser = new JsonParser();
-      JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(catalogWebsiteOnboardingSettings.toString());
+      JsonElement o1 = JsonParser.parseString(json);
+      JsonElement o2 = JsonParser.parseString(catalogWebsiteOnboardingSettings.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -137,10 +138,9 @@ public class CatalogWebsiteOnboardingSettings extends APINode {
     APINodeList<CatalogWebsiteOnboardingSettings> catalogWebsiteOnboardingSettingss = new APINodeList<CatalogWebsiteOnboardingSettings>(request, json, header);
     JsonArray arr;
     JsonObject obj;
-    JsonParser parser = new JsonParser();
     Exception exception = null;
     try{
-      JsonElement result = parser.parse(json);
+      JsonElement result = JsonParser.parseString(json);
       if (result.isJsonArray()) {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
@@ -263,6 +263,10 @@ public class CatalogWebsiteOnboardingSettings extends APINode {
     return mId;
   }
 
+  public String getFieldQualityBand() {
+    return mQualityBand;
+  }
+
   public String getFieldStatus() {
     return mStatus;
   }
@@ -281,6 +285,7 @@ public class CatalogWebsiteOnboardingSettings extends APINode {
 
     public static final String[] FIELDS = {
       "id",
+      "quality_band",
       "status",
     };
 
@@ -381,6 +386,13 @@ public class CatalogWebsiteOnboardingSettings extends APINode {
       this.requestField("id", value);
       return this;
     }
+    public APIRequestGet requestQualityBandField () {
+      return this.requestQualityBandField(true);
+    }
+    public APIRequestGet requestQualityBandField (boolean value) {
+      this.requestField("quality_band", value);
+      return this;
+    }
     public APIRequestGet requestStatusField () {
       return this.requestStatusField(true);
     }
@@ -406,6 +418,7 @@ public class CatalogWebsiteOnboardingSettings extends APINode {
 
   public CatalogWebsiteOnboardingSettings copyFrom(CatalogWebsiteOnboardingSettings instance) {
     this.mId = instance.mId;
+    this.mQualityBand = instance.mQualityBand;
     this.mStatus = instance.mStatus;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

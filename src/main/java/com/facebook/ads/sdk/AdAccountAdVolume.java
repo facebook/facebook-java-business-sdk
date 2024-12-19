@@ -76,9 +76,8 @@ public class AdAccountAdVolume extends APINode {
   public static AdAccountAdVolume loadJSON(String json, APIContext context, String header) {
     AdAccountAdVolume adAccountAdVolume = getGson().fromJson(json, AdAccountAdVolume.class);
     if (context.isDebug()) {
-      JsonParser parser = new JsonParser();
-      JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(adAccountAdVolume.toString());
+      JsonElement o1 = JsonParser.parseString(json);
+      JsonElement o2 = JsonParser.parseString(adAccountAdVolume.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -98,10 +97,9 @@ public class AdAccountAdVolume extends APINode {
     APINodeList<AdAccountAdVolume> adAccountAdVolumes = new APINodeList<AdAccountAdVolume>(request, json, header);
     JsonArray arr;
     JsonObject obj;
-    JsonParser parser = new JsonParser();
     Exception exception = null;
     try{
-      JsonElement result = parser.parse(json);
+      JsonElement result = JsonParser.parseString(json);
       if (result.isJsonArray()) {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
@@ -339,6 +337,8 @@ public class AdAccountAdVolume extends APINode {
       VALUE_AAC_CREATION_PACKAGE("AAC_CREATION_PACKAGE"),
       @SerializedName("AB_TEST")
       VALUE_AB_TEST("AB_TEST"),
+      @SerializedName("ACCOUNT_ERROR")
+      VALUE_ACCOUNT_ERROR("ACCOUNT_ERROR"),
       @SerializedName("ACCOUNT_NEEDS_CREDIT")
       VALUE_ACCOUNT_NEEDS_CREDIT("ACCOUNT_NEEDS_CREDIT"),
       @SerializedName("ACCOUNT_SPEND_LIMIT")
@@ -349,6 +349,8 @@ public class AdAccountAdVolume extends APINode {
       VALUE_ACO_TOGGLE("ACO_TOGGLE"),
       @SerializedName("ADS_REPORTING")
       VALUE_ADS_REPORTING("ADS_REPORTING"),
+      @SerializedName("ADS_STATUS")
+      VALUE_ADS_STATUS("ADS_STATUS"),
       @SerializedName("ADVANCED_CAMPAIGN_BUDGET")
       VALUE_ADVANCED_CAMPAIGN_BUDGET("ADVANCED_CAMPAIGN_BUDGET"),
       @SerializedName("ADVANTAGE_APP_CAMPAIGN")
@@ -587,6 +589,8 @@ public class AdAccountAdVolume extends APINode {
       VALUE_HISTORICAL_BENCHMARK("HISTORICAL_BENCHMARK"),
       @SerializedName("IG_MULTI_ADS")
       VALUE_IG_MULTI_ADS("IG_MULTI_ADS"),
+      @SerializedName("IG_SURFACES_MANUAL_PLACEMENTS")
+      VALUE_IG_SURFACES_MANUAL_PLACEMENTS("IG_SURFACES_MANUAL_PLACEMENTS"),
       @SerializedName("LANDING_PAGE_VIEW")
       VALUE_LANDING_PAGE_VIEW("LANDING_PAGE_VIEW"),
       @SerializedName("LANDING_PAGE_VIEW_OPTIMIZATION_GOAL")
@@ -733,6 +737,8 @@ public class AdAccountAdVolume extends APINode {
       VALUE_SIGNALS_GROWTH_CAPI_V2("SIGNALS_GROWTH_CAPI_V2"),
       @SerializedName("SIMILAR_ADVERTISER_BUDGET_RECOMMENDATION")
       VALUE_SIMILAR_ADVERTISER_BUDGET_RECOMMENDATION("SIMILAR_ADVERTISER_BUDGET_RECOMMENDATION"),
+      @SerializedName("SITE_EXTENSIONS_DUPLICATION")
+      VALUE_SITE_EXTENSIONS_DUPLICATION("SITE_EXTENSIONS_DUPLICATION"),
       @SerializedName("SIX_PLUS_MANUAL_PLACEMENTS")
       VALUE_SIX_PLUS_MANUAL_PLACEMENTS("SIX_PLUS_MANUAL_PLACEMENTS"),
       @SerializedName("SIX_PLUS_PLACEMENTS_DUPLICATION")

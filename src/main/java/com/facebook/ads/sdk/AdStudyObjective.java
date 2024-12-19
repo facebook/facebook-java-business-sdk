@@ -123,9 +123,8 @@ public class AdStudyObjective extends APINode {
   public static AdStudyObjective loadJSON(String json, APIContext context, String header) {
     AdStudyObjective adStudyObjective = getGson().fromJson(json, AdStudyObjective.class);
     if (context.isDebug()) {
-      JsonParser parser = new JsonParser();
-      JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(adStudyObjective.toString());
+      JsonElement o1 = JsonParser.parseString(json);
+      JsonElement o2 = JsonParser.parseString(adStudyObjective.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -145,10 +144,9 @@ public class AdStudyObjective extends APINode {
     APINodeList<AdStudyObjective> adStudyObjectives = new APINodeList<AdStudyObjective>(request, json, header);
     JsonArray arr;
     JsonObject obj;
-    JsonParser parser = new JsonParser();
     Exception exception = null;
     try{
-      JsonElement result = parser.parse(json);
+      JsonElement result = JsonParser.parseString(json);
       if (result.isJsonArray()) {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
@@ -756,6 +754,7 @@ public class AdStudyObjective extends APINode {
       "deauth_callback_url",
       "default_share_mode",
       "description",
+      "enigma_config",
       "financial_id",
       "gdpv4_chrome_custom_tabs_enabled",
       "gdpv4_enabled",
@@ -1209,6 +1208,13 @@ public class AdStudyObjective extends APINode {
     }
     public APIRequestGetApplications requestDescriptionField (boolean value) {
       this.requestField("description", value);
+      return this;
+    }
+    public APIRequestGetApplications requestEnigmaConfigField () {
+      return this.requestEnigmaConfigField(true);
+    }
+    public APIRequestGetApplications requestEnigmaConfigField (boolean value) {
+      this.requestField("enigma_config", value);
       return this;
     }
     public APIRequestGetApplications requestFinancialIdField () {

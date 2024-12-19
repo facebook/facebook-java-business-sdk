@@ -191,6 +191,8 @@ public class ProductItem extends APINode {
   private List<String> mTags = null;
   @SerializedName("url")
   private String mUrl = null;
+  @SerializedName("vendor_id")
+  private String mVendorId = null;
   @SerializedName("video_fetch_status")
   private EnumVideoFetchStatus mVideoFetchStatus = null;
   @SerializedName("visibility")
@@ -267,9 +269,8 @@ public class ProductItem extends APINode {
   public static ProductItem loadJSON(String json, APIContext context, String header) {
     ProductItem productItem = getGson().fromJson(json, ProductItem.class);
     if (context.isDebug()) {
-      JsonParser parser = new JsonParser();
-      JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(productItem.toString());
+      JsonElement o1 = JsonParser.parseString(json);
+      JsonElement o2 = JsonParser.parseString(productItem.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -289,10 +290,9 @@ public class ProductItem extends APINode {
     APINodeList<ProductItem> productItems = new APINodeList<ProductItem>(request, json, header);
     JsonArray arr;
     JsonObject obj;
-    JsonParser parser = new JsonParser();
     Exception exception = null;
     try{
-      JsonElement result = parser.parse(json);
+      JsonElement result = JsonParser.parseString(json);
       if (result.isJsonArray()) {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
@@ -745,6 +745,10 @@ public class ProductItem extends APINode {
 
   public String getFieldUrl() {
     return mUrl;
+  }
+
+  public String getFieldVendorId() {
+    return mVendorId;
   }
 
   public EnumVideoFetchStatus getFieldVideoFetchStatus() {
@@ -1549,6 +1553,7 @@ public class ProductItem extends APINode {
       "start_date",
       "tags",
       "url",
+      "vendor_id",
       "video_fetch_status",
       "visibility",
       "wa_compliance_category",
@@ -2200,6 +2205,13 @@ public class ProductItem extends APINode {
     }
     public APIRequestGet requestUrlField (boolean value) {
       this.requestField("url", value);
+      return this;
+    }
+    public APIRequestGet requestVendorIdField () {
+      return this.requestVendorIdField(true);
+    }
+    public APIRequestGet requestVendorIdField (boolean value) {
+      this.requestField("vendor_id", value);
       return this;
     }
     public APIRequestGet requestVideoFetchStatusField () {
@@ -3771,6 +3783,20 @@ public class ProductItem extends APINode {
       VALUE_ITEM_STALE_OUT_OF_STOCK("ITEM_STALE_OUT_OF_STOCK"),
       @SerializedName("MARKETPLACE_DISABLED_BY_USER")
       VALUE_MARKETPLACE_DISABLED_BY_USER("MARKETPLACE_DISABLED_BY_USER"),
+      @SerializedName("MARKETPLACE_PARTNER_LISTING_LIMIT_EXCEEDED")
+      VALUE_MARKETPLACE_PARTNER_LISTING_LIMIT_EXCEEDED("MARKETPLACE_PARTNER_LISTING_LIMIT_EXCEEDED"),
+      @SerializedName("MARKETPLACE_PARTNER_NOT_LOCAL_ITEM")
+      VALUE_MARKETPLACE_PARTNER_NOT_LOCAL_ITEM("MARKETPLACE_PARTNER_NOT_LOCAL_ITEM"),
+      @SerializedName("MARKETPLACE_PARTNER_NOT_SHIPPED_ITEM")
+      VALUE_MARKETPLACE_PARTNER_NOT_SHIPPED_ITEM("MARKETPLACE_PARTNER_NOT_SHIPPED_ITEM"),
+      @SerializedName("MARKETPLACE_PARTNER_POLICY_VIOLATION")
+      VALUE_MARKETPLACE_PARTNER_POLICY_VIOLATION("MARKETPLACE_PARTNER_POLICY_VIOLATION"),
+      @SerializedName("MARKETPLACE_PARTNER_RULE_LISTING_LIMIT_EXCEEDED")
+      VALUE_MARKETPLACE_PARTNER_RULE_LISTING_LIMIT_EXCEEDED("MARKETPLACE_PARTNER_RULE_LISTING_LIMIT_EXCEEDED"),
+      @SerializedName("MARKETPLACE_PARTNER_SELLER_BANNED")
+      VALUE_MARKETPLACE_PARTNER_SELLER_BANNED("MARKETPLACE_PARTNER_SELLER_BANNED"),
+      @SerializedName("MARKETPLACE_PARTNER_SELLER_NOT_VALID")
+      VALUE_MARKETPLACE_PARTNER_SELLER_NOT_VALID("MARKETPLACE_PARTNER_SELLER_NOT_VALID"),
       @SerializedName("MINI_SHOPS_DISABLED_BY_USER")
       VALUE_MINI_SHOPS_DISABLED_BY_USER("MINI_SHOPS_DISABLED_BY_USER"),
       @SerializedName("MISSING_CHECKOUT")
@@ -4568,6 +4594,7 @@ public class ProductItem extends APINode {
     this.mStartDate = instance.mStartDate;
     this.mTags = instance.mTags;
     this.mUrl = instance.mUrl;
+    this.mVendorId = instance.mVendorId;
     this.mVideoFetchStatus = instance.mVideoFetchStatus;
     this.mVisibility = instance.mVisibility;
     this.mWaComplianceCategory = instance.mWaComplianceCategory;

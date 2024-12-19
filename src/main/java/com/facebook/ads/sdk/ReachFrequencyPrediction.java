@@ -173,6 +173,8 @@ public class ReachFrequencyPrediction extends APINode {
   private String mOptimizationGoalName = null;
   @SerializedName("pause_periods")
   private List<Object> mPausePeriods = null;
+  @SerializedName("percent_reach_at_target_frequency")
+  private Long mPercentReachAtTargetFrequency = null;
   @SerializedName("placement_breakdown")
   private ReachFrequencyEstimatesPlacementBreakdown mPlacementBreakdown = null;
   @SerializedName("placement_breakdown_map")
@@ -283,9 +285,8 @@ public class ReachFrequencyPrediction extends APINode {
   public static ReachFrequencyPrediction loadJSON(String json, APIContext context, String header) {
     ReachFrequencyPrediction reachFrequencyPrediction = getGson().fromJson(json, ReachFrequencyPrediction.class);
     if (context.isDebug()) {
-      JsonParser parser = new JsonParser();
-      JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(reachFrequencyPrediction.toString());
+      JsonElement o1 = JsonParser.parseString(json);
+      JsonElement o2 = JsonParser.parseString(reachFrequencyPrediction.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -305,10 +306,9 @@ public class ReachFrequencyPrediction extends APINode {
     APINodeList<ReachFrequencyPrediction> reachFrequencyPredictions = new APINodeList<ReachFrequencyPrediction>(request, json, header);
     JsonArray arr;
     JsonObject obj;
-    JsonParser parser = new JsonParser();
     Exception exception = null;
     try{
-      JsonElement result = parser.parse(json);
+      JsonElement result = JsonParser.parseString(json);
       if (result.isJsonArray()) {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
@@ -691,6 +691,10 @@ public class ReachFrequencyPrediction extends APINode {
     return mPausePeriods;
   }
 
+  public Long getFieldPercentReachAtTargetFrequency() {
+    return mPercentReachAtTargetFrequency;
+  }
+
   public ReachFrequencyEstimatesPlacementBreakdown getFieldPlacementBreakdown() {
     return mPlacementBreakdown;
   }
@@ -850,6 +854,7 @@ public class ReachFrequencyPrediction extends APINode {
       "optimization_goal",
       "optimization_goal_name",
       "pause_periods",
+      "percent_reach_at_target_frequency",
       "placement_breakdown",
       "placement_breakdown_map",
       "plan_name",
@@ -1424,6 +1429,13 @@ public class ReachFrequencyPrediction extends APINode {
       this.requestField("pause_periods", value);
       return this;
     }
+    public APIRequestGet requestPercentReachAtTargetFrequencyField () {
+      return this.requestPercentReachAtTargetFrequencyField(true);
+    }
+    public APIRequestGet requestPercentReachAtTargetFrequencyField (boolean value) {
+      this.requestField("percent_reach_at_target_frequency", value);
+      return this;
+    }
     public APIRequestGet requestPlacementBreakdownField () {
       return this.requestPlacementBreakdownField(true);
     }
@@ -1740,6 +1752,7 @@ public class ReachFrequencyPrediction extends APINode {
     this.mOptimizationGoal = instance.mOptimizationGoal;
     this.mOptimizationGoalName = instance.mOptimizationGoalName;
     this.mPausePeriods = instance.mPausePeriods;
+    this.mPercentReachAtTargetFrequency = instance.mPercentReachAtTargetFrequency;
     this.mPlacementBreakdown = instance.mPlacementBreakdown;
     this.mPlacementBreakdownMap = instance.mPlacementBreakdownMap;
     this.mPlanName = instance.mPlanName;

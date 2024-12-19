@@ -47,6 +47,8 @@ public class IGComment extends APINode {
   private Boolean mHidden = null;
   @SerializedName("id")
   private String mId = null;
+  @SerializedName("legacy_instagram_comment_id")
+  private String mLegacyInstagramCommentId = null;
   @SerializedName("like_count")
   private Long mLikeCount = null;
   @SerializedName("media")
@@ -131,9 +133,8 @@ public class IGComment extends APINode {
   public static IGComment loadJSON(String json, APIContext context, String header) {
     IGComment igComment = getGson().fromJson(json, IGComment.class);
     if (context.isDebug()) {
-      JsonParser parser = new JsonParser();
-      JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(igComment.toString());
+      JsonElement o1 = JsonParser.parseString(json);
+      JsonElement o2 = JsonParser.parseString(igComment.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -153,10 +154,9 @@ public class IGComment extends APINode {
     APINodeList<IGComment> igComments = new APINodeList<IGComment>(request, json, header);
     JsonArray arr;
     JsonObject obj;
-    JsonParser parser = new JsonParser();
     Exception exception = null;
     try{
-      JsonElement result = parser.parse(json);
+      JsonElement result = JsonParser.parseString(json);
       if (result.isJsonArray()) {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
@@ -303,6 +303,10 @@ public class IGComment extends APINode {
     return mId;
   }
 
+  public String getFieldLegacyInstagramCommentId() {
+    return mLegacyInstagramCommentId;
+  }
+
   public Long getFieldLikeCount() {
     return mLikeCount;
   }
@@ -353,6 +357,7 @@ public class IGComment extends APINode {
       "from",
       "hidden",
       "id",
+      "legacy_instagram_comment_id",
       "like_count",
       "media",
       "parent_id",
@@ -471,6 +476,13 @@ public class IGComment extends APINode {
     }
     public APIRequestGetReplies requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetReplies requestLegacyInstagramCommentIdField () {
+      return this.requestLegacyInstagramCommentIdField(true);
+    }
+    public APIRequestGetReplies requestLegacyInstagramCommentIdField (boolean value) {
+      this.requestField("legacy_instagram_comment_id", value);
       return this;
     }
     public APIRequestGetReplies requestLikeCountField () {
@@ -754,6 +766,7 @@ public class IGComment extends APINode {
       "from",
       "hidden",
       "id",
+      "legacy_instagram_comment_id",
       "like_count",
       "media",
       "parent_id",
@@ -872,6 +885,13 @@ public class IGComment extends APINode {
     }
     public APIRequestGet requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGet requestLegacyInstagramCommentIdField () {
+      return this.requestLegacyInstagramCommentIdField(true);
+    }
+    public APIRequestGet requestLegacyInstagramCommentIdField (boolean value) {
+      this.requestField("legacy_instagram_comment_id", value);
       return this;
     }
     public APIRequestGet requestLikeCountField () {
@@ -1058,6 +1078,7 @@ public class IGComment extends APINode {
     this.mFrom = instance.mFrom;
     this.mHidden = instance.mHidden;
     this.mId = instance.mId;
+    this.mLegacyInstagramCommentId = instance.mLegacyInstagramCommentId;
     this.mLikeCount = instance.mLikeCount;
     this.mMedia = instance.mMedia;
     this.mParentId = instance.mParentId;

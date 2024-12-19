@@ -115,9 +115,8 @@ public class AdMonetizationProperty extends APINode {
   public static AdMonetizationProperty loadJSON(String json, APIContext context, String header) {
     AdMonetizationProperty adMonetizationProperty = getGson().fromJson(json, AdMonetizationProperty.class);
     if (context.isDebug()) {
-      JsonParser parser = new JsonParser();
-      JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(adMonetizationProperty.toString());
+      JsonElement o1 = JsonParser.parseString(json);
+      JsonElement o2 = JsonParser.parseString(adMonetizationProperty.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -137,10 +136,9 @@ public class AdMonetizationProperty extends APINode {
     APINodeList<AdMonetizationProperty> adMonetizationPropertys = new APINodeList<AdMonetizationProperty>(request, json, header);
     JsonArray arr;
     JsonObject obj;
-    JsonParser parser = new JsonParser();
     Exception exception = null;
     try{
-      JsonElement result = parser.parse(json);
+      JsonElement result = JsonParser.parseString(json);
       if (result.isJsonArray()) {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
@@ -299,6 +297,7 @@ public class AdMonetizationProperty extends APINode {
       "metrics",
       "ordering_column",
       "ordering_type",
+      "should_include_until",
       "since",
       "until",
     };
@@ -423,6 +422,15 @@ public class AdMonetizationProperty extends APINode {
     }
     public APIRequestGetAdNetworkAnalytics setOrderingType (String orderingType) {
       this.setParam("ordering_type", orderingType);
+      return this;
+    }
+
+    public APIRequestGetAdNetworkAnalytics setShouldIncludeUntil (Boolean shouldIncludeUntil) {
+      this.setParam("should_include_until", shouldIncludeUntil);
+      return this;
+    }
+    public APIRequestGetAdNetworkAnalytics setShouldIncludeUntil (String shouldIncludeUntil) {
+      this.setParam("should_include_until", shouldIncludeUntil);
       return this;
     }
 
@@ -695,7 +703,6 @@ public class AdMonetizationProperty extends APINode {
 
     public static final String[] FIELDS = {
       "data",
-      "error",
       "omitted_results",
       "query_id",
       "results",
@@ -806,13 +813,6 @@ public class AdMonetizationProperty extends APINode {
     }
     public APIRequestGetAdNetworkAnalyticsResults requestDataField (boolean value) {
       this.requestField("data", value);
-      return this;
-    }
-    public APIRequestGetAdNetworkAnalyticsResults requestErrorField () {
-      return this.requestErrorField(true);
-    }
-    public APIRequestGetAdNetworkAnalyticsResults requestErrorField (boolean value) {
-      this.requestField("error", value);
       return this;
     }
     public APIRequestGetAdNetworkAnalyticsResults requestOmittedResultsField () {

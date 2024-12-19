@@ -51,6 +51,8 @@ public class AdCreativeLinkData extends APINode {
   private String mAttachmentStyle = null;
   @SerializedName("automated_product_tags")
   private Boolean mAutomatedProductTags = null;
+  @SerializedName("boosted_product_set_id")
+  private String mBoostedProductSetId = null;
   @SerializedName("branded_content_shared_to_sponsor_status")
   private String mBrandedContentSharedToSponsorStatus = null;
   @SerializedName("branded_content_sponsor_page_id")
@@ -122,9 +124,8 @@ public class AdCreativeLinkData extends APINode {
   public static AdCreativeLinkData loadJSON(String json, APIContext context, String header) {
     AdCreativeLinkData adCreativeLinkData = getGson().fromJson(json, AdCreativeLinkData.class);
     if (context.isDebug()) {
-      JsonParser parser = new JsonParser();
-      JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(adCreativeLinkData.toString());
+      JsonElement o1 = JsonParser.parseString(json);
+      JsonElement o2 = JsonParser.parseString(adCreativeLinkData.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -144,10 +145,9 @@ public class AdCreativeLinkData extends APINode {
     APINodeList<AdCreativeLinkData> adCreativeLinkDatas = new APINodeList<AdCreativeLinkData>(request, json, header);
     JsonArray arr;
     JsonObject obj;
-    JsonParser parser = new JsonParser();
     Exception exception = null;
     try{
-      JsonElement result = parser.parse(json);
+      JsonElement result = JsonParser.parseString(json);
       if (result.isJsonArray()) {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
@@ -309,6 +309,15 @@ public class AdCreativeLinkData extends APINode {
 
   public AdCreativeLinkData setFieldAutomatedProductTags(Boolean value) {
     this.mAutomatedProductTags = value;
+    return this;
+  }
+
+  public String getFieldBoostedProductSetId() {
+    return mBoostedProductSetId;
+  }
+
+  public AdCreativeLinkData setFieldBoostedProductSetId(String value) {
+    this.mBoostedProductSetId = value;
     return this;
   }
 
@@ -676,6 +685,7 @@ public class AdCreativeLinkData extends APINode {
     this.mAppLinkSpec = instance.mAppLinkSpec;
     this.mAttachmentStyle = instance.mAttachmentStyle;
     this.mAutomatedProductTags = instance.mAutomatedProductTags;
+    this.mBoostedProductSetId = instance.mBoostedProductSetId;
     this.mBrandedContentSharedToSponsorStatus = instance.mBrandedContentSharedToSponsorStatus;
     this.mBrandedContentSponsorPageId = instance.mBrandedContentSponsorPageId;
     this.mCallToAction = instance.mCallToAction;

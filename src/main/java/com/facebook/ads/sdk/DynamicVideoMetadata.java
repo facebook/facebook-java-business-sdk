@@ -119,9 +119,8 @@ public class DynamicVideoMetadata extends APINode {
   public static DynamicVideoMetadata loadJSON(String json, APIContext context, String header) {
     DynamicVideoMetadata dynamicVideoMetadata = getGson().fromJson(json, DynamicVideoMetadata.class);
     if (context.isDebug()) {
-      JsonParser parser = new JsonParser();
-      JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(dynamicVideoMetadata.toString());
+      JsonElement o1 = JsonParser.parseString(json);
+      JsonElement o2 = JsonParser.parseString(dynamicVideoMetadata.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -141,10 +140,9 @@ public class DynamicVideoMetadata extends APINode {
     APINodeList<DynamicVideoMetadata> dynamicVideoMetadatas = new APINodeList<DynamicVideoMetadata>(request, json, header);
     JsonArray arr;
     JsonObject obj;
-    JsonParser parser = new JsonParser();
     Exception exception = null;
     try{
-      JsonElement result = parser.parse(json);
+      JsonElement result = JsonParser.parseString(json);
       if (result.isJsonArray()) {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();

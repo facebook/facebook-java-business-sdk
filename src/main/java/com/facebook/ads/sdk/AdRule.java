@@ -133,9 +133,8 @@ public class AdRule extends APINode {
   public static AdRule loadJSON(String json, APIContext context, String header) {
     AdRule adRule = getGson().fromJson(json, AdRule.class);
     if (context.isDebug()) {
-      JsonParser parser = new JsonParser();
-      JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(adRule.toString());
+      JsonElement o1 = JsonParser.parseString(json);
+      JsonElement o2 = JsonParser.parseString(adRule.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -155,10 +154,9 @@ public class AdRule extends APINode {
     APINodeList<AdRule> adRules = new APINodeList<AdRule>(request, json, header);
     JsonArray arr;
     JsonObject obj;
-    JsonParser parser = new JsonParser();
     Exception exception = null;
     try{
-      JsonElement result = parser.parse(json);
+      JsonElement result = JsonParser.parseString(json);
       if (result.isJsonArray()) {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
@@ -1260,6 +1258,8 @@ public class AdRule extends APINode {
       VALUE_AM_SYD_RESOLUTION_FLOW_MODAL("AM_SYD_RESOLUTION_FLOW_MODAL"),
       @SerializedName("AM_TABLE_DELIVERY_COLUMN_POPOVER")
       VALUE_AM_TABLE_DELIVERY_COLUMN_POPOVER("AM_TABLE_DELIVERY_COLUMN_POPOVER"),
+      @SerializedName("AM_TABLE_MORE_RULES_DROPDOWN")
+      VALUE_AM_TABLE_MORE_RULES_DROPDOWN("AM_TABLE_MORE_RULES_DROPDOWN"),
       @SerializedName("AM_TABLE_TOGGLE_POPOVER")
       VALUE_AM_TABLE_TOGGLE_POPOVER("AM_TABLE_TOGGLE_POPOVER"),
       @SerializedName("AM_TOOLBAR_CREATE_RULE_DROPDOWN")

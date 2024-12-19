@@ -43,8 +43,6 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class AdNetworkAnalyticsAsyncQueryResult extends APINode {
   @SerializedName("data")
   private Object mData = null;
-  @SerializedName("error")
-  private Object mError = null;
   @SerializedName("omitted_results")
   private List<Object> mOmittedResults = null;
   @SerializedName("query_id")
@@ -64,9 +62,8 @@ public class AdNetworkAnalyticsAsyncQueryResult extends APINode {
   public static AdNetworkAnalyticsAsyncQueryResult loadJSON(String json, APIContext context, String header) {
     AdNetworkAnalyticsAsyncQueryResult adNetworkAnalyticsAsyncQueryResult = getGson().fromJson(json, AdNetworkAnalyticsAsyncQueryResult.class);
     if (context.isDebug()) {
-      JsonParser parser = new JsonParser();
-      JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(adNetworkAnalyticsAsyncQueryResult.toString());
+      JsonElement o1 = JsonParser.parseString(json);
+      JsonElement o2 = JsonParser.parseString(adNetworkAnalyticsAsyncQueryResult.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -86,10 +83,9 @@ public class AdNetworkAnalyticsAsyncQueryResult extends APINode {
     APINodeList<AdNetworkAnalyticsAsyncQueryResult> adNetworkAnalyticsAsyncQueryResults = new APINodeList<AdNetworkAnalyticsAsyncQueryResult>(request, json, header);
     JsonArray arr;
     JsonObject obj;
-    JsonParser parser = new JsonParser();
     Exception exception = null;
     try{
-      JsonElement result = parser.parse(json);
+      JsonElement result = JsonParser.parseString(json);
       if (result.isJsonArray()) {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
@@ -213,15 +209,6 @@ public class AdNetworkAnalyticsAsyncQueryResult extends APINode {
     return this;
   }
 
-  public Object getFieldError() {
-    return mError;
-  }
-
-  public AdNetworkAnalyticsAsyncQueryResult setFieldError(Object value) {
-    this.mError = value;
-    return this;
-  }
-
   public List<Object> getFieldOmittedResults() {
     return mOmittedResults;
   }
@@ -276,7 +263,6 @@ public class AdNetworkAnalyticsAsyncQueryResult extends APINode {
 
   public AdNetworkAnalyticsAsyncQueryResult copyFrom(AdNetworkAnalyticsAsyncQueryResult instance) {
     this.mData = instance.mData;
-    this.mError = instance.mError;
     this.mOmittedResults = instance.mOmittedResults;
     this.mQueryId = instance.mQueryId;
     this.mResults = instance.mResults;

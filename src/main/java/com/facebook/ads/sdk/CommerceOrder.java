@@ -141,9 +141,8 @@ public class CommerceOrder extends APINode {
   public static CommerceOrder loadJSON(String json, APIContext context, String header) {
     CommerceOrder commerceOrder = getGson().fromJson(json, CommerceOrder.class);
     if (context.isDebug()) {
-      JsonParser parser = new JsonParser();
-      JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(commerceOrder.toString());
+      JsonElement o1 = JsonParser.parseString(json);
+      JsonElement o2 = JsonParser.parseString(commerceOrder.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -163,10 +162,9 @@ public class CommerceOrder extends APINode {
     APINodeList<CommerceOrder> commerceOrders = new APINodeList<CommerceOrder>(request, json, header);
     JsonArray arr;
     JsonObject obj;
-    JsonParser parser = new JsonParser();
     Exception exception = null;
     try{
-      JsonElement result = parser.parse(json);
+      JsonElement result = JsonParser.parseString(json);
       if (result.isJsonArray()) {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
@@ -338,10 +336,6 @@ public class CommerceOrder extends APINode {
 
   public APIRequestCreateUpdateShipment createUpdateShipment() {
     return new APIRequestCreateUpdateShipment(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestCreateUpdate createUpdate() {
-    return new APIRequestCreateUpdate(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGet get() {
@@ -2274,157 +2268,6 @@ public class CommerceOrder extends APINode {
 
     @Override
     public APIRequestCreateUpdateShipment requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
-  public static class APIRequestCreateUpdate extends APIRequest<CommerceOrder> {
-
-    CommerceOrder lastResponse = null;
-    @Override
-    public CommerceOrder getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "cancel_amount",
-      "fulfill_amount",
-      "merchant_order_reference",
-      "refund_amount",
-      "total_amount",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public CommerceOrder parseResponse(String response, String header) throws APIException {
-      return CommerceOrder.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public CommerceOrder execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public CommerceOrder execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<CommerceOrder> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<CommerceOrder> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, CommerceOrder>() {
-           public CommerceOrder apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateUpdate.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         },
-         MoreExecutors.directExecutor()
-      );
-    };
-
-    public APIRequestCreateUpdate(String nodeId, APIContext context) {
-      super(context, nodeId, "/updates", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateUpdate setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateUpdate setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateUpdate setCancelAmount (Map<String, String> cancelAmount) {
-      this.setParam("cancel_amount", cancelAmount);
-      return this;
-    }
-    public APIRequestCreateUpdate setCancelAmount (String cancelAmount) {
-      this.setParam("cancel_amount", cancelAmount);
-      return this;
-    }
-
-    public APIRequestCreateUpdate setFulfillAmount (Map<String, String> fulfillAmount) {
-      this.setParam("fulfill_amount", fulfillAmount);
-      return this;
-    }
-    public APIRequestCreateUpdate setFulfillAmount (String fulfillAmount) {
-      this.setParam("fulfill_amount", fulfillAmount);
-      return this;
-    }
-
-    public APIRequestCreateUpdate setMerchantOrderReference (String merchantOrderReference) {
-      this.setParam("merchant_order_reference", merchantOrderReference);
-      return this;
-    }
-
-    public APIRequestCreateUpdate setRefundAmount (Map<String, String> refundAmount) {
-      this.setParam("refund_amount", refundAmount);
-      return this;
-    }
-    public APIRequestCreateUpdate setRefundAmount (String refundAmount) {
-      this.setParam("refund_amount", refundAmount);
-      return this;
-    }
-
-    public APIRequestCreateUpdate setTotalAmount (Map<String, String> totalAmount) {
-      this.setParam("total_amount", totalAmount);
-      return this;
-    }
-    public APIRequestCreateUpdate setTotalAmount (String totalAmount) {
-      this.setParam("total_amount", totalAmount);
-      return this;
-    }
-
-    public APIRequestCreateUpdate requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateUpdate requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateUpdate requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateUpdate requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateUpdate requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateUpdate requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }

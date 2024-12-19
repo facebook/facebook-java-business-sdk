@@ -41,12 +41,6 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class AnalyticsQueryResult extends APINode {
-  @SerializedName("columns")
-  private Object mColumns = null;
-  @SerializedName("datapoints")
-  private List<Object> mDatapoints = null;
-  @SerializedName("error")
-  private Object mError = null;
   @SerializedName("query_id")
   private String mQueryId = null;
   @SerializedName("status")
@@ -62,9 +56,8 @@ public class AnalyticsQueryResult extends APINode {
   public static AnalyticsQueryResult loadJSON(String json, APIContext context, String header) {
     AnalyticsQueryResult analyticsQueryResult = getGson().fromJson(json, AnalyticsQueryResult.class);
     if (context.isDebug()) {
-      JsonParser parser = new JsonParser();
-      JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(analyticsQueryResult.toString());
+      JsonElement o1 = JsonParser.parseString(json);
+      JsonElement o2 = JsonParser.parseString(analyticsQueryResult.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -84,10 +77,9 @@ public class AnalyticsQueryResult extends APINode {
     APINodeList<AnalyticsQueryResult> analyticsQueryResults = new APINodeList<AnalyticsQueryResult>(request, json, header);
     JsonArray arr;
     JsonObject obj;
-    JsonParser parser = new JsonParser();
     Exception exception = null;
     try{
-      JsonElement result = parser.parse(json);
+      JsonElement result = JsonParser.parseString(json);
       if (result.isJsonArray()) {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
@@ -202,33 +194,6 @@ public class AnalyticsQueryResult extends APINode {
   }
 
 
-  public Object getFieldColumns() {
-    return mColumns;
-  }
-
-  public AnalyticsQueryResult setFieldColumns(Object value) {
-    this.mColumns = value;
-    return this;
-  }
-
-  public List<Object> getFieldDatapoints() {
-    return mDatapoints;
-  }
-
-  public AnalyticsQueryResult setFieldDatapoints(List<Object> value) {
-    this.mDatapoints = value;
-    return this;
-  }
-
-  public Object getFieldError() {
-    return mError;
-  }
-
-  public AnalyticsQueryResult setFieldError(Object value) {
-    this.mError = value;
-    return this;
-  }
-
   public String getFieldQueryId() {
     return mQueryId;
   }
@@ -264,9 +229,6 @@ public class AnalyticsQueryResult extends APINode {
   }
 
   public AnalyticsQueryResult copyFrom(AnalyticsQueryResult instance) {
-    this.mColumns = instance.mColumns;
-    this.mDatapoints = instance.mDatapoints;
-    this.mError = instance.mError;
     this.mQueryId = instance.mQueryId;
     this.mStatus = instance.mStatus;
     this.context = instance.context;

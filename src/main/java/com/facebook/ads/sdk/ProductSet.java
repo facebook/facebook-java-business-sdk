@@ -131,9 +131,8 @@ public class ProductSet extends APINode {
   public static ProductSet loadJSON(String json, APIContext context, String header) {
     ProductSet productSet = getGson().fromJson(json, ProductSet.class);
     if (context.isDebug()) {
-      JsonParser parser = new JsonParser();
-      JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(productSet.toString());
+      JsonElement o1 = JsonParser.parseString(json);
+      JsonElement o2 = JsonParser.parseString(productSet.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -153,10 +152,9 @@ public class ProductSet extends APINode {
     APINodeList<ProductSet> productSets = new APINodeList<ProductSet>(request, json, header);
     JsonArray arr;
     JsonObject obj;
-    JsonParser parser = new JsonParser();
     Exception exception = null;
     try{
-      JsonElement result = parser.parse(json);
+      JsonElement result = JsonParser.parseString(json);
       if (result.isJsonArray()) {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
@@ -746,6 +744,12 @@ public class ProductSet extends APINode {
       "applinks",
       "category_specific_fields",
       "currency",
+      "custom_label_0",
+      "custom_label_1",
+      "custom_label_2",
+      "custom_number_0",
+      "custom_number_1",
+      "custom_number_2",
       "description",
       "destination_id",
       "id",
@@ -896,6 +900,48 @@ public class ProductSet extends APINode {
     }
     public APIRequestGetDestinations requestCurrencyField (boolean value) {
       this.requestField("currency", value);
+      return this;
+    }
+    public APIRequestGetDestinations requestCustomLabel0Field () {
+      return this.requestCustomLabel0Field(true);
+    }
+    public APIRequestGetDestinations requestCustomLabel0Field (boolean value) {
+      this.requestField("custom_label_0", value);
+      return this;
+    }
+    public APIRequestGetDestinations requestCustomLabel1Field () {
+      return this.requestCustomLabel1Field(true);
+    }
+    public APIRequestGetDestinations requestCustomLabel1Field (boolean value) {
+      this.requestField("custom_label_1", value);
+      return this;
+    }
+    public APIRequestGetDestinations requestCustomLabel2Field () {
+      return this.requestCustomLabel2Field(true);
+    }
+    public APIRequestGetDestinations requestCustomLabel2Field (boolean value) {
+      this.requestField("custom_label_2", value);
+      return this;
+    }
+    public APIRequestGetDestinations requestCustomNumber0Field () {
+      return this.requestCustomNumber0Field(true);
+    }
+    public APIRequestGetDestinations requestCustomNumber0Field (boolean value) {
+      this.requestField("custom_number_0", value);
+      return this;
+    }
+    public APIRequestGetDestinations requestCustomNumber1Field () {
+      return this.requestCustomNumber1Field(true);
+    }
+    public APIRequestGetDestinations requestCustomNumber1Field (boolean value) {
+      this.requestField("custom_number_1", value);
+      return this;
+    }
+    public APIRequestGetDestinations requestCustomNumber2Field () {
+      return this.requestCustomNumber2Field(true);
+    }
+    public APIRequestGetDestinations requestCustomNumber2Field (boolean value) {
+      this.requestField("custom_number_2", value);
       return this;
     }
     public APIRequestGetDestinations requestDescriptionField () {
@@ -2516,6 +2562,7 @@ public class ProductSet extends APINode {
       "start_date",
       "tags",
       "url",
+      "vendor_id",
       "video_fetch_status",
       "visibility",
       "wa_compliance_category",
@@ -3170,6 +3217,13 @@ public class ProductSet extends APINode {
     }
     public APIRequestGetProducts requestUrlField (boolean value) {
       this.requestField("url", value);
+      return this;
+    }
+    public APIRequestGetProducts requestVendorIdField () {
+      return this.requestVendorIdField(true);
+    }
+    public APIRequestGetProducts requestVendorIdField (boolean value) {
+      this.requestField("vendor_id", value);
       return this;
     }
     public APIRequestGetProducts requestVideoFetchStatusField () {

@@ -241,9 +241,8 @@ public class AdSet extends APINode {
   public static AdSet loadJSON(String json, APIContext context, String header) {
     AdSet adSet = getGson().fromJson(json, AdSet.class);
     if (context.isDebug()) {
-      JsonParser parser = new JsonParser();
-      JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(adSet.toString());
+      JsonElement o1 = JsonParser.parseString(json);
+      JsonElement o2 = JsonParser.parseString(adSet.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -263,10 +262,9 @@ public class AdSet extends APINode {
     APINodeList<AdSet> adSets = new APINodeList<AdSet>(request, json, header);
     JsonArray arr;
     JsonObject obj;
-    JsonParser parser = new JsonParser();
     Exception exception = null;
     try{
-      JsonElement result = parser.parse(json);
+      JsonElement result = JsonParser.parseString(json);
       if (result.isJsonArray()) {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
@@ -1642,6 +1640,7 @@ public class AdSet extends APINode {
     public static final String[] FIELDS = {
       "account_id",
       "actor_id",
+      "ad_disclaimer_spec",
       "adlabels",
       "applink_treatment",
       "asset_feed_spec",
@@ -1696,6 +1695,7 @@ public class AdSet extends APINode {
       "platform_customizations",
       "playable_asset_id",
       "portrait_customizations",
+      "product_data",
       "product_set_id",
       "recommender_settings",
       "source_instagram_media_id",
@@ -1812,6 +1812,13 @@ public class AdSet extends APINode {
     }
     public APIRequestGetAdCreatives requestActorIdField (boolean value) {
       this.requestField("actor_id", value);
+      return this;
+    }
+    public APIRequestGetAdCreatives requestAdDisclaimerSpecField () {
+      return this.requestAdDisclaimerSpecField(true);
+    }
+    public APIRequestGetAdCreatives requestAdDisclaimerSpecField (boolean value) {
+      this.requestField("ad_disclaimer_spec", value);
       return this;
     }
     public APIRequestGetAdCreatives requestAdlabelsField () {
@@ -2190,6 +2197,13 @@ public class AdSet extends APINode {
     }
     public APIRequestGetAdCreatives requestPortraitCustomizationsField (boolean value) {
       this.requestField("portrait_customizations", value);
+      return this;
+    }
+    public APIRequestGetAdCreatives requestProductDataField () {
+      return this.requestProductDataField(true);
+    }
+    public APIRequestGetAdCreatives requestProductDataField (boolean value) {
+      this.requestField("product_data", value);
       return this;
     }
     public APIRequestGetAdCreatives requestProductSetIdField () {
@@ -7245,6 +7259,8 @@ public class AdSet extends APINode {
       VALUE_1("1"),
       @SerializedName("2")
       VALUE_2("2"),
+      @SerializedName("3")
+      VALUE_3("3"),
       ;
 
       private String value;

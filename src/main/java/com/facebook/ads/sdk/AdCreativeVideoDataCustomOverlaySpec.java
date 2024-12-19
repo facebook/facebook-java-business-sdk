@@ -72,9 +72,8 @@ public class AdCreativeVideoDataCustomOverlaySpec extends APINode {
   public static AdCreativeVideoDataCustomOverlaySpec loadJSON(String json, APIContext context, String header) {
     AdCreativeVideoDataCustomOverlaySpec adCreativeVideoDataCustomOverlaySpec = getGson().fromJson(json, AdCreativeVideoDataCustomOverlaySpec.class);
     if (context.isDebug()) {
-      JsonParser parser = new JsonParser();
-      JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(adCreativeVideoDataCustomOverlaySpec.toString());
+      JsonElement o1 = JsonParser.parseString(json);
+      JsonElement o2 = JsonParser.parseString(adCreativeVideoDataCustomOverlaySpec.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -94,10 +93,9 @@ public class AdCreativeVideoDataCustomOverlaySpec extends APINode {
     APINodeList<AdCreativeVideoDataCustomOverlaySpec> adCreativeVideoDataCustomOverlaySpecs = new APINodeList<AdCreativeVideoDataCustomOverlaySpec>(request, json, header);
     JsonArray arr;
     JsonObject obj;
-    JsonParser parser = new JsonParser();
     Exception exception = null;
     try{
-      JsonElement result = parser.parse(json);
+      JsonElement result = JsonParser.parseString(json);
       if (result.isJsonArray()) {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();

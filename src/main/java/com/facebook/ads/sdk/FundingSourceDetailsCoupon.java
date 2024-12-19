@@ -57,6 +57,8 @@ public class FundingSourceDetailsCoupon extends APINode {
   private Long mOriginalAmount = null;
   @SerializedName("original_display_amount")
   private String mOriginalDisplayAmount = null;
+  @SerializedName("start_date")
+  private String mStartDate = null;
   protected static Gson gson = null;
 
   public FundingSourceDetailsCoupon() {
@@ -68,9 +70,8 @@ public class FundingSourceDetailsCoupon extends APINode {
   public static FundingSourceDetailsCoupon loadJSON(String json, APIContext context, String header) {
     FundingSourceDetailsCoupon fundingSourceDetailsCoupon = getGson().fromJson(json, FundingSourceDetailsCoupon.class);
     if (context.isDebug()) {
-      JsonParser parser = new JsonParser();
-      JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(fundingSourceDetailsCoupon.toString());
+      JsonElement o1 = JsonParser.parseString(json);
+      JsonElement o2 = JsonParser.parseString(fundingSourceDetailsCoupon.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -90,10 +91,9 @@ public class FundingSourceDetailsCoupon extends APINode {
     APINodeList<FundingSourceDetailsCoupon> fundingSourceDetailsCoupons = new APINodeList<FundingSourceDetailsCoupon>(request, json, header);
     JsonArray arr;
     JsonObject obj;
-    JsonParser parser = new JsonParser();
     Exception exception = null;
     try{
-      JsonElement result = parser.parse(json);
+      JsonElement result = JsonParser.parseString(json);
       if (result.isJsonArray()) {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
@@ -280,6 +280,15 @@ public class FundingSourceDetailsCoupon extends APINode {
     return this;
   }
 
+  public String getFieldStartDate() {
+    return mStartDate;
+  }
+
+  public FundingSourceDetailsCoupon setFieldStartDate(String value) {
+    this.mStartDate = value;
+    return this;
+  }
+
 
 
 
@@ -305,6 +314,7 @@ public class FundingSourceDetailsCoupon extends APINode {
     this.mExpiration = instance.mExpiration;
     this.mOriginalAmount = instance.mOriginalAmount;
     this.mOriginalDisplayAmount = instance.mOriginalDisplayAmount;
+    this.mStartDate = instance.mStartDate;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
