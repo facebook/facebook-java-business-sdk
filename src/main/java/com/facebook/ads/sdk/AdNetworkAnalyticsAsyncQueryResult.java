@@ -43,8 +43,6 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class AdNetworkAnalyticsAsyncQueryResult extends APINode {
   @SerializedName("data")
   private Object mData = null;
-  @SerializedName("error")
-  private Object mError = null;
   @SerializedName("omitted_results")
   private List<Object> mOmittedResults = null;
   @SerializedName("query_id")
@@ -213,15 +211,6 @@ public class AdNetworkAnalyticsAsyncQueryResult extends APINode {
     return this;
   }
 
-  public Object getFieldError() {
-    return mError;
-  }
-
-  public AdNetworkAnalyticsAsyncQueryResult setFieldError(Object value) {
-    this.mError = value;
-    return this;
-  }
-
   public List<Object> getFieldOmittedResults() {
     return mOmittedResults;
   }
@@ -276,7 +265,6 @@ public class AdNetworkAnalyticsAsyncQueryResult extends APINode {
 
   public AdNetworkAnalyticsAsyncQueryResult copyFrom(AdNetworkAnalyticsAsyncQueryResult instance) {
     this.mData = instance.mData;
-    this.mError = instance.mError;
     this.mOmittedResults = instance.mOmittedResults;
     this.mQueryId = instance.mQueryId;
     this.mResults = instance.mResults;

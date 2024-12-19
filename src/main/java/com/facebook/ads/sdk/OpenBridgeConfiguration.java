@@ -43,12 +43,20 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class OpenBridgeConfiguration extends APINode {
   @SerializedName("active")
   private Boolean mActive = null;
+  @SerializedName("cloud_provider")
+  private String mCloudProvider = null;
+  @SerializedName("cloud_region")
+  private String mCloudRegion = null;
+  @SerializedName("destination_id")
+  private String mDestinationId = null;
   @SerializedName("endpoint")
   private String mEndpoint = null;
   @SerializedName("fallback_domain")
   private String mFallbackDomain = null;
   @SerializedName("fallback_domain_enabled")
   private Boolean mFallbackDomainEnabled = null;
+  @SerializedName("first_party_domain")
+  private String mFirstPartyDomain = null;
   @SerializedName("host_business_id")
   private String mHostBusinessId = null;
   @SerializedName("host_external_id")
@@ -57,6 +65,12 @@ public class OpenBridgeConfiguration extends APINode {
   private String mId = null;
   @SerializedName("instance_id")
   private String mInstanceId = null;
+  @SerializedName("instance_version")
+  private String mInstanceVersion = null;
+  @SerializedName("is_sgw_instance")
+  private Boolean mIsSgwInstance = null;
+  @SerializedName("partner_name")
+  private String mPartnerName = null;
   @SerializedName("pixel_id")
   private String mPixelId = null;
   protected static Gson gson = null;
@@ -285,6 +299,18 @@ public class OpenBridgeConfiguration extends APINode {
     return mActive;
   }
 
+  public String getFieldCloudProvider() {
+    return mCloudProvider;
+  }
+
+  public String getFieldCloudRegion() {
+    return mCloudRegion;
+  }
+
+  public String getFieldDestinationId() {
+    return mDestinationId;
+  }
+
   public String getFieldEndpoint() {
     return mEndpoint;
   }
@@ -295,6 +321,10 @@ public class OpenBridgeConfiguration extends APINode {
 
   public Boolean getFieldFallbackDomainEnabled() {
     return mFallbackDomainEnabled;
+  }
+
+  public String getFieldFirstPartyDomain() {
+    return mFirstPartyDomain;
   }
 
   public String getFieldHostBusinessId() {
@@ -311,6 +341,18 @@ public class OpenBridgeConfiguration extends APINode {
 
   public String getFieldInstanceId() {
     return mInstanceId;
+  }
+
+  public String getFieldInstanceVersion() {
+    return mInstanceVersion;
+  }
+
+  public Boolean getFieldIsSgwInstance() {
+    return mIsSgwInstance;
+  }
+
+  public String getFieldPartnerName() {
+    return mPartnerName;
   }
 
   public String getFieldPixelId() {
@@ -436,13 +478,20 @@ public class OpenBridgeConfiguration extends APINode {
 
     public static final String[] FIELDS = {
       "active",
+      "cloud_provider",
+      "cloud_region",
+      "destination_id",
       "endpoint",
       "fallback_domain",
       "fallback_domain_enabled",
+      "first_party_domain",
       "host_business_id",
       "host_external_id",
       "id",
       "instance_id",
+      "instance_version",
+      "is_sgw_instance",
+      "partner_name",
       "pixel_id",
     };
 
@@ -543,6 +592,27 @@ public class OpenBridgeConfiguration extends APINode {
       this.requestField("active", value);
       return this;
     }
+    public APIRequestGet requestCloudProviderField () {
+      return this.requestCloudProviderField(true);
+    }
+    public APIRequestGet requestCloudProviderField (boolean value) {
+      this.requestField("cloud_provider", value);
+      return this;
+    }
+    public APIRequestGet requestCloudRegionField () {
+      return this.requestCloudRegionField(true);
+    }
+    public APIRequestGet requestCloudRegionField (boolean value) {
+      this.requestField("cloud_region", value);
+      return this;
+    }
+    public APIRequestGet requestDestinationIdField () {
+      return this.requestDestinationIdField(true);
+    }
+    public APIRequestGet requestDestinationIdField (boolean value) {
+      this.requestField("destination_id", value);
+      return this;
+    }
     public APIRequestGet requestEndpointField () {
       return this.requestEndpointField(true);
     }
@@ -562,6 +632,13 @@ public class OpenBridgeConfiguration extends APINode {
     }
     public APIRequestGet requestFallbackDomainEnabledField (boolean value) {
       this.requestField("fallback_domain_enabled", value);
+      return this;
+    }
+    public APIRequestGet requestFirstPartyDomainField () {
+      return this.requestFirstPartyDomainField(true);
+    }
+    public APIRequestGet requestFirstPartyDomainField (boolean value) {
+      this.requestField("first_party_domain", value);
       return this;
     }
     public APIRequestGet requestHostBusinessIdField () {
@@ -592,6 +669,27 @@ public class OpenBridgeConfiguration extends APINode {
       this.requestField("instance_id", value);
       return this;
     }
+    public APIRequestGet requestInstanceVersionField () {
+      return this.requestInstanceVersionField(true);
+    }
+    public APIRequestGet requestInstanceVersionField (boolean value) {
+      this.requestField("instance_version", value);
+      return this;
+    }
+    public APIRequestGet requestIsSgwInstanceField () {
+      return this.requestIsSgwInstanceField(true);
+    }
+    public APIRequestGet requestIsSgwInstanceField (boolean value) {
+      this.requestField("is_sgw_instance", value);
+      return this;
+    }
+    public APIRequestGet requestPartnerNameField () {
+      return this.requestPartnerNameField(true);
+    }
+    public APIRequestGet requestPartnerNameField (boolean value) {
+      this.requestField("partner_name", value);
+      return this;
+    }
     public APIRequestGet requestPixelIdField () {
       return this.requestPixelIdField(true);
     }
@@ -610,12 +708,19 @@ public class OpenBridgeConfiguration extends APINode {
     }
     public static final String[] PARAMS = {
       "active",
+      "cloud_provider",
+      "cloud_region",
+      "destination_id",
       "endpoint",
       "fallback_domain",
       "fallback_domain_enabled",
+      "first_party_domain",
       "host_business_id",
       "host_external_id",
       "instance_id",
+      "instance_version",
+      "is_sgw_instance",
+      "partner_name",
     };
 
     public static final String[] FIELDS = {
@@ -684,6 +789,21 @@ public class OpenBridgeConfiguration extends APINode {
       return this;
     }
 
+    public APIRequestUpdate setCloudProvider (String cloudProvider) {
+      this.setParam("cloud_provider", cloudProvider);
+      return this;
+    }
+
+    public APIRequestUpdate setCloudRegion (String cloudRegion) {
+      this.setParam("cloud_region", cloudRegion);
+      return this;
+    }
+
+    public APIRequestUpdate setDestinationId (String destinationId) {
+      this.setParam("destination_id", destinationId);
+      return this;
+    }
+
     public APIRequestUpdate setEndpoint (String endpoint) {
       this.setParam("endpoint", endpoint);
       return this;
@@ -703,6 +823,11 @@ public class OpenBridgeConfiguration extends APINode {
       return this;
     }
 
+    public APIRequestUpdate setFirstPartyDomain (String firstPartyDomain) {
+      this.setParam("first_party_domain", firstPartyDomain);
+      return this;
+    }
+
     public APIRequestUpdate setHostBusinessId (Long hostBusinessId) {
       this.setParam("host_business_id", hostBusinessId);
       return this;
@@ -719,6 +844,25 @@ public class OpenBridgeConfiguration extends APINode {
 
     public APIRequestUpdate setInstanceId (String instanceId) {
       this.setParam("instance_id", instanceId);
+      return this;
+    }
+
+    public APIRequestUpdate setInstanceVersion (String instanceVersion) {
+      this.setParam("instance_version", instanceVersion);
+      return this;
+    }
+
+    public APIRequestUpdate setIsSgwInstance (Boolean isSgwInstance) {
+      this.setParam("is_sgw_instance", isSgwInstance);
+      return this;
+    }
+    public APIRequestUpdate setIsSgwInstance (String isSgwInstance) {
+      this.setParam("is_sgw_instance", isSgwInstance);
+      return this;
+    }
+
+    public APIRequestUpdate setPartnerName (String partnerName) {
+      this.setParam("partner_name", partnerName);
       return this;
     }
 
@@ -776,13 +920,20 @@ public class OpenBridgeConfiguration extends APINode {
 
   public OpenBridgeConfiguration copyFrom(OpenBridgeConfiguration instance) {
     this.mActive = instance.mActive;
+    this.mCloudProvider = instance.mCloudProvider;
+    this.mCloudRegion = instance.mCloudRegion;
+    this.mDestinationId = instance.mDestinationId;
     this.mEndpoint = instance.mEndpoint;
     this.mFallbackDomain = instance.mFallbackDomain;
     this.mFallbackDomainEnabled = instance.mFallbackDomainEnabled;
+    this.mFirstPartyDomain = instance.mFirstPartyDomain;
     this.mHostBusinessId = instance.mHostBusinessId;
     this.mHostExternalId = instance.mHostExternalId;
     this.mId = instance.mId;
     this.mInstanceId = instance.mInstanceId;
+    this.mInstanceVersion = instance.mInstanceVersion;
+    this.mIsSgwInstance = instance.mIsSgwInstance;
+    this.mPartnerName = instance.mPartnerName;
     this.mPixelId = instance.mPixelId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

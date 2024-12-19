@@ -48,7 +48,7 @@ public class WhatsAppBusinessAccount extends APINode {
   @SerializedName("auth_international_rate_eligibility")
   private Object mAuthInternationalRateEligibility = null;
   @SerializedName("business_verification_status")
-  private String mBusinessVerificationStatus = null;
+  private EnumBusinessVerificationStatus mBusinessVerificationStatus = null;
   @SerializedName("country")
   private String mCountry = null;
   @SerializedName("creation_time")
@@ -475,7 +475,7 @@ public class WhatsAppBusinessAccount extends APINode {
     return mAuthInternationalRateEligibility;
   }
 
-  public String getFieldBusinessVerificationStatus() {
+  public EnumBusinessVerificationStatus getFieldBusinessVerificationStatus() {
     return mBusinessVerificationStatus;
   }
 
@@ -2793,6 +2793,7 @@ public class WhatsAppBusinessAccount extends APINode {
       "library_template_name",
       "message_send_ttl_seconds",
       "name",
+      "parameter_format",
       "sub_category",
     };
 
@@ -2937,6 +2938,15 @@ public class WhatsAppBusinessAccount extends APINode {
 
     public APIRequestCreateMessageTemplate setName (String name) {
       this.setParam("name", name);
+      return this;
+    }
+
+    public APIRequestCreateMessageTemplate setParameterFormat (WhatsAppBusinessAccount.EnumParameterFormat parameterFormat) {
+      this.setParam("parameter_format", parameterFormat);
+      return this;
+    }
+    public APIRequestCreateMessageTemplate setParameterFormat (String parameterFormat) {
+      this.setParam("parameter_format", parameterFormat);
       return this;
     }
 
@@ -6203,6 +6213,41 @@ public class WhatsAppBusinessAccount extends APINode {
 
   }
 
+  public static enum EnumBusinessVerificationStatus {
+      @SerializedName("expired")
+      VALUE_EXPIRED("expired"),
+      @SerializedName("failed")
+      VALUE_FAILED("failed"),
+      @SerializedName("ineligible")
+      VALUE_INELIGIBLE("ineligible"),
+      @SerializedName("not_verified")
+      VALUE_NOT_VERIFIED("not_verified"),
+      @SerializedName("pending")
+      VALUE_PENDING("pending"),
+      @SerializedName("pending_need_more_info")
+      VALUE_PENDING_NEED_MORE_INFO("pending_need_more_info"),
+      @SerializedName("pending_submission")
+      VALUE_PENDING_SUBMISSION("pending_submission"),
+      @SerializedName("rejected")
+      VALUE_REJECTED("rejected"),
+      @SerializedName("revoked")
+      VALUE_REVOKED("revoked"),
+      @SerializedName("verified")
+      VALUE_VERIFIED("verified"),
+      ;
+
+      private String value;
+
+      private EnumBusinessVerificationStatus(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
   public static enum EnumTasks {
       @SerializedName("DEVELOP")
       VALUE_DEVELOP("DEVELOP"),
@@ -6267,6 +6312,25 @@ public class WhatsAppBusinessAccount extends APINode {
       private String value;
 
       private EnumDisplayFormat(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumParameterFormat {
+      @SerializedName("NAMED")
+      VALUE_NAMED("NAMED"),
+      @SerializedName("POSITIONAL")
+      VALUE_POSITIONAL("POSITIONAL"),
+      ;
+
+      private String value;
+
+      private EnumParameterFormat(String value) {
         this.value = value;
       }
 
@@ -6415,16 +6479,12 @@ public class WhatsAppBusinessAccount extends APINode {
       VALUE_AUTHENTICATION_INTERNATIONAL("AUTHENTICATION_INTERNATIONAL"),
       @SerializedName("MARKETING")
       VALUE_MARKETING("MARKETING"),
-      @SerializedName("MARKETING_OPTIMIZED_DELIVERY")
-      VALUE_MARKETING_OPTIMIZED_DELIVERY("MARKETING_OPTIMIZED_DELIVERY"),
+      @SerializedName("MARKETING_LITE")
+      VALUE_MARKETING_LITE("MARKETING_LITE"),
       @SerializedName("SERVICE")
       VALUE_SERVICE("SERVICE"),
-      @SerializedName("UNKNOWN")
-      VALUE_UNKNOWN("UNKNOWN"),
       @SerializedName("UTILITY")
       VALUE_UTILITY("UTILITY"),
-      @SerializedName("UTILITY_FIXED_TEMPLATE")
-      VALUE_UTILITY_FIXED_TEMPLATE("UTILITY_FIXED_TEMPLATE"),
       ;
 
       private String value;

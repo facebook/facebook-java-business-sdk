@@ -47,6 +47,8 @@ public class IGComment extends APINode {
   private Boolean mHidden = null;
   @SerializedName("id")
   private String mId = null;
+  @SerializedName("legacy_instagram_comment_id")
+  private String mLegacyInstagramCommentId = null;
   @SerializedName("like_count")
   private Long mLikeCount = null;
   @SerializedName("media")
@@ -303,6 +305,10 @@ public class IGComment extends APINode {
     return mId;
   }
 
+  public String getFieldLegacyInstagramCommentId() {
+    return mLegacyInstagramCommentId;
+  }
+
   public Long getFieldLikeCount() {
     return mLikeCount;
   }
@@ -353,6 +359,7 @@ public class IGComment extends APINode {
       "from",
       "hidden",
       "id",
+      "legacy_instagram_comment_id",
       "like_count",
       "media",
       "parent_id",
@@ -471,6 +478,13 @@ public class IGComment extends APINode {
     }
     public APIRequestGetReplies requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetReplies requestLegacyInstagramCommentIdField () {
+      return this.requestLegacyInstagramCommentIdField(true);
+    }
+    public APIRequestGetReplies requestLegacyInstagramCommentIdField (boolean value) {
+      this.requestField("legacy_instagram_comment_id", value);
       return this;
     }
     public APIRequestGetReplies requestLikeCountField () {
@@ -754,6 +768,7 @@ public class IGComment extends APINode {
       "from",
       "hidden",
       "id",
+      "legacy_instagram_comment_id",
       "like_count",
       "media",
       "parent_id",
@@ -872,6 +887,13 @@ public class IGComment extends APINode {
     }
     public APIRequestGet requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGet requestLegacyInstagramCommentIdField () {
+      return this.requestLegacyInstagramCommentIdField(true);
+    }
+    public APIRequestGet requestLegacyInstagramCommentIdField (boolean value) {
+      this.requestField("legacy_instagram_comment_id", value);
       return this;
     }
     public APIRequestGet requestLikeCountField () {
@@ -1058,6 +1080,7 @@ public class IGComment extends APINode {
     this.mFrom = instance.mFrom;
     this.mHidden = instance.mHidden;
     this.mId = instance.mId;
+    this.mLegacyInstagramCommentId = instance.mLegacyInstagramCommentId;
     this.mLikeCount = instance.mLikeCount;
     this.mMedia = instance.mMedia;
     this.mParentId = instance.mParentId;

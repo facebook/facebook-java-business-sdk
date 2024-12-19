@@ -111,6 +111,8 @@ public class AdCreativeFeaturesSpec extends APINode {
   private AdCreativeFeatureDetails mMediaOrder = null;
   @SerializedName("media_type_automation")
   private AdCreativeFeatureDetails mMediaTypeAutomation = null;
+  @SerializedName("multi_photo_to_video")
+  private AdCreativeFeatureDetails mMultiPhotoToVideo = null;
   @SerializedName("pac_relaxation")
   private AdCreativeFeatureDetails mPacRelaxation = null;
   @SerializedName("product_extensions")
@@ -780,6 +782,20 @@ public class AdCreativeFeaturesSpec extends APINode {
     this.mMediaTypeAutomation = AdCreativeFeatureDetails.getGson().fromJson(value, type);
     return this;
   }
+  public AdCreativeFeatureDetails getFieldMultiPhotoToVideo() {
+    return mMultiPhotoToVideo;
+  }
+
+  public AdCreativeFeaturesSpec setFieldMultiPhotoToVideo(AdCreativeFeatureDetails value) {
+    this.mMultiPhotoToVideo = value;
+    return this;
+  }
+
+  public AdCreativeFeaturesSpec setFieldMultiPhotoToVideo(String value) {
+    Type type = new TypeToken<AdCreativeFeatureDetails>(){}.getType();
+    this.mMultiPhotoToVideo = AdCreativeFeatureDetails.getGson().fromJson(value, type);
+    return this;
+  }
   public AdCreativeFeatureDetails getFieldPacRelaxation() {
     return mPacRelaxation;
   }
@@ -1028,6 +1044,7 @@ public class AdCreativeFeaturesSpec extends APINode {
     this.mMediaLiquidityAnimatedImage = instance.mMediaLiquidityAnimatedImage;
     this.mMediaOrder = instance.mMediaOrder;
     this.mMediaTypeAutomation = instance.mMediaTypeAutomation;
+    this.mMultiPhotoToVideo = instance.mMultiPhotoToVideo;
     this.mPacRelaxation = instance.mPacRelaxation;
     this.mProductExtensions = instance.mProductExtensions;
     this.mProductMetadataAutomation = instance.mProductMetadataAutomation;

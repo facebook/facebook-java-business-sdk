@@ -2446,6 +2446,8 @@ public class Event extends APINode {
   public static enum EnumOnlineEventFormat {
       @SerializedName("fb_live")
       VALUE_FB_LIVE("fb_live"),
+      @SerializedName("horizon_world")
+      VALUE_HORIZON_WORLD("horizon_world"),
       @SerializedName("messenger_room")
       VALUE_MESSENGER_ROOM("messenger_room"),
       @SerializedName("none")

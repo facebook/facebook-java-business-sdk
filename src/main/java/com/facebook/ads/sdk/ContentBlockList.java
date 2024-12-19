@@ -329,6 +329,7 @@ public class ContentBlockList extends APINode {
       "end_advertiser",
       "end_advertiser_name",
       "existing_customers",
+      "expired_funding_source_details",
       "extended_credit_invoice_group",
       "failed_delivery_checks",
       "fb_entity",
@@ -657,6 +658,13 @@ public class ContentBlockList extends APINode {
     }
     public APIRequestGetAppliedAdAccounts requestExistingCustomersField (boolean value) {
       this.requestField("existing_customers", value);
+      return this;
+    }
+    public APIRequestGetAppliedAdAccounts requestExpiredFundingSourceDetailsField () {
+      return this.requestExpiredFundingSourceDetailsField(true);
+    }
+    public APIRequestGetAppliedAdAccounts requestExpiredFundingSourceDetailsField (boolean value) {
+      this.requestField("expired_funding_source_details", value);
       return this;
     }
     public APIRequestGetAppliedAdAccounts requestExtendedCreditInvoiceGroupField () {
@@ -1079,6 +1087,7 @@ public class ContentBlockList extends APINode {
       "ig_id",
       "is_comment_enabled",
       "is_shared_to_feed",
+      "legacy_instagram_media_id",
       "like_count",
       "media_product_type",
       "media_type",
@@ -1235,6 +1244,13 @@ public class ContentBlockList extends APINode {
     }
     public APIRequestGetInstagramContent requestIsSharedToFeedField (boolean value) {
       this.requestField("is_shared_to_feed", value);
+      return this;
+    }
+    public APIRequestGetInstagramContent requestLegacyInstagramMediaIdField () {
+      return this.requestLegacyInstagramMediaIdField(true);
+    }
+    public APIRequestGetInstagramContent requestLegacyInstagramMediaIdField (boolean value) {
+      this.requestField("legacy_instagram_media_id", value);
       return this;
     }
     public APIRequestGetInstagramContent requestLikeCountField () {

@@ -582,6 +582,7 @@ public class AdsPixel extends APINode {
       "end_advertiser",
       "end_advertiser_name",
       "existing_customers",
+      "expired_funding_source_details",
       "extended_credit_invoice_group",
       "failed_delivery_checks",
       "fb_entity",
@@ -915,6 +916,13 @@ public class AdsPixel extends APINode {
     }
     public APIRequestGetAdAccounts requestExistingCustomersField (boolean value) {
       this.requestField("existing_customers", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestExpiredFundingSourceDetailsField () {
+      return this.requestExpiredFundingSourceDetailsField(true);
+    }
+    public APIRequestGetAdAccounts requestExpiredFundingSourceDetailsField (boolean value) {
+      this.requestField("expired_funding_source_details", value);
       return this;
     }
     public APIRequestGetAdAccounts requestExtendedCreditInvoiceGroupField () {
@@ -2722,13 +2730,20 @@ public class AdsPixel extends APINode {
 
     public static final String[] FIELDS = {
       "active",
+      "cloud_provider",
+      "cloud_region",
+      "destination_id",
       "endpoint",
       "fallback_domain",
       "fallback_domain_enabled",
+      "first_party_domain",
       "host_business_id",
       "host_external_id",
       "id",
       "instance_id",
+      "instance_version",
+      "is_sgw_instance",
+      "partner_name",
       "pixel_id",
     };
 
@@ -2829,6 +2844,27 @@ public class AdsPixel extends APINode {
       this.requestField("active", value);
       return this;
     }
+    public APIRequestGetOpenBridgeConfigurations requestCloudProviderField () {
+      return this.requestCloudProviderField(true);
+    }
+    public APIRequestGetOpenBridgeConfigurations requestCloudProviderField (boolean value) {
+      this.requestField("cloud_provider", value);
+      return this;
+    }
+    public APIRequestGetOpenBridgeConfigurations requestCloudRegionField () {
+      return this.requestCloudRegionField(true);
+    }
+    public APIRequestGetOpenBridgeConfigurations requestCloudRegionField (boolean value) {
+      this.requestField("cloud_region", value);
+      return this;
+    }
+    public APIRequestGetOpenBridgeConfigurations requestDestinationIdField () {
+      return this.requestDestinationIdField(true);
+    }
+    public APIRequestGetOpenBridgeConfigurations requestDestinationIdField (boolean value) {
+      this.requestField("destination_id", value);
+      return this;
+    }
     public APIRequestGetOpenBridgeConfigurations requestEndpointField () {
       return this.requestEndpointField(true);
     }
@@ -2848,6 +2884,13 @@ public class AdsPixel extends APINode {
     }
     public APIRequestGetOpenBridgeConfigurations requestFallbackDomainEnabledField (boolean value) {
       this.requestField("fallback_domain_enabled", value);
+      return this;
+    }
+    public APIRequestGetOpenBridgeConfigurations requestFirstPartyDomainField () {
+      return this.requestFirstPartyDomainField(true);
+    }
+    public APIRequestGetOpenBridgeConfigurations requestFirstPartyDomainField (boolean value) {
+      this.requestField("first_party_domain", value);
       return this;
     }
     public APIRequestGetOpenBridgeConfigurations requestHostBusinessIdField () {
@@ -2876,6 +2919,27 @@ public class AdsPixel extends APINode {
     }
     public APIRequestGetOpenBridgeConfigurations requestInstanceIdField (boolean value) {
       this.requestField("instance_id", value);
+      return this;
+    }
+    public APIRequestGetOpenBridgeConfigurations requestInstanceVersionField () {
+      return this.requestInstanceVersionField(true);
+    }
+    public APIRequestGetOpenBridgeConfigurations requestInstanceVersionField (boolean value) {
+      this.requestField("instance_version", value);
+      return this;
+    }
+    public APIRequestGetOpenBridgeConfigurations requestIsSgwInstanceField () {
+      return this.requestIsSgwInstanceField(true);
+    }
+    public APIRequestGetOpenBridgeConfigurations requestIsSgwInstanceField (boolean value) {
+      this.requestField("is_sgw_instance", value);
+      return this;
+    }
+    public APIRequestGetOpenBridgeConfigurations requestPartnerNameField () {
+      return this.requestPartnerNameField(true);
+    }
+    public APIRequestGetOpenBridgeConfigurations requestPartnerNameField (boolean value) {
+      this.requestField("partner_name", value);
       return this;
     }
     public APIRequestGetOpenBridgeConfigurations requestPixelIdField () {
@@ -3149,6 +3213,7 @@ public class AdsPixel extends APINode {
       "end_advertiser",
       "end_advertiser_name",
       "existing_customers",
+      "expired_funding_source_details",
       "extended_credit_invoice_group",
       "failed_delivery_checks",
       "fb_entity",
@@ -3482,6 +3547,13 @@ public class AdsPixel extends APINode {
     }
     public APIRequestGetSharedAccounts requestExistingCustomersField (boolean value) {
       this.requestField("existing_customers", value);
+      return this;
+    }
+    public APIRequestGetSharedAccounts requestExpiredFundingSourceDetailsField () {
+      return this.requestExpiredFundingSourceDetailsField(true);
+    }
+    public APIRequestGetSharedAccounts requestExpiredFundingSourceDetailsField (boolean value) {
+      this.requestField("expired_funding_source_details", value);
       return this;
     }
     public APIRequestGetSharedAccounts requestExtendedCreditInvoiceGroupField () {

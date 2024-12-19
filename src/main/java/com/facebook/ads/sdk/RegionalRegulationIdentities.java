@@ -41,6 +41,10 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class RegionalRegulationIdentities extends APINode {
+  @SerializedName("australia_finserv_beneficiary")
+  private String mAustraliaFinservBeneficiary = null;
+  @SerializedName("australia_finserv_payer")
+  private String mAustraliaFinservPayer = null;
   @SerializedName("taiwan_finserv_beneficiary")
   private String mTaiwanFinservBeneficiary = null;
   @SerializedName("taiwan_finserv_payer")
@@ -196,6 +200,24 @@ public class RegionalRegulationIdentities extends APINode {
   }
 
 
+  public String getFieldAustraliaFinservBeneficiary() {
+    return mAustraliaFinservBeneficiary;
+  }
+
+  public RegionalRegulationIdentities setFieldAustraliaFinservBeneficiary(String value) {
+    this.mAustraliaFinservBeneficiary = value;
+    return this;
+  }
+
+  public String getFieldAustraliaFinservPayer() {
+    return mAustraliaFinservPayer;
+  }
+
+  public RegionalRegulationIdentities setFieldAustraliaFinservPayer(String value) {
+    this.mAustraliaFinservPayer = value;
+    return this;
+  }
+
   public String getFieldTaiwanFinservBeneficiary() {
     return mTaiwanFinservBeneficiary;
   }
@@ -231,6 +253,8 @@ public class RegionalRegulationIdentities extends APINode {
   }
 
   public RegionalRegulationIdentities copyFrom(RegionalRegulationIdentities instance) {
+    this.mAustraliaFinservBeneficiary = instance.mAustraliaFinservBeneficiary;
+    this.mAustraliaFinservPayer = instance.mAustraliaFinservPayer;
     this.mTaiwanFinservBeneficiary = instance.mTaiwanFinservBeneficiary;
     this.mTaiwanFinservPayer = instance.mTaiwanFinservPayer;
     this.context = instance.context;

@@ -318,36 +318,24 @@ public class InstagramInsightsResult extends APINode {
       VALUE_LIKES("likes"),
       @SerializedName("navigation")
       VALUE_NAVIGATION("navigation"),
-      @SerializedName("peak_concurrent_viewers")
-      VALUE_PEAK_CONCURRENT_VIEWERS("peak_concurrent_viewers"),
       @SerializedName("plays")
       VALUE_PLAYS("plays"),
       @SerializedName("profile_activity")
       VALUE_PROFILE_ACTIVITY("profile_activity"),
       @SerializedName("profile_visits")
       VALUE_PROFILE_VISITS("profile_visits"),
-      @SerializedName("quotes")
-      VALUE_QUOTES("quotes"),
       @SerializedName("reach")
       VALUE_REACH("reach"),
       @SerializedName("replies")
       VALUE_REPLIES("replies"),
-      @SerializedName("reposts")
-      VALUE_REPOSTS("reposts"),
       @SerializedName("saved")
       VALUE_SAVED("saved"),
       @SerializedName("shares")
       VALUE_SHARES("shares"),
-      @SerializedName("thread_replies")
-      VALUE_THREAD_REPLIES("thread_replies"),
-      @SerializedName("thread_shares")
-      VALUE_THREAD_SHARES("thread_shares"),
       @SerializedName("total_interactions")
       VALUE_TOTAL_INTERACTIONS("total_interactions"),
       @SerializedName("video_views")
       VALUE_VIDEO_VIEWS("video_views"),
-      @SerializedName("views")
-      VALUE_VIEWS("views"),
       ;
 
       private String value;

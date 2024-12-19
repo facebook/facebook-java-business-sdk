@@ -43,6 +43,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class CatalogWebsiteOnboardingSettings extends APINode {
   @SerializedName("id")
   private String mId = null;
+  @SerializedName("quality_band")
+  private String mQualityBand = null;
   @SerializedName("status")
   private String mStatus = null;
   protected static Gson gson = null;
@@ -263,6 +265,10 @@ public class CatalogWebsiteOnboardingSettings extends APINode {
     return mId;
   }
 
+  public String getFieldQualityBand() {
+    return mQualityBand;
+  }
+
   public String getFieldStatus() {
     return mStatus;
   }
@@ -281,6 +287,7 @@ public class CatalogWebsiteOnboardingSettings extends APINode {
 
     public static final String[] FIELDS = {
       "id",
+      "quality_band",
       "status",
     };
 
@@ -381,6 +388,13 @@ public class CatalogWebsiteOnboardingSettings extends APINode {
       this.requestField("id", value);
       return this;
     }
+    public APIRequestGet requestQualityBandField () {
+      return this.requestQualityBandField(true);
+    }
+    public APIRequestGet requestQualityBandField (boolean value) {
+      this.requestField("quality_band", value);
+      return this;
+    }
     public APIRequestGet requestStatusField () {
       return this.requestStatusField(true);
     }
@@ -406,6 +420,7 @@ public class CatalogWebsiteOnboardingSettings extends APINode {
 
   public CatalogWebsiteOnboardingSettings copyFrom(CatalogWebsiteOnboardingSettings instance) {
     this.mId = instance.mId;
+    this.mQualityBand = instance.mQualityBand;
     this.mStatus = instance.mStatus;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

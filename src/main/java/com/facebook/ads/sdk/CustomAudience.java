@@ -704,6 +704,7 @@ public class CustomAudience extends APINode {
       "end_advertiser",
       "end_advertiser_name",
       "existing_customers",
+      "expired_funding_source_details",
       "extended_credit_invoice_group",
       "failed_delivery_checks",
       "fb_entity",
@@ -1037,6 +1038,13 @@ public class CustomAudience extends APINode {
     }
     public APIRequestGetAdAccounts requestExistingCustomersField (boolean value) {
       this.requestField("existing_customers", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestExpiredFundingSourceDetailsField () {
+      return this.requestExpiredFundingSourceDetailsField(true);
+    }
+    public APIRequestGetAdAccounts requestExpiredFundingSourceDetailsField (boolean value) {
+      this.requestField("expired_funding_source_details", value);
       return this;
     }
     public APIRequestGetAdAccounts requestExtendedCreditInvoiceGroupField () {
@@ -1927,6 +1935,8 @@ public class CustomAudience extends APINode {
     public static final String[] FIELDS = {
       "app_id",
       "public_key",
+      "salts",
+      "user_id",
     };
 
     @Override
@@ -2040,6 +2050,20 @@ public class CustomAudience extends APINode {
     }
     public APIRequestGetSalts requestPublicKeyField (boolean value) {
       this.requestField("public_key", value);
+      return this;
+    }
+    public APIRequestGetSalts requestSaltsField () {
+      return this.requestSaltsField(true);
+    }
+    public APIRequestGetSalts requestSaltsField (boolean value) {
+      this.requestField("salts", value);
+      return this;
+    }
+    public APIRequestGetSalts requestUserIdField () {
+      return this.requestUserIdField(true);
+    }
+    public APIRequestGetSalts requestUserIdField (boolean value) {
+      this.requestField("user_id", value);
       return this;
     }
   }

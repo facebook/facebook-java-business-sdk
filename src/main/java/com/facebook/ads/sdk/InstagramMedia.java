@@ -53,6 +53,8 @@ public class InstagramMedia extends APINode {
   private String mFilterName = null;
   @SerializedName("id")
   private String mId = null;
+  @SerializedName("ig_media_id")
+  private String mIgMediaId = null;
   @SerializedName("latitude")
   private Double mLatitude = null;
   @SerializedName("like_count")
@@ -317,6 +319,10 @@ public class InstagramMedia extends APINode {
     return mId;
   }
 
+  public String getFieldIgMediaId() {
+    return mIgMediaId;
+  }
+
   public Double getFieldLatitude() {
     return mLatitude;
   }
@@ -372,6 +378,7 @@ public class InstagramMedia extends APINode {
       "comment_type",
       "created_at",
       "id",
+      "ig_comment_id",
       "instagram_comment_id",
       "instagram_user",
       "mentioned_instagram_users",
@@ -488,6 +495,13 @@ public class InstagramMedia extends APINode {
     }
     public APIRequestGetComments requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetComments requestIgCommentIdField () {
+      return this.requestIgCommentIdField(true);
+    }
+    public APIRequestGetComments requestIgCommentIdField (boolean value) {
+      this.requestField("ig_comment_id", value);
       return this;
     }
     public APIRequestGetComments requestInstagramCommentIdField () {
@@ -661,6 +675,7 @@ public class InstagramMedia extends APINode {
       "display_url",
       "filter_name",
       "id",
+      "ig_media_id",
       "latitude",
       "like_count",
       "location",
@@ -804,6 +819,13 @@ public class InstagramMedia extends APINode {
       this.requestField("id", value);
       return this;
     }
+    public APIRequestGet requestIgMediaIdField () {
+      return this.requestIgMediaIdField(true);
+    }
+    public APIRequestGet requestIgMediaIdField (boolean value) {
+      this.requestField("ig_media_id", value);
+      return this;
+    }
     public APIRequestGet requestLatitudeField () {
       return this.requestLatitudeField(true);
     }
@@ -890,6 +912,7 @@ public class InstagramMedia extends APINode {
     this.mDisplayUrl = instance.mDisplayUrl;
     this.mFilterName = instance.mFilterName;
     this.mId = instance.mId;
+    this.mIgMediaId = instance.mIgMediaId;
     this.mLatitude = instance.mLatitude;
     this.mLikeCount = instance.mLikeCount;
     this.mLocation = instance.mLocation;

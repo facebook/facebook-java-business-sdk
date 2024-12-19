@@ -1220,6 +1220,7 @@ public class CommerceMerchantSettings extends APINode {
       "deauth_callback_url",
       "default_share_mode",
       "description",
+      "enigma_config",
       "financial_id",
       "gdpv4_chrome_custom_tabs_enabled",
       "gdpv4_enabled",
@@ -1673,6 +1674,13 @@ public class CommerceMerchantSettings extends APINode {
     }
     public APIRequestGetOrderManagementApps requestDescriptionField (boolean value) {
       this.requestField("description", value);
+      return this;
+    }
+    public APIRequestGetOrderManagementApps requestEnigmaConfigField () {
+      return this.requestEnigmaConfigField(true);
+    }
+    public APIRequestGetOrderManagementApps requestEnigmaConfigField (boolean value) {
+      this.requestField("enigma_config", value);
       return this;
     }
     public APIRequestGetOrderManagementApps requestFinancialIdField () {
