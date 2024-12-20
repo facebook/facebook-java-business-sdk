@@ -52,9 +52,8 @@ public class AdAccountAppSetupRequirements extends APINode {
   public static AdAccountAppSetupRequirements loadJSON(String json, APIContext context, String header) {
     AdAccountAppSetupRequirements adAccountAppSetupRequirements = getGson().fromJson(json, AdAccountAppSetupRequirements.class);
     if (context.isDebug()) {
-      JsonParser parser = new JsonParser();
-      JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(adAccountAppSetupRequirements.toString());
+      JsonElement o1 = JsonParser.parseString(json);
+      JsonElement o2 = JsonParser.parseString(adAccountAppSetupRequirements.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -74,10 +73,9 @@ public class AdAccountAppSetupRequirements extends APINode {
     APINodeList<AdAccountAppSetupRequirements> adAccountAppSetupRequirementss = new APINodeList<AdAccountAppSetupRequirements>(request, json, header);
     JsonArray arr;
     JsonObject obj;
-    JsonParser parser = new JsonParser();
     Exception exception = null;
     try{
-      JsonElement result = parser.parse(json);
+      JsonElement result = JsonParser.parseString(json);
       if (result.isJsonArray()) {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();

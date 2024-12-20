@@ -160,8 +160,7 @@ public class APIContext {
         params.put("fields", "app_id");
 
         APIRequest.ResponseWrapper response = executor.execute("GET", apiUrl, params, this);
-        JsonParser parser = new JsonParser();
-        this.appID = parser.parse(response.getBody())
+        this.appID = JsonParser.parseString(response.getBody())
           .getAsJsonObject()
           .get("data")
           .getAsJsonObject()

@@ -56,9 +56,8 @@ public class P2MInvoicePayments extends APINode {
   public static P2MInvoicePayments loadJSON(String json, APIContext context, String header) {
     P2MInvoicePayments p2mInvoicePayments = getGson().fromJson(json, P2MInvoicePayments.class);
     if (context.isDebug()) {
-      JsonParser parser = new JsonParser();
-      JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(p2mInvoicePayments.toString());
+      JsonElement o1 = JsonParser.parseString(json);
+      JsonElement o2 = JsonParser.parseString(p2mInvoicePayments.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -78,10 +77,9 @@ public class P2MInvoicePayments extends APINode {
     APINodeList<P2MInvoicePayments> p2mInvoicePaymentss = new APINodeList<P2MInvoicePayments>(request, json, header);
     JsonArray arr;
     JsonObject obj;
-    JsonParser parser = new JsonParser();
     Exception exception = null;
     try{
-      JsonElement result = parser.parse(json);
+      JsonElement result = JsonParser.parseString(json);
       if (result.isJsonArray()) {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();

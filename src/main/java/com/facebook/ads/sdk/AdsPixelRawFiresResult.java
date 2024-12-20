@@ -68,9 +68,8 @@ public class AdsPixelRawFiresResult extends APINode {
   public static AdsPixelRawFiresResult loadJSON(String json, APIContext context, String header) {
     AdsPixelRawFiresResult adsPixelRawFiresResult = getGson().fromJson(json, AdsPixelRawFiresResult.class);
     if (context.isDebug()) {
-      JsonParser parser = new JsonParser();
-      JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(adsPixelRawFiresResult.toString());
+      JsonElement o1 = JsonParser.parseString(json);
+      JsonElement o2 = JsonParser.parseString(adsPixelRawFiresResult.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -90,10 +89,9 @@ public class AdsPixelRawFiresResult extends APINode {
     APINodeList<AdsPixelRawFiresResult> adsPixelRawFiresResults = new APINodeList<AdsPixelRawFiresResult>(request, json, header);
     JsonArray arr;
     JsonObject obj;
-    JsonParser parser = new JsonParser();
     Exception exception = null;
     try{
-      JsonElement result = parser.parse(json);
+      JsonElement result = JsonParser.parseString(json);
       if (result.isJsonArray()) {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();

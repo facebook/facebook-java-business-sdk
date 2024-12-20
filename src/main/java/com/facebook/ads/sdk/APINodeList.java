@@ -128,8 +128,7 @@ public class APINodeList<T extends APINode> extends ArrayList<T> implements APIR
 
     @Override
     public JsonObject getRawResponseAsJsonObject() {
-      JsonParser parser = new JsonParser();
-      return parser.parse(rawValue).getAsJsonObject();
+      return JsonParser.parseString(rawValue).getAsJsonObject();
     }
 
     @Override

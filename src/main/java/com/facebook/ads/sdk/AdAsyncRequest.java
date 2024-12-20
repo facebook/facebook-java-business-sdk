@@ -129,9 +129,8 @@ public class AdAsyncRequest extends APINode {
   public static AdAsyncRequest loadJSON(String json, APIContext context, String header) {
     AdAsyncRequest adAsyncRequest = getGson().fromJson(json, AdAsyncRequest.class);
     if (context.isDebug()) {
-      JsonParser parser = new JsonParser();
-      JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(adAsyncRequest.toString());
+      JsonElement o1 = JsonParser.parseString(json);
+      JsonElement o2 = JsonParser.parseString(adAsyncRequest.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -151,10 +150,9 @@ public class AdAsyncRequest extends APINode {
     APINodeList<AdAsyncRequest> adAsyncRequests = new APINodeList<AdAsyncRequest>(request, json, header);
     JsonArray arr;
     JsonObject obj;
-    JsonParser parser = new JsonParser();
     Exception exception = null;
     try{
-      JsonElement result = parser.parse(json);
+      JsonElement result = JsonParser.parseString(json);
       if (result.isJsonArray()) {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();

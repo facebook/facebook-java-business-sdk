@@ -131,9 +131,8 @@ public class AdsPivotRules extends APINode {
   public static AdsPivotRules loadJSON(String json, APIContext context, String header) {
     AdsPivotRules adsPivotRules = getGson().fromJson(json, AdsPivotRules.class);
     if (context.isDebug()) {
-      JsonParser parser = new JsonParser();
-      JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(adsPivotRules.toString());
+      JsonElement o1 = JsonParser.parseString(json);
+      JsonElement o2 = JsonParser.parseString(adsPivotRules.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -153,10 +152,9 @@ public class AdsPivotRules extends APINode {
     APINodeList<AdsPivotRules> adsPivotRuless = new APINodeList<AdsPivotRules>(request, json, header);
     JsonArray arr;
     JsonObject obj;
-    JsonParser parser = new JsonParser();
     Exception exception = null;
     try{
-      JsonElement result = parser.parse(json);
+      JsonElement result = JsonParser.parseString(json);
       if (result.isJsonArray()) {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();

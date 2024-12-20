@@ -62,9 +62,8 @@ public class AdsPixelSignalsIWLNux extends APINode {
   public static AdsPixelSignalsIWLNux loadJSON(String json, APIContext context, String header) {
     AdsPixelSignalsIWLNux adsPixelSignalsIWLNux = getGson().fromJson(json, AdsPixelSignalsIWLNux.class);
     if (context.isDebug()) {
-      JsonParser parser = new JsonParser();
-      JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(adsPixelSignalsIWLNux.toString());
+      JsonElement o1 = JsonParser.parseString(json);
+      JsonElement o2 = JsonParser.parseString(adsPixelSignalsIWLNux.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -84,10 +83,9 @@ public class AdsPixelSignalsIWLNux extends APINode {
     APINodeList<AdsPixelSignalsIWLNux> adsPixelSignalsIWLNuxs = new APINodeList<AdsPixelSignalsIWLNux>(request, json, header);
     JsonArray arr;
     JsonObject obj;
-    JsonParser parser = new JsonParser();
     Exception exception = null;
     try{
-      JsonElement result = parser.parse(json);
+      JsonElement result = JsonParser.parseString(json);
       if (result.isJsonArray()) {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();

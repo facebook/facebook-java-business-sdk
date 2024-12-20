@@ -56,9 +56,8 @@ public class AdCreativeProductData extends APINode {
   public static AdCreativeProductData loadJSON(String json, APIContext context, String header) {
     AdCreativeProductData adCreativeProductData = getGson().fromJson(json, AdCreativeProductData.class);
     if (context.isDebug()) {
-      JsonParser parser = new JsonParser();
-      JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(adCreativeProductData.toString());
+      JsonElement o1 = JsonParser.parseString(json);
+      JsonElement o2 = JsonParser.parseString(adCreativeProductData.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -78,10 +77,9 @@ public class AdCreativeProductData extends APINode {
     APINodeList<AdCreativeProductData> adCreativeProductDatas = new APINodeList<AdCreativeProductData>(request, json, header);
     JsonArray arr;
     JsonObject obj;
-    JsonParser parser = new JsonParser();
     Exception exception = null;
     try{
-      JsonElement result = parser.parse(json);
+      JsonElement result = JsonParser.parseString(json);
       if (result.isJsonArray()) {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();

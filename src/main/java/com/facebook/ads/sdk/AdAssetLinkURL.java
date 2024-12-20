@@ -70,9 +70,8 @@ public class AdAssetLinkURL extends APINode {
   public static AdAssetLinkURL loadJSON(String json, APIContext context, String header) {
     AdAssetLinkURL adAssetLinkURL = getGson().fromJson(json, AdAssetLinkURL.class);
     if (context.isDebug()) {
-      JsonParser parser = new JsonParser();
-      JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(adAssetLinkURL.toString());
+      JsonElement o1 = JsonParser.parseString(json);
+      JsonElement o2 = JsonParser.parseString(adAssetLinkURL.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -92,10 +91,9 @@ public class AdAssetLinkURL extends APINode {
     APINodeList<AdAssetLinkURL> adAssetLinkURLs = new APINodeList<AdAssetLinkURL>(request, json, header);
     JsonArray arr;
     JsonObject obj;
-    JsonParser parser = new JsonParser();
     Exception exception = null;
     try{
-      JsonElement result = parser.parse(json);
+      JsonElement result = JsonParser.parseString(json);
       if (result.isJsonArray()) {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();

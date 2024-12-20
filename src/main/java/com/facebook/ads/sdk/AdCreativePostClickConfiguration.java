@@ -56,9 +56,8 @@ public class AdCreativePostClickConfiguration extends APINode {
   public static AdCreativePostClickConfiguration loadJSON(String json, APIContext context, String header) {
     AdCreativePostClickConfiguration adCreativePostClickConfiguration = getGson().fromJson(json, AdCreativePostClickConfiguration.class);
     if (context.isDebug()) {
-      JsonParser parser = new JsonParser();
-      JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(adCreativePostClickConfiguration.toString());
+      JsonElement o1 = JsonParser.parseString(json);
+      JsonElement o2 = JsonParser.parseString(adCreativePostClickConfiguration.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -78,10 +77,9 @@ public class AdCreativePostClickConfiguration extends APINode {
     APINodeList<AdCreativePostClickConfiguration> adCreativePostClickConfigurations = new APINodeList<AdCreativePostClickConfiguration>(request, json, header);
     JsonArray arr;
     JsonObject obj;
-    JsonParser parser = new JsonParser();
     Exception exception = null;
     try{
-      JsonElement result = parser.parse(json);
+      JsonElement result = JsonParser.parseString(json);
       if (result.isJsonArray()) {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();

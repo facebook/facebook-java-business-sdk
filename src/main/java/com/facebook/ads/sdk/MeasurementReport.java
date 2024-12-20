@@ -121,9 +121,8 @@ public class MeasurementReport extends APINode {
   public static MeasurementReport loadJSON(String json, APIContext context, String header) {
     MeasurementReport measurementReport = getGson().fromJson(json, MeasurementReport.class);
     if (context.isDebug()) {
-      JsonParser parser = new JsonParser();
-      JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(measurementReport.toString());
+      JsonElement o1 = JsonParser.parseString(json);
+      JsonElement o2 = JsonParser.parseString(measurementReport.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -143,10 +142,9 @@ public class MeasurementReport extends APINode {
     APINodeList<MeasurementReport> measurementReports = new APINodeList<MeasurementReport>(request, json, header);
     JsonArray arr;
     JsonObject obj;
-    JsonParser parser = new JsonParser();
     Exception exception = null;
     try{
-      JsonElement result = parser.parse(json);
+      JsonElement result = JsonParser.parseString(json);
       if (result.isJsonArray()) {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();

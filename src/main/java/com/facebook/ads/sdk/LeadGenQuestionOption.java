@@ -56,9 +56,8 @@ public class LeadGenQuestionOption extends APINode {
   public static LeadGenQuestionOption loadJSON(String json, APIContext context, String header) {
     LeadGenQuestionOption leadGenQuestionOption = getGson().fromJson(json, LeadGenQuestionOption.class);
     if (context.isDebug()) {
-      JsonParser parser = new JsonParser();
-      JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(leadGenQuestionOption.toString());
+      JsonElement o1 = JsonParser.parseString(json);
+      JsonElement o2 = JsonParser.parseString(leadGenQuestionOption.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -78,10 +77,9 @@ public class LeadGenQuestionOption extends APINode {
     APINodeList<LeadGenQuestionOption> leadGenQuestionOptions = new APINodeList<LeadGenQuestionOption>(request, json, header);
     JsonArray arr;
     JsonObject obj;
-    JsonParser parser = new JsonParser();
     Exception exception = null;
     try{
-      JsonElement result = parser.parse(json);
+      JsonElement result = JsonParser.parseString(json);
       if (result.isJsonArray()) {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
