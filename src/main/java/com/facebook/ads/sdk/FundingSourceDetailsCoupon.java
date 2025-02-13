@@ -47,6 +47,8 @@ public class FundingSourceDetailsCoupon extends APINode {
   private List<Long> mCampaignIds = null;
   @SerializedName("coupon_id")
   private String mCouponId = null;
+  @SerializedName("coupon_tiering")
+  private FundingSourceDetailsCouponTiering mCouponTiering = null;
   @SerializedName("currency")
   private String mCurrency = null;
   @SerializedName("display_amount")
@@ -237,6 +239,20 @@ public class FundingSourceDetailsCoupon extends APINode {
     return this;
   }
 
+  public FundingSourceDetailsCouponTiering getFieldCouponTiering() {
+    return mCouponTiering;
+  }
+
+  public FundingSourceDetailsCoupon setFieldCouponTiering(FundingSourceDetailsCouponTiering value) {
+    this.mCouponTiering = value;
+    return this;
+  }
+
+  public FundingSourceDetailsCoupon setFieldCouponTiering(String value) {
+    Type type = new TypeToken<FundingSourceDetailsCouponTiering>(){}.getType();
+    this.mCouponTiering = FundingSourceDetailsCouponTiering.getGson().fromJson(value, type);
+    return this;
+  }
   public String getFieldCurrency() {
     return mCurrency;
   }
@@ -311,6 +327,7 @@ public class FundingSourceDetailsCoupon extends APINode {
     this.mAmount = instance.mAmount;
     this.mCampaignIds = instance.mCampaignIds;
     this.mCouponId = instance.mCouponId;
+    this.mCouponTiering = instance.mCouponTiering;
     this.mCurrency = instance.mCurrency;
     this.mDisplayAmount = instance.mDisplayAmount;
     this.mExpiration = instance.mExpiration;

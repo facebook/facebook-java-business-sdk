@@ -41,6 +41,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class IGMediaForIGOnlyAPI extends APINode {
+  @SerializedName("alt_text")
+  private String mAltText = null;
   @SerializedName("caption")
   private String mCaption = null;
   @SerializedName("comments_count")
@@ -304,6 +306,10 @@ public class IGMediaForIGOnlyAPI extends APINode {
     return new APIRequestUpdate(this.getPrefixedId().toString(), context);
   }
 
+
+  public String getFieldAltText() {
+    return mAltText;
+  }
 
   public String getFieldCaption() {
     return mCaption;
@@ -1077,6 +1083,7 @@ public class IGMediaForIGOnlyAPI extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "alt_text",
       "caption",
       "comments_count",
       "id",
@@ -1184,6 +1191,13 @@ public class IGMediaForIGOnlyAPI extends APINode {
       return this;
     }
 
+    public APIRequestGet requestAltTextField () {
+      return this.requestAltTextField(true);
+    }
+    public APIRequestGet requestAltTextField (boolean value) {
+      this.requestField("alt_text", value);
+      return this;
+    }
     public APIRequestGet requestCaptionField () {
       return this.requestCaptionField(true);
     }
@@ -1421,6 +1435,7 @@ public class IGMediaForIGOnlyAPI extends APINode {
   }
 
   public IGMediaForIGOnlyAPI copyFrom(IGMediaForIGOnlyAPI instance) {
+    this.mAltText = instance.mAltText;
     this.mCaption = instance.mCaption;
     this.mCommentsCount = instance.mCommentsCount;
     this.mId = instance.mId;

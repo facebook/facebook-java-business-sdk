@@ -43,6 +43,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class InsightsValue extends APINode {
   @SerializedName("campaign_id")
   private String mCampaignId = null;
+  @SerializedName("earning_source")
+  private String mEarningSource = null;
   @SerializedName("end_time")
   private String mEndTime = null;
   @SerializedName("engagement_source")
@@ -221,6 +223,15 @@ public class InsightsValue extends APINode {
     return this;
   }
 
+  public String getFieldEarningSource() {
+    return mEarningSource;
+  }
+
+  public InsightsValue setFieldEarningSource(String value) {
+    this.mEarningSource = value;
+    return this;
+  }
+
   public String getFieldEndTime() {
     return mEndTime;
   }
@@ -320,6 +331,7 @@ public class InsightsValue extends APINode {
 
   public InsightsValue copyFrom(InsightsValue instance) {
     this.mCampaignId = instance.mCampaignId;
+    this.mEarningSource = instance.mEarningSource;
     this.mEndTime = instance.mEndTime;
     this.mEngagementSource = instance.mEngagementSource;
     this.mMessageType = instance.mMessageType;

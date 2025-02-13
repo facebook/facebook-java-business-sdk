@@ -45,12 +45,8 @@ public class PageChangeProposal extends APINode {
   private String mAcceptanceStatus = null;
   @SerializedName("category")
   private String mCategory = null;
-  @SerializedName("current_value")
-  private String mCurrentValue = null;
   @SerializedName("id")
   private String mId = null;
-  @SerializedName("proposed_value")
-  private String mProposedValue = null;
   @SerializedName("upcoming_change_info")
   private PageUpcomingChange mUpcomingChangeInfo = null;
   protected static Gson gson = null;
@@ -222,30 +218,12 @@ public class PageChangeProposal extends APINode {
     return this;
   }
 
-  public String getFieldCurrentValue() {
-    return mCurrentValue;
-  }
-
-  public PageChangeProposal setFieldCurrentValue(String value) {
-    this.mCurrentValue = value;
-    return this;
-  }
-
   public String getFieldId() {
     return mId;
   }
 
   public PageChangeProposal setFieldId(String value) {
     this.mId = value;
-    return this;
-  }
-
-  public String getFieldProposedValue() {
-    return mProposedValue;
-  }
-
-  public PageChangeProposal setFieldProposedValue(String value) {
-    this.mProposedValue = value;
     return this;
   }
 
@@ -285,9 +263,7 @@ public class PageChangeProposal extends APINode {
   public PageChangeProposal copyFrom(PageChangeProposal instance) {
     this.mAcceptanceStatus = instance.mAcceptanceStatus;
     this.mCategory = instance.mCategory;
-    this.mCurrentValue = instance.mCurrentValue;
     this.mId = instance.mId;
-    this.mProposedValue = instance.mProposedValue;
     this.mUpcomingChangeInfo = instance.mUpcomingChangeInfo;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

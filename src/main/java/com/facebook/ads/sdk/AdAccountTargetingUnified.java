@@ -1243,8 +1243,6 @@ public class AdAccountTargetingUnified extends APINode {
       VALUE_LOCATION_EXPANSION("location_expansion"),
       @SerializedName("marketing_message_channels")
       VALUE_MARKETING_MESSAGE_CHANNELS("marketing_message_channels"),
-      @SerializedName("marketing_message_targeting")
-      VALUE_MARKETING_MESSAGE_TARGETING("marketing_message_targeting"),
       @SerializedName("marketplace_product_categories")
       VALUE_MARKETPLACE_PRODUCT_CATEGORIES("marketplace_product_categories"),
       @SerializedName("messenger_positions")
@@ -1285,6 +1283,8 @@ public class AdAccountTargetingUnified extends APINode {
       VALUE_RTB_FLAG("rtb_flag"),
       @SerializedName("site_category")
       VALUE_SITE_CATEGORY("site_category"),
+      @SerializedName("subscriber_universe")
+      VALUE_SUBSCRIBER_UNIVERSE("subscriber_universe"),
       @SerializedName("tafe_ca_mitigation_strategy")
       VALUE_TAFE_CA_MITIGATION_STRATEGY("tafe_ca_mitigation_strategy"),
       @SerializedName("targeting_automation")

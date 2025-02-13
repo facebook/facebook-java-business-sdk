@@ -53,10 +53,16 @@ public class ThirdPartyPartnerLiftRequest extends APINode {
   private Double mHoldoutSize = null;
   @SerializedName("id")
   private String mId = null;
+  @SerializedName("legacy_ads_data_partner_id")
+  private String mLegacyAdsDataPartnerId = null;
+  @SerializedName("legacy_ads_data_partner_name")
+  private String mLegacyAdsDataPartnerName = null;
   @SerializedName("modified_time")
   private String mModifiedTime = null;
   @SerializedName("owner_instance_id")
   private String mOwnerInstanceId = null;
+  @SerializedName("partner_household_graph_dataset_id")
+  private String mPartnerHouseholdGraphDatasetId = null;
   @SerializedName("region")
   private String mRegion = null;
   @SerializedName("status")
@@ -305,12 +311,24 @@ public class ThirdPartyPartnerLiftRequest extends APINode {
     return mId;
   }
 
+  public String getFieldLegacyAdsDataPartnerId() {
+    return mLegacyAdsDataPartnerId;
+  }
+
+  public String getFieldLegacyAdsDataPartnerName() {
+    return mLegacyAdsDataPartnerName;
+  }
+
   public String getFieldModifiedTime() {
     return mModifiedTime;
   }
 
   public String getFieldOwnerInstanceId() {
     return mOwnerInstanceId;
+  }
+
+  public String getFieldPartnerHouseholdGraphDatasetId() {
+    return mPartnerHouseholdGraphDatasetId;
   }
 
   public String getFieldRegion() {
@@ -352,8 +370,11 @@ public class ThirdPartyPartnerLiftRequest extends APINode {
       "description",
       "holdout_size",
       "id",
+      "legacy_ads_data_partner_id",
+      "legacy_ads_data_partner_name",
       "modified_time",
       "owner_instance_id",
+      "partner_household_graph_dataset_id",
       "region",
       "status",
       "study_cells",
@@ -493,6 +514,20 @@ public class ThirdPartyPartnerLiftRequest extends APINode {
       this.requestField("id", value);
       return this;
     }
+    public APIRequestGet requestLegacyAdsDataPartnerIdField () {
+      return this.requestLegacyAdsDataPartnerIdField(true);
+    }
+    public APIRequestGet requestLegacyAdsDataPartnerIdField (boolean value) {
+      this.requestField("legacy_ads_data_partner_id", value);
+      return this;
+    }
+    public APIRequestGet requestLegacyAdsDataPartnerNameField () {
+      return this.requestLegacyAdsDataPartnerNameField(true);
+    }
+    public APIRequestGet requestLegacyAdsDataPartnerNameField (boolean value) {
+      this.requestField("legacy_ads_data_partner_name", value);
+      return this;
+    }
     public APIRequestGet requestModifiedTimeField () {
       return this.requestModifiedTimeField(true);
     }
@@ -505,6 +540,13 @@ public class ThirdPartyPartnerLiftRequest extends APINode {
     }
     public APIRequestGet requestOwnerInstanceIdField (boolean value) {
       this.requestField("owner_instance_id", value);
+      return this;
+    }
+    public APIRequestGet requestPartnerHouseholdGraphDatasetIdField () {
+      return this.requestPartnerHouseholdGraphDatasetIdField(true);
+    }
+    public APIRequestGet requestPartnerHouseholdGraphDatasetIdField (boolean value) {
+      this.requestField("partner_household_graph_dataset_id", value);
       return this;
     }
     public APIRequestGet requestRegionField () {
@@ -590,8 +632,11 @@ public class ThirdPartyPartnerLiftRequest extends APINode {
     this.mDescription = instance.mDescription;
     this.mHoldoutSize = instance.mHoldoutSize;
     this.mId = instance.mId;
+    this.mLegacyAdsDataPartnerId = instance.mLegacyAdsDataPartnerId;
+    this.mLegacyAdsDataPartnerName = instance.mLegacyAdsDataPartnerName;
     this.mModifiedTime = instance.mModifiedTime;
     this.mOwnerInstanceId = instance.mOwnerInstanceId;
+    this.mPartnerHouseholdGraphDatasetId = instance.mPartnerHouseholdGraphDatasetId;
     this.mRegion = instance.mRegion;
     this.mStatus = instance.mStatus;
     this.mStudyCells = instance.mStudyCells;

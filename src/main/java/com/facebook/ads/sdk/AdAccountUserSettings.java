@@ -45,6 +45,10 @@ public class AdAccountUserSettings extends APINode {
   private Boolean mAcfShouldOptOutVideoAdjustments = null;
   @SerializedName("aco_sticky_settings")
   private List<Map<String, String>> mAcoStickySettings = null;
+  @SerializedName("actions_quick_view_created")
+  private Boolean mActionsQuickViewCreated = null;
+  @SerializedName("active_ads_quick_view_created")
+  private Boolean mActiveAdsQuickViewCreated = null;
   @SerializedName("ad_account")
   private AdAccount mAdAccount = null;
   @SerializedName("ad_object_export_format")
@@ -73,6 +77,8 @@ public class AdAccountUserSettings extends APINode {
   private Boolean mExportDeletedItemsWithDelivery = null;
   @SerializedName("export_summary_row")
   private Boolean mExportSummaryRow = null;
+  @SerializedName("had_delivery_quick_view_created")
+  private Boolean mHadDeliveryQuickViewCreated = null;
   @SerializedName("has_seen_groups_column_flexing_experience")
   private Boolean mHasSeenGroupsColumnFlexingExperience = null;
   @SerializedName("has_seen_instagram_column_flexing_experience")
@@ -375,6 +381,14 @@ public class AdAccountUserSettings extends APINode {
     return mAcoStickySettings;
   }
 
+  public Boolean getFieldActionsQuickViewCreated() {
+    return mActionsQuickViewCreated;
+  }
+
+  public Boolean getFieldActiveAdsQuickViewCreated() {
+    return mActiveAdsQuickViewCreated;
+  }
+
   public AdAccount getFieldAdAccount() {
     if (mAdAccount != null) {
       mAdAccount.context = getContext();
@@ -432,6 +446,10 @@ public class AdAccountUserSettings extends APINode {
 
   public Boolean getFieldExportSummaryRow() {
     return mExportSummaryRow;
+  }
+
+  public Boolean getFieldHadDeliveryQuickViewCreated() {
+    return mHadDeliveryQuickViewCreated;
   }
 
   public Boolean getFieldHasSeenGroupsColumnFlexingExperience() {
@@ -612,6 +630,8 @@ public class AdAccountUserSettings extends APINode {
     public static final String[] FIELDS = {
       "acf_should_opt_out_video_adjustments",
       "aco_sticky_settings",
+      "actions_quick_view_created",
+      "active_ads_quick_view_created",
       "ad_account",
       "ad_object_export_format",
       "auto_review_video_caption",
@@ -626,6 +646,7 @@ public class AdAccountUserSettings extends APINode {
       "draft_mode_enabled",
       "export_deleted_items_with_delivery",
       "export_summary_row",
+      "had_delivery_quick_view_created",
       "has_seen_groups_column_flexing_experience",
       "has_seen_instagram_column_flexing_experience",
       "has_seen_leads_column_flexing_experience",
@@ -772,6 +793,20 @@ public class AdAccountUserSettings extends APINode {
       this.requestField("aco_sticky_settings", value);
       return this;
     }
+    public APIRequestGet requestActionsQuickViewCreatedField () {
+      return this.requestActionsQuickViewCreatedField(true);
+    }
+    public APIRequestGet requestActionsQuickViewCreatedField (boolean value) {
+      this.requestField("actions_quick_view_created", value);
+      return this;
+    }
+    public APIRequestGet requestActiveAdsQuickViewCreatedField () {
+      return this.requestActiveAdsQuickViewCreatedField(true);
+    }
+    public APIRequestGet requestActiveAdsQuickViewCreatedField (boolean value) {
+      this.requestField("active_ads_quick_view_created", value);
+      return this;
+    }
     public APIRequestGet requestAdAccountField () {
       return this.requestAdAccountField(true);
     }
@@ -868,6 +903,13 @@ public class AdAccountUserSettings extends APINode {
     }
     public APIRequestGet requestExportSummaryRowField (boolean value) {
       this.requestField("export_summary_row", value);
+      return this;
+    }
+    public APIRequestGet requestHadDeliveryQuickViewCreatedField () {
+      return this.requestHadDeliveryQuickViewCreatedField(true);
+    }
+    public APIRequestGet requestHadDeliveryQuickViewCreatedField (boolean value) {
+      this.requestField("had_delivery_quick_view_created", value);
       return this;
     }
     public APIRequestGet requestHasSeenGroupsColumnFlexingExperienceField () {
@@ -1226,6 +1268,8 @@ public class AdAccountUserSettings extends APINode {
   public AdAccountUserSettings copyFrom(AdAccountUserSettings instance) {
     this.mAcfShouldOptOutVideoAdjustments = instance.mAcfShouldOptOutVideoAdjustments;
     this.mAcoStickySettings = instance.mAcoStickySettings;
+    this.mActionsQuickViewCreated = instance.mActionsQuickViewCreated;
+    this.mActiveAdsQuickViewCreated = instance.mActiveAdsQuickViewCreated;
     this.mAdAccount = instance.mAdAccount;
     this.mAdObjectExportFormat = instance.mAdObjectExportFormat;
     this.mAutoReviewVideoCaption = instance.mAutoReviewVideoCaption;
@@ -1240,6 +1284,7 @@ public class AdAccountUserSettings extends APINode {
     this.mDraftModeEnabled = instance.mDraftModeEnabled;
     this.mExportDeletedItemsWithDelivery = instance.mExportDeletedItemsWithDelivery;
     this.mExportSummaryRow = instance.mExportSummaryRow;
+    this.mHadDeliveryQuickViewCreated = instance.mHadDeliveryQuickViewCreated;
     this.mHasSeenGroupsColumnFlexingExperience = instance.mHasSeenGroupsColumnFlexingExperience;
     this.mHasSeenInstagramColumnFlexingExperience = instance.mHasSeenInstagramColumnFlexingExperience;
     this.mHasSeenLeadsColumnFlexingExperience = instance.mHasSeenLeadsColumnFlexingExperience;

@@ -5075,6 +5075,7 @@ public class Group extends APINode {
       "place",
       "privacy",
       "profile_id",
+      "provenance_info",
       "proxied_app_id",
       "published",
       "qn",
@@ -5397,6 +5398,15 @@ public class Group extends APINode {
     }
     public APIRequestCreatePhoto setProfileId (String profileId) {
       this.setParam("profile_id", profileId);
+      return this;
+    }
+
+    public APIRequestCreatePhoto setProvenanceInfo (Map<String, String> provenanceInfo) {
+      this.setParam("provenance_info", provenanceInfo);
+      return this;
+    }
+    public APIRequestCreatePhoto setProvenanceInfo (String provenanceInfo) {
+      this.setParam("provenance_info", provenanceInfo);
       return this;
     }
 
@@ -5787,6 +5797,7 @@ public class Group extends APINode {
       "audio_isrc",
       "backdated_time",
       "backdated_time_granularity",
+      "boost_eligibility_info",
       "content_category",
       "content_tags",
       "copyright",
@@ -5962,6 +5973,13 @@ public class Group extends APINode {
     }
     public APIRequestGetVideos requestBackdatedTimeGranularityField (boolean value) {
       this.requestField("backdated_time_granularity", value);
+      return this;
+    }
+    public APIRequestGetVideos requestBoostEligibilityInfoField () {
+      return this.requestBoostEligibilityInfoField(true);
+    }
+    public APIRequestGetVideos requestBoostEligibilityInfoField (boolean value) {
+      this.requestField("boost_eligibility_info", value);
       return this;
     }
     public APIRequestGetVideos requestContentCategoryField () {

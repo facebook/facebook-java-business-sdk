@@ -53,14 +53,10 @@ public class OpenBridgeConfiguration extends APINode {
   private String mEndpoint = null;
   @SerializedName("fallback_domain")
   private String mFallbackDomain = null;
-  @SerializedName("fallback_domain_enabled")
-  private Boolean mFallbackDomainEnabled = null;
   @SerializedName("first_party_domain")
   private String mFirstPartyDomain = null;
   @SerializedName("host_business_id")
   private String mHostBusinessId = null;
-  @SerializedName("host_external_id")
-  private String mHostExternalId = null;
   @SerializedName("id")
   private String mId = null;
   @SerializedName("instance_id")
@@ -319,20 +315,12 @@ public class OpenBridgeConfiguration extends APINode {
     return mFallbackDomain;
   }
 
-  public Boolean getFieldFallbackDomainEnabled() {
-    return mFallbackDomainEnabled;
-  }
-
   public String getFieldFirstPartyDomain() {
     return mFirstPartyDomain;
   }
 
   public String getFieldHostBusinessId() {
     return mHostBusinessId;
-  }
-
-  public String getFieldHostExternalId() {
-    return mHostExternalId;
   }
 
   public String getFieldId() {
@@ -483,10 +471,8 @@ public class OpenBridgeConfiguration extends APINode {
       "destination_id",
       "endpoint",
       "fallback_domain",
-      "fallback_domain_enabled",
       "first_party_domain",
       "host_business_id",
-      "host_external_id",
       "id",
       "instance_id",
       "instance_version",
@@ -627,13 +613,6 @@ public class OpenBridgeConfiguration extends APINode {
       this.requestField("fallback_domain", value);
       return this;
     }
-    public APIRequestGet requestFallbackDomainEnabledField () {
-      return this.requestFallbackDomainEnabledField(true);
-    }
-    public APIRequestGet requestFallbackDomainEnabledField (boolean value) {
-      this.requestField("fallback_domain_enabled", value);
-      return this;
-    }
     public APIRequestGet requestFirstPartyDomainField () {
       return this.requestFirstPartyDomainField(true);
     }
@@ -646,13 +625,6 @@ public class OpenBridgeConfiguration extends APINode {
     }
     public APIRequestGet requestHostBusinessIdField (boolean value) {
       this.requestField("host_business_id", value);
-      return this;
-    }
-    public APIRequestGet requestHostExternalIdField () {
-      return this.requestHostExternalIdField(true);
-    }
-    public APIRequestGet requestHostExternalIdField (boolean value) {
-      this.requestField("host_external_id", value);
       return this;
     }
     public APIRequestGet requestIdField () {
@@ -713,10 +685,8 @@ public class OpenBridgeConfiguration extends APINode {
       "destination_id",
       "endpoint",
       "fallback_domain",
-      "fallback_domain_enabled",
       "first_party_domain",
       "host_business_id",
-      "host_external_id",
       "instance_id",
       "instance_version",
       "is_sgw_instance",
@@ -814,15 +784,6 @@ public class OpenBridgeConfiguration extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setFallbackDomainEnabled (Boolean fallbackDomainEnabled) {
-      this.setParam("fallback_domain_enabled", fallbackDomainEnabled);
-      return this;
-    }
-    public APIRequestUpdate setFallbackDomainEnabled (String fallbackDomainEnabled) {
-      this.setParam("fallback_domain_enabled", fallbackDomainEnabled);
-      return this;
-    }
-
     public APIRequestUpdate setFirstPartyDomain (String firstPartyDomain) {
       this.setParam("first_party_domain", firstPartyDomain);
       return this;
@@ -834,11 +795,6 @@ public class OpenBridgeConfiguration extends APINode {
     }
     public APIRequestUpdate setHostBusinessId (String hostBusinessId) {
       this.setParam("host_business_id", hostBusinessId);
-      return this;
-    }
-
-    public APIRequestUpdate setHostExternalId (String hostExternalId) {
-      this.setParam("host_external_id", hostExternalId);
       return this;
     }
 
@@ -925,10 +881,8 @@ public class OpenBridgeConfiguration extends APINode {
     this.mDestinationId = instance.mDestinationId;
     this.mEndpoint = instance.mEndpoint;
     this.mFallbackDomain = instance.mFallbackDomain;
-    this.mFallbackDomainEnabled = instance.mFallbackDomainEnabled;
     this.mFirstPartyDomain = instance.mFirstPartyDomain;
     this.mHostBusinessId = instance.mHostBusinessId;
-    this.mHostExternalId = instance.mHostExternalId;
     this.mId = instance.mId;
     this.mInstanceId = instance.mInstanceId;
     this.mInstanceVersion = instance.mInstanceVersion;

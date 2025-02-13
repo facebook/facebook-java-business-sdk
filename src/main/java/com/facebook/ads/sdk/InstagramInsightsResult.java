@@ -336,6 +336,8 @@ public class InstagramInsightsResult extends APINode {
       VALUE_TOTAL_INTERACTIONS("total_interactions"),
       @SerializedName("video_views")
       VALUE_VIDEO_VIEWS("video_views"),
+      @SerializedName("views")
+      VALUE_VIEWS("views"),
       ;
 
       private String value;

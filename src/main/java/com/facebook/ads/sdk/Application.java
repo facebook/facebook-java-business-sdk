@@ -630,10 +630,6 @@ public class Application extends APINode {
     return new APIRequestCreateOccludesPopup(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestCreatePaymentCurrency createPaymentCurrency() {
-    return new APIRequestCreatePaymentCurrency(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetPermissions getPermissions() {
     return new APIRequestGetPermissions(this.getPrefixedId().toString(), context);
   }
@@ -1556,6 +1552,7 @@ public class Application extends APINode {
       "app_user_id",
       "application_tracking_enabled",
       "attribution",
+      "attribution_sources",
       "auto_publish",
       "bundle_id",
       "bundle_short_version",
@@ -1577,8 +1574,10 @@ public class Application extends APINode {
       "install_referrer",
       "install_timestamp",
       "installer_package",
+      "is_fb",
       "limited_data_use",
       "migration_bundle",
+      "operational_parameters",
       "page_id",
       "page_scoped_user_id",
       "receipt_data",
@@ -1683,6 +1682,15 @@ public class Application extends APINode {
 
     public APIRequestCreateActivity setAttribution (String attribution) {
       this.setParam("attribution", attribution);
+      return this;
+    }
+
+    public APIRequestCreateActivity setAttributionSources (List<Map<String, String>> attributionSources) {
+      this.setParam("attribution_sources", attributionSources);
+      return this;
+    }
+    public APIRequestCreateActivity setAttributionSources (String attributionSources) {
+      this.setParam("attribution_sources", attributionSources);
       return this;
     }
 
@@ -1839,6 +1847,15 @@ public class Application extends APINode {
       return this;
     }
 
+    public APIRequestCreateActivity setIsFb (Boolean isFb) {
+      this.setParam("is_fb", isFb);
+      return this;
+    }
+    public APIRequestCreateActivity setIsFb (String isFb) {
+      this.setParam("is_fb", isFb);
+      return this;
+    }
+
     public APIRequestCreateActivity setLimitedDataUse (Boolean limitedDataUse) {
       this.setParam("limited_data_use", limitedDataUse);
       return this;
@@ -1850,6 +1867,15 @@ public class Application extends APINode {
 
     public APIRequestCreateActivity setMigrationBundle (String migrationBundle) {
       this.setParam("migration_bundle", migrationBundle);
+      return this;
+    }
+
+    public APIRequestCreateActivity setOperationalParameters (List<Map<String, String>> operationalParameters) {
+      this.setParam("operational_parameters", operationalParameters);
+      return this;
+    }
+    public APIRequestCreateActivity setOperationalParameters (String operationalParameters) {
+      this.setParam("operational_parameters", operationalParameters);
       return this;
     }
 
@@ -7248,18 +7274,27 @@ public class Application extends APINode {
     public static final String[] PARAMS = {
       "advertiser_id",
       "attribution",
+      "attribution_method",
       "attribution_model",
+      "attribution_referrer",
       "auditing_token",
       "click_attr_window",
       "custom_events",
       "decline_reason",
+      "device_os",
       "engagement_type",
       "event",
+      "event_id",
       "event_reported_time",
       "fb_ad_id",
+      "fb_adgroup_id",
       "fb_click_time",
       "fb_view_time",
+      "google_install_referrer",
+      "inactivity_window_hours",
+      "install_id",
       "is_fb",
+      "meta_install_referrer",
       "used_install_referrer",
       "view_attr_window",
     };
@@ -7331,8 +7366,18 @@ public class Application extends APINode {
       return this;
     }
 
+    public APIRequestCreateMmpAuditing setAttributionMethod (String attributionMethod) {
+      this.setParam("attribution_method", attributionMethod);
+      return this;
+    }
+
     public APIRequestCreateMmpAuditing setAttributionModel (String attributionModel) {
       this.setParam("attribution_model", attributionModel);
+      return this;
+    }
+
+    public APIRequestCreateMmpAuditing setAttributionReferrer (String attributionReferrer) {
+      this.setParam("attribution_referrer", attributionReferrer);
       return this;
     }
 
@@ -7364,6 +7409,11 @@ public class Application extends APINode {
       return this;
     }
 
+    public APIRequestCreateMmpAuditing setDeviceOs (String deviceOs) {
+      this.setParam("device_os", deviceOs);
+      return this;
+    }
+
     public APIRequestCreateMmpAuditing setEngagementType (String engagementType) {
       this.setParam("engagement_type", engagementType);
       return this;
@@ -7371,6 +7421,11 @@ public class Application extends APINode {
 
     public APIRequestCreateMmpAuditing setEvent (String event) {
       this.setParam("event", event);
+      return this;
+    }
+
+    public APIRequestCreateMmpAuditing setEventId (String eventId) {
+      this.setParam("event_id", eventId);
       return this;
     }
 
@@ -7392,6 +7447,15 @@ public class Application extends APINode {
       return this;
     }
 
+    public APIRequestCreateMmpAuditing setFbAdgroupId (Long fbAdgroupId) {
+      this.setParam("fb_adgroup_id", fbAdgroupId);
+      return this;
+    }
+    public APIRequestCreateMmpAuditing setFbAdgroupId (String fbAdgroupId) {
+      this.setParam("fb_adgroup_id", fbAdgroupId);
+      return this;
+    }
+
     public APIRequestCreateMmpAuditing setFbClickTime (Long fbClickTime) {
       this.setParam("fb_click_time", fbClickTime);
       return this;
@@ -7410,12 +7474,36 @@ public class Application extends APINode {
       return this;
     }
 
+    public APIRequestCreateMmpAuditing setGoogleInstallReferrer (String googleInstallReferrer) {
+      this.setParam("google_install_referrer", googleInstallReferrer);
+      return this;
+    }
+
+    public APIRequestCreateMmpAuditing setInactivityWindowHours (Long inactivityWindowHours) {
+      this.setParam("inactivity_window_hours", inactivityWindowHours);
+      return this;
+    }
+    public APIRequestCreateMmpAuditing setInactivityWindowHours (String inactivityWindowHours) {
+      this.setParam("inactivity_window_hours", inactivityWindowHours);
+      return this;
+    }
+
+    public APIRequestCreateMmpAuditing setInstallId (String installId) {
+      this.setParam("install_id", installId);
+      return this;
+    }
+
     public APIRequestCreateMmpAuditing setIsFb (Boolean isFb) {
       this.setParam("is_fb", isFb);
       return this;
     }
     public APIRequestCreateMmpAuditing setIsFb (String isFb) {
       this.setParam("is_fb", isFb);
+      return this;
+    }
+
+    public APIRequestCreateMmpAuditing setMetaInstallReferrer (String metaInstallReferrer) {
+      this.setParam("meta_install_referrer", metaInstallReferrer);
       return this;
     }
 
@@ -8169,117 +8257,6 @@ public class Application extends APINode {
 
     @Override
     public APIRequestCreateOccludesPopup requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
-  public static class APIRequestCreatePaymentCurrency extends APIRequest<Application> {
-
-    Application lastResponse = null;
-    @Override
-    public Application getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "currency_url",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public Application parseResponse(String response, String header) throws APIException {
-      return Application.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public Application execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public Application execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<Application> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<Application> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, Application>() {
-           public Application apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreatePaymentCurrency.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         },
-         MoreExecutors.directExecutor()
-      );
-    };
-
-    public APIRequestCreatePaymentCurrency(String nodeId, APIContext context) {
-      super(context, nodeId, "/payment_currencies", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreatePaymentCurrency setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreatePaymentCurrency setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreatePaymentCurrency setCurrencyUrl (String currencyUrl) {
-      this.setParam("currency_url", currencyUrl);
-      return this;
-    }
-
-    public APIRequestCreatePaymentCurrency requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreatePaymentCurrency requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreatePaymentCurrency requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreatePaymentCurrency requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreatePaymentCurrency requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreatePaymentCurrency requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }

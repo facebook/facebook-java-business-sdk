@@ -401,6 +401,8 @@ public class AdReportRun extends APINode {
       "catalog_segment_value_omni_purchase_roas",
       "catalog_segment_value_website_purchase_roas",
       "clicks",
+      "conversion_lead_rate",
+      "conversion_leads",
       "conversion_rate_ranking",
       "conversion_values",
       "conversions",
@@ -411,6 +413,7 @@ public class AdReportRun extends APINode {
       "cost_per_action_type",
       "cost_per_ad_click",
       "cost_per_conversion",
+      "cost_per_conversion_lead",
       "cost_per_dda_countby_convs",
       "cost_per_estimated_ad_recallers",
       "cost_per_inline_link_click",
@@ -454,6 +457,8 @@ public class AdReportRun extends APINode {
       "instant_experience_outbound_clicks",
       "interactive_component_tap",
       "labels",
+      "landing_page_view_actions_per_link_click",
+      "landing_page_view_per_purchase_rate",
       "location",
       "marketing_messages_cost_per_delivered",
       "marketing_messages_cost_per_link_btn_click",
@@ -473,9 +478,11 @@ public class AdReportRun extends APINode {
       "outbound_clicks_ctr",
       "place_page_name",
       "purchase_roas",
+      "purchases_per_link_click",
       "qualifying_question_qualify_answer_rate",
       "quality_ranking",
       "reach",
+      "result_values_performance_indicator",
       "shops_assisted_purchases",
       "social_spend",
       "spend",
@@ -510,6 +517,7 @@ public class AdReportRun extends APINode {
       "video_play_retention_graph_actions",
       "video_thruplay_watched_actions",
       "video_time_watched_actions",
+      "video_view_per_impression",
       "website_ctr",
       "website_purchase_roas",
       "wish_bid",
@@ -815,6 +823,20 @@ public class AdReportRun extends APINode {
       this.requestField("clicks", value);
       return this;
     }
+    public APIRequestGetInsights requestConversionLeadRateField () {
+      return this.requestConversionLeadRateField(true);
+    }
+    public APIRequestGetInsights requestConversionLeadRateField (boolean value) {
+      this.requestField("conversion_lead_rate", value);
+      return this;
+    }
+    public APIRequestGetInsights requestConversionLeadsField () {
+      return this.requestConversionLeadsField(true);
+    }
+    public APIRequestGetInsights requestConversionLeadsField (boolean value) {
+      this.requestField("conversion_leads", value);
+      return this;
+    }
     public APIRequestGetInsights requestConversionRateRankingField () {
       return this.requestConversionRateRankingField(true);
     }
@@ -883,6 +905,13 @@ public class AdReportRun extends APINode {
     }
     public APIRequestGetInsights requestCostPerConversionField (boolean value) {
       this.requestField("cost_per_conversion", value);
+      return this;
+    }
+    public APIRequestGetInsights requestCostPerConversionLeadField () {
+      return this.requestCostPerConversionLeadField(true);
+    }
+    public APIRequestGetInsights requestCostPerConversionLeadField (boolean value) {
+      this.requestField("cost_per_conversion_lead", value);
       return this;
     }
     public APIRequestGetInsights requestCostPerDdaCountbyConvsField () {
@@ -1186,6 +1215,20 @@ public class AdReportRun extends APINode {
       this.requestField("labels", value);
       return this;
     }
+    public APIRequestGetInsights requestLandingPageViewActionsPerLinkClickField () {
+      return this.requestLandingPageViewActionsPerLinkClickField(true);
+    }
+    public APIRequestGetInsights requestLandingPageViewActionsPerLinkClickField (boolean value) {
+      this.requestField("landing_page_view_actions_per_link_click", value);
+      return this;
+    }
+    public APIRequestGetInsights requestLandingPageViewPerPurchaseRateField () {
+      return this.requestLandingPageViewPerPurchaseRateField(true);
+    }
+    public APIRequestGetInsights requestLandingPageViewPerPurchaseRateField (boolean value) {
+      this.requestField("landing_page_view_per_purchase_rate", value);
+      return this;
+    }
     public APIRequestGetInsights requestLocationField () {
       return this.requestLocationField(true);
     }
@@ -1319,6 +1362,13 @@ public class AdReportRun extends APINode {
       this.requestField("purchase_roas", value);
       return this;
     }
+    public APIRequestGetInsights requestPurchasesPerLinkClickField () {
+      return this.requestPurchasesPerLinkClickField(true);
+    }
+    public APIRequestGetInsights requestPurchasesPerLinkClickField (boolean value) {
+      this.requestField("purchases_per_link_click", value);
+      return this;
+    }
     public APIRequestGetInsights requestQualifyingQuestionQualifyAnswerRateField () {
       return this.requestQualifyingQuestionQualifyAnswerRateField(true);
     }
@@ -1338,6 +1388,13 @@ public class AdReportRun extends APINode {
     }
     public APIRequestGetInsights requestReachField (boolean value) {
       this.requestField("reach", value);
+      return this;
+    }
+    public APIRequestGetInsights requestResultValuesPerformanceIndicatorField () {
+      return this.requestResultValuesPerformanceIndicatorField(true);
+    }
+    public APIRequestGetInsights requestResultValuesPerformanceIndicatorField (boolean value) {
+      this.requestField("result_values_performance_indicator", value);
       return this;
     }
     public APIRequestGetInsights requestShopsAssistedPurchasesField () {
@@ -1576,6 +1633,13 @@ public class AdReportRun extends APINode {
     }
     public APIRequestGetInsights requestVideoTimeWatchedActionsField (boolean value) {
       this.requestField("video_time_watched_actions", value);
+      return this;
+    }
+    public APIRequestGetInsights requestVideoViewPerImpressionField () {
+      return this.requestVideoViewPerImpressionField(true);
+    }
+    public APIRequestGetInsights requestVideoViewPerImpressionField (boolean value) {
+      this.requestField("video_view_per_impression", value);
       return this;
     }
     public APIRequestGetInsights requestWebsiteCtrField () {
@@ -1946,6 +2010,8 @@ public class AdReportRun extends APINode {
       VALUE_APP_ID("app_id"),
       @SerializedName("body_asset")
       VALUE_BODY_ASSET("body_asset"),
+      @SerializedName("breakdown_ad_objective")
+      VALUE_BREAKDOWN_AD_OBJECTIVE("breakdown_ad_objective"),
       @SerializedName("breakdown_reporting_ad_id")
       VALUE_BREAKDOWN_REPORTING_AD_ID("breakdown_reporting_ad_id"),
       @SerializedName("call_to_action_asset")
@@ -1978,6 +2044,8 @@ public class AdReportRun extends APINode {
       VALUE_IMAGE_ASSET("image_asset"),
       @SerializedName("impression_device")
       VALUE_IMPRESSION_DEVICE("impression_device"),
+      @SerializedName("impression_view_time_advertiser_hour_v2")
+      VALUE_IMPRESSION_VIEW_TIME_ADVERTISER_HOUR_V2("impression_view_time_advertiser_hour_v2"),
       @SerializedName("is_conversion_id_modeled")
       VALUE_IS_CONVERSION_ID_MODELED("is_conversion_id_modeled"),
       @SerializedName("is_rendered_as_delayed_skip_ad")

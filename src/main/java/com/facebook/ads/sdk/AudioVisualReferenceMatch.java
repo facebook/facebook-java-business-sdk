@@ -47,6 +47,8 @@ public class AudioVisualReferenceMatch extends APINode {
   private List<Object> mAudioCurrentConflictResolvedSegments = null;
   @SerializedName("audio_segment_resolution_history")
   private List<Object> mAudioSegmentResolutionHistory = null;
+  @SerializedName("conflict_status")
+  private String mConflictStatus = null;
   @SerializedName("conflict_type")
   private String mConflictType = null;
   @SerializedName("conflicting_countries")
@@ -278,6 +280,15 @@ public class AudioVisualReferenceMatch extends APINode {
 
   public AudioVisualReferenceMatch setFieldAudioSegmentResolutionHistory(List<Object> value) {
     this.mAudioSegmentResolutionHistory = value;
+    return this;
+  }
+
+  public String getFieldConflictStatus() {
+    return mConflictStatus;
+  }
+
+  public AudioVisualReferenceMatch setFieldConflictStatus(String value) {
+    this.mConflictStatus = value;
     return this;
   }
 
@@ -569,6 +580,7 @@ public class AudioVisualReferenceMatch extends APINode {
     this.mAudioConflictingSegments = instance.mAudioConflictingSegments;
     this.mAudioCurrentConflictResolvedSegments = instance.mAudioCurrentConflictResolvedSegments;
     this.mAudioSegmentResolutionHistory = instance.mAudioSegmentResolutionHistory;
+    this.mConflictStatus = instance.mConflictStatus;
     this.mConflictType = instance.mConflictType;
     this.mConflictingCountries = instance.mConflictingCountries;
     this.mCountryResolutionHistory = instance.mCountryResolutionHistory;

@@ -24,8 +24,8 @@
 package com.facebook.ads.sdk;
 
 public class APIConfig {
-  public static final String DEFAULT_API_VERSION = "v21.0";
+  public static final String DEFAULT_API_VERSION = "v22.0";
   public static final String DEFAULT_API_BASE = "https://graph.facebook.com";
   public static final String DEFAULT_VIDEO_API_BASE = "https://graph-video.facebook.com";
-  public static final String USER_AGENT = "fbbizsdk-java-v21.0.2";
+  public static final String USER_AGENT = "fbbizsdk-java-v22.0.0";
 };

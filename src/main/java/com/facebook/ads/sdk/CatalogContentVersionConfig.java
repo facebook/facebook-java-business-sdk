@@ -40,68 +40,68 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class AdsDataPartner extends APINode {
+public class CatalogContentVersionConfig extends APINode {
   @SerializedName("id")
   private String mId = null;
   @SerializedName("name")
   private String mName = null;
-  @SerializedName("rev_share_policies")
-  private List<RevSharePolicy> mRevSharePolicies = null;
+  @SerializedName("version")
+  private String mVersion = null;
   protected static Gson gson = null;
 
-  AdsDataPartner() {
+  CatalogContentVersionConfig() {
   }
 
-  public AdsDataPartner(Long id, APIContext context) {
+  public CatalogContentVersionConfig(Long id, APIContext context) {
     this(id.toString(), context);
   }
 
-  public AdsDataPartner(String id, APIContext context) {
+  public CatalogContentVersionConfig(String id, APIContext context) {
     this.mId = id;
 
     this.context = context;
   }
 
-  public AdsDataPartner fetch() throws APIException{
-    AdsDataPartner newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+  public CatalogContentVersionConfig fetch() throws APIException{
+    CatalogContentVersionConfig newInstance = fetchById(this.getPrefixedId().toString(), this.context);
     this.copyFrom(newInstance);
     return this;
   }
 
-  public static AdsDataPartner fetchById(Long id, APIContext context) throws APIException {
+  public static CatalogContentVersionConfig fetchById(Long id, APIContext context) throws APIException {
     return fetchById(id.toString(), context);
   }
 
-  public static ListenableFuture<AdsDataPartner> fetchByIdAsync(Long id, APIContext context) throws APIException {
+  public static ListenableFuture<CatalogContentVersionConfig> fetchByIdAsync(Long id, APIContext context) throws APIException {
     return fetchByIdAsync(id.toString(), context);
   }
 
-  public static AdsDataPartner fetchById(String id, APIContext context) throws APIException {
+  public static CatalogContentVersionConfig fetchById(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
   }
 
-  public static ListenableFuture<AdsDataPartner> fetchByIdAsync(String id, APIContext context) throws APIException {
+  public static ListenableFuture<CatalogContentVersionConfig> fetchByIdAsync(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
   }
 
-  public static APINodeList<AdsDataPartner> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<AdsDataPartner>)(
-      new APIRequest<AdsDataPartner>(context, "", "/", "GET", AdsDataPartner.getParser())
+  public static APINodeList<CatalogContentVersionConfig> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<CatalogContentVersionConfig>)(
+      new APIRequest<CatalogContentVersionConfig>(context, "", "/", "GET", CatalogContentVersionConfig.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .execute()
     );
   }
 
-  public static ListenableFuture<APINodeList<AdsDataPartner>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+  public static ListenableFuture<APINodeList<CatalogContentVersionConfig>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
     return
-      new APIRequest(context, "", "/", "GET", AdsDataPartner.getParser())
+      new APIRequest(context, "", "/", "GET", CatalogContentVersionConfig.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
@@ -114,12 +114,12 @@ public class AdsDataPartner extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static AdsDataPartner loadJSON(String json, APIContext context, String header) {
-    AdsDataPartner adsDataPartner = getGson().fromJson(json, AdsDataPartner.class);
+  public static CatalogContentVersionConfig loadJSON(String json, APIContext context, String header) {
+    CatalogContentVersionConfig catalogContentVersionConfig = getGson().fromJson(json, CatalogContentVersionConfig.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(adsDataPartner.toString());
+      JsonElement o2 = parser.parse(catalogContentVersionConfig.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -129,14 +129,14 @@ public class AdsDataPartner extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    adsDataPartner.context = context;
-    adsDataPartner.rawValue = json;
-    adsDataPartner.header = header;
-    return adsDataPartner;
+    catalogContentVersionConfig.context = context;
+    catalogContentVersionConfig.rawValue = json;
+    catalogContentVersionConfig.header = header;
+    return catalogContentVersionConfig;
   }
 
-  public static APINodeList<AdsDataPartner> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<AdsDataPartner> adsDataPartners = new APINodeList<AdsDataPartner>(request, json, header);
+  public static APINodeList<CatalogContentVersionConfig> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<CatalogContentVersionConfig> catalogContentVersionConfigs = new APINodeList<CatalogContentVersionConfig>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -147,9 +147,9 @@ public class AdsDataPartner extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adsDataPartners.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          catalogContentVersionConfigs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return adsDataPartners;
+        return catalogContentVersionConfigs;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -159,20 +159,20 @@ public class AdsDataPartner extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                adsDataPartners.setCursors(before, after);
+                catalogContentVersionConfigs.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            adsDataPartners.setPaging(previous, next);
+            catalogContentVersionConfigs.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              adsDataPartners.setAppSecret(context.getAppSecretProof());
+              catalogContentVersionConfigs.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adsDataPartners.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              catalogContentVersionConfigs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -183,23 +183,23 @@ public class AdsDataPartner extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adsDataPartners.add(loadJSON(entry.getValue().toString(), context, header));
+                  catalogContentVersionConfigs.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adsDataPartners.add(loadJSON(obj.toString(), context, header));
+              catalogContentVersionConfigs.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return adsDataPartners;
+          return catalogContentVersionConfigs;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adsDataPartners.add(loadJSON(entry.getValue().toString(), context, header));
+              catalogContentVersionConfigs.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return adsDataPartners;
+          return catalogContentVersionConfigs;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -216,20 +216,20 @@ public class AdsDataPartner extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adsDataPartners.add(loadJSON(value.toString(), context, header));
+              catalogContentVersionConfigs.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return adsDataPartners;
+            return catalogContentVersionConfigs;
           }
 
           // Sixth, check if it's pure JsonObject
-          adsDataPartners.clear();
-          adsDataPartners.add(loadJSON(json, context, header));
-          return adsDataPartners;
+          catalogContentVersionConfigs.clear();
+          catalogContentVersionConfigs.add(loadJSON(json, context, header));
+          return catalogContentVersionConfigs;
         }
       }
     } catch (Exception e) {
@@ -269,17 +269,17 @@ public class AdsDataPartner extends APINode {
     return mName;
   }
 
-  public List<RevSharePolicy> getFieldRevSharePolicies() {
-    return mRevSharePolicies;
+  public String getFieldVersion() {
+    return mVersion;
   }
 
 
 
-  public static class APIRequestGet extends APIRequest<AdsDataPartner> {
+  public static class APIRequestGet extends APIRequest<CatalogContentVersionConfig> {
 
-    AdsDataPartner lastResponse = null;
+    CatalogContentVersionConfig lastResponse = null;
     @Override
-    public AdsDataPartner getLastResponse() {
+    public CatalogContentVersionConfig getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
@@ -288,35 +288,35 @@ public class AdsDataPartner extends APINode {
     public static final String[] FIELDS = {
       "id",
       "name",
-      "rev_share_policies",
+      "version",
     };
 
     @Override
-    public AdsDataPartner parseResponse(String response, String header) throws APIException {
-      return AdsDataPartner.parseResponse(response, getContext(), this, header).head();
+    public CatalogContentVersionConfig parseResponse(String response, String header) throws APIException {
+      return CatalogContentVersionConfig.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public AdsDataPartner execute() throws APIException {
+    public CatalogContentVersionConfig execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public AdsDataPartner execute(Map<String, Object> extraParams) throws APIException {
+    public CatalogContentVersionConfig execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<AdsDataPartner> executeAsync() throws APIException {
+    public ListenableFuture<CatalogContentVersionConfig> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<AdsDataPartner> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<CatalogContentVersionConfig> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, AdsDataPartner>() {
-           public AdsDataPartner apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, CatalogContentVersionConfig>() {
+           public CatalogContentVersionConfig apply(ResponseWrapper result) {
              try {
                return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -395,11 +395,11 @@ public class AdsDataPartner extends APINode {
       this.requestField("name", value);
       return this;
     }
-    public APIRequestGet requestRevSharePoliciesField () {
-      return this.requestRevSharePoliciesField(true);
+    public APIRequestGet requestVersionField () {
+      return this.requestVersionField(true);
     }
-    public APIRequestGet requestRevSharePoliciesField (boolean value) {
-      this.requestField("rev_share_policies", value);
+    public APIRequestGet requestVersionField (boolean value) {
+      this.requestField("version", value);
       return this;
     }
   }
@@ -418,19 +418,19 @@ public class AdsDataPartner extends APINode {
     return gson;
   }
 
-  public AdsDataPartner copyFrom(AdsDataPartner instance) {
+  public CatalogContentVersionConfig copyFrom(CatalogContentVersionConfig instance) {
     this.mId = instance.mId;
     this.mName = instance.mName;
-    this.mRevSharePolicies = instance.mRevSharePolicies;
+    this.mVersion = instance.mVersion;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<AdsDataPartner> getParser() {
-    return new APIRequest.ResponseParser<AdsDataPartner>() {
-      public APINodeList<AdsDataPartner> parseResponse(String response, APIContext context, APIRequest<AdsDataPartner> request, String header) throws MalformedResponseException {
-        return AdsDataPartner.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<CatalogContentVersionConfig> getParser() {
+    return new APIRequest.ResponseParser<CatalogContentVersionConfig>() {
+      public APINodeList<CatalogContentVersionConfig> parseResponse(String response, APIContext context, APIRequest<CatalogContentVersionConfig> request, String header) throws MalformedResponseException {
+        return CatalogContentVersionConfig.parseResponse(response, context, request, header);
       }
     };
   }

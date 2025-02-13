@@ -348,7 +348,6 @@ public class AdLabel extends APINode {
       "dynamic_ad_voice",
       "effective_authorization_category",
       "effective_instagram_media_id",
-      "effective_instagram_story_id",
       "effective_object_story_id",
       "enable_direct_install",
       "enable_launch_instant_app",
@@ -357,10 +356,8 @@ public class AdLabel extends APINode {
       "image_crops",
       "image_hash",
       "image_url",
-      "instagram_actor_id",
       "instagram_branded_content",
       "instagram_permalink_url",
-      "instagram_story_id",
       "instagram_user_id",
       "interactive_components_spec",
       "link_deep_link_url",
@@ -385,6 +382,7 @@ public class AdLabel extends APINode {
       "product_data",
       "product_set_id",
       "recommender_settings",
+      "regional_regulation_disclaimer_spec",
       "source_instagram_media_id",
       "status",
       "template_url",
@@ -648,13 +646,6 @@ public class AdLabel extends APINode {
       this.requestField("effective_instagram_media_id", value);
       return this;
     }
-    public APIRequestGetAdCreatives requestEffectiveInstagramStoryIdField () {
-      return this.requestEffectiveInstagramStoryIdField(true);
-    }
-    public APIRequestGetAdCreatives requestEffectiveInstagramStoryIdField (boolean value) {
-      this.requestField("effective_instagram_story_id", value);
-      return this;
-    }
     public APIRequestGetAdCreatives requestEffectiveObjectStoryIdField () {
       return this.requestEffectiveObjectStoryIdField(true);
     }
@@ -711,13 +702,6 @@ public class AdLabel extends APINode {
       this.requestField("image_url", value);
       return this;
     }
-    public APIRequestGetAdCreatives requestInstagramActorIdField () {
-      return this.requestInstagramActorIdField(true);
-    }
-    public APIRequestGetAdCreatives requestInstagramActorIdField (boolean value) {
-      this.requestField("instagram_actor_id", value);
-      return this;
-    }
     public APIRequestGetAdCreatives requestInstagramBrandedContentField () {
       return this.requestInstagramBrandedContentField(true);
     }
@@ -730,13 +714,6 @@ public class AdLabel extends APINode {
     }
     public APIRequestGetAdCreatives requestInstagramPermalinkUrlField (boolean value) {
       this.requestField("instagram_permalink_url", value);
-      return this;
-    }
-    public APIRequestGetAdCreatives requestInstagramStoryIdField () {
-      return this.requestInstagramStoryIdField(true);
-    }
-    public APIRequestGetAdCreatives requestInstagramStoryIdField (boolean value) {
-      this.requestField("instagram_story_id", value);
       return this;
     }
     public APIRequestGetAdCreatives requestInstagramUserIdField () {
@@ -905,6 +882,13 @@ public class AdLabel extends APINode {
     }
     public APIRequestGetAdCreatives requestRecommenderSettingsField (boolean value) {
       this.requestField("recommender_settings", value);
+      return this;
+    }
+    public APIRequestGetAdCreatives requestRegionalRegulationDisclaimerSpecField () {
+      return this.requestRegionalRegulationDisclaimerSpecField(true);
+    }
+    public APIRequestGetAdCreatives requestRegionalRegulationDisclaimerSpecField (boolean value) {
+      this.requestField("regional_regulation_disclaimer_spec", value);
       return this;
     }
     public APIRequestGetAdCreatives requestSourceInstagramMediaIdField () {
@@ -1439,7 +1423,7 @@ public class AdLabel extends APINode {
       "frequency_control_specs",
       "full_funnel_exploration_mode",
       "id",
-      "instagram_actor_id",
+      "instagram_user_id",
       "is_budget_schedule_enabled",
       "is_dynamic_creative",
       "issues_info",
@@ -1788,11 +1772,11 @@ public class AdLabel extends APINode {
       this.requestField("id", value);
       return this;
     }
-    public APIRequestGetAdSets requestInstagramActorIdField () {
-      return this.requestInstagramActorIdField(true);
+    public APIRequestGetAdSets requestInstagramUserIdField () {
+      return this.requestInstagramUserIdField(true);
     }
-    public APIRequestGetAdSets requestInstagramActorIdField (boolean value) {
-      this.requestField("instagram_actor_id", value);
+    public APIRequestGetAdSets requestInstagramUserIdField (boolean value) {
+      this.requestField("instagram_user_id", value);
       return this;
     }
     public APIRequestGetAdSets requestIsBudgetScheduleEnabledField () {

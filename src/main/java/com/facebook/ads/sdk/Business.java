@@ -9505,6 +9505,7 @@ public class Business extends APINode {
       "id",
       "is_enabled_for_insights",
       "linked_commerce_account",
+      "marketing_messages_lite_api_status",
       "message_template_namespace",
       "name",
       "on_behalf_of_business_info",
@@ -9683,6 +9684,13 @@ public class Business extends APINode {
     }
     public APIRequestGetClientWhatsAppBusinessAccounts requestLinkedCommerceAccountField (boolean value) {
       this.requestField("linked_commerce_account", value);
+      return this;
+    }
+    public APIRequestGetClientWhatsAppBusinessAccounts requestMarketingMessagesLiteApiStatusField () {
+      return this.requestMarketingMessagesLiteApiStatusField(true);
+    }
+    public APIRequestGetClientWhatsAppBusinessAccounts requestMarketingMessagesLiteApiStatusField (boolean value) {
+      this.requestField("marketing_messages_lite_api_status", value);
       return this;
     }
     public APIRequestGetClientWhatsAppBusinessAccounts requestMessageTemplateNamespaceField () {
@@ -13512,8 +13520,10 @@ public class Business extends APINode {
       "business_discovery",
       "followers_count",
       "follows_count",
+      "has_profile_pic",
       "id",
       "ig_id",
+      "is_published",
       "legacy_instagram_user_id",
       "media_count",
       "mentioned_comment",
@@ -13645,6 +13655,13 @@ public class Business extends APINode {
       this.requestField("follows_count", value);
       return this;
     }
+    public APIRequestGetInstagramBusinessAccounts requestHasProfilePicField () {
+      return this.requestHasProfilePicField(true);
+    }
+    public APIRequestGetInstagramBusinessAccounts requestHasProfilePicField (boolean value) {
+      this.requestField("has_profile_pic", value);
+      return this;
+    }
     public APIRequestGetInstagramBusinessAccounts requestIdField () {
       return this.requestIdField(true);
     }
@@ -13657,6 +13674,13 @@ public class Business extends APINode {
     }
     public APIRequestGetInstagramBusinessAccounts requestIgIdField (boolean value) {
       this.requestField("ig_id", value);
+      return this;
+    }
+    public APIRequestGetInstagramBusinessAccounts requestIsPublishedField () {
+      return this.requestIsPublishedField(true);
+    }
+    public APIRequestGetInstagramBusinessAccounts requestIsPublishedField (boolean value) {
+      this.requestField("is_published", value);
       return this;
     }
     public APIRequestGetInstagramBusinessAccounts requestLegacyInstagramUserIdField () {
@@ -14797,10 +14821,8 @@ public class Business extends APINode {
       "destination_id",
       "endpoint",
       "fallback_domain",
-      "fallback_domain_enabled",
       "first_party_domain",
       "host_business_id",
-      "host_external_id",
       "id",
       "instance_id",
       "instance_version",
@@ -14941,13 +14963,6 @@ public class Business extends APINode {
       this.requestField("fallback_domain", value);
       return this;
     }
-    public APIRequestGetOpenBridgeConfigurations requestFallbackDomainEnabledField () {
-      return this.requestFallbackDomainEnabledField(true);
-    }
-    public APIRequestGetOpenBridgeConfigurations requestFallbackDomainEnabledField (boolean value) {
-      this.requestField("fallback_domain_enabled", value);
-      return this;
-    }
     public APIRequestGetOpenBridgeConfigurations requestFirstPartyDomainField () {
       return this.requestFirstPartyDomainField(true);
     }
@@ -14960,13 +14975,6 @@ public class Business extends APINode {
     }
     public APIRequestGetOpenBridgeConfigurations requestHostBusinessIdField (boolean value) {
       this.requestField("host_business_id", value);
-      return this;
-    }
-    public APIRequestGetOpenBridgeConfigurations requestHostExternalIdField () {
-      return this.requestHostExternalIdField(true);
-    }
-    public APIRequestGetOpenBridgeConfigurations requestHostExternalIdField (boolean value) {
-      this.requestField("host_external_id", value);
       return this;
     }
     public APIRequestGetOpenBridgeConfigurations requestIdField () {
@@ -15027,10 +15035,8 @@ public class Business extends APINode {
       "destination_id",
       "endpoint",
       "fallback_domain",
-      "fallback_domain_enabled",
       "first_party_domain",
       "host_business_id",
-      "host_external_id",
       "instance_id",
       "instance_version",
       "is_sgw_instance",
@@ -15129,15 +15135,6 @@ public class Business extends APINode {
       return this;
     }
 
-    public APIRequestCreateOpenBridgeConfiguration setFallbackDomainEnabled (Boolean fallbackDomainEnabled) {
-      this.setParam("fallback_domain_enabled", fallbackDomainEnabled);
-      return this;
-    }
-    public APIRequestCreateOpenBridgeConfiguration setFallbackDomainEnabled (String fallbackDomainEnabled) {
-      this.setParam("fallback_domain_enabled", fallbackDomainEnabled);
-      return this;
-    }
-
     public APIRequestCreateOpenBridgeConfiguration setFirstPartyDomain (String firstPartyDomain) {
       this.setParam("first_party_domain", firstPartyDomain);
       return this;
@@ -15149,11 +15146,6 @@ public class Business extends APINode {
     }
     public APIRequestCreateOpenBridgeConfiguration setHostBusinessId (String hostBusinessId) {
       this.setParam("host_business_id", hostBusinessId);
-      return this;
-    }
-
-    public APIRequestCreateOpenBridgeConfiguration setHostExternalId (String hostExternalId) {
-      this.setParam("host_external_id", hostExternalId);
       return this;
     }
 
@@ -20346,6 +20338,7 @@ public class Business extends APINode {
       "id",
       "is_enabled_for_insights",
       "linked_commerce_account",
+      "marketing_messages_lite_api_status",
       "message_template_namespace",
       "name",
       "on_behalf_of_business_info",
@@ -20524,6 +20517,13 @@ public class Business extends APINode {
     }
     public APIRequestGetOwnedWhatsAppBusinessAccounts requestLinkedCommerceAccountField (boolean value) {
       this.requestField("linked_commerce_account", value);
+      return this;
+    }
+    public APIRequestGetOwnedWhatsAppBusinessAccounts requestMarketingMessagesLiteApiStatusField () {
+      return this.requestMarketingMessagesLiteApiStatusField(true);
+    }
+    public APIRequestGetOwnedWhatsAppBusinessAccounts requestMarketingMessagesLiteApiStatusField (boolean value) {
+      this.requestField("marketing_messages_lite_api_status", value);
       return this;
     }
     public APIRequestGetOwnedWhatsAppBusinessAccounts requestMessageTemplateNamespaceField () {

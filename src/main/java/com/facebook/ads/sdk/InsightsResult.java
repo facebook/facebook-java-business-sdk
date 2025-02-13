@@ -304,6 +304,8 @@ public class InsightsResult extends APINode {
       VALUE_CLIPS_REPLAYS_COUNT("clips_replays_count"),
       @SerializedName("comments")
       VALUE_COMMENTS("comments"),
+      @SerializedName("content_views")
+      VALUE_CONTENT_VIEWS("content_views"),
       @SerializedName("follows")
       VALUE_FOLLOWS("follows"),
       @SerializedName("ig_reels_aggregated_all_plays_count")
@@ -342,6 +344,8 @@ public class InsightsResult extends APINode {
       VALUE_THREAD_REPLIES("thread_replies"),
       @SerializedName("thread_shares")
       VALUE_THREAD_SHARES("thread_shares"),
+      @SerializedName("threads_views")
+      VALUE_THREADS_VIEWS("threads_views"),
       @SerializedName("total_interactions")
       VALUE_TOTAL_INTERACTIONS("total_interactions"),
       @SerializedName("video_views")
@@ -435,6 +439,54 @@ public class InsightsResult extends APINode {
       private String value;
 
       private EnumDatePreset(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumMetricType {
+      @SerializedName("default")
+      VALUE_DEFAULT("default"),
+      @SerializedName("time_series")
+      VALUE_TIME_SERIES("time_series"),
+      @SerializedName("total_value")
+      VALUE_TOTAL_VALUE("total_value"),
+      ;
+
+      private String value;
+
+      private EnumMetricType(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumTimeframe {
+      @SerializedName("last_14_days")
+      VALUE_LAST_14_DAYS("last_14_days"),
+      @SerializedName("last_30_days")
+      VALUE_LAST_30_DAYS("last_30_days"),
+      @SerializedName("last_90_days")
+      VALUE_LAST_90_DAYS("last_90_days"),
+      @SerializedName("prev_month")
+      VALUE_PREV_MONTH("prev_month"),
+      @SerializedName("this_month")
+      VALUE_THIS_MONTH("this_month"),
+      @SerializedName("this_week")
+      VALUE_THIS_WEEK("this_week"),
+      ;
+
+      private String value;
+
+      private EnumTimeframe(String value) {
         this.value = value;
       }
 

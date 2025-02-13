@@ -87,8 +87,6 @@ public class AdCreative extends APINode {
   private String mEffectiveAuthorizationCategory = null;
   @SerializedName("effective_instagram_media_id")
   private String mEffectiveInstagramMediaId = null;
-  @SerializedName("effective_instagram_story_id")
-  private String mEffectiveInstagramStoryId = null;
   @SerializedName("effective_object_story_id")
   private String mEffectiveObjectStoryId = null;
   @SerializedName("enable_direct_install")
@@ -105,14 +103,10 @@ public class AdCreative extends APINode {
   private String mImageHash = null;
   @SerializedName("image_url")
   private String mImageUrl = null;
-  @SerializedName("instagram_actor_id")
-  private String mInstagramActorId = null;
   @SerializedName("instagram_branded_content")
   private AdCreativeInstagramBrandedContent mInstagramBrandedContent = null;
   @SerializedName("instagram_permalink_url")
   private String mInstagramPermalinkUrl = null;
-  @SerializedName("instagram_story_id")
-  private String mInstagramStoryId = null;
   @SerializedName("instagram_user_id")
   private String mInstagramUserId = null;
   @SerializedName("interactive_components_spec")
@@ -161,6 +155,8 @@ public class AdCreative extends APINode {
   private String mProductSetId = null;
   @SerializedName("recommender_settings")
   private AdCreativeRecommenderSettings mRecommenderSettings = null;
+  @SerializedName("regional_regulation_disclaimer_spec")
+  private AdCreativeRegionalRegulationDisclaimer mRegionalRegulationDisclaimerSpec = null;
   @SerializedName("source_instagram_media_id")
   private String mSourceInstagramMediaId = null;
   @SerializedName("status")
@@ -662,15 +658,6 @@ public class AdCreative extends APINode {
     return this;
   }
 
-  public String getFieldEffectiveInstagramStoryId() {
-    return mEffectiveInstagramStoryId;
-  }
-
-  public AdCreative setFieldEffectiveInstagramStoryId(String value) {
-    this.mEffectiveInstagramStoryId = value;
-    return this;
-  }
-
   public String getFieldEffectiveObjectStoryId() {
     return mEffectiveObjectStoryId;
   }
@@ -754,15 +741,6 @@ public class AdCreative extends APINode {
     return this;
   }
 
-  public String getFieldInstagramActorId() {
-    return mInstagramActorId;
-  }
-
-  public AdCreative setFieldInstagramActorId(String value) {
-    this.mInstagramActorId = value;
-    return this;
-  }
-
   public AdCreativeInstagramBrandedContent getFieldInstagramBrandedContent() {
     return mInstagramBrandedContent;
   }
@@ -783,15 +761,6 @@ public class AdCreative extends APINode {
 
   public AdCreative setFieldInstagramPermalinkUrl(String value) {
     this.mInstagramPermalinkUrl = value;
-    return this;
-  }
-
-  public String getFieldInstagramStoryId() {
-    return mInstagramStoryId;
-  }
-
-  public AdCreative setFieldInstagramStoryId(String value) {
-    this.mInstagramStoryId = value;
     return this;
   }
 
@@ -1044,6 +1013,20 @@ public class AdCreative extends APINode {
   public AdCreative setFieldRecommenderSettings(String value) {
     Type type = new TypeToken<AdCreativeRecommenderSettings>(){}.getType();
     this.mRecommenderSettings = AdCreativeRecommenderSettings.getGson().fromJson(value, type);
+    return this;
+  }
+  public AdCreativeRegionalRegulationDisclaimer getFieldRegionalRegulationDisclaimerSpec() {
+    return mRegionalRegulationDisclaimerSpec;
+  }
+
+  public AdCreative setFieldRegionalRegulationDisclaimerSpec(AdCreativeRegionalRegulationDisclaimer value) {
+    this.mRegionalRegulationDisclaimerSpec = value;
+    return this;
+  }
+
+  public AdCreative setFieldRegionalRegulationDisclaimerSpec(String value) {
+    Type type = new TypeToken<AdCreativeRegionalRegulationDisclaimer>(){}.getType();
+    this.mRegionalRegulationDisclaimerSpec = AdCreativeRegionalRegulationDisclaimer.getGson().fromJson(value, type);
     return this;
   }
   public String getFieldSourceInstagramMediaId() {
@@ -1789,7 +1772,6 @@ public class AdCreative extends APINode {
       "dynamic_ad_voice",
       "effective_authorization_category",
       "effective_instagram_media_id",
-      "effective_instagram_story_id",
       "effective_object_story_id",
       "enable_direct_install",
       "enable_launch_instant_app",
@@ -1798,10 +1780,8 @@ public class AdCreative extends APINode {
       "image_crops",
       "image_hash",
       "image_url",
-      "instagram_actor_id",
       "instagram_branded_content",
       "instagram_permalink_url",
-      "instagram_story_id",
       "instagram_user_id",
       "interactive_components_spec",
       "link_deep_link_url",
@@ -1826,6 +1806,7 @@ public class AdCreative extends APINode {
       "product_data",
       "product_set_id",
       "recommender_settings",
+      "regional_regulation_disclaimer_spec",
       "source_instagram_media_id",
       "status",
       "template_url",
@@ -2107,13 +2088,6 @@ public class AdCreative extends APINode {
       this.requestField("effective_instagram_media_id", value);
       return this;
     }
-    public APIRequestGet requestEffectiveInstagramStoryIdField () {
-      return this.requestEffectiveInstagramStoryIdField(true);
-    }
-    public APIRequestGet requestEffectiveInstagramStoryIdField (boolean value) {
-      this.requestField("effective_instagram_story_id", value);
-      return this;
-    }
     public APIRequestGet requestEffectiveObjectStoryIdField () {
       return this.requestEffectiveObjectStoryIdField(true);
     }
@@ -2170,13 +2144,6 @@ public class AdCreative extends APINode {
       this.requestField("image_url", value);
       return this;
     }
-    public APIRequestGet requestInstagramActorIdField () {
-      return this.requestInstagramActorIdField(true);
-    }
-    public APIRequestGet requestInstagramActorIdField (boolean value) {
-      this.requestField("instagram_actor_id", value);
-      return this;
-    }
     public APIRequestGet requestInstagramBrandedContentField () {
       return this.requestInstagramBrandedContentField(true);
     }
@@ -2189,13 +2156,6 @@ public class AdCreative extends APINode {
     }
     public APIRequestGet requestInstagramPermalinkUrlField (boolean value) {
       this.requestField("instagram_permalink_url", value);
-      return this;
-    }
-    public APIRequestGet requestInstagramStoryIdField () {
-      return this.requestInstagramStoryIdField(true);
-    }
-    public APIRequestGet requestInstagramStoryIdField (boolean value) {
-      this.requestField("instagram_story_id", value);
       return this;
     }
     public APIRequestGet requestInstagramUserIdField () {
@@ -2364,6 +2324,13 @@ public class AdCreative extends APINode {
     }
     public APIRequestGet requestRecommenderSettingsField (boolean value) {
       this.requestField("recommender_settings", value);
+      return this;
+    }
+    public APIRequestGet requestRegionalRegulationDisclaimerSpecField () {
+      return this.requestRegionalRegulationDisclaimerSpecField(true);
+    }
+    public APIRequestGet requestRegionalRegulationDisclaimerSpecField (boolean value) {
+      this.requestField("regional_regulation_disclaimer_spec", value);
       return this;
     }
     public APIRequestGet requestSourceInstagramMediaIdField () {
@@ -2636,6 +2603,8 @@ public class AdCreative extends APINode {
       VALUE_GET_A_QUOTE("GET_A_QUOTE"),
       @SerializedName("GET_DIRECTIONS")
       VALUE_GET_DIRECTIONS("GET_DIRECTIONS"),
+      @SerializedName("GET_IN_TOUCH")
+      VALUE_GET_IN_TOUCH("GET_IN_TOUCH"),
       @SerializedName("GET_OFFER")
       VALUE_GET_OFFER("GET_OFFER"),
       @SerializedName("GET_OFFER_VIEW")
@@ -2738,6 +2707,8 @@ public class AdCreative extends APINode {
       VALUE_VIEW_PRODUCT("VIEW_PRODUCT"),
       @SerializedName("VISIT_PAGES_FEED")
       VALUE_VISIT_PAGES_FEED("VISIT_PAGES_FEED"),
+      @SerializedName("WATCH_LIVE_VIDEO")
+      VALUE_WATCH_LIVE_VIDEO("WATCH_LIVE_VIDEO"),
       @SerializedName("WATCH_MORE")
       VALUE_WATCH_MORE("WATCH_MORE"),
       @SerializedName("WATCH_VIDEO")
@@ -2988,7 +2959,6 @@ public class AdCreative extends APINode {
     this.mDynamicAdVoice = instance.mDynamicAdVoice;
     this.mEffectiveAuthorizationCategory = instance.mEffectiveAuthorizationCategory;
     this.mEffectiveInstagramMediaId = instance.mEffectiveInstagramMediaId;
-    this.mEffectiveInstagramStoryId = instance.mEffectiveInstagramStoryId;
     this.mEffectiveObjectStoryId = instance.mEffectiveObjectStoryId;
     this.mEnableDirectInstall = instance.mEnableDirectInstall;
     this.mEnableLaunchInstantApp = instance.mEnableLaunchInstantApp;
@@ -2997,10 +2967,8 @@ public class AdCreative extends APINode {
     this.mImageCrops = instance.mImageCrops;
     this.mImageHash = instance.mImageHash;
     this.mImageUrl = instance.mImageUrl;
-    this.mInstagramActorId = instance.mInstagramActorId;
     this.mInstagramBrandedContent = instance.mInstagramBrandedContent;
     this.mInstagramPermalinkUrl = instance.mInstagramPermalinkUrl;
-    this.mInstagramStoryId = instance.mInstagramStoryId;
     this.mInstagramUserId = instance.mInstagramUserId;
     this.mInteractiveComponentsSpec = instance.mInteractiveComponentsSpec;
     this.mLinkDeepLinkUrl = instance.mLinkDeepLinkUrl;
@@ -3025,6 +2993,7 @@ public class AdCreative extends APINode {
     this.mProductData = instance.mProductData;
     this.mProductSetId = instance.mProductSetId;
     this.mRecommenderSettings = instance.mRecommenderSettings;
+    this.mRegionalRegulationDisclaimerSpec = instance.mRegionalRegulationDisclaimerSpec;
     this.mSourceInstagramMediaId = instance.mSourceInstagramMediaId;
     this.mStatus = instance.mStatus;
     this.mTemplateUrl = instance.mTemplateUrl;

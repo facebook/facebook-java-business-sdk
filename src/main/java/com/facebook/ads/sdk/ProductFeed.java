@@ -478,6 +478,15 @@ public class ProductFeed extends APINode {
       "category_specific_fields",
       "currency",
       "custom_label_0",
+      "custom_label_1",
+      "custom_label_2",
+      "custom_label_3",
+      "custom_label_4",
+      "custom_number_0",
+      "custom_number_1",
+      "custom_number_2",
+      "custom_number_3",
+      "custom_number_4",
       "description",
       "drivetrain",
       "exterior_color",
@@ -658,6 +667,69 @@ public class ProductFeed extends APINode {
     }
     public APIRequestGetAutomotiveModels requestCustomLabel0Field (boolean value) {
       this.requestField("custom_label_0", value);
+      return this;
+    }
+    public APIRequestGetAutomotiveModels requestCustomLabel1Field () {
+      return this.requestCustomLabel1Field(true);
+    }
+    public APIRequestGetAutomotiveModels requestCustomLabel1Field (boolean value) {
+      this.requestField("custom_label_1", value);
+      return this;
+    }
+    public APIRequestGetAutomotiveModels requestCustomLabel2Field () {
+      return this.requestCustomLabel2Field(true);
+    }
+    public APIRequestGetAutomotiveModels requestCustomLabel2Field (boolean value) {
+      this.requestField("custom_label_2", value);
+      return this;
+    }
+    public APIRequestGetAutomotiveModels requestCustomLabel3Field () {
+      return this.requestCustomLabel3Field(true);
+    }
+    public APIRequestGetAutomotiveModels requestCustomLabel3Field (boolean value) {
+      this.requestField("custom_label_3", value);
+      return this;
+    }
+    public APIRequestGetAutomotiveModels requestCustomLabel4Field () {
+      return this.requestCustomLabel4Field(true);
+    }
+    public APIRequestGetAutomotiveModels requestCustomLabel4Field (boolean value) {
+      this.requestField("custom_label_4", value);
+      return this;
+    }
+    public APIRequestGetAutomotiveModels requestCustomNumber0Field () {
+      return this.requestCustomNumber0Field(true);
+    }
+    public APIRequestGetAutomotiveModels requestCustomNumber0Field (boolean value) {
+      this.requestField("custom_number_0", value);
+      return this;
+    }
+    public APIRequestGetAutomotiveModels requestCustomNumber1Field () {
+      return this.requestCustomNumber1Field(true);
+    }
+    public APIRequestGetAutomotiveModels requestCustomNumber1Field (boolean value) {
+      this.requestField("custom_number_1", value);
+      return this;
+    }
+    public APIRequestGetAutomotiveModels requestCustomNumber2Field () {
+      return this.requestCustomNumber2Field(true);
+    }
+    public APIRequestGetAutomotiveModels requestCustomNumber2Field (boolean value) {
+      this.requestField("custom_number_2", value);
+      return this;
+    }
+    public APIRequestGetAutomotiveModels requestCustomNumber3Field () {
+      return this.requestCustomNumber3Field(true);
+    }
+    public APIRequestGetAutomotiveModels requestCustomNumber3Field (boolean value) {
+      this.requestField("custom_number_3", value);
+      return this;
+    }
+    public APIRequestGetAutomotiveModels requestCustomNumber4Field () {
+      return this.requestCustomNumber4Field(true);
+    }
+    public APIRequestGetAutomotiveModels requestCustomNumber4Field (boolean value) {
+      this.requestField("custom_number_4", value);
       return this;
     }
     public APIRequestGetAutomotiveModels requestDescriptionField () {
@@ -843,9 +915,13 @@ public class ProductFeed extends APINode {
       "custom_label_0",
       "custom_label_1",
       "custom_label_2",
+      "custom_label_3",
+      "custom_label_4",
       "custom_number_0",
       "custom_number_1",
       "custom_number_2",
+      "custom_number_3",
+      "custom_number_4",
       "description",
       "destination_id",
       "id",
@@ -1019,6 +1095,20 @@ public class ProductFeed extends APINode {
       this.requestField("custom_label_2", value);
       return this;
     }
+    public APIRequestGetDestinations requestCustomLabel3Field () {
+      return this.requestCustomLabel3Field(true);
+    }
+    public APIRequestGetDestinations requestCustomLabel3Field (boolean value) {
+      this.requestField("custom_label_3", value);
+      return this;
+    }
+    public APIRequestGetDestinations requestCustomLabel4Field () {
+      return this.requestCustomLabel4Field(true);
+    }
+    public APIRequestGetDestinations requestCustomLabel4Field (boolean value) {
+      this.requestField("custom_label_4", value);
+      return this;
+    }
     public APIRequestGetDestinations requestCustomNumber0Field () {
       return this.requestCustomNumber0Field(true);
     }
@@ -1038,6 +1128,20 @@ public class ProductFeed extends APINode {
     }
     public APIRequestGetDestinations requestCustomNumber2Field (boolean value) {
       this.requestField("custom_number_2", value);
+      return this;
+    }
+    public APIRequestGetDestinations requestCustomNumber3Field () {
+      return this.requestCustomNumber3Field(true);
+    }
+    public APIRequestGetDestinations requestCustomNumber3Field (boolean value) {
+      this.requestField("custom_number_3", value);
+      return this;
+    }
+    public APIRequestGetDestinations requestCustomNumber4Field () {
+      return this.requestCustomNumber4Field(true);
+    }
+    public APIRequestGetDestinations requestCustomNumber4Field (boolean value) {
+      this.requestField("custom_number_4", value);
       return this;
     }
     public APIRequestGetDestinations requestDescriptionField () {
@@ -1156,6 +1260,16 @@ public class ProductFeed extends APINode {
       "applinks",
       "category_specific_fields",
       "currency",
+      "custom_label_0",
+      "custom_label_1",
+      "custom_label_2",
+      "custom_label_3",
+      "custom_label_4",
+      "custom_number_0",
+      "custom_number_1",
+      "custom_number_2",
+      "custom_number_3",
+      "custom_number_4",
       "description",
       "destination_airport",
       "destination_city",
@@ -1168,6 +1282,11 @@ public class ProductFeed extends APINode {
       "origin_airport",
       "origin_city",
       "price",
+      "product_priority_0",
+      "product_priority_1",
+      "product_priority_2",
+      "product_priority_3",
+      "product_priority_4",
       "sanitized_images",
       "tags",
       "unit_price",
@@ -1304,6 +1423,76 @@ public class ProductFeed extends APINode {
       this.requestField("currency", value);
       return this;
     }
+    public APIRequestGetFlights requestCustomLabel0Field () {
+      return this.requestCustomLabel0Field(true);
+    }
+    public APIRequestGetFlights requestCustomLabel0Field (boolean value) {
+      this.requestField("custom_label_0", value);
+      return this;
+    }
+    public APIRequestGetFlights requestCustomLabel1Field () {
+      return this.requestCustomLabel1Field(true);
+    }
+    public APIRequestGetFlights requestCustomLabel1Field (boolean value) {
+      this.requestField("custom_label_1", value);
+      return this;
+    }
+    public APIRequestGetFlights requestCustomLabel2Field () {
+      return this.requestCustomLabel2Field(true);
+    }
+    public APIRequestGetFlights requestCustomLabel2Field (boolean value) {
+      this.requestField("custom_label_2", value);
+      return this;
+    }
+    public APIRequestGetFlights requestCustomLabel3Field () {
+      return this.requestCustomLabel3Field(true);
+    }
+    public APIRequestGetFlights requestCustomLabel3Field (boolean value) {
+      this.requestField("custom_label_3", value);
+      return this;
+    }
+    public APIRequestGetFlights requestCustomLabel4Field () {
+      return this.requestCustomLabel4Field(true);
+    }
+    public APIRequestGetFlights requestCustomLabel4Field (boolean value) {
+      this.requestField("custom_label_4", value);
+      return this;
+    }
+    public APIRequestGetFlights requestCustomNumber0Field () {
+      return this.requestCustomNumber0Field(true);
+    }
+    public APIRequestGetFlights requestCustomNumber0Field (boolean value) {
+      this.requestField("custom_number_0", value);
+      return this;
+    }
+    public APIRequestGetFlights requestCustomNumber1Field () {
+      return this.requestCustomNumber1Field(true);
+    }
+    public APIRequestGetFlights requestCustomNumber1Field (boolean value) {
+      this.requestField("custom_number_1", value);
+      return this;
+    }
+    public APIRequestGetFlights requestCustomNumber2Field () {
+      return this.requestCustomNumber2Field(true);
+    }
+    public APIRequestGetFlights requestCustomNumber2Field (boolean value) {
+      this.requestField("custom_number_2", value);
+      return this;
+    }
+    public APIRequestGetFlights requestCustomNumber3Field () {
+      return this.requestCustomNumber3Field(true);
+    }
+    public APIRequestGetFlights requestCustomNumber3Field (boolean value) {
+      this.requestField("custom_number_3", value);
+      return this;
+    }
+    public APIRequestGetFlights requestCustomNumber4Field () {
+      return this.requestCustomNumber4Field(true);
+    }
+    public APIRequestGetFlights requestCustomNumber4Field (boolean value) {
+      this.requestField("custom_number_4", value);
+      return this;
+    }
     public APIRequestGetFlights requestDescriptionField () {
       return this.requestDescriptionField(true);
     }
@@ -1388,6 +1577,41 @@ public class ProductFeed extends APINode {
       this.requestField("price", value);
       return this;
     }
+    public APIRequestGetFlights requestProductPriority0Field () {
+      return this.requestProductPriority0Field(true);
+    }
+    public APIRequestGetFlights requestProductPriority0Field (boolean value) {
+      this.requestField("product_priority_0", value);
+      return this;
+    }
+    public APIRequestGetFlights requestProductPriority1Field () {
+      return this.requestProductPriority1Field(true);
+    }
+    public APIRequestGetFlights requestProductPriority1Field (boolean value) {
+      this.requestField("product_priority_1", value);
+      return this;
+    }
+    public APIRequestGetFlights requestProductPriority2Field () {
+      return this.requestProductPriority2Field(true);
+    }
+    public APIRequestGetFlights requestProductPriority2Field (boolean value) {
+      this.requestField("product_priority_2", value);
+      return this;
+    }
+    public APIRequestGetFlights requestProductPriority3Field () {
+      return this.requestProductPriority3Field(true);
+    }
+    public APIRequestGetFlights requestProductPriority3Field (boolean value) {
+      this.requestField("product_priority_3", value);
+      return this;
+    }
+    public APIRequestGetFlights requestProductPriority4Field () {
+      return this.requestProductPriority4Field(true);
+    }
+    public APIRequestGetFlights requestProductPriority4Field (boolean value) {
+      this.requestField("product_priority_4", value);
+      return this;
+    }
     public APIRequestGetFlights requestSanitizedImagesField () {
       return this.requestSanitizedImagesField(true);
     }
@@ -1453,6 +1677,16 @@ public class ProductFeed extends APINode {
       "category_specific_fields",
       "co_2_emission_rating_eu",
       "currency",
+      "custom_label_0",
+      "custom_label_1",
+      "custom_label_2",
+      "custom_label_3",
+      "custom_label_4",
+      "custom_number_0",
+      "custom_number_1",
+      "custom_number_2",
+      "custom_number_3",
+      "custom_number_4",
       "days_on_market",
       "description",
       "energy_rating_eu",
@@ -1699,6 +1933,76 @@ public class ProductFeed extends APINode {
       this.requestField("currency", value);
       return this;
     }
+    public APIRequestGetHomeListings requestCustomLabel0Field () {
+      return this.requestCustomLabel0Field(true);
+    }
+    public APIRequestGetHomeListings requestCustomLabel0Field (boolean value) {
+      this.requestField("custom_label_0", value);
+      return this;
+    }
+    public APIRequestGetHomeListings requestCustomLabel1Field () {
+      return this.requestCustomLabel1Field(true);
+    }
+    public APIRequestGetHomeListings requestCustomLabel1Field (boolean value) {
+      this.requestField("custom_label_1", value);
+      return this;
+    }
+    public APIRequestGetHomeListings requestCustomLabel2Field () {
+      return this.requestCustomLabel2Field(true);
+    }
+    public APIRequestGetHomeListings requestCustomLabel2Field (boolean value) {
+      this.requestField("custom_label_2", value);
+      return this;
+    }
+    public APIRequestGetHomeListings requestCustomLabel3Field () {
+      return this.requestCustomLabel3Field(true);
+    }
+    public APIRequestGetHomeListings requestCustomLabel3Field (boolean value) {
+      this.requestField("custom_label_3", value);
+      return this;
+    }
+    public APIRequestGetHomeListings requestCustomLabel4Field () {
+      return this.requestCustomLabel4Field(true);
+    }
+    public APIRequestGetHomeListings requestCustomLabel4Field (boolean value) {
+      this.requestField("custom_label_4", value);
+      return this;
+    }
+    public APIRequestGetHomeListings requestCustomNumber0Field () {
+      return this.requestCustomNumber0Field(true);
+    }
+    public APIRequestGetHomeListings requestCustomNumber0Field (boolean value) {
+      this.requestField("custom_number_0", value);
+      return this;
+    }
+    public APIRequestGetHomeListings requestCustomNumber1Field () {
+      return this.requestCustomNumber1Field(true);
+    }
+    public APIRequestGetHomeListings requestCustomNumber1Field (boolean value) {
+      this.requestField("custom_number_1", value);
+      return this;
+    }
+    public APIRequestGetHomeListings requestCustomNumber2Field () {
+      return this.requestCustomNumber2Field(true);
+    }
+    public APIRequestGetHomeListings requestCustomNumber2Field (boolean value) {
+      this.requestField("custom_number_2", value);
+      return this;
+    }
+    public APIRequestGetHomeListings requestCustomNumber3Field () {
+      return this.requestCustomNumber3Field(true);
+    }
+    public APIRequestGetHomeListings requestCustomNumber3Field (boolean value) {
+      this.requestField("custom_number_3", value);
+      return this;
+    }
+    public APIRequestGetHomeListings requestCustomNumber4Field () {
+      return this.requestCustomNumber4Field(true);
+    }
+    public APIRequestGetHomeListings requestCustomNumber4Field (boolean value) {
+      this.requestField("custom_number_4", value);
+      return this;
+    }
     public APIRequestGetHomeListings requestDaysOnMarketField () {
       return this.requestDaysOnMarketField(true);
     }
@@ -1937,6 +2241,16 @@ public class ProductFeed extends APINode {
       "category",
       "category_specific_fields",
       "currency",
+      "custom_label_0",
+      "custom_label_1",
+      "custom_label_2",
+      "custom_label_3",
+      "custom_label_4",
+      "custom_number_0",
+      "custom_number_1",
+      "custom_number_2",
+      "custom_number_3",
+      "custom_number_4",
       "description",
       "guest_ratings",
       "hotel_id",
@@ -2110,6 +2424,76 @@ public class ProductFeed extends APINode {
     }
     public APIRequestGetHotels requestCurrencyField (boolean value) {
       this.requestField("currency", value);
+      return this;
+    }
+    public APIRequestGetHotels requestCustomLabel0Field () {
+      return this.requestCustomLabel0Field(true);
+    }
+    public APIRequestGetHotels requestCustomLabel0Field (boolean value) {
+      this.requestField("custom_label_0", value);
+      return this;
+    }
+    public APIRequestGetHotels requestCustomLabel1Field () {
+      return this.requestCustomLabel1Field(true);
+    }
+    public APIRequestGetHotels requestCustomLabel1Field (boolean value) {
+      this.requestField("custom_label_1", value);
+      return this;
+    }
+    public APIRequestGetHotels requestCustomLabel2Field () {
+      return this.requestCustomLabel2Field(true);
+    }
+    public APIRequestGetHotels requestCustomLabel2Field (boolean value) {
+      this.requestField("custom_label_2", value);
+      return this;
+    }
+    public APIRequestGetHotels requestCustomLabel3Field () {
+      return this.requestCustomLabel3Field(true);
+    }
+    public APIRequestGetHotels requestCustomLabel3Field (boolean value) {
+      this.requestField("custom_label_3", value);
+      return this;
+    }
+    public APIRequestGetHotels requestCustomLabel4Field () {
+      return this.requestCustomLabel4Field(true);
+    }
+    public APIRequestGetHotels requestCustomLabel4Field (boolean value) {
+      this.requestField("custom_label_4", value);
+      return this;
+    }
+    public APIRequestGetHotels requestCustomNumber0Field () {
+      return this.requestCustomNumber0Field(true);
+    }
+    public APIRequestGetHotels requestCustomNumber0Field (boolean value) {
+      this.requestField("custom_number_0", value);
+      return this;
+    }
+    public APIRequestGetHotels requestCustomNumber1Field () {
+      return this.requestCustomNumber1Field(true);
+    }
+    public APIRequestGetHotels requestCustomNumber1Field (boolean value) {
+      this.requestField("custom_number_1", value);
+      return this;
+    }
+    public APIRequestGetHotels requestCustomNumber2Field () {
+      return this.requestCustomNumber2Field(true);
+    }
+    public APIRequestGetHotels requestCustomNumber2Field (boolean value) {
+      this.requestField("custom_number_2", value);
+      return this;
+    }
+    public APIRequestGetHotels requestCustomNumber3Field () {
+      return this.requestCustomNumber3Field(true);
+    }
+    public APIRequestGetHotels requestCustomNumber3Field (boolean value) {
+      this.requestField("custom_number_3", value);
+      return this;
+    }
+    public APIRequestGetHotels requestCustomNumber4Field () {
+      return this.requestCustomNumber4Field(true);
+    }
+    public APIRequestGetHotels requestCustomNumber4Field (boolean value) {
+      this.requestField("custom_number_4", value);
       return this;
     }
     public APIRequestGetHotels requestDescriptionField () {
@@ -4406,6 +4790,16 @@ public class ProductFeed extends APINode {
       "cashback_price",
       "category_specific_fields",
       "currency",
+      "custom_label_0",
+      "custom_label_1",
+      "custom_label_2",
+      "custom_label_3",
+      "custom_label_4",
+      "custom_number_0",
+      "custom_number_1",
+      "custom_number_2",
+      "custom_number_3",
+      "custom_number_4",
       "dma_codes",
       "downpayment_currency",
       "downpayment_price",
@@ -4630,6 +5024,76 @@ public class ProductFeed extends APINode {
     }
     public APIRequestGetVehicleOffers requestCurrencyField (boolean value) {
       this.requestField("currency", value);
+      return this;
+    }
+    public APIRequestGetVehicleOffers requestCustomLabel0Field () {
+      return this.requestCustomLabel0Field(true);
+    }
+    public APIRequestGetVehicleOffers requestCustomLabel0Field (boolean value) {
+      this.requestField("custom_label_0", value);
+      return this;
+    }
+    public APIRequestGetVehicleOffers requestCustomLabel1Field () {
+      return this.requestCustomLabel1Field(true);
+    }
+    public APIRequestGetVehicleOffers requestCustomLabel1Field (boolean value) {
+      this.requestField("custom_label_1", value);
+      return this;
+    }
+    public APIRequestGetVehicleOffers requestCustomLabel2Field () {
+      return this.requestCustomLabel2Field(true);
+    }
+    public APIRequestGetVehicleOffers requestCustomLabel2Field (boolean value) {
+      this.requestField("custom_label_2", value);
+      return this;
+    }
+    public APIRequestGetVehicleOffers requestCustomLabel3Field () {
+      return this.requestCustomLabel3Field(true);
+    }
+    public APIRequestGetVehicleOffers requestCustomLabel3Field (boolean value) {
+      this.requestField("custom_label_3", value);
+      return this;
+    }
+    public APIRequestGetVehicleOffers requestCustomLabel4Field () {
+      return this.requestCustomLabel4Field(true);
+    }
+    public APIRequestGetVehicleOffers requestCustomLabel4Field (boolean value) {
+      this.requestField("custom_label_4", value);
+      return this;
+    }
+    public APIRequestGetVehicleOffers requestCustomNumber0Field () {
+      return this.requestCustomNumber0Field(true);
+    }
+    public APIRequestGetVehicleOffers requestCustomNumber0Field (boolean value) {
+      this.requestField("custom_number_0", value);
+      return this;
+    }
+    public APIRequestGetVehicleOffers requestCustomNumber1Field () {
+      return this.requestCustomNumber1Field(true);
+    }
+    public APIRequestGetVehicleOffers requestCustomNumber1Field (boolean value) {
+      this.requestField("custom_number_1", value);
+      return this;
+    }
+    public APIRequestGetVehicleOffers requestCustomNumber2Field () {
+      return this.requestCustomNumber2Field(true);
+    }
+    public APIRequestGetVehicleOffers requestCustomNumber2Field (boolean value) {
+      this.requestField("custom_number_2", value);
+      return this;
+    }
+    public APIRequestGetVehicleOffers requestCustomNumber3Field () {
+      return this.requestCustomNumber3Field(true);
+    }
+    public APIRequestGetVehicleOffers requestCustomNumber3Field (boolean value) {
+      this.requestField("custom_number_3", value);
+      return this;
+    }
+    public APIRequestGetVehicleOffers requestCustomNumber4Field () {
+      return this.requestCustomNumber4Field(true);
+    }
+    public APIRequestGetVehicleOffers requestCustomNumber4Field (boolean value) {
+      this.requestField("custom_number_4", value);
       return this;
     }
     public APIRequestGetVehicleOffers requestDmaCodesField () {
@@ -4928,6 +5392,15 @@ public class ProductFeed extends APINode {
       "condition",
       "currency",
       "custom_label_0",
+      "custom_label_1",
+      "custom_label_2",
+      "custom_label_3",
+      "custom_label_4",
+      "custom_number_0",
+      "custom_number_1",
+      "custom_number_2",
+      "custom_number_3",
+      "custom_number_4",
       "date_first_on_lot",
       "dealer_communication_channel",
       "dealer_email",
@@ -5137,6 +5610,69 @@ public class ProductFeed extends APINode {
     }
     public APIRequestGetVehicles requestCustomLabel0Field (boolean value) {
       this.requestField("custom_label_0", value);
+      return this;
+    }
+    public APIRequestGetVehicles requestCustomLabel1Field () {
+      return this.requestCustomLabel1Field(true);
+    }
+    public APIRequestGetVehicles requestCustomLabel1Field (boolean value) {
+      this.requestField("custom_label_1", value);
+      return this;
+    }
+    public APIRequestGetVehicles requestCustomLabel2Field () {
+      return this.requestCustomLabel2Field(true);
+    }
+    public APIRequestGetVehicles requestCustomLabel2Field (boolean value) {
+      this.requestField("custom_label_2", value);
+      return this;
+    }
+    public APIRequestGetVehicles requestCustomLabel3Field () {
+      return this.requestCustomLabel3Field(true);
+    }
+    public APIRequestGetVehicles requestCustomLabel3Field (boolean value) {
+      this.requestField("custom_label_3", value);
+      return this;
+    }
+    public APIRequestGetVehicles requestCustomLabel4Field () {
+      return this.requestCustomLabel4Field(true);
+    }
+    public APIRequestGetVehicles requestCustomLabel4Field (boolean value) {
+      this.requestField("custom_label_4", value);
+      return this;
+    }
+    public APIRequestGetVehicles requestCustomNumber0Field () {
+      return this.requestCustomNumber0Field(true);
+    }
+    public APIRequestGetVehicles requestCustomNumber0Field (boolean value) {
+      this.requestField("custom_number_0", value);
+      return this;
+    }
+    public APIRequestGetVehicles requestCustomNumber1Field () {
+      return this.requestCustomNumber1Field(true);
+    }
+    public APIRequestGetVehicles requestCustomNumber1Field (boolean value) {
+      this.requestField("custom_number_1", value);
+      return this;
+    }
+    public APIRequestGetVehicles requestCustomNumber2Field () {
+      return this.requestCustomNumber2Field(true);
+    }
+    public APIRequestGetVehicles requestCustomNumber2Field (boolean value) {
+      this.requestField("custom_number_2", value);
+      return this;
+    }
+    public APIRequestGetVehicles requestCustomNumber3Field () {
+      return this.requestCustomNumber3Field(true);
+    }
+    public APIRequestGetVehicles requestCustomNumber3Field (boolean value) {
+      this.requestField("custom_number_3", value);
+      return this;
+    }
+    public APIRequestGetVehicles requestCustomNumber4Field () {
+      return this.requestCustomNumber4Field(true);
+    }
+    public APIRequestGetVehicles requestCustomNumber4Field (boolean value) {
+      this.requestField("custom_number_4", value);
       return this;
     }
     public APIRequestGetVehicles requestDateFirstOnLotField () {

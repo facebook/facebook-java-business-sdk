@@ -57,8 +57,14 @@ public class AdPromotedObject extends APINode {
   private String mEventId = null;
   @SerializedName("fundraiser_campaign_id")
   private String mFundraiserCampaignId = null;
+  @SerializedName("lead_ads_custom_event_str")
+  private String mLeadAdsCustomEventStr = null;
+  @SerializedName("lead_ads_custom_event_type")
+  private EnumLeadAdsCustomEventType mLeadAdsCustomEventType = null;
   @SerializedName("lead_ads_form_event_source_type")
   private String mLeadAdsFormEventSourceType = null;
+  @SerializedName("lead_ads_offsite_conversion_type")
+  private String mLeadAdsOffsiteConversionType = null;
   @SerializedName("mcme_conversion_id")
   private String mMcmeConversionId = null;
   @SerializedName("object_store_url")
@@ -322,12 +328,39 @@ public class AdPromotedObject extends APINode {
     return this;
   }
 
+  public String getFieldLeadAdsCustomEventStr() {
+    return mLeadAdsCustomEventStr;
+  }
+
+  public AdPromotedObject setFieldLeadAdsCustomEventStr(String value) {
+    this.mLeadAdsCustomEventStr = value;
+    return this;
+  }
+
+  public EnumLeadAdsCustomEventType getFieldLeadAdsCustomEventType() {
+    return mLeadAdsCustomEventType;
+  }
+
+  public AdPromotedObject setFieldLeadAdsCustomEventType(EnumLeadAdsCustomEventType value) {
+    this.mLeadAdsCustomEventType = value;
+    return this;
+  }
+
   public String getFieldLeadAdsFormEventSourceType() {
     return mLeadAdsFormEventSourceType;
   }
 
   public AdPromotedObject setFieldLeadAdsFormEventSourceType(String value) {
     this.mLeadAdsFormEventSourceType = value;
+    return this;
+  }
+
+  public String getFieldLeadAdsOffsiteConversionType() {
+    return mLeadAdsOffsiteConversionType;
+  }
+
+  public AdPromotedObject setFieldLeadAdsOffsiteConversionType(String value) {
+    this.mLeadAdsOffsiteConversionType = value;
     return this;
   }
 
@@ -602,6 +635,79 @@ public class AdPromotedObject extends APINode {
       }
   }
 
+  public static enum EnumLeadAdsCustomEventType {
+      @SerializedName("ACHIEVEMENT_UNLOCKED")
+      VALUE_ACHIEVEMENT_UNLOCKED("ACHIEVEMENT_UNLOCKED"),
+      @SerializedName("ADD_PAYMENT_INFO")
+      VALUE_ADD_PAYMENT_INFO("ADD_PAYMENT_INFO"),
+      @SerializedName("ADD_TO_CART")
+      VALUE_ADD_TO_CART("ADD_TO_CART"),
+      @SerializedName("ADD_TO_WISHLIST")
+      VALUE_ADD_TO_WISHLIST("ADD_TO_WISHLIST"),
+      @SerializedName("AD_IMPRESSION")
+      VALUE_AD_IMPRESSION("AD_IMPRESSION"),
+      @SerializedName("COMPLETE_REGISTRATION")
+      VALUE_COMPLETE_REGISTRATION("COMPLETE_REGISTRATION"),
+      @SerializedName("CONTACT")
+      VALUE_CONTACT("CONTACT"),
+      @SerializedName("CONTENT_VIEW")
+      VALUE_CONTENT_VIEW("CONTENT_VIEW"),
+      @SerializedName("CUSTOMIZE_PRODUCT")
+      VALUE_CUSTOMIZE_PRODUCT("CUSTOMIZE_PRODUCT"),
+      @SerializedName("D2_RETENTION")
+      VALUE_D2_RETENTION("D2_RETENTION"),
+      @SerializedName("D7_RETENTION")
+      VALUE_D7_RETENTION("D7_RETENTION"),
+      @SerializedName("DONATE")
+      VALUE_DONATE("DONATE"),
+      @SerializedName("FIND_LOCATION")
+      VALUE_FIND_LOCATION("FIND_LOCATION"),
+      @SerializedName("INITIATED_CHECKOUT")
+      VALUE_INITIATED_CHECKOUT("INITIATED_CHECKOUT"),
+      @SerializedName("LEAD")
+      VALUE_LEAD("LEAD"),
+      @SerializedName("LEVEL_ACHIEVED")
+      VALUE_LEVEL_ACHIEVED("LEVEL_ACHIEVED"),
+      @SerializedName("LISTING_INTERACTION")
+      VALUE_LISTING_INTERACTION("LISTING_INTERACTION"),
+      @SerializedName("MESSAGING_CONVERSATION_STARTED_7D")
+      VALUE_MESSAGING_CONVERSATION_STARTED_7D("MESSAGING_CONVERSATION_STARTED_7D"),
+      @SerializedName("OTHER")
+      VALUE_OTHER("OTHER"),
+      @SerializedName("PURCHASE")
+      VALUE_PURCHASE("PURCHASE"),
+      @SerializedName("RATE")
+      VALUE_RATE("RATE"),
+      @SerializedName("SCHEDULE")
+      VALUE_SCHEDULE("SCHEDULE"),
+      @SerializedName("SEARCH")
+      VALUE_SEARCH("SEARCH"),
+      @SerializedName("SERVICE_BOOKING_REQUEST")
+      VALUE_SERVICE_BOOKING_REQUEST("SERVICE_BOOKING_REQUEST"),
+      @SerializedName("SPENT_CREDITS")
+      VALUE_SPENT_CREDITS("SPENT_CREDITS"),
+      @SerializedName("START_TRIAL")
+      VALUE_START_TRIAL("START_TRIAL"),
+      @SerializedName("SUBMIT_APPLICATION")
+      VALUE_SUBMIT_APPLICATION("SUBMIT_APPLICATION"),
+      @SerializedName("SUBSCRIBE")
+      VALUE_SUBSCRIBE("SUBSCRIBE"),
+      @SerializedName("TUTORIAL_COMPLETION")
+      VALUE_TUTORIAL_COMPLETION("TUTORIAL_COMPLETION"),
+      ;
+
+      private String value;
+
+      private EnumLeadAdsCustomEventType(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
 
   synchronized /*package*/ static Gson getGson() {
     if (gson != null) {
@@ -625,7 +731,10 @@ public class AdPromotedObject extends APINode {
     this.mCustomEventType = instance.mCustomEventType;
     this.mEventId = instance.mEventId;
     this.mFundraiserCampaignId = instance.mFundraiserCampaignId;
+    this.mLeadAdsCustomEventStr = instance.mLeadAdsCustomEventStr;
+    this.mLeadAdsCustomEventType = instance.mLeadAdsCustomEventType;
     this.mLeadAdsFormEventSourceType = instance.mLeadAdsFormEventSourceType;
+    this.mLeadAdsOffsiteConversionType = instance.mLeadAdsOffsiteConversionType;
     this.mMcmeConversionId = instance.mMcmeConversionId;
     this.mObjectStoreUrl = instance.mObjectStoreUrl;
     this.mOfferId = instance.mOfferId;

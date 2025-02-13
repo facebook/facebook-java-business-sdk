@@ -40,27 +40,25 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class InstagramVideoMetadata extends APINode {
-  @SerializedName("duration")
-  private Double mDuration = null;
-  @SerializedName("height")
-  private Double mHeight = null;
-  @SerializedName("width")
-  private Double mWidth = null;
+public class TargetingSubscriberUniverse extends APINode {
+  @SerializedName("messenger_subscriber_source")
+  private IDName mMessengerSubscriberSource = null;
+  @SerializedName("whatsapp_subscriber_source")
+  private IDName mWhatsappSubscriberSource = null;
   protected static Gson gson = null;
 
-  public InstagramVideoMetadata() {
+  public TargetingSubscriberUniverse() {
   }
 
   public String getId() {
     return null;
   }
-  public static InstagramVideoMetadata loadJSON(String json, APIContext context, String header) {
-    InstagramVideoMetadata instagramVideoMetadata = getGson().fromJson(json, InstagramVideoMetadata.class);
+  public static TargetingSubscriberUniverse loadJSON(String json, APIContext context, String header) {
+    TargetingSubscriberUniverse targetingSubscriberUniverse = getGson().fromJson(json, TargetingSubscriberUniverse.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(instagramVideoMetadata.toString());
+      JsonElement o2 = parser.parse(targetingSubscriberUniverse.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -70,14 +68,14 @@ public class InstagramVideoMetadata extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    instagramVideoMetadata.context = context;
-    instagramVideoMetadata.rawValue = json;
-    instagramVideoMetadata.header = header;
-    return instagramVideoMetadata;
+    targetingSubscriberUniverse.context = context;
+    targetingSubscriberUniverse.rawValue = json;
+    targetingSubscriberUniverse.header = header;
+    return targetingSubscriberUniverse;
   }
 
-  public static APINodeList<InstagramVideoMetadata> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<InstagramVideoMetadata> instagramVideoMetadatas = new APINodeList<InstagramVideoMetadata>(request, json, header);
+  public static APINodeList<TargetingSubscriberUniverse> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<TargetingSubscriberUniverse> targetingSubscriberUniverses = new APINodeList<TargetingSubscriberUniverse>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -88,9 +86,9 @@ public class InstagramVideoMetadata extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          instagramVideoMetadatas.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          targetingSubscriberUniverses.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return instagramVideoMetadatas;
+        return targetingSubscriberUniverses;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -100,20 +98,20 @@ public class InstagramVideoMetadata extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                instagramVideoMetadatas.setCursors(before, after);
+                targetingSubscriberUniverses.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            instagramVideoMetadatas.setPaging(previous, next);
+            targetingSubscriberUniverses.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              instagramVideoMetadatas.setAppSecret(context.getAppSecretProof());
+              targetingSubscriberUniverses.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              instagramVideoMetadatas.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              targetingSubscriberUniverses.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -124,23 +122,23 @@ public class InstagramVideoMetadata extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  instagramVideoMetadatas.add(loadJSON(entry.getValue().toString(), context, header));
+                  targetingSubscriberUniverses.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              instagramVideoMetadatas.add(loadJSON(obj.toString(), context, header));
+              targetingSubscriberUniverses.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return instagramVideoMetadatas;
+          return targetingSubscriberUniverses;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              instagramVideoMetadatas.add(loadJSON(entry.getValue().toString(), context, header));
+              targetingSubscriberUniverses.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return instagramVideoMetadatas;
+          return targetingSubscriberUniverses;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -157,20 +155,20 @@ public class InstagramVideoMetadata extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              instagramVideoMetadatas.add(loadJSON(value.toString(), context, header));
+              targetingSubscriberUniverses.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return instagramVideoMetadatas;
+            return targetingSubscriberUniverses;
           }
 
           // Sixth, check if it's pure JsonObject
-          instagramVideoMetadatas.clear();
-          instagramVideoMetadatas.add(loadJSON(json, context, header));
-          return instagramVideoMetadatas;
+          targetingSubscriberUniverses.clear();
+          targetingSubscriberUniverses.add(loadJSON(json, context, header));
+          return targetingSubscriberUniverses;
         }
       }
     } catch (Exception e) {
@@ -198,33 +196,34 @@ public class InstagramVideoMetadata extends APINode {
   }
 
 
-  public Double getFieldDuration() {
-    return mDuration;
+  public IDName getFieldMessengerSubscriberSource() {
+    return mMessengerSubscriberSource;
   }
 
-  public InstagramVideoMetadata setFieldDuration(Double value) {
-    this.mDuration = value;
+  public TargetingSubscriberUniverse setFieldMessengerSubscriberSource(IDName value) {
+    this.mMessengerSubscriberSource = value;
     return this;
   }
 
-  public Double getFieldHeight() {
-    return mHeight;
+  public TargetingSubscriberUniverse setFieldMessengerSubscriberSource(String value) {
+    Type type = new TypeToken<IDName>(){}.getType();
+    this.mMessengerSubscriberSource = IDName.getGson().fromJson(value, type);
+    return this;
+  }
+  public IDName getFieldWhatsappSubscriberSource() {
+    return mWhatsappSubscriberSource;
   }
 
-  public InstagramVideoMetadata setFieldHeight(Double value) {
-    this.mHeight = value;
+  public TargetingSubscriberUniverse setFieldWhatsappSubscriberSource(IDName value) {
+    this.mWhatsappSubscriberSource = value;
     return this;
   }
 
-  public Double getFieldWidth() {
-    return mWidth;
-  }
-
-  public InstagramVideoMetadata setFieldWidth(Double value) {
-    this.mWidth = value;
+  public TargetingSubscriberUniverse setFieldWhatsappSubscriberSource(String value) {
+    Type type = new TypeToken<IDName>(){}.getType();
+    this.mWhatsappSubscriberSource = IDName.getGson().fromJson(value, type);
     return this;
   }
-
 
 
 
@@ -241,19 +240,18 @@ public class InstagramVideoMetadata extends APINode {
     return gson;
   }
 
-  public InstagramVideoMetadata copyFrom(InstagramVideoMetadata instance) {
-    this.mDuration = instance.mDuration;
-    this.mHeight = instance.mHeight;
-    this.mWidth = instance.mWidth;
+  public TargetingSubscriberUniverse copyFrom(TargetingSubscriberUniverse instance) {
+    this.mMessengerSubscriberSource = instance.mMessengerSubscriberSource;
+    this.mWhatsappSubscriberSource = instance.mWhatsappSubscriberSource;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<InstagramVideoMetadata> getParser() {
-    return new APIRequest.ResponseParser<InstagramVideoMetadata>() {
-      public APINodeList<InstagramVideoMetadata> parseResponse(String response, APIContext context, APIRequest<InstagramVideoMetadata> request, String header) throws MalformedResponseException {
-        return InstagramVideoMetadata.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<TargetingSubscriberUniverse> getParser() {
+    return new APIRequest.ResponseParser<TargetingSubscriberUniverse>() {
+      public APINodeList<TargetingSubscriberUniverse> parseResponse(String response, APIContext context, APIRequest<TargetingSubscriberUniverse> request, String header) throws MalformedResponseException {
+        return TargetingSubscriberUniverse.parseResponse(response, context, request, header);
       }
     };
   }

@@ -41,6 +41,12 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class AdCreativeRegionalRegulationDisclaimer extends APINode {
+  @SerializedName("australia_finserv")
+  private Object mAustraliaFinserv = null;
+  @SerializedName("taiwan_finserv")
+  private Object mTaiwanFinserv = null;
+  @SerializedName("taiwan_universal")
+  private Object mTaiwanUniversal = null;
   protected static Gson gson = null;
 
   public AdCreativeRegionalRegulationDisclaimer() {
@@ -192,6 +198,33 @@ public class AdCreativeRegionalRegulationDisclaimer extends APINode {
   }
 
 
+  public Object getFieldAustraliaFinserv() {
+    return mAustraliaFinserv;
+  }
+
+  public AdCreativeRegionalRegulationDisclaimer setFieldAustraliaFinserv(Object value) {
+    this.mAustraliaFinserv = value;
+    return this;
+  }
+
+  public Object getFieldTaiwanFinserv() {
+    return mTaiwanFinserv;
+  }
+
+  public AdCreativeRegionalRegulationDisclaimer setFieldTaiwanFinserv(Object value) {
+    this.mTaiwanFinserv = value;
+    return this;
+  }
+
+  public Object getFieldTaiwanUniversal() {
+    return mTaiwanUniversal;
+  }
+
+  public AdCreativeRegionalRegulationDisclaimer setFieldTaiwanUniversal(Object value) {
+    this.mTaiwanUniversal = value;
+    return this;
+  }
+
 
 
 
@@ -209,6 +242,9 @@ public class AdCreativeRegionalRegulationDisclaimer extends APINode {
   }
 
   public AdCreativeRegionalRegulationDisclaimer copyFrom(AdCreativeRegionalRegulationDisclaimer instance) {
+    this.mAustraliaFinserv = instance.mAustraliaFinserv;
+    this.mTaiwanFinserv = instance.mTaiwanFinserv;
+    this.mTaiwanUniversal = instance.mTaiwanUniversal;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

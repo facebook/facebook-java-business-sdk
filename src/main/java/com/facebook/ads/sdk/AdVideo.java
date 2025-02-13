@@ -51,6 +51,8 @@ public class AdVideo extends APINode {
   private String mBackdatedTime = null;
   @SerializedName("backdated_time_granularity")
   private String mBackdatedTimeGranularity = null;
+  @SerializedName("boost_eligibility_info")
+  private Object mBoostEligibilityInfo = null;
   @SerializedName("content_category")
   private String mContentCategory = null;
   @SerializedName("content_tags")
@@ -342,6 +344,10 @@ public class AdVideo extends APINode {
     return getGson().toJson(this);
   }
 
+  public APIRequestGetBoostAdsList getBoostAdsList() {
+    return new APIRequestGetBoostAdsList(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetCaptions getCaptions() {
     return new APIRequestGetCaptions(this.getPrefixedId().toString(), context);
   }
@@ -451,6 +457,10 @@ public class AdVideo extends APINode {
 
   public String getFieldBackdatedTimeGranularity() {
     return mBackdatedTimeGranularity;
+  }
+
+  public Object getFieldBoostEligibilityInfo() {
+    return mBoostEligibilityInfo;
   }
 
   public String getFieldContentCategory() {
@@ -630,6 +640,111 @@ public class AdVideo extends APINode {
   }
 
 
+
+  public static class APIRequestGetBoostAdsList extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetBoostAdsList.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestGetBoostAdsList(String nodeId, APIContext context) {
+      super(context, nodeId, "/boost_ads_list", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetBoostAdsList setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetBoostAdsList setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetBoostAdsList requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetBoostAdsList requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetBoostAdsList requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetBoostAdsList requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetBoostAdsList requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetBoostAdsList requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
 
   public static class APIRequestGetCaptions extends APIRequest<APINode> {
 
@@ -5832,6 +5947,7 @@ public class AdVideo extends APINode {
       "audio_isrc",
       "backdated_time",
       "backdated_time_granularity",
+      "boost_eligibility_info",
       "content_category",
       "content_tags",
       "copyright",
@@ -5998,6 +6114,13 @@ public class AdVideo extends APINode {
     }
     public APIRequestGet requestBackdatedTimeGranularityField (boolean value) {
       this.requestField("backdated_time_granularity", value);
+      return this;
+    }
+    public APIRequestGet requestBoostEligibilityInfoField () {
+      return this.requestBoostEligibilityInfoField(true);
+    }
+    public APIRequestGet requestBoostEligibilityInfoField (boolean value) {
+      this.requestField("boost_eligibility_info", value);
       return this;
     }
     public APIRequestGet requestContentCategoryField () {
@@ -6452,6 +6575,10 @@ public class AdVideo extends APINode {
       return this;
     }
 
+    public APIRequestUpdate setCustomLabels (List<String> customLabels) {
+      this.setParam("custom_labels", customLabels);
+      return this;
+    }
     public APIRequestUpdate setCustomLabels (String customLabels) {
       this.setParam("custom_labels", customLabels);
       return this;
@@ -6655,8 +6782,6 @@ public class AdVideo extends APINode {
       VALUE_AGE_UP("AGE_UP"),
       @SerializedName("ALBUM_MULTIMEDIA_POST")
       VALUE_ALBUM_MULTIMEDIA_POST("ALBUM_MULTIMEDIA_POST"),
-      @SerializedName("ALOHA_CALL_VIDEO")
-      VALUE_ALOHA_CALL_VIDEO("ALOHA_CALL_VIDEO"),
       @SerializedName("ALOHA_SUPERFRAME")
       VALUE_ALOHA_SUPERFRAME("ALOHA_SUPERFRAME"),
       @SerializedName("APP_REREVIEW_SCREENCAST")
@@ -6667,16 +6792,12 @@ public class AdVideo extends APINode {
       VALUE_ASSET_MANAGER("ASSET_MANAGER"),
       @SerializedName("ATLAS_VIDEO")
       VALUE_ATLAS_VIDEO("ATLAS_VIDEO"),
-      @SerializedName("AUDIO_BRIEF")
-      VALUE_AUDIO_BRIEF("AUDIO_BRIEF"),
       @SerializedName("AUDIO_BROADCAST")
       VALUE_AUDIO_BROADCAST("AUDIO_BROADCAST"),
       @SerializedName("AUDIO_COMMENT")
       VALUE_AUDIO_COMMENT("AUDIO_COMMENT"),
       @SerializedName("BROADCAST")
       VALUE_BROADCAST("BROADCAST"),
-      @SerializedName("BULLETIN_ARTICLE_AUDIO")
-      VALUE_BULLETIN_ARTICLE_AUDIO("BULLETIN_ARTICLE_AUDIO"),
       @SerializedName("CANVAS")
       VALUE_CANVAS("CANVAS"),
       @SerializedName("CFC_VIDEO")
@@ -6737,8 +6858,6 @@ public class AdVideo extends APINode {
       VALUE_FB_SHORTS("FB_SHORTS"),
       @SerializedName("FB_SHORTS_CONTENT_REMIXABLE")
       VALUE_FB_SHORTS_CONTENT_REMIXABLE("FB_SHORTS_CONTENT_REMIXABLE"),
-      @SerializedName("FB_SHORTS_CROSS_META_POST")
-      VALUE_FB_SHORTS_CROSS_META_POST("FB_SHORTS_CROSS_META_POST"),
       @SerializedName("FB_SHORTS_GROUP_POST")
       VALUE_FB_SHORTS_GROUP_POST("FB_SHORTS_GROUP_POST"),
       @SerializedName("FB_SHORTS_LINKED_PRODUCT")
@@ -6755,8 +6874,6 @@ public class AdVideo extends APINode {
       VALUE_FUNDRAISER_COVER_VIDEO("FUNDRAISER_COVER_VIDEO"),
       @SerializedName("GAME_CLIP")
       VALUE_GAME_CLIP("GAME_CLIP"),
-      @SerializedName("GEMSTONE")
-      VALUE_GEMSTONE("GEMSTONE"),
       @SerializedName("GIF_TO_VIDEO")
       VALUE_GIF_TO_VIDEO("GIF_TO_VIDEO"),
       @SerializedName("GOODWILL_ANNIVERSARY_DEPRECATED")
@@ -6773,8 +6890,6 @@ public class AdVideo extends APINode {
       VALUE_GOODWILL_VIDEO_TOKEN_REQUIRED("GOODWILL_VIDEO_TOKEN_REQUIRED"),
       @SerializedName("GROUP_POST")
       VALUE_GROUP_POST("GROUP_POST"),
-      @SerializedName("HACK_TV")
-      VALUE_HACK_TV("HACK_TV"),
       @SerializedName("HEURISTIC_CLUSTER_VIDEO")
       VALUE_HEURISTIC_CLUSTER_VIDEO("HEURISTIC_CLUSTER_VIDEO"),
       @SerializedName("HIGHLIGHT_CLIP_VIDEO")
@@ -6795,20 +6910,12 @@ public class AdVideo extends APINode {
       VALUE_INSTANT_APPLICATION_PREVIEW("INSTANT_APPLICATION_PREVIEW"),
       @SerializedName("INSTANT_ARTICLE")
       VALUE_INSTANT_ARTICLE("INSTANT_ARTICLE"),
-      @SerializedName("INSTANT_GAMES_PROMO")
-      VALUE_INSTANT_GAMES_PROMO("INSTANT_GAMES_PROMO"),
-      @SerializedName("INSTANT_GAME_CLIP")
-      VALUE_INSTANT_GAME_CLIP("INSTANT_GAME_CLIP"),
       @SerializedName("ISSUE_MODULE")
       VALUE_ISSUE_MODULE("ISSUE_MODULE"),
       @SerializedName("JOBS_CAREERS")
       VALUE_JOBS_CAREERS("JOBS_CAREERS"),
       @SerializedName("JOBS_VISUAL_INTRO_ENTRY")
       VALUE_JOBS_VISUAL_INTRO_ENTRY("JOBS_VISUAL_INTRO_ENTRY"),
-      @SerializedName("JOB_APPLICATION_VIDEO")
-      VALUE_JOB_APPLICATION_VIDEO("JOB_APPLICATION_VIDEO"),
-      @SerializedName("JOB_OPENING_VIDEO")
-      VALUE_JOB_OPENING_VIDEO("JOB_OPENING_VIDEO"),
       @SerializedName("LEARN")
       VALUE_LEARN("LEARN"),
       @SerializedName("LEGACY")
@@ -6837,8 +6944,6 @@ public class AdVideo extends APINode {
       VALUE_MOMENTS_VIDEO("MOMENTS_VIDEO"),
       @SerializedName("MUSIC_CLIP")
       VALUE_MUSIC_CLIP("MUSIC_CLIP"),
-      @SerializedName("MUSIC_CLIP_IN_AUDIO_DIGEST")
-      VALUE_MUSIC_CLIP_IN_AUDIO_DIGEST("MUSIC_CLIP_IN_AUDIO_DIGEST"),
       @SerializedName("MUSIC_CLIP_IN_COMMENT")
       VALUE_MUSIC_CLIP_IN_COMMENT("MUSIC_CLIP_IN_COMMENT"),
       @SerializedName("MUSIC_CLIP_IN_LIGHTWEIGHT_STATUS")
@@ -7165,6 +7270,27 @@ public class AdVideo extends APINode {
       }
   }
 
+  public static enum EnumVideoState {
+      @SerializedName("DRAFT")
+      VALUE_DRAFT("DRAFT"),
+      @SerializedName("PUBLISHED")
+      VALUE_PUBLISHED("PUBLISHED"),
+      @SerializedName("SCHEDULED")
+      VALUE_SCHEDULED("SCHEDULED"),
+      ;
+
+      private String value;
+
+      private EnumVideoState(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
   public static enum EnumValidationAdPlacements {
       @SerializedName("AUDIENCE_NETWORK_INSTREAM_VIDEO")
       VALUE_AUDIENCE_NETWORK_INSTREAM_VIDEO("AUDIENCE_NETWORK_INSTREAM_VIDEO"),
@@ -7245,27 +7371,6 @@ public class AdVideo extends APINode {
       }
   }
 
-  public static enum EnumVideoState {
-      @SerializedName("DRAFT")
-      VALUE_DRAFT("DRAFT"),
-      @SerializedName("PUBLISHED")
-      VALUE_PUBLISHED("PUBLISHED"),
-      @SerializedName("SCHEDULED")
-      VALUE_SCHEDULED("SCHEDULED"),
-      ;
-
-      private String value;
-
-      private EnumVideoState(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
   public static enum EnumBackdatedTimeGranularity {
       @SerializedName("day")
       VALUE_DAY("day"),
@@ -7313,6 +7418,7 @@ public class AdVideo extends APINode {
     this.mAudioIsrc = instance.mAudioIsrc;
     this.mBackdatedTime = instance.mBackdatedTime;
     this.mBackdatedTimeGranularity = instance.mBackdatedTimeGranularity;
+    this.mBoostEligibilityInfo = instance.mBoostEligibilityInfo;
     this.mContentCategory = instance.mContentCategory;
     this.mContentTags = instance.mContentTags;
     this.mCopyright = instance.mCopyright;

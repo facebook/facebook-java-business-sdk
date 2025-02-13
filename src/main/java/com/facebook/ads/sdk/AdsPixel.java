@@ -2735,10 +2735,8 @@ public class AdsPixel extends APINode {
       "destination_id",
       "endpoint",
       "fallback_domain",
-      "fallback_domain_enabled",
       "first_party_domain",
       "host_business_id",
-      "host_external_id",
       "id",
       "instance_id",
       "instance_version",
@@ -2879,13 +2877,6 @@ public class AdsPixel extends APINode {
       this.requestField("fallback_domain", value);
       return this;
     }
-    public APIRequestGetOpenBridgeConfigurations requestFallbackDomainEnabledField () {
-      return this.requestFallbackDomainEnabledField(true);
-    }
-    public APIRequestGetOpenBridgeConfigurations requestFallbackDomainEnabledField (boolean value) {
-      this.requestField("fallback_domain_enabled", value);
-      return this;
-    }
     public APIRequestGetOpenBridgeConfigurations requestFirstPartyDomainField () {
       return this.requestFirstPartyDomainField(true);
     }
@@ -2898,13 +2889,6 @@ public class AdsPixel extends APINode {
     }
     public APIRequestGetOpenBridgeConfigurations requestHostBusinessIdField (boolean value) {
       this.requestField("host_business_id", value);
-      return this;
-    }
-    public APIRequestGetOpenBridgeConfigurations requestHostExternalIdField () {
-      return this.requestHostExternalIdField(true);
-    }
-    public APIRequestGetOpenBridgeConfigurations requestHostExternalIdField (boolean value) {
-      this.requestField("host_external_id", value);
       return this;
     }
     public APIRequestGetOpenBridgeConfigurations requestIdField () {

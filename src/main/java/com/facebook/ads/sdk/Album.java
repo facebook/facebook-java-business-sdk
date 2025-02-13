@@ -1646,6 +1646,7 @@ public class Album extends APINode {
       "place",
       "privacy",
       "profile_id",
+      "provenance_info",
       "proxied_app_id",
       "published",
       "qn",
@@ -1968,6 +1969,15 @@ public class Album extends APINode {
     }
     public APIRequestCreatePhoto setProfileId (String profileId) {
       this.setParam("profile_id", profileId);
+      return this;
+    }
+
+    public APIRequestCreatePhoto setProvenanceInfo (Map<String, String> provenanceInfo) {
+      this.setParam("provenance_info", provenanceInfo);
+      return this;
+    }
+    public APIRequestCreatePhoto setProvenanceInfo (String provenanceInfo) {
+      this.setParam("provenance_info", provenanceInfo);
       return this;
     }
 

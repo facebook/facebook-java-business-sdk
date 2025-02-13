@@ -61,6 +61,10 @@ public class MessengerBusinessTemplate extends APINode {
   private String mName = null;
   @SerializedName("rejected_reason")
   private String mRejectedReason = null;
+  @SerializedName("rejection_reasons")
+  private Object mRejectionReasons = null;
+  @SerializedName("specific_rejection_reasons")
+  private Object mSpecificRejectionReasons = null;
   @SerializedName("status")
   private String mStatus = null;
   protected static Gson gson = null;
@@ -321,6 +325,14 @@ public class MessengerBusinessTemplate extends APINode {
     return mRejectedReason;
   }
 
+  public Object getFieldRejectionReasons() {
+    return mRejectionReasons;
+  }
+
+  public Object getFieldSpecificRejectionReasons() {
+    return mSpecificRejectionReasons;
+  }
+
   public String getFieldStatus() {
     return mStatus;
   }
@@ -348,6 +360,8 @@ public class MessengerBusinessTemplate extends APINode {
       "library_template_name",
       "name",
       "rejected_reason",
+      "rejection_reasons",
+      "specific_rejection_reasons",
       "status",
     };
 
@@ -509,6 +523,20 @@ public class MessengerBusinessTemplate extends APINode {
     }
     public APIRequestGet requestRejectedReasonField (boolean value) {
       this.requestField("rejected_reason", value);
+      return this;
+    }
+    public APIRequestGet requestRejectionReasonsField () {
+      return this.requestRejectionReasonsField(true);
+    }
+    public APIRequestGet requestRejectionReasonsField (boolean value) {
+      this.requestField("rejection_reasons", value);
+      return this;
+    }
+    public APIRequestGet requestSpecificRejectionReasonsField () {
+      return this.requestSpecificRejectionReasonsField(true);
+    }
+    public APIRequestGet requestSpecificRejectionReasonsField (boolean value) {
+      this.requestField("specific_rejection_reasons", value);
       return this;
     }
     public APIRequestGet requestStatusField () {
@@ -695,6 +723,8 @@ public class MessengerBusinessTemplate extends APINode {
     this.mLibraryTemplateName = instance.mLibraryTemplateName;
     this.mName = instance.mName;
     this.mRejectedReason = instance.mRejectedReason;
+    this.mRejectionReasons = instance.mRejectionReasons;
+    this.mSpecificRejectionReasons = instance.mSpecificRejectionReasons;
     this.mStatus = instance.mStatus;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

@@ -40,25 +40,23 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class InstagramBoostableMediaForAccessToken extends APINode {
-  @SerializedName("has_product_tags")
-  private Boolean mHasProductTags = null;
-  @SerializedName("media")
-  private IGMedia mMedia = null;
+public class AdsEligibility extends APINode {
+  @SerializedName("live_shopping")
+  private Object mLiveShopping = null;
   protected static Gson gson = null;
 
-  public InstagramBoostableMediaForAccessToken() {
+  public AdsEligibility() {
   }
 
   public String getId() {
     return null;
   }
-  public static InstagramBoostableMediaForAccessToken loadJSON(String json, APIContext context, String header) {
-    InstagramBoostableMediaForAccessToken instagramBoostableMediaForAccessToken = getGson().fromJson(json, InstagramBoostableMediaForAccessToken.class);
+  public static AdsEligibility loadJSON(String json, APIContext context, String header) {
+    AdsEligibility adsEligibility = getGson().fromJson(json, AdsEligibility.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(instagramBoostableMediaForAccessToken.toString());
+      JsonElement o2 = parser.parse(adsEligibility.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -68,14 +66,14 @@ public class InstagramBoostableMediaForAccessToken extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    instagramBoostableMediaForAccessToken.context = context;
-    instagramBoostableMediaForAccessToken.rawValue = json;
-    instagramBoostableMediaForAccessToken.header = header;
-    return instagramBoostableMediaForAccessToken;
+    adsEligibility.context = context;
+    adsEligibility.rawValue = json;
+    adsEligibility.header = header;
+    return adsEligibility;
   }
 
-  public static APINodeList<InstagramBoostableMediaForAccessToken> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<InstagramBoostableMediaForAccessToken> instagramBoostableMediaForAccessTokens = new APINodeList<InstagramBoostableMediaForAccessToken>(request, json, header);
+  public static APINodeList<AdsEligibility> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdsEligibility> adsEligibilitys = new APINodeList<AdsEligibility>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -86,9 +84,9 @@ public class InstagramBoostableMediaForAccessToken extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          instagramBoostableMediaForAccessTokens.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          adsEligibilitys.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return instagramBoostableMediaForAccessTokens;
+        return adsEligibilitys;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -98,20 +96,20 @@ public class InstagramBoostableMediaForAccessToken extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                instagramBoostableMediaForAccessTokens.setCursors(before, after);
+                adsEligibilitys.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            instagramBoostableMediaForAccessTokens.setPaging(previous, next);
+            adsEligibilitys.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              instagramBoostableMediaForAccessTokens.setAppSecret(context.getAppSecretProof());
+              adsEligibilitys.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              instagramBoostableMediaForAccessTokens.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              adsEligibilitys.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -122,23 +120,23 @@ public class InstagramBoostableMediaForAccessToken extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  instagramBoostableMediaForAccessTokens.add(loadJSON(entry.getValue().toString(), context, header));
+                  adsEligibilitys.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              instagramBoostableMediaForAccessTokens.add(loadJSON(obj.toString(), context, header));
+              adsEligibilitys.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return instagramBoostableMediaForAccessTokens;
+          return adsEligibilitys;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              instagramBoostableMediaForAccessTokens.add(loadJSON(entry.getValue().toString(), context, header));
+              adsEligibilitys.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return instagramBoostableMediaForAccessTokens;
+          return adsEligibilitys;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -155,20 +153,20 @@ public class InstagramBoostableMediaForAccessToken extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              instagramBoostableMediaForAccessTokens.add(loadJSON(value.toString(), context, header));
+              adsEligibilitys.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return instagramBoostableMediaForAccessTokens;
+            return adsEligibilitys;
           }
 
           // Sixth, check if it's pure JsonObject
-          instagramBoostableMediaForAccessTokens.clear();
-          instagramBoostableMediaForAccessTokens.add(loadJSON(json, context, header));
-          return instagramBoostableMediaForAccessTokens;
+          adsEligibilitys.clear();
+          adsEligibilitys.add(loadJSON(json, context, header));
+          return adsEligibilitys;
         }
       }
     } catch (Exception e) {
@@ -196,32 +194,15 @@ public class InstagramBoostableMediaForAccessToken extends APINode {
   }
 
 
-  public Boolean getFieldHasProductTags() {
-    return mHasProductTags;
+  public Object getFieldLiveShopping() {
+    return mLiveShopping;
   }
 
-  public InstagramBoostableMediaForAccessToken setFieldHasProductTags(Boolean value) {
-    this.mHasProductTags = value;
+  public AdsEligibility setFieldLiveShopping(Object value) {
+    this.mLiveShopping = value;
     return this;
   }
 
-  public IGMedia getFieldMedia() {
-    if (mMedia != null) {
-      mMedia.context = getContext();
-    }
-    return mMedia;
-  }
-
-  public InstagramBoostableMediaForAccessToken setFieldMedia(IGMedia value) {
-    this.mMedia = value;
-    return this;
-  }
-
-  public InstagramBoostableMediaForAccessToken setFieldMedia(String value) {
-    Type type = new TypeToken<IGMedia>(){}.getType();
-    this.mMedia = IGMedia.getGson().fromJson(value, type);
-    return this;
-  }
 
 
 
@@ -238,18 +219,17 @@ public class InstagramBoostableMediaForAccessToken extends APINode {
     return gson;
   }
 
-  public InstagramBoostableMediaForAccessToken copyFrom(InstagramBoostableMediaForAccessToken instance) {
-    this.mHasProductTags = instance.mHasProductTags;
-    this.mMedia = instance.mMedia;
+  public AdsEligibility copyFrom(AdsEligibility instance) {
+    this.mLiveShopping = instance.mLiveShopping;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<InstagramBoostableMediaForAccessToken> getParser() {
-    return new APIRequest.ResponseParser<InstagramBoostableMediaForAccessToken>() {
-      public APINodeList<InstagramBoostableMediaForAccessToken> parseResponse(String response, APIContext context, APIRequest<InstagramBoostableMediaForAccessToken> request, String header) throws MalformedResponseException {
-        return InstagramBoostableMediaForAccessToken.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<AdsEligibility> getParser() {
+    return new APIRequest.ResponseParser<AdsEligibility>() {
+      public APINodeList<AdsEligibility> parseResponse(String response, APIContext context, APIRequest<AdsEligibility> request, String header) throws MalformedResponseException {
+        return AdsEligibility.parseResponse(response, context, request, header);
       }
     };
   }

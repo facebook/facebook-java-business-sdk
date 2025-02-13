@@ -55,6 +55,8 @@ public class CopyrightReferenceContainer extends APINode {
   private String mIswc = null;
   @SerializedName("metadata")
   private Object mMetadata = null;
+  @SerializedName("playable_video_uri")
+  private String mPlayableVideoUri = null;
   @SerializedName("published_time")
   private String mPublishedTime = null;
   @SerializedName("thumbnail_url")
@@ -279,6 +281,15 @@ public class CopyrightReferenceContainer extends APINode {
     return this;
   }
 
+  public String getFieldPlayableVideoUri() {
+    return mPlayableVideoUri;
+  }
+
+  public CopyrightReferenceContainer setFieldPlayableVideoUri(String value) {
+    this.mPlayableVideoUri = value;
+    return this;
+  }
+
   public String getFieldPublishedTime() {
     return mPublishedTime;
   }
@@ -348,6 +359,7 @@ public class CopyrightReferenceContainer extends APINode {
     this.mId = instance.mId;
     this.mIswc = instance.mIswc;
     this.mMetadata = instance.mMetadata;
+    this.mPlayableVideoUri = instance.mPlayableVideoUri;
     this.mPublishedTime = instance.mPublishedTime;
     this.mThumbnailUrl = instance.mThumbnailUrl;
     this.mTitle = instance.mTitle;

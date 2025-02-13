@@ -1477,6 +1477,7 @@ public class OfflineConversionDataSet extends APINode {
       "household_audience",
       "id",
       "included_custom_audiences",
+      "is_eligible_for_sac_campaigns",
       "is_household",
       "is_snapshot",
       "is_value_based",
@@ -1710,6 +1711,13 @@ public class OfflineConversionDataSet extends APINode {
     }
     public APIRequestGetAudiences requestIncludedCustomAudiencesField (boolean value) {
       this.requestField("included_custom_audiences", value);
+      return this;
+    }
+    public APIRequestGetAudiences requestIsEligibleForSacCampaignsField () {
+      return this.requestIsEligibleForSacCampaignsField(true);
+    }
+    public APIRequestGetAudiences requestIsEligibleForSacCampaignsField (boolean value) {
+      this.requestField("is_eligible_for_sac_campaigns", value);
       return this;
     }
     public APIRequestGetAudiences requestIsHouseholdField () {

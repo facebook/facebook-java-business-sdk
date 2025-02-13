@@ -55,6 +55,8 @@ public class AdsQuickViews extends APINode {
   private String mName = null;
   @SerializedName("permission")
   private String mPermission = null;
+  @SerializedName("quick_view_type")
+  private String mQuickViewType = null;
   @SerializedName("sort")
   private List<Object> mSort = null;
   protected static Gson gson = null;
@@ -299,6 +301,10 @@ public class AdsQuickViews extends APINode {
     return mPermission;
   }
 
+  public String getFieldQuickViewType() {
+    return mQuickViewType;
+  }
+
   public List<Object> getFieldSort() {
     return mSort;
   }
@@ -323,6 +329,7 @@ public class AdsQuickViews extends APINode {
       "id",
       "name",
       "permission",
+      "quick_view_type",
       "sort",
     };
 
@@ -465,6 +472,13 @@ public class AdsQuickViews extends APINode {
       this.requestField("permission", value);
       return this;
     }
+    public APIRequestGet requestQuickViewTypeField () {
+      return this.requestQuickViewTypeField(true);
+    }
+    public APIRequestGet requestQuickViewTypeField (boolean value) {
+      this.requestField("quick_view_type", value);
+      return this;
+    }
     public APIRequestGet requestSortField () {
       return this.requestSortField(true);
     }
@@ -496,6 +510,7 @@ public class AdsQuickViews extends APINode {
     this.mId = instance.mId;
     this.mName = instance.mName;
     this.mPermission = instance.mPermission;
+    this.mQuickViewType = instance.mQuickViewType;
     this.mSort = instance.mSort;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

@@ -53,8 +53,12 @@ public class MusicWorkCopyright extends APINode {
   private Long mDisplayedIgMatchesCount = null;
   @SerializedName("displayed_matches_count")
   private Long mDisplayedMatchesCount = null;
+  @SerializedName("has_rev_share_eligible_isrcs")
+  private Boolean mHasRevShareEligibleIsrcs = null;
   @SerializedName("id")
   private String mId = null;
+  @SerializedName("is_linking_required_to_monetize_for_manual_claim")
+  private Boolean mIsLinkingRequiredToMonetizeForManualClaim = null;
   @SerializedName("match_rule")
   private VideoCopyrightRule mMatchRule = null;
   @SerializedName("status")
@@ -301,8 +305,16 @@ public class MusicWorkCopyright extends APINode {
     return mDisplayedMatchesCount;
   }
 
+  public Boolean getFieldHasRevShareEligibleIsrcs() {
+    return mHasRevShareEligibleIsrcs;
+  }
+
   public String getFieldId() {
     return mId;
+  }
+
+  public Boolean getFieldIsLinkingRequiredToMonetizeForManualClaim() {
+    return mIsLinkingRequiredToMonetizeForManualClaim;
   }
 
   public VideoCopyrightRule getFieldMatchRule() {
@@ -343,7 +355,9 @@ public class MusicWorkCopyright extends APINode {
       "displayed_fb_matches_count",
       "displayed_ig_matches_count",
       "displayed_matches_count",
+      "has_rev_share_eligible_isrcs",
       "id",
+      "is_linking_required_to_monetize_for_manual_claim",
       "match_rule",
       "status",
       "tags",
@@ -482,11 +496,25 @@ public class MusicWorkCopyright extends APINode {
       this.requestField("displayed_matches_count", value);
       return this;
     }
+    public APIRequestGet requestHasRevShareEligibleIsrcsField () {
+      return this.requestHasRevShareEligibleIsrcsField(true);
+    }
+    public APIRequestGet requestHasRevShareEligibleIsrcsField (boolean value) {
+      this.requestField("has_rev_share_eligible_isrcs", value);
+      return this;
+    }
     public APIRequestGet requestIdField () {
       return this.requestIdField(true);
     }
     public APIRequestGet requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGet requestIsLinkingRequiredToMonetizeForManualClaimField () {
+      return this.requestIsLinkingRequiredToMonetizeForManualClaimField(true);
+    }
+    public APIRequestGet requestIsLinkingRequiredToMonetizeForManualClaimField (boolean value) {
+      this.requestField("is_linking_required_to_monetize_for_manual_claim", value);
       return this;
     }
     public APIRequestGet requestMatchRuleField () {
@@ -540,7 +568,9 @@ public class MusicWorkCopyright extends APINode {
     this.mDisplayedFbMatchesCount = instance.mDisplayedFbMatchesCount;
     this.mDisplayedIgMatchesCount = instance.mDisplayedIgMatchesCount;
     this.mDisplayedMatchesCount = instance.mDisplayedMatchesCount;
+    this.mHasRevShareEligibleIsrcs = instance.mHasRevShareEligibleIsrcs;
     this.mId = instance.mId;
+    this.mIsLinkingRequiredToMonetizeForManualClaim = instance.mIsLinkingRequiredToMonetizeForManualClaim;
     this.mMatchRule = instance.mMatchRule;
     this.mStatus = instance.mStatus;
     this.mTags = instance.mTags;

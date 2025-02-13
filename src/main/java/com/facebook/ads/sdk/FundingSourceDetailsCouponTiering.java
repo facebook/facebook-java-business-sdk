@@ -40,31 +40,25 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class MarketingMessageTargeting extends APINode {
-  @SerializedName("automation_type")
-  private String mAutomationType = null;
-  @SerializedName("delay_send_time_second")
-  private Long mDelaySendTimeSecond = null;
-  @SerializedName("delay_send_time_unit")
-  private String mDelaySendTimeUnit = null;
-  @SerializedName("subscriber_lists")
-  private List<RawCustomAudience> mSubscriberLists = null;
-  @SerializedName("targeting_rules")
-  private List<Object> mTargetingRules = null;
+public class FundingSourceDetailsCouponTiering extends APINode {
+  @SerializedName("coupon_tiering_new")
+  private Object mCouponTieringNew = null;
+  @SerializedName("coupon_tiering_reactivation")
+  private Object mCouponTieringReactivation = null;
   protected static Gson gson = null;
 
-  public MarketingMessageTargeting() {
+  public FundingSourceDetailsCouponTiering() {
   }
 
   public String getId() {
     return null;
   }
-  public static MarketingMessageTargeting loadJSON(String json, APIContext context, String header) {
-    MarketingMessageTargeting marketingMessageTargeting = getGson().fromJson(json, MarketingMessageTargeting.class);
+  public static FundingSourceDetailsCouponTiering loadJSON(String json, APIContext context, String header) {
+    FundingSourceDetailsCouponTiering fundingSourceDetailsCouponTiering = getGson().fromJson(json, FundingSourceDetailsCouponTiering.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(marketingMessageTargeting.toString());
+      JsonElement o2 = parser.parse(fundingSourceDetailsCouponTiering.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -74,14 +68,14 @@ public class MarketingMessageTargeting extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    marketingMessageTargeting.context = context;
-    marketingMessageTargeting.rawValue = json;
-    marketingMessageTargeting.header = header;
-    return marketingMessageTargeting;
+    fundingSourceDetailsCouponTiering.context = context;
+    fundingSourceDetailsCouponTiering.rawValue = json;
+    fundingSourceDetailsCouponTiering.header = header;
+    return fundingSourceDetailsCouponTiering;
   }
 
-  public static APINodeList<MarketingMessageTargeting> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<MarketingMessageTargeting> marketingMessageTargetings = new APINodeList<MarketingMessageTargeting>(request, json, header);
+  public static APINodeList<FundingSourceDetailsCouponTiering> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<FundingSourceDetailsCouponTiering> fundingSourceDetailsCouponTierings = new APINodeList<FundingSourceDetailsCouponTiering>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -92,9 +86,9 @@ public class MarketingMessageTargeting extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          marketingMessageTargetings.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          fundingSourceDetailsCouponTierings.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return marketingMessageTargetings;
+        return fundingSourceDetailsCouponTierings;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -104,20 +98,20 @@ public class MarketingMessageTargeting extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                marketingMessageTargetings.setCursors(before, after);
+                fundingSourceDetailsCouponTierings.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            marketingMessageTargetings.setPaging(previous, next);
+            fundingSourceDetailsCouponTierings.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              marketingMessageTargetings.setAppSecret(context.getAppSecretProof());
+              fundingSourceDetailsCouponTierings.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              marketingMessageTargetings.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              fundingSourceDetailsCouponTierings.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -128,23 +122,23 @@ public class MarketingMessageTargeting extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  marketingMessageTargetings.add(loadJSON(entry.getValue().toString(), context, header));
+                  fundingSourceDetailsCouponTierings.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              marketingMessageTargetings.add(loadJSON(obj.toString(), context, header));
+              fundingSourceDetailsCouponTierings.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return marketingMessageTargetings;
+          return fundingSourceDetailsCouponTierings;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              marketingMessageTargetings.add(loadJSON(entry.getValue().toString(), context, header));
+              fundingSourceDetailsCouponTierings.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return marketingMessageTargetings;
+          return fundingSourceDetailsCouponTierings;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -161,20 +155,20 @@ public class MarketingMessageTargeting extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              marketingMessageTargetings.add(loadJSON(value.toString(), context, header));
+              fundingSourceDetailsCouponTierings.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return marketingMessageTargetings;
+            return fundingSourceDetailsCouponTierings;
           }
 
           // Sixth, check if it's pure JsonObject
-          marketingMessageTargetings.clear();
-          marketingMessageTargetings.add(loadJSON(json, context, header));
-          return marketingMessageTargetings;
+          fundingSourceDetailsCouponTierings.clear();
+          fundingSourceDetailsCouponTierings.add(loadJSON(json, context, header));
+          return fundingSourceDetailsCouponTierings;
         }
       }
     } catch (Exception e) {
@@ -202,53 +196,21 @@ public class MarketingMessageTargeting extends APINode {
   }
 
 
-  public String getFieldAutomationType() {
-    return mAutomationType;
+  public Object getFieldCouponTieringNew() {
+    return mCouponTieringNew;
   }
 
-  public MarketingMessageTargeting setFieldAutomationType(String value) {
-    this.mAutomationType = value;
+  public FundingSourceDetailsCouponTiering setFieldCouponTieringNew(Object value) {
+    this.mCouponTieringNew = value;
     return this;
   }
 
-  public Long getFieldDelaySendTimeSecond() {
-    return mDelaySendTimeSecond;
+  public Object getFieldCouponTieringReactivation() {
+    return mCouponTieringReactivation;
   }
 
-  public MarketingMessageTargeting setFieldDelaySendTimeSecond(Long value) {
-    this.mDelaySendTimeSecond = value;
-    return this;
-  }
-
-  public String getFieldDelaySendTimeUnit() {
-    return mDelaySendTimeUnit;
-  }
-
-  public MarketingMessageTargeting setFieldDelaySendTimeUnit(String value) {
-    this.mDelaySendTimeUnit = value;
-    return this;
-  }
-
-  public List<RawCustomAudience> getFieldSubscriberLists() {
-    return mSubscriberLists;
-  }
-
-  public MarketingMessageTargeting setFieldSubscriberLists(List<RawCustomAudience> value) {
-    this.mSubscriberLists = value;
-    return this;
-  }
-
-  public MarketingMessageTargeting setFieldSubscriberLists(String value) {
-    Type type = new TypeToken<List<RawCustomAudience>>(){}.getType();
-    this.mSubscriberLists = RawCustomAudience.getGson().fromJson(value, type);
-    return this;
-  }
-  public List<Object> getFieldTargetingRules() {
-    return mTargetingRules;
-  }
-
-  public MarketingMessageTargeting setFieldTargetingRules(List<Object> value) {
-    this.mTargetingRules = value;
+  public FundingSourceDetailsCouponTiering setFieldCouponTieringReactivation(Object value) {
+    this.mCouponTieringReactivation = value;
     return this;
   }
 
@@ -268,21 +230,18 @@ public class MarketingMessageTargeting extends APINode {
     return gson;
   }
 
-  public MarketingMessageTargeting copyFrom(MarketingMessageTargeting instance) {
-    this.mAutomationType = instance.mAutomationType;
-    this.mDelaySendTimeSecond = instance.mDelaySendTimeSecond;
-    this.mDelaySendTimeUnit = instance.mDelaySendTimeUnit;
-    this.mSubscriberLists = instance.mSubscriberLists;
-    this.mTargetingRules = instance.mTargetingRules;
+  public FundingSourceDetailsCouponTiering copyFrom(FundingSourceDetailsCouponTiering instance) {
+    this.mCouponTieringNew = instance.mCouponTieringNew;
+    this.mCouponTieringReactivation = instance.mCouponTieringReactivation;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<MarketingMessageTargeting> getParser() {
-    return new APIRequest.ResponseParser<MarketingMessageTargeting>() {
-      public APINodeList<MarketingMessageTargeting> parseResponse(String response, APIContext context, APIRequest<MarketingMessageTargeting> request, String header) throws MalformedResponseException {
-        return MarketingMessageTargeting.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<FundingSourceDetailsCouponTiering> getParser() {
+    return new APIRequest.ResponseParser<FundingSourceDetailsCouponTiering>() {
+      public APINodeList<FundingSourceDetailsCouponTiering> parseResponse(String response, APIContext context, APIRequest<FundingSourceDetailsCouponTiering> request, String header) throws MalformedResponseException {
+        return FundingSourceDetailsCouponTiering.parseResponse(response, context, request, header);
       }
     };
   }

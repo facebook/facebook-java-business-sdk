@@ -500,6 +500,10 @@ public class User extends APINode {
     return new APIRequestCreateMessengerDesktopPerformanceTrace(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestCreateMessengerKidsAccountsUnreadBadge createMessengerKidsAccountsUnreadBadge() {
+    return new APIRequestCreateMessengerKidsAccountsUnreadBadge(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetMusic getMusic() {
     return new APIRequestGetMusic(this.getPrefixedId().toString(), context);
   }
@@ -14816,6 +14820,121 @@ public class User extends APINode {
 
   }
 
+  public static class APIRequestCreateMessengerKidsAccountsUnreadBadge extends APIRequest<User> {
+
+    User lastResponse = null;
+    @Override
+    public User getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "proxied_app_id",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public User parseResponse(String response, String header) throws APIException {
+      return User.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public User execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public User execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<User> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<User> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, User>() {
+           public User apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateMessengerKidsAccountsUnreadBadge.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestCreateMessengerKidsAccountsUnreadBadge(String nodeId, APIContext context) {
+      super(context, nodeId, "/messenger_kids_accounts_unread_badge", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateMessengerKidsAccountsUnreadBadge setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateMessengerKidsAccountsUnreadBadge setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateMessengerKidsAccountsUnreadBadge setProxiedAppId (Long proxiedAppId) {
+      this.setParam("proxied_app_id", proxiedAppId);
+      return this;
+    }
+    public APIRequestCreateMessengerKidsAccountsUnreadBadge setProxiedAppId (String proxiedAppId) {
+      this.setParam("proxied_app_id", proxiedAppId);
+      return this;
+    }
+
+    public APIRequestCreateMessengerKidsAccountsUnreadBadge requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateMessengerKidsAccountsUnreadBadge requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateMessengerKidsAccountsUnreadBadge requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateMessengerKidsAccountsUnreadBadge requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateMessengerKidsAccountsUnreadBadge requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateMessengerKidsAccountsUnreadBadge requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGetMusic extends APIRequest<Page> {
 
     APINodeList<Page> lastResponse = null;
@@ -17914,6 +18033,7 @@ public class User extends APINode {
       "place",
       "privacy",
       "profile_id",
+      "provenance_info",
       "proxied_app_id",
       "published",
       "qn",
@@ -18236,6 +18356,15 @@ public class User extends APINode {
     }
     public APIRequestCreatePhoto setProfileId (String profileId) {
       this.setParam("profile_id", profileId);
+      return this;
+    }
+
+    public APIRequestCreatePhoto setProvenanceInfo (Map<String, String> provenanceInfo) {
+      this.setParam("provenance_info", provenanceInfo);
+      return this;
+    }
+    public APIRequestCreatePhoto setProvenanceInfo (String provenanceInfo) {
+      this.setParam("provenance_info", provenanceInfo);
       return this;
     }
 
@@ -19713,6 +19842,7 @@ public class User extends APINode {
       "audio_isrc",
       "backdated_time",
       "backdated_time_granularity",
+      "boost_eligibility_info",
       "content_category",
       "content_tags",
       "copyright",
@@ -19888,6 +20018,13 @@ public class User extends APINode {
     }
     public APIRequestGetVideos requestBackdatedTimeGranularityField (boolean value) {
       this.requestField("backdated_time_granularity", value);
+      return this;
+    }
+    public APIRequestGetVideos requestBoostEligibilityInfoField () {
+      return this.requestBoostEligibilityInfoField(true);
+    }
+    public APIRequestGetVideos requestBoostEligibilityInfoField (boolean value) {
+      this.requestField("boost_eligibility_info", value);
       return this;
     }
     public APIRequestGetVideos requestContentCategoryField () {

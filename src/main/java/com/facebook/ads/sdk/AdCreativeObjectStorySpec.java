@@ -41,8 +41,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class AdCreativeObjectStorySpec extends APINode {
-  @SerializedName("instagram_actor_id")
-  private String mInstagramActorId = null;
+  @SerializedName("instagram_user_id")
+  private String mInstagramUserId = null;
   @SerializedName("link_data")
   private AdCreativeLinkData mLinkData = null;
   @SerializedName("page_id")
@@ -210,12 +210,12 @@ public class AdCreativeObjectStorySpec extends APINode {
   }
 
 
-  public String getFieldInstagramActorId() {
-    return mInstagramActorId;
+  public String getFieldInstagramUserId() {
+    return mInstagramUserId;
   }
 
-  public AdCreativeObjectStorySpec setFieldInstagramActorId(String value) {
-    this.mInstagramActorId = value;
+  public AdCreativeObjectStorySpec setFieldInstagramUserId(String value) {
+    this.mInstagramUserId = value;
     return this;
   }
 
@@ -338,7 +338,7 @@ public class AdCreativeObjectStorySpec extends APINode {
   }
 
   public AdCreativeObjectStorySpec copyFrom(AdCreativeObjectStorySpec instance) {
-    this.mInstagramActorId = instance.mInstagramActorId;
+    this.mInstagramUserId = instance.mInstagramUserId;
     this.mLinkData = instance.mLinkData;
     this.mPageId = instance.mPageId;
     this.mPhotoData = instance.mPhotoData;

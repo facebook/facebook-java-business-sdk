@@ -47,6 +47,26 @@ public class Flight extends APINode {
   private CatalogSubVerticalList mCategorySpecificFields = null;
   @SerializedName("currency")
   private String mCurrency = null;
+  @SerializedName("custom_label_0")
+  private String mCustomLabel0 = null;
+  @SerializedName("custom_label_1")
+  private String mCustomLabel1 = null;
+  @SerializedName("custom_label_2")
+  private String mCustomLabel2 = null;
+  @SerializedName("custom_label_3")
+  private String mCustomLabel3 = null;
+  @SerializedName("custom_label_4")
+  private String mCustomLabel4 = null;
+  @SerializedName("custom_number_0")
+  private Long mCustomNumber0 = null;
+  @SerializedName("custom_number_1")
+  private Long mCustomNumber1 = null;
+  @SerializedName("custom_number_2")
+  private Long mCustomNumber2 = null;
+  @SerializedName("custom_number_3")
+  private Long mCustomNumber3 = null;
+  @SerializedName("custom_number_4")
+  private Long mCustomNumber4 = null;
   @SerializedName("description")
   private String mDescription = null;
   @SerializedName("destination_airport")
@@ -71,6 +91,16 @@ public class Flight extends APINode {
   private String mOriginCity = null;
   @SerializedName("price")
   private String mPrice = null;
+  @SerializedName("product_priority_0")
+  private Double mProductPriority0 = null;
+  @SerializedName("product_priority_1")
+  private Double mProductPriority1 = null;
+  @SerializedName("product_priority_2")
+  private Double mProductPriority2 = null;
+  @SerializedName("product_priority_3")
+  private Double mProductPriority3 = null;
+  @SerializedName("product_priority_4")
+  private Double mProductPriority4 = null;
   @SerializedName("sanitized_images")
   private List<String> mSanitizedImages = null;
   @SerializedName("tags")
@@ -323,6 +353,46 @@ public class Flight extends APINode {
     return mCurrency;
   }
 
+  public String getFieldCustomLabel0() {
+    return mCustomLabel0;
+  }
+
+  public String getFieldCustomLabel1() {
+    return mCustomLabel1;
+  }
+
+  public String getFieldCustomLabel2() {
+    return mCustomLabel2;
+  }
+
+  public String getFieldCustomLabel3() {
+    return mCustomLabel3;
+  }
+
+  public String getFieldCustomLabel4() {
+    return mCustomLabel4;
+  }
+
+  public Long getFieldCustomNumber0() {
+    return mCustomNumber0;
+  }
+
+  public Long getFieldCustomNumber1() {
+    return mCustomNumber1;
+  }
+
+  public Long getFieldCustomNumber2() {
+    return mCustomNumber2;
+  }
+
+  public Long getFieldCustomNumber3() {
+    return mCustomNumber3;
+  }
+
+  public Long getFieldCustomNumber4() {
+    return mCustomNumber4;
+  }
+
   public String getFieldDescription() {
     return mDescription;
   }
@@ -369,6 +439,26 @@ public class Flight extends APINode {
 
   public String getFieldPrice() {
     return mPrice;
+  }
+
+  public Double getFieldProductPriority0() {
+    return mProductPriority0;
+  }
+
+  public Double getFieldProductPriority1() {
+    return mProductPriority1;
+  }
+
+  public Double getFieldProductPriority2() {
+    return mProductPriority2;
+  }
+
+  public Double getFieldProductPriority3() {
+    return mProductPriority3;
+  }
+
+  public Double getFieldProductPriority4() {
+    return mProductPriority4;
   }
 
   public List<String> getFieldSanitizedImages() {
@@ -814,6 +904,16 @@ public class Flight extends APINode {
       "applinks",
       "category_specific_fields",
       "currency",
+      "custom_label_0",
+      "custom_label_1",
+      "custom_label_2",
+      "custom_label_3",
+      "custom_label_4",
+      "custom_number_0",
+      "custom_number_1",
+      "custom_number_2",
+      "custom_number_3",
+      "custom_number_4",
       "description",
       "destination_airport",
       "destination_city",
@@ -826,6 +926,11 @@ public class Flight extends APINode {
       "origin_airport",
       "origin_city",
       "price",
+      "product_priority_0",
+      "product_priority_1",
+      "product_priority_2",
+      "product_priority_3",
+      "product_priority_4",
       "sanitized_images",
       "tags",
       "unit_price",
@@ -944,6 +1049,76 @@ public class Flight extends APINode {
       this.requestField("currency", value);
       return this;
     }
+    public APIRequestGet requestCustomLabel0Field () {
+      return this.requestCustomLabel0Field(true);
+    }
+    public APIRequestGet requestCustomLabel0Field (boolean value) {
+      this.requestField("custom_label_0", value);
+      return this;
+    }
+    public APIRequestGet requestCustomLabel1Field () {
+      return this.requestCustomLabel1Field(true);
+    }
+    public APIRequestGet requestCustomLabel1Field (boolean value) {
+      this.requestField("custom_label_1", value);
+      return this;
+    }
+    public APIRequestGet requestCustomLabel2Field () {
+      return this.requestCustomLabel2Field(true);
+    }
+    public APIRequestGet requestCustomLabel2Field (boolean value) {
+      this.requestField("custom_label_2", value);
+      return this;
+    }
+    public APIRequestGet requestCustomLabel3Field () {
+      return this.requestCustomLabel3Field(true);
+    }
+    public APIRequestGet requestCustomLabel3Field (boolean value) {
+      this.requestField("custom_label_3", value);
+      return this;
+    }
+    public APIRequestGet requestCustomLabel4Field () {
+      return this.requestCustomLabel4Field(true);
+    }
+    public APIRequestGet requestCustomLabel4Field (boolean value) {
+      this.requestField("custom_label_4", value);
+      return this;
+    }
+    public APIRequestGet requestCustomNumber0Field () {
+      return this.requestCustomNumber0Field(true);
+    }
+    public APIRequestGet requestCustomNumber0Field (boolean value) {
+      this.requestField("custom_number_0", value);
+      return this;
+    }
+    public APIRequestGet requestCustomNumber1Field () {
+      return this.requestCustomNumber1Field(true);
+    }
+    public APIRequestGet requestCustomNumber1Field (boolean value) {
+      this.requestField("custom_number_1", value);
+      return this;
+    }
+    public APIRequestGet requestCustomNumber2Field () {
+      return this.requestCustomNumber2Field(true);
+    }
+    public APIRequestGet requestCustomNumber2Field (boolean value) {
+      this.requestField("custom_number_2", value);
+      return this;
+    }
+    public APIRequestGet requestCustomNumber3Field () {
+      return this.requestCustomNumber3Field(true);
+    }
+    public APIRequestGet requestCustomNumber3Field (boolean value) {
+      this.requestField("custom_number_3", value);
+      return this;
+    }
+    public APIRequestGet requestCustomNumber4Field () {
+      return this.requestCustomNumber4Field(true);
+    }
+    public APIRequestGet requestCustomNumber4Field (boolean value) {
+      this.requestField("custom_number_4", value);
+      return this;
+    }
     public APIRequestGet requestDescriptionField () {
       return this.requestDescriptionField(true);
     }
@@ -1026,6 +1201,41 @@ public class Flight extends APINode {
     }
     public APIRequestGet requestPriceField (boolean value) {
       this.requestField("price", value);
+      return this;
+    }
+    public APIRequestGet requestProductPriority0Field () {
+      return this.requestProductPriority0Field(true);
+    }
+    public APIRequestGet requestProductPriority0Field (boolean value) {
+      this.requestField("product_priority_0", value);
+      return this;
+    }
+    public APIRequestGet requestProductPriority1Field () {
+      return this.requestProductPriority1Field(true);
+    }
+    public APIRequestGet requestProductPriority1Field (boolean value) {
+      this.requestField("product_priority_1", value);
+      return this;
+    }
+    public APIRequestGet requestProductPriority2Field () {
+      return this.requestProductPriority2Field(true);
+    }
+    public APIRequestGet requestProductPriority2Field (boolean value) {
+      this.requestField("product_priority_2", value);
+      return this;
+    }
+    public APIRequestGet requestProductPriority3Field () {
+      return this.requestProductPriority3Field(true);
+    }
+    public APIRequestGet requestProductPriority3Field (boolean value) {
+      this.requestField("product_priority_3", value);
+      return this;
+    }
+    public APIRequestGet requestProductPriority4Field () {
+      return this.requestProductPriority4Field(true);
+    }
+    public APIRequestGet requestProductPriority4Field (boolean value) {
+      this.requestField("product_priority_4", value);
       return this;
     }
     public APIRequestGet requestSanitizedImagesField () {
@@ -1296,6 +1506,16 @@ public class Flight extends APINode {
     this.mApplinks = instance.mApplinks;
     this.mCategorySpecificFields = instance.mCategorySpecificFields;
     this.mCurrency = instance.mCurrency;
+    this.mCustomLabel0 = instance.mCustomLabel0;
+    this.mCustomLabel1 = instance.mCustomLabel1;
+    this.mCustomLabel2 = instance.mCustomLabel2;
+    this.mCustomLabel3 = instance.mCustomLabel3;
+    this.mCustomLabel4 = instance.mCustomLabel4;
+    this.mCustomNumber0 = instance.mCustomNumber0;
+    this.mCustomNumber1 = instance.mCustomNumber1;
+    this.mCustomNumber2 = instance.mCustomNumber2;
+    this.mCustomNumber3 = instance.mCustomNumber3;
+    this.mCustomNumber4 = instance.mCustomNumber4;
     this.mDescription = instance.mDescription;
     this.mDestinationAirport = instance.mDestinationAirport;
     this.mDestinationCity = instance.mDestinationCity;
@@ -1308,6 +1528,11 @@ public class Flight extends APINode {
     this.mOriginAirport = instance.mOriginAirport;
     this.mOriginCity = instance.mOriginCity;
     this.mPrice = instance.mPrice;
+    this.mProductPriority0 = instance.mProductPriority0;
+    this.mProductPriority1 = instance.mProductPriority1;
+    this.mProductPriority2 = instance.mProductPriority2;
+    this.mProductPriority3 = instance.mProductPriority3;
+    this.mProductPriority4 = instance.mProductPriority4;
     this.mSanitizedImages = instance.mSanitizedImages;
     this.mTags = instance.mTags;
     this.mUnitPrice = instance.mUnitPrice;

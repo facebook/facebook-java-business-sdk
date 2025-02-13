@@ -55,8 +55,12 @@ public class AdsUserSettings extends APINode {
   private String mApluscCarouselCdaOptInStatus = null;
   @SerializedName("aplusc_carousel_inline_comment_opt_in_status")
   private String mApluscCarouselInlineCommentOptInStatus = null;
+  @SerializedName("aplusc_enhance_cta_opt_in_status")
+  private String mApluscEnhanceCtaOptInStatus = null;
   @SerializedName("aplusc_epa_opt_in_status")
   private String mApluscEpaOptInStatus = null;
+  @SerializedName("aplusc_local_store_extension_opt_in_status")
+  private String mApluscLocalStoreExtensionOptInStatus = null;
   @SerializedName("aplusc_opt_out_friction")
   private List<String> mApluscOptOutFriction = null;
   @SerializedName("autoflow_lite_opt_in_status")
@@ -79,6 +83,8 @@ public class AdsUserSettings extends APINode {
   private String mConnectedSourcesCatalogOptInStatus = null;
   @SerializedName("default_creation_mode")
   private String mDefaultCreationMode = null;
+  @SerializedName("dynamic_partnership_ads_opt_in_status")
+  private String mDynamicPartnershipAdsOptInStatus = null;
   @SerializedName("enhance_cta_text_extraction_opt_in_status")
   private String mEnhanceCtaTextExtractionOptInStatus = null;
   @SerializedName("export_format_default")
@@ -407,8 +413,16 @@ public class AdsUserSettings extends APINode {
     return mApluscCarouselInlineCommentOptInStatus;
   }
 
+  public String getFieldApluscEnhanceCtaOptInStatus() {
+    return mApluscEnhanceCtaOptInStatus;
+  }
+
   public String getFieldApluscEpaOptInStatus() {
     return mApluscEpaOptInStatus;
+  }
+
+  public String getFieldApluscLocalStoreExtensionOptInStatus() {
+    return mApluscLocalStoreExtensionOptInStatus;
   }
 
   public List<String> getFieldApluscOptOutFriction() {
@@ -453,6 +467,10 @@ public class AdsUserSettings extends APINode {
 
   public String getFieldDefaultCreationMode() {
     return mDefaultCreationMode;
+  }
+
+  public String getFieldDynamicPartnershipAdsOptInStatus() {
+    return mDynamicPartnershipAdsOptInStatus;
   }
 
   public String getFieldEnhanceCtaTextExtractionOptInStatus() {
@@ -656,7 +674,9 @@ public class AdsUserSettings extends APINode {
       "ads_tool_visits",
       "aplusc_carousel_cda_opt_in_status",
       "aplusc_carousel_inline_comment_opt_in_status",
+      "aplusc_enhance_cta_opt_in_status",
       "aplusc_epa_opt_in_status",
+      "aplusc_local_store_extension_opt_in_status",
       "aplusc_opt_out_friction",
       "autoflow_lite_opt_in_status",
       "autoflow_lite_should_opt_in",
@@ -668,6 +688,7 @@ public class AdsUserSettings extends APINode {
       "carousel_to_video_opt_in_status",
       "connected_sources_catalog_opt_in_status",
       "default_creation_mode",
+      "dynamic_partnership_ads_opt_in_status",
       "enhance_cta_text_extraction_opt_in_status",
       "export_format_default",
       "focus_mode_default",
@@ -852,11 +873,25 @@ public class AdsUserSettings extends APINode {
       this.requestField("aplusc_carousel_inline_comment_opt_in_status", value);
       return this;
     }
+    public APIRequestGet requestApluscEnhanceCtaOptInStatusField () {
+      return this.requestApluscEnhanceCtaOptInStatusField(true);
+    }
+    public APIRequestGet requestApluscEnhanceCtaOptInStatusField (boolean value) {
+      this.requestField("aplusc_enhance_cta_opt_in_status", value);
+      return this;
+    }
     public APIRequestGet requestApluscEpaOptInStatusField () {
       return this.requestApluscEpaOptInStatusField(true);
     }
     public APIRequestGet requestApluscEpaOptInStatusField (boolean value) {
       this.requestField("aplusc_epa_opt_in_status", value);
+      return this;
+    }
+    public APIRequestGet requestApluscLocalStoreExtensionOptInStatusField () {
+      return this.requestApluscLocalStoreExtensionOptInStatusField(true);
+    }
+    public APIRequestGet requestApluscLocalStoreExtensionOptInStatusField (boolean value) {
+      this.requestField("aplusc_local_store_extension_opt_in_status", value);
       return this;
     }
     public APIRequestGet requestApluscOptOutFrictionField () {
@@ -934,6 +969,13 @@ public class AdsUserSettings extends APINode {
     }
     public APIRequestGet requestDefaultCreationModeField (boolean value) {
       this.requestField("default_creation_mode", value);
+      return this;
+    }
+    public APIRequestGet requestDynamicPartnershipAdsOptInStatusField () {
+      return this.requestDynamicPartnershipAdsOptInStatusField(true);
+    }
+    public APIRequestGet requestDynamicPartnershipAdsOptInStatusField (boolean value) {
+      this.requestField("dynamic_partnership_ads_opt_in_status", value);
       return this;
     }
     public APIRequestGet requestEnhanceCtaTextExtractionOptInStatusField () {
@@ -1261,7 +1303,9 @@ public class AdsUserSettings extends APINode {
     this.mAdsToolVisits = instance.mAdsToolVisits;
     this.mApluscCarouselCdaOptInStatus = instance.mApluscCarouselCdaOptInStatus;
     this.mApluscCarouselInlineCommentOptInStatus = instance.mApluscCarouselInlineCommentOptInStatus;
+    this.mApluscEnhanceCtaOptInStatus = instance.mApluscEnhanceCtaOptInStatus;
     this.mApluscEpaOptInStatus = instance.mApluscEpaOptInStatus;
+    this.mApluscLocalStoreExtensionOptInStatus = instance.mApluscLocalStoreExtensionOptInStatus;
     this.mApluscOptOutFriction = instance.mApluscOptOutFriction;
     this.mAutoflowLiteOptInStatus = instance.mAutoflowLiteOptInStatus;
     this.mAutoflowLiteShouldOptIn = instance.mAutoflowLiteShouldOptIn;
@@ -1273,6 +1317,7 @@ public class AdsUserSettings extends APINode {
     this.mCarouselToVideoOptInStatus = instance.mCarouselToVideoOptInStatus;
     this.mConnectedSourcesCatalogOptInStatus = instance.mConnectedSourcesCatalogOptInStatus;
     this.mDefaultCreationMode = instance.mDefaultCreationMode;
+    this.mDynamicPartnershipAdsOptInStatus = instance.mDynamicPartnershipAdsOptInStatus;
     this.mEnhanceCtaTextExtractionOptInStatus = instance.mEnhanceCtaTextExtractionOptInStatus;
     this.mExportFormatDefault = instance.mExportFormatDefault;
     this.mFocusModeDefault = instance.mFocusModeDefault;

@@ -280,6 +280,10 @@ public class IGUserForIGOnlyAPI extends APINode {
     return new APIRequestGetConversations(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetInsights getInsights() {
+    return new APIRequestGetInsights(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetLiveMedia getLiveMedia() {
     return new APIRequestGetLiveMedia(this.getPrefixedId().toString(), context);
   }
@@ -799,6 +803,229 @@ public class IGUserForIGOnlyAPI extends APINode {
     }
   }
 
+  public static class APIRequestGetInsights extends APIRequest<InsightsResult> {
+
+    APINodeList<InsightsResult> lastResponse = null;
+    @Override
+    public APINodeList<InsightsResult> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "breakdown",
+      "metric",
+      "metric_type",
+      "period",
+      "since",
+      "timeframe",
+      "until",
+    };
+
+    public static final String[] FIELDS = {
+      "description",
+      "description_from_api_doc",
+      "id",
+      "name",
+      "period",
+      "title",
+      "values",
+    };
+
+    @Override
+    public APINodeList<InsightsResult> parseResponse(String response, String header) throws APIException {
+      return InsightsResult.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<InsightsResult> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<InsightsResult> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<InsightsResult>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<InsightsResult>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<InsightsResult>>() {
+           public APINodeList<InsightsResult> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetInsights.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestGetInsights(String nodeId, APIContext context) {
+      super(context, nodeId, "/insights", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetInsights setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetInsights setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetInsights setBreakdown (List<InsightsResult.EnumBreakdown> breakdown) {
+      this.setParam("breakdown", breakdown);
+      return this;
+    }
+    public APIRequestGetInsights setBreakdown (String breakdown) {
+      this.setParam("breakdown", breakdown);
+      return this;
+    }
+
+    public APIRequestGetInsights setMetric (List<InsightsResult.EnumMetric> metric) {
+      this.setParam("metric", metric);
+      return this;
+    }
+    public APIRequestGetInsights setMetric (String metric) {
+      this.setParam("metric", metric);
+      return this;
+    }
+
+    public APIRequestGetInsights setMetricType (InsightsResult.EnumMetricType metricType) {
+      this.setParam("metric_type", metricType);
+      return this;
+    }
+    public APIRequestGetInsights setMetricType (String metricType) {
+      this.setParam("metric_type", metricType);
+      return this;
+    }
+
+    public APIRequestGetInsights setPeriod (List<InsightsResult.EnumPeriod> period) {
+      this.setParam("period", period);
+      return this;
+    }
+    public APIRequestGetInsights setPeriod (String period) {
+      this.setParam("period", period);
+      return this;
+    }
+
+    public APIRequestGetInsights setSince (String since) {
+      this.setParam("since", since);
+      return this;
+    }
+
+    public APIRequestGetInsights setTimeframe (InsightsResult.EnumTimeframe timeframe) {
+      this.setParam("timeframe", timeframe);
+      return this;
+    }
+    public APIRequestGetInsights setTimeframe (String timeframe) {
+      this.setParam("timeframe", timeframe);
+      return this;
+    }
+
+    public APIRequestGetInsights setUntil (String until) {
+      this.setParam("until", until);
+      return this;
+    }
+
+    public APIRequestGetInsights requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetInsights requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetInsights requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetInsights requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetInsights requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetInsights requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetInsights requestDescriptionField () {
+      return this.requestDescriptionField(true);
+    }
+    public APIRequestGetInsights requestDescriptionField (boolean value) {
+      this.requestField("description", value);
+      return this;
+    }
+    public APIRequestGetInsights requestDescriptionFromApiDocField () {
+      return this.requestDescriptionFromApiDocField(true);
+    }
+    public APIRequestGetInsights requestDescriptionFromApiDocField (boolean value) {
+      this.requestField("description_from_api_doc", value);
+      return this;
+    }
+    public APIRequestGetInsights requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetInsights requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetInsights requestNameField () {
+      return this.requestNameField(true);
+    }
+    public APIRequestGetInsights requestNameField (boolean value) {
+      this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetInsights requestPeriodField () {
+      return this.requestPeriodField(true);
+    }
+    public APIRequestGetInsights requestPeriodField (boolean value) {
+      this.requestField("period", value);
+      return this;
+    }
+    public APIRequestGetInsights requestTitleField () {
+      return this.requestTitleField(true);
+    }
+    public APIRequestGetInsights requestTitleField (boolean value) {
+      this.requestField("title", value);
+      return this;
+    }
+    public APIRequestGetInsights requestValuesField () {
+      return this.requestValuesField(true);
+    }
+    public APIRequestGetInsights requestValuesField (boolean value) {
+      this.requestField("values", value);
+      return this;
+    }
+  }
+
   public static class APIRequestGetLiveMedia extends APIRequest<APINode> {
 
     APINodeList<APINode> lastResponse = null;
@@ -1029,6 +1256,7 @@ public class IGUserForIGOnlyAPI extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "alt_text",
       "audio_name",
       "caption",
       "children",
@@ -1102,6 +1330,11 @@ public class IGUserForIGOnlyAPI extends APINode {
       return this;
     }
 
+
+    public APIRequestCreateMedia setAltText (String altText) {
+      this.setParam("alt_text", altText);
+      return this;
+    }
 
     public APIRequestCreateMedia setAudioName (String audioName) {
       this.setParam("audio_name", audioName);
@@ -3285,6 +3518,8 @@ public class IGUserForIGOnlyAPI extends APINode {
       VALUE_STANDBY("standby"),
       @SerializedName("story_insights")
       VALUE_STORY_INSIGHTS("story_insights"),
+      @SerializedName("story_reactions")
+      VALUE_STORY_REACTIONS("story_reactions"),
       ;
 
       private String value;

@@ -331,6 +331,7 @@ public class VideoList extends APINode {
       "audio_isrc",
       "backdated_time",
       "backdated_time_granularity",
+      "boost_eligibility_info",
       "content_category",
       "content_tags",
       "copyright",
@@ -497,6 +498,13 @@ public class VideoList extends APINode {
     }
     public APIRequestGetVideos requestBackdatedTimeGranularityField (boolean value) {
       this.requestField("backdated_time_granularity", value);
+      return this;
+    }
+    public APIRequestGetVideos requestBoostEligibilityInfoField () {
+      return this.requestBoostEligibilityInfoField(true);
+    }
+    public APIRequestGetVideos requestBoostEligibilityInfoField (boolean value) {
+      this.requestField("boost_eligibility_info", value);
       return this;
     }
     public APIRequestGetVideos requestContentCategoryField () {

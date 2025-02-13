@@ -55,12 +55,20 @@ public class Destination extends APINode {
   private String mCustomLabel1 = null;
   @SerializedName("custom_label_2")
   private String mCustomLabel2 = null;
+  @SerializedName("custom_label_3")
+  private String mCustomLabel3 = null;
+  @SerializedName("custom_label_4")
+  private String mCustomLabel4 = null;
   @SerializedName("custom_number_0")
   private Long mCustomNumber0 = null;
   @SerializedName("custom_number_1")
   private Long mCustomNumber1 = null;
   @SerializedName("custom_number_2")
   private Long mCustomNumber2 = null;
+  @SerializedName("custom_number_3")
+  private Long mCustomNumber3 = null;
+  @SerializedName("custom_number_4")
+  private Long mCustomNumber4 = null;
   @SerializedName("description")
   private String mDescription = null;
   @SerializedName("destination_id")
@@ -343,6 +351,14 @@ public class Destination extends APINode {
     return mCustomLabel2;
   }
 
+  public String getFieldCustomLabel3() {
+    return mCustomLabel3;
+  }
+
+  public String getFieldCustomLabel4() {
+    return mCustomLabel4;
+  }
+
   public Long getFieldCustomNumber0() {
     return mCustomNumber0;
   }
@@ -353,6 +369,14 @@ public class Destination extends APINode {
 
   public Long getFieldCustomNumber2() {
     return mCustomNumber2;
+  }
+
+  public Long getFieldCustomNumber3() {
+    return mCustomNumber3;
+  }
+
+  public Long getFieldCustomNumber4() {
+    return mCustomNumber4;
   }
 
   public String getFieldDescription() {
@@ -838,9 +862,13 @@ public class Destination extends APINode {
       "custom_label_0",
       "custom_label_1",
       "custom_label_2",
+      "custom_label_3",
+      "custom_label_4",
       "custom_number_0",
       "custom_number_1",
       "custom_number_2",
+      "custom_number_3",
+      "custom_number_4",
       "description",
       "destination_id",
       "id",
@@ -996,6 +1024,20 @@ public class Destination extends APINode {
       this.requestField("custom_label_2", value);
       return this;
     }
+    public APIRequestGet requestCustomLabel3Field () {
+      return this.requestCustomLabel3Field(true);
+    }
+    public APIRequestGet requestCustomLabel3Field (boolean value) {
+      this.requestField("custom_label_3", value);
+      return this;
+    }
+    public APIRequestGet requestCustomLabel4Field () {
+      return this.requestCustomLabel4Field(true);
+    }
+    public APIRequestGet requestCustomLabel4Field (boolean value) {
+      this.requestField("custom_label_4", value);
+      return this;
+    }
     public APIRequestGet requestCustomNumber0Field () {
       return this.requestCustomNumber0Field(true);
     }
@@ -1015,6 +1057,20 @@ public class Destination extends APINode {
     }
     public APIRequestGet requestCustomNumber2Field (boolean value) {
       this.requestField("custom_number_2", value);
+      return this;
+    }
+    public APIRequestGet requestCustomNumber3Field () {
+      return this.requestCustomNumber3Field(true);
+    }
+    public APIRequestGet requestCustomNumber3Field (boolean value) {
+      this.requestField("custom_number_3", value);
+      return this;
+    }
+    public APIRequestGet requestCustomNumber4Field () {
+      return this.requestCustomNumber4Field(true);
+    }
+    public APIRequestGet requestCustomNumber4Field (boolean value) {
+      this.requestField("custom_number_4", value);
       return this;
     }
     public APIRequestGet requestDescriptionField () {
@@ -1185,9 +1241,13 @@ public class Destination extends APINode {
     this.mCustomLabel0 = instance.mCustomLabel0;
     this.mCustomLabel1 = instance.mCustomLabel1;
     this.mCustomLabel2 = instance.mCustomLabel2;
+    this.mCustomLabel3 = instance.mCustomLabel3;
+    this.mCustomLabel4 = instance.mCustomLabel4;
     this.mCustomNumber0 = instance.mCustomNumber0;
     this.mCustomNumber1 = instance.mCustomNumber1;
     this.mCustomNumber2 = instance.mCustomNumber2;
+    this.mCustomNumber3 = instance.mCustomNumber3;
+    this.mCustomNumber4 = instance.mCustomNumber4;
     this.mDescription = instance.mDescription;
     this.mDestinationId = instance.mDestinationId;
     this.mId = instance.mId;

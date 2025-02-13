@@ -1019,7 +1019,7 @@ public class AdStudyCell extends APINode {
       "frequency_control_specs",
       "full_funnel_exploration_mode",
       "id",
-      "instagram_actor_id",
+      "instagram_user_id",
       "is_budget_schedule_enabled",
       "is_dynamic_creative",
       "issues_info",
@@ -1368,11 +1368,11 @@ public class AdStudyCell extends APINode {
       this.requestField("id", value);
       return this;
     }
-    public APIRequestGetAdSets requestInstagramActorIdField () {
-      return this.requestInstagramActorIdField(true);
+    public APIRequestGetAdSets requestInstagramUserIdField () {
+      return this.requestInstagramUserIdField(true);
     }
-    public APIRequestGetAdSets requestInstagramActorIdField (boolean value) {
-      this.requestField("instagram_actor_id", value);
+    public APIRequestGetAdSets requestInstagramUserIdField (boolean value) {
+      this.requestField("instagram_user_id", value);
       return this;
     }
     public APIRequestGetAdSets requestIsBudgetScheduleEnabledField () {

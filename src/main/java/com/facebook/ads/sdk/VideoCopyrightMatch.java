@@ -55,6 +55,8 @@ public class VideoCopyrightMatch extends APINode {
   private String mNotes = null;
   @SerializedName("permalink")
   private String mPermalink = null;
+  @SerializedName("ugc_content_format")
+  private String mUgcContentFormat = null;
   protected static Gson gson = null;
 
   VideoCopyrightMatch() {
@@ -300,6 +302,10 @@ public class VideoCopyrightMatch extends APINode {
     return mPermalink;
   }
 
+  public String getFieldUgcContentFormat() {
+    return mUgcContentFormat;
+  }
+
 
 
   public static class APIRequestGet extends APIRequest<VideoCopyrightMatch> {
@@ -320,6 +326,7 @@ public class VideoCopyrightMatch extends APINode {
       "match_status",
       "notes",
       "permalink",
+      "ugc_content_format",
     };
 
     @Override
@@ -461,6 +468,13 @@ public class VideoCopyrightMatch extends APINode {
       this.requestField("permalink", value);
       return this;
     }
+    public APIRequestGet requestUgcContentFormatField () {
+      return this.requestUgcContentFormatField(true);
+    }
+    public APIRequestGet requestUgcContentFormatField (boolean value) {
+      this.requestField("ugc_content_format", value);
+      return this;
+    }
   }
 
   public static enum EnumAction {
@@ -562,6 +576,7 @@ public class VideoCopyrightMatch extends APINode {
     this.mMatchStatus = instance.mMatchStatus;
     this.mNotes = instance.mNotes;
     this.mPermalink = instance.mPermalink;
+    this.mUgcContentFormat = instance.mUgcContentFormat;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

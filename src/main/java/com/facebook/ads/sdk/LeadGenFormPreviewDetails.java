@@ -107,6 +107,8 @@ public class LeadGenFormPreviewDetails extends APINode {
   private String mQualifiedThankYouCardTransparencyInfoText = null;
   @SerializedName("redeem_promo_code_text")
   private String mRedeemPromoCodeText = null;
+  @SerializedName("return_to_facebook_text")
+  private String mReturnToFacebookText = null;
   @SerializedName("review_your_info_text")
   private String mReviewYourInfoText = null;
   @SerializedName("secure_sharing_text")
@@ -567,6 +569,15 @@ public class LeadGenFormPreviewDetails extends APINode {
     return this;
   }
 
+  public String getFieldReturnToFacebookText() {
+    return mReturnToFacebookText;
+  }
+
+  public LeadGenFormPreviewDetails setFieldReturnToFacebookText(String value) {
+    this.mReturnToFacebookText = value;
+    return this;
+  }
+
   public String getFieldReviewYourInfoText() {
     return mReviewYourInfoText;
   }
@@ -671,6 +682,7 @@ public class LeadGenFormPreviewDetails extends APINode {
     this.mProductsSectionHeaders = instance.mProductsSectionHeaders;
     this.mQualifiedThankYouCardTransparencyInfoText = instance.mQualifiedThankYouCardTransparencyInfoText;
     this.mRedeemPromoCodeText = instance.mRedeemPromoCodeText;
+    this.mReturnToFacebookText = instance.mReturnToFacebookText;
     this.mReviewYourInfoText = instance.mReviewYourInfoText;
     this.mSecureSharingText = instance.mSecureSharingText;
     this.mSlideToSubmitText = instance.mSlideToSubmitText;

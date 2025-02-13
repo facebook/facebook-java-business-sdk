@@ -786,6 +786,10 @@ public class AdAccount extends APINode {
     return new APIRequestCreateSubscribedApp(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetSuggestedProductTags getSuggestedProductTags() {
+    return new APIRequestGetSuggestedProductTags(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetTargetingBrowse getTargetingBrowse() {
     return new APIRequestGetTargetingBrowse(this.getPrefixedId().toString(), context);
   }
@@ -832,6 +836,10 @@ public class AdAccount extends APINode {
 
   public APIRequestGetVideoAds getVideoAds() {
     return new APIRequestGetVideoAds(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestCreateVideoAd createVideoAd() {
+    return new APIRequestCreateVideoAd(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGet get() {
@@ -2709,7 +2717,6 @@ public class AdAccount extends APINode {
       "dynamic_ad_voice",
       "effective_authorization_category",
       "effective_instagram_media_id",
-      "effective_instagram_story_id",
       "effective_object_story_id",
       "enable_direct_install",
       "enable_launch_instant_app",
@@ -2718,10 +2725,8 @@ public class AdAccount extends APINode {
       "image_crops",
       "image_hash",
       "image_url",
-      "instagram_actor_id",
       "instagram_branded_content",
       "instagram_permalink_url",
-      "instagram_story_id",
       "instagram_user_id",
       "interactive_components_spec",
       "link_deep_link_url",
@@ -2746,6 +2751,7 @@ public class AdAccount extends APINode {
       "product_data",
       "product_set_id",
       "recommender_settings",
+      "regional_regulation_disclaimer_spec",
       "source_instagram_media_id",
       "status",
       "template_url",
@@ -3009,13 +3015,6 @@ public class AdAccount extends APINode {
       this.requestField("effective_instagram_media_id", value);
       return this;
     }
-    public APIRequestGetAdCreatives requestEffectiveInstagramStoryIdField () {
-      return this.requestEffectiveInstagramStoryIdField(true);
-    }
-    public APIRequestGetAdCreatives requestEffectiveInstagramStoryIdField (boolean value) {
-      this.requestField("effective_instagram_story_id", value);
-      return this;
-    }
     public APIRequestGetAdCreatives requestEffectiveObjectStoryIdField () {
       return this.requestEffectiveObjectStoryIdField(true);
     }
@@ -3072,13 +3071,6 @@ public class AdAccount extends APINode {
       this.requestField("image_url", value);
       return this;
     }
-    public APIRequestGetAdCreatives requestInstagramActorIdField () {
-      return this.requestInstagramActorIdField(true);
-    }
-    public APIRequestGetAdCreatives requestInstagramActorIdField (boolean value) {
-      this.requestField("instagram_actor_id", value);
-      return this;
-    }
     public APIRequestGetAdCreatives requestInstagramBrandedContentField () {
       return this.requestInstagramBrandedContentField(true);
     }
@@ -3091,13 +3083,6 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAdCreatives requestInstagramPermalinkUrlField (boolean value) {
       this.requestField("instagram_permalink_url", value);
-      return this;
-    }
-    public APIRequestGetAdCreatives requestInstagramStoryIdField () {
-      return this.requestInstagramStoryIdField(true);
-    }
-    public APIRequestGetAdCreatives requestInstagramStoryIdField (boolean value) {
-      this.requestField("instagram_story_id", value);
       return this;
     }
     public APIRequestGetAdCreatives requestInstagramUserIdField () {
@@ -3268,6 +3253,13 @@ public class AdAccount extends APINode {
       this.requestField("recommender_settings", value);
       return this;
     }
+    public APIRequestGetAdCreatives requestRegionalRegulationDisclaimerSpecField () {
+      return this.requestRegionalRegulationDisclaimerSpecField(true);
+    }
+    public APIRequestGetAdCreatives requestRegionalRegulationDisclaimerSpecField (boolean value) {
+      this.requestField("regional_regulation_disclaimer_spec", value);
+      return this;
+    }
     public APIRequestGetAdCreatives requestSourceInstagramMediaIdField () {
       return this.requestSourceInstagramMediaIdField(true);
     }
@@ -3372,7 +3364,6 @@ public class AdAccount extends APINode {
       "image_file",
       "image_hash",
       "image_url",
-      "instagram_actor_id",
       "instagram_branded_content",
       "instagram_permalink_url",
       "instagram_user_id",
@@ -3394,6 +3385,7 @@ public class AdAccount extends APINode {
       "portrait_customizations",
       "product_set_id",
       "recommender_settings",
+      "regional_regulation_disclaimer_spec",
       "source_instagram_media_id",
       "template_url",
       "template_url_spec",
@@ -3648,11 +3640,6 @@ public class AdAccount extends APINode {
       return this;
     }
 
-    public APIRequestCreateAdCreative setInstagramActorId (String instagramActorId) {
-      this.setParam("instagram_actor_id", instagramActorId);
-      return this;
-    }
-
     public APIRequestCreateAdCreative setInstagramBrandedContent (Map<String, String> instagramBrandedContent) {
       this.setParam("instagram_branded_content", instagramBrandedContent);
       return this;
@@ -3794,6 +3781,15 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestCreateAdCreative setRegionalRegulationDisclaimerSpec (Map<String, String> regionalRegulationDisclaimerSpec) {
+      this.setParam("regional_regulation_disclaimer_spec", regionalRegulationDisclaimerSpec);
+      return this;
+    }
+    public APIRequestCreateAdCreative setRegionalRegulationDisclaimerSpec (String regionalRegulationDisclaimerSpec) {
+      this.setParam("regional_regulation_disclaimer_spec", regionalRegulationDisclaimerSpec);
+      return this;
+    }
+
     public APIRequestCreateAdCreative setSourceInstagramMediaId (String sourceInstagramMediaId) {
       this.setParam("source_instagram_media_id", sourceInstagramMediaId);
       return this;
@@ -3907,7 +3903,6 @@ public class AdAccount extends APINode {
       "dynamic_ad_voice",
       "effective_authorization_category",
       "effective_instagram_media_id",
-      "effective_instagram_story_id",
       "effective_object_story_id",
       "enable_direct_install",
       "enable_launch_instant_app",
@@ -3916,10 +3911,8 @@ public class AdAccount extends APINode {
       "image_crops",
       "image_hash",
       "image_url",
-      "instagram_actor_id",
       "instagram_branded_content",
       "instagram_permalink_url",
-      "instagram_story_id",
       "instagram_user_id",
       "interactive_components_spec",
       "link_deep_link_url",
@@ -3944,6 +3937,7 @@ public class AdAccount extends APINode {
       "product_data",
       "product_set_id",
       "recommender_settings",
+      "regional_regulation_disclaimer_spec",
       "source_instagram_media_id",
       "status",
       "template_url",
@@ -4225,13 +4219,6 @@ public class AdAccount extends APINode {
       this.requestField("effective_instagram_media_id", value);
       return this;
     }
-    public APIRequestGetAdCreativesByLabels requestEffectiveInstagramStoryIdField () {
-      return this.requestEffectiveInstagramStoryIdField(true);
-    }
-    public APIRequestGetAdCreativesByLabels requestEffectiveInstagramStoryIdField (boolean value) {
-      this.requestField("effective_instagram_story_id", value);
-      return this;
-    }
     public APIRequestGetAdCreativesByLabels requestEffectiveObjectStoryIdField () {
       return this.requestEffectiveObjectStoryIdField(true);
     }
@@ -4288,13 +4275,6 @@ public class AdAccount extends APINode {
       this.requestField("image_url", value);
       return this;
     }
-    public APIRequestGetAdCreativesByLabels requestInstagramActorIdField () {
-      return this.requestInstagramActorIdField(true);
-    }
-    public APIRequestGetAdCreativesByLabels requestInstagramActorIdField (boolean value) {
-      this.requestField("instagram_actor_id", value);
-      return this;
-    }
     public APIRequestGetAdCreativesByLabels requestInstagramBrandedContentField () {
       return this.requestInstagramBrandedContentField(true);
     }
@@ -4307,13 +4287,6 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAdCreativesByLabels requestInstagramPermalinkUrlField (boolean value) {
       this.requestField("instagram_permalink_url", value);
-      return this;
-    }
-    public APIRequestGetAdCreativesByLabels requestInstagramStoryIdField () {
-      return this.requestInstagramStoryIdField(true);
-    }
-    public APIRequestGetAdCreativesByLabels requestInstagramStoryIdField (boolean value) {
-      this.requestField("instagram_story_id", value);
       return this;
     }
     public APIRequestGetAdCreativesByLabels requestInstagramUserIdField () {
@@ -4482,6 +4455,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAdCreativesByLabels requestRecommenderSettingsField (boolean value) {
       this.requestField("recommender_settings", value);
+      return this;
+    }
+    public APIRequestGetAdCreativesByLabels requestRegionalRegulationDisclaimerSpecField () {
+      return this.requestRegionalRegulationDisclaimerSpecField(true);
+    }
+    public APIRequestGetAdCreativesByLabels requestRegionalRegulationDisclaimerSpecField (boolean value) {
+      this.requestField("regional_regulation_disclaimer_spec", value);
       return this;
     }
     public APIRequestGetAdCreativesByLabels requestSourceInstagramMediaIdField () {
@@ -7988,7 +7968,7 @@ public class AdAccount extends APINode {
       "frequency_control_specs",
       "full_funnel_exploration_mode",
       "id",
-      "instagram_actor_id",
+      "instagram_user_id",
       "is_budget_schedule_enabled",
       "is_dynamic_creative",
       "issues_info",
@@ -8382,11 +8362,11 @@ public class AdAccount extends APINode {
       this.requestField("id", value);
       return this;
     }
-    public APIRequestGetAdSets requestInstagramActorIdField () {
-      return this.requestInstagramActorIdField(true);
+    public APIRequestGetAdSets requestInstagramUserIdField () {
+      return this.requestInstagramUserIdField(true);
     }
-    public APIRequestGetAdSets requestInstagramActorIdField (boolean value) {
-      this.requestField("instagram_actor_id", value);
+    public APIRequestGetAdSets requestInstagramUserIdField (boolean value) {
+      this.requestField("instagram_user_id", value);
       return this;
     }
     public APIRequestGetAdSets requestIsBudgetScheduleEnabledField () {
@@ -8649,6 +8629,7 @@ public class AdAccount extends APINode {
       "frequency_control_specs",
       "full_funnel_exploration_mode",
       "is_dynamic_creative",
+      "is_sac_cfca_terms_certified",
       "lifetime_budget",
       "lifetime_imps",
       "lifetime_min_spend_target",
@@ -8949,6 +8930,15 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestCreateAdSet setIsSacCfcaTermsCertified (Boolean isSacCfcaTermsCertified) {
+      this.setParam("is_sac_cfca_terms_certified", isSacCfcaTermsCertified);
+      return this;
+    }
+    public APIRequestCreateAdSet setIsSacCfcaTermsCertified (String isSacCfcaTermsCertified) {
+      this.setParam("is_sac_cfca_terms_certified", isSacCfcaTermsCertified);
+      return this;
+    }
+
     public APIRequestCreateAdSet setLifetimeBudget (Long lifetimeBudget) {
       this.setParam("lifetime_budget", lifetimeBudget);
       return this;
@@ -9243,7 +9233,7 @@ public class AdAccount extends APINode {
       "frequency_control_specs",
       "full_funnel_exploration_mode",
       "id",
-      "instagram_actor_id",
+      "instagram_user_id",
       "is_budget_schedule_enabled",
       "is_dynamic_creative",
       "issues_info",
@@ -9610,11 +9600,11 @@ public class AdAccount extends APINode {
       this.requestField("id", value);
       return this;
     }
-    public APIRequestGetAdSetsByLabels requestInstagramActorIdField () {
-      return this.requestInstagramActorIdField(true);
+    public APIRequestGetAdSetsByLabels requestInstagramUserIdField () {
+      return this.requestInstagramUserIdField(true);
     }
-    public APIRequestGetAdSetsByLabels requestInstagramActorIdField (boolean value) {
-      this.requestField("instagram_actor_id", value);
+    public APIRequestGetAdSetsByLabels requestInstagramUserIdField (boolean value) {
+      this.requestField("instagram_user_id", value);
       return this;
     }
     public APIRequestGetAdSetsByLabels requestIsBudgetScheduleEnabledField () {
@@ -11442,6 +11432,7 @@ public class AdAccount extends APINode {
       "audio_isrc",
       "backdated_time",
       "backdated_time_granularity",
+      "boost_eligibility_info",
       "content_category",
       "content_tags",
       "copyright",
@@ -11685,6 +11676,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAdVideos requestBackdatedTimeGranularityField (boolean value) {
       this.requestField("backdated_time_granularity", value);
+      return this;
+    }
+    public APIRequestGetAdVideos requestBoostEligibilityInfoField () {
+      return this.requestBoostEligibilityInfoField(true);
+    }
+    public APIRequestGetAdVideos requestBoostEligibilityInfoField (boolean value) {
+      this.requestField("boost_eligibility_info", value);
       return this;
     }
     public APIRequestGetAdVideos requestContentCategoryField () {
@@ -12667,7 +12665,7 @@ public class AdAccount extends APINode {
       "frequency_control_specs",
       "full_funnel_exploration_mode",
       "id",
-      "instagram_actor_id",
+      "instagram_user_id",
       "is_budget_schedule_enabled",
       "is_dynamic_creative",
       "issues_info",
@@ -13016,11 +13014,11 @@ public class AdAccount extends APINode {
       this.requestField("id", value);
       return this;
     }
-    public APIRequestGetAffectedAdSets requestInstagramActorIdField () {
-      return this.requestInstagramActorIdField(true);
+    public APIRequestGetAffectedAdSets requestInstagramUserIdField () {
+      return this.requestInstagramUserIdField(true);
     }
-    public APIRequestGetAffectedAdSets requestInstagramActorIdField (boolean value) {
-      this.requestField("instagram_actor_id", value);
+    public APIRequestGetAffectedAdSets requestInstagramUserIdField (boolean value) {
+      this.requestField("instagram_user_id", value);
       return this;
     }
     public APIRequestGetAffectedAdSets requestIsBudgetScheduleEnabledField () {
@@ -17848,8 +17846,10 @@ public class AdAccount extends APINode {
       "business_discovery",
       "followers_count",
       "follows_count",
+      "has_profile_pic",
       "id",
       "ig_id",
+      "is_published",
       "legacy_instagram_user_id",
       "media_count",
       "mentioned_comment",
@@ -17981,6 +17981,13 @@ public class AdAccount extends APINode {
       this.requestField("follows_count", value);
       return this;
     }
+    public APIRequestGetConnectedInstagramAccounts requestHasProfilePicField () {
+      return this.requestHasProfilePicField(true);
+    }
+    public APIRequestGetConnectedInstagramAccounts requestHasProfilePicField (boolean value) {
+      this.requestField("has_profile_pic", value);
+      return this;
+    }
     public APIRequestGetConnectedInstagramAccounts requestIdField () {
       return this.requestIdField(true);
     }
@@ -17993,6 +18000,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetConnectedInstagramAccounts requestIgIdField (boolean value) {
       this.requestField("ig_id", value);
+      return this;
+    }
+    public APIRequestGetConnectedInstagramAccounts requestIsPublishedField () {
+      return this.requestIsPublishedField(true);
+    }
+    public APIRequestGetConnectedInstagramAccounts requestIsPublishedField (boolean value) {
+      this.requestField("is_published", value);
       return this;
     }
     public APIRequestGetConnectedInstagramAccounts requestLegacyInstagramUserIdField () {
@@ -20068,7 +20082,7 @@ public class AdAccount extends APINode {
       "frequency_control_specs",
       "full_funnel_exploration_mode",
       "id",
-      "instagram_actor_id",
+      "instagram_user_id",
       "is_budget_schedule_enabled",
       "is_dynamic_creative",
       "issues_info",
@@ -20422,11 +20436,11 @@ public class AdAccount extends APINode {
       this.requestField("id", value);
       return this;
     }
-    public APIRequestGetDeprecatedTargetingAdSets requestInstagramActorIdField () {
-      return this.requestInstagramActorIdField(true);
+    public APIRequestGetDeprecatedTargetingAdSets requestInstagramUserIdField () {
+      return this.requestInstagramUserIdField(true);
     }
-    public APIRequestGetDeprecatedTargetingAdSets requestInstagramActorIdField (boolean value) {
-      this.requestField("instagram_actor_id", value);
+    public APIRequestGetDeprecatedTargetingAdSets requestInstagramUserIdField (boolean value) {
+      this.requestField("instagram_user_id", value);
       return this;
     }
     public APIRequestGetDeprecatedTargetingAdSets requestIsBudgetScheduleEnabledField () {
@@ -25229,6 +25243,7 @@ public class AdAccount extends APINode {
       "instream_packages",
       "interval_frequency_cap",
       "interval_frequency_cap_reset_period",
+      "is_balanced_frequency",
       "is_bonus_media",
       "is_conversion_goal",
       "is_higher_average_frequency",
@@ -25256,6 +25271,8 @@ public class AdAccount extends APINode {
       "status",
       "story_event_type",
       "target_cpm",
+      "target_frequency",
+      "target_frequency_reset_period",
       "target_spec",
       "time_created",
       "time_updated",
@@ -25720,6 +25737,13 @@ public class AdAccount extends APINode {
       this.requestField("interval_frequency_cap_reset_period", value);
       return this;
     }
+    public APIRequestGetReachFrequencyPredictions requestIsBalancedFrequencyField () {
+      return this.requestIsBalancedFrequencyField(true);
+    }
+    public APIRequestGetReachFrequencyPredictions requestIsBalancedFrequencyField (boolean value) {
+      this.requestField("is_balanced_frequency", value);
+      return this;
+    }
     public APIRequestGetReachFrequencyPredictions requestIsBonusMediaField () {
       return this.requestIsBonusMediaField(true);
     }
@@ -25907,6 +25931,20 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetReachFrequencyPredictions requestTargetCpmField (boolean value) {
       this.requestField("target_cpm", value);
+      return this;
+    }
+    public APIRequestGetReachFrequencyPredictions requestTargetFrequencyField () {
+      return this.requestTargetFrequencyField(true);
+    }
+    public APIRequestGetReachFrequencyPredictions requestTargetFrequencyField (boolean value) {
+      this.requestField("target_frequency", value);
+      return this;
+    }
+    public APIRequestGetReachFrequencyPredictions requestTargetFrequencyResetPeriodField () {
+      return this.requestTargetFrequencyResetPeriodField(true);
+    }
+    public APIRequestGetReachFrequencyPredictions requestTargetFrequencyResetPeriodField (boolean value) {
+      this.requestField("target_frequency_reset_period", value);
       return this;
     }
     public APIRequestGetReachFrequencyPredictions requestTargetSpecField () {
@@ -27206,6 +27244,163 @@ public class AdAccount extends APINode {
       return this;
     }
 
+  }
+
+  public static class APIRequestGetSuggestedProductTags extends APIRequest<AdAccountSuggestedTag> {
+
+    APINodeList<AdAccountSuggestedTag> lastResponse = null;
+    @Override
+    public APINodeList<AdAccountSuggestedTag> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "image_hash",
+      "instagram_actor_id",
+      "is_shops_ad",
+      "page_id",
+    };
+
+    public static final String[] FIELDS = {
+      "product_id",
+      "x",
+      "y",
+    };
+
+    @Override
+    public APINodeList<AdAccountSuggestedTag> parseResponse(String response, String header) throws APIException {
+      return AdAccountSuggestedTag.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<AdAccountSuggestedTag> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<AdAccountSuggestedTag> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<AdAccountSuggestedTag>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<AdAccountSuggestedTag>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<AdAccountSuggestedTag>>() {
+           public APINodeList<AdAccountSuggestedTag> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetSuggestedProductTags.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestGetSuggestedProductTags(String nodeId, APIContext context) {
+      super(context, nodeId, "/suggested_product_tags", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetSuggestedProductTags setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetSuggestedProductTags setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetSuggestedProductTags setImageHash (String imageHash) {
+      this.setParam("image_hash", imageHash);
+      return this;
+    }
+
+    public APIRequestGetSuggestedProductTags setInstagramActorId (String instagramActorId) {
+      this.setParam("instagram_actor_id", instagramActorId);
+      return this;
+    }
+
+    public APIRequestGetSuggestedProductTags setIsShopsAd (Boolean isShopsAd) {
+      this.setParam("is_shops_ad", isShopsAd);
+      return this;
+    }
+    public APIRequestGetSuggestedProductTags setIsShopsAd (String isShopsAd) {
+      this.setParam("is_shops_ad", isShopsAd);
+      return this;
+    }
+
+    public APIRequestGetSuggestedProductTags setPageId (String pageId) {
+      this.setParam("page_id", pageId);
+      return this;
+    }
+
+    public APIRequestGetSuggestedProductTags requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetSuggestedProductTags requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetSuggestedProductTags requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetSuggestedProductTags requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetSuggestedProductTags requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetSuggestedProductTags requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetSuggestedProductTags requestProductIdField () {
+      return this.requestProductIdField(true);
+    }
+    public APIRequestGetSuggestedProductTags requestProductIdField (boolean value) {
+      this.requestField("product_id", value);
+      return this;
+    }
+    public APIRequestGetSuggestedProductTags requestXField () {
+      return this.requestXField(true);
+    }
+    public APIRequestGetSuggestedProductTags requestXField (boolean value) {
+      this.requestField("x", value);
+      return this;
+    }
+    public APIRequestGetSuggestedProductTags requestYField () {
+      return this.requestYField(true);
+    }
+    public APIRequestGetSuggestedProductTags requestYField (boolean value) {
+      this.requestField("y", value);
+      return this;
+    }
   }
 
   public static class APIRequestGetTargetingBrowse extends APIRequest<AdAccountTargetingUnified> {
@@ -29651,6 +29846,7 @@ public class AdAccount extends APINode {
       "audio_isrc",
       "backdated_time",
       "backdated_time_granularity",
+      "boost_eligibility_info",
       "content_category",
       "content_tags",
       "copyright",
@@ -29827,6 +30023,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetVideoAds requestBackdatedTimeGranularityField (boolean value) {
       this.requestField("backdated_time_granularity", value);
+      return this;
+    }
+    public APIRequestGetVideoAds requestBoostEligibilityInfoField () {
+      return this.requestBoostEligibilityInfoField(true);
+    }
+    public APIRequestGetVideoAds requestBoostEligibilityInfoField (boolean value) {
+      this.requestField("boost_eligibility_info", value);
       return this;
     }
     public APIRequestGetVideoAds requestContentCategoryField () {
@@ -30116,6 +30319,155 @@ public class AdAccount extends APINode {
       this.requestField("views", value);
       return this;
     }
+  }
+
+  public static class APIRequestCreateVideoAd extends APIRequest<AdVideo> {
+
+    AdVideo lastResponse = null;
+    @Override
+    public AdVideo getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "description",
+      "privacy",
+      "title",
+      "upload_phase",
+      "video_id",
+      "video_state",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public AdVideo parseResponse(String response, String header) throws APIException {
+      return AdVideo.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public AdVideo execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public AdVideo execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<AdVideo> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<AdVideo> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, AdVideo>() {
+           public AdVideo apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateVideoAd.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestCreateVideoAd(String nodeId, APIContext context) {
+      super(context, nodeId, "/video_ads", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateVideoAd setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateVideoAd setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateVideoAd setDescription (String description) {
+      this.setParam("description", description);
+      return this;
+    }
+
+    public APIRequestCreateVideoAd setPrivacy (String privacy) {
+      this.setParam("privacy", privacy);
+      return this;
+    }
+
+    public APIRequestCreateVideoAd setTitle (String title) {
+      this.setParam("title", title);
+      return this;
+    }
+
+    public APIRequestCreateVideoAd setUploadPhase (AdVideo.EnumUploadPhase uploadPhase) {
+      this.setParam("upload_phase", uploadPhase);
+      return this;
+    }
+    public APIRequestCreateVideoAd setUploadPhase (String uploadPhase) {
+      this.setParam("upload_phase", uploadPhase);
+      return this;
+    }
+
+    public APIRequestCreateVideoAd setVideoId (String videoId) {
+      this.setParam("video_id", videoId);
+      return this;
+    }
+
+    public APIRequestCreateVideoAd setVideoState (AdVideo.EnumVideoState videoState) {
+      this.setParam("video_state", videoState);
+      return this;
+    }
+    public APIRequestCreateVideoAd setVideoState (String videoState) {
+      this.setParam("video_state", videoState);
+      return this;
+    }
+
+    public APIRequestCreateVideoAd requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateVideoAd requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateVideoAd requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateVideoAd requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateVideoAd requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateVideoAd requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
   }
 
   public static class APIRequestGet extends APIRequest<AdAccount> {
@@ -31359,8 +31711,6 @@ public class AdAccount extends APINode {
       VALUE_REGULATED_CATEGORIES_AUDIENCE("REGULATED_CATEGORIES_AUDIENCE"),
       @SerializedName("STUDY_RULE_AUDIENCE")
       VALUE_STUDY_RULE_AUDIENCE("STUDY_RULE_AUDIENCE"),
-      @SerializedName("SUBSCRIBER_SEGMENT")
-      VALUE_SUBSCRIBER_SEGMENT("SUBSCRIBER_SEGMENT"),
       @SerializedName("VIDEO")
       VALUE_VIDEO("VIDEO"),
       @SerializedName("WEBSITE")

@@ -45,6 +45,8 @@ public class AdRuleExecutionSpec extends APINode {
   private List<AdRuleExecutionOptions> mExecutionOptions = null;
   @SerializedName("execution_type")
   private EnumExecutionType mExecutionType = null;
+  @SerializedName("is_once_off")
+  private Boolean mIsOnceOff = null;
   @SerializedName("id")
   private String mId = null;
   protected static Gson gson = null;
@@ -269,6 +271,10 @@ public class AdRuleExecutionSpec extends APINode {
     return mExecutionType;
   }
 
+  public Boolean getFieldIsOnceOff() {
+    return mIsOnceOff;
+  }
+
   public String getFieldId() {
     return mId;
   }
@@ -288,6 +294,7 @@ public class AdRuleExecutionSpec extends APINode {
     public static final String[] FIELDS = {
       "execution_options",
       "execution_type",
+      "is_once_off",
       "id",
     };
 
@@ -395,6 +402,13 @@ public class AdRuleExecutionSpec extends APINode {
       this.requestField("execution_type", value);
       return this;
     }
+    public APIRequestGet requestIsOnceOffField () {
+      return this.requestIsOnceOffField(true);
+    }
+    public APIRequestGet requestIsOnceOffField (boolean value) {
+      this.requestField("is_once_off", value);
+      return this;
+    }
     public APIRequestGet requestIdField () {
       return this.requestIdField(true);
     }
@@ -474,6 +488,7 @@ public class AdRuleExecutionSpec extends APINode {
   public AdRuleExecutionSpec copyFrom(AdRuleExecutionSpec instance) {
     this.mExecutionOptions = instance.mExecutionOptions;
     this.mExecutionType = instance.mExecutionType;
+    this.mIsOnceOff = instance.mIsOnceOff;
     this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

@@ -49,6 +49,8 @@ public class AdAssetFeedSpec extends APINode {
   private String mAppProductPageId = null;
   @SerializedName("asset_customization_rules")
   private List<AdAssetFeedSpecAssetCustomizationRule> mAssetCustomizationRules = null;
+  @SerializedName("audios")
+  private List<Object> mAudios = null;
   @SerializedName("autotranslate")
   private List<String> mAutotranslate = null;
   @SerializedName("bodies")
@@ -63,6 +65,8 @@ public class AdAssetFeedSpec extends APINode {
   private List<AdAssetFeedSpecCaption> mCaptions = null;
   @SerializedName("carousels")
   private List<AdAssetFeedSpecCarousel> mCarousels = null;
+  @SerializedName("ctwa_consent_data")
+  private List<Object> mCtwaConsentData = null;
   @SerializedName("descriptions")
   private List<AdAssetFeedSpecDescription> mDescriptions = null;
   @SerializedName("events")
@@ -288,6 +292,15 @@ public class AdAssetFeedSpec extends APINode {
     this.mAssetCustomizationRules = AdAssetFeedSpecAssetCustomizationRule.getGson().fromJson(value, type);
     return this;
   }
+  public List<Object> getFieldAudios() {
+    return mAudios;
+  }
+
+  public AdAssetFeedSpec setFieldAudios(List<Object> value) {
+    this.mAudios = value;
+    return this;
+  }
+
   public List<String> getFieldAutotranslate() {
     return mAutotranslate;
   }
@@ -371,6 +384,15 @@ public class AdAssetFeedSpec extends APINode {
     this.mCarousels = AdAssetFeedSpecCarousel.getGson().fromJson(value, type);
     return this;
   }
+  public List<Object> getFieldCtwaConsentData() {
+    return mCtwaConsentData;
+  }
+
+  public AdAssetFeedSpec setFieldCtwaConsentData(List<Object> value) {
+    this.mCtwaConsentData = value;
+    return this;
+  }
+
   public List<AdAssetFeedSpecDescription> getFieldDescriptions() {
     return mDescriptions;
   }
@@ -605,6 +627,8 @@ public class AdAssetFeedSpec extends APINode {
       VALUE_GET_A_QUOTE("GET_A_QUOTE"),
       @SerializedName("GET_DIRECTIONS")
       VALUE_GET_DIRECTIONS("GET_DIRECTIONS"),
+      @SerializedName("GET_IN_TOUCH")
+      VALUE_GET_IN_TOUCH("GET_IN_TOUCH"),
       @SerializedName("GET_OFFER")
       VALUE_GET_OFFER("GET_OFFER"),
       @SerializedName("GET_OFFER_VIEW")
@@ -707,6 +731,8 @@ public class AdAssetFeedSpec extends APINode {
       VALUE_VIEW_PRODUCT("VIEW_PRODUCT"),
       @SerializedName("VISIT_PAGES_FEED")
       VALUE_VISIT_PAGES_FEED("VISIT_PAGES_FEED"),
+      @SerializedName("WATCH_LIVE_VIDEO")
+      VALUE_WATCH_LIVE_VIDEO("WATCH_LIVE_VIDEO"),
       @SerializedName("WATCH_MORE")
       VALUE_WATCH_MORE("WATCH_MORE"),
       @SerializedName("WATCH_VIDEO")
@@ -748,6 +774,7 @@ public class AdAssetFeedSpec extends APINode {
     this.mAdditionalData = instance.mAdditionalData;
     this.mAppProductPageId = instance.mAppProductPageId;
     this.mAssetCustomizationRules = instance.mAssetCustomizationRules;
+    this.mAudios = instance.mAudios;
     this.mAutotranslate = instance.mAutotranslate;
     this.mBodies = instance.mBodies;
     this.mCallAdsConfiguration = instance.mCallAdsConfiguration;
@@ -755,6 +782,7 @@ public class AdAssetFeedSpec extends APINode {
     this.mCallToActions = instance.mCallToActions;
     this.mCaptions = instance.mCaptions;
     this.mCarousels = instance.mCarousels;
+    this.mCtwaConsentData = instance.mCtwaConsentData;
     this.mDescriptions = instance.mDescriptions;
     this.mEvents = instance.mEvents;
     this.mGroups = instance.mGroups;

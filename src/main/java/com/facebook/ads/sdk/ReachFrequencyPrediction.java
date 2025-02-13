@@ -145,6 +145,8 @@ public class ReachFrequencyPrediction extends APINode {
   private Long mIntervalFrequencyCap = null;
   @SerializedName("interval_frequency_cap_reset_period")
   private Long mIntervalFrequencyCapResetPeriod = null;
+  @SerializedName("is_balanced_frequency")
+  private Boolean mIsBalancedFrequency = null;
   @SerializedName("is_bonus_media")
   private Long mIsBonusMedia = null;
   @SerializedName("is_conversion_goal")
@@ -199,6 +201,10 @@ public class ReachFrequencyPrediction extends APINode {
   private Long mStoryEventType = null;
   @SerializedName("target_cpm")
   private Long mTargetCpm = null;
+  @SerializedName("target_frequency")
+  private Long mTargetFrequency = null;
+  @SerializedName("target_frequency_reset_period")
+  private Long mTargetFrequencyResetPeriod = null;
   @SerializedName("target_spec")
   private Targeting mTargetSpec = null;
   @SerializedName("time_created")
@@ -637,6 +643,10 @@ public class ReachFrequencyPrediction extends APINode {
     return mIntervalFrequencyCapResetPeriod;
   }
 
+  public Boolean getFieldIsBalancedFrequency() {
+    return mIsBalancedFrequency;
+  }
+
   public Long getFieldIsBonusMedia() {
     return mIsBonusMedia;
   }
@@ -745,6 +755,14 @@ public class ReachFrequencyPrediction extends APINode {
     return mTargetCpm;
   }
 
+  public Long getFieldTargetFrequency() {
+    return mTargetFrequency;
+  }
+
+  public Long getFieldTargetFrequencyResetPeriod() {
+    return mTargetFrequencyResetPeriod;
+  }
+
   public Targeting getFieldTargetSpec() {
     return mTargetSpec;
   }
@@ -842,6 +860,7 @@ public class ReachFrequencyPrediction extends APINode {
       "instream_packages",
       "interval_frequency_cap",
       "interval_frequency_cap_reset_period",
+      "is_balanced_frequency",
       "is_bonus_media",
       "is_conversion_goal",
       "is_higher_average_frequency",
@@ -869,6 +888,8 @@ public class ReachFrequencyPrediction extends APINode {
       "status",
       "story_event_type",
       "target_cpm",
+      "target_frequency",
+      "target_frequency_reset_period",
       "target_spec",
       "time_created",
       "time_updated",
@@ -1333,6 +1354,13 @@ public class ReachFrequencyPrediction extends APINode {
       this.requestField("interval_frequency_cap_reset_period", value);
       return this;
     }
+    public APIRequestGet requestIsBalancedFrequencyField () {
+      return this.requestIsBalancedFrequencyField(true);
+    }
+    public APIRequestGet requestIsBalancedFrequencyField (boolean value) {
+      this.requestField("is_balanced_frequency", value);
+      return this;
+    }
     public APIRequestGet requestIsBonusMediaField () {
       return this.requestIsBonusMediaField(true);
     }
@@ -1520,6 +1548,20 @@ public class ReachFrequencyPrediction extends APINode {
     }
     public APIRequestGet requestTargetCpmField (boolean value) {
       this.requestField("target_cpm", value);
+      return this;
+    }
+    public APIRequestGet requestTargetFrequencyField () {
+      return this.requestTargetFrequencyField(true);
+    }
+    public APIRequestGet requestTargetFrequencyField (boolean value) {
+      this.requestField("target_frequency", value);
+      return this;
+    }
+    public APIRequestGet requestTargetFrequencyResetPeriodField () {
+      return this.requestTargetFrequencyResetPeriodField(true);
+    }
+    public APIRequestGet requestTargetFrequencyResetPeriodField (boolean value) {
+      this.requestField("target_frequency_reset_period", value);
       return this;
     }
     public APIRequestGet requestTargetSpecField () {
@@ -1740,6 +1782,7 @@ public class ReachFrequencyPrediction extends APINode {
     this.mInstreamPackages = instance.mInstreamPackages;
     this.mIntervalFrequencyCap = instance.mIntervalFrequencyCap;
     this.mIntervalFrequencyCapResetPeriod = instance.mIntervalFrequencyCapResetPeriod;
+    this.mIsBalancedFrequency = instance.mIsBalancedFrequency;
     this.mIsBonusMedia = instance.mIsBonusMedia;
     this.mIsConversionGoal = instance.mIsConversionGoal;
     this.mIsHigherAverageFrequency = instance.mIsHigherAverageFrequency;
@@ -1767,6 +1810,8 @@ public class ReachFrequencyPrediction extends APINode {
     this.mStatus = instance.mStatus;
     this.mStoryEventType = instance.mStoryEventType;
     this.mTargetCpm = instance.mTargetCpm;
+    this.mTargetFrequency = instance.mTargetFrequency;
+    this.mTargetFrequencyResetPeriod = instance.mTargetFrequencyResetPeriod;
     this.mTargetSpec = instance.mTargetSpec;
     this.mTimeCreated = instance.mTimeCreated;
     this.mTimeUpdated = instance.mTimeUpdated;

@@ -40,68 +40,76 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class Domain extends APINode {
+public class AdsMcmeConversion extends APINode {
+  @SerializedName("creation_time")
+  private String mCreationTime = null;
+  @SerializedName("description")
+  private String mDescription = null;
   @SerializedName("id")
   private String mId = null;
+  @SerializedName("is_archived")
+  private Boolean mIsArchived = null;
+  @SerializedName("mcme_conversion_type")
+  private String mMcmeConversionType = null;
   @SerializedName("name")
   private String mName = null;
-  @SerializedName("url")
-  private String mUrl = null;
+  @SerializedName("omnichannel_object_id")
+  private String mOmnichannelObjectId = null;
   protected static Gson gson = null;
 
-  Domain() {
+  AdsMcmeConversion() {
   }
 
-  public Domain(Long id, APIContext context) {
+  public AdsMcmeConversion(Long id, APIContext context) {
     this(id.toString(), context);
   }
 
-  public Domain(String id, APIContext context) {
+  public AdsMcmeConversion(String id, APIContext context) {
     this.mId = id;
 
     this.context = context;
   }
 
-  public Domain fetch() throws APIException{
-    Domain newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+  public AdsMcmeConversion fetch() throws APIException{
+    AdsMcmeConversion newInstance = fetchById(this.getPrefixedId().toString(), this.context);
     this.copyFrom(newInstance);
     return this;
   }
 
-  public static Domain fetchById(Long id, APIContext context) throws APIException {
+  public static AdsMcmeConversion fetchById(Long id, APIContext context) throws APIException {
     return fetchById(id.toString(), context);
   }
 
-  public static ListenableFuture<Domain> fetchByIdAsync(Long id, APIContext context) throws APIException {
+  public static ListenableFuture<AdsMcmeConversion> fetchByIdAsync(Long id, APIContext context) throws APIException {
     return fetchByIdAsync(id.toString(), context);
   }
 
-  public static Domain fetchById(String id, APIContext context) throws APIException {
+  public static AdsMcmeConversion fetchById(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
   }
 
-  public static ListenableFuture<Domain> fetchByIdAsync(String id, APIContext context) throws APIException {
+  public static ListenableFuture<AdsMcmeConversion> fetchByIdAsync(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
   }
 
-  public static APINodeList<Domain> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<Domain>)(
-      new APIRequest<Domain>(context, "", "/", "GET", Domain.getParser())
+  public static APINodeList<AdsMcmeConversion> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<AdsMcmeConversion>)(
+      new APIRequest<AdsMcmeConversion>(context, "", "/", "GET", AdsMcmeConversion.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .execute()
     );
   }
 
-  public static ListenableFuture<APINodeList<Domain>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+  public static ListenableFuture<APINodeList<AdsMcmeConversion>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
     return
-      new APIRequest(context, "", "/", "GET", Domain.getParser())
+      new APIRequest(context, "", "/", "GET", AdsMcmeConversion.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
@@ -114,12 +122,12 @@ public class Domain extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static Domain loadJSON(String json, APIContext context, String header) {
-    Domain domain = getGson().fromJson(json, Domain.class);
+  public static AdsMcmeConversion loadJSON(String json, APIContext context, String header) {
+    AdsMcmeConversion adsMcmeConversion = getGson().fromJson(json, AdsMcmeConversion.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(domain.toString());
+      JsonElement o2 = parser.parse(adsMcmeConversion.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -129,14 +137,14 @@ public class Domain extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    domain.context = context;
-    domain.rawValue = json;
-    domain.header = header;
-    return domain;
+    adsMcmeConversion.context = context;
+    adsMcmeConversion.rawValue = json;
+    adsMcmeConversion.header = header;
+    return adsMcmeConversion;
   }
 
-  public static APINodeList<Domain> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<Domain> domains = new APINodeList<Domain>(request, json, header);
+  public static APINodeList<AdsMcmeConversion> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdsMcmeConversion> adsMcmeConversions = new APINodeList<AdsMcmeConversion>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -147,9 +155,9 @@ public class Domain extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          domains.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          adsMcmeConversions.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return domains;
+        return adsMcmeConversions;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -159,20 +167,20 @@ public class Domain extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                domains.setCursors(before, after);
+                adsMcmeConversions.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            domains.setPaging(previous, next);
+            adsMcmeConversions.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              domains.setAppSecret(context.getAppSecretProof());
+              adsMcmeConversions.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              domains.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              adsMcmeConversions.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -183,23 +191,23 @@ public class Domain extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  domains.add(loadJSON(entry.getValue().toString(), context, header));
+                  adsMcmeConversions.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              domains.add(loadJSON(obj.toString(), context, header));
+              adsMcmeConversions.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return domains;
+          return adsMcmeConversions;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              domains.add(loadJSON(entry.getValue().toString(), context, header));
+              adsMcmeConversions.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return domains;
+          return adsMcmeConversions;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -216,20 +224,20 @@ public class Domain extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              domains.add(loadJSON(value.toString(), context, header));
+              adsMcmeConversions.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return domains;
+            return adsMcmeConversions;
           }
 
           // Sixth, check if it's pure JsonObject
-          domains.clear();
-          domains.add(loadJSON(json, context, header));
-          return domains;
+          adsMcmeConversions.clear();
+          adsMcmeConversions.add(loadJSON(json, context, header));
+          return adsMcmeConversions;
         }
       }
     } catch (Exception e) {
@@ -261,62 +269,82 @@ public class Domain extends APINode {
   }
 
 
+  public String getFieldCreationTime() {
+    return mCreationTime;
+  }
+
+  public String getFieldDescription() {
+    return mDescription;
+  }
+
   public String getFieldId() {
     return mId;
+  }
+
+  public Boolean getFieldIsArchived() {
+    return mIsArchived;
+  }
+
+  public String getFieldMcmeConversionType() {
+    return mMcmeConversionType;
   }
 
   public String getFieldName() {
     return mName;
   }
 
-  public String getFieldUrl() {
-    return mUrl;
+  public String getFieldOmnichannelObjectId() {
+    return mOmnichannelObjectId;
   }
 
 
 
-  public static class APIRequestGet extends APIRequest<Domain> {
+  public static class APIRequestGet extends APIRequest<AdsMcmeConversion> {
 
-    Domain lastResponse = null;
+    AdsMcmeConversion lastResponse = null;
     @Override
-    public Domain getLastResponse() {
+    public AdsMcmeConversion getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
     };
 
     public static final String[] FIELDS = {
+      "creation_time",
+      "description",
       "id",
+      "is_archived",
+      "mcme_conversion_type",
       "name",
-      "url",
+      "omnichannel_object_id",
     };
 
     @Override
-    public Domain parseResponse(String response, String header) throws APIException {
-      return Domain.parseResponse(response, getContext(), this, header).head();
+    public AdsMcmeConversion parseResponse(String response, String header) throws APIException {
+      return AdsMcmeConversion.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public Domain execute() throws APIException {
+    public AdsMcmeConversion execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public Domain execute(Map<String, Object> extraParams) throws APIException {
+    public AdsMcmeConversion execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<Domain> executeAsync() throws APIException {
+    public ListenableFuture<AdsMcmeConversion> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<Domain> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<AdsMcmeConversion> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, Domain>() {
-           public Domain apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, AdsMcmeConversion>() {
+           public AdsMcmeConversion apply(ResponseWrapper result) {
              try {
                return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -381,11 +409,39 @@ public class Domain extends APINode {
       return this;
     }
 
+    public APIRequestGet requestCreationTimeField () {
+      return this.requestCreationTimeField(true);
+    }
+    public APIRequestGet requestCreationTimeField (boolean value) {
+      this.requestField("creation_time", value);
+      return this;
+    }
+    public APIRequestGet requestDescriptionField () {
+      return this.requestDescriptionField(true);
+    }
+    public APIRequestGet requestDescriptionField (boolean value) {
+      this.requestField("description", value);
+      return this;
+    }
     public APIRequestGet requestIdField () {
       return this.requestIdField(true);
     }
     public APIRequestGet requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGet requestIsArchivedField () {
+      return this.requestIsArchivedField(true);
+    }
+    public APIRequestGet requestIsArchivedField (boolean value) {
+      this.requestField("is_archived", value);
+      return this;
+    }
+    public APIRequestGet requestMcmeConversionTypeField () {
+      return this.requestMcmeConversionTypeField(true);
+    }
+    public APIRequestGet requestMcmeConversionTypeField (boolean value) {
+      this.requestField("mcme_conversion_type", value);
       return this;
     }
     public APIRequestGet requestNameField () {
@@ -395,11 +451,11 @@ public class Domain extends APINode {
       this.requestField("name", value);
       return this;
     }
-    public APIRequestGet requestUrlField () {
-      return this.requestUrlField(true);
+    public APIRequestGet requestOmnichannelObjectIdField () {
+      return this.requestOmnichannelObjectIdField(true);
     }
-    public APIRequestGet requestUrlField (boolean value) {
-      this.requestField("url", value);
+    public APIRequestGet requestOmnichannelObjectIdField (boolean value) {
+      this.requestField("omnichannel_object_id", value);
       return this;
     }
   }
@@ -418,19 +474,23 @@ public class Domain extends APINode {
     return gson;
   }
 
-  public Domain copyFrom(Domain instance) {
+  public AdsMcmeConversion copyFrom(AdsMcmeConversion instance) {
+    this.mCreationTime = instance.mCreationTime;
+    this.mDescription = instance.mDescription;
     this.mId = instance.mId;
+    this.mIsArchived = instance.mIsArchived;
+    this.mMcmeConversionType = instance.mMcmeConversionType;
     this.mName = instance.mName;
-    this.mUrl = instance.mUrl;
+    this.mOmnichannelObjectId = instance.mOmnichannelObjectId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<Domain> getParser() {
-    return new APIRequest.ResponseParser<Domain>() {
-      public APINodeList<Domain> parseResponse(String response, APIContext context, APIRequest<Domain> request, String header) throws MalformedResponseException {
-        return Domain.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<AdsMcmeConversion> getParser() {
+    return new APIRequest.ResponseParser<AdsMcmeConversion>() {
+      public APINodeList<AdsMcmeConversion> parseResponse(String response, APIContext context, APIRequest<AdsMcmeConversion> request, String header) throws MalformedResponseException {
+        return AdsMcmeConversion.parseResponse(response, context, request, header);
       }
     };
   }

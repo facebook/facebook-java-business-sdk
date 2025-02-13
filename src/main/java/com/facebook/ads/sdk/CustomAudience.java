@@ -71,6 +71,8 @@ public class CustomAudience extends APINode {
   private String mId = null;
   @SerializedName("included_custom_audiences")
   private List<CustomAudience> mIncludedCustomAudiences = null;
+  @SerializedName("is_eligible_for_sac_campaigns")
+  private Boolean mIsEligibleForSacCampaigns = null;
   @SerializedName("is_household")
   private Boolean mIsHousehold = null;
   @SerializedName("is_snapshot")
@@ -446,6 +448,10 @@ public class CustomAudience extends APINode {
 
   public List<CustomAudience> getFieldIncludedCustomAudiences() {
     return mIncludedCustomAudiences;
+  }
+
+  public Boolean getFieldIsEligibleForSacCampaigns() {
+    return mIsEligibleForSacCampaigns;
   }
 
   public Boolean getFieldIsHousehold() {
@@ -3022,6 +3028,8 @@ public class CustomAudience extends APINode {
     }
     public static final String[] PARAMS = {
       "ad_account_id",
+      "special_ad_categories",
+      "special_ad_category_countries",
       "target_countries",
     };
 
@@ -3041,6 +3049,7 @@ public class CustomAudience extends APINode {
       "household_audience",
       "id",
       "included_custom_audiences",
+      "is_eligible_for_sac_campaigns",
       "is_household",
       "is_snapshot",
       "is_value_based",
@@ -3123,6 +3132,24 @@ public class CustomAudience extends APINode {
 
     public APIRequestGet setAdAccountId (String adAccountId) {
       this.setParam("ad_account_id", adAccountId);
+      return this;
+    }
+
+    public APIRequestGet setSpecialAdCategories (List<String> specialAdCategories) {
+      this.setParam("special_ad_categories", specialAdCategories);
+      return this;
+    }
+    public APIRequestGet setSpecialAdCategories (String specialAdCategories) {
+      this.setParam("special_ad_categories", specialAdCategories);
+      return this;
+    }
+
+    public APIRequestGet setSpecialAdCategoryCountries (List<String> specialAdCategoryCountries) {
+      this.setParam("special_ad_category_countries", specialAdCategoryCountries);
+      return this;
+    }
+    public APIRequestGet setSpecialAdCategoryCountries (String specialAdCategoryCountries) {
+      this.setParam("special_ad_category_countries", specialAdCategoryCountries);
       return this;
     }
 
@@ -3274,6 +3301,13 @@ public class CustomAudience extends APINode {
     }
     public APIRequestGet requestIncludedCustomAudiencesField (boolean value) {
       this.requestField("included_custom_audiences", value);
+      return this;
+    }
+    public APIRequestGet requestIsEligibleForSacCampaignsField () {
+      return this.requestIsEligibleForSacCampaignsField(true);
+    }
+    public APIRequestGet requestIsEligibleForSacCampaignsField (boolean value) {
+      this.requestField("is_eligible_for_sac_campaigns", value);
       return this;
     }
     public APIRequestGet requestIsHouseholdField () {
@@ -3882,8 +3916,6 @@ public class CustomAudience extends APINode {
       VALUE_REGULATED_CATEGORIES_AUDIENCE("REGULATED_CATEGORIES_AUDIENCE"),
       @SerializedName("STUDY_RULE_AUDIENCE")
       VALUE_STUDY_RULE_AUDIENCE("STUDY_RULE_AUDIENCE"),
-      @SerializedName("SUBSCRIBER_SEGMENT")
-      VALUE_SUBSCRIBER_SEGMENT("SUBSCRIBER_SEGMENT"),
       @SerializedName("VIDEO")
       VALUE_VIDEO("VIDEO"),
       @SerializedName("WEBSITE")
@@ -3970,6 +4002,7 @@ public class CustomAudience extends APINode {
     this.mHouseholdAudience = instance.mHouseholdAudience;
     this.mId = instance.mId;
     this.mIncludedCustomAudiences = instance.mIncludedCustomAudiences;
+    this.mIsEligibleForSacCampaigns = instance.mIsEligibleForSacCampaigns;
     this.mIsHousehold = instance.mIsHousehold;
     this.mIsSnapshot = instance.mIsSnapshot;
     this.mIsValueBased = instance.mIsValueBased;

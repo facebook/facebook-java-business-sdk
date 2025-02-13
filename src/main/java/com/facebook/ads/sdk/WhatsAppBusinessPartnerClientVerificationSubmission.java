@@ -303,6 +303,8 @@ public class WhatsAppBusinessPartnerClientVerificationSubmission extends APINode
   public static enum EnumVerificationStatus {
       @SerializedName("APPROVED")
       VALUE_APPROVED("APPROVED"),
+      @SerializedName("DISCARDED")
+      VALUE_DISCARDED("DISCARDED"),
       @SerializedName("FAILED")
       VALUE_FAILED("FAILED"),
       @SerializedName("PENDING")

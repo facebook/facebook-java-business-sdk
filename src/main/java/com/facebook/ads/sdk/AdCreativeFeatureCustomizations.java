@@ -41,10 +41,20 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class AdCreativeFeatureCustomizations extends APINode {
+  @SerializedName("background_color")
+  private String mBackgroundColor = null;
+  @SerializedName("catalog_feed_tag_name")
+  private String mCatalogFeedTagName = null;
+  @SerializedName("font_name")
+  private String mFontName = null;
   @SerializedName("image_crop_style")
   private String mImageCropStyle = null;
   @SerializedName("showcase_card_display")
   private String mShowcaseCardDisplay = null;
+  @SerializedName("text_extraction")
+  private Object mTextExtraction = null;
+  @SerializedName("text_style")
+  private String mTextStyle = null;
   protected static Gson gson = null;
 
   public AdCreativeFeatureCustomizations() {
@@ -196,6 +206,33 @@ public class AdCreativeFeatureCustomizations extends APINode {
   }
 
 
+  public String getFieldBackgroundColor() {
+    return mBackgroundColor;
+  }
+
+  public AdCreativeFeatureCustomizations setFieldBackgroundColor(String value) {
+    this.mBackgroundColor = value;
+    return this;
+  }
+
+  public String getFieldCatalogFeedTagName() {
+    return mCatalogFeedTagName;
+  }
+
+  public AdCreativeFeatureCustomizations setFieldCatalogFeedTagName(String value) {
+    this.mCatalogFeedTagName = value;
+    return this;
+  }
+
+  public String getFieldFontName() {
+    return mFontName;
+  }
+
+  public AdCreativeFeatureCustomizations setFieldFontName(String value) {
+    this.mFontName = value;
+    return this;
+  }
+
   public String getFieldImageCropStyle() {
     return mImageCropStyle;
   }
@@ -211,6 +248,24 @@ public class AdCreativeFeatureCustomizations extends APINode {
 
   public AdCreativeFeatureCustomizations setFieldShowcaseCardDisplay(String value) {
     this.mShowcaseCardDisplay = value;
+    return this;
+  }
+
+  public Object getFieldTextExtraction() {
+    return mTextExtraction;
+  }
+
+  public AdCreativeFeatureCustomizations setFieldTextExtraction(Object value) {
+    this.mTextExtraction = value;
+    return this;
+  }
+
+  public String getFieldTextStyle() {
+    return mTextStyle;
+  }
+
+  public AdCreativeFeatureCustomizations setFieldTextStyle(String value) {
+    this.mTextStyle = value;
     return this;
   }
 
@@ -231,8 +286,13 @@ public class AdCreativeFeatureCustomizations extends APINode {
   }
 
   public AdCreativeFeatureCustomizations copyFrom(AdCreativeFeatureCustomizations instance) {
+    this.mBackgroundColor = instance.mBackgroundColor;
+    this.mCatalogFeedTagName = instance.mCatalogFeedTagName;
+    this.mFontName = instance.mFontName;
     this.mImageCropStyle = instance.mImageCropStyle;
     this.mShowcaseCardDisplay = instance.mShowcaseCardDisplay;
+    this.mTextExtraction = instance.mTextExtraction;
+    this.mTextStyle = instance.mTextStyle;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

@@ -51,6 +51,8 @@ public class FBImageCopyrightMatch extends APINode {
   private List<String> mAvailableUiActions = null;
   @SerializedName("expiration_days")
   private Long mExpirationDays = null;
+  @SerializedName("generic_match_data")
+  private List<Object> mGenericMatchData = null;
   @SerializedName("id")
   private String mId = null;
   @SerializedName("is_business_page_match")
@@ -301,6 +303,10 @@ public class FBImageCopyrightMatch extends APINode {
     return mExpirationDays;
   }
 
+  public List<Object> getFieldGenericMatchData() {
+    return mGenericMatchData;
+  }
+
   public String getFieldId() {
     return mId;
   }
@@ -354,6 +360,7 @@ public class FBImageCopyrightMatch extends APINode {
       "audit_log",
       "available_ui_actions",
       "expiration_days",
+      "generic_match_data",
       "id",
       "is_business_page_match",
       "last_modified_time",
@@ -489,6 +496,13 @@ public class FBImageCopyrightMatch extends APINode {
       this.requestField("expiration_days", value);
       return this;
     }
+    public APIRequestGet requestGenericMatchDataField () {
+      return this.requestGenericMatchDataField(true);
+    }
+    public APIRequestGet requestGenericMatchDataField (boolean value) {
+      this.requestField("generic_match_data", value);
+      return this;
+    }
     public APIRequestGet requestIdField () {
       return this.requestIdField(true);
     }
@@ -567,6 +581,7 @@ public class FBImageCopyrightMatch extends APINode {
     this.mAuditLog = instance.mAuditLog;
     this.mAvailableUiActions = instance.mAvailableUiActions;
     this.mExpirationDays = instance.mExpirationDays;
+    this.mGenericMatchData = instance.mGenericMatchData;
     this.mId = instance.mId;
     this.mIsBusinessPageMatch = instance.mIsBusinessPageMatch;
     this.mLastModifiedTime = instance.mLastModifiedTime;
