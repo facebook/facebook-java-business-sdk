@@ -65,6 +65,8 @@ public class AdCreativeBrandedContentAds extends APINode {
   private String mPromotedPageId = null;
   @SerializedName("testimonial")
   private String mTestimonial = null;
+  @SerializedName("testimonial_locale")
+  private String mTestimonialLocale = null;
   @SerializedName("ui_version")
   private Long mUiVersion = null;
   protected static Gson gson = null;
@@ -331,6 +333,15 @@ public class AdCreativeBrandedContentAds extends APINode {
     return this;
   }
 
+  public String getFieldTestimonialLocale() {
+    return mTestimonialLocale;
+  }
+
+  public AdCreativeBrandedContentAds setFieldTestimonialLocale(String value) {
+    this.mTestimonialLocale = value;
+    return this;
+  }
+
   public Long getFieldUiVersion() {
     return mUiVersion;
   }
@@ -369,6 +380,7 @@ public class AdCreativeBrandedContentAds extends APINode {
     this.mProductSetPartnerSelectionStatus = instance.mProductSetPartnerSelectionStatus;
     this.mPromotedPageId = instance.mPromotedPageId;
     this.mTestimonial = instance.mTestimonial;
+    this.mTestimonialLocale = instance.mTestimonialLocale;
     this.mUiVersion = instance.mUiVersion;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

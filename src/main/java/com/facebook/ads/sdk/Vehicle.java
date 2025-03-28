@@ -141,6 +141,8 @@ public class Vehicle extends APINode {
   private List<String> mSanitizedImages = null;
   @SerializedName("state_of_vehicle")
   private String mStateOfVehicle = null;
+  @SerializedName("tags")
+  private List<String> mTags = null;
   @SerializedName("title")
   private String mTitle = null;
   @SerializedName("transmission")
@@ -596,6 +598,10 @@ public class Vehicle extends APINode {
 
   public String getFieldStateOfVehicle() {
     return mStateOfVehicle;
+  }
+
+  public List<String> getFieldTags() {
+    return mTags;
   }
 
   public String getFieldTitle() {
@@ -1116,6 +1122,7 @@ public class Vehicle extends APINode {
       "sale_price",
       "sanitized_images",
       "state_of_vehicle",
+      "tags",
       "title",
       "transmission",
       "trim",
@@ -1568,6 +1575,13 @@ public class Vehicle extends APINode {
     }
     public APIRequestGet requestStateOfVehicleField (boolean value) {
       this.requestField("state_of_vehicle", value);
+      return this;
+    }
+    public APIRequestGet requestTagsField () {
+      return this.requestTagsField(true);
+    }
+    public APIRequestGet requestTagsField (boolean value) {
+      this.requestField("tags", value);
       return this;
     }
     public APIRequestGet requestTitleField () {
@@ -2350,6 +2364,7 @@ public class Vehicle extends APINode {
     this.mSalePrice = instance.mSalePrice;
     this.mSanitizedImages = instance.mSanitizedImages;
     this.mStateOfVehicle = instance.mStateOfVehicle;
+    this.mTags = instance.mTags;
     this.mTitle = instance.mTitle;
     this.mTransmission = instance.mTransmission;
     this.mTrim = instance.mTrim;

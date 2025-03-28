@@ -408,6 +408,8 @@ public class AdReportRun extends APINode {
       "conversions",
       "converted_product_quantity",
       "converted_product_value",
+      "converted_promoted_product_quantity",
+      "converted_promoted_product_value",
       "cost_per_15_sec_video_view",
       "cost_per_2_sec_continuous_video_view",
       "cost_per_action_type",
@@ -462,13 +464,22 @@ public class AdReportRun extends APINode {
       "location",
       "marketing_messages_cost_per_delivered",
       "marketing_messages_cost_per_link_btn_click",
+      "marketing_messages_delivered",
       "marketing_messages_delivery_rate",
+      "marketing_messages_link_btn_click",
       "marketing_messages_link_btn_click_rate",
       "marketing_messages_media_view_rate",
       "marketing_messages_phone_call_btn_click_rate",
+      "marketing_messages_quick_reply_btn_click",
       "marketing_messages_quick_reply_btn_click_rate",
+      "marketing_messages_read",
       "marketing_messages_read_rate",
+      "marketing_messages_sent",
       "marketing_messages_spend",
+      "marketing_messages_spend_currency",
+      "marketing_messages_website_add_to_cart",
+      "marketing_messages_website_initiate_checkout",
+      "marketing_messages_website_purchase",
       "marketing_messages_website_purchase_values",
       "mobile_app_purchase_roas",
       "objective",
@@ -872,6 +883,20 @@ public class AdReportRun extends APINode {
       this.requestField("converted_product_value", value);
       return this;
     }
+    public APIRequestGetInsights requestConvertedPromotedProductQuantityField () {
+      return this.requestConvertedPromotedProductQuantityField(true);
+    }
+    public APIRequestGetInsights requestConvertedPromotedProductQuantityField (boolean value) {
+      this.requestField("converted_promoted_product_quantity", value);
+      return this;
+    }
+    public APIRequestGetInsights requestConvertedPromotedProductValueField () {
+      return this.requestConvertedPromotedProductValueField(true);
+    }
+    public APIRequestGetInsights requestConvertedPromotedProductValueField (boolean value) {
+      this.requestField("converted_promoted_product_value", value);
+      return this;
+    }
     public APIRequestGetInsights requestCostPer15SecVideoViewField () {
       return this.requestCostPer15SecVideoViewField(true);
     }
@@ -1250,11 +1275,25 @@ public class AdReportRun extends APINode {
       this.requestField("marketing_messages_cost_per_link_btn_click", value);
       return this;
     }
+    public APIRequestGetInsights requestMarketingMessagesDeliveredField () {
+      return this.requestMarketingMessagesDeliveredField(true);
+    }
+    public APIRequestGetInsights requestMarketingMessagesDeliveredField (boolean value) {
+      this.requestField("marketing_messages_delivered", value);
+      return this;
+    }
     public APIRequestGetInsights requestMarketingMessagesDeliveryRateField () {
       return this.requestMarketingMessagesDeliveryRateField(true);
     }
     public APIRequestGetInsights requestMarketingMessagesDeliveryRateField (boolean value) {
       this.requestField("marketing_messages_delivery_rate", value);
+      return this;
+    }
+    public APIRequestGetInsights requestMarketingMessagesLinkBtnClickField () {
+      return this.requestMarketingMessagesLinkBtnClickField(true);
+    }
+    public APIRequestGetInsights requestMarketingMessagesLinkBtnClickField (boolean value) {
+      this.requestField("marketing_messages_link_btn_click", value);
       return this;
     }
     public APIRequestGetInsights requestMarketingMessagesLinkBtnClickRateField () {
@@ -1278,11 +1317,25 @@ public class AdReportRun extends APINode {
       this.requestField("marketing_messages_phone_call_btn_click_rate", value);
       return this;
     }
+    public APIRequestGetInsights requestMarketingMessagesQuickReplyBtnClickField () {
+      return this.requestMarketingMessagesQuickReplyBtnClickField(true);
+    }
+    public APIRequestGetInsights requestMarketingMessagesQuickReplyBtnClickField (boolean value) {
+      this.requestField("marketing_messages_quick_reply_btn_click", value);
+      return this;
+    }
     public APIRequestGetInsights requestMarketingMessagesQuickReplyBtnClickRateField () {
       return this.requestMarketingMessagesQuickReplyBtnClickRateField(true);
     }
     public APIRequestGetInsights requestMarketingMessagesQuickReplyBtnClickRateField (boolean value) {
       this.requestField("marketing_messages_quick_reply_btn_click_rate", value);
+      return this;
+    }
+    public APIRequestGetInsights requestMarketingMessagesReadField () {
+      return this.requestMarketingMessagesReadField(true);
+    }
+    public APIRequestGetInsights requestMarketingMessagesReadField (boolean value) {
+      this.requestField("marketing_messages_read", value);
       return this;
     }
     public APIRequestGetInsights requestMarketingMessagesReadRateField () {
@@ -1292,11 +1345,46 @@ public class AdReportRun extends APINode {
       this.requestField("marketing_messages_read_rate", value);
       return this;
     }
+    public APIRequestGetInsights requestMarketingMessagesSentField () {
+      return this.requestMarketingMessagesSentField(true);
+    }
+    public APIRequestGetInsights requestMarketingMessagesSentField (boolean value) {
+      this.requestField("marketing_messages_sent", value);
+      return this;
+    }
     public APIRequestGetInsights requestMarketingMessagesSpendField () {
       return this.requestMarketingMessagesSpendField(true);
     }
     public APIRequestGetInsights requestMarketingMessagesSpendField (boolean value) {
       this.requestField("marketing_messages_spend", value);
+      return this;
+    }
+    public APIRequestGetInsights requestMarketingMessagesSpendCurrencyField () {
+      return this.requestMarketingMessagesSpendCurrencyField(true);
+    }
+    public APIRequestGetInsights requestMarketingMessagesSpendCurrencyField (boolean value) {
+      this.requestField("marketing_messages_spend_currency", value);
+      return this;
+    }
+    public APIRequestGetInsights requestMarketingMessagesWebsiteAddToCartField () {
+      return this.requestMarketingMessagesWebsiteAddToCartField(true);
+    }
+    public APIRequestGetInsights requestMarketingMessagesWebsiteAddToCartField (boolean value) {
+      this.requestField("marketing_messages_website_add_to_cart", value);
+      return this;
+    }
+    public APIRequestGetInsights requestMarketingMessagesWebsiteInitiateCheckoutField () {
+      return this.requestMarketingMessagesWebsiteInitiateCheckoutField(true);
+    }
+    public APIRequestGetInsights requestMarketingMessagesWebsiteInitiateCheckoutField (boolean value) {
+      this.requestField("marketing_messages_website_initiate_checkout", value);
+      return this;
+    }
+    public APIRequestGetInsights requestMarketingMessagesWebsitePurchaseField () {
+      return this.requestMarketingMessagesWebsitePurchaseField(true);
+    }
+    public APIRequestGetInsights requestMarketingMessagesWebsitePurchaseField (boolean value) {
+      this.requestField("marketing_messages_website_purchase", value);
       return this;
     }
     public APIRequestGetInsights requestMarketingMessagesWebsitePurchaseValuesField () {
@@ -1919,8 +2007,16 @@ public class AdReportRun extends APINode {
       VALUE_DEFAULT("default"),
       @SerializedName("skan_click")
       VALUE_SKAN_CLICK("skan_click"),
+      @SerializedName("skan_click_second_postback")
+      VALUE_SKAN_CLICK_SECOND_POSTBACK("skan_click_second_postback"),
+      @SerializedName("skan_click_third_postback")
+      VALUE_SKAN_CLICK_THIRD_POSTBACK("skan_click_third_postback"),
       @SerializedName("skan_view")
       VALUE_SKAN_VIEW("skan_view"),
+      @SerializedName("skan_view_second_postback")
+      VALUE_SKAN_VIEW_SECOND_POSTBACK("skan_view_second_postback"),
+      @SerializedName("skan_view_third_postback")
+      VALUE_SKAN_VIEW_THIRD_POSTBACK("skan_view_third_postback"),
       ;
 
       private String value;

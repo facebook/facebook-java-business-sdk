@@ -353,6 +353,7 @@ public class AdStudyCell extends APINode {
       "id",
       "io_number",
       "is_attribution_spec_system_default",
+      "is_ba_skip_delayed_eligible",
       "is_direct_deals_enabled",
       "is_in_3ds_authorization_enabled_market",
       "is_notifications_enabled",
@@ -750,6 +751,13 @@ public class AdStudyCell extends APINode {
       this.requestField("is_attribution_spec_system_default", value);
       return this;
     }
+    public APIRequestGetAdAccounts requestIsBaSkipDelayedEligibleField () {
+      return this.requestIsBaSkipDelayedEligibleField(true);
+    }
+    public APIRequestGetAdAccounts requestIsBaSkipDelayedEligibleField (boolean value) {
+      this.requestField("is_ba_skip_delayed_eligible", value);
+      return this;
+    }
     public APIRequestGetAdAccounts requestIsDirectDealsEnabledField () {
       return this.requestIsDirectDealsEnabledField(true);
     }
@@ -1020,6 +1028,7 @@ public class AdStudyCell extends APINode {
       "full_funnel_exploration_mode",
       "id",
       "instagram_user_id",
+      "is_ba_skip_delayed_eligible",
       "is_budget_schedule_enabled",
       "is_dynamic_creative",
       "issues_info",
@@ -1375,6 +1384,13 @@ public class AdStudyCell extends APINode {
       this.requestField("instagram_user_id", value);
       return this;
     }
+    public APIRequestGetAdSets requestIsBaSkipDelayedEligibleField () {
+      return this.requestIsBaSkipDelayedEligibleField(true);
+    }
+    public APIRequestGetAdSets requestIsBaSkipDelayedEligibleField (boolean value) {
+      this.requestField("is_ba_skip_delayed_eligible", value);
+      return this;
+    }
     public APIRequestGetAdSets requestIsBudgetScheduleEnabledField () {
       return this.requestIsBudgetScheduleEnabledField(true);
     }
@@ -1614,6 +1630,7 @@ public class AdStudyCell extends APINode {
     public static final String[] FIELDS = {
       "account_id",
       "adlabels",
+      "advantage_state_info",
       "bid_strategy",
       "boosted_object_id",
       "brand_lift_studies",
@@ -1757,6 +1774,13 @@ public class AdStudyCell extends APINode {
     }
     public APIRequestGetCampaigns requestAdlabelsField (boolean value) {
       this.requestField("adlabels", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestAdvantageStateInfoField () {
+      return this.requestAdvantageStateInfoField(true);
+    }
+    public APIRequestGetCampaigns requestAdvantageStateInfoField (boolean value) {
+      this.requestField("advantage_state_info", value);
       return this;
     }
     public APIRequestGetCampaigns requestBidStrategyField () {

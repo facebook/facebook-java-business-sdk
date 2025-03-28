@@ -352,8 +352,8 @@ public class AdVideo extends APINode {
     return new APIRequestGetCaptions(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestCreateCaption createCaption() {
-    return new APIRequestCreateCaption(this.getPrefixedId().toString(), context);
+  public APIRequestCreateCapTIOn createCapTIOn() {
+    return new APIRequestCreateCapTIOn(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetCollaborators getCollaborators() {
@@ -851,7 +851,7 @@ public class AdVideo extends APINode {
 
   }
 
-  public static class APIRequestCreateCaption extends APIRequest<AdVideo> {
+  public static class APIRequestCreateCapTIOn extends APIRequest<AdVideo> {
 
     AdVideo lastResponse = null;
     @Override
@@ -894,7 +894,7 @@ public class AdVideo extends APINode {
         new Function<ResponseWrapper, AdVideo>() {
            public AdVideo apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateCaption.this.parseResponse(result.getBody(), result.getHeader());
+               return APIRequestCreateCapTIOn.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -904,51 +904,51 @@ public class AdVideo extends APINode {
       );
     };
 
-    public APIRequestCreateCaption(String nodeId, APIContext context) {
+    public APIRequestCreateCapTIOn(String nodeId, APIContext context) {
       super(context, nodeId, "/captions", "POST", Arrays.asList(PARAMS));
     }
 
     @Override
-    public APIRequestCreateCaption setParam(String param, Object value) {
+    public APIRequestCreateCapTIOn setParam(String param, Object value) {
       setParamInternal(param, value);
       return this;
     }
 
     @Override
-    public APIRequestCreateCaption setParams(Map<String, Object> params) {
+    public APIRequestCreateCapTIOn setParams(Map<String, Object> params) {
       setParamsInternal(params);
       return this;
     }
 
 
-    public APIRequestCreateCaption setCaptionsFile (File captionsFile) {
+    public APIRequestCreateCapTIOn setCaptionsFile (File captionsFile) {
       this.setParam("captions_file", captionsFile);
       return this;
     }
-    public APIRequestCreateCaption setCaptionsFile (String captionsFile) {
+    public APIRequestCreateCapTIOn setCaptionsFile (String captionsFile) {
       this.setParam("captions_file", captionsFile);
       return this;
     }
 
-    public APIRequestCreateCaption setDefaultLocale (String defaultLocale) {
+    public APIRequestCreateCapTIOn setDefaultLocale (String defaultLocale) {
       this.setParam("default_locale", defaultLocale);
       return this;
     }
 
-    public APIRequestCreateCaption setLocalesToDelete (List<String> localesToDelete) {
+    public APIRequestCreateCapTIOn setLocalesToDelete (List<String> localesToDelete) {
       this.setParam("locales_to_delete", localesToDelete);
       return this;
     }
-    public APIRequestCreateCaption setLocalesToDelete (String localesToDelete) {
+    public APIRequestCreateCapTIOn setLocalesToDelete (String localesToDelete) {
       this.setParam("locales_to_delete", localesToDelete);
       return this;
     }
 
-    public APIRequestCreateCaption requestAllFields () {
+    public APIRequestCreateCapTIOn requestAllFields () {
       return this.requestAllFields(true);
     }
 
-    public APIRequestCreateCaption requestAllFields (boolean value) {
+    public APIRequestCreateCapTIOn requestAllFields (boolean value) {
       for (String field : FIELDS) {
         this.requestField(field, value);
       }
@@ -956,12 +956,12 @@ public class AdVideo extends APINode {
     }
 
     @Override
-    public APIRequestCreateCaption requestFields (List<String> fields) {
+    public APIRequestCreateCapTIOn requestFields (List<String> fields) {
       return this.requestFields(fields, true);
     }
 
     @Override
-    public APIRequestCreateCaption requestFields (List<String> fields, boolean value) {
+    public APIRequestCreateCapTIOn requestFields (List<String> fields, boolean value) {
       for (String field : fields) {
         this.requestField(field, value);
       }
@@ -969,13 +969,13 @@ public class AdVideo extends APINode {
     }
 
     @Override
-    public APIRequestCreateCaption requestField (String field) {
+    public APIRequestCreateCapTIOn requestField (String field) {
       this.requestField(field, true);
       return this;
     }
 
     @Override
-    public APIRequestCreateCaption requestField (String field, boolean value) {
+    public APIRequestCreateCapTIOn requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
@@ -6818,6 +6818,8 @@ public class AdVideo extends APINode {
       VALUE_COPYRIGHT_REFERENCE_VIDEO("COPYRIGHT_REFERENCE_VIDEO"),
       @SerializedName("CREATION_ML_PRECREATION")
       VALUE_CREATION_ML_PRECREATION("CREATION_ML_PRECREATION"),
+      @SerializedName("CREATOR_FAN_CHALLENGE")
+      VALUE_CREATOR_FAN_CHALLENGE("CREATOR_FAN_CHALLENGE"),
       @SerializedName("CREATOR_STOREFRONT_PERSONALIZED_VIDEO")
       VALUE_CREATOR_STOREFRONT_PERSONALIZED_VIDEO("CREATOR_STOREFRONT_PERSONALIZED_VIDEO"),
       @SerializedName("DATAGENIX_VIDEO")
@@ -6912,10 +6914,6 @@ public class AdVideo extends APINode {
       VALUE_INSTANT_ARTICLE("INSTANT_ARTICLE"),
       @SerializedName("ISSUE_MODULE")
       VALUE_ISSUE_MODULE("ISSUE_MODULE"),
-      @SerializedName("JOBS_CAREERS")
-      VALUE_JOBS_CAREERS("JOBS_CAREERS"),
-      @SerializedName("JOBS_VISUAL_INTRO_ENTRY")
-      VALUE_JOBS_VISUAL_INTRO_ENTRY("JOBS_VISUAL_INTRO_ENTRY"),
       @SerializedName("LEARN")
       VALUE_LEARN("LEARN"),
       @SerializedName("LEGACY")
@@ -6938,8 +6936,6 @@ public class AdVideo extends APINode {
       VALUE_MARKETPLACE_LISTING_VIDEO("MARKETPLACE_LISTING_VIDEO"),
       @SerializedName("MARKETPLACE_PRE_RECORDED_VIDEO")
       VALUE_MARKETPLACE_PRE_RECORDED_VIDEO("MARKETPLACE_PRE_RECORDED_VIDEO"),
-      @SerializedName("MESSENGER_WATCH_TOGETHER")
-      VALUE_MESSENGER_WATCH_TOGETHER("MESSENGER_WATCH_TOGETHER"),
       @SerializedName("MOMENTS_VIDEO")
       VALUE_MOMENTS_VIDEO("MOMENTS_VIDEO"),
       @SerializedName("MUSIC_CLIP")
@@ -6960,16 +6956,12 @@ public class AdVideo extends APINode {
       VALUE_NEW_CONTAINED_POST_BROADCAST("NEW_CONTAINED_POST_BROADCAST"),
       @SerializedName("NO_STORY")
       VALUE_NO_STORY("NO_STORY"),
-      @SerializedName("NO_STORY_WITH_ENTPOST")
-      VALUE_NO_STORY_WITH_ENTPOST("NO_STORY_WITH_ENTPOST"),
       @SerializedName("NPE_COLLAB_COPYRIGHT_CHECK")
       VALUE_NPE_COLLAB_COPYRIGHT_CHECK("NPE_COLLAB_COPYRIGHT_CHECK"),
       @SerializedName("OCULUS_CREATOR_PORTAL")
       VALUE_OCULUS_CREATOR_PORTAL("OCULUS_CREATOR_PORTAL"),
       @SerializedName("OCULUS_VENUES_BROADCAST")
       VALUE_OCULUS_VENUES_BROADCAST("OCULUS_VENUES_BROADCAST"),
-      @SerializedName("OFFERS_VIDEO")
-      VALUE_OFFERS_VIDEO("OFFERS_VIDEO"),
       @SerializedName("ORIGINALITY_SELF_ADVOCACY")
       VALUE_ORIGINALITY_SELF_ADVOCACY("ORIGINALITY_SELF_ADVOCACY"),
       @SerializedName("PAGES_COVER_VIDEO")
@@ -7036,8 +7028,6 @@ public class AdVideo extends APINode {
       VALUE_REPLACE_VIDEO("REPLACE_VIDEO"),
       @SerializedName("SALES_CLIENT_INTERACTION")
       VALUE_SALES_CLIENT_INTERACTION("SALES_CLIENT_INTERACTION"),
-      @SerializedName("SAY_THANKS_DEPRECATED")
-      VALUE_SAY_THANKS_DEPRECATED("SAY_THANKS_DEPRECATED"),
       @SerializedName("SHOWREEL_NATIVE_DUMMY_VIDEO")
       VALUE_SHOWREEL_NATIVE_DUMMY_VIDEO("SHOWREEL_NATIVE_DUMMY_VIDEO"),
       @SerializedName("SLIDESHOW_ANIMOTO")
@@ -7072,6 +7062,8 @@ public class AdVideo extends APINode {
       VALUE_TEMPORARY_UNLISTED("TEMPORARY_UNLISTED"),
       @SerializedName("TEMP_MULTIMEDIA_POST")
       VALUE_TEMP_MULTIMEDIA_POST("TEMP_MULTIMEDIA_POST"),
+      @SerializedName("TEMP_VIDEO_COPYRIGHT_SCAN")
+      VALUE_TEMP_VIDEO_COPYRIGHT_SCAN("TEMP_VIDEO_COPYRIGHT_SCAN"),
       @SerializedName("UNLISTED")
       VALUE_UNLISTED("UNLISTED"),
       @SerializedName("UNLISTED_HORIZON")

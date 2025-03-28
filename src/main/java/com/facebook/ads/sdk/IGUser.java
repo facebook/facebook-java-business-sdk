@@ -332,6 +332,10 @@ public class IGUser extends APINode {
     return new APIRequestGetCatalogProductSearch(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetConnectedThreadsUser getConnectedThreadsUser() {
+    return new APIRequestGetConnectedThreadsUser(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetContentPublishingLimit getContentPublishingLimit() {
     return new APIRequestGetContentPublishingLimit(this.getPrefixedId().toString(), context);
   }
@@ -346,6 +350,14 @@ public class IGUser extends APINode {
 
   public APIRequestGetInsights getInsights() {
     return new APIRequestGetInsights(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetInstagramBackedThreadsUser getInstagramBackedThreadsUser() {
+    return new APIRequestGetInstagramBackedThreadsUser(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestCreateInstagramBackedThreadsUser createInstagramBackedThreadsUser() {
+    return new APIRequestCreateInstagramBackedThreadsUser(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetLiveMedia getLiveMedia() {
@@ -819,6 +831,7 @@ public class IGUser extends APINode {
       "id",
       "io_number",
       "is_attribution_spec_system_default",
+      "is_ba_skip_delayed_eligible",
       "is_direct_deals_enabled",
       "is_in_3ds_authorization_enabled_market",
       "is_notifications_enabled",
@@ -1219,6 +1232,13 @@ public class IGUser extends APINode {
     }
     public APIRequestGetAuthorizedAdAccounts requestIsAttributionSpecSystemDefaultField (boolean value) {
       this.requestField("is_attribution_spec_system_default", value);
+      return this;
+    }
+    public APIRequestGetAuthorizedAdAccounts requestIsBaSkipDelayedEligibleField () {
+      return this.requestIsBaSkipDelayedEligibleField(true);
+    }
+    public APIRequestGetAuthorizedAdAccounts requestIsBaSkipDelayedEligibleField (boolean value) {
+      this.requestField("is_ba_skip_delayed_eligible", value);
       return this;
     }
     public APIRequestGetAuthorizedAdAccounts requestIsDirectDealsEnabledField () {
@@ -1968,6 +1988,7 @@ public class IGUser extends APINode {
       "ad_code",
       "creator_username",
       "only_fetch_allowlisted",
+      "only_fetch_recommended_content",
       "permalinks",
     };
 
@@ -1977,6 +1998,7 @@ public class IGUser extends APINode {
       "id",
       "owner_id",
       "permalink",
+      "recommended_campaign_objectives",
     };
 
     @Override
@@ -2049,6 +2071,15 @@ public class IGUser extends APINode {
     }
     public APIRequestGetBrandedContentAdvertisableMedias setOnlyFetchAllowlisted (String onlyFetchAllowlisted) {
       this.setParam("only_fetch_allowlisted", onlyFetchAllowlisted);
+      return this;
+    }
+
+    public APIRequestGetBrandedContentAdvertisableMedias setOnlyFetchRecommendedContent (Boolean onlyFetchRecommendedContent) {
+      this.setParam("only_fetch_recommended_content", onlyFetchRecommendedContent);
+      return this;
+    }
+    public APIRequestGetBrandedContentAdvertisableMedias setOnlyFetchRecommendedContent (String onlyFetchRecommendedContent) {
+      this.setParam("only_fetch_recommended_content", onlyFetchRecommendedContent);
       return this;
     }
 
@@ -2130,6 +2161,13 @@ public class IGUser extends APINode {
     }
     public APIRequestGetBrandedContentAdvertisableMedias requestPermalinkField (boolean value) {
       this.requestField("permalink", value);
+      return this;
+    }
+    public APIRequestGetBrandedContentAdvertisableMedias requestRecommendedCampaignObjectivesField () {
+      return this.requestRecommendedCampaignObjectivesField(true);
+    }
+    public APIRequestGetBrandedContentAdvertisableMedias requestRecommendedCampaignObjectivesField (boolean value) {
+      this.requestField("recommended_campaign_objectives", value);
       return this;
     }
   }
@@ -2664,6 +2702,127 @@ public class IGUser extends APINode {
     }
     public APIRequestGetCatalogProductSearch requestReviewStatusField (boolean value) {
       this.requestField("review_status", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestGetConnectedThreadsUser extends APIRequest<ThreadsUser> {
+
+    APINodeList<ThreadsUser> lastResponse = null;
+    @Override
+    public APINodeList<ThreadsUser> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "threads_user_id",
+      "threads_user_profile_pic",
+    };
+
+    @Override
+    public APINodeList<ThreadsUser> parseResponse(String response, String header) throws APIException {
+      return ThreadsUser.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<ThreadsUser> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<ThreadsUser> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<ThreadsUser>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<ThreadsUser>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<ThreadsUser>>() {
+           public APINodeList<ThreadsUser> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetConnectedThreadsUser.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestGetConnectedThreadsUser(String nodeId, APIContext context) {
+      super(context, nodeId, "/connected_threads_user", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetConnectedThreadsUser setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetConnectedThreadsUser setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetConnectedThreadsUser requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetConnectedThreadsUser requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetConnectedThreadsUser requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetConnectedThreadsUser requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetConnectedThreadsUser requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetConnectedThreadsUser requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetConnectedThreadsUser requestThreadsUserIdField () {
+      return this.requestThreadsUserIdField(true);
+    }
+    public APIRequestGetConnectedThreadsUser requestThreadsUserIdField (boolean value) {
+      this.requestField("threads_user_id", value);
+      return this;
+    }
+    public APIRequestGetConnectedThreadsUser requestThreadsUserProfilePicField () {
+      return this.requestThreadsUserProfilePicField(true);
+    }
+    public APIRequestGetConnectedThreadsUser requestThreadsUserProfilePicField (boolean value) {
+      this.requestField("threads_user_profile_pic", value);
       return this;
     }
   }
@@ -3248,6 +3407,232 @@ public class IGUser extends APINode {
       this.requestField("values", value);
       return this;
     }
+  }
+
+  public static class APIRequestGetInstagramBackedThreadsUser extends APIRequest<ThreadsUser> {
+
+    APINodeList<ThreadsUser> lastResponse = null;
+    @Override
+    public APINodeList<ThreadsUser> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "threads_user_id",
+      "threads_user_profile_pic",
+    };
+
+    @Override
+    public APINodeList<ThreadsUser> parseResponse(String response, String header) throws APIException {
+      return ThreadsUser.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<ThreadsUser> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<ThreadsUser> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<ThreadsUser>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<ThreadsUser>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<ThreadsUser>>() {
+           public APINodeList<ThreadsUser> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetInstagramBackedThreadsUser.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestGetInstagramBackedThreadsUser(String nodeId, APIContext context) {
+      super(context, nodeId, "/instagram_backed_threads_user", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetInstagramBackedThreadsUser setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetInstagramBackedThreadsUser setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetInstagramBackedThreadsUser requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetInstagramBackedThreadsUser requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetInstagramBackedThreadsUser requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetInstagramBackedThreadsUser requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetInstagramBackedThreadsUser requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetInstagramBackedThreadsUser requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetInstagramBackedThreadsUser requestThreadsUserIdField () {
+      return this.requestThreadsUserIdField(true);
+    }
+    public APIRequestGetInstagramBackedThreadsUser requestThreadsUserIdField (boolean value) {
+      this.requestField("threads_user_id", value);
+      return this;
+    }
+    public APIRequestGetInstagramBackedThreadsUser requestThreadsUserProfilePicField () {
+      return this.requestThreadsUserProfilePicField(true);
+    }
+    public APIRequestGetInstagramBackedThreadsUser requestThreadsUserProfilePicField (boolean value) {
+      this.requestField("threads_user_profile_pic", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestCreateInstagramBackedThreadsUser extends APIRequest<ThreadsUser> {
+
+    ThreadsUser lastResponse = null;
+    @Override
+    public ThreadsUser getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public ThreadsUser parseResponse(String response, String header) throws APIException {
+      return ThreadsUser.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public ThreadsUser execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public ThreadsUser execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<ThreadsUser> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<ThreadsUser> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, ThreadsUser>() {
+           public ThreadsUser apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateInstagramBackedThreadsUser.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestCreateInstagramBackedThreadsUser(String nodeId, APIContext context) {
+      super(context, nodeId, "/instagram_backed_threads_user", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateInstagramBackedThreadsUser setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateInstagramBackedThreadsUser setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateInstagramBackedThreadsUser requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateInstagramBackedThreadsUser requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateInstagramBackedThreadsUser requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateInstagramBackedThreadsUser requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateInstagramBackedThreadsUser requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateInstagramBackedThreadsUser requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
   }
 
   public static class APIRequestGetLiveMedia extends APIRequest<IGMedia> {

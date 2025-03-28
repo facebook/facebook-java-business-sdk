@@ -53,6 +53,10 @@ public class LeadGenFormPreviewDetails extends APINode {
   private String mContactInformationText = null;
   @SerializedName("creatives_overview_default_text")
   private String mCreativesOverviewDefaultText = null;
+  @SerializedName("custom_disclaimer_editor_state")
+  private String mCustomDisclaimerEditorState = null;
+  @SerializedName("custom_disclaimer_title")
+  private String mCustomDisclaimerTitle = null;
   @SerializedName("data_privacy_policy_setting_description")
   private String mDataPrivacyPolicySettingDescription = null;
   @SerializedName("default_appointment_scheduling_inline_context")
@@ -97,6 +101,8 @@ public class LeadGenFormPreviewDetails extends APINode {
   private String mPhoneNumberInlineContextText = null;
   @SerializedName("privacy_policy_link_text")
   private String mPrivacyPolicyLinkText = null;
+  @SerializedName("privacy_policy_link_text_for_optional_privacy_policy")
+  private String mPrivacyPolicyLinkTextForOptionalPrivacyPolicy = null;
   @SerializedName("privacy_policy_title_section_title_text")
   private String mPrivacyPolicyTitleSectionTitleText = null;
   @SerializedName("privacy_setting_description")
@@ -113,6 +119,8 @@ public class LeadGenFormPreviewDetails extends APINode {
   private String mReviewYourInfoText = null;
   @SerializedName("secure_sharing_text")
   private String mSecureSharingText = null;
+  @SerializedName("secure_sharing_text_for_optional_privacy_policy")
+  private String mSecureSharingTextForOptionalPrivacyPolicy = null;
   @SerializedName("slide_to_submit_text")
   private String mSlideToSubmitText = null;
   @SerializedName("social_proof_section_headers")
@@ -326,6 +334,24 @@ public class LeadGenFormPreviewDetails extends APINode {
     return this;
   }
 
+  public String getFieldCustomDisclaimerEditorState() {
+    return mCustomDisclaimerEditorState;
+  }
+
+  public LeadGenFormPreviewDetails setFieldCustomDisclaimerEditorState(String value) {
+    this.mCustomDisclaimerEditorState = value;
+    return this;
+  }
+
+  public String getFieldCustomDisclaimerTitle() {
+    return mCustomDisclaimerTitle;
+  }
+
+  public LeadGenFormPreviewDetails setFieldCustomDisclaimerTitle(String value) {
+    this.mCustomDisclaimerTitle = value;
+    return this;
+  }
+
   public String getFieldDataPrivacyPolicySettingDescription() {
     return mDataPrivacyPolicySettingDescription;
   }
@@ -524,6 +550,15 @@ public class LeadGenFormPreviewDetails extends APINode {
     return this;
   }
 
+  public String getFieldPrivacyPolicyLinkTextForOptionalPrivacyPolicy() {
+    return mPrivacyPolicyLinkTextForOptionalPrivacyPolicy;
+  }
+
+  public LeadGenFormPreviewDetails setFieldPrivacyPolicyLinkTextForOptionalPrivacyPolicy(String value) {
+    this.mPrivacyPolicyLinkTextForOptionalPrivacyPolicy = value;
+    return this;
+  }
+
   public String getFieldPrivacyPolicyTitleSectionTitleText() {
     return mPrivacyPolicyTitleSectionTitleText;
   }
@@ -596,6 +631,15 @@ public class LeadGenFormPreviewDetails extends APINode {
     return this;
   }
 
+  public String getFieldSecureSharingTextForOptionalPrivacyPolicy() {
+    return mSecureSharingTextForOptionalPrivacyPolicy;
+  }
+
+  public LeadGenFormPreviewDetails setFieldSecureSharingTextForOptionalPrivacyPolicy(String value) {
+    this.mSecureSharingTextForOptionalPrivacyPolicy = value;
+    return this;
+  }
+
   public String getFieldSlideToSubmitText() {
     return mSlideToSubmitText;
   }
@@ -655,6 +699,8 @@ public class LeadGenFormPreviewDetails extends APINode {
     this.mChatOnWhatsappText = instance.mChatOnWhatsappText;
     this.mContactInformationText = instance.mContactInformationText;
     this.mCreativesOverviewDefaultText = instance.mCreativesOverviewDefaultText;
+    this.mCustomDisclaimerEditorState = instance.mCustomDisclaimerEditorState;
+    this.mCustomDisclaimerTitle = instance.mCustomDisclaimerTitle;
     this.mDataPrivacyPolicySettingDescription = instance.mDataPrivacyPolicySettingDescription;
     this.mDefaultAppointmentSchedulingInlineContext = instance.mDefaultAppointmentSchedulingInlineContext;
     this.mDefaultDisqualifiedEndComponent = instance.mDefaultDisqualifiedEndComponent;
@@ -677,6 +723,7 @@ public class LeadGenFormPreviewDetails extends APINode {
     this.mPersonalInfoText = instance.mPersonalInfoText;
     this.mPhoneNumberInlineContextText = instance.mPhoneNumberInlineContextText;
     this.mPrivacyPolicyLinkText = instance.mPrivacyPolicyLinkText;
+    this.mPrivacyPolicyLinkTextForOptionalPrivacyPolicy = instance.mPrivacyPolicyLinkTextForOptionalPrivacyPolicy;
     this.mPrivacyPolicyTitleSectionTitleText = instance.mPrivacyPolicyTitleSectionTitleText;
     this.mPrivacySettingDescription = instance.mPrivacySettingDescription;
     this.mProductsSectionHeaders = instance.mProductsSectionHeaders;
@@ -685,6 +732,7 @@ public class LeadGenFormPreviewDetails extends APINode {
     this.mReturnToFacebookText = instance.mReturnToFacebookText;
     this.mReviewYourInfoText = instance.mReviewYourInfoText;
     this.mSecureSharingText = instance.mSecureSharingText;
+    this.mSecureSharingTextForOptionalPrivacyPolicy = instance.mSecureSharingTextForOptionalPrivacyPolicy;
     this.mSlideToSubmitText = instance.mSlideToSubmitText;
     this.mSocialProofSectionHeaders = instance.mSocialProofSectionHeaders;
     this.mSubmitButtonText = instance.mSubmitButtonText;

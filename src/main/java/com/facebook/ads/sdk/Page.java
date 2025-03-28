@@ -844,6 +844,10 @@ public class Page extends APINode {
     return new APIRequestCreateMessengerProfile(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestCreateModerateConversation createModerateConversation() {
+    return new APIRequestCreateModerateConversation(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestCreateNlpConfig createNlpConfig() {
     return new APIRequestCreateNlpConfig(this.getPrefixedId().toString(), context);
   }
@@ -870,10 +874,6 @@ public class Page extends APINode {
 
   public APIRequestCreatePassThreadControl createPassThreadControl() {
     return new APIRequestCreatePassThreadControl(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestCreatePassThreadMetadatum createPassThreadMetadatum() {
-    return new APIRequestCreatePassThreadMetadatum(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetPersonas getPersonas() {
@@ -950,6 +950,10 @@ public class Page extends APINode {
 
   public APIRequestGetShopSetupStatus getShopSetupStatus() {
     return new APIRequestGetShopSetupStatus(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetStoreLocations getStoreLocations() {
+    return new APIRequestGetStoreLocations(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetStories getStories() {
@@ -21429,6 +21433,131 @@ public class Page extends APINode {
 
   }
 
+  public static class APIRequestCreateModerateConversation extends APIRequest<Page> {
+
+    Page lastResponse = null;
+    @Override
+    public Page getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "actions",
+      "user_ids",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public Page parseResponse(String response, String header) throws APIException {
+      return Page.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public Page execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public Page execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<Page> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<Page> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, Page>() {
+           public Page apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateModerateConversation.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestCreateModerateConversation(String nodeId, APIContext context) {
+      super(context, nodeId, "/moderate_conversations", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateModerateConversation setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateModerateConversation setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateModerateConversation setActions (List<Page.EnumActions> actions) {
+      this.setParam("actions", actions);
+      return this;
+    }
+    public APIRequestCreateModerateConversation setActions (String actions) {
+      this.setParam("actions", actions);
+      return this;
+    }
+
+    public APIRequestCreateModerateConversation setUserIds (List<Map<String, String>> userIds) {
+      this.setParam("user_ids", userIds);
+      return this;
+    }
+    public APIRequestCreateModerateConversation setUserIds (String userIds) {
+      this.setParam("user_ids", userIds);
+      return this;
+    }
+
+    public APIRequestCreateModerateConversation requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateModerateConversation requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateModerateConversation requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateModerateConversation requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateModerateConversation requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateModerateConversation requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestCreateNlpConfig extends APIRequest<Page> {
 
     Page lastResponse = null;
@@ -22462,137 +22591,6 @@ public class Page extends APINode {
 
     @Override
     public APIRequestCreatePassThreadControl requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
-  public static class APIRequestCreatePassThreadMetadatum extends APIRequest<Page> {
-
-    Page lastResponse = null;
-    @Override
-    public Page getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "metadata",
-      "recipient",
-      "target_app_id",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public Page parseResponse(String response, String header) throws APIException {
-      return Page.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public Page execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public Page execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<Page> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<Page> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, Page>() {
-           public Page apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreatePassThreadMetadatum.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         },
-         MoreExecutors.directExecutor()
-      );
-    };
-
-    public APIRequestCreatePassThreadMetadatum(String nodeId, APIContext context) {
-      super(context, nodeId, "/pass_thread_metadata", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreatePassThreadMetadatum setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreatePassThreadMetadatum setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreatePassThreadMetadatum setMetadata (String metadata) {
-      this.setParam("metadata", metadata);
-      return this;
-    }
-
-    public APIRequestCreatePassThreadMetadatum setRecipient (Object recipient) {
-      this.setParam("recipient", recipient);
-      return this;
-    }
-    public APIRequestCreatePassThreadMetadatum setRecipient (String recipient) {
-      this.setParam("recipient", recipient);
-      return this;
-    }
-
-    public APIRequestCreatePassThreadMetadatum setTargetAppId (Long targetAppId) {
-      this.setParam("target_app_id", targetAppId);
-      return this;
-    }
-    public APIRequestCreatePassThreadMetadatum setTargetAppId (String targetAppId) {
-      this.setParam("target_app_id", targetAppId);
-      return this;
-    }
-
-    public APIRequestCreatePassThreadMetadatum requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreatePassThreadMetadatum requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreatePassThreadMetadatum requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreatePassThreadMetadatum requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreatePassThreadMetadatum requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreatePassThreadMetadatum requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
@@ -28698,6 +28696,175 @@ public class Page extends APINode {
     }
     public APIRequestGetShopSetupStatus requestShopSetupField (boolean value) {
       this.requestField("shop_setup", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestGetStoreLocations extends APIRequest<StoreLocation> {
+
+    APINodeList<StoreLocation> lastResponse = null;
+    @Override
+    public APINodeList<StoreLocation> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "full_address",
+      "hours",
+      "id",
+      "phone_number",
+      "pickup_options",
+      "price_range",
+      "store_code",
+      "zip_code",
+    };
+
+    @Override
+    public APINodeList<StoreLocation> parseResponse(String response, String header) throws APIException {
+      return StoreLocation.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<StoreLocation> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<StoreLocation> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<StoreLocation>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<StoreLocation>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<StoreLocation>>() {
+           public APINodeList<StoreLocation> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetStoreLocations.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestGetStoreLocations(String nodeId, APIContext context) {
+      super(context, nodeId, "/store_locations", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetStoreLocations setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetStoreLocations setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetStoreLocations requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetStoreLocations requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetStoreLocations requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetStoreLocations requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetStoreLocations requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetStoreLocations requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetStoreLocations requestFullAddressField () {
+      return this.requestFullAddressField(true);
+    }
+    public APIRequestGetStoreLocations requestFullAddressField (boolean value) {
+      this.requestField("full_address", value);
+      return this;
+    }
+    public APIRequestGetStoreLocations requestHoursField () {
+      return this.requestHoursField(true);
+    }
+    public APIRequestGetStoreLocations requestHoursField (boolean value) {
+      this.requestField("hours", value);
+      return this;
+    }
+    public APIRequestGetStoreLocations requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetStoreLocations requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetStoreLocations requestPhoneNumberField () {
+      return this.requestPhoneNumberField(true);
+    }
+    public APIRequestGetStoreLocations requestPhoneNumberField (boolean value) {
+      this.requestField("phone_number", value);
+      return this;
+    }
+    public APIRequestGetStoreLocations requestPickupOptionsField () {
+      return this.requestPickupOptionsField(true);
+    }
+    public APIRequestGetStoreLocations requestPickupOptionsField (boolean value) {
+      this.requestField("pickup_options", value);
+      return this;
+    }
+    public APIRequestGetStoreLocations requestPriceRangeField () {
+      return this.requestPriceRangeField(true);
+    }
+    public APIRequestGetStoreLocations requestPriceRangeField (boolean value) {
+      this.requestField("price_range", value);
+      return this;
+    }
+    public APIRequestGetStoreLocations requestStoreCodeField () {
+      return this.requestStoreCodeField(true);
+    }
+    public APIRequestGetStoreLocations requestStoreCodeField (boolean value) {
+      this.requestField("store_code", value);
+      return this;
+    }
+    public APIRequestGetStoreLocations requestZipCodeField () {
+      return this.requestZipCodeField(true);
+    }
+    public APIRequestGetStoreLocations requestZipCodeField (boolean value) {
+      this.requestField("zip_code", value);
       return this;
     }
   }
@@ -37437,6 +37604,8 @@ public class Page extends APINode {
       VALUE_CASHIER_ROLE("CASHIER_ROLE"),
       @SerializedName("CREATE_CONTENT")
       VALUE_CREATE_CONTENT("CREATE_CONTENT"),
+      @SerializedName("GLOBAL_STRUCTURE_MANAGEMENT")
+      VALUE_GLOBAL_STRUCTURE_MANAGEMENT("GLOBAL_STRUCTURE_MANAGEMENT"),
       @SerializedName("MANAGE")
       VALUE_MANAGE("MANAGE"),
       @SerializedName("MANAGE_JOBS")
@@ -37502,6 +37671,8 @@ public class Page extends APINode {
       VALUE_CASHIER_ROLE("CASHIER_ROLE"),
       @SerializedName("CREATE_CONTENT")
       VALUE_CREATE_CONTENT("CREATE_CONTENT"),
+      @SerializedName("GLOBAL_STRUCTURE_MANAGEMENT")
+      VALUE_GLOBAL_STRUCTURE_MANAGEMENT("GLOBAL_STRUCTURE_MANAGEMENT"),
       @SerializedName("MANAGE")
       VALUE_MANAGE("MANAGE"),
       @SerializedName("MANAGE_JOBS")
@@ -37832,6 +38003,31 @@ public class Page extends APINode {
       private String value;
 
       private EnumPlatform(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumActions {
+      @SerializedName("BAN_USER")
+      VALUE_BAN_USER("BAN_USER"),
+      @SerializedName("BLOCK_USER")
+      VALUE_BLOCK_USER("BLOCK_USER"),
+      @SerializedName("MOVE_TO_SPAM")
+      VALUE_MOVE_TO_SPAM("MOVE_TO_SPAM"),
+      @SerializedName("UNBAN_USER")
+      VALUE_UNBAN_USER("UNBAN_USER"),
+      @SerializedName("UNBLOCK_USER")
+      VALUE_UNBLOCK_USER("UNBLOCK_USER"),
+      ;
+
+      private String value;
+
+      private EnumActions(String value) {
         this.value = value;
       }
 

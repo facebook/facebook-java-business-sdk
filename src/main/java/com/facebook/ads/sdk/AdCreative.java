@@ -65,6 +65,8 @@ public class AdCreative extends APINode {
   private String mBrandedContentSponsorPageId = null;
   @SerializedName("bundle_folder_id")
   private String mBundleFolderId = null;
+  @SerializedName("call_to_action")
+  private AdCreativeLinkDataCallToAction mCallToAction = null;
   @SerializedName("call_to_action_type")
   private EnumCallToActionType mCallToActionType = null;
   @SerializedName("categorization_criteria")
@@ -544,6 +546,20 @@ public class AdCreative extends APINode {
     return this;
   }
 
+  public AdCreativeLinkDataCallToAction getFieldCallToAction() {
+    return mCallToAction;
+  }
+
+  public AdCreative setFieldCallToAction(AdCreativeLinkDataCallToAction value) {
+    this.mCallToAction = value;
+    return this;
+  }
+
+  public AdCreative setFieldCallToAction(String value) {
+    Type type = new TypeToken<AdCreativeLinkDataCallToAction>(){}.getType();
+    this.mCallToAction = AdCreativeLinkDataCallToAction.getGson().fromJson(value, type);
+    return this;
+  }
   public EnumCallToActionType getFieldCallToActionType() {
     return mCallToActionType;
   }
@@ -1761,6 +1777,7 @@ public class AdCreative extends APINode {
       "branded_content",
       "branded_content_sponsor_page_id",
       "bundle_folder_id",
+      "call_to_action",
       "call_to_action_type",
       "categorization_criteria",
       "category_media_source",
@@ -2009,6 +2026,13 @@ public class AdCreative extends APINode {
     }
     public APIRequestGet requestBundleFolderIdField (boolean value) {
       this.requestField("bundle_folder_id", value);
+      return this;
+    }
+    public APIRequestGet requestCallToActionField () {
+      return this.requestCallToActionField(true);
+    }
+    public APIRequestGet requestCallToActionField (boolean value) {
+      this.requestField("call_to_action", value);
       return this;
     }
     public APIRequestGet requestCallToActionTypeField () {
@@ -2701,6 +2725,8 @@ public class AdCreative extends APINode {
       VALUE_VIDEO_ANNOTATION("VIDEO_ANNOTATION"),
       @SerializedName("VIDEO_CALL")
       VALUE_VIDEO_CALL("VIDEO_CALL"),
+      @SerializedName("VIEW_CART")
+      VALUE_VIEW_CART("VIEW_CART"),
       @SerializedName("VIEW_CHANNEL")
       VALUE_VIEW_CHANNEL("VIEW_CHANNEL"),
       @SerializedName("VIEW_PRODUCT")
@@ -2948,6 +2974,7 @@ public class AdCreative extends APINode {
     this.mBrandedContent = instance.mBrandedContent;
     this.mBrandedContentSponsorPageId = instance.mBrandedContentSponsorPageId;
     this.mBundleFolderId = instance.mBundleFolderId;
+    this.mCallToAction = instance.mCallToAction;
     this.mCallToActionType = instance.mCallToActionType;
     this.mCategorizationCriteria = instance.mCategorizationCriteria;
     this.mCategoryMediaSource = instance.mCategoryMediaSource;

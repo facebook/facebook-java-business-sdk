@@ -570,6 +570,8 @@ public class BusinessAssetSharingAgreement extends APINode {
   public static enum EnumRequestStatus {
       @SerializedName("APPROVE")
       VALUE_APPROVE("APPROVE"),
+      @SerializedName("CANCELED")
+      VALUE_CANCELED("CANCELED"),
       @SerializedName("DECLINE")
       VALUE_DECLINE("DECLINE"),
       @SerializedName("EXPIRED")

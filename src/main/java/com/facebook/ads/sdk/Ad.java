@@ -574,6 +574,7 @@ public class Ad extends APINode {
       "branded_content",
       "branded_content_sponsor_page_id",
       "bundle_folder_id",
+      "call_to_action",
       "call_to_action_type",
       "categorization_criteria",
       "category_media_source",
@@ -804,6 +805,13 @@ public class Ad extends APINode {
     }
     public APIRequestGetAdCreatives requestBundleFolderIdField (boolean value) {
       this.requestField("bundle_folder_id", value);
+      return this;
+    }
+    public APIRequestGetAdCreatives requestCallToActionField () {
+      return this.requestCallToActionField(true);
+    }
+    public APIRequestGetAdCreatives requestCallToActionField (boolean value) {
+      this.requestField("call_to_action", value);
       return this;
     }
     public APIRequestGetAdCreatives requestCallToActionTypeField () {

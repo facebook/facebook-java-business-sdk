@@ -59,6 +59,8 @@ public class AdAccountUserSettings extends APINode {
   private List<String> mCampaignOverviewColumns = null;
   @SerializedName("column_suggestion_status")
   private String mColumnSuggestionStatus = null;
+  @SerializedName("conditional_formatting_rules")
+  private List<String> mConditionalFormattingRules = null;
   @SerializedName("default_account_overview_agegender_metrics")
   private List<String> mDefaultAccountOverviewAgegenderMetrics = null;
   @SerializedName("default_account_overview_location_metrics")
@@ -95,6 +97,10 @@ public class AdAccountUserSettings extends APINode {
   private String mId = null;
   @SerializedName("is_3p_auth_setting_set")
   private Boolean mIs3pAuthSettingSet = null;
+  @SerializedName("is_ads_manager_footer_row_preference_set")
+  private Boolean mIsAdsManagerFooterRowPreferenceSet = null;
+  @SerializedName("is_ads_manager_footer_row_shown")
+  private Boolean mIsAdsManagerFooterRowShown = null;
   @SerializedName("is_text_variation_nux_close")
   private Boolean mIsTextVariationNuxClose = null;
   @SerializedName("last_used_columns")
@@ -412,6 +418,10 @@ public class AdAccountUserSettings extends APINode {
     return mColumnSuggestionStatus;
   }
 
+  public List<String> getFieldConditionalFormattingRules() {
+    return mConditionalFormattingRules;
+  }
+
   public List<String> getFieldDefaultAccountOverviewAgegenderMetrics() {
     return mDefaultAccountOverviewAgegenderMetrics;
   }
@@ -482,6 +492,14 @@ public class AdAccountUserSettings extends APINode {
 
   public Boolean getFieldIs3pAuthSettingSet() {
     return mIs3pAuthSettingSet;
+  }
+
+  public Boolean getFieldIsAdsManagerFooterRowPreferenceSet() {
+    return mIsAdsManagerFooterRowPreferenceSet;
+  }
+
+  public Boolean getFieldIsAdsManagerFooterRowShown() {
+    return mIsAdsManagerFooterRowShown;
   }
 
   public Boolean getFieldIsTextVariationNuxClose() {
@@ -637,6 +655,7 @@ public class AdAccountUserSettings extends APINode {
       "auto_review_video_caption",
       "campaign_overview_columns",
       "column_suggestion_status",
+      "conditional_formatting_rules",
       "default_account_overview_agegender_metrics",
       "default_account_overview_location_metrics",
       "default_account_overview_metrics",
@@ -655,6 +674,8 @@ public class AdAccountUserSettings extends APINode {
       "hidden_optimization_tips",
       "id",
       "is_3p_auth_setting_set",
+      "is_ads_manager_footer_row_preference_set",
+      "is_ads_manager_footer_row_shown",
       "is_text_variation_nux_close",
       "last_used_columns",
       "last_used_pe_filters",
@@ -842,6 +863,13 @@ public class AdAccountUserSettings extends APINode {
       this.requestField("column_suggestion_status", value);
       return this;
     }
+    public APIRequestGet requestConditionalFormattingRulesField () {
+      return this.requestConditionalFormattingRulesField(true);
+    }
+    public APIRequestGet requestConditionalFormattingRulesField (boolean value) {
+      this.requestField("conditional_formatting_rules", value);
+      return this;
+    }
     public APIRequestGet requestDefaultAccountOverviewAgegenderMetricsField () {
       return this.requestDefaultAccountOverviewAgegenderMetricsField(true);
     }
@@ -966,6 +994,20 @@ public class AdAccountUserSettings extends APINode {
     }
     public APIRequestGet requestIs3pAuthSettingSetField (boolean value) {
       this.requestField("is_3p_auth_setting_set", value);
+      return this;
+    }
+    public APIRequestGet requestIsAdsManagerFooterRowPreferenceSetField () {
+      return this.requestIsAdsManagerFooterRowPreferenceSetField(true);
+    }
+    public APIRequestGet requestIsAdsManagerFooterRowPreferenceSetField (boolean value) {
+      this.requestField("is_ads_manager_footer_row_preference_set", value);
+      return this;
+    }
+    public APIRequestGet requestIsAdsManagerFooterRowShownField () {
+      return this.requestIsAdsManagerFooterRowShownField(true);
+    }
+    public APIRequestGet requestIsAdsManagerFooterRowShownField (boolean value) {
+      this.requestField("is_ads_manager_footer_row_shown", value);
       return this;
     }
     public APIRequestGet requestIsTextVariationNuxCloseField () {
@@ -1275,6 +1317,7 @@ public class AdAccountUserSettings extends APINode {
     this.mAutoReviewVideoCaption = instance.mAutoReviewVideoCaption;
     this.mCampaignOverviewColumns = instance.mCampaignOverviewColumns;
     this.mColumnSuggestionStatus = instance.mColumnSuggestionStatus;
+    this.mConditionalFormattingRules = instance.mConditionalFormattingRules;
     this.mDefaultAccountOverviewAgegenderMetrics = instance.mDefaultAccountOverviewAgegenderMetrics;
     this.mDefaultAccountOverviewLocationMetrics = instance.mDefaultAccountOverviewLocationMetrics;
     this.mDefaultAccountOverviewMetrics = instance.mDefaultAccountOverviewMetrics;
@@ -1293,6 +1336,8 @@ public class AdAccountUserSettings extends APINode {
     this.mHiddenOptimizationTips = instance.mHiddenOptimizationTips;
     this.mId = instance.mId;
     this.mIs3pAuthSettingSet = instance.mIs3pAuthSettingSet;
+    this.mIsAdsManagerFooterRowPreferenceSet = instance.mIsAdsManagerFooterRowPreferenceSet;
+    this.mIsAdsManagerFooterRowShown = instance.mIsAdsManagerFooterRowShown;
     this.mIsTextVariationNuxClose = instance.mIsTextVariationNuxClose;
     this.mLastUsedColumns = instance.mLastUsedColumns;
     this.mLastUsedPeFilters = instance.mLastUsedPeFilters;

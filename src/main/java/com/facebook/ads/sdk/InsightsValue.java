@@ -53,6 +53,8 @@ public class InsightsValue extends APINode {
   private String mMessageType = null;
   @SerializedName("messaging_channel")
   private String mMessagingChannel = null;
+  @SerializedName("monetization_tool")
+  private String mMonetizationTool = null;
   @SerializedName("recurring_notifications_entry_point")
   private String mRecurringNotificationsEntryPoint = null;
   @SerializedName("recurring_notifications_frequency")
@@ -268,6 +270,15 @@ public class InsightsValue extends APINode {
     return this;
   }
 
+  public String getFieldMonetizationTool() {
+    return mMonetizationTool;
+  }
+
+  public InsightsValue setFieldMonetizationTool(String value) {
+    this.mMonetizationTool = value;
+    return this;
+  }
+
   public String getFieldRecurringNotificationsEntryPoint() {
     return mRecurringNotificationsEntryPoint;
   }
@@ -336,6 +347,7 @@ public class InsightsValue extends APINode {
     this.mEngagementSource = instance.mEngagementSource;
     this.mMessageType = instance.mMessageType;
     this.mMessagingChannel = instance.mMessagingChannel;
+    this.mMonetizationTool = instance.mMonetizationTool;
     this.mRecurringNotificationsEntryPoint = instance.mRecurringNotificationsEntryPoint;
     this.mRecurringNotificationsFrequency = instance.mRecurringNotificationsFrequency;
     this.mRecurringNotificationsTopic = instance.mRecurringNotificationsTopic;

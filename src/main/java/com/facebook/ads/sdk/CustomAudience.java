@@ -346,6 +346,10 @@ public class CustomAudience extends APINode {
     return new APIRequestGetAds(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetHealth getHealth() {
+    return new APIRequestGetHealth(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetSalts getSalts() {
     return new APIRequestGetSalts(this.getPrefixedId().toString(), context);
   }
@@ -721,6 +725,7 @@ public class CustomAudience extends APINode {
       "id",
       "io_number",
       "is_attribution_spec_system_default",
+      "is_ba_skip_delayed_eligible",
       "is_direct_deals_enabled",
       "is_in_3ds_authorization_enabled_market",
       "is_notifications_enabled",
@@ -1121,6 +1126,13 @@ public class CustomAudience extends APINode {
     }
     public APIRequestGetAdAccounts requestIsAttributionSpecSystemDefaultField (boolean value) {
       this.requestField("is_attribution_spec_system_default", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestIsBaSkipDelayedEligibleField () {
+      return this.requestIsBaSkipDelayedEligibleField(true);
+    }
+    public APIRequestGetAdAccounts requestIsBaSkipDelayedEligibleField (boolean value) {
+      this.requestField("is_ba_skip_delayed_eligible", value);
       return this;
     }
     public APIRequestGetAdAccounts requestIsDirectDealsEnabledField () {
@@ -1923,6 +1935,157 @@ public class CustomAudience extends APINode {
     }
     public APIRequestGetAds requestUpdatedTimeField (boolean value) {
       this.requestField("updated_time", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestGetHealth extends APIRequest<CustomAudienceHealth> {
+
+    APINodeList<CustomAudienceHealth> lastResponse = null;
+    @Override
+    public APINodeList<CustomAudienceHealth> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "calculated_date",
+      "processed_date",
+      "value_aggregation_duration",
+      "value_currency",
+      "value_version",
+    };
+
+    public static final String[] FIELDS = {
+      "health",
+    };
+
+    @Override
+    public APINodeList<CustomAudienceHealth> parseResponse(String response, String header) throws APIException {
+      return CustomAudienceHealth.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<CustomAudienceHealth> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<CustomAudienceHealth> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<CustomAudienceHealth>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<CustomAudienceHealth>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<CustomAudienceHealth>>() {
+           public APINodeList<CustomAudienceHealth> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetHealth.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestGetHealth(String nodeId, APIContext context) {
+      super(context, nodeId, "/health", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetHealth setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetHealth setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetHealth setCalculatedDate (String calculatedDate) {
+      this.setParam("calculated_date", calculatedDate);
+      return this;
+    }
+
+    public APIRequestGetHealth setProcessedDate (String processedDate) {
+      this.setParam("processed_date", processedDate);
+      return this;
+    }
+
+    public APIRequestGetHealth setValueAggregationDuration (Long valueAggregationDuration) {
+      this.setParam("value_aggregation_duration", valueAggregationDuration);
+      return this;
+    }
+    public APIRequestGetHealth setValueAggregationDuration (String valueAggregationDuration) {
+      this.setParam("value_aggregation_duration", valueAggregationDuration);
+      return this;
+    }
+
+    public APIRequestGetHealth setValueCurrency (String valueCurrency) {
+      this.setParam("value_currency", valueCurrency);
+      return this;
+    }
+
+    public APIRequestGetHealth setValueVersion (Long valueVersion) {
+      this.setParam("value_version", valueVersion);
+      return this;
+    }
+    public APIRequestGetHealth setValueVersion (String valueVersion) {
+      this.setParam("value_version", valueVersion);
+      return this;
+    }
+
+    public APIRequestGetHealth requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetHealth requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetHealth requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetHealth requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetHealth requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetHealth requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetHealth requestHealthField () {
+      return this.requestHealthField(true);
+    }
+    public APIRequestGetHealth requestHealthField (boolean value) {
+      this.requestField("health", value);
       return this;
     }
   }

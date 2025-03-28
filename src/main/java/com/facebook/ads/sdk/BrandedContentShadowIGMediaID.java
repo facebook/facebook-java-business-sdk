@@ -51,6 +51,8 @@ public class BrandedContentShadowIGMediaID extends APINode {
   private String mOwnerId = null;
   @SerializedName("permalink")
   private String mPermalink = null;
+  @SerializedName("recommended_campaign_objectives")
+  private List<String> mRecommendedCampaignObjectives = null;
   protected static Gson gson = null;
 
   public BrandedContentShadowIGMediaID() {
@@ -247,6 +249,15 @@ public class BrandedContentShadowIGMediaID extends APINode {
     return this;
   }
 
+  public List<String> getFieldRecommendedCampaignObjectives() {
+    return mRecommendedCampaignObjectives;
+  }
+
+  public BrandedContentShadowIGMediaID setFieldRecommendedCampaignObjectives(List<String> value) {
+    this.mRecommendedCampaignObjectives = value;
+    return this;
+  }
+
 
 
 
@@ -269,6 +280,7 @@ public class BrandedContentShadowIGMediaID extends APINode {
     this.mId = instance.mId;
     this.mOwnerId = instance.mOwnerId;
     this.mPermalink = instance.mPermalink;
+    this.mRecommendedCampaignObjectives = instance.mRecommendedCampaignObjectives;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

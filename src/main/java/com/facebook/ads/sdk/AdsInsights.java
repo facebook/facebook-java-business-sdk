@@ -115,6 +115,10 @@ public class AdsInsights extends APINode {
   private List<AdsActionStats> mConvertedProductQuantity = null;
   @SerializedName("converted_product_value")
   private List<AdsActionStats> mConvertedProductValue = null;
+  @SerializedName("converted_promoted_product_quantity")
+  private List<AdsActionStats> mConvertedPromotedProductQuantity = null;
+  @SerializedName("converted_promoted_product_value")
+  private List<AdsActionStats> mConvertedPromotedProductValue = null;
   @SerializedName("cost_per_15_sec_video_view")
   private List<AdsActionStats> mCostPer15SecVideoView = null;
   @SerializedName("cost_per_2_sec_continuous_video_view")
@@ -223,20 +227,38 @@ public class AdsInsights extends APINode {
   private String mMarketingMessagesCostPerDelivered = null;
   @SerializedName("marketing_messages_cost_per_link_btn_click")
   private String mMarketingMessagesCostPerLinkBtnClick = null;
+  @SerializedName("marketing_messages_delivered")
+  private String mMarketingMessagesDelivered = null;
   @SerializedName("marketing_messages_delivery_rate")
   private String mMarketingMessagesDeliveryRate = null;
+  @SerializedName("marketing_messages_link_btn_click")
+  private String mMarketingMessagesLinkBtnClick = null;
   @SerializedName("marketing_messages_link_btn_click_rate")
   private String mMarketingMessagesLinkBtnClickRate = null;
   @SerializedName("marketing_messages_media_view_rate")
   private String mMarketingMessagesMediaViewRate = null;
   @SerializedName("marketing_messages_phone_call_btn_click_rate")
   private String mMarketingMessagesPhoneCallBtnClickRate = null;
+  @SerializedName("marketing_messages_quick_reply_btn_click")
+  private String mMarketingMessagesQuickReplyBtnClick = null;
   @SerializedName("marketing_messages_quick_reply_btn_click_rate")
   private String mMarketingMessagesQuickReplyBtnClickRate = null;
+  @SerializedName("marketing_messages_read")
+  private String mMarketingMessagesRead = null;
   @SerializedName("marketing_messages_read_rate")
   private String mMarketingMessagesReadRate = null;
+  @SerializedName("marketing_messages_sent")
+  private String mMarketingMessagesSent = null;
   @SerializedName("marketing_messages_spend")
   private String mMarketingMessagesSpend = null;
+  @SerializedName("marketing_messages_spend_currency")
+  private String mMarketingMessagesSpendCurrency = null;
+  @SerializedName("marketing_messages_website_add_to_cart")
+  private String mMarketingMessagesWebsiteAddToCart = null;
+  @SerializedName("marketing_messages_website_initiate_checkout")
+  private String mMarketingMessagesWebsiteInitiateCheckout = null;
+  @SerializedName("marketing_messages_website_purchase")
+  private String mMarketingMessagesWebsitePurchase = null;
   @SerializedName("marketing_messages_website_purchase_values")
   private String mMarketingMessagesWebsitePurchaseValues = null;
   @SerializedName("mobile_app_purchase_roas")
@@ -1020,6 +1042,34 @@ public class AdsInsights extends APINode {
     this.mConvertedProductValue = AdsActionStats.getGson().fromJson(value, type);
     return this;
   }
+  public List<AdsActionStats> getFieldConvertedPromotedProductQuantity() {
+    return mConvertedPromotedProductQuantity;
+  }
+
+  public AdsInsights setFieldConvertedPromotedProductQuantity(List<AdsActionStats> value) {
+    this.mConvertedPromotedProductQuantity = value;
+    return this;
+  }
+
+  public AdsInsights setFieldConvertedPromotedProductQuantity(String value) {
+    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
+    this.mConvertedPromotedProductQuantity = AdsActionStats.getGson().fromJson(value, type);
+    return this;
+  }
+  public List<AdsActionStats> getFieldConvertedPromotedProductValue() {
+    return mConvertedPromotedProductValue;
+  }
+
+  public AdsInsights setFieldConvertedPromotedProductValue(List<AdsActionStats> value) {
+    this.mConvertedPromotedProductValue = value;
+    return this;
+  }
+
+  public AdsInsights setFieldConvertedPromotedProductValue(String value) {
+    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
+    this.mConvertedPromotedProductValue = AdsActionStats.getGson().fromJson(value, type);
+    return this;
+  }
   public List<AdsActionStats> getFieldCostPer15SecVideoView() {
     return mCostPer15SecVideoView;
   }
@@ -1576,12 +1626,30 @@ public class AdsInsights extends APINode {
     return this;
   }
 
+  public String getFieldMarketingMessagesDelivered() {
+    return mMarketingMessagesDelivered;
+  }
+
+  public AdsInsights setFieldMarketingMessagesDelivered(String value) {
+    this.mMarketingMessagesDelivered = value;
+    return this;
+  }
+
   public String getFieldMarketingMessagesDeliveryRate() {
     return mMarketingMessagesDeliveryRate;
   }
 
   public AdsInsights setFieldMarketingMessagesDeliveryRate(String value) {
     this.mMarketingMessagesDeliveryRate = value;
+    return this;
+  }
+
+  public String getFieldMarketingMessagesLinkBtnClick() {
+    return mMarketingMessagesLinkBtnClick;
+  }
+
+  public AdsInsights setFieldMarketingMessagesLinkBtnClick(String value) {
+    this.mMarketingMessagesLinkBtnClick = value;
     return this;
   }
 
@@ -1612,12 +1680,30 @@ public class AdsInsights extends APINode {
     return this;
   }
 
+  public String getFieldMarketingMessagesQuickReplyBtnClick() {
+    return mMarketingMessagesQuickReplyBtnClick;
+  }
+
+  public AdsInsights setFieldMarketingMessagesQuickReplyBtnClick(String value) {
+    this.mMarketingMessagesQuickReplyBtnClick = value;
+    return this;
+  }
+
   public String getFieldMarketingMessagesQuickReplyBtnClickRate() {
     return mMarketingMessagesQuickReplyBtnClickRate;
   }
 
   public AdsInsights setFieldMarketingMessagesQuickReplyBtnClickRate(String value) {
     this.mMarketingMessagesQuickReplyBtnClickRate = value;
+    return this;
+  }
+
+  public String getFieldMarketingMessagesRead() {
+    return mMarketingMessagesRead;
+  }
+
+  public AdsInsights setFieldMarketingMessagesRead(String value) {
+    this.mMarketingMessagesRead = value;
     return this;
   }
 
@@ -1630,12 +1716,57 @@ public class AdsInsights extends APINode {
     return this;
   }
 
+  public String getFieldMarketingMessagesSent() {
+    return mMarketingMessagesSent;
+  }
+
+  public AdsInsights setFieldMarketingMessagesSent(String value) {
+    this.mMarketingMessagesSent = value;
+    return this;
+  }
+
   public String getFieldMarketingMessagesSpend() {
     return mMarketingMessagesSpend;
   }
 
   public AdsInsights setFieldMarketingMessagesSpend(String value) {
     this.mMarketingMessagesSpend = value;
+    return this;
+  }
+
+  public String getFieldMarketingMessagesSpendCurrency() {
+    return mMarketingMessagesSpendCurrency;
+  }
+
+  public AdsInsights setFieldMarketingMessagesSpendCurrency(String value) {
+    this.mMarketingMessagesSpendCurrency = value;
+    return this;
+  }
+
+  public String getFieldMarketingMessagesWebsiteAddToCart() {
+    return mMarketingMessagesWebsiteAddToCart;
+  }
+
+  public AdsInsights setFieldMarketingMessagesWebsiteAddToCart(String value) {
+    this.mMarketingMessagesWebsiteAddToCart = value;
+    return this;
+  }
+
+  public String getFieldMarketingMessagesWebsiteInitiateCheckout() {
+    return mMarketingMessagesWebsiteInitiateCheckout;
+  }
+
+  public AdsInsights setFieldMarketingMessagesWebsiteInitiateCheckout(String value) {
+    this.mMarketingMessagesWebsiteInitiateCheckout = value;
+    return this;
+  }
+
+  public String getFieldMarketingMessagesWebsitePurchase() {
+    return mMarketingMessagesWebsitePurchase;
+  }
+
+  public AdsInsights setFieldMarketingMessagesWebsitePurchase(String value) {
+    this.mMarketingMessagesWebsitePurchase = value;
     return this;
   }
 
@@ -2526,8 +2657,16 @@ public class AdsInsights extends APINode {
       VALUE_DEFAULT("default"),
       @SerializedName("skan_click")
       VALUE_SKAN_CLICK("skan_click"),
+      @SerializedName("skan_click_second_postback")
+      VALUE_SKAN_CLICK_SECOND_POSTBACK("skan_click_second_postback"),
+      @SerializedName("skan_click_third_postback")
+      VALUE_SKAN_CLICK_THIRD_POSTBACK("skan_click_third_postback"),
       @SerializedName("skan_view")
       VALUE_SKAN_VIEW("skan_view"),
+      @SerializedName("skan_view_second_postback")
+      VALUE_SKAN_VIEW_SECOND_POSTBACK("skan_view_second_postback"),
+      @SerializedName("skan_view_third_postback")
+      VALUE_SKAN_VIEW_THIRD_POSTBACK("skan_view_third_postback"),
       ;
 
       private String value;
@@ -2912,6 +3051,8 @@ public class AdsInsights extends APINode {
     this.mConversions = instance.mConversions;
     this.mConvertedProductQuantity = instance.mConvertedProductQuantity;
     this.mConvertedProductValue = instance.mConvertedProductValue;
+    this.mConvertedPromotedProductQuantity = instance.mConvertedPromotedProductQuantity;
+    this.mConvertedPromotedProductValue = instance.mConvertedPromotedProductValue;
     this.mCostPer15SecVideoView = instance.mCostPer15SecVideoView;
     this.mCostPer2SecContinuousVideoView = instance.mCostPer2SecContinuousVideoView;
     this.mCostPerActionType = instance.mCostPerActionType;
@@ -2966,13 +3107,22 @@ public class AdsInsights extends APINode {
     this.mLocation = instance.mLocation;
     this.mMarketingMessagesCostPerDelivered = instance.mMarketingMessagesCostPerDelivered;
     this.mMarketingMessagesCostPerLinkBtnClick = instance.mMarketingMessagesCostPerLinkBtnClick;
+    this.mMarketingMessagesDelivered = instance.mMarketingMessagesDelivered;
     this.mMarketingMessagesDeliveryRate = instance.mMarketingMessagesDeliveryRate;
+    this.mMarketingMessagesLinkBtnClick = instance.mMarketingMessagesLinkBtnClick;
     this.mMarketingMessagesLinkBtnClickRate = instance.mMarketingMessagesLinkBtnClickRate;
     this.mMarketingMessagesMediaViewRate = instance.mMarketingMessagesMediaViewRate;
     this.mMarketingMessagesPhoneCallBtnClickRate = instance.mMarketingMessagesPhoneCallBtnClickRate;
+    this.mMarketingMessagesQuickReplyBtnClick = instance.mMarketingMessagesQuickReplyBtnClick;
     this.mMarketingMessagesQuickReplyBtnClickRate = instance.mMarketingMessagesQuickReplyBtnClickRate;
+    this.mMarketingMessagesRead = instance.mMarketingMessagesRead;
     this.mMarketingMessagesReadRate = instance.mMarketingMessagesReadRate;
+    this.mMarketingMessagesSent = instance.mMarketingMessagesSent;
     this.mMarketingMessagesSpend = instance.mMarketingMessagesSpend;
+    this.mMarketingMessagesSpendCurrency = instance.mMarketingMessagesSpendCurrency;
+    this.mMarketingMessagesWebsiteAddToCart = instance.mMarketingMessagesWebsiteAddToCart;
+    this.mMarketingMessagesWebsiteInitiateCheckout = instance.mMarketingMessagesWebsiteInitiateCheckout;
+    this.mMarketingMessagesWebsitePurchase = instance.mMarketingMessagesWebsitePurchase;
     this.mMarketingMessagesWebsitePurchaseValues = instance.mMarketingMessagesWebsitePurchaseValues;
     this.mMobileAppPurchaseRoas = instance.mMobileAppPurchaseRoas;
     this.mObjective = instance.mObjective;

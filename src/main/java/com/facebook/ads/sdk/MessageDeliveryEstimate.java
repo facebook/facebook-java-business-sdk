@@ -294,6 +294,8 @@ public class MessageDeliveryEstimate extends APINode {
 
 
   public static enum EnumOptimizationGoal {
+      @SerializedName("ADVERTISER_SILOED_VALUE")
+      VALUE_ADVERTISER_SILOED_VALUE("ADVERTISER_SILOED_VALUE"),
       @SerializedName("AD_RECALL_LIFT")
       VALUE_AD_RECALL_LIFT("AD_RECALL_LIFT"),
       @SerializedName("APP_INSTALLS")
@@ -332,6 +334,8 @@ public class MessageDeliveryEstimate extends APINode {
       VALUE_PAGE_LIKES("PAGE_LIKES"),
       @SerializedName("POST_ENGAGEMENT")
       VALUE_POST_ENGAGEMENT("POST_ENGAGEMENT"),
+      @SerializedName("PROFILE_AND_PAGE_ENGAGEMENT")
+      VALUE_PROFILE_AND_PAGE_ENGAGEMENT("PROFILE_AND_PAGE_ENGAGEMENT"),
       @SerializedName("PROFILE_VISIT")
       VALUE_PROFILE_VISIT("PROFILE_VISIT"),
       @SerializedName("QUALITY_CALL")

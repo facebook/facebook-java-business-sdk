@@ -145,6 +145,8 @@ public class HomeListing extends APINode {
   private String mPropertyType = null;
   @SerializedName("sanitized_images")
   private List<String> mSanitizedImages = null;
+  @SerializedName("tags")
+  private List<String> mTags = null;
   @SerializedName("unit_price")
   private Object mUnitPrice = null;
   @SerializedName("url")
@@ -596,6 +598,10 @@ public class HomeListing extends APINode {
 
   public List<String> getFieldSanitizedImages() {
     return mSanitizedImages;
+  }
+
+  public List<String> getFieldTags() {
+    return mTags;
   }
 
   public Object getFieldUnitPrice() {
@@ -1191,6 +1197,7 @@ public class HomeListing extends APINode {
       "price",
       "property_type",
       "sanitized_images",
+      "tags",
       "unit_price",
       "url",
       "visibility",
@@ -1651,6 +1658,13 @@ public class HomeListing extends APINode {
       this.requestField("sanitized_images", value);
       return this;
     }
+    public APIRequestGet requestTagsField () {
+      return this.requestTagsField(true);
+    }
+    public APIRequestGet requestTagsField (boolean value) {
+      this.requestField("tags", value);
+      return this;
+    }
     public APIRequestGet requestUnitPriceField () {
       return this.requestUnitPriceField(true);
     }
@@ -2011,6 +2025,7 @@ public class HomeListing extends APINode {
     this.mPrice = instance.mPrice;
     this.mPropertyType = instance.mPropertyType;
     this.mSanitizedImages = instance.mSanitizedImages;
+    this.mTags = instance.mTags;
     this.mUnitPrice = instance.mUnitPrice;
     this.mUrl = instance.mUrl;
     this.mVisibility = instance.mVisibility;

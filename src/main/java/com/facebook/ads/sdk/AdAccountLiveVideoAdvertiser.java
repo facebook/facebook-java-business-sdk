@@ -45,6 +45,10 @@ public class AdAccountLiveVideoAdvertiser extends APINode {
   private Boolean mIsLvaToggleOn = null;
   @SerializedName("lva_default_budget")
   private Long mLvaDefaultBudget = null;
+  @SerializedName("should_default_current_live")
+  private Boolean mShouldDefaultCurrentLive = null;
+  @SerializedName("should_default_scheduled_live")
+  private Boolean mShouldDefaultScheduledLive = null;
   @SerializedName("should_show_lva_toggle")
   private Boolean mShouldShowLvaToggle = null;
   protected static Gson gson = null;
@@ -216,6 +220,24 @@ public class AdAccountLiveVideoAdvertiser extends APINode {
     return this;
   }
 
+  public Boolean getFieldShouldDefaultCurrentLive() {
+    return mShouldDefaultCurrentLive;
+  }
+
+  public AdAccountLiveVideoAdvertiser setFieldShouldDefaultCurrentLive(Boolean value) {
+    this.mShouldDefaultCurrentLive = value;
+    return this;
+  }
+
+  public Boolean getFieldShouldDefaultScheduledLive() {
+    return mShouldDefaultScheduledLive;
+  }
+
+  public AdAccountLiveVideoAdvertiser setFieldShouldDefaultScheduledLive(Boolean value) {
+    this.mShouldDefaultScheduledLive = value;
+    return this;
+  }
+
   public Boolean getFieldShouldShowLvaToggle() {
     return mShouldShowLvaToggle;
   }
@@ -244,6 +266,8 @@ public class AdAccountLiveVideoAdvertiser extends APINode {
   public AdAccountLiveVideoAdvertiser copyFrom(AdAccountLiveVideoAdvertiser instance) {
     this.mIsLvaToggleOn = instance.mIsLvaToggleOn;
     this.mLvaDefaultBudget = instance.mLvaDefaultBudget;
+    this.mShouldDefaultCurrentLive = instance.mShouldDefaultCurrentLive;
+    this.mShouldDefaultScheduledLive = instance.mShouldDefaultScheduledLive;
     this.mShouldShowLvaToggle = instance.mShouldShowLvaToggle;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

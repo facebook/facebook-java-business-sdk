@@ -836,6 +836,7 @@ public class InstagramUser extends APINode {
       "id",
       "io_number",
       "is_attribution_spec_system_default",
+      "is_ba_skip_delayed_eligible",
       "is_direct_deals_enabled",
       "is_in_3ds_authorization_enabled_market",
       "is_notifications_enabled",
@@ -1236,6 +1237,13 @@ public class InstagramUser extends APINode {
     }
     public APIRequestGetAuthorizedAdAccounts requestIsAttributionSpecSystemDefaultField (boolean value) {
       this.requestField("is_attribution_spec_system_default", value);
+      return this;
+    }
+    public APIRequestGetAuthorizedAdAccounts requestIsBaSkipDelayedEligibleField () {
+      return this.requestIsBaSkipDelayedEligibleField(true);
+    }
+    public APIRequestGetAuthorizedAdAccounts requestIsBaSkipDelayedEligibleField (boolean value) {
+      this.requestField("is_ba_skip_delayed_eligible", value);
       return this;
     }
     public APIRequestGetAuthorizedAdAccounts requestIsDirectDealsEnabledField () {

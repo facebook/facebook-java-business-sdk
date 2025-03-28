@@ -107,6 +107,8 @@ public class AdSet extends APINode {
   private String mId = null;
   @SerializedName("instagram_user_id")
   private String mInstagramUserId = null;
+  @SerializedName("is_ba_skip_delayed_eligible")
+  private Boolean mIsBaSkipDelayedEligible = null;
   @SerializedName("is_budget_schedule_enabled")
   private Boolean mIsBudgetScheduleEnabled = null;
   @SerializedName("is_dynamic_creative")
@@ -794,6 +796,15 @@ public class AdSet extends APINode {
 
   public AdSet setFieldInstagramUserId(String value) {
     this.mInstagramUserId = value;
+    return this;
+  }
+
+  public Boolean getFieldIsBaSkipDelayedEligible() {
+    return mIsBaSkipDelayedEligible;
+  }
+
+  public AdSet setFieldIsBaSkipDelayedEligible(Boolean value) {
+    this.mIsBaSkipDelayedEligible = value;
     return this;
   }
 
@@ -1652,6 +1663,7 @@ public class AdSet extends APINode {
       "branded_content",
       "branded_content_sponsor_page_id",
       "bundle_folder_id",
+      "call_to_action",
       "call_to_action_type",
       "categorization_criteria",
       "category_media_source",
@@ -1882,6 +1894,13 @@ public class AdSet extends APINode {
     }
     public APIRequestGetAdCreatives requestBundleFolderIdField (boolean value) {
       this.requestField("bundle_folder_id", value);
+      return this;
+    }
+    public APIRequestGetAdCreatives requestCallToActionField () {
+      return this.requestCallToActionField(true);
+    }
+    public APIRequestGetAdCreatives requestCallToActionField (boolean value) {
+      this.requestField("call_to_action", value);
       return this;
     }
     public APIRequestGetAdCreatives requestCallToActionTypeField () {
@@ -3568,6 +3587,7 @@ public class AdSet extends APINode {
       "full_funnel_exploration_mode",
       "id",
       "instagram_user_id",
+      "is_ba_skip_delayed_eligible",
       "is_budget_schedule_enabled",
       "is_dynamic_creative",
       "issues_info",
@@ -3957,6 +3977,13 @@ public class AdSet extends APINode {
     }
     public APIRequestGetCopies requestInstagramUserIdField (boolean value) {
       this.requestField("instagram_user_id", value);
+      return this;
+    }
+    public APIRequestGetCopies requestIsBaSkipDelayedEligibleField () {
+      return this.requestIsBaSkipDelayedEligibleField(true);
+    }
+    public APIRequestGetCopies requestIsBaSkipDelayedEligibleField (boolean value) {
+      this.requestField("is_ba_skip_delayed_eligible", value);
       return this;
     }
     public APIRequestGetCopies requestIsBudgetScheduleEnabledField () {
@@ -5666,6 +5693,7 @@ public class AdSet extends APINode {
       "full_funnel_exploration_mode",
       "id",
       "instagram_user_id",
+      "is_ba_skip_delayed_eligible",
       "is_budget_schedule_enabled",
       "is_dynamic_creative",
       "issues_info",
@@ -6057,6 +6085,13 @@ public class AdSet extends APINode {
       this.requestField("instagram_user_id", value);
       return this;
     }
+    public APIRequestGet requestIsBaSkipDelayedEligibleField () {
+      return this.requestIsBaSkipDelayedEligibleField(true);
+    }
+    public APIRequestGet requestIsBaSkipDelayedEligibleField (boolean value) {
+      this.requestField("is_ba_skip_delayed_eligible", value);
+      return this;
+    }
     public APIRequestGet requestIsBudgetScheduleEnabledField () {
       return this.requestIsBudgetScheduleEnabledField(true);
     }
@@ -6315,6 +6350,7 @@ public class AdSet extends APINode {
       "execution_options",
       "existing_customer_budget_percentage",
       "full_funnel_exploration_mode",
+      "is_ba_skip_delayed_eligible",
       "is_sac_cfca_terms_certified",
       "lifetime_budget",
       "lifetime_imps",
@@ -6592,6 +6628,15 @@ public class AdSet extends APINode {
     }
     public APIRequestUpdate setFullFunnelExplorationMode (String fullFunnelExplorationMode) {
       this.setParam("full_funnel_exploration_mode", fullFunnelExplorationMode);
+      return this;
+    }
+
+    public APIRequestUpdate setIsBaSkipDelayedEligible (Boolean isBaSkipDelayedEligible) {
+      this.setParam("is_ba_skip_delayed_eligible", isBaSkipDelayedEligible);
+      return this;
+    }
+    public APIRequestUpdate setIsBaSkipDelayedEligible (String isBaSkipDelayedEligible) {
+      this.setParam("is_ba_skip_delayed_eligible", isBaSkipDelayedEligible);
       return this;
     }
 
@@ -6947,6 +6992,8 @@ public class AdSet extends APINode {
   }
 
   public static enum EnumOptimizationGoal {
+      @SerializedName("ADVERTISER_SILOED_VALUE")
+      VALUE_ADVERTISER_SILOED_VALUE("ADVERTISER_SILOED_VALUE"),
       @SerializedName("AD_RECALL_LIFT")
       VALUE_AD_RECALL_LIFT("AD_RECALL_LIFT"),
       @SerializedName("APP_INSTALLS")
@@ -6985,6 +7032,8 @@ public class AdSet extends APINode {
       VALUE_PAGE_LIKES("PAGE_LIKES"),
       @SerializedName("POST_ENGAGEMENT")
       VALUE_POST_ENGAGEMENT("POST_ENGAGEMENT"),
+      @SerializedName("PROFILE_AND_PAGE_ENGAGEMENT")
+      VALUE_PROFILE_AND_PAGE_ENGAGEMENT("PROFILE_AND_PAGE_ENGAGEMENT"),
       @SerializedName("PROFILE_VISIT")
       VALUE_PROFILE_VISIT("PROFILE_VISIT"),
       @SerializedName("QUALITY_CALL")
@@ -7259,6 +7308,8 @@ public class AdSet extends APINode {
       VALUE_3("3"),
       @SerializedName("4")
       VALUE_4("4"),
+      @SerializedName("5")
+      VALUE_5("5"),
       ;
 
       private String value;
@@ -7390,6 +7441,7 @@ public class AdSet extends APINode {
     this.mFullFunnelExplorationMode = instance.mFullFunnelExplorationMode;
     this.mId = instance.mId;
     this.mInstagramUserId = instance.mInstagramUserId;
+    this.mIsBaSkipDelayedEligible = instance.mIsBaSkipDelayedEligible;
     this.mIsBudgetScheduleEnabled = instance.mIsBudgetScheduleEnabled;
     this.mIsDynamicCreative = instance.mIsDynamicCreative;
     this.mIssuesInfo = instance.mIssuesInfo;

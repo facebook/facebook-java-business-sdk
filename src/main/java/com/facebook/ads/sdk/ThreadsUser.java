@@ -40,31 +40,25 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class AdCreativeRegionalRegulationDisclaimer extends APINode {
-  @SerializedName("australia_finserv")
-  private Object mAustraliaFinserv = null;
-  @SerializedName("india_finserv")
-  private Object mIndiaFinserv = null;
-  @SerializedName("singapore_universal")
-  private Object mSingaporeUniversal = null;
-  @SerializedName("taiwan_finserv")
-  private Object mTaiwanFinserv = null;
-  @SerializedName("taiwan_universal")
-  private Object mTaiwanUniversal = null;
+public class ThreadsUser extends APINode {
+  @SerializedName("threads_user_id")
+  private String mThreadsUserId = null;
+  @SerializedName("threads_user_profile_pic")
+  private String mThreadsUserProfilePic = null;
   protected static Gson gson = null;
 
-  public AdCreativeRegionalRegulationDisclaimer() {
+  public ThreadsUser() {
   }
 
   public String getId() {
     return null;
   }
-  public static AdCreativeRegionalRegulationDisclaimer loadJSON(String json, APIContext context, String header) {
-    AdCreativeRegionalRegulationDisclaimer adCreativeRegionalRegulationDisclaimer = getGson().fromJson(json, AdCreativeRegionalRegulationDisclaimer.class);
+  public static ThreadsUser loadJSON(String json, APIContext context, String header) {
+    ThreadsUser threadsUser = getGson().fromJson(json, ThreadsUser.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(adCreativeRegionalRegulationDisclaimer.toString());
+      JsonElement o2 = parser.parse(threadsUser.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -74,14 +68,14 @@ public class AdCreativeRegionalRegulationDisclaimer extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    adCreativeRegionalRegulationDisclaimer.context = context;
-    adCreativeRegionalRegulationDisclaimer.rawValue = json;
-    adCreativeRegionalRegulationDisclaimer.header = header;
-    return adCreativeRegionalRegulationDisclaimer;
+    threadsUser.context = context;
+    threadsUser.rawValue = json;
+    threadsUser.header = header;
+    return threadsUser;
   }
 
-  public static APINodeList<AdCreativeRegionalRegulationDisclaimer> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<AdCreativeRegionalRegulationDisclaimer> adCreativeRegionalRegulationDisclaimers = new APINodeList<AdCreativeRegionalRegulationDisclaimer>(request, json, header);
+  public static APINodeList<ThreadsUser> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<ThreadsUser> threadsUsers = new APINodeList<ThreadsUser>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -92,9 +86,9 @@ public class AdCreativeRegionalRegulationDisclaimer extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adCreativeRegionalRegulationDisclaimers.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          threadsUsers.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return adCreativeRegionalRegulationDisclaimers;
+        return threadsUsers;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -104,20 +98,20 @@ public class AdCreativeRegionalRegulationDisclaimer extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                adCreativeRegionalRegulationDisclaimers.setCursors(before, after);
+                threadsUsers.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            adCreativeRegionalRegulationDisclaimers.setPaging(previous, next);
+            threadsUsers.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              adCreativeRegionalRegulationDisclaimers.setAppSecret(context.getAppSecretProof());
+              threadsUsers.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adCreativeRegionalRegulationDisclaimers.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              threadsUsers.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -128,23 +122,23 @@ public class AdCreativeRegionalRegulationDisclaimer extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adCreativeRegionalRegulationDisclaimers.add(loadJSON(entry.getValue().toString(), context, header));
+                  threadsUsers.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adCreativeRegionalRegulationDisclaimers.add(loadJSON(obj.toString(), context, header));
+              threadsUsers.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return adCreativeRegionalRegulationDisclaimers;
+          return threadsUsers;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adCreativeRegionalRegulationDisclaimers.add(loadJSON(entry.getValue().toString(), context, header));
+              threadsUsers.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return adCreativeRegionalRegulationDisclaimers;
+          return threadsUsers;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -161,20 +155,20 @@ public class AdCreativeRegionalRegulationDisclaimer extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adCreativeRegionalRegulationDisclaimers.add(loadJSON(value.toString(), context, header));
+              threadsUsers.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return adCreativeRegionalRegulationDisclaimers;
+            return threadsUsers;
           }
 
           // Sixth, check if it's pure JsonObject
-          adCreativeRegionalRegulationDisclaimers.clear();
-          adCreativeRegionalRegulationDisclaimers.add(loadJSON(json, context, header));
-          return adCreativeRegionalRegulationDisclaimers;
+          threadsUsers.clear();
+          threadsUsers.add(loadJSON(json, context, header));
+          return threadsUsers;
         }
       }
     } catch (Exception e) {
@@ -202,48 +196,21 @@ public class AdCreativeRegionalRegulationDisclaimer extends APINode {
   }
 
 
-  public Object getFieldAustraliaFinserv() {
-    return mAustraliaFinserv;
+  public String getFieldThreadsUserId() {
+    return mThreadsUserId;
   }
 
-  public AdCreativeRegionalRegulationDisclaimer setFieldAustraliaFinserv(Object value) {
-    this.mAustraliaFinserv = value;
+  public ThreadsUser setFieldThreadsUserId(String value) {
+    this.mThreadsUserId = value;
     return this;
   }
 
-  public Object getFieldIndiaFinserv() {
-    return mIndiaFinserv;
+  public String getFieldThreadsUserProfilePic() {
+    return mThreadsUserProfilePic;
   }
 
-  public AdCreativeRegionalRegulationDisclaimer setFieldIndiaFinserv(Object value) {
-    this.mIndiaFinserv = value;
-    return this;
-  }
-
-  public Object getFieldSingaporeUniversal() {
-    return mSingaporeUniversal;
-  }
-
-  public AdCreativeRegionalRegulationDisclaimer setFieldSingaporeUniversal(Object value) {
-    this.mSingaporeUniversal = value;
-    return this;
-  }
-
-  public Object getFieldTaiwanFinserv() {
-    return mTaiwanFinserv;
-  }
-
-  public AdCreativeRegionalRegulationDisclaimer setFieldTaiwanFinserv(Object value) {
-    this.mTaiwanFinserv = value;
-    return this;
-  }
-
-  public Object getFieldTaiwanUniversal() {
-    return mTaiwanUniversal;
-  }
-
-  public AdCreativeRegionalRegulationDisclaimer setFieldTaiwanUniversal(Object value) {
-    this.mTaiwanUniversal = value;
+  public ThreadsUser setFieldThreadsUserProfilePic(String value) {
+    this.mThreadsUserProfilePic = value;
     return this;
   }
 
@@ -263,21 +230,18 @@ public class AdCreativeRegionalRegulationDisclaimer extends APINode {
     return gson;
   }
 
-  public AdCreativeRegionalRegulationDisclaimer copyFrom(AdCreativeRegionalRegulationDisclaimer instance) {
-    this.mAustraliaFinserv = instance.mAustraliaFinserv;
-    this.mIndiaFinserv = instance.mIndiaFinserv;
-    this.mSingaporeUniversal = instance.mSingaporeUniversal;
-    this.mTaiwanFinserv = instance.mTaiwanFinserv;
-    this.mTaiwanUniversal = instance.mTaiwanUniversal;
+  public ThreadsUser copyFrom(ThreadsUser instance) {
+    this.mThreadsUserId = instance.mThreadsUserId;
+    this.mThreadsUserProfilePic = instance.mThreadsUserProfilePic;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<AdCreativeRegionalRegulationDisclaimer> getParser() {
-    return new APIRequest.ResponseParser<AdCreativeRegionalRegulationDisclaimer>() {
-      public APINodeList<AdCreativeRegionalRegulationDisclaimer> parseResponse(String response, APIContext context, APIRequest<AdCreativeRegionalRegulationDisclaimer> request, String header) throws MalformedResponseException {
-        return AdCreativeRegionalRegulationDisclaimer.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<ThreadsUser> getParser() {
+    return new APIRequest.ResponseParser<ThreadsUser>() {
+      public APINodeList<ThreadsUser> parseResponse(String response, APIContext context, APIRequest<ThreadsUser> request, String header) throws MalformedResponseException {
+        return ThreadsUser.parseResponse(response, context, request, header);
       }
     };
   }

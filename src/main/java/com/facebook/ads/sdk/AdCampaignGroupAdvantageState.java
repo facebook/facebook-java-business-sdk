@@ -40,25 +40,29 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class AdsPixelCAPISetupQuality extends APINode {
-  @SerializedName("event_match_quality")
-  private Object mEventMatchQuality = null;
-  @SerializedName("event_name")
-  private String mEventName = null;
+public class AdCampaignGroupAdvantageState extends APINode {
+  @SerializedName("advantage_audience_state")
+  private String mAdvantageAudienceState = null;
+  @SerializedName("advantage_budget_state")
+  private String mAdvantageBudgetState = null;
+  @SerializedName("advantage_placement_state")
+  private String mAdvantagePlacementState = null;
+  @SerializedName("advantage_state")
+  private String mAdvantageState = null;
   protected static Gson gson = null;
 
-  public AdsPixelCAPISetupQuality() {
+  public AdCampaignGroupAdvantageState() {
   }
 
   public String getId() {
     return null;
   }
-  public static AdsPixelCAPISetupQuality loadJSON(String json, APIContext context, String header) {
-    AdsPixelCAPISetupQuality adsPixelCAPISetupQuality = getGson().fromJson(json, AdsPixelCAPISetupQuality.class);
+  public static AdCampaignGroupAdvantageState loadJSON(String json, APIContext context, String header) {
+    AdCampaignGroupAdvantageState adCampaignGroupAdvantageState = getGson().fromJson(json, AdCampaignGroupAdvantageState.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(adsPixelCAPISetupQuality.toString());
+      JsonElement o2 = parser.parse(adCampaignGroupAdvantageState.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -68,14 +72,14 @@ public class AdsPixelCAPISetupQuality extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    adsPixelCAPISetupQuality.context = context;
-    adsPixelCAPISetupQuality.rawValue = json;
-    adsPixelCAPISetupQuality.header = header;
-    return adsPixelCAPISetupQuality;
+    adCampaignGroupAdvantageState.context = context;
+    adCampaignGroupAdvantageState.rawValue = json;
+    adCampaignGroupAdvantageState.header = header;
+    return adCampaignGroupAdvantageState;
   }
 
-  public static APINodeList<AdsPixelCAPISetupQuality> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<AdsPixelCAPISetupQuality> adsPixelCAPISetupQualitys = new APINodeList<AdsPixelCAPISetupQuality>(request, json, header);
+  public static APINodeList<AdCampaignGroupAdvantageState> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdCampaignGroupAdvantageState> adCampaignGroupAdvantageStates = new APINodeList<AdCampaignGroupAdvantageState>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -86,9 +90,9 @@ public class AdsPixelCAPISetupQuality extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adsPixelCAPISetupQualitys.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          adCampaignGroupAdvantageStates.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return adsPixelCAPISetupQualitys;
+        return adCampaignGroupAdvantageStates;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -98,20 +102,20 @@ public class AdsPixelCAPISetupQuality extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                adsPixelCAPISetupQualitys.setCursors(before, after);
+                adCampaignGroupAdvantageStates.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            adsPixelCAPISetupQualitys.setPaging(previous, next);
+            adCampaignGroupAdvantageStates.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              adsPixelCAPISetupQualitys.setAppSecret(context.getAppSecretProof());
+              adCampaignGroupAdvantageStates.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adsPixelCAPISetupQualitys.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              adCampaignGroupAdvantageStates.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -122,23 +126,23 @@ public class AdsPixelCAPISetupQuality extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adsPixelCAPISetupQualitys.add(loadJSON(entry.getValue().toString(), context, header));
+                  adCampaignGroupAdvantageStates.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adsPixelCAPISetupQualitys.add(loadJSON(obj.toString(), context, header));
+              adCampaignGroupAdvantageStates.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return adsPixelCAPISetupQualitys;
+          return adCampaignGroupAdvantageStates;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adsPixelCAPISetupQualitys.add(loadJSON(entry.getValue().toString(), context, header));
+              adCampaignGroupAdvantageStates.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return adsPixelCAPISetupQualitys;
+          return adCampaignGroupAdvantageStates;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -155,20 +159,20 @@ public class AdsPixelCAPISetupQuality extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adsPixelCAPISetupQualitys.add(loadJSON(value.toString(), context, header));
+              adCampaignGroupAdvantageStates.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return adsPixelCAPISetupQualitys;
+            return adCampaignGroupAdvantageStates;
           }
 
           // Sixth, check if it's pure JsonObject
-          adsPixelCAPISetupQualitys.clear();
-          adsPixelCAPISetupQualitys.add(loadJSON(json, context, header));
-          return adsPixelCAPISetupQualitys;
+          adCampaignGroupAdvantageStates.clear();
+          adCampaignGroupAdvantageStates.add(loadJSON(json, context, header));
+          return adCampaignGroupAdvantageStates;
         }
       }
     } catch (Exception e) {
@@ -196,21 +200,39 @@ public class AdsPixelCAPISetupQuality extends APINode {
   }
 
 
-  public Object getFieldEventMatchQuality() {
-    return mEventMatchQuality;
+  public String getFieldAdvantageAudienceState() {
+    return mAdvantageAudienceState;
   }
 
-  public AdsPixelCAPISetupQuality setFieldEventMatchQuality(Object value) {
-    this.mEventMatchQuality = value;
+  public AdCampaignGroupAdvantageState setFieldAdvantageAudienceState(String value) {
+    this.mAdvantageAudienceState = value;
     return this;
   }
 
-  public String getFieldEventName() {
-    return mEventName;
+  public String getFieldAdvantageBudgetState() {
+    return mAdvantageBudgetState;
   }
 
-  public AdsPixelCAPISetupQuality setFieldEventName(String value) {
-    this.mEventName = value;
+  public AdCampaignGroupAdvantageState setFieldAdvantageBudgetState(String value) {
+    this.mAdvantageBudgetState = value;
+    return this;
+  }
+
+  public String getFieldAdvantagePlacementState() {
+    return mAdvantagePlacementState;
+  }
+
+  public AdCampaignGroupAdvantageState setFieldAdvantagePlacementState(String value) {
+    this.mAdvantagePlacementState = value;
+    return this;
+  }
+
+  public String getFieldAdvantageState() {
+    return mAdvantageState;
+  }
+
+  public AdCampaignGroupAdvantageState setFieldAdvantageState(String value) {
+    this.mAdvantageState = value;
     return this;
   }
 
@@ -230,18 +252,20 @@ public class AdsPixelCAPISetupQuality extends APINode {
     return gson;
   }
 
-  public AdsPixelCAPISetupQuality copyFrom(AdsPixelCAPISetupQuality instance) {
-    this.mEventMatchQuality = instance.mEventMatchQuality;
-    this.mEventName = instance.mEventName;
+  public AdCampaignGroupAdvantageState copyFrom(AdCampaignGroupAdvantageState instance) {
+    this.mAdvantageAudienceState = instance.mAdvantageAudienceState;
+    this.mAdvantageBudgetState = instance.mAdvantageBudgetState;
+    this.mAdvantagePlacementState = instance.mAdvantagePlacementState;
+    this.mAdvantageState = instance.mAdvantageState;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<AdsPixelCAPISetupQuality> getParser() {
-    return new APIRequest.ResponseParser<AdsPixelCAPISetupQuality>() {
-      public APINodeList<AdsPixelCAPISetupQuality> parseResponse(String response, APIContext context, APIRequest<AdsPixelCAPISetupQuality> request, String header) throws MalformedResponseException {
-        return AdsPixelCAPISetupQuality.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<AdCampaignGroupAdvantageState> getParser() {
+    return new APIRequest.ResponseParser<AdCampaignGroupAdvantageState>() {
+      public APINodeList<AdCampaignGroupAdvantageState> parseResponse(String response, APIContext context, APIRequest<AdCampaignGroupAdvantageState> request, String header) throws MalformedResponseException {
+        return AdCampaignGroupAdvantageState.parseResponse(response, context, request, header);
       }
     };
   }

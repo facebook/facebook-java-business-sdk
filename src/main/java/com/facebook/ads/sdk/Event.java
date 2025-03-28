@@ -2477,6 +2477,8 @@ public class Event extends APINode {
       VALUE_FRIENDS("friends"),
       @SerializedName("group")
       VALUE_GROUP("group"),
+      @SerializedName("messenger_community")
+      VALUE_MESSENGER_COMMUNITY("messenger_community"),
       @SerializedName("private")
       VALUE_PRIVATE("private"),
       @SerializedName("public")

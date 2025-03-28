@@ -53,6 +53,8 @@ public class AdsQuickViews extends APINode {
   private String mId = null;
   @SerializedName("name")
   private String mName = null;
+  @SerializedName("owner")
+  private Profile mOwner = null;
   @SerializedName("permission")
   private String mPermission = null;
   @SerializedName("quick_view_type")
@@ -297,6 +299,13 @@ public class AdsQuickViews extends APINode {
     return mName;
   }
 
+  public Profile getFieldOwner() {
+    if (mOwner != null) {
+      mOwner.context = getContext();
+    }
+    return mOwner;
+  }
+
   public String getFieldPermission() {
     return mPermission;
   }
@@ -328,6 +337,7 @@ public class AdsQuickViews extends APINode {
       "description",
       "id",
       "name",
+      "owner",
       "permission",
       "quick_view_type",
       "sort",
@@ -465,6 +475,13 @@ public class AdsQuickViews extends APINode {
       this.requestField("name", value);
       return this;
     }
+    public APIRequestGet requestOwnerField () {
+      return this.requestOwnerField(true);
+    }
+    public APIRequestGet requestOwnerField (boolean value) {
+      this.requestField("owner", value);
+      return this;
+    }
     public APIRequestGet requestPermissionField () {
       return this.requestPermissionField(true);
     }
@@ -509,6 +526,7 @@ public class AdsQuickViews extends APINode {
     this.mDescription = instance.mDescription;
     this.mId = instance.mId;
     this.mName = instance.mName;
+    this.mOwner = instance.mOwner;
     this.mPermission = instance.mPermission;
     this.mQuickViewType = instance.mQuickViewType;
     this.mSort = instance.mSort;

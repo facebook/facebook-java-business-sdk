@@ -63,6 +63,8 @@ public class AdsUserSettings extends APINode {
   private String mApluscLocalStoreExtensionOptInStatus = null;
   @SerializedName("aplusc_opt_out_friction")
   private List<String> mApluscOptOutFriction = null;
+  @SerializedName("aplusc_videofilter_opt_in_status")
+  private String mApluscVideofilterOptInStatus = null;
   @SerializedName("autoflow_lite_opt_in_status")
   private String mAutoflowLiteOptInStatus = null;
   @SerializedName("autoflow_lite_should_opt_in")
@@ -121,6 +123,10 @@ public class AdsUserSettings extends APINode {
   private List<String> mPreviouslySeenRecommendations = null;
   @SerializedName("product_extensions_opt_in")
   private String mProductExtensionsOptIn = null;
+  @SerializedName("sa_off_conv_loc_seen")
+  private String mSaOffConvLocSeen = null;
+  @SerializedName("saon_migr_l1_seen_status")
+  private String mSaonMigrL1SeenStatus = null;
   @SerializedName("selected_ad_account")
   private AdAccount mSelectedAdAccount = null;
   @SerializedName("selected_comparison_timerange")
@@ -429,6 +435,10 @@ public class AdsUserSettings extends APINode {
     return mApluscOptOutFriction;
   }
 
+  public String getFieldApluscVideofilterOptInStatus() {
+    return mApluscVideofilterOptInStatus;
+  }
+
   public String getFieldAutoflowLiteOptInStatus() {
     return mAutoflowLiteOptInStatus;
   }
@@ -543,6 +553,14 @@ public class AdsUserSettings extends APINode {
 
   public String getFieldProductExtensionsOptIn() {
     return mProductExtensionsOptIn;
+  }
+
+  public String getFieldSaOffConvLocSeen() {
+    return mSaOffConvLocSeen;
+  }
+
+  public String getFieldSaonMigrL1SeenStatus() {
+    return mSaonMigrL1SeenStatus;
   }
 
   public AdAccount getFieldSelectedAdAccount() {
@@ -678,6 +696,7 @@ public class AdsUserSettings extends APINode {
       "aplusc_epa_opt_in_status",
       "aplusc_local_store_extension_opt_in_status",
       "aplusc_opt_out_friction",
+      "aplusc_videofilter_opt_in_status",
       "autoflow_lite_opt_in_status",
       "autoflow_lite_should_opt_in",
       "blended_ads_creation_defaulting_opt_in_status",
@@ -707,6 +726,8 @@ public class AdsUserSettings extends APINode {
       "open_tabs",
       "previously_seen_recommendations",
       "product_extensions_opt_in",
+      "sa_off_conv_loc_seen",
+      "saon_migr_l1_seen_status",
       "selected_ad_account",
       "selected_comparison_timerange",
       "selected_metric_cic",
@@ -899,6 +920,13 @@ public class AdsUserSettings extends APINode {
     }
     public APIRequestGet requestApluscOptOutFrictionField (boolean value) {
       this.requestField("aplusc_opt_out_friction", value);
+      return this;
+    }
+    public APIRequestGet requestApluscVideofilterOptInStatusField () {
+      return this.requestApluscVideofilterOptInStatusField(true);
+    }
+    public APIRequestGet requestApluscVideofilterOptInStatusField (boolean value) {
+      this.requestField("aplusc_videofilter_opt_in_status", value);
       return this;
     }
     public APIRequestGet requestAutoflowLiteOptInStatusField () {
@@ -1104,6 +1132,20 @@ public class AdsUserSettings extends APINode {
       this.requestField("product_extensions_opt_in", value);
       return this;
     }
+    public APIRequestGet requestSaOffConvLocSeenField () {
+      return this.requestSaOffConvLocSeenField(true);
+    }
+    public APIRequestGet requestSaOffConvLocSeenField (boolean value) {
+      this.requestField("sa_off_conv_loc_seen", value);
+      return this;
+    }
+    public APIRequestGet requestSaonMigrL1SeenStatusField () {
+      return this.requestSaonMigrL1SeenStatusField(true);
+    }
+    public APIRequestGet requestSaonMigrL1SeenStatusField (boolean value) {
+      this.requestField("saon_migr_l1_seen_status", value);
+      return this;
+    }
     public APIRequestGet requestSelectedAdAccountField () {
       return this.requestSelectedAdAccountField(true);
     }
@@ -1307,6 +1349,7 @@ public class AdsUserSettings extends APINode {
     this.mApluscEpaOptInStatus = instance.mApluscEpaOptInStatus;
     this.mApluscLocalStoreExtensionOptInStatus = instance.mApluscLocalStoreExtensionOptInStatus;
     this.mApluscOptOutFriction = instance.mApluscOptOutFriction;
+    this.mApluscVideofilterOptInStatus = instance.mApluscVideofilterOptInStatus;
     this.mAutoflowLiteOptInStatus = instance.mAutoflowLiteOptInStatus;
     this.mAutoflowLiteShouldOptIn = instance.mAutoflowLiteShouldOptIn;
     this.mBlendedAdsCreationDefaultingOptInStatus = instance.mBlendedAdsCreationDefaultingOptInStatus;
@@ -1336,6 +1379,8 @@ public class AdsUserSettings extends APINode {
     this.mOpenTabs = instance.mOpenTabs;
     this.mPreviouslySeenRecommendations = instance.mPreviouslySeenRecommendations;
     this.mProductExtensionsOptIn = instance.mProductExtensionsOptIn;
+    this.mSaOffConvLocSeen = instance.mSaOffConvLocSeen;
+    this.mSaonMigrL1SeenStatus = instance.mSaonMigrL1SeenStatus;
     this.mSelectedAdAccount = instance.mSelectedAdAccount;
     this.mSelectedComparisonTimerange = instance.mSelectedComparisonTimerange;
     this.mSelectedMetricCic = instance.mSelectedMetricCic;

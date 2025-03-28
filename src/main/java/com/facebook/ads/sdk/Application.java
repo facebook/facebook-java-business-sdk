@@ -1552,6 +1552,7 @@ public class Application extends APINode {
       "app_user_id",
       "application_tracking_enabled",
       "attribution",
+      "attribution_referrer",
       "attribution_sources",
       "auto_publish",
       "bundle_id",
@@ -1569,13 +1570,16 @@ public class Application extends APINode {
       "event",
       "event_id",
       "extinfo",
+      "google_install_referrer",
       "include_dwell_data",
       "include_video_data",
+      "install_id",
       "install_referrer",
       "install_timestamp",
       "installer_package",
       "is_fb",
       "limited_data_use",
+      "meta_install_referrer",
       "migration_bundle",
       "operational_parameters",
       "page_id",
@@ -1682,6 +1686,11 @@ public class Application extends APINode {
 
     public APIRequestCreateActivity setAttribution (String attribution) {
       this.setParam("attribution", attribution);
+      return this;
+    }
+
+    public APIRequestCreateActivity setAttributionReferrer (String attributionReferrer) {
+      this.setParam("attribution_referrer", attributionReferrer);
       return this;
     }
 
@@ -1810,6 +1819,11 @@ public class Application extends APINode {
       return this;
     }
 
+    public APIRequestCreateActivity setGoogleInstallReferrer (String googleInstallReferrer) {
+      this.setParam("google_install_referrer", googleInstallReferrer);
+      return this;
+    }
+
     public APIRequestCreateActivity setIncludeDwellData (Boolean includeDwellData) {
       this.setParam("include_dwell_data", includeDwellData);
       return this;
@@ -1825,6 +1839,11 @@ public class Application extends APINode {
     }
     public APIRequestCreateActivity setIncludeVideoData (String includeVideoData) {
       this.setParam("include_video_data", includeVideoData);
+      return this;
+    }
+
+    public APIRequestCreateActivity setInstallId (String installId) {
+      this.setParam("install_id", installId);
       return this;
     }
 
@@ -1862,6 +1881,11 @@ public class Application extends APINode {
     }
     public APIRequestCreateActivity setLimitedDataUse (String limitedDataUse) {
       this.setParam("limited_data_use", limitedDataUse);
+      return this;
+    }
+
+    public APIRequestCreateActivity setMetaInstallReferrer (String metaInstallReferrer) {
+      this.setParam("meta_install_referrer", metaInstallReferrer);
       return this;
     }
 
@@ -5139,6 +5163,7 @@ public class Application extends APINode {
       "id",
       "io_number",
       "is_attribution_spec_system_default",
+      "is_ba_skip_delayed_eligible",
       "is_direct_deals_enabled",
       "is_in_3ds_authorization_enabled_market",
       "is_notifications_enabled",
@@ -5539,6 +5564,13 @@ public class Application extends APINode {
     }
     public APIRequestGetAuthorizedAdAccounts requestIsAttributionSpecSystemDefaultField (boolean value) {
       this.requestField("is_attribution_spec_system_default", value);
+      return this;
+    }
+    public APIRequestGetAuthorizedAdAccounts requestIsBaSkipDelayedEligibleField () {
+      return this.requestIsBaSkipDelayedEligibleField(true);
+    }
+    public APIRequestGetAuthorizedAdAccounts requestIsBaSkipDelayedEligibleField (boolean value) {
+      this.requestField("is_ba_skip_delayed_eligible", value);
       return this;
     }
     public APIRequestGetAuthorizedAdAccounts requestIsDirectDealsEnabledField () {

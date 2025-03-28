@@ -5056,6 +5056,7 @@ public class ProductCatalog extends APINode {
       "price",
       "property_type",
       "sanitized_images",
+      "tags",
       "unit_price",
       "url",
       "visibility",
@@ -5532,6 +5533,13 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestGetHomeListings requestSanitizedImagesField (boolean value) {
       this.requestField("sanitized_images", value);
+      return this;
+    }
+    public APIRequestGetHomeListings requestTagsField () {
+      return this.requestTagsField(true);
+    }
+    public APIRequestGetHomeListings requestTagsField (boolean value) {
+      this.requestField("tags", value);
       return this;
     }
     public APIRequestGetHomeListings requestUnitPriceField () {
@@ -8804,6 +8812,7 @@ public class ProductCatalog extends APINode {
       "product_feed",
       "product_group",
       "product_local_info",
+      "product_relationship",
       "product_type",
       "quantity_to_sell_on_facebook",
       "retailer_id",
@@ -9372,6 +9381,13 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestGetProducts requestProductLocalInfoField (boolean value) {
       this.requestField("product_local_info", value);
+      return this;
+    }
+    public APIRequestGetProducts requestProductRelationshipField () {
+      return this.requestProductRelationshipField(true);
+    }
+    public APIRequestGetProducts requestProductRelationshipField (boolean value) {
+      this.requestField("product_relationship", value);
       return this;
     }
     public APIRequestGetProducts requestProductTypeField () {
@@ -10274,6 +10290,7 @@ public class ProductCatalog extends APINode {
       "sanitized_images",
       "start_date",
       "start_time",
+      "tags",
       "term_length",
       "term_qualifier",
       "title",
@@ -10744,6 +10761,13 @@ public class ProductCatalog extends APINode {
       this.requestField("start_time", value);
       return this;
     }
+    public APIRequestGetVehicleOffers requestTagsField () {
+      return this.requestTagsField(true);
+    }
+    public APIRequestGetVehicleOffers requestTagsField (boolean value) {
+      this.requestField("tags", value);
+      return this;
+    }
     public APIRequestGetVehicleOffers requestTermLengthField () {
       return this.requestTermLengthField(true);
     }
@@ -10879,6 +10903,7 @@ public class ProductCatalog extends APINode {
       "sale_price",
       "sanitized_images",
       "state_of_vehicle",
+      "tags",
       "title",
       "transmission",
       "trim",
@@ -11349,6 +11374,13 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestGetVehicles requestStateOfVehicleField (boolean value) {
       this.requestField("state_of_vehicle", value);
+      return this;
+    }
+    public APIRequestGetVehicles requestTagsField () {
+      return this.requestTagsField(true);
+    }
+    public APIRequestGetVehicles requestTagsField (boolean value) {
+      this.requestField("tags", value);
       return this;
     }
     public APIRequestGetVehicles requestTitleField () {

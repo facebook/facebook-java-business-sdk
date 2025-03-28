@@ -344,6 +344,10 @@ public class IGUserForIGOnlyAPI extends APINode {
     return new APIRequestGetTags(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestDeleteWelcomeMessageFlows deleteWelcomeMessageFlows() {
+    return new APIRequestDeleteWelcomeMessageFlows(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetWelcomeMessageFlows getWelcomeMessageFlows() {
     return new APIRequestGetWelcomeMessageFlows(this.getPrefixedId().toString(), context);
   }
@@ -2877,6 +2881,117 @@ public class IGUserForIGOnlyAPI extends APINode {
 
   }
 
+  public static class APIRequestDeleteWelcomeMessageFlows extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "flow_id",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestDeleteWelcomeMessageFlows.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestDeleteWelcomeMessageFlows(String nodeId, APIContext context) {
+      super(context, nodeId, "/welcome_message_flows", "DELETE", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestDeleteWelcomeMessageFlows setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteWelcomeMessageFlows setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestDeleteWelcomeMessageFlows setFlowId (String flowId) {
+      this.setParam("flow_id", flowId);
+      return this;
+    }
+
+    public APIRequestDeleteWelcomeMessageFlows requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestDeleteWelcomeMessageFlows requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteWelcomeMessageFlows requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestDeleteWelcomeMessageFlows requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteWelcomeMessageFlows requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteWelcomeMessageFlows requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGetWelcomeMessageFlows extends APIRequest<CTXPartnerAppWelcomeMessageFlow> {
 
     APINodeList<CTXPartnerAppWelcomeMessageFlow> lastResponse = null;
@@ -3514,6 +3629,8 @@ public class IGUserForIGOnlyAPI extends APINode {
       VALUE_MESSAGING_REFERRAL("messaging_referral"),
       @SerializedName("messaging_seen")
       VALUE_MESSAGING_SEEN("messaging_seen"),
+      @SerializedName("onboarding_welcome_message_series")
+      VALUE_ONBOARDING_WELCOME_MESSAGE_SERIES("onboarding_welcome_message_series"),
       @SerializedName("standby")
       VALUE_STANDBY("standby"),
       @SerializedName("story_insights")

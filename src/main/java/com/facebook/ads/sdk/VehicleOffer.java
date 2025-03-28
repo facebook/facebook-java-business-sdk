@@ -141,6 +141,8 @@ public class VehicleOffer extends APINode {
   private String mStartDate = null;
   @SerializedName("start_time")
   private Long mStartTime = null;
+  @SerializedName("tags")
+  private List<String> mTags = null;
   @SerializedName("term_length")
   private Long mTermLength = null;
   @SerializedName("term_qualifier")
@@ -585,6 +587,10 @@ public class VehicleOffer extends APINode {
 
   public Long getFieldStartTime() {
     return mStartTime;
+  }
+
+  public List<String> getFieldTags() {
+    return mTags;
   }
 
   public Long getFieldTermLength() {
@@ -1097,6 +1103,7 @@ public class VehicleOffer extends APINode {
       "sanitized_images",
       "start_date",
       "start_time",
+      "tags",
       "term_length",
       "term_qualifier",
       "title",
@@ -1549,6 +1556,13 @@ public class VehicleOffer extends APINode {
       this.requestField("start_time", value);
       return this;
     }
+    public APIRequestGet requestTagsField () {
+      return this.requestTagsField(true);
+    }
+    public APIRequestGet requestTagsField (boolean value) {
+      this.requestField("tags", value);
+      return this;
+    }
     public APIRequestGet requestTermLengthField () {
       return this.requestTermLengthField(true);
     }
@@ -1732,6 +1746,7 @@ public class VehicleOffer extends APINode {
     this.mSanitizedImages = instance.mSanitizedImages;
     this.mStartDate = instance.mStartDate;
     this.mStartTime = instance.mStartTime;
+    this.mTags = instance.mTags;
     this.mTermLength = instance.mTermLength;
     this.mTermQualifier = instance.mTermQualifier;
     this.mTitle = instance.mTitle;

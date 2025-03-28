@@ -40,84 +40,78 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class InstagramCarousel extends APINode {
-  @SerializedName("caption_text")
-  private String mCaptionText = null;
-  @SerializedName("comment_count")
-  private Long mCommentCount = null;
-  @SerializedName("content_type")
-  private Long mContentType = null;
-  @SerializedName("display_url")
-  private String mDisplayUrl = null;
+public class StoreLocation extends APINode {
+  @SerializedName("full_address")
+  private String mFullAddress = null;
+  @SerializedName("hours")
+  private Object mHours = null;
   @SerializedName("id")
   private String mId = null;
-  @SerializedName("ig_media_id")
-  private String mIgMediaId = null;
-  @SerializedName("like_count")
-  private Long mLikeCount = null;
-  @SerializedName("owner_instagram_user")
-  private InstagramUser mOwnerInstagramUser = null;
-  @SerializedName("permalink")
-  private String mPermalink = null;
-  @SerializedName("taken_at")
-  private String mTakenAt = null;
-  @SerializedName("video_url")
-  private String mVideoUrl = null;
+  @SerializedName("phone_number")
+  private String mPhoneNumber = null;
+  @SerializedName("pickup_options")
+  private List<String> mPickupOptions = null;
+  @SerializedName("price_range")
+  private String mPriceRange = null;
+  @SerializedName("store_code")
+  private String mStoreCode = null;
+  @SerializedName("zip_code")
+  private String mZipCode = null;
   protected static Gson gson = null;
 
-  InstagramCarousel() {
+  StoreLocation() {
   }
 
-  public InstagramCarousel(Long id, APIContext context) {
+  public StoreLocation(Long id, APIContext context) {
     this(id.toString(), context);
   }
 
-  public InstagramCarousel(String id, APIContext context) {
+  public StoreLocation(String id, APIContext context) {
     this.mId = id;
 
     this.context = context;
   }
 
-  public InstagramCarousel fetch() throws APIException{
-    InstagramCarousel newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+  public StoreLocation fetch() throws APIException{
+    StoreLocation newInstance = fetchById(this.getPrefixedId().toString(), this.context);
     this.copyFrom(newInstance);
     return this;
   }
 
-  public static InstagramCarousel fetchById(Long id, APIContext context) throws APIException {
+  public static StoreLocation fetchById(Long id, APIContext context) throws APIException {
     return fetchById(id.toString(), context);
   }
 
-  public static ListenableFuture<InstagramCarousel> fetchByIdAsync(Long id, APIContext context) throws APIException {
+  public static ListenableFuture<StoreLocation> fetchByIdAsync(Long id, APIContext context) throws APIException {
     return fetchByIdAsync(id.toString(), context);
   }
 
-  public static InstagramCarousel fetchById(String id, APIContext context) throws APIException {
+  public static StoreLocation fetchById(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
   }
 
-  public static ListenableFuture<InstagramCarousel> fetchByIdAsync(String id, APIContext context) throws APIException {
+  public static ListenableFuture<StoreLocation> fetchByIdAsync(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
   }
 
-  public static APINodeList<InstagramCarousel> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<InstagramCarousel>)(
-      new APIRequest<InstagramCarousel>(context, "", "/", "GET", InstagramCarousel.getParser())
+  public static APINodeList<StoreLocation> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<StoreLocation>)(
+      new APIRequest<StoreLocation>(context, "", "/", "GET", StoreLocation.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .execute()
     );
   }
 
-  public static ListenableFuture<APINodeList<InstagramCarousel>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+  public static ListenableFuture<APINodeList<StoreLocation>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
     return
-      new APIRequest(context, "", "/", "GET", InstagramCarousel.getParser())
+      new APIRequest(context, "", "/", "GET", StoreLocation.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
@@ -130,12 +124,12 @@ public class InstagramCarousel extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static InstagramCarousel loadJSON(String json, APIContext context, String header) {
-    InstagramCarousel instagramCarousel = getGson().fromJson(json, InstagramCarousel.class);
+  public static StoreLocation loadJSON(String json, APIContext context, String header) {
+    StoreLocation storeLocation = getGson().fromJson(json, StoreLocation.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(instagramCarousel.toString());
+      JsonElement o2 = parser.parse(storeLocation.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -145,14 +139,14 @@ public class InstagramCarousel extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    instagramCarousel.context = context;
-    instagramCarousel.rawValue = json;
-    instagramCarousel.header = header;
-    return instagramCarousel;
+    storeLocation.context = context;
+    storeLocation.rawValue = json;
+    storeLocation.header = header;
+    return storeLocation;
   }
 
-  public static APINodeList<InstagramCarousel> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<InstagramCarousel> instagramCarousels = new APINodeList<InstagramCarousel>(request, json, header);
+  public static APINodeList<StoreLocation> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<StoreLocation> storeLocations = new APINodeList<StoreLocation>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -163,9 +157,9 @@ public class InstagramCarousel extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          instagramCarousels.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          storeLocations.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return instagramCarousels;
+        return storeLocations;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -175,20 +169,20 @@ public class InstagramCarousel extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                instagramCarousels.setCursors(before, after);
+                storeLocations.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            instagramCarousels.setPaging(previous, next);
+            storeLocations.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              instagramCarousels.setAppSecret(context.getAppSecretProof());
+              storeLocations.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              instagramCarousels.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              storeLocations.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -199,23 +193,23 @@ public class InstagramCarousel extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  instagramCarousels.add(loadJSON(entry.getValue().toString(), context, header));
+                  storeLocations.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              instagramCarousels.add(loadJSON(obj.toString(), context, header));
+              storeLocations.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return instagramCarousels;
+          return storeLocations;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              instagramCarousels.add(loadJSON(entry.getValue().toString(), context, header));
+              storeLocations.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return instagramCarousels;
+          return storeLocations;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -232,20 +226,20 @@ public class InstagramCarousel extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              instagramCarousels.add(loadJSON(value.toString(), context, header));
+              storeLocations.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return instagramCarousels;
+            return storeLocations;
           }
 
           // Sixth, check if it's pure JsonObject
-          instagramCarousels.clear();
-          instagramCarousels.add(loadJSON(json, context, header));
-          return instagramCarousels;
+          storeLocations.clear();
+          storeLocations.add(loadJSON(json, context, header));
+          return storeLocations;
         }
       }
     } catch (Exception e) {
@@ -277,105 +271,87 @@ public class InstagramCarousel extends APINode {
   }
 
 
-  public String getFieldCaptionText() {
-    return mCaptionText;
+  public String getFieldFullAddress() {
+    return mFullAddress;
   }
 
-  public Long getFieldCommentCount() {
-    return mCommentCount;
-  }
-
-  public Long getFieldContentType() {
-    return mContentType;
-  }
-
-  public String getFieldDisplayUrl() {
-    return mDisplayUrl;
+  public Object getFieldHours() {
+    return mHours;
   }
 
   public String getFieldId() {
     return mId;
   }
 
-  public String getFieldIgMediaId() {
-    return mIgMediaId;
+  public String getFieldPhoneNumber() {
+    return mPhoneNumber;
   }
 
-  public Long getFieldLikeCount() {
-    return mLikeCount;
+  public List<String> getFieldPickupOptions() {
+    return mPickupOptions;
   }
 
-  public InstagramUser getFieldOwnerInstagramUser() {
-    if (mOwnerInstagramUser != null) {
-      mOwnerInstagramUser.context = getContext();
-    }
-    return mOwnerInstagramUser;
+  public String getFieldPriceRange() {
+    return mPriceRange;
   }
 
-  public String getFieldPermalink() {
-    return mPermalink;
+  public String getFieldStoreCode() {
+    return mStoreCode;
   }
 
-  public String getFieldTakenAt() {
-    return mTakenAt;
-  }
-
-  public String getFieldVideoUrl() {
-    return mVideoUrl;
+  public String getFieldZipCode() {
+    return mZipCode;
   }
 
 
 
-  public static class APIRequestGet extends APIRequest<InstagramCarousel> {
+  public static class APIRequestGet extends APIRequest<StoreLocation> {
 
-    InstagramCarousel lastResponse = null;
+    StoreLocation lastResponse = null;
     @Override
-    public InstagramCarousel getLastResponse() {
+    public StoreLocation getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
     };
 
     public static final String[] FIELDS = {
-      "caption_text",
-      "comment_count",
-      "content_type",
-      "display_url",
+      "full_address",
+      "hours",
       "id",
-      "ig_media_id",
-      "like_count",
-      "owner_instagram_user",
-      "permalink",
-      "taken_at",
-      "video_url",
+      "phone_number",
+      "pickup_options",
+      "price_range",
+      "store_code",
+      "zip_code",
     };
 
     @Override
-    public InstagramCarousel parseResponse(String response, String header) throws APIException {
-      return InstagramCarousel.parseResponse(response, getContext(), this, header).head();
+    public StoreLocation parseResponse(String response, String header) throws APIException {
+      return StoreLocation.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public InstagramCarousel execute() throws APIException {
+    public StoreLocation execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public InstagramCarousel execute(Map<String, Object> extraParams) throws APIException {
+    public StoreLocation execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<InstagramCarousel> executeAsync() throws APIException {
+    public ListenableFuture<StoreLocation> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<InstagramCarousel> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<StoreLocation> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, InstagramCarousel>() {
-           public InstagramCarousel apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, StoreLocation>() {
+           public StoreLocation apply(ResponseWrapper result) {
              try {
                return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -440,32 +416,18 @@ public class InstagramCarousel extends APINode {
       return this;
     }
 
-    public APIRequestGet requestCaptionTextField () {
-      return this.requestCaptionTextField(true);
+    public APIRequestGet requestFullAddressField () {
+      return this.requestFullAddressField(true);
     }
-    public APIRequestGet requestCaptionTextField (boolean value) {
-      this.requestField("caption_text", value);
+    public APIRequestGet requestFullAddressField (boolean value) {
+      this.requestField("full_address", value);
       return this;
     }
-    public APIRequestGet requestCommentCountField () {
-      return this.requestCommentCountField(true);
+    public APIRequestGet requestHoursField () {
+      return this.requestHoursField(true);
     }
-    public APIRequestGet requestCommentCountField (boolean value) {
-      this.requestField("comment_count", value);
-      return this;
-    }
-    public APIRequestGet requestContentTypeField () {
-      return this.requestContentTypeField(true);
-    }
-    public APIRequestGet requestContentTypeField (boolean value) {
-      this.requestField("content_type", value);
-      return this;
-    }
-    public APIRequestGet requestDisplayUrlField () {
-      return this.requestDisplayUrlField(true);
-    }
-    public APIRequestGet requestDisplayUrlField (boolean value) {
-      this.requestField("display_url", value);
+    public APIRequestGet requestHoursField (boolean value) {
+      this.requestField("hours", value);
       return this;
     }
     public APIRequestGet requestIdField () {
@@ -475,46 +437,39 @@ public class InstagramCarousel extends APINode {
       this.requestField("id", value);
       return this;
     }
-    public APIRequestGet requestIgMediaIdField () {
-      return this.requestIgMediaIdField(true);
+    public APIRequestGet requestPhoneNumberField () {
+      return this.requestPhoneNumberField(true);
     }
-    public APIRequestGet requestIgMediaIdField (boolean value) {
-      this.requestField("ig_media_id", value);
+    public APIRequestGet requestPhoneNumberField (boolean value) {
+      this.requestField("phone_number", value);
       return this;
     }
-    public APIRequestGet requestLikeCountField () {
-      return this.requestLikeCountField(true);
+    public APIRequestGet requestPickupOptionsField () {
+      return this.requestPickupOptionsField(true);
     }
-    public APIRequestGet requestLikeCountField (boolean value) {
-      this.requestField("like_count", value);
+    public APIRequestGet requestPickupOptionsField (boolean value) {
+      this.requestField("pickup_options", value);
       return this;
     }
-    public APIRequestGet requestOwnerInstagramUserField () {
-      return this.requestOwnerInstagramUserField(true);
+    public APIRequestGet requestPriceRangeField () {
+      return this.requestPriceRangeField(true);
     }
-    public APIRequestGet requestOwnerInstagramUserField (boolean value) {
-      this.requestField("owner_instagram_user", value);
+    public APIRequestGet requestPriceRangeField (boolean value) {
+      this.requestField("price_range", value);
       return this;
     }
-    public APIRequestGet requestPermalinkField () {
-      return this.requestPermalinkField(true);
+    public APIRequestGet requestStoreCodeField () {
+      return this.requestStoreCodeField(true);
     }
-    public APIRequestGet requestPermalinkField (boolean value) {
-      this.requestField("permalink", value);
+    public APIRequestGet requestStoreCodeField (boolean value) {
+      this.requestField("store_code", value);
       return this;
     }
-    public APIRequestGet requestTakenAtField () {
-      return this.requestTakenAtField(true);
+    public APIRequestGet requestZipCodeField () {
+      return this.requestZipCodeField(true);
     }
-    public APIRequestGet requestTakenAtField (boolean value) {
-      this.requestField("taken_at", value);
-      return this;
-    }
-    public APIRequestGet requestVideoUrlField () {
-      return this.requestVideoUrlField(true);
-    }
-    public APIRequestGet requestVideoUrlField (boolean value) {
-      this.requestField("video_url", value);
+    public APIRequestGet requestZipCodeField (boolean value) {
+      this.requestField("zip_code", value);
       return this;
     }
   }
@@ -533,27 +488,24 @@ public class InstagramCarousel extends APINode {
     return gson;
   }
 
-  public InstagramCarousel copyFrom(InstagramCarousel instance) {
-    this.mCaptionText = instance.mCaptionText;
-    this.mCommentCount = instance.mCommentCount;
-    this.mContentType = instance.mContentType;
-    this.mDisplayUrl = instance.mDisplayUrl;
+  public StoreLocation copyFrom(StoreLocation instance) {
+    this.mFullAddress = instance.mFullAddress;
+    this.mHours = instance.mHours;
     this.mId = instance.mId;
-    this.mIgMediaId = instance.mIgMediaId;
-    this.mLikeCount = instance.mLikeCount;
-    this.mOwnerInstagramUser = instance.mOwnerInstagramUser;
-    this.mPermalink = instance.mPermalink;
-    this.mTakenAt = instance.mTakenAt;
-    this.mVideoUrl = instance.mVideoUrl;
+    this.mPhoneNumber = instance.mPhoneNumber;
+    this.mPickupOptions = instance.mPickupOptions;
+    this.mPriceRange = instance.mPriceRange;
+    this.mStoreCode = instance.mStoreCode;
+    this.mZipCode = instance.mZipCode;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<InstagramCarousel> getParser() {
-    return new APIRequest.ResponseParser<InstagramCarousel>() {
-      public APINodeList<InstagramCarousel> parseResponse(String response, APIContext context, APIRequest<InstagramCarousel> request, String header) throws MalformedResponseException {
-        return InstagramCarousel.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<StoreLocation> getParser() {
+    return new APIRequest.ResponseParser<StoreLocation>() {
+      public APINodeList<StoreLocation> parseResponse(String response, APIContext context, APIRequest<StoreLocation> request, String header) throws MalformedResponseException {
+        return StoreLocation.parseResponse(response, context, request, header);
       }
     };
   }

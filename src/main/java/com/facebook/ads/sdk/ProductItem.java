@@ -159,6 +159,8 @@ public class ProductItem extends APINode {
   private ProductGroup mProductGroup = null;
   @SerializedName("product_local_info")
   private ProductItemLocalInfo mProductLocalInfo = null;
+  @SerializedName("product_relationship")
+  private String mProductRelationship = null;
   @SerializedName("product_type")
   private String mProductType = null;
   @SerializedName("quantity_to_sell_on_facebook")
@@ -683,6 +685,10 @@ public class ProductItem extends APINode {
       mProductLocalInfo.context = getContext();
     }
     return mProductLocalInfo;
+  }
+
+  public String getFieldProductRelationship() {
+    return mProductRelationship;
   }
 
   public String getFieldProductType() {
@@ -1539,6 +1545,7 @@ public class ProductItem extends APINode {
       "product_feed",
       "product_group",
       "product_local_info",
+      "product_relationship",
       "product_type",
       "quantity_to_sell_on_facebook",
       "retailer_id",
@@ -2095,6 +2102,13 @@ public class ProductItem extends APINode {
     }
     public APIRequestGet requestProductLocalInfoField (boolean value) {
       this.requestField("product_local_info", value);
+      return this;
+    }
+    public APIRequestGet requestProductRelationshipField () {
+      return this.requestProductRelationshipField(true);
+    }
+    public APIRequestGet requestProductRelationshipField (boolean value) {
+      this.requestField("product_relationship", value);
       return this;
     }
     public APIRequestGet requestProductTypeField () {
@@ -3785,6 +3799,8 @@ public class ProductItem extends APINode {
       VALUE_ITEM_STALE_OUT_OF_STOCK("ITEM_STALE_OUT_OF_STOCK"),
       @SerializedName("MARKETPLACE_DISABLED_BY_USER")
       VALUE_MARKETPLACE_DISABLED_BY_USER("MARKETPLACE_DISABLED_BY_USER"),
+      @SerializedName("MARKETPLACE_PARTNER_AUCTION_NO_BID_CLOSE_TIME")
+      VALUE_MARKETPLACE_PARTNER_AUCTION_NO_BID_CLOSE_TIME("MARKETPLACE_PARTNER_AUCTION_NO_BID_CLOSE_TIME"),
       @SerializedName("MARKETPLACE_PARTNER_LISTING_LIMIT_EXCEEDED")
       VALUE_MARKETPLACE_PARTNER_LISTING_LIMIT_EXCEEDED("MARKETPLACE_PARTNER_LISTING_LIMIT_EXCEEDED"),
       @SerializedName("MARKETPLACE_PARTNER_NOT_LOCAL_ITEM")
@@ -4580,6 +4596,7 @@ public class ProductItem extends APINode {
     this.mProductFeed = instance.mProductFeed;
     this.mProductGroup = instance.mProductGroup;
     this.mProductLocalInfo = instance.mProductLocalInfo;
+    this.mProductRelationship = instance.mProductRelationship;
     this.mProductType = instance.mProductType;
     this.mQuantityToSellOnFacebook = instance.mQuantityToSellOnFacebook;
     this.mRetailerId = instance.mRetailerId;

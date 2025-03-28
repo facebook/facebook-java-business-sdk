@@ -1205,6 +1205,8 @@ public class AdAccountTargetingUnified extends APINode {
       VALUE_HOME_VALUE("home_value"),
       @SerializedName("household_composition")
       VALUE_HOUSEHOLD_COMPOSITION("household_composition"),
+      @SerializedName("household_income")
+      VALUE_HOUSEHOLD_INCOME("household_income"),
       @SerializedName("id")
       VALUE_ID("id"),
       @SerializedName("income")
@@ -1303,6 +1305,8 @@ public class AdAccountTargetingUnified extends APINode {
       VALUE_TRENDING("trending"),
       @SerializedName("user_adclusters")
       VALUE_USER_ADCLUSTERS("user_adclusters"),
+      @SerializedName("user_age_unknown")
+      VALUE_USER_AGE_UNKNOWN("user_age_unknown"),
       @SerializedName("user_device")
       VALUE_USER_DEVICE("user_device"),
       @SerializedName("user_event")

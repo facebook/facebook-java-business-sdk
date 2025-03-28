@@ -441,6 +441,8 @@ public class BusinessOwnedObjectOnBehalfOfRequest extends APINode {
   public static enum EnumStatus {
       @SerializedName("APPROVE")
       VALUE_APPROVE("APPROVE"),
+      @SerializedName("CANCELED")
+      VALUE_CANCELED("CANCELED"),
       @SerializedName("DECLINE")
       VALUE_DECLINE("DECLINE"),
       @SerializedName("EXPIRED")

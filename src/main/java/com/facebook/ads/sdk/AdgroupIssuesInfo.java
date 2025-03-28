@@ -51,6 +51,8 @@ public class AdgroupIssuesInfo extends APINode {
   private String mErrorType = null;
   @SerializedName("level")
   private String mLevel = null;
+  @SerializedName("mid")
+  private String mMid = null;
   protected static Gson gson = null;
 
   public AdgroupIssuesInfo() {
@@ -247,6 +249,15 @@ public class AdgroupIssuesInfo extends APINode {
     return this;
   }
 
+  public String getFieldMid() {
+    return mMid;
+  }
+
+  public AdgroupIssuesInfo setFieldMid(String value) {
+    this.mMid = value;
+    return this;
+  }
+
 
 
 
@@ -269,6 +280,7 @@ public class AdgroupIssuesInfo extends APINode {
     this.mErrorSummary = instance.mErrorSummary;
     this.mErrorType = instance.mErrorType;
     this.mLevel = instance.mLevel;
+    this.mMid = instance.mMid;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

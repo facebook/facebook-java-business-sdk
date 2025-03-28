@@ -342,6 +342,10 @@ public class Business extends APINode {
     return new APIRequestGetAdNetworkAnalyticsResults(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestCreateAdsDataSet createAdsDataSet() {
+    return new APIRequestCreateAdsDataSet(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetAdsReportingMmmReports getAdsReportingMmmReports() {
     return new APIRequestGetAdsReportingMmmReports(this.getPrefixedId().toString(), context);
   }
@@ -486,10 +490,6 @@ public class Business extends APINode {
     return new APIRequestCreateCustomConversion(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestCreateDraftNegativeKeywordList createDraftNegativeKeywordList() {
-    return new APIRequestCreateDraftNegativeKeywordList(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetEventSourceGroups getEventSourceGroups() {
     return new APIRequestGetEventSourceGroups(this.getPrefixedId().toString(), context);
   }
@@ -546,8 +546,8 @@ public class Business extends APINode {
     return new APIRequestCreateManagedPartnerBusiness(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestGetNegativeKeywordLists getNegativeKeywordLists() {
-    return new APIRequestGetNegativeKeywordLists(this.getPrefixedId().toString(), context);
+  public APIRequestCreateOnboardPartnersToMmLite createOnboardPartnersToMmLite() {
+    return new APIRequestCreateOnboardPartnersToMmLite(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetOpenBridgeConfigurations getOpenBridgeConfigurations() {
@@ -628,6 +628,10 @@ public class Business extends APINode {
 
   public APIRequestCreatePartnerPremiumOption createPartnerPremiumOption() {
     return new APIRequestCreatePartnerPremiumOption(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetPassbackAttributionMetadataConfigs getPassbackAttributionMetadataConfigs() {
+    return new APIRequestGetPassbackAttributionMetadataConfigs(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetPendingClientAdAccounts getPendingClientAdAccounts() {
@@ -2826,6 +2830,139 @@ public class Business extends APINode {
       this.requestField("status", value);
       return this;
     }
+  }
+
+  public static class APIRequestCreateAdsDataSet extends APIRequest<Business> {
+
+    Business lastResponse = null;
+    @Override
+    public Business getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "ad_account_id",
+      "app_id",
+      "is_crm",
+      "name",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public Business parseResponse(String response, String header) throws APIException {
+      return Business.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public Business execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public Business execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<Business> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<Business> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, Business>() {
+           public Business apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateAdsDataSet.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestCreateAdsDataSet(String nodeId, APIContext context) {
+      super(context, nodeId, "/ads_dataset", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateAdsDataSet setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAdsDataSet setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateAdsDataSet setAdAccountId (String adAccountId) {
+      this.setParam("ad_account_id", adAccountId);
+      return this;
+    }
+
+    public APIRequestCreateAdsDataSet setAppId (String appId) {
+      this.setParam("app_id", appId);
+      return this;
+    }
+
+    public APIRequestCreateAdsDataSet setIsCrm (Boolean isCrm) {
+      this.setParam("is_crm", isCrm);
+      return this;
+    }
+    public APIRequestCreateAdsDataSet setIsCrm (String isCrm) {
+      this.setParam("is_crm", isCrm);
+      return this;
+    }
+
+    public APIRequestCreateAdsDataSet setName (String name) {
+      this.setParam("name", name);
+      return this;
+    }
+
+    public APIRequestCreateAdsDataSet requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateAdsDataSet requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAdsDataSet requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateAdsDataSet requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAdsDataSet requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAdsDataSet requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
   }
 
   public static class APIRequestGetAdsReportingMmmReports extends APIRequest<AdsReportBuilderMMMReport> {
@@ -5554,6 +5691,7 @@ public class Business extends APINode {
       "id",
       "io_number",
       "is_attribution_spec_system_default",
+      "is_ba_skip_delayed_eligible",
       "is_direct_deals_enabled",
       "is_in_3ds_authorization_enabled_market",
       "is_notifications_enabled",
@@ -5954,6 +6092,13 @@ public class Business extends APINode {
     }
     public APIRequestGetClientAdAccounts requestIsAttributionSpecSystemDefaultField (boolean value) {
       this.requestField("is_attribution_spec_system_default", value);
+      return this;
+    }
+    public APIRequestGetClientAdAccounts requestIsBaSkipDelayedEligibleField () {
+      return this.requestIsBaSkipDelayedEligibleField(true);
+    }
+    public APIRequestGetClientAdAccounts requestIsBaSkipDelayedEligibleField (boolean value) {
+      this.requestField("is_ba_skip_delayed_eligible", value);
       return this;
     }
     public APIRequestGetClientAdAccounts requestIsDirectDealsEnabledField () {
@@ -11914,121 +12059,6 @@ public class Business extends APINode {
 
   }
 
-  public static class APIRequestCreateDraftNegativeKeywordList extends APIRequest<APINode> {
-
-    APINode lastResponse = null;
-    @Override
-    public APINode getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "negative_keyword_list_file",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINode parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public APINode execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINode execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINode> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINode>() {
-           public APINode apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateDraftNegativeKeywordList.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         },
-         MoreExecutors.directExecutor()
-      );
-    };
-
-    public APIRequestCreateDraftNegativeKeywordList(String nodeId, APIContext context) {
-      super(context, nodeId, "/draft_negative_keyword_lists", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateDraftNegativeKeywordList setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateDraftNegativeKeywordList setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateDraftNegativeKeywordList setNegativeKeywordListFile (File negativeKeywordListFile) {
-      this.setParam("negative_keyword_list_file", negativeKeywordListFile);
-      return this;
-    }
-    public APIRequestCreateDraftNegativeKeywordList setNegativeKeywordListFile (String negativeKeywordListFile) {
-      this.setParam("negative_keyword_list_file", negativeKeywordListFile);
-      return this;
-    }
-
-    public APIRequestCreateDraftNegativeKeywordList requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateDraftNegativeKeywordList requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateDraftNegativeKeywordList requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateDraftNegativeKeywordList requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateDraftNegativeKeywordList requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateDraftNegativeKeywordList requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
   public static class APIRequestGetEventSourceGroups extends APIRequest<EventSourceGroup> {
 
     APINodeList<EventSourceGroup> lastResponse = null;
@@ -14603,59 +14633,48 @@ public class Business extends APINode {
 
   }
 
-  public static class APIRequestGetNegativeKeywordLists extends APIRequest<NegativeKeywordList> {
+  public static class APIRequestCreateOnboardPartnersToMmLite extends APIRequest<APINode> {
 
-    APINodeList<NegativeKeywordList> lastResponse = null;
+    APINode lastResponse = null;
     @Override
-    public APINodeList<NegativeKeywordList> getLastResponse() {
+    public APINode getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "solution_id",
     };
 
     public static final String[] FIELDS = {
-      "applied_active_ad_campaign_groups",
-      "applied_inactive_ad_campaign_groups",
-      "creator_id",
-      "id",
-      "is_fully_reviewed",
-      "last_update_time",
-      "last_update_user_id",
-      "list_name",
-      "total_approved_keyword_count",
-      "total_declined_keyword_count",
-      "total_negative_keyword_count",
-      "total_validated_keyword_count",
     };
 
     @Override
-    public APINodeList<NegativeKeywordList> parseResponse(String response, String header) throws APIException {
-      return NegativeKeywordList.parseResponse(response, getContext(), this, header);
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public APINodeList<NegativeKeywordList> execute() throws APIException {
+    public APINode execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINodeList<NegativeKeywordList> execute(Map<String, Object> extraParams) throws APIException {
+    public APINode execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<APINodeList<NegativeKeywordList>> executeAsync() throws APIException {
+    public ListenableFuture<APINode> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<APINodeList<NegativeKeywordList>> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<NegativeKeywordList>>() {
-           public APINodeList<NegativeKeywordList> apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
              try {
-               return APIRequestGetNegativeKeywordLists.this.parseResponse(result.getBody(), result.getHeader());
+               return APIRequestCreateOnboardPartnersToMmLite.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -14665,28 +14684,33 @@ public class Business extends APINode {
       );
     };
 
-    public APIRequestGetNegativeKeywordLists(String nodeId, APIContext context) {
-      super(context, nodeId, "/negative_keyword_lists", "GET", Arrays.asList(PARAMS));
+    public APIRequestCreateOnboardPartnersToMmLite(String nodeId, APIContext context) {
+      super(context, nodeId, "/onboard_partners_to_mm_lite", "POST", Arrays.asList(PARAMS));
     }
 
     @Override
-    public APIRequestGetNegativeKeywordLists setParam(String param, Object value) {
+    public APIRequestCreateOnboardPartnersToMmLite setParam(String param, Object value) {
       setParamInternal(param, value);
       return this;
     }
 
     @Override
-    public APIRequestGetNegativeKeywordLists setParams(Map<String, Object> params) {
+    public APIRequestCreateOnboardPartnersToMmLite setParams(Map<String, Object> params) {
       setParamsInternal(params);
       return this;
     }
 
 
-    public APIRequestGetNegativeKeywordLists requestAllFields () {
+    public APIRequestCreateOnboardPartnersToMmLite setSolutionId (String solutionId) {
+      this.setParam("solution_id", solutionId);
+      return this;
+    }
+
+    public APIRequestCreateOnboardPartnersToMmLite requestAllFields () {
       return this.requestAllFields(true);
     }
 
-    public APIRequestGetNegativeKeywordLists requestAllFields (boolean value) {
+    public APIRequestCreateOnboardPartnersToMmLite requestAllFields (boolean value) {
       for (String field : FIELDS) {
         this.requestField(field, value);
       }
@@ -14694,12 +14718,12 @@ public class Business extends APINode {
     }
 
     @Override
-    public APIRequestGetNegativeKeywordLists requestFields (List<String> fields) {
+    public APIRequestCreateOnboardPartnersToMmLite requestFields (List<String> fields) {
       return this.requestFields(fields, true);
     }
 
     @Override
-    public APIRequestGetNegativeKeywordLists requestFields (List<String> fields, boolean value) {
+    public APIRequestCreateOnboardPartnersToMmLite requestFields (List<String> fields, boolean value) {
       for (String field : fields) {
         this.requestField(field, value);
       }
@@ -14707,101 +14731,17 @@ public class Business extends APINode {
     }
 
     @Override
-    public APIRequestGetNegativeKeywordLists requestField (String field) {
+    public APIRequestCreateOnboardPartnersToMmLite requestField (String field) {
       this.requestField(field, true);
       return this;
     }
 
     @Override
-    public APIRequestGetNegativeKeywordLists requestField (String field, boolean value) {
+    public APIRequestCreateOnboardPartnersToMmLite requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
 
-    public APIRequestGetNegativeKeywordLists requestAppliedActiveAdCampaignGroupsField () {
-      return this.requestAppliedActiveAdCampaignGroupsField(true);
-    }
-    public APIRequestGetNegativeKeywordLists requestAppliedActiveAdCampaignGroupsField (boolean value) {
-      this.requestField("applied_active_ad_campaign_groups", value);
-      return this;
-    }
-    public APIRequestGetNegativeKeywordLists requestAppliedInactiveAdCampaignGroupsField () {
-      return this.requestAppliedInactiveAdCampaignGroupsField(true);
-    }
-    public APIRequestGetNegativeKeywordLists requestAppliedInactiveAdCampaignGroupsField (boolean value) {
-      this.requestField("applied_inactive_ad_campaign_groups", value);
-      return this;
-    }
-    public APIRequestGetNegativeKeywordLists requestCreatorIdField () {
-      return this.requestCreatorIdField(true);
-    }
-    public APIRequestGetNegativeKeywordLists requestCreatorIdField (boolean value) {
-      this.requestField("creator_id", value);
-      return this;
-    }
-    public APIRequestGetNegativeKeywordLists requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetNegativeKeywordLists requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGetNegativeKeywordLists requestIsFullyReviewedField () {
-      return this.requestIsFullyReviewedField(true);
-    }
-    public APIRequestGetNegativeKeywordLists requestIsFullyReviewedField (boolean value) {
-      this.requestField("is_fully_reviewed", value);
-      return this;
-    }
-    public APIRequestGetNegativeKeywordLists requestLastUpdateTimeField () {
-      return this.requestLastUpdateTimeField(true);
-    }
-    public APIRequestGetNegativeKeywordLists requestLastUpdateTimeField (boolean value) {
-      this.requestField("last_update_time", value);
-      return this;
-    }
-    public APIRequestGetNegativeKeywordLists requestLastUpdateUserIdField () {
-      return this.requestLastUpdateUserIdField(true);
-    }
-    public APIRequestGetNegativeKeywordLists requestLastUpdateUserIdField (boolean value) {
-      this.requestField("last_update_user_id", value);
-      return this;
-    }
-    public APIRequestGetNegativeKeywordLists requestListNameField () {
-      return this.requestListNameField(true);
-    }
-    public APIRequestGetNegativeKeywordLists requestListNameField (boolean value) {
-      this.requestField("list_name", value);
-      return this;
-    }
-    public APIRequestGetNegativeKeywordLists requestTotalApprovedKeywordCountField () {
-      return this.requestTotalApprovedKeywordCountField(true);
-    }
-    public APIRequestGetNegativeKeywordLists requestTotalApprovedKeywordCountField (boolean value) {
-      this.requestField("total_approved_keyword_count", value);
-      return this;
-    }
-    public APIRequestGetNegativeKeywordLists requestTotalDeclinedKeywordCountField () {
-      return this.requestTotalDeclinedKeywordCountField(true);
-    }
-    public APIRequestGetNegativeKeywordLists requestTotalDeclinedKeywordCountField (boolean value) {
-      this.requestField("total_declined_keyword_count", value);
-      return this;
-    }
-    public APIRequestGetNegativeKeywordLists requestTotalNegativeKeywordCountField () {
-      return this.requestTotalNegativeKeywordCountField(true);
-    }
-    public APIRequestGetNegativeKeywordLists requestTotalNegativeKeywordCountField (boolean value) {
-      this.requestField("total_negative_keyword_count", value);
-      return this;
-    }
-    public APIRequestGetNegativeKeywordLists requestTotalValidatedKeywordCountField () {
-      return this.requestTotalValidatedKeywordCountField(true);
-    }
-    public APIRequestGetNegativeKeywordLists requestTotalValidatedKeywordCountField (boolean value) {
-      this.requestField("total_validated_keyword_count", value);
-      return this;
-    }
   }
 
   public static class APIRequestGetOpenBridgeConfigurations extends APIRequest<OpenBridgeConfiguration> {
@@ -15271,6 +15211,7 @@ public class Business extends APINode {
       "id",
       "io_number",
       "is_attribution_spec_system_default",
+      "is_ba_skip_delayed_eligible",
       "is_direct_deals_enabled",
       "is_in_3ds_authorization_enabled_market",
       "is_notifications_enabled",
@@ -15671,6 +15612,13 @@ public class Business extends APINode {
     }
     public APIRequestGetOwnedAdAccounts requestIsAttributionSpecSystemDefaultField (boolean value) {
       this.requestField("is_attribution_spec_system_default", value);
+      return this;
+    }
+    public APIRequestGetOwnedAdAccounts requestIsBaSkipDelayedEligibleField () {
+      return this.requestIsBaSkipDelayedEligibleField(true);
+    }
+    public APIRequestGetOwnedAdAccounts requestIsBaSkipDelayedEligibleField (boolean value) {
+      this.requestField("is_ba_skip_delayed_eligible", value);
       return this;
     }
     public APIRequestGetOwnedAdAccounts requestIsDirectDealsEnabledField () {
@@ -20122,6 +20070,7 @@ public class Business extends APINode {
     }
     public static final String[] PARAMS = {
       "additional_vertical_option",
+      "business_metadata",
       "catalog_segment_filter",
       "catalog_segment_product_set_id",
       "da_display_settings",
@@ -20197,6 +20146,15 @@ public class Business extends APINode {
     }
     public APIRequestCreateOwnedProductCatalog setAdditionalVerticalOption (String additionalVerticalOption) {
       this.setParam("additional_vertical_option", additionalVerticalOption);
+      return this;
+    }
+
+    public APIRequestCreateOwnedProductCatalog setBusinessMetadata (Map<String, String> businessMetadata) {
+      this.setParam("business_metadata", businessMetadata);
+      return this;
+    }
+    public APIRequestCreateOwnedProductCatalog setBusinessMetadata (String businessMetadata) {
+      this.setParam("business_metadata", businessMetadata);
       return this;
     }
 
@@ -21036,6 +20994,111 @@ public class Business extends APINode {
 
     @Override
     public APIRequestCreatePartnerPremiumOption requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestGetPassbackAttributionMetadataConfigs extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetPassbackAttributionMetadataConfigs.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestGetPassbackAttributionMetadataConfigs(String nodeId, APIContext context) {
+      super(context, nodeId, "/passback_attribution_metadata_configs", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetPassbackAttributionMetadataConfigs setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPassbackAttributionMetadataConfigs setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetPassbackAttributionMetadataConfigs requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetPassbackAttributionMetadataConfigs requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPassbackAttributionMetadataConfigs requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetPassbackAttributionMetadataConfigs requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPassbackAttributionMetadataConfigs requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPassbackAttributionMetadataConfigs requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
@@ -25418,6 +25481,8 @@ public class Business extends APINode {
       VALUE_CASHIER_ROLE("CASHIER_ROLE"),
       @SerializedName("CREATE_CONTENT")
       VALUE_CREATE_CONTENT("CREATE_CONTENT"),
+      @SerializedName("GLOBAL_STRUCTURE_MANAGEMENT")
+      VALUE_GLOBAL_STRUCTURE_MANAGEMENT("GLOBAL_STRUCTURE_MANAGEMENT"),
       @SerializedName("MANAGE")
       VALUE_MANAGE("MANAGE"),
       @SerializedName("MANAGE_JOBS")
@@ -26483,6 +26548,8 @@ public class Business extends APINode {
       VALUE_CASHIER_ROLE("CASHIER_ROLE"),
       @SerializedName("CREATE_CONTENT")
       VALUE_CREATE_CONTENT("CREATE_CONTENT"),
+      @SerializedName("GLOBAL_STRUCTURE_MANAGEMENT")
+      VALUE_GLOBAL_STRUCTURE_MANAGEMENT("GLOBAL_STRUCTURE_MANAGEMENT"),
       @SerializedName("MANAGE")
       VALUE_MANAGE("MANAGE"),
       @SerializedName("MANAGE_JOBS")

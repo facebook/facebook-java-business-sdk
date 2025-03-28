@@ -337,6 +337,7 @@ public class AdLabel extends APINode {
       "branded_content",
       "branded_content_sponsor_page_id",
       "bundle_folder_id",
+      "call_to_action",
       "call_to_action_type",
       "categorization_criteria",
       "category_media_source",
@@ -567,6 +568,13 @@ public class AdLabel extends APINode {
     }
     public APIRequestGetAdCreatives requestBundleFolderIdField (boolean value) {
       this.requestField("bundle_folder_id", value);
+      return this;
+    }
+    public APIRequestGetAdCreatives requestCallToActionField () {
+      return this.requestCallToActionField(true);
+    }
+    public APIRequestGetAdCreatives requestCallToActionField (boolean value) {
+      this.requestField("call_to_action", value);
       return this;
     }
     public APIRequestGetAdCreatives requestCallToActionTypeField () {
@@ -1424,6 +1432,7 @@ public class AdLabel extends APINode {
       "full_funnel_exploration_mode",
       "id",
       "instagram_user_id",
+      "is_ba_skip_delayed_eligible",
       "is_budget_schedule_enabled",
       "is_dynamic_creative",
       "issues_info",
@@ -1779,6 +1788,13 @@ public class AdLabel extends APINode {
       this.requestField("instagram_user_id", value);
       return this;
     }
+    public APIRequestGetAdSets requestIsBaSkipDelayedEligibleField () {
+      return this.requestIsBaSkipDelayedEligibleField(true);
+    }
+    public APIRequestGetAdSets requestIsBaSkipDelayedEligibleField (boolean value) {
+      this.requestField("is_ba_skip_delayed_eligible", value);
+      return this;
+    }
     public APIRequestGetAdSets requestIsBudgetScheduleEnabledField () {
       return this.requestIsBudgetScheduleEnabledField(true);
     }
@@ -2018,6 +2034,7 @@ public class AdLabel extends APINode {
     public static final String[] FIELDS = {
       "account_id",
       "adlabels",
+      "advantage_state_info",
       "bid_strategy",
       "boosted_object_id",
       "brand_lift_studies",
@@ -2161,6 +2178,13 @@ public class AdLabel extends APINode {
     }
     public APIRequestGetCampaigns requestAdlabelsField (boolean value) {
       this.requestField("adlabels", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestAdvantageStateInfoField () {
+      return this.requestAdvantageStateInfoField(true);
+    }
+    public APIRequestGetCampaigns requestAdvantageStateInfoField (boolean value) {
+      this.requestField("advantage_state_info", value);
       return this;
     }
     public APIRequestGetCampaigns requestBidStrategyField () {

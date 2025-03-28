@@ -47,6 +47,8 @@ public class AdsValueAdjustmentRuleCollection extends APINode {
   private Boolean mIsDefaultSetting = null;
   @SerializedName("name")
   private String mName = null;
+  @SerializedName("product_type")
+  private String mProductType = null;
   protected static Gson gson = null;
 
   AdsValueAdjustmentRuleCollection() {
@@ -264,6 +266,10 @@ public class AdsValueAdjustmentRuleCollection extends APINode {
     return new APIRequestGet(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestUpdate update() {
+    return new APIRequestUpdate(this.getPrefixedId().toString(), context);
+  }
+
 
   public String getFieldId() {
     return mId;
@@ -275,6 +281,10 @@ public class AdsValueAdjustmentRuleCollection extends APINode {
 
   public String getFieldName() {
     return mName;
+  }
+
+  public String getFieldProductType() {
+    return mProductType;
   }
 
 
@@ -398,6 +408,7 @@ public class AdsValueAdjustmentRuleCollection extends APINode {
       "id",
       "is_default_setting",
       "name",
+      "product_type",
     };
 
     @Override
@@ -511,6 +522,165 @@ public class AdsValueAdjustmentRuleCollection extends APINode {
       this.requestField("name", value);
       return this;
     }
+    public APIRequestGet requestProductTypeField () {
+      return this.requestProductTypeField(true);
+    }
+    public APIRequestGet requestProductTypeField (boolean value) {
+      this.requestField("product_type", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestUpdate extends APIRequest<AdsValueAdjustmentRuleCollection> {
+
+    AdsValueAdjustmentRuleCollection lastResponse = null;
+    @Override
+    public AdsValueAdjustmentRuleCollection getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "is_default_setting",
+      "name",
+      "rules",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public AdsValueAdjustmentRuleCollection parseResponse(String response, String header) throws APIException {
+      return AdsValueAdjustmentRuleCollection.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public AdsValueAdjustmentRuleCollection execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public AdsValueAdjustmentRuleCollection execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<AdsValueAdjustmentRuleCollection> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<AdsValueAdjustmentRuleCollection> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, AdsValueAdjustmentRuleCollection>() {
+           public AdsValueAdjustmentRuleCollection apply(ResponseWrapper result) {
+             try {
+               return APIRequestUpdate.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestUpdate(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestUpdate setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestUpdate setIsDefaultSetting (Boolean isDefaultSetting) {
+      this.setParam("is_default_setting", isDefaultSetting);
+      return this;
+    }
+    public APIRequestUpdate setIsDefaultSetting (String isDefaultSetting) {
+      this.setParam("is_default_setting", isDefaultSetting);
+      return this;
+    }
+
+    public APIRequestUpdate setName (String name) {
+      this.setParam("name", name);
+      return this;
+    }
+
+    public APIRequestUpdate setRules (List<Map<String, String>> rules) {
+      this.setParam("rules", rules);
+      return this;
+    }
+    public APIRequestUpdate setRules (String rules) {
+      this.setParam("rules", rules);
+      return this;
+    }
+
+    public APIRequestUpdate requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestUpdate requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestUpdate requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static enum EnumProductType {
+      @SerializedName("AUDIENCE")
+      VALUE_AUDIENCE("AUDIENCE"),
+      @SerializedName("LEADGEN_ADS")
+      VALUE_LEADGEN_ADS("LEADGEN_ADS"),
+      @SerializedName("OMNI_CHANNEL")
+      VALUE_OMNI_CHANNEL("OMNI_CHANNEL"),
+      ;
+
+      private String value;
+
+      private EnumProductType(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
   }
 
 
@@ -531,6 +701,7 @@ public class AdsValueAdjustmentRuleCollection extends APINode {
     this.mId = instance.mId;
     this.mIsDefaultSetting = instance.mIsDefaultSetting;
     this.mName = instance.mName;
+    this.mProductType = instance.mProductType;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

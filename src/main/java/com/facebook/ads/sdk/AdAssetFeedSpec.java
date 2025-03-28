@@ -725,6 +725,8 @@ public class AdAssetFeedSpec extends APINode {
       VALUE_VIDEO_ANNOTATION("VIDEO_ANNOTATION"),
       @SerializedName("VIDEO_CALL")
       VALUE_VIDEO_CALL("VIDEO_CALL"),
+      @SerializedName("VIEW_CART")
+      VALUE_VIEW_CART("VIEW_CART"),
       @SerializedName("VIEW_CHANNEL")
       VALUE_VIEW_CHANNEL("VIEW_CHANNEL"),
       @SerializedName("VIEW_PRODUCT")

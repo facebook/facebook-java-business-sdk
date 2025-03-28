@@ -43,6 +43,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class TargetingSubscriberUniverse extends APINode {
   @SerializedName("messenger_subscriber_source")
   private IDName mMessengerSubscriberSource = null;
+  @SerializedName("whatsapp_subscriber_pool")
+  private IDName mWhatsappSubscriberPool = null;
   @SerializedName("whatsapp_subscriber_source")
   private IDName mWhatsappSubscriberSource = null;
   protected static Gson gson = null;
@@ -210,6 +212,20 @@ public class TargetingSubscriberUniverse extends APINode {
     this.mMessengerSubscriberSource = IDName.getGson().fromJson(value, type);
     return this;
   }
+  public IDName getFieldWhatsappSubscriberPool() {
+    return mWhatsappSubscriberPool;
+  }
+
+  public TargetingSubscriberUniverse setFieldWhatsappSubscriberPool(IDName value) {
+    this.mWhatsappSubscriberPool = value;
+    return this;
+  }
+
+  public TargetingSubscriberUniverse setFieldWhatsappSubscriberPool(String value) {
+    Type type = new TypeToken<IDName>(){}.getType();
+    this.mWhatsappSubscriberPool = IDName.getGson().fromJson(value, type);
+    return this;
+  }
   public IDName getFieldWhatsappSubscriberSource() {
     return mWhatsappSubscriberSource;
   }
@@ -242,6 +258,7 @@ public class TargetingSubscriberUniverse extends APINode {
 
   public TargetingSubscriberUniverse copyFrom(TargetingSubscriberUniverse instance) {
     this.mMessengerSubscriberSource = instance.mMessengerSubscriberSource;
+    this.mWhatsappSubscriberPool = instance.mWhatsappSubscriberPool;
     this.mWhatsappSubscriberSource = instance.mWhatsappSubscriberSource;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

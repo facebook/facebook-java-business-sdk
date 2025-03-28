@@ -952,6 +952,7 @@ public class BusinessAssetGroup extends APINode {
       "id",
       "io_number",
       "is_attribution_spec_system_default",
+      "is_ba_skip_delayed_eligible",
       "is_direct_deals_enabled",
       "is_in_3ds_authorization_enabled_market",
       "is_notifications_enabled",
@@ -1347,6 +1348,13 @@ public class BusinessAssetGroup extends APINode {
     }
     public APIRequestGetContainedAdAccounts requestIsAttributionSpecSystemDefaultField (boolean value) {
       this.requestField("is_attribution_spec_system_default", value);
+      return this;
+    }
+    public APIRequestGetContainedAdAccounts requestIsBaSkipDelayedEligibleField () {
+      return this.requestIsBaSkipDelayedEligibleField(true);
+    }
+    public APIRequestGetContainedAdAccounts requestIsBaSkipDelayedEligibleField (boolean value) {
+      this.requestField("is_ba_skip_delayed_eligible", value);
       return this;
     }
     public APIRequestGetContainedAdAccounts requestIsDirectDealsEnabledField () {
@@ -6675,6 +6683,8 @@ public class BusinessAssetGroup extends APINode {
       VALUE_CASHIER_ROLE("CASHIER_ROLE"),
       @SerializedName("CREATE_CONTENT")
       VALUE_CREATE_CONTENT("CREATE_CONTENT"),
+      @SerializedName("GLOBAL_STRUCTURE_MANAGEMENT")
+      VALUE_GLOBAL_STRUCTURE_MANAGEMENT("GLOBAL_STRUCTURE_MANAGEMENT"),
       @SerializedName("MANAGE")
       VALUE_MANAGE("MANAGE"),
       @SerializedName("MANAGE_JOBS")

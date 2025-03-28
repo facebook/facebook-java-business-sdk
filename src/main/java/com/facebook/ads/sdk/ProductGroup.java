@@ -370,6 +370,7 @@ public class ProductGroup extends APINode {
       "product_feed",
       "product_group",
       "product_local_info",
+      "product_relationship",
       "product_type",
       "quantity_to_sell_on_facebook",
       "retailer_id",
@@ -893,6 +894,13 @@ public class ProductGroup extends APINode {
     }
     public APIRequestGetProducts requestProductLocalInfoField (boolean value) {
       this.requestField("product_local_info", value);
+      return this;
+    }
+    public APIRequestGetProducts requestProductRelationshipField () {
+      return this.requestProductRelationshipField(true);
+    }
+    public APIRequestGetProducts requestProductRelationshipField (boolean value) {
+      this.requestField("product_relationship", value);
       return this;
     }
     public APIRequestGetProducts requestProductTypeField () {

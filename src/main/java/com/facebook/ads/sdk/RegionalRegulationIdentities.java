@@ -45,6 +45,14 @@ public class RegionalRegulationIdentities extends APINode {
   private String mAustraliaFinservBeneficiary = null;
   @SerializedName("australia_finserv_payer")
   private String mAustraliaFinservPayer = null;
+  @SerializedName("india_finserv_beneficiary")
+  private String mIndiaFinservBeneficiary = null;
+  @SerializedName("india_finserv_payer")
+  private String mIndiaFinservPayer = null;
+  @SerializedName("singapore_universal_beneficiary")
+  private String mSingaporeUniversalBeneficiary = null;
+  @SerializedName("singapore_universal_payer")
+  private String mSingaporeUniversalPayer = null;
   @SerializedName("taiwan_finserv_beneficiary")
   private String mTaiwanFinservBeneficiary = null;
   @SerializedName("taiwan_finserv_payer")
@@ -222,6 +230,42 @@ public class RegionalRegulationIdentities extends APINode {
     return this;
   }
 
+  public String getFieldIndiaFinservBeneficiary() {
+    return mIndiaFinservBeneficiary;
+  }
+
+  public RegionalRegulationIdentities setFieldIndiaFinservBeneficiary(String value) {
+    this.mIndiaFinservBeneficiary = value;
+    return this;
+  }
+
+  public String getFieldIndiaFinservPayer() {
+    return mIndiaFinservPayer;
+  }
+
+  public RegionalRegulationIdentities setFieldIndiaFinservPayer(String value) {
+    this.mIndiaFinservPayer = value;
+    return this;
+  }
+
+  public String getFieldSingaporeUniversalBeneficiary() {
+    return mSingaporeUniversalBeneficiary;
+  }
+
+  public RegionalRegulationIdentities setFieldSingaporeUniversalBeneficiary(String value) {
+    this.mSingaporeUniversalBeneficiary = value;
+    return this;
+  }
+
+  public String getFieldSingaporeUniversalPayer() {
+    return mSingaporeUniversalPayer;
+  }
+
+  public RegionalRegulationIdentities setFieldSingaporeUniversalPayer(String value) {
+    this.mSingaporeUniversalPayer = value;
+    return this;
+  }
+
   public String getFieldTaiwanFinservBeneficiary() {
     return mTaiwanFinservBeneficiary;
   }
@@ -277,6 +321,10 @@ public class RegionalRegulationIdentities extends APINode {
   public RegionalRegulationIdentities copyFrom(RegionalRegulationIdentities instance) {
     this.mAustraliaFinservBeneficiary = instance.mAustraliaFinservBeneficiary;
     this.mAustraliaFinservPayer = instance.mAustraliaFinservPayer;
+    this.mIndiaFinservBeneficiary = instance.mIndiaFinservBeneficiary;
+    this.mIndiaFinservPayer = instance.mIndiaFinservPayer;
+    this.mSingaporeUniversalBeneficiary = instance.mSingaporeUniversalBeneficiary;
+    this.mSingaporeUniversalPayer = instance.mSingaporeUniversalPayer;
     this.mTaiwanFinservBeneficiary = instance.mTaiwanFinservBeneficiary;
     this.mTaiwanFinservPayer = instance.mTaiwanFinservPayer;
     this.mTaiwanUniversalBeneficiary = instance.mTaiwanUniversalBeneficiary;

@@ -55,8 +55,6 @@ public class AdCreativeObjectStorySpec extends APINode {
   private AdCreativeLinkData mTemplateData = null;
   @SerializedName("text_data")
   private AdCreativeTextData mTextData = null;
-  @SerializedName("threads_user_id")
-  private String mThreadsUserId = null;
   @SerializedName("video_data")
   private AdCreativeVideoData mVideoData = null;
   protected static Gson gson = null;
@@ -298,15 +296,6 @@ public class AdCreativeObjectStorySpec extends APINode {
     this.mTextData = AdCreativeTextData.getGson().fromJson(value, type);
     return this;
   }
-  public String getFieldThreadsUserId() {
-    return mThreadsUserId;
-  }
-
-  public AdCreativeObjectStorySpec setFieldThreadsUserId(String value) {
-    this.mThreadsUserId = value;
-    return this;
-  }
-
   public AdCreativeVideoData getFieldVideoData() {
     return mVideoData;
   }
@@ -345,7 +334,6 @@ public class AdCreativeObjectStorySpec extends APINode {
     this.mProductData = instance.mProductData;
     this.mTemplateData = instance.mTemplateData;
     this.mTextData = instance.mTextData;
-    this.mThreadsUserId = instance.mThreadsUserId;
     this.mVideoData = instance.mVideoData;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

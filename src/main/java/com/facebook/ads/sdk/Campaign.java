@@ -45,6 +45,8 @@ public class Campaign extends APINode {
   private String mAccountId = null;
   @SerializedName("adlabels")
   private List<AdLabel> mAdlabels = null;
+  @SerializedName("advantage_state_info")
+  private AdCampaignGroupAdvantageState mAdvantageStateInfo = null;
   @SerializedName("bid_strategy")
   private EnumBidStrategy mBidStrategy = null;
   @SerializedName("boosted_object_id")
@@ -391,6 +393,10 @@ public class Campaign extends APINode {
 
   public List<AdLabel> getFieldAdlabels() {
     return mAdlabels;
+  }
+
+  public AdCampaignGroupAdvantageState getFieldAdvantageStateInfo() {
+    return mAdvantageStateInfo;
   }
 
   public EnumBidStrategy getFieldBidStrategy() {
@@ -1636,6 +1642,7 @@ public class Campaign extends APINode {
       "full_funnel_exploration_mode",
       "id",
       "instagram_user_id",
+      "is_ba_skip_delayed_eligible",
       "is_budget_schedule_enabled",
       "is_dynamic_creative",
       "issues_info",
@@ -2027,6 +2034,13 @@ public class Campaign extends APINode {
       this.requestField("instagram_user_id", value);
       return this;
     }
+    public APIRequestGetAdSets requestIsBaSkipDelayedEligibleField () {
+      return this.requestIsBaSkipDelayedEligibleField(true);
+    }
+    public APIRequestGetAdSets requestIsBaSkipDelayedEligibleField (boolean value) {
+      this.requestField("is_ba_skip_delayed_eligible", value);
+      return this;
+    }
     public APIRequestGetAdSets requestIsBudgetScheduleEnabledField () {
       return this.requestIsBudgetScheduleEnabledField(true);
     }
@@ -2415,6 +2429,7 @@ public class Campaign extends APINode {
     public static final String[] FIELDS = {
       "account_id",
       "adlabels",
+      "advantage_state_info",
       "bid_strategy",
       "boosted_object_id",
       "brand_lift_studies",
@@ -2594,6 +2609,13 @@ public class Campaign extends APINode {
     }
     public APIRequestGetCopies requestAdlabelsField (boolean value) {
       this.requestField("adlabels", value);
+      return this;
+    }
+    public APIRequestGetCopies requestAdvantageStateInfoField () {
+      return this.requestAdvantageStateInfoField(true);
+    }
+    public APIRequestGetCopies requestAdvantageStateInfoField (boolean value) {
+      this.requestField("advantage_state_info", value);
       return this;
     }
     public APIRequestGetCopies requestBidStrategyField () {
@@ -3746,6 +3768,7 @@ public class Campaign extends APINode {
     public static final String[] FIELDS = {
       "account_id",
       "adlabels",
+      "advantage_state_info",
       "bid_strategy",
       "boosted_object_id",
       "brand_lift_studies",
@@ -3925,6 +3948,13 @@ public class Campaign extends APINode {
     }
     public APIRequestGet requestAdlabelsField (boolean value) {
       this.requestField("adlabels", value);
+      return this;
+    }
+    public APIRequestGet requestAdvantageStateInfoField () {
+      return this.requestAdvantageStateInfoField(true);
+    }
+    public APIRequestGet requestAdvantageStateInfoField (boolean value) {
+      this.requestField("advantage_state_info", value);
       return this;
     }
     public APIRequestGet requestBidStrategyField () {
@@ -5393,6 +5423,7 @@ public class Campaign extends APINode {
   public Campaign copyFrom(Campaign instance) {
     this.mAccountId = instance.mAccountId;
     this.mAdlabels = instance.mAdlabels;
+    this.mAdvantageStateInfo = instance.mAdvantageStateInfo;
     this.mBidStrategy = instance.mBidStrategy;
     this.mBoostedObjectId = instance.mBoostedObjectId;
     this.mBrandLiftStudies = instance.mBrandLiftStudies;

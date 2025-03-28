@@ -1052,6 +1052,8 @@ public class PageCallToAction extends APINode {
       VALUE_CHECK_IN("CHECK_IN"),
       @SerializedName("CONTACT_US")
       VALUE_CONTACT_US("CONTACT_US"),
+      @SerializedName("CREATOR_STOREFRONT")
+      VALUE_CREATOR_STOREFRONT("CREATOR_STOREFRONT"),
       @SerializedName("DONATE_NOW")
       VALUE_DONATE_NOW("DONATE_NOW"),
       @SerializedName("EMAIL")
