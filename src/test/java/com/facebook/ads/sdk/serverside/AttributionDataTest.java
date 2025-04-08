@@ -33,6 +33,7 @@ public class AttributionDataTest {
         long visitTime = 123L;
         int attributionWindow = 7;
         float attributionShare = 0.5f;
+        float attributionValue = 0.3f;
         AttributionModelEnum attributionModel = AttributionModelEnum.LAST_CLICK;
         
         attributionData
@@ -43,7 +44,8 @@ public class AttributionDataTest {
                      .visitTime(visitTime)
                      .attributionWindow(attributionWindow)
                      .attributionShare(attributionShare)
-                     .attributionModel(attributionModel);
+                     .attributionModel(attributionModel)
+                     .attributionValue(attributionValue);
 
         assertEquals(attributionData.getScope(), scope);
         assertEquals(attributionData.getAdId(), adId);
@@ -53,6 +55,7 @@ public class AttributionDataTest {
         assertEquals((float)attributionData.getAttributionShare(), attributionShare, 0);
         assertEquals((long) attributionData.getVisitTime(), visitTime);
         assertEquals(attributionData.getAttributionModel(), attributionModel);
+        assertEquals((float)attributionData.getAttributionValue(), attributionValue, 0);
     }
 
     @Test
@@ -66,6 +69,7 @@ public class AttributionDataTest {
         long visitTime = 123L;
         int attributionWindow = 7;
         float attributionShare = 0.5f;
+        float attributionValue = 0.3f;
         AttributionModelEnum attributionModel = AttributionModelEnum.LAST_CLICK;
         
         attributionData1
@@ -76,7 +80,8 @@ public class AttributionDataTest {
                      .visitTime(visitTime)
                      .attributionWindow(attributionWindow)
                      .attributionShare(attributionShare)
-                     .attributionModel(attributionModel);
+                     .attributionModel(attributionModel)
+                     .attributionValue(attributionValue);
 
         attributionData2
                      .scope(scope)
@@ -86,7 +91,8 @@ public class AttributionDataTest {
                      .visitTime(visitTime)
                      .attributionWindow(attributionWindow)
                      .attributionShare(attributionShare)
-                     .attributionModel(attributionModel);
+                     .attributionModel(attributionModel)
+                     .attributionValue(attributionValue);
 
         assertEquals(attributionData1, attributionData2);
         assertEquals(attributionData1.hashCode(), attributionData2.hashCode());
@@ -102,6 +108,7 @@ public class AttributionDataTest {
         String campaignId = "campaignId-0";
         long visitTime = 123L;
         float attributionShare = 0.5f;
+        float attributionValue = 0.3f;
         AttributionModelEnum attributionModel = AttributionModelEnum.LAST_CLICK;
         
         // set different attribution windown to test
@@ -113,7 +120,8 @@ public class AttributionDataTest {
                      .visitTime(visitTime)
                      .attributionWindow(28)
                      .attributionShare(attributionShare)
-                     .attributionModel(attributionModel);
+                     .attributionModel(attributionModel)
+                     .attributionValue(attributionValue);
 
         attributionData2
                      .scope(scope)
@@ -123,7 +131,8 @@ public class AttributionDataTest {
                      .visitTime(visitTime)
                      .attributionWindow(7)
                      .attributionShare(attributionShare)
-                     .attributionModel(attributionModel);
+                     .attributionModel(attributionModel)
+                     .attributionValue(attributionValue);
 
         assertNotEquals(attributionData1, attributionData2);
         assertNotEquals(attributionData1.hashCode(), attributionData2.hashCode());

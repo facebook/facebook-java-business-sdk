@@ -31,6 +31,9 @@ public class CustomData {
   @SerializedName("value")
   private Float value = null;
 
+  @SerializedName("net_revenue")
+  private Float netRevenue = null;
+
   @SerializedName("currency")
   private String currency = null;
 
@@ -82,6 +85,7 @@ public class CustomData {
    * Constructor.
    *
    * @param value a numeric value associated with this event
+   * @param netRevenue a numeric net_revenue associated with this event
    * @param currency currency code for the value specified
    * @param contentName name of the page or product associated with the event
    * @param contentCategory category of the content associated with the event
@@ -98,12 +102,13 @@ public class CustomData {
    * @param itemNumber the item number
    * @param customProperties Custom Properties to be added to the Custom Data
    */
-  public CustomData(Float value, String currency, String contentName,
+  public CustomData(Float value, Float netRevenue, String currency, String contentName,
       String contentCategory, List<String> contentIds,
       List<Content> contents, String contentType, String orderId, Float predictedLtv,
       String numItems, String status, String searchString, DeliveryCategory deliveryCategory, String itemNumber,
       HashMap<String, String> customProperties) {
     this.value = value;
+    this.netRevenue = netRevenue;
     this.currency = currency;
     this.contentName = contentName;
     this.contentCategory = contentCategory;
@@ -153,6 +158,41 @@ public class CustomData {
    */
   public void setValue(Float value) {
     this.value = value;
+  }
+
+  /**
+   * Set a numeric net revenue associated with this event. This could be a monetary value or a value in
+   * some other metric.
+   * <p> Example: 42.54.
+   *
+   * @param netRevenue a numeric net revenue associated with this event
+   * @return CustomData
+   */
+  public CustomData netRevenue(Float netRevenue) {
+    this.netRevenue = netRevenue;
+    return this;
+  }
+
+  /**
+   * A numeric net revenue associated with this event. This could be a monetary value or a value in some
+   * other metric.
+   * <p> Example: 42.54.
+   *
+   * @return netRevenue
+   */
+  public Float getNetRevenue() {
+    return netRevenue;
+  }
+
+  /**
+   * Set a numeric net revenue associated with this event. This could be a monetary value or a value in
+   * some other metric.
+   * <p> Example: 42.54.
+   *
+   * @param netRevenue a numeric net revenue associated with this event
+   */
+  public void setNetRevenue(Float netRevenue) {
+    this.netRevenue = netRevenue;
   }
 
   /**
@@ -646,6 +686,7 @@ public class CustomData {
     }
     CustomData customData = (CustomData) o;
     return Objects.equals(this.value, customData.value)
+        && Objects.equals(this.netRevenue, customData.netRevenue)
         && Objects.equals(this.currency, customData.currency)
         && Objects.equals(this.contentName, customData.contentName)
         && Objects.equals(this.contentCategory, customData.contentCategory)
@@ -666,6 +707,7 @@ public class CustomData {
   public int hashCode() {
     return Objects.hash(
         value,
+        netRevenue,
         currency,
         contentName,
         contentCategory,
@@ -688,6 +730,7 @@ public class CustomData {
     sb.append("class CustomData {\n");
 
     sb.append("    value: ").append(toIndentedString(value)).append("\n");
+    sb.append("    netRevenue: ").append(toIndentedString(netRevenue)).append("\n");
     sb.append("    currency: ").append(toIndentedString(currency)).append("\n");
     sb.append("    contentName: ").append(toIndentedString(contentName)).append("\n");
     sb.append("    contentCategory: ").append(toIndentedString(contentCategory)).append("\n");

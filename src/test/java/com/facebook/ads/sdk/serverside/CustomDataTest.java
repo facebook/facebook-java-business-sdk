@@ -36,6 +36,7 @@ public class CustomDataTest {
         customProperties.put("key-12", "value-12");
         customData
                 .value(0.123f)
+                .netRevenue(0.1f)
                 .currency("USD")
                 .contentName("content-name-1")
                 .contentCategory("content-category-2")
@@ -52,6 +53,7 @@ public class CustomDataTest {
                 .customProperties(customProperties);
 
         assertEquals(customData.getValue(), 0.123f, 0);
+        assertEquals(customData.getNetRevenue(), 0.1f, 0);
         assertEquals(customData.getCurrency(), "USD");
         assertEquals(customData.getContentName(), "content-name-1");
         assertEquals(customData.getContentCategory(), "content-category-2");
@@ -74,6 +76,7 @@ public class CustomDataTest {
         customProperties.put("key-12", "value-12");
         CustomData customData1 = new CustomData();
         customData1.value(0.123f)
+                .netRevenue(0.1f)
                 .currency("USD")
                 .contentName("content-name-1")
                 .contentCategory("content-category-2")
@@ -91,6 +94,7 @@ public class CustomDataTest {
 
         CustomData customData2 = new CustomData();
         customData2.value(0.123f)
+                .netRevenue(0.1f)
                 .currency("USD")
                 .contentName("content-name-1")
                 .contentCategory("content-category-2")
@@ -116,6 +120,7 @@ public class CustomDataTest {
         customProperties.put("key-12", "value-12");
         CustomData customData1 = new CustomData();
         customData1.value(0.123f)
+                .netRevenue(0.1f)
                 .currency("USD")
                 .contentName("content-name-1")
                 .contentCategory("content-category-2")
@@ -133,6 +138,7 @@ public class CustomDataTest {
 
         CustomData customData2 = new CustomData();
         customData2.value(0.123f)
+                .netRevenue(0.09f)
                 .currency("USD")
                 .contentName("content-name-1")
                 .contentCategory("content-category-2")
