@@ -68,7 +68,7 @@ public class CustomDataAdapter implements JsonSerializer<CustomData> {
         }
 
         // Adding Custom Properties to serialized object
-        if (null != src.getCustomProperties()) {
+        if (src.getCustomProperties() != null) {
             for (final String key : src.getCustomProperties().keySet()) {
                 serializedObject.addProperty(key, src.getCustomProperties().get(key));
             }
