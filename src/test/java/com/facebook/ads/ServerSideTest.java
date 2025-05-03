@@ -33,6 +33,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class ServerSideTest {
@@ -85,10 +86,13 @@ public class ServerSideTest {
     String serializedPayload = eventRequest.getSerializedPayload();
 
     // ASSERT
-    String cpString = (new Gson()).toJson(customProperties);
     String serializedContents = (new Gson()).toJson(contents);
     String serializedContentIds = (new Gson()).toJson(contentIds);
-    Assert.assertTrue(serializedPayload.contains(cpString.substring(1, cpString.length() - 1)));
+
+    Map<String, String> mp = customProperties; 
+    mp.forEach((key, value) -> Assert.assertTrue(serializedPayload.contains(
+            "\"" + key + "\":" +  "\"" + value + "\"" 
+    ))); 
     Assert.assertTrue(serializedPayload.contains(serializedContents));
     Assert.assertTrue(serializedPayload.contains(serializedContentIds));
     Assert.assertTrue(serializedPayload.contains(currency.toLowerCase()));
