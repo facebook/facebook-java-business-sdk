@@ -33,6 +33,12 @@ public class OriginalEventData {
   @SerializedName("event_time")
   private Long eventTime = null;
 
+  @SerializedName("order_id")
+  private String orderID = null;
+
+  @SerializedName("event_id")
+  private String eventID = null;
+
   /**
    * Default Constructor.
    */
@@ -42,19 +48,23 @@ public class OriginalEventData {
   /**
    * Constructor.
    *
-   * @param eventName Meta pixel Standard Event or Custom Event name
+   * @param eventName Meta pixel Standard Event or Custom Event name.
    * @param eventTime Unix timestamp in seconds indicating when the original event occurred.
+   * @param orderID The order ID for this transaction as a string.
+   * @param eventID A unique string chosen by the advertiser.
    */
-  public OriginalEventData(String eventName, Long eventTime) {
+  public OriginalEventData(String eventName, Long eventTime, String orderID, String eventID) {
     this.eventName = eventName;
     this.eventTime = eventTime;
+    this.orderID = orderID;
+    this.eventID = eventID;
   }
 
   /**
    * Set Meta pixel Standard Event or Custom Event name.
    *
    * @param eventName Meta pixel Standard Event or Custom Event name.
-   * @return Event
+   * @return OriginalEventData
    */
   public OriginalEventData eventName(String eventName) {
     this.eventName = eventName;
@@ -83,7 +93,7 @@ public class OriginalEventData {
    * Set Unix timestamp in seconds indicating when the original event occurred.
    *
    * @param eventTime Unix timestamp in seconds indicating when the original event occurred
-   * @return Event
+   * @return OriginalEventData
    */
   public OriginalEventData eventTime(Long eventTime) {
     this.eventTime = eventTime;
@@ -108,6 +118,64 @@ public class OriginalEventData {
     this.eventTime = eventTime;
   }
 
+  /**
+   * Set the order_id of original Event.
+   *
+   * @param orderID The order ID for this transaction as a string.
+   * @return OriginalEventData
+   */
+  public OriginalEventData orderID(String orderID) {
+    this.orderID = orderID;
+    return this;
+  }
+
+  /**
+   * Get the order_id of original Event.
+   *
+   * @return orderID
+   */
+  public String getOrderID() {
+    return orderID;
+  }
+
+  /**
+   * Set the order_id of original Event.
+   *
+   * @param orderID The order ID for this transaction as a string.
+   */
+  public void setOrderID(String orderID) {
+    this.orderID = orderID;
+  }
+
+  /**
+   * Set the event_id of original Event.
+   *
+   * @param eventID A unique string chosen by the advertiser.
+   * @return OriginalEventData
+   */
+  public OriginalEventData eventID(String eventID) {
+    this.eventID = eventID;
+    return this;
+  }
+
+  /**
+   * Get the event_id of original Event.
+   *
+   * @return event_id
+   */
+  public String getEventID() {
+    return eventID;
+  }
+
+  /**
+   * Set the event_id of original Event.
+   *
+   * @param eventID A unique string chosen by the advertiser.
+   */
+  public void setEventID(String eventID) {
+    this.eventID = eventID;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -118,12 +186,14 @@ public class OriginalEventData {
     }
     OriginalEventData originalEvent = (OriginalEventData) o;
     return Objects.equals(this.eventName, originalEvent.eventName)
-        && Objects.equals(this.eventTime, originalEvent.eventTime);
+        && Objects.equals(this.eventTime, originalEvent.eventTime)
+        && Objects.equals(this.orderID, originalEvent.orderID)
+        && Objects.equals(this.eventID, originalEvent.eventID);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(eventName, eventTime);
+    return Objects.hash(eventName, eventTime, orderID, eventID);
   }
 
   @Override
@@ -132,6 +202,8 @@ public class OriginalEventData {
     sb.append("class OriginalEventData {\n");
     sb.append("    eventName: ").append(toIndentedString(eventName)).append("\n");
     sb.append("    eventTime: ").append(toIndentedString(eventTime)).append("\n");
+    sb.append("    orderID: ").append(toIndentedString(orderID)).append("\n");
+    sb.append("    eventID: ").append(toIndentedString(eventID)).append("\n");
     sb.append("}");
     return sb.toString();
   }

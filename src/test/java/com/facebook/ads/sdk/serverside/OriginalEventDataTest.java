@@ -28,10 +28,14 @@ public class OriginalEventDataTest {
         OriginalEventData originalEventData = new OriginalEventData();
         String eventName = "eventName-0";
         long eventTime = 123L;
-        originalEventData.eventName(eventName).eventTime(eventTime);
+        String orderID = "orderID-0";
+        String eventID = "eventID-0";
+        originalEventData.eventName(eventName).eventTime(eventTime).orderID(orderID).eventID(eventID);
 
         assertEquals(originalEventData.getEventName(), eventName);
         assertEquals((long) originalEventData.getEventTime(), eventTime);
+        assertEquals(originalEventData.getOrderID(), orderID);
+        assertEquals(originalEventData.getEventID(), eventID);
     }
 
     @Test
@@ -39,9 +43,11 @@ public class OriginalEventDataTest {
         OriginalEventData originalEventData1 = new OriginalEventData();
         String eventName = "eventName-0";
         long eventTime = 123L;
-        originalEventData1.eventName(eventName).eventTime(eventTime);
+        String orderID = "orderID-0";
+        String eventID = "eventID-0";
+        originalEventData1.eventName(eventName).eventTime(eventTime).orderID(orderID).eventID(eventID);
         OriginalEventData originalEventData2 = new OriginalEventData();
-        originalEventData2.eventName(eventName).eventTime(eventTime);
+        originalEventData2.eventName(eventName).eventTime(eventTime).orderID(orderID).eventID(eventID);
 
         assertEquals(originalEventData1, originalEventData2);
         assertEquals(originalEventData1.hashCode(), originalEventData2.hashCode());
