@@ -23,7 +23,6 @@
 package com.facebook.ads.sdk;
 
 import java.nio.file.Files;
-import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -535,6 +534,7 @@ public class APIRequest<T extends APINode> {
       context.log("GET: " + url.toString());
       HttpsURLConnection con = (HttpsURLConnection) url.openConnection();
 
+      setTimeout(con, context);
       con.setRequestMethod("GET");
       con.setRequestProperty("User-Agent", USER_AGENT);
       con.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
@@ -542,12 +542,22 @@ public class APIRequest<T extends APINode> {
       return readResponse(con);
     }
 
+    /**
+     * set timeout for connection
+     * @param con connection
+     * @param context context
+     */
+    public void setTimeout(HttpsURLConnection con, APIContext context){
+        con.setConnectTimeout(Math.max(context.getConnectTimeout(), 0));
+        con.setReadTimeout(Math.max(context.getReadTimeout(), 0));
+    }
     public ResponseWrapper sendPost(String apiUrl, Map<String, Object> allParams, APIContext context) throws APIException, IOException {
       String boundary = "--------------------------" + new Random().nextLong();
       URL url = new URL(apiUrl);
       context.log("Post: " + url.toString());
       HttpsURLConnection con = (HttpsURLConnection) url.openConnection();
 
+      setTimeout(con, context);
       con.setRequestMethod("POST");
       con.setRequestProperty("User-Agent", USER_AGENT);
       con.setRequestProperty("Content-Type","multipart/form-data; boundary=" + boundary);
@@ -601,6 +611,7 @@ public class APIRequest<T extends APINode> {
       context.log("Delete: " + url.toString());
       HttpsURLConnection con = (HttpsURLConnection) url.openConnection();
 
+      setTimeout(con, context);
       con.setRequestMethod("DELETE");
       con.setRequestProperty("User-Agent", USER_AGENT);
       con.setRequestProperty("Content-Type","multipart/form-data; boundary=" + boundary);
