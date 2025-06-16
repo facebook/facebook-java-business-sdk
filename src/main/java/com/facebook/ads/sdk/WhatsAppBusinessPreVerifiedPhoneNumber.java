@@ -42,7 +42,7 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  */
 public class WhatsAppBusinessPreVerifiedPhoneNumber extends APINode {
   @SerializedName("code_verification_status")
-  private String mCodeVerificationStatus = null;
+  private EnumCodeVerificationStatus mCodeVerificationStatus = null;
   @SerializedName("code_verification_time")
   private String mCodeVerificationTime = null;
   @SerializedName("id")
@@ -283,7 +283,7 @@ public class WhatsAppBusinessPreVerifiedPhoneNumber extends APINode {
   }
 
 
-  public String getFieldCodeVerificationStatus() {
+  public EnumCodeVerificationStatus getFieldCodeVerificationStatus() {
     return mCodeVerificationStatus;
   }
 

@@ -49,6 +49,8 @@ public class User extends APINode {
   private AvatarProfilePicture mAvatar2dProfilePicture = null;
   @SerializedName("birthday")
   private String mBirthday = null;
+  @SerializedName("client_business_id")
+  private String mClientBusinessId = null;
   @SerializedName("community")
   private Group mCommunity = null;
   @SerializedName("cover")
@@ -75,8 +77,6 @@ public class User extends APINode {
   private String mIdForAvatars = null;
   @SerializedName("inspirational_people")
   private List<Experience> mInspirationalPeople = null;
-  @SerializedName("instagram_user_self_asset")
-  private InstagramUser mInstagramUserSelfAsset = null;
   @SerializedName("install_type")
   private String mInstallType = null;
   @SerializedName("installed")
@@ -592,6 +592,10 @@ public class User extends APINode {
     return mBirthday;
   }
 
+  public String getFieldClientBusinessId() {
+    return mClientBusinessId;
+  }
+
   public Group getFieldCommunity() {
     if (mCommunity != null) {
       mCommunity.context = getContext();
@@ -648,13 +652,6 @@ public class User extends APINode {
 
   public List<Experience> getFieldInspirationalPeople() {
     return mInspirationalPeople;
-  }
-
-  public InstagramUser getFieldInstagramUserSelfAsset() {
-    if (mInstagramUserSelfAsset != null) {
-      mInstagramUserSelfAsset.context = getContext();
-    }
-    return mInstagramUserSelfAsset;
   }
 
   public String getFieldInstallType() {
@@ -7933,6 +7930,7 @@ public class User extends APINode {
       "name",
       "pending_email",
       "role",
+      "tasks",
       "title",
       "two_fac_status",
     };
@@ -8109,6 +8107,13 @@ public class User extends APINode {
     }
     public APIRequestGetBusinessUsers requestRoleField (boolean value) {
       this.requestField("role", value);
+      return this;
+    }
+    public APIRequestGetBusinessUsers requestTasksField () {
+      return this.requestTasksField(true);
+    }
+    public APIRequestGetBusinessUsers requestTasksField (boolean value) {
+      this.requestField("tasks", value);
       return this;
     }
     public APIRequestGetBusinessUsers requestTitleField () {
@@ -9131,6 +9136,8 @@ public class User extends APINode {
       "registration_setting",
       "scheduled_publish_time",
       "start_time",
+      "sub_categories",
+      "ticket_selling_status",
       "ticket_setting",
       "ticket_uri",
       "ticket_uri_start_sales_time",
@@ -9443,6 +9450,20 @@ public class User extends APINode {
     }
     public APIRequestGetEvents requestStartTimeField (boolean value) {
       this.requestField("start_time", value);
+      return this;
+    }
+    public APIRequestGetEvents requestSubCategoriesField () {
+      return this.requestSubCategoriesField(true);
+    }
+    public APIRequestGetEvents requestSubCategoriesField (boolean value) {
+      this.requestField("sub_categories", value);
+      return this;
+    }
+    public APIRequestGetEvents requestTicketSellingStatusField () {
+      return this.requestTicketSellingStatusField(true);
+    }
+    public APIRequestGetEvents requestTicketSellingStatusField (boolean value) {
+      this.requestField("ticket_selling_status", value);
       return this;
     }
     public APIRequestGetEvents requestTicketSettingField () {
@@ -11119,6 +11140,7 @@ public class User extends APINode {
       "age_range",
       "avatar_2d_profile_picture",
       "birthday",
+      "client_business_id",
       "community",
       "cover",
       "currency",
@@ -11132,7 +11154,6 @@ public class User extends APINode {
       "id",
       "id_for_avatars",
       "inspirational_people",
-      "instagram_user_self_asset",
       "install_type",
       "installed",
       "is_guest_user",
@@ -11295,6 +11316,13 @@ public class User extends APINode {
       this.requestField("birthday", value);
       return this;
     }
+    public APIRequestGetFriends requestClientBusinessIdField () {
+      return this.requestClientBusinessIdField(true);
+    }
+    public APIRequestGetFriends requestClientBusinessIdField (boolean value) {
+      this.requestField("client_business_id", value);
+      return this;
+    }
     public APIRequestGetFriends requestCommunityField () {
       return this.requestCommunityField(true);
     }
@@ -11384,13 +11412,6 @@ public class User extends APINode {
     }
     public APIRequestGetFriends requestInspirationalPeopleField (boolean value) {
       this.requestField("inspirational_people", value);
-      return this;
-    }
-    public APIRequestGetFriends requestInstagramUserSelfAssetField () {
-      return this.requestInstagramUserSelfAssetField(true);
-    }
-    public APIRequestGetFriends requestInstagramUserSelfAssetField (boolean value) {
-      this.requestField("instagram_user_self_asset", value);
       return this;
     }
     public APIRequestGetFriends requestInstallTypeField () {
@@ -18053,6 +18074,7 @@ public class User extends APINode {
       "proxied_app_id",
       "published",
       "qn",
+      "scheduled_publish_time",
       "spherical_metadata",
       "sponsor_id",
       "sponsor_relationship",
@@ -18400,6 +18422,15 @@ public class User extends APINode {
 
     public APIRequestCreatePhoto setQn (String qn) {
       this.setParam("qn", qn);
+      return this;
+    }
+
+    public APIRequestCreatePhoto setScheduledPublishTime (Long scheduledPublishTime) {
+      this.setParam("scheduled_publish_time", scheduledPublishTime);
+      return this;
+    }
+    public APIRequestCreatePhoto setScheduledPublishTime (String scheduledPublishTime) {
+      this.setParam("scheduled_publish_time", scheduledPublishTime);
       return this;
     }
 
@@ -20374,6 +20405,7 @@ public class User extends APINode {
       "is_boost_intended",
       "is_explicit_share",
       "is_group_linking_post",
+      "is_partnership_ad",
       "is_voice_clip",
       "location_source_id",
       "manual_privacy",
@@ -20385,6 +20417,7 @@ public class User extends APINode {
       "og_suggestion_mechanism",
       "original_fov",
       "original_projection_type",
+      "partnership_ad_ad_code",
       "privacy",
       "publish_event_id",
       "referenced_sticker_id",
@@ -20718,6 +20751,15 @@ public class User extends APINode {
       return this;
     }
 
+    public APIRequestCreateVideo setIsPartnershipAd (Boolean isPartnershipAd) {
+      this.setParam("is_partnership_ad", isPartnershipAd);
+      return this;
+    }
+    public APIRequestCreateVideo setIsPartnershipAd (String isPartnershipAd) {
+      this.setParam("is_partnership_ad", isPartnershipAd);
+      return this;
+    }
+
     public APIRequestCreateVideo setIsVoiceClip (Boolean isVoiceClip) {
       this.setParam("is_voice_clip", isVoiceClip);
       return this;
@@ -20790,6 +20832,11 @@ public class User extends APINode {
     }
     public APIRequestCreateVideo setOriginalProjectionType (String originalProjectionType) {
       this.setParam("original_projection_type", originalProjectionType);
+      return this;
+    }
+
+    public APIRequestCreateVideo setPartnershipAdAdCode (String partnershipAdAdCode) {
+      this.setParam("partnership_ad_ad_code", partnershipAdAdCode);
       return this;
     }
 
@@ -21111,6 +21158,7 @@ public class User extends APINode {
       "age_range",
       "avatar_2d_profile_picture",
       "birthday",
+      "client_business_id",
       "community",
       "cover",
       "currency",
@@ -21124,7 +21172,6 @@ public class User extends APINode {
       "id",
       "id_for_avatars",
       "inspirational_people",
-      "instagram_user_self_asset",
       "install_type",
       "installed",
       "is_guest_user",
@@ -21278,6 +21325,13 @@ public class User extends APINode {
       this.requestField("birthday", value);
       return this;
     }
+    public APIRequestGet requestClientBusinessIdField () {
+      return this.requestClientBusinessIdField(true);
+    }
+    public APIRequestGet requestClientBusinessIdField (boolean value) {
+      this.requestField("client_business_id", value);
+      return this;
+    }
     public APIRequestGet requestCommunityField () {
       return this.requestCommunityField(true);
     }
@@ -21367,13 +21421,6 @@ public class User extends APINode {
     }
     public APIRequestGet requestInspirationalPeopleField (boolean value) {
       this.requestField("inspirational_people", value);
-      return this;
-    }
-    public APIRequestGet requestInstagramUserSelfAssetField () {
-      return this.requestInstagramUserSelfAssetField(true);
-    }
-    public APIRequestGet requestInstagramUserSelfAssetField (boolean value) {
-      this.requestField("instagram_user_self_asset", value);
       return this;
     }
     public APIRequestGet requestInstallTypeField () {
@@ -21865,6 +21912,7 @@ public class User extends APINode {
     this.mAgeRange = instance.mAgeRange;
     this.mAvatar2dProfilePicture = instance.mAvatar2dProfilePicture;
     this.mBirthday = instance.mBirthday;
+    this.mClientBusinessId = instance.mClientBusinessId;
     this.mCommunity = instance.mCommunity;
     this.mCover = instance.mCover;
     this.mCurrency = instance.mCurrency;
@@ -21878,7 +21926,6 @@ public class User extends APINode {
     this.mId = instance.mId;
     this.mIdForAvatars = instance.mIdForAvatars;
     this.mInspirationalPeople = instance.mInspirationalPeople;
-    this.mInstagramUserSelfAsset = instance.mInstagramUserSelfAsset;
     this.mInstallType = instance.mInstallType;
     this.mInstalled = instance.mInstalled;
     this.mIsGuestUser = instance.mIsGuestUser;

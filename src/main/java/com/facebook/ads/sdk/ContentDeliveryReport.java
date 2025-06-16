@@ -41,10 +41,14 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class ContentDeliveryReport extends APINode {
+  @SerializedName("content_id")
+  private String mContentId = null;
   @SerializedName("content_name")
   private String mContentName = null;
   @SerializedName("content_url")
   private String mContentUrl = null;
+  @SerializedName("creator_id")
+  private String mCreatorId = null;
   @SerializedName("creator_name")
   private String mCreatorName = null;
   @SerializedName("creator_url")
@@ -202,6 +206,15 @@ public class ContentDeliveryReport extends APINode {
   }
 
 
+  public String getFieldContentId() {
+    return mContentId;
+  }
+
+  public ContentDeliveryReport setFieldContentId(String value) {
+    this.mContentId = value;
+    return this;
+  }
+
   public String getFieldContentName() {
     return mContentName;
   }
@@ -217,6 +230,15 @@ public class ContentDeliveryReport extends APINode {
 
   public ContentDeliveryReport setFieldContentUrl(String value) {
     this.mContentUrl = value;
+    return this;
+  }
+
+  public String getFieldCreatorId() {
+    return mCreatorId;
+  }
+
+  public ContentDeliveryReport setFieldCreatorId(String value) {
+    this.mCreatorId = value;
     return this;
   }
 
@@ -264,8 +286,10 @@ public class ContentDeliveryReport extends APINode {
   }
 
   public ContentDeliveryReport copyFrom(ContentDeliveryReport instance) {
+    this.mContentId = instance.mContentId;
     this.mContentName = instance.mContentName;
     this.mContentUrl = instance.mContentUrl;
+    this.mCreatorId = instance.mCreatorId;
     this.mCreatorName = instance.mCreatorName;
     this.mCreatorUrl = instance.mCreatorUrl;
     this.mEstimatedImpressions = instance.mEstimatedImpressions;

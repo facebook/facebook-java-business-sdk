@@ -105,6 +105,10 @@ public class ProductItem extends APINode {
   private String mFbProductCategory = null;
   @SerializedName("gender")
   private EnumGender mGender = null;
+  @SerializedName("generated_background_images")
+  private List<AIGeneratedProductImage> mGeneratedBackgroundImages = null;
+  @SerializedName("generated_background_images_ad_usage")
+  private Boolean mGeneratedBackgroundImagesAdUsage = null;
   @SerializedName("gtin")
   private String mGtin = null;
   @SerializedName("id")
@@ -197,6 +201,8 @@ public class ProductItem extends APINode {
   private String mVendorId = null;
   @SerializedName("video_fetch_status")
   private EnumVideoFetchStatus mVideoFetchStatus = null;
+  @SerializedName("videos")
+  private List<ProductItemVideoData> mVideos = null;
   @SerializedName("visibility")
   private EnumVisibility mVisibility = null;
   @SerializedName("wa_compliance_category")
@@ -567,6 +573,14 @@ public class ProductItem extends APINode {
     return mGender;
   }
 
+  public List<AIGeneratedProductImage> getFieldGeneratedBackgroundImages() {
+    return mGeneratedBackgroundImages;
+  }
+
+  public Boolean getFieldGeneratedBackgroundImagesAdUsage() {
+    return mGeneratedBackgroundImagesAdUsage;
+  }
+
   public String getFieldGtin() {
     return mGtin;
   }
@@ -761,6 +775,10 @@ public class ProductItem extends APINode {
 
   public EnumVideoFetchStatus getFieldVideoFetchStatus() {
     return mVideoFetchStatus;
+  }
+
+  public List<ProductItemVideoData> getFieldVideos() {
+    return mVideos;
   }
 
   public EnumVisibility getFieldVisibility() {
@@ -1518,6 +1536,8 @@ public class ProductItem extends APINode {
       "expiration_date",
       "fb_product_category",
       "gender",
+      "generated_background_images",
+      "generated_background_images_ad_usage",
       "gtin",
       "id",
       "image_cdn_urls",
@@ -1564,6 +1584,7 @@ public class ProductItem extends APINode {
       "url",
       "vendor_id",
       "video_fetch_status",
+      "videos",
       "visibility",
       "wa_compliance_category",
     };
@@ -1915,6 +1936,20 @@ public class ProductItem extends APINode {
       this.requestField("gender", value);
       return this;
     }
+    public APIRequestGet requestGeneratedBackgroundImagesField () {
+      return this.requestGeneratedBackgroundImagesField(true);
+    }
+    public APIRequestGet requestGeneratedBackgroundImagesField (boolean value) {
+      this.requestField("generated_background_images", value);
+      return this;
+    }
+    public APIRequestGet requestGeneratedBackgroundImagesAdUsageField () {
+      return this.requestGeneratedBackgroundImagesAdUsageField(true);
+    }
+    public APIRequestGet requestGeneratedBackgroundImagesAdUsageField (boolean value) {
+      this.requestField("generated_background_images_ad_usage", value);
+      return this;
+    }
     public APIRequestGet requestGtinField () {
       return this.requestGtinField(true);
     }
@@ -2237,6 +2272,13 @@ public class ProductItem extends APINode {
       this.requestField("video_fetch_status", value);
       return this;
     }
+    public APIRequestGet requestVideosField () {
+      return this.requestVideosField(true);
+    }
+    public APIRequestGet requestVideosField (boolean value) {
+      this.requestField("videos", value);
+      return this;
+    }
     public APIRequestGet requestVisibilityField () {
       return this.requestVisibilityField(true);
     }
@@ -2263,6 +2305,7 @@ public class ProductItem extends APINode {
     public static final String[] PARAMS = {
       "additional_image_urls",
       "additional_variant_attributes",
+      "age_group",
       "android_app_name",
       "android_class",
       "android_package",
@@ -2411,6 +2454,15 @@ public class ProductItem extends APINode {
     }
     public APIRequestUpdate setAdditionalVariantAttributes (String additionalVariantAttributes) {
       this.setParam("additional_variant_attributes", additionalVariantAttributes);
+      return this;
+    }
+
+    public APIRequestUpdate setAgeGroup (ProductItem.EnumAgeGroup ageGroup) {
+      this.setParam("age_group", ageGroup);
+      return this;
+    }
+    public APIRequestUpdate setAgeGroup (String ageGroup) {
+      this.setParam("age_group", ageGroup);
       return this;
     }
 
@@ -3677,6 +3729,8 @@ public class ProductItem extends APINode {
       VALUE_CRAWLED_AVAILABILITY_MISMATCH("CRAWLED_AVAILABILITY_MISMATCH"),
       @SerializedName("DA_DISABLED_BY_USER")
       VALUE_DA_DISABLED_BY_USER("DA_DISABLED_BY_USER"),
+      @SerializedName("DA_POLICY_UNFIT_FOR_AUDIENCE")
+      VALUE_DA_POLICY_UNFIT_FOR_AUDIENCE("DA_POLICY_UNFIT_FOR_AUDIENCE"),
       @SerializedName("DA_POLICY_VIOLATION")
       VALUE_DA_POLICY_VIOLATION("DA_POLICY_VIOLATION"),
       @SerializedName("DELETED_ITEM")
@@ -3801,8 +3855,16 @@ public class ProductItem extends APINode {
       VALUE_MARKETPLACE_DISABLED_BY_USER("MARKETPLACE_DISABLED_BY_USER"),
       @SerializedName("MARKETPLACE_PARTNER_AUCTION_NO_BID_CLOSE_TIME")
       VALUE_MARKETPLACE_PARTNER_AUCTION_NO_BID_CLOSE_TIME("MARKETPLACE_PARTNER_AUCTION_NO_BID_CLOSE_TIME"),
+      @SerializedName("MARKETPLACE_PARTNER_CURRENCY_NOT_VALID")
+      VALUE_MARKETPLACE_PARTNER_CURRENCY_NOT_VALID("MARKETPLACE_PARTNER_CURRENCY_NOT_VALID"),
+      @SerializedName("MARKETPLACE_PARTNER_LISTING_COUNTRY_NOT_MATCH_CATALOG")
+      VALUE_MARKETPLACE_PARTNER_LISTING_COUNTRY_NOT_MATCH_CATALOG("MARKETPLACE_PARTNER_LISTING_COUNTRY_NOT_MATCH_CATALOG"),
       @SerializedName("MARKETPLACE_PARTNER_LISTING_LIMIT_EXCEEDED")
       VALUE_MARKETPLACE_PARTNER_LISTING_LIMIT_EXCEEDED("MARKETPLACE_PARTNER_LISTING_LIMIT_EXCEEDED"),
+      @SerializedName("MARKETPLACE_PARTNER_MISSING_LATLONG")
+      VALUE_MARKETPLACE_PARTNER_MISSING_LATLONG("MARKETPLACE_PARTNER_MISSING_LATLONG"),
+      @SerializedName("MARKETPLACE_PARTNER_MISSING_SHIPPING_COST")
+      VALUE_MARKETPLACE_PARTNER_MISSING_SHIPPING_COST("MARKETPLACE_PARTNER_MISSING_SHIPPING_COST"),
       @SerializedName("MARKETPLACE_PARTNER_NOT_LOCAL_ITEM")
       VALUE_MARKETPLACE_PARTNER_NOT_LOCAL_ITEM("MARKETPLACE_PARTNER_NOT_LOCAL_ITEM"),
       @SerializedName("MARKETPLACE_PARTNER_NOT_SHIPPED_ITEM")
@@ -4569,6 +4631,8 @@ public class ProductItem extends APINode {
     this.mExpirationDate = instance.mExpirationDate;
     this.mFbProductCategory = instance.mFbProductCategory;
     this.mGender = instance.mGender;
+    this.mGeneratedBackgroundImages = instance.mGeneratedBackgroundImages;
+    this.mGeneratedBackgroundImagesAdUsage = instance.mGeneratedBackgroundImagesAdUsage;
     this.mGtin = instance.mGtin;
     this.mId = instance.mId;
     this.mImageCdnUrls = instance.mImageCdnUrls;
@@ -4615,6 +4679,7 @@ public class ProductItem extends APINode {
     this.mUrl = instance.mUrl;
     this.mVendorId = instance.mVendorId;
     this.mVideoFetchStatus = instance.mVideoFetchStatus;
+    this.mVideos = instance.mVideos;
     this.mVisibility = instance.mVisibility;
     this.mWaComplianceCategory = instance.mWaComplianceCategory;
     this.context = instance.context;

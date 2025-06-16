@@ -1950,6 +1950,7 @@ public class CustomAudience extends APINode {
       "calculated_date",
       "processed_date",
       "value_aggregation_duration",
+      "value_country",
       "value_currency",
       "value_version",
     };
@@ -2028,6 +2029,11 @@ public class CustomAudience extends APINode {
     }
     public APIRequestGetHealth setValueAggregationDuration (String valueAggregationDuration) {
       this.setParam("value_aggregation_duration", valueAggregationDuration);
+      return this;
+    }
+
+    public APIRequestGetHealth setValueCountry (String valueCountry) {
+      this.setParam("value_country", valueCountry);
       return this;
     }
 
@@ -3976,8 +3982,6 @@ public class CustomAudience extends APINode {
       VALUE_HOME_LISTING("HOME_LISTING"),
       @SerializedName("HOTEL")
       VALUE_HOTEL("HOTEL"),
-      @SerializedName("JOB")
-      VALUE_JOB("JOB"),
       @SerializedName("LOCAL_SERVICE_BUSINESS")
       VALUE_LOCAL_SERVICE_BUSINESS("LOCAL_SERVICE_BUSINESS"),
       @SerializedName("MEDIA_TITLE")

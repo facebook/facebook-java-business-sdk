@@ -356,10 +356,6 @@ public class IGUser extends APINode {
     return new APIRequestGetInstagramBackedThreadsUser(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestCreateInstagramBackedThreadsUser createInstagramBackedThreadsUser() {
-    return new APIRequestCreateInstagramBackedThreadsUser(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetLiveMedia getLiveMedia() {
     return new APIRequestGetLiveMedia(this.getPrefixedId().toString(), context);
   }
@@ -410,6 +406,10 @@ public class IGUser extends APINode {
 
   public APIRequestCreateUpcomingEvent createUpcomingEvent() {
     return new APIRequestCreateUpcomingEvent(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetWelcomeMessageFlows getWelcomeMessageFlows() {
+    return new APIRequestGetWelcomeMessageFlows(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGet get() {
@@ -3530,111 +3530,6 @@ public class IGUser extends APINode {
     }
   }
 
-  public static class APIRequestCreateInstagramBackedThreadsUser extends APIRequest<ThreadsUser> {
-
-    ThreadsUser lastResponse = null;
-    @Override
-    public ThreadsUser getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public ThreadsUser parseResponse(String response, String header) throws APIException {
-      return ThreadsUser.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public ThreadsUser execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public ThreadsUser execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<ThreadsUser> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<ThreadsUser> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, ThreadsUser>() {
-           public ThreadsUser apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateInstagramBackedThreadsUser.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         },
-         MoreExecutors.directExecutor()
-      );
-    };
-
-    public APIRequestCreateInstagramBackedThreadsUser(String nodeId, APIContext context) {
-      super(context, nodeId, "/instagram_backed_threads_user", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateInstagramBackedThreadsUser setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateInstagramBackedThreadsUser setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateInstagramBackedThreadsUser requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateInstagramBackedThreadsUser requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateInstagramBackedThreadsUser requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateInstagramBackedThreadsUser requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateInstagramBackedThreadsUser requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateInstagramBackedThreadsUser requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
   public static class APIRequestGetLiveMedia extends APIRequest<IGMedia> {
 
     APINodeList<IGMedia> lastResponse = null;
@@ -3648,6 +3543,7 @@ public class IGUser extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "alt_text",
       "boost_eligibility_info",
       "caption",
       "comments_count",
@@ -3667,6 +3563,7 @@ public class IGUser extends APINode {
       "thumbnail_url",
       "timestamp",
       "username",
+      "view_count",
     };
 
     @Override
@@ -3769,6 +3666,13 @@ public class IGUser extends APINode {
       return this;
     }
 
+    public APIRequestGetLiveMedia requestAltTextField () {
+      return this.requestAltTextField(true);
+    }
+    public APIRequestGetLiveMedia requestAltTextField (boolean value) {
+      this.requestField("alt_text", value);
+      return this;
+    }
     public APIRequestGetLiveMedia requestBoostEligibilityInfoField () {
       return this.requestBoostEligibilityInfoField(true);
     }
@@ -3902,6 +3806,13 @@ public class IGUser extends APINode {
       this.requestField("username", value);
       return this;
     }
+    public APIRequestGetLiveMedia requestViewCountField () {
+      return this.requestViewCountField(true);
+    }
+    public APIRequestGetLiveMedia requestViewCountField (boolean value) {
+      this.requestField("view_count", value);
+      return this;
+    }
   }
 
   public static class APIRequestGetMedia extends APIRequest<IGMedia> {
@@ -3917,6 +3828,7 @@ public class IGUser extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "alt_text",
       "boost_eligibility_info",
       "caption",
       "comments_count",
@@ -3936,6 +3848,7 @@ public class IGUser extends APINode {
       "thumbnail_url",
       "timestamp",
       "username",
+      "view_count",
     };
 
     @Override
@@ -4038,6 +3951,13 @@ public class IGUser extends APINode {
       return this;
     }
 
+    public APIRequestGetMedia requestAltTextField () {
+      return this.requestAltTextField(true);
+    }
+    public APIRequestGetMedia requestAltTextField (boolean value) {
+      this.requestField("alt_text", value);
+      return this;
+    }
     public APIRequestGetMedia requestBoostEligibilityInfoField () {
       return this.requestBoostEligibilityInfoField(true);
     }
@@ -4169,6 +4089,13 @@ public class IGUser extends APINode {
     }
     public APIRequestGetMedia requestUsernameField (boolean value) {
       this.requestField("username", value);
+      return this;
+    }
+    public APIRequestGetMedia requestViewCountField () {
+      return this.requestViewCountField(true);
+    }
+    public APIRequestGetMedia requestViewCountField (boolean value) {
+      this.requestField("view_count", value);
       return this;
     }
   }
@@ -5229,6 +5156,7 @@ public class IGUser extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "alt_text",
       "boost_eligibility_info",
       "caption",
       "comments_count",
@@ -5248,6 +5176,7 @@ public class IGUser extends APINode {
       "thumbnail_url",
       "timestamp",
       "username",
+      "view_count",
     };
 
     @Override
@@ -5340,6 +5269,13 @@ public class IGUser extends APINode {
       return this;
     }
 
+    public APIRequestGetStories requestAltTextField () {
+      return this.requestAltTextField(true);
+    }
+    public APIRequestGetStories requestAltTextField (boolean value) {
+      this.requestField("alt_text", value);
+      return this;
+    }
     public APIRequestGetStories requestBoostEligibilityInfoField () {
       return this.requestBoostEligibilityInfoField(true);
     }
@@ -5473,6 +5409,13 @@ public class IGUser extends APINode {
       this.requestField("username", value);
       return this;
     }
+    public APIRequestGetStories requestViewCountField () {
+      return this.requestViewCountField(true);
+    }
+    public APIRequestGetStories requestViewCountField (boolean value) {
+      this.requestField("view_count", value);
+      return this;
+    }
   }
 
   public static class APIRequestGetTags extends APIRequest<IGMedia> {
@@ -5486,6 +5429,7 @@ public class IGUser extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "alt_text",
       "boost_eligibility_info",
       "caption",
       "comments_count",
@@ -5505,6 +5449,7 @@ public class IGUser extends APINode {
       "thumbnail_url",
       "timestamp",
       "username",
+      "view_count",
     };
 
     @Override
@@ -5597,6 +5542,13 @@ public class IGUser extends APINode {
       return this;
     }
 
+    public APIRequestGetTags requestAltTextField () {
+      return this.requestAltTextField(true);
+    }
+    public APIRequestGetTags requestAltTextField (boolean value) {
+      this.requestField("alt_text", value);
+      return this;
+    }
     public APIRequestGetTags requestBoostEligibilityInfoField () {
       return this.requestBoostEligibilityInfoField(true);
     }
@@ -5728,6 +5680,13 @@ public class IGUser extends APINode {
     }
     public APIRequestGetTags requestUsernameField (boolean value) {
       this.requestField("username", value);
+      return this;
+    }
+    public APIRequestGetTags requestViewCountField () {
+      return this.requestViewCountField(true);
+    }
+    public APIRequestGetTags requestViewCountField (boolean value) {
+      this.requestField("view_count", value);
       return this;
     }
   }
@@ -6016,6 +5975,187 @@ public class IGUser extends APINode {
       return this;
     }
 
+  }
+
+  public static class APIRequestGetWelcomeMessageFlows extends APIRequest<ShadowIGUserCTXPartnerAppWelcomeMessageFlow> {
+
+    APINodeList<ShadowIGUserCTXPartnerAppWelcomeMessageFlow> lastResponse = null;
+    @Override
+    public APINodeList<ShadowIGUserCTXPartnerAppWelcomeMessageFlow> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "app_id",
+      "flow_id",
+    };
+
+    public static final String[] FIELDS = {
+      "compatible_platforms",
+      "eligible_platforms",
+      "id",
+      "is_ig_only_flow",
+      "is_used_in_ad",
+      "last_update_time",
+      "name",
+      "welcome_message_flow",
+    };
+
+    @Override
+    public APINodeList<ShadowIGUserCTXPartnerAppWelcomeMessageFlow> parseResponse(String response, String header) throws APIException {
+      return ShadowIGUserCTXPartnerAppWelcomeMessageFlow.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<ShadowIGUserCTXPartnerAppWelcomeMessageFlow> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<ShadowIGUserCTXPartnerAppWelcomeMessageFlow> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<ShadowIGUserCTXPartnerAppWelcomeMessageFlow>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<ShadowIGUserCTXPartnerAppWelcomeMessageFlow>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<ShadowIGUserCTXPartnerAppWelcomeMessageFlow>>() {
+           public APINodeList<ShadowIGUserCTXPartnerAppWelcomeMessageFlow> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetWelcomeMessageFlows.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestGetWelcomeMessageFlows(String nodeId, APIContext context) {
+      super(context, nodeId, "/welcome_message_flows", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetWelcomeMessageFlows setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetWelcomeMessageFlows setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetWelcomeMessageFlows setAppId (String appId) {
+      this.setParam("app_id", appId);
+      return this;
+    }
+
+    public APIRequestGetWelcomeMessageFlows setFlowId (String flowId) {
+      this.setParam("flow_id", flowId);
+      return this;
+    }
+
+    public APIRequestGetWelcomeMessageFlows requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetWelcomeMessageFlows requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetWelcomeMessageFlows requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetWelcomeMessageFlows requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetWelcomeMessageFlows requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetWelcomeMessageFlows requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetWelcomeMessageFlows requestCompatiblePlatformsField () {
+      return this.requestCompatiblePlatformsField(true);
+    }
+    public APIRequestGetWelcomeMessageFlows requestCompatiblePlatformsField (boolean value) {
+      this.requestField("compatible_platforms", value);
+      return this;
+    }
+    public APIRequestGetWelcomeMessageFlows requestEligiblePlatformsField () {
+      return this.requestEligiblePlatformsField(true);
+    }
+    public APIRequestGetWelcomeMessageFlows requestEligiblePlatformsField (boolean value) {
+      this.requestField("eligible_platforms", value);
+      return this;
+    }
+    public APIRequestGetWelcomeMessageFlows requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetWelcomeMessageFlows requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetWelcomeMessageFlows requestIsIgOnlyFlowField () {
+      return this.requestIsIgOnlyFlowField(true);
+    }
+    public APIRequestGetWelcomeMessageFlows requestIsIgOnlyFlowField (boolean value) {
+      this.requestField("is_ig_only_flow", value);
+      return this;
+    }
+    public APIRequestGetWelcomeMessageFlows requestIsUsedInAdField () {
+      return this.requestIsUsedInAdField(true);
+    }
+    public APIRequestGetWelcomeMessageFlows requestIsUsedInAdField (boolean value) {
+      this.requestField("is_used_in_ad", value);
+      return this;
+    }
+    public APIRequestGetWelcomeMessageFlows requestLastUpdateTimeField () {
+      return this.requestLastUpdateTimeField(true);
+    }
+    public APIRequestGetWelcomeMessageFlows requestLastUpdateTimeField (boolean value) {
+      this.requestField("last_update_time", value);
+      return this;
+    }
+    public APIRequestGetWelcomeMessageFlows requestNameField () {
+      return this.requestNameField(true);
+    }
+    public APIRequestGetWelcomeMessageFlows requestNameField (boolean value) {
+      this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetWelcomeMessageFlows requestWelcomeMessageFlowField () {
+      return this.requestWelcomeMessageFlowField(true);
+    }
+    public APIRequestGetWelcomeMessageFlows requestWelcomeMessageFlowField (boolean value) {
+      this.requestField("welcome_message_flow", value);
+      return this;
+    }
   }
 
   public static class APIRequestGet extends APIRequest<IGUser> {

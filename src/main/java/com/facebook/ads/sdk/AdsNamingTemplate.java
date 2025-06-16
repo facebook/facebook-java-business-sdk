@@ -501,6 +501,8 @@ public class AdsNamingTemplate extends APINode {
       VALUE_OPPORTUNITIES("OPPORTUNITIES"),
       @SerializedName("PRIVACY_INFO_CENTER")
       VALUE_PRIVACY_INFO_CENTER("PRIVACY_INFO_CENTER"),
+      @SerializedName("PRODUCT")
+      VALUE_PRODUCT("PRODUCT"),
       @SerializedName("TOPLINE")
       VALUE_TOPLINE("TOPLINE"),
       @SerializedName("UNIQUE_ADCREATIVE")

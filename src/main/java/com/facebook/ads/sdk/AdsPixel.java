@@ -2749,8 +2749,12 @@ public class AdsPixel extends APINode {
       "instance_id",
       "instance_version",
       "is_sgw_instance",
+      "is_sgw_pixel_from_meta_pixel",
       "partner_name",
       "pixel_id",
+      "sgw_account_id",
+      "sgw_instance_url",
+      "sgw_pixel_id",
     };
 
     @Override
@@ -2927,6 +2931,13 @@ public class AdsPixel extends APINode {
       this.requestField("is_sgw_instance", value);
       return this;
     }
+    public APIRequestGetOpenBridgeConfigurations requestIsSgwPixelFromMetaPixelField () {
+      return this.requestIsSgwPixelFromMetaPixelField(true);
+    }
+    public APIRequestGetOpenBridgeConfigurations requestIsSgwPixelFromMetaPixelField (boolean value) {
+      this.requestField("is_sgw_pixel_from_meta_pixel", value);
+      return this;
+    }
     public APIRequestGetOpenBridgeConfigurations requestPartnerNameField () {
       return this.requestPartnerNameField(true);
     }
@@ -2939,6 +2950,27 @@ public class AdsPixel extends APINode {
     }
     public APIRequestGetOpenBridgeConfigurations requestPixelIdField (boolean value) {
       this.requestField("pixel_id", value);
+      return this;
+    }
+    public APIRequestGetOpenBridgeConfigurations requestSgwAccountIdField () {
+      return this.requestSgwAccountIdField(true);
+    }
+    public APIRequestGetOpenBridgeConfigurations requestSgwAccountIdField (boolean value) {
+      this.requestField("sgw_account_id", value);
+      return this;
+    }
+    public APIRequestGetOpenBridgeConfigurations requestSgwInstanceUrlField () {
+      return this.requestSgwInstanceUrlField(true);
+    }
+    public APIRequestGetOpenBridgeConfigurations requestSgwInstanceUrlField (boolean value) {
+      this.requestField("sgw_instance_url", value);
+      return this;
+    }
+    public APIRequestGetOpenBridgeConfigurations requestSgwPixelIdField () {
+      return this.requestSgwPixelIdField(true);
+    }
+    public APIRequestGetOpenBridgeConfigurations requestSgwPixelIdField (boolean value) {
+      this.requestField("sgw_pixel_id", value);
       return this;
     }
   }

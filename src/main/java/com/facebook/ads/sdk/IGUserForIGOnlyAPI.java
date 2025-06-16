@@ -272,6 +272,10 @@ public class IGUserForIGOnlyAPI extends APINode {
     return getGson().toJson(this);
   }
 
+  public APIRequestGetBusinessMessagingFeatureStatus getBusinessMessagingFeatureStatus() {
+    return new APIRequestGetBusinessMessagingFeatureStatus(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetContentPublishingLimit getContentPublishingLimit() {
     return new APIRequestGetContentPublishingLimit(this.getPrefixedId().toString(), context);
   }
@@ -406,6 +410,117 @@ public class IGUserForIGOnlyAPI extends APINode {
   }
 
 
+
+  public static class APIRequestGetBusinessMessagingFeatureStatus extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "feature",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetBusinessMessagingFeatureStatus.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestGetBusinessMessagingFeatureStatus(String nodeId, APIContext context) {
+      super(context, nodeId, "/business_messaging_feature_status", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetBusinessMessagingFeatureStatus setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetBusinessMessagingFeatureStatus setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetBusinessMessagingFeatureStatus setFeature (String feature) {
+      this.setParam("feature", feature);
+      return this;
+    }
+
+    public APIRequestGetBusinessMessagingFeatureStatus requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetBusinessMessagingFeatureStatus requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetBusinessMessagingFeatureStatus requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetBusinessMessagingFeatureStatus requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetBusinessMessagingFeatureStatus requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetBusinessMessagingFeatureStatus requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
 
   public static class APIRequestGetContentPublishingLimit extends APIRequest<ContentPublishingLimitResponse> {
 
@@ -3574,16 +3689,12 @@ public class IGUserForIGOnlyAPI extends APINode {
       VALUE_HOME_URL("HOME_URL"),
       @SerializedName("ICE_BREAKERS")
       VALUE_ICE_BREAKERS("ICE_BREAKERS"),
-      @SerializedName("PAYMENT_SETTINGS")
-      VALUE_PAYMENT_SETTINGS("PAYMENT_SETTINGS"),
       @SerializedName("PERSISTENT_MENU")
       VALUE_PERSISTENT_MENU("PERSISTENT_MENU"),
       @SerializedName("PLATFORM")
       VALUE_PLATFORM("PLATFORM"),
       @SerializedName("SUBJECT_TO_NEW_EU_PRIVACY_RULES")
       VALUE_SUBJECT_TO_NEW_EU_PRIVACY_RULES("SUBJECT_TO_NEW_EU_PRIVACY_RULES"),
-      @SerializedName("TARGET_AUDIENCE")
-      VALUE_TARGET_AUDIENCE("TARGET_AUDIENCE"),
       @SerializedName("TITLE")
       VALUE_TITLE("TITLE"),
       @SerializedName("WHITELISTED_DOMAINS")
@@ -3603,6 +3714,8 @@ public class IGUserForIGOnlyAPI extends APINode {
   }
 
   public static enum EnumSubscribedFields {
+      @SerializedName("comment_poll_response")
+      VALUE_COMMENT_POLL_RESPONSE("comment_poll_response"),
       @SerializedName("comments")
       VALUE_COMMENTS("comments"),
       @SerializedName("creator_marketplace_invited_creator_onboarding")
@@ -3611,6 +3724,8 @@ public class IGUserForIGOnlyAPI extends APINode {
       VALUE_CREATOR_MARKETPLACE_PROJECTS("creator_marketplace_projects"),
       @SerializedName("delta")
       VALUE_DELTA("delta"),
+      @SerializedName("follow")
+      VALUE_FOLLOW("follow"),
       @SerializedName("live_comments")
       VALUE_LIVE_COMMENTS("live_comments"),
       @SerializedName("mentions")
@@ -3635,8 +3750,12 @@ public class IGUserForIGOnlyAPI extends APINode {
       VALUE_STANDBY("standby"),
       @SerializedName("story_insights")
       VALUE_STORY_INSIGHTS("story_insights"),
+      @SerializedName("story_poll_response")
+      VALUE_STORY_POLL_RESPONSE("story_poll_response"),
       @SerializedName("story_reactions")
       VALUE_STORY_REACTIONS("story_reactions"),
+      @SerializedName("story_share")
+      VALUE_STORY_SHARE("story_share"),
       ;
 
       private String value;

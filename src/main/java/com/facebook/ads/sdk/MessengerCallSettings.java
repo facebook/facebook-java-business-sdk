@@ -43,6 +43,10 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class MessengerCallSettings extends APINode {
   @SerializedName("audio_enabled")
   private Boolean mAudioEnabled = null;
+  @SerializedName("call_hours")
+  private Object mCallHours = null;
+  @SerializedName("call_routing")
+  private String mCallRouting = null;
   @SerializedName("icon_enabled")
   private Boolean mIconEnabled = null;
   protected static Gson gson = null;
@@ -205,6 +209,24 @@ public class MessengerCallSettings extends APINode {
     return this;
   }
 
+  public Object getFieldCallHours() {
+    return mCallHours;
+  }
+
+  public MessengerCallSettings setFieldCallHours(Object value) {
+    this.mCallHours = value;
+    return this;
+  }
+
+  public String getFieldCallRouting() {
+    return mCallRouting;
+  }
+
+  public MessengerCallSettings setFieldCallRouting(String value) {
+    this.mCallRouting = value;
+    return this;
+  }
+
   public Boolean getFieldIconEnabled() {
     return mIconEnabled;
   }
@@ -232,6 +254,8 @@ public class MessengerCallSettings extends APINode {
 
   public MessengerCallSettings copyFrom(MessengerCallSettings instance) {
     this.mAudioEnabled = instance.mAudioEnabled;
+    this.mCallHours = instance.mCallHours;
+    this.mCallRouting = instance.mCallRouting;
     this.mIconEnabled = instance.mIconEnabled;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

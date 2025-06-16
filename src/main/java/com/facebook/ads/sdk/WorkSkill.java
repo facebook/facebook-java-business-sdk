@@ -288,6 +288,7 @@ public class WorkSkill extends APINode {
       "age_range",
       "avatar_2d_profile_picture",
       "birthday",
+      "client_business_id",
       "community",
       "cover",
       "currency",
@@ -301,7 +302,6 @@ public class WorkSkill extends APINode {
       "id",
       "id_for_avatars",
       "inspirational_people",
-      "instagram_user_self_asset",
       "install_type",
       "installed",
       "is_guest_user",
@@ -455,6 +455,13 @@ public class WorkSkill extends APINode {
       this.requestField("birthday", value);
       return this;
     }
+    public APIRequestGetUsers requestClientBusinessIdField () {
+      return this.requestClientBusinessIdField(true);
+    }
+    public APIRequestGetUsers requestClientBusinessIdField (boolean value) {
+      this.requestField("client_business_id", value);
+      return this;
+    }
     public APIRequestGetUsers requestCommunityField () {
       return this.requestCommunityField(true);
     }
@@ -544,13 +551,6 @@ public class WorkSkill extends APINode {
     }
     public APIRequestGetUsers requestInspirationalPeopleField (boolean value) {
       this.requestField("inspirational_people", value);
-      return this;
-    }
-    public APIRequestGetUsers requestInstagramUserSelfAssetField () {
-      return this.requestInstagramUserSelfAssetField(true);
-    }
-    public APIRequestGetUsers requestInstagramUserSelfAssetField (boolean value) {
-      this.requestField("instagram_user_self_asset", value);
       return this;
     }
     public APIRequestGetUsers requestInstallTypeField () {

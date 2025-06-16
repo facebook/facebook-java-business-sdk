@@ -287,6 +287,8 @@ public class AdCreativeLinkDataImageOverlaySpec extends APINode {
       VALUE_FREE_SHIPPING("free_shipping"),
       @SerializedName("popular")
       VALUE_POPULAR("popular"),
+      @SerializedName("sale")
+      VALUE_SALE("sale"),
       ;
 
       private String value;

@@ -45,6 +45,10 @@ public class FundingSourceDetailsCoupon extends APINode {
   private Long mAmount = null;
   @SerializedName("campaign_ids")
   private List<Long> mCampaignIds = null;
+  @SerializedName("child_ad_account_id")
+  private String mChildAdAccountId = null;
+  @SerializedName("child_bm_id")
+  private String mChildBmId = null;
   @SerializedName("coupon_id")
   private String mCouponId = null;
   @SerializedName("coupon_tiering")
@@ -61,6 +65,8 @@ public class FundingSourceDetailsCoupon extends APINode {
   private String mOriginalDisplayAmount = null;
   @SerializedName("start_date")
   private String mStartDate = null;
+  @SerializedName("vendor_id")
+  private String mVendorId = null;
   protected static Gson gson = null;
 
   public FundingSourceDetailsCoupon() {
@@ -230,6 +236,24 @@ public class FundingSourceDetailsCoupon extends APINode {
     return this;
   }
 
+  public String getFieldChildAdAccountId() {
+    return mChildAdAccountId;
+  }
+
+  public FundingSourceDetailsCoupon setFieldChildAdAccountId(String value) {
+    this.mChildAdAccountId = value;
+    return this;
+  }
+
+  public String getFieldChildBmId() {
+    return mChildBmId;
+  }
+
+  public FundingSourceDetailsCoupon setFieldChildBmId(String value) {
+    this.mChildBmId = value;
+    return this;
+  }
+
   public String getFieldCouponId() {
     return mCouponId;
   }
@@ -307,6 +331,15 @@ public class FundingSourceDetailsCoupon extends APINode {
     return this;
   }
 
+  public String getFieldVendorId() {
+    return mVendorId;
+  }
+
+  public FundingSourceDetailsCoupon setFieldVendorId(String value) {
+    this.mVendorId = value;
+    return this;
+  }
+
 
 
 
@@ -326,6 +359,8 @@ public class FundingSourceDetailsCoupon extends APINode {
   public FundingSourceDetailsCoupon copyFrom(FundingSourceDetailsCoupon instance) {
     this.mAmount = instance.mAmount;
     this.mCampaignIds = instance.mCampaignIds;
+    this.mChildAdAccountId = instance.mChildAdAccountId;
+    this.mChildBmId = instance.mChildBmId;
     this.mCouponId = instance.mCouponId;
     this.mCouponTiering = instance.mCouponTiering;
     this.mCurrency = instance.mCurrency;
@@ -334,6 +369,7 @@ public class FundingSourceDetailsCoupon extends APINode {
     this.mOriginalAmount = instance.mOriginalAmount;
     this.mOriginalDisplayAmount = instance.mOriginalDisplayAmount;
     this.mStartDate = instance.mStartDate;
+    this.mVendorId = instance.mVendorId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

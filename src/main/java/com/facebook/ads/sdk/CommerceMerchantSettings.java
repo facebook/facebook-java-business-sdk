@@ -41,6 +41,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class CommerceMerchantSettings extends APINode {
+  @SerializedName("checkout_config")
+  private String mCheckoutConfig = null;
   @SerializedName("checkout_message")
   private String mCheckoutMessage = null;
   @SerializedName("contact_email")
@@ -55,6 +57,8 @@ public class CommerceMerchantSettings extends APINode {
   private String mId = null;
   @SerializedName("instagram_channel")
   private Object mInstagramChannel = null;
+  @SerializedName("korea_ftc_listing")
+  private String mKoreaFtcListing = null;
   @SerializedName("merchant_page")
   private Profile mMerchantPage = null;
   @SerializedName("merchant_status")
@@ -63,6 +67,10 @@ public class CommerceMerchantSettings extends APINode {
   private Object mOnsiteCommerceMerchant = null;
   @SerializedName("payment_provider")
   private String mPaymentProvider = null;
+  @SerializedName("privacy_policy_localized")
+  private String mPrivacyPolicyLocalized = null;
+  @SerializedName("return_policy_localized")
+  private String mReturnPolicyLocalized = null;
   @SerializedName("review_rejection_messages")
   private List<String> mReviewRejectionMessages = null;
   @SerializedName("review_rejection_reasons")
@@ -335,6 +343,10 @@ public class CommerceMerchantSettings extends APINode {
   }
 
 
+  public String getFieldCheckoutConfig() {
+    return mCheckoutConfig;
+  }
+
   public String getFieldCheckoutMessage() {
     return mCheckoutMessage;
   }
@@ -363,6 +375,10 @@ public class CommerceMerchantSettings extends APINode {
     return mInstagramChannel;
   }
 
+  public String getFieldKoreaFtcListing() {
+    return mKoreaFtcListing;
+  }
+
   public Profile getFieldMerchantPage() {
     if (mMerchantPage != null) {
       mMerchantPage.context = getContext();
@@ -380,6 +396,14 @@ public class CommerceMerchantSettings extends APINode {
 
   public String getFieldPaymentProvider() {
     return mPaymentProvider;
+  }
+
+  public String getFieldPrivacyPolicyLocalized() {
+    return mPrivacyPolicyLocalized;
+  }
+
+  public String getFieldReturnPolicyLocalized() {
+    return mReturnPolicyLocalized;
   }
 
   public List<String> getFieldReviewRejectionMessages() {
@@ -3312,6 +3336,7 @@ public class CommerceMerchantSettings extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "checkout_config",
       "checkout_message",
       "contact_email",
       "cta",
@@ -3319,10 +3344,13 @@ public class CommerceMerchantSettings extends APINode {
       "facebook_channel",
       "id",
       "instagram_channel",
+      "korea_ftc_listing",
       "merchant_page",
       "merchant_status",
       "onsite_commerce_merchant",
       "payment_provider",
+      "privacy_policy_localized",
+      "return_policy_localized",
       "review_rejection_messages",
       "review_rejection_reasons",
       "terms",
@@ -3418,6 +3446,13 @@ public class CommerceMerchantSettings extends APINode {
       return this;
     }
 
+    public APIRequestGet requestCheckoutConfigField () {
+      return this.requestCheckoutConfigField(true);
+    }
+    public APIRequestGet requestCheckoutConfigField (boolean value) {
+      this.requestField("checkout_config", value);
+      return this;
+    }
     public APIRequestGet requestCheckoutMessageField () {
       return this.requestCheckoutMessageField(true);
     }
@@ -3467,6 +3502,13 @@ public class CommerceMerchantSettings extends APINode {
       this.requestField("instagram_channel", value);
       return this;
     }
+    public APIRequestGet requestKoreaFtcListingField () {
+      return this.requestKoreaFtcListingField(true);
+    }
+    public APIRequestGet requestKoreaFtcListingField (boolean value) {
+      this.requestField("korea_ftc_listing", value);
+      return this;
+    }
     public APIRequestGet requestMerchantPageField () {
       return this.requestMerchantPageField(true);
     }
@@ -3493,6 +3535,20 @@ public class CommerceMerchantSettings extends APINode {
     }
     public APIRequestGet requestPaymentProviderField (boolean value) {
       this.requestField("payment_provider", value);
+      return this;
+    }
+    public APIRequestGet requestPrivacyPolicyLocalizedField () {
+      return this.requestPrivacyPolicyLocalizedField(true);
+    }
+    public APIRequestGet requestPrivacyPolicyLocalizedField (boolean value) {
+      this.requestField("privacy_policy_localized", value);
+      return this;
+    }
+    public APIRequestGet requestReturnPolicyLocalizedField () {
+      return this.requestReturnPolicyLocalizedField(true);
+    }
+    public APIRequestGet requestReturnPolicyLocalizedField (boolean value) {
+      this.requestField("return_policy_localized", value);
       return this;
     }
     public APIRequestGet requestReviewRejectionMessagesField () {
@@ -3558,6 +3614,7 @@ public class CommerceMerchantSettings extends APINode {
   }
 
   public CommerceMerchantSettings copyFrom(CommerceMerchantSettings instance) {
+    this.mCheckoutConfig = instance.mCheckoutConfig;
     this.mCheckoutMessage = instance.mCheckoutMessage;
     this.mContactEmail = instance.mContactEmail;
     this.mCta = instance.mCta;
@@ -3565,10 +3622,13 @@ public class CommerceMerchantSettings extends APINode {
     this.mFacebookChannel = instance.mFacebookChannel;
     this.mId = instance.mId;
     this.mInstagramChannel = instance.mInstagramChannel;
+    this.mKoreaFtcListing = instance.mKoreaFtcListing;
     this.mMerchantPage = instance.mMerchantPage;
     this.mMerchantStatus = instance.mMerchantStatus;
     this.mOnsiteCommerceMerchant = instance.mOnsiteCommerceMerchant;
     this.mPaymentProvider = instance.mPaymentProvider;
+    this.mPrivacyPolicyLocalized = instance.mPrivacyPolicyLocalized;
+    this.mReturnPolicyLocalized = instance.mReturnPolicyLocalized;
     this.mReviewRejectionMessages = instance.mReviewRejectionMessages;
     this.mReviewRejectionReasons = instance.mReviewRejectionReasons;
     this.mTerms = instance.mTerms;

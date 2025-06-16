@@ -47,6 +47,10 @@ public class Vehicle extends APINode {
   private CatalogItemAppLinks mApplinks = null;
   @SerializedName("availability")
   private String mAvailability = null;
+  @SerializedName("availability_circle_radius")
+  private Double mAvailabilityCircleRadius = null;
+  @SerializedName("availability_circle_radius_unit")
+  private String mAvailabilityCircleRadiusUnit = null;
   @SerializedName("body_style")
   private String mBodyStyle = null;
   @SerializedName("category_specific_fields")
@@ -407,6 +411,14 @@ public class Vehicle extends APINode {
 
   public String getFieldAvailability() {
     return mAvailability;
+  }
+
+  public Double getFieldAvailabilityCircleRadius() {
+    return mAvailabilityCircleRadius;
+  }
+
+  public String getFieldAvailabilityCircleRadiusUnit() {
+    return mAvailabilityCircleRadiusUnit;
   }
 
   public String getFieldBodyStyle() {
@@ -1075,6 +1087,8 @@ public class Vehicle extends APINode {
       "address",
       "applinks",
       "availability",
+      "availability_circle_radius",
+      "availability_circle_radius_unit",
       "body_style",
       "category_specific_fields",
       "condition",
@@ -1246,6 +1260,20 @@ public class Vehicle extends APINode {
     }
     public APIRequestGet requestAvailabilityField (boolean value) {
       this.requestField("availability", value);
+      return this;
+    }
+    public APIRequestGet requestAvailabilityCircleRadiusField () {
+      return this.requestAvailabilityCircleRadiusField(true);
+    }
+    public APIRequestGet requestAvailabilityCircleRadiusField (boolean value) {
+      this.requestField("availability_circle_radius", value);
+      return this;
+    }
+    public APIRequestGet requestAvailabilityCircleRadiusUnitField () {
+      return this.requestAvailabilityCircleRadiusUnitField(true);
+    }
+    public APIRequestGet requestAvailabilityCircleRadiusUnitField (boolean value) {
+      this.requestField("availability_circle_radius_unit", value);
       return this;
     }
     public APIRequestGet requestBodyStyleField () {
@@ -2058,6 +2086,8 @@ public class Vehicle extends APINode {
       VALUE_NOT_AVAILABLE("NOT_AVAILABLE"),
       @SerializedName("PENDING")
       VALUE_PENDING("PENDING"),
+      @SerializedName("UNKNOWN")
+      VALUE_UNKNOWN("UNKNOWN"),
       ;
 
       private String value;
@@ -2317,6 +2347,8 @@ public class Vehicle extends APINode {
     this.mAddress = instance.mAddress;
     this.mApplinks = instance.mApplinks;
     this.mAvailability = instance.mAvailability;
+    this.mAvailabilityCircleRadius = instance.mAvailabilityCircleRadius;
+    this.mAvailabilityCircleRadiusUnit = instance.mAvailabilityCircleRadiusUnit;
     this.mBodyStyle = instance.mBodyStyle;
     this.mCategorySpecificFields = instance.mCategorySpecificFields;
     this.mCondition = instance.mCondition;

@@ -1114,6 +1114,8 @@ public class Group extends APINode {
       "registration_setting",
       "scheduled_publish_time",
       "start_time",
+      "sub_categories",
+      "ticket_selling_status",
       "ticket_setting",
       "ticket_uri",
       "ticket_uri_start_sales_time",
@@ -1408,6 +1410,20 @@ public class Group extends APINode {
     }
     public APIRequestGetEvents requestStartTimeField (boolean value) {
       this.requestField("start_time", value);
+      return this;
+    }
+    public APIRequestGetEvents requestSubCategoriesField () {
+      return this.requestSubCategoriesField(true);
+    }
+    public APIRequestGetEvents requestSubCategoriesField (boolean value) {
+      this.requestField("sub_categories", value);
+      return this;
+    }
+    public APIRequestGetEvents requestTicketSellingStatusField () {
+      return this.requestTicketSellingStatusField(true);
+    }
+    public APIRequestGetEvents requestTicketSellingStatusField (boolean value) {
+      this.requestField("ticket_selling_status", value);
       return this;
     }
     public APIRequestGetEvents requestTicketSettingField () {
@@ -4534,6 +4550,7 @@ public class Group extends APINode {
       "age_range",
       "avatar_2d_profile_picture",
       "birthday",
+      "client_business_id",
       "community",
       "cover",
       "currency",
@@ -4547,7 +4564,6 @@ public class Group extends APINode {
       "id",
       "id_for_avatars",
       "inspirational_people",
-      "instagram_user_self_asset",
       "install_type",
       "installed",
       "is_guest_user",
@@ -4701,6 +4717,13 @@ public class Group extends APINode {
       this.requestField("birthday", value);
       return this;
     }
+    public APIRequestGetOptedInMembers requestClientBusinessIdField () {
+      return this.requestClientBusinessIdField(true);
+    }
+    public APIRequestGetOptedInMembers requestClientBusinessIdField (boolean value) {
+      this.requestField("client_business_id", value);
+      return this;
+    }
     public APIRequestGetOptedInMembers requestCommunityField () {
       return this.requestCommunityField(true);
     }
@@ -4790,13 +4813,6 @@ public class Group extends APINode {
     }
     public APIRequestGetOptedInMembers requestInspirationalPeopleField (boolean value) {
       this.requestField("inspirational_people", value);
-      return this;
-    }
-    public APIRequestGetOptedInMembers requestInstagramUserSelfAssetField () {
-      return this.requestInstagramUserSelfAssetField(true);
-    }
-    public APIRequestGetOptedInMembers requestInstagramUserSelfAssetField (boolean value) {
-      this.requestField("instagram_user_self_asset", value);
       return this;
     }
     public APIRequestGetOptedInMembers requestInstallTypeField () {
@@ -6312,6 +6328,7 @@ public class Group extends APINode {
       "is_boost_intended",
       "is_explicit_share",
       "is_group_linking_post",
+      "is_partnership_ad",
       "is_voice_clip",
       "location_source_id",
       "manual_privacy",
@@ -6322,6 +6339,7 @@ public class Group extends APINode {
       "og_suggestion_mechanism",
       "original_fov",
       "original_projection_type",
+      "partnership_ad_ad_code",
       "publish_event_id",
       "published",
       "referenced_sticker_id",
@@ -6646,6 +6664,15 @@ public class Group extends APINode {
       return this;
     }
 
+    public APIRequestCreateVideo setIsPartnershipAd (Boolean isPartnershipAd) {
+      this.setParam("is_partnership_ad", isPartnershipAd);
+      return this;
+    }
+    public APIRequestCreateVideo setIsPartnershipAd (String isPartnershipAd) {
+      this.setParam("is_partnership_ad", isPartnershipAd);
+      return this;
+    }
+
     public APIRequestCreateVideo setIsVoiceClip (Boolean isVoiceClip) {
       this.setParam("is_voice_clip", isVoiceClip);
       return this;
@@ -6709,6 +6736,11 @@ public class Group extends APINode {
     }
     public APIRequestCreateVideo setOriginalProjectionType (String originalProjectionType) {
       this.setParam("original_projection_type", originalProjectionType);
+      return this;
+    }
+
+    public APIRequestCreateVideo setPartnershipAdAdCode (String partnershipAdAdCode) {
+      this.setParam("partnership_ad_ad_code", partnershipAdAdCode);
       return this;
     }
 

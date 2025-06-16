@@ -40,66 +40,70 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class AdsValueAdjustmentRule extends APINode {
-  @SerializedName("base_value")
-  private Long mBaseValue = null;
+public class InstagramThread extends APINode {
+  @SerializedName("folder")
+  private String mFolder = null;
   @SerializedName("id")
   private String mId = null;
+  @SerializedName("participants")
+  private Object mParticipants = null;
+  @SerializedName("updated_time")
+  private String mUpdatedTime = null;
   protected static Gson gson = null;
 
-  AdsValueAdjustmentRule() {
+  InstagramThread() {
   }
 
-  public AdsValueAdjustmentRule(Long id, APIContext context) {
+  public InstagramThread(Long id, APIContext context) {
     this(id.toString(), context);
   }
 
-  public AdsValueAdjustmentRule(String id, APIContext context) {
+  public InstagramThread(String id, APIContext context) {
     this.mId = id;
 
     this.context = context;
   }
 
-  public AdsValueAdjustmentRule fetch() throws APIException{
-    AdsValueAdjustmentRule newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+  public InstagramThread fetch() throws APIException{
+    InstagramThread newInstance = fetchById(this.getPrefixedId().toString(), this.context);
     this.copyFrom(newInstance);
     return this;
   }
 
-  public static AdsValueAdjustmentRule fetchById(Long id, APIContext context) throws APIException {
+  public static InstagramThread fetchById(Long id, APIContext context) throws APIException {
     return fetchById(id.toString(), context);
   }
 
-  public static ListenableFuture<AdsValueAdjustmentRule> fetchByIdAsync(Long id, APIContext context) throws APIException {
+  public static ListenableFuture<InstagramThread> fetchByIdAsync(Long id, APIContext context) throws APIException {
     return fetchByIdAsync(id.toString(), context);
   }
 
-  public static AdsValueAdjustmentRule fetchById(String id, APIContext context) throws APIException {
+  public static InstagramThread fetchById(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
   }
 
-  public static ListenableFuture<AdsValueAdjustmentRule> fetchByIdAsync(String id, APIContext context) throws APIException {
+  public static ListenableFuture<InstagramThread> fetchByIdAsync(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
   }
 
-  public static APINodeList<AdsValueAdjustmentRule> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<AdsValueAdjustmentRule>)(
-      new APIRequest<AdsValueAdjustmentRule>(context, "", "/", "GET", AdsValueAdjustmentRule.getParser())
+  public static APINodeList<InstagramThread> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<InstagramThread>)(
+      new APIRequest<InstagramThread>(context, "", "/", "GET", InstagramThread.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .execute()
     );
   }
 
-  public static ListenableFuture<APINodeList<AdsValueAdjustmentRule>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+  public static ListenableFuture<APINodeList<InstagramThread>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
     return
-      new APIRequest(context, "", "/", "GET", AdsValueAdjustmentRule.getParser())
+      new APIRequest(context, "", "/", "GET", InstagramThread.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
@@ -112,12 +116,12 @@ public class AdsValueAdjustmentRule extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static AdsValueAdjustmentRule loadJSON(String json, APIContext context, String header) {
-    AdsValueAdjustmentRule adsValueAdjustmentRule = getGson().fromJson(json, AdsValueAdjustmentRule.class);
+  public static InstagramThread loadJSON(String json, APIContext context, String header) {
+    InstagramThread instagramThread = getGson().fromJson(json, InstagramThread.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(adsValueAdjustmentRule.toString());
+      JsonElement o2 = parser.parse(instagramThread.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -127,14 +131,14 @@ public class AdsValueAdjustmentRule extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    adsValueAdjustmentRule.context = context;
-    adsValueAdjustmentRule.rawValue = json;
-    adsValueAdjustmentRule.header = header;
-    return adsValueAdjustmentRule;
+    instagramThread.context = context;
+    instagramThread.rawValue = json;
+    instagramThread.header = header;
+    return instagramThread;
   }
 
-  public static APINodeList<AdsValueAdjustmentRule> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<AdsValueAdjustmentRule> adsValueAdjustmentRules = new APINodeList<AdsValueAdjustmentRule>(request, json, header);
+  public static APINodeList<InstagramThread> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<InstagramThread> instagramThreads = new APINodeList<InstagramThread>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -145,9 +149,9 @@ public class AdsValueAdjustmentRule extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adsValueAdjustmentRules.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          instagramThreads.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return adsValueAdjustmentRules;
+        return instagramThreads;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -157,20 +161,20 @@ public class AdsValueAdjustmentRule extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                adsValueAdjustmentRules.setCursors(before, after);
+                instagramThreads.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            adsValueAdjustmentRules.setPaging(previous, next);
+            instagramThreads.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              adsValueAdjustmentRules.setAppSecret(context.getAppSecretProof());
+              instagramThreads.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adsValueAdjustmentRules.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              instagramThreads.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -181,23 +185,23 @@ public class AdsValueAdjustmentRule extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adsValueAdjustmentRules.add(loadJSON(entry.getValue().toString(), context, header));
+                  instagramThreads.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adsValueAdjustmentRules.add(loadJSON(obj.toString(), context, header));
+              instagramThreads.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return adsValueAdjustmentRules;
+          return instagramThreads;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adsValueAdjustmentRules.add(loadJSON(entry.getValue().toString(), context, header));
+              instagramThreads.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return adsValueAdjustmentRules;
+          return instagramThreads;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -214,20 +218,20 @@ public class AdsValueAdjustmentRule extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adsValueAdjustmentRules.add(loadJSON(value.toString(), context, header));
+              instagramThreads.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return adsValueAdjustmentRules;
+            return instagramThreads;
           }
 
           // Sixth, check if it's pure JsonObject
-          adsValueAdjustmentRules.clear();
-          adsValueAdjustmentRules.add(loadJSON(json, context, header));
-          return adsValueAdjustmentRules;
+          instagramThreads.clear();
+          instagramThreads.add(loadJSON(json, context, header));
+          return instagramThreads;
         }
       }
     } catch (Exception e) {
@@ -254,171 +258,72 @@ public class AdsValueAdjustmentRule extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGetCriterias getCriterias() {
-    return new APIRequestGetCriterias(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGet get() {
     return new APIRequestGet(this.getPrefixedId().toString(), context);
   }
 
 
-  public Long getFieldBaseValue() {
-    return mBaseValue;
+  public String getFieldFolder() {
+    return mFolder;
   }
 
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGetCriterias extends APIRequest<APINode> {
-
-    APINodeList<APINode> lastResponse = null;
-    @Override
-    public APINodeList<APINode> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<APINode> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetCriterias.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         },
-         MoreExecutors.directExecutor()
-      );
-    };
-
-    public APIRequestGetCriterias(String nodeId, APIContext context) {
-      super(context, nodeId, "/criterias", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetCriterias setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetCriterias setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetCriterias requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetCriterias requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetCriterias requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetCriterias requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetCriterias requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetCriterias requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
+  public Object getFieldParticipants() {
+    return mParticipants;
   }
 
-  public static class APIRequestGet extends APIRequest<AdsValueAdjustmentRule> {
+  public String getFieldUpdatedTime() {
+    return mUpdatedTime;
+  }
 
-    AdsValueAdjustmentRule lastResponse = null;
+
+
+  public static class APIRequestGet extends APIRequest<InstagramThread> {
+
+    InstagramThread lastResponse = null;
     @Override
-    public AdsValueAdjustmentRule getLastResponse() {
+    public InstagramThread getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
     };
 
     public static final String[] FIELDS = {
-      "base_value",
+      "folder",
       "id",
+      "participants",
+      "updated_time",
     };
 
     @Override
-    public AdsValueAdjustmentRule parseResponse(String response, String header) throws APIException {
-      return AdsValueAdjustmentRule.parseResponse(response, getContext(), this, header).head();
+    public InstagramThread parseResponse(String response, String header) throws APIException {
+      return InstagramThread.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public AdsValueAdjustmentRule execute() throws APIException {
+    public InstagramThread execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public AdsValueAdjustmentRule execute(Map<String, Object> extraParams) throws APIException {
+    public InstagramThread execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<AdsValueAdjustmentRule> executeAsync() throws APIException {
+    public ListenableFuture<InstagramThread> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<AdsValueAdjustmentRule> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<InstagramThread> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, AdsValueAdjustmentRule>() {
-           public AdsValueAdjustmentRule apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, InstagramThread>() {
+           public InstagramThread apply(ResponseWrapper result) {
              try {
                return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -483,11 +388,11 @@ public class AdsValueAdjustmentRule extends APINode {
       return this;
     }
 
-    public APIRequestGet requestBaseValueField () {
-      return this.requestBaseValueField(true);
+    public APIRequestGet requestFolderField () {
+      return this.requestFolderField(true);
     }
-    public APIRequestGet requestBaseValueField (boolean value) {
-      this.requestField("base_value", value);
+    public APIRequestGet requestFolderField (boolean value) {
+      this.requestField("folder", value);
       return this;
     }
     public APIRequestGet requestIdField () {
@@ -495,6 +400,20 @@ public class AdsValueAdjustmentRule extends APINode {
     }
     public APIRequestGet requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGet requestParticipantsField () {
+      return this.requestParticipantsField(true);
+    }
+    public APIRequestGet requestParticipantsField (boolean value) {
+      this.requestField("participants", value);
+      return this;
+    }
+    public APIRequestGet requestUpdatedTimeField () {
+      return this.requestUpdatedTimeField(true);
+    }
+    public APIRequestGet requestUpdatedTimeField (boolean value) {
+      this.requestField("updated_time", value);
       return this;
     }
   }
@@ -513,18 +432,20 @@ public class AdsValueAdjustmentRule extends APINode {
     return gson;
   }
 
-  public AdsValueAdjustmentRule copyFrom(AdsValueAdjustmentRule instance) {
-    this.mBaseValue = instance.mBaseValue;
+  public InstagramThread copyFrom(InstagramThread instance) {
+    this.mFolder = instance.mFolder;
     this.mId = instance.mId;
+    this.mParticipants = instance.mParticipants;
+    this.mUpdatedTime = instance.mUpdatedTime;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<AdsValueAdjustmentRule> getParser() {
-    return new APIRequest.ResponseParser<AdsValueAdjustmentRule>() {
-      public APINodeList<AdsValueAdjustmentRule> parseResponse(String response, APIContext context, APIRequest<AdsValueAdjustmentRule> request, String header) throws MalformedResponseException {
-        return AdsValueAdjustmentRule.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<InstagramThread> getParser() {
+    return new APIRequest.ResponseParser<InstagramThread>() {
+      public APINodeList<InstagramThread> parseResponse(String response, APIContext context, APIRequest<InstagramThread> request, String header) throws MalformedResponseException {
+        return InstagramThread.parseResponse(response, context, request, header);
       }
     };
   }

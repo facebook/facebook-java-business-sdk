@@ -57,6 +57,8 @@ public class AdAssetTargetRuleTargeting extends APINode {
   private List<String> mInstagramPositions = null;
   @SerializedName("publisher_platforms")
   private List<String> mPublisherPlatforms = null;
+  @SerializedName("threads_positions")
+  private List<String> mThreadsPositions = null;
   protected static Gson gson = null;
 
   public AdAssetTargetRuleTargeting() {
@@ -285,6 +287,15 @@ public class AdAssetTargetRuleTargeting extends APINode {
     return this;
   }
 
+  public List<String> getFieldThreadsPositions() {
+    return mThreadsPositions;
+  }
+
+  public AdAssetTargetRuleTargeting setFieldThreadsPositions(List<String> value) {
+    this.mThreadsPositions = value;
+    return this;
+  }
+
 
 
   public static enum EnumDevicePlatforms {
@@ -329,6 +340,7 @@ public class AdAssetTargetRuleTargeting extends APINode {
     this.mGeoLocations = instance.mGeoLocations;
     this.mInstagramPositions = instance.mInstagramPositions;
     this.mPublisherPlatforms = instance.mPublisherPlatforms;
+    this.mThreadsPositions = instance.mThreadsPositions;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

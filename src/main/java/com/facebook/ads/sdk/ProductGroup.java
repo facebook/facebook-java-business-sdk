@@ -343,6 +343,8 @@ public class ProductGroup extends APINode {
       "expiration_date",
       "fb_product_category",
       "gender",
+      "generated_background_images",
+      "generated_background_images_ad_usage",
       "gtin",
       "id",
       "image_cdn_urls",
@@ -389,6 +391,7 @@ public class ProductGroup extends APINode {
       "url",
       "vendor_id",
       "video_fetch_status",
+      "videos",
       "visibility",
       "wa_compliance_category",
     };
@@ -705,6 +708,20 @@ public class ProductGroup extends APINode {
     }
     public APIRequestGetProducts requestGenderField (boolean value) {
       this.requestField("gender", value);
+      return this;
+    }
+    public APIRequestGetProducts requestGeneratedBackgroundImagesField () {
+      return this.requestGeneratedBackgroundImagesField(true);
+    }
+    public APIRequestGetProducts requestGeneratedBackgroundImagesField (boolean value) {
+      this.requestField("generated_background_images", value);
+      return this;
+    }
+    public APIRequestGetProducts requestGeneratedBackgroundImagesAdUsageField () {
+      return this.requestGeneratedBackgroundImagesAdUsageField(true);
+    }
+    public APIRequestGetProducts requestGeneratedBackgroundImagesAdUsageField (boolean value) {
+      this.requestField("generated_background_images_ad_usage", value);
       return this;
     }
     public APIRequestGetProducts requestGtinField () {
@@ -1029,6 +1046,13 @@ public class ProductGroup extends APINode {
       this.requestField("video_fetch_status", value);
       return this;
     }
+    public APIRequestGetProducts requestVideosField () {
+      return this.requestVideosField(true);
+    }
+    public APIRequestGetProducts requestVideosField (boolean value) {
+      this.requestField("videos", value);
+      return this;
+    }
     public APIRequestGetProducts requestVisibilityField () {
       return this.requestVisibilityField(true);
     }
@@ -1055,6 +1079,7 @@ public class ProductGroup extends APINode {
     public static final String[] PARAMS = {
       "additional_image_urls",
       "additional_variant_attributes",
+      "age_group",
       "android_app_name",
       "android_class",
       "android_package",
@@ -1197,6 +1222,15 @@ public class ProductGroup extends APINode {
     }
     public APIRequestCreateProduct setAdditionalVariantAttributes (String additionalVariantAttributes) {
       this.setParam("additional_variant_attributes", additionalVariantAttributes);
+      return this;
+    }
+
+    public APIRequestCreateProduct setAgeGroup (ProductItem.EnumAgeGroup ageGroup) {
+      this.setParam("age_group", ageGroup);
+      return this;
+    }
+    public APIRequestCreateProduct setAgeGroup (String ageGroup) {
+      this.setParam("age_group", ageGroup);
       return this;
     }
 

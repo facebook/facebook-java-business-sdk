@@ -49,6 +49,8 @@ public class AdsValueAdjustmentRuleCollection extends APINode {
   private String mName = null;
   @SerializedName("product_type")
   private String mProductType = null;
+  @SerializedName("status")
+  private String mStatus = null;
   protected static Gson gson = null;
 
   AdsValueAdjustmentRuleCollection() {
@@ -258,6 +260,10 @@ public class AdsValueAdjustmentRuleCollection extends APINode {
     return getGson().toJson(this);
   }
 
+  public APIRequestCreateDeleteRuleSet createDeleteRuleSet() {
+    return new APIRequestCreateDeleteRuleSet(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetRules getRules() {
     return new APIRequestGetRules(this.getPrefixedId().toString(), context);
   }
@@ -287,7 +293,116 @@ public class AdsValueAdjustmentRuleCollection extends APINode {
     return mProductType;
   }
 
+  public String getFieldStatus() {
+    return mStatus;
+  }
 
+
+
+  public static class APIRequestCreateDeleteRuleSet extends APIRequest<AdsValueAdjustmentRuleCollection> {
+
+    AdsValueAdjustmentRuleCollection lastResponse = null;
+    @Override
+    public AdsValueAdjustmentRuleCollection getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public AdsValueAdjustmentRuleCollection parseResponse(String response, String header) throws APIException {
+      return AdsValueAdjustmentRuleCollection.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public AdsValueAdjustmentRuleCollection execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public AdsValueAdjustmentRuleCollection execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<AdsValueAdjustmentRuleCollection> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<AdsValueAdjustmentRuleCollection> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, AdsValueAdjustmentRuleCollection>() {
+           public AdsValueAdjustmentRuleCollection apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateDeleteRuleSet.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestCreateDeleteRuleSet(String nodeId, APIContext context) {
+      super(context, nodeId, "/delete_rule_set", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateDeleteRuleSet setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateDeleteRuleSet setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateDeleteRuleSet requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateDeleteRuleSet requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateDeleteRuleSet requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateDeleteRuleSet requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateDeleteRuleSet requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateDeleteRuleSet requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
 
   public static class APIRequestGetRules extends APIRequest<APINode> {
 
@@ -409,6 +524,7 @@ public class AdsValueAdjustmentRuleCollection extends APINode {
       "is_default_setting",
       "name",
       "product_type",
+      "status",
     };
 
     @Override
@@ -527,6 +643,13 @@ public class AdsValueAdjustmentRuleCollection extends APINode {
     }
     public APIRequestGet requestProductTypeField (boolean value) {
       this.requestField("product_type", value);
+      return this;
+    }
+    public APIRequestGet requestStatusField () {
+      return this.requestStatusField(true);
+    }
+    public APIRequestGet requestStatusField (boolean value) {
+      this.requestField("status", value);
       return this;
     }
   }
@@ -683,6 +806,25 @@ public class AdsValueAdjustmentRuleCollection extends APINode {
       }
   }
 
+  public static enum EnumStatus {
+      @SerializedName("ACTIVE")
+      VALUE_ACTIVE("ACTIVE"),
+      @SerializedName("DELETED")
+      VALUE_DELETED("DELETED"),
+      ;
+
+      private String value;
+
+      private EnumStatus(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
 
   synchronized /*package*/ static Gson getGson() {
     if (gson != null) {
@@ -702,6 +844,7 @@ public class AdsValueAdjustmentRuleCollection extends APINode {
     this.mIsDefaultSetting = instance.mIsDefaultSetting;
     this.mName = instance.mName;
     this.mProductType = instance.mProductType;
+    this.mStatus = instance.mStatus;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

@@ -111,14 +111,46 @@ public class AdsInsights extends APINode {
   private List<AdsActionStats> mConversionValues = null;
   @SerializedName("conversions")
   private List<AdsActionStats> mConversions = null;
+  @SerializedName("converted_product_app_custom_event_fb_mobile_purchase")
+  private List<AdsActionStats> mConvertedProductAppCustomEventFbMobilePurchase = null;
+  @SerializedName("converted_product_app_custom_event_fb_mobile_purchase_value")
+  private List<AdsActionStats> mConvertedProductAppCustomEventFbMobilePurchaseValue = null;
+  @SerializedName("converted_product_offline_purchase")
+  private List<AdsActionStats> mConvertedProductOfflinePurchase = null;
+  @SerializedName("converted_product_offline_purchase_value")
+  private List<AdsActionStats> mConvertedProductOfflinePurchaseValue = null;
+  @SerializedName("converted_product_omni_purchase")
+  private List<AdsActionStats> mConvertedProductOmniPurchase = null;
+  @SerializedName("converted_product_omni_purchase_values")
+  private List<AdsActionStats> mConvertedProductOmniPurchaseValues = null;
   @SerializedName("converted_product_quantity")
   private List<AdsActionStats> mConvertedProductQuantity = null;
   @SerializedName("converted_product_value")
   private List<AdsActionStats> mConvertedProductValue = null;
+  @SerializedName("converted_product_website_pixel_purchase")
+  private List<AdsActionStats> mConvertedProductWebsitePixelPurchase = null;
+  @SerializedName("converted_product_website_pixel_purchase_value")
+  private List<AdsActionStats> mConvertedProductWebsitePixelPurchaseValue = null;
+  @SerializedName("converted_promoted_product_app_custom_event_fb_mobile_purchase")
+  private List<AdsActionStats> mConvertedPromotedProductAppCustomEventFbMobilePurchase = null;
+  @SerializedName("converted_promoted_product_app_custom_event_fb_mobile_purchase_value")
+  private List<AdsActionStats> mConvertedPromotedProductAppCustomEventFbMobilePurchaseValue = null;
+  @SerializedName("converted_promoted_product_offline_purchase")
+  private List<AdsActionStats> mConvertedPromotedProductOfflinePurchase = null;
+  @SerializedName("converted_promoted_product_offline_purchase_value")
+  private List<AdsActionStats> mConvertedPromotedProductOfflinePurchaseValue = null;
+  @SerializedName("converted_promoted_product_omni_purchase")
+  private List<AdsActionStats> mConvertedPromotedProductOmniPurchase = null;
+  @SerializedName("converted_promoted_product_omni_purchase_values")
+  private List<AdsActionStats> mConvertedPromotedProductOmniPurchaseValues = null;
   @SerializedName("converted_promoted_product_quantity")
   private List<AdsActionStats> mConvertedPromotedProductQuantity = null;
   @SerializedName("converted_promoted_product_value")
   private List<AdsActionStats> mConvertedPromotedProductValue = null;
+  @SerializedName("converted_promoted_product_website_pixel_purchase")
+  private List<AdsActionStats> mConvertedPromotedProductWebsitePixelPurchase = null;
+  @SerializedName("converted_promoted_product_website_pixel_purchase_value")
+  private List<AdsActionStats> mConvertedPromotedProductWebsitePixelPurchaseValue = null;
   @SerializedName("cost_per_15_sec_video_view")
   private List<AdsActionStats> mCostPer15SecVideoView = null;
   @SerializedName("cost_per_2_sec_continuous_video_view")
@@ -139,10 +171,14 @@ public class AdsInsights extends APINode {
   private String mCostPerInlineLinkClick = null;
   @SerializedName("cost_per_inline_post_engagement")
   private String mCostPerInlinePostEngagement = null;
+  @SerializedName("cost_per_objective_result")
+  private List<Object> mCostPerObjectiveResult = null;
   @SerializedName("cost_per_one_thousand_ad_impression")
   private List<AdsActionStats> mCostPerOneThousandAdImpression = null;
   @SerializedName("cost_per_outbound_click")
   private List<AdsActionStats> mCostPerOutboundClick = null;
+  @SerializedName("cost_per_result")
+  private List<Object> mCostPerResult = null;
   @SerializedName("cost_per_thruplay")
   private List<AdsActionStats> mCostPerThruplay = null;
   @SerializedName("cost_per_unique_action_type")
@@ -219,10 +255,14 @@ public class AdsInsights extends APINode {
   private String mLabels = null;
   @SerializedName("landing_page_view_actions_per_link_click")
   private String mLandingPageViewActionsPerLinkClick = null;
+  @SerializedName("landing_page_view_per_link_click")
+  private String mLandingPageViewPerLinkClick = null;
   @SerializedName("landing_page_view_per_purchase_rate")
   private String mLandingPageViewPerPurchaseRate = null;
   @SerializedName("location")
   private String mLocation = null;
+  @SerializedName("marketing_messages_click_rate_benchmark")
+  private String mMarketingMessagesClickRateBenchmark = null;
   @SerializedName("marketing_messages_cost_per_delivered")
   private String mMarketingMessagesCostPerDelivered = null;
   @SerializedName("marketing_messages_cost_per_link_btn_click")
@@ -247,6 +287,8 @@ public class AdsInsights extends APINode {
   private String mMarketingMessagesRead = null;
   @SerializedName("marketing_messages_read_rate")
   private String mMarketingMessagesReadRate = null;
+  @SerializedName("marketing_messages_read_rate_benchmark")
+  private String mMarketingMessagesReadRateBenchmark = null;
   @SerializedName("marketing_messages_sent")
   private String mMarketingMessagesSent = null;
   @SerializedName("marketing_messages_spend")
@@ -265,6 +307,10 @@ public class AdsInsights extends APINode {
   private List<AdsActionStats> mMobileAppPurchaseRoas = null;
   @SerializedName("objective")
   private String mObjective = null;
+  @SerializedName("objective_result_rate")
+  private List<Object> mObjectiveResultRate = null;
+  @SerializedName("objective_results")
+  private List<Object> mObjectiveResults = null;
   @SerializedName("onsite_conversion_messaging_detected_purchase_deduped")
   private List<AdsActionStats> mOnsiteConversionMessagingDetectedPurchaseDeduped = null;
   @SerializedName("optimization_goal")
@@ -275,6 +321,32 @@ public class AdsInsights extends APINode {
   private List<AdsActionStats> mOutboundClicksCtr = null;
   @SerializedName("place_page_name")
   private String mPlacePageName = null;
+  @SerializedName("product_brand")
+  private String mProductBrand = null;
+  @SerializedName("product_category")
+  private String mProductCategory = null;
+  @SerializedName("product_content_id")
+  private String mProductContentId = null;
+  @SerializedName("product_custom_label_0")
+  private String mProductCustomLabel0 = null;
+  @SerializedName("product_custom_label_1")
+  private String mProductCustomLabel1 = null;
+  @SerializedName("product_custom_label_2")
+  private String mProductCustomLabel2 = null;
+  @SerializedName("product_custom_label_3")
+  private String mProductCustomLabel3 = null;
+  @SerializedName("product_custom_label_4")
+  private String mProductCustomLabel4 = null;
+  @SerializedName("product_group_content_id")
+  private String mProductGroupContentId = null;
+  @SerializedName("product_group_retailer_id")
+  private String mProductGroupRetailerId = null;
+  @SerializedName("product_name")
+  private String mProductName = null;
+  @SerializedName("product_retailer_id")
+  private String mProductRetailerId = null;
+  @SerializedName("purchase_per_landing_page_view")
+  private String mPurchasePerLandingPageView = null;
   @SerializedName("purchase_roas")
   private List<AdsActionStats> mPurchaseRoas = null;
   @SerializedName("purchases_per_link_click")
@@ -285,8 +357,12 @@ public class AdsInsights extends APINode {
   private String mQualityRanking = null;
   @SerializedName("reach")
   private String mReach = null;
+  @SerializedName("result_rate")
+  private List<Object> mResultRate = null;
   @SerializedName("result_values_performance_indicator")
   private String mResultValuesPerformanceIndicator = null;
+  @SerializedName("results")
+  private List<Object> mResults = null;
   @SerializedName("shops_assisted_purchases")
   private String mShopsAssistedPurchases = null;
   @SerializedName("social_spend")
@@ -364,6 +440,10 @@ public class AdsInsights extends APINode {
   @SerializedName("wish_bid")
   private String mWishBid = null;
   // Breakdowns
+  @SerializedName("ad_extension_domain")
+  private String mAdExtensionDomain = null;
+  @SerializedName("ad_extension_url")
+  private String mAdExtensionUrl = null;
   @SerializedName("ad_format_asset")
   private String mAdFormatAsset = null;
   @SerializedName("age")
@@ -380,10 +460,16 @@ public class AdsInsights extends APINode {
   private AdAssetCallToActionType mCallToActionAsset = null;
   @SerializedName("coarse_conversion_value")
   private String mCoarseConversionValue = null;
+  @SerializedName("comscore_market")
+  private String mComscoreMarket = null;
+  @SerializedName("comscore_market_code")
+  private String mComscoreMarketCode = null;
   @SerializedName("conversion_destination")
   private String mConversionDestination = null;
   @SerializedName("country")
   private String mCountry = null;
+  @SerializedName("creative_relaxation_asset_type")
+  private String mCreativeRelaxationAssetType = null;
   @SerializedName("description_asset")
   private AdAssetDescription mDescriptionAsset = null;
   @SerializedName("device_platform")
@@ -392,8 +478,12 @@ public class AdsInsights extends APINode {
   private String mDma = null;
   @SerializedName("fidelity_type")
   private String mFidelityType = null;
+  @SerializedName("flexible_format_asset_type")
+  private String mFlexibleFormatAssetType = null;
   @SerializedName("frequency_value")
   private String mFrequencyValue = null;
+  @SerializedName("gen_ai_asset_type")
+  private String mGenAiAssetType = null;
   @SerializedName("gender")
   private String mGender = null;
   @SerializedName("hourly_stats_aggregated_by_advertiser_time_zone")
@@ -408,6 +498,8 @@ public class AdsInsights extends APINode {
   private String mImpressionDevice = null;
   @SerializedName("impression_view_time_advertiser_hour_v2")
   private String mImpressionViewTimeAdvertiserHourV2 = null;
+  @SerializedName("is_auto_advance")
+  private String mIsAutoAdvance = null;
   @SerializedName("is_conversion_id_modeled")
   private String mIsConversionIdModeled = null;
   @SerializedName("is_rendered_as_delayed_skip_ad")
@@ -1014,6 +1106,90 @@ public class AdsInsights extends APINode {
     this.mConversions = AdsActionStats.getGson().fromJson(value, type);
     return this;
   }
+  public List<AdsActionStats> getFieldConvertedProductAppCustomEventFbMobilePurchase() {
+    return mConvertedProductAppCustomEventFbMobilePurchase;
+  }
+
+  public AdsInsights setFieldConvertedProductAppCustomEventFbMobilePurchase(List<AdsActionStats> value) {
+    this.mConvertedProductAppCustomEventFbMobilePurchase = value;
+    return this;
+  }
+
+  public AdsInsights setFieldConvertedProductAppCustomEventFbMobilePurchase(String value) {
+    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
+    this.mConvertedProductAppCustomEventFbMobilePurchase = AdsActionStats.getGson().fromJson(value, type);
+    return this;
+  }
+  public List<AdsActionStats> getFieldConvertedProductAppCustomEventFbMobilePurchaseValue() {
+    return mConvertedProductAppCustomEventFbMobilePurchaseValue;
+  }
+
+  public AdsInsights setFieldConvertedProductAppCustomEventFbMobilePurchaseValue(List<AdsActionStats> value) {
+    this.mConvertedProductAppCustomEventFbMobilePurchaseValue = value;
+    return this;
+  }
+
+  public AdsInsights setFieldConvertedProductAppCustomEventFbMobilePurchaseValue(String value) {
+    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
+    this.mConvertedProductAppCustomEventFbMobilePurchaseValue = AdsActionStats.getGson().fromJson(value, type);
+    return this;
+  }
+  public List<AdsActionStats> getFieldConvertedProductOfflinePurchase() {
+    return mConvertedProductOfflinePurchase;
+  }
+
+  public AdsInsights setFieldConvertedProductOfflinePurchase(List<AdsActionStats> value) {
+    this.mConvertedProductOfflinePurchase = value;
+    return this;
+  }
+
+  public AdsInsights setFieldConvertedProductOfflinePurchase(String value) {
+    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
+    this.mConvertedProductOfflinePurchase = AdsActionStats.getGson().fromJson(value, type);
+    return this;
+  }
+  public List<AdsActionStats> getFieldConvertedProductOfflinePurchaseValue() {
+    return mConvertedProductOfflinePurchaseValue;
+  }
+
+  public AdsInsights setFieldConvertedProductOfflinePurchaseValue(List<AdsActionStats> value) {
+    this.mConvertedProductOfflinePurchaseValue = value;
+    return this;
+  }
+
+  public AdsInsights setFieldConvertedProductOfflinePurchaseValue(String value) {
+    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
+    this.mConvertedProductOfflinePurchaseValue = AdsActionStats.getGson().fromJson(value, type);
+    return this;
+  }
+  public List<AdsActionStats> getFieldConvertedProductOmniPurchase() {
+    return mConvertedProductOmniPurchase;
+  }
+
+  public AdsInsights setFieldConvertedProductOmniPurchase(List<AdsActionStats> value) {
+    this.mConvertedProductOmniPurchase = value;
+    return this;
+  }
+
+  public AdsInsights setFieldConvertedProductOmniPurchase(String value) {
+    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
+    this.mConvertedProductOmniPurchase = AdsActionStats.getGson().fromJson(value, type);
+    return this;
+  }
+  public List<AdsActionStats> getFieldConvertedProductOmniPurchaseValues() {
+    return mConvertedProductOmniPurchaseValues;
+  }
+
+  public AdsInsights setFieldConvertedProductOmniPurchaseValues(List<AdsActionStats> value) {
+    this.mConvertedProductOmniPurchaseValues = value;
+    return this;
+  }
+
+  public AdsInsights setFieldConvertedProductOmniPurchaseValues(String value) {
+    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
+    this.mConvertedProductOmniPurchaseValues = AdsActionStats.getGson().fromJson(value, type);
+    return this;
+  }
   public List<AdsActionStats> getFieldConvertedProductQuantity() {
     return mConvertedProductQuantity;
   }
@@ -1042,6 +1218,118 @@ public class AdsInsights extends APINode {
     this.mConvertedProductValue = AdsActionStats.getGson().fromJson(value, type);
     return this;
   }
+  public List<AdsActionStats> getFieldConvertedProductWebsitePixelPurchase() {
+    return mConvertedProductWebsitePixelPurchase;
+  }
+
+  public AdsInsights setFieldConvertedProductWebsitePixelPurchase(List<AdsActionStats> value) {
+    this.mConvertedProductWebsitePixelPurchase = value;
+    return this;
+  }
+
+  public AdsInsights setFieldConvertedProductWebsitePixelPurchase(String value) {
+    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
+    this.mConvertedProductWebsitePixelPurchase = AdsActionStats.getGson().fromJson(value, type);
+    return this;
+  }
+  public List<AdsActionStats> getFieldConvertedProductWebsitePixelPurchaseValue() {
+    return mConvertedProductWebsitePixelPurchaseValue;
+  }
+
+  public AdsInsights setFieldConvertedProductWebsitePixelPurchaseValue(List<AdsActionStats> value) {
+    this.mConvertedProductWebsitePixelPurchaseValue = value;
+    return this;
+  }
+
+  public AdsInsights setFieldConvertedProductWebsitePixelPurchaseValue(String value) {
+    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
+    this.mConvertedProductWebsitePixelPurchaseValue = AdsActionStats.getGson().fromJson(value, type);
+    return this;
+  }
+  public List<AdsActionStats> getFieldConvertedPromotedProductAppCustomEventFbMobilePurchase() {
+    return mConvertedPromotedProductAppCustomEventFbMobilePurchase;
+  }
+
+  public AdsInsights setFieldConvertedPromotedProductAppCustomEventFbMobilePurchase(List<AdsActionStats> value) {
+    this.mConvertedPromotedProductAppCustomEventFbMobilePurchase = value;
+    return this;
+  }
+
+  public AdsInsights setFieldConvertedPromotedProductAppCustomEventFbMobilePurchase(String value) {
+    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
+    this.mConvertedPromotedProductAppCustomEventFbMobilePurchase = AdsActionStats.getGson().fromJson(value, type);
+    return this;
+  }
+  public List<AdsActionStats> getFieldConvertedPromotedProductAppCustomEventFbMobilePurchaseValue() {
+    return mConvertedPromotedProductAppCustomEventFbMobilePurchaseValue;
+  }
+
+  public AdsInsights setFieldConvertedPromotedProductAppCustomEventFbMobilePurchaseValue(List<AdsActionStats> value) {
+    this.mConvertedPromotedProductAppCustomEventFbMobilePurchaseValue = value;
+    return this;
+  }
+
+  public AdsInsights setFieldConvertedPromotedProductAppCustomEventFbMobilePurchaseValue(String value) {
+    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
+    this.mConvertedPromotedProductAppCustomEventFbMobilePurchaseValue = AdsActionStats.getGson().fromJson(value, type);
+    return this;
+  }
+  public List<AdsActionStats> getFieldConvertedPromotedProductOfflinePurchase() {
+    return mConvertedPromotedProductOfflinePurchase;
+  }
+
+  public AdsInsights setFieldConvertedPromotedProductOfflinePurchase(List<AdsActionStats> value) {
+    this.mConvertedPromotedProductOfflinePurchase = value;
+    return this;
+  }
+
+  public AdsInsights setFieldConvertedPromotedProductOfflinePurchase(String value) {
+    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
+    this.mConvertedPromotedProductOfflinePurchase = AdsActionStats.getGson().fromJson(value, type);
+    return this;
+  }
+  public List<AdsActionStats> getFieldConvertedPromotedProductOfflinePurchaseValue() {
+    return mConvertedPromotedProductOfflinePurchaseValue;
+  }
+
+  public AdsInsights setFieldConvertedPromotedProductOfflinePurchaseValue(List<AdsActionStats> value) {
+    this.mConvertedPromotedProductOfflinePurchaseValue = value;
+    return this;
+  }
+
+  public AdsInsights setFieldConvertedPromotedProductOfflinePurchaseValue(String value) {
+    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
+    this.mConvertedPromotedProductOfflinePurchaseValue = AdsActionStats.getGson().fromJson(value, type);
+    return this;
+  }
+  public List<AdsActionStats> getFieldConvertedPromotedProductOmniPurchase() {
+    return mConvertedPromotedProductOmniPurchase;
+  }
+
+  public AdsInsights setFieldConvertedPromotedProductOmniPurchase(List<AdsActionStats> value) {
+    this.mConvertedPromotedProductOmniPurchase = value;
+    return this;
+  }
+
+  public AdsInsights setFieldConvertedPromotedProductOmniPurchase(String value) {
+    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
+    this.mConvertedPromotedProductOmniPurchase = AdsActionStats.getGson().fromJson(value, type);
+    return this;
+  }
+  public List<AdsActionStats> getFieldConvertedPromotedProductOmniPurchaseValues() {
+    return mConvertedPromotedProductOmniPurchaseValues;
+  }
+
+  public AdsInsights setFieldConvertedPromotedProductOmniPurchaseValues(List<AdsActionStats> value) {
+    this.mConvertedPromotedProductOmniPurchaseValues = value;
+    return this;
+  }
+
+  public AdsInsights setFieldConvertedPromotedProductOmniPurchaseValues(String value) {
+    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
+    this.mConvertedPromotedProductOmniPurchaseValues = AdsActionStats.getGson().fromJson(value, type);
+    return this;
+  }
   public List<AdsActionStats> getFieldConvertedPromotedProductQuantity() {
     return mConvertedPromotedProductQuantity;
   }
@@ -1068,6 +1356,34 @@ public class AdsInsights extends APINode {
   public AdsInsights setFieldConvertedPromotedProductValue(String value) {
     Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
     this.mConvertedPromotedProductValue = AdsActionStats.getGson().fromJson(value, type);
+    return this;
+  }
+  public List<AdsActionStats> getFieldConvertedPromotedProductWebsitePixelPurchase() {
+    return mConvertedPromotedProductWebsitePixelPurchase;
+  }
+
+  public AdsInsights setFieldConvertedPromotedProductWebsitePixelPurchase(List<AdsActionStats> value) {
+    this.mConvertedPromotedProductWebsitePixelPurchase = value;
+    return this;
+  }
+
+  public AdsInsights setFieldConvertedPromotedProductWebsitePixelPurchase(String value) {
+    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
+    this.mConvertedPromotedProductWebsitePixelPurchase = AdsActionStats.getGson().fromJson(value, type);
+    return this;
+  }
+  public List<AdsActionStats> getFieldConvertedPromotedProductWebsitePixelPurchaseValue() {
+    return mConvertedPromotedProductWebsitePixelPurchaseValue;
+  }
+
+  public AdsInsights setFieldConvertedPromotedProductWebsitePixelPurchaseValue(List<AdsActionStats> value) {
+    this.mConvertedPromotedProductWebsitePixelPurchaseValue = value;
+    return this;
+  }
+
+  public AdsInsights setFieldConvertedPromotedProductWebsitePixelPurchaseValue(String value) {
+    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
+    this.mConvertedPromotedProductWebsitePixelPurchaseValue = AdsActionStats.getGson().fromJson(value, type);
     return this;
   }
   public List<AdsActionStats> getFieldCostPer15SecVideoView() {
@@ -1190,6 +1506,15 @@ public class AdsInsights extends APINode {
     return this;
   }
 
+  public List<Object> getFieldCostPerObjectiveResult() {
+    return mCostPerObjectiveResult;
+  }
+
+  public AdsInsights setFieldCostPerObjectiveResult(List<Object> value) {
+    this.mCostPerObjectiveResult = value;
+    return this;
+  }
+
   public List<AdsActionStats> getFieldCostPerOneThousandAdImpression() {
     return mCostPerOneThousandAdImpression;
   }
@@ -1218,6 +1543,15 @@ public class AdsInsights extends APINode {
     this.mCostPerOutboundClick = AdsActionStats.getGson().fromJson(value, type);
     return this;
   }
+  public List<Object> getFieldCostPerResult() {
+    return mCostPerResult;
+  }
+
+  public AdsInsights setFieldCostPerResult(List<Object> value) {
+    this.mCostPerResult = value;
+    return this;
+  }
+
   public List<AdsActionStats> getFieldCostPerThruplay() {
     return mCostPerThruplay;
   }
@@ -1590,6 +1924,15 @@ public class AdsInsights extends APINode {
     return this;
   }
 
+  public String getFieldLandingPageViewPerLinkClick() {
+    return mLandingPageViewPerLinkClick;
+  }
+
+  public AdsInsights setFieldLandingPageViewPerLinkClick(String value) {
+    this.mLandingPageViewPerLinkClick = value;
+    return this;
+  }
+
   public String getFieldLandingPageViewPerPurchaseRate() {
     return mLandingPageViewPerPurchaseRate;
   }
@@ -1605,6 +1948,15 @@ public class AdsInsights extends APINode {
 
   public AdsInsights setFieldLocation(String value) {
     this.mLocation = value;
+    return this;
+  }
+
+  public String getFieldMarketingMessagesClickRateBenchmark() {
+    return mMarketingMessagesClickRateBenchmark;
+  }
+
+  public AdsInsights setFieldMarketingMessagesClickRateBenchmark(String value) {
+    this.mMarketingMessagesClickRateBenchmark = value;
     return this;
   }
 
@@ -1716,6 +2068,15 @@ public class AdsInsights extends APINode {
     return this;
   }
 
+  public String getFieldMarketingMessagesReadRateBenchmark() {
+    return mMarketingMessagesReadRateBenchmark;
+  }
+
+  public AdsInsights setFieldMarketingMessagesReadRateBenchmark(String value) {
+    this.mMarketingMessagesReadRateBenchmark = value;
+    return this;
+  }
+
   public String getFieldMarketingMessagesSent() {
     return mMarketingMessagesSent;
   }
@@ -1802,6 +2163,24 @@ public class AdsInsights extends APINode {
     return this;
   }
 
+  public List<Object> getFieldObjectiveResultRate() {
+    return mObjectiveResultRate;
+  }
+
+  public AdsInsights setFieldObjectiveResultRate(List<Object> value) {
+    this.mObjectiveResultRate = value;
+    return this;
+  }
+
+  public List<Object> getFieldObjectiveResults() {
+    return mObjectiveResults;
+  }
+
+  public AdsInsights setFieldObjectiveResults(List<Object> value) {
+    this.mObjectiveResults = value;
+    return this;
+  }
+
   public List<AdsActionStats> getFieldOnsiteConversionMessagingDetectedPurchaseDeduped() {
     return mOnsiteConversionMessagingDetectedPurchaseDeduped;
   }
@@ -1862,6 +2241,123 @@ public class AdsInsights extends APINode {
     return this;
   }
 
+  public String getFieldProductBrand() {
+    return mProductBrand;
+  }
+
+  public AdsInsights setFieldProductBrand(String value) {
+    this.mProductBrand = value;
+    return this;
+  }
+
+  public String getFieldProductCategory() {
+    return mProductCategory;
+  }
+
+  public AdsInsights setFieldProductCategory(String value) {
+    this.mProductCategory = value;
+    return this;
+  }
+
+  public String getFieldProductContentId() {
+    return mProductContentId;
+  }
+
+  public AdsInsights setFieldProductContentId(String value) {
+    this.mProductContentId = value;
+    return this;
+  }
+
+  public String getFieldProductCustomLabel0() {
+    return mProductCustomLabel0;
+  }
+
+  public AdsInsights setFieldProductCustomLabel0(String value) {
+    this.mProductCustomLabel0 = value;
+    return this;
+  }
+
+  public String getFieldProductCustomLabel1() {
+    return mProductCustomLabel1;
+  }
+
+  public AdsInsights setFieldProductCustomLabel1(String value) {
+    this.mProductCustomLabel1 = value;
+    return this;
+  }
+
+  public String getFieldProductCustomLabel2() {
+    return mProductCustomLabel2;
+  }
+
+  public AdsInsights setFieldProductCustomLabel2(String value) {
+    this.mProductCustomLabel2 = value;
+    return this;
+  }
+
+  public String getFieldProductCustomLabel3() {
+    return mProductCustomLabel3;
+  }
+
+  public AdsInsights setFieldProductCustomLabel3(String value) {
+    this.mProductCustomLabel3 = value;
+    return this;
+  }
+
+  public String getFieldProductCustomLabel4() {
+    return mProductCustomLabel4;
+  }
+
+  public AdsInsights setFieldProductCustomLabel4(String value) {
+    this.mProductCustomLabel4 = value;
+    return this;
+  }
+
+  public String getFieldProductGroupContentId() {
+    return mProductGroupContentId;
+  }
+
+  public AdsInsights setFieldProductGroupContentId(String value) {
+    this.mProductGroupContentId = value;
+    return this;
+  }
+
+  public String getFieldProductGroupRetailerId() {
+    return mProductGroupRetailerId;
+  }
+
+  public AdsInsights setFieldProductGroupRetailerId(String value) {
+    this.mProductGroupRetailerId = value;
+    return this;
+  }
+
+  public String getFieldProductName() {
+    return mProductName;
+  }
+
+  public AdsInsights setFieldProductName(String value) {
+    this.mProductName = value;
+    return this;
+  }
+
+  public String getFieldProductRetailerId() {
+    return mProductRetailerId;
+  }
+
+  public AdsInsights setFieldProductRetailerId(String value) {
+    this.mProductRetailerId = value;
+    return this;
+  }
+
+  public String getFieldPurchasePerLandingPageView() {
+    return mPurchasePerLandingPageView;
+  }
+
+  public AdsInsights setFieldPurchasePerLandingPageView(String value) {
+    this.mPurchasePerLandingPageView = value;
+    return this;
+  }
+
   public List<AdsActionStats> getFieldPurchaseRoas() {
     return mPurchaseRoas;
   }
@@ -1912,12 +2408,30 @@ public class AdsInsights extends APINode {
     return this;
   }
 
+  public List<Object> getFieldResultRate() {
+    return mResultRate;
+  }
+
+  public AdsInsights setFieldResultRate(List<Object> value) {
+    this.mResultRate = value;
+    return this;
+  }
+
   public String getFieldResultValuesPerformanceIndicator() {
     return mResultValuesPerformanceIndicator;
   }
 
   public AdsInsights setFieldResultValuesPerformanceIndicator(String value) {
     this.mResultValuesPerformanceIndicator = value;
+    return this;
+  }
+
+  public List<Object> getFieldResults() {
+    return mResults;
+  }
+
+  public AdsInsights setFieldResults(List<Object> value) {
+    this.mResults = value;
     return this;
   }
 
@@ -2398,6 +2912,14 @@ public class AdsInsights extends APINode {
     return this;
   }
 
+  public String getFieldAdExtensionDomain() {
+    return mAdExtensionDomain;
+  }
+
+  public String getFieldAdExtensionUrl() {
+    return mAdExtensionUrl;
+  }
+
   public String getFieldAdFormatAsset() {
     return mAdFormatAsset;
   }
@@ -2430,12 +2952,24 @@ public class AdsInsights extends APINode {
     return mCoarseConversionValue;
   }
 
+  public String getFieldComscoreMarket() {
+    return mComscoreMarket;
+  }
+
+  public String getFieldComscoreMarketCode() {
+    return mComscoreMarketCode;
+  }
+
   public String getFieldConversionDestination() {
     return mConversionDestination;
   }
 
   public String getFieldCountry() {
     return mCountry;
+  }
+
+  public String getFieldCreativeRelaxationAssetType() {
+    return mCreativeRelaxationAssetType;
   }
 
   public AdAssetDescription getFieldDescriptionAsset() {
@@ -2454,8 +2988,16 @@ public class AdsInsights extends APINode {
     return mFidelityType;
   }
 
+  public String getFieldFlexibleFormatAssetType() {
+    return mFlexibleFormatAssetType;
+  }
+
   public String getFieldFrequencyValue() {
     return mFrequencyValue;
+  }
+
+  public String getFieldGenAiAssetType() {
+    return mGenAiAssetType;
   }
 
   public String getFieldGender() {
@@ -2484,6 +3026,10 @@ public class AdsInsights extends APINode {
 
   public String getFieldImpressionViewTimeAdvertiserHourV2() {
     return mImpressionViewTimeAdvertiserHourV2;
+  }
+
+  public String getFieldIsAutoAdvance() {
+    return mIsAutoAdvance;
   }
 
   public String getFieldIsConversionIdModeled() {
@@ -2731,6 +3277,8 @@ public class AdsInsights extends APINode {
       VALUE_CONVERSION("conversion"),
       @SerializedName("impression")
       VALUE_IMPRESSION("impression"),
+      @SerializedName("lifetime")
+      VALUE_LIFETIME("lifetime"),
       @SerializedName("mixed")
       VALUE_MIXED("mixed"),
       ;
@@ -2748,6 +3296,10 @@ public class AdsInsights extends APINode {
   }
 
   public static enum EnumBreakdowns {
+      @SerializedName("ad_extension_domain")
+      VALUE_AD_EXTENSION_DOMAIN("ad_extension_domain"),
+      @SerializedName("ad_extension_url")
+      VALUE_AD_EXTENSION_URL("ad_extension_url"),
       @SerializedName("ad_format_asset")
       VALUE_AD_FORMAT_ASSET("ad_format_asset"),
       @SerializedName("age")
@@ -2764,10 +3316,16 @@ public class AdsInsights extends APINode {
       VALUE_CALL_TO_ACTION_ASSET("call_to_action_asset"),
       @SerializedName("coarse_conversion_value")
       VALUE_COARSE_CONVERSION_VALUE("coarse_conversion_value"),
+      @SerializedName("comscore_market")
+      VALUE_COMSCORE_MARKET("comscore_market"),
+      @SerializedName("comscore_market_code")
+      VALUE_COMSCORE_MARKET_CODE("comscore_market_code"),
       @SerializedName("conversion_destination")
       VALUE_CONVERSION_DESTINATION("conversion_destination"),
       @SerializedName("country")
       VALUE_COUNTRY("country"),
+      @SerializedName("creative_relaxation_asset_type")
+      VALUE_CREATIVE_RELAXATION_ASSET_TYPE("creative_relaxation_asset_type"),
       @SerializedName("description_asset")
       VALUE_DESCRIPTION_ASSET("description_asset"),
       @SerializedName("device_platform")
@@ -2776,8 +3334,12 @@ public class AdsInsights extends APINode {
       VALUE_DMA("dma"),
       @SerializedName("fidelity_type")
       VALUE_FIDELITY_TYPE("fidelity_type"),
+      @SerializedName("flexible_format_asset_type")
+      VALUE_FLEXIBLE_FORMAT_ASSET_TYPE("flexible_format_asset_type"),
       @SerializedName("frequency_value")
       VALUE_FREQUENCY_VALUE("frequency_value"),
+      @SerializedName("gen_ai_asset_type")
+      VALUE_GEN_AI_ASSET_TYPE("gen_ai_asset_type"),
       @SerializedName("gender")
       VALUE_GENDER("gender"),
       @SerializedName("hourly_stats_aggregated_by_advertiser_time_zone")
@@ -2792,6 +3354,8 @@ public class AdsInsights extends APINode {
       VALUE_IMPRESSION_DEVICE("impression_device"),
       @SerializedName("impression_view_time_advertiser_hour_v2")
       VALUE_IMPRESSION_VIEW_TIME_ADVERTISER_HOUR_V2("impression_view_time_advertiser_hour_v2"),
+      @SerializedName("is_auto_advance")
+      VALUE_IS_AUTO_ADVANCE("is_auto_advance"),
       @SerializedName("is_conversion_id_modeled")
       VALUE_IS_CONVERSION_ID_MODELED("is_conversion_id_modeled"),
       @SerializedName("is_rendered_as_delayed_skip_ad")
@@ -3049,10 +3613,26 @@ public class AdsInsights extends APINode {
     this.mConversionRateRanking = instance.mConversionRateRanking;
     this.mConversionValues = instance.mConversionValues;
     this.mConversions = instance.mConversions;
+    this.mConvertedProductAppCustomEventFbMobilePurchase = instance.mConvertedProductAppCustomEventFbMobilePurchase;
+    this.mConvertedProductAppCustomEventFbMobilePurchaseValue = instance.mConvertedProductAppCustomEventFbMobilePurchaseValue;
+    this.mConvertedProductOfflinePurchase = instance.mConvertedProductOfflinePurchase;
+    this.mConvertedProductOfflinePurchaseValue = instance.mConvertedProductOfflinePurchaseValue;
+    this.mConvertedProductOmniPurchase = instance.mConvertedProductOmniPurchase;
+    this.mConvertedProductOmniPurchaseValues = instance.mConvertedProductOmniPurchaseValues;
     this.mConvertedProductQuantity = instance.mConvertedProductQuantity;
     this.mConvertedProductValue = instance.mConvertedProductValue;
+    this.mConvertedProductWebsitePixelPurchase = instance.mConvertedProductWebsitePixelPurchase;
+    this.mConvertedProductWebsitePixelPurchaseValue = instance.mConvertedProductWebsitePixelPurchaseValue;
+    this.mConvertedPromotedProductAppCustomEventFbMobilePurchase = instance.mConvertedPromotedProductAppCustomEventFbMobilePurchase;
+    this.mConvertedPromotedProductAppCustomEventFbMobilePurchaseValue = instance.mConvertedPromotedProductAppCustomEventFbMobilePurchaseValue;
+    this.mConvertedPromotedProductOfflinePurchase = instance.mConvertedPromotedProductOfflinePurchase;
+    this.mConvertedPromotedProductOfflinePurchaseValue = instance.mConvertedPromotedProductOfflinePurchaseValue;
+    this.mConvertedPromotedProductOmniPurchase = instance.mConvertedPromotedProductOmniPurchase;
+    this.mConvertedPromotedProductOmniPurchaseValues = instance.mConvertedPromotedProductOmniPurchaseValues;
     this.mConvertedPromotedProductQuantity = instance.mConvertedPromotedProductQuantity;
     this.mConvertedPromotedProductValue = instance.mConvertedPromotedProductValue;
+    this.mConvertedPromotedProductWebsitePixelPurchase = instance.mConvertedPromotedProductWebsitePixelPurchase;
+    this.mConvertedPromotedProductWebsitePixelPurchaseValue = instance.mConvertedPromotedProductWebsitePixelPurchaseValue;
     this.mCostPer15SecVideoView = instance.mCostPer15SecVideoView;
     this.mCostPer2SecContinuousVideoView = instance.mCostPer2SecContinuousVideoView;
     this.mCostPerActionType = instance.mCostPerActionType;
@@ -3063,8 +3643,10 @@ public class AdsInsights extends APINode {
     this.mCostPerEstimatedAdRecallers = instance.mCostPerEstimatedAdRecallers;
     this.mCostPerInlineLinkClick = instance.mCostPerInlineLinkClick;
     this.mCostPerInlinePostEngagement = instance.mCostPerInlinePostEngagement;
+    this.mCostPerObjectiveResult = instance.mCostPerObjectiveResult;
     this.mCostPerOneThousandAdImpression = instance.mCostPerOneThousandAdImpression;
     this.mCostPerOutboundClick = instance.mCostPerOutboundClick;
+    this.mCostPerResult = instance.mCostPerResult;
     this.mCostPerThruplay = instance.mCostPerThruplay;
     this.mCostPerUniqueActionType = instance.mCostPerUniqueActionType;
     this.mCostPerUniqueClick = instance.mCostPerUniqueClick;
@@ -3103,8 +3685,10 @@ public class AdsInsights extends APINode {
     this.mInteractiveComponentTap = instance.mInteractiveComponentTap;
     this.mLabels = instance.mLabels;
     this.mLandingPageViewActionsPerLinkClick = instance.mLandingPageViewActionsPerLinkClick;
+    this.mLandingPageViewPerLinkClick = instance.mLandingPageViewPerLinkClick;
     this.mLandingPageViewPerPurchaseRate = instance.mLandingPageViewPerPurchaseRate;
     this.mLocation = instance.mLocation;
+    this.mMarketingMessagesClickRateBenchmark = instance.mMarketingMessagesClickRateBenchmark;
     this.mMarketingMessagesCostPerDelivered = instance.mMarketingMessagesCostPerDelivered;
     this.mMarketingMessagesCostPerLinkBtnClick = instance.mMarketingMessagesCostPerLinkBtnClick;
     this.mMarketingMessagesDelivered = instance.mMarketingMessagesDelivered;
@@ -3117,6 +3701,7 @@ public class AdsInsights extends APINode {
     this.mMarketingMessagesQuickReplyBtnClickRate = instance.mMarketingMessagesQuickReplyBtnClickRate;
     this.mMarketingMessagesRead = instance.mMarketingMessagesRead;
     this.mMarketingMessagesReadRate = instance.mMarketingMessagesReadRate;
+    this.mMarketingMessagesReadRateBenchmark = instance.mMarketingMessagesReadRateBenchmark;
     this.mMarketingMessagesSent = instance.mMarketingMessagesSent;
     this.mMarketingMessagesSpend = instance.mMarketingMessagesSpend;
     this.mMarketingMessagesSpendCurrency = instance.mMarketingMessagesSpendCurrency;
@@ -3126,17 +3711,34 @@ public class AdsInsights extends APINode {
     this.mMarketingMessagesWebsitePurchaseValues = instance.mMarketingMessagesWebsitePurchaseValues;
     this.mMobileAppPurchaseRoas = instance.mMobileAppPurchaseRoas;
     this.mObjective = instance.mObjective;
+    this.mObjectiveResultRate = instance.mObjectiveResultRate;
+    this.mObjectiveResults = instance.mObjectiveResults;
     this.mOnsiteConversionMessagingDetectedPurchaseDeduped = instance.mOnsiteConversionMessagingDetectedPurchaseDeduped;
     this.mOptimizationGoal = instance.mOptimizationGoal;
     this.mOutboundClicks = instance.mOutboundClicks;
     this.mOutboundClicksCtr = instance.mOutboundClicksCtr;
     this.mPlacePageName = instance.mPlacePageName;
+    this.mProductBrand = instance.mProductBrand;
+    this.mProductCategory = instance.mProductCategory;
+    this.mProductContentId = instance.mProductContentId;
+    this.mProductCustomLabel0 = instance.mProductCustomLabel0;
+    this.mProductCustomLabel1 = instance.mProductCustomLabel1;
+    this.mProductCustomLabel2 = instance.mProductCustomLabel2;
+    this.mProductCustomLabel3 = instance.mProductCustomLabel3;
+    this.mProductCustomLabel4 = instance.mProductCustomLabel4;
+    this.mProductGroupContentId = instance.mProductGroupContentId;
+    this.mProductGroupRetailerId = instance.mProductGroupRetailerId;
+    this.mProductName = instance.mProductName;
+    this.mProductRetailerId = instance.mProductRetailerId;
+    this.mPurchasePerLandingPageView = instance.mPurchasePerLandingPageView;
     this.mPurchaseRoas = instance.mPurchaseRoas;
     this.mPurchasesPerLinkClick = instance.mPurchasesPerLinkClick;
     this.mQualifyingQuestionQualifyAnswerRate = instance.mQualifyingQuestionQualifyAnswerRate;
     this.mQualityRanking = instance.mQualityRanking;
     this.mReach = instance.mReach;
+    this.mResultRate = instance.mResultRate;
     this.mResultValuesPerformanceIndicator = instance.mResultValuesPerformanceIndicator;
+    this.mResults = instance.mResults;
     this.mShopsAssistedPurchases = instance.mShopsAssistedPurchases;
     this.mSocialSpend = instance.mSocialSpend;
     this.mSpend = instance.mSpend;
@@ -3175,6 +3777,8 @@ public class AdsInsights extends APINode {
     this.mWebsiteCtr = instance.mWebsiteCtr;
     this.mWebsitePurchaseRoas = instance.mWebsitePurchaseRoas;
     this.mWishBid = instance.mWishBid;
+    this.mAdExtensionDomain = instance.mAdExtensionDomain;
+    this.mAdExtensionUrl = instance.mAdExtensionUrl;
     this.mAdFormatAsset = instance.mAdFormatAsset;
     this.mAge = instance.mAge;
     this.mAppId = instance.mAppId;
@@ -3183,13 +3787,18 @@ public class AdsInsights extends APINode {
     this.mBreakdownReportingAdId = instance.mBreakdownReportingAdId;
     this.mCallToActionAsset = instance.mCallToActionAsset;
     this.mCoarseConversionValue = instance.mCoarseConversionValue;
+    this.mComscoreMarket = instance.mComscoreMarket;
+    this.mComscoreMarketCode = instance.mComscoreMarketCode;
     this.mConversionDestination = instance.mConversionDestination;
     this.mCountry = instance.mCountry;
+    this.mCreativeRelaxationAssetType = instance.mCreativeRelaxationAssetType;
     this.mDescriptionAsset = instance.mDescriptionAsset;
     this.mDevicePlatform = instance.mDevicePlatform;
     this.mDma = instance.mDma;
     this.mFidelityType = instance.mFidelityType;
+    this.mFlexibleFormatAssetType = instance.mFlexibleFormatAssetType;
     this.mFrequencyValue = instance.mFrequencyValue;
+    this.mGenAiAssetType = instance.mGenAiAssetType;
     this.mGender = instance.mGender;
     this.mHourlyStatsAggregatedByAdvertiserTimeZone = instance.mHourlyStatsAggregatedByAdvertiserTimeZone;
     this.mHourlyStatsAggregatedByAudienceTimeZone = instance.mHourlyStatsAggregatedByAudienceTimeZone;
@@ -3197,6 +3806,7 @@ public class AdsInsights extends APINode {
     this.mImageAsset = instance.mImageAsset;
     this.mImpressionDevice = instance.mImpressionDevice;
     this.mImpressionViewTimeAdvertiserHourV2 = instance.mImpressionViewTimeAdvertiserHourV2;
+    this.mIsAutoAdvance = instance.mIsAutoAdvance;
     this.mIsConversionIdModeled = instance.mIsConversionIdModeled;
     this.mIsRenderedAsDelayedSkipAd = instance.mIsRenderedAsDelayedSkipAd;
     this.mLandingDestination = instance.mLandingDestination;

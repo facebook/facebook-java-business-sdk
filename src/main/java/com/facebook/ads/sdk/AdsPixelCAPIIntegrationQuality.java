@@ -41,10 +41,20 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class AdsPixelCAPIIntegrationQuality extends APINode {
+  @SerializedName("acr")
+  private Object mAcr = null;
+  @SerializedName("data_freshness")
+  private Object mDataFreshness = null;
+  @SerializedName("dedupe_key_feedback")
+  private List<Object> mDedupeKeyFeedback = null;
+  @SerializedName("event_coverage")
+  private Object mEventCoverage = null;
   @SerializedName("event_match_quality")
   private Object mEventMatchQuality = null;
   @SerializedName("event_name")
   private String mEventName = null;
+  @SerializedName("event_potential_aly_acr_increase")
+  private Object mEventPotentialAlyAcrIncrease = null;
   protected static Gson gson = null;
 
   public AdsPixelCAPIIntegrationQuality() {
@@ -196,6 +206,42 @@ public class AdsPixelCAPIIntegrationQuality extends APINode {
   }
 
 
+  public Object getFieldAcr() {
+    return mAcr;
+  }
+
+  public AdsPixelCAPIIntegrationQuality setFieldAcr(Object value) {
+    this.mAcr = value;
+    return this;
+  }
+
+  public Object getFieldDataFreshness() {
+    return mDataFreshness;
+  }
+
+  public AdsPixelCAPIIntegrationQuality setFieldDataFreshness(Object value) {
+    this.mDataFreshness = value;
+    return this;
+  }
+
+  public List<Object> getFieldDedupeKeyFeedback() {
+    return mDedupeKeyFeedback;
+  }
+
+  public AdsPixelCAPIIntegrationQuality setFieldDedupeKeyFeedback(List<Object> value) {
+    this.mDedupeKeyFeedback = value;
+    return this;
+  }
+
+  public Object getFieldEventCoverage() {
+    return mEventCoverage;
+  }
+
+  public AdsPixelCAPIIntegrationQuality setFieldEventCoverage(Object value) {
+    this.mEventCoverage = value;
+    return this;
+  }
+
   public Object getFieldEventMatchQuality() {
     return mEventMatchQuality;
   }
@@ -211,6 +257,15 @@ public class AdsPixelCAPIIntegrationQuality extends APINode {
 
   public AdsPixelCAPIIntegrationQuality setFieldEventName(String value) {
     this.mEventName = value;
+    return this;
+  }
+
+  public Object getFieldEventPotentialAlyAcrIncrease() {
+    return mEventPotentialAlyAcrIncrease;
+  }
+
+  public AdsPixelCAPIIntegrationQuality setFieldEventPotentialAlyAcrIncrease(Object value) {
+    this.mEventPotentialAlyAcrIncrease = value;
     return this;
   }
 
@@ -231,8 +286,13 @@ public class AdsPixelCAPIIntegrationQuality extends APINode {
   }
 
   public AdsPixelCAPIIntegrationQuality copyFrom(AdsPixelCAPIIntegrationQuality instance) {
+    this.mAcr = instance.mAcr;
+    this.mDataFreshness = instance.mDataFreshness;
+    this.mDedupeKeyFeedback = instance.mDedupeKeyFeedback;
+    this.mEventCoverage = instance.mEventCoverage;
     this.mEventMatchQuality = instance.mEventMatchQuality;
     this.mEventName = instance.mEventName;
+    this.mEventPotentialAlyAcrIncrease = instance.mEventPotentialAlyAcrIncrease;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

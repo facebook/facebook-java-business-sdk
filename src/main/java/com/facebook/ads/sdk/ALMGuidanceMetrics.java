@@ -57,10 +57,28 @@ public class ALMGuidanceMetrics extends APINode {
   private Long mL28Click = null;
   @SerializedName("l28_conversion")
   private Long mL28Conversion = null;
+  @SerializedName("l28_has_click")
+  private Boolean mL28HasClick = null;
+  @SerializedName("l28_has_impression")
+  private Boolean mL28HasImpression = null;
   @SerializedName("l28_impression")
   private Long mL28Impression = null;
+  @SerializedName("l28_is_actioned")
+  private Boolean mL28IsActioned = null;
+  @SerializedName("l28_is_adopted")
+  private Boolean mL28IsAdopted = null;
+  @SerializedName("l28_is_available")
+  private Boolean mL28IsAvailable = null;
+  @SerializedName("l28_is_pitched")
+  private Boolean mL28IsPitched = null;
   @SerializedName("l28_pitch")
   private Long mL28Pitch = null;
+  @SerializedName("l28d_adopted_revenue")
+  private Double mL28dAdoptedRevenue = null;
+  @SerializedName("last_actioned_ds")
+  private String mLastActionedDs = null;
+  @SerializedName("last_adopted_ds")
+  private String mLastAdoptedDs = null;
   @SerializedName("last_pitch_ds")
   private String mLastPitchDs = null;
   @SerializedName("parent_advertiser_id")
@@ -290,6 +308,24 @@ public class ALMGuidanceMetrics extends APINode {
     return this;
   }
 
+  public Boolean getFieldL28HasClick() {
+    return mL28HasClick;
+  }
+
+  public ALMGuidanceMetrics setFieldL28HasClick(Boolean value) {
+    this.mL28HasClick = value;
+    return this;
+  }
+
+  public Boolean getFieldL28HasImpression() {
+    return mL28HasImpression;
+  }
+
+  public ALMGuidanceMetrics setFieldL28HasImpression(Boolean value) {
+    this.mL28HasImpression = value;
+    return this;
+  }
+
   public Long getFieldL28Impression() {
     return mL28Impression;
   }
@@ -299,12 +335,75 @@ public class ALMGuidanceMetrics extends APINode {
     return this;
   }
 
+  public Boolean getFieldL28IsActioned() {
+    return mL28IsActioned;
+  }
+
+  public ALMGuidanceMetrics setFieldL28IsActioned(Boolean value) {
+    this.mL28IsActioned = value;
+    return this;
+  }
+
+  public Boolean getFieldL28IsAdopted() {
+    return mL28IsAdopted;
+  }
+
+  public ALMGuidanceMetrics setFieldL28IsAdopted(Boolean value) {
+    this.mL28IsAdopted = value;
+    return this;
+  }
+
+  public Boolean getFieldL28IsAvailable() {
+    return mL28IsAvailable;
+  }
+
+  public ALMGuidanceMetrics setFieldL28IsAvailable(Boolean value) {
+    this.mL28IsAvailable = value;
+    return this;
+  }
+
+  public Boolean getFieldL28IsPitched() {
+    return mL28IsPitched;
+  }
+
+  public ALMGuidanceMetrics setFieldL28IsPitched(Boolean value) {
+    this.mL28IsPitched = value;
+    return this;
+  }
+
   public Long getFieldL28Pitch() {
     return mL28Pitch;
   }
 
   public ALMGuidanceMetrics setFieldL28Pitch(Long value) {
     this.mL28Pitch = value;
+    return this;
+  }
+
+  public Double getFieldL28dAdoptedRevenue() {
+    return mL28dAdoptedRevenue;
+  }
+
+  public ALMGuidanceMetrics setFieldL28dAdoptedRevenue(Double value) {
+    this.mL28dAdoptedRevenue = value;
+    return this;
+  }
+
+  public String getFieldLastActionedDs() {
+    return mLastActionedDs;
+  }
+
+  public ALMGuidanceMetrics setFieldLastActionedDs(String value) {
+    this.mLastActionedDs = value;
+    return this;
+  }
+
+  public String getFieldLastAdoptedDs() {
+    return mLastAdoptedDs;
+  }
+
+  public ALMGuidanceMetrics setFieldLastAdoptedDs(String value) {
+    this.mLastAdoptedDs = value;
     return this;
   }
 
@@ -360,8 +459,17 @@ public class ALMGuidanceMetrics extends APINode {
     this.mL28Available = instance.mL28Available;
     this.mL28Click = instance.mL28Click;
     this.mL28Conversion = instance.mL28Conversion;
+    this.mL28HasClick = instance.mL28HasClick;
+    this.mL28HasImpression = instance.mL28HasImpression;
     this.mL28Impression = instance.mL28Impression;
+    this.mL28IsActioned = instance.mL28IsActioned;
+    this.mL28IsAdopted = instance.mL28IsAdopted;
+    this.mL28IsAvailable = instance.mL28IsAvailable;
+    this.mL28IsPitched = instance.mL28IsPitched;
     this.mL28Pitch = instance.mL28Pitch;
+    this.mL28dAdoptedRevenue = instance.mL28dAdoptedRevenue;
+    this.mLastActionedDs = instance.mLastActionedDs;
+    this.mLastAdoptedDs = instance.mLastAdoptedDs;
     this.mLastPitchDs = instance.mLastPitchDs;
     this.mParentAdvertiserId = instance.mParentAdvertiserId;
     this.mReportDs = instance.mReportDs;

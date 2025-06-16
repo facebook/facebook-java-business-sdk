@@ -45,6 +45,8 @@ public class AdCreativeSourcingSpec extends APINode {
   private String mAssociatedProductSetId = null;
   @SerializedName("brand")
   private Object mBrand = null;
+  @SerializedName("dynamic_site_links_spec")
+  private Object mDynamicSiteLinksSpec = null;
   @SerializedName("enable_social_feedback_preservation")
   private Boolean mEnableSocialFeedbackPreservation = null;
   @SerializedName("promotion_metadata_spec")
@@ -222,6 +224,15 @@ public class AdCreativeSourcingSpec extends APINode {
     return this;
   }
 
+  public Object getFieldDynamicSiteLinksSpec() {
+    return mDynamicSiteLinksSpec;
+  }
+
+  public AdCreativeSourcingSpec setFieldDynamicSiteLinksSpec(Object value) {
+    this.mDynamicSiteLinksSpec = value;
+    return this;
+  }
+
   public Boolean getFieldEnableSocialFeedbackPreservation() {
     return mEnableSocialFeedbackPreservation;
   }
@@ -287,6 +298,7 @@ public class AdCreativeSourcingSpec extends APINode {
   public AdCreativeSourcingSpec copyFrom(AdCreativeSourcingSpec instance) {
     this.mAssociatedProductSetId = instance.mAssociatedProductSetId;
     this.mBrand = instance.mBrand;
+    this.mDynamicSiteLinksSpec = instance.mDynamicSiteLinksSpec;
     this.mEnableSocialFeedbackPreservation = instance.mEnableSocialFeedbackPreservation;
     this.mPromotionMetadataSpec = instance.mPromotionMetadataSpec;
     this.mSiteLinksSpec = instance.mSiteLinksSpec;

@@ -6363,6 +6363,7 @@ public class Page extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "checkout_config",
       "checkout_message",
       "contact_email",
       "cta",
@@ -6370,10 +6371,13 @@ public class Page extends APINode {
       "facebook_channel",
       "id",
       "instagram_channel",
+      "korea_ftc_listing",
       "merchant_page",
       "merchant_status",
       "onsite_commerce_merchant",
       "payment_provider",
+      "privacy_policy_localized",
+      "return_policy_localized",
       "review_rejection_messages",
       "review_rejection_reasons",
       "terms",
@@ -6469,6 +6473,13 @@ public class Page extends APINode {
       return this;
     }
 
+    public APIRequestGetCommerceMerchantSettings requestCheckoutConfigField () {
+      return this.requestCheckoutConfigField(true);
+    }
+    public APIRequestGetCommerceMerchantSettings requestCheckoutConfigField (boolean value) {
+      this.requestField("checkout_config", value);
+      return this;
+    }
     public APIRequestGetCommerceMerchantSettings requestCheckoutMessageField () {
       return this.requestCheckoutMessageField(true);
     }
@@ -6518,6 +6529,13 @@ public class Page extends APINode {
       this.requestField("instagram_channel", value);
       return this;
     }
+    public APIRequestGetCommerceMerchantSettings requestKoreaFtcListingField () {
+      return this.requestKoreaFtcListingField(true);
+    }
+    public APIRequestGetCommerceMerchantSettings requestKoreaFtcListingField (boolean value) {
+      this.requestField("korea_ftc_listing", value);
+      return this;
+    }
     public APIRequestGetCommerceMerchantSettings requestMerchantPageField () {
       return this.requestMerchantPageField(true);
     }
@@ -6544,6 +6562,20 @@ public class Page extends APINode {
     }
     public APIRequestGetCommerceMerchantSettings requestPaymentProviderField (boolean value) {
       this.requestField("payment_provider", value);
+      return this;
+    }
+    public APIRequestGetCommerceMerchantSettings requestPrivacyPolicyLocalizedField () {
+      return this.requestPrivacyPolicyLocalizedField(true);
+    }
+    public APIRequestGetCommerceMerchantSettings requestPrivacyPolicyLocalizedField (boolean value) {
+      this.requestField("privacy_policy_localized", value);
+      return this;
+    }
+    public APIRequestGetCommerceMerchantSettings requestReturnPolicyLocalizedField () {
+      return this.requestReturnPolicyLocalizedField(true);
+    }
+    public APIRequestGetCommerceMerchantSettings requestReturnPolicyLocalizedField (boolean value) {
+      this.requestField("return_policy_localized", value);
       return this;
     }
     public APIRequestGetCommerceMerchantSettings requestReviewRejectionMessagesField () {
@@ -9966,6 +9998,8 @@ public class Page extends APINode {
       "registration_setting",
       "scheduled_publish_time",
       "start_time",
+      "sub_categories",
+      "ticket_selling_status",
       "ticket_setting",
       "ticket_uri",
       "ticket_uri_start_sales_time",
@@ -10296,6 +10330,20 @@ public class Page extends APINode {
     }
     public APIRequestGetEvents requestStartTimeField (boolean value) {
       this.requestField("start_time", value);
+      return this;
+    }
+    public APIRequestGetEvents requestSubCategoriesField () {
+      return this.requestSubCategoriesField(true);
+    }
+    public APIRequestGetEvents requestSubCategoriesField (boolean value) {
+      this.requestField("sub_categories", value);
+      return this;
+    }
+    public APIRequestGetEvents requestTicketSellingStatusField () {
+      return this.requestTicketSellingStatusField(true);
+    }
+    public APIRequestGetEvents requestTicketSellingStatusField (boolean value) {
+      this.requestField("ticket_selling_status", value);
       return this;
     }
     public APIRequestGetEvents requestTicketSettingField () {
@@ -14567,57 +14615,64 @@ public class Page extends APINode {
     }
   }
 
-  public static class APIRequestGetInstagramAccounts extends APIRequest<InstagramUser> {
+  public static class APIRequestGetInstagramAccounts extends APIRequest<IGUser> {
 
-    APINodeList<InstagramUser> lastResponse = null;
+    APINodeList<IGUser> lastResponse = null;
     @Override
-    public APINodeList<InstagramUser> getLastResponse() {
+    public APINodeList<IGUser> getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
     };
 
     public static final String[] FIELDS = {
-      "follow_count",
-      "followed_by_count",
-      "has_profile_picture",
+      "biography",
+      "business_discovery",
+      "followers_count",
+      "follows_count",
+      "has_profile_pic",
       "id",
-      "ig_user_id",
-      "is_private",
+      "ig_id",
       "is_published",
+      "legacy_instagram_user_id",
       "media_count",
-      "mini_shop_storefront",
+      "mentioned_comment",
+      "mentioned_media",
+      "name",
       "owner_business",
-      "profile_pic",
+      "profile_picture_url",
+      "shopping_product_tag_eligibility",
+      "shopping_review_status",
       "username",
+      "website",
     };
 
     @Override
-    public APINodeList<InstagramUser> parseResponse(String response, String header) throws APIException {
-      return InstagramUser.parseResponse(response, getContext(), this, header);
+    public APINodeList<IGUser> parseResponse(String response, String header) throws APIException {
+      return IGUser.parseResponse(response, getContext(), this, header);
     }
 
     @Override
-    public APINodeList<InstagramUser> execute() throws APIException {
+    public APINodeList<IGUser> execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINodeList<InstagramUser> execute(Map<String, Object> extraParams) throws APIException {
+    public APINodeList<IGUser> execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<APINodeList<InstagramUser>> executeAsync() throws APIException {
+    public ListenableFuture<APINodeList<IGUser>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<APINodeList<InstagramUser>> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<APINodeList<IGUser>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<InstagramUser>>() {
-           public APINodeList<InstagramUser> apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, APINodeList<IGUser>>() {
+           public APINodeList<IGUser> apply(ResponseWrapper result) {
              try {
                return APIRequestGetInstagramAccounts.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -14682,25 +14737,39 @@ public class Page extends APINode {
       return this;
     }
 
-    public APIRequestGetInstagramAccounts requestFollowCountField () {
-      return this.requestFollowCountField(true);
+    public APIRequestGetInstagramAccounts requestBiographyField () {
+      return this.requestBiographyField(true);
     }
-    public APIRequestGetInstagramAccounts requestFollowCountField (boolean value) {
-      this.requestField("follow_count", value);
+    public APIRequestGetInstagramAccounts requestBiographyField (boolean value) {
+      this.requestField("biography", value);
       return this;
     }
-    public APIRequestGetInstagramAccounts requestFollowedByCountField () {
-      return this.requestFollowedByCountField(true);
+    public APIRequestGetInstagramAccounts requestBusinessDiscoveryField () {
+      return this.requestBusinessDiscoveryField(true);
     }
-    public APIRequestGetInstagramAccounts requestFollowedByCountField (boolean value) {
-      this.requestField("followed_by_count", value);
+    public APIRequestGetInstagramAccounts requestBusinessDiscoveryField (boolean value) {
+      this.requestField("business_discovery", value);
       return this;
     }
-    public APIRequestGetInstagramAccounts requestHasProfilePictureField () {
-      return this.requestHasProfilePictureField(true);
+    public APIRequestGetInstagramAccounts requestFollowersCountField () {
+      return this.requestFollowersCountField(true);
     }
-    public APIRequestGetInstagramAccounts requestHasProfilePictureField (boolean value) {
-      this.requestField("has_profile_picture", value);
+    public APIRequestGetInstagramAccounts requestFollowersCountField (boolean value) {
+      this.requestField("followers_count", value);
+      return this;
+    }
+    public APIRequestGetInstagramAccounts requestFollowsCountField () {
+      return this.requestFollowsCountField(true);
+    }
+    public APIRequestGetInstagramAccounts requestFollowsCountField (boolean value) {
+      this.requestField("follows_count", value);
+      return this;
+    }
+    public APIRequestGetInstagramAccounts requestHasProfilePicField () {
+      return this.requestHasProfilePicField(true);
+    }
+    public APIRequestGetInstagramAccounts requestHasProfilePicField (boolean value) {
+      this.requestField("has_profile_pic", value);
       return this;
     }
     public APIRequestGetInstagramAccounts requestIdField () {
@@ -14710,18 +14779,11 @@ public class Page extends APINode {
       this.requestField("id", value);
       return this;
     }
-    public APIRequestGetInstagramAccounts requestIgUserIdField () {
-      return this.requestIgUserIdField(true);
+    public APIRequestGetInstagramAccounts requestIgIdField () {
+      return this.requestIgIdField(true);
     }
-    public APIRequestGetInstagramAccounts requestIgUserIdField (boolean value) {
-      this.requestField("ig_user_id", value);
-      return this;
-    }
-    public APIRequestGetInstagramAccounts requestIsPrivateField () {
-      return this.requestIsPrivateField(true);
-    }
-    public APIRequestGetInstagramAccounts requestIsPrivateField (boolean value) {
-      this.requestField("is_private", value);
+    public APIRequestGetInstagramAccounts requestIgIdField (boolean value) {
+      this.requestField("ig_id", value);
       return this;
     }
     public APIRequestGetInstagramAccounts requestIsPublishedField () {
@@ -14731,6 +14793,13 @@ public class Page extends APINode {
       this.requestField("is_published", value);
       return this;
     }
+    public APIRequestGetInstagramAccounts requestLegacyInstagramUserIdField () {
+      return this.requestLegacyInstagramUserIdField(true);
+    }
+    public APIRequestGetInstagramAccounts requestLegacyInstagramUserIdField (boolean value) {
+      this.requestField("legacy_instagram_user_id", value);
+      return this;
+    }
     public APIRequestGetInstagramAccounts requestMediaCountField () {
       return this.requestMediaCountField(true);
     }
@@ -14738,11 +14807,25 @@ public class Page extends APINode {
       this.requestField("media_count", value);
       return this;
     }
-    public APIRequestGetInstagramAccounts requestMiniShopStorefrontField () {
-      return this.requestMiniShopStorefrontField(true);
+    public APIRequestGetInstagramAccounts requestMentionedCommentField () {
+      return this.requestMentionedCommentField(true);
     }
-    public APIRequestGetInstagramAccounts requestMiniShopStorefrontField (boolean value) {
-      this.requestField("mini_shop_storefront", value);
+    public APIRequestGetInstagramAccounts requestMentionedCommentField (boolean value) {
+      this.requestField("mentioned_comment", value);
+      return this;
+    }
+    public APIRequestGetInstagramAccounts requestMentionedMediaField () {
+      return this.requestMentionedMediaField(true);
+    }
+    public APIRequestGetInstagramAccounts requestMentionedMediaField (boolean value) {
+      this.requestField("mentioned_media", value);
+      return this;
+    }
+    public APIRequestGetInstagramAccounts requestNameField () {
+      return this.requestNameField(true);
+    }
+    public APIRequestGetInstagramAccounts requestNameField (boolean value) {
+      this.requestField("name", value);
       return this;
     }
     public APIRequestGetInstagramAccounts requestOwnerBusinessField () {
@@ -14752,11 +14835,25 @@ public class Page extends APINode {
       this.requestField("owner_business", value);
       return this;
     }
-    public APIRequestGetInstagramAccounts requestProfilePicField () {
-      return this.requestProfilePicField(true);
+    public APIRequestGetInstagramAccounts requestProfilePictureUrlField () {
+      return this.requestProfilePictureUrlField(true);
     }
-    public APIRequestGetInstagramAccounts requestProfilePicField (boolean value) {
-      this.requestField("profile_pic", value);
+    public APIRequestGetInstagramAccounts requestProfilePictureUrlField (boolean value) {
+      this.requestField("profile_picture_url", value);
+      return this;
+    }
+    public APIRequestGetInstagramAccounts requestShoppingProductTagEligibilityField () {
+      return this.requestShoppingProductTagEligibilityField(true);
+    }
+    public APIRequestGetInstagramAccounts requestShoppingProductTagEligibilityField (boolean value) {
+      this.requestField("shopping_product_tag_eligibility", value);
+      return this;
+    }
+    public APIRequestGetInstagramAccounts requestShoppingReviewStatusField () {
+      return this.requestShoppingReviewStatusField(true);
+    }
+    public APIRequestGetInstagramAccounts requestShoppingReviewStatusField (boolean value) {
+      this.requestField("shopping_review_status", value);
       return this;
     }
     public APIRequestGetInstagramAccounts requestUsernameField () {
@@ -14764,6 +14861,13 @@ public class Page extends APINode {
     }
     public APIRequestGetInstagramAccounts requestUsernameField (boolean value) {
       this.requestField("username", value);
+      return this;
+    }
+    public APIRequestGetInstagramAccounts requestWebsiteField () {
+      return this.requestWebsiteField(true);
+    }
+    public APIRequestGetInstagramAccounts requestWebsiteField (boolean value) {
+      this.requestField("website", value);
       return this;
     }
   }
@@ -19986,6 +20090,7 @@ public class Page extends APINode {
       "payload",
       "persona_id",
       "recipient",
+      "reply_to",
       "sender_action",
       "suggestion_action",
       "tag",
@@ -20092,6 +20197,11 @@ public class Page extends APINode {
     }
     public APIRequestCreateMessage setRecipient (String recipient) {
       this.setParam("recipient", recipient);
+      return this;
+    }
+
+    public APIRequestCreateMessage setReplyTo (String replyTo) {
+      this.setParam("reply_to", replyTo);
       return this;
     }
 
@@ -20302,6 +20412,8 @@ public class Page extends APINode {
 
     public static final String[] FIELDS = {
       "audio_enabled",
+      "call_hours",
+      "call_routing",
       "icon_enabled",
     };
 
@@ -20402,6 +20514,20 @@ public class Page extends APINode {
       this.requestField("audio_enabled", value);
       return this;
     }
+    public APIRequestGetMessengerCallSettings requestCallHoursField () {
+      return this.requestCallHoursField(true);
+    }
+    public APIRequestGetMessengerCallSettings requestCallHoursField (boolean value) {
+      this.requestField("call_hours", value);
+      return this;
+    }
+    public APIRequestGetMessengerCallSettings requestCallRoutingField () {
+      return this.requestCallRoutingField(true);
+    }
+    public APIRequestGetMessengerCallSettings requestCallRoutingField (boolean value) {
+      this.requestField("call_routing", value);
+      return this;
+    }
     public APIRequestGetMessengerCallSettings requestIconEnabledField () {
       return this.requestIconEnabledField(true);
     }
@@ -20420,6 +20546,8 @@ public class Page extends APINode {
     }
     public static final String[] PARAMS = {
       "audio_enabled",
+      "call_hours",
+      "call_routing",
       "icon_enabled",
     };
 
@@ -20486,6 +20614,24 @@ public class Page extends APINode {
     }
     public APIRequestCreateMessengerCallSetting setAudioEnabled (String audioEnabled) {
       this.setParam("audio_enabled", audioEnabled);
+      return this;
+    }
+
+    public APIRequestCreateMessengerCallSetting setCallHours (Map<String, String> callHours) {
+      this.setParam("call_hours", callHours);
+      return this;
+    }
+    public APIRequestCreateMessengerCallSetting setCallHours (String callHours) {
+      this.setParam("call_hours", callHours);
+      return this;
+    }
+
+    public APIRequestCreateMessengerCallSetting setCallRouting (Map<String, String> callRouting) {
+      this.setParam("call_routing", callRouting);
+      return this;
+    }
+    public APIRequestCreateMessengerCallSetting setCallRouting (String callRouting) {
+      this.setParam("call_routing", callRouting);
       return this;
     }
 
@@ -21034,10 +21180,8 @@ public class Page extends APINode {
       "get_started",
       "greeting",
       "ice_breakers",
-      "payment_settings",
       "persistent_menu",
       "subject_to_new_eu_privacy_rules",
-      "target_audience",
       "whitelisted_domains",
     };
 
@@ -21175,13 +21319,6 @@ public class Page extends APINode {
       this.requestField("ice_breakers", value);
       return this;
     }
-    public APIRequestGetMessengerProfile requestPaymentSettingsField () {
-      return this.requestPaymentSettingsField(true);
-    }
-    public APIRequestGetMessengerProfile requestPaymentSettingsField (boolean value) {
-      this.requestField("payment_settings", value);
-      return this;
-    }
     public APIRequestGetMessengerProfile requestPersistentMenuField () {
       return this.requestPersistentMenuField(true);
     }
@@ -21194,13 +21331,6 @@ public class Page extends APINode {
     }
     public APIRequestGetMessengerProfile requestSubjectToNewEuPrivacyRulesField (boolean value) {
       this.requestField("subject_to_new_eu_privacy_rules", value);
-      return this;
-    }
-    public APIRequestGetMessengerProfile requestTargetAudienceField () {
-      return this.requestTargetAudienceField(true);
-    }
-    public APIRequestGetMessengerProfile requestTargetAudienceField (boolean value) {
-      this.requestField("target_audience", value);
       return this;
     }
     public APIRequestGetMessengerProfile requestWhitelistedDomainsField () {
@@ -21226,10 +21356,8 @@ public class Page extends APINode {
       "get_started",
       "greeting",
       "ice_breakers",
-      "payment_settings",
       "persistent_menu",
       "platform",
-      "target_audience",
       "title",
       "whitelisted_domains",
     };
@@ -21341,15 +21469,6 @@ public class Page extends APINode {
       return this;
     }
 
-    public APIRequestCreateMessengerProfile setPaymentSettings (Object paymentSettings) {
-      this.setParam("payment_settings", paymentSettings);
-      return this;
-    }
-    public APIRequestCreateMessengerProfile setPaymentSettings (String paymentSettings) {
-      this.setParam("payment_settings", paymentSettings);
-      return this;
-    }
-
     public APIRequestCreateMessengerProfile setPersistentMenu (List<Object> persistentMenu) {
       this.setParam("persistent_menu", persistentMenu);
       return this;
@@ -21365,15 +21484,6 @@ public class Page extends APINode {
     }
     public APIRequestCreateMessengerProfile setPlatform (String platform) {
       this.setParam("platform", platform);
-      return this;
-    }
-
-    public APIRequestCreateMessengerProfile setTargetAudience (Object targetAudience) {
-      this.setParam("target_audience", targetAudience);
-      return this;
-    }
-    public APIRequestCreateMessengerProfile setTargetAudience (String targetAudience) {
-      this.setParam("target_audience", targetAudience);
       return this;
     }
 
@@ -22047,57 +22157,64 @@ public class Page extends APINode {
 
   }
 
-  public static class APIRequestGetPageBackedInstagramAccounts extends APIRequest<InstagramUser> {
+  public static class APIRequestGetPageBackedInstagramAccounts extends APIRequest<IGUser> {
 
-    APINodeList<InstagramUser> lastResponse = null;
+    APINodeList<IGUser> lastResponse = null;
     @Override
-    public APINodeList<InstagramUser> getLastResponse() {
+    public APINodeList<IGUser> getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
     };
 
     public static final String[] FIELDS = {
-      "follow_count",
-      "followed_by_count",
-      "has_profile_picture",
+      "biography",
+      "business_discovery",
+      "followers_count",
+      "follows_count",
+      "has_profile_pic",
       "id",
-      "ig_user_id",
-      "is_private",
+      "ig_id",
       "is_published",
+      "legacy_instagram_user_id",
       "media_count",
-      "mini_shop_storefront",
+      "mentioned_comment",
+      "mentioned_media",
+      "name",
       "owner_business",
-      "profile_pic",
+      "profile_picture_url",
+      "shopping_product_tag_eligibility",
+      "shopping_review_status",
       "username",
+      "website",
     };
 
     @Override
-    public APINodeList<InstagramUser> parseResponse(String response, String header) throws APIException {
-      return InstagramUser.parseResponse(response, getContext(), this, header);
+    public APINodeList<IGUser> parseResponse(String response, String header) throws APIException {
+      return IGUser.parseResponse(response, getContext(), this, header);
     }
 
     @Override
-    public APINodeList<InstagramUser> execute() throws APIException {
+    public APINodeList<IGUser> execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINodeList<InstagramUser> execute(Map<String, Object> extraParams) throws APIException {
+    public APINodeList<IGUser> execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<APINodeList<InstagramUser>> executeAsync() throws APIException {
+    public ListenableFuture<APINodeList<IGUser>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<APINodeList<InstagramUser>> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<APINodeList<IGUser>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<InstagramUser>>() {
-           public APINodeList<InstagramUser> apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, APINodeList<IGUser>>() {
+           public APINodeList<IGUser> apply(ResponseWrapper result) {
              try {
                return APIRequestGetPageBackedInstagramAccounts.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -22162,25 +22279,39 @@ public class Page extends APINode {
       return this;
     }
 
-    public APIRequestGetPageBackedInstagramAccounts requestFollowCountField () {
-      return this.requestFollowCountField(true);
+    public APIRequestGetPageBackedInstagramAccounts requestBiographyField () {
+      return this.requestBiographyField(true);
     }
-    public APIRequestGetPageBackedInstagramAccounts requestFollowCountField (boolean value) {
-      this.requestField("follow_count", value);
+    public APIRequestGetPageBackedInstagramAccounts requestBiographyField (boolean value) {
+      this.requestField("biography", value);
       return this;
     }
-    public APIRequestGetPageBackedInstagramAccounts requestFollowedByCountField () {
-      return this.requestFollowedByCountField(true);
+    public APIRequestGetPageBackedInstagramAccounts requestBusinessDiscoveryField () {
+      return this.requestBusinessDiscoveryField(true);
     }
-    public APIRequestGetPageBackedInstagramAccounts requestFollowedByCountField (boolean value) {
-      this.requestField("followed_by_count", value);
+    public APIRequestGetPageBackedInstagramAccounts requestBusinessDiscoveryField (boolean value) {
+      this.requestField("business_discovery", value);
       return this;
     }
-    public APIRequestGetPageBackedInstagramAccounts requestHasProfilePictureField () {
-      return this.requestHasProfilePictureField(true);
+    public APIRequestGetPageBackedInstagramAccounts requestFollowersCountField () {
+      return this.requestFollowersCountField(true);
     }
-    public APIRequestGetPageBackedInstagramAccounts requestHasProfilePictureField (boolean value) {
-      this.requestField("has_profile_picture", value);
+    public APIRequestGetPageBackedInstagramAccounts requestFollowersCountField (boolean value) {
+      this.requestField("followers_count", value);
+      return this;
+    }
+    public APIRequestGetPageBackedInstagramAccounts requestFollowsCountField () {
+      return this.requestFollowsCountField(true);
+    }
+    public APIRequestGetPageBackedInstagramAccounts requestFollowsCountField (boolean value) {
+      this.requestField("follows_count", value);
+      return this;
+    }
+    public APIRequestGetPageBackedInstagramAccounts requestHasProfilePicField () {
+      return this.requestHasProfilePicField(true);
+    }
+    public APIRequestGetPageBackedInstagramAccounts requestHasProfilePicField (boolean value) {
+      this.requestField("has_profile_pic", value);
       return this;
     }
     public APIRequestGetPageBackedInstagramAccounts requestIdField () {
@@ -22190,18 +22321,11 @@ public class Page extends APINode {
       this.requestField("id", value);
       return this;
     }
-    public APIRequestGetPageBackedInstagramAccounts requestIgUserIdField () {
-      return this.requestIgUserIdField(true);
+    public APIRequestGetPageBackedInstagramAccounts requestIgIdField () {
+      return this.requestIgIdField(true);
     }
-    public APIRequestGetPageBackedInstagramAccounts requestIgUserIdField (boolean value) {
-      this.requestField("ig_user_id", value);
-      return this;
-    }
-    public APIRequestGetPageBackedInstagramAccounts requestIsPrivateField () {
-      return this.requestIsPrivateField(true);
-    }
-    public APIRequestGetPageBackedInstagramAccounts requestIsPrivateField (boolean value) {
-      this.requestField("is_private", value);
+    public APIRequestGetPageBackedInstagramAccounts requestIgIdField (boolean value) {
+      this.requestField("ig_id", value);
       return this;
     }
     public APIRequestGetPageBackedInstagramAccounts requestIsPublishedField () {
@@ -22211,6 +22335,13 @@ public class Page extends APINode {
       this.requestField("is_published", value);
       return this;
     }
+    public APIRequestGetPageBackedInstagramAccounts requestLegacyInstagramUserIdField () {
+      return this.requestLegacyInstagramUserIdField(true);
+    }
+    public APIRequestGetPageBackedInstagramAccounts requestLegacyInstagramUserIdField (boolean value) {
+      this.requestField("legacy_instagram_user_id", value);
+      return this;
+    }
     public APIRequestGetPageBackedInstagramAccounts requestMediaCountField () {
       return this.requestMediaCountField(true);
     }
@@ -22218,11 +22349,25 @@ public class Page extends APINode {
       this.requestField("media_count", value);
       return this;
     }
-    public APIRequestGetPageBackedInstagramAccounts requestMiniShopStorefrontField () {
-      return this.requestMiniShopStorefrontField(true);
+    public APIRequestGetPageBackedInstagramAccounts requestMentionedCommentField () {
+      return this.requestMentionedCommentField(true);
     }
-    public APIRequestGetPageBackedInstagramAccounts requestMiniShopStorefrontField (boolean value) {
-      this.requestField("mini_shop_storefront", value);
+    public APIRequestGetPageBackedInstagramAccounts requestMentionedCommentField (boolean value) {
+      this.requestField("mentioned_comment", value);
+      return this;
+    }
+    public APIRequestGetPageBackedInstagramAccounts requestMentionedMediaField () {
+      return this.requestMentionedMediaField(true);
+    }
+    public APIRequestGetPageBackedInstagramAccounts requestMentionedMediaField (boolean value) {
+      this.requestField("mentioned_media", value);
+      return this;
+    }
+    public APIRequestGetPageBackedInstagramAccounts requestNameField () {
+      return this.requestNameField(true);
+    }
+    public APIRequestGetPageBackedInstagramAccounts requestNameField (boolean value) {
+      this.requestField("name", value);
       return this;
     }
     public APIRequestGetPageBackedInstagramAccounts requestOwnerBusinessField () {
@@ -22232,11 +22377,25 @@ public class Page extends APINode {
       this.requestField("owner_business", value);
       return this;
     }
-    public APIRequestGetPageBackedInstagramAccounts requestProfilePicField () {
-      return this.requestProfilePicField(true);
+    public APIRequestGetPageBackedInstagramAccounts requestProfilePictureUrlField () {
+      return this.requestProfilePictureUrlField(true);
     }
-    public APIRequestGetPageBackedInstagramAccounts requestProfilePicField (boolean value) {
-      this.requestField("profile_pic", value);
+    public APIRequestGetPageBackedInstagramAccounts requestProfilePictureUrlField (boolean value) {
+      this.requestField("profile_picture_url", value);
+      return this;
+    }
+    public APIRequestGetPageBackedInstagramAccounts requestShoppingProductTagEligibilityField () {
+      return this.requestShoppingProductTagEligibilityField(true);
+    }
+    public APIRequestGetPageBackedInstagramAccounts requestShoppingProductTagEligibilityField (boolean value) {
+      this.requestField("shopping_product_tag_eligibility", value);
+      return this;
+    }
+    public APIRequestGetPageBackedInstagramAccounts requestShoppingReviewStatusField () {
+      return this.requestShoppingReviewStatusField(true);
+    }
+    public APIRequestGetPageBackedInstagramAccounts requestShoppingReviewStatusField (boolean value) {
+      this.requestField("shopping_review_status", value);
       return this;
     }
     public APIRequestGetPageBackedInstagramAccounts requestUsernameField () {
@@ -22246,13 +22405,20 @@ public class Page extends APINode {
       this.requestField("username", value);
       return this;
     }
+    public APIRequestGetPageBackedInstagramAccounts requestWebsiteField () {
+      return this.requestWebsiteField(true);
+    }
+    public APIRequestGetPageBackedInstagramAccounts requestWebsiteField (boolean value) {
+      this.requestField("website", value);
+      return this;
+    }
   }
 
-  public static class APIRequestCreatePageBackedInstagramAccount extends APIRequest<InstagramUser> {
+  public static class APIRequestCreatePageBackedInstagramAccount extends APIRequest<IGUser> {
 
-    InstagramUser lastResponse = null;
+    IGUser lastResponse = null;
     @Override
-    public InstagramUser getLastResponse() {
+    public IGUser getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
@@ -22262,31 +22428,31 @@ public class Page extends APINode {
     };
 
     @Override
-    public InstagramUser parseResponse(String response, String header) throws APIException {
-      return InstagramUser.parseResponse(response, getContext(), this, header).head();
+    public IGUser parseResponse(String response, String header) throws APIException {
+      return IGUser.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public InstagramUser execute() throws APIException {
+    public IGUser execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public InstagramUser execute(Map<String, Object> extraParams) throws APIException {
+    public IGUser execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<InstagramUser> executeAsync() throws APIException {
+    public ListenableFuture<IGUser> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<InstagramUser> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<IGUser> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, InstagramUser>() {
-           public InstagramUser apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, IGUser>() {
+           public IGUser apply(ResponseWrapper result) {
              try {
                return APIRequestCreatePageBackedInstagramAccount.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -26094,6 +26260,7 @@ public class Page extends APINode {
       "age_range",
       "avatar_2d_profile_picture",
       "birthday",
+      "client_business_id",
       "community",
       "cover",
       "currency",
@@ -26107,7 +26274,6 @@ public class Page extends APINode {
       "id",
       "id_for_avatars",
       "inspirational_people",
-      "instagram_user_self_asset",
       "install_type",
       "installed",
       "is_guest_user",
@@ -26279,6 +26445,13 @@ public class Page extends APINode {
       this.requestField("birthday", value);
       return this;
     }
+    public APIRequestGetRoles requestClientBusinessIdField () {
+      return this.requestClientBusinessIdField(true);
+    }
+    public APIRequestGetRoles requestClientBusinessIdField (boolean value) {
+      this.requestField("client_business_id", value);
+      return this;
+    }
     public APIRequestGetRoles requestCommunityField () {
       return this.requestCommunityField(true);
     }
@@ -26368,13 +26541,6 @@ public class Page extends APINode {
     }
     public APIRequestGetRoles requestInspirationalPeopleField (boolean value) {
       this.requestField("inspirational_people", value);
-      return this;
-    }
-    public APIRequestGetRoles requestInstagramUserSelfAssetField () {
-      return this.requestInstagramUserSelfAssetField(true);
-    }
-    public APIRequestGetRoles requestInstagramUserSelfAssetField (boolean value) {
-      this.requestField("instagram_user_self_asset", value);
       return this;
     }
     public APIRequestGetRoles requestInstallTypeField () {
@@ -33671,6 +33837,7 @@ public class Page extends APINode {
       "is_boost_intended",
       "is_explicit_share",
       "is_group_linking_post",
+      "is_partnership_ad",
       "is_voice_clip",
       "location_source_id",
       "manual_privacy",
@@ -33683,6 +33850,7 @@ public class Page extends APINode {
       "og_suggestion_mechanism",
       "original_fov",
       "original_projection_type",
+      "partnership_ad_ad_code",
       "publish_event_id",
       "published",
       "reference_only",
@@ -34093,6 +34261,15 @@ public class Page extends APINode {
       return this;
     }
 
+    public APIRequestCreateVideo setIsPartnershipAd (Boolean isPartnershipAd) {
+      this.setParam("is_partnership_ad", isPartnershipAd);
+      return this;
+    }
+    public APIRequestCreateVideo setIsPartnershipAd (String isPartnershipAd) {
+      this.setParam("is_partnership_ad", isPartnershipAd);
+      return this;
+    }
+
     public APIRequestCreateVideo setIsVoiceClip (Boolean isVoiceClip) {
       this.setParam("is_voice_clip", isVoiceClip);
       return this;
@@ -34174,6 +34351,11 @@ public class Page extends APINode {
     }
     public APIRequestCreateVideo setOriginalProjectionType (String originalProjectionType) {
       this.setParam("original_projection_type", originalProjectionType);
+      return this;
+    }
+
+    public APIRequestCreateVideo setPartnershipAdAdCode (String partnershipAdAdCode) {
+      this.setParam("partnership_ad_ad_code", partnershipAdAdCode);
       return this;
     }
 
@@ -37531,6 +37713,8 @@ public class Page extends APINode {
       VALUE_EXPLICIT_IMAGINE("EXPLICIT_IMAGINE"),
       @SerializedName("EXPLICIT_IMAGINE_ME")
       VALUE_EXPLICIT_IMAGINE_ME("EXPLICIT_IMAGINE_ME"),
+      @SerializedName("EXPLICIT_RESTYLE")
+      VALUE_EXPLICIT_RESTYLE("EXPLICIT_RESTYLE"),
       @SerializedName("INVISIBLE_WATERMARK")
       VALUE_INVISIBLE_WATERMARK("INVISIBLE_WATERMARK"),
       @SerializedName("IPTC")
@@ -38319,6 +38503,8 @@ public class Page extends APINode {
       VALUE_ACCEPT("ACCEPT"),
       @SerializedName("CONNECT")
       VALUE_CONNECT("CONNECT"),
+      @SerializedName("MEDIA_UPDATE")
+      VALUE_MEDIA_UPDATE("MEDIA_UPDATE"),
       @SerializedName("REJECT")
       VALUE_REJECT("REJECT"),
       @SerializedName("TERMINATE")
@@ -38369,16 +38555,12 @@ public class Page extends APINode {
       VALUE_HOME_URL("HOME_URL"),
       @SerializedName("ICE_BREAKERS")
       VALUE_ICE_BREAKERS("ICE_BREAKERS"),
-      @SerializedName("PAYMENT_SETTINGS")
-      VALUE_PAYMENT_SETTINGS("PAYMENT_SETTINGS"),
       @SerializedName("PERSISTENT_MENU")
       VALUE_PERSISTENT_MENU("PERSISTENT_MENU"),
       @SerializedName("PLATFORM")
       VALUE_PLATFORM("PLATFORM"),
       @SerializedName("SUBJECT_TO_NEW_EU_PRIVACY_RULES")
       VALUE_SUBJECT_TO_NEW_EU_PRIVACY_RULES("SUBJECT_TO_NEW_EU_PRIVACY_RULES"),
-      @SerializedName("TARGET_AUDIENCE")
-      VALUE_TARGET_AUDIENCE("TARGET_AUDIENCE"),
       @SerializedName("TITLE")
       VALUE_TITLE("TITLE"),
       @SerializedName("WHITELISTED_DOMAINS")

@@ -657,6 +657,7 @@ public class IGComment extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "ad_id",
     };
 
     public static final String[] FIELDS = {
@@ -715,6 +716,11 @@ public class IGComment extends APINode {
       return this;
     }
 
+
+    public APIRequestDelete setAdId (String adId) {
+      this.setParam("ad_id", adId);
+      return this;
+    }
 
     public APIRequestDelete requestAllFields () {
       return this.requestAllFields(true);
@@ -955,6 +961,7 @@ public class IGComment extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "ad_id",
       "hide",
     };
 
@@ -1014,6 +1021,11 @@ public class IGComment extends APINode {
       return this;
     }
 
+
+    public APIRequestUpdate setAdId (String adId) {
+      this.setParam("ad_id", adId);
+      return this;
+    }
 
     public APIRequestUpdate setHide (Boolean hide) {
       this.setParam("hide", hide);

@@ -49,6 +49,8 @@ public class AdCreativeFeatureCustomizations extends APINode {
   private String mFontName = null;
   @SerializedName("image_crop_style")
   private String mImageCropStyle = null;
+  @SerializedName("pe_carousel")
+  private Object mPeCarousel = null;
   @SerializedName("showcase_card_display")
   private String mShowcaseCardDisplay = null;
   @SerializedName("text_extraction")
@@ -242,6 +244,15 @@ public class AdCreativeFeatureCustomizations extends APINode {
     return this;
   }
 
+  public Object getFieldPeCarousel() {
+    return mPeCarousel;
+  }
+
+  public AdCreativeFeatureCustomizations setFieldPeCarousel(Object value) {
+    this.mPeCarousel = value;
+    return this;
+  }
+
   public String getFieldShowcaseCardDisplay() {
     return mShowcaseCardDisplay;
   }
@@ -290,6 +301,7 @@ public class AdCreativeFeatureCustomizations extends APINode {
     this.mCatalogFeedTagName = instance.mCatalogFeedTagName;
     this.mFontName = instance.mFontName;
     this.mImageCropStyle = instance.mImageCropStyle;
+    this.mPeCarousel = instance.mPeCarousel;
     this.mShowcaseCardDisplay = instance.mShowcaseCardDisplay;
     this.mTextExtraction = instance.mTextExtraction;
     this.mTextStyle = instance.mTextStyle;

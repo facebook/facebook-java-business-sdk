@@ -43,6 +43,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class IGCommentFromUser extends APINode {
   @SerializedName("id")
   private String mId = null;
+  @SerializedName("self_ig_scoped_id")
+  private String mSelfIgScopedId = null;
   @SerializedName("username")
   private String mUsername = null;
   protected static Gson gson = null;
@@ -205,6 +207,15 @@ public class IGCommentFromUser extends APINode {
     return this;
   }
 
+  public String getFieldSelfIgScopedId() {
+    return mSelfIgScopedId;
+  }
+
+  public IGCommentFromUser setFieldSelfIgScopedId(String value) {
+    this.mSelfIgScopedId = value;
+    return this;
+  }
+
   public String getFieldUsername() {
     return mUsername;
   }
@@ -232,6 +243,7 @@ public class IGCommentFromUser extends APINode {
 
   public IGCommentFromUser copyFrom(IGCommentFromUser instance) {
     this.mId = instance.mId;
+    this.mSelfIgScopedId = instance.mSelfIgScopedId;
     this.mUsername = instance.mUsername;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

@@ -1015,6 +1015,7 @@ public class AdStudyCell extends APINode {
       "configured_status",
       "created_time",
       "creative_sequence",
+      "creative_sequence_repetition_pattern",
       "daily_budget",
       "daily_min_spend_target",
       "daily_spend_cap",
@@ -1031,6 +1032,7 @@ public class AdStudyCell extends APINode {
       "is_ba_skip_delayed_eligible",
       "is_budget_schedule_enabled",
       "is_dynamic_creative",
+      "is_incremental_attribution_enabled",
       "issues_info",
       "learning_stage_info",
       "lifetime_budget",
@@ -1293,6 +1295,13 @@ public class AdStudyCell extends APINode {
       this.requestField("creative_sequence", value);
       return this;
     }
+    public APIRequestGetAdSets requestCreativeSequenceRepetitionPatternField () {
+      return this.requestCreativeSequenceRepetitionPatternField(true);
+    }
+    public APIRequestGetAdSets requestCreativeSequenceRepetitionPatternField (boolean value) {
+      this.requestField("creative_sequence_repetition_pattern", value);
+      return this;
+    }
     public APIRequestGetAdSets requestDailyBudgetField () {
       return this.requestDailyBudgetField(true);
     }
@@ -1403,6 +1412,13 @@ public class AdStudyCell extends APINode {
     }
     public APIRequestGetAdSets requestIsDynamicCreativeField (boolean value) {
       this.requestField("is_dynamic_creative", value);
+      return this;
+    }
+    public APIRequestGetAdSets requestIsIncrementalAttributionEnabledField () {
+      return this.requestIsIncrementalAttributionEnabledField(true);
+    }
+    public APIRequestGetAdSets requestIsIncrementalAttributionEnabledField (boolean value) {
+      this.requestField("is_incremental_attribution_enabled", value);
       return this;
     }
     public APIRequestGetAdSets requestIssuesInfoField () {

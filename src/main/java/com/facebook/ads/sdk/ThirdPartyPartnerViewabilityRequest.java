@@ -45,6 +45,8 @@ public class ThirdPartyPartnerViewabilityRequest extends APINode {
   private String mCreatedTime = null;
   @SerializedName("description")
   private String mDescription = null;
+  @SerializedName("ds")
+  private String mDs = null;
   @SerializedName("hour")
   private String mHour = null;
   @SerializedName("id")
@@ -283,6 +285,10 @@ public class ThirdPartyPartnerViewabilityRequest extends APINode {
     return mDescription;
   }
 
+  public String getFieldDs() {
+    return mDs;
+  }
+
   public String getFieldHour() {
     return mHour;
   }
@@ -330,6 +336,7 @@ public class ThirdPartyPartnerViewabilityRequest extends APINode {
     public static final String[] FIELDS = {
       "created_time",
       "description",
+      "ds",
       "hour",
       "id",
       "metric",
@@ -442,6 +449,13 @@ public class ThirdPartyPartnerViewabilityRequest extends APINode {
     }
     public APIRequestGet requestDescriptionField (boolean value) {
       this.requestField("description", value);
+      return this;
+    }
+    public APIRequestGet requestDsField () {
+      return this.requestDsField(true);
+    }
+    public APIRequestGet requestDsField (boolean value) {
+      this.requestField("ds", value);
       return this;
     }
     public APIRequestGet requestHourField () {
@@ -586,6 +600,7 @@ public class ThirdPartyPartnerViewabilityRequest extends APINode {
   public ThirdPartyPartnerViewabilityRequest copyFrom(ThirdPartyPartnerViewabilityRequest instance) {
     this.mCreatedTime = instance.mCreatedTime;
     this.mDescription = instance.mDescription;
+    this.mDs = instance.mDs;
     this.mHour = instance.mHour;
     this.mId = instance.mId;
     this.mMetric = instance.mMetric;

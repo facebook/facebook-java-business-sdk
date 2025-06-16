@@ -41,6 +41,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class IGMedia extends APINode {
+  @SerializedName("alt_text")
+  private String mAltText = null;
   @SerializedName("boost_eligibility_info")
   private IGMediaBoostEligibilityInfo mBoostEligibilityInfo = null;
   @SerializedName("caption")
@@ -79,6 +81,8 @@ public class IGMedia extends APINode {
   private String mTimestamp = null;
   @SerializedName("username")
   private String mUsername = null;
+  @SerializedName("view_count")
+  private Long mViewCount = null;
   protected static Gson gson = null;
 
   IGMedia() {
@@ -345,6 +349,10 @@ public class IGMedia extends APINode {
   }
 
 
+  public String getFieldAltText() {
+    return mAltText;
+  }
+
   public IGMediaBoostEligibilityInfo getFieldBoostEligibilityInfo() {
     if (mBoostEligibilityInfo != null) {
       mBoostEligibilityInfo.context = getContext();
@@ -425,6 +433,10 @@ public class IGMedia extends APINode {
 
   public String getFieldUsername() {
     return mUsername;
+  }
+
+  public Long getFieldViewCount() {
+    return mViewCount;
   }
 
 
@@ -807,6 +819,7 @@ public class IGMedia extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "alt_text",
       "boost_eligibility_info",
       "caption",
       "comments_count",
@@ -826,6 +839,7 @@ public class IGMedia extends APINode {
       "thumbnail_url",
       "timestamp",
       "username",
+      "view_count",
     };
 
     @Override
@@ -918,6 +932,13 @@ public class IGMedia extends APINode {
       return this;
     }
 
+    public APIRequestGetChildren requestAltTextField () {
+      return this.requestAltTextField(true);
+    }
+    public APIRequestGetChildren requestAltTextField (boolean value) {
+      this.requestField("alt_text", value);
+      return this;
+    }
     public APIRequestGetChildren requestBoostEligibilityInfoField () {
       return this.requestBoostEligibilityInfoField(true);
     }
@@ -1049,6 +1070,13 @@ public class IGMedia extends APINode {
     }
     public APIRequestGetChildren requestUsernameField (boolean value) {
       this.requestField("username", value);
+      return this;
+    }
+    public APIRequestGetChildren requestViewCountField () {
+      return this.requestViewCountField(true);
+    }
+    public APIRequestGetChildren requestViewCountField (boolean value) {
+      this.requestField("view_count", value);
       return this;
     }
   }
@@ -1383,6 +1411,7 @@ public class IGMedia extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "ad_id",
       "message",
     };
 
@@ -1442,6 +1471,11 @@ public class IGMedia extends APINode {
       return this;
     }
 
+
+    public APIRequestCreateComment setAdId (String adId) {
+      this.setParam("ad_id", adId);
+      return this;
+    }
 
     public APIRequestCreateComment setMessage (String message) {
       this.setParam("message", message);
@@ -2214,6 +2248,7 @@ public class IGMedia extends APINode {
     }
     public static final String[] PARAMS = {
       "ad_account_id",
+      "boostable_media_callsite",
       "business_id",
       "primary_fb_page_id",
       "primary_ig_user_id",
@@ -2222,6 +2257,7 @@ public class IGMedia extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "alt_text",
       "boost_eligibility_info",
       "caption",
       "comments_count",
@@ -2241,6 +2277,7 @@ public class IGMedia extends APINode {
       "thumbnail_url",
       "timestamp",
       "username",
+      "view_count",
     };
 
     @Override
@@ -2306,6 +2343,15 @@ public class IGMedia extends APINode {
       return this;
     }
 
+    public APIRequestGet setBoostableMediaCallsite (EnumBoostableMediaCallsite boostableMediaCallsite) {
+      this.setParam("boostable_media_callsite", boostableMediaCallsite);
+      return this;
+    }
+    public APIRequestGet setBoostableMediaCallsite (String boostableMediaCallsite) {
+      this.setParam("boostable_media_callsite", boostableMediaCallsite);
+      return this;
+    }
+
     public APIRequestGet setBusinessId (String businessId) {
       this.setParam("business_id", businessId);
       return this;
@@ -2367,6 +2413,13 @@ public class IGMedia extends APINode {
       return this;
     }
 
+    public APIRequestGet requestAltTextField () {
+      return this.requestAltTextField(true);
+    }
+    public APIRequestGet requestAltTextField (boolean value) {
+      this.requestField("alt_text", value);
+      return this;
+    }
     public APIRequestGet requestBoostEligibilityInfoField () {
       return this.requestBoostEligibilityInfoField(true);
     }
@@ -2500,6 +2553,13 @@ public class IGMedia extends APINode {
       this.requestField("username", value);
       return this;
     }
+    public APIRequestGet requestViewCountField () {
+      return this.requestViewCountField(true);
+    }
+    public APIRequestGet requestViewCountField (boolean value) {
+      this.requestField("view_count", value);
+      return this;
+    }
   }
 
   public static class APIRequestUpdate extends APIRequest<IGMedia> {
@@ -2617,6 +2677,23 @@ public class IGMedia extends APINode {
 
   }
 
+  public static enum EnumBoostableMediaCallsite {
+      @SerializedName("ADS_MANAGER_L1_EDITOR_DYNAMIC_ADS_WITH_EXISTING_POST")
+      VALUE_ADS_MANAGER_L1_EDITOR_DYNAMIC_ADS_WITH_EXISTING_POST("ADS_MANAGER_L1_EDITOR_DYNAMIC_ADS_WITH_EXISTING_POST"),
+      ;
+
+      private String value;
+
+      private EnumBoostableMediaCallsite(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
 
   synchronized /*package*/ static Gson getGson() {
     if (gson != null) {
@@ -2632,6 +2709,7 @@ public class IGMedia extends APINode {
   }
 
   public IGMedia copyFrom(IGMedia instance) {
+    this.mAltText = instance.mAltText;
     this.mBoostEligibilityInfo = instance.mBoostEligibilityInfo;
     this.mCaption = instance.mCaption;
     this.mCommentsCount = instance.mCommentsCount;
@@ -2651,6 +2729,7 @@ public class IGMedia extends APINode {
     this.mThumbnailUrl = instance.mThumbnailUrl;
     this.mTimestamp = instance.mTimestamp;
     this.mUsername = instance.mUsername;
+    this.mViewCount = instance.mViewCount;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

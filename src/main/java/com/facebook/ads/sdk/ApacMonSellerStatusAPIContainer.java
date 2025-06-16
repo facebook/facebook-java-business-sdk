@@ -40,33 +40,21 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class ShadowIGMediaBoostedInsightsResult extends APINode {
-  @SerializedName("description")
-  private String mDescription = null;
-  @SerializedName("name")
-  private String mName = null;
-  @SerializedName("organic_media_id")
-  private String mOrganicMediaId = null;
-  @SerializedName("source_type")
-  private String mSourceType = null;
-  @SerializedName("title")
-  private String mTitle = null;
-  @SerializedName("values")
-  private List<Object> mValues = null;
+public class ApacMonSellerStatusAPIContainer extends APINode {
   protected static Gson gson = null;
 
-  public ShadowIGMediaBoostedInsightsResult() {
+  public ApacMonSellerStatusAPIContainer() {
   }
 
   public String getId() {
     return null;
   }
-  public static ShadowIGMediaBoostedInsightsResult loadJSON(String json, APIContext context, String header) {
-    ShadowIGMediaBoostedInsightsResult shadowIGMediaBoostedInsightsResult = getGson().fromJson(json, ShadowIGMediaBoostedInsightsResult.class);
+  public static ApacMonSellerStatusAPIContainer loadJSON(String json, APIContext context, String header) {
+    ApacMonSellerStatusAPIContainer apacMonSellerStatusAPIContainer = getGson().fromJson(json, ApacMonSellerStatusAPIContainer.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(shadowIGMediaBoostedInsightsResult.toString());
+      JsonElement o2 = parser.parse(apacMonSellerStatusAPIContainer.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -76,14 +64,14 @@ public class ShadowIGMediaBoostedInsightsResult extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    shadowIGMediaBoostedInsightsResult.context = context;
-    shadowIGMediaBoostedInsightsResult.rawValue = json;
-    shadowIGMediaBoostedInsightsResult.header = header;
-    return shadowIGMediaBoostedInsightsResult;
+    apacMonSellerStatusAPIContainer.context = context;
+    apacMonSellerStatusAPIContainer.rawValue = json;
+    apacMonSellerStatusAPIContainer.header = header;
+    return apacMonSellerStatusAPIContainer;
   }
 
-  public static APINodeList<ShadowIGMediaBoostedInsightsResult> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<ShadowIGMediaBoostedInsightsResult> shadowIGMediaBoostedInsightsResults = new APINodeList<ShadowIGMediaBoostedInsightsResult>(request, json, header);
+  public static APINodeList<ApacMonSellerStatusAPIContainer> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<ApacMonSellerStatusAPIContainer> apacMonSellerStatusAPIContainers = new APINodeList<ApacMonSellerStatusAPIContainer>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -94,9 +82,9 @@ public class ShadowIGMediaBoostedInsightsResult extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          shadowIGMediaBoostedInsightsResults.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          apacMonSellerStatusAPIContainers.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return shadowIGMediaBoostedInsightsResults;
+        return apacMonSellerStatusAPIContainers;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -106,20 +94,20 @@ public class ShadowIGMediaBoostedInsightsResult extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                shadowIGMediaBoostedInsightsResults.setCursors(before, after);
+                apacMonSellerStatusAPIContainers.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            shadowIGMediaBoostedInsightsResults.setPaging(previous, next);
+            apacMonSellerStatusAPIContainers.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              shadowIGMediaBoostedInsightsResults.setAppSecret(context.getAppSecretProof());
+              apacMonSellerStatusAPIContainers.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              shadowIGMediaBoostedInsightsResults.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              apacMonSellerStatusAPIContainers.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -130,23 +118,23 @@ public class ShadowIGMediaBoostedInsightsResult extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  shadowIGMediaBoostedInsightsResults.add(loadJSON(entry.getValue().toString(), context, header));
+                  apacMonSellerStatusAPIContainers.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              shadowIGMediaBoostedInsightsResults.add(loadJSON(obj.toString(), context, header));
+              apacMonSellerStatusAPIContainers.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return shadowIGMediaBoostedInsightsResults;
+          return apacMonSellerStatusAPIContainers;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              shadowIGMediaBoostedInsightsResults.add(loadJSON(entry.getValue().toString(), context, header));
+              apacMonSellerStatusAPIContainers.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return shadowIGMediaBoostedInsightsResults;
+          return apacMonSellerStatusAPIContainers;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -163,20 +151,20 @@ public class ShadowIGMediaBoostedInsightsResult extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              shadowIGMediaBoostedInsightsResults.add(loadJSON(value.toString(), context, header));
+              apacMonSellerStatusAPIContainers.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return shadowIGMediaBoostedInsightsResults;
+            return apacMonSellerStatusAPIContainers;
           }
 
           // Sixth, check if it's pure JsonObject
-          shadowIGMediaBoostedInsightsResults.clear();
-          shadowIGMediaBoostedInsightsResults.add(loadJSON(json, context, header));
-          return shadowIGMediaBoostedInsightsResults;
+          apacMonSellerStatusAPIContainers.clear();
+          apacMonSellerStatusAPIContainers.add(loadJSON(json, context, header));
+          return apacMonSellerStatusAPIContainers;
         }
       }
     } catch (Exception e) {
@@ -204,60 +192,6 @@ public class ShadowIGMediaBoostedInsightsResult extends APINode {
   }
 
 
-  public String getFieldDescription() {
-    return mDescription;
-  }
-
-  public ShadowIGMediaBoostedInsightsResult setFieldDescription(String value) {
-    this.mDescription = value;
-    return this;
-  }
-
-  public String getFieldName() {
-    return mName;
-  }
-
-  public ShadowIGMediaBoostedInsightsResult setFieldName(String value) {
-    this.mName = value;
-    return this;
-  }
-
-  public String getFieldOrganicMediaId() {
-    return mOrganicMediaId;
-  }
-
-  public ShadowIGMediaBoostedInsightsResult setFieldOrganicMediaId(String value) {
-    this.mOrganicMediaId = value;
-    return this;
-  }
-
-  public String getFieldSourceType() {
-    return mSourceType;
-  }
-
-  public ShadowIGMediaBoostedInsightsResult setFieldSourceType(String value) {
-    this.mSourceType = value;
-    return this;
-  }
-
-  public String getFieldTitle() {
-    return mTitle;
-  }
-
-  public ShadowIGMediaBoostedInsightsResult setFieldTitle(String value) {
-    this.mTitle = value;
-    return this;
-  }
-
-  public List<Object> getFieldValues() {
-    return mValues;
-  }
-
-  public ShadowIGMediaBoostedInsightsResult setFieldValues(List<Object> value) {
-    this.mValues = value;
-    return this;
-  }
-
 
 
 
@@ -274,22 +208,16 @@ public class ShadowIGMediaBoostedInsightsResult extends APINode {
     return gson;
   }
 
-  public ShadowIGMediaBoostedInsightsResult copyFrom(ShadowIGMediaBoostedInsightsResult instance) {
-    this.mDescription = instance.mDescription;
-    this.mName = instance.mName;
-    this.mOrganicMediaId = instance.mOrganicMediaId;
-    this.mSourceType = instance.mSourceType;
-    this.mTitle = instance.mTitle;
-    this.mValues = instance.mValues;
+  public ApacMonSellerStatusAPIContainer copyFrom(ApacMonSellerStatusAPIContainer instance) {
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<ShadowIGMediaBoostedInsightsResult> getParser() {
-    return new APIRequest.ResponseParser<ShadowIGMediaBoostedInsightsResult>() {
-      public APINodeList<ShadowIGMediaBoostedInsightsResult> parseResponse(String response, APIContext context, APIRequest<ShadowIGMediaBoostedInsightsResult> request, String header) throws MalformedResponseException {
-        return ShadowIGMediaBoostedInsightsResult.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<ApacMonSellerStatusAPIContainer> getParser() {
+    return new APIRequest.ResponseParser<ApacMonSellerStatusAPIContainer>() {
+      public APINodeList<ApacMonSellerStatusAPIContainer> parseResponse(String response, APIContext context, APIRequest<ApacMonSellerStatusAPIContainer> request, String header) throws MalformedResponseException {
+        return ApacMonSellerStatusAPIContainer.parseResponse(response, context, request, header);
       }
     };
   }

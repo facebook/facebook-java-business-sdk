@@ -384,6 +384,7 @@ public class AdLabel extends APINode {
       "product_set_id",
       "recommender_settings",
       "regional_regulation_disclaimer_spec",
+      "source_facebook_post_id",
       "source_instagram_media_id",
       "status",
       "template_url",
@@ -897,6 +898,13 @@ public class AdLabel extends APINode {
     }
     public APIRequestGetAdCreatives requestRegionalRegulationDisclaimerSpecField (boolean value) {
       this.requestField("regional_regulation_disclaimer_spec", value);
+      return this;
+    }
+    public APIRequestGetAdCreatives requestSourceFacebookPostIdField () {
+      return this.requestSourceFacebookPostIdField(true);
+    }
+    public APIRequestGetAdCreatives requestSourceFacebookPostIdField (boolean value) {
+      this.requestField("source_facebook_post_id", value);
       return this;
     }
     public APIRequestGetAdCreatives requestSourceInstagramMediaIdField () {
@@ -1419,6 +1427,7 @@ public class AdLabel extends APINode {
       "configured_status",
       "created_time",
       "creative_sequence",
+      "creative_sequence_repetition_pattern",
       "daily_budget",
       "daily_min_spend_target",
       "daily_spend_cap",
@@ -1435,6 +1444,7 @@ public class AdLabel extends APINode {
       "is_ba_skip_delayed_eligible",
       "is_budget_schedule_enabled",
       "is_dynamic_creative",
+      "is_incremental_attribution_enabled",
       "issues_info",
       "learning_stage_info",
       "lifetime_budget",
@@ -1697,6 +1707,13 @@ public class AdLabel extends APINode {
       this.requestField("creative_sequence", value);
       return this;
     }
+    public APIRequestGetAdSets requestCreativeSequenceRepetitionPatternField () {
+      return this.requestCreativeSequenceRepetitionPatternField(true);
+    }
+    public APIRequestGetAdSets requestCreativeSequenceRepetitionPatternField (boolean value) {
+      this.requestField("creative_sequence_repetition_pattern", value);
+      return this;
+    }
     public APIRequestGetAdSets requestDailyBudgetField () {
       return this.requestDailyBudgetField(true);
     }
@@ -1807,6 +1824,13 @@ public class AdLabel extends APINode {
     }
     public APIRequestGetAdSets requestIsDynamicCreativeField (boolean value) {
       this.requestField("is_dynamic_creative", value);
+      return this;
+    }
+    public APIRequestGetAdSets requestIsIncrementalAttributionEnabledField () {
+      return this.requestIsIncrementalAttributionEnabledField(true);
+    }
+    public APIRequestGetAdSets requestIsIncrementalAttributionEnabledField (boolean value) {
+      this.requestField("is_incremental_attribution_enabled", value);
       return this;
     }
     public APIRequestGetAdSets requestIssuesInfoField () {

@@ -97,12 +97,16 @@ public class AdPromotedObject extends APINode {
   private ProductSet mProductSet = null;
   @SerializedName("product_set_id")
   private String mProductSetId = null;
+  @SerializedName("product_set_optimization")
+  private String mProductSetOptimization = null;
   @SerializedName("retention_days")
   private String mRetentionDays = null;
   @SerializedName("value_semantic_type")
   private String mValueSemanticType = null;
   @SerializedName("variation")
   private String mVariation = null;
+  @SerializedName("whats_app_business_phone_number_id")
+  private String mWhatsAppBusinessPhoneNumberId = null;
   @SerializedName("whatsapp_phone_number")
   private String mWhatsappPhoneNumber = null;
   protected static Gson gson = null;
@@ -524,6 +528,15 @@ public class AdPromotedObject extends APINode {
     return this;
   }
 
+  public String getFieldProductSetOptimization() {
+    return mProductSetOptimization;
+  }
+
+  public AdPromotedObject setFieldProductSetOptimization(String value) {
+    this.mProductSetOptimization = value;
+    return this;
+  }
+
   public String getFieldRetentionDays() {
     return mRetentionDays;
   }
@@ -548,6 +561,15 @@ public class AdPromotedObject extends APINode {
 
   public AdPromotedObject setFieldVariation(String value) {
     this.mVariation = value;
+    return this;
+  }
+
+  public String getFieldWhatsAppBusinessPhoneNumberId() {
+    return mWhatsAppBusinessPhoneNumberId;
+  }
+
+  public AdPromotedObject setFieldWhatsAppBusinessPhoneNumberId(String value) {
+    this.mWhatsAppBusinessPhoneNumberId = value;
     return this;
   }
 
@@ -751,9 +773,11 @@ public class AdPromotedObject extends APINode {
     this.mProductItemId = instance.mProductItemId;
     this.mProductSet = instance.mProductSet;
     this.mProductSetId = instance.mProductSetId;
+    this.mProductSetOptimization = instance.mProductSetOptimization;
     this.mRetentionDays = instance.mRetentionDays;
     this.mValueSemanticType = instance.mValueSemanticType;
     this.mVariation = instance.mVariation;
+    this.mWhatsAppBusinessPhoneNumberId = instance.mWhatsAppBusinessPhoneNumberId;
     this.mWhatsappPhoneNumber = instance.mWhatsappPhoneNumber;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

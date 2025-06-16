@@ -41,14 +41,10 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class Organization extends APINode {
-  @SerializedName("hq_country")
-  private String mHqCountry = null;
   @SerializedName("id")
   private String mId = null;
   @SerializedName("legal_entity_name")
   private String mLegalEntityName = null;
-  @SerializedName("master_bm_id")
-  private String mMasterBmId = null;
   @SerializedName("owner_business")
   private Business mOwnerBusiness = null;
   protected static Gson gson = null;
@@ -265,20 +261,12 @@ public class Organization extends APINode {
   }
 
 
-  public String getFieldHqCountry() {
-    return mHqCountry;
-  }
-
   public String getFieldId() {
     return mId;
   }
 
   public String getFieldLegalEntityName() {
     return mLegalEntityName;
-  }
-
-  public String getFieldMasterBmId() {
-    return mMasterBmId;
   }
 
   public Business getFieldOwnerBusiness() {
@@ -301,10 +289,8 @@ public class Organization extends APINode {
     };
 
     public static final String[] FIELDS = {
-      "hq_country",
       "id",
       "legal_entity_name",
-      "master_bm_id",
       "owner_business",
     };
 
@@ -398,13 +384,6 @@ public class Organization extends APINode {
       return this;
     }
 
-    public APIRequestGet requestHqCountryField () {
-      return this.requestHqCountryField(true);
-    }
-    public APIRequestGet requestHqCountryField (boolean value) {
-      this.requestField("hq_country", value);
-      return this;
-    }
     public APIRequestGet requestIdField () {
       return this.requestIdField(true);
     }
@@ -417,13 +396,6 @@ public class Organization extends APINode {
     }
     public APIRequestGet requestLegalEntityNameField (boolean value) {
       this.requestField("legal_entity_name", value);
-      return this;
-    }
-    public APIRequestGet requestMasterBmIdField () {
-      return this.requestMasterBmIdField(true);
-    }
-    public APIRequestGet requestMasterBmIdField (boolean value) {
-      this.requestField("master_bm_id", value);
       return this;
     }
     public APIRequestGet requestOwnerBusinessField () {
@@ -450,10 +422,8 @@ public class Organization extends APINode {
   }
 
   public Organization copyFrom(Organization instance) {
-    this.mHqCountry = instance.mHqCountry;
     this.mId = instance.mId;
     this.mLegalEntityName = instance.mLegalEntityName;
-    this.mMasterBmId = instance.mMasterBmId;
     this.mOwnerBusiness = instance.mOwnerBusiness;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

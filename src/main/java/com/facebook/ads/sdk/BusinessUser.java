@@ -65,6 +65,8 @@ public class BusinessUser extends APINode {
   private String mPendingEmail = null;
   @SerializedName("role")
   private String mRole = null;
+  @SerializedName("tasks")
+  private List<String> mTasks = null;
   @SerializedName("title")
   private String mTitle = null;
   @SerializedName("two_fac_status")
@@ -359,6 +361,10 @@ public class BusinessUser extends APINode {
 
   public String getFieldRole() {
     return mRole;
+  }
+
+  public List<String> getFieldTasks() {
+    return mTasks;
   }
 
   public String getFieldTitle() {
@@ -2895,6 +2901,7 @@ public class BusinessUser extends APINode {
       "name",
       "pending_email",
       "role",
+      "tasks",
       "title",
       "two_fac_status",
     };
@@ -3073,6 +3080,13 @@ public class BusinessUser extends APINode {
       this.requestField("role", value);
       return this;
     }
+    public APIRequestGet requestTasksField () {
+      return this.requestTasksField(true);
+    }
+    public APIRequestGet requestTasksField (boolean value) {
+      this.requestField("tasks", value);
+      return this;
+    }
     public APIRequestGet requestTitleField () {
       return this.requestTitleField(true);
     }
@@ -3104,6 +3118,7 @@ public class BusinessUser extends APINode {
       "pending_email",
       "role",
       "skip_verification_email",
+      "tasks",
       "title",
     };
 
@@ -3208,6 +3223,15 @@ public class BusinessUser extends APINode {
     }
     public APIRequestUpdate setSkipVerificationEmail (String skipVerificationEmail) {
       this.setParam("skip_verification_email", skipVerificationEmail);
+      return this;
+    }
+
+    public APIRequestUpdate setTasks (List<BusinessUser.EnumTasks> tasks) {
+      this.setParam("tasks", tasks);
+      return this;
+    }
+    public APIRequestUpdate setTasks (String tasks) {
+      this.setParam("tasks", tasks);
       return this;
     }
 
@@ -3318,6 +3342,51 @@ public class BusinessUser extends APINode {
       }
   }
 
+  public static enum EnumTasks {
+      @SerializedName("ADMIN")
+      VALUE_ADMIN("ADMIN"),
+      @SerializedName("ADS_RIGHTS_REVIEWER")
+      VALUE_ADS_RIGHTS_REVIEWER("ADS_RIGHTS_REVIEWER"),
+      @SerializedName("DEFAULT")
+      VALUE_DEFAULT("DEFAULT"),
+      @SerializedName("DEVELOPER")
+      VALUE_DEVELOPER("DEVELOPER"),
+      @SerializedName("EMPLOYEE")
+      VALUE_EMPLOYEE("EMPLOYEE"),
+      @SerializedName("FINANCE_ANALYST")
+      VALUE_FINANCE_ANALYST("FINANCE_ANALYST"),
+      @SerializedName("FINANCE_EDIT")
+      VALUE_FINANCE_EDIT("FINANCE_EDIT"),
+      @SerializedName("FINANCE_EDITOR")
+      VALUE_FINANCE_EDITOR("FINANCE_EDITOR"),
+      @SerializedName("FINANCE_VIEW")
+      VALUE_FINANCE_VIEW("FINANCE_VIEW"),
+      @SerializedName("MANAGE")
+      VALUE_MANAGE("MANAGE"),
+      @SerializedName("PARTNER_CENTER_ADMIN")
+      VALUE_PARTNER_CENTER_ADMIN("PARTNER_CENTER_ADMIN"),
+      @SerializedName("PARTNER_CENTER_ANALYST")
+      VALUE_PARTNER_CENTER_ANALYST("PARTNER_CENTER_ANALYST"),
+      @SerializedName("PARTNER_CENTER_EDUCATION")
+      VALUE_PARTNER_CENTER_EDUCATION("PARTNER_CENTER_EDUCATION"),
+      @SerializedName("PARTNER_CENTER_MARKETING")
+      VALUE_PARTNER_CENTER_MARKETING("PARTNER_CENTER_MARKETING"),
+      @SerializedName("PARTNER_CENTER_OPERATIONS")
+      VALUE_PARTNER_CENTER_OPERATIONS("PARTNER_CENTER_OPERATIONS"),
+      ;
+
+      private String value;
+
+      private EnumTasks(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
 
   synchronized /*package*/ static Gson getGson() {
     if (gson != null) {
@@ -3345,6 +3414,7 @@ public class BusinessUser extends APINode {
     this.mName = instance.mName;
     this.mPendingEmail = instance.mPendingEmail;
     this.mRole = instance.mRole;
+    this.mTasks = instance.mTasks;
     this.mTitle = instance.mTitle;
     this.mTwoFacStatus = instance.mTwoFacStatus;
     this.context = instance.context;

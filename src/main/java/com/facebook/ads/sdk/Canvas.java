@@ -308,8 +308,8 @@ public class Canvas extends APINode {
     return new APIRequestGetPreview(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestGetPreviews getPreviews() {
-    return new APIRequestGetPreviews(this.getPrefixedId().toString(), context);
+  public APIRequestGetPreViews getPreViews() {
+    return new APIRequestGetPreViews(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGet get() {
@@ -562,7 +562,7 @@ public class Canvas extends APINode {
     }
   }
 
-  public static class APIRequestGetPreviews extends APIRequest<TextWithEntities> {
+  public static class APIRequestGetPreViews extends APIRequest<TextWithEntities> {
 
     APINodeList<TextWithEntities> lastResponse = null;
     @Override
@@ -604,7 +604,7 @@ public class Canvas extends APINode {
         new Function<ResponseWrapper, APINodeList<TextWithEntities>>() {
            public APINodeList<TextWithEntities> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetPreviews.this.parseResponse(result.getBody(), result.getHeader());
+               return APIRequestGetPreViews.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -614,37 +614,37 @@ public class Canvas extends APINode {
       );
     };
 
-    public APIRequestGetPreviews(String nodeId, APIContext context) {
+    public APIRequestGetPreViews(String nodeId, APIContext context) {
       super(context, nodeId, "/previews", "GET", Arrays.asList(PARAMS));
     }
 
     @Override
-    public APIRequestGetPreviews setParam(String param, Object value) {
+    public APIRequestGetPreViews setParam(String param, Object value) {
       setParamInternal(param, value);
       return this;
     }
 
     @Override
-    public APIRequestGetPreviews setParams(Map<String, Object> params) {
+    public APIRequestGetPreViews setParams(Map<String, Object> params) {
       setParamsInternal(params);
       return this;
     }
 
 
-    public APIRequestGetPreviews setUserIds (List<Long> userIds) {
+    public APIRequestGetPreViews setUserIds (List<Long> userIds) {
       this.setParam("user_ids", userIds);
       return this;
     }
-    public APIRequestGetPreviews setUserIds (String userIds) {
+    public APIRequestGetPreViews setUserIds (String userIds) {
       this.setParam("user_ids", userIds);
       return this;
     }
 
-    public APIRequestGetPreviews requestAllFields () {
+    public APIRequestGetPreViews requestAllFields () {
       return this.requestAllFields(true);
     }
 
-    public APIRequestGetPreviews requestAllFields (boolean value) {
+    public APIRequestGetPreViews requestAllFields (boolean value) {
       for (String field : FIELDS) {
         this.requestField(field, value);
       }
@@ -652,12 +652,12 @@ public class Canvas extends APINode {
     }
 
     @Override
-    public APIRequestGetPreviews requestFields (List<String> fields) {
+    public APIRequestGetPreViews requestFields (List<String> fields) {
       return this.requestFields(fields, true);
     }
 
     @Override
-    public APIRequestGetPreviews requestFields (List<String> fields, boolean value) {
+    public APIRequestGetPreViews requestFields (List<String> fields, boolean value) {
       for (String field : fields) {
         this.requestField(field, value);
       }
@@ -665,21 +665,21 @@ public class Canvas extends APINode {
     }
 
     @Override
-    public APIRequestGetPreviews requestField (String field) {
+    public APIRequestGetPreViews requestField (String field) {
       this.requestField(field, true);
       return this;
     }
 
     @Override
-    public APIRequestGetPreviews requestField (String field, boolean value) {
+    public APIRequestGetPreViews requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
 
-    public APIRequestGetPreviews requestTextField () {
+    public APIRequestGetPreViews requestTextField () {
       return this.requestTextField(true);
     }
-    public APIRequestGetPreviews requestTextField (boolean value) {
+    public APIRequestGetPreViews requestTextField (boolean value) {
       this.requestField("text", value);
       return this;
     }

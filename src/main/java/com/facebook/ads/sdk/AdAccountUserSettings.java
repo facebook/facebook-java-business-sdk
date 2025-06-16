@@ -53,6 +53,8 @@ public class AdAccountUserSettings extends APINode {
   private AdAccount mAdAccount = null;
   @SerializedName("ad_object_export_format")
   private String mAdObjectExportFormat = null;
+  @SerializedName("ads_manager_footer_row_toast_impressions")
+  private Long mAdsManagerFooterRowToastImpressions = null;
   @SerializedName("auto_review_video_caption")
   private Boolean mAutoReviewVideoCaption = null;
   @SerializedName("campaign_overview_columns")
@@ -93,6 +95,8 @@ public class AdAccountUserSettings extends APINode {
   private Boolean mHasSeenShopsColumnFlexingExperience = null;
   @SerializedName("hidden_optimization_tips")
   private List<Map<String, Boolean>> mHiddenOptimizationTips = null;
+  @SerializedName("high_performing_quick_view_created")
+  private Boolean mHighPerformingQuickViewCreated = null;
   @SerializedName("id")
   private String mId = null;
   @SerializedName("is_3p_auth_setting_set")
@@ -161,6 +165,10 @@ public class AdAccountUserSettings extends APINode {
   private String mSydCampaignTrendsTimeRange = null;
   @SerializedName("syd_landing_page_opt_in_status")
   private String mSydLandingPageOptInStatus = null;
+  @SerializedName("text_gen_persona_opt_in_type")
+  private String mTextGenPersonaOptInType = null;
+  @SerializedName("text_variations_opt_in_out_ts")
+  private String mTextVariationsOptInOutTs = null;
   @SerializedName("text_variations_opt_in_type")
   private String mTextVariationsOptInType = null;
   @SerializedName("user")
@@ -406,6 +414,10 @@ public class AdAccountUserSettings extends APINode {
     return mAdObjectExportFormat;
   }
 
+  public Long getFieldAdsManagerFooterRowToastImpressions() {
+    return mAdsManagerFooterRowToastImpressions;
+  }
+
   public Boolean getFieldAutoReviewVideoCaption() {
     return mAutoReviewVideoCaption;
   }
@@ -484,6 +496,10 @@ public class AdAccountUserSettings extends APINode {
 
   public List<Map<String, Boolean>> getFieldHiddenOptimizationTips() {
     return mHiddenOptimizationTips;
+  }
+
+  public Boolean getFieldHighPerformingQuickViewCreated() {
+    return mHighPerformingQuickViewCreated;
   }
 
   public String getFieldId() {
@@ -622,6 +638,14 @@ public class AdAccountUserSettings extends APINode {
     return mSydLandingPageOptInStatus;
   }
 
+  public String getFieldTextGenPersonaOptInType() {
+    return mTextGenPersonaOptInType;
+  }
+
+  public String getFieldTextVariationsOptInOutTs() {
+    return mTextVariationsOptInOutTs;
+  }
+
   public String getFieldTextVariationsOptInType() {
     return mTextVariationsOptInType;
   }
@@ -652,6 +676,7 @@ public class AdAccountUserSettings extends APINode {
       "active_ads_quick_view_created",
       "ad_account",
       "ad_object_export_format",
+      "ads_manager_footer_row_toast_impressions",
       "auto_review_video_caption",
       "campaign_overview_columns",
       "column_suggestion_status",
@@ -672,6 +697,7 @@ public class AdAccountUserSettings extends APINode {
       "has_seen_shops_ads_metrics_onboarding_tour",
       "has_seen_shops_column_flexing_experience",
       "hidden_optimization_tips",
+      "high_performing_quick_view_created",
       "id",
       "is_3p_auth_setting_set",
       "is_ads_manager_footer_row_preference_set",
@@ -706,6 +732,8 @@ public class AdAccountUserSettings extends APINode {
       "syd_campaign_trends_objective",
       "syd_campaign_trends_time_range",
       "syd_landing_page_opt_in_status",
+      "text_gen_persona_opt_in_type",
+      "text_variations_opt_in_out_ts",
       "text_variations_opt_in_type",
       "user",
     };
@@ -840,6 +868,13 @@ public class AdAccountUserSettings extends APINode {
     }
     public APIRequestGet requestAdObjectExportFormatField (boolean value) {
       this.requestField("ad_object_export_format", value);
+      return this;
+    }
+    public APIRequestGet requestAdsManagerFooterRowToastImpressionsField () {
+      return this.requestAdsManagerFooterRowToastImpressionsField(true);
+    }
+    public APIRequestGet requestAdsManagerFooterRowToastImpressionsField (boolean value) {
+      this.requestField("ads_manager_footer_row_toast_impressions", value);
       return this;
     }
     public APIRequestGet requestAutoReviewVideoCaptionField () {
@@ -980,6 +1015,13 @@ public class AdAccountUserSettings extends APINode {
     }
     public APIRequestGet requestHiddenOptimizationTipsField (boolean value) {
       this.requestField("hidden_optimization_tips", value);
+      return this;
+    }
+    public APIRequestGet requestHighPerformingQuickViewCreatedField () {
+      return this.requestHighPerformingQuickViewCreatedField(true);
+    }
+    public APIRequestGet requestHighPerformingQuickViewCreatedField (boolean value) {
+      this.requestField("high_performing_quick_view_created", value);
       return this;
     }
     public APIRequestGet requestIdField () {
@@ -1220,6 +1262,20 @@ public class AdAccountUserSettings extends APINode {
       this.requestField("syd_landing_page_opt_in_status", value);
       return this;
     }
+    public APIRequestGet requestTextGenPersonaOptInTypeField () {
+      return this.requestTextGenPersonaOptInTypeField(true);
+    }
+    public APIRequestGet requestTextGenPersonaOptInTypeField (boolean value) {
+      this.requestField("text_gen_persona_opt_in_type", value);
+      return this;
+    }
+    public APIRequestGet requestTextVariationsOptInOutTsField () {
+      return this.requestTextVariationsOptInOutTsField(true);
+    }
+    public APIRequestGet requestTextVariationsOptInOutTsField (boolean value) {
+      this.requestField("text_variations_opt_in_out_ts", value);
+      return this;
+    }
     public APIRequestGet requestTextVariationsOptInTypeField () {
       return this.requestTextVariationsOptInTypeField(true);
     }
@@ -1314,6 +1370,7 @@ public class AdAccountUserSettings extends APINode {
     this.mActiveAdsQuickViewCreated = instance.mActiveAdsQuickViewCreated;
     this.mAdAccount = instance.mAdAccount;
     this.mAdObjectExportFormat = instance.mAdObjectExportFormat;
+    this.mAdsManagerFooterRowToastImpressions = instance.mAdsManagerFooterRowToastImpressions;
     this.mAutoReviewVideoCaption = instance.mAutoReviewVideoCaption;
     this.mCampaignOverviewColumns = instance.mCampaignOverviewColumns;
     this.mColumnSuggestionStatus = instance.mColumnSuggestionStatus;
@@ -1334,6 +1391,7 @@ public class AdAccountUserSettings extends APINode {
     this.mHasSeenShopsAdsMetricsOnboardingTour = instance.mHasSeenShopsAdsMetricsOnboardingTour;
     this.mHasSeenShopsColumnFlexingExperience = instance.mHasSeenShopsColumnFlexingExperience;
     this.mHiddenOptimizationTips = instance.mHiddenOptimizationTips;
+    this.mHighPerformingQuickViewCreated = instance.mHighPerformingQuickViewCreated;
     this.mId = instance.mId;
     this.mIs3pAuthSettingSet = instance.mIs3pAuthSettingSet;
     this.mIsAdsManagerFooterRowPreferenceSet = instance.mIsAdsManagerFooterRowPreferenceSet;
@@ -1368,6 +1426,8 @@ public class AdAccountUserSettings extends APINode {
     this.mSydCampaignTrendsObjective = instance.mSydCampaignTrendsObjective;
     this.mSydCampaignTrendsTimeRange = instance.mSydCampaignTrendsTimeRange;
     this.mSydLandingPageOptInStatus = instance.mSydLandingPageOptInStatus;
+    this.mTextGenPersonaOptInType = instance.mTextGenPersonaOptInType;
+    this.mTextVariationsOptInOutTs = instance.mTextVariationsOptInOutTs;
     this.mTextVariationsOptInType = instance.mTextVariationsOptInType;
     this.mUser = instance.mUser;
     this.context = instance.context;

@@ -800,6 +800,25 @@ public class AdsDataset extends APINode {
 
 
 
+  public static enum EnumSortBy {
+      @SerializedName("LAST_FIRED_TIME")
+      VALUE_LAST_FIRED_TIME("LAST_FIRED_TIME"),
+      @SerializedName("NAME")
+      VALUE_NAME("NAME"),
+      ;
+
+      private String value;
+
+      private EnumSortBy(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
 
   synchronized /*package*/ static Gson getGson() {
     if (gson != null) {

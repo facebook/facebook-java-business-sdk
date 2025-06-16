@@ -91,6 +91,8 @@ public class AdAssetFeedSpec extends APINode {
   private Boolean mShopsBundle = null;
   @SerializedName("titles")
   private List<AdAssetFeedSpecTitle> mTitles = null;
+  @SerializedName("translations")
+  private List<Object> mTranslations = null;
   @SerializedName("upcoming_events")
   private List<Object> mUpcomingEvents = null;
   @SerializedName("videos")
@@ -541,6 +543,15 @@ public class AdAssetFeedSpec extends APINode {
     this.mTitles = AdAssetFeedSpecTitle.getGson().fromJson(value, type);
     return this;
   }
+  public List<Object> getFieldTranslations() {
+    return mTranslations;
+  }
+
+  public AdAssetFeedSpec setFieldTranslations(List<Object> value) {
+    this.mTranslations = value;
+    return this;
+  }
+
   public List<Object> getFieldUpcomingEvents() {
     return mUpcomingEvents;
   }
@@ -729,6 +740,8 @@ public class AdAssetFeedSpec extends APINode {
       VALUE_VIEW_CART("VIEW_CART"),
       @SerializedName("VIEW_CHANNEL")
       VALUE_VIEW_CHANNEL("VIEW_CHANNEL"),
+      @SerializedName("VIEW_IN_CART")
+      VALUE_VIEW_IN_CART("VIEW_IN_CART"),
       @SerializedName("VIEW_PRODUCT")
       VALUE_VIEW_PRODUCT("VIEW_PRODUCT"),
       @SerializedName("VISIT_PAGES_FEED")
@@ -797,6 +810,7 @@ public class AdAssetFeedSpec extends APINode {
     this.mReasonsToShop = instance.mReasonsToShop;
     this.mShopsBundle = instance.mShopsBundle;
     this.mTitles = instance.mTitles;
+    this.mTranslations = instance.mTranslations;
     this.mUpcomingEvents = instance.mUpcomingEvents;
     this.mVideos = instance.mVideos;
     this.context = instance.context;

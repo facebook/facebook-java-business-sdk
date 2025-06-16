@@ -336,6 +336,10 @@ public class ProductCatalog extends APINode {
     return new APIRequestGetCheckBatchRequestStatus(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetCheckMarketplacePartnerSellersStatus getCheckMarketplacePartnerSellersStatus() {
+    return new APIRequestGetCheckMarketplacePartnerSellersStatus(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetCollaborativeAdsLsbImageBank getCollaborativeAdsLsbImageBank() {
     return new APIRequestGetCollaborativeAdsLsbImageBank(this.getPrefixedId().toString(), context);
   }
@@ -384,6 +388,10 @@ public class ProductCatalog extends APINode {
     return new APIRequestGetFlights(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestCreateGeolocatedItemsBatch createGeolocatedItemsBatch() {
+    return new APIRequestCreateGeolocatedItemsBatch(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetHomeListings getHomeListings() {
     return new APIRequestGetHomeListings(this.getPrefixedId().toString(), context);
   }
@@ -418,6 +426,10 @@ public class ProductCatalog extends APINode {
 
   public APIRequestCreateMarketPlacePartnerSellersDetail createMarketPlacePartnerSellersDetail() {
     return new APIRequestCreateMarketPlacePartnerSellersDetail(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestCreateMarketPlacePartnerSignal createMarketPlacePartnerSignal() {
+    return new APIRequestCreateMarketPlacePartnerSignal(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetPricingVariablesBatch getPricingVariablesBatch() {
@@ -462,6 +474,10 @@ public class ProductCatalog extends APINode {
 
   public APIRequestCreateProduct createProduct() {
     return new APIRequestCreateProduct(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestCreateUpdateGeneratedImageConfig createUpdateGeneratedImageConfig() {
+    return new APIRequestCreateUpdateGeneratedImageConfig(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetVehicleOffers getVehicleOffers() {
@@ -2685,6 +2701,141 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestGetCheckBatchRequestStatus requestWarningsTotalCountField (boolean value) {
       this.requestField("warnings_total_count", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestGetCheckMarketplacePartnerSellersStatus extends APIRequest<ProductCatalogCheckMarketplacePartnerSellersStatus> {
+
+    APINodeList<ProductCatalogCheckMarketplacePartnerSellersStatus> lastResponse = null;
+    @Override
+    public APINodeList<ProductCatalogCheckMarketplacePartnerSellersStatus> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "session_id",
+    };
+
+    public static final String[] FIELDS = {
+      "sample_errors",
+      "session_id",
+      "status",
+    };
+
+    @Override
+    public APINodeList<ProductCatalogCheckMarketplacePartnerSellersStatus> parseResponse(String response, String header) throws APIException {
+      return ProductCatalogCheckMarketplacePartnerSellersStatus.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<ProductCatalogCheckMarketplacePartnerSellersStatus> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<ProductCatalogCheckMarketplacePartnerSellersStatus> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<ProductCatalogCheckMarketplacePartnerSellersStatus>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<ProductCatalogCheckMarketplacePartnerSellersStatus>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<ProductCatalogCheckMarketplacePartnerSellersStatus>>() {
+           public APINodeList<ProductCatalogCheckMarketplacePartnerSellersStatus> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetCheckMarketplacePartnerSellersStatus.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestGetCheckMarketplacePartnerSellersStatus(String nodeId, APIContext context) {
+      super(context, nodeId, "/check_marketplace_partner_sellers_status", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetCheckMarketplacePartnerSellersStatus setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCheckMarketplacePartnerSellersStatus setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetCheckMarketplacePartnerSellersStatus setSessionId (String sessionId) {
+      this.setParam("session_id", sessionId);
+      return this;
+    }
+
+    public APIRequestGetCheckMarketplacePartnerSellersStatus requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetCheckMarketplacePartnerSellersStatus requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCheckMarketplacePartnerSellersStatus requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetCheckMarketplacePartnerSellersStatus requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCheckMarketplacePartnerSellersStatus requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCheckMarketplacePartnerSellersStatus requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetCheckMarketplacePartnerSellersStatus requestSampleErrorsField () {
+      return this.requestSampleErrorsField(true);
+    }
+    public APIRequestGetCheckMarketplacePartnerSellersStatus requestSampleErrorsField (boolean value) {
+      this.requestField("sample_errors", value);
+      return this;
+    }
+    public APIRequestGetCheckMarketplacePartnerSellersStatus requestSessionIdField () {
+      return this.requestSessionIdField(true);
+    }
+    public APIRequestGetCheckMarketplacePartnerSellersStatus requestSessionIdField (boolean value) {
+      this.requestField("session_id", value);
+      return this;
+    }
+    public APIRequestGetCheckMarketplacePartnerSellersStatus requestStatusField () {
+      return this.requestStatusField(true);
+    }
+    public APIRequestGetCheckMarketplacePartnerSellersStatus requestStatusField (boolean value) {
+      this.requestField("status", value);
       return this;
     }
   }
@@ -4991,6 +5142,137 @@ public class ProductCatalog extends APINode {
     }
   }
 
+  public static class APIRequestCreateGeolocatedItemsBatch extends APIRequest<ProductCatalog> {
+
+    ProductCatalog lastResponse = null;
+    @Override
+    public ProductCatalog getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "allow_upsert",
+      "item_type",
+      "requests",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public ProductCatalog parseResponse(String response, String header) throws APIException {
+      return ProductCatalog.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public ProductCatalog execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public ProductCatalog execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<ProductCatalog> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<ProductCatalog> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, ProductCatalog>() {
+           public ProductCatalog apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateGeolocatedItemsBatch.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestCreateGeolocatedItemsBatch(String nodeId, APIContext context) {
+      super(context, nodeId, "/geolocated_items_batch", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateGeolocatedItemsBatch setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateGeolocatedItemsBatch setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateGeolocatedItemsBatch setAllowUpsert (Boolean allowUpsert) {
+      this.setParam("allow_upsert", allowUpsert);
+      return this;
+    }
+    public APIRequestCreateGeolocatedItemsBatch setAllowUpsert (String allowUpsert) {
+      this.setParam("allow_upsert", allowUpsert);
+      return this;
+    }
+
+    public APIRequestCreateGeolocatedItemsBatch setItemType (String itemType) {
+      this.setParam("item_type", itemType);
+      return this;
+    }
+
+    public APIRequestCreateGeolocatedItemsBatch setRequests (Map<String, String> requests) {
+      this.setParam("requests", requests);
+      return this;
+    }
+    public APIRequestCreateGeolocatedItemsBatch setRequests (String requests) {
+      this.setParam("requests", requests);
+      return this;
+    }
+
+    public APIRequestCreateGeolocatedItemsBatch requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateGeolocatedItemsBatch requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateGeolocatedItemsBatch requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateGeolocatedItemsBatch requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateGeolocatedItemsBatch requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateGeolocatedItemsBatch requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGetHomeListings extends APIRequest<HomeListing> {
 
     APINodeList<HomeListing> lastResponse = null;
@@ -5056,6 +5338,8 @@ public class ProductCatalog extends APINode {
       "price",
       "property_type",
       "sanitized_images",
+      "securitydeposit_currency",
+      "securitydeposit_price",
       "tags",
       "unit_price",
       "url",
@@ -5533,6 +5817,20 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestGetHomeListings requestSanitizedImagesField (boolean value) {
       this.requestField("sanitized_images", value);
+      return this;
+    }
+    public APIRequestGetHomeListings requestSecuritydepositCurrencyField () {
+      return this.requestSecuritydepositCurrencyField(true);
+    }
+    public APIRequestGetHomeListings requestSecuritydepositCurrencyField (boolean value) {
+      this.requestField("securitydeposit_currency", value);
+      return this;
+    }
+    public APIRequestGetHomeListings requestSecuritydepositPriceField () {
+      return this.requestSecuritydepositPriceField(true);
+    }
+    public APIRequestGetHomeListings requestSecuritydepositPriceField (boolean value) {
+      this.requestField("securitydeposit_price", value);
       return this;
     }
     public APIRequestGetHomeListings requestTagsField () {
@@ -7136,6 +7434,153 @@ public class ProductCatalog extends APINode {
 
     @Override
     public APIRequestCreateMarketPlacePartnerSellersDetail requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestCreateMarketPlacePartnerSignal extends APIRequest<ProductCatalog> {
+
+    ProductCatalog lastResponse = null;
+    @Override
+    public ProductCatalog getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "event_name",
+      "event_source_url",
+      "event_time",
+      "order_data",
+      "user_data",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public ProductCatalog parseResponse(String response, String header) throws APIException {
+      return ProductCatalog.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public ProductCatalog execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public ProductCatalog execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<ProductCatalog> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<ProductCatalog> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, ProductCatalog>() {
+           public ProductCatalog apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateMarketPlacePartnerSignal.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestCreateMarketPlacePartnerSignal(String nodeId, APIContext context) {
+      super(context, nodeId, "/marketplace_partner_signals", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateMarketPlacePartnerSignal setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateMarketPlacePartnerSignal setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateMarketPlacePartnerSignal setEventName (ProductCatalog.EnumEventName eventName) {
+      this.setParam("event_name", eventName);
+      return this;
+    }
+    public APIRequestCreateMarketPlacePartnerSignal setEventName (String eventName) {
+      this.setParam("event_name", eventName);
+      return this;
+    }
+
+    public APIRequestCreateMarketPlacePartnerSignal setEventSourceUrl (String eventSourceUrl) {
+      this.setParam("event_source_url", eventSourceUrl);
+      return this;
+    }
+
+    public APIRequestCreateMarketPlacePartnerSignal setEventTime (String eventTime) {
+      this.setParam("event_time", eventTime);
+      return this;
+    }
+
+    public APIRequestCreateMarketPlacePartnerSignal setOrderData (Map<String, String> orderData) {
+      this.setParam("order_data", orderData);
+      return this;
+    }
+    public APIRequestCreateMarketPlacePartnerSignal setOrderData (String orderData) {
+      this.setParam("order_data", orderData);
+      return this;
+    }
+
+    public APIRequestCreateMarketPlacePartnerSignal setUserData (Map<String, String> userData) {
+      this.setParam("user_data", userData);
+      return this;
+    }
+    public APIRequestCreateMarketPlacePartnerSignal setUserData (String userData) {
+      this.setParam("user_data", userData);
+      return this;
+    }
+
+    public APIRequestCreateMarketPlacePartnerSignal requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateMarketPlacePartnerSignal requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateMarketPlacePartnerSignal requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateMarketPlacePartnerSignal requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateMarketPlacePartnerSignal requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateMarketPlacePartnerSignal requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
@@ -8785,6 +9230,8 @@ public class ProductCatalog extends APINode {
       "expiration_date",
       "fb_product_category",
       "gender",
+      "generated_background_images",
+      "generated_background_images_ad_usage",
       "gtin",
       "id",
       "image_cdn_urls",
@@ -8831,6 +9278,7 @@ public class ProductCatalog extends APINode {
       "url",
       "vendor_id",
       "video_fetch_status",
+      "videos",
       "visibility",
       "wa_compliance_category",
     };
@@ -9194,6 +9642,20 @@ public class ProductCatalog extends APINode {
       this.requestField("gender", value);
       return this;
     }
+    public APIRequestGetProducts requestGeneratedBackgroundImagesField () {
+      return this.requestGeneratedBackgroundImagesField(true);
+    }
+    public APIRequestGetProducts requestGeneratedBackgroundImagesField (boolean value) {
+      this.requestField("generated_background_images", value);
+      return this;
+    }
+    public APIRequestGetProducts requestGeneratedBackgroundImagesAdUsageField () {
+      return this.requestGeneratedBackgroundImagesAdUsageField(true);
+    }
+    public APIRequestGetProducts requestGeneratedBackgroundImagesAdUsageField (boolean value) {
+      this.requestField("generated_background_images_ad_usage", value);
+      return this;
+    }
     public APIRequestGetProducts requestGtinField () {
       return this.requestGtinField(true);
     }
@@ -9516,6 +9978,13 @@ public class ProductCatalog extends APINode {
       this.requestField("video_fetch_status", value);
       return this;
     }
+    public APIRequestGetProducts requestVideosField () {
+      return this.requestVideosField(true);
+    }
+    public APIRequestGetProducts requestVideosField (boolean value) {
+      this.requestField("videos", value);
+      return this;
+    }
     public APIRequestGetProducts requestVisibilityField () {
       return this.requestVisibilityField(true);
     }
@@ -9542,6 +10011,7 @@ public class ProductCatalog extends APINode {
     public static final String[] PARAMS = {
       "additional_image_urls",
       "additional_variant_attributes",
+      "age_group",
       "android_app_name",
       "android_class",
       "android_package",
@@ -9691,6 +10161,15 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestCreateProduct setAdditionalVariantAttributes (String additionalVariantAttributes) {
       this.setParam("additional_variant_attributes", additionalVariantAttributes);
+      return this;
+    }
+
+    public APIRequestCreateProduct setAgeGroup (ProductItem.EnumAgeGroup ageGroup) {
+      this.setParam("age_group", ageGroup);
+      return this;
+    }
+    public APIRequestCreateProduct setAgeGroup (String ageGroup) {
+      this.setParam("age_group", ageGroup);
       return this;
     }
 
@@ -10221,6 +10700,121 @@ public class ProductCatalog extends APINode {
 
     @Override
     public APIRequestCreateProduct requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestCreateUpdateGeneratedImageConfig extends APIRequest<ProductCatalog> {
+
+    ProductCatalog lastResponse = null;
+    @Override
+    public ProductCatalog getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "data",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public ProductCatalog parseResponse(String response, String header) throws APIException {
+      return ProductCatalog.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public ProductCatalog execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public ProductCatalog execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<ProductCatalog> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<ProductCatalog> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, ProductCatalog>() {
+           public ProductCatalog apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateUpdateGeneratedImageConfig.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestCreateUpdateGeneratedImageConfig(String nodeId, APIContext context) {
+      super(context, nodeId, "/update_generated_image_config", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateUpdateGeneratedImageConfig setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateUpdateGeneratedImageConfig setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateUpdateGeneratedImageConfig setData (List<Object> data) {
+      this.setParam("data", data);
+      return this;
+    }
+    public APIRequestCreateUpdateGeneratedImageConfig setData (String data) {
+      this.setParam("data", data);
+      return this;
+    }
+
+    public APIRequestCreateUpdateGeneratedImageConfig requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateUpdateGeneratedImageConfig requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateUpdateGeneratedImageConfig requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateUpdateGeneratedImageConfig requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateUpdateGeneratedImageConfig requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateUpdateGeneratedImageConfig requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
@@ -10856,6 +11450,8 @@ public class ProductCatalog extends APINode {
       "address",
       "applinks",
       "availability",
+      "availability_circle_radius",
+      "availability_circle_radius_unit",
       "body_style",
       "category_specific_fields",
       "condition",
@@ -11045,6 +11641,20 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestGetVehicles requestAvailabilityField (boolean value) {
       this.requestField("availability", value);
+      return this;
+    }
+    public APIRequestGetVehicles requestAvailabilityCircleRadiusField () {
+      return this.requestAvailabilityCircleRadiusField(true);
+    }
+    public APIRequestGetVehicles requestAvailabilityCircleRadiusField (boolean value) {
+      this.requestField("availability_circle_radius", value);
+      return this;
+    }
+    public APIRequestGetVehicles requestAvailabilityCircleRadiusUnitField () {
+      return this.requestAvailabilityCircleRadiusUnitField(true);
+    }
+    public APIRequestGetVehicles requestAvailabilityCircleRadiusUnitField (boolean value) {
+      this.requestField("availability_circle_radius_unit", value);
       return this;
     }
     public APIRequestGetVehicles requestBodyStyleField () {
@@ -12685,8 +13295,6 @@ public class ProductCatalog extends APINode {
       VALUE_HOME_LISTINGS("home_listings"),
       @SerializedName("hotels")
       VALUE_HOTELS("hotels"),
-      @SerializedName("jobs")
-      VALUE_JOBS("jobs"),
       @SerializedName("local_service_businesses")
       VALUE_LOCAL_SERVICE_BUSINESSES("local_service_businesses"),
       @SerializedName("offer_items")
@@ -12851,6 +13459,29 @@ public class ProductCatalog extends APINode {
       private String value;
 
       private EnumItemSubType(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumEventName {
+      @SerializedName("ADD_TO_CART")
+      VALUE_ADD_TO_CART("ADD_TO_CART"),
+      @SerializedName("PURCHASE")
+      VALUE_PURCHASE("PURCHASE"),
+      @SerializedName("TEST")
+      VALUE_TEST("TEST"),
+      @SerializedName("VIEW_ITEM")
+      VALUE_VIEW_ITEM("VIEW_ITEM"),
+      ;
+
+      private String value;
+
+      private EnumEventName(String value) {
         this.value = value;
       }
 

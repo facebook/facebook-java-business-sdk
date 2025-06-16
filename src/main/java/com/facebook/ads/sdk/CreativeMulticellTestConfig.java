@@ -41,10 +41,18 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class CreativeMulticellTestConfig extends APINode {
+  @SerializedName("budget_percentage")
+  private Long mBudgetPercentage = null;
+  @SerializedName("configured_cell_count")
+  private Long mConfiguredCellCount = null;
   @SerializedName("daily_budget")
   private Long mDailyBudget = null;
+  @SerializedName("entry_source")
+  private String mEntrySource = null;
   @SerializedName("lifetime_budget")
   private Long mLifetimeBudget = null;
+  @SerializedName("use_existing_daily_budget")
+  private Boolean mUseExistingDailyBudget = null;
   protected static Gson gson = null;
 
   public CreativeMulticellTestConfig() {
@@ -196,6 +204,24 @@ public class CreativeMulticellTestConfig extends APINode {
   }
 
 
+  public Long getFieldBudgetPercentage() {
+    return mBudgetPercentage;
+  }
+
+  public CreativeMulticellTestConfig setFieldBudgetPercentage(Long value) {
+    this.mBudgetPercentage = value;
+    return this;
+  }
+
+  public Long getFieldConfiguredCellCount() {
+    return mConfiguredCellCount;
+  }
+
+  public CreativeMulticellTestConfig setFieldConfiguredCellCount(Long value) {
+    this.mConfiguredCellCount = value;
+    return this;
+  }
+
   public Long getFieldDailyBudget() {
     return mDailyBudget;
   }
@@ -205,12 +231,30 @@ public class CreativeMulticellTestConfig extends APINode {
     return this;
   }
 
+  public String getFieldEntrySource() {
+    return mEntrySource;
+  }
+
+  public CreativeMulticellTestConfig setFieldEntrySource(String value) {
+    this.mEntrySource = value;
+    return this;
+  }
+
   public Long getFieldLifetimeBudget() {
     return mLifetimeBudget;
   }
 
   public CreativeMulticellTestConfig setFieldLifetimeBudget(Long value) {
     this.mLifetimeBudget = value;
+    return this;
+  }
+
+  public Boolean getFieldUseExistingDailyBudget() {
+    return mUseExistingDailyBudget;
+  }
+
+  public CreativeMulticellTestConfig setFieldUseExistingDailyBudget(Boolean value) {
+    this.mUseExistingDailyBudget = value;
     return this;
   }
 
@@ -231,8 +275,12 @@ public class CreativeMulticellTestConfig extends APINode {
   }
 
   public CreativeMulticellTestConfig copyFrom(CreativeMulticellTestConfig instance) {
+    this.mBudgetPercentage = instance.mBudgetPercentage;
+    this.mConfiguredCellCount = instance.mConfiguredCellCount;
     this.mDailyBudget = instance.mDailyBudget;
+    this.mEntrySource = instance.mEntrySource;
     this.mLifetimeBudget = instance.mLifetimeBudget;
+    this.mUseExistingDailyBudget = instance.mUseExistingDailyBudget;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

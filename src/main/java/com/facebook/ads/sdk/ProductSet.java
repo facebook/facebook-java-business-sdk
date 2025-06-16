@@ -1620,6 +1620,8 @@ public class ProductSet extends APINode {
       "price",
       "property_type",
       "sanitized_images",
+      "securitydeposit_currency",
+      "securitydeposit_price",
       "tags",
       "unit_price",
       "url",
@@ -2097,6 +2099,20 @@ public class ProductSet extends APINode {
     }
     public APIRequestGetHomeListings requestSanitizedImagesField (boolean value) {
       this.requestField("sanitized_images", value);
+      return this;
+    }
+    public APIRequestGetHomeListings requestSecuritydepositCurrencyField () {
+      return this.requestSecuritydepositCurrencyField(true);
+    }
+    public APIRequestGetHomeListings requestSecuritydepositCurrencyField (boolean value) {
+      this.requestField("securitydeposit_currency", value);
+      return this;
+    }
+    public APIRequestGetHomeListings requestSecuritydepositPriceField () {
+      return this.requestSecuritydepositPriceField(true);
+    }
+    public APIRequestGetHomeListings requestSecuritydepositPriceField (boolean value) {
+      this.requestField("securitydeposit_price", value);
       return this;
     }
     public APIRequestGetHomeListings requestTagsField () {
@@ -2913,6 +2929,8 @@ public class ProductSet extends APINode {
       "expiration_date",
       "fb_product_category",
       "gender",
+      "generated_background_images",
+      "generated_background_images_ad_usage",
       "gtin",
       "id",
       "image_cdn_urls",
@@ -2959,6 +2977,7 @@ public class ProductSet extends APINode {
       "url",
       "vendor_id",
       "video_fetch_status",
+      "videos",
       "visibility",
       "wa_compliance_category",
     };
@@ -3313,6 +3332,20 @@ public class ProductSet extends APINode {
       this.requestField("gender", value);
       return this;
     }
+    public APIRequestGetProducts requestGeneratedBackgroundImagesField () {
+      return this.requestGeneratedBackgroundImagesField(true);
+    }
+    public APIRequestGetProducts requestGeneratedBackgroundImagesField (boolean value) {
+      this.requestField("generated_background_images", value);
+      return this;
+    }
+    public APIRequestGetProducts requestGeneratedBackgroundImagesAdUsageField () {
+      return this.requestGeneratedBackgroundImagesAdUsageField(true);
+    }
+    public APIRequestGetProducts requestGeneratedBackgroundImagesAdUsageField (boolean value) {
+      this.requestField("generated_background_images_ad_usage", value);
+      return this;
+    }
     public APIRequestGetProducts requestGtinField () {
       return this.requestGtinField(true);
     }
@@ -3633,6 +3666,13 @@ public class ProductSet extends APINode {
     }
     public APIRequestGetProducts requestVideoFetchStatusField (boolean value) {
       this.requestField("video_fetch_status", value);
+      return this;
+    }
+    public APIRequestGetProducts requestVideosField () {
+      return this.requestVideosField(true);
+    }
+    public APIRequestGetProducts requestVideosField (boolean value) {
+      this.requestField("videos", value);
       return this;
     }
     public APIRequestGetProducts requestVisibilityField () {
@@ -4280,6 +4320,8 @@ public class ProductSet extends APINode {
       "address",
       "applinks",
       "availability",
+      "availability_circle_radius",
+      "availability_circle_radius_unit",
       "body_style",
       "category_specific_fields",
       "condition",
@@ -4469,6 +4511,20 @@ public class ProductSet extends APINode {
     }
     public APIRequestGetVehicles requestAvailabilityField (boolean value) {
       this.requestField("availability", value);
+      return this;
+    }
+    public APIRequestGetVehicles requestAvailabilityCircleRadiusField () {
+      return this.requestAvailabilityCircleRadiusField(true);
+    }
+    public APIRequestGetVehicles requestAvailabilityCircleRadiusField (boolean value) {
+      this.requestField("availability_circle_radius", value);
+      return this;
+    }
+    public APIRequestGetVehicles requestAvailabilityCircleRadiusUnitField () {
+      return this.requestAvailabilityCircleRadiusUnitField(true);
+    }
+    public APIRequestGetVehicles requestAvailabilityCircleRadiusUnitField (boolean value) {
+      this.requestField("availability_circle_radius_unit", value);
       return this;
     }
     public APIRequestGetVehicles requestBodyStyleField () {

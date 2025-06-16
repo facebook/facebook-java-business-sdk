@@ -61,6 +61,8 @@ public class WhatsAppBusinessAccount extends APINode {
   private String mId = null;
   @SerializedName("is_enabled_for_insights")
   private Boolean mIsEnabledForInsights = null;
+  @SerializedName("is_shared_with_partners")
+  private Boolean mIsSharedWithPartners = null;
   @SerializedName("linked_commerce_account")
   private CommerceMerchantSettings mLinkedCommerceAccount = null;
   @SerializedName("marketing_messages_lite_api_status")
@@ -515,6 +517,10 @@ public class WhatsAppBusinessAccount extends APINode {
 
   public Boolean getFieldIsEnabledForInsights() {
     return mIsEnabledForInsights;
+  }
+
+  public Boolean getFieldIsSharedWithPartners() {
+    return mIsSharedWithPartners;
   }
 
   public CommerceMerchantSettings getFieldLinkedCommerceAccount() {
@@ -2715,6 +2721,7 @@ public class WhatsAppBusinessAccount extends APINode {
       "category",
       "components",
       "cta_url_link_tracking_opted_out",
+      "degrees_of_freedom_spec",
       "display_format",
       "language",
       "library_template_body_inputs",
@@ -2816,6 +2823,15 @@ public class WhatsAppBusinessAccount extends APINode {
     }
     public APIRequestCreateMessageTemplate setCtaUrlLinkTrackingOptedOut (String ctaUrlLinkTrackingOptedOut) {
       this.setParam("cta_url_link_tracking_opted_out", ctaUrlLinkTrackingOptedOut);
+      return this;
+    }
+
+    public APIRequestCreateMessageTemplate setDegreesOfFreedomSpec (Map<String, String> degreesOfFreedomSpec) {
+      this.setParam("degrees_of_freedom_spec", degreesOfFreedomSpec);
+      return this;
+    }
+    public APIRequestCreateMessageTemplate setDegreesOfFreedomSpec (String degreesOfFreedomSpec) {
+      this.setParam("degrees_of_freedom_spec", degreesOfFreedomSpec);
       return this;
     }
 
@@ -3907,6 +3923,7 @@ public class WhatsAppBusinessAccount extends APINode {
       "pricing_categories",
       "pricing_types",
       "start",
+      "tiers",
     };
 
     public static final String[] FIELDS = {
@@ -4044,6 +4061,15 @@ public class WhatsAppBusinessAccount extends APINode {
     }
     public APIRequestGetPricingAnalytics setStart (String start) {
       this.setParam("start", start);
+      return this;
+    }
+
+    public APIRequestGetPricingAnalytics setTiers (List<String> tiers) {
+      this.setParam("tiers", tiers);
+      return this;
+    }
+    public APIRequestGetPricingAnalytics setTiers (String tiers) {
+      this.setParam("tiers", tiers);
       return this;
     }
 
@@ -6343,6 +6369,7 @@ public class WhatsAppBusinessAccount extends APINode {
       "health_status",
       "id",
       "is_enabled_for_insights",
+      "is_shared_with_partners",
       "linked_commerce_account",
       "marketing_messages_lite_api_status",
       "message_template_namespace",
@@ -6516,6 +6543,13 @@ public class WhatsAppBusinessAccount extends APINode {
     }
     public APIRequestGet requestIsEnabledForInsightsField (boolean value) {
       this.requestField("is_enabled_for_insights", value);
+      return this;
+    }
+    public APIRequestGet requestIsSharedWithPartnersField () {
+      return this.requestIsSharedWithPartnersField(true);
+    }
+    public APIRequestGet requestIsSharedWithPartnersField (boolean value) {
+      this.requestField("is_shared_with_partners", value);
       return this;
     }
     public APIRequestGet requestLinkedCommerceAccountField () {
@@ -6904,6 +6938,8 @@ public class WhatsAppBusinessAccount extends APINode {
       VALUE_DIRECTION("DIRECTION"),
       @SerializedName("PHONE")
       VALUE_PHONE("PHONE"),
+      @SerializedName("TIER")
+      VALUE_TIER("TIER"),
       @SerializedName("UNKNOWN")
       VALUE_UNKNOWN("UNKNOWN"),
       ;
@@ -7169,6 +7205,12 @@ public class WhatsAppBusinessAccount extends APINode {
       VALUE_AUTHENTICATION("AUTHENTICATION"),
       @SerializedName("AUTHENTICATION_INTERNATIONAL")
       VALUE_AUTHENTICATION_INTERNATIONAL("AUTHENTICATION_INTERNATIONAL"),
+      @SerializedName("GROUP_MARKETING")
+      VALUE_GROUP_MARKETING("GROUP_MARKETING"),
+      @SerializedName("GROUP_SERVICE")
+      VALUE_GROUP_SERVICE("GROUP_SERVICE"),
+      @SerializedName("GROUP_UTILITY")
+      VALUE_GROUP_UTILITY("GROUP_UTILITY"),
       @SerializedName("MARKETING")
       VALUE_MARKETING("MARKETING"),
       @SerializedName("MARKETING_LITE")
@@ -7256,6 +7298,7 @@ public class WhatsAppBusinessAccount extends APINode {
     this.mHealthStatus = instance.mHealthStatus;
     this.mId = instance.mId;
     this.mIsEnabledForInsights = instance.mIsEnabledForInsights;
+    this.mIsSharedWithPartners = instance.mIsSharedWithPartners;
     this.mLinkedCommerceAccount = instance.mLinkedCommerceAccount;
     this.mMarketingMessagesLiteApiStatus = instance.mMarketingMessagesLiteApiStatus;
     this.mMessageTemplateNamespace = instance.mMessageTemplateNamespace;

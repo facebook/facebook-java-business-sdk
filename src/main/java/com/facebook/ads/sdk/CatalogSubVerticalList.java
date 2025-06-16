@@ -73,8 +73,6 @@ public class CatalogSubVerticalList extends APINode {
   private Object mComputersLaptopsAndTablets = null;
   @SerializedName("diapering_and_potty_training")
   private Object mDiaperingAndPottyTraining = null;
-  @SerializedName("digital_product_offer")
-  private Object mDigitalProductOffer = null;
   @SerializedName("electronic_accessories_and_cables")
   private Object mElectronicAccessoriesAndCables = null;
   @SerializedName("electronics_accessories")
@@ -442,15 +440,6 @@ public class CatalogSubVerticalList extends APINode {
     return this;
   }
 
-  public Object getFieldDigitalProductOffer() {
-    return mDigitalProductOffer;
-  }
-
-  public CatalogSubVerticalList setFieldDigitalProductOffer(Object value) {
-    this.mDigitalProductOffer = value;
-    return this;
-  }
-
   public Object getFieldElectronicAccessoriesAndCables() {
     return mElectronicAccessoriesAndCables;
   }
@@ -808,7 +797,6 @@ public class CatalogSubVerticalList extends APINode {
     this.mComputersAndTablets = instance.mComputersAndTablets;
     this.mComputersLaptopsAndTablets = instance.mComputersLaptopsAndTablets;
     this.mDiaperingAndPottyTraining = instance.mDiaperingAndPottyTraining;
-    this.mDigitalProductOffer = instance.mDigitalProductOffer;
     this.mElectronicAccessoriesAndCables = instance.mElectronicAccessoriesAndCables;
     this.mElectronicsAccessories = instance.mElectronicsAccessories;
     this.mFurniture = instance.mFurniture;

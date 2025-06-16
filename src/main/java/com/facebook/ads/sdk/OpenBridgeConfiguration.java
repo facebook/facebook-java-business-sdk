@@ -65,10 +65,18 @@ public class OpenBridgeConfiguration extends APINode {
   private String mInstanceVersion = null;
   @SerializedName("is_sgw_instance")
   private Boolean mIsSgwInstance = null;
+  @SerializedName("is_sgw_pixel_from_meta_pixel")
+  private Boolean mIsSgwPixelFromMetaPixel = null;
   @SerializedName("partner_name")
   private String mPartnerName = null;
   @SerializedName("pixel_id")
   private String mPixelId = null;
+  @SerializedName("sgw_account_id")
+  private String mSgwAccountId = null;
+  @SerializedName("sgw_instance_url")
+  private String mSgwInstanceUrl = null;
+  @SerializedName("sgw_pixel_id")
+  private String mSgwPixelId = null;
   protected static Gson gson = null;
 
   OpenBridgeConfiguration() {
@@ -339,12 +347,28 @@ public class OpenBridgeConfiguration extends APINode {
     return mIsSgwInstance;
   }
 
+  public Boolean getFieldIsSgwPixelFromMetaPixel() {
+    return mIsSgwPixelFromMetaPixel;
+  }
+
   public String getFieldPartnerName() {
     return mPartnerName;
   }
 
   public String getFieldPixelId() {
     return mPixelId;
+  }
+
+  public String getFieldSgwAccountId() {
+    return mSgwAccountId;
+  }
+
+  public String getFieldSgwInstanceUrl() {
+    return mSgwInstanceUrl;
+  }
+
+  public String getFieldSgwPixelId() {
+    return mSgwPixelId;
   }
 
 
@@ -477,8 +501,12 @@ public class OpenBridgeConfiguration extends APINode {
       "instance_id",
       "instance_version",
       "is_sgw_instance",
+      "is_sgw_pixel_from_meta_pixel",
       "partner_name",
       "pixel_id",
+      "sgw_account_id",
+      "sgw_instance_url",
+      "sgw_pixel_id",
     };
 
     @Override
@@ -655,6 +683,13 @@ public class OpenBridgeConfiguration extends APINode {
       this.requestField("is_sgw_instance", value);
       return this;
     }
+    public APIRequestGet requestIsSgwPixelFromMetaPixelField () {
+      return this.requestIsSgwPixelFromMetaPixelField(true);
+    }
+    public APIRequestGet requestIsSgwPixelFromMetaPixelField (boolean value) {
+      this.requestField("is_sgw_pixel_from_meta_pixel", value);
+      return this;
+    }
     public APIRequestGet requestPartnerNameField () {
       return this.requestPartnerNameField(true);
     }
@@ -667,6 +702,27 @@ public class OpenBridgeConfiguration extends APINode {
     }
     public APIRequestGet requestPixelIdField (boolean value) {
       this.requestField("pixel_id", value);
+      return this;
+    }
+    public APIRequestGet requestSgwAccountIdField () {
+      return this.requestSgwAccountIdField(true);
+    }
+    public APIRequestGet requestSgwAccountIdField (boolean value) {
+      this.requestField("sgw_account_id", value);
+      return this;
+    }
+    public APIRequestGet requestSgwInstanceUrlField () {
+      return this.requestSgwInstanceUrlField(true);
+    }
+    public APIRequestGet requestSgwInstanceUrlField (boolean value) {
+      this.requestField("sgw_instance_url", value);
+      return this;
+    }
+    public APIRequestGet requestSgwPixelIdField () {
+      return this.requestSgwPixelIdField(true);
+    }
+    public APIRequestGet requestSgwPixelIdField (boolean value) {
+      this.requestField("sgw_pixel_id", value);
       return this;
     }
   }
@@ -690,7 +746,11 @@ public class OpenBridgeConfiguration extends APINode {
       "instance_id",
       "instance_version",
       "is_sgw_instance",
+      "is_sgw_pixel_from_meta_pixel",
       "partner_name",
+      "sgw_account_id",
+      "sgw_instance_url",
+      "sgw_pixel_id",
     };
 
     public static final String[] FIELDS = {
@@ -817,8 +877,36 @@ public class OpenBridgeConfiguration extends APINode {
       return this;
     }
 
+    public APIRequestUpdate setIsSgwPixelFromMetaPixel (Boolean isSgwPixelFromMetaPixel) {
+      this.setParam("is_sgw_pixel_from_meta_pixel", isSgwPixelFromMetaPixel);
+      return this;
+    }
+    public APIRequestUpdate setIsSgwPixelFromMetaPixel (String isSgwPixelFromMetaPixel) {
+      this.setParam("is_sgw_pixel_from_meta_pixel", isSgwPixelFromMetaPixel);
+      return this;
+    }
+
     public APIRequestUpdate setPartnerName (String partnerName) {
       this.setParam("partner_name", partnerName);
+      return this;
+    }
+
+    public APIRequestUpdate setSgwAccountId (String sgwAccountId) {
+      this.setParam("sgw_account_id", sgwAccountId);
+      return this;
+    }
+
+    public APIRequestUpdate setSgwInstanceUrl (String sgwInstanceUrl) {
+      this.setParam("sgw_instance_url", sgwInstanceUrl);
+      return this;
+    }
+
+    public APIRequestUpdate setSgwPixelId (Long sgwPixelId) {
+      this.setParam("sgw_pixel_id", sgwPixelId);
+      return this;
+    }
+    public APIRequestUpdate setSgwPixelId (String sgwPixelId) {
+      this.setParam("sgw_pixel_id", sgwPixelId);
       return this;
     }
 
@@ -887,8 +975,12 @@ public class OpenBridgeConfiguration extends APINode {
     this.mInstanceId = instance.mInstanceId;
     this.mInstanceVersion = instance.mInstanceVersion;
     this.mIsSgwInstance = instance.mIsSgwInstance;
+    this.mIsSgwPixelFromMetaPixel = instance.mIsSgwPixelFromMetaPixel;
     this.mPartnerName = instance.mPartnerName;
     this.mPixelId = instance.mPixelId;
+    this.mSgwAccountId = instance.mSgwAccountId;
+    this.mSgwInstanceUrl = instance.mSgwInstanceUrl;
+    this.mSgwPixelId = instance.mSgwPixelId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

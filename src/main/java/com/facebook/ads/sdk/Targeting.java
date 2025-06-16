@@ -101,6 +101,8 @@ public class Targeting extends APINode {
   private List<String> mEffectiveMessengerPositions = null;
   @SerializedName("effective_publisher_platforms")
   private List<String> mEffectivePublisherPlatforms = null;
+  @SerializedName("effective_threads_positions")
+  private List<String> mEffectiveThreadsPositions = null;
   @SerializedName("engagement_specs")
   private List<TargetingDynamicRule> mEngagementSpecs = null;
   @SerializedName("ethnic_affinity")
@@ -209,6 +211,8 @@ public class Targeting extends APINode {
   private String mTargetingOptimization = null;
   @SerializedName("targeting_relaxation_types")
   private TargetingRelaxation mTargetingRelaxationTypes = null;
+  @SerializedName("threads_positions")
+  private List<String> mThreadsPositions = null;
   @SerializedName("user_adclusters")
   private List<IDName> mUserAdclusters = null;
   @SerializedName("user_device")
@@ -683,6 +687,15 @@ public class Targeting extends APINode {
 
   public Targeting setFieldEffectivePublisherPlatforms(List<String> value) {
     this.mEffectivePublisherPlatforms = value;
+    return this;
+  }
+
+  public List<String> getFieldEffectiveThreadsPositions() {
+    return mEffectiveThreadsPositions;
+  }
+
+  public Targeting setFieldEffectiveThreadsPositions(List<String> value) {
+    this.mEffectiveThreadsPositions = value;
     return this;
   }
 
@@ -1322,6 +1335,15 @@ public class Targeting extends APINode {
     this.mTargetingRelaxationTypes = TargetingRelaxation.getGson().fromJson(value, type);
     return this;
   }
+  public List<String> getFieldThreadsPositions() {
+    return mThreadsPositions;
+  }
+
+  public Targeting setFieldThreadsPositions(List<String> value) {
+    this.mThreadsPositions = value;
+    return this;
+  }
+
   public List<IDName> getFieldUserAdclusters() {
     return mUserAdclusters;
   }
@@ -1494,6 +1516,7 @@ public class Targeting extends APINode {
     this.mEffectiveInstagramPositions = instance.mEffectiveInstagramPositions;
     this.mEffectiveMessengerPositions = instance.mEffectiveMessengerPositions;
     this.mEffectivePublisherPlatforms = instance.mEffectivePublisherPlatforms;
+    this.mEffectiveThreadsPositions = instance.mEffectiveThreadsPositions;
     this.mEngagementSpecs = instance.mEngagementSpecs;
     this.mEthnicAffinity = instance.mEthnicAffinity;
     this.mExcludeReachedSince = instance.mExcludeReachedSince;
@@ -1548,6 +1571,7 @@ public class Targeting extends APINode {
     this.mTargetingAutomation = instance.mTargetingAutomation;
     this.mTargetingOptimization = instance.mTargetingOptimization;
     this.mTargetingRelaxationTypes = instance.mTargetingRelaxationTypes;
+    this.mThreadsPositions = instance.mThreadsPositions;
     this.mUserAdclusters = instance.mUserAdclusters;
     this.mUserDevice = instance.mUserDevice;
     this.mUserEvent = instance.mUserEvent;

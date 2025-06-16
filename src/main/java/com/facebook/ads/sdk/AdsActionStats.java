@@ -121,6 +121,12 @@ public class AdsActionStats extends APINode {
   private String mActionVideoType = null;
   @SerializedName("dda")
   private String mDda = null;
+  @SerializedName("incrementality")
+  private String mIncrementality = null;
+  @SerializedName("incrementality_all_conversions")
+  private String mIncrementalityAllConversions = null;
+  @SerializedName("incrementality_first_conversion")
+  private String mIncrementalityFirstConversion = null;
   @SerializedName("inline")
   private String mInline = null;
   @SerializedName("interactive_component_sticker_id")
@@ -652,6 +658,33 @@ public class AdsActionStats extends APINode {
     return this;
   }
 
+  public String getFieldIncrementality() {
+    return mIncrementality;
+  }
+
+  public AdsActionStats setFieldIncrementality(String value) {
+    this.mIncrementality = value;
+    return this;
+  }
+
+  public String getFieldIncrementalityAllConversions() {
+    return mIncrementalityAllConversions;
+  }
+
+  public AdsActionStats setFieldIncrementalityAllConversions(String value) {
+    this.mIncrementalityAllConversions = value;
+    return this;
+  }
+
+  public String getFieldIncrementalityFirstConversion() {
+    return mIncrementalityFirstConversion;
+  }
+
+  public AdsActionStats setFieldIncrementalityFirstConversion(String value) {
+    this.mIncrementalityFirstConversion = value;
+    return this;
+  }
+
   public String getFieldInline() {
     return mInline;
   }
@@ -799,6 +832,9 @@ public class AdsActionStats extends APINode {
     this.mActionVideoSound = instance.mActionVideoSound;
     this.mActionVideoType = instance.mActionVideoType;
     this.mDda = instance.mDda;
+    this.mIncrementality = instance.mIncrementality;
+    this.mIncrementalityAllConversions = instance.mIncrementalityAllConversions;
+    this.mIncrementalityFirstConversion = instance.mIncrementalityFirstConversion;
     this.mInline = instance.mInline;
     this.mInteractiveComponentStickerId = instance.mInteractiveComponentStickerId;
     this.mInteractiveComponentStickerResponse = instance.mInteractiveComponentStickerResponse;

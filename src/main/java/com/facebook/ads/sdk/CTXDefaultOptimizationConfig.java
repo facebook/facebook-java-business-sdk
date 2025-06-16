@@ -41,6 +41,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class CTXDefaultOptimizationConfig extends APINode {
+  @SerializedName("destination_type")
+  private String mDestinationType = null;
   @SerializedName("objective")
   private String mObjective = null;
   @SerializedName("optimization_goal")
@@ -196,6 +198,15 @@ public class CTXDefaultOptimizationConfig extends APINode {
   }
 
 
+  public String getFieldDestinationType() {
+    return mDestinationType;
+  }
+
+  public CTXDefaultOptimizationConfig setFieldDestinationType(String value) {
+    this.mDestinationType = value;
+    return this;
+  }
+
   public String getFieldObjective() {
     return mObjective;
   }
@@ -231,6 +242,7 @@ public class CTXDefaultOptimizationConfig extends APINode {
   }
 
   public CTXDefaultOptimizationConfig copyFrom(CTXDefaultOptimizationConfig instance) {
+    this.mDestinationType = instance.mDestinationType;
     this.mObjective = instance.mObjective;
     this.mOptimizationGoal = instance.mOptimizationGoal;
     this.context = instance.context;

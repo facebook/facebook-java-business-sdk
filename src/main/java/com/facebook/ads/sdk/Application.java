@@ -578,6 +578,10 @@ public class Application extends APINode {
     return new APIRequestCreateCodelessEventMapping(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetConnectedClientBusinesses getConnectedClientBusinesses() {
+    return new APIRequestGetConnectedClientBusinesses(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetDaChecks getDaChecks() {
     return new APIRequestGetDaChecks(this.getPrefixedId().toString(), context);
   }
@@ -648,6 +652,14 @@ public class Application extends APINode {
 
   public APIRequestGetServerDomainInfos getServerDomainInfos() {
     return new APIRequestGetServerDomainInfos(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetSgwDatasetStatus getSgwDatasetStatus() {
+    return new APIRequestGetSgwDatasetStatus(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetSgwInstallDeferralLink getSgwInstallDeferralLink() {
+    return new APIRequestGetSgwInstallDeferralLink(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetSubscribedDomains getSubscribedDomains() {
@@ -6160,6 +6172,279 @@ public class Application extends APINode {
 
   }
 
+  public static class APIRequestGetConnectedClientBusinesses extends APIRequest<Business> {
+
+    APINodeList<Business> lastResponse = null;
+    @Override
+    public APINodeList<Business> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "block_offline_analytics",
+      "collaborative_ads_managed_partner_business_info",
+      "collaborative_ads_managed_partner_eligibility",
+      "collaborative_ads_partner_premium_options",
+      "created_by",
+      "created_time",
+      "extended_updated_time",
+      "id",
+      "is_hidden",
+      "link",
+      "name",
+      "primary_page",
+      "profile_picture_uri",
+      "timezone_id",
+      "two_factor_type",
+      "updated_by",
+      "updated_time",
+      "user_access_expire_time",
+      "verification_status",
+      "vertical",
+      "vertical_id",
+    };
+
+    @Override
+    public APINodeList<Business> parseResponse(String response, String header) throws APIException {
+      return Business.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<Business> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<Business> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<Business>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<Business>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<Business>>() {
+           public APINodeList<Business> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetConnectedClientBusinesses.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestGetConnectedClientBusinesses(String nodeId, APIContext context) {
+      super(context, nodeId, "/connected_client_businesses", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetConnectedClientBusinesses setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetConnectedClientBusinesses setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetConnectedClientBusinesses requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetConnectedClientBusinesses requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetConnectedClientBusinesses requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetConnectedClientBusinesses requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetConnectedClientBusinesses requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetConnectedClientBusinesses requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetConnectedClientBusinesses requestBlockOfflineAnalyticsField () {
+      return this.requestBlockOfflineAnalyticsField(true);
+    }
+    public APIRequestGetConnectedClientBusinesses requestBlockOfflineAnalyticsField (boolean value) {
+      this.requestField("block_offline_analytics", value);
+      return this;
+    }
+    public APIRequestGetConnectedClientBusinesses requestCollaborativeAdsManagedPartnerBusinessInfoField () {
+      return this.requestCollaborativeAdsManagedPartnerBusinessInfoField(true);
+    }
+    public APIRequestGetConnectedClientBusinesses requestCollaborativeAdsManagedPartnerBusinessInfoField (boolean value) {
+      this.requestField("collaborative_ads_managed_partner_business_info", value);
+      return this;
+    }
+    public APIRequestGetConnectedClientBusinesses requestCollaborativeAdsManagedPartnerEligibilityField () {
+      return this.requestCollaborativeAdsManagedPartnerEligibilityField(true);
+    }
+    public APIRequestGetConnectedClientBusinesses requestCollaborativeAdsManagedPartnerEligibilityField (boolean value) {
+      this.requestField("collaborative_ads_managed_partner_eligibility", value);
+      return this;
+    }
+    public APIRequestGetConnectedClientBusinesses requestCollaborativeAdsPartnerPremiumOptionsField () {
+      return this.requestCollaborativeAdsPartnerPremiumOptionsField(true);
+    }
+    public APIRequestGetConnectedClientBusinesses requestCollaborativeAdsPartnerPremiumOptionsField (boolean value) {
+      this.requestField("collaborative_ads_partner_premium_options", value);
+      return this;
+    }
+    public APIRequestGetConnectedClientBusinesses requestCreatedByField () {
+      return this.requestCreatedByField(true);
+    }
+    public APIRequestGetConnectedClientBusinesses requestCreatedByField (boolean value) {
+      this.requestField("created_by", value);
+      return this;
+    }
+    public APIRequestGetConnectedClientBusinesses requestCreatedTimeField () {
+      return this.requestCreatedTimeField(true);
+    }
+    public APIRequestGetConnectedClientBusinesses requestCreatedTimeField (boolean value) {
+      this.requestField("created_time", value);
+      return this;
+    }
+    public APIRequestGetConnectedClientBusinesses requestExtendedUpdatedTimeField () {
+      return this.requestExtendedUpdatedTimeField(true);
+    }
+    public APIRequestGetConnectedClientBusinesses requestExtendedUpdatedTimeField (boolean value) {
+      this.requestField("extended_updated_time", value);
+      return this;
+    }
+    public APIRequestGetConnectedClientBusinesses requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetConnectedClientBusinesses requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetConnectedClientBusinesses requestIsHiddenField () {
+      return this.requestIsHiddenField(true);
+    }
+    public APIRequestGetConnectedClientBusinesses requestIsHiddenField (boolean value) {
+      this.requestField("is_hidden", value);
+      return this;
+    }
+    public APIRequestGetConnectedClientBusinesses requestLinkField () {
+      return this.requestLinkField(true);
+    }
+    public APIRequestGetConnectedClientBusinesses requestLinkField (boolean value) {
+      this.requestField("link", value);
+      return this;
+    }
+    public APIRequestGetConnectedClientBusinesses requestNameField () {
+      return this.requestNameField(true);
+    }
+    public APIRequestGetConnectedClientBusinesses requestNameField (boolean value) {
+      this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetConnectedClientBusinesses requestPrimaryPageField () {
+      return this.requestPrimaryPageField(true);
+    }
+    public APIRequestGetConnectedClientBusinesses requestPrimaryPageField (boolean value) {
+      this.requestField("primary_page", value);
+      return this;
+    }
+    public APIRequestGetConnectedClientBusinesses requestProfilePictureUriField () {
+      return this.requestProfilePictureUriField(true);
+    }
+    public APIRequestGetConnectedClientBusinesses requestProfilePictureUriField (boolean value) {
+      this.requestField("profile_picture_uri", value);
+      return this;
+    }
+    public APIRequestGetConnectedClientBusinesses requestTimezoneIdField () {
+      return this.requestTimezoneIdField(true);
+    }
+    public APIRequestGetConnectedClientBusinesses requestTimezoneIdField (boolean value) {
+      this.requestField("timezone_id", value);
+      return this;
+    }
+    public APIRequestGetConnectedClientBusinesses requestTwoFactorTypeField () {
+      return this.requestTwoFactorTypeField(true);
+    }
+    public APIRequestGetConnectedClientBusinesses requestTwoFactorTypeField (boolean value) {
+      this.requestField("two_factor_type", value);
+      return this;
+    }
+    public APIRequestGetConnectedClientBusinesses requestUpdatedByField () {
+      return this.requestUpdatedByField(true);
+    }
+    public APIRequestGetConnectedClientBusinesses requestUpdatedByField (boolean value) {
+      this.requestField("updated_by", value);
+      return this;
+    }
+    public APIRequestGetConnectedClientBusinesses requestUpdatedTimeField () {
+      return this.requestUpdatedTimeField(true);
+    }
+    public APIRequestGetConnectedClientBusinesses requestUpdatedTimeField (boolean value) {
+      this.requestField("updated_time", value);
+      return this;
+    }
+    public APIRequestGetConnectedClientBusinesses requestUserAccessExpireTimeField () {
+      return this.requestUserAccessExpireTimeField(true);
+    }
+    public APIRequestGetConnectedClientBusinesses requestUserAccessExpireTimeField (boolean value) {
+      this.requestField("user_access_expire_time", value);
+      return this;
+    }
+    public APIRequestGetConnectedClientBusinesses requestVerificationStatusField () {
+      return this.requestVerificationStatusField(true);
+    }
+    public APIRequestGetConnectedClientBusinesses requestVerificationStatusField (boolean value) {
+      this.requestField("verification_status", value);
+      return this;
+    }
+    public APIRequestGetConnectedClientBusinesses requestVerticalField () {
+      return this.requestVerticalField(true);
+    }
+    public APIRequestGetConnectedClientBusinesses requestVerticalField (boolean value) {
+      this.requestField("vertical", value);
+      return this;
+    }
+    public APIRequestGetConnectedClientBusinesses requestVerticalIdField () {
+      return this.requestVerticalIdField(true);
+    }
+    public APIRequestGetConnectedClientBusinesses requestVerticalIdField (boolean value) {
+      this.requestField("vertical_id", value);
+      return this;
+    }
+  }
+
   public static class APIRequestGetDaChecks extends APIRequest<DACheck> {
 
     APINodeList<DACheck> lastResponse = null;
@@ -8866,6 +9151,242 @@ public class Application extends APINode {
 
     @Override
     public APIRequestGetServerDomainInfos requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestGetSgwDatasetStatus extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "dataset_id",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetSgwDatasetStatus.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestGetSgwDatasetStatus(String nodeId, APIContext context) {
+      super(context, nodeId, "/sgw_dataset_status", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetSgwDatasetStatus setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetSgwDatasetStatus setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetSgwDatasetStatus setDatasetId (Long datasetId) {
+      this.setParam("dataset_id", datasetId);
+      return this;
+    }
+    public APIRequestGetSgwDatasetStatus setDatasetId (String datasetId) {
+      this.setParam("dataset_id", datasetId);
+      return this;
+    }
+
+    public APIRequestGetSgwDatasetStatus requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetSgwDatasetStatus requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetSgwDatasetStatus requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetSgwDatasetStatus requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetSgwDatasetStatus requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetSgwDatasetStatus requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestGetSgwInstallDeferralLink extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "client_ip",
+      "dataset_id",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetSgwInstallDeferralLink.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestGetSgwInstallDeferralLink(String nodeId, APIContext context) {
+      super(context, nodeId, "/sgw_install_deferral_link", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetSgwInstallDeferralLink setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetSgwInstallDeferralLink setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetSgwInstallDeferralLink setClientIp (String clientIp) {
+      this.setParam("client_ip", clientIp);
+      return this;
+    }
+
+    public APIRequestGetSgwInstallDeferralLink setDatasetId (Long datasetId) {
+      this.setParam("dataset_id", datasetId);
+      return this;
+    }
+    public APIRequestGetSgwInstallDeferralLink setDatasetId (String datasetId) {
+      this.setParam("dataset_id", datasetId);
+      return this;
+    }
+
+    public APIRequestGetSgwInstallDeferralLink requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetSgwInstallDeferralLink requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetSgwInstallDeferralLink requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetSgwInstallDeferralLink requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetSgwInstallDeferralLink requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetSgwInstallDeferralLink requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }

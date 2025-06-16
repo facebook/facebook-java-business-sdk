@@ -40,31 +40,25 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class BespokePartnerGuidanceLaser extends APINode {
-  @SerializedName("business")
-  private Business mBusiness = null;
-  @SerializedName("campaign_group")
-  private Campaign mCampaignGroup = null;
-  @SerializedName("cpa_improvement")
-  private Double mCpaImprovement = null;
-  @SerializedName("guidance_type")
-  private String mGuidanceType = null;
-  @SerializedName("id")
-  private String mId = null;
+public class ProductItemVideoData extends APINode {
+  @SerializedName("tags")
+  private List<String> mTags = null;
+  @SerializedName("url")
+  private String mUrl = null;
   protected static Gson gson = null;
 
-  public BespokePartnerGuidanceLaser() {
+  public ProductItemVideoData() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
-  public static BespokePartnerGuidanceLaser loadJSON(String json, APIContext context, String header) {
-    BespokePartnerGuidanceLaser bespokePartnerGuidanceLaser = getGson().fromJson(json, BespokePartnerGuidanceLaser.class);
+  public static ProductItemVideoData loadJSON(String json, APIContext context, String header) {
+    ProductItemVideoData productItemVideoData = getGson().fromJson(json, ProductItemVideoData.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(bespokePartnerGuidanceLaser.toString());
+      JsonElement o2 = parser.parse(productItemVideoData.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -74,14 +68,14 @@ public class BespokePartnerGuidanceLaser extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    bespokePartnerGuidanceLaser.context = context;
-    bespokePartnerGuidanceLaser.rawValue = json;
-    bespokePartnerGuidanceLaser.header = header;
-    return bespokePartnerGuidanceLaser;
+    productItemVideoData.context = context;
+    productItemVideoData.rawValue = json;
+    productItemVideoData.header = header;
+    return productItemVideoData;
   }
 
-  public static APINodeList<BespokePartnerGuidanceLaser> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<BespokePartnerGuidanceLaser> bespokePartnerGuidanceLasers = new APINodeList<BespokePartnerGuidanceLaser>(request, json, header);
+  public static APINodeList<ProductItemVideoData> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<ProductItemVideoData> productItemVideoDatas = new APINodeList<ProductItemVideoData>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -92,9 +86,9 @@ public class BespokePartnerGuidanceLaser extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          bespokePartnerGuidanceLasers.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          productItemVideoDatas.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return bespokePartnerGuidanceLasers;
+        return productItemVideoDatas;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -104,20 +98,20 @@ public class BespokePartnerGuidanceLaser extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                bespokePartnerGuidanceLasers.setCursors(before, after);
+                productItemVideoDatas.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            bespokePartnerGuidanceLasers.setPaging(previous, next);
+            productItemVideoDatas.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              bespokePartnerGuidanceLasers.setAppSecret(context.getAppSecretProof());
+              productItemVideoDatas.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              bespokePartnerGuidanceLasers.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              productItemVideoDatas.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -128,23 +122,23 @@ public class BespokePartnerGuidanceLaser extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  bespokePartnerGuidanceLasers.add(loadJSON(entry.getValue().toString(), context, header));
+                  productItemVideoDatas.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              bespokePartnerGuidanceLasers.add(loadJSON(obj.toString(), context, header));
+              productItemVideoDatas.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return bespokePartnerGuidanceLasers;
+          return productItemVideoDatas;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              bespokePartnerGuidanceLasers.add(loadJSON(entry.getValue().toString(), context, header));
+              productItemVideoDatas.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return bespokePartnerGuidanceLasers;
+          return productItemVideoDatas;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -161,20 +155,20 @@ public class BespokePartnerGuidanceLaser extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              bespokePartnerGuidanceLasers.add(loadJSON(value.toString(), context, header));
+              productItemVideoDatas.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return bespokePartnerGuidanceLasers;
+            return productItemVideoDatas;
           }
 
           // Sixth, check if it's pure JsonObject
-          bespokePartnerGuidanceLasers.clear();
-          bespokePartnerGuidanceLasers.add(loadJSON(json, context, header));
-          return bespokePartnerGuidanceLasers;
+          productItemVideoDatas.clear();
+          productItemVideoDatas.add(loadJSON(json, context, header));
+          return productItemVideoDatas;
         }
       }
     } catch (Exception e) {
@@ -202,64 +196,21 @@ public class BespokePartnerGuidanceLaser extends APINode {
   }
 
 
-  public Business getFieldBusiness() {
-    if (mBusiness != null) {
-      mBusiness.context = getContext();
-    }
-    return mBusiness;
+  public List<String> getFieldTags() {
+    return mTags;
   }
 
-  public BespokePartnerGuidanceLaser setFieldBusiness(Business value) {
-    this.mBusiness = value;
+  public ProductItemVideoData setFieldTags(List<String> value) {
+    this.mTags = value;
     return this;
   }
 
-  public BespokePartnerGuidanceLaser setFieldBusiness(String value) {
-    Type type = new TypeToken<Business>(){}.getType();
-    this.mBusiness = Business.getGson().fromJson(value, type);
-    return this;
-  }
-  public Campaign getFieldCampaignGroup() {
-    if (mCampaignGroup != null) {
-      mCampaignGroup.context = getContext();
-    }
-    return mCampaignGroup;
+  public String getFieldUrl() {
+    return mUrl;
   }
 
-  public BespokePartnerGuidanceLaser setFieldCampaignGroup(Campaign value) {
-    this.mCampaignGroup = value;
-    return this;
-  }
-
-  public BespokePartnerGuidanceLaser setFieldCampaignGroup(String value) {
-    Type type = new TypeToken<Campaign>(){}.getType();
-    this.mCampaignGroup = Campaign.getGson().fromJson(value, type);
-    return this;
-  }
-  public Double getFieldCpaImprovement() {
-    return mCpaImprovement;
-  }
-
-  public BespokePartnerGuidanceLaser setFieldCpaImprovement(Double value) {
-    this.mCpaImprovement = value;
-    return this;
-  }
-
-  public String getFieldGuidanceType() {
-    return mGuidanceType;
-  }
-
-  public BespokePartnerGuidanceLaser setFieldGuidanceType(String value) {
-    this.mGuidanceType = value;
-    return this;
-  }
-
-  public String getFieldId() {
-    return mId;
-  }
-
-  public BespokePartnerGuidanceLaser setFieldId(String value) {
-    this.mId = value;
+  public ProductItemVideoData setFieldUrl(String value) {
+    this.mUrl = value;
     return this;
   }
 
@@ -279,21 +230,18 @@ public class BespokePartnerGuidanceLaser extends APINode {
     return gson;
   }
 
-  public BespokePartnerGuidanceLaser copyFrom(BespokePartnerGuidanceLaser instance) {
-    this.mBusiness = instance.mBusiness;
-    this.mCampaignGroup = instance.mCampaignGroup;
-    this.mCpaImprovement = instance.mCpaImprovement;
-    this.mGuidanceType = instance.mGuidanceType;
-    this.mId = instance.mId;
+  public ProductItemVideoData copyFrom(ProductItemVideoData instance) {
+    this.mTags = instance.mTags;
+    this.mUrl = instance.mUrl;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<BespokePartnerGuidanceLaser> getParser() {
-    return new APIRequest.ResponseParser<BespokePartnerGuidanceLaser>() {
-      public APINodeList<BespokePartnerGuidanceLaser> parseResponse(String response, APIContext context, APIRequest<BespokePartnerGuidanceLaser> request, String header) throws MalformedResponseException {
-        return BespokePartnerGuidanceLaser.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<ProductItemVideoData> getParser() {
+    return new APIRequest.ResponseParser<ProductItemVideoData>() {
+      public APINodeList<ProductItemVideoData> parseResponse(String response, APIContext context, APIRequest<ProductItemVideoData> request, String header) throws MalformedResponseException {
+        return ProductItemVideoData.parseResponse(response, context, request, header);
       }
     };
   }

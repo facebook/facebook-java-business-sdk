@@ -53,6 +53,8 @@ public class LeadGenThankYouPage extends APINode {
   private String mCountryCode = null;
   @SerializedName("enable_messenger")
   private Boolean mEnableMessenger = null;
+  @SerializedName("gated_file")
+  private LeadGenThankYouPageGatedFile mGatedFile = null;
   @SerializedName("id")
   private String mId = null;
   @SerializedName("lead_gen_use_case")
@@ -268,6 +270,20 @@ public class LeadGenThankYouPage extends APINode {
     return this;
   }
 
+  public LeadGenThankYouPageGatedFile getFieldGatedFile() {
+    return mGatedFile;
+  }
+
+  public LeadGenThankYouPage setFieldGatedFile(LeadGenThankYouPageGatedFile value) {
+    this.mGatedFile = value;
+    return this;
+  }
+
+  public LeadGenThankYouPage setFieldGatedFile(String value) {
+    Type type = new TypeToken<LeadGenThankYouPageGatedFile>(){}.getType();
+    this.mGatedFile = LeadGenThankYouPageGatedFile.getGson().fromJson(value, type);
+    return this;
+  }
   public String getFieldId() {
     return mId;
   }
@@ -336,6 +352,7 @@ public class LeadGenThankYouPage extends APINode {
     this.mButtonType = instance.mButtonType;
     this.mCountryCode = instance.mCountryCode;
     this.mEnableMessenger = instance.mEnableMessenger;
+    this.mGatedFile = instance.mGatedFile;
     this.mId = instance.mId;
     this.mLeadGenUseCase = instance.mLeadGenUseCase;
     this.mStatus = instance.mStatus;

@@ -81,6 +81,8 @@ public class AdSet extends APINode {
   private String mCreatedTime = null;
   @SerializedName("creative_sequence")
   private List<String> mCreativeSequence = null;
+  @SerializedName("creative_sequence_repetition_pattern")
+  private String mCreativeSequenceRepetitionPattern = null;
   @SerializedName("daily_budget")
   private String mDailyBudget = null;
   @SerializedName("daily_min_spend_target")
@@ -113,6 +115,8 @@ public class AdSet extends APINode {
   private Boolean mIsBudgetScheduleEnabled = null;
   @SerializedName("is_dynamic_creative")
   private Boolean mIsDynamicCreative = null;
+  @SerializedName("is_incremental_attribution_enabled")
+  private Boolean mIsIncrementalAttributionEnabled = null;
   @SerializedName("issues_info")
   private List<AdCampaignIssuesInfo> mIssuesInfo = null;
   @SerializedName("learning_stage_info")
@@ -677,6 +681,15 @@ public class AdSet extends APINode {
     return this;
   }
 
+  public String getFieldCreativeSequenceRepetitionPattern() {
+    return mCreativeSequenceRepetitionPattern;
+  }
+
+  public AdSet setFieldCreativeSequenceRepetitionPattern(String value) {
+    this.mCreativeSequenceRepetitionPattern = value;
+    return this;
+  }
+
   public String getFieldDailyBudget() {
     return mDailyBudget;
   }
@@ -823,6 +836,15 @@ public class AdSet extends APINode {
 
   public AdSet setFieldIsDynamicCreative(Boolean value) {
     this.mIsDynamicCreative = value;
+    return this;
+  }
+
+  public Boolean getFieldIsIncrementalAttributionEnabled() {
+    return mIsIncrementalAttributionEnabled;
+  }
+
+  public AdSet setFieldIsIncrementalAttributionEnabled(Boolean value) {
+    this.mIsIncrementalAttributionEnabled = value;
     return this;
   }
 
@@ -1710,6 +1732,7 @@ public class AdSet extends APINode {
       "product_set_id",
       "recommender_settings",
       "regional_regulation_disclaimer_spec",
+      "source_facebook_post_id",
       "source_instagram_media_id",
       "status",
       "template_url",
@@ -2223,6 +2246,13 @@ public class AdSet extends APINode {
     }
     public APIRequestGetAdCreatives requestRegionalRegulationDisclaimerSpecField (boolean value) {
       this.requestField("regional_regulation_disclaimer_spec", value);
+      return this;
+    }
+    public APIRequestGetAdCreatives requestSourceFacebookPostIdField () {
+      return this.requestSourceFacebookPostIdField(true);
+    }
+    public APIRequestGetAdCreatives requestSourceFacebookPostIdField (boolean value) {
+      this.requestField("source_facebook_post_id", value);
       return this;
     }
     public APIRequestGetAdCreatives requestSourceInstagramMediaIdField () {
@@ -3574,6 +3604,7 @@ public class AdSet extends APINode {
       "configured_status",
       "created_time",
       "creative_sequence",
+      "creative_sequence_repetition_pattern",
       "daily_budget",
       "daily_min_spend_target",
       "daily_spend_cap",
@@ -3590,6 +3621,7 @@ public class AdSet extends APINode {
       "is_ba_skip_delayed_eligible",
       "is_budget_schedule_enabled",
       "is_dynamic_creative",
+      "is_incremental_attribution_enabled",
       "issues_info",
       "learning_stage_info",
       "lifetime_budget",
@@ -3888,6 +3920,13 @@ public class AdSet extends APINode {
       this.requestField("creative_sequence", value);
       return this;
     }
+    public APIRequestGetCopies requestCreativeSequenceRepetitionPatternField () {
+      return this.requestCreativeSequenceRepetitionPatternField(true);
+    }
+    public APIRequestGetCopies requestCreativeSequenceRepetitionPatternField (boolean value) {
+      this.requestField("creative_sequence_repetition_pattern", value);
+      return this;
+    }
     public APIRequestGetCopies requestDailyBudgetField () {
       return this.requestDailyBudgetField(true);
     }
@@ -3998,6 +4037,13 @@ public class AdSet extends APINode {
     }
     public APIRequestGetCopies requestIsDynamicCreativeField (boolean value) {
       this.requestField("is_dynamic_creative", value);
+      return this;
+    }
+    public APIRequestGetCopies requestIsIncrementalAttributionEnabledField () {
+      return this.requestIsIncrementalAttributionEnabledField(true);
+    }
+    public APIRequestGetCopies requestIsIncrementalAttributionEnabledField (boolean value) {
+      this.requestField("is_incremental_attribution_enabled", value);
       return this;
     }
     public APIRequestGetCopies requestIssuesInfoField () {
@@ -4578,6 +4624,7 @@ public class AdSet extends APINode {
       "fields",
       "filtering",
       "level",
+      "limit",
       "product_id_limit",
       "sort",
       "summary",
@@ -4746,6 +4793,15 @@ public class AdSet extends APINode {
       return this;
     }
 
+    public APIRequestGetInsights setLimit (Long limit) {
+      this.setParam("limit", limit);
+      return this;
+    }
+    public APIRequestGetInsights setLimit (String limit) {
+      this.setParam("limit", limit);
+      return this;
+    }
+
     public APIRequestGetInsights setProductIdLimit (Long productIdLimit) {
       this.setParam("product_id_limit", productIdLimit);
       return this;
@@ -4881,6 +4937,7 @@ public class AdSet extends APINode {
       "fields",
       "filtering",
       "level",
+      "limit",
       "product_id_limit",
       "sort",
       "summary",
@@ -5049,6 +5106,15 @@ public class AdSet extends APINode {
       return this;
     }
 
+    public APIRequestGetInsightsAsync setLimit (Long limit) {
+      this.setParam("limit", limit);
+      return this;
+    }
+    public APIRequestGetInsightsAsync setLimit (String limit) {
+      this.setParam("limit", limit);
+      return this;
+    }
+
     public APIRequestGetInsightsAsync setProductIdLimit (Long productIdLimit) {
       this.setParam("product_id_limit", productIdLimit);
       return this;
@@ -5173,6 +5239,8 @@ public class AdSet extends APINode {
     }
     public static final String[] PARAMS = {
       "bid_amount",
+      "daily_budget",
+      "is_direct_send_campaign",
       "lifetime_budget",
       "lifetime_in_days",
       "optimization_goal",
@@ -5253,6 +5321,24 @@ public class AdSet extends APINode {
     }
     public APIRequestGetMessageDeliveryEstimate setBidAmount (String bidAmount) {
       this.setParam("bid_amount", bidAmount);
+      return this;
+    }
+
+    public APIRequestGetMessageDeliveryEstimate setDailyBudget (Long dailyBudget) {
+      this.setParam("daily_budget", dailyBudget);
+      return this;
+    }
+    public APIRequestGetMessageDeliveryEstimate setDailyBudget (String dailyBudget) {
+      this.setParam("daily_budget", dailyBudget);
+      return this;
+    }
+
+    public APIRequestGetMessageDeliveryEstimate setIsDirectSendCampaign (Boolean isDirectSendCampaign) {
+      this.setParam("is_direct_send_campaign", isDirectSendCampaign);
+      return this;
+    }
+    public APIRequestGetMessageDeliveryEstimate setIsDirectSendCampaign (String isDirectSendCampaign) {
+      this.setParam("is_direct_send_campaign", isDirectSendCampaign);
       return this;
     }
 
@@ -5680,6 +5766,7 @@ public class AdSet extends APINode {
       "configured_status",
       "created_time",
       "creative_sequence",
+      "creative_sequence_repetition_pattern",
       "daily_budget",
       "daily_min_spend_target",
       "daily_spend_cap",
@@ -5696,6 +5783,7 @@ public class AdSet extends APINode {
       "is_ba_skip_delayed_eligible",
       "is_budget_schedule_enabled",
       "is_dynamic_creative",
+      "is_incremental_attribution_enabled",
       "issues_info",
       "learning_stage_info",
       "lifetime_budget",
@@ -5994,6 +6082,13 @@ public class AdSet extends APINode {
       this.requestField("creative_sequence", value);
       return this;
     }
+    public APIRequestGet requestCreativeSequenceRepetitionPatternField () {
+      return this.requestCreativeSequenceRepetitionPatternField(true);
+    }
+    public APIRequestGet requestCreativeSequenceRepetitionPatternField (boolean value) {
+      this.requestField("creative_sequence_repetition_pattern", value);
+      return this;
+    }
     public APIRequestGet requestDailyBudgetField () {
       return this.requestDailyBudgetField(true);
     }
@@ -6104,6 +6199,13 @@ public class AdSet extends APINode {
     }
     public APIRequestGet requestIsDynamicCreativeField (boolean value) {
       this.requestField("is_dynamic_creative", value);
+      return this;
+    }
+    public APIRequestGet requestIsIncrementalAttributionEnabledField () {
+      return this.requestIsIncrementalAttributionEnabledField(true);
+    }
+    public APIRequestGet requestIsIncrementalAttributionEnabledField (boolean value) {
+      this.requestField("is_incremental_attribution_enabled", value);
       return this;
     }
     public APIRequestGet requestIssuesInfoField () {
@@ -6338,6 +6440,7 @@ public class AdSet extends APINode {
       "campaign_attribution",
       "campaign_spec",
       "creative_sequence",
+      "creative_sequence_repetition_pattern",
       "daily_budget",
       "daily_imps",
       "daily_min_spend_target",
@@ -6351,6 +6454,7 @@ public class AdSet extends APINode {
       "existing_customer_budget_percentage",
       "full_funnel_exploration_mode",
       "is_ba_skip_delayed_eligible",
+      "is_incremental_attribution_enabled",
       "is_sac_cfca_terms_certified",
       "lifetime_budget",
       "lifetime_imps",
@@ -6539,6 +6643,15 @@ public class AdSet extends APINode {
       return this;
     }
 
+    public APIRequestUpdate setCreativeSequenceRepetitionPattern (AdSet.EnumCreativeSequenceRepetitionPattern creativeSequenceRepetitionPattern) {
+      this.setParam("creative_sequence_repetition_pattern", creativeSequenceRepetitionPattern);
+      return this;
+    }
+    public APIRequestUpdate setCreativeSequenceRepetitionPattern (String creativeSequenceRepetitionPattern) {
+      this.setParam("creative_sequence_repetition_pattern", creativeSequenceRepetitionPattern);
+      return this;
+    }
+
     public APIRequestUpdate setDailyBudget (Long dailyBudget) {
       this.setParam("daily_budget", dailyBudget);
       return this;
@@ -6637,6 +6750,15 @@ public class AdSet extends APINode {
     }
     public APIRequestUpdate setIsBaSkipDelayedEligible (String isBaSkipDelayedEligible) {
       this.setParam("is_ba_skip_delayed_eligible", isBaSkipDelayedEligible);
+      return this;
+    }
+
+    public APIRequestUpdate setIsIncrementalAttributionEnabled (Boolean isIncrementalAttributionEnabled) {
+      this.setParam("is_incremental_attribution_enabled", isIncrementalAttributionEnabled);
+      return this;
+    }
+    public APIRequestUpdate setIsIncrementalAttributionEnabled (String isIncrementalAttributionEnabled) {
+      this.setParam("is_incremental_attribution_enabled", isIncrementalAttributionEnabled);
       return this;
     }
 
@@ -7089,6 +7211,44 @@ public class AdSet extends APINode {
       }
   }
 
+  public static enum EnumBudgetSource {
+      @SerializedName("NONE")
+      VALUE_NONE("NONE"),
+      @SerializedName("RMN")
+      VALUE_RMN("RMN"),
+      ;
+
+      private String value;
+
+      private EnumBudgetSource(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumCreativeSequenceRepetitionPattern {
+      @SerializedName("FULL_SEQUENCE")
+      VALUE_FULL_SEQUENCE("FULL_SEQUENCE"),
+      @SerializedName("LAST_AD")
+      VALUE_LAST_AD("LAST_AD"),
+      ;
+
+      private String value;
+
+      private EnumCreativeSequenceRepetitionPattern(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
   public static enum EnumDatePreset {
       @SerializedName("DATA_MAXIMUM")
       VALUE_DATA_MAXIMUM("DATA_MAXIMUM"),
@@ -7151,10 +7311,16 @@ public class AdSet extends APINode {
       VALUE_APPLINKS_AUTOMATIC("APPLINKS_AUTOMATIC"),
       @SerializedName("FACEBOOK")
       VALUE_FACEBOOK("FACEBOOK"),
+      @SerializedName("FACEBOOK_LIVE")
+      VALUE_FACEBOOK_LIVE("FACEBOOK_LIVE"),
       @SerializedName("FACEBOOK_PAGE")
       VALUE_FACEBOOK_PAGE("FACEBOOK_PAGE"),
+      @SerializedName("IMAGINE")
+      VALUE_IMAGINE("IMAGINE"),
       @SerializedName("INSTAGRAM_DIRECT")
       VALUE_INSTAGRAM_DIRECT("INSTAGRAM_DIRECT"),
+      @SerializedName("INSTAGRAM_LIVE")
+      VALUE_INSTAGRAM_LIVE("INSTAGRAM_LIVE"),
       @SerializedName("INSTAGRAM_PROFILE")
       VALUE_INSTAGRAM_PROFILE("INSTAGRAM_PROFILE"),
       @SerializedName("INSTAGRAM_PROFILE_AND_FACEBOOK_PAGE")
@@ -7310,6 +7476,8 @@ public class AdSet extends APINode {
       VALUE_4("4"),
       @SerializedName("5")
       VALUE_5("5"),
+      @SerializedName("6")
+      VALUE_6("6"),
       ;
 
       private String value;
@@ -7428,6 +7596,7 @@ public class AdSet extends APINode {
     this.mConfiguredStatus = instance.mConfiguredStatus;
     this.mCreatedTime = instance.mCreatedTime;
     this.mCreativeSequence = instance.mCreativeSequence;
+    this.mCreativeSequenceRepetitionPattern = instance.mCreativeSequenceRepetitionPattern;
     this.mDailyBudget = instance.mDailyBudget;
     this.mDailyMinSpendTarget = instance.mDailyMinSpendTarget;
     this.mDailySpendCap = instance.mDailySpendCap;
@@ -7444,6 +7613,7 @@ public class AdSet extends APINode {
     this.mIsBaSkipDelayedEligible = instance.mIsBaSkipDelayedEligible;
     this.mIsBudgetScheduleEnabled = instance.mIsBudgetScheduleEnabled;
     this.mIsDynamicCreative = instance.mIsDynamicCreative;
+    this.mIsIncrementalAttributionEnabled = instance.mIsIncrementalAttributionEnabled;
     this.mIssuesInfo = instance.mIssuesInfo;
     this.mLearningStageInfo = instance.mLearningStageInfo;
     this.mLifetimeBudget = instance.mLifetimeBudget;

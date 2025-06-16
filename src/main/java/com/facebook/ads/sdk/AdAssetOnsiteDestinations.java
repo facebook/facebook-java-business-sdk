@@ -47,6 +47,8 @@ public class AdAssetOnsiteDestinations extends APINode {
   private String mDetailsPageProductId = null;
   @SerializedName("shop_collection_product_set_id")
   private String mShopCollectionProductSetId = null;
+  @SerializedName("source")
+  private String mSource = null;
   @SerializedName("storefront_shop_id")
   private String mStorefrontShopId = null;
   protected static Gson gson = null;
@@ -227,6 +229,15 @@ public class AdAssetOnsiteDestinations extends APINode {
     return this;
   }
 
+  public String getFieldSource() {
+    return mSource;
+  }
+
+  public AdAssetOnsiteDestinations setFieldSource(String value) {
+    this.mSource = value;
+    return this;
+  }
+
   public String getFieldStorefrontShopId() {
     return mStorefrontShopId;
   }
@@ -256,6 +267,7 @@ public class AdAssetOnsiteDestinations extends APINode {
     this.mAutoOptimization = instance.mAutoOptimization;
     this.mDetailsPageProductId = instance.mDetailsPageProductId;
     this.mShopCollectionProductSetId = instance.mShopCollectionProductSetId;
+    this.mSource = instance.mSource;
     this.mStorefrontShopId = instance.mStorefrontShopId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

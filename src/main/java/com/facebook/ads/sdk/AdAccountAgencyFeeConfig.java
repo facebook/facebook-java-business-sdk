@@ -40,76 +40,72 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class SplitTestConfig extends APINode {
-  @SerializedName("budget")
-  private Long mBudget = null;
-  @SerializedName("early_winner_declaration_enabled")
-  private Boolean mEarlyWinnerDeclarationEnabled = null;
-  @SerializedName("end_time")
-  private String mEndTime = null;
-  @SerializedName("splits")
-  private List<Long> mSplits = null;
-  @SerializedName("start_time")
-  private String mStartTime = null;
-  @SerializedName("test_variable")
-  private String mTestVariable = null;
+public class AdAccountAgencyFeeConfig extends APINode {
+  @SerializedName("can_add_agency_fee_to_invoice")
+  private Boolean mCanAddAgencyFeeToInvoice = null;
+  @SerializedName("default_agency_fee_pct")
+  private Double mDefaultAgencyFeePct = null;
   @SerializedName("id")
   private String mId = null;
+  @SerializedName("is_agency_fee_disabled")
+  private Boolean mIsAgencyFeeDisabled = null;
+  @SerializedName("status")
+  private EnumStatus mStatus = null;
   protected static Gson gson = null;
 
-  SplitTestConfig() {
+  AdAccountAgencyFeeConfig() {
   }
 
-  public SplitTestConfig(Long id, APIContext context) {
+  public AdAccountAgencyFeeConfig(Long id, APIContext context) {
     this(id.toString(), context);
   }
 
-  public SplitTestConfig(String id, APIContext context) {
+  public AdAccountAgencyFeeConfig(String id, APIContext context) {
     this.mId = id;
 
     this.context = context;
   }
 
-  public SplitTestConfig fetch() throws APIException{
-    SplitTestConfig newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+  public AdAccountAgencyFeeConfig fetch() throws APIException{
+    AdAccountAgencyFeeConfig newInstance = fetchById(this.getPrefixedId().toString(), this.context);
     this.copyFrom(newInstance);
     return this;
   }
 
-  public static SplitTestConfig fetchById(Long id, APIContext context) throws APIException {
+  public static AdAccountAgencyFeeConfig fetchById(Long id, APIContext context) throws APIException {
     return fetchById(id.toString(), context);
   }
 
-  public static ListenableFuture<SplitTestConfig> fetchByIdAsync(Long id, APIContext context) throws APIException {
+  public static ListenableFuture<AdAccountAgencyFeeConfig> fetchByIdAsync(Long id, APIContext context) throws APIException {
     return fetchByIdAsync(id.toString(), context);
   }
 
-  public static SplitTestConfig fetchById(String id, APIContext context) throws APIException {
+  public static AdAccountAgencyFeeConfig fetchById(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
   }
 
-  public static ListenableFuture<SplitTestConfig> fetchByIdAsync(String id, APIContext context) throws APIException {
+  public static ListenableFuture<AdAccountAgencyFeeConfig> fetchByIdAsync(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
   }
 
-  public static APINodeList<SplitTestConfig> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<SplitTestConfig>)(
-      new APIRequest<SplitTestConfig>(context, "", "/", "GET", SplitTestConfig.getParser())
+  public static APINodeList<AdAccountAgencyFeeConfig> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<AdAccountAgencyFeeConfig>)(
+      new APIRequest<AdAccountAgencyFeeConfig>(context, "", "/", "GET", AdAccountAgencyFeeConfig.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .execute()
     );
   }
 
-  public static ListenableFuture<APINodeList<SplitTestConfig>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+  public static ListenableFuture<APINodeList<AdAccountAgencyFeeConfig>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
     return
-      new APIRequest(context, "", "/", "GET", SplitTestConfig.getParser())
+      new APIRequest(context, "", "/", "GET", AdAccountAgencyFeeConfig.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
@@ -122,12 +118,12 @@ public class SplitTestConfig extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static SplitTestConfig loadJSON(String json, APIContext context, String header) {
-    SplitTestConfig splitTestConfig = getGson().fromJson(json, SplitTestConfig.class);
+  public static AdAccountAgencyFeeConfig loadJSON(String json, APIContext context, String header) {
+    AdAccountAgencyFeeConfig adAccountAgencyFeeConfig = getGson().fromJson(json, AdAccountAgencyFeeConfig.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(splitTestConfig.toString());
+      JsonElement o2 = parser.parse(adAccountAgencyFeeConfig.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -137,14 +133,14 @@ public class SplitTestConfig extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    splitTestConfig.context = context;
-    splitTestConfig.rawValue = json;
-    splitTestConfig.header = header;
-    return splitTestConfig;
+    adAccountAgencyFeeConfig.context = context;
+    adAccountAgencyFeeConfig.rawValue = json;
+    adAccountAgencyFeeConfig.header = header;
+    return adAccountAgencyFeeConfig;
   }
 
-  public static APINodeList<SplitTestConfig> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<SplitTestConfig> splitTestConfigs = new APINodeList<SplitTestConfig>(request, json, header);
+  public static APINodeList<AdAccountAgencyFeeConfig> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdAccountAgencyFeeConfig> adAccountAgencyFeeConfigs = new APINodeList<AdAccountAgencyFeeConfig>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -155,9 +151,9 @@ public class SplitTestConfig extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          splitTestConfigs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          adAccountAgencyFeeConfigs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return splitTestConfigs;
+        return adAccountAgencyFeeConfigs;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -167,20 +163,20 @@ public class SplitTestConfig extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                splitTestConfigs.setCursors(before, after);
+                adAccountAgencyFeeConfigs.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            splitTestConfigs.setPaging(previous, next);
+            adAccountAgencyFeeConfigs.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              splitTestConfigs.setAppSecret(context.getAppSecretProof());
+              adAccountAgencyFeeConfigs.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              splitTestConfigs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              adAccountAgencyFeeConfigs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -191,23 +187,23 @@ public class SplitTestConfig extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  splitTestConfigs.add(loadJSON(entry.getValue().toString(), context, header));
+                  adAccountAgencyFeeConfigs.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              splitTestConfigs.add(loadJSON(obj.toString(), context, header));
+              adAccountAgencyFeeConfigs.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return splitTestConfigs;
+          return adAccountAgencyFeeConfigs;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              splitTestConfigs.add(loadJSON(entry.getValue().toString(), context, header));
+              adAccountAgencyFeeConfigs.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return splitTestConfigs;
+          return adAccountAgencyFeeConfigs;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -224,20 +220,20 @@ public class SplitTestConfig extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              splitTestConfigs.add(loadJSON(value.toString(), context, header));
+              adAccountAgencyFeeConfigs.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return splitTestConfigs;
+            return adAccountAgencyFeeConfigs;
           }
 
           // Sixth, check if it's pure JsonObject
-          splitTestConfigs.clear();
-          splitTestConfigs.add(loadJSON(json, context, header));
-          return splitTestConfigs;
+          adAccountAgencyFeeConfigs.clear();
+          adAccountAgencyFeeConfigs.add(loadJSON(json, context, header));
+          return adAccountAgencyFeeConfigs;
         }
       }
     } catch (Exception e) {
@@ -269,82 +265,72 @@ public class SplitTestConfig extends APINode {
   }
 
 
-  public Long getFieldBudget() {
-    return mBudget;
+  public Boolean getFieldCanAddAgencyFeeToInvoice() {
+    return mCanAddAgencyFeeToInvoice;
   }
 
-  public Boolean getFieldEarlyWinnerDeclarationEnabled() {
-    return mEarlyWinnerDeclarationEnabled;
-  }
-
-  public String getFieldEndTime() {
-    return mEndTime;
-  }
-
-  public List<Long> getFieldSplits() {
-    return mSplits;
-  }
-
-  public String getFieldStartTime() {
-    return mStartTime;
-  }
-
-  public String getFieldTestVariable() {
-    return mTestVariable;
+  public Double getFieldDefaultAgencyFeePct() {
+    return mDefaultAgencyFeePct;
   }
 
   public String getFieldId() {
     return mId;
   }
 
+  public Boolean getFieldIsAgencyFeeDisabled() {
+    return mIsAgencyFeeDisabled;
+  }
+
+  public EnumStatus getFieldStatus() {
+    return mStatus;
+  }
 
 
-  public static class APIRequestGet extends APIRequest<SplitTestConfig> {
 
-    SplitTestConfig lastResponse = null;
+  public static class APIRequestGet extends APIRequest<AdAccountAgencyFeeConfig> {
+
+    AdAccountAgencyFeeConfig lastResponse = null;
     @Override
-    public SplitTestConfig getLastResponse() {
+    public AdAccountAgencyFeeConfig getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
     };
 
     public static final String[] FIELDS = {
-      "budget",
-      "early_winner_declaration_enabled",
-      "end_time",
-      "splits",
-      "start_time",
-      "test_variable",
+      "can_add_agency_fee_to_invoice",
+      "default_agency_fee_pct",
       "id",
+      "is_agency_fee_disabled",
+      "status",
     };
 
     @Override
-    public SplitTestConfig parseResponse(String response, String header) throws APIException {
-      return SplitTestConfig.parseResponse(response, getContext(), this, header).head();
+    public AdAccountAgencyFeeConfig parseResponse(String response, String header) throws APIException {
+      return AdAccountAgencyFeeConfig.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public SplitTestConfig execute() throws APIException {
+    public AdAccountAgencyFeeConfig execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public SplitTestConfig execute(Map<String, Object> extraParams) throws APIException {
+    public AdAccountAgencyFeeConfig execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<SplitTestConfig> executeAsync() throws APIException {
+    public ListenableFuture<AdAccountAgencyFeeConfig> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<SplitTestConfig> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<AdAccountAgencyFeeConfig> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, SplitTestConfig>() {
-           public SplitTestConfig apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, AdAccountAgencyFeeConfig>() {
+           public AdAccountAgencyFeeConfig apply(ResponseWrapper result) {
              try {
                return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -409,46 +395,18 @@ public class SplitTestConfig extends APINode {
       return this;
     }
 
-    public APIRequestGet requestBudgetField () {
-      return this.requestBudgetField(true);
+    public APIRequestGet requestCanAddAgencyFeeToInvoiceField () {
+      return this.requestCanAddAgencyFeeToInvoiceField(true);
     }
-    public APIRequestGet requestBudgetField (boolean value) {
-      this.requestField("budget", value);
+    public APIRequestGet requestCanAddAgencyFeeToInvoiceField (boolean value) {
+      this.requestField("can_add_agency_fee_to_invoice", value);
       return this;
     }
-    public APIRequestGet requestEarlyWinnerDeclarationEnabledField () {
-      return this.requestEarlyWinnerDeclarationEnabledField(true);
+    public APIRequestGet requestDefaultAgencyFeePctField () {
+      return this.requestDefaultAgencyFeePctField(true);
     }
-    public APIRequestGet requestEarlyWinnerDeclarationEnabledField (boolean value) {
-      this.requestField("early_winner_declaration_enabled", value);
-      return this;
-    }
-    public APIRequestGet requestEndTimeField () {
-      return this.requestEndTimeField(true);
-    }
-    public APIRequestGet requestEndTimeField (boolean value) {
-      this.requestField("end_time", value);
-      return this;
-    }
-    public APIRequestGet requestSplitsField () {
-      return this.requestSplitsField(true);
-    }
-    public APIRequestGet requestSplitsField (boolean value) {
-      this.requestField("splits", value);
-      return this;
-    }
-    public APIRequestGet requestStartTimeField () {
-      return this.requestStartTimeField(true);
-    }
-    public APIRequestGet requestStartTimeField (boolean value) {
-      this.requestField("start_time", value);
-      return this;
-    }
-    public APIRequestGet requestTestVariableField () {
-      return this.requestTestVariableField(true);
-    }
-    public APIRequestGet requestTestVariableField (boolean value) {
-      this.requestField("test_variable", value);
+    public APIRequestGet requestDefaultAgencyFeePctField (boolean value) {
+      this.requestField("default_agency_fee_pct", value);
       return this;
     }
     public APIRequestGet requestIdField () {
@@ -458,6 +416,43 @@ public class SplitTestConfig extends APINode {
       this.requestField("id", value);
       return this;
     }
+    public APIRequestGet requestIsAgencyFeeDisabledField () {
+      return this.requestIsAgencyFeeDisabledField(true);
+    }
+    public APIRequestGet requestIsAgencyFeeDisabledField (boolean value) {
+      this.requestField("is_agency_fee_disabled", value);
+      return this;
+    }
+    public APIRequestGet requestStatusField () {
+      return this.requestStatusField(true);
+    }
+    public APIRequestGet requestStatusField (boolean value) {
+      this.requestField("status", value);
+      return this;
+    }
+  }
+
+  public static enum EnumStatus {
+      @SerializedName("ACTIVE")
+      VALUE_ACTIVE("ACTIVE"),
+      @SerializedName("ARCHIVED")
+      VALUE_ARCHIVED("ARCHIVED"),
+      @SerializedName("DRAFT")
+      VALUE_DRAFT("DRAFT"),
+      @SerializedName("UNKNOWN")
+      VALUE_UNKNOWN("UNKNOWN"),
+      ;
+
+      private String value;
+
+      private EnumStatus(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
   }
 
 
@@ -474,23 +469,21 @@ public class SplitTestConfig extends APINode {
     return gson;
   }
 
-  public SplitTestConfig copyFrom(SplitTestConfig instance) {
-    this.mBudget = instance.mBudget;
-    this.mEarlyWinnerDeclarationEnabled = instance.mEarlyWinnerDeclarationEnabled;
-    this.mEndTime = instance.mEndTime;
-    this.mSplits = instance.mSplits;
-    this.mStartTime = instance.mStartTime;
-    this.mTestVariable = instance.mTestVariable;
+  public AdAccountAgencyFeeConfig copyFrom(AdAccountAgencyFeeConfig instance) {
+    this.mCanAddAgencyFeeToInvoice = instance.mCanAddAgencyFeeToInvoice;
+    this.mDefaultAgencyFeePct = instance.mDefaultAgencyFeePct;
     this.mId = instance.mId;
+    this.mIsAgencyFeeDisabled = instance.mIsAgencyFeeDisabled;
+    this.mStatus = instance.mStatus;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<SplitTestConfig> getParser() {
-    return new APIRequest.ResponseParser<SplitTestConfig>() {
-      public APINodeList<SplitTestConfig> parseResponse(String response, APIContext context, APIRequest<SplitTestConfig> request, String header) throws MalformedResponseException {
-        return SplitTestConfig.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<AdAccountAgencyFeeConfig> getParser() {
+    return new APIRequest.ResponseParser<AdAccountAgencyFeeConfig>() {
+      public APINodeList<AdAccountAgencyFeeConfig> parseResponse(String response, APIContext context, APIRequest<AdAccountAgencyFeeConfig> request, String header) throws MalformedResponseException {
+        return AdAccountAgencyFeeConfig.parseResponse(response, context, request, header);
       }
     };
   }

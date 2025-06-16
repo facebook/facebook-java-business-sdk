@@ -129,6 +129,10 @@ public class LeadGenFormPreviewDetails extends APINode {
   private String mSubmitButtonText = null;
   @SerializedName("view_file_text")
   private String mViewFileText = null;
+  @SerializedName("whats_app_opt_in_body")
+  private String mWhatsAppOptInBody = null;
+  @SerializedName("whats_app_opt_in_title")
+  private String mWhatsAppOptInTitle = null;
   protected static Gson gson = null;
 
   public LeadGenFormPreviewDetails() {
@@ -676,6 +680,24 @@ public class LeadGenFormPreviewDetails extends APINode {
     return this;
   }
 
+  public String getFieldWhatsAppOptInBody() {
+    return mWhatsAppOptInBody;
+  }
+
+  public LeadGenFormPreviewDetails setFieldWhatsAppOptInBody(String value) {
+    this.mWhatsAppOptInBody = value;
+    return this;
+  }
+
+  public String getFieldWhatsAppOptInTitle() {
+    return mWhatsAppOptInTitle;
+  }
+
+  public LeadGenFormPreviewDetails setFieldWhatsAppOptInTitle(String value) {
+    this.mWhatsAppOptInTitle = value;
+    return this;
+  }
+
 
 
 
@@ -737,6 +759,8 @@ public class LeadGenFormPreviewDetails extends APINode {
     this.mSocialProofSectionHeaders = instance.mSocialProofSectionHeaders;
     this.mSubmitButtonText = instance.mSubmitButtonText;
     this.mViewFileText = instance.mViewFileText;
+    this.mWhatsAppOptInBody = instance.mWhatsAppOptInBody;
+    this.mWhatsAppOptInTitle = instance.mWhatsAppOptInTitle;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

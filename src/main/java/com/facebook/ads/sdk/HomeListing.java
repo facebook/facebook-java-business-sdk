@@ -145,6 +145,10 @@ public class HomeListing extends APINode {
   private String mPropertyType = null;
   @SerializedName("sanitized_images")
   private List<String> mSanitizedImages = null;
+  @SerializedName("securitydeposit_currency")
+  private String mSecuritydepositCurrency = null;
+  @SerializedName("securitydeposit_price")
+  private String mSecuritydepositPrice = null;
   @SerializedName("tags")
   private List<String> mTags = null;
   @SerializedName("unit_price")
@@ -598,6 +602,14 @@ public class HomeListing extends APINode {
 
   public List<String> getFieldSanitizedImages() {
     return mSanitizedImages;
+  }
+
+  public String getFieldSecuritydepositCurrency() {
+    return mSecuritydepositCurrency;
+  }
+
+  public String getFieldSecuritydepositPrice() {
+    return mSecuritydepositPrice;
   }
 
   public List<String> getFieldTags() {
@@ -1197,6 +1209,8 @@ public class HomeListing extends APINode {
       "price",
       "property_type",
       "sanitized_images",
+      "securitydeposit_currency",
+      "securitydeposit_price",
       "tags",
       "unit_price",
       "url",
@@ -1658,6 +1672,20 @@ public class HomeListing extends APINode {
       this.requestField("sanitized_images", value);
       return this;
     }
+    public APIRequestGet requestSecuritydepositCurrencyField () {
+      return this.requestSecuritydepositCurrencyField(true);
+    }
+    public APIRequestGet requestSecuritydepositCurrencyField (boolean value) {
+      this.requestField("securitydeposit_currency", value);
+      return this;
+    }
+    public APIRequestGet requestSecuritydepositPriceField () {
+      return this.requestSecuritydepositPriceField(true);
+    }
+    public APIRequestGet requestSecuritydepositPriceField (boolean value) {
+      this.requestField("securitydeposit_price", value);
+      return this;
+    }
     public APIRequestGet requestTagsField () {
       return this.requestTagsField(true);
     }
@@ -2025,6 +2053,8 @@ public class HomeListing extends APINode {
     this.mPrice = instance.mPrice;
     this.mPropertyType = instance.mPropertyType;
     this.mSanitizedImages = instance.mSanitizedImages;
+    this.mSecuritydepositCurrency = instance.mSecuritydepositCurrency;
+    this.mSecuritydepositPrice = instance.mSecuritydepositPrice;
     this.mTags = instance.mTags;
     this.mUnitPrice = instance.mUnitPrice;
     this.mUrl = instance.mUrl;

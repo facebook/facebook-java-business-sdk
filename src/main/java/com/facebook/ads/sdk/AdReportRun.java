@@ -55,6 +55,8 @@ public class AdReportRun extends APINode {
   private String mDateStop = null;
   @SerializedName("emails")
   private List<String> mEmails = null;
+  @SerializedName("error_code")
+  private Long mErrorCode = null;
   @SerializedName("friendly_name")
   private String mFriendlyName = null;
   @SerializedName("id")
@@ -326,6 +328,10 @@ public class AdReportRun extends APINode {
     return mEmails;
   }
 
+  public Long getFieldErrorCode() {
+    return mErrorCode;
+  }
+
   public String getFieldFriendlyName() {
     return mFriendlyName;
   }
@@ -406,10 +412,26 @@ public class AdReportRun extends APINode {
       "conversion_rate_ranking",
       "conversion_values",
       "conversions",
+      "converted_product_app_custom_event_fb_mobile_purchase",
+      "converted_product_app_custom_event_fb_mobile_purchase_value",
+      "converted_product_offline_purchase",
+      "converted_product_offline_purchase_value",
+      "converted_product_omni_purchase",
+      "converted_product_omni_purchase_values",
       "converted_product_quantity",
       "converted_product_value",
+      "converted_product_website_pixel_purchase",
+      "converted_product_website_pixel_purchase_value",
+      "converted_promoted_product_app_custom_event_fb_mobile_purchase",
+      "converted_promoted_product_app_custom_event_fb_mobile_purchase_value",
+      "converted_promoted_product_offline_purchase",
+      "converted_promoted_product_offline_purchase_value",
+      "converted_promoted_product_omni_purchase",
+      "converted_promoted_product_omni_purchase_values",
       "converted_promoted_product_quantity",
       "converted_promoted_product_value",
+      "converted_promoted_product_website_pixel_purchase",
+      "converted_promoted_product_website_pixel_purchase_value",
       "cost_per_15_sec_video_view",
       "cost_per_2_sec_continuous_video_view",
       "cost_per_action_type",
@@ -420,8 +442,10 @@ public class AdReportRun extends APINode {
       "cost_per_estimated_ad_recallers",
       "cost_per_inline_link_click",
       "cost_per_inline_post_engagement",
+      "cost_per_objective_result",
       "cost_per_one_thousand_ad_impression",
       "cost_per_outbound_click",
+      "cost_per_result",
       "cost_per_thruplay",
       "cost_per_unique_action_type",
       "cost_per_unique_click",
@@ -460,8 +484,10 @@ public class AdReportRun extends APINode {
       "interactive_component_tap",
       "labels",
       "landing_page_view_actions_per_link_click",
+      "landing_page_view_per_link_click",
       "landing_page_view_per_purchase_rate",
       "location",
+      "marketing_messages_click_rate_benchmark",
       "marketing_messages_cost_per_delivered",
       "marketing_messages_cost_per_link_btn_click",
       "marketing_messages_delivered",
@@ -474,6 +500,7 @@ public class AdReportRun extends APINode {
       "marketing_messages_quick_reply_btn_click_rate",
       "marketing_messages_read",
       "marketing_messages_read_rate",
+      "marketing_messages_read_rate_benchmark",
       "marketing_messages_sent",
       "marketing_messages_spend",
       "marketing_messages_spend_currency",
@@ -483,17 +510,34 @@ public class AdReportRun extends APINode {
       "marketing_messages_website_purchase_values",
       "mobile_app_purchase_roas",
       "objective",
+      "objective_result_rate",
+      "objective_results",
       "onsite_conversion_messaging_detected_purchase_deduped",
       "optimization_goal",
       "outbound_clicks",
       "outbound_clicks_ctr",
       "place_page_name",
+      "product_brand",
+      "product_category",
+      "product_content_id",
+      "product_custom_label_0",
+      "product_custom_label_1",
+      "product_custom_label_2",
+      "product_custom_label_3",
+      "product_custom_label_4",
+      "product_group_content_id",
+      "product_group_retailer_id",
+      "product_name",
+      "product_retailer_id",
+      "purchase_per_landing_page_view",
       "purchase_roas",
       "purchases_per_link_click",
       "qualifying_question_qualify_answer_rate",
       "quality_ranking",
       "reach",
+      "result_rate",
       "result_values_performance_indicator",
+      "results",
       "shops_assisted_purchases",
       "social_spend",
       "spend",
@@ -869,6 +913,48 @@ public class AdReportRun extends APINode {
       this.requestField("conversions", value);
       return this;
     }
+    public APIRequestGetInsights requestConvertedProductAppCustomEventFbMobilePurchaseField () {
+      return this.requestConvertedProductAppCustomEventFbMobilePurchaseField(true);
+    }
+    public APIRequestGetInsights requestConvertedProductAppCustomEventFbMobilePurchaseField (boolean value) {
+      this.requestField("converted_product_app_custom_event_fb_mobile_purchase", value);
+      return this;
+    }
+    public APIRequestGetInsights requestConvertedProductAppCustomEventFbMobilePurchaseValueField () {
+      return this.requestConvertedProductAppCustomEventFbMobilePurchaseValueField(true);
+    }
+    public APIRequestGetInsights requestConvertedProductAppCustomEventFbMobilePurchaseValueField (boolean value) {
+      this.requestField("converted_product_app_custom_event_fb_mobile_purchase_value", value);
+      return this;
+    }
+    public APIRequestGetInsights requestConvertedProductOfflinePurchaseField () {
+      return this.requestConvertedProductOfflinePurchaseField(true);
+    }
+    public APIRequestGetInsights requestConvertedProductOfflinePurchaseField (boolean value) {
+      this.requestField("converted_product_offline_purchase", value);
+      return this;
+    }
+    public APIRequestGetInsights requestConvertedProductOfflinePurchaseValueField () {
+      return this.requestConvertedProductOfflinePurchaseValueField(true);
+    }
+    public APIRequestGetInsights requestConvertedProductOfflinePurchaseValueField (boolean value) {
+      this.requestField("converted_product_offline_purchase_value", value);
+      return this;
+    }
+    public APIRequestGetInsights requestConvertedProductOmniPurchaseField () {
+      return this.requestConvertedProductOmniPurchaseField(true);
+    }
+    public APIRequestGetInsights requestConvertedProductOmniPurchaseField (boolean value) {
+      this.requestField("converted_product_omni_purchase", value);
+      return this;
+    }
+    public APIRequestGetInsights requestConvertedProductOmniPurchaseValuesField () {
+      return this.requestConvertedProductOmniPurchaseValuesField(true);
+    }
+    public APIRequestGetInsights requestConvertedProductOmniPurchaseValuesField (boolean value) {
+      this.requestField("converted_product_omni_purchase_values", value);
+      return this;
+    }
     public APIRequestGetInsights requestConvertedProductQuantityField () {
       return this.requestConvertedProductQuantityField(true);
     }
@@ -883,6 +969,62 @@ public class AdReportRun extends APINode {
       this.requestField("converted_product_value", value);
       return this;
     }
+    public APIRequestGetInsights requestConvertedProductWebsitePixelPurchaseField () {
+      return this.requestConvertedProductWebsitePixelPurchaseField(true);
+    }
+    public APIRequestGetInsights requestConvertedProductWebsitePixelPurchaseField (boolean value) {
+      this.requestField("converted_product_website_pixel_purchase", value);
+      return this;
+    }
+    public APIRequestGetInsights requestConvertedProductWebsitePixelPurchaseValueField () {
+      return this.requestConvertedProductWebsitePixelPurchaseValueField(true);
+    }
+    public APIRequestGetInsights requestConvertedProductWebsitePixelPurchaseValueField (boolean value) {
+      this.requestField("converted_product_website_pixel_purchase_value", value);
+      return this;
+    }
+    public APIRequestGetInsights requestConvertedPromotedProductAppCustomEventFbMobilePurchaseField () {
+      return this.requestConvertedPromotedProductAppCustomEventFbMobilePurchaseField(true);
+    }
+    public APIRequestGetInsights requestConvertedPromotedProductAppCustomEventFbMobilePurchaseField (boolean value) {
+      this.requestField("converted_promoted_product_app_custom_event_fb_mobile_purchase", value);
+      return this;
+    }
+    public APIRequestGetInsights requestConvertedPromotedProductAppCustomEventFbMobilePurchaseValueField () {
+      return this.requestConvertedPromotedProductAppCustomEventFbMobilePurchaseValueField(true);
+    }
+    public APIRequestGetInsights requestConvertedPromotedProductAppCustomEventFbMobilePurchaseValueField (boolean value) {
+      this.requestField("converted_promoted_product_app_custom_event_fb_mobile_purchase_value", value);
+      return this;
+    }
+    public APIRequestGetInsights requestConvertedPromotedProductOfflinePurchaseField () {
+      return this.requestConvertedPromotedProductOfflinePurchaseField(true);
+    }
+    public APIRequestGetInsights requestConvertedPromotedProductOfflinePurchaseField (boolean value) {
+      this.requestField("converted_promoted_product_offline_purchase", value);
+      return this;
+    }
+    public APIRequestGetInsights requestConvertedPromotedProductOfflinePurchaseValueField () {
+      return this.requestConvertedPromotedProductOfflinePurchaseValueField(true);
+    }
+    public APIRequestGetInsights requestConvertedPromotedProductOfflinePurchaseValueField (boolean value) {
+      this.requestField("converted_promoted_product_offline_purchase_value", value);
+      return this;
+    }
+    public APIRequestGetInsights requestConvertedPromotedProductOmniPurchaseField () {
+      return this.requestConvertedPromotedProductOmniPurchaseField(true);
+    }
+    public APIRequestGetInsights requestConvertedPromotedProductOmniPurchaseField (boolean value) {
+      this.requestField("converted_promoted_product_omni_purchase", value);
+      return this;
+    }
+    public APIRequestGetInsights requestConvertedPromotedProductOmniPurchaseValuesField () {
+      return this.requestConvertedPromotedProductOmniPurchaseValuesField(true);
+    }
+    public APIRequestGetInsights requestConvertedPromotedProductOmniPurchaseValuesField (boolean value) {
+      this.requestField("converted_promoted_product_omni_purchase_values", value);
+      return this;
+    }
     public APIRequestGetInsights requestConvertedPromotedProductQuantityField () {
       return this.requestConvertedPromotedProductQuantityField(true);
     }
@@ -895,6 +1037,20 @@ public class AdReportRun extends APINode {
     }
     public APIRequestGetInsights requestConvertedPromotedProductValueField (boolean value) {
       this.requestField("converted_promoted_product_value", value);
+      return this;
+    }
+    public APIRequestGetInsights requestConvertedPromotedProductWebsitePixelPurchaseField () {
+      return this.requestConvertedPromotedProductWebsitePixelPurchaseField(true);
+    }
+    public APIRequestGetInsights requestConvertedPromotedProductWebsitePixelPurchaseField (boolean value) {
+      this.requestField("converted_promoted_product_website_pixel_purchase", value);
+      return this;
+    }
+    public APIRequestGetInsights requestConvertedPromotedProductWebsitePixelPurchaseValueField () {
+      return this.requestConvertedPromotedProductWebsitePixelPurchaseValueField(true);
+    }
+    public APIRequestGetInsights requestConvertedPromotedProductWebsitePixelPurchaseValueField (boolean value) {
+      this.requestField("converted_promoted_product_website_pixel_purchase_value", value);
       return this;
     }
     public APIRequestGetInsights requestCostPer15SecVideoViewField () {
@@ -967,6 +1123,13 @@ public class AdReportRun extends APINode {
       this.requestField("cost_per_inline_post_engagement", value);
       return this;
     }
+    public APIRequestGetInsights requestCostPerObjectiveResultField () {
+      return this.requestCostPerObjectiveResultField(true);
+    }
+    public APIRequestGetInsights requestCostPerObjectiveResultField (boolean value) {
+      this.requestField("cost_per_objective_result", value);
+      return this;
+    }
     public APIRequestGetInsights requestCostPerOneThousandAdImpressionField () {
       return this.requestCostPerOneThousandAdImpressionField(true);
     }
@@ -979,6 +1142,13 @@ public class AdReportRun extends APINode {
     }
     public APIRequestGetInsights requestCostPerOutboundClickField (boolean value) {
       this.requestField("cost_per_outbound_click", value);
+      return this;
+    }
+    public APIRequestGetInsights requestCostPerResultField () {
+      return this.requestCostPerResultField(true);
+    }
+    public APIRequestGetInsights requestCostPerResultField (boolean value) {
+      this.requestField("cost_per_result", value);
       return this;
     }
     public APIRequestGetInsights requestCostPerThruplayField () {
@@ -1247,6 +1417,13 @@ public class AdReportRun extends APINode {
       this.requestField("landing_page_view_actions_per_link_click", value);
       return this;
     }
+    public APIRequestGetInsights requestLandingPageViewPerLinkClickField () {
+      return this.requestLandingPageViewPerLinkClickField(true);
+    }
+    public APIRequestGetInsights requestLandingPageViewPerLinkClickField (boolean value) {
+      this.requestField("landing_page_view_per_link_click", value);
+      return this;
+    }
     public APIRequestGetInsights requestLandingPageViewPerPurchaseRateField () {
       return this.requestLandingPageViewPerPurchaseRateField(true);
     }
@@ -1259,6 +1436,13 @@ public class AdReportRun extends APINode {
     }
     public APIRequestGetInsights requestLocationField (boolean value) {
       this.requestField("location", value);
+      return this;
+    }
+    public APIRequestGetInsights requestMarketingMessagesClickRateBenchmarkField () {
+      return this.requestMarketingMessagesClickRateBenchmarkField(true);
+    }
+    public APIRequestGetInsights requestMarketingMessagesClickRateBenchmarkField (boolean value) {
+      this.requestField("marketing_messages_click_rate_benchmark", value);
       return this;
     }
     public APIRequestGetInsights requestMarketingMessagesCostPerDeliveredField () {
@@ -1345,6 +1529,13 @@ public class AdReportRun extends APINode {
       this.requestField("marketing_messages_read_rate", value);
       return this;
     }
+    public APIRequestGetInsights requestMarketingMessagesReadRateBenchmarkField () {
+      return this.requestMarketingMessagesReadRateBenchmarkField(true);
+    }
+    public APIRequestGetInsights requestMarketingMessagesReadRateBenchmarkField (boolean value) {
+      this.requestField("marketing_messages_read_rate_benchmark", value);
+      return this;
+    }
     public APIRequestGetInsights requestMarketingMessagesSentField () {
       return this.requestMarketingMessagesSentField(true);
     }
@@ -1408,6 +1599,20 @@ public class AdReportRun extends APINode {
       this.requestField("objective", value);
       return this;
     }
+    public APIRequestGetInsights requestObjectiveResultRateField () {
+      return this.requestObjectiveResultRateField(true);
+    }
+    public APIRequestGetInsights requestObjectiveResultRateField (boolean value) {
+      this.requestField("objective_result_rate", value);
+      return this;
+    }
+    public APIRequestGetInsights requestObjectiveResultsField () {
+      return this.requestObjectiveResultsField(true);
+    }
+    public APIRequestGetInsights requestObjectiveResultsField (boolean value) {
+      this.requestField("objective_results", value);
+      return this;
+    }
     public APIRequestGetInsights requestOnsiteConversionMessagingDetectedPurchaseDedupedField () {
       return this.requestOnsiteConversionMessagingDetectedPurchaseDedupedField(true);
     }
@@ -1441,6 +1646,97 @@ public class AdReportRun extends APINode {
     }
     public APIRequestGetInsights requestPlacePageNameField (boolean value) {
       this.requestField("place_page_name", value);
+      return this;
+    }
+    public APIRequestGetInsights requestProductBrandField () {
+      return this.requestProductBrandField(true);
+    }
+    public APIRequestGetInsights requestProductBrandField (boolean value) {
+      this.requestField("product_brand", value);
+      return this;
+    }
+    public APIRequestGetInsights requestProductCategoryField () {
+      return this.requestProductCategoryField(true);
+    }
+    public APIRequestGetInsights requestProductCategoryField (boolean value) {
+      this.requestField("product_category", value);
+      return this;
+    }
+    public APIRequestGetInsights requestProductContentIdField () {
+      return this.requestProductContentIdField(true);
+    }
+    public APIRequestGetInsights requestProductContentIdField (boolean value) {
+      this.requestField("product_content_id", value);
+      return this;
+    }
+    public APIRequestGetInsights requestProductCustomLabel0Field () {
+      return this.requestProductCustomLabel0Field(true);
+    }
+    public APIRequestGetInsights requestProductCustomLabel0Field (boolean value) {
+      this.requestField("product_custom_label_0", value);
+      return this;
+    }
+    public APIRequestGetInsights requestProductCustomLabel1Field () {
+      return this.requestProductCustomLabel1Field(true);
+    }
+    public APIRequestGetInsights requestProductCustomLabel1Field (boolean value) {
+      this.requestField("product_custom_label_1", value);
+      return this;
+    }
+    public APIRequestGetInsights requestProductCustomLabel2Field () {
+      return this.requestProductCustomLabel2Field(true);
+    }
+    public APIRequestGetInsights requestProductCustomLabel2Field (boolean value) {
+      this.requestField("product_custom_label_2", value);
+      return this;
+    }
+    public APIRequestGetInsights requestProductCustomLabel3Field () {
+      return this.requestProductCustomLabel3Field(true);
+    }
+    public APIRequestGetInsights requestProductCustomLabel3Field (boolean value) {
+      this.requestField("product_custom_label_3", value);
+      return this;
+    }
+    public APIRequestGetInsights requestProductCustomLabel4Field () {
+      return this.requestProductCustomLabel4Field(true);
+    }
+    public APIRequestGetInsights requestProductCustomLabel4Field (boolean value) {
+      this.requestField("product_custom_label_4", value);
+      return this;
+    }
+    public APIRequestGetInsights requestProductGroupContentIdField () {
+      return this.requestProductGroupContentIdField(true);
+    }
+    public APIRequestGetInsights requestProductGroupContentIdField (boolean value) {
+      this.requestField("product_group_content_id", value);
+      return this;
+    }
+    public APIRequestGetInsights requestProductGroupRetailerIdField () {
+      return this.requestProductGroupRetailerIdField(true);
+    }
+    public APIRequestGetInsights requestProductGroupRetailerIdField (boolean value) {
+      this.requestField("product_group_retailer_id", value);
+      return this;
+    }
+    public APIRequestGetInsights requestProductNameField () {
+      return this.requestProductNameField(true);
+    }
+    public APIRequestGetInsights requestProductNameField (boolean value) {
+      this.requestField("product_name", value);
+      return this;
+    }
+    public APIRequestGetInsights requestProductRetailerIdField () {
+      return this.requestProductRetailerIdField(true);
+    }
+    public APIRequestGetInsights requestProductRetailerIdField (boolean value) {
+      this.requestField("product_retailer_id", value);
+      return this;
+    }
+    public APIRequestGetInsights requestPurchasePerLandingPageViewField () {
+      return this.requestPurchasePerLandingPageViewField(true);
+    }
+    public APIRequestGetInsights requestPurchasePerLandingPageViewField (boolean value) {
+      this.requestField("purchase_per_landing_page_view", value);
       return this;
     }
     public APIRequestGetInsights requestPurchaseRoasField () {
@@ -1478,11 +1774,25 @@ public class AdReportRun extends APINode {
       this.requestField("reach", value);
       return this;
     }
+    public APIRequestGetInsights requestResultRateField () {
+      return this.requestResultRateField(true);
+    }
+    public APIRequestGetInsights requestResultRateField (boolean value) {
+      this.requestField("result_rate", value);
+      return this;
+    }
     public APIRequestGetInsights requestResultValuesPerformanceIndicatorField () {
       return this.requestResultValuesPerformanceIndicatorField(true);
     }
     public APIRequestGetInsights requestResultValuesPerformanceIndicatorField (boolean value) {
       this.requestField("result_values_performance_indicator", value);
+      return this;
+    }
+    public APIRequestGetInsights requestResultsField () {
+      return this.requestResultsField(true);
+    }
+    public APIRequestGetInsights requestResultsField (boolean value) {
+      this.requestField("results", value);
       return this;
     }
     public APIRequestGetInsights requestShopsAssistedPurchasesField () {
@@ -1771,6 +2081,7 @@ public class AdReportRun extends APINode {
       "date_start",
       "date_stop",
       "emails",
+      "error_code",
       "friendly_name",
       "id",
       "is_async_export",
@@ -1918,6 +2229,13 @@ public class AdReportRun extends APINode {
     }
     public APIRequestGet requestEmailsField (boolean value) {
       this.requestField("emails", value);
+      return this;
+    }
+    public APIRequestGet requestErrorCodeField () {
+      return this.requestErrorCodeField(true);
+    }
+    public APIRequestGet requestErrorCodeField (boolean value) {
+      this.requestField("error_code", value);
       return this;
     }
     public APIRequestGet requestFriendlyNameField () {
@@ -2081,6 +2399,8 @@ public class AdReportRun extends APINode {
       VALUE_CONVERSION("conversion"),
       @SerializedName("impression")
       VALUE_IMPRESSION("impression"),
+      @SerializedName("lifetime")
+      VALUE_LIFETIME("lifetime"),
       @SerializedName("mixed")
       VALUE_MIXED("mixed"),
       ;
@@ -2098,6 +2418,10 @@ public class AdReportRun extends APINode {
   }
 
   public static enum EnumBreakdowns {
+      @SerializedName("ad_extension_domain")
+      VALUE_AD_EXTENSION_DOMAIN("ad_extension_domain"),
+      @SerializedName("ad_extension_url")
+      VALUE_AD_EXTENSION_URL("ad_extension_url"),
       @SerializedName("ad_format_asset")
       VALUE_AD_FORMAT_ASSET("ad_format_asset"),
       @SerializedName("age")
@@ -2114,10 +2438,16 @@ public class AdReportRun extends APINode {
       VALUE_CALL_TO_ACTION_ASSET("call_to_action_asset"),
       @SerializedName("coarse_conversion_value")
       VALUE_COARSE_CONVERSION_VALUE("coarse_conversion_value"),
+      @SerializedName("comscore_market")
+      VALUE_COMSCORE_MARKET("comscore_market"),
+      @SerializedName("comscore_market_code")
+      VALUE_COMSCORE_MARKET_CODE("comscore_market_code"),
       @SerializedName("conversion_destination")
       VALUE_CONVERSION_DESTINATION("conversion_destination"),
       @SerializedName("country")
       VALUE_COUNTRY("country"),
+      @SerializedName("creative_relaxation_asset_type")
+      VALUE_CREATIVE_RELAXATION_ASSET_TYPE("creative_relaxation_asset_type"),
       @SerializedName("description_asset")
       VALUE_DESCRIPTION_ASSET("description_asset"),
       @SerializedName("device_platform")
@@ -2126,8 +2456,12 @@ public class AdReportRun extends APINode {
       VALUE_DMA("dma"),
       @SerializedName("fidelity_type")
       VALUE_FIDELITY_TYPE("fidelity_type"),
+      @SerializedName("flexible_format_asset_type")
+      VALUE_FLEXIBLE_FORMAT_ASSET_TYPE("flexible_format_asset_type"),
       @SerializedName("frequency_value")
       VALUE_FREQUENCY_VALUE("frequency_value"),
+      @SerializedName("gen_ai_asset_type")
+      VALUE_GEN_AI_ASSET_TYPE("gen_ai_asset_type"),
       @SerializedName("gender")
       VALUE_GENDER("gender"),
       @SerializedName("hourly_stats_aggregated_by_advertiser_time_zone")
@@ -2142,6 +2476,8 @@ public class AdReportRun extends APINode {
       VALUE_IMPRESSION_DEVICE("impression_device"),
       @SerializedName("impression_view_time_advertiser_hour_v2")
       VALUE_IMPRESSION_VIEW_TIME_ADVERTISER_HOUR_V2("impression_view_time_advertiser_hour_v2"),
+      @SerializedName("is_auto_advance")
+      VALUE_IS_AUTO_ADVANCE("is_auto_advance"),
       @SerializedName("is_conversion_id_modeled")
       VALUE_IS_CONVERSION_ID_MODELED("is_conversion_id_modeled"),
       @SerializedName("is_rendered_as_delayed_skip_ad")
@@ -2371,6 +2707,7 @@ public class AdReportRun extends APINode {
     this.mDateStart = instance.mDateStart;
     this.mDateStop = instance.mDateStop;
     this.mEmails = instance.mEmails;
+    this.mErrorCode = instance.mErrorCode;
     this.mFriendlyName = instance.mFriendlyName;
     this.mId = instance.mId;
     this.mIsAsyncExport = instance.mIsAsyncExport;

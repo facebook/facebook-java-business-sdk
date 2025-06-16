@@ -485,6 +485,7 @@ public class LiveVideo extends APINode {
       "age_range",
       "avatar_2d_profile_picture",
       "birthday",
+      "client_business_id",
       "community",
       "cover",
       "currency",
@@ -498,7 +499,6 @@ public class LiveVideo extends APINode {
       "id",
       "id_for_avatars",
       "inspirational_people",
-      "instagram_user_self_asset",
       "install_type",
       "installed",
       "is_guest_user",
@@ -657,6 +657,13 @@ public class LiveVideo extends APINode {
       this.requestField("birthday", value);
       return this;
     }
+    public APIRequestGetBlockedUsers requestClientBusinessIdField () {
+      return this.requestClientBusinessIdField(true);
+    }
+    public APIRequestGetBlockedUsers requestClientBusinessIdField (boolean value) {
+      this.requestField("client_business_id", value);
+      return this;
+    }
     public APIRequestGetBlockedUsers requestCommunityField () {
       return this.requestCommunityField(true);
     }
@@ -746,13 +753,6 @@ public class LiveVideo extends APINode {
     }
     public APIRequestGetBlockedUsers requestInspirationalPeopleField (boolean value) {
       this.requestField("inspirational_people", value);
-      return this;
-    }
-    public APIRequestGetBlockedUsers requestInstagramUserSelfAssetField () {
-      return this.requestInstagramUserSelfAssetField(true);
-    }
-    public APIRequestGetBlockedUsers requestInstagramUserSelfAssetField (boolean value) {
-      this.requestField("instagram_user_self_asset", value);
       return this;
     }
     public APIRequestGetBlockedUsers requestInstallTypeField () {

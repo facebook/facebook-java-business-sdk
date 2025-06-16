@@ -384,6 +384,8 @@ public class AdCreativeLinkDataCallToAction extends APINode {
       VALUE_VIEW_CART("VIEW_CART"),
       @SerializedName("VIEW_CHANNEL")
       VALUE_VIEW_CHANNEL("VIEW_CHANNEL"),
+      @SerializedName("VIEW_IN_CART")
+      VALUE_VIEW_IN_CART("VIEW_IN_CART"),
       @SerializedName("VIEW_PRODUCT")
       VALUE_VIEW_PRODUCT("VIEW_PRODUCT"),
       @SerializedName("VISIT_PAGES_FEED")

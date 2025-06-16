@@ -41,6 +41,12 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class AdCreativeSiteLinksSpec extends APINode {
+  @SerializedName("is_site_link_sticky")
+  private Boolean mIsSiteLinkSticky = null;
+  @SerializedName("site_link_hash")
+  private String mSiteLinkHash = null;
+  @SerializedName("site_link_id")
+  private String mSiteLinkId = null;
   @SerializedName("site_link_image_hash")
   private String mSiteLinkImageHash = null;
   @SerializedName("site_link_image_url")
@@ -202,6 +208,33 @@ public class AdCreativeSiteLinksSpec extends APINode {
   }
 
 
+  public Boolean getFieldIsSiteLinkSticky() {
+    return mIsSiteLinkSticky;
+  }
+
+  public AdCreativeSiteLinksSpec setFieldIsSiteLinkSticky(Boolean value) {
+    this.mIsSiteLinkSticky = value;
+    return this;
+  }
+
+  public String getFieldSiteLinkHash() {
+    return mSiteLinkHash;
+  }
+
+  public AdCreativeSiteLinksSpec setFieldSiteLinkHash(String value) {
+    this.mSiteLinkHash = value;
+    return this;
+  }
+
+  public String getFieldSiteLinkId() {
+    return mSiteLinkId;
+  }
+
+  public AdCreativeSiteLinksSpec setFieldSiteLinkId(String value) {
+    this.mSiteLinkId = value;
+    return this;
+  }
+
   public String getFieldSiteLinkImageHash() {
     return mSiteLinkImageHash;
   }
@@ -264,6 +297,9 @@ public class AdCreativeSiteLinksSpec extends APINode {
   }
 
   public AdCreativeSiteLinksSpec copyFrom(AdCreativeSiteLinksSpec instance) {
+    this.mIsSiteLinkSticky = instance.mIsSiteLinkSticky;
+    this.mSiteLinkHash = instance.mSiteLinkHash;
+    this.mSiteLinkId = instance.mSiteLinkId;
     this.mSiteLinkImageHash = instance.mSiteLinkImageHash;
     this.mSiteLinkImageUrl = instance.mSiteLinkImageUrl;
     this.mSiteLinkRecommendationType = instance.mSiteLinkRecommendationType;

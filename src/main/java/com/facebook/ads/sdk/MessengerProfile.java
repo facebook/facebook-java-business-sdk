@@ -51,14 +51,10 @@ public class MessengerProfile extends APINode {
   private List<Object> mGreeting = null;
   @SerializedName("ice_breakers")
   private List<Object> mIceBreakers = null;
-  @SerializedName("payment_settings")
-  private Object mPaymentSettings = null;
   @SerializedName("persistent_menu")
   private List<Object> mPersistentMenu = null;
   @SerializedName("subject_to_new_eu_privacy_rules")
   private Boolean mSubjectToNewEuPrivacyRules = null;
-  @SerializedName("target_audience")
-  private Object mTargetAudience = null;
   @SerializedName("whitelisted_domains")
   private List<String> mWhitelistedDomains = null;
   protected static Gson gson = null;
@@ -257,15 +253,6 @@ public class MessengerProfile extends APINode {
     return this;
   }
 
-  public Object getFieldPaymentSettings() {
-    return mPaymentSettings;
-  }
-
-  public MessengerProfile setFieldPaymentSettings(Object value) {
-    this.mPaymentSettings = value;
-    return this;
-  }
-
   public List<Object> getFieldPersistentMenu() {
     return mPersistentMenu;
   }
@@ -281,15 +268,6 @@ public class MessengerProfile extends APINode {
 
   public MessengerProfile setFieldSubjectToNewEuPrivacyRules(Boolean value) {
     this.mSubjectToNewEuPrivacyRules = value;
-    return this;
-  }
-
-  public Object getFieldTargetAudience() {
-    return mTargetAudience;
-  }
-
-  public MessengerProfile setFieldTargetAudience(Object value) {
-    this.mTargetAudience = value;
     return this;
   }
 
@@ -324,10 +302,8 @@ public class MessengerProfile extends APINode {
     this.mGetStarted = instance.mGetStarted;
     this.mGreeting = instance.mGreeting;
     this.mIceBreakers = instance.mIceBreakers;
-    this.mPaymentSettings = instance.mPaymentSettings;
     this.mPersistentMenu = instance.mPersistentMenu;
     this.mSubjectToNewEuPrivacyRules = instance.mSubjectToNewEuPrivacyRules;
-    this.mTargetAudience = instance.mTargetAudience;
     this.mWhitelistedDomains = instance.mWhitelistedDomains;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

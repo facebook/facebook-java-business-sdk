@@ -621,6 +621,7 @@ public class Ad extends APINode {
       "product_set_id",
       "recommender_settings",
       "regional_regulation_disclaimer_spec",
+      "source_facebook_post_id",
       "source_instagram_media_id",
       "status",
       "template_url",
@@ -1134,6 +1135,13 @@ public class Ad extends APINode {
     }
     public APIRequestGetAdCreatives requestRegionalRegulationDisclaimerSpecField (boolean value) {
       this.requestField("regional_regulation_disclaimer_spec", value);
+      return this;
+    }
+    public APIRequestGetAdCreatives requestSourceFacebookPostIdField () {
+      return this.requestSourceFacebookPostIdField(true);
+    }
+    public APIRequestGetAdCreatives requestSourceFacebookPostIdField (boolean value) {
+      this.requestField("source_facebook_post_id", value);
       return this;
     }
     public APIRequestGetAdCreatives requestSourceInstagramMediaIdField () {
@@ -2002,6 +2010,7 @@ public class Ad extends APINode {
     }
     public static final String[] PARAMS = {
       "adset_id",
+      "creative_parameters",
       "rename_options",
       "status_option",
     };
@@ -2065,6 +2074,15 @@ public class Ad extends APINode {
 
     public APIRequestCreateCopy setAdsetId (String adsetId) {
       this.setParam("adset_id", adsetId);
+      return this;
+    }
+
+    public APIRequestCreateCopy setCreativeParameters (AdCreative creativeParameters) {
+      this.setParam("creative_parameters", creativeParameters);
+      return this;
+    }
+    public APIRequestCreateCopy setCreativeParameters (String creativeParameters) {
+      this.setParam("creative_parameters", creativeParameters);
       return this;
     }
 
@@ -2144,6 +2162,7 @@ public class Ad extends APINode {
       "fields",
       "filtering",
       "level",
+      "limit",
       "product_id_limit",
       "sort",
       "summary",
@@ -2312,6 +2331,15 @@ public class Ad extends APINode {
       return this;
     }
 
+    public APIRequestGetInsights setLimit (Long limit) {
+      this.setParam("limit", limit);
+      return this;
+    }
+    public APIRequestGetInsights setLimit (String limit) {
+      this.setParam("limit", limit);
+      return this;
+    }
+
     public APIRequestGetInsights setProductIdLimit (Long productIdLimit) {
       this.setParam("product_id_limit", productIdLimit);
       return this;
@@ -2447,6 +2475,7 @@ public class Ad extends APINode {
       "fields",
       "filtering",
       "level",
+      "limit",
       "product_id_limit",
       "sort",
       "summary",
@@ -2612,6 +2641,15 @@ public class Ad extends APINode {
     }
     public APIRequestGetInsightsAsync setLevel (String level) {
       this.setParam("level", level);
+      return this;
+    }
+
+    public APIRequestGetInsightsAsync setLimit (Long limit) {
+      this.setParam("limit", limit);
+      return this;
+    }
+    public APIRequestGetInsightsAsync setLimit (String limit) {
+      this.setParam("limit", limit);
       return this;
     }
 

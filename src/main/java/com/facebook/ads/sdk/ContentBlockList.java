@@ -1087,6 +1087,7 @@ public class ContentBlockList extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "alt_text",
       "boost_eligibility_info",
       "caption",
       "comments_count",
@@ -1106,6 +1107,7 @@ public class ContentBlockList extends APINode {
       "thumbnail_url",
       "timestamp",
       "username",
+      "view_count",
     };
 
     @Override
@@ -1198,6 +1200,13 @@ public class ContentBlockList extends APINode {
       return this;
     }
 
+    public APIRequestGetInstagramContent requestAltTextField () {
+      return this.requestAltTextField(true);
+    }
+    public APIRequestGetInstagramContent requestAltTextField (boolean value) {
+      this.requestField("alt_text", value);
+      return this;
+    }
     public APIRequestGetInstagramContent requestBoostEligibilityInfoField () {
       return this.requestBoostEligibilityInfoField(true);
     }
@@ -1329,6 +1338,13 @@ public class ContentBlockList extends APINode {
     }
     public APIRequestGetInstagramContent requestUsernameField (boolean value) {
       this.requestField("username", value);
+      return this;
+    }
+    public APIRequestGetInstagramContent requestViewCountField () {
+      return this.requestViewCountField(true);
+    }
+    public APIRequestGetInstagramContent requestViewCountField (boolean value) {
+      this.requestField("view_count", value);
       return this;
     }
   }

@@ -45,6 +45,8 @@ public class ALMGuidance extends APINode {
   private String mAdAccountId = null;
   @SerializedName("guidances")
   private List<Object> mGuidances = null;
+  @SerializedName("opportunity_score")
+  private Double mOpportunityScore = null;
   @SerializedName("parent_advertiser_id")
   private String mParentAdvertiserId = null;
   @SerializedName("parent_advertiser_name")
@@ -218,6 +220,15 @@ public class ALMGuidance extends APINode {
     return this;
   }
 
+  public Double getFieldOpportunityScore() {
+    return mOpportunityScore;
+  }
+
+  public ALMGuidance setFieldOpportunityScore(Double value) {
+    this.mOpportunityScore = value;
+    return this;
+  }
+
   public String getFieldParentAdvertiserId() {
     return mParentAdvertiserId;
   }
@@ -255,6 +266,7 @@ public class ALMGuidance extends APINode {
   public ALMGuidance copyFrom(ALMGuidance instance) {
     this.mAdAccountId = instance.mAdAccountId;
     this.mGuidances = instance.mGuidances;
+    this.mOpportunityScore = instance.mOpportunityScore;
     this.mParentAdvertiserId = instance.mParentAdvertiserId;
     this.mParentAdvertiserName = instance.mParentAdvertiserName;
     this.context = instance.context;

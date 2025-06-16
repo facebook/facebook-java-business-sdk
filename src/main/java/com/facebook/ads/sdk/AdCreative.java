@@ -159,6 +159,8 @@ public class AdCreative extends APINode {
   private AdCreativeRecommenderSettings mRecommenderSettings = null;
   @SerializedName("regional_regulation_disclaimer_spec")
   private AdCreativeRegionalRegulationDisclaimer mRegionalRegulationDisclaimerSpec = null;
+  @SerializedName("source_facebook_post_id")
+  private String mSourceFacebookPostId = null;
   @SerializedName("source_instagram_media_id")
   private String mSourceInstagramMediaId = null;
   @SerializedName("status")
@@ -1045,6 +1047,15 @@ public class AdCreative extends APINode {
     this.mRegionalRegulationDisclaimerSpec = AdCreativeRegionalRegulationDisclaimer.getGson().fromJson(value, type);
     return this;
   }
+  public String getFieldSourceFacebookPostId() {
+    return mSourceFacebookPostId;
+  }
+
+  public AdCreative setFieldSourceFacebookPostId(String value) {
+    this.mSourceFacebookPostId = value;
+    return this;
+  }
+
   public String getFieldSourceInstagramMediaId() {
     return mSourceInstagramMediaId;
   }
@@ -1824,6 +1835,7 @@ public class AdCreative extends APINode {
       "product_set_id",
       "recommender_settings",
       "regional_regulation_disclaimer_spec",
+      "source_facebook_post_id",
       "source_instagram_media_id",
       "status",
       "template_url",
@@ -2357,6 +2369,13 @@ public class AdCreative extends APINode {
       this.requestField("regional_regulation_disclaimer_spec", value);
       return this;
     }
+    public APIRequestGet requestSourceFacebookPostIdField () {
+      return this.requestSourceFacebookPostIdField(true);
+    }
+    public APIRequestGet requestSourceFacebookPostIdField (boolean value) {
+      this.requestField("source_facebook_post_id", value);
+      return this;
+    }
     public APIRequestGet requestSourceInstagramMediaIdField () {
       return this.requestSourceInstagramMediaIdField(true);
     }
@@ -2729,6 +2748,8 @@ public class AdCreative extends APINode {
       VALUE_VIEW_CART("VIEW_CART"),
       @SerializedName("VIEW_CHANNEL")
       VALUE_VIEW_CHANNEL("VIEW_CHANNEL"),
+      @SerializedName("VIEW_IN_CART")
+      VALUE_VIEW_IN_CART("VIEW_IN_CART"),
       @SerializedName("VIEW_PRODUCT")
       VALUE_VIEW_PRODUCT("VIEW_PRODUCT"),
       @SerializedName("VISIT_PAGES_FEED")
@@ -3021,6 +3042,7 @@ public class AdCreative extends APINode {
     this.mProductSetId = instance.mProductSetId;
     this.mRecommenderSettings = instance.mRecommenderSettings;
     this.mRegionalRegulationDisclaimerSpec = instance.mRegionalRegulationDisclaimerSpec;
+    this.mSourceFacebookPostId = instance.mSourceFacebookPostId;
     this.mSourceInstagramMediaId = instance.mSourceInstagramMediaId;
     this.mStatus = instance.mStatus;
     this.mTemplateUrl = instance.mTemplateUrl;

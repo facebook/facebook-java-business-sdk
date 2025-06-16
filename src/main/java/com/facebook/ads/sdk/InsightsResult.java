@@ -320,8 +320,6 @@ public class InsightsResult extends APINode {
       VALUE_LIKES("likes"),
       @SerializedName("navigation")
       VALUE_NAVIGATION("navigation"),
-      @SerializedName("peak_concurrent_viewers")
-      VALUE_PEAK_CONCURRENT_VIEWERS("peak_concurrent_viewers"),
       @SerializedName("plays")
       VALUE_PLAYS("plays"),
       @SerializedName("profile_activity")
@@ -344,12 +342,12 @@ public class InsightsResult extends APINode {
       VALUE_THREAD_REPLIES("thread_replies"),
       @SerializedName("thread_shares")
       VALUE_THREAD_SHARES("thread_shares"),
+      @SerializedName("threads_media_clicks")
+      VALUE_THREADS_MEDIA_CLICKS("threads_media_clicks"),
       @SerializedName("threads_views")
       VALUE_THREADS_VIEWS("threads_views"),
       @SerializedName("total_interactions")
       VALUE_TOTAL_INTERACTIONS("total_interactions"),
-      @SerializedName("video_views")
-      VALUE_VIDEO_VIEWS("video_views"),
       @SerializedName("views")
       VALUE_VIEWS("views"),
       ;

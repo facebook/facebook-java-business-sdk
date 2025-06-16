@@ -49,12 +49,18 @@ public class ChinaBusinessOnboardingVettingRequest extends APINode {
   private String mAdAccountNumber = null;
   @SerializedName("ad_accounts_info")
   private List<Object> mAdAccountsInfo = null;
+  @SerializedName("advertiser_business_id")
+  private String mAdvertiserBusinessId = null;
+  @SerializedName("advertiser_business_name")
+  private String mAdvertiserBusinessName = null;
   @SerializedName("business_manager_id")
   private String mBusinessManagerId = null;
   @SerializedName("business_registration")
   private String mBusinessRegistration = null;
   @SerializedName("business_registration_id")
   private String mBusinessRegistrationId = null;
+  @SerializedName("business_verification_status")
+  private String mBusinessVerificationStatus = null;
   @SerializedName("chinese_address")
   private String mChineseAddress = null;
   @SerializedName("chinese_legal_entity_name")
@@ -355,6 +361,14 @@ public class ChinaBusinessOnboardingVettingRequest extends APINode {
     return mAdAccountsInfo;
   }
 
+  public String getFieldAdvertiserBusinessId() {
+    return mAdvertiserBusinessId;
+  }
+
+  public String getFieldAdvertiserBusinessName() {
+    return mAdvertiserBusinessName;
+  }
+
   public String getFieldBusinessManagerId() {
     return mBusinessManagerId;
   }
@@ -365,6 +379,10 @@ public class ChinaBusinessOnboardingVettingRequest extends APINode {
 
   public String getFieldBusinessRegistrationId() {
     return mBusinessRegistrationId;
+  }
+
+  public String getFieldBusinessVerificationStatus() {
+    return mBusinessVerificationStatus;
   }
 
   public String getFieldChineseAddress() {
@@ -524,9 +542,12 @@ public class ChinaBusinessOnboardingVettingRequest extends APINode {
       "ad_account_limit",
       "ad_account_number",
       "ad_accounts_info",
+      "advertiser_business_id",
+      "advertiser_business_name",
       "business_manager_id",
       "business_registration",
       "business_registration_id",
+      "business_verification_status",
       "chinese_address",
       "chinese_legal_entity_name",
       "city",
@@ -682,6 +703,20 @@ public class ChinaBusinessOnboardingVettingRequest extends APINode {
       this.requestField("ad_accounts_info", value);
       return this;
     }
+    public APIRequestGet requestAdvertiserBusinessIdField () {
+      return this.requestAdvertiserBusinessIdField(true);
+    }
+    public APIRequestGet requestAdvertiserBusinessIdField (boolean value) {
+      this.requestField("advertiser_business_id", value);
+      return this;
+    }
+    public APIRequestGet requestAdvertiserBusinessNameField () {
+      return this.requestAdvertiserBusinessNameField(true);
+    }
+    public APIRequestGet requestAdvertiserBusinessNameField (boolean value) {
+      this.requestField("advertiser_business_name", value);
+      return this;
+    }
     public APIRequestGet requestBusinessManagerIdField () {
       return this.requestBusinessManagerIdField(true);
     }
@@ -701,6 +736,13 @@ public class ChinaBusinessOnboardingVettingRequest extends APINode {
     }
     public APIRequestGet requestBusinessRegistrationIdField (boolean value) {
       this.requestField("business_registration_id", value);
+      return this;
+    }
+    public APIRequestGet requestBusinessVerificationStatusField () {
+      return this.requestBusinessVerificationStatusField(true);
+    }
+    public APIRequestGet requestBusinessVerificationStatusField (boolean value) {
+      this.requestField("business_verification_status", value);
       return this;
     }
     public APIRequestGet requestChineseAddressField () {
@@ -969,9 +1011,12 @@ public class ChinaBusinessOnboardingVettingRequest extends APINode {
     this.mAdAccountLimit = instance.mAdAccountLimit;
     this.mAdAccountNumber = instance.mAdAccountNumber;
     this.mAdAccountsInfo = instance.mAdAccountsInfo;
+    this.mAdvertiserBusinessId = instance.mAdvertiserBusinessId;
+    this.mAdvertiserBusinessName = instance.mAdvertiserBusinessName;
     this.mBusinessManagerId = instance.mBusinessManagerId;
     this.mBusinessRegistration = instance.mBusinessRegistration;
     this.mBusinessRegistrationId = instance.mBusinessRegistrationId;
+    this.mBusinessVerificationStatus = instance.mBusinessVerificationStatus;
     this.mChineseAddress = instance.mChineseAddress;
     this.mChineseLegalEntityName = instance.mChineseLegalEntityName;
     this.mCity = instance.mCity;

@@ -121,6 +121,12 @@ public class AdsHistogramStats extends APINode {
   private String mActionVideoType = null;
   @SerializedName("dda")
   private List<Long> mDda = null;
+  @SerializedName("incrementality")
+  private List<Long> mIncrementality = null;
+  @SerializedName("incrementality_all_conversions")
+  private List<Long> mIncrementalityAllConversions = null;
+  @SerializedName("incrementality_first_conversion")
+  private List<Long> mIncrementalityFirstConversion = null;
   @SerializedName("inline")
   private List<Long> mInline = null;
   @SerializedName("interactive_component_sticker_id")
@@ -652,6 +658,33 @@ public class AdsHistogramStats extends APINode {
     return this;
   }
 
+  public List<Long> getFieldIncrementality() {
+    return mIncrementality;
+  }
+
+  public AdsHistogramStats setFieldIncrementality(List<Long> value) {
+    this.mIncrementality = value;
+    return this;
+  }
+
+  public List<Long> getFieldIncrementalityAllConversions() {
+    return mIncrementalityAllConversions;
+  }
+
+  public AdsHistogramStats setFieldIncrementalityAllConversions(List<Long> value) {
+    this.mIncrementalityAllConversions = value;
+    return this;
+  }
+
+  public List<Long> getFieldIncrementalityFirstConversion() {
+    return mIncrementalityFirstConversion;
+  }
+
+  public AdsHistogramStats setFieldIncrementalityFirstConversion(List<Long> value) {
+    this.mIncrementalityFirstConversion = value;
+    return this;
+  }
+
   public List<Long> getFieldInline() {
     return mInline;
   }
@@ -799,6 +832,9 @@ public class AdsHistogramStats extends APINode {
     this.mActionVideoSound = instance.mActionVideoSound;
     this.mActionVideoType = instance.mActionVideoType;
     this.mDda = instance.mDda;
+    this.mIncrementality = instance.mIncrementality;
+    this.mIncrementalityAllConversions = instance.mIncrementalityAllConversions;
+    this.mIncrementalityFirstConversion = instance.mIncrementalityFirstConversion;
     this.mInline = instance.mInline;
     this.mInteractiveComponentStickerId = instance.mInteractiveComponentStickerId;
     this.mInteractiveComponentStickerResponse = instance.mInteractiveComponentStickerResponse;
