@@ -53,8 +53,12 @@ public class AdPromotedObject extends APINode {
   private String mCustomEventStr = null;
   @SerializedName("custom_event_type")
   private EnumCustomEventType mCustomEventType = null;
+  @SerializedName("dataset_split_id")
+  private String mDatasetSplitId = null;
   @SerializedName("event_id")
   private String mEventId = null;
+  @SerializedName("full_funnel_objective")
+  private EnumFullFunnelObjective mFullFunnelObjective = null;
   @SerializedName("fundraiser_campaign_id")
   private String mFundraiserCampaignId = null;
   @SerializedName("lead_ads_custom_event_str")
@@ -69,6 +73,8 @@ public class AdPromotedObject extends APINode {
   private String mMcmeConversionId = null;
   @SerializedName("object_store_url")
   private String mObjectStoreUrl = null;
+  @SerializedName("object_store_urls")
+  private List<String> mObjectStoreUrls = null;
   @SerializedName("offer_id")
   private String mOfferId = null;
   @SerializedName("offline_conversion_data_set_id")
@@ -314,12 +320,30 @@ public class AdPromotedObject extends APINode {
     return this;
   }
 
+  public String getFieldDatasetSplitId() {
+    return mDatasetSplitId;
+  }
+
+  public AdPromotedObject setFieldDatasetSplitId(String value) {
+    this.mDatasetSplitId = value;
+    return this;
+  }
+
   public String getFieldEventId() {
     return mEventId;
   }
 
   public AdPromotedObject setFieldEventId(String value) {
     this.mEventId = value;
+    return this;
+  }
+
+  public EnumFullFunnelObjective getFieldFullFunnelObjective() {
+    return mFullFunnelObjective;
+  }
+
+  public AdPromotedObject setFieldFullFunnelObjective(EnumFullFunnelObjective value) {
+    this.mFullFunnelObjective = value;
     return this;
   }
 
@@ -383,6 +407,15 @@ public class AdPromotedObject extends APINode {
 
   public AdPromotedObject setFieldObjectStoreUrl(String value) {
     this.mObjectStoreUrl = value;
+    return this;
+  }
+
+  public List<String> getFieldObjectStoreUrls() {
+    return mObjectStoreUrls;
+  }
+
+  public AdPromotedObject setFieldObjectStoreUrls(List<String> value) {
+    this.mObjectStoreUrls = value;
     return this;
   }
 
@@ -657,6 +690,63 @@ public class AdPromotedObject extends APINode {
       }
   }
 
+  public static enum EnumFullFunnelObjective {
+      @SerializedName("APP_INSTALLS")
+      VALUE_APP_INSTALLS("APP_INSTALLS"),
+      @SerializedName("BRAND_AWARENESS")
+      VALUE_BRAND_AWARENESS("BRAND_AWARENESS"),
+      @SerializedName("EVENT_RESPONSES")
+      VALUE_EVENT_RESPONSES("EVENT_RESPONSES"),
+      @SerializedName("LEAD_GENERATION")
+      VALUE_LEAD_GENERATION("LEAD_GENERATION"),
+      @SerializedName("LINK_CLICKS")
+      VALUE_LINK_CLICKS("LINK_CLICKS"),
+      @SerializedName("LOCAL_AWARENESS")
+      VALUE_LOCAL_AWARENESS("LOCAL_AWARENESS"),
+      @SerializedName("MESSAGES")
+      VALUE_MESSAGES("MESSAGES"),
+      @SerializedName("OFFER_CLAIMS")
+      VALUE_OFFER_CLAIMS("OFFER_CLAIMS"),
+      @SerializedName("OUTCOME_APP_PROMOTION")
+      VALUE_OUTCOME_APP_PROMOTION("OUTCOME_APP_PROMOTION"),
+      @SerializedName("OUTCOME_AWARENESS")
+      VALUE_OUTCOME_AWARENESS("OUTCOME_AWARENESS"),
+      @SerializedName("OUTCOME_ENGAGEMENT")
+      VALUE_OUTCOME_ENGAGEMENT("OUTCOME_ENGAGEMENT"),
+      @SerializedName("OUTCOME_LEADS")
+      VALUE_OUTCOME_LEADS("OUTCOME_LEADS"),
+      @SerializedName("OUTCOME_SALES")
+      VALUE_OUTCOME_SALES("OUTCOME_SALES"),
+      @SerializedName("OUTCOME_TRAFFIC")
+      VALUE_OUTCOME_TRAFFIC("OUTCOME_TRAFFIC"),
+      @SerializedName("PAGE_LIKES")
+      VALUE_PAGE_LIKES("PAGE_LIKES"),
+      @SerializedName("POST_ENGAGEMENT")
+      VALUE_POST_ENGAGEMENT("POST_ENGAGEMENT"),
+      @SerializedName("PRODUCT_CATALOG_SALES")
+      VALUE_PRODUCT_CATALOG_SALES("PRODUCT_CATALOG_SALES"),
+      @SerializedName("REACH")
+      VALUE_REACH("REACH"),
+      @SerializedName("STORE_VISITS")
+      VALUE_STORE_VISITS("STORE_VISITS"),
+      @SerializedName("VIDEO_VIEWS")
+      VALUE_VIDEO_VIEWS("VIDEO_VIEWS"),
+      @SerializedName("WEBSITE_CONVERSIONS")
+      VALUE_WEBSITE_CONVERSIONS("WEBSITE_CONVERSIONS"),
+      ;
+
+      private String value;
+
+      private EnumFullFunnelObjective(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
   public static enum EnumLeadAdsCustomEventType {
       @SerializedName("ACHIEVEMENT_UNLOCKED")
       VALUE_ACHIEVEMENT_UNLOCKED("ACHIEVEMENT_UNLOCKED"),
@@ -751,7 +841,9 @@ public class AdPromotedObject extends APINode {
     this.mCustomConversionId = instance.mCustomConversionId;
     this.mCustomEventStr = instance.mCustomEventStr;
     this.mCustomEventType = instance.mCustomEventType;
+    this.mDatasetSplitId = instance.mDatasetSplitId;
     this.mEventId = instance.mEventId;
+    this.mFullFunnelObjective = instance.mFullFunnelObjective;
     this.mFundraiserCampaignId = instance.mFundraiserCampaignId;
     this.mLeadAdsCustomEventStr = instance.mLeadAdsCustomEventStr;
     this.mLeadAdsCustomEventType = instance.mLeadAdsCustomEventType;
@@ -759,6 +851,7 @@ public class AdPromotedObject extends APINode {
     this.mLeadAdsOffsiteConversionType = instance.mLeadAdsOffsiteConversionType;
     this.mMcmeConversionId = instance.mMcmeConversionId;
     this.mObjectStoreUrl = instance.mObjectStoreUrl;
+    this.mObjectStoreUrls = instance.mObjectStoreUrls;
     this.mOfferId = instance.mOfferId;
     this.mOfflineConversionDataSetId = instance.mOfflineConversionDataSetId;
     this.mOffsiteConversionEventId = instance.mOffsiteConversionEventId;

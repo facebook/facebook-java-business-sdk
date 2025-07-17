@@ -259,6 +259,8 @@ public class AdsInsights extends APINode {
   private String mLandingPageViewPerLinkClick = null;
   @SerializedName("landing_page_view_per_purchase_rate")
   private String mLandingPageViewPerPurchaseRate = null;
+  @SerializedName("link_clicks_per_results")
+  private List<Object> mLinkClicksPerResults = null;
   @SerializedName("location")
   private String mLocation = null;
   @SerializedName("marketing_messages_click_rate_benchmark")
@@ -345,6 +347,8 @@ public class AdsInsights extends APINode {
   private String mProductName = null;
   @SerializedName("product_retailer_id")
   private String mProductRetailerId = null;
+  @SerializedName("product_views")
+  private String mProductViews = null;
   @SerializedName("purchase_per_landing_page_view")
   private String mPurchasePerLandingPageView = null;
   @SerializedName("purchase_roas")
@@ -369,6 +373,8 @@ public class AdsInsights extends APINode {
   private String mSocialSpend = null;
   @SerializedName("spend")
   private String mSpend = null;
+  @SerializedName("total_card_view")
+  private String mTotalCardView = null;
   @SerializedName("total_postbacks")
   private String mTotalPostbacks = null;
   @SerializedName("total_postbacks_detailed")
@@ -1942,6 +1948,15 @@ public class AdsInsights extends APINode {
     return this;
   }
 
+  public List<Object> getFieldLinkClicksPerResults() {
+    return mLinkClicksPerResults;
+  }
+
+  public AdsInsights setFieldLinkClicksPerResults(List<Object> value) {
+    this.mLinkClicksPerResults = value;
+    return this;
+  }
+
   public String getFieldLocation() {
     return mLocation;
   }
@@ -2349,6 +2364,15 @@ public class AdsInsights extends APINode {
     return this;
   }
 
+  public String getFieldProductViews() {
+    return mProductViews;
+  }
+
+  public AdsInsights setFieldProductViews(String value) {
+    this.mProductViews = value;
+    return this;
+  }
+
   public String getFieldPurchasePerLandingPageView() {
     return mPurchasePerLandingPageView;
   }
@@ -2459,6 +2483,15 @@ public class AdsInsights extends APINode {
 
   public AdsInsights setFieldSpend(String value) {
     this.mSpend = value;
+    return this;
+  }
+
+  public String getFieldTotalCardView() {
+    return mTotalCardView;
+  }
+
+  public AdsInsights setFieldTotalCardView(String value) {
+    this.mTotalCardView = value;
     return this;
   }
 
@@ -3687,6 +3720,7 @@ public class AdsInsights extends APINode {
     this.mLandingPageViewActionsPerLinkClick = instance.mLandingPageViewActionsPerLinkClick;
     this.mLandingPageViewPerLinkClick = instance.mLandingPageViewPerLinkClick;
     this.mLandingPageViewPerPurchaseRate = instance.mLandingPageViewPerPurchaseRate;
+    this.mLinkClicksPerResults = instance.mLinkClicksPerResults;
     this.mLocation = instance.mLocation;
     this.mMarketingMessagesClickRateBenchmark = instance.mMarketingMessagesClickRateBenchmark;
     this.mMarketingMessagesCostPerDelivered = instance.mMarketingMessagesCostPerDelivered;
@@ -3730,6 +3764,7 @@ public class AdsInsights extends APINode {
     this.mProductGroupRetailerId = instance.mProductGroupRetailerId;
     this.mProductName = instance.mProductName;
     this.mProductRetailerId = instance.mProductRetailerId;
+    this.mProductViews = instance.mProductViews;
     this.mPurchasePerLandingPageView = instance.mPurchasePerLandingPageView;
     this.mPurchaseRoas = instance.mPurchaseRoas;
     this.mPurchasesPerLinkClick = instance.mPurchasesPerLinkClick;
@@ -3742,6 +3777,7 @@ public class AdsInsights extends APINode {
     this.mShopsAssistedPurchases = instance.mShopsAssistedPurchases;
     this.mSocialSpend = instance.mSocialSpend;
     this.mSpend = instance.mSpend;
+    this.mTotalCardView = instance.mTotalCardView;
     this.mTotalPostbacks = instance.mTotalPostbacks;
     this.mTotalPostbacksDetailed = instance.mTotalPostbacksDetailed;
     this.mTotalPostbacksDetailedV4 = instance.mTotalPostbacksDetailedV4;

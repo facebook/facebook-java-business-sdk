@@ -327,6 +327,8 @@ public class AdActivity extends APINode {
 
 
   public static enum EnumEventType {
+      @SerializedName("accept_custom_audience_appeal")
+      VALUE_ACCEPT_CUSTOM_AUDIENCE_APPEAL("accept_custom_audience_appeal"),
       @SerializedName("account_spending_limit_reached")
       VALUE_ACCOUNT_SPENDING_LIMIT_REACHED("account_spending_limit_reached"),
       @SerializedName("ad_account_add_user_to_role")
@@ -367,6 +369,8 @@ public class AdActivity extends APINode {
       VALUE_ADD_FUNDING_SOURCE("add_funding_source"),
       @SerializedName("add_images")
       VALUE_ADD_IMAGES("add_images"),
+      @SerializedName("apply_restrictions_custom_audience")
+      VALUE_APPLY_RESTRICTIONS_CUSTOM_AUDIENCE("apply_restrictions_custom_audience"),
       @SerializedName("billing_event")
       VALUE_BILLING_EVENT("billing_event"),
       @SerializedName("campaign_ended")
@@ -379,12 +383,18 @@ public class AdActivity extends APINode {
       VALUE_CREATE_AD("create_ad"),
       @SerializedName("create_ad_set")
       VALUE_CREATE_AD_SET("create_ad_set"),
+      @SerializedName("create_adaccount_agency_fee")
+      VALUE_CREATE_ADACCOUNT_AGENCY_FEE("create_adaccount_agency_fee"),
       @SerializedName("create_audience")
       VALUE_CREATE_AUDIENCE("create_audience"),
       @SerializedName("create_campaign_group")
       VALUE_CREATE_CAMPAIGN_GROUP("create_campaign_group"),
+      @SerializedName("create_campaign_group_agency_fee")
+      VALUE_CREATE_CAMPAIGN_GROUP_AGENCY_FEE("create_campaign_group_agency_fee"),
       @SerializedName("create_campaign_legacy")
       VALUE_CREATE_CAMPAIGN_LEGACY("create_campaign_legacy"),
+      @SerializedName("create_custom_audience_appeal")
+      VALUE_CREATE_CUSTOM_AUDIENCE_APPEAL("create_custom_audience_appeal"),
       @SerializedName("delete_audience")
       VALUE_DELETE_AUDIENCE("delete_audience"),
       @SerializedName("delete_images")
@@ -407,6 +417,8 @@ public class AdActivity extends APINode {
       VALUE_MERGE_CAMPAIGNS("merge_campaigns"),
       @SerializedName("receive_audience")
       VALUE_RECEIVE_AUDIENCE("receive_audience"),
+      @SerializedName("reject_custom_audience_appeal")
+      VALUE_REJECT_CUSTOM_AUDIENCE_APPEAL("reject_custom_audience_appeal"),
       @SerializedName("remove_funding_source")
       VALUE_REMOVE_FUNDING_SOURCE("remove_funding_source"),
       @SerializedName("remove_shared_audience")
@@ -459,6 +471,8 @@ public class AdActivity extends APINode {
       VALUE_UPDATE_AD_SET_TARGET_SPEC("update_ad_set_target_spec"),
       @SerializedName("update_ad_targets_spec")
       VALUE_UPDATE_AD_TARGETS_SPEC("update_ad_targets_spec"),
+      @SerializedName("update_adaccount_agency_fee")
+      VALUE_UPDATE_ADACCOUNT_AGENCY_FEE("update_adaccount_agency_fee"),
       @SerializedName("update_adgroup_stop_delivery")
       VALUE_UPDATE_ADGROUP_STOP_DELIVERY("update_adgroup_stop_delivery"),
       @SerializedName("update_audience")
@@ -479,6 +493,8 @@ public class AdActivity extends APINode {
       VALUE_UPDATE_CAMPAIGN_DELIVERY_TYPE("update_campaign_delivery_type"),
       @SerializedName("update_campaign_group_ad_scheduling")
       VALUE_UPDATE_CAMPAIGN_GROUP_AD_SCHEDULING("update_campaign_group_ad_scheduling"),
+      @SerializedName("update_campaign_group_agency_fee")
+      VALUE_UPDATE_CAMPAIGN_GROUP_AGENCY_FEE("update_campaign_group_agency_fee"),
       @SerializedName("update_campaign_group_budget_scheduling_state")
       VALUE_UPDATE_CAMPAIGN_GROUP_BUDGET_SCHEDULING_STATE("update_campaign_group_budget_scheduling_state"),
       @SerializedName("update_campaign_group_delivery_type")

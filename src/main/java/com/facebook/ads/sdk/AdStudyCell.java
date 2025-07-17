@@ -1000,6 +1000,7 @@ public class AdStudyCell extends APINode {
       "adset_schedule",
       "asset_feed_id",
       "attribution_spec",
+      "automatic_manual_state",
       "bid_adjustments",
       "bid_amount",
       "bid_constraints",
@@ -1188,6 +1189,13 @@ public class AdStudyCell extends APINode {
     }
     public APIRequestGetAdSets requestAttributionSpecField (boolean value) {
       this.requestField("attribution_spec", value);
+      return this;
+    }
+    public APIRequestGetAdSets requestAutomaticManualStateField () {
+      return this.requestAutomaticManualStateField(true);
+    }
+    public APIRequestGetAdSets requestAutomaticManualStateField (boolean value) {
+      this.requestField("automatic_manual_state", value);
       return this;
     }
     public APIRequestGetAdSets requestBidAdjustmentsField () {

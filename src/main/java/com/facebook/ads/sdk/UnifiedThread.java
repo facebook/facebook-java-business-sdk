@@ -67,8 +67,6 @@ public class UnifiedThread extends APINode {
   private Object mSenders = null;
   @SerializedName("snippet")
   private String mSnippet = null;
-  @SerializedName("subject")
-  private String mSubject = null;
   @SerializedName("unread_count")
   private Long mUnreadCount = null;
   @SerializedName("updated_time")
@@ -348,10 +346,6 @@ public class UnifiedThread extends APINode {
     return mSnippet;
   }
 
-  public String getFieldSubject() {
-    return mSubject;
-  }
-
   public Long getFieldUnreadCount() {
     return mUnreadCount;
   }
@@ -505,7 +499,6 @@ public class UnifiedThread extends APINode {
       "scoped_thread_key",
       "senders",
       "snippet",
-      "subject",
       "unread_count",
       "updated_time",
       "wallpaper",
@@ -692,13 +685,6 @@ public class UnifiedThread extends APINode {
       this.requestField("snippet", value);
       return this;
     }
-    public APIRequestGet requestSubjectField () {
-      return this.requestSubjectField(true);
-    }
-    public APIRequestGet requestSubjectField (boolean value) {
-      this.requestField("subject", value);
-      return this;
-    }
     public APIRequestGet requestUnreadCountField () {
       return this.requestUnreadCountField(true);
     }
@@ -788,7 +774,6 @@ public class UnifiedThread extends APINode {
     this.mScopedThreadKey = instance.mScopedThreadKey;
     this.mSenders = instance.mSenders;
     this.mSnippet = instance.mSnippet;
-    this.mSubject = instance.mSubject;
     this.mUnreadCount = instance.mUnreadCount;
     this.mUpdatedTime = instance.mUpdatedTime;
     this.mWallpaper = instance.mWallpaper;

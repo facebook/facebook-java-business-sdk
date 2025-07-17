@@ -41,6 +41,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class ImageReferenceMatch extends APINode {
+  @SerializedName("conflict_status")
+  private String mConflictStatus = null;
   @SerializedName("conflicting_countries")
   private List<String> mConflictingCountries = null;
   @SerializedName("country_resolution_history")
@@ -289,6 +291,10 @@ public class ImageReferenceMatch extends APINode {
   }
 
 
+  public String getFieldConflictStatus() {
+    return mConflictStatus;
+  }
+
   public List<String> getFieldConflictingCountries() {
     return mConflictingCountries;
   }
@@ -382,6 +388,7 @@ public class ImageReferenceMatch extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "conflict_status",
       "conflicting_countries",
       "country_resolution_history",
       "creation_time",
@@ -491,6 +498,13 @@ public class ImageReferenceMatch extends APINode {
       return this;
     }
 
+    public APIRequestGet requestConflictStatusField () {
+      return this.requestConflictStatusField(true);
+    }
+    public APIRequestGet requestConflictStatusField (boolean value) {
+      this.requestField("conflict_status", value);
+      return this;
+    }
     public APIRequestGet requestConflictingCountriesField () {
       return this.requestConflictingCountriesField(true);
     }
@@ -627,6 +641,7 @@ public class ImageReferenceMatch extends APINode {
   }
 
   public ImageReferenceMatch copyFrom(ImageReferenceMatch instance) {
+    this.mConflictStatus = instance.mConflictStatus;
     this.mConflictingCountries = instance.mConflictingCountries;
     this.mCountryResolutionHistory = instance.mCountryResolutionHistory;
     this.mCreationTime = instance.mCreationTime;

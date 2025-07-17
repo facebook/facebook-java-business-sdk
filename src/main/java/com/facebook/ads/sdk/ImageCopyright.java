@@ -735,6 +735,8 @@ public class ImageCopyright extends APINode {
   }
 
   public static enum EnumGeoOwnership {
+      @SerializedName("AC")
+      VALUE_AC("AC"),
       @SerializedName("AD")
       VALUE_AD("AD"),
       @SerializedName("AE")

@@ -51,6 +51,8 @@ public class IGUserExportForCAM extends APINode {
   private String mEmail = null;
   @SerializedName("gender")
   private String mGender = null;
+  @SerializedName("has_brand_partnership_experience")
+  private Boolean mHasBrandPartnershipExperience = null;
   @SerializedName("id")
   private String mId = null;
   @SerializedName("is_account_verified")
@@ -61,6 +63,8 @@ public class IGUserExportForCAM extends APINode {
   private String mMessagingId = null;
   @SerializedName("onboarded_status")
   private Boolean mOnboardedStatus = null;
+  @SerializedName("past_brand_partnership_partners")
+  private List<String> mPastBrandPartnershipPartners = null;
   @SerializedName("portfolio_url")
   private String mPortfolioUrl = null;
   @SerializedName("username")
@@ -311,6 +315,10 @@ public class IGUserExportForCAM extends APINode {
     return mGender;
   }
 
+  public Boolean getFieldHasBrandPartnershipExperience() {
+    return mHasBrandPartnershipExperience;
+  }
+
   public String getFieldId() {
     return mId;
   }
@@ -329,6 +337,10 @@ public class IGUserExportForCAM extends APINode {
 
   public Boolean getFieldOnboardedStatus() {
     return mOnboardedStatus;
+  }
+
+  public List<String> getFieldPastBrandPartnershipPartners() {
+    return mPastBrandPartnershipPartners;
   }
 
   public String getFieldPortfolioUrl() {
@@ -712,11 +724,13 @@ public class IGUserExportForCAM extends APINode {
       "country",
       "email",
       "gender",
+      "has_brand_partnership_experience",
       "id",
       "is_account_verified",
       "is_paid_partnership_messages_enabled",
       "messaging_id",
       "onboarded_status",
+      "past_brand_partnership_partners",
       "portfolio_url",
       "username",
     };
@@ -846,6 +860,13 @@ public class IGUserExportForCAM extends APINode {
       this.requestField("gender", value);
       return this;
     }
+    public APIRequestGet requestHasBrandPartnershipExperienceField () {
+      return this.requestHasBrandPartnershipExperienceField(true);
+    }
+    public APIRequestGet requestHasBrandPartnershipExperienceField (boolean value) {
+      this.requestField("has_brand_partnership_experience", value);
+      return this;
+    }
     public APIRequestGet requestIdField () {
       return this.requestIdField(true);
     }
@@ -881,6 +902,13 @@ public class IGUserExportForCAM extends APINode {
       this.requestField("onboarded_status", value);
       return this;
     }
+    public APIRequestGet requestPastBrandPartnershipPartnersField () {
+      return this.requestPastBrandPartnershipPartnersField(true);
+    }
+    public APIRequestGet requestPastBrandPartnershipPartnersField (boolean value) {
+      this.requestField("past_brand_partnership_partners", value);
+      return this;
+    }
     public APIRequestGet requestPortfolioUrlField () {
       return this.requestPortfolioUrlField(true);
     }
@@ -895,6 +923,1090 @@ public class IGUserExportForCAM extends APINode {
       this.requestField("username", value);
       return this;
     }
+  }
+
+  public static enum EnumCreatorCountries {
+      @SerializedName("AC")
+      VALUE_AC("AC"),
+      @SerializedName("AD")
+      VALUE_AD("AD"),
+      @SerializedName("AE")
+      VALUE_AE("AE"),
+      @SerializedName("AF")
+      VALUE_AF("AF"),
+      @SerializedName("AG")
+      VALUE_AG("AG"),
+      @SerializedName("AI")
+      VALUE_AI("AI"),
+      @SerializedName("AL")
+      VALUE_AL("AL"),
+      @SerializedName("AM")
+      VALUE_AM("AM"),
+      @SerializedName("AN")
+      VALUE_AN("AN"),
+      @SerializedName("AO")
+      VALUE_AO("AO"),
+      @SerializedName("AQ")
+      VALUE_AQ("AQ"),
+      @SerializedName("AR")
+      VALUE_AR("AR"),
+      @SerializedName("AS")
+      VALUE_AS("AS"),
+      @SerializedName("AT")
+      VALUE_AT("AT"),
+      @SerializedName("AU")
+      VALUE_AU("AU"),
+      @SerializedName("AW")
+      VALUE_AW("AW"),
+      @SerializedName("AX")
+      VALUE_AX("AX"),
+      @SerializedName("AZ")
+      VALUE_AZ("AZ"),
+      @SerializedName("BA")
+      VALUE_BA("BA"),
+      @SerializedName("BB")
+      VALUE_BB("BB"),
+      @SerializedName("BD")
+      VALUE_BD("BD"),
+      @SerializedName("BE")
+      VALUE_BE("BE"),
+      @SerializedName("BF")
+      VALUE_BF("BF"),
+      @SerializedName("BG")
+      VALUE_BG("BG"),
+      @SerializedName("BH")
+      VALUE_BH("BH"),
+      @SerializedName("BI")
+      VALUE_BI("BI"),
+      @SerializedName("BJ")
+      VALUE_BJ("BJ"),
+      @SerializedName("BL")
+      VALUE_BL("BL"),
+      @SerializedName("BM")
+      VALUE_BM("BM"),
+      @SerializedName("BN")
+      VALUE_BN("BN"),
+      @SerializedName("BO")
+      VALUE_BO("BO"),
+      @SerializedName("BQ")
+      VALUE_BQ("BQ"),
+      @SerializedName("BR")
+      VALUE_BR("BR"),
+      @SerializedName("BS")
+      VALUE_BS("BS"),
+      @SerializedName("BT")
+      VALUE_BT("BT"),
+      @SerializedName("BV")
+      VALUE_BV("BV"),
+      @SerializedName("BW")
+      VALUE_BW("BW"),
+      @SerializedName("BY")
+      VALUE_BY("BY"),
+      @SerializedName("BZ")
+      VALUE_BZ("BZ"),
+      @SerializedName("CA")
+      VALUE_CA("CA"),
+      @SerializedName("CC")
+      VALUE_CC("CC"),
+      @SerializedName("CD")
+      VALUE_CD("CD"),
+      @SerializedName("CF")
+      VALUE_CF("CF"),
+      @SerializedName("CG")
+      VALUE_CG("CG"),
+      @SerializedName("CH")
+      VALUE_CH("CH"),
+      @SerializedName("CI")
+      VALUE_CI("CI"),
+      @SerializedName("CK")
+      VALUE_CK("CK"),
+      @SerializedName("CL")
+      VALUE_CL("CL"),
+      @SerializedName("CM")
+      VALUE_CM("CM"),
+      @SerializedName("CN")
+      VALUE_CN("CN"),
+      @SerializedName("CO")
+      VALUE_CO("CO"),
+      @SerializedName("CR")
+      VALUE_CR("CR"),
+      @SerializedName("CU")
+      VALUE_CU("CU"),
+      @SerializedName("CV")
+      VALUE_CV("CV"),
+      @SerializedName("CW")
+      VALUE_CW("CW"),
+      @SerializedName("CX")
+      VALUE_CX("CX"),
+      @SerializedName("CY")
+      VALUE_CY("CY"),
+      @SerializedName("CZ")
+      VALUE_CZ("CZ"),
+      @SerializedName("DE")
+      VALUE_DE("DE"),
+      @SerializedName("DJ")
+      VALUE_DJ("DJ"),
+      @SerializedName("DK")
+      VALUE_DK("DK"),
+      @SerializedName("DM")
+      VALUE_DM("DM"),
+      @SerializedName("DO")
+      VALUE_DO("DO"),
+      @SerializedName("DZ")
+      VALUE_DZ("DZ"),
+      @SerializedName("EC")
+      VALUE_EC("EC"),
+      @SerializedName("EE")
+      VALUE_EE("EE"),
+      @SerializedName("EG")
+      VALUE_EG("EG"),
+      @SerializedName("EH")
+      VALUE_EH("EH"),
+      @SerializedName("ER")
+      VALUE_ER("ER"),
+      @SerializedName("ES")
+      VALUE_ES("ES"),
+      @SerializedName("ET")
+      VALUE_ET("ET"),
+      @SerializedName("FI")
+      VALUE_FI("FI"),
+      @SerializedName("FJ")
+      VALUE_FJ("FJ"),
+      @SerializedName("FK")
+      VALUE_FK("FK"),
+      @SerializedName("FM")
+      VALUE_FM("FM"),
+      @SerializedName("FO")
+      VALUE_FO("FO"),
+      @SerializedName("FR")
+      VALUE_FR("FR"),
+      @SerializedName("GA")
+      VALUE_GA("GA"),
+      @SerializedName("GB")
+      VALUE_GB("GB"),
+      @SerializedName("GD")
+      VALUE_GD("GD"),
+      @SerializedName("GE")
+      VALUE_GE("GE"),
+      @SerializedName("GF")
+      VALUE_GF("GF"),
+      @SerializedName("GG")
+      VALUE_GG("GG"),
+      @SerializedName("GH")
+      VALUE_GH("GH"),
+      @SerializedName("GI")
+      VALUE_GI("GI"),
+      @SerializedName("GL")
+      VALUE_GL("GL"),
+      @SerializedName("GM")
+      VALUE_GM("GM"),
+      @SerializedName("GN")
+      VALUE_GN("GN"),
+      @SerializedName("GP")
+      VALUE_GP("GP"),
+      @SerializedName("GQ")
+      VALUE_GQ("GQ"),
+      @SerializedName("GR")
+      VALUE_GR("GR"),
+      @SerializedName("GS")
+      VALUE_GS("GS"),
+      @SerializedName("GT")
+      VALUE_GT("GT"),
+      @SerializedName("GU")
+      VALUE_GU("GU"),
+      @SerializedName("GW")
+      VALUE_GW("GW"),
+      @SerializedName("GY")
+      VALUE_GY("GY"),
+      @SerializedName("HK")
+      VALUE_HK("HK"),
+      @SerializedName("HM")
+      VALUE_HM("HM"),
+      @SerializedName("HN")
+      VALUE_HN("HN"),
+      @SerializedName("HR")
+      VALUE_HR("HR"),
+      @SerializedName("HT")
+      VALUE_HT("HT"),
+      @SerializedName("HU")
+      VALUE_HU("HU"),
+      @SerializedName("ID")
+      VALUE_ID("ID"),
+      @SerializedName("IE")
+      VALUE_IE("IE"),
+      @SerializedName("IL")
+      VALUE_IL("IL"),
+      @SerializedName("IM")
+      VALUE_IM("IM"),
+      @SerializedName("IN")
+      VALUE_IN("IN"),
+      @SerializedName("IO")
+      VALUE_IO("IO"),
+      @SerializedName("IQ")
+      VALUE_IQ("IQ"),
+      @SerializedName("IR")
+      VALUE_IR("IR"),
+      @SerializedName("IS")
+      VALUE_IS("IS"),
+      @SerializedName("IT")
+      VALUE_IT("IT"),
+      @SerializedName("JE")
+      VALUE_JE("JE"),
+      @SerializedName("JM")
+      VALUE_JM("JM"),
+      @SerializedName("JO")
+      VALUE_JO("JO"),
+      @SerializedName("JP")
+      VALUE_JP("JP"),
+      @SerializedName("KE")
+      VALUE_KE("KE"),
+      @SerializedName("KG")
+      VALUE_KG("KG"),
+      @SerializedName("KH")
+      VALUE_KH("KH"),
+      @SerializedName("KI")
+      VALUE_KI("KI"),
+      @SerializedName("KM")
+      VALUE_KM("KM"),
+      @SerializedName("KN")
+      VALUE_KN("KN"),
+      @SerializedName("KP")
+      VALUE_KP("KP"),
+      @SerializedName("KR")
+      VALUE_KR("KR"),
+      @SerializedName("KW")
+      VALUE_KW("KW"),
+      @SerializedName("KY")
+      VALUE_KY("KY"),
+      @SerializedName("KZ")
+      VALUE_KZ("KZ"),
+      @SerializedName("LA")
+      VALUE_LA("LA"),
+      @SerializedName("LB")
+      VALUE_LB("LB"),
+      @SerializedName("LC")
+      VALUE_LC("LC"),
+      @SerializedName("LI")
+      VALUE_LI("LI"),
+      @SerializedName("LK")
+      VALUE_LK("LK"),
+      @SerializedName("LR")
+      VALUE_LR("LR"),
+      @SerializedName("LS")
+      VALUE_LS("LS"),
+      @SerializedName("LT")
+      VALUE_LT("LT"),
+      @SerializedName("LU")
+      VALUE_LU("LU"),
+      @SerializedName("LV")
+      VALUE_LV("LV"),
+      @SerializedName("LY")
+      VALUE_LY("LY"),
+      @SerializedName("MA")
+      VALUE_MA("MA"),
+      @SerializedName("MC")
+      VALUE_MC("MC"),
+      @SerializedName("MD")
+      VALUE_MD("MD"),
+      @SerializedName("ME")
+      VALUE_ME("ME"),
+      @SerializedName("MF")
+      VALUE_MF("MF"),
+      @SerializedName("MG")
+      VALUE_MG("MG"),
+      @SerializedName("MH")
+      VALUE_MH("MH"),
+      @SerializedName("MK")
+      VALUE_MK("MK"),
+      @SerializedName("ML")
+      VALUE_ML("ML"),
+      @SerializedName("MM")
+      VALUE_MM("MM"),
+      @SerializedName("MN")
+      VALUE_MN("MN"),
+      @SerializedName("MO")
+      VALUE_MO("MO"),
+      @SerializedName("MP")
+      VALUE_MP("MP"),
+      @SerializedName("MQ")
+      VALUE_MQ("MQ"),
+      @SerializedName("MR")
+      VALUE_MR("MR"),
+      @SerializedName("MS")
+      VALUE_MS("MS"),
+      @SerializedName("MT")
+      VALUE_MT("MT"),
+      @SerializedName("MU")
+      VALUE_MU("MU"),
+      @SerializedName("MV")
+      VALUE_MV("MV"),
+      @SerializedName("MW")
+      VALUE_MW("MW"),
+      @SerializedName("MX")
+      VALUE_MX("MX"),
+      @SerializedName("MY")
+      VALUE_MY("MY"),
+      @SerializedName("MZ")
+      VALUE_MZ("MZ"),
+      @SerializedName("NA")
+      VALUE_NA("NA"),
+      @SerializedName("NC")
+      VALUE_NC("NC"),
+      @SerializedName("NE")
+      VALUE_NE("NE"),
+      @SerializedName("NF")
+      VALUE_NF("NF"),
+      @SerializedName("NG")
+      VALUE_NG("NG"),
+      @SerializedName("NI")
+      VALUE_NI("NI"),
+      @SerializedName("NL")
+      VALUE_NL("NL"),
+      @SerializedName("NO")
+      VALUE_NO("NO"),
+      @SerializedName("NP")
+      VALUE_NP("NP"),
+      @SerializedName("NR")
+      VALUE_NR("NR"),
+      @SerializedName("NU")
+      VALUE_NU("NU"),
+      @SerializedName("NZ")
+      VALUE_NZ("NZ"),
+      @SerializedName("OM")
+      VALUE_OM("OM"),
+      @SerializedName("PA")
+      VALUE_PA("PA"),
+      @SerializedName("PE")
+      VALUE_PE("PE"),
+      @SerializedName("PF")
+      VALUE_PF("PF"),
+      @SerializedName("PG")
+      VALUE_PG("PG"),
+      @SerializedName("PH")
+      VALUE_PH("PH"),
+      @SerializedName("PK")
+      VALUE_PK("PK"),
+      @SerializedName("PL")
+      VALUE_PL("PL"),
+      @SerializedName("PM")
+      VALUE_PM("PM"),
+      @SerializedName("PN")
+      VALUE_PN("PN"),
+      @SerializedName("PR")
+      VALUE_PR("PR"),
+      @SerializedName("PS")
+      VALUE_PS("PS"),
+      @SerializedName("PT")
+      VALUE_PT("PT"),
+      @SerializedName("PW")
+      VALUE_PW("PW"),
+      @SerializedName("PY")
+      VALUE_PY("PY"),
+      @SerializedName("QA")
+      VALUE_QA("QA"),
+      @SerializedName("RE")
+      VALUE_RE("RE"),
+      @SerializedName("RO")
+      VALUE_RO("RO"),
+      @SerializedName("RS")
+      VALUE_RS("RS"),
+      @SerializedName("RU")
+      VALUE_RU("RU"),
+      @SerializedName("RW")
+      VALUE_RW("RW"),
+      @SerializedName("SA")
+      VALUE_SA("SA"),
+      @SerializedName("SB")
+      VALUE_SB("SB"),
+      @SerializedName("SC")
+      VALUE_SC("SC"),
+      @SerializedName("SD")
+      VALUE_SD("SD"),
+      @SerializedName("SE")
+      VALUE_SE("SE"),
+      @SerializedName("SG")
+      VALUE_SG("SG"),
+      @SerializedName("SH")
+      VALUE_SH("SH"),
+      @SerializedName("SI")
+      VALUE_SI("SI"),
+      @SerializedName("SJ")
+      VALUE_SJ("SJ"),
+      @SerializedName("SK")
+      VALUE_SK("SK"),
+      @SerializedName("SL")
+      VALUE_SL("SL"),
+      @SerializedName("SM")
+      VALUE_SM("SM"),
+      @SerializedName("SN")
+      VALUE_SN("SN"),
+      @SerializedName("SO")
+      VALUE_SO("SO"),
+      @SerializedName("SR")
+      VALUE_SR("SR"),
+      @SerializedName("SS")
+      VALUE_SS("SS"),
+      @SerializedName("ST")
+      VALUE_ST("ST"),
+      @SerializedName("SV")
+      VALUE_SV("SV"),
+      @SerializedName("SX")
+      VALUE_SX("SX"),
+      @SerializedName("SY")
+      VALUE_SY("SY"),
+      @SerializedName("SZ")
+      VALUE_SZ("SZ"),
+      @SerializedName("TC")
+      VALUE_TC("TC"),
+      @SerializedName("TD")
+      VALUE_TD("TD"),
+      @SerializedName("TF")
+      VALUE_TF("TF"),
+      @SerializedName("TG")
+      VALUE_TG("TG"),
+      @SerializedName("TH")
+      VALUE_TH("TH"),
+      @SerializedName("TJ")
+      VALUE_TJ("TJ"),
+      @SerializedName("TK")
+      VALUE_TK("TK"),
+      @SerializedName("TL")
+      VALUE_TL("TL"),
+      @SerializedName("TM")
+      VALUE_TM("TM"),
+      @SerializedName("TN")
+      VALUE_TN("TN"),
+      @SerializedName("TO")
+      VALUE_TO("TO"),
+      @SerializedName("TR")
+      VALUE_TR("TR"),
+      @SerializedName("TT")
+      VALUE_TT("TT"),
+      @SerializedName("TV")
+      VALUE_TV("TV"),
+      @SerializedName("TW")
+      VALUE_TW("TW"),
+      @SerializedName("TZ")
+      VALUE_TZ("TZ"),
+      @SerializedName("UA")
+      VALUE_UA("UA"),
+      @SerializedName("UG")
+      VALUE_UG("UG"),
+      @SerializedName("UM")
+      VALUE_UM("UM"),
+      @SerializedName("US")
+      VALUE_US("US"),
+      @SerializedName("UY")
+      VALUE_UY("UY"),
+      @SerializedName("UZ")
+      VALUE_UZ("UZ"),
+      @SerializedName("VA")
+      VALUE_VA("VA"),
+      @SerializedName("VC")
+      VALUE_VC("VC"),
+      @SerializedName("VE")
+      VALUE_VE("VE"),
+      @SerializedName("VG")
+      VALUE_VG("VG"),
+      @SerializedName("VI")
+      VALUE_VI("VI"),
+      @SerializedName("VN")
+      VALUE_VN("VN"),
+      @SerializedName("VU")
+      VALUE_VU("VU"),
+      @SerializedName("WF")
+      VALUE_WF("WF"),
+      @SerializedName("WS")
+      VALUE_WS("WS"),
+      @SerializedName("XK")
+      VALUE_XK("XK"),
+      @SerializedName("YE")
+      VALUE_YE("YE"),
+      @SerializedName("YT")
+      VALUE_YT("YT"),
+      @SerializedName("ZA")
+      VALUE_ZA("ZA"),
+      @SerializedName("ZM")
+      VALUE_ZM("ZM"),
+      @SerializedName("ZW")
+      VALUE_ZW("ZW"),
+      ;
+
+      private String value;
+
+      private EnumCreatorCountries(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumCreatorGender {
+      @SerializedName("custom")
+      VALUE_CUSTOM("custom"),
+      @SerializedName("female")
+      VALUE_FEMALE("female"),
+      @SerializedName("male")
+      VALUE_MALE("male"),
+      @SerializedName("unknown")
+      VALUE_UNKNOWN("unknown"),
+      ;
+
+      private String value;
+
+      private EnumCreatorGender(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumMajorAudienceCountries {
+      @SerializedName("AC")
+      VALUE_AC("AC"),
+      @SerializedName("AD")
+      VALUE_AD("AD"),
+      @SerializedName("AE")
+      VALUE_AE("AE"),
+      @SerializedName("AF")
+      VALUE_AF("AF"),
+      @SerializedName("AG")
+      VALUE_AG("AG"),
+      @SerializedName("AI")
+      VALUE_AI("AI"),
+      @SerializedName("AL")
+      VALUE_AL("AL"),
+      @SerializedName("AM")
+      VALUE_AM("AM"),
+      @SerializedName("AN")
+      VALUE_AN("AN"),
+      @SerializedName("AO")
+      VALUE_AO("AO"),
+      @SerializedName("AQ")
+      VALUE_AQ("AQ"),
+      @SerializedName("AR")
+      VALUE_AR("AR"),
+      @SerializedName("AS")
+      VALUE_AS("AS"),
+      @SerializedName("AT")
+      VALUE_AT("AT"),
+      @SerializedName("AU")
+      VALUE_AU("AU"),
+      @SerializedName("AW")
+      VALUE_AW("AW"),
+      @SerializedName("AX")
+      VALUE_AX("AX"),
+      @SerializedName("AZ")
+      VALUE_AZ("AZ"),
+      @SerializedName("BA")
+      VALUE_BA("BA"),
+      @SerializedName("BB")
+      VALUE_BB("BB"),
+      @SerializedName("BD")
+      VALUE_BD("BD"),
+      @SerializedName("BE")
+      VALUE_BE("BE"),
+      @SerializedName("BF")
+      VALUE_BF("BF"),
+      @SerializedName("BG")
+      VALUE_BG("BG"),
+      @SerializedName("BH")
+      VALUE_BH("BH"),
+      @SerializedName("BI")
+      VALUE_BI("BI"),
+      @SerializedName("BJ")
+      VALUE_BJ("BJ"),
+      @SerializedName("BL")
+      VALUE_BL("BL"),
+      @SerializedName("BM")
+      VALUE_BM("BM"),
+      @SerializedName("BN")
+      VALUE_BN("BN"),
+      @SerializedName("BO")
+      VALUE_BO("BO"),
+      @SerializedName("BQ")
+      VALUE_BQ("BQ"),
+      @SerializedName("BR")
+      VALUE_BR("BR"),
+      @SerializedName("BS")
+      VALUE_BS("BS"),
+      @SerializedName("BT")
+      VALUE_BT("BT"),
+      @SerializedName("BV")
+      VALUE_BV("BV"),
+      @SerializedName("BW")
+      VALUE_BW("BW"),
+      @SerializedName("BY")
+      VALUE_BY("BY"),
+      @SerializedName("BZ")
+      VALUE_BZ("BZ"),
+      @SerializedName("CA")
+      VALUE_CA("CA"),
+      @SerializedName("CC")
+      VALUE_CC("CC"),
+      @SerializedName("CD")
+      VALUE_CD("CD"),
+      @SerializedName("CF")
+      VALUE_CF("CF"),
+      @SerializedName("CG")
+      VALUE_CG("CG"),
+      @SerializedName("CH")
+      VALUE_CH("CH"),
+      @SerializedName("CI")
+      VALUE_CI("CI"),
+      @SerializedName("CK")
+      VALUE_CK("CK"),
+      @SerializedName("CL")
+      VALUE_CL("CL"),
+      @SerializedName("CM")
+      VALUE_CM("CM"),
+      @SerializedName("CN")
+      VALUE_CN("CN"),
+      @SerializedName("CO")
+      VALUE_CO("CO"),
+      @SerializedName("CR")
+      VALUE_CR("CR"),
+      @SerializedName("CU")
+      VALUE_CU("CU"),
+      @SerializedName("CV")
+      VALUE_CV("CV"),
+      @SerializedName("CW")
+      VALUE_CW("CW"),
+      @SerializedName("CX")
+      VALUE_CX("CX"),
+      @SerializedName("CY")
+      VALUE_CY("CY"),
+      @SerializedName("CZ")
+      VALUE_CZ("CZ"),
+      @SerializedName("DE")
+      VALUE_DE("DE"),
+      @SerializedName("DJ")
+      VALUE_DJ("DJ"),
+      @SerializedName("DK")
+      VALUE_DK("DK"),
+      @SerializedName("DM")
+      VALUE_DM("DM"),
+      @SerializedName("DO")
+      VALUE_DO("DO"),
+      @SerializedName("DZ")
+      VALUE_DZ("DZ"),
+      @SerializedName("EC")
+      VALUE_EC("EC"),
+      @SerializedName("EE")
+      VALUE_EE("EE"),
+      @SerializedName("EG")
+      VALUE_EG("EG"),
+      @SerializedName("EH")
+      VALUE_EH("EH"),
+      @SerializedName("ER")
+      VALUE_ER("ER"),
+      @SerializedName("ES")
+      VALUE_ES("ES"),
+      @SerializedName("ET")
+      VALUE_ET("ET"),
+      @SerializedName("FI")
+      VALUE_FI("FI"),
+      @SerializedName("FJ")
+      VALUE_FJ("FJ"),
+      @SerializedName("FK")
+      VALUE_FK("FK"),
+      @SerializedName("FM")
+      VALUE_FM("FM"),
+      @SerializedName("FO")
+      VALUE_FO("FO"),
+      @SerializedName("FR")
+      VALUE_FR("FR"),
+      @SerializedName("GA")
+      VALUE_GA("GA"),
+      @SerializedName("GB")
+      VALUE_GB("GB"),
+      @SerializedName("GD")
+      VALUE_GD("GD"),
+      @SerializedName("GE")
+      VALUE_GE("GE"),
+      @SerializedName("GF")
+      VALUE_GF("GF"),
+      @SerializedName("GG")
+      VALUE_GG("GG"),
+      @SerializedName("GH")
+      VALUE_GH("GH"),
+      @SerializedName("GI")
+      VALUE_GI("GI"),
+      @SerializedName("GL")
+      VALUE_GL("GL"),
+      @SerializedName("GM")
+      VALUE_GM("GM"),
+      @SerializedName("GN")
+      VALUE_GN("GN"),
+      @SerializedName("GP")
+      VALUE_GP("GP"),
+      @SerializedName("GQ")
+      VALUE_GQ("GQ"),
+      @SerializedName("GR")
+      VALUE_GR("GR"),
+      @SerializedName("GS")
+      VALUE_GS("GS"),
+      @SerializedName("GT")
+      VALUE_GT("GT"),
+      @SerializedName("GU")
+      VALUE_GU("GU"),
+      @SerializedName("GW")
+      VALUE_GW("GW"),
+      @SerializedName("GY")
+      VALUE_GY("GY"),
+      @SerializedName("HK")
+      VALUE_HK("HK"),
+      @SerializedName("HM")
+      VALUE_HM("HM"),
+      @SerializedName("HN")
+      VALUE_HN("HN"),
+      @SerializedName("HR")
+      VALUE_HR("HR"),
+      @SerializedName("HT")
+      VALUE_HT("HT"),
+      @SerializedName("HU")
+      VALUE_HU("HU"),
+      @SerializedName("ID")
+      VALUE_ID("ID"),
+      @SerializedName("IE")
+      VALUE_IE("IE"),
+      @SerializedName("IL")
+      VALUE_IL("IL"),
+      @SerializedName("IM")
+      VALUE_IM("IM"),
+      @SerializedName("IN")
+      VALUE_IN("IN"),
+      @SerializedName("IO")
+      VALUE_IO("IO"),
+      @SerializedName("IQ")
+      VALUE_IQ("IQ"),
+      @SerializedName("IR")
+      VALUE_IR("IR"),
+      @SerializedName("IS")
+      VALUE_IS("IS"),
+      @SerializedName("IT")
+      VALUE_IT("IT"),
+      @SerializedName("JE")
+      VALUE_JE("JE"),
+      @SerializedName("JM")
+      VALUE_JM("JM"),
+      @SerializedName("JO")
+      VALUE_JO("JO"),
+      @SerializedName("JP")
+      VALUE_JP("JP"),
+      @SerializedName("KE")
+      VALUE_KE("KE"),
+      @SerializedName("KG")
+      VALUE_KG("KG"),
+      @SerializedName("KH")
+      VALUE_KH("KH"),
+      @SerializedName("KI")
+      VALUE_KI("KI"),
+      @SerializedName("KM")
+      VALUE_KM("KM"),
+      @SerializedName("KN")
+      VALUE_KN("KN"),
+      @SerializedName("KP")
+      VALUE_KP("KP"),
+      @SerializedName("KR")
+      VALUE_KR("KR"),
+      @SerializedName("KW")
+      VALUE_KW("KW"),
+      @SerializedName("KY")
+      VALUE_KY("KY"),
+      @SerializedName("KZ")
+      VALUE_KZ("KZ"),
+      @SerializedName("LA")
+      VALUE_LA("LA"),
+      @SerializedName("LB")
+      VALUE_LB("LB"),
+      @SerializedName("LC")
+      VALUE_LC("LC"),
+      @SerializedName("LI")
+      VALUE_LI("LI"),
+      @SerializedName("LK")
+      VALUE_LK("LK"),
+      @SerializedName("LR")
+      VALUE_LR("LR"),
+      @SerializedName("LS")
+      VALUE_LS("LS"),
+      @SerializedName("LT")
+      VALUE_LT("LT"),
+      @SerializedName("LU")
+      VALUE_LU("LU"),
+      @SerializedName("LV")
+      VALUE_LV("LV"),
+      @SerializedName("LY")
+      VALUE_LY("LY"),
+      @SerializedName("MA")
+      VALUE_MA("MA"),
+      @SerializedName("MC")
+      VALUE_MC("MC"),
+      @SerializedName("MD")
+      VALUE_MD("MD"),
+      @SerializedName("ME")
+      VALUE_ME("ME"),
+      @SerializedName("MF")
+      VALUE_MF("MF"),
+      @SerializedName("MG")
+      VALUE_MG("MG"),
+      @SerializedName("MH")
+      VALUE_MH("MH"),
+      @SerializedName("MK")
+      VALUE_MK("MK"),
+      @SerializedName("ML")
+      VALUE_ML("ML"),
+      @SerializedName("MM")
+      VALUE_MM("MM"),
+      @SerializedName("MN")
+      VALUE_MN("MN"),
+      @SerializedName("MO")
+      VALUE_MO("MO"),
+      @SerializedName("MP")
+      VALUE_MP("MP"),
+      @SerializedName("MQ")
+      VALUE_MQ("MQ"),
+      @SerializedName("MR")
+      VALUE_MR("MR"),
+      @SerializedName("MS")
+      VALUE_MS("MS"),
+      @SerializedName("MT")
+      VALUE_MT("MT"),
+      @SerializedName("MU")
+      VALUE_MU("MU"),
+      @SerializedName("MV")
+      VALUE_MV("MV"),
+      @SerializedName("MW")
+      VALUE_MW("MW"),
+      @SerializedName("MX")
+      VALUE_MX("MX"),
+      @SerializedName("MY")
+      VALUE_MY("MY"),
+      @SerializedName("MZ")
+      VALUE_MZ("MZ"),
+      @SerializedName("NA")
+      VALUE_NA("NA"),
+      @SerializedName("NC")
+      VALUE_NC("NC"),
+      @SerializedName("NE")
+      VALUE_NE("NE"),
+      @SerializedName("NF")
+      VALUE_NF("NF"),
+      @SerializedName("NG")
+      VALUE_NG("NG"),
+      @SerializedName("NI")
+      VALUE_NI("NI"),
+      @SerializedName("NL")
+      VALUE_NL("NL"),
+      @SerializedName("NO")
+      VALUE_NO("NO"),
+      @SerializedName("NP")
+      VALUE_NP("NP"),
+      @SerializedName("NR")
+      VALUE_NR("NR"),
+      @SerializedName("NU")
+      VALUE_NU("NU"),
+      @SerializedName("NZ")
+      VALUE_NZ("NZ"),
+      @SerializedName("OM")
+      VALUE_OM("OM"),
+      @SerializedName("PA")
+      VALUE_PA("PA"),
+      @SerializedName("PE")
+      VALUE_PE("PE"),
+      @SerializedName("PF")
+      VALUE_PF("PF"),
+      @SerializedName("PG")
+      VALUE_PG("PG"),
+      @SerializedName("PH")
+      VALUE_PH("PH"),
+      @SerializedName("PK")
+      VALUE_PK("PK"),
+      @SerializedName("PL")
+      VALUE_PL("PL"),
+      @SerializedName("PM")
+      VALUE_PM("PM"),
+      @SerializedName("PN")
+      VALUE_PN("PN"),
+      @SerializedName("PR")
+      VALUE_PR("PR"),
+      @SerializedName("PS")
+      VALUE_PS("PS"),
+      @SerializedName("PT")
+      VALUE_PT("PT"),
+      @SerializedName("PW")
+      VALUE_PW("PW"),
+      @SerializedName("PY")
+      VALUE_PY("PY"),
+      @SerializedName("QA")
+      VALUE_QA("QA"),
+      @SerializedName("RE")
+      VALUE_RE("RE"),
+      @SerializedName("RO")
+      VALUE_RO("RO"),
+      @SerializedName("RS")
+      VALUE_RS("RS"),
+      @SerializedName("RU")
+      VALUE_RU("RU"),
+      @SerializedName("RW")
+      VALUE_RW("RW"),
+      @SerializedName("SA")
+      VALUE_SA("SA"),
+      @SerializedName("SB")
+      VALUE_SB("SB"),
+      @SerializedName("SC")
+      VALUE_SC("SC"),
+      @SerializedName("SD")
+      VALUE_SD("SD"),
+      @SerializedName("SE")
+      VALUE_SE("SE"),
+      @SerializedName("SG")
+      VALUE_SG("SG"),
+      @SerializedName("SH")
+      VALUE_SH("SH"),
+      @SerializedName("SI")
+      VALUE_SI("SI"),
+      @SerializedName("SJ")
+      VALUE_SJ("SJ"),
+      @SerializedName("SK")
+      VALUE_SK("SK"),
+      @SerializedName("SL")
+      VALUE_SL("SL"),
+      @SerializedName("SM")
+      VALUE_SM("SM"),
+      @SerializedName("SN")
+      VALUE_SN("SN"),
+      @SerializedName("SO")
+      VALUE_SO("SO"),
+      @SerializedName("SR")
+      VALUE_SR("SR"),
+      @SerializedName("SS")
+      VALUE_SS("SS"),
+      @SerializedName("ST")
+      VALUE_ST("ST"),
+      @SerializedName("SV")
+      VALUE_SV("SV"),
+      @SerializedName("SX")
+      VALUE_SX("SX"),
+      @SerializedName("SY")
+      VALUE_SY("SY"),
+      @SerializedName("SZ")
+      VALUE_SZ("SZ"),
+      @SerializedName("TC")
+      VALUE_TC("TC"),
+      @SerializedName("TD")
+      VALUE_TD("TD"),
+      @SerializedName("TF")
+      VALUE_TF("TF"),
+      @SerializedName("TG")
+      VALUE_TG("TG"),
+      @SerializedName("TH")
+      VALUE_TH("TH"),
+      @SerializedName("TJ")
+      VALUE_TJ("TJ"),
+      @SerializedName("TK")
+      VALUE_TK("TK"),
+      @SerializedName("TL")
+      VALUE_TL("TL"),
+      @SerializedName("TM")
+      VALUE_TM("TM"),
+      @SerializedName("TN")
+      VALUE_TN("TN"),
+      @SerializedName("TO")
+      VALUE_TO("TO"),
+      @SerializedName("TR")
+      VALUE_TR("TR"),
+      @SerializedName("TT")
+      VALUE_TT("TT"),
+      @SerializedName("TV")
+      VALUE_TV("TV"),
+      @SerializedName("TW")
+      VALUE_TW("TW"),
+      @SerializedName("TZ")
+      VALUE_TZ("TZ"),
+      @SerializedName("UA")
+      VALUE_UA("UA"),
+      @SerializedName("UG")
+      VALUE_UG("UG"),
+      @SerializedName("UM")
+      VALUE_UM("UM"),
+      @SerializedName("US")
+      VALUE_US("US"),
+      @SerializedName("UY")
+      VALUE_UY("UY"),
+      @SerializedName("UZ")
+      VALUE_UZ("UZ"),
+      @SerializedName("VA")
+      VALUE_VA("VA"),
+      @SerializedName("VC")
+      VALUE_VC("VC"),
+      @SerializedName("VE")
+      VALUE_VE("VE"),
+      @SerializedName("VG")
+      VALUE_VG("VG"),
+      @SerializedName("VI")
+      VALUE_VI("VI"),
+      @SerializedName("VN")
+      VALUE_VN("VN"),
+      @SerializedName("VU")
+      VALUE_VU("VU"),
+      @SerializedName("WF")
+      VALUE_WF("WF"),
+      @SerializedName("WS")
+      VALUE_WS("WS"),
+      @SerializedName("XK")
+      VALUE_XK("XK"),
+      @SerializedName("YE")
+      VALUE_YE("YE"),
+      @SerializedName("YT")
+      VALUE_YT("YT"),
+      @SerializedName("ZA")
+      VALUE_ZA("ZA"),
+      @SerializedName("ZM")
+      VALUE_ZM("ZM"),
+      @SerializedName("ZW")
+      VALUE_ZW("ZW"),
+      ;
+
+      private String value;
+
+      private EnumMajorAudienceCountries(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumMajorAudienceGender {
+      @SerializedName("custom")
+      VALUE_CUSTOM("custom"),
+      @SerializedName("female")
+      VALUE_FEMALE("female"),
+      @SerializedName("male")
+      VALUE_MALE("male"),
+      @SerializedName("unknown")
+      VALUE_UNKNOWN("unknown"),
+      ;
+
+      private String value;
+
+      private EnumMajorAudienceGender(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
   }
 
   public static enum EnumBreakdown {
@@ -1013,11 +2125,13 @@ public class IGUserExportForCAM extends APINode {
     this.mCountry = instance.mCountry;
     this.mEmail = instance.mEmail;
     this.mGender = instance.mGender;
+    this.mHasBrandPartnershipExperience = instance.mHasBrandPartnershipExperience;
     this.mId = instance.mId;
     this.mIsAccountVerified = instance.mIsAccountVerified;
     this.mIsPaidPartnershipMessagesEnabled = instance.mIsPaidPartnershipMessagesEnabled;
     this.mMessagingId = instance.mMessagingId;
     this.mOnboardedStatus = instance.mOnboardedStatus;
+    this.mPastBrandPartnershipPartners = instance.mPastBrandPartnershipPartners;
     this.mPortfolioUrl = instance.mPortfolioUrl;
     this.mUsername = instance.mUsername;
     this.context = instance.context;

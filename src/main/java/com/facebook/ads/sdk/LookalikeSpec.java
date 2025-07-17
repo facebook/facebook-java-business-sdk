@@ -43,8 +43,12 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class LookalikeSpec extends APINode {
   @SerializedName("country")
   private String mCountry = null;
+  @SerializedName("is_created_by_recommended_dfca")
+  private Boolean mIsCreatedByRecommendedDfca = null;
   @SerializedName("is_financial_service")
   private Boolean mIsFinancialService = null;
+  @SerializedName("is_parent_lal")
+  private Boolean mIsParentLal = null;
   @SerializedName("origin")
   private List<Object> mOrigin = null;
   @SerializedName("origin_event_name")
@@ -225,12 +229,30 @@ public class LookalikeSpec extends APINode {
     return this;
   }
 
+  public Boolean getFieldIsCreatedByRecommendedDfca() {
+    return mIsCreatedByRecommendedDfca;
+  }
+
+  public LookalikeSpec setFieldIsCreatedByRecommendedDfca(Boolean value) {
+    this.mIsCreatedByRecommendedDfca = value;
+    return this;
+  }
+
   public Boolean getFieldIsFinancialService() {
     return mIsFinancialService;
   }
 
   public LookalikeSpec setFieldIsFinancialService(Boolean value) {
     this.mIsFinancialService = value;
+    return this;
+  }
+
+  public Boolean getFieldIsParentLal() {
+    return mIsParentLal;
+  }
+
+  public LookalikeSpec setFieldIsParentLal(Boolean value) {
+    this.mIsParentLal = value;
     return this;
   }
 
@@ -342,7 +364,9 @@ public class LookalikeSpec extends APINode {
 
   public LookalikeSpec copyFrom(LookalikeSpec instance) {
     this.mCountry = instance.mCountry;
+    this.mIsCreatedByRecommendedDfca = instance.mIsCreatedByRecommendedDfca;
     this.mIsFinancialService = instance.mIsFinancialService;
+    this.mIsParentLal = instance.mIsParentLal;
     this.mOrigin = instance.mOrigin;
     this.mOriginEventName = instance.mOriginEventName;
     this.mOriginEventSourceName = instance.mOriginEventSourceName;

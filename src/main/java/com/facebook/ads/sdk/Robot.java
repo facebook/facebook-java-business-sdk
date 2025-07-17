@@ -55,6 +55,8 @@ public class Robot extends APINode {
   private List<Map<String, Double>> mLastPos = null;
   @SerializedName("meetup_link_hash")
   private String mMeetupLinkHash = null;
+  @SerializedName("robot_notes")
+  private String mRobotNotes = null;
   @SerializedName("suite")
   private String mSuite = null;
   @SerializedName("target_map_image_uri")
@@ -307,6 +309,10 @@ public class Robot extends APINode {
     return mMeetupLinkHash;
   }
 
+  public String getFieldRobotNotes() {
+    return mRobotNotes;
+  }
+
   public String getFieldSuite() {
     return mSuite;
   }
@@ -350,6 +356,7 @@ public class Robot extends APINode {
       "init_pos",
       "last_pos",
       "meetup_link_hash",
+      "robot_notes",
       "suite",
       "target_map_image_uri",
       "target_os_image_uri",
@@ -496,6 +503,13 @@ public class Robot extends APINode {
       this.requestField("meetup_link_hash", value);
       return this;
     }
+    public APIRequestGet requestRobotNotesField () {
+      return this.requestRobotNotesField(true);
+    }
+    public APIRequestGet requestRobotNotesField (boolean value) {
+      this.requestField("robot_notes", value);
+      return this;
+    }
     public APIRequestGet requestSuiteField () {
       return this.requestSuiteField(true);
     }
@@ -555,6 +569,7 @@ public class Robot extends APINode {
     this.mInitPos = instance.mInitPos;
     this.mLastPos = instance.mLastPos;
     this.mMeetupLinkHash = instance.mMeetupLinkHash;
+    this.mRobotNotes = instance.mRobotNotes;
     this.mSuite = instance.mSuite;
     this.mTargetMapImageUri = instance.mTargetMapImageUri;
     this.mTargetOsImageUri = instance.mTargetOsImageUri;

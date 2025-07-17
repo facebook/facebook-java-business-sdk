@@ -83,6 +83,8 @@ public class AdCreative extends APINode {
   private AdCreativeDegreesOfFreedomSpec mDegreesOfFreedomSpec = null;
   @SerializedName("destination_set_id")
   private String mDestinationSetId = null;
+  @SerializedName("destination_spec")
+  private AdCreativeDestinationSpec mDestinationSpec = null;
   @SerializedName("dynamic_ad_voice")
   private String mDynamicAdVoice = null;
   @SerializedName("effective_authorization_category")
@@ -97,6 +99,8 @@ public class AdCreative extends APINode {
   private Boolean mEnableLaunchInstantApp = null;
   @SerializedName("facebook_branded_content")
   private AdCreativeFacebookBrandedContent mFacebookBrandedContent = null;
+  @SerializedName("format_transformation_spec")
+  private AdCreativeFormatTransformationSpec mFormatTransformationSpec = null;
   @SerializedName("id")
   private String mId = null;
   @SerializedName("image_crops")
@@ -649,6 +653,20 @@ public class AdCreative extends APINode {
     return this;
   }
 
+  public AdCreativeDestinationSpec getFieldDestinationSpec() {
+    return mDestinationSpec;
+  }
+
+  public AdCreative setFieldDestinationSpec(AdCreativeDestinationSpec value) {
+    this.mDestinationSpec = value;
+    return this;
+  }
+
+  public AdCreative setFieldDestinationSpec(String value) {
+    Type type = new TypeToken<AdCreativeDestinationSpec>(){}.getType();
+    this.mDestinationSpec = AdCreativeDestinationSpec.getGson().fromJson(value, type);
+    return this;
+  }
   public String getFieldDynamicAdVoice() {
     return mDynamicAdVoice;
   }
@@ -715,6 +733,20 @@ public class AdCreative extends APINode {
   public AdCreative setFieldFacebookBrandedContent(String value) {
     Type type = new TypeToken<AdCreativeFacebookBrandedContent>(){}.getType();
     this.mFacebookBrandedContent = AdCreativeFacebookBrandedContent.getGson().fromJson(value, type);
+    return this;
+  }
+  public AdCreativeFormatTransformationSpec getFieldFormatTransformationSpec() {
+    return mFormatTransformationSpec;
+  }
+
+  public AdCreative setFieldFormatTransformationSpec(AdCreativeFormatTransformationSpec value) {
+    this.mFormatTransformationSpec = value;
+    return this;
+  }
+
+  public AdCreative setFieldFormatTransformationSpec(String value) {
+    Type type = new TypeToken<AdCreativeFormatTransformationSpec>(){}.getType();
+    this.mFormatTransformationSpec = AdCreativeFormatTransformationSpec.getGson().fromJson(value, type);
     return this;
   }
   public String getFieldId() {
@@ -1797,6 +1829,7 @@ public class AdCreative extends APINode {
       "creative_sourcing_spec",
       "degrees_of_freedom_spec",
       "destination_set_id",
+      "destination_spec",
       "dynamic_ad_voice",
       "effective_authorization_category",
       "effective_instagram_media_id",
@@ -1804,6 +1837,7 @@ public class AdCreative extends APINode {
       "enable_direct_install",
       "enable_launch_instant_app",
       "facebook_branded_content",
+      "format_transformation_spec",
       "id",
       "image_crops",
       "image_hash",
@@ -2103,6 +2137,13 @@ public class AdCreative extends APINode {
       this.requestField("destination_set_id", value);
       return this;
     }
+    public APIRequestGet requestDestinationSpecField () {
+      return this.requestDestinationSpecField(true);
+    }
+    public APIRequestGet requestDestinationSpecField (boolean value) {
+      this.requestField("destination_spec", value);
+      return this;
+    }
     public APIRequestGet requestDynamicAdVoiceField () {
       return this.requestDynamicAdVoiceField(true);
     }
@@ -2150,6 +2191,13 @@ public class AdCreative extends APINode {
     }
     public APIRequestGet requestFacebookBrandedContentField (boolean value) {
       this.requestField("facebook_branded_content", value);
+      return this;
+    }
+    public APIRequestGet requestFormatTransformationSpecField () {
+      return this.requestFormatTransformationSpecField(true);
+    }
+    public APIRequestGet requestFormatTransformationSpecField (boolean value) {
+      this.requestField("format_transformation_spec", value);
       return this;
     }
     public APIRequestGet requestIdField () {
@@ -3004,6 +3052,7 @@ public class AdCreative extends APINode {
     this.mCreativeSourcingSpec = instance.mCreativeSourcingSpec;
     this.mDegreesOfFreedomSpec = instance.mDegreesOfFreedomSpec;
     this.mDestinationSetId = instance.mDestinationSetId;
+    this.mDestinationSpec = instance.mDestinationSpec;
     this.mDynamicAdVoice = instance.mDynamicAdVoice;
     this.mEffectiveAuthorizationCategory = instance.mEffectiveAuthorizationCategory;
     this.mEffectiveInstagramMediaId = instance.mEffectiveInstagramMediaId;
@@ -3011,6 +3060,7 @@ public class AdCreative extends APINode {
     this.mEnableDirectInstall = instance.mEnableDirectInstall;
     this.mEnableLaunchInstantApp = instance.mEnableLaunchInstantApp;
     this.mFacebookBrandedContent = instance.mFacebookBrandedContent;
+    this.mFormatTransformationSpec = instance.mFormatTransformationSpec;
     this.mId = instance.mId;
     this.mImageCrops = instance.mImageCrops;
     this.mImageHash = instance.mImageHash;

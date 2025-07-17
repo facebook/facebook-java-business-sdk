@@ -51,6 +51,8 @@ public class AdSet extends APINode {
   private String mAssetFeedId = null;
   @SerializedName("attribution_spec")
   private List<AttributionSpec> mAttributionSpec = null;
+  @SerializedName("automatic_manual_state")
+  private String mAutomaticManualState = null;
   @SerializedName("bid_adjustments")
   private AdBidAdjustments mBidAdjustments = null;
   @SerializedName("bid_amount")
@@ -523,6 +525,15 @@ public class AdSet extends APINode {
     this.mAttributionSpec = AttributionSpec.getGson().fromJson(value, type);
     return this;
   }
+  public String getFieldAutomaticManualState() {
+    return mAutomaticManualState;
+  }
+
+  public AdSet setFieldAutomaticManualState(String value) {
+    this.mAutomaticManualState = value;
+    return this;
+  }
+
   public AdBidAdjustments getFieldBidAdjustments() {
     return mBidAdjustments;
   }
@@ -1694,6 +1705,7 @@ public class AdSet extends APINode {
       "creative_sourcing_spec",
       "degrees_of_freedom_spec",
       "destination_set_id",
+      "destination_spec",
       "dynamic_ad_voice",
       "effective_authorization_category",
       "effective_instagram_media_id",
@@ -1701,6 +1713,7 @@ public class AdSet extends APINode {
       "enable_direct_install",
       "enable_launch_instant_app",
       "facebook_branded_content",
+      "format_transformation_spec",
       "id",
       "image_crops",
       "image_hash",
@@ -1982,6 +1995,13 @@ public class AdSet extends APINode {
       this.requestField("destination_set_id", value);
       return this;
     }
+    public APIRequestGetAdCreatives requestDestinationSpecField () {
+      return this.requestDestinationSpecField(true);
+    }
+    public APIRequestGetAdCreatives requestDestinationSpecField (boolean value) {
+      this.requestField("destination_spec", value);
+      return this;
+    }
     public APIRequestGetAdCreatives requestDynamicAdVoiceField () {
       return this.requestDynamicAdVoiceField(true);
     }
@@ -2029,6 +2049,13 @@ public class AdSet extends APINode {
     }
     public APIRequestGetAdCreatives requestFacebookBrandedContentField (boolean value) {
       this.requestField("facebook_branded_content", value);
+      return this;
+    }
+    public APIRequestGetAdCreatives requestFormatTransformationSpecField () {
+      return this.requestFormatTransformationSpecField(true);
+    }
+    public APIRequestGetAdCreatives requestFormatTransformationSpecField (boolean value) {
+      this.requestField("format_transformation_spec", value);
       return this;
     }
     public APIRequestGetAdCreatives requestIdField () {
@@ -3589,6 +3616,7 @@ public class AdSet extends APINode {
       "adset_schedule",
       "asset_feed_id",
       "attribution_spec",
+      "automatic_manual_state",
       "bid_adjustments",
       "bid_amount",
       "bid_constraints",
@@ -3813,6 +3841,13 @@ public class AdSet extends APINode {
     }
     public APIRequestGetCopies requestAttributionSpecField (boolean value) {
       this.requestField("attribution_spec", value);
+      return this;
+    }
+    public APIRequestGetCopies requestAutomaticManualStateField () {
+      return this.requestAutomaticManualStateField(true);
+    }
+    public APIRequestGetCopies requestAutomaticManualStateField (boolean value) {
+      this.requestField("automatic_manual_state", value);
       return this;
     }
     public APIRequestGetCopies requestBidAdjustmentsField () {
@@ -5751,6 +5786,7 @@ public class AdSet extends APINode {
       "adset_schedule",
       "asset_feed_id",
       "attribution_spec",
+      "automatic_manual_state",
       "bid_adjustments",
       "bid_amount",
       "bid_constraints",
@@ -5975,6 +6011,13 @@ public class AdSet extends APINode {
     }
     public APIRequestGet requestAttributionSpecField (boolean value) {
       this.requestField("attribution_spec", value);
+      return this;
+    }
+    public APIRequestGet requestAutomaticManualStateField () {
+      return this.requestAutomaticManualStateField(true);
+    }
+    public APIRequestGet requestAutomaticManualStateField (boolean value) {
+      this.requestField("automatic_manual_state", value);
       return this;
     }
     public APIRequestGet requestBidAdjustmentsField () {
@@ -6432,6 +6475,7 @@ public class AdSet extends APINode {
       "adlabels",
       "adset_schedule",
       "attribution_spec",
+      "automatic_manual_state",
       "bid_adjustments",
       "bid_amount",
       "bid_constraints",
@@ -6568,6 +6612,15 @@ public class AdSet extends APINode {
     }
     public APIRequestUpdate setAttributionSpec (String attributionSpec) {
       this.setParam("attribution_spec", attributionSpec);
+      return this;
+    }
+
+    public APIRequestUpdate setAutomaticManualState (AdSet.EnumAutomaticManualState automaticManualState) {
+      this.setParam("automatic_manual_state", automaticManualState);
+      return this;
+    }
+    public APIRequestUpdate setAutomaticManualState (String automaticManualState) {
+      this.setParam("automatic_manual_state", automaticManualState);
       return this;
     }
 
@@ -7122,6 +7175,8 @@ public class AdSet extends APINode {
       VALUE_APP_INSTALLS("APP_INSTALLS"),
       @SerializedName("APP_INSTALLS_AND_OFFSITE_CONVERSIONS")
       VALUE_APP_INSTALLS_AND_OFFSITE_CONVERSIONS("APP_INSTALLS_AND_OFFSITE_CONVERSIONS"),
+      @SerializedName("AUTOMATIC_OBJECTIVE")
+      VALUE_AUTOMATIC_OBJECTIVE("AUTOMATIC_OBJECTIVE"),
       @SerializedName("CONVERSATIONS")
       VALUE_CONVERSATIONS("CONVERSATIONS"),
       @SerializedName("DERIVED_EVENTS")
@@ -7202,6 +7257,27 @@ public class AdSet extends APINode {
       private String value;
 
       private EnumStatus(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumAutomaticManualState {
+      @SerializedName("AUTOMATIC")
+      VALUE_AUTOMATIC("AUTOMATIC"),
+      @SerializedName("MANUAL")
+      VALUE_MANUAL("MANUAL"),
+      @SerializedName("UNSET")
+      VALUE_UNSET("UNSET"),
+      ;
+
+      private String value;
+
+      private EnumAutomaticManualState(String value) {
         this.value = value;
       }
 
@@ -7478,6 +7554,8 @@ public class AdSet extends APINode {
       VALUE_5("5"),
       @SerializedName("6")
       VALUE_6("6"),
+      @SerializedName("7")
+      VALUE_7("7"),
       ;
 
       private String value;
@@ -7581,6 +7659,7 @@ public class AdSet extends APINode {
     this.mAdsetSchedule = instance.mAdsetSchedule;
     this.mAssetFeedId = instance.mAssetFeedId;
     this.mAttributionSpec = instance.mAttributionSpec;
+    this.mAutomaticManualState = instance.mAutomaticManualState;
     this.mBidAdjustments = instance.mBidAdjustments;
     this.mBidAmount = instance.mBidAmount;
     this.mBidConstraints = instance.mBidConstraints;

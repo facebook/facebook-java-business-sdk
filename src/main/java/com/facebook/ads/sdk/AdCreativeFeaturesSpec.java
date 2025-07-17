@@ -143,6 +143,8 @@ public class AdCreativeFeaturesSpec extends APINode {
   private AdCreativeFeatureDetails mTextGeneration = null;
   @SerializedName("text_optimizations")
   private AdCreativeFeatureDetails mTextOptimizations = null;
+  @SerializedName("text_overlay_translation")
+  private AdCreativeFeatureDetails mTextOverlayTranslation = null;
   @SerializedName("text_translation")
   private AdCreativeFeatureDetails mTextTranslation = null;
   @SerializedName("video_auto_crop")
@@ -155,6 +157,8 @@ public class AdCreativeFeaturesSpec extends APINode {
   private AdCreativeFeatureDetails mVideoToImage = null;
   @SerializedName("video_uncrop")
   private AdCreativeFeatureDetails mVideoUncrop = null;
+  @SerializedName("wa_mm_text_truncation_length")
+  private AdCreativeFeatureDetails mWaMmTextTruncationLength = null;
   protected static Gson gson = null;
 
   public AdCreativeFeaturesSpec() {
@@ -1020,6 +1024,20 @@ public class AdCreativeFeaturesSpec extends APINode {
     this.mTextOptimizations = AdCreativeFeatureDetails.getGson().fromJson(value, type);
     return this;
   }
+  public AdCreativeFeatureDetails getFieldTextOverlayTranslation() {
+    return mTextOverlayTranslation;
+  }
+
+  public AdCreativeFeaturesSpec setFieldTextOverlayTranslation(AdCreativeFeatureDetails value) {
+    this.mTextOverlayTranslation = value;
+    return this;
+  }
+
+  public AdCreativeFeaturesSpec setFieldTextOverlayTranslation(String value) {
+    Type type = new TypeToken<AdCreativeFeatureDetails>(){}.getType();
+    this.mTextOverlayTranslation = AdCreativeFeatureDetails.getGson().fromJson(value, type);
+    return this;
+  }
   public AdCreativeFeatureDetails getFieldTextTranslation() {
     return mTextTranslation;
   }
@@ -1104,6 +1122,20 @@ public class AdCreativeFeaturesSpec extends APINode {
     this.mVideoUncrop = AdCreativeFeatureDetails.getGson().fromJson(value, type);
     return this;
   }
+  public AdCreativeFeatureDetails getFieldWaMmTextTruncationLength() {
+    return mWaMmTextTruncationLength;
+  }
+
+  public AdCreativeFeaturesSpec setFieldWaMmTextTruncationLength(AdCreativeFeatureDetails value) {
+    this.mWaMmTextTruncationLength = value;
+    return this;
+  }
+
+  public AdCreativeFeaturesSpec setFieldWaMmTextTruncationLength(String value) {
+    Type type = new TypeToken<AdCreativeFeatureDetails>(){}.getType();
+    this.mWaMmTextTruncationLength = AdCreativeFeatureDetails.getGson().fromJson(value, type);
+    return this;
+  }
 
 
 
@@ -1172,12 +1204,14 @@ public class AdCreativeFeaturesSpec extends APINode {
     this.mStandardEnhancementsCatalog = instance.mStandardEnhancementsCatalog;
     this.mTextGeneration = instance.mTextGeneration;
     this.mTextOptimizations = instance.mTextOptimizations;
+    this.mTextOverlayTranslation = instance.mTextOverlayTranslation;
     this.mTextTranslation = instance.mTextTranslation;
     this.mVideoAutoCrop = instance.mVideoAutoCrop;
     this.mVideoFiltering = instance.mVideoFiltering;
     this.mVideoHighlight = instance.mVideoHighlight;
     this.mVideoToImage = instance.mVideoToImage;
     this.mVideoUncrop = instance.mVideoUncrop;
+    this.mWaMmTextTruncationLength = instance.mWaMmTextTruncationLength;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

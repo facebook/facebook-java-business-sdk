@@ -40,37 +40,31 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class AdCreativeSourcingSpec extends APINode {
-  @SerializedName("associated_product_set_id")
-  private String mAssociatedProductSetId = null;
-  @SerializedName("brand")
-  private Object mBrand = null;
-  @SerializedName("dynamic_site_links_spec")
-  private Object mDynamicSiteLinksSpec = null;
-  @SerializedName("enable_social_feedback_preservation")
-  private Boolean mEnableSocialFeedbackPreservation = null;
-  @SerializedName("promotion_metadata_spec")
-  private List<AdCreativePromotionMetadataSpec> mPromotionMetadataSpec = null;
-  @SerializedName("site_links_spec")
-  private List<AdCreativeSiteLinksSpec> mSiteLinksSpec = null;
-  @SerializedName("source_url")
-  private String mSourceUrl = null;
-  @SerializedName("website_summary_spec")
-  private Object mWebsiteSummarySpec = null;
+public class BrandedContentFBPromodeUser extends APINode {
+  @SerializedName("delegate_page_for_ads_only_id")
+  private String mDelegatePageForAdsOnlyId = null;
+  @SerializedName("is_iabp")
+  private Boolean mIsIabp = null;
+  @SerializedName("is_managed")
+  private Boolean mIsManaged = null;
+  @SerializedName("name")
+  private String mName = null;
+  @SerializedName("profile_picture_url")
+  private String mProfilePictureUrl = null;
   protected static Gson gson = null;
 
-  public AdCreativeSourcingSpec() {
+  public BrandedContentFBPromodeUser() {
   }
 
   public String getId() {
     return null;
   }
-  public static AdCreativeSourcingSpec loadJSON(String json, APIContext context, String header) {
-    AdCreativeSourcingSpec adCreativeSourcingSpec = getGson().fromJson(json, AdCreativeSourcingSpec.class);
+  public static BrandedContentFBPromodeUser loadJSON(String json, APIContext context, String header) {
+    BrandedContentFBPromodeUser brandedContentFBPromodeUser = getGson().fromJson(json, BrandedContentFBPromodeUser.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(adCreativeSourcingSpec.toString());
+      JsonElement o2 = parser.parse(brandedContentFBPromodeUser.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -80,14 +74,14 @@ public class AdCreativeSourcingSpec extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    adCreativeSourcingSpec.context = context;
-    adCreativeSourcingSpec.rawValue = json;
-    adCreativeSourcingSpec.header = header;
-    return adCreativeSourcingSpec;
+    brandedContentFBPromodeUser.context = context;
+    brandedContentFBPromodeUser.rawValue = json;
+    brandedContentFBPromodeUser.header = header;
+    return brandedContentFBPromodeUser;
   }
 
-  public static APINodeList<AdCreativeSourcingSpec> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<AdCreativeSourcingSpec> adCreativeSourcingSpecs = new APINodeList<AdCreativeSourcingSpec>(request, json, header);
+  public static APINodeList<BrandedContentFBPromodeUser> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<BrandedContentFBPromodeUser> brandedContentFBPromodeUsers = new APINodeList<BrandedContentFBPromodeUser>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -98,9 +92,9 @@ public class AdCreativeSourcingSpec extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adCreativeSourcingSpecs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          brandedContentFBPromodeUsers.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return adCreativeSourcingSpecs;
+        return brandedContentFBPromodeUsers;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -110,20 +104,20 @@ public class AdCreativeSourcingSpec extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                adCreativeSourcingSpecs.setCursors(before, after);
+                brandedContentFBPromodeUsers.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            adCreativeSourcingSpecs.setPaging(previous, next);
+            brandedContentFBPromodeUsers.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              adCreativeSourcingSpecs.setAppSecret(context.getAppSecretProof());
+              brandedContentFBPromodeUsers.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adCreativeSourcingSpecs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              brandedContentFBPromodeUsers.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -134,23 +128,23 @@ public class AdCreativeSourcingSpec extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adCreativeSourcingSpecs.add(loadJSON(entry.getValue().toString(), context, header));
+                  brandedContentFBPromodeUsers.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adCreativeSourcingSpecs.add(loadJSON(obj.toString(), context, header));
+              brandedContentFBPromodeUsers.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return adCreativeSourcingSpecs;
+          return brandedContentFBPromodeUsers;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adCreativeSourcingSpecs.add(loadJSON(entry.getValue().toString(), context, header));
+              brandedContentFBPromodeUsers.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return adCreativeSourcingSpecs;
+          return brandedContentFBPromodeUsers;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -167,20 +161,20 @@ public class AdCreativeSourcingSpec extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adCreativeSourcingSpecs.add(loadJSON(value.toString(), context, header));
+              brandedContentFBPromodeUsers.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return adCreativeSourcingSpecs;
+            return brandedContentFBPromodeUsers;
           }
 
           // Sixth, check if it's pure JsonObject
-          adCreativeSourcingSpecs.clear();
-          adCreativeSourcingSpecs.add(loadJSON(json, context, header));
-          return adCreativeSourcingSpecs;
+          brandedContentFBPromodeUsers.clear();
+          brandedContentFBPromodeUsers.add(loadJSON(json, context, header));
+          return brandedContentFBPromodeUsers;
         }
       }
     } catch (Exception e) {
@@ -208,85 +202,48 @@ public class AdCreativeSourcingSpec extends APINode {
   }
 
 
-  public String getFieldAssociatedProductSetId() {
-    return mAssociatedProductSetId;
+  public String getFieldDelegatePageForAdsOnlyId() {
+    return mDelegatePageForAdsOnlyId;
   }
 
-  public AdCreativeSourcingSpec setFieldAssociatedProductSetId(String value) {
-    this.mAssociatedProductSetId = value;
+  public BrandedContentFBPromodeUser setFieldDelegatePageForAdsOnlyId(String value) {
+    this.mDelegatePageForAdsOnlyId = value;
     return this;
   }
 
-  public Object getFieldBrand() {
-    return mBrand;
+  public Boolean getFieldIsIabp() {
+    return mIsIabp;
   }
 
-  public AdCreativeSourcingSpec setFieldBrand(Object value) {
-    this.mBrand = value;
+  public BrandedContentFBPromodeUser setFieldIsIabp(Boolean value) {
+    this.mIsIabp = value;
     return this;
   }
 
-  public Object getFieldDynamicSiteLinksSpec() {
-    return mDynamicSiteLinksSpec;
+  public Boolean getFieldIsManaged() {
+    return mIsManaged;
   }
 
-  public AdCreativeSourcingSpec setFieldDynamicSiteLinksSpec(Object value) {
-    this.mDynamicSiteLinksSpec = value;
+  public BrandedContentFBPromodeUser setFieldIsManaged(Boolean value) {
+    this.mIsManaged = value;
     return this;
   }
 
-  public Boolean getFieldEnableSocialFeedbackPreservation() {
-    return mEnableSocialFeedbackPreservation;
+  public String getFieldName() {
+    return mName;
   }
 
-  public AdCreativeSourcingSpec setFieldEnableSocialFeedbackPreservation(Boolean value) {
-    this.mEnableSocialFeedbackPreservation = value;
+  public BrandedContentFBPromodeUser setFieldName(String value) {
+    this.mName = value;
     return this;
   }
 
-  public List<AdCreativePromotionMetadataSpec> getFieldPromotionMetadataSpec() {
-    return mPromotionMetadataSpec;
+  public String getFieldProfilePictureUrl() {
+    return mProfilePictureUrl;
   }
 
-  public AdCreativeSourcingSpec setFieldPromotionMetadataSpec(List<AdCreativePromotionMetadataSpec> value) {
-    this.mPromotionMetadataSpec = value;
-    return this;
-  }
-
-  public AdCreativeSourcingSpec setFieldPromotionMetadataSpec(String value) {
-    Type type = new TypeToken<List<AdCreativePromotionMetadataSpec>>(){}.getType();
-    this.mPromotionMetadataSpec = AdCreativePromotionMetadataSpec.getGson().fromJson(value, type);
-    return this;
-  }
-  public List<AdCreativeSiteLinksSpec> getFieldSiteLinksSpec() {
-    return mSiteLinksSpec;
-  }
-
-  public AdCreativeSourcingSpec setFieldSiteLinksSpec(List<AdCreativeSiteLinksSpec> value) {
-    this.mSiteLinksSpec = value;
-    return this;
-  }
-
-  public AdCreativeSourcingSpec setFieldSiteLinksSpec(String value) {
-    Type type = new TypeToken<List<AdCreativeSiteLinksSpec>>(){}.getType();
-    this.mSiteLinksSpec = AdCreativeSiteLinksSpec.getGson().fromJson(value, type);
-    return this;
-  }
-  public String getFieldSourceUrl() {
-    return mSourceUrl;
-  }
-
-  public AdCreativeSourcingSpec setFieldSourceUrl(String value) {
-    this.mSourceUrl = value;
-    return this;
-  }
-
-  public Object getFieldWebsiteSummarySpec() {
-    return mWebsiteSummarySpec;
-  }
-
-  public AdCreativeSourcingSpec setFieldWebsiteSummarySpec(Object value) {
-    this.mWebsiteSummarySpec = value;
+  public BrandedContentFBPromodeUser setFieldProfilePictureUrl(String value) {
+    this.mProfilePictureUrl = value;
     return this;
   }
 
@@ -306,24 +263,21 @@ public class AdCreativeSourcingSpec extends APINode {
     return gson;
   }
 
-  public AdCreativeSourcingSpec copyFrom(AdCreativeSourcingSpec instance) {
-    this.mAssociatedProductSetId = instance.mAssociatedProductSetId;
-    this.mBrand = instance.mBrand;
-    this.mDynamicSiteLinksSpec = instance.mDynamicSiteLinksSpec;
-    this.mEnableSocialFeedbackPreservation = instance.mEnableSocialFeedbackPreservation;
-    this.mPromotionMetadataSpec = instance.mPromotionMetadataSpec;
-    this.mSiteLinksSpec = instance.mSiteLinksSpec;
-    this.mSourceUrl = instance.mSourceUrl;
-    this.mWebsiteSummarySpec = instance.mWebsiteSummarySpec;
+  public BrandedContentFBPromodeUser copyFrom(BrandedContentFBPromodeUser instance) {
+    this.mDelegatePageForAdsOnlyId = instance.mDelegatePageForAdsOnlyId;
+    this.mIsIabp = instance.mIsIabp;
+    this.mIsManaged = instance.mIsManaged;
+    this.mName = instance.mName;
+    this.mProfilePictureUrl = instance.mProfilePictureUrl;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<AdCreativeSourcingSpec> getParser() {
-    return new APIRequest.ResponseParser<AdCreativeSourcingSpec>() {
-      public APINodeList<AdCreativeSourcingSpec> parseResponse(String response, APIContext context, APIRequest<AdCreativeSourcingSpec> request, String header) throws MalformedResponseException {
-        return AdCreativeSourcingSpec.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<BrandedContentFBPromodeUser> getParser() {
+    return new APIRequest.ResponseParser<BrandedContentFBPromodeUser>() {
+      public APINodeList<BrandedContentFBPromodeUser> parseResponse(String response, APIContext context, APIRequest<BrandedContentFBPromodeUser> request, String header) throws MalformedResponseException {
+        return BrandedContentFBPromodeUser.parseResponse(response, context, request, header);
       }
     };
   }

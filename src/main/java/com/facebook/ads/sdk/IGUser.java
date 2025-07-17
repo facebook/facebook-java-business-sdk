@@ -340,6 +340,10 @@ public class IGUser extends APINode {
     return new APIRequestGetContentPublishingLimit(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetCreatorMarketPlaceCreators getCreatorMarketPlaceCreators() {
+    return new APIRequestGetCreatorMarketPlaceCreators(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetDataset getDataset() {
     return new APIRequestGetDataset(this.getPrefixedId().toString(), context);
   }
@@ -354,6 +358,10 @@ public class IGUser extends APINode {
 
   public APIRequestGetInstagramBackedThreadsUser getInstagramBackedThreadsUser() {
     return new APIRequestGetInstagramBackedThreadsUser(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestCreateInstagramBackedThreadsUser createInstagramBackedThreadsUser() {
+    return new APIRequestCreateInstagramBackedThreadsUser(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetLiveMedia getLiveMedia() {
@@ -2954,6 +2962,359 @@ public class IGUser extends APINode {
     }
   }
 
+  public static class APIRequestGetCreatorMarketPlaceCreators extends APIRequest<IGUserExportForCAM> {
+
+    APINodeList<IGUserExportForCAM> lastResponse = null;
+    @Override
+    public APINodeList<IGUserExportForCAM> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "creator_age_bucket",
+      "creator_countries",
+      "creator_gender",
+      "creator_interests",
+      "creator_max_engaged_accounts",
+      "creator_max_followers",
+      "creator_min_engaged_accounts",
+      "creator_min_followers",
+      "major_audience_age_bucket",
+      "major_audience_countries",
+      "major_audience_gender",
+      "query",
+      "reels_interaction_rate",
+      "similar_to_creators",
+    };
+
+    public static final String[] FIELDS = {
+      "age_bucket",
+      "biography",
+      "country",
+      "email",
+      "gender",
+      "has_brand_partnership_experience",
+      "id",
+      "is_account_verified",
+      "is_paid_partnership_messages_enabled",
+      "messaging_id",
+      "onboarded_status",
+      "past_brand_partnership_partners",
+      "portfolio_url",
+      "username",
+    };
+
+    @Override
+    public APINodeList<IGUserExportForCAM> parseResponse(String response, String header) throws APIException {
+      return IGUserExportForCAM.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<IGUserExportForCAM> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<IGUserExportForCAM> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<IGUserExportForCAM>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<IGUserExportForCAM>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<IGUserExportForCAM>>() {
+           public APINodeList<IGUserExportForCAM> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetCreatorMarketPlaceCreators.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestGetCreatorMarketPlaceCreators(String nodeId, APIContext context) {
+      super(context, nodeId, "/creator_marketplace_creators", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetCreatorMarketPlaceCreators setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCreatorMarketPlaceCreators setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetCreatorMarketPlaceCreators setCreatorAgeBucket (List<Object> creatorAgeBucket) {
+      this.setParam("creator_age_bucket", creatorAgeBucket);
+      return this;
+    }
+    public APIRequestGetCreatorMarketPlaceCreators setCreatorAgeBucket (String creatorAgeBucket) {
+      this.setParam("creator_age_bucket", creatorAgeBucket);
+      return this;
+    }
+
+    public APIRequestGetCreatorMarketPlaceCreators setCreatorCountries (List<IGUserExportForCAM.EnumCreatorCountries> creatorCountries) {
+      this.setParam("creator_countries", creatorCountries);
+      return this;
+    }
+    public APIRequestGetCreatorMarketPlaceCreators setCreatorCountries (String creatorCountries) {
+      this.setParam("creator_countries", creatorCountries);
+      return this;
+    }
+
+    public APIRequestGetCreatorMarketPlaceCreators setCreatorGender (List<IGUserExportForCAM.EnumCreatorGender> creatorGender) {
+      this.setParam("creator_gender", creatorGender);
+      return this;
+    }
+    public APIRequestGetCreatorMarketPlaceCreators setCreatorGender (String creatorGender) {
+      this.setParam("creator_gender", creatorGender);
+      return this;
+    }
+
+    public APIRequestGetCreatorMarketPlaceCreators setCreatorInterests (List<Object> creatorInterests) {
+      this.setParam("creator_interests", creatorInterests);
+      return this;
+    }
+    public APIRequestGetCreatorMarketPlaceCreators setCreatorInterests (String creatorInterests) {
+      this.setParam("creator_interests", creatorInterests);
+      return this;
+    }
+
+    public APIRequestGetCreatorMarketPlaceCreators setCreatorMaxEngagedAccounts (Long creatorMaxEngagedAccounts) {
+      this.setParam("creator_max_engaged_accounts", creatorMaxEngagedAccounts);
+      return this;
+    }
+    public APIRequestGetCreatorMarketPlaceCreators setCreatorMaxEngagedAccounts (String creatorMaxEngagedAccounts) {
+      this.setParam("creator_max_engaged_accounts", creatorMaxEngagedAccounts);
+      return this;
+    }
+
+    public APIRequestGetCreatorMarketPlaceCreators setCreatorMaxFollowers (Long creatorMaxFollowers) {
+      this.setParam("creator_max_followers", creatorMaxFollowers);
+      return this;
+    }
+    public APIRequestGetCreatorMarketPlaceCreators setCreatorMaxFollowers (String creatorMaxFollowers) {
+      this.setParam("creator_max_followers", creatorMaxFollowers);
+      return this;
+    }
+
+    public APIRequestGetCreatorMarketPlaceCreators setCreatorMinEngagedAccounts (Long creatorMinEngagedAccounts) {
+      this.setParam("creator_min_engaged_accounts", creatorMinEngagedAccounts);
+      return this;
+    }
+    public APIRequestGetCreatorMarketPlaceCreators setCreatorMinEngagedAccounts (String creatorMinEngagedAccounts) {
+      this.setParam("creator_min_engaged_accounts", creatorMinEngagedAccounts);
+      return this;
+    }
+
+    public APIRequestGetCreatorMarketPlaceCreators setCreatorMinFollowers (Long creatorMinFollowers) {
+      this.setParam("creator_min_followers", creatorMinFollowers);
+      return this;
+    }
+    public APIRequestGetCreatorMarketPlaceCreators setCreatorMinFollowers (String creatorMinFollowers) {
+      this.setParam("creator_min_followers", creatorMinFollowers);
+      return this;
+    }
+
+    public APIRequestGetCreatorMarketPlaceCreators setMajorAudienceAgeBucket (List<Object> majorAudienceAgeBucket) {
+      this.setParam("major_audience_age_bucket", majorAudienceAgeBucket);
+      return this;
+    }
+    public APIRequestGetCreatorMarketPlaceCreators setMajorAudienceAgeBucket (String majorAudienceAgeBucket) {
+      this.setParam("major_audience_age_bucket", majorAudienceAgeBucket);
+      return this;
+    }
+
+    public APIRequestGetCreatorMarketPlaceCreators setMajorAudienceCountries (List<IGUserExportForCAM.EnumMajorAudienceCountries> majorAudienceCountries) {
+      this.setParam("major_audience_countries", majorAudienceCountries);
+      return this;
+    }
+    public APIRequestGetCreatorMarketPlaceCreators setMajorAudienceCountries (String majorAudienceCountries) {
+      this.setParam("major_audience_countries", majorAudienceCountries);
+      return this;
+    }
+
+    public APIRequestGetCreatorMarketPlaceCreators setMajorAudienceGender (List<IGUserExportForCAM.EnumMajorAudienceGender> majorAudienceGender) {
+      this.setParam("major_audience_gender", majorAudienceGender);
+      return this;
+    }
+    public APIRequestGetCreatorMarketPlaceCreators setMajorAudienceGender (String majorAudienceGender) {
+      this.setParam("major_audience_gender", majorAudienceGender);
+      return this;
+    }
+
+    public APIRequestGetCreatorMarketPlaceCreators setQuery (String query) {
+      this.setParam("query", query);
+      return this;
+    }
+
+    public APIRequestGetCreatorMarketPlaceCreators setReelsInteractionRate (Object reelsInteractionRate) {
+      this.setParam("reels_interaction_rate", reelsInteractionRate);
+      return this;
+    }
+    public APIRequestGetCreatorMarketPlaceCreators setReelsInteractionRate (String reelsInteractionRate) {
+      this.setParam("reels_interaction_rate", reelsInteractionRate);
+      return this;
+    }
+
+    public APIRequestGetCreatorMarketPlaceCreators setSimilarToCreators (List<String> similarToCreators) {
+      this.setParam("similar_to_creators", similarToCreators);
+      return this;
+    }
+    public APIRequestGetCreatorMarketPlaceCreators setSimilarToCreators (String similarToCreators) {
+      this.setParam("similar_to_creators", similarToCreators);
+      return this;
+    }
+
+    public APIRequestGetCreatorMarketPlaceCreators requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetCreatorMarketPlaceCreators requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCreatorMarketPlaceCreators requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetCreatorMarketPlaceCreators requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCreatorMarketPlaceCreators requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCreatorMarketPlaceCreators requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetCreatorMarketPlaceCreators requestAgeBucketField () {
+      return this.requestAgeBucketField(true);
+    }
+    public APIRequestGetCreatorMarketPlaceCreators requestAgeBucketField (boolean value) {
+      this.requestField("age_bucket", value);
+      return this;
+    }
+    public APIRequestGetCreatorMarketPlaceCreators requestBiographyField () {
+      return this.requestBiographyField(true);
+    }
+    public APIRequestGetCreatorMarketPlaceCreators requestBiographyField (boolean value) {
+      this.requestField("biography", value);
+      return this;
+    }
+    public APIRequestGetCreatorMarketPlaceCreators requestCountryField () {
+      return this.requestCountryField(true);
+    }
+    public APIRequestGetCreatorMarketPlaceCreators requestCountryField (boolean value) {
+      this.requestField("country", value);
+      return this;
+    }
+    public APIRequestGetCreatorMarketPlaceCreators requestEmailField () {
+      return this.requestEmailField(true);
+    }
+    public APIRequestGetCreatorMarketPlaceCreators requestEmailField (boolean value) {
+      this.requestField("email", value);
+      return this;
+    }
+    public APIRequestGetCreatorMarketPlaceCreators requestGenderField () {
+      return this.requestGenderField(true);
+    }
+    public APIRequestGetCreatorMarketPlaceCreators requestGenderField (boolean value) {
+      this.requestField("gender", value);
+      return this;
+    }
+    public APIRequestGetCreatorMarketPlaceCreators requestHasBrandPartnershipExperienceField () {
+      return this.requestHasBrandPartnershipExperienceField(true);
+    }
+    public APIRequestGetCreatorMarketPlaceCreators requestHasBrandPartnershipExperienceField (boolean value) {
+      this.requestField("has_brand_partnership_experience", value);
+      return this;
+    }
+    public APIRequestGetCreatorMarketPlaceCreators requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetCreatorMarketPlaceCreators requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetCreatorMarketPlaceCreators requestIsAccountVerifiedField () {
+      return this.requestIsAccountVerifiedField(true);
+    }
+    public APIRequestGetCreatorMarketPlaceCreators requestIsAccountVerifiedField (boolean value) {
+      this.requestField("is_account_verified", value);
+      return this;
+    }
+    public APIRequestGetCreatorMarketPlaceCreators requestIsPaidPartnershipMessagesEnabledField () {
+      return this.requestIsPaidPartnershipMessagesEnabledField(true);
+    }
+    public APIRequestGetCreatorMarketPlaceCreators requestIsPaidPartnershipMessagesEnabledField (boolean value) {
+      this.requestField("is_paid_partnership_messages_enabled", value);
+      return this;
+    }
+    public APIRequestGetCreatorMarketPlaceCreators requestMessagingIdField () {
+      return this.requestMessagingIdField(true);
+    }
+    public APIRequestGetCreatorMarketPlaceCreators requestMessagingIdField (boolean value) {
+      this.requestField("messaging_id", value);
+      return this;
+    }
+    public APIRequestGetCreatorMarketPlaceCreators requestOnboardedStatusField () {
+      return this.requestOnboardedStatusField(true);
+    }
+    public APIRequestGetCreatorMarketPlaceCreators requestOnboardedStatusField (boolean value) {
+      this.requestField("onboarded_status", value);
+      return this;
+    }
+    public APIRequestGetCreatorMarketPlaceCreators requestPastBrandPartnershipPartnersField () {
+      return this.requestPastBrandPartnershipPartnersField(true);
+    }
+    public APIRequestGetCreatorMarketPlaceCreators requestPastBrandPartnershipPartnersField (boolean value) {
+      this.requestField("past_brand_partnership_partners", value);
+      return this;
+    }
+    public APIRequestGetCreatorMarketPlaceCreators requestPortfolioUrlField () {
+      return this.requestPortfolioUrlField(true);
+    }
+    public APIRequestGetCreatorMarketPlaceCreators requestPortfolioUrlField (boolean value) {
+      this.requestField("portfolio_url", value);
+      return this;
+    }
+    public APIRequestGetCreatorMarketPlaceCreators requestUsernameField () {
+      return this.requestUsernameField(true);
+    }
+    public APIRequestGetCreatorMarketPlaceCreators requestUsernameField (boolean value) {
+      this.requestField("username", value);
+      return this;
+    }
+  }
+
   public static class APIRequestGetDataset extends APIRequest<Dataset> {
 
     APINodeList<Dataset> lastResponse = null;
@@ -3528,6 +3889,111 @@ public class IGUser extends APINode {
       this.requestField("threads_user_profile_pic", value);
       return this;
     }
+  }
+
+  public static class APIRequestCreateInstagramBackedThreadsUser extends APIRequest<ThreadsUser> {
+
+    ThreadsUser lastResponse = null;
+    @Override
+    public ThreadsUser getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public ThreadsUser parseResponse(String response, String header) throws APIException {
+      return ThreadsUser.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public ThreadsUser execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public ThreadsUser execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<ThreadsUser> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<ThreadsUser> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, ThreadsUser>() {
+           public ThreadsUser apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateInstagramBackedThreadsUser.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestCreateInstagramBackedThreadsUser(String nodeId, APIContext context) {
+      super(context, nodeId, "/instagram_backed_threads_user", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateInstagramBackedThreadsUser setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateInstagramBackedThreadsUser setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateInstagramBackedThreadsUser requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateInstagramBackedThreadsUser requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateInstagramBackedThreadsUser requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateInstagramBackedThreadsUser requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateInstagramBackedThreadsUser requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateInstagramBackedThreadsUser requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
   }
 
   public static class APIRequestGetLiveMedia extends APIRequest<IGMedia> {
@@ -4576,6 +5042,7 @@ public class IGUser extends APINode {
     public static final String[] FIELDS = {
       "creation_timestamp",
       "next_eligible_time",
+      "next_eligible_time_for_paid_messaging",
       "notification_messages_frequency",
       "notification_messages_reoptin",
       "notification_messages_timezone",
@@ -4689,6 +5156,13 @@ public class IGUser extends APINode {
     }
     public APIRequestGetNotificationMessageTokens requestNextEligibleTimeField (boolean value) {
       this.requestField("next_eligible_time", value);
+      return this;
+    }
+    public APIRequestGetNotificationMessageTokens requestNextEligibleTimeForPaidMessagingField () {
+      return this.requestNextEligibleTimeForPaidMessagingField(true);
+    }
+    public APIRequestGetNotificationMessageTokens requestNextEligibleTimeForPaidMessagingField (boolean value) {
+      this.requestField("next_eligible_time_for_paid_messaging", value);
       return this;
     }
     public APIRequestGetNotificationMessageTokens requestNotificationMessagesFrequencyField () {

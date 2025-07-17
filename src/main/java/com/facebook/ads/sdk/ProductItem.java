@@ -59,6 +59,8 @@ public class ProductItem extends APINode {
   private List<String> mBundleItems = null;
   @SerializedName("bundle_retailer_ids")
   private List<String> mBundleRetailerIds = null;
+  @SerializedName("capabilities_disabled_by_user")
+  private List<String> mCapabilitiesDisabledByUser = null;
   @SerializedName("capability_to_review_status")
   private List<Map<String, EnumCapabilityToReviewStatus>> mCapabilityToReviewStatus = null;
   @SerializedName("category")
@@ -479,6 +481,10 @@ public class ProductItem extends APINode {
 
   public List<String> getFieldBundleRetailerIds() {
     return mBundleRetailerIds;
+  }
+
+  public List<String> getFieldCapabilitiesDisabledByUser() {
+    return mCapabilitiesDisabledByUser;
   }
 
   public List<Map<String, EnumCapabilityToReviewStatus>> getFieldCapabilityToReviewStatus() {
@@ -1513,6 +1519,7 @@ public class ProductItem extends APINode {
       "brand",
       "bundle_items",
       "bundle_retailer_ids",
+      "capabilities_disabled_by_user",
       "capability_to_review_status",
       "category",
       "category_specific_fields",
@@ -1773,6 +1780,13 @@ public class ProductItem extends APINode {
     }
     public APIRequestGet requestBundleRetailerIdsField (boolean value) {
       this.requestField("bundle_retailer_ids", value);
+      return this;
+    }
+    public APIRequestGet requestCapabilitiesDisabledByUserField () {
+      return this.requestCapabilitiesDisabledByUserField(true);
+    }
+    public APIRequestGet requestCapabilitiesDisabledByUserField (boolean value) {
+      this.requestField("capabilities_disabled_by_user", value);
       return this;
     }
     public APIRequestGet requestCapabilityToReviewStatusField () {
@@ -4049,6 +4063,8 @@ public class ProductItem extends APINode {
   }
 
   public static enum EnumOriginCountry {
+      @SerializedName("AC")
+      VALUE_AC("AC"),
       @SerializedName("AD")
       VALUE_AD("AD"),
       @SerializedName("AE")
@@ -4608,6 +4624,7 @@ public class ProductItem extends APINode {
     this.mBrand = instance.mBrand;
     this.mBundleItems = instance.mBundleItems;
     this.mBundleRetailerIds = instance.mBundleRetailerIds;
+    this.mCapabilitiesDisabledByUser = instance.mCapabilitiesDisabledByUser;
     this.mCapabilityToReviewStatus = instance.mCapabilityToReviewStatus;
     this.mCategory = instance.mCategory;
     this.mCategorySpecificFields = instance.mCategorySpecificFields;

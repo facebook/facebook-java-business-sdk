@@ -41,6 +41,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class DeliveryWindow extends APINode {
+  @SerializedName("ac")
+  private Long mAc = null;
   @SerializedName("ad")
   private Long mAd = null;
   @SerializedName("ae")
@@ -695,6 +697,15 @@ public class DeliveryWindow extends APINode {
     return getGson().toJson(this);
   }
 
+
+  public Long getFieldAc() {
+    return mAc;
+  }
+
+  public DeliveryWindow setFieldAc(Long value) {
+    this.mAc = value;
+    return this;
+  }
 
   public Long getFieldAd() {
     return mAd;
@@ -2981,6 +2992,7 @@ public class DeliveryWindow extends APINode {
   }
 
   public DeliveryWindow copyFrom(DeliveryWindow instance) {
+    this.mAc = instance.mAc;
     this.mAd = instance.mAd;
     this.mAe = instance.mAe;
     this.mAf = instance.mAf;

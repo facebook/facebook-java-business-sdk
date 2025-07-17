@@ -45,6 +45,8 @@ public class CollaborativeAdsPartnerBusinesses extends APINode {
   private List<Business> mCollaborativeAdsPartnerBusinessesInfo = null;
   @SerializedName("dedicated_partner_business_info")
   private Business mDedicatedPartnerBusinessInfo = null;
+  @SerializedName("dedicated_partners_business_info")
+  private List<Business> mDedicatedPartnersBusinessInfo = null;
   protected static Gson gson = null;
 
   public CollaborativeAdsPartnerBusinesses() {
@@ -227,6 +229,20 @@ public class CollaborativeAdsPartnerBusinesses extends APINode {
     this.mDedicatedPartnerBusinessInfo = Business.getGson().fromJson(value, type);
     return this;
   }
+  public List<Business> getFieldDedicatedPartnersBusinessInfo() {
+    return mDedicatedPartnersBusinessInfo;
+  }
+
+  public CollaborativeAdsPartnerBusinesses setFieldDedicatedPartnersBusinessInfo(List<Business> value) {
+    this.mDedicatedPartnersBusinessInfo = value;
+    return this;
+  }
+
+  public CollaborativeAdsPartnerBusinesses setFieldDedicatedPartnersBusinessInfo(String value) {
+    Type type = new TypeToken<List<Business>>(){}.getType();
+    this.mDedicatedPartnersBusinessInfo = Business.getGson().fromJson(value, type);
+    return this;
+  }
 
 
 
@@ -246,6 +262,7 @@ public class CollaborativeAdsPartnerBusinesses extends APINode {
   public CollaborativeAdsPartnerBusinesses copyFrom(CollaborativeAdsPartnerBusinesses instance) {
     this.mCollaborativeAdsPartnerBusinessesInfo = instance.mCollaborativeAdsPartnerBusinessesInfo;
     this.mDedicatedPartnerBusinessInfo = instance.mDedicatedPartnerBusinessInfo;
+    this.mDedicatedPartnersBusinessInfo = instance.mDedicatedPartnersBusinessInfo;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

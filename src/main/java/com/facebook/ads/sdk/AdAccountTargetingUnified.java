@@ -544,6 +544,8 @@ public class AdAccountTargetingUnified extends APINode {
   }
 
   public static enum EnumRegulatedCountries {
+      @SerializedName("AC")
+      VALUE_AC("AC"),
       @SerializedName("AD")
       VALUE_AD("AD"),
       @SerializedName("AE")

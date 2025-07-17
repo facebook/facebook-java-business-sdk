@@ -61,10 +61,16 @@ public class McomInvoiceStatus extends APINode {
   private String mSlipVerificationError = null;
   @SerializedName("slip_verification_status")
   private String mSlipVerificationStatus = null;
+  @SerializedName("sof_transfer_id")
+  private String mSofTransferId = null;
+  @SerializedName("sof_transfer_timestamp")
+  private Long mSofTransferTimestamp = null;
   @SerializedName("transaction_fee")
   private Object mTransactionFee = null;
   @SerializedName("transfer_slip")
   private String mTransferSlip = null;
+  @SerializedName("transfer_slip_qr_code")
+  private String mTransferSlipQrCode = null;
   protected static Gson gson = null;
 
   public McomInvoiceStatus() {
@@ -306,6 +312,24 @@ public class McomInvoiceStatus extends APINode {
     return this;
   }
 
+  public String getFieldSofTransferId() {
+    return mSofTransferId;
+  }
+
+  public McomInvoiceStatus setFieldSofTransferId(String value) {
+    this.mSofTransferId = value;
+    return this;
+  }
+
+  public Long getFieldSofTransferTimestamp() {
+    return mSofTransferTimestamp;
+  }
+
+  public McomInvoiceStatus setFieldSofTransferTimestamp(Long value) {
+    this.mSofTransferTimestamp = value;
+    return this;
+  }
+
   public Object getFieldTransactionFee() {
     return mTransactionFee;
   }
@@ -321,6 +345,15 @@ public class McomInvoiceStatus extends APINode {
 
   public McomInvoiceStatus setFieldTransferSlip(String value) {
     this.mTransferSlip = value;
+    return this;
+  }
+
+  public String getFieldTransferSlipQrCode() {
+    return mTransferSlipQrCode;
+  }
+
+  public McomInvoiceStatus setFieldTransferSlipQrCode(String value) {
+    this.mTransferSlipQrCode = value;
     return this;
   }
 
@@ -351,8 +384,11 @@ public class McomInvoiceStatus extends APINode {
     this.mPayoutAmount = instance.mPayoutAmount;
     this.mSlipVerificationError = instance.mSlipVerificationError;
     this.mSlipVerificationStatus = instance.mSlipVerificationStatus;
+    this.mSofTransferId = instance.mSofTransferId;
+    this.mSofTransferTimestamp = instance.mSofTransferTimestamp;
     this.mTransactionFee = instance.mTransactionFee;
     this.mTransferSlip = instance.mTransferSlip;
+    this.mTransferSlipQrCode = instance.mTransferSlipQrCode;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

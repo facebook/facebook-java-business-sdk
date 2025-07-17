@@ -173,6 +173,8 @@ public class AdsUserSettings extends APINode {
   private Boolean mShouldNotShowPublishMessageOnEditorClose = null;
   @SerializedName("show_original_videos_opt_in")
   private String mShowOriginalVideosOptIn = null;
+  @SerializedName("show_summary_opt_in_status")
+  private String mShowSummaryOptInStatus = null;
   @SerializedName("static_ad_product_extensions_opt_in")
   private String mStaticAdProductExtensionsOptIn = null;
   @SerializedName("sticky_setting_after_default_on")
@@ -681,6 +683,10 @@ public class AdsUserSettings extends APINode {
     return mShowOriginalVideosOptIn;
   }
 
+  public String getFieldShowSummaryOptInStatus() {
+    return mShowSummaryOptInStatus;
+  }
+
   public String getFieldStaticAdProductExtensionsOptIn() {
     return mStaticAdProductExtensionsOptIn;
   }
@@ -811,6 +817,7 @@ public class AdsUserSettings extends APINode {
       "should_not_show_cbo_campaign_toggle_off_confirmation_message",
       "should_not_show_publish_message_on_editor_close",
       "show_original_videos_opt_in",
+      "show_summary_opt_in_status",
       "static_ad_product_extensions_opt_in",
       "sticky_setting_after_default_on",
       "syd_campaign_trends_metric",
@@ -1377,6 +1384,13 @@ public class AdsUserSettings extends APINode {
       this.requestField("show_original_videos_opt_in", value);
       return this;
     }
+    public APIRequestGet requestShowSummaryOptInStatusField () {
+      return this.requestShowSummaryOptInStatusField(true);
+    }
+    public APIRequestGet requestShowSummaryOptInStatusField (boolean value) {
+      this.requestField("show_summary_opt_in_status", value);
+      return this;
+    }
     public APIRequestGet requestStaticAdProductExtensionsOptInField () {
       return this.requestStaticAdProductExtensionsOptInField(true);
     }
@@ -1544,6 +1558,7 @@ public class AdsUserSettings extends APINode {
     this.mShouldNotShowCboCampaignToggleOffConfirmationMessage = instance.mShouldNotShowCboCampaignToggleOffConfirmationMessage;
     this.mShouldNotShowPublishMessageOnEditorClose = instance.mShouldNotShowPublishMessageOnEditorClose;
     this.mShowOriginalVideosOptIn = instance.mShowOriginalVideosOptIn;
+    this.mShowSummaryOptInStatus = instance.mShowSummaryOptInStatus;
     this.mStaticAdProductExtensionsOptIn = instance.mStaticAdProductExtensionsOptIn;
     this.mStickySettingAfterDefaultOn = instance.mStickySettingAfterDefaultOn;
     this.mSydCampaignTrendsMetric = instance.mSydCampaignTrendsMetric;

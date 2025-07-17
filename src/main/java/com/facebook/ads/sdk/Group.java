@@ -1114,8 +1114,6 @@ public class Group extends APINode {
       "registration_setting",
       "scheduled_publish_time",
       "start_time",
-      "sub_categories",
-      "ticket_selling_status",
       "ticket_setting",
       "ticket_uri",
       "ticket_uri_start_sales_time",
@@ -1410,20 +1408,6 @@ public class Group extends APINode {
     }
     public APIRequestGetEvents requestStartTimeField (boolean value) {
       this.requestField("start_time", value);
-      return this;
-    }
-    public APIRequestGetEvents requestSubCategoriesField () {
-      return this.requestSubCategoriesField(true);
-    }
-    public APIRequestGetEvents requestSubCategoriesField (boolean value) {
-      this.requestField("sub_categories", value);
-      return this;
-    }
-    public APIRequestGetEvents requestTicketSellingStatusField () {
-      return this.requestTicketSellingStatusField(true);
-    }
-    public APIRequestGetEvents requestTicketSellingStatusField (boolean value) {
-      this.requestField("ticket_selling_status", value);
       return this;
     }
     public APIRequestGetEvents requestTicketSettingField () {

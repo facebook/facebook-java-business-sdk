@@ -296,6 +296,10 @@ public class BusinessUser extends APINode {
     return new APIRequestGetAssignedProductCatalogs(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetAssignedWhatsAppBusinessAccounts getAssignedWhatsAppBusinessAccounts() {
+    return new APIRequestGetAssignedWhatsAppBusinessAccounts(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestDelete delete() {
     return new APIRequestDelete(this.getPrefixedId().toString(), context);
   }
@@ -2769,6 +2773,311 @@ public class BusinessUser extends APINode {
     }
     public APIRequestGetAssignedProductCatalogs requestVerticalField (boolean value) {
       this.requestField("vertical", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestGetAssignedWhatsAppBusinessAccounts extends APIRequest<WhatsAppBusinessAccount> {
+
+    APINodeList<WhatsAppBusinessAccount> lastResponse = null;
+    @Override
+    public APINodeList<WhatsAppBusinessAccount> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "account_review_status",
+      "analytics",
+      "auth_international_rate_eligibility",
+      "business_verification_status",
+      "country",
+      "creation_time",
+      "currency",
+      "health_status",
+      "id",
+      "is_enabled_for_insights",
+      "is_shared_with_partners",
+      "linked_commerce_account",
+      "marketing_messages_lite_api_status",
+      "marketing_messages_onboarding_status",
+      "message_template_namespace",
+      "name",
+      "on_behalf_of_business_info",
+      "owner_business",
+      "owner_business_info",
+      "ownership_type",
+      "primary_business_location",
+      "primary_funding_id",
+      "purchase_order_number",
+      "status",
+      "timezone_id",
+    };
+
+    @Override
+    public APINodeList<WhatsAppBusinessAccount> parseResponse(String response, String header) throws APIException {
+      return WhatsAppBusinessAccount.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<WhatsAppBusinessAccount> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<WhatsAppBusinessAccount> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<WhatsAppBusinessAccount>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<WhatsAppBusinessAccount>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<WhatsAppBusinessAccount>>() {
+           public APINodeList<WhatsAppBusinessAccount> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetAssignedWhatsAppBusinessAccounts.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestGetAssignedWhatsAppBusinessAccounts(String nodeId, APIContext context) {
+      super(context, nodeId, "/assigned_whatsapp_business_accounts", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetAssignedWhatsAppBusinessAccounts setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAssignedWhatsAppBusinessAccounts setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetAssignedWhatsAppBusinessAccounts requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetAssignedWhatsAppBusinessAccounts requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAssignedWhatsAppBusinessAccounts requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetAssignedWhatsAppBusinessAccounts requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAssignedWhatsAppBusinessAccounts requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAssignedWhatsAppBusinessAccounts requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetAssignedWhatsAppBusinessAccounts requestAccountReviewStatusField () {
+      return this.requestAccountReviewStatusField(true);
+    }
+    public APIRequestGetAssignedWhatsAppBusinessAccounts requestAccountReviewStatusField (boolean value) {
+      this.requestField("account_review_status", value);
+      return this;
+    }
+    public APIRequestGetAssignedWhatsAppBusinessAccounts requestAnalyticsField () {
+      return this.requestAnalyticsField(true);
+    }
+    public APIRequestGetAssignedWhatsAppBusinessAccounts requestAnalyticsField (boolean value) {
+      this.requestField("analytics", value);
+      return this;
+    }
+    public APIRequestGetAssignedWhatsAppBusinessAccounts requestAuthInternationalRateEligibilityField () {
+      return this.requestAuthInternationalRateEligibilityField(true);
+    }
+    public APIRequestGetAssignedWhatsAppBusinessAccounts requestAuthInternationalRateEligibilityField (boolean value) {
+      this.requestField("auth_international_rate_eligibility", value);
+      return this;
+    }
+    public APIRequestGetAssignedWhatsAppBusinessAccounts requestBusinessVerificationStatusField () {
+      return this.requestBusinessVerificationStatusField(true);
+    }
+    public APIRequestGetAssignedWhatsAppBusinessAccounts requestBusinessVerificationStatusField (boolean value) {
+      this.requestField("business_verification_status", value);
+      return this;
+    }
+    public APIRequestGetAssignedWhatsAppBusinessAccounts requestCountryField () {
+      return this.requestCountryField(true);
+    }
+    public APIRequestGetAssignedWhatsAppBusinessAccounts requestCountryField (boolean value) {
+      this.requestField("country", value);
+      return this;
+    }
+    public APIRequestGetAssignedWhatsAppBusinessAccounts requestCreationTimeField () {
+      return this.requestCreationTimeField(true);
+    }
+    public APIRequestGetAssignedWhatsAppBusinessAccounts requestCreationTimeField (boolean value) {
+      this.requestField("creation_time", value);
+      return this;
+    }
+    public APIRequestGetAssignedWhatsAppBusinessAccounts requestCurrencyField () {
+      return this.requestCurrencyField(true);
+    }
+    public APIRequestGetAssignedWhatsAppBusinessAccounts requestCurrencyField (boolean value) {
+      this.requestField("currency", value);
+      return this;
+    }
+    public APIRequestGetAssignedWhatsAppBusinessAccounts requestHealthStatusField () {
+      return this.requestHealthStatusField(true);
+    }
+    public APIRequestGetAssignedWhatsAppBusinessAccounts requestHealthStatusField (boolean value) {
+      this.requestField("health_status", value);
+      return this;
+    }
+    public APIRequestGetAssignedWhatsAppBusinessAccounts requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetAssignedWhatsAppBusinessAccounts requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetAssignedWhatsAppBusinessAccounts requestIsEnabledForInsightsField () {
+      return this.requestIsEnabledForInsightsField(true);
+    }
+    public APIRequestGetAssignedWhatsAppBusinessAccounts requestIsEnabledForInsightsField (boolean value) {
+      this.requestField("is_enabled_for_insights", value);
+      return this;
+    }
+    public APIRequestGetAssignedWhatsAppBusinessAccounts requestIsSharedWithPartnersField () {
+      return this.requestIsSharedWithPartnersField(true);
+    }
+    public APIRequestGetAssignedWhatsAppBusinessAccounts requestIsSharedWithPartnersField (boolean value) {
+      this.requestField("is_shared_with_partners", value);
+      return this;
+    }
+    public APIRequestGetAssignedWhatsAppBusinessAccounts requestLinkedCommerceAccountField () {
+      return this.requestLinkedCommerceAccountField(true);
+    }
+    public APIRequestGetAssignedWhatsAppBusinessAccounts requestLinkedCommerceAccountField (boolean value) {
+      this.requestField("linked_commerce_account", value);
+      return this;
+    }
+    public APIRequestGetAssignedWhatsAppBusinessAccounts requestMarketingMessagesLiteApiStatusField () {
+      return this.requestMarketingMessagesLiteApiStatusField(true);
+    }
+    public APIRequestGetAssignedWhatsAppBusinessAccounts requestMarketingMessagesLiteApiStatusField (boolean value) {
+      this.requestField("marketing_messages_lite_api_status", value);
+      return this;
+    }
+    public APIRequestGetAssignedWhatsAppBusinessAccounts requestMarketingMessagesOnboardingStatusField () {
+      return this.requestMarketingMessagesOnboardingStatusField(true);
+    }
+    public APIRequestGetAssignedWhatsAppBusinessAccounts requestMarketingMessagesOnboardingStatusField (boolean value) {
+      this.requestField("marketing_messages_onboarding_status", value);
+      return this;
+    }
+    public APIRequestGetAssignedWhatsAppBusinessAccounts requestMessageTemplateNamespaceField () {
+      return this.requestMessageTemplateNamespaceField(true);
+    }
+    public APIRequestGetAssignedWhatsAppBusinessAccounts requestMessageTemplateNamespaceField (boolean value) {
+      this.requestField("message_template_namespace", value);
+      return this;
+    }
+    public APIRequestGetAssignedWhatsAppBusinessAccounts requestNameField () {
+      return this.requestNameField(true);
+    }
+    public APIRequestGetAssignedWhatsAppBusinessAccounts requestNameField (boolean value) {
+      this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetAssignedWhatsAppBusinessAccounts requestOnBehalfOfBusinessInfoField () {
+      return this.requestOnBehalfOfBusinessInfoField(true);
+    }
+    public APIRequestGetAssignedWhatsAppBusinessAccounts requestOnBehalfOfBusinessInfoField (boolean value) {
+      this.requestField("on_behalf_of_business_info", value);
+      return this;
+    }
+    public APIRequestGetAssignedWhatsAppBusinessAccounts requestOwnerBusinessField () {
+      return this.requestOwnerBusinessField(true);
+    }
+    public APIRequestGetAssignedWhatsAppBusinessAccounts requestOwnerBusinessField (boolean value) {
+      this.requestField("owner_business", value);
+      return this;
+    }
+    public APIRequestGetAssignedWhatsAppBusinessAccounts requestOwnerBusinessInfoField () {
+      return this.requestOwnerBusinessInfoField(true);
+    }
+    public APIRequestGetAssignedWhatsAppBusinessAccounts requestOwnerBusinessInfoField (boolean value) {
+      this.requestField("owner_business_info", value);
+      return this;
+    }
+    public APIRequestGetAssignedWhatsAppBusinessAccounts requestOwnershipTypeField () {
+      return this.requestOwnershipTypeField(true);
+    }
+    public APIRequestGetAssignedWhatsAppBusinessAccounts requestOwnershipTypeField (boolean value) {
+      this.requestField("ownership_type", value);
+      return this;
+    }
+    public APIRequestGetAssignedWhatsAppBusinessAccounts requestPrimaryBusinessLocationField () {
+      return this.requestPrimaryBusinessLocationField(true);
+    }
+    public APIRequestGetAssignedWhatsAppBusinessAccounts requestPrimaryBusinessLocationField (boolean value) {
+      this.requestField("primary_business_location", value);
+      return this;
+    }
+    public APIRequestGetAssignedWhatsAppBusinessAccounts requestPrimaryFundingIdField () {
+      return this.requestPrimaryFundingIdField(true);
+    }
+    public APIRequestGetAssignedWhatsAppBusinessAccounts requestPrimaryFundingIdField (boolean value) {
+      this.requestField("primary_funding_id", value);
+      return this;
+    }
+    public APIRequestGetAssignedWhatsAppBusinessAccounts requestPurchaseOrderNumberField () {
+      return this.requestPurchaseOrderNumberField(true);
+    }
+    public APIRequestGetAssignedWhatsAppBusinessAccounts requestPurchaseOrderNumberField (boolean value) {
+      this.requestField("purchase_order_number", value);
+      return this;
+    }
+    public APIRequestGetAssignedWhatsAppBusinessAccounts requestStatusField () {
+      return this.requestStatusField(true);
+    }
+    public APIRequestGetAssignedWhatsAppBusinessAccounts requestStatusField (boolean value) {
+      this.requestField("status", value);
+      return this;
+    }
+    public APIRequestGetAssignedWhatsAppBusinessAccounts requestTimezoneIdField () {
+      return this.requestTimezoneIdField(true);
+    }
+    public APIRequestGetAssignedWhatsAppBusinessAccounts requestTimezoneIdField (boolean value) {
+      this.requestField("timezone_id", value);
       return this;
     }
   }

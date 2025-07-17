@@ -40,23 +40,23 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class ApacMonSellerStatusAPIContainer extends APINode {
-  @SerializedName("structured_messaging_commerce")
-  private Object mStructuredMessagingCommerce = null;
+public class ABTestPostTestActions extends APINode {
+  @SerializedName("auto_change_budget_to_winner")
+  private Long mAutoChangeBudgetToWinner = null;
   protected static Gson gson = null;
 
-  public ApacMonSellerStatusAPIContainer() {
+  public ABTestPostTestActions() {
   }
 
   public String getId() {
     return null;
   }
-  public static ApacMonSellerStatusAPIContainer loadJSON(String json, APIContext context, String header) {
-    ApacMonSellerStatusAPIContainer apacMonSellerStatusAPIContainer = getGson().fromJson(json, ApacMonSellerStatusAPIContainer.class);
+  public static ABTestPostTestActions loadJSON(String json, APIContext context, String header) {
+    ABTestPostTestActions abTestPostTestActions = getGson().fromJson(json, ABTestPostTestActions.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(apacMonSellerStatusAPIContainer.toString());
+      JsonElement o2 = parser.parse(abTestPostTestActions.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -66,14 +66,14 @@ public class ApacMonSellerStatusAPIContainer extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    apacMonSellerStatusAPIContainer.context = context;
-    apacMonSellerStatusAPIContainer.rawValue = json;
-    apacMonSellerStatusAPIContainer.header = header;
-    return apacMonSellerStatusAPIContainer;
+    abTestPostTestActions.context = context;
+    abTestPostTestActions.rawValue = json;
+    abTestPostTestActions.header = header;
+    return abTestPostTestActions;
   }
 
-  public static APINodeList<ApacMonSellerStatusAPIContainer> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<ApacMonSellerStatusAPIContainer> apacMonSellerStatusAPIContainers = new APINodeList<ApacMonSellerStatusAPIContainer>(request, json, header);
+  public static APINodeList<ABTestPostTestActions> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<ABTestPostTestActions> abTestPostTestActionss = new APINodeList<ABTestPostTestActions>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -84,9 +84,9 @@ public class ApacMonSellerStatusAPIContainer extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          apacMonSellerStatusAPIContainers.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          abTestPostTestActionss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return apacMonSellerStatusAPIContainers;
+        return abTestPostTestActionss;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -96,20 +96,20 @@ public class ApacMonSellerStatusAPIContainer extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                apacMonSellerStatusAPIContainers.setCursors(before, after);
+                abTestPostTestActionss.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            apacMonSellerStatusAPIContainers.setPaging(previous, next);
+            abTestPostTestActionss.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              apacMonSellerStatusAPIContainers.setAppSecret(context.getAppSecretProof());
+              abTestPostTestActionss.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              apacMonSellerStatusAPIContainers.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              abTestPostTestActionss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -120,23 +120,23 @@ public class ApacMonSellerStatusAPIContainer extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  apacMonSellerStatusAPIContainers.add(loadJSON(entry.getValue().toString(), context, header));
+                  abTestPostTestActionss.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              apacMonSellerStatusAPIContainers.add(loadJSON(obj.toString(), context, header));
+              abTestPostTestActionss.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return apacMonSellerStatusAPIContainers;
+          return abTestPostTestActionss;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              apacMonSellerStatusAPIContainers.add(loadJSON(entry.getValue().toString(), context, header));
+              abTestPostTestActionss.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return apacMonSellerStatusAPIContainers;
+          return abTestPostTestActionss;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -153,20 +153,20 @@ public class ApacMonSellerStatusAPIContainer extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              apacMonSellerStatusAPIContainers.add(loadJSON(value.toString(), context, header));
+              abTestPostTestActionss.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return apacMonSellerStatusAPIContainers;
+            return abTestPostTestActionss;
           }
 
           // Sixth, check if it's pure JsonObject
-          apacMonSellerStatusAPIContainers.clear();
-          apacMonSellerStatusAPIContainers.add(loadJSON(json, context, header));
-          return apacMonSellerStatusAPIContainers;
+          abTestPostTestActionss.clear();
+          abTestPostTestActionss.add(loadJSON(json, context, header));
+          return abTestPostTestActionss;
         }
       }
     } catch (Exception e) {
@@ -194,12 +194,12 @@ public class ApacMonSellerStatusAPIContainer extends APINode {
   }
 
 
-  public Object getFieldStructuredMessagingCommerce() {
-    return mStructuredMessagingCommerce;
+  public Long getFieldAutoChangeBudgetToWinner() {
+    return mAutoChangeBudgetToWinner;
   }
 
-  public ApacMonSellerStatusAPIContainer setFieldStructuredMessagingCommerce(Object value) {
-    this.mStructuredMessagingCommerce = value;
+  public ABTestPostTestActions setFieldAutoChangeBudgetToWinner(Long value) {
+    this.mAutoChangeBudgetToWinner = value;
     return this;
   }
 
@@ -219,17 +219,17 @@ public class ApacMonSellerStatusAPIContainer extends APINode {
     return gson;
   }
 
-  public ApacMonSellerStatusAPIContainer copyFrom(ApacMonSellerStatusAPIContainer instance) {
-    this.mStructuredMessagingCommerce = instance.mStructuredMessagingCommerce;
+  public ABTestPostTestActions copyFrom(ABTestPostTestActions instance) {
+    this.mAutoChangeBudgetToWinner = instance.mAutoChangeBudgetToWinner;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<ApacMonSellerStatusAPIContainer> getParser() {
-    return new APIRequest.ResponseParser<ApacMonSellerStatusAPIContainer>() {
-      public APINodeList<ApacMonSellerStatusAPIContainer> parseResponse(String response, APIContext context, APIRequest<ApacMonSellerStatusAPIContainer> request, String header) throws MalformedResponseException {
-        return ApacMonSellerStatusAPIContainer.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<ABTestPostTestActions> getParser() {
+    return new APIRequest.ResponseParser<ABTestPostTestActions>() {
+      public APINodeList<ABTestPostTestActions> parseResponse(String response, APIContext context, APIRequest<ABTestPostTestActions> request, String header) throws MalformedResponseException {
+        return ABTestPostTestActions.parseResponse(response, context, request, header);
       }
     };
   }

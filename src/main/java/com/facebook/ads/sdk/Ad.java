@@ -583,6 +583,7 @@ public class Ad extends APINode {
       "creative_sourcing_spec",
       "degrees_of_freedom_spec",
       "destination_set_id",
+      "destination_spec",
       "dynamic_ad_voice",
       "effective_authorization_category",
       "effective_instagram_media_id",
@@ -590,6 +591,7 @@ public class Ad extends APINode {
       "enable_direct_install",
       "enable_launch_instant_app",
       "facebook_branded_content",
+      "format_transformation_spec",
       "id",
       "image_crops",
       "image_hash",
@@ -871,6 +873,13 @@ public class Ad extends APINode {
       this.requestField("destination_set_id", value);
       return this;
     }
+    public APIRequestGetAdCreatives requestDestinationSpecField () {
+      return this.requestDestinationSpecField(true);
+    }
+    public APIRequestGetAdCreatives requestDestinationSpecField (boolean value) {
+      this.requestField("destination_spec", value);
+      return this;
+    }
     public APIRequestGetAdCreatives requestDynamicAdVoiceField () {
       return this.requestDynamicAdVoiceField(true);
     }
@@ -918,6 +927,13 @@ public class Ad extends APINode {
     }
     public APIRequestGetAdCreatives requestFacebookBrandedContentField (boolean value) {
       this.requestField("facebook_branded_content", value);
+      return this;
+    }
+    public APIRequestGetAdCreatives requestFormatTransformationSpecField () {
+      return this.requestFormatTransformationSpecField(true);
+    }
+    public APIRequestGetAdCreatives requestFormatTransformationSpecField (boolean value) {
+      this.requestField("format_transformation_spec", value);
       return this;
     }
     public APIRequestGetAdCreatives requestIdField () {

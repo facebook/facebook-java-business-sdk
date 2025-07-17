@@ -45,6 +45,8 @@ public class UserPageOneTimeOptInTokenSettings extends APINode {
   private Long mCreationTimestamp = null;
   @SerializedName("next_eligible_time")
   private Long mNextEligibleTime = null;
+  @SerializedName("next_eligible_time_for_paid_messaging")
+  private Long mNextEligibleTimeForPaidMessaging = null;
   @SerializedName("notification_messages_frequency")
   private String mNotificationMessagesFrequency = null;
   @SerializedName("notification_messages_reoptin")
@@ -285,6 +287,10 @@ public class UserPageOneTimeOptInTokenSettings extends APINode {
     return mNextEligibleTime;
   }
 
+  public Long getFieldNextEligibleTimeForPaidMessaging() {
+    return mNextEligibleTimeForPaidMessaging;
+  }
+
   public String getFieldNotificationMessagesFrequency() {
     return mNotificationMessagesFrequency;
   }
@@ -336,6 +342,7 @@ public class UserPageOneTimeOptInTokenSettings extends APINode {
     public static final String[] FIELDS = {
       "creation_timestamp",
       "next_eligible_time",
+      "next_eligible_time_for_paid_messaging",
       "notification_messages_frequency",
       "notification_messages_reoptin",
       "notification_messages_timezone",
@@ -451,6 +458,13 @@ public class UserPageOneTimeOptInTokenSettings extends APINode {
       this.requestField("next_eligible_time", value);
       return this;
     }
+    public APIRequestGet requestNextEligibleTimeForPaidMessagingField () {
+      return this.requestNextEligibleTimeForPaidMessagingField(true);
+    }
+    public APIRequestGet requestNextEligibleTimeForPaidMessagingField (boolean value) {
+      this.requestField("next_eligible_time_for_paid_messaging", value);
+      return this;
+    }
     public APIRequestGet requestNotificationMessagesFrequencyField () {
       return this.requestNotificationMessagesFrequencyField(true);
     }
@@ -533,6 +547,7 @@ public class UserPageOneTimeOptInTokenSettings extends APINode {
   public UserPageOneTimeOptInTokenSettings copyFrom(UserPageOneTimeOptInTokenSettings instance) {
     this.mCreationTimestamp = instance.mCreationTimestamp;
     this.mNextEligibleTime = instance.mNextEligibleTime;
+    this.mNextEligibleTimeForPaidMessaging = instance.mNextEligibleTimeForPaidMessaging;
     this.mNotificationMessagesFrequency = instance.mNotificationMessagesFrequency;
     this.mNotificationMessagesReoptin = instance.mNotificationMessagesReoptin;
     this.mNotificationMessagesTimezone = instance.mNotificationMessagesTimezone;

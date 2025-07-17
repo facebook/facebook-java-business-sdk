@@ -2721,6 +2721,7 @@ public class AdAccount extends APINode {
       "creative_sourcing_spec",
       "degrees_of_freedom_spec",
       "destination_set_id",
+      "destination_spec",
       "dynamic_ad_voice",
       "effective_authorization_category",
       "effective_instagram_media_id",
@@ -2728,6 +2729,7 @@ public class AdAccount extends APINode {
       "enable_direct_install",
       "enable_launch_instant_app",
       "facebook_branded_content",
+      "format_transformation_spec",
       "id",
       "image_crops",
       "image_hash",
@@ -3009,6 +3011,13 @@ public class AdAccount extends APINode {
       this.requestField("destination_set_id", value);
       return this;
     }
+    public APIRequestGetAdCreatives requestDestinationSpecField () {
+      return this.requestDestinationSpecField(true);
+    }
+    public APIRequestGetAdCreatives requestDestinationSpecField (boolean value) {
+      this.requestField("destination_spec", value);
+      return this;
+    }
     public APIRequestGetAdCreatives requestDynamicAdVoiceField () {
       return this.requestDynamicAdVoiceField(true);
     }
@@ -3056,6 +3065,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAdCreatives requestFacebookBrandedContentField (boolean value) {
       this.requestField("facebook_branded_content", value);
+      return this;
+    }
+    public APIRequestGetAdCreatives requestFormatTransformationSpecField () {
+      return this.requestFormatTransformationSpecField(true);
+    }
+    public APIRequestGetAdCreatives requestFormatTransformationSpecField (boolean value) {
+      this.requestField("format_transformation_spec", value);
       return this;
     }
     public APIRequestGetAdCreatives requestIdField () {
@@ -3379,9 +3395,11 @@ public class AdAccount extends APINode {
       "creative_sourcing_spec",
       "degrees_of_freedom_spec",
       "destination_set_id",
+      "destination_spec",
       "dynamic_ad_voice",
       "enable_launch_instant_app",
       "facebook_branded_content",
+      "format_transformation_spec",
       "image_crops",
       "image_file",
       "image_hash",
@@ -3611,6 +3629,15 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestCreateAdCreative setDestinationSpec (Map<String, String> destinationSpec) {
+      this.setParam("destination_spec", destinationSpec);
+      return this;
+    }
+    public APIRequestCreateAdCreative setDestinationSpec (String destinationSpec) {
+      this.setParam("destination_spec", destinationSpec);
+      return this;
+    }
+
     public APIRequestCreateAdCreative setDynamicAdVoice (AdCreative.EnumDynamicAdVoice dynamicAdVoice) {
       this.setParam("dynamic_ad_voice", dynamicAdVoice);
       return this;
@@ -3635,6 +3662,15 @@ public class AdAccount extends APINode {
     }
     public APIRequestCreateAdCreative setFacebookBrandedContent (String facebookBrandedContent) {
       this.setParam("facebook_branded_content", facebookBrandedContent);
+      return this;
+    }
+
+    public APIRequestCreateAdCreative setFormatTransformationSpec (List<Map<String, String>> formatTransformationSpec) {
+      this.setParam("format_transformation_spec", formatTransformationSpec);
+      return this;
+    }
+    public APIRequestCreateAdCreative setFormatTransformationSpec (String formatTransformationSpec) {
+      this.setParam("format_transformation_spec", formatTransformationSpec);
       return this;
     }
 
@@ -3923,6 +3959,7 @@ public class AdAccount extends APINode {
       "creative_sourcing_spec",
       "degrees_of_freedom_spec",
       "destination_set_id",
+      "destination_spec",
       "dynamic_ad_voice",
       "effective_authorization_category",
       "effective_instagram_media_id",
@@ -3930,6 +3967,7 @@ public class AdAccount extends APINode {
       "enable_direct_install",
       "enable_launch_instant_app",
       "facebook_branded_content",
+      "format_transformation_spec",
       "id",
       "image_crops",
       "image_hash",
@@ -4229,6 +4267,13 @@ public class AdAccount extends APINode {
       this.requestField("destination_set_id", value);
       return this;
     }
+    public APIRequestGetAdCreativesByLabels requestDestinationSpecField () {
+      return this.requestDestinationSpecField(true);
+    }
+    public APIRequestGetAdCreativesByLabels requestDestinationSpecField (boolean value) {
+      this.requestField("destination_spec", value);
+      return this;
+    }
     public APIRequestGetAdCreativesByLabels requestDynamicAdVoiceField () {
       return this.requestDynamicAdVoiceField(true);
     }
@@ -4276,6 +4321,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAdCreativesByLabels requestFacebookBrandedContentField (boolean value) {
       this.requestField("facebook_branded_content", value);
+      return this;
+    }
+    public APIRequestGetAdCreativesByLabels requestFormatTransformationSpecField () {
+      return this.requestFormatTransformationSpecField(true);
+    }
+    public APIRequestGetAdCreativesByLabels requestFormatTransformationSpecField (boolean value) {
+      this.requestField("format_transformation_spec", value);
       return this;
     }
     public APIRequestGetAdCreativesByLabels requestIdField () {
@@ -7979,6 +8031,7 @@ public class AdAccount extends APINode {
       "adset_schedule",
       "asset_feed_id",
       "attribution_spec",
+      "automatic_manual_state",
       "bid_adjustments",
       "bid_amount",
       "bid_constraints",
@@ -8212,6 +8265,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAdSets requestAttributionSpecField (boolean value) {
       this.requestField("attribution_spec", value);
+      return this;
+    }
+    public APIRequestGetAdSets requestAutomaticManualStateField () {
+      return this.requestAutomaticManualStateField(true);
+    }
+    public APIRequestGetAdSets requestAutomaticManualStateField (boolean value) {
+      this.requestField("automatic_manual_state", value);
       return this;
     }
     public APIRequestGetAdSets requestBidAdjustmentsField () {
@@ -8668,6 +8728,7 @@ public class AdAccount extends APINode {
       "adlabels",
       "adset_schedule",
       "attribution_spec",
+      "automatic_manual_state",
       "bid_adjustments",
       "bid_amount",
       "bid_constraints",
@@ -8807,6 +8868,15 @@ public class AdAccount extends APINode {
     }
     public APIRequestCreateAdSet setAttributionSpec (String attributionSpec) {
       this.setParam("attribution_spec", attributionSpec);
+      return this;
+    }
+
+    public APIRequestCreateAdSet setAutomaticManualState (AdSet.EnumAutomaticManualState automaticManualState) {
+      this.setParam("automatic_manual_state", automaticManualState);
+      return this;
+    }
+    public APIRequestCreateAdSet setAutomaticManualState (String automaticManualState) {
+      this.setParam("automatic_manual_state", automaticManualState);
       return this;
     }
 
@@ -9314,6 +9384,7 @@ public class AdAccount extends APINode {
       "adset_schedule",
       "asset_feed_id",
       "attribution_spec",
+      "automatic_manual_state",
       "bid_adjustments",
       "bid_amount",
       "bid_constraints",
@@ -9520,6 +9591,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAdSetsByLabels requestAttributionSpecField (boolean value) {
       this.requestField("attribution_spec", value);
+      return this;
+    }
+    public APIRequestGetAdSetsByLabels requestAutomaticManualStateField () {
+      return this.requestAutomaticManualStateField(true);
+    }
+    public APIRequestGetAdSetsByLabels requestAutomaticManualStateField (boolean value) {
+      this.requestField("automatic_manual_state", value);
       return this;
     }
     public APIRequestGetAdSetsByLabels requestBidAdjustmentsField () {
@@ -12786,6 +12864,7 @@ public class AdAccount extends APINode {
       "adset_schedule",
       "asset_feed_id",
       "attribution_spec",
+      "automatic_manual_state",
       "bid_adjustments",
       "bid_amount",
       "bid_constraints",
@@ -12974,6 +13053,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAffectedAdSets requestAttributionSpecField (boolean value) {
       this.requestField("attribution_spec", value);
+      return this;
+    }
+    public APIRequestGetAffectedAdSets requestAutomaticManualStateField () {
+      return this.requestAutomaticManualStateField(true);
+    }
+    public APIRequestGetAffectedAdSets requestAutomaticManualStateField (boolean value) {
+      this.requestField("automatic_manual_state", value);
       return this;
     }
     public APIRequestGetAffectedAdSets requestBidAdjustmentsField () {
@@ -20534,6 +20620,7 @@ public class AdAccount extends APINode {
       "adset_schedule",
       "asset_feed_id",
       "attribution_spec",
+      "automatic_manual_state",
       "bid_adjustments",
       "bid_amount",
       "bid_constraints",
@@ -20727,6 +20814,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetDeprecatedTargetingAdSets requestAttributionSpecField (boolean value) {
       this.requestField("attribution_spec", value);
+      return this;
+    }
+    public APIRequestGetDeprecatedTargetingAdSets requestAutomaticManualStateField () {
+      return this.requestAutomaticManualStateField(true);
+    }
+    public APIRequestGetDeprecatedTargetingAdSets requestAutomaticManualStateField (boolean value) {
+      this.requestField("automatic_manual_state", value);
       return this;
     }
     public APIRequestGetDeprecatedTargetingAdSets requestBidAdjustmentsField () {
@@ -26559,6 +26653,7 @@ public class AdAccount extends APINode {
       "target_frequency",
       "target_frequency_reset_period",
       "target_spec",
+      "trending_topics_spec",
       "video_view_length_constraint",
     };
 
@@ -26953,6 +27048,15 @@ public class AdAccount extends APINode {
     }
     public APIRequestCreateReachFrequencyPrediction setTargetSpec (String targetSpec) {
       this.setParam("target_spec", targetSpec);
+      return this;
+    }
+
+    public APIRequestCreateReachFrequencyPrediction setTrendingTopicsSpec (Map<String, String> trendingTopicsSpec) {
+      this.setParam("trending_topics_spec", trendingTopicsSpec);
+      return this;
+    }
+    public APIRequestCreateReachFrequencyPrediction setTrendingTopicsSpec (String trendingTopicsSpec) {
+      this.setParam("trending_topics_spec", trendingTopicsSpec);
       return this;
     }
 

@@ -677,7 +677,6 @@ public class IGUserForIGOnlyAPI extends APINode {
       "scoped_thread_key",
       "senders",
       "snippet",
-      "subject",
       "unread_count",
       "updated_time",
       "wallpaper",
@@ -890,13 +889,6 @@ public class IGUserForIGOnlyAPI extends APINode {
     }
     public APIRequestGetConversations requestSnippetField (boolean value) {
       this.requestField("snippet", value);
-      return this;
-    }
-    public APIRequestGetConversations requestSubjectField () {
-      return this.requestSubjectField(true);
-    }
-    public APIRequestGetConversations requestSubjectField (boolean value) {
-      this.requestField("subject", value);
       return this;
     }
     public APIRequestGetConversations requestUnreadCountField () {
@@ -3746,6 +3738,8 @@ public class IGUserForIGOnlyAPI extends APINode {
       VALUE_MESSAGING_SEEN("messaging_seen"),
       @SerializedName("onboarding_welcome_message_series")
       VALUE_ONBOARDING_WELCOME_MESSAGE_SERIES("onboarding_welcome_message_series"),
+      @SerializedName("share_to_story")
+      VALUE_SHARE_TO_STORY("share_to_story"),
       @SerializedName("standby")
       VALUE_STANDBY("standby"),
       @SerializedName("story_insights")
@@ -3754,8 +3748,6 @@ public class IGUserForIGOnlyAPI extends APINode {
       VALUE_STORY_POLL_RESPONSE("story_poll_response"),
       @SerializedName("story_reactions")
       VALUE_STORY_REACTIONS("story_reactions"),
-      @SerializedName("story_share")
-      VALUE_STORY_SHARE("story_share"),
       ;
 
       private String value;

@@ -63,6 +63,8 @@ public class CommerceMerchantSettings extends APINode {
   private Profile mMerchantPage = null;
   @SerializedName("merchant_status")
   private String mMerchantStatus = null;
+  @SerializedName("offsite_iab_checkout_enabled_countries")
+  private List<String> mOffsiteIabCheckoutEnabledCountries = null;
   @SerializedName("onsite_commerce_merchant")
   private Object mOnsiteCommerceMerchant = null;
   @SerializedName("payment_provider")
@@ -75,6 +77,8 @@ public class CommerceMerchantSettings extends APINode {
   private List<String> mReviewRejectionMessages = null;
   @SerializedName("review_rejection_reasons")
   private List<String> mReviewRejectionReasons = null;
+  @SerializedName("shops_ads_setup")
+  private Object mShopsAdsSetup = null;
   @SerializedName("terms")
   private String mTerms = null;
   protected static Gson gson = null;
@@ -390,6 +394,10 @@ public class CommerceMerchantSettings extends APINode {
     return mMerchantStatus;
   }
 
+  public List<String> getFieldOffsiteIabCheckoutEnabledCountries() {
+    return mOffsiteIabCheckoutEnabledCountries;
+  }
+
   public Object getFieldOnsiteCommerceMerchant() {
     return mOnsiteCommerceMerchant;
   }
@@ -412,6 +420,10 @@ public class CommerceMerchantSettings extends APINode {
 
   public List<String> getFieldReviewRejectionReasons() {
     return mReviewRejectionReasons;
+  }
+
+  public Object getFieldShopsAdsSetup() {
+    return mShopsAdsSetup;
   }
 
   public String getFieldTerms() {
@@ -3347,12 +3359,14 @@ public class CommerceMerchantSettings extends APINode {
       "korea_ftc_listing",
       "merchant_page",
       "merchant_status",
+      "offsite_iab_checkout_enabled_countries",
       "onsite_commerce_merchant",
       "payment_provider",
       "privacy_policy_localized",
       "return_policy_localized",
       "review_rejection_messages",
       "review_rejection_reasons",
+      "shops_ads_setup",
       "terms",
     };
 
@@ -3523,6 +3537,13 @@ public class CommerceMerchantSettings extends APINode {
       this.requestField("merchant_status", value);
       return this;
     }
+    public APIRequestGet requestOffsiteIabCheckoutEnabledCountriesField () {
+      return this.requestOffsiteIabCheckoutEnabledCountriesField(true);
+    }
+    public APIRequestGet requestOffsiteIabCheckoutEnabledCountriesField (boolean value) {
+      this.requestField("offsite_iab_checkout_enabled_countries", value);
+      return this;
+    }
     public APIRequestGet requestOnsiteCommerceMerchantField () {
       return this.requestOnsiteCommerceMerchantField(true);
     }
@@ -3563,6 +3584,13 @@ public class CommerceMerchantSettings extends APINode {
     }
     public APIRequestGet requestReviewRejectionReasonsField (boolean value) {
       this.requestField("review_rejection_reasons", value);
+      return this;
+    }
+    public APIRequestGet requestShopsAdsSetupField () {
+      return this.requestShopsAdsSetupField(true);
+    }
+    public APIRequestGet requestShopsAdsSetupField (boolean value) {
+      this.requestField("shops_ads_setup", value);
       return this;
     }
     public APIRequestGet requestTermsField () {
@@ -3625,12 +3653,14 @@ public class CommerceMerchantSettings extends APINode {
     this.mKoreaFtcListing = instance.mKoreaFtcListing;
     this.mMerchantPage = instance.mMerchantPage;
     this.mMerchantStatus = instance.mMerchantStatus;
+    this.mOffsiteIabCheckoutEnabledCountries = instance.mOffsiteIabCheckoutEnabledCountries;
     this.mOnsiteCommerceMerchant = instance.mOnsiteCommerceMerchant;
     this.mPaymentProvider = instance.mPaymentProvider;
     this.mPrivacyPolicyLocalized = instance.mPrivacyPolicyLocalized;
     this.mReturnPolicyLocalized = instance.mReturnPolicyLocalized;
     this.mReviewRejectionMessages = instance.mReviewRejectionMessages;
     this.mReviewRejectionReasons = instance.mReviewRejectionReasons;
+    this.mShopsAdsSetup = instance.mShopsAdsSetup;
     this.mTerms = instance.mTerms;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

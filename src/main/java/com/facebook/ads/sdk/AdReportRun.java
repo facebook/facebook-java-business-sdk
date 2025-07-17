@@ -486,6 +486,7 @@ public class AdReportRun extends APINode {
       "landing_page_view_actions_per_link_click",
       "landing_page_view_per_link_click",
       "landing_page_view_per_purchase_rate",
+      "link_clicks_per_results",
       "location",
       "marketing_messages_click_rate_benchmark",
       "marketing_messages_cost_per_delivered",
@@ -529,6 +530,7 @@ public class AdReportRun extends APINode {
       "product_group_retailer_id",
       "product_name",
       "product_retailer_id",
+      "product_views",
       "purchase_per_landing_page_view",
       "purchase_roas",
       "purchases_per_link_click",
@@ -541,6 +543,7 @@ public class AdReportRun extends APINode {
       "shops_assisted_purchases",
       "social_spend",
       "spend",
+      "total_card_view",
       "total_postbacks",
       "total_postbacks_detailed",
       "total_postbacks_detailed_v4",
@@ -1431,6 +1434,13 @@ public class AdReportRun extends APINode {
       this.requestField("landing_page_view_per_purchase_rate", value);
       return this;
     }
+    public APIRequestGetInsights requestLinkClicksPerResultsField () {
+      return this.requestLinkClicksPerResultsField(true);
+    }
+    public APIRequestGetInsights requestLinkClicksPerResultsField (boolean value) {
+      this.requestField("link_clicks_per_results", value);
+      return this;
+    }
     public APIRequestGetInsights requestLocationField () {
       return this.requestLocationField(true);
     }
@@ -1732,6 +1742,13 @@ public class AdReportRun extends APINode {
       this.requestField("product_retailer_id", value);
       return this;
     }
+    public APIRequestGetInsights requestProductViewsField () {
+      return this.requestProductViewsField(true);
+    }
+    public APIRequestGetInsights requestProductViewsField (boolean value) {
+      this.requestField("product_views", value);
+      return this;
+    }
     public APIRequestGetInsights requestPurchasePerLandingPageViewField () {
       return this.requestPurchasePerLandingPageViewField(true);
     }
@@ -1814,6 +1831,13 @@ public class AdReportRun extends APINode {
     }
     public APIRequestGetInsights requestSpendField (boolean value) {
       this.requestField("spend", value);
+      return this;
+    }
+    public APIRequestGetInsights requestTotalCardViewField () {
+      return this.requestTotalCardViewField(true);
+    }
+    public APIRequestGetInsights requestTotalCardViewField (boolean value) {
+      this.requestField("total_card_view", value);
       return this;
     }
     public APIRequestGetInsights requestTotalPostbacksField () {

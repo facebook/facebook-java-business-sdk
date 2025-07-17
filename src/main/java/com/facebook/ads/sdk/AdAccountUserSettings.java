@@ -93,6 +93,8 @@ public class AdAccountUserSettings extends APINode {
   private Boolean mHasSeenShopsAdsMetricsOnboardingTour = null;
   @SerializedName("has_seen_shops_column_flexing_experience")
   private Boolean mHasSeenShopsColumnFlexingExperience = null;
+  @SerializedName("has_used_quick_views_panel")
+  private Boolean mHasUsedQuickViewsPanel = null;
   @SerializedName("hidden_optimization_tips")
   private List<Map<String, Boolean>> mHiddenOptimizationTips = null;
   @SerializedName("high_performing_quick_view_created")
@@ -123,6 +125,8 @@ public class AdAccountUserSettings extends APINode {
   private Boolean mRbExportRawData = null;
   @SerializedName("rb_export_summary_row")
   private Boolean mRbExportSummaryRow = null;
+  @SerializedName("recently_used_quick_views")
+  private List<String> mRecentlyUsedQuickViews = null;
   @SerializedName("saip_advertiser_setup_optimisation_guidance_overall_state")
   private String mSaipAdvertiserSetupOptimisationGuidanceOverallState = null;
   @SerializedName("saip_advertiser_setup_optimisation_guidance_state")
@@ -494,6 +498,10 @@ public class AdAccountUserSettings extends APINode {
     return mHasSeenShopsColumnFlexingExperience;
   }
 
+  public Boolean getFieldHasUsedQuickViewsPanel() {
+    return mHasUsedQuickViewsPanel;
+  }
+
   public List<Map<String, Boolean>> getFieldHiddenOptimizationTips() {
     return mHiddenOptimizationTips;
   }
@@ -552,6 +560,10 @@ public class AdAccountUserSettings extends APINode {
 
   public Boolean getFieldRbExportSummaryRow() {
     return mRbExportSummaryRow;
+  }
+
+  public List<String> getFieldRecentlyUsedQuickViews() {
+    return mRecentlyUsedQuickViews;
   }
 
   public String getFieldSaipAdvertiserSetupOptimisationGuidanceOverallState() {
@@ -696,6 +708,7 @@ public class AdAccountUserSettings extends APINode {
       "has_seen_leads_column_flexing_experience",
       "has_seen_shops_ads_metrics_onboarding_tour",
       "has_seen_shops_column_flexing_experience",
+      "has_used_quick_views_panel",
       "hidden_optimization_tips",
       "high_performing_quick_view_created",
       "id",
@@ -711,6 +724,7 @@ public class AdAccountUserSettings extends APINode {
       "rb_export_format",
       "rb_export_raw_data",
       "rb_export_summary_row",
+      "recently_used_quick_views",
       "saip_advertiser_setup_optimisation_guidance_overall_state",
       "saip_advertiser_setup_optimisation_guidance_state",
       "shops_ads_metrics_onboarding_tour_close_count",
@@ -1010,6 +1024,13 @@ public class AdAccountUserSettings extends APINode {
       this.requestField("has_seen_shops_column_flexing_experience", value);
       return this;
     }
+    public APIRequestGet requestHasUsedQuickViewsPanelField () {
+      return this.requestHasUsedQuickViewsPanelField(true);
+    }
+    public APIRequestGet requestHasUsedQuickViewsPanelField (boolean value) {
+      this.requestField("has_used_quick_views_panel", value);
+      return this;
+    }
     public APIRequestGet requestHiddenOptimizationTipsField () {
       return this.requestHiddenOptimizationTipsField(true);
     }
@@ -1113,6 +1134,13 @@ public class AdAccountUserSettings extends APINode {
     }
     public APIRequestGet requestRbExportSummaryRowField (boolean value) {
       this.requestField("rb_export_summary_row", value);
+      return this;
+    }
+    public APIRequestGet requestRecentlyUsedQuickViewsField () {
+      return this.requestRecentlyUsedQuickViewsField(true);
+    }
+    public APIRequestGet requestRecentlyUsedQuickViewsField (boolean value) {
+      this.requestField("recently_used_quick_views", value);
       return this;
     }
     public APIRequestGet requestSaipAdvertiserSetupOptimisationGuidanceOverallStateField () {
@@ -1390,6 +1418,7 @@ public class AdAccountUserSettings extends APINode {
     this.mHasSeenLeadsColumnFlexingExperience = instance.mHasSeenLeadsColumnFlexingExperience;
     this.mHasSeenShopsAdsMetricsOnboardingTour = instance.mHasSeenShopsAdsMetricsOnboardingTour;
     this.mHasSeenShopsColumnFlexingExperience = instance.mHasSeenShopsColumnFlexingExperience;
+    this.mHasUsedQuickViewsPanel = instance.mHasUsedQuickViewsPanel;
     this.mHiddenOptimizationTips = instance.mHiddenOptimizationTips;
     this.mHighPerformingQuickViewCreated = instance.mHighPerformingQuickViewCreated;
     this.mId = instance.mId;
@@ -1405,6 +1434,7 @@ public class AdAccountUserSettings extends APINode {
     this.mRbExportFormat = instance.mRbExportFormat;
     this.mRbExportRawData = instance.mRbExportRawData;
     this.mRbExportSummaryRow = instance.mRbExportSummaryRow;
+    this.mRecentlyUsedQuickViews = instance.mRecentlyUsedQuickViews;
     this.mSaipAdvertiserSetupOptimisationGuidanceOverallState = instance.mSaipAdvertiserSetupOptimisationGuidanceOverallState;
     this.mSaipAdvertiserSetupOptimisationGuidanceState = instance.mSaipAdvertiserSetupOptimisationGuidanceState;
     this.mShopsAdsMetricsOnboardingTourCloseCount = instance.mShopsAdsMetricsOnboardingTourCloseCount;

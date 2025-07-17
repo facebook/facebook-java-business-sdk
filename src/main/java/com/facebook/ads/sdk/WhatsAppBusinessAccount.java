@@ -67,6 +67,8 @@ public class WhatsAppBusinessAccount extends APINode {
   private CommerceMerchantSettings mLinkedCommerceAccount = null;
   @SerializedName("marketing_messages_lite_api_status")
   private String mMarketingMessagesLiteApiStatus = null;
+  @SerializedName("marketing_messages_onboarding_status")
+  private String mMarketingMessagesOnboardingStatus = null;
   @SerializedName("message_template_namespace")
   private String mMessageTemplateNamespace = null;
   @SerializedName("name")
@@ -532,6 +534,10 @@ public class WhatsAppBusinessAccount extends APINode {
 
   public String getFieldMarketingMessagesLiteApiStatus() {
     return mMarketingMessagesLiteApiStatus;
+  }
+
+  public String getFieldMarketingMessagesOnboardingStatus() {
+    return mMarketingMessagesOnboardingStatus;
   }
 
   public String getFieldMessageTemplateNamespace() {
@@ -6372,6 +6378,7 @@ public class WhatsAppBusinessAccount extends APINode {
       "is_shared_with_partners",
       "linked_commerce_account",
       "marketing_messages_lite_api_status",
+      "marketing_messages_onboarding_status",
       "message_template_namespace",
       "name",
       "on_behalf_of_business_info",
@@ -6564,6 +6571,13 @@ public class WhatsAppBusinessAccount extends APINode {
     }
     public APIRequestGet requestMarketingMessagesLiteApiStatusField (boolean value) {
       this.requestField("marketing_messages_lite_api_status", value);
+      return this;
+    }
+    public APIRequestGet requestMarketingMessagesOnboardingStatusField () {
+      return this.requestMarketingMessagesOnboardingStatusField(true);
+    }
+    public APIRequestGet requestMarketingMessagesOnboardingStatusField (boolean value) {
+      this.requestField("marketing_messages_onboarding_status", value);
       return this;
     }
     public APIRequestGet requestMessageTemplateNamespaceField () {
@@ -7238,6 +7252,8 @@ public class WhatsAppBusinessAccount extends APINode {
       VALUE_FREE_CUSTOMER_SERVICE("FREE_CUSTOMER_SERVICE"),
       @SerializedName("FREE_ENTRY_POINT")
       VALUE_FREE_ENTRY_POINT("FREE_ENTRY_POINT"),
+      @SerializedName("FREE_GROUP_CUSTOMER_SERVICE")
+      VALUE_FREE_GROUP_CUSTOMER_SERVICE("FREE_GROUP_CUSTOMER_SERVICE"),
       @SerializedName("REGULAR")
       VALUE_REGULAR("REGULAR"),
       ;
@@ -7301,6 +7317,7 @@ public class WhatsAppBusinessAccount extends APINode {
     this.mIsSharedWithPartners = instance.mIsSharedWithPartners;
     this.mLinkedCommerceAccount = instance.mLinkedCommerceAccount;
     this.mMarketingMessagesLiteApiStatus = instance.mMarketingMessagesLiteApiStatus;
+    this.mMarketingMessagesOnboardingStatus = instance.mMarketingMessagesOnboardingStatus;
     this.mMessageTemplateNamespace = instance.mMessageTemplateNamespace;
     this.mName = instance.mName;
     this.mOnBehalfOfBusinessInfo = instance.mOnBehalfOfBusinessInfo;

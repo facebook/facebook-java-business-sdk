@@ -320,6 +320,7 @@ public class ProductGroup extends APINode {
       "brand",
       "bundle_items",
       "bundle_retailer_ids",
+      "capabilities_disabled_by_user",
       "capability_to_review_status",
       "category",
       "category_specific_fields",
@@ -547,6 +548,13 @@ public class ProductGroup extends APINode {
     }
     public APIRequestGetProducts requestBundleRetailerIdsField (boolean value) {
       this.requestField("bundle_retailer_ids", value);
+      return this;
+    }
+    public APIRequestGetProducts requestCapabilitiesDisabledByUserField () {
+      return this.requestCapabilitiesDisabledByUserField(true);
+    }
+    public APIRequestGetProducts requestCapabilitiesDisabledByUserField (boolean value) {
+      this.requestField("capabilities_disabled_by_user", value);
       return this;
     }
     public APIRequestGetProducts requestCapabilityToReviewStatusField () {

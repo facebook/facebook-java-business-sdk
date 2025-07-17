@@ -271,8 +271,12 @@ public class AdPreview extends APINode {
       VALUE_INSTAGRAM_PROFILE_REELS("INSTAGRAM_PROFILE_REELS"),
       @SerializedName("INSTAGRAM_REELS")
       VALUE_INSTAGRAM_REELS("INSTAGRAM_REELS"),
+      @SerializedName("INSTAGRAM_REELS_INSTREAM")
+      VALUE_INSTAGRAM_REELS_INSTREAM("INSTAGRAM_REELS_INSTREAM"),
       @SerializedName("INSTAGRAM_REELS_OVERLAY")
       VALUE_INSTAGRAM_REELS_OVERLAY("INSTAGRAM_REELS_OVERLAY"),
+      @SerializedName("INSTAGRAM_REELS_WEB")
+      VALUE_INSTAGRAM_REELS_WEB("INSTAGRAM_REELS_WEB"),
       @SerializedName("INSTAGRAM_SEARCH_CHAIN")
       VALUE_INSTAGRAM_SEARCH_CHAIN("INSTAGRAM_SEARCH_CHAIN"),
       @SerializedName("INSTAGRAM_SEARCH_GRID")
@@ -372,6 +376,8 @@ public class AdPreview extends APINode {
       VALUE_PROFILE_CARD("profile_card"),
       @SerializedName("standard_enhancements_catalog")
       VALUE_STANDARD_ENHANCEMENTS_CATALOG("standard_enhancements_catalog"),
+      @SerializedName("text_overlay_translation")
+      VALUE_TEXT_OVERLAY_TRANSLATION("text_overlay_translation"),
       @SerializedName("video_to_image")
       VALUE_VIDEO_TO_IMAGE("video_to_image"),
       ;

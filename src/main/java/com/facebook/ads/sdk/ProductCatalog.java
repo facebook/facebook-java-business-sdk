@@ -1008,6 +1008,7 @@ public class ProductCatalog extends APINode {
     }
     public static final String[] PARAMS = {
       "business",
+      "enabled_collab_terms",
       "permitted_roles",
       "permitted_tasks",
       "skip_defaults",
@@ -1073,6 +1074,15 @@ public class ProductCatalog extends APINode {
 
     public APIRequestCreateAgency setBusiness (String business) {
       this.setParam("business", business);
+      return this;
+    }
+
+    public APIRequestCreateAgency setEnabledCollabTerms (List<ProductCatalog.EnumEnabledCollabTerms> enabledCollabTerms) {
+      this.setParam("enabled_collab_terms", enabledCollabTerms);
+      return this;
+    }
+    public APIRequestCreateAgency setEnabledCollabTerms (String enabledCollabTerms) {
+      this.setParam("enabled_collab_terms", enabledCollabTerms);
       return this;
     }
 
@@ -9207,6 +9217,7 @@ public class ProductCatalog extends APINode {
       "brand",
       "bundle_items",
       "bundle_retailer_ids",
+      "capabilities_disabled_by_user",
       "capability_to_review_status",
       "category",
       "category_specific_fields",
@@ -9479,6 +9490,13 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestGetProducts requestBundleRetailerIdsField (boolean value) {
       this.requestField("bundle_retailer_ids", value);
+      return this;
+    }
+    public APIRequestGetProducts requestCapabilitiesDisabledByUserField () {
+      return this.requestCapabilitiesDisabledByUserField(true);
+    }
+    public APIRequestGetProducts requestCapabilitiesDisabledByUserField (boolean value) {
+      this.requestField("capabilities_disabled_by_user", value);
       return this;
     }
     public APIRequestGetProducts requestCapabilityToReviewStatusField () {
@@ -13310,6 +13328,25 @@ public class ProductCatalog extends APINode {
       private String value;
 
       private EnumVertical(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumEnabledCollabTerms {
+      @SerializedName("ENFORCE_CREATE_NEW_AD_ACCOUNT")
+      VALUE_ENFORCE_CREATE_NEW_AD_ACCOUNT("ENFORCE_CREATE_NEW_AD_ACCOUNT"),
+      @SerializedName("ENFORCE_SHARE_AD_PERFORMANCE_ACCESS")
+      VALUE_ENFORCE_SHARE_AD_PERFORMANCE_ACCESS("ENFORCE_SHARE_AD_PERFORMANCE_ACCESS"),
+      ;
+
+      private String value;
+
+      private EnumEnabledCollabTerms(String value) {
         this.value = value;
       }
 

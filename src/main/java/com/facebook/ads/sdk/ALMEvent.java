@@ -55,6 +55,8 @@ public class ALMEvent extends APINode {
   private String mGuidance = null;
   @SerializedName("guidance_detail")
   private String mGuidanceDetail = null;
+  @SerializedName("guidance_type")
+  private String mGuidanceType = null;
   @SerializedName("id")
   private String mId = null;
   @SerializedName("parent_advertiser_ids")
@@ -307,6 +309,10 @@ public class ALMEvent extends APINode {
     return mGuidanceDetail;
   }
 
+  public String getFieldGuidanceType() {
+    return mGuidanceType;
+  }
+
   public String getFieldId() {
     return mId;
   }
@@ -347,6 +353,7 @@ public class ALMEvent extends APINode {
       "event_time",
       "guidance",
       "guidance_detail",
+      "guidance_type",
       "id",
       "parent_advertiser_ids",
       "reseller_business_id",
@@ -493,6 +500,13 @@ public class ALMEvent extends APINode {
       this.requestField("guidance_detail", value);
       return this;
     }
+    public APIRequestGet requestGuidanceTypeField () {
+      return this.requestGuidanceTypeField(true);
+    }
+    public APIRequestGet requestGuidanceTypeField (boolean value) {
+      this.requestField("guidance_type", value);
+      return this;
+    }
     public APIRequestGet requestIdField () {
       return this.requestIdField(true);
     }
@@ -552,6 +566,7 @@ public class ALMEvent extends APINode {
     this.mEventTime = instance.mEventTime;
     this.mGuidance = instance.mGuidance;
     this.mGuidanceDetail = instance.mGuidanceDetail;
+    this.mGuidanceType = instance.mGuidanceType;
     this.mId = instance.mId;
     this.mParentAdvertiserIds = instance.mParentAdvertiserIds;
     this.mResellerBusinessId = instance.mResellerBusinessId;

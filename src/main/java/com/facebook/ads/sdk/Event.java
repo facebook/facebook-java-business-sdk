@@ -97,10 +97,6 @@ public class Event extends APINode {
   private String mScheduledPublishTime = null;
   @SerializedName("start_time")
   private String mStartTime = null;
-  @SerializedName("sub_categories")
-  private List<String> mSubCategories = null;
-  @SerializedName("ticket_selling_status")
-  private String mTicketSellingStatus = null;
   @SerializedName("ticket_setting")
   private EventTicketSetting mTicketSetting = null;
   @SerializedName("ticket_uri")
@@ -490,14 +486,6 @@ public class Event extends APINode {
 
   public String getFieldStartTime() {
     return mStartTime;
-  }
-
-  public List<String> getFieldSubCategories() {
-    return mSubCategories;
-  }
-
-  public String getFieldTicketSellingStatus() {
-    return mTicketSellingStatus;
   }
 
   public EventTicketSetting getFieldTicketSetting() {
@@ -2042,8 +2030,6 @@ public class Event extends APINode {
       "registration_setting",
       "scheduled_publish_time",
       "start_time",
-      "sub_categories",
-      "ticket_selling_status",
       "ticket_setting",
       "ticket_uri",
       "ticket_uri_start_sales_time",
@@ -2340,20 +2326,6 @@ public class Event extends APINode {
       this.requestField("start_time", value);
       return this;
     }
-    public APIRequestGet requestSubCategoriesField () {
-      return this.requestSubCategoriesField(true);
-    }
-    public APIRequestGet requestSubCategoriesField (boolean value) {
-      this.requestField("sub_categories", value);
-      return this;
-    }
-    public APIRequestGet requestTicketSellingStatusField () {
-      return this.requestTicketSellingStatusField(true);
-    }
-    public APIRequestGet requestTicketSellingStatusField (boolean value) {
-      this.requestField("ticket_selling_status", value);
-      return this;
-    }
     public APIRequestGet requestTicketSettingField () {
       return this.requestTicketSettingField(true);
     }
@@ -2614,8 +2586,6 @@ public class Event extends APINode {
     this.mRegistrationSetting = instance.mRegistrationSetting;
     this.mScheduledPublishTime = instance.mScheduledPublishTime;
     this.mStartTime = instance.mStartTime;
-    this.mSubCategories = instance.mSubCategories;
-    this.mTicketSellingStatus = instance.mTicketSellingStatus;
     this.mTicketSetting = instance.mTicketSetting;
     this.mTicketUri = instance.mTicketUri;
     this.mTicketUriStartSalesTime = instance.mTicketUriStartSalesTime;
