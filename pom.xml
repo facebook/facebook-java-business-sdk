@@ -56,8 +56,9 @@
         <extensions>true</extensions>
         <configuration>
           <serverId>ossrh</serverId>
-          <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+          <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
           <autoReleaseAfterClose>true</autoReleaseAfterClose>
+          <skipNexusStagingDeployMojo>true</skipNexusStagingDeployMojo>
         </configuration>
       </plugin>
       <plugin>
@@ -84,6 +85,9 @@
             <goals>
               <goal>sign</goal>
             </goals>
+            <configuration>
+              <skip>true</skip>
+            </configuration>
           </execution>
         </executions>
       </plugin>
