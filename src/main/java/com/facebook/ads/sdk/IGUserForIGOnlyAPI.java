@@ -658,6 +658,7 @@ public class IGUserForIGOnlyAPI extends APINode {
     }
     public static final String[] PARAMS = {
       "folder",
+      "is_owner",
       "platform",
       "tags",
       "user_id",
@@ -668,6 +669,7 @@ public class IGUserForIGOnlyAPI extends APINode {
       "folder",
       "former_participants",
       "id",
+      "is_owner",
       "is_subscribed",
       "link",
       "linked_group",
@@ -738,6 +740,15 @@ public class IGUserForIGOnlyAPI extends APINode {
 
     public APIRequestGetConversations setFolder (String folder) {
       this.setParam("folder", folder);
+      return this;
+    }
+
+    public APIRequestGetConversations setIsOwner (Boolean isOwner) {
+      this.setParam("is_owner", isOwner);
+      return this;
+    }
+    public APIRequestGetConversations setIsOwner (String isOwner) {
+      this.setParam("is_owner", isOwner);
       return this;
     }
 
@@ -826,6 +837,13 @@ public class IGUserForIGOnlyAPI extends APINode {
     }
     public APIRequestGetConversations requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetConversations requestIsOwnerField () {
+      return this.requestIsOwnerField(true);
+    }
+    public APIRequestGetConversations requestIsOwnerField (boolean value) {
+      this.requestField("is_owner", value);
       return this;
     }
     public APIRequestGetConversations requestIsSubscribedField () {
@@ -3722,6 +3740,8 @@ public class IGUserForIGOnlyAPI extends APINode {
       VALUE_LIVE_COMMENTS("live_comments"),
       @SerializedName("mentions")
       VALUE_MENTIONS("mentions"),
+      @SerializedName("message_edit")
+      VALUE_MESSAGE_EDIT("message_edit"),
       @SerializedName("message_reactions")
       VALUE_MESSAGE_REACTIONS("message_reactions"),
       @SerializedName("messages")

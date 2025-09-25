@@ -43,6 +43,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class UserPageOneTimeOptInTokenSettings extends APINode {
   @SerializedName("creation_timestamp")
   private Long mCreationTimestamp = null;
+  @SerializedName("custom_audience_ids")
+  private List<String> mCustomAudienceIds = null;
   @SerializedName("next_eligible_time")
   private Long mNextEligibleTime = null;
   @SerializedName("next_eligible_time_for_paid_messaging")
@@ -283,6 +285,10 @@ public class UserPageOneTimeOptInTokenSettings extends APINode {
     return mCreationTimestamp;
   }
 
+  public List<String> getFieldCustomAudienceIds() {
+    return mCustomAudienceIds;
+  }
+
   public Long getFieldNextEligibleTime() {
     return mNextEligibleTime;
   }
@@ -341,6 +347,7 @@ public class UserPageOneTimeOptInTokenSettings extends APINode {
 
     public static final String[] FIELDS = {
       "creation_timestamp",
+      "custom_audience_ids",
       "next_eligible_time",
       "next_eligible_time_for_paid_messaging",
       "notification_messages_frequency",
@@ -451,6 +458,13 @@ public class UserPageOneTimeOptInTokenSettings extends APINode {
       this.requestField("creation_timestamp", value);
       return this;
     }
+    public APIRequestGet requestCustomAudienceIdsField () {
+      return this.requestCustomAudienceIdsField(true);
+    }
+    public APIRequestGet requestCustomAudienceIdsField (boolean value) {
+      this.requestField("custom_audience_ids", value);
+      return this;
+    }
     public APIRequestGet requestNextEligibleTimeField () {
       return this.requestNextEligibleTimeField(true);
     }
@@ -546,6 +560,7 @@ public class UserPageOneTimeOptInTokenSettings extends APINode {
 
   public UserPageOneTimeOptInTokenSettings copyFrom(UserPageOneTimeOptInTokenSettings instance) {
     this.mCreationTimestamp = instance.mCreationTimestamp;
+    this.mCustomAudienceIds = instance.mCustomAudienceIds;
     this.mNextEligibleTime = instance.mNextEligibleTime;
     this.mNextEligibleTimeForPaidMessaging = instance.mNextEligibleTimeForPaidMessaging;
     this.mNotificationMessagesFrequency = instance.mNotificationMessagesFrequency;

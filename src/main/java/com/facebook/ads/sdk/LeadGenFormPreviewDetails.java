@@ -41,6 +41,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class LeadGenFormPreviewDetails extends APINode {
+  @SerializedName("book_on_website_text")
+  private String mBookOnWebsiteText = null;
   @SerializedName("call_business_text")
   private String mCallBusinessText = null;
   @SerializedName("call_to_action_title")
@@ -283,6 +285,15 @@ public class LeadGenFormPreviewDetails extends APINode {
     return getGson().toJson(this);
   }
 
+
+  public String getFieldBookOnWebsiteText() {
+    return mBookOnWebsiteText;
+  }
+
+  public LeadGenFormPreviewDetails setFieldBookOnWebsiteText(String value) {
+    this.mBookOnWebsiteText = value;
+    return this;
+  }
 
   public String getFieldCallBusinessText() {
     return mCallBusinessText;
@@ -715,6 +726,7 @@ public class LeadGenFormPreviewDetails extends APINode {
   }
 
   public LeadGenFormPreviewDetails copyFrom(LeadGenFormPreviewDetails instance) {
+    this.mBookOnWebsiteText = instance.mBookOnWebsiteText;
     this.mCallBusinessText = instance.mCallBusinessText;
     this.mCallToActionTitle = instance.mCallToActionTitle;
     this.mChatOnMessengerText = instance.mChatOnMessengerText;

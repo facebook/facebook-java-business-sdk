@@ -369,6 +369,7 @@ public class EventSourceGroup extends APINode {
       "min_daily_budget",
       "name",
       "offsite_pixels_tos_accepted",
+      "opportunity_score",
       "owner",
       "owner_business",
       "partner",
@@ -849,6 +850,13 @@ public class EventSourceGroup extends APINode {
     }
     public APIRequestGetSharedAccounts requestOffsitePixelsTosAcceptedField (boolean value) {
       this.requestField("offsite_pixels_tos_accepted", value);
+      return this;
+    }
+    public APIRequestGetSharedAccounts requestOpportunityScoreField () {
+      return this.requestOpportunityScoreField(true);
+    }
+    public APIRequestGetSharedAccounts requestOpportunityScoreField (boolean value) {
+      this.requestField("opportunity_score", value);
       return this;
     }
     public APIRequestGetSharedAccounts requestOwnerField () {

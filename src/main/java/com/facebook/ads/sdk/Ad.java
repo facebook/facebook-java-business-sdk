@@ -604,6 +604,7 @@ public class Ad extends APINode {
       "link_destination_display_url",
       "link_og_id",
       "link_url",
+      "media_sourcing_spec",
       "messenger_sponsored_message",
       "name",
       "object_id",
@@ -1018,6 +1019,13 @@ public class Ad extends APINode {
     }
     public APIRequestGetAdCreatives requestLinkUrlField (boolean value) {
       this.requestField("link_url", value);
+      return this;
+    }
+    public APIRequestGetAdCreatives requestMediaSourcingSpecField () {
+      return this.requestMediaSourcingSpecField(true);
+    }
+    public APIRequestGetAdCreatives requestMediaSourcingSpecField (boolean value) {
+      this.requestField("media_sourcing_spec", value);
       return this;
     }
     public APIRequestGetAdCreatives requestMessengerSponsoredMessageField () {
@@ -2177,6 +2185,7 @@ public class Ad extends APINode {
       "export_name",
       "fields",
       "filtering",
+      "graph_cache",
       "level",
       "limit",
       "product_id_limit",
@@ -2338,6 +2347,15 @@ public class Ad extends APINode {
       return this;
     }
 
+    public APIRequestGetInsights setGraphCache (Boolean graphCache) {
+      this.setParam("graph_cache", graphCache);
+      return this;
+    }
+    public APIRequestGetInsights setGraphCache (String graphCache) {
+      this.setParam("graph_cache", graphCache);
+      return this;
+    }
+
     public APIRequestGetInsights setLevel (AdsInsights.EnumLevel level) {
       this.setParam("level", level);
       return this;
@@ -2490,6 +2508,7 @@ public class Ad extends APINode {
       "export_name",
       "fields",
       "filtering",
+      "graph_cache",
       "level",
       "limit",
       "product_id_limit",
@@ -2648,6 +2667,15 @@ public class Ad extends APINode {
     }
     public APIRequestGetInsightsAsync setFiltering (String filtering) {
       this.setParam("filtering", filtering);
+      return this;
+    }
+
+    public APIRequestGetInsightsAsync setGraphCache (Boolean graphCache) {
+      this.setParam("graph_cache", graphCache);
+      return this;
+    }
+    public APIRequestGetInsightsAsync setGraphCache (String graphCache) {
+      this.setParam("graph_cache", graphCache);
       return this;
     }
 

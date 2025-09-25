@@ -61,6 +61,8 @@ public class Business extends APINode {
   private Boolean mIsHidden = null;
   @SerializedName("link")
   private String mLink = null;
+  @SerializedName("marketing_messages_onboarding_status")
+  private MarketingMessagesOnboardingStatus mMarketingMessagesOnboardingStatus = null;
   @SerializedName("name")
   private String mName = null;
   @SerializedName("payment_account_id")
@@ -304,6 +306,10 @@ public class Business extends APINode {
 
   public APIRequestDeleteAdAccounts deleteAdAccounts() {
     return new APIRequestDeleteAdAccounts(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetAdCustomDerivedMetrics getAdCustomDerivedMetrics() {
+    return new APIRequestGetAdCustomDerivedMetrics(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestCreateAdReviewRequest createAdReviewRequest() {
@@ -785,6 +791,10 @@ public class Business extends APINode {
 
   public String getFieldLink() {
     return mLink;
+  }
+
+  public MarketingMessagesOnboardingStatus getFieldMarketingMessagesOnboardingStatus() {
+    return mMarketingMessagesOnboardingStatus;
   }
 
   public String getFieldName() {
@@ -1277,6 +1287,267 @@ public class Business extends APINode {
       return this;
     }
 
+  }
+
+  public static class APIRequestGetAdCustomDerivedMetrics extends APIRequest<AdCustomDerivedMetrics> {
+
+    APINodeList<AdCustomDerivedMetrics> lastResponse = null;
+    @Override
+    public APINodeList<AdCustomDerivedMetrics> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "adhoc_custom_metrics",
+      "scope",
+    };
+
+    public static final String[] FIELDS = {
+      "ad_account_id",
+      "business",
+      "creation_time",
+      "creator",
+      "custom_derived_metric_type",
+      "deletion_time",
+      "deletor",
+      "description",
+      "format_type",
+      "formula",
+      "has_attribution_windows",
+      "has_inline_attribution_window",
+      "id",
+      "name",
+      "permission",
+      "saved_report_id",
+      "scope",
+    };
+
+    @Override
+    public APINodeList<AdCustomDerivedMetrics> parseResponse(String response, String header) throws APIException {
+      return AdCustomDerivedMetrics.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<AdCustomDerivedMetrics> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<AdCustomDerivedMetrics> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<AdCustomDerivedMetrics>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<AdCustomDerivedMetrics>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<AdCustomDerivedMetrics>>() {
+           public APINodeList<AdCustomDerivedMetrics> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetAdCustomDerivedMetrics.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestGetAdCustomDerivedMetrics(String nodeId, APIContext context) {
+      super(context, nodeId, "/ad_custom_derived_metrics", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetAdCustomDerivedMetrics setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAdCustomDerivedMetrics setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetAdCustomDerivedMetrics setAdhocCustomMetrics (List<String> adhocCustomMetrics) {
+      this.setParam("adhoc_custom_metrics", adhocCustomMetrics);
+      return this;
+    }
+    public APIRequestGetAdCustomDerivedMetrics setAdhocCustomMetrics (String adhocCustomMetrics) {
+      this.setParam("adhoc_custom_metrics", adhocCustomMetrics);
+      return this;
+    }
+
+    public APIRequestGetAdCustomDerivedMetrics setScope (AdCustomDerivedMetrics.EnumScope scope) {
+      this.setParam("scope", scope);
+      return this;
+    }
+    public APIRequestGetAdCustomDerivedMetrics setScope (String scope) {
+      this.setParam("scope", scope);
+      return this;
+    }
+
+    public APIRequestGetAdCustomDerivedMetrics requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetAdCustomDerivedMetrics requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAdCustomDerivedMetrics requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetAdCustomDerivedMetrics requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAdCustomDerivedMetrics requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAdCustomDerivedMetrics requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetAdCustomDerivedMetrics requestAdAccountIdField () {
+      return this.requestAdAccountIdField(true);
+    }
+    public APIRequestGetAdCustomDerivedMetrics requestAdAccountIdField (boolean value) {
+      this.requestField("ad_account_id", value);
+      return this;
+    }
+    public APIRequestGetAdCustomDerivedMetrics requestBusinessField () {
+      return this.requestBusinessField(true);
+    }
+    public APIRequestGetAdCustomDerivedMetrics requestBusinessField (boolean value) {
+      this.requestField("business", value);
+      return this;
+    }
+    public APIRequestGetAdCustomDerivedMetrics requestCreationTimeField () {
+      return this.requestCreationTimeField(true);
+    }
+    public APIRequestGetAdCustomDerivedMetrics requestCreationTimeField (boolean value) {
+      this.requestField("creation_time", value);
+      return this;
+    }
+    public APIRequestGetAdCustomDerivedMetrics requestCreatorField () {
+      return this.requestCreatorField(true);
+    }
+    public APIRequestGetAdCustomDerivedMetrics requestCreatorField (boolean value) {
+      this.requestField("creator", value);
+      return this;
+    }
+    public APIRequestGetAdCustomDerivedMetrics requestCustomDerivedMetricTypeField () {
+      return this.requestCustomDerivedMetricTypeField(true);
+    }
+    public APIRequestGetAdCustomDerivedMetrics requestCustomDerivedMetricTypeField (boolean value) {
+      this.requestField("custom_derived_metric_type", value);
+      return this;
+    }
+    public APIRequestGetAdCustomDerivedMetrics requestDeletionTimeField () {
+      return this.requestDeletionTimeField(true);
+    }
+    public APIRequestGetAdCustomDerivedMetrics requestDeletionTimeField (boolean value) {
+      this.requestField("deletion_time", value);
+      return this;
+    }
+    public APIRequestGetAdCustomDerivedMetrics requestDeletorField () {
+      return this.requestDeletorField(true);
+    }
+    public APIRequestGetAdCustomDerivedMetrics requestDeletorField (boolean value) {
+      this.requestField("deletor", value);
+      return this;
+    }
+    public APIRequestGetAdCustomDerivedMetrics requestDescriptionField () {
+      return this.requestDescriptionField(true);
+    }
+    public APIRequestGetAdCustomDerivedMetrics requestDescriptionField (boolean value) {
+      this.requestField("description", value);
+      return this;
+    }
+    public APIRequestGetAdCustomDerivedMetrics requestFormatTypeField () {
+      return this.requestFormatTypeField(true);
+    }
+    public APIRequestGetAdCustomDerivedMetrics requestFormatTypeField (boolean value) {
+      this.requestField("format_type", value);
+      return this;
+    }
+    public APIRequestGetAdCustomDerivedMetrics requestFormulaField () {
+      return this.requestFormulaField(true);
+    }
+    public APIRequestGetAdCustomDerivedMetrics requestFormulaField (boolean value) {
+      this.requestField("formula", value);
+      return this;
+    }
+    public APIRequestGetAdCustomDerivedMetrics requestHasAttributionWindowsField () {
+      return this.requestHasAttributionWindowsField(true);
+    }
+    public APIRequestGetAdCustomDerivedMetrics requestHasAttributionWindowsField (boolean value) {
+      this.requestField("has_attribution_windows", value);
+      return this;
+    }
+    public APIRequestGetAdCustomDerivedMetrics requestHasInlineAttributionWindowField () {
+      return this.requestHasInlineAttributionWindowField(true);
+    }
+    public APIRequestGetAdCustomDerivedMetrics requestHasInlineAttributionWindowField (boolean value) {
+      this.requestField("has_inline_attribution_window", value);
+      return this;
+    }
+    public APIRequestGetAdCustomDerivedMetrics requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetAdCustomDerivedMetrics requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetAdCustomDerivedMetrics requestNameField () {
+      return this.requestNameField(true);
+    }
+    public APIRequestGetAdCustomDerivedMetrics requestNameField (boolean value) {
+      this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetAdCustomDerivedMetrics requestPermissionField () {
+      return this.requestPermissionField(true);
+    }
+    public APIRequestGetAdCustomDerivedMetrics requestPermissionField (boolean value) {
+      this.requestField("permission", value);
+      return this;
+    }
+    public APIRequestGetAdCustomDerivedMetrics requestSavedReportIdField () {
+      return this.requestSavedReportIdField(true);
+    }
+    public APIRequestGetAdCustomDerivedMetrics requestSavedReportIdField (boolean value) {
+      this.requestField("saved_report_id", value);
+      return this;
+    }
+    public APIRequestGetAdCustomDerivedMetrics requestScopeField () {
+      return this.requestScopeField(true);
+    }
+    public APIRequestGetAdCustomDerivedMetrics requestScopeField (boolean value) {
+      this.requestField("scope", value);
+      return this;
+    }
   }
 
   public static class APIRequestCreateAdReviewRequest extends APIRequest<APINode> {
@@ -4500,6 +4771,7 @@ public class Business extends APINode {
       "id",
       "is_hidden",
       "link",
+      "marketing_messages_onboarding_status",
       "name",
       "primary_page",
       "profile_picture_uri",
@@ -4671,6 +4943,13 @@ public class Business extends APINode {
     }
     public APIRequestGetAgencies requestLinkField (boolean value) {
       this.requestField("link", value);
+      return this;
+    }
+    public APIRequestGetAgencies requestMarketingMessagesOnboardingStatusField () {
+      return this.requestMarketingMessagesOnboardingStatusField(true);
+    }
+    public APIRequestGetAgencies requestMarketingMessagesOnboardingStatusField (boolean value) {
+      this.requestField("marketing_messages_onboarding_status", value);
       return this;
     }
     public APIRequestGetAgencies requestNameField () {
@@ -6320,6 +6599,7 @@ public class Business extends APINode {
       "min_daily_budget",
       "name",
       "offsite_pixels_tos_accepted",
+      "opportunity_score",
       "owner",
       "owner_business",
       "partner",
@@ -6805,6 +7085,13 @@ public class Business extends APINode {
     }
     public APIRequestGetClientAdAccounts requestOffsitePixelsTosAcceptedField (boolean value) {
       this.requestField("offsite_pixels_tos_accepted", value);
+      return this;
+    }
+    public APIRequestGetClientAdAccounts requestOpportunityScoreField () {
+      return this.requestOpportunityScoreField(true);
+    }
+    public APIRequestGetClientAdAccounts requestOpportunityScoreField (boolean value) {
+      this.requestField("opportunity_score", value);
       return this;
     }
     public APIRequestGetClientAdAccounts requestOwnerField () {
@@ -8338,6 +8625,7 @@ public class Business extends APINode {
       "connected_instagram_account",
       "connected_page_backed_instagram_account",
       "contact_address",
+      "copyright_attribution_insights",
       "copyright_whitelisted_ig_partners",
       "country_page_likes",
       "cover",
@@ -8741,6 +9029,13 @@ public class Business extends APINode {
     }
     public APIRequestGetClientPages requestContactAddressField (boolean value) {
       this.requestField("contact_address", value);
+      return this;
+    }
+    public APIRequestGetClientPages requestCopyrightAttributionInsightsField () {
+      return this.requestCopyrightAttributionInsightsField(true);
+    }
+    public APIRequestGetClientPages requestCopyrightAttributionInsightsField (boolean value) {
+      this.requestField("copyright_attribution_insights", value);
       return this;
     }
     public APIRequestGetClientPages requestCopyrightWhitelistedIgPartnersField () {
@@ -10809,6 +11104,7 @@ public class Business extends APINode {
       "id",
       "is_hidden",
       "link",
+      "marketing_messages_onboarding_status",
       "name",
       "primary_page",
       "profile_picture_uri",
@@ -10980,6 +11276,13 @@ public class Business extends APINode {
     }
     public APIRequestGetClients requestLinkField (boolean value) {
       this.requestField("link", value);
+      return this;
+    }
+    public APIRequestGetClients requestMarketingMessagesOnboardingStatusField () {
+      return this.requestMarketingMessagesOnboardingStatusField(true);
+    }
+    public APIRequestGetClients requestMarketingMessagesOnboardingStatusField (boolean value) {
+      this.requestField("marketing_messages_onboarding_status", value);
       return this;
     }
     public APIRequestGetClients requestNameField () {
@@ -11617,8 +11920,6 @@ public class Business extends APINode {
       "payment_provider",
       "privacy_policy_localized",
       "return_policy_localized",
-      "review_rejection_messages",
-      "review_rejection_reasons",
       "shops_ads_setup",
       "terms",
     };
@@ -11823,20 +12124,6 @@ public class Business extends APINode {
     }
     public APIRequestGetCommerceMerchantSettings requestReturnPolicyLocalizedField (boolean value) {
       this.requestField("return_policy_localized", value);
-      return this;
-    }
-    public APIRequestGetCommerceMerchantSettings requestReviewRejectionMessagesField () {
-      return this.requestReviewRejectionMessagesField(true);
-    }
-    public APIRequestGetCommerceMerchantSettings requestReviewRejectionMessagesField (boolean value) {
-      this.requestField("review_rejection_messages", value);
-      return this;
-    }
-    public APIRequestGetCommerceMerchantSettings requestReviewRejectionReasonsField () {
-      return this.requestReviewRejectionReasonsField(true);
-    }
-    public APIRequestGetCommerceMerchantSettings requestReviewRejectionReasonsField (boolean value) {
-      this.requestField("review_rejection_reasons", value);
       return this;
     }
     public APIRequestGetCommerceMerchantSettings requestShopsAdsSetupField () {
@@ -15835,6 +16122,7 @@ public class Business extends APINode {
 
     public static final String[] FIELDS = {
       "active",
+      "browser_agent",
       "cloud_provider",
       "cloud_region",
       "destination_id",
@@ -15949,6 +16237,13 @@ public class Business extends APINode {
     }
     public APIRequestGetOpenBridgeConfigurations requestActiveField (boolean value) {
       this.requestField("active", value);
+      return this;
+    }
+    public APIRequestGetOpenBridgeConfigurations requestBrowserAgentField () {
+      return this.requestBrowserAgentField(true);
+    }
+    public APIRequestGetOpenBridgeConfigurations requestBrowserAgentField (boolean value) {
+      this.requestField("browser_agent", value);
       return this;
     }
     public APIRequestGetOpenBridgeConfigurations requestCloudProviderField () {
@@ -16368,6 +16663,7 @@ public class Business extends APINode {
       "min_daily_budget",
       "name",
       "offsite_pixels_tos_accepted",
+      "opportunity_score",
       "owner",
       "owner_business",
       "partner",
@@ -16853,6 +17149,13 @@ public class Business extends APINode {
     }
     public APIRequestGetOwnedAdAccounts requestOffsitePixelsTosAcceptedField (boolean value) {
       this.requestField("offsite_pixels_tos_accepted", value);
+      return this;
+    }
+    public APIRequestGetOwnedAdAccounts requestOpportunityScoreField () {
+      return this.requestOpportunityScoreField(true);
+    }
+    public APIRequestGetOwnedAdAccounts requestOpportunityScoreField (boolean value) {
+      this.requestField("opportunity_score", value);
       return this;
     }
     public APIRequestGetOwnedAdAccounts requestOwnerField () {
@@ -18303,6 +18606,7 @@ public class Business extends APINode {
       "id",
       "is_hidden",
       "link",
+      "marketing_messages_onboarding_status",
       "name",
       "primary_page",
       "profile_picture_uri",
@@ -18488,6 +18792,13 @@ public class Business extends APINode {
     }
     public APIRequestGetOwnedBusinesses requestLinkField (boolean value) {
       this.requestField("link", value);
+      return this;
+    }
+    public APIRequestGetOwnedBusinesses requestMarketingMessagesOnboardingStatusField () {
+      return this.requestMarketingMessagesOnboardingStatusField(true);
+    }
+    public APIRequestGetOwnedBusinesses requestMarketingMessagesOnboardingStatusField (boolean value) {
+      this.requestField("marketing_messages_onboarding_status", value);
       return this;
     }
     public APIRequestGetOwnedBusinesses requestNameField () {
@@ -19353,6 +19664,7 @@ public class Business extends APINode {
       "connected_instagram_account",
       "connected_page_backed_instagram_account",
       "contact_address",
+      "copyright_attribution_insights",
       "copyright_whitelisted_ig_partners",
       "country_page_likes",
       "cover",
@@ -19756,6 +20068,13 @@ public class Business extends APINode {
     }
     public APIRequestGetOwnedPages requestContactAddressField (boolean value) {
       this.requestField("contact_address", value);
+      return this;
+    }
+    public APIRequestGetOwnedPages requestCopyrightAttributionInsightsField () {
+      return this.requestCopyrightAttributionInsightsField(true);
+    }
+    public APIRequestGetOwnedPages requestCopyrightAttributionInsightsField (boolean value) {
+      this.requestField("copyright_attribution_insights", value);
       return this;
     }
     public APIRequestGetOwnedPages requestCopyrightWhitelistedIgPartnersField () {
@@ -26318,6 +26637,7 @@ public class Business extends APINode {
       "id",
       "is_hidden",
       "link",
+      "marketing_messages_onboarding_status",
       "name",
       "primary_page",
       "profile_picture_uri",
@@ -26489,6 +26809,13 @@ public class Business extends APINode {
     }
     public APIRequestGet requestLinkField (boolean value) {
       this.requestField("link", value);
+      return this;
+    }
+    public APIRequestGet requestMarketingMessagesOnboardingStatusField () {
+      return this.requestMarketingMessagesOnboardingStatusField(true);
+    }
+    public APIRequestGet requestMarketingMessagesOnboardingStatusField (boolean value) {
+      this.requestField("marketing_messages_onboarding_status", value);
       return this;
     }
     public APIRequestGet requestNameField () {
@@ -28513,6 +28840,7 @@ public class Business extends APINode {
     this.mId = instance.mId;
     this.mIsHidden = instance.mIsHidden;
     this.mLink = instance.mLink;
+    this.mMarketingMessagesOnboardingStatus = instance.mMarketingMessagesOnboardingStatus;
     this.mName = instance.mName;
     this.mPaymentAccountId = instance.mPaymentAccountId;
     this.mPrimaryPage = instance.mPrimaryPage;

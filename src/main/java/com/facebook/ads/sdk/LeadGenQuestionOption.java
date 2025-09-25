@@ -43,6 +43,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class LeadGenQuestionOption extends APINode {
   @SerializedName("key")
   private String mKey = null;
+  @SerializedName("photo")
+  private Photo mPhoto = null;
   @SerializedName("value")
   private String mValue = null;
   protected static Gson gson = null;
@@ -205,6 +207,23 @@ public class LeadGenQuestionOption extends APINode {
     return this;
   }
 
+  public Photo getFieldPhoto() {
+    if (mPhoto != null) {
+      mPhoto.context = getContext();
+    }
+    return mPhoto;
+  }
+
+  public LeadGenQuestionOption setFieldPhoto(Photo value) {
+    this.mPhoto = value;
+    return this;
+  }
+
+  public LeadGenQuestionOption setFieldPhoto(String value) {
+    Type type = new TypeToken<Photo>(){}.getType();
+    this.mPhoto = Photo.getGson().fromJson(value, type);
+    return this;
+  }
   public String getFieldValue() {
     return mValue;
   }
@@ -232,6 +251,7 @@ public class LeadGenQuestionOption extends APINode {
 
   public LeadGenQuestionOption copyFrom(LeadGenQuestionOption instance) {
     this.mKey = instance.mKey;
+    this.mPhoto = instance.mPhoto;
     this.mValue = instance.mValue;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

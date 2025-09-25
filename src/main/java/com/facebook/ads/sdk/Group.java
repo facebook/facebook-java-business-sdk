@@ -4532,7 +4532,6 @@ public class Group extends APINode {
     public static final String[] FIELDS = {
       "about",
       "age_range",
-      "avatar_2d_profile_picture",
       "birthday",
       "client_business_id",
       "community",
@@ -4546,7 +4545,6 @@ public class Group extends APINode {
       "gender",
       "hometown",
       "id",
-      "id_for_avatars",
       "inspirational_people",
       "install_type",
       "installed",
@@ -4687,13 +4685,6 @@ public class Group extends APINode {
       this.requestField("age_range", value);
       return this;
     }
-    public APIRequestGetOptedInMembers requestAvatar2dProfilePictureField () {
-      return this.requestAvatar2dProfilePictureField(true);
-    }
-    public APIRequestGetOptedInMembers requestAvatar2dProfilePictureField (boolean value) {
-      this.requestField("avatar_2d_profile_picture", value);
-      return this;
-    }
     public APIRequestGetOptedInMembers requestBirthdayField () {
       return this.requestBirthdayField(true);
     }
@@ -4783,13 +4774,6 @@ public class Group extends APINode {
     }
     public APIRequestGetOptedInMembers requestIdField (boolean value) {
       this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGetOptedInMembers requestIdForAvatarsField () {
-      return this.requestIdForAvatarsField(true);
-    }
-    public APIRequestGetOptedInMembers requestIdForAvatarsField (boolean value) {
-      this.requestField("id_for_avatars", value);
       return this;
     }
     public APIRequestGetOptedInMembers requestInspirationalPeopleField () {
@@ -5832,6 +5816,7 @@ public class Group extends APINode {
       "privacy",
       "published",
       "scheduled_publish_time",
+      "season",
       "source",
       "spherical",
       "status",
@@ -6218,6 +6203,13 @@ public class Group extends APINode {
     }
     public APIRequestGetVideos requestScheduledPublishTimeField (boolean value) {
       this.requestField("scheduled_publish_time", value);
+      return this;
+    }
+    public APIRequestGetVideos requestSeasonField () {
+      return this.requestSeasonField(true);
+    }
+    public APIRequestGetVideos requestSeasonField (boolean value) {
+      this.requestField("season", value);
       return this;
     }
     public APIRequestGetVideos requestSourceField () {

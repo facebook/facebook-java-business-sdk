@@ -49,6 +49,10 @@ public class InsightsValue extends APINode {
   private String mEndTime = null;
   @SerializedName("engagement_source")
   private String mEngagementSource = null;
+  @SerializedName("is_from_ads")
+  private String mIsFromAds = null;
+  @SerializedName("is_from_followers")
+  private String mIsFromFollowers = null;
   @SerializedName("message_type")
   private String mMessageType = null;
   @SerializedName("messaging_channel")
@@ -252,6 +256,24 @@ public class InsightsValue extends APINode {
     return this;
   }
 
+  public String getFieldIsFromAds() {
+    return mIsFromAds;
+  }
+
+  public InsightsValue setFieldIsFromAds(String value) {
+    this.mIsFromAds = value;
+    return this;
+  }
+
+  public String getFieldIsFromFollowers() {
+    return mIsFromFollowers;
+  }
+
+  public InsightsValue setFieldIsFromFollowers(String value) {
+    this.mIsFromFollowers = value;
+    return this;
+  }
+
   public String getFieldMessageType() {
     return mMessageType;
   }
@@ -345,6 +367,8 @@ public class InsightsValue extends APINode {
     this.mEarningSource = instance.mEarningSource;
     this.mEndTime = instance.mEndTime;
     this.mEngagementSource = instance.mEngagementSource;
+    this.mIsFromAds = instance.mIsFromAds;
+    this.mIsFromFollowers = instance.mIsFromFollowers;
     this.mMessageType = instance.mMessageType;
     this.mMessagingChannel = instance.mMessagingChannel;
     this.mMonetizationTool = instance.mMonetizationTool;

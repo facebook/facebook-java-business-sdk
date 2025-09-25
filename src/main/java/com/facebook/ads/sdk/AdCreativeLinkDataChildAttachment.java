@@ -41,6 +41,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class AdCreativeLinkDataChildAttachment extends APINode {
+  @SerializedName("android_url")
+  private String mAndroidUrl = null;
   @SerializedName("call_to_action")
   private AdCreativeLinkDataCallToAction mCallToAction = null;
   @SerializedName("caption")
@@ -51,8 +53,12 @@ public class AdCreativeLinkDataChildAttachment extends APINode {
   private AdsImageCrops mImageCrops = null;
   @SerializedName("image_hash")
   private String mImageHash = null;
+  @SerializedName("ios_url")
+  private String mIosUrl = null;
   @SerializedName("link")
   private String mLink = null;
+  @SerializedName("marketing_message_buttons")
+  private List<Object> mMarketingMessageButtons = null;
   @SerializedName("name")
   private String mName = null;
   @SerializedName("picture")
@@ -214,6 +220,15 @@ public class AdCreativeLinkDataChildAttachment extends APINode {
   }
 
 
+  public String getFieldAndroidUrl() {
+    return mAndroidUrl;
+  }
+
+  public AdCreativeLinkDataChildAttachment setFieldAndroidUrl(String value) {
+    this.mAndroidUrl = value;
+    return this;
+  }
+
   public AdCreativeLinkDataCallToAction getFieldCallToAction() {
     return mCallToAction;
   }
@@ -269,12 +284,30 @@ public class AdCreativeLinkDataChildAttachment extends APINode {
     return this;
   }
 
+  public String getFieldIosUrl() {
+    return mIosUrl;
+  }
+
+  public AdCreativeLinkDataChildAttachment setFieldIosUrl(String value) {
+    this.mIosUrl = value;
+    return this;
+  }
+
   public String getFieldLink() {
     return mLink;
   }
 
   public AdCreativeLinkDataChildAttachment setFieldLink(String value) {
     this.mLink = value;
+    return this;
+  }
+
+  public List<Object> getFieldMarketingMessageButtons() {
+    return mMarketingMessageButtons;
+  }
+
+  public AdCreativeLinkDataChildAttachment setFieldMarketingMessageButtons(List<Object> value) {
+    this.mMarketingMessageButtons = value;
     return this;
   }
 
@@ -345,12 +378,15 @@ public class AdCreativeLinkDataChildAttachment extends APINode {
   }
 
   public AdCreativeLinkDataChildAttachment copyFrom(AdCreativeLinkDataChildAttachment instance) {
+    this.mAndroidUrl = instance.mAndroidUrl;
     this.mCallToAction = instance.mCallToAction;
     this.mCaption = instance.mCaption;
     this.mDescription = instance.mDescription;
     this.mImageCrops = instance.mImageCrops;
     this.mImageHash = instance.mImageHash;
+    this.mIosUrl = instance.mIosUrl;
     this.mLink = instance.mLink;
+    this.mMarketingMessageButtons = instance.mMarketingMessageButtons;
     this.mName = instance.mName;
     this.mPicture = instance.mPicture;
     this.mPlaceData = instance.mPlaceData;

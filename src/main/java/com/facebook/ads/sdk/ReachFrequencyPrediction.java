@@ -217,6 +217,8 @@ public class ReachFrequencyPrediction extends APINode {
   private String mTimezoneName = null;
   @SerializedName("topline_id")
   private Long mToplineId = null;
+  @SerializedName("trending_topics_spec")
+  private TrendingTopicsSpec mTrendingTopicsSpec = null;
   @SerializedName("video_view_length_constraint")
   private Long mVideoViewLengthConstraint = null;
   @SerializedName("viewtag")
@@ -787,6 +789,10 @@ public class ReachFrequencyPrediction extends APINode {
     return mToplineId;
   }
 
+  public TrendingTopicsSpec getFieldTrendingTopicsSpec() {
+    return mTrendingTopicsSpec;
+  }
+
   public Long getFieldVideoViewLengthConstraint() {
     return mVideoViewLengthConstraint;
   }
@@ -896,6 +902,7 @@ public class ReachFrequencyPrediction extends APINode {
       "timezone_id",
       "timezone_name",
       "topline_id",
+      "trending_topics_spec",
       "video_view_length_constraint",
       "viewtag",
     };
@@ -1606,6 +1613,13 @@ public class ReachFrequencyPrediction extends APINode {
       this.requestField("topline_id", value);
       return this;
     }
+    public APIRequestGet requestTrendingTopicsSpecField () {
+      return this.requestTrendingTopicsSpecField(true);
+    }
+    public APIRequestGet requestTrendingTopicsSpecField (boolean value) {
+      this.requestField("trending_topics_spec", value);
+      return this;
+    }
     public APIRequestGet requestVideoViewLengthConstraintField () {
       return this.requestVideoViewLengthConstraintField(true);
     }
@@ -1818,6 +1832,7 @@ public class ReachFrequencyPrediction extends APINode {
     this.mTimezoneId = instance.mTimezoneId;
     this.mTimezoneName = instance.mTimezoneName;
     this.mToplineId = instance.mToplineId;
+    this.mTrendingTopicsSpec = instance.mTrendingTopicsSpec;
     this.mVideoViewLengthConstraint = instance.mVideoViewLengthConstraint;
     this.mViewtag = instance.mViewtag;
     this.context = instance.context;

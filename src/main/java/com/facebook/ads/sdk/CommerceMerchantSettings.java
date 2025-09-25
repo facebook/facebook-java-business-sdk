@@ -73,10 +73,6 @@ public class CommerceMerchantSettings extends APINode {
   private String mPrivacyPolicyLocalized = null;
   @SerializedName("return_policy_localized")
   private String mReturnPolicyLocalized = null;
-  @SerializedName("review_rejection_messages")
-  private List<String> mReviewRejectionMessages = null;
-  @SerializedName("review_rejection_reasons")
-  private List<String> mReviewRejectionReasons = null;
   @SerializedName("shops_ads_setup")
   private Object mShopsAdsSetup = null;
   @SerializedName("terms")
@@ -310,10 +306,6 @@ public class CommerceMerchantSettings extends APINode {
     return new APIRequestGetOrderManagementApps(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestCreateOrderManagementApp createOrderManagementApp() {
-    return new APIRequestCreateOrderManagementApp(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetProductCatalogs getProductCatalogs() {
     return new APIRequestGetProductCatalogs(this.getPrefixedId().toString(), context);
   }
@@ -412,14 +404,6 @@ public class CommerceMerchantSettings extends APINode {
 
   public String getFieldReturnPolicyLocalized() {
     return mReturnPolicyLocalized;
-  }
-
-  public List<String> getFieldReviewRejectionMessages() {
-    return mReviewRejectionMessages;
-  }
-
-  public List<String> getFieldReviewRejectionReasons() {
-    return mReviewRejectionReasons;
   }
 
   public Object getFieldShopsAdsSetup() {
@@ -2155,111 +2139,6 @@ public class CommerceMerchantSettings extends APINode {
     }
   }
 
-  public static class APIRequestCreateOrderManagementApp extends APIRequest<CommerceMerchantSettings> {
-
-    CommerceMerchantSettings lastResponse = null;
-    @Override
-    public CommerceMerchantSettings getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public CommerceMerchantSettings parseResponse(String response, String header) throws APIException {
-      return CommerceMerchantSettings.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public CommerceMerchantSettings execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public CommerceMerchantSettings execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<CommerceMerchantSettings> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<CommerceMerchantSettings> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, CommerceMerchantSettings>() {
-           public CommerceMerchantSettings apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateOrderManagementApp.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         },
-         MoreExecutors.directExecutor()
-      );
-    };
-
-    public APIRequestCreateOrderManagementApp(String nodeId, APIContext context) {
-      super(context, nodeId, "/order_management_apps", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateOrderManagementApp setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateOrderManagementApp setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateOrderManagementApp requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateOrderManagementApp requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateOrderManagementApp requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateOrderManagementApp requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateOrderManagementApp requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateOrderManagementApp requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
   public static class APIRequestGetProductCatalogs extends APIRequest<ProductCatalog> {
 
     APINodeList<ProductCatalog> lastResponse = null;
@@ -3086,7 +2965,6 @@ public class CommerceMerchantSettings extends APINode {
       "fb_sales_channel",
       "id",
       "ig_sales_channel",
-      "is_onsite_enabled",
       "shop_status",
       "workspace",
     };
@@ -3207,13 +3085,6 @@ public class CommerceMerchantSettings extends APINode {
     }
     public APIRequestGetShops requestIgSalesChannelField (boolean value) {
       this.requestField("ig_sales_channel", value);
-      return this;
-    }
-    public APIRequestGetShops requestIsOnsiteEnabledField () {
-      return this.requestIsOnsiteEnabledField(true);
-    }
-    public APIRequestGetShops requestIsOnsiteEnabledField (boolean value) {
-      this.requestField("is_onsite_enabled", value);
       return this;
     }
     public APIRequestGetShops requestShopStatusField () {
@@ -3364,8 +3235,6 @@ public class CommerceMerchantSettings extends APINode {
       "payment_provider",
       "privacy_policy_localized",
       "return_policy_localized",
-      "review_rejection_messages",
-      "review_rejection_reasons",
       "shops_ads_setup",
       "terms",
     };
@@ -3572,20 +3441,6 @@ public class CommerceMerchantSettings extends APINode {
       this.requestField("return_policy_localized", value);
       return this;
     }
-    public APIRequestGet requestReviewRejectionMessagesField () {
-      return this.requestReviewRejectionMessagesField(true);
-    }
-    public APIRequestGet requestReviewRejectionMessagesField (boolean value) {
-      this.requestField("review_rejection_messages", value);
-      return this;
-    }
-    public APIRequestGet requestReviewRejectionReasonsField () {
-      return this.requestReviewRejectionReasonsField(true);
-    }
-    public APIRequestGet requestReviewRejectionReasonsField (boolean value) {
-      this.requestField("review_rejection_reasons", value);
-      return this;
-    }
     public APIRequestGet requestShopsAdsSetupField () {
       return this.requestShopsAdsSetupField(true);
     }
@@ -3658,8 +3513,6 @@ public class CommerceMerchantSettings extends APINode {
     this.mPaymentProvider = instance.mPaymentProvider;
     this.mPrivacyPolicyLocalized = instance.mPrivacyPolicyLocalized;
     this.mReturnPolicyLocalized = instance.mReturnPolicyLocalized;
-    this.mReviewRejectionMessages = instance.mReviewRejectionMessages;
-    this.mReviewRejectionReasons = instance.mReviewRejectionReasons;
     this.mShopsAdsSetup = instance.mShopsAdsSetup;
     this.mTerms = instance.mTerms;
     this.context = instance.context;

@@ -65,6 +65,8 @@ public class CustomAudience extends APINode {
   private List<CustomAudience> mExcludedCustomAudiences = null;
   @SerializedName("external_event_source")
   private AdsPixel mExternalEventSource = null;
+  @SerializedName("fields_violating_integrity_policy")
+  private List<String> mFieldsViolatingIntegrityPolicy = null;
   @SerializedName("household_audience")
   private Long mHouseholdAudience = null;
   @SerializedName("id")
@@ -442,6 +444,10 @@ public class CustomAudience extends APINode {
     return mExternalEventSource;
   }
 
+  public List<String> getFieldFieldsViolatingIntegrityPolicy() {
+    return mFieldsViolatingIntegrityPolicy;
+  }
+
   public Long getFieldHouseholdAudience() {
     return mHouseholdAudience;
   }
@@ -739,6 +745,7 @@ public class CustomAudience extends APINode {
       "min_daily_budget",
       "name",
       "offsite_pixels_tos_accepted",
+      "opportunity_score",
       "owner",
       "owner_business",
       "partner",
@@ -1224,6 +1231,13 @@ public class CustomAudience extends APINode {
     }
     public APIRequestGetAdAccounts requestOffsitePixelsTosAcceptedField (boolean value) {
       this.requestField("offsite_pixels_tos_accepted", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestOpportunityScoreField () {
+      return this.requestOpportunityScoreField(true);
+    }
+    public APIRequestGetAdAccounts requestOpportunityScoreField (boolean value) {
+      this.requestField("opportunity_score", value);
       return this;
     }
     public APIRequestGetAdAccounts requestOwnerField () {
@@ -3215,6 +3229,7 @@ public class CustomAudience extends APINode {
       "description",
       "excluded_custom_audiences",
       "external_event_source",
+      "fields_violating_integrity_policy",
       "household_audience",
       "id",
       "included_custom_audiences",
@@ -3449,6 +3464,13 @@ public class CustomAudience extends APINode {
     }
     public APIRequestGet requestExternalEventSourceField (boolean value) {
       this.requestField("external_event_source", value);
+      return this;
+    }
+    public APIRequestGet requestFieldsViolatingIntegrityPolicyField () {
+      return this.requestFieldsViolatingIntegrityPolicyField(true);
+    }
+    public APIRequestGet requestFieldsViolatingIntegrityPolicyField (boolean value) {
+      this.requestField("fields_violating_integrity_policy", value);
       return this;
     }
     public APIRequestGet requestHouseholdAudienceField () {
@@ -4166,6 +4188,7 @@ public class CustomAudience extends APINode {
     this.mDescription = instance.mDescription;
     this.mExcludedCustomAudiences = instance.mExcludedCustomAudiences;
     this.mExternalEventSource = instance.mExternalEventSource;
+    this.mFieldsViolatingIntegrityPolicy = instance.mFieldsViolatingIntegrityPolicy;
     this.mHouseholdAudience = instance.mHouseholdAudience;
     this.mId = instance.mId;
     this.mIncludedCustomAudiences = instance.mIncludedCustomAudiences;

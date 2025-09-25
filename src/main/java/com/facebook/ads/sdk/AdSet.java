@@ -145,6 +145,8 @@ public class AdSet extends APINode {
   private String mOptimizationSubEvent = null;
   @SerializedName("pacing_type")
   private List<String> mPacingType = null;
+  @SerializedName("placement_soft_opt_out")
+  private Placement mPlacementSoftOptOut = null;
   @SerializedName("promoted_object")
   private AdPromotedObject mPromotedObject = null;
   @SerializedName("recommendations")
@@ -175,10 +177,16 @@ public class AdSet extends APINode {
   private List<List<Long>> mTimeBasedAdRotationIdBlocks = null;
   @SerializedName("time_based_ad_rotation_intervals")
   private List<Long> mTimeBasedAdRotationIntervals = null;
+  @SerializedName("trending_topics_spec")
+  private TrendingTopicsSpec mTrendingTopicsSpec = null;
   @SerializedName("updated_time")
   private String mUpdatedTime = null;
   @SerializedName("use_new_app_click")
   private Boolean mUseNewAppClick = null;
+  @SerializedName("value_rule_set_id")
+  private String mValueRuleSetId = null;
+  @SerializedName("value_rules_applied")
+  private Boolean mValueRulesApplied = null;
   protected static Gson gson = null;
 
   public AdSet() {
@@ -418,6 +426,10 @@ public class AdSet extends APINode {
 
   public APIRequestGetAsyncAdRequests getAsyncAdRequests() {
     return new APIRequestGetAsyncAdRequests(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetBudgetSchedules getBudgetSchedules() {
+    return new APIRequestGetBudgetSchedules(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestCreateBudgetSchedule createBudgetSchedule() {
@@ -986,6 +998,20 @@ public class AdSet extends APINode {
     return this;
   }
 
+  public Placement getFieldPlacementSoftOptOut() {
+    return mPlacementSoftOptOut;
+  }
+
+  public AdSet setFieldPlacementSoftOptOut(Placement value) {
+    this.mPlacementSoftOptOut = value;
+    return this;
+  }
+
+  public AdSet setFieldPlacementSoftOptOut(String value) {
+    Type type = new TypeToken<Placement>(){}.getType();
+    this.mPlacementSoftOptOut = Placement.getGson().fromJson(value, type);
+    return this;
+  }
   public AdPromotedObject getFieldPromotedObject() {
     return mPromotedObject;
   }
@@ -1149,6 +1175,20 @@ public class AdSet extends APINode {
     return this;
   }
 
+  public TrendingTopicsSpec getFieldTrendingTopicsSpec() {
+    return mTrendingTopicsSpec;
+  }
+
+  public AdSet setFieldTrendingTopicsSpec(TrendingTopicsSpec value) {
+    this.mTrendingTopicsSpec = value;
+    return this;
+  }
+
+  public AdSet setFieldTrendingTopicsSpec(String value) {
+    Type type = new TypeToken<TrendingTopicsSpec>(){}.getType();
+    this.mTrendingTopicsSpec = TrendingTopicsSpec.getGson().fromJson(value, type);
+    return this;
+  }
   public String getFieldUpdatedTime() {
     return mUpdatedTime;
   }
@@ -1164,6 +1204,24 @@ public class AdSet extends APINode {
 
   public AdSet setFieldUseNewAppClick(Boolean value) {
     this.mUseNewAppClick = value;
+    return this;
+  }
+
+  public String getFieldValueRuleSetId() {
+    return mValueRuleSetId;
+  }
+
+  public AdSet setFieldValueRuleSetId(String value) {
+    this.mValueRuleSetId = value;
+    return this;
+  }
+
+  public Boolean getFieldValueRulesApplied() {
+    return mValueRulesApplied;
+  }
+
+  public AdSet setFieldValueRulesApplied(Boolean value) {
+    this.mValueRulesApplied = value;
     return this;
   }
 
@@ -1726,6 +1784,7 @@ public class AdSet extends APINode {
       "link_destination_display_url",
       "link_og_id",
       "link_url",
+      "media_sourcing_spec",
       "messenger_sponsored_message",
       "name",
       "object_id",
@@ -2140,6 +2199,13 @@ public class AdSet extends APINode {
     }
     public APIRequestGetAdCreatives requestLinkUrlField (boolean value) {
       this.requestField("link_url", value);
+      return this;
+    }
+    public APIRequestGetAdCreatives requestMediaSourcingSpecField () {
+      return this.requestMediaSourcingSpecField(true);
+    }
+    public APIRequestGetAdCreatives requestMediaSourcingSpecField (boolean value) {
+      this.requestField("media_sourcing_spec", value);
       return this;
     }
     public APIRequestGetAdCreatives requestMessengerSponsoredMessageField () {
@@ -3451,6 +3517,187 @@ public class AdSet extends APINode {
     }
   }
 
+  public static class APIRequestGetBudgetSchedules extends APIRequest<HighDemandPeriod> {
+
+    APINodeList<HighDemandPeriod> lastResponse = null;
+    @Override
+    public APINodeList<HighDemandPeriod> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "time_start",
+      "time_stop",
+    };
+
+    public static final String[] FIELDS = {
+      "ad_object_id",
+      "budget_value",
+      "budget_value_type",
+      "id",
+      "recurrence_type",
+      "time_end",
+      "time_start",
+      "weekly_schedule",
+    };
+
+    @Override
+    public APINodeList<HighDemandPeriod> parseResponse(String response, String header) throws APIException {
+      return HighDemandPeriod.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<HighDemandPeriod> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<HighDemandPeriod> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<HighDemandPeriod>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<HighDemandPeriod>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<HighDemandPeriod>>() {
+           public APINodeList<HighDemandPeriod> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetBudgetSchedules.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestGetBudgetSchedules(String nodeId, APIContext context) {
+      super(context, nodeId, "/budget_schedules", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetBudgetSchedules setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetBudgetSchedules setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetBudgetSchedules setTimeStart (String timeStart) {
+      this.setParam("time_start", timeStart);
+      return this;
+    }
+
+    public APIRequestGetBudgetSchedules setTimeStop (String timeStop) {
+      this.setParam("time_stop", timeStop);
+      return this;
+    }
+
+    public APIRequestGetBudgetSchedules requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetBudgetSchedules requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetBudgetSchedules requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetBudgetSchedules requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetBudgetSchedules requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetBudgetSchedules requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetBudgetSchedules requestAdObjectIdField () {
+      return this.requestAdObjectIdField(true);
+    }
+    public APIRequestGetBudgetSchedules requestAdObjectIdField (boolean value) {
+      this.requestField("ad_object_id", value);
+      return this;
+    }
+    public APIRequestGetBudgetSchedules requestBudgetValueField () {
+      return this.requestBudgetValueField(true);
+    }
+    public APIRequestGetBudgetSchedules requestBudgetValueField (boolean value) {
+      this.requestField("budget_value", value);
+      return this;
+    }
+    public APIRequestGetBudgetSchedules requestBudgetValueTypeField () {
+      return this.requestBudgetValueTypeField(true);
+    }
+    public APIRequestGetBudgetSchedules requestBudgetValueTypeField (boolean value) {
+      this.requestField("budget_value_type", value);
+      return this;
+    }
+    public APIRequestGetBudgetSchedules requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetBudgetSchedules requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetBudgetSchedules requestRecurrenceTypeField () {
+      return this.requestRecurrenceTypeField(true);
+    }
+    public APIRequestGetBudgetSchedules requestRecurrenceTypeField (boolean value) {
+      this.requestField("recurrence_type", value);
+      return this;
+    }
+    public APIRequestGetBudgetSchedules requestTimeEndField () {
+      return this.requestTimeEndField(true);
+    }
+    public APIRequestGetBudgetSchedules requestTimeEndField (boolean value) {
+      this.requestField("time_end", value);
+      return this;
+    }
+    public APIRequestGetBudgetSchedules requestTimeStartField () {
+      return this.requestTimeStartField(true);
+    }
+    public APIRequestGetBudgetSchedules requestTimeStartField (boolean value) {
+      this.requestField("time_start", value);
+      return this;
+    }
+    public APIRequestGetBudgetSchedules requestWeeklyScheduleField () {
+      return this.requestWeeklyScheduleField(true);
+    }
+    public APIRequestGetBudgetSchedules requestWeeklyScheduleField (boolean value) {
+      this.requestField("weekly_schedule", value);
+      return this;
+    }
+  }
+
   public static class APIRequestCreateBudgetSchedule extends APIRequest<HighDemandPeriod> {
 
     HighDemandPeriod lastResponse = null;
@@ -3663,6 +3910,7 @@ public class AdSet extends APINode {
       "optimization_goal",
       "optimization_sub_event",
       "pacing_type",
+      "placement_soft_opt_out",
       "promoted_object",
       "recommendations",
       "recurring_budget_semantics",
@@ -3678,8 +3926,11 @@ public class AdSet extends APINode {
       "targeting_optimization_types",
       "time_based_ad_rotation_id_blocks",
       "time_based_ad_rotation_intervals",
+      "trending_topics_spec",
       "updated_time",
       "use_new_app_click",
+      "value_rule_set_id",
+      "value_rules_applied",
     };
 
     @Override
@@ -4172,6 +4423,13 @@ public class AdSet extends APINode {
       this.requestField("pacing_type", value);
       return this;
     }
+    public APIRequestGetCopies requestPlacementSoftOptOutField () {
+      return this.requestPlacementSoftOptOutField(true);
+    }
+    public APIRequestGetCopies requestPlacementSoftOptOutField (boolean value) {
+      this.requestField("placement_soft_opt_out", value);
+      return this;
+    }
     public APIRequestGetCopies requestPromotedObjectField () {
       return this.requestPromotedObjectField(true);
     }
@@ -4277,6 +4535,13 @@ public class AdSet extends APINode {
       this.requestField("time_based_ad_rotation_intervals", value);
       return this;
     }
+    public APIRequestGetCopies requestTrendingTopicsSpecField () {
+      return this.requestTrendingTopicsSpecField(true);
+    }
+    public APIRequestGetCopies requestTrendingTopicsSpecField (boolean value) {
+      this.requestField("trending_topics_spec", value);
+      return this;
+    }
     public APIRequestGetCopies requestUpdatedTimeField () {
       return this.requestUpdatedTimeField(true);
     }
@@ -4289,6 +4554,20 @@ public class AdSet extends APINode {
     }
     public APIRequestGetCopies requestUseNewAppClickField (boolean value) {
       this.requestField("use_new_app_click", value);
+      return this;
+    }
+    public APIRequestGetCopies requestValueRuleSetIdField () {
+      return this.requestValueRuleSetIdField(true);
+    }
+    public APIRequestGetCopies requestValueRuleSetIdField (boolean value) {
+      this.requestField("value_rule_set_id", value);
+      return this;
+    }
+    public APIRequestGetCopies requestValueRulesAppliedField () {
+      return this.requestValueRulesAppliedField(true);
+    }
+    public APIRequestGetCopies requestValueRulesAppliedField (boolean value) {
+      this.requestField("value_rules_applied", value);
       return this;
     }
   }
@@ -4658,6 +4937,7 @@ public class AdSet extends APINode {
       "export_name",
       "fields",
       "filtering",
+      "graph_cache",
       "level",
       "limit",
       "product_id_limit",
@@ -4819,6 +5099,15 @@ public class AdSet extends APINode {
       return this;
     }
 
+    public APIRequestGetInsights setGraphCache (Boolean graphCache) {
+      this.setParam("graph_cache", graphCache);
+      return this;
+    }
+    public APIRequestGetInsights setGraphCache (String graphCache) {
+      this.setParam("graph_cache", graphCache);
+      return this;
+    }
+
     public APIRequestGetInsights setLevel (AdsInsights.EnumLevel level) {
       this.setParam("level", level);
       return this;
@@ -4971,6 +5260,7 @@ public class AdSet extends APINode {
       "export_name",
       "fields",
       "filtering",
+      "graph_cache",
       "level",
       "limit",
       "product_id_limit",
@@ -5129,6 +5419,15 @@ public class AdSet extends APINode {
     }
     public APIRequestGetInsightsAsync setFiltering (String filtering) {
       this.setParam("filtering", filtering);
+      return this;
+    }
+
+    public APIRequestGetInsightsAsync setGraphCache (Boolean graphCache) {
+      this.setParam("graph_cache", graphCache);
+      return this;
+    }
+    public APIRequestGetInsightsAsync setGraphCache (String graphCache) {
+      this.setParam("graph_cache", graphCache);
       return this;
     }
 
@@ -5833,6 +6132,7 @@ public class AdSet extends APINode {
       "optimization_goal",
       "optimization_sub_event",
       "pacing_type",
+      "placement_soft_opt_out",
       "promoted_object",
       "recommendations",
       "recurring_budget_semantics",
@@ -5848,8 +6148,11 @@ public class AdSet extends APINode {
       "targeting_optimization_types",
       "time_based_ad_rotation_id_blocks",
       "time_based_ad_rotation_intervals",
+      "trending_topics_spec",
       "updated_time",
       "use_new_app_click",
+      "value_rule_set_id",
+      "value_rules_applied",
     };
 
     @Override
@@ -6342,6 +6645,13 @@ public class AdSet extends APINode {
       this.requestField("pacing_type", value);
       return this;
     }
+    public APIRequestGet requestPlacementSoftOptOutField () {
+      return this.requestPlacementSoftOptOutField(true);
+    }
+    public APIRequestGet requestPlacementSoftOptOutField (boolean value) {
+      this.requestField("placement_soft_opt_out", value);
+      return this;
+    }
     public APIRequestGet requestPromotedObjectField () {
       return this.requestPromotedObjectField(true);
     }
@@ -6447,6 +6757,13 @@ public class AdSet extends APINode {
       this.requestField("time_based_ad_rotation_intervals", value);
       return this;
     }
+    public APIRequestGet requestTrendingTopicsSpecField () {
+      return this.requestTrendingTopicsSpecField(true);
+    }
+    public APIRequestGet requestTrendingTopicsSpecField (boolean value) {
+      this.requestField("trending_topics_spec", value);
+      return this;
+    }
     public APIRequestGet requestUpdatedTimeField () {
       return this.requestUpdatedTimeField(true);
     }
@@ -6459,6 +6776,20 @@ public class AdSet extends APINode {
     }
     public APIRequestGet requestUseNewAppClickField (boolean value) {
       this.requestField("use_new_app_click", value);
+      return this;
+    }
+    public APIRequestGet requestValueRuleSetIdField () {
+      return this.requestValueRuleSetIdField(true);
+    }
+    public APIRequestGet requestValueRuleSetIdField (boolean value) {
+      this.requestField("value_rule_set_id", value);
+      return this;
+    }
+    public APIRequestGet requestValueRulesAppliedField () {
+      return this.requestValueRulesAppliedField(true);
+    }
+    public APIRequestGet requestValueRulesAppliedField (boolean value) {
+      this.requestField("value_rules_applied", value);
       return this;
     }
   }
@@ -6481,6 +6812,7 @@ public class AdSet extends APINode {
       "bid_constraints",
       "bid_strategy",
       "billing_event",
+      "budget_schedule_specs",
       "campaign_attribution",
       "campaign_spec",
       "creative_sequence",
@@ -6498,6 +6830,7 @@ public class AdSet extends APINode {
       "existing_customer_budget_percentage",
       "full_funnel_exploration_mode",
       "is_ba_skip_delayed_eligible",
+      "is_budget_schedule_enabled",
       "is_incremental_attribution_enabled",
       "is_sac_cfca_terms_certified",
       "lifetime_budget",
@@ -6523,7 +6856,10 @@ public class AdSet extends APINode {
       "time_based_ad_rotation_intervals",
       "time_start",
       "time_stop",
+      "trending_topics_spec",
       "tune_for_category",
+      "value_rule_set_id",
+      "value_rules_applied",
     };
 
     public static final String[] FIELDS = {
@@ -6669,6 +7005,15 @@ public class AdSet extends APINode {
       return this;
     }
 
+    public APIRequestUpdate setBudgetScheduleSpecs (List<Object> budgetScheduleSpecs) {
+      this.setParam("budget_schedule_specs", budgetScheduleSpecs);
+      return this;
+    }
+    public APIRequestUpdate setBudgetScheduleSpecs (String budgetScheduleSpecs) {
+      this.setParam("budget_schedule_specs", budgetScheduleSpecs);
+      return this;
+    }
+
     public APIRequestUpdate setCampaignAttribution (Object campaignAttribution) {
       this.setParam("campaign_attribution", campaignAttribution);
       return this;
@@ -6803,6 +7148,15 @@ public class AdSet extends APINode {
     }
     public APIRequestUpdate setIsBaSkipDelayedEligible (String isBaSkipDelayedEligible) {
       this.setParam("is_ba_skip_delayed_eligible", isBaSkipDelayedEligible);
+      return this;
+    }
+
+    public APIRequestUpdate setIsBudgetScheduleEnabled (Boolean isBudgetScheduleEnabled) {
+      this.setParam("is_budget_schedule_enabled", isBudgetScheduleEnabled);
+      return this;
+    }
+    public APIRequestUpdate setIsBudgetScheduleEnabled (String isBudgetScheduleEnabled) {
+      this.setParam("is_budget_schedule_enabled", isBudgetScheduleEnabled);
       return this;
     }
 
@@ -7007,12 +7361,35 @@ public class AdSet extends APINode {
       return this;
     }
 
+    public APIRequestUpdate setTrendingTopicsSpec (Map<String, String> trendingTopicsSpec) {
+      this.setParam("trending_topics_spec", trendingTopicsSpec);
+      return this;
+    }
+    public APIRequestUpdate setTrendingTopicsSpec (String trendingTopicsSpec) {
+      this.setParam("trending_topics_spec", trendingTopicsSpec);
+      return this;
+    }
+
     public APIRequestUpdate setTuneForCategory (AdSet.EnumTuneForCategory tuneForCategory) {
       this.setParam("tune_for_category", tuneForCategory);
       return this;
     }
     public APIRequestUpdate setTuneForCategory (String tuneForCategory) {
       this.setParam("tune_for_category", tuneForCategory);
+      return this;
+    }
+
+    public APIRequestUpdate setValueRuleSetId (String valueRuleSetId) {
+      this.setParam("value_rule_set_id", valueRuleSetId);
+      return this;
+    }
+
+    public APIRequestUpdate setValueRulesApplied (Boolean valueRulesApplied) {
+      this.setParam("value_rules_applied", valueRulesApplied);
+      return this;
+    }
+    public APIRequestUpdate setValueRulesApplied (String valueRulesApplied) {
+      this.setParam("value_rules_applied", valueRulesApplied);
       return this;
     }
 
@@ -7507,6 +7884,8 @@ public class AdSet extends APINode {
   public static enum EnumOptimizationSubEvent {
       @SerializedName("NONE")
       VALUE_NONE("NONE"),
+      @SerializedName("POST_INTERACTION")
+      VALUE_POST_INTERACTION("POST_INTERACTION"),
       @SerializedName("TRAVEL_INTENT")
       VALUE_TRAVEL_INTENT("TRAVEL_INTENT"),
       @SerializedName("TRAVEL_INTENT_BUCKET_01")
@@ -7556,6 +7935,14 @@ public class AdSet extends APINode {
       VALUE_6("6"),
       @SerializedName("7")
       VALUE_7("7"),
+      @SerializedName("8")
+      VALUE_8("8"),
+      @SerializedName("9")
+      VALUE_9("9"),
+      @SerializedName("10")
+      VALUE_10("10"),
+      @SerializedName("11")
+      VALUE_11("11"),
       ;
 
       private String value;
@@ -7706,6 +8093,7 @@ public class AdSet extends APINode {
     this.mOptimizationGoal = instance.mOptimizationGoal;
     this.mOptimizationSubEvent = instance.mOptimizationSubEvent;
     this.mPacingType = instance.mPacingType;
+    this.mPlacementSoftOptOut = instance.mPlacementSoftOptOut;
     this.mPromotedObject = instance.mPromotedObject;
     this.mRecommendations = instance.mRecommendations;
     this.mRecurringBudgetSemantics = instance.mRecurringBudgetSemantics;
@@ -7721,8 +8109,11 @@ public class AdSet extends APINode {
     this.mTargetingOptimizationTypes = instance.mTargetingOptimizationTypes;
     this.mTimeBasedAdRotationIdBlocks = instance.mTimeBasedAdRotationIdBlocks;
     this.mTimeBasedAdRotationIntervals = instance.mTimeBasedAdRotationIntervals;
+    this.mTrendingTopicsSpec = instance.mTrendingTopicsSpec;
     this.mUpdatedTime = instance.mUpdatedTime;
     this.mUseNewAppClick = instance.mUseNewAppClick;
+    this.mValueRuleSetId = instance.mValueRuleSetId;
+    this.mValueRulesApplied = instance.mValueRulesApplied;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

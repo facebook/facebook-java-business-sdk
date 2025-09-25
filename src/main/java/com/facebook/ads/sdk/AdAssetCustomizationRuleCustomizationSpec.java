@@ -61,6 +61,8 @@ public class AdAssetCustomizationRuleCustomizationSpec extends APINode {
   private List<String> mMessengerPositions = null;
   @SerializedName("publisher_platforms")
   private List<String> mPublisherPlatforms = null;
+  @SerializedName("threads_positions")
+  private List<String> mThreadsPositions = null;
   protected static Gson gson = null;
 
   public AdAssetCustomizationRuleCustomizationSpec() {
@@ -307,6 +309,15 @@ public class AdAssetCustomizationRuleCustomizationSpec extends APINode {
     return this;
   }
 
+  public List<String> getFieldThreadsPositions() {
+    return mThreadsPositions;
+  }
+
+  public AdAssetCustomizationRuleCustomizationSpec setFieldThreadsPositions(List<String> value) {
+    this.mThreadsPositions = value;
+    return this;
+  }
+
 
 
   public static enum EnumDevicePlatforms {
@@ -353,6 +364,7 @@ public class AdAssetCustomizationRuleCustomizationSpec extends APINode {
     this.mLocales = instance.mLocales;
     this.mMessengerPositions = instance.mMessengerPositions;
     this.mPublisherPlatforms = instance.mPublisherPlatforms;
+    this.mThreadsPositions = instance.mThreadsPositions;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

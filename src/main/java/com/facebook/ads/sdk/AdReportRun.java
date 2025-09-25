@@ -518,17 +518,7 @@ public class AdReportRun extends APINode {
       "outbound_clicks",
       "outbound_clicks_ctr",
       "place_page_name",
-      "product_brand",
-      "product_category",
-      "product_content_id",
-      "product_custom_label_0",
-      "product_custom_label_1",
-      "product_custom_label_2",
-      "product_custom_label_3",
-      "product_custom_label_4",
-      "product_group_content_id",
       "product_group_retailer_id",
-      "product_name",
       "product_retailer_id",
       "product_views",
       "purchase_per_landing_page_view",
@@ -1658,81 +1648,11 @@ public class AdReportRun extends APINode {
       this.requestField("place_page_name", value);
       return this;
     }
-    public APIRequestGetInsights requestProductBrandField () {
-      return this.requestProductBrandField(true);
-    }
-    public APIRequestGetInsights requestProductBrandField (boolean value) {
-      this.requestField("product_brand", value);
-      return this;
-    }
-    public APIRequestGetInsights requestProductCategoryField () {
-      return this.requestProductCategoryField(true);
-    }
-    public APIRequestGetInsights requestProductCategoryField (boolean value) {
-      this.requestField("product_category", value);
-      return this;
-    }
-    public APIRequestGetInsights requestProductContentIdField () {
-      return this.requestProductContentIdField(true);
-    }
-    public APIRequestGetInsights requestProductContentIdField (boolean value) {
-      this.requestField("product_content_id", value);
-      return this;
-    }
-    public APIRequestGetInsights requestProductCustomLabel0Field () {
-      return this.requestProductCustomLabel0Field(true);
-    }
-    public APIRequestGetInsights requestProductCustomLabel0Field (boolean value) {
-      this.requestField("product_custom_label_0", value);
-      return this;
-    }
-    public APIRequestGetInsights requestProductCustomLabel1Field () {
-      return this.requestProductCustomLabel1Field(true);
-    }
-    public APIRequestGetInsights requestProductCustomLabel1Field (boolean value) {
-      this.requestField("product_custom_label_1", value);
-      return this;
-    }
-    public APIRequestGetInsights requestProductCustomLabel2Field () {
-      return this.requestProductCustomLabel2Field(true);
-    }
-    public APIRequestGetInsights requestProductCustomLabel2Field (boolean value) {
-      this.requestField("product_custom_label_2", value);
-      return this;
-    }
-    public APIRequestGetInsights requestProductCustomLabel3Field () {
-      return this.requestProductCustomLabel3Field(true);
-    }
-    public APIRequestGetInsights requestProductCustomLabel3Field (boolean value) {
-      this.requestField("product_custom_label_3", value);
-      return this;
-    }
-    public APIRequestGetInsights requestProductCustomLabel4Field () {
-      return this.requestProductCustomLabel4Field(true);
-    }
-    public APIRequestGetInsights requestProductCustomLabel4Field (boolean value) {
-      this.requestField("product_custom_label_4", value);
-      return this;
-    }
-    public APIRequestGetInsights requestProductGroupContentIdField () {
-      return this.requestProductGroupContentIdField(true);
-    }
-    public APIRequestGetInsights requestProductGroupContentIdField (boolean value) {
-      this.requestField("product_group_content_id", value);
-      return this;
-    }
     public APIRequestGetInsights requestProductGroupRetailerIdField () {
       return this.requestProductGroupRetailerIdField(true);
     }
     public APIRequestGetInsights requestProductGroupRetailerIdField (boolean value) {
       this.requestField("product_group_retailer_id", value);
-      return this;
-    }
-    public APIRequestGetInsights requestProductNameField () {
-      return this.requestProductNameField(true);
-    }
-    public APIRequestGetInsights requestProductNameField (boolean value) {
-      this.requestField("product_name", value);
       return this;
     }
     public APIRequestGetInsights requestProductRetailerIdField () {
@@ -2464,14 +2384,22 @@ public class AdReportRun extends APINode {
       VALUE_COARSE_CONVERSION_VALUE("coarse_conversion_value"),
       @SerializedName("comscore_market")
       VALUE_COMSCORE_MARKET("comscore_market"),
-      @SerializedName("comscore_market_code")
-      VALUE_COMSCORE_MARKET_CODE("comscore_market_code"),
       @SerializedName("conversion_destination")
       VALUE_CONVERSION_DESTINATION("conversion_destination"),
       @SerializedName("country")
       VALUE_COUNTRY("country"),
+      @SerializedName("creative_automation_asset_id")
+      VALUE_CREATIVE_AUTOMATION_ASSET_ID("creative_automation_asset_id"),
       @SerializedName("creative_relaxation_asset_type")
       VALUE_CREATIVE_RELAXATION_ASSET_TYPE("creative_relaxation_asset_type"),
+      @SerializedName("crm_advertiser_l12_territory_ids")
+      VALUE_CRM_ADVERTISER_L12_TERRITORY_IDS("crm_advertiser_l12_territory_ids"),
+      @SerializedName("crm_advertiser_subvertical_id")
+      VALUE_CRM_ADVERTISER_SUBVERTICAL_ID("crm_advertiser_subvertical_id"),
+      @SerializedName("crm_advertiser_vertical_id")
+      VALUE_CRM_ADVERTISER_VERTICAL_ID("crm_advertiser_vertical_id"),
+      @SerializedName("crm_ult_advertiser_id")
+      VALUE_CRM_ULT_ADVERTISER_ID("crm_ult_advertiser_id"),
       @SerializedName("description_asset")
       VALUE_DESCRIPTION_ASSET("description_asset"),
       @SerializedName("device_platform")
@@ -2536,14 +2464,38 @@ public class AdReportRun extends APINode {
       VALUE_PLATFORM_POSITION("platform_position"),
       @SerializedName("postback_sequence_index")
       VALUE_POSTBACK_SEQUENCE_INDEX("postback_sequence_index"),
+      @SerializedName("product_brand_breakdown")
+      VALUE_PRODUCT_BRAND_BREAKDOWN("product_brand_breakdown"),
+      @SerializedName("product_category_breakdown")
+      VALUE_PRODUCT_CATEGORY_BREAKDOWN("product_category_breakdown"),
+      @SerializedName("product_custom_label_0_breakdown")
+      VALUE_PRODUCT_CUSTOM_LABEL_0_BREAKDOWN("product_custom_label_0_breakdown"),
+      @SerializedName("product_custom_label_1_breakdown")
+      VALUE_PRODUCT_CUSTOM_LABEL_1_BREAKDOWN("product_custom_label_1_breakdown"),
+      @SerializedName("product_custom_label_2_breakdown")
+      VALUE_PRODUCT_CUSTOM_LABEL_2_BREAKDOWN("product_custom_label_2_breakdown"),
+      @SerializedName("product_custom_label_3_breakdown")
+      VALUE_PRODUCT_CUSTOM_LABEL_3_BREAKDOWN("product_custom_label_3_breakdown"),
+      @SerializedName("product_custom_label_4_breakdown")
+      VALUE_PRODUCT_CUSTOM_LABEL_4_BREAKDOWN("product_custom_label_4_breakdown"),
+      @SerializedName("product_group_content_id_breakdown")
+      VALUE_PRODUCT_GROUP_CONTENT_ID_BREAKDOWN("product_group_content_id_breakdown"),
       @SerializedName("product_id")
       VALUE_PRODUCT_ID("product_id"),
+      @SerializedName("product_set_id_breakdown")
+      VALUE_PRODUCT_SET_ID_BREAKDOWN("product_set_id_breakdown"),
       @SerializedName("publisher_platform")
       VALUE_PUBLISHER_PLATFORM("publisher_platform"),
       @SerializedName("redownload")
       VALUE_REDOWNLOAD("redownload"),
       @SerializedName("region")
       VALUE_REGION("region"),
+      @SerializedName("rta_ugc_topic")
+      VALUE_RTA_UGC_TOPIC("rta_ugc_topic"),
+      @SerializedName("rule_set_id")
+      VALUE_RULE_SET_ID("rule_set_id"),
+      @SerializedName("rule_set_name")
+      VALUE_RULE_SET_NAME("rule_set_name"),
       @SerializedName("signal_source_bucket")
       VALUE_SIGNAL_SOURCE_BUCKET("signal_source_bucket"),
       @SerializedName("skan_campaign_id")

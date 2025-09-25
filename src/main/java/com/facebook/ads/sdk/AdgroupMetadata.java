@@ -47,6 +47,8 @@ public class AdgroupMetadata extends APINode {
   private String mAdgroupCreationSource = null;
   @SerializedName("adgroup_edit_source")
   private String mAdgroupEditSource = null;
+  @SerializedName("adgroup_media_source")
+  private String mAdgroupMediaSource = null;
   @SerializedName("carousel_style")
   private String mCarouselStyle = null;
   @SerializedName("carousel_with_static_card_style")
@@ -229,6 +231,15 @@ public class AdgroupMetadata extends APINode {
     return this;
   }
 
+  public String getFieldAdgroupMediaSource() {
+    return mAdgroupMediaSource;
+  }
+
+  public AdgroupMetadata setFieldAdgroupMediaSource(String value) {
+    this.mAdgroupMediaSource = value;
+    return this;
+  }
+
   public String getFieldCarouselStyle() {
     return mCarouselStyle;
   }
@@ -267,6 +278,7 @@ public class AdgroupMetadata extends APINode {
     this.mAdStandardEnhancementsEditSource = instance.mAdStandardEnhancementsEditSource;
     this.mAdgroupCreationSource = instance.mAdgroupCreationSource;
     this.mAdgroupEditSource = instance.mAdgroupEditSource;
+    this.mAdgroupMediaSource = instance.mAdgroupMediaSource;
     this.mCarouselStyle = instance.mCarouselStyle;
     this.mCarouselWithStaticCardStyle = instance.mCarouselWithStaticCardStyle;
     this.context = instance.context;

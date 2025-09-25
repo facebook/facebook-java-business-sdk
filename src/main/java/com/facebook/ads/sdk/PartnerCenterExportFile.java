@@ -40,66 +40,68 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class FavoriteCatalog extends APINode {
-  @SerializedName("catalog")
-  private ProductCatalog mCatalog = null;
+public class PartnerCenterExportFile extends APINode {
   @SerializedName("id")
   private String mId = null;
+  @SerializedName("report_ds")
+  private String mReportDs = null;
+  @SerializedName("url")
+  private String mUrl = null;
   protected static Gson gson = null;
 
-  FavoriteCatalog() {
+  PartnerCenterExportFile() {
   }
 
-  public FavoriteCatalog(Long id, APIContext context) {
+  public PartnerCenterExportFile(Long id, APIContext context) {
     this(id.toString(), context);
   }
 
-  public FavoriteCatalog(String id, APIContext context) {
+  public PartnerCenterExportFile(String id, APIContext context) {
     this.mId = id;
 
     this.context = context;
   }
 
-  public FavoriteCatalog fetch() throws APIException{
-    FavoriteCatalog newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+  public PartnerCenterExportFile fetch() throws APIException{
+    PartnerCenterExportFile newInstance = fetchById(this.getPrefixedId().toString(), this.context);
     this.copyFrom(newInstance);
     return this;
   }
 
-  public static FavoriteCatalog fetchById(Long id, APIContext context) throws APIException {
+  public static PartnerCenterExportFile fetchById(Long id, APIContext context) throws APIException {
     return fetchById(id.toString(), context);
   }
 
-  public static ListenableFuture<FavoriteCatalog> fetchByIdAsync(Long id, APIContext context) throws APIException {
+  public static ListenableFuture<PartnerCenterExportFile> fetchByIdAsync(Long id, APIContext context) throws APIException {
     return fetchByIdAsync(id.toString(), context);
   }
 
-  public static FavoriteCatalog fetchById(String id, APIContext context) throws APIException {
+  public static PartnerCenterExportFile fetchById(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
   }
 
-  public static ListenableFuture<FavoriteCatalog> fetchByIdAsync(String id, APIContext context) throws APIException {
+  public static ListenableFuture<PartnerCenterExportFile> fetchByIdAsync(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
   }
 
-  public static APINodeList<FavoriteCatalog> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<FavoriteCatalog>)(
-      new APIRequest<FavoriteCatalog>(context, "", "/", "GET", FavoriteCatalog.getParser())
+  public static APINodeList<PartnerCenterExportFile> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<PartnerCenterExportFile>)(
+      new APIRequest<PartnerCenterExportFile>(context, "", "/", "GET", PartnerCenterExportFile.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .execute()
     );
   }
 
-  public static ListenableFuture<APINodeList<FavoriteCatalog>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+  public static ListenableFuture<APINodeList<PartnerCenterExportFile>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
     return
-      new APIRequest(context, "", "/", "GET", FavoriteCatalog.getParser())
+      new APIRequest(context, "", "/", "GET", PartnerCenterExportFile.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
@@ -112,12 +114,12 @@ public class FavoriteCatalog extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static FavoriteCatalog loadJSON(String json, APIContext context, String header) {
-    FavoriteCatalog favoriteCatalog = getGson().fromJson(json, FavoriteCatalog.class);
+  public static PartnerCenterExportFile loadJSON(String json, APIContext context, String header) {
+    PartnerCenterExportFile partnerCenterExportFile = getGson().fromJson(json, PartnerCenterExportFile.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(favoriteCatalog.toString());
+      JsonElement o2 = parser.parse(partnerCenterExportFile.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -127,14 +129,14 @@ public class FavoriteCatalog extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    favoriteCatalog.context = context;
-    favoriteCatalog.rawValue = json;
-    favoriteCatalog.header = header;
-    return favoriteCatalog;
+    partnerCenterExportFile.context = context;
+    partnerCenterExportFile.rawValue = json;
+    partnerCenterExportFile.header = header;
+    return partnerCenterExportFile;
   }
 
-  public static APINodeList<FavoriteCatalog> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<FavoriteCatalog> favoriteCatalogs = new APINodeList<FavoriteCatalog>(request, json, header);
+  public static APINodeList<PartnerCenterExportFile> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<PartnerCenterExportFile> partnerCenterExportFiles = new APINodeList<PartnerCenterExportFile>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -145,9 +147,9 @@ public class FavoriteCatalog extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          favoriteCatalogs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          partnerCenterExportFiles.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return favoriteCatalogs;
+        return partnerCenterExportFiles;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -157,20 +159,20 @@ public class FavoriteCatalog extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                favoriteCatalogs.setCursors(before, after);
+                partnerCenterExportFiles.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            favoriteCatalogs.setPaging(previous, next);
+            partnerCenterExportFiles.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              favoriteCatalogs.setAppSecret(context.getAppSecretProof());
+              partnerCenterExportFiles.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              favoriteCatalogs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              partnerCenterExportFiles.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -181,23 +183,23 @@ public class FavoriteCatalog extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  favoriteCatalogs.add(loadJSON(entry.getValue().toString(), context, header));
+                  partnerCenterExportFiles.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              favoriteCatalogs.add(loadJSON(obj.toString(), context, header));
+              partnerCenterExportFiles.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return favoriteCatalogs;
+          return partnerCenterExportFiles;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              favoriteCatalogs.add(loadJSON(entry.getValue().toString(), context, header));
+              partnerCenterExportFiles.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return favoriteCatalogs;
+          return partnerCenterExportFiles;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -214,20 +216,20 @@ public class FavoriteCatalog extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              favoriteCatalogs.add(loadJSON(value.toString(), context, header));
+              partnerCenterExportFiles.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return favoriteCatalogs;
+            return partnerCenterExportFiles;
           }
 
           // Sixth, check if it's pure JsonObject
-          favoriteCatalogs.clear();
-          favoriteCatalogs.add(loadJSON(json, context, header));
-          return favoriteCatalogs;
+          partnerCenterExportFiles.clear();
+          partnerCenterExportFiles.add(loadJSON(json, context, header));
+          return partnerCenterExportFiles;
         }
       }
     } catch (Exception e) {
@@ -259,60 +261,62 @@ public class FavoriteCatalog extends APINode {
   }
 
 
-  public ProductCatalog getFieldCatalog() {
-    if (mCatalog != null) {
-      mCatalog.context = getContext();
-    }
-    return mCatalog;
-  }
-
   public String getFieldId() {
     return mId;
   }
 
+  public String getFieldReportDs() {
+    return mReportDs;
+  }
+
+  public String getFieldUrl() {
+    return mUrl;
+  }
 
 
-  public static class APIRequestGet extends APIRequest<FavoriteCatalog> {
 
-    FavoriteCatalog lastResponse = null;
+  public static class APIRequestGet extends APIRequest<PartnerCenterExportFile> {
+
+    PartnerCenterExportFile lastResponse = null;
     @Override
-    public FavoriteCatalog getLastResponse() {
+    public PartnerCenterExportFile getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
     };
 
     public static final String[] FIELDS = {
-      "catalog",
       "id",
+      "report_ds",
+      "url",
     };
 
     @Override
-    public FavoriteCatalog parseResponse(String response, String header) throws APIException {
-      return FavoriteCatalog.parseResponse(response, getContext(), this, header).head();
+    public PartnerCenterExportFile parseResponse(String response, String header) throws APIException {
+      return PartnerCenterExportFile.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public FavoriteCatalog execute() throws APIException {
+    public PartnerCenterExportFile execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public FavoriteCatalog execute(Map<String, Object> extraParams) throws APIException {
+    public PartnerCenterExportFile execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<FavoriteCatalog> executeAsync() throws APIException {
+    public ListenableFuture<PartnerCenterExportFile> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<FavoriteCatalog> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<PartnerCenterExportFile> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, FavoriteCatalog>() {
-           public FavoriteCatalog apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, PartnerCenterExportFile>() {
+           public PartnerCenterExportFile apply(ResponseWrapper result) {
              try {
                return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -377,18 +381,25 @@ public class FavoriteCatalog extends APINode {
       return this;
     }
 
-    public APIRequestGet requestCatalogField () {
-      return this.requestCatalogField(true);
-    }
-    public APIRequestGet requestCatalogField (boolean value) {
-      this.requestField("catalog", value);
-      return this;
-    }
     public APIRequestGet requestIdField () {
       return this.requestIdField(true);
     }
     public APIRequestGet requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGet requestReportDsField () {
+      return this.requestReportDsField(true);
+    }
+    public APIRequestGet requestReportDsField (boolean value) {
+      this.requestField("report_ds", value);
+      return this;
+    }
+    public APIRequestGet requestUrlField () {
+      return this.requestUrlField(true);
+    }
+    public APIRequestGet requestUrlField (boolean value) {
+      this.requestField("url", value);
       return this;
     }
   }
@@ -407,18 +418,19 @@ public class FavoriteCatalog extends APINode {
     return gson;
   }
 
-  public FavoriteCatalog copyFrom(FavoriteCatalog instance) {
-    this.mCatalog = instance.mCatalog;
+  public PartnerCenterExportFile copyFrom(PartnerCenterExportFile instance) {
     this.mId = instance.mId;
+    this.mReportDs = instance.mReportDs;
+    this.mUrl = instance.mUrl;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<FavoriteCatalog> getParser() {
-    return new APIRequest.ResponseParser<FavoriteCatalog>() {
-      public APINodeList<FavoriteCatalog> parseResponse(String response, APIContext context, APIRequest<FavoriteCatalog> request, String header) throws MalformedResponseException {
-        return FavoriteCatalog.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<PartnerCenterExportFile> getParser() {
+    return new APIRequest.ResponseParser<PartnerCenterExportFile>() {
+      public APINodeList<PartnerCenterExportFile> parseResponse(String response, APIContext context, APIRequest<PartnerCenterExportFile> request, String header) throws MalformedResponseException {
+        return PartnerCenterExportFile.parseResponse(response, context, request, header);
       }
     };
   }

@@ -55,6 +55,8 @@ public class VideoCopyrightMatch extends APINode {
   private String mNotes = null;
   @SerializedName("permalink")
   private String mPermalink = null;
+  @SerializedName("policy_eval_modify_reasons")
+  private List<Object> mPolicyEvalModifyReasons = null;
   @SerializedName("ugc_content_format")
   private String mUgcContentFormat = null;
   protected static Gson gson = null;
@@ -302,6 +304,10 @@ public class VideoCopyrightMatch extends APINode {
     return mPermalink;
   }
 
+  public List<Object> getFieldPolicyEvalModifyReasons() {
+    return mPolicyEvalModifyReasons;
+  }
+
   public String getFieldUgcContentFormat() {
     return mUgcContentFormat;
   }
@@ -326,6 +332,7 @@ public class VideoCopyrightMatch extends APINode {
       "match_status",
       "notes",
       "permalink",
+      "policy_eval_modify_reasons",
       "ugc_content_format",
     };
 
@@ -468,6 +475,13 @@ public class VideoCopyrightMatch extends APINode {
       this.requestField("permalink", value);
       return this;
     }
+    public APIRequestGet requestPolicyEvalModifyReasonsField () {
+      return this.requestPolicyEvalModifyReasonsField(true);
+    }
+    public APIRequestGet requestPolicyEvalModifyReasonsField (boolean value) {
+      this.requestField("policy_eval_modify_reasons", value);
+      return this;
+    }
     public APIRequestGet requestUgcContentFormatField () {
       return this.requestUgcContentFormatField(true);
     }
@@ -576,6 +590,7 @@ public class VideoCopyrightMatch extends APINode {
     this.mMatchStatus = instance.mMatchStatus;
     this.mNotes = instance.mNotes;
     this.mPermalink = instance.mPermalink;
+    this.mPolicyEvalModifyReasons = instance.mPolicyEvalModifyReasons;
     this.mUgcContentFormat = instance.mUgcContentFormat;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

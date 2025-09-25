@@ -43,8 +43,12 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class CustomAudienceIntegrityFlagsAndAppealStatus extends APINode {
   @SerializedName("closeout_time")
   private Long mCloseoutTime = null;
+  @SerializedName("days_until_enforcement")
+  private Long mDaysUntilEnforcement = null;
   @SerializedName("flagged_fields")
   private List<String> mFlaggedFields = null;
+  @SerializedName("is_enforcement_rolled_out")
+  private Boolean mIsEnforcementRolledOut = null;
   @SerializedName("latest_appeal_requestor")
   private String mLatestAppealRequestor = null;
   @SerializedName("latest_appeal_time")
@@ -211,12 +215,30 @@ public class CustomAudienceIntegrityFlagsAndAppealStatus extends APINode {
     return this;
   }
 
+  public Long getFieldDaysUntilEnforcement() {
+    return mDaysUntilEnforcement;
+  }
+
+  public CustomAudienceIntegrityFlagsAndAppealStatus setFieldDaysUntilEnforcement(Long value) {
+    this.mDaysUntilEnforcement = value;
+    return this;
+  }
+
   public List<String> getFieldFlaggedFields() {
     return mFlaggedFields;
   }
 
   public CustomAudienceIntegrityFlagsAndAppealStatus setFieldFlaggedFields(List<String> value) {
     this.mFlaggedFields = value;
+    return this;
+  }
+
+  public Boolean getFieldIsEnforcementRolledOut() {
+    return mIsEnforcementRolledOut;
+  }
+
+  public CustomAudienceIntegrityFlagsAndAppealStatus setFieldIsEnforcementRolledOut(Boolean value) {
+    this.mIsEnforcementRolledOut = value;
     return this;
   }
 
@@ -265,7 +287,9 @@ public class CustomAudienceIntegrityFlagsAndAppealStatus extends APINode {
 
   public CustomAudienceIntegrityFlagsAndAppealStatus copyFrom(CustomAudienceIntegrityFlagsAndAppealStatus instance) {
     this.mCloseoutTime = instance.mCloseoutTime;
+    this.mDaysUntilEnforcement = instance.mDaysUntilEnforcement;
     this.mFlaggedFields = instance.mFlaggedFields;
+    this.mIsEnforcementRolledOut = instance.mIsEnforcementRolledOut;
     this.mLatestAppealRequestor = instance.mLatestAppealRequestor;
     this.mLatestAppealTime = instance.mLatestAppealTime;
     this.mRestrictionStatus = instance.mRestrictionStatus;

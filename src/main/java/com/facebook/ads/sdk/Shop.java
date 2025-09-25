@@ -49,8 +49,6 @@ public class Shop extends APINode {
   private String mId = null;
   @SerializedName("ig_sales_channel")
   private Object mIgSalesChannel = null;
-  @SerializedName("is_onsite_enabled")
-  private Boolean mIsOnsiteEnabled = null;
   @SerializedName("shop_status")
   private String mShopStatus = null;
   @SerializedName("workspace")
@@ -288,10 +286,6 @@ public class Shop extends APINode {
     return mIgSalesChannel;
   }
 
-  public Boolean getFieldIsOnsiteEnabled() {
-    return mIsOnsiteEnabled;
-  }
-
   public String getFieldShopStatus() {
     return mShopStatus;
   }
@@ -317,7 +311,6 @@ public class Shop extends APINode {
       "fb_sales_channel",
       "id",
       "ig_sales_channel",
-      "is_onsite_enabled",
       "shop_status",
       "workspace",
     };
@@ -440,13 +433,6 @@ public class Shop extends APINode {
       this.requestField("ig_sales_channel", value);
       return this;
     }
-    public APIRequestGet requestIsOnsiteEnabledField () {
-      return this.requestIsOnsiteEnabledField(true);
-    }
-    public APIRequestGet requestIsOnsiteEnabledField (boolean value) {
-      this.requestField("is_onsite_enabled", value);
-      return this;
-    }
     public APIRequestGet requestShopStatusField () {
       return this.requestShopStatusField(true);
     }
@@ -482,7 +468,6 @@ public class Shop extends APINode {
     this.mFbSalesChannel = instance.mFbSalesChannel;
     this.mId = instance.mId;
     this.mIgSalesChannel = instance.mIgSalesChannel;
-    this.mIsOnsiteEnabled = instance.mIsOnsiteEnabled;
     this.mShopStatus = instance.mShopStatus;
     this.mWorkspace = instance.mWorkspace;
     this.context = instance.context;

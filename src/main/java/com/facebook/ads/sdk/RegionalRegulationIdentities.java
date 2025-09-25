@@ -61,6 +61,10 @@ public class RegionalRegulationIdentities extends APINode {
   private String mTaiwanUniversalBeneficiary = null;
   @SerializedName("taiwan_universal_payer")
   private String mTaiwanUniversalPayer = null;
+  @SerializedName("universal_beneficiary")
+  private String mUniversalBeneficiary = null;
+  @SerializedName("universal_payer")
+  private String mUniversalPayer = null;
   protected static Gson gson = null;
 
   public RegionalRegulationIdentities() {
@@ -302,6 +306,24 @@ public class RegionalRegulationIdentities extends APINode {
     return this;
   }
 
+  public String getFieldUniversalBeneficiary() {
+    return mUniversalBeneficiary;
+  }
+
+  public RegionalRegulationIdentities setFieldUniversalBeneficiary(String value) {
+    this.mUniversalBeneficiary = value;
+    return this;
+  }
+
+  public String getFieldUniversalPayer() {
+    return mUniversalPayer;
+  }
+
+  public RegionalRegulationIdentities setFieldUniversalPayer(String value) {
+    this.mUniversalPayer = value;
+    return this;
+  }
+
 
 
 
@@ -329,6 +351,8 @@ public class RegionalRegulationIdentities extends APINode {
     this.mTaiwanFinservPayer = instance.mTaiwanFinservPayer;
     this.mTaiwanUniversalBeneficiary = instance.mTaiwanUniversalBeneficiary;
     this.mTaiwanUniversalPayer = instance.mTaiwanUniversalPayer;
+    this.mUniversalBeneficiary = instance.mUniversalBeneficiary;
+    this.mUniversalPayer = instance.mUniversalPayer;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

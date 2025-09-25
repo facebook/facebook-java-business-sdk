@@ -57,6 +57,8 @@ public class AdAccountUserSettings extends APINode {
   private Long mAdsManagerFooterRowToastImpressions = null;
   @SerializedName("auto_review_video_caption")
   private Boolean mAutoReviewVideoCaption = null;
+  @SerializedName("budget_optimization_quick_view_created")
+  private Boolean mBudgetOptimizationQuickViewCreated = null;
   @SerializedName("campaign_overview_columns")
   private List<String> mCampaignOverviewColumns = null;
   @SerializedName("column_suggestion_status")
@@ -171,12 +173,22 @@ public class AdAccountUserSettings extends APINode {
   private String mSydLandingPageOptInStatus = null;
   @SerializedName("text_gen_persona_opt_in_type")
   private String mTextGenPersonaOptInType = null;
+  @SerializedName("text_variations_hl_opt_in_out_ts")
+  private String mTextVariationsHlOptInOutTs = null;
+  @SerializedName("text_variations_hl_opt_in_type")
+  private String mTextVariationsHlOptInType = null;
   @SerializedName("text_variations_opt_in_out_ts")
   private String mTextVariationsOptInOutTs = null;
   @SerializedName("text_variations_opt_in_type")
   private String mTextVariationsOptInType = null;
   @SerializedName("user")
   private User mUser = null;
+  @SerializedName("value_optimized_qv_created")
+  private Boolean mValueOptimizedQvCreated = null;
+  @SerializedName("value_qv_nux_impressions")
+  private Long mValueQvNuxImpressions = null;
+  @SerializedName("value_suggested_column_status")
+  private String mValueSuggestedColumnStatus = null;
   protected static Gson gson = null;
 
   AdAccountUserSettings() {
@@ -426,6 +438,10 @@ public class AdAccountUserSettings extends APINode {
     return mAutoReviewVideoCaption;
   }
 
+  public Boolean getFieldBudgetOptimizationQuickViewCreated() {
+    return mBudgetOptimizationQuickViewCreated;
+  }
+
   public List<String> getFieldCampaignOverviewColumns() {
     return mCampaignOverviewColumns;
   }
@@ -654,6 +670,14 @@ public class AdAccountUserSettings extends APINode {
     return mTextGenPersonaOptInType;
   }
 
+  public String getFieldTextVariationsHlOptInOutTs() {
+    return mTextVariationsHlOptInOutTs;
+  }
+
+  public String getFieldTextVariationsHlOptInType() {
+    return mTextVariationsHlOptInType;
+  }
+
   public String getFieldTextVariationsOptInOutTs() {
     return mTextVariationsOptInOutTs;
   }
@@ -667,6 +691,18 @@ public class AdAccountUserSettings extends APINode {
       mUser.context = getContext();
     }
     return mUser;
+  }
+
+  public Boolean getFieldValueOptimizedQvCreated() {
+    return mValueOptimizedQvCreated;
+  }
+
+  public Long getFieldValueQvNuxImpressions() {
+    return mValueQvNuxImpressions;
+  }
+
+  public String getFieldValueSuggestedColumnStatus() {
+    return mValueSuggestedColumnStatus;
   }
 
 
@@ -690,6 +726,7 @@ public class AdAccountUserSettings extends APINode {
       "ad_object_export_format",
       "ads_manager_footer_row_toast_impressions",
       "auto_review_video_caption",
+      "budget_optimization_quick_view_created",
       "campaign_overview_columns",
       "column_suggestion_status",
       "conditional_formatting_rules",
@@ -747,9 +784,14 @@ public class AdAccountUserSettings extends APINode {
       "syd_campaign_trends_time_range",
       "syd_landing_page_opt_in_status",
       "text_gen_persona_opt_in_type",
+      "text_variations_hl_opt_in_out_ts",
+      "text_variations_hl_opt_in_type",
       "text_variations_opt_in_out_ts",
       "text_variations_opt_in_type",
       "user",
+      "value_optimized_qv_created",
+      "value_qv_nux_impressions",
+      "value_suggested_column_status",
     };
 
     @Override
@@ -896,6 +938,13 @@ public class AdAccountUserSettings extends APINode {
     }
     public APIRequestGet requestAutoReviewVideoCaptionField (boolean value) {
       this.requestField("auto_review_video_caption", value);
+      return this;
+    }
+    public APIRequestGet requestBudgetOptimizationQuickViewCreatedField () {
+      return this.requestBudgetOptimizationQuickViewCreatedField(true);
+    }
+    public APIRequestGet requestBudgetOptimizationQuickViewCreatedField (boolean value) {
+      this.requestField("budget_optimization_quick_view_created", value);
       return this;
     }
     public APIRequestGet requestCampaignOverviewColumnsField () {
@@ -1297,6 +1346,20 @@ public class AdAccountUserSettings extends APINode {
       this.requestField("text_gen_persona_opt_in_type", value);
       return this;
     }
+    public APIRequestGet requestTextVariationsHlOptInOutTsField () {
+      return this.requestTextVariationsHlOptInOutTsField(true);
+    }
+    public APIRequestGet requestTextVariationsHlOptInOutTsField (boolean value) {
+      this.requestField("text_variations_hl_opt_in_out_ts", value);
+      return this;
+    }
+    public APIRequestGet requestTextVariationsHlOptInTypeField () {
+      return this.requestTextVariationsHlOptInTypeField(true);
+    }
+    public APIRequestGet requestTextVariationsHlOptInTypeField (boolean value) {
+      this.requestField("text_variations_hl_opt_in_type", value);
+      return this;
+    }
     public APIRequestGet requestTextVariationsOptInOutTsField () {
       return this.requestTextVariationsOptInOutTsField(true);
     }
@@ -1316,6 +1379,27 @@ public class AdAccountUserSettings extends APINode {
     }
     public APIRequestGet requestUserField (boolean value) {
       this.requestField("user", value);
+      return this;
+    }
+    public APIRequestGet requestValueOptimizedQvCreatedField () {
+      return this.requestValueOptimizedQvCreatedField(true);
+    }
+    public APIRequestGet requestValueOptimizedQvCreatedField (boolean value) {
+      this.requestField("value_optimized_qv_created", value);
+      return this;
+    }
+    public APIRequestGet requestValueQvNuxImpressionsField () {
+      return this.requestValueQvNuxImpressionsField(true);
+    }
+    public APIRequestGet requestValueQvNuxImpressionsField (boolean value) {
+      this.requestField("value_qv_nux_impressions", value);
+      return this;
+    }
+    public APIRequestGet requestValueSuggestedColumnStatusField () {
+      return this.requestValueSuggestedColumnStatusField(true);
+    }
+    public APIRequestGet requestValueSuggestedColumnStatusField (boolean value) {
+      this.requestField("value_suggested_column_status", value);
       return this;
     }
   }
@@ -1400,6 +1484,7 @@ public class AdAccountUserSettings extends APINode {
     this.mAdObjectExportFormat = instance.mAdObjectExportFormat;
     this.mAdsManagerFooterRowToastImpressions = instance.mAdsManagerFooterRowToastImpressions;
     this.mAutoReviewVideoCaption = instance.mAutoReviewVideoCaption;
+    this.mBudgetOptimizationQuickViewCreated = instance.mBudgetOptimizationQuickViewCreated;
     this.mCampaignOverviewColumns = instance.mCampaignOverviewColumns;
     this.mColumnSuggestionStatus = instance.mColumnSuggestionStatus;
     this.mConditionalFormattingRules = instance.mConditionalFormattingRules;
@@ -1457,9 +1542,14 @@ public class AdAccountUserSettings extends APINode {
     this.mSydCampaignTrendsTimeRange = instance.mSydCampaignTrendsTimeRange;
     this.mSydLandingPageOptInStatus = instance.mSydLandingPageOptInStatus;
     this.mTextGenPersonaOptInType = instance.mTextGenPersonaOptInType;
+    this.mTextVariationsHlOptInOutTs = instance.mTextVariationsHlOptInOutTs;
+    this.mTextVariationsHlOptInType = instance.mTextVariationsHlOptInType;
     this.mTextVariationsOptInOutTs = instance.mTextVariationsOptInOutTs;
     this.mTextVariationsOptInType = instance.mTextVariationsOptInType;
     this.mUser = instance.mUser;
+    this.mValueOptimizedQvCreated = instance.mValueOptimizedQvCreated;
+    this.mValueQvNuxImpressions = instance.mValueQvNuxImpressions;
+    this.mValueSuggestedColumnStatus = instance.mValueSuggestedColumnStatus;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

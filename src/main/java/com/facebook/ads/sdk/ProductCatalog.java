@@ -336,6 +336,10 @@ public class ProductCatalog extends APINode {
     return new APIRequestGetCheckBatchRequestStatus(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetCheckMarketplacePartnerDealsStatus getCheckMarketplacePartnerDealsStatus() {
+    return new APIRequestGetCheckMarketplacePartnerDealsStatus(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetCheckMarketplacePartnerSellersStatus getCheckMarketplacePartnerSellersStatus() {
     return new APIRequestGetCheckMarketplacePartnerSellersStatus(this.getPrefixedId().toString(), context);
   }
@@ -422,6 +426,10 @@ public class ProductCatalog extends APINode {
 
   public APIRequestCreateLocalizedItemsBatch createLocalizedItemsBatch() {
     return new APIRequestCreateLocalizedItemsBatch(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestCreateMarketPlacePartnerDealsDetail createMarketPlacePartnerDealsDetail() {
+    return new APIRequestCreateMarketPlacePartnerDealsDetail(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestCreateMarketPlacePartnerSellersDetail createMarketPlacePartnerSellersDetail() {
@@ -747,6 +755,7 @@ public class ProductCatalog extends APINode {
       "id",
       "is_hidden",
       "link",
+      "marketing_messages_onboarding_status",
       "name",
       "primary_page",
       "profile_picture_uri",
@@ -918,6 +927,13 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestGetAgencies requestLinkField (boolean value) {
       this.requestField("link", value);
+      return this;
+    }
+    public APIRequestGetAgencies requestMarketingMessagesOnboardingStatusField () {
+      return this.requestMarketingMessagesOnboardingStatusField(true);
+    }
+    public APIRequestGetAgencies requestMarketingMessagesOnboardingStatusField (boolean value) {
+      this.requestField("marketing_messages_onboarding_status", value);
       return this;
     }
     public APIRequestGetAgencies requestNameField () {
@@ -2711,6 +2727,141 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestGetCheckBatchRequestStatus requestWarningsTotalCountField (boolean value) {
       this.requestField("warnings_total_count", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestGetCheckMarketplacePartnerDealsStatus extends APIRequest<ProductCatalogCheckMarketplacePartnerDealsStatus> {
+
+    APINodeList<ProductCatalogCheckMarketplacePartnerDealsStatus> lastResponse = null;
+    @Override
+    public APINodeList<ProductCatalogCheckMarketplacePartnerDealsStatus> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "session_id",
+    };
+
+    public static final String[] FIELDS = {
+      "errors",
+      "session_id",
+      "status",
+    };
+
+    @Override
+    public APINodeList<ProductCatalogCheckMarketplacePartnerDealsStatus> parseResponse(String response, String header) throws APIException {
+      return ProductCatalogCheckMarketplacePartnerDealsStatus.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<ProductCatalogCheckMarketplacePartnerDealsStatus> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<ProductCatalogCheckMarketplacePartnerDealsStatus> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<ProductCatalogCheckMarketplacePartnerDealsStatus>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<ProductCatalogCheckMarketplacePartnerDealsStatus>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<ProductCatalogCheckMarketplacePartnerDealsStatus>>() {
+           public APINodeList<ProductCatalogCheckMarketplacePartnerDealsStatus> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetCheckMarketplacePartnerDealsStatus.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestGetCheckMarketplacePartnerDealsStatus(String nodeId, APIContext context) {
+      super(context, nodeId, "/check_marketplace_partner_deals_status", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetCheckMarketplacePartnerDealsStatus setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCheckMarketplacePartnerDealsStatus setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetCheckMarketplacePartnerDealsStatus setSessionId (String sessionId) {
+      this.setParam("session_id", sessionId);
+      return this;
+    }
+
+    public APIRequestGetCheckMarketplacePartnerDealsStatus requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetCheckMarketplacePartnerDealsStatus requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCheckMarketplacePartnerDealsStatus requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetCheckMarketplacePartnerDealsStatus requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCheckMarketplacePartnerDealsStatus requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCheckMarketplacePartnerDealsStatus requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetCheckMarketplacePartnerDealsStatus requestErrorsField () {
+      return this.requestErrorsField(true);
+    }
+    public APIRequestGetCheckMarketplacePartnerDealsStatus requestErrorsField (boolean value) {
+      this.requestField("errors", value);
+      return this;
+    }
+    public APIRequestGetCheckMarketplacePartnerDealsStatus requestSessionIdField () {
+      return this.requestSessionIdField(true);
+    }
+    public APIRequestGetCheckMarketplacePartnerDealsStatus requestSessionIdField (boolean value) {
+      this.requestField("session_id", value);
+      return this;
+    }
+    public APIRequestGetCheckMarketplacePartnerDealsStatus requestStatusField () {
+      return this.requestStatusField(true);
+    }
+    public APIRequestGetCheckMarketplacePartnerDealsStatus requestStatusField (boolean value) {
+      this.requestField("status", value);
       return this;
     }
   }
@@ -7335,6 +7486,121 @@ public class ProductCatalog extends APINode {
 
   }
 
+  public static class APIRequestCreateMarketPlacePartnerDealsDetail extends APIRequest<ProductCatalog> {
+
+    ProductCatalog lastResponse = null;
+    @Override
+    public ProductCatalog getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "requests",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public ProductCatalog parseResponse(String response, String header) throws APIException {
+      return ProductCatalog.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public ProductCatalog execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public ProductCatalog execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<ProductCatalog> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<ProductCatalog> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, ProductCatalog>() {
+           public ProductCatalog apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateMarketPlacePartnerDealsDetail.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestCreateMarketPlacePartnerDealsDetail(String nodeId, APIContext context) {
+      super(context, nodeId, "/marketplace_partner_deals_details", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateMarketPlacePartnerDealsDetail setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateMarketPlacePartnerDealsDetail setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateMarketPlacePartnerDealsDetail setRequests (Map<String, String> requests) {
+      this.setParam("requests", requests);
+      return this;
+    }
+    public APIRequestCreateMarketPlacePartnerDealsDetail setRequests (String requests) {
+      this.setParam("requests", requests);
+      return this;
+    }
+
+    public APIRequestCreateMarketPlacePartnerDealsDetail requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateMarketPlacePartnerDealsDetail requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateMarketPlacePartnerDealsDetail requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateMarketPlacePartnerDealsDetail requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateMarketPlacePartnerDealsDetail requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateMarketPlacePartnerDealsDetail requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestCreateMarketPlacePartnerSellersDetail extends APIRequest<ProductCatalog> {
 
     ProductCatalog lastResponse = null;
@@ -9254,6 +9520,7 @@ public class ProductCatalog extends APINode {
       "invalidation_errors",
       "inventory",
       "is_bundle_hero",
+      "live_special_price",
       "manufacturer_info",
       "manufacturer_part_number",
       "marked_for_product_launch",
@@ -9277,6 +9544,7 @@ public class ProductCatalog extends APINode {
       "retailer_product_group_id",
       "review_rejection_reasons",
       "review_status",
+      "rich_text_description",
       "sale_price",
       "sale_price_end_date",
       "sale_price_start_date",
@@ -9285,6 +9553,7 @@ public class ProductCatalog extends APINode {
       "short_description",
       "size",
       "start_date",
+      "status",
       "tags",
       "url",
       "vendor_id",
@@ -9751,6 +10020,13 @@ public class ProductCatalog extends APINode {
       this.requestField("is_bundle_hero", value);
       return this;
     }
+    public APIRequestGetProducts requestLiveSpecialPriceField () {
+      return this.requestLiveSpecialPriceField(true);
+    }
+    public APIRequestGetProducts requestLiveSpecialPriceField (boolean value) {
+      this.requestField("live_special_price", value);
+      return this;
+    }
     public APIRequestGetProducts requestManufacturerInfoField () {
       return this.requestManufacturerInfoField(true);
     }
@@ -9912,6 +10188,13 @@ public class ProductCatalog extends APINode {
       this.requestField("review_status", value);
       return this;
     }
+    public APIRequestGetProducts requestRichTextDescriptionField () {
+      return this.requestRichTextDescriptionField(true);
+    }
+    public APIRequestGetProducts requestRichTextDescriptionField (boolean value) {
+      this.requestField("rich_text_description", value);
+      return this;
+    }
     public APIRequestGetProducts requestSalePriceField () {
       return this.requestSalePriceField(true);
     }
@@ -9966,6 +10249,13 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestGetProducts requestStartDateField (boolean value) {
       this.requestField("start_date", value);
+      return this;
+    }
+    public APIRequestGetProducts requestStatusField () {
+      return this.requestStatusField(true);
+    }
+    public APIRequestGetProducts requestStatusField (boolean value) {
+      this.requestField("status", value);
       return this;
     }
     public APIRequestGetProducts requestTagsField () {
@@ -10073,6 +10363,7 @@ public class ProductCatalog extends APINode {
       "iphone_app_store_id",
       "iphone_url",
       "launch_date",
+      "live_special_price",
       "manufacturer_info",
       "manufacturer_part_number",
       "marked_for_product_launch",
@@ -10093,6 +10384,7 @@ public class ProductCatalog extends APINode {
       "retailer_id",
       "retailer_product_group_id",
       "return_policy_days",
+      "rich_text_description",
       "sale_price",
       "sale_price_end_date",
       "sale_price_start_date",
@@ -10470,6 +10762,11 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
+    public APIRequestCreateProduct setLiveSpecialPrice (String liveSpecialPrice) {
+      this.setParam("live_special_price", liveSpecialPrice);
+      return this;
+    }
+
     public APIRequestCreateProduct setManufacturerInfo (String manufacturerInfo) {
       this.setParam("manufacturer_info", manufacturerInfo);
       return this;
@@ -10611,6 +10908,11 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestCreateProduct setReturnPolicyDays (String returnPolicyDays) {
       this.setParam("return_policy_days", returnPolicyDays);
+      return this;
+    }
+
+    public APIRequestCreateProduct setRichTextDescription (String richTextDescription) {
+      this.setParam("rich_text_description", richTextDescription);
       return this;
     }
 

@@ -366,6 +366,7 @@ public class VideoList extends APINode {
       "privacy",
       "published",
       "scheduled_publish_time",
+      "season",
       "source",
       "spherical",
       "status",
@@ -743,6 +744,13 @@ public class VideoList extends APINode {
     }
     public APIRequestGetVideos requestScheduledPublishTimeField (boolean value) {
       this.requestField("scheduled_publish_time", value);
+      return this;
+    }
+    public APIRequestGetVideos requestSeasonField () {
+      return this.requestSeasonField(true);
+    }
+    public APIRequestGetVideos requestSeasonField (boolean value) {
+      this.requestField("season", value);
       return this;
     }
     public APIRequestGetVideos requestSourceField () {

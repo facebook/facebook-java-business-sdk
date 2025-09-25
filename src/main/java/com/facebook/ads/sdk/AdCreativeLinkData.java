@@ -83,6 +83,8 @@ public class AdCreativeLinkData extends APINode {
   private List<AdCreativeLinkDataImageLayerSpec> mImageLayerSpecs = null;
   @SerializedName("image_overlay_spec")
   private AdCreativeLinkDataImageOverlaySpec mImageOverlaySpec = null;
+  @SerializedName("is_local_expansion")
+  private Boolean mIsLocalExpansion = null;
   @SerializedName("link")
   private String mLink = null;
   @SerializedName("message")
@@ -493,6 +495,15 @@ public class AdCreativeLinkData extends APINode {
     this.mImageOverlaySpec = AdCreativeLinkDataImageOverlaySpec.getGson().fromJson(value, type);
     return this;
   }
+  public Boolean getFieldIsLocalExpansion() {
+    return mIsLocalExpansion;
+  }
+
+  public AdCreativeLinkData setFieldIsLocalExpansion(Boolean value) {
+    this.mIsLocalExpansion = value;
+    return this;
+  }
+
   public String getFieldLink() {
     return mLink;
   }
@@ -703,6 +714,7 @@ public class AdCreativeLinkData extends APINode {
     this.mImageHash = instance.mImageHash;
     this.mImageLayerSpecs = instance.mImageLayerSpecs;
     this.mImageOverlaySpec = instance.mImageOverlaySpec;
+    this.mIsLocalExpansion = instance.mIsLocalExpansion;
     this.mLink = instance.mLink;
     this.mMessage = instance.mMessage;
     this.mMultiShareEndCard = instance.mMultiShareEndCard;

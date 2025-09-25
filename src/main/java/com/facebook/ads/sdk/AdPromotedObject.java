@@ -55,6 +55,8 @@ public class AdPromotedObject extends APINode {
   private EnumCustomEventType mCustomEventType = null;
   @SerializedName("dataset_split_id")
   private String mDatasetSplitId = null;
+  @SerializedName("dataset_split_ids")
+  private List<String> mDatasetSplitIds = null;
   @SerializedName("event_id")
   private String mEventId = null;
   @SerializedName("full_funnel_objective")
@@ -69,8 +71,12 @@ public class AdPromotedObject extends APINode {
   private String mLeadAdsFormEventSourceType = null;
   @SerializedName("lead_ads_offsite_conversion_type")
   private String mLeadAdsOffsiteConversionType = null;
+  @SerializedName("lead_ads_selected_pixel_id")
+  private String mLeadAdsSelectedPixelId = null;
   @SerializedName("mcme_conversion_id")
   private String mMcmeConversionId = null;
+  @SerializedName("multi_event_product")
+  private String mMultiEventProduct = null;
   @SerializedName("object_store_url")
   private String mObjectStoreUrl = null;
   @SerializedName("object_store_urls")
@@ -85,6 +91,10 @@ public class AdPromotedObject extends APINode {
   private Object mOmnichannelObject = null;
   @SerializedName("page_id")
   private String mPageId = null;
+  @SerializedName("passback_application_id")
+  private String mPassbackApplicationId = null;
+  @SerializedName("passback_pixel_id")
+  private String mPassbackPixelId = null;
   @SerializedName("pixel_aggregation_rule")
   private String mPixelAggregationRule = null;
   @SerializedName("pixel_id")
@@ -329,6 +339,15 @@ public class AdPromotedObject extends APINode {
     return this;
   }
 
+  public List<String> getFieldDatasetSplitIds() {
+    return mDatasetSplitIds;
+  }
+
+  public AdPromotedObject setFieldDatasetSplitIds(List<String> value) {
+    this.mDatasetSplitIds = value;
+    return this;
+  }
+
   public String getFieldEventId() {
     return mEventId;
   }
@@ -392,12 +411,30 @@ public class AdPromotedObject extends APINode {
     return this;
   }
 
+  public String getFieldLeadAdsSelectedPixelId() {
+    return mLeadAdsSelectedPixelId;
+  }
+
+  public AdPromotedObject setFieldLeadAdsSelectedPixelId(String value) {
+    this.mLeadAdsSelectedPixelId = value;
+    return this;
+  }
+
   public String getFieldMcmeConversionId() {
     return mMcmeConversionId;
   }
 
   public AdPromotedObject setFieldMcmeConversionId(String value) {
     this.mMcmeConversionId = value;
+    return this;
+  }
+
+  public String getFieldMultiEventProduct() {
+    return mMultiEventProduct;
+  }
+
+  public AdPromotedObject setFieldMultiEventProduct(String value) {
+    this.mMultiEventProduct = value;
     return this;
   }
 
@@ -461,6 +498,24 @@ public class AdPromotedObject extends APINode {
 
   public AdPromotedObject setFieldPageId(String value) {
     this.mPageId = value;
+    return this;
+  }
+
+  public String getFieldPassbackApplicationId() {
+    return mPassbackApplicationId;
+  }
+
+  public AdPromotedObject setFieldPassbackApplicationId(String value) {
+    this.mPassbackApplicationId = value;
+    return this;
+  }
+
+  public String getFieldPassbackPixelId() {
+    return mPassbackPixelId;
+  }
+
+  public AdPromotedObject setFieldPassbackPixelId(String value) {
+    this.mPassbackPixelId = value;
     return this;
   }
 
@@ -842,6 +897,7 @@ public class AdPromotedObject extends APINode {
     this.mCustomEventStr = instance.mCustomEventStr;
     this.mCustomEventType = instance.mCustomEventType;
     this.mDatasetSplitId = instance.mDatasetSplitId;
+    this.mDatasetSplitIds = instance.mDatasetSplitIds;
     this.mEventId = instance.mEventId;
     this.mFullFunnelObjective = instance.mFullFunnelObjective;
     this.mFundraiserCampaignId = instance.mFundraiserCampaignId;
@@ -849,7 +905,9 @@ public class AdPromotedObject extends APINode {
     this.mLeadAdsCustomEventType = instance.mLeadAdsCustomEventType;
     this.mLeadAdsFormEventSourceType = instance.mLeadAdsFormEventSourceType;
     this.mLeadAdsOffsiteConversionType = instance.mLeadAdsOffsiteConversionType;
+    this.mLeadAdsSelectedPixelId = instance.mLeadAdsSelectedPixelId;
     this.mMcmeConversionId = instance.mMcmeConversionId;
+    this.mMultiEventProduct = instance.mMultiEventProduct;
     this.mObjectStoreUrl = instance.mObjectStoreUrl;
     this.mObjectStoreUrls = instance.mObjectStoreUrls;
     this.mOfferId = instance.mOfferId;
@@ -857,6 +915,8 @@ public class AdPromotedObject extends APINode {
     this.mOffsiteConversionEventId = instance.mOffsiteConversionEventId;
     this.mOmnichannelObject = instance.mOmnichannelObject;
     this.mPageId = instance.mPageId;
+    this.mPassbackApplicationId = instance.mPassbackApplicationId;
+    this.mPassbackPixelId = instance.mPassbackPixelId;
     this.mPixelAggregationRule = instance.mPixelAggregationRule;
     this.mPixelId = instance.mPixelId;
     this.mPixelRule = instance.mPixelRule;

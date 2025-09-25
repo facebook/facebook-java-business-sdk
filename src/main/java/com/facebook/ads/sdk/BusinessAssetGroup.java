@@ -966,6 +966,7 @@ public class BusinessAssetGroup extends APINode {
       "min_daily_budget",
       "name",
       "offsite_pixels_tos_accepted",
+      "opportunity_score",
       "owner",
       "owner_business",
       "partner",
@@ -1446,6 +1447,13 @@ public class BusinessAssetGroup extends APINode {
     }
     public APIRequestGetContainedAdAccounts requestOffsitePixelsTosAcceptedField (boolean value) {
       this.requestField("offsite_pixels_tos_accepted", value);
+      return this;
+    }
+    public APIRequestGetContainedAdAccounts requestOpportunityScoreField () {
+      return this.requestOpportunityScoreField(true);
+    }
+    public APIRequestGetContainedAdAccounts requestOpportunityScoreField (boolean value) {
+      this.requestField("opportunity_score", value);
       return this;
     }
     public APIRequestGetContainedAdAccounts requestOwnerField () {
@@ -3920,6 +3928,7 @@ public class BusinessAssetGroup extends APINode {
       "connected_instagram_account",
       "connected_page_backed_instagram_account",
       "contact_address",
+      "copyright_attribution_insights",
       "copyright_whitelisted_ig_partners",
       "country_page_likes",
       "cover",
@@ -4323,6 +4332,13 @@ public class BusinessAssetGroup extends APINode {
     }
     public APIRequestGetContainedPages requestContactAddressField (boolean value) {
       this.requestField("contact_address", value);
+      return this;
+    }
+    public APIRequestGetContainedPages requestCopyrightAttributionInsightsField () {
+      return this.requestCopyrightAttributionInsightsField(true);
+    }
+    public APIRequestGetContainedPages requestCopyrightAttributionInsightsField (boolean value) {
+      this.requestField("copyright_attribution_insights", value);
       return this;
     }
     public APIRequestGetContainedPages requestCopyrightWhitelistedIgPartnersField () {

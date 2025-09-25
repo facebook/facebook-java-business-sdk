@@ -45,8 +45,6 @@ public class User extends APINode {
   private String mAbout = null;
   @SerializedName("age_range")
   private AgeRange mAgeRange = null;
-  @SerializedName("avatar_2d_profile_picture")
-  private AvatarProfilePicture mAvatar2dProfilePicture = null;
   @SerializedName("birthday")
   private String mBirthday = null;
   @SerializedName("client_business_id")
@@ -73,8 +71,6 @@ public class User extends APINode {
   private Page mHometown = null;
   @SerializedName("id")
   private String mId = null;
-  @SerializedName("id_for_avatars")
-  private String mIdForAvatars = null;
   @SerializedName("inspirational_people")
   private List<Experience> mInspirationalPeople = null;
   @SerializedName("install_type")
@@ -420,10 +416,6 @@ public class User extends APINode {
     return new APIRequestGetAssignedWhatsAppBusinessAccounts(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestGetAvatars getAvatars() {
-    return new APIRequestGetAvatars(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetBusinessUsers getBusinessUsers() {
     return new APIRequestGetBusinessUsers(this.getPrefixedId().toString(), context);
   }
@@ -585,13 +577,6 @@ public class User extends APINode {
     return mAgeRange;
   }
 
-  public AvatarProfilePicture getFieldAvatar2dProfilePicture() {
-    if (mAvatar2dProfilePicture != null) {
-      mAvatar2dProfilePicture.context = getContext();
-    }
-    return mAvatar2dProfilePicture;
-  }
-
   public String getFieldBirthday() {
     return mBirthday;
   }
@@ -648,10 +633,6 @@ public class User extends APINode {
 
   public String getFieldId() {
     return mId;
-  }
-
-  public String getFieldIdForAvatars() {
-    return mIdForAvatars;
   }
 
   public List<Experience> getFieldInspirationalPeople() {
@@ -1081,6 +1062,7 @@ public class User extends APINode {
       "connected_instagram_account",
       "connected_page_backed_instagram_account",
       "contact_address",
+      "copyright_attribution_insights",
       "copyright_whitelisted_ig_partners",
       "country_page_likes",
       "cover",
@@ -1507,6 +1489,13 @@ public class User extends APINode {
     }
     public APIRequestGetAccounts requestContactAddressField (boolean value) {
       this.requestField("contact_address", value);
+      return this;
+    }
+    public APIRequestGetAccounts requestCopyrightAttributionInsightsField () {
+      return this.requestCopyrightAttributionInsightsField(true);
+    }
+    public APIRequestGetAccounts requestCopyrightAttributionInsightsField (boolean value) {
+      this.requestField("copyright_attribution_insights", value);
       return this;
     }
     public APIRequestGetAccounts requestCopyrightWhitelistedIgPartnersField () {
@@ -3130,6 +3119,7 @@ public class User extends APINode {
       "min_daily_budget",
       "name",
       "offsite_pixels_tos_accepted",
+      "opportunity_score",
       "owner",
       "owner_business",
       "partner",
@@ -3610,6 +3600,13 @@ public class User extends APINode {
     }
     public APIRequestGetAdAccounts requestOffsitePixelsTosAcceptedField (boolean value) {
       this.requestField("offsite_pixels_tos_accepted", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestOpportunityScoreField () {
+      return this.requestOpportunityScoreField(true);
+    }
+    public APIRequestGetAdAccounts requestOpportunityScoreField (boolean value) {
+      this.requestField("opportunity_score", value);
       return this;
     }
     public APIRequestGetAdAccounts requestOwnerField () {
@@ -4513,6 +4510,7 @@ public class User extends APINode {
       "min_daily_budget",
       "name",
       "offsite_pixels_tos_accepted",
+      "opportunity_score",
       "owner",
       "owner_business",
       "partner",
@@ -4993,6 +4991,13 @@ public class User extends APINode {
     }
     public APIRequestGetAssignedAdAccounts requestOffsitePixelsTosAcceptedField (boolean value) {
       this.requestField("offsite_pixels_tos_accepted", value);
+      return this;
+    }
+    public APIRequestGetAssignedAdAccounts requestOpportunityScoreField () {
+      return this.requestOpportunityScoreField(true);
+    }
+    public APIRequestGetAssignedAdAccounts requestOpportunityScoreField (boolean value) {
+      this.requestField("opportunity_score", value);
       return this;
     }
     public APIRequestGetAssignedAdAccounts requestOwnerField () {
@@ -6257,6 +6262,7 @@ public class User extends APINode {
       "connected_instagram_account",
       "connected_page_backed_instagram_account",
       "contact_address",
+      "copyright_attribution_insights",
       "copyright_whitelisted_ig_partners",
       "country_page_likes",
       "cover",
@@ -6669,6 +6675,13 @@ public class User extends APINode {
     }
     public APIRequestGetAssignedPages requestContactAddressField (boolean value) {
       this.requestField("contact_address", value);
+      return this;
+    }
+    public APIRequestGetAssignedPages requestCopyrightAttributionInsightsField () {
+      return this.requestCopyrightAttributionInsightsField(true);
+    }
+    public APIRequestGetAssignedPages requestCopyrightAttributionInsightsField (boolean value) {
+      this.requestField("copyright_attribution_insights", value);
       return this;
     }
     public APIRequestGetAssignedPages requestCopyrightWhitelistedIgPartnersField () {
@@ -8103,119 +8116,6 @@ public class User extends APINode {
     }
   }
 
-  public static class APIRequestGetAvatars extends APIRequest<Avatar> {
-
-    APINodeList<Avatar> lastResponse = null;
-    @Override
-    public APINodeList<Avatar> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "id",
-    };
-
-    @Override
-    public APINodeList<Avatar> parseResponse(String response, String header) throws APIException {
-      return Avatar.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<Avatar> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<Avatar> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<Avatar>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<Avatar>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<Avatar>>() {
-           public APINodeList<Avatar> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetAvatars.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         },
-         MoreExecutors.directExecutor()
-      );
-    };
-
-    public APIRequestGetAvatars(String nodeId, APIContext context) {
-      super(context, nodeId, "/avatars", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetAvatars setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAvatars setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetAvatars requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetAvatars requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAvatars requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetAvatars requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAvatars requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAvatars requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGetAvatars requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetAvatars requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-  }
-
   public static class APIRequestGetBusinessUsers extends APIRequest<BusinessUser> {
 
     APINodeList<BusinessUser> lastResponse = null;
@@ -8573,6 +8473,7 @@ public class User extends APINode {
       "id",
       "is_hidden",
       "link",
+      "marketing_messages_onboarding_status",
       "name",
       "primary_page",
       "profile_picture_uri",
@@ -8744,6 +8645,13 @@ public class User extends APINode {
     }
     public APIRequestGetBusinesses requestLinkField (boolean value) {
       this.requestField("link", value);
+      return this;
+    }
+    public APIRequestGetBusinesses requestMarketingMessagesOnboardingStatusField () {
+      return this.requestMarketingMessagesOnboardingStatusField(true);
+    }
+    public APIRequestGetBusinesses requestMarketingMessagesOnboardingStatusField (boolean value) {
+      this.requestField("marketing_messages_onboarding_status", value);
       return this;
     }
     public APIRequestGetBusinesses requestNameField () {
@@ -9019,6 +8927,7 @@ public class User extends APINode {
     }
     public static final String[] PARAMS = {
       "folder",
+      "is_owner",
       "platform",
       "tags",
       "user_id",
@@ -9029,6 +8938,7 @@ public class User extends APINode {
       "folder",
       "former_participants",
       "id",
+      "is_owner",
       "is_subscribed",
       "link",
       "linked_group",
@@ -9099,6 +9009,15 @@ public class User extends APINode {
 
     public APIRequestGetConversations setFolder (String folder) {
       this.setParam("folder", folder);
+      return this;
+    }
+
+    public APIRequestGetConversations setIsOwner (Boolean isOwner) {
+      this.setParam("is_owner", isOwner);
+      return this;
+    }
+    public APIRequestGetConversations setIsOwner (String isOwner) {
+      this.setParam("is_owner", isOwner);
       return this;
     }
 
@@ -9187,6 +9106,13 @@ public class User extends APINode {
     }
     public APIRequestGetConversations requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetConversations requestIsOwnerField () {
+      return this.requestIsOwnerField(true);
+    }
+    public APIRequestGetConversations requestIsOwnerField (boolean value) {
+      this.requestField("is_owner", value);
       return this;
     }
     public APIRequestGetConversations requestIsSubscribedField () {
@@ -11423,7 +11349,6 @@ public class User extends APINode {
     public static final String[] FIELDS = {
       "about",
       "age_range",
-      "avatar_2d_profile_picture",
       "birthday",
       "client_business_id",
       "community",
@@ -11437,7 +11362,6 @@ public class User extends APINode {
       "gender",
       "hometown",
       "id",
-      "id_for_avatars",
       "inspirational_people",
       "install_type",
       "installed",
@@ -11587,13 +11511,6 @@ public class User extends APINode {
       this.requestField("age_range", value);
       return this;
     }
-    public APIRequestGetFriends requestAvatar2dProfilePictureField () {
-      return this.requestAvatar2dProfilePictureField(true);
-    }
-    public APIRequestGetFriends requestAvatar2dProfilePictureField (boolean value) {
-      this.requestField("avatar_2d_profile_picture", value);
-      return this;
-    }
     public APIRequestGetFriends requestBirthdayField () {
       return this.requestBirthdayField(true);
     }
@@ -11683,13 +11600,6 @@ public class User extends APINode {
     }
     public APIRequestGetFriends requestIdField (boolean value) {
       this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGetFriends requestIdForAvatarsField () {
-      return this.requestIdForAvatarsField(true);
-    }
-    public APIRequestGetFriends requestIdForAvatarsField (boolean value) {
-      this.requestField("id_for_avatars", value);
       return this;
     }
     public APIRequestGetFriends requestInspirationalPeopleField () {
@@ -13119,6 +13029,7 @@ public class User extends APINode {
       "connected_instagram_account",
       "connected_page_backed_instagram_account",
       "contact_address",
+      "copyright_attribution_insights",
       "copyright_whitelisted_ig_partners",
       "country_page_likes",
       "cover",
@@ -13527,6 +13438,13 @@ public class User extends APINode {
     }
     public APIRequestGetLikes requestContactAddressField (boolean value) {
       this.requestField("contact_address", value);
+      return this;
+    }
+    public APIRequestGetLikes requestCopyrightAttributionInsightsField () {
+      return this.requestCopyrightAttributionInsightsField(true);
+    }
+    public APIRequestGetLikes requestCopyrightAttributionInsightsField (boolean value) {
+      this.requestField("copyright_attribution_insights", value);
       return this;
     }
     public APIRequestGetLikes requestCopyrightWhitelistedIgPartnersField () {
@@ -15288,6 +15206,7 @@ public class User extends APINode {
       "connected_instagram_account",
       "connected_page_backed_instagram_account",
       "contact_address",
+      "copyright_attribution_insights",
       "copyright_whitelisted_ig_partners",
       "country_page_likes",
       "cover",
@@ -15696,6 +15615,13 @@ public class User extends APINode {
     }
     public APIRequestGetMusic requestContactAddressField (boolean value) {
       this.requestField("contact_address", value);
+      return this;
+    }
+    public APIRequestGetMusic requestCopyrightAttributionInsightsField () {
+      return this.requestCopyrightAttributionInsightsField(true);
+    }
+    public APIRequestGetMusic requestCopyrightAttributionInsightsField (boolean value) {
+      this.requestField("copyright_attribution_insights", value);
       return this;
     }
     public APIRequestGetMusic requestCopyrightWhitelistedIgPartnersField () {
@@ -17364,6 +17290,7 @@ public class User extends APINode {
       "min_daily_budget",
       "name",
       "offsite_pixels_tos_accepted",
+      "opportunity_score",
       "owner",
       "owner_business",
       "partner",
@@ -17844,6 +17771,13 @@ public class User extends APINode {
     }
     public APIRequestGetPersonalAdAccounts requestOffsitePixelsTosAcceptedField (boolean value) {
       this.requestField("offsite_pixels_tos_accepted", value);
+      return this;
+    }
+    public APIRequestGetPersonalAdAccounts requestOpportunityScoreField () {
+      return this.requestOpportunityScoreField(true);
+    }
+    public APIRequestGetPersonalAdAccounts requestOpportunityScoreField (boolean value) {
+      this.requestField("opportunity_score", value);
       return this;
     }
     public APIRequestGetPersonalAdAccounts requestOwnerField () {
@@ -19738,6 +19672,8 @@ public class User extends APINode {
       "element_payload",
       "elements",
       "fb_body_elements",
+      "hero_asset_facebook_post_id",
+      "hero_asset_instagram_media_id",
       "id",
       "is_hidden",
       "is_published",
@@ -19926,6 +19862,20 @@ public class User extends APINode {
     }
     public APIRequestGetRichMediaDocuments requestFbBodyElementsField (boolean value) {
       this.requestField("fb_body_elements", value);
+      return this;
+    }
+    public APIRequestGetRichMediaDocuments requestHeroAssetFacebookPostIdField () {
+      return this.requestHeroAssetFacebookPostIdField(true);
+    }
+    public APIRequestGetRichMediaDocuments requestHeroAssetFacebookPostIdField (boolean value) {
+      this.requestField("hero_asset_facebook_post_id", value);
+      return this;
+    }
+    public APIRequestGetRichMediaDocuments requestHeroAssetInstagramMediaIdField () {
+      return this.requestHeroAssetInstagramMediaIdField(true);
+    }
+    public APIRequestGetRichMediaDocuments requestHeroAssetInstagramMediaIdField (boolean value) {
+      this.requestField("hero_asset_instagram_media_id", value);
       return this;
     }
     public APIRequestGetRichMediaDocuments requestIdField () {
@@ -20209,6 +20159,7 @@ public class User extends APINode {
       "privacy",
       "published",
       "scheduled_publish_time",
+      "season",
       "source",
       "spherical",
       "status",
@@ -20595,6 +20546,13 @@ public class User extends APINode {
     }
     public APIRequestGetVideos requestScheduledPublishTimeField (boolean value) {
       this.requestField("scheduled_publish_time", value);
+      return this;
+    }
+    public APIRequestGetVideos requestSeasonField () {
+      return this.requestSeasonField(true);
+    }
+    public APIRequestGetVideos requestSeasonField (boolean value) {
+      this.requestField("season", value);
       return this;
     }
     public APIRequestGetVideos requestSourceField () {
@@ -21441,7 +21399,6 @@ public class User extends APINode {
     public static final String[] FIELDS = {
       "about",
       "age_range",
-      "avatar_2d_profile_picture",
       "birthday",
       "client_business_id",
       "community",
@@ -21455,7 +21412,6 @@ public class User extends APINode {
       "gender",
       "hometown",
       "id",
-      "id_for_avatars",
       "inspirational_people",
       "install_type",
       "installed",
@@ -21596,13 +21552,6 @@ public class User extends APINode {
       this.requestField("age_range", value);
       return this;
     }
-    public APIRequestGet requestAvatar2dProfilePictureField () {
-      return this.requestAvatar2dProfilePictureField(true);
-    }
-    public APIRequestGet requestAvatar2dProfilePictureField (boolean value) {
-      this.requestField("avatar_2d_profile_picture", value);
-      return this;
-    }
     public APIRequestGet requestBirthdayField () {
       return this.requestBirthdayField(true);
     }
@@ -21692,13 +21641,6 @@ public class User extends APINode {
     }
     public APIRequestGet requestIdField (boolean value) {
       this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGet requestIdForAvatarsField () {
-      return this.requestIdForAvatarsField(true);
-    }
-    public APIRequestGet requestIdForAvatarsField (boolean value) {
-      this.requestField("id_for_avatars", value);
       return this;
     }
     public APIRequestGet requestInspirationalPeopleField () {
@@ -22195,7 +22137,6 @@ public class User extends APINode {
   public User copyFrom(User instance) {
     this.mAbout = instance.mAbout;
     this.mAgeRange = instance.mAgeRange;
-    this.mAvatar2dProfilePicture = instance.mAvatar2dProfilePicture;
     this.mBirthday = instance.mBirthday;
     this.mClientBusinessId = instance.mClientBusinessId;
     this.mCommunity = instance.mCommunity;
@@ -22209,7 +22150,6 @@ public class User extends APINode {
     this.mGender = instance.mGender;
     this.mHometown = instance.mHometown;
     this.mId = instance.mId;
-    this.mIdForAvatars = instance.mIdForAvatars;
     this.mInspirationalPeople = instance.mInspirationalPeople;
     this.mInstallType = instance.mInstallType;
     this.mInstalled = instance.mInstalled;

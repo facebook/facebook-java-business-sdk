@@ -333,6 +333,7 @@ public class WhatsAppBusinessPreVerifiedPhoneNumber extends APINode {
       "id",
       "is_hidden",
       "link",
+      "marketing_messages_onboarding_status",
       "name",
       "primary_page",
       "profile_picture_uri",
@@ -504,6 +505,13 @@ public class WhatsAppBusinessPreVerifiedPhoneNumber extends APINode {
     }
     public APIRequestGetPartners requestLinkField (boolean value) {
       this.requestField("link", value);
+      return this;
+    }
+    public APIRequestGetPartners requestMarketingMessagesOnboardingStatusField () {
+      return this.requestMarketingMessagesOnboardingStatusField(true);
+    }
+    public APIRequestGetPartners requestMarketingMessagesOnboardingStatusField (boolean value) {
+      this.requestField("marketing_messages_onboarding_status", value);
       return this;
     }
     public APIRequestGetPartners requestNameField () {

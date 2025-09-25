@@ -357,6 +357,7 @@ public class ProductGroup extends APINode {
       "invalidation_errors",
       "inventory",
       "is_bundle_hero",
+      "live_special_price",
       "manufacturer_info",
       "manufacturer_part_number",
       "marked_for_product_launch",
@@ -380,6 +381,7 @@ public class ProductGroup extends APINode {
       "retailer_product_group_id",
       "review_rejection_reasons",
       "review_status",
+      "rich_text_description",
       "sale_price",
       "sale_price_end_date",
       "sale_price_start_date",
@@ -388,6 +390,7 @@ public class ProductGroup extends APINode {
       "short_description",
       "size",
       "start_date",
+      "status",
       "tags",
       "url",
       "vendor_id",
@@ -809,6 +812,13 @@ public class ProductGroup extends APINode {
       this.requestField("is_bundle_hero", value);
       return this;
     }
+    public APIRequestGetProducts requestLiveSpecialPriceField () {
+      return this.requestLiveSpecialPriceField(true);
+    }
+    public APIRequestGetProducts requestLiveSpecialPriceField (boolean value) {
+      this.requestField("live_special_price", value);
+      return this;
+    }
     public APIRequestGetProducts requestManufacturerInfoField () {
       return this.requestManufacturerInfoField(true);
     }
@@ -970,6 +980,13 @@ public class ProductGroup extends APINode {
       this.requestField("review_status", value);
       return this;
     }
+    public APIRequestGetProducts requestRichTextDescriptionField () {
+      return this.requestRichTextDescriptionField(true);
+    }
+    public APIRequestGetProducts requestRichTextDescriptionField (boolean value) {
+      this.requestField("rich_text_description", value);
+      return this;
+    }
     public APIRequestGetProducts requestSalePriceField () {
       return this.requestSalePriceField(true);
     }
@@ -1024,6 +1041,13 @@ public class ProductGroup extends APINode {
     }
     public APIRequestGetProducts requestStartDateField (boolean value) {
       this.requestField("start_date", value);
+      return this;
+    }
+    public APIRequestGetProducts requestStatusField () {
+      return this.requestStatusField(true);
+    }
+    public APIRequestGetProducts requestStatusField (boolean value) {
+      this.requestField("status", value);
       return this;
     }
     public APIRequestGetProducts requestTagsField () {
@@ -1128,6 +1152,7 @@ public class ProductGroup extends APINode {
       "iphone_app_store_id",
       "iphone_url",
       "launch_date",
+      "live_special_price",
       "manufacturer_part_number",
       "marked_for_product_launch",
       "material",
@@ -1145,6 +1170,7 @@ public class ProductGroup extends APINode {
       "quantity_to_sell_on_facebook",
       "retailer_id",
       "return_policy_days",
+      "rich_text_description",
       "sale_price",
       "sale_price_end_date",
       "sale_price_start_date",
@@ -1498,6 +1524,11 @@ public class ProductGroup extends APINode {
       return this;
     }
 
+    public APIRequestCreateProduct setLiveSpecialPrice (String liveSpecialPrice) {
+      this.setParam("live_special_price", liveSpecialPrice);
+      return this;
+    }
+
     public APIRequestCreateProduct setManufacturerPartNumber (String manufacturerPartNumber) {
       this.setParam("manufacturer_part_number", manufacturerPartNumber);
       return this;
@@ -1620,6 +1651,11 @@ public class ProductGroup extends APINode {
     }
     public APIRequestCreateProduct setReturnPolicyDays (String returnPolicyDays) {
       this.setParam("return_policy_days", returnPolicyDays);
+      return this;
+    }
+
+    public APIRequestCreateProduct setRichTextDescription (String richTextDescription) {
+      this.setParam("rich_text_description", richTextDescription);
       return this;
     }
 

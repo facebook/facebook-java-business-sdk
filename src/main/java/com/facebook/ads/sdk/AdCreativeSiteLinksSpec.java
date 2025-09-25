@@ -43,6 +43,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class AdCreativeSiteLinksSpec extends APINode {
   @SerializedName("is_site_link_sticky")
   private Boolean mIsSiteLinkSticky = null;
+  @SerializedName("site_link_extra_metadata")
+  private String mSiteLinkExtraMetadata = null;
   @SerializedName("site_link_hash")
   private String mSiteLinkHash = null;
   @SerializedName("site_link_id")
@@ -51,6 +53,8 @@ public class AdCreativeSiteLinksSpec extends APINode {
   private String mSiteLinkImageHash = null;
   @SerializedName("site_link_image_url")
   private String mSiteLinkImageUrl = null;
+  @SerializedName("site_link_language")
+  private String mSiteLinkLanguage = null;
   @SerializedName("site_link_recommendation_type")
   private String mSiteLinkRecommendationType = null;
   @SerializedName("site_link_title")
@@ -217,6 +221,15 @@ public class AdCreativeSiteLinksSpec extends APINode {
     return this;
   }
 
+  public String getFieldSiteLinkExtraMetadata() {
+    return mSiteLinkExtraMetadata;
+  }
+
+  public AdCreativeSiteLinksSpec setFieldSiteLinkExtraMetadata(String value) {
+    this.mSiteLinkExtraMetadata = value;
+    return this;
+  }
+
   public String getFieldSiteLinkHash() {
     return mSiteLinkHash;
   }
@@ -250,6 +263,15 @@ public class AdCreativeSiteLinksSpec extends APINode {
 
   public AdCreativeSiteLinksSpec setFieldSiteLinkImageUrl(String value) {
     this.mSiteLinkImageUrl = value;
+    return this;
+  }
+
+  public String getFieldSiteLinkLanguage() {
+    return mSiteLinkLanguage;
+  }
+
+  public AdCreativeSiteLinksSpec setFieldSiteLinkLanguage(String value) {
+    this.mSiteLinkLanguage = value;
     return this;
   }
 
@@ -298,10 +320,12 @@ public class AdCreativeSiteLinksSpec extends APINode {
 
   public AdCreativeSiteLinksSpec copyFrom(AdCreativeSiteLinksSpec instance) {
     this.mIsSiteLinkSticky = instance.mIsSiteLinkSticky;
+    this.mSiteLinkExtraMetadata = instance.mSiteLinkExtraMetadata;
     this.mSiteLinkHash = instance.mSiteLinkHash;
     this.mSiteLinkId = instance.mSiteLinkId;
     this.mSiteLinkImageHash = instance.mSiteLinkImageHash;
     this.mSiteLinkImageUrl = instance.mSiteLinkImageUrl;
+    this.mSiteLinkLanguage = instance.mSiteLinkLanguage;
     this.mSiteLinkRecommendationType = instance.mSiteLinkRecommendationType;
     this.mSiteLinkTitle = instance.mSiteLinkTitle;
     this.mSiteLinkUrl = instance.mSiteLinkUrl;

@@ -43,6 +43,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class OpenBridgeConfiguration extends APINode {
   @SerializedName("active")
   private Boolean mActive = null;
+  @SerializedName("browser_agent")
+  private List<String> mBrowserAgent = null;
   @SerializedName("cloud_provider")
   private String mCloudProvider = null;
   @SerializedName("cloud_region")
@@ -303,6 +305,10 @@ public class OpenBridgeConfiguration extends APINode {
     return mActive;
   }
 
+  public List<String> getFieldBrowserAgent() {
+    return mBrowserAgent;
+  }
+
   public String getFieldCloudProvider() {
     return mCloudProvider;
   }
@@ -490,6 +496,7 @@ public class OpenBridgeConfiguration extends APINode {
 
     public static final String[] FIELDS = {
       "active",
+      "browser_agent",
       "cloud_provider",
       "cloud_region",
       "destination_id",
@@ -604,6 +611,13 @@ public class OpenBridgeConfiguration extends APINode {
     }
     public APIRequestGet requestActiveField (boolean value) {
       this.requestField("active", value);
+      return this;
+    }
+    public APIRequestGet requestBrowserAgentField () {
+      return this.requestBrowserAgentField(true);
+    }
+    public APIRequestGet requestBrowserAgentField (boolean value) {
+      this.requestField("browser_agent", value);
       return this;
     }
     public APIRequestGet requestCloudProviderField () {
@@ -964,6 +978,7 @@ public class OpenBridgeConfiguration extends APINode {
 
   public OpenBridgeConfiguration copyFrom(OpenBridgeConfiguration instance) {
     this.mActive = instance.mActive;
+    this.mBrowserAgent = instance.mBrowserAgent;
     this.mCloudProvider = instance.mCloudProvider;
     this.mCloudRegion = instance.mCloudRegion;
     this.mDestinationId = instance.mDestinationId;

@@ -149,6 +149,8 @@ public class AdAccount extends APINode {
   private String mName = null;
   @SerializedName("offsite_pixels_tos_accepted")
   private Boolean mOffsitePixelsTosAccepted = null;
+  @SerializedName("opportunity_score")
+  private Double mOpportunityScore = null;
   @SerializedName("owner")
   private String mOwner = null;
   @SerializedName("owner_business")
@@ -732,6 +734,18 @@ public class AdAccount extends APINode {
     return new APIRequestGetMcmeConversions(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestCreateMessageCampaign createMessageCampaign() {
+    return new APIRequestCreateMessageCampaign(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetMessageDeliveryEstimate getMessageDeliveryEstimate() {
+    return new APIRequestGetMessageDeliveryEstimate(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestCreateMessage createMessage() {
+    return new APIRequestCreateMessage(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetMinimumBudgets getMinimumBudgets() {
     return new APIRequestGetMinimumBudgets(this.getPrefixedId().toString(), context);
   }
@@ -1076,6 +1090,10 @@ public class AdAccount extends APINode {
 
   public Boolean getFieldOffsitePixelsTosAccepted() {
     return mOffsitePixelsTosAccepted;
+  }
+
+  public Double getFieldOpportunityScore() {
+    return mOpportunityScore;
   }
 
   public String getFieldOwner() {
@@ -2742,6 +2760,7 @@ public class AdAccount extends APINode {
       "link_destination_display_url",
       "link_og_id",
       "link_url",
+      "media_sourcing_spec",
       "messenger_sponsored_message",
       "name",
       "object_id",
@@ -3158,6 +3177,13 @@ public class AdAccount extends APINode {
       this.requestField("link_url", value);
       return this;
     }
+    public APIRequestGetAdCreatives requestMediaSourcingSpecField () {
+      return this.requestMediaSourcingSpecField(true);
+    }
+    public APIRequestGetAdCreatives requestMediaSourcingSpecField (boolean value) {
+      this.requestField("media_sourcing_spec", value);
+      return this;
+    }
     public APIRequestGetAdCreatives requestMessengerSponsoredMessageField () {
       return this.requestMessengerSponsoredMessageField(true);
     }
@@ -3411,6 +3437,7 @@ public class AdAccount extends APINode {
       "is_dco_internal",
       "link_og_id",
       "link_url",
+      "media_sourcing_spec",
       "name",
       "object_id",
       "object_story_id",
@@ -3745,6 +3772,15 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestCreateAdCreative setMediaSourcingSpec (Map<String, String> mediaSourcingSpec) {
+      this.setParam("media_sourcing_spec", mediaSourcingSpec);
+      return this;
+    }
+    public APIRequestCreateAdCreative setMediaSourcingSpec (String mediaSourcingSpec) {
+      this.setParam("media_sourcing_spec", mediaSourcingSpec);
+      return this;
+    }
+
     public APIRequestCreateAdCreative setName (String name) {
       this.setParam("name", name);
       return this;
@@ -3980,6 +4016,7 @@ public class AdAccount extends APINode {
       "link_destination_display_url",
       "link_og_id",
       "link_url",
+      "media_sourcing_spec",
       "messenger_sponsored_message",
       "name",
       "object_id",
@@ -4412,6 +4449,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAdCreativesByLabels requestLinkUrlField (boolean value) {
       this.requestField("link_url", value);
+      return this;
+    }
+    public APIRequestGetAdCreativesByLabels requestMediaSourcingSpecField () {
+      return this.requestMediaSourcingSpecField(true);
+    }
+    public APIRequestGetAdCreativesByLabels requestMediaSourcingSpecField (boolean value) {
+      this.requestField("media_sourcing_spec", value);
       return this;
     }
     public APIRequestGetAdCreativesByLabels requestMessengerSponsoredMessageField () {
@@ -8078,6 +8122,7 @@ public class AdAccount extends APINode {
       "optimization_goal",
       "optimization_sub_event",
       "pacing_type",
+      "placement_soft_opt_out",
       "promoted_object",
       "recommendations",
       "recurring_budget_semantics",
@@ -8093,8 +8138,11 @@ public class AdAccount extends APINode {
       "targeting_optimization_types",
       "time_based_ad_rotation_id_blocks",
       "time_based_ad_rotation_intervals",
+      "trending_topics_spec",
       "updated_time",
       "use_new_app_click",
+      "value_rule_set_id",
+      "value_rules_applied",
     };
 
     @Override
@@ -8596,6 +8644,13 @@ public class AdAccount extends APINode {
       this.requestField("pacing_type", value);
       return this;
     }
+    public APIRequestGetAdSets requestPlacementSoftOptOutField () {
+      return this.requestPlacementSoftOptOutField(true);
+    }
+    public APIRequestGetAdSets requestPlacementSoftOptOutField (boolean value) {
+      this.requestField("placement_soft_opt_out", value);
+      return this;
+    }
     public APIRequestGetAdSets requestPromotedObjectField () {
       return this.requestPromotedObjectField(true);
     }
@@ -8701,6 +8756,13 @@ public class AdAccount extends APINode {
       this.requestField("time_based_ad_rotation_intervals", value);
       return this;
     }
+    public APIRequestGetAdSets requestTrendingTopicsSpecField () {
+      return this.requestTrendingTopicsSpecField(true);
+    }
+    public APIRequestGetAdSets requestTrendingTopicsSpecField (boolean value) {
+      this.requestField("trending_topics_spec", value);
+      return this;
+    }
     public APIRequestGetAdSets requestUpdatedTimeField () {
       return this.requestUpdatedTimeField(true);
     }
@@ -8713,6 +8775,20 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAdSets requestUseNewAppClickField (boolean value) {
       this.requestField("use_new_app_click", value);
+      return this;
+    }
+    public APIRequestGetAdSets requestValueRuleSetIdField () {
+      return this.requestValueRuleSetIdField(true);
+    }
+    public APIRequestGetAdSets requestValueRuleSetIdField (boolean value) {
+      this.requestField("value_rule_set_id", value);
+      return this;
+    }
+    public APIRequestGetAdSets requestValueRulesAppliedField () {
+      return this.requestValueRulesAppliedField(true);
+    }
+    public APIRequestGetAdSets requestValueRulesAppliedField (boolean value) {
+      this.requestField("value_rules_applied", value);
       return this;
     }
   }
@@ -8734,6 +8810,7 @@ public class AdAccount extends APINode {
       "bid_constraints",
       "bid_strategy",
       "billing_event",
+      "budget_schedule_specs",
       "budget_source",
       "budget_split_set_id",
       "campaign_attribution",
@@ -8755,6 +8832,7 @@ public class AdAccount extends APINode {
       "frequency_control_specs",
       "full_funnel_exploration_mode",
       "is_ba_skip_delayed_eligible",
+      "is_budget_schedule_enabled",
       "is_dynamic_creative",
       "is_incremental_attribution_enabled",
       "is_sac_cfca_terms_certified",
@@ -8784,7 +8862,10 @@ public class AdAccount extends APINode {
       "time_start",
       "time_stop",
       "topline_id",
+      "trending_topics_spec",
       "tune_for_category",
+      "value_rule_set_id",
+      "value_rules_applied",
     };
 
     public static final String[] FIELDS = {
@@ -8922,6 +9003,15 @@ public class AdAccount extends APINode {
     }
     public APIRequestCreateAdSet setBillingEvent (String billingEvent) {
       this.setParam("billing_event", billingEvent);
+      return this;
+    }
+
+    public APIRequestCreateAdSet setBudgetScheduleSpecs (List<Object> budgetScheduleSpecs) {
+      this.setParam("budget_schedule_specs", budgetScheduleSpecs);
+      return this;
+    }
+    public APIRequestCreateAdSet setBudgetScheduleSpecs (String budgetScheduleSpecs) {
+      this.setParam("budget_schedule_specs", budgetScheduleSpecs);
       return this;
     }
 
@@ -9087,6 +9177,15 @@ public class AdAccount extends APINode {
     }
     public APIRequestCreateAdSet setIsBaSkipDelayedEligible (String isBaSkipDelayedEligible) {
       this.setParam("is_ba_skip_delayed_eligible", isBaSkipDelayedEligible);
+      return this;
+    }
+
+    public APIRequestCreateAdSet setIsBudgetScheduleEnabled (Boolean isBudgetScheduleEnabled) {
+      this.setParam("is_budget_schedule_enabled", isBudgetScheduleEnabled);
+      return this;
+    }
+    public APIRequestCreateAdSet setIsBudgetScheduleEnabled (String isBudgetScheduleEnabled) {
+      this.setParam("is_budget_schedule_enabled", isBudgetScheduleEnabled);
       return this;
     }
 
@@ -9319,12 +9418,35 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestCreateAdSet setTrendingTopicsSpec (Map<String, String> trendingTopicsSpec) {
+      this.setParam("trending_topics_spec", trendingTopicsSpec);
+      return this;
+    }
+    public APIRequestCreateAdSet setTrendingTopicsSpec (String trendingTopicsSpec) {
+      this.setParam("trending_topics_spec", trendingTopicsSpec);
+      return this;
+    }
+
     public APIRequestCreateAdSet setTuneForCategory (AdSet.EnumTuneForCategory tuneForCategory) {
       this.setParam("tune_for_category", tuneForCategory);
       return this;
     }
     public APIRequestCreateAdSet setTuneForCategory (String tuneForCategory) {
       this.setParam("tune_for_category", tuneForCategory);
+      return this;
+    }
+
+    public APIRequestCreateAdSet setValueRuleSetId (String valueRuleSetId) {
+      this.setParam("value_rule_set_id", valueRuleSetId);
+      return this;
+    }
+
+    public APIRequestCreateAdSet setValueRulesApplied (Boolean valueRulesApplied) {
+      this.setParam("value_rules_applied", valueRulesApplied);
+      return this;
+    }
+    public APIRequestCreateAdSet setValueRulesApplied (String valueRulesApplied) {
+      this.setParam("value_rules_applied", valueRulesApplied);
       return this;
     }
 
@@ -9431,6 +9553,7 @@ public class AdAccount extends APINode {
       "optimization_goal",
       "optimization_sub_event",
       "pacing_type",
+      "placement_soft_opt_out",
       "promoted_object",
       "recommendations",
       "recurring_budget_semantics",
@@ -9446,8 +9569,11 @@ public class AdAccount extends APINode {
       "targeting_optimization_types",
       "time_based_ad_rotation_id_blocks",
       "time_based_ad_rotation_intervals",
+      "trending_topics_spec",
       "updated_time",
       "use_new_app_click",
+      "value_rule_set_id",
+      "value_rules_applied",
     };
 
     @Override
@@ -9922,6 +10048,13 @@ public class AdAccount extends APINode {
       this.requestField("pacing_type", value);
       return this;
     }
+    public APIRequestGetAdSetsByLabels requestPlacementSoftOptOutField () {
+      return this.requestPlacementSoftOptOutField(true);
+    }
+    public APIRequestGetAdSetsByLabels requestPlacementSoftOptOutField (boolean value) {
+      this.requestField("placement_soft_opt_out", value);
+      return this;
+    }
     public APIRequestGetAdSetsByLabels requestPromotedObjectField () {
       return this.requestPromotedObjectField(true);
     }
@@ -10027,6 +10160,13 @@ public class AdAccount extends APINode {
       this.requestField("time_based_ad_rotation_intervals", value);
       return this;
     }
+    public APIRequestGetAdSetsByLabels requestTrendingTopicsSpecField () {
+      return this.requestTrendingTopicsSpecField(true);
+    }
+    public APIRequestGetAdSetsByLabels requestTrendingTopicsSpecField (boolean value) {
+      this.requestField("trending_topics_spec", value);
+      return this;
+    }
     public APIRequestGetAdSetsByLabels requestUpdatedTimeField () {
       return this.requestUpdatedTimeField(true);
     }
@@ -10039,6 +10179,20 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAdSetsByLabels requestUseNewAppClickField (boolean value) {
       this.requestField("use_new_app_click", value);
+      return this;
+    }
+    public APIRequestGetAdSetsByLabels requestValueRuleSetIdField () {
+      return this.requestValueRuleSetIdField(true);
+    }
+    public APIRequestGetAdSetsByLabels requestValueRuleSetIdField (boolean value) {
+      this.requestField("value_rule_set_id", value);
+      return this;
+    }
+    public APIRequestGetAdSetsByLabels requestValueRulesAppliedField () {
+      return this.requestValueRulesAppliedField(true);
+    }
+    public APIRequestGetAdSetsByLabels requestValueRulesAppliedField (boolean value) {
+      this.requestField("value_rules_applied", value);
       return this;
     }
   }
@@ -11677,6 +11831,7 @@ public class AdAccount extends APINode {
       "privacy",
       "published",
       "scheduled_publish_time",
+      "season",
       "source",
       "spherical",
       "status",
@@ -12131,6 +12286,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAdVideos requestScheduledPublishTimeField (boolean value) {
       this.requestField("scheduled_publish_time", value);
+      return this;
+    }
+    public APIRequestGetAdVideos requestSeasonField () {
+      return this.requestSeasonField(true);
+    }
+    public APIRequestGetAdVideos requestSeasonField (boolean value) {
+      this.requestField("season", value);
       return this;
     }
     public APIRequestGetAdVideos requestSourceField () {
@@ -12911,6 +13073,7 @@ public class AdAccount extends APINode {
       "optimization_goal",
       "optimization_sub_event",
       "pacing_type",
+      "placement_soft_opt_out",
       "promoted_object",
       "recommendations",
       "recurring_budget_semantics",
@@ -12926,8 +13089,11 @@ public class AdAccount extends APINode {
       "targeting_optimization_types",
       "time_based_ad_rotation_id_blocks",
       "time_based_ad_rotation_intervals",
+      "trending_topics_spec",
       "updated_time",
       "use_new_app_click",
+      "value_rule_set_id",
+      "value_rules_applied",
     };
 
     @Override
@@ -13384,6 +13550,13 @@ public class AdAccount extends APINode {
       this.requestField("pacing_type", value);
       return this;
     }
+    public APIRequestGetAffectedAdSets requestPlacementSoftOptOutField () {
+      return this.requestPlacementSoftOptOutField(true);
+    }
+    public APIRequestGetAffectedAdSets requestPlacementSoftOptOutField (boolean value) {
+      this.requestField("placement_soft_opt_out", value);
+      return this;
+    }
     public APIRequestGetAffectedAdSets requestPromotedObjectField () {
       return this.requestPromotedObjectField(true);
     }
@@ -13489,6 +13662,13 @@ public class AdAccount extends APINode {
       this.requestField("time_based_ad_rotation_intervals", value);
       return this;
     }
+    public APIRequestGetAffectedAdSets requestTrendingTopicsSpecField () {
+      return this.requestTrendingTopicsSpecField(true);
+    }
+    public APIRequestGetAffectedAdSets requestTrendingTopicsSpecField (boolean value) {
+      this.requestField("trending_topics_spec", value);
+      return this;
+    }
     public APIRequestGetAffectedAdSets requestUpdatedTimeField () {
       return this.requestUpdatedTimeField(true);
     }
@@ -13501,6 +13681,20 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAffectedAdSets requestUseNewAppClickField (boolean value) {
       this.requestField("use_new_app_click", value);
+      return this;
+    }
+    public APIRequestGetAffectedAdSets requestValueRuleSetIdField () {
+      return this.requestValueRuleSetIdField(true);
+    }
+    public APIRequestGetAffectedAdSets requestValueRuleSetIdField (boolean value) {
+      this.requestField("value_rule_set_id", value);
+      return this;
+    }
+    public APIRequestGetAffectedAdSets requestValueRulesAppliedField () {
+      return this.requestValueRulesAppliedField(true);
+    }
+    public APIRequestGetAffectedAdSets requestValueRulesAppliedField (boolean value) {
+      this.requestField("value_rules_applied", value);
       return this;
     }
   }
@@ -13637,6 +13831,7 @@ public class AdAccount extends APINode {
       "id",
       "is_hidden",
       "link",
+      "marketing_messages_onboarding_status",
       "name",
       "primary_page",
       "profile_picture_uri",
@@ -13808,6 +14003,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAgencies requestLinkField (boolean value) {
       this.requestField("link", value);
+      return this;
+    }
+    public APIRequestGetAgencies requestMarketingMessagesOnboardingStatusField () {
+      return this.requestMarketingMessagesOnboardingStatusField(true);
+    }
+    public APIRequestGetAgencies requestMarketingMessagesOnboardingStatusField (boolean value) {
+      this.requestField("marketing_messages_onboarding_status", value);
       return this;
     }
     public APIRequestGetAgencies requestNameField () {
@@ -17285,7 +17487,10 @@ public class AdAccount extends APINode {
       "effective_status",
       "has_secondary_skadnetwork_reporting",
       "id",
+      "is_adset_budget_sharing_enabled",
       "is_budget_schedule_enabled",
+      "is_direct_send_campaign",
+      "is_message_campaign",
       "is_skadnetwork_attribution",
       "issues_info",
       "last_budget_toggling_time",
@@ -17563,11 +17768,32 @@ public class AdAccount extends APINode {
       this.requestField("id", value);
       return this;
     }
+    public APIRequestGetCampaigns requestIsAdsetBudgetSharingEnabledField () {
+      return this.requestIsAdsetBudgetSharingEnabledField(true);
+    }
+    public APIRequestGetCampaigns requestIsAdsetBudgetSharingEnabledField (boolean value) {
+      this.requestField("is_adset_budget_sharing_enabled", value);
+      return this;
+    }
     public APIRequestGetCampaigns requestIsBudgetScheduleEnabledField () {
       return this.requestIsBudgetScheduleEnabledField(true);
     }
     public APIRequestGetCampaigns requestIsBudgetScheduleEnabledField (boolean value) {
       this.requestField("is_budget_schedule_enabled", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestIsDirectSendCampaignField () {
+      return this.requestIsDirectSendCampaignField(true);
+    }
+    public APIRequestGetCampaigns requestIsDirectSendCampaignField (boolean value) {
+      this.requestField("is_direct_send_campaign", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestIsMessageCampaignField () {
+      return this.requestIsMessageCampaignField(true);
+    }
+    public APIRequestGetCampaigns requestIsMessageCampaignField (boolean value) {
+      this.requestField("is_message_campaign", value);
       return this;
     }
     public APIRequestGetCampaigns requestIsSkadnetworkAttributionField () {
@@ -17743,9 +17969,14 @@ public class AdAccount extends APINode {
     public static final String[] PARAMS = {
       "adlabels",
       "bid_strategy",
+      "budget_schedule_specs",
       "buying_type",
       "daily_budget",
       "execution_options",
+      "is_adset_budget_sharing_enabled",
+      "is_budget_schedule_enabled",
+      "is_direct_send_campaign",
+      "is_message_campaign",
       "is_skadnetwork_attribution",
       "iterative_split_test_configs",
       "lifetime_budget",
@@ -17839,6 +18070,15 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestCreateCampaign setBudgetScheduleSpecs (List<Object> budgetScheduleSpecs) {
+      this.setParam("budget_schedule_specs", budgetScheduleSpecs);
+      return this;
+    }
+    public APIRequestCreateCampaign setBudgetScheduleSpecs (String budgetScheduleSpecs) {
+      this.setParam("budget_schedule_specs", budgetScheduleSpecs);
+      return this;
+    }
+
     public APIRequestCreateCampaign setBuyingType (String buyingType) {
       this.setParam("buying_type", buyingType);
       return this;
@@ -17859,6 +18099,42 @@ public class AdAccount extends APINode {
     }
     public APIRequestCreateCampaign setExecutionOptions (String executionOptions) {
       this.setParam("execution_options", executionOptions);
+      return this;
+    }
+
+    public APIRequestCreateCampaign setIsAdsetBudgetSharingEnabled (Boolean isAdsetBudgetSharingEnabled) {
+      this.setParam("is_adset_budget_sharing_enabled", isAdsetBudgetSharingEnabled);
+      return this;
+    }
+    public APIRequestCreateCampaign setIsAdsetBudgetSharingEnabled (String isAdsetBudgetSharingEnabled) {
+      this.setParam("is_adset_budget_sharing_enabled", isAdsetBudgetSharingEnabled);
+      return this;
+    }
+
+    public APIRequestCreateCampaign setIsBudgetScheduleEnabled (Boolean isBudgetScheduleEnabled) {
+      this.setParam("is_budget_schedule_enabled", isBudgetScheduleEnabled);
+      return this;
+    }
+    public APIRequestCreateCampaign setIsBudgetScheduleEnabled (String isBudgetScheduleEnabled) {
+      this.setParam("is_budget_schedule_enabled", isBudgetScheduleEnabled);
+      return this;
+    }
+
+    public APIRequestCreateCampaign setIsDirectSendCampaign (Boolean isDirectSendCampaign) {
+      this.setParam("is_direct_send_campaign", isDirectSendCampaign);
+      return this;
+    }
+    public APIRequestCreateCampaign setIsDirectSendCampaign (String isDirectSendCampaign) {
+      this.setParam("is_direct_send_campaign", isDirectSendCampaign);
+      return this;
+    }
+
+    public APIRequestCreateCampaign setIsMessageCampaign (Boolean isMessageCampaign) {
+      this.setParam("is_message_campaign", isMessageCampaign);
+      return this;
+    }
+    public APIRequestCreateCampaign setIsMessageCampaign (String isMessageCampaign) {
+      this.setParam("is_message_campaign", isMessageCampaign);
       return this;
     }
 
@@ -18055,7 +18331,10 @@ public class AdAccount extends APINode {
       "effective_status",
       "has_secondary_skadnetwork_reporting",
       "id",
+      "is_adset_budget_sharing_enabled",
       "is_budget_schedule_enabled",
+      "is_direct_send_campaign",
+      "is_message_campaign",
       "is_skadnetwork_attribution",
       "issues_info",
       "last_budget_toggling_time",
@@ -18315,11 +18594,32 @@ public class AdAccount extends APINode {
       this.requestField("id", value);
       return this;
     }
+    public APIRequestGetCampaignsByLabels requestIsAdsetBudgetSharingEnabledField () {
+      return this.requestIsAdsetBudgetSharingEnabledField(true);
+    }
+    public APIRequestGetCampaignsByLabels requestIsAdsetBudgetSharingEnabledField (boolean value) {
+      this.requestField("is_adset_budget_sharing_enabled", value);
+      return this;
+    }
     public APIRequestGetCampaignsByLabels requestIsBudgetScheduleEnabledField () {
       return this.requestIsBudgetScheduleEnabledField(true);
     }
     public APIRequestGetCampaignsByLabels requestIsBudgetScheduleEnabledField (boolean value) {
       this.requestField("is_budget_schedule_enabled", value);
+      return this;
+    }
+    public APIRequestGetCampaignsByLabels requestIsDirectSendCampaignField () {
+      return this.requestIsDirectSendCampaignField(true);
+    }
+    public APIRequestGetCampaignsByLabels requestIsDirectSendCampaignField (boolean value) {
+      this.requestField("is_direct_send_campaign", value);
+      return this;
+    }
+    public APIRequestGetCampaignsByLabels requestIsMessageCampaignField () {
+      return this.requestIsMessageCampaignField(true);
+    }
+    public APIRequestGetCampaignsByLabels requestIsMessageCampaignField (boolean value) {
+      this.requestField("is_message_campaign", value);
       return this;
     }
     public APIRequestGetCampaignsByLabels requestIsSkadnetworkAttributionField () {
@@ -20667,6 +20967,7 @@ public class AdAccount extends APINode {
       "optimization_goal",
       "optimization_sub_event",
       "pacing_type",
+      "placement_soft_opt_out",
       "promoted_object",
       "recommendations",
       "recurring_budget_semantics",
@@ -20682,8 +20983,11 @@ public class AdAccount extends APINode {
       "targeting_optimization_types",
       "time_based_ad_rotation_id_blocks",
       "time_based_ad_rotation_intervals",
+      "trending_topics_spec",
       "updated_time",
       "use_new_app_click",
+      "value_rule_set_id",
+      "value_rules_applied",
     };
 
     @Override
@@ -21145,6 +21449,13 @@ public class AdAccount extends APINode {
       this.requestField("pacing_type", value);
       return this;
     }
+    public APIRequestGetDeprecatedTargetingAdSets requestPlacementSoftOptOutField () {
+      return this.requestPlacementSoftOptOutField(true);
+    }
+    public APIRequestGetDeprecatedTargetingAdSets requestPlacementSoftOptOutField (boolean value) {
+      this.requestField("placement_soft_opt_out", value);
+      return this;
+    }
     public APIRequestGetDeprecatedTargetingAdSets requestPromotedObjectField () {
       return this.requestPromotedObjectField(true);
     }
@@ -21250,6 +21561,13 @@ public class AdAccount extends APINode {
       this.requestField("time_based_ad_rotation_intervals", value);
       return this;
     }
+    public APIRequestGetDeprecatedTargetingAdSets requestTrendingTopicsSpecField () {
+      return this.requestTrendingTopicsSpecField(true);
+    }
+    public APIRequestGetDeprecatedTargetingAdSets requestTrendingTopicsSpecField (boolean value) {
+      this.requestField("trending_topics_spec", value);
+      return this;
+    }
     public APIRequestGetDeprecatedTargetingAdSets requestUpdatedTimeField () {
       return this.requestUpdatedTimeField(true);
     }
@@ -21262,6 +21580,20 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetDeprecatedTargetingAdSets requestUseNewAppClickField (boolean value) {
       this.requestField("use_new_app_click", value);
+      return this;
+    }
+    public APIRequestGetDeprecatedTargetingAdSets requestValueRuleSetIdField () {
+      return this.requestValueRuleSetIdField(true);
+    }
+    public APIRequestGetDeprecatedTargetingAdSets requestValueRuleSetIdField (boolean value) {
+      this.requestField("value_rule_set_id", value);
+      return this;
+    }
+    public APIRequestGetDeprecatedTargetingAdSets requestValueRulesAppliedField () {
+      return this.requestValueRulesAppliedField(true);
+    }
+    public APIRequestGetDeprecatedTargetingAdSets requestValueRulesAppliedField (boolean value) {
+      this.requestField("value_rules_applied", value);
       return this;
     }
   }
@@ -21396,6 +21728,7 @@ public class AdAccount extends APINode {
       "end_date",
       "height",
       "locale",
+      "message",
       "place_page_id",
       "post",
       "product_item_ids",
@@ -21529,6 +21862,15 @@ public class AdAccount extends APINode {
 
     public APIRequestGetGeneratePreviews setLocale (String locale) {
       this.setParam("locale", locale);
+      return this;
+    }
+
+    public APIRequestGetGeneratePreviews setMessage (Object message) {
+      this.setParam("message", message);
+      return this;
+    }
+    public APIRequestGetGeneratePreviews setMessage (String message) {
+      this.setParam("message", message);
       return this;
     }
 
@@ -21902,6 +22244,7 @@ public class AdAccount extends APINode {
       "export_name",
       "fields",
       "filtering",
+      "graph_cache",
       "level",
       "limit",
       "product_id_limit",
@@ -22063,6 +22406,15 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestGetInsights setGraphCache (Boolean graphCache) {
+      this.setParam("graph_cache", graphCache);
+      return this;
+    }
+    public APIRequestGetInsights setGraphCache (String graphCache) {
+      this.setParam("graph_cache", graphCache);
+      return this;
+    }
+
     public APIRequestGetInsights setLevel (AdsInsights.EnumLevel level) {
       this.setParam("level", level);
       return this;
@@ -22215,6 +22567,7 @@ public class AdAccount extends APINode {
       "export_name",
       "fields",
       "filtering",
+      "graph_cache",
       "level",
       "limit",
       "product_id_limit",
@@ -22373,6 +22726,15 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetInsightsAsync setFiltering (String filtering) {
       this.setParam("filtering", filtering);
+      return this;
+    }
+
+    public APIRequestGetInsightsAsync setGraphCache (Boolean graphCache) {
+      this.setParam("graph_cache", graphCache);
+      return this;
+    }
+    public APIRequestGetInsightsAsync setGraphCache (String graphCache) {
+      this.setParam("graph_cache", graphCache);
       return this;
     }
 
@@ -22916,6 +23278,7 @@ public class AdAccount extends APINode {
       "is_skadnetwork_search",
       "only_apps_with_permission",
       "query_term",
+      "stores_to_filter",
     };
 
     public static final String[] FIELDS = {
@@ -23031,6 +23394,15 @@ public class AdAccount extends APINode {
 
     public APIRequestGetMatchedSearchApplications setQueryTerm (String queryTerm) {
       this.setParam("query_term", queryTerm);
+      return this;
+    }
+
+    public APIRequestGetMatchedSearchApplications setStoresToFilter (List<AdAccountMatchedSearchApplicationsEdgeData.EnumStoresToFilter> storesToFilter) {
+      this.setParam("stores_to_filter", storesToFilter);
+      return this;
+    }
+    public APIRequestGetMatchedSearchApplications setStoresToFilter (String storesToFilter) {
+      this.setParam("stores_to_filter", storesToFilter);
       return this;
     }
 
@@ -23400,6 +23772,555 @@ public class AdAccount extends APINode {
       this.requestField("omnichannel_object_id", value);
       return this;
     }
+  }
+
+  public static class APIRequestCreateMessageCampaign extends APIRequest<APINode> {
+
+    APINode lastResponse = null;
+    @Override
+    public APINode getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "bid_amount",
+      "daily_budget",
+      "lifetime_budget",
+      "name",
+      "page_id",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public APINode execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINode execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINode> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateMessageCampaign.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestCreateMessageCampaign(String nodeId, APIContext context) {
+      super(context, nodeId, "/message_campaign", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateMessageCampaign setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateMessageCampaign setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateMessageCampaign setBidAmount (Long bidAmount) {
+      this.setParam("bid_amount", bidAmount);
+      return this;
+    }
+    public APIRequestCreateMessageCampaign setBidAmount (String bidAmount) {
+      this.setParam("bid_amount", bidAmount);
+      return this;
+    }
+
+    public APIRequestCreateMessageCampaign setDailyBudget (Long dailyBudget) {
+      this.setParam("daily_budget", dailyBudget);
+      return this;
+    }
+    public APIRequestCreateMessageCampaign setDailyBudget (String dailyBudget) {
+      this.setParam("daily_budget", dailyBudget);
+      return this;
+    }
+
+    public APIRequestCreateMessageCampaign setLifetimeBudget (Long lifetimeBudget) {
+      this.setParam("lifetime_budget", lifetimeBudget);
+      return this;
+    }
+    public APIRequestCreateMessageCampaign setLifetimeBudget (String lifetimeBudget) {
+      this.setParam("lifetime_budget", lifetimeBudget);
+      return this;
+    }
+
+    public APIRequestCreateMessageCampaign setName (String name) {
+      this.setParam("name", name);
+      return this;
+    }
+
+    public APIRequestCreateMessageCampaign setPageId (String pageId) {
+      this.setParam("page_id", pageId);
+      return this;
+    }
+
+    public APIRequestCreateMessageCampaign requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateMessageCampaign requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateMessageCampaign requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateMessageCampaign requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateMessageCampaign requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateMessageCampaign requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestGetMessageDeliveryEstimate extends APIRequest<MessageDeliveryEstimate> {
+
+    APINodeList<MessageDeliveryEstimate> lastResponse = null;
+    @Override
+    public APINodeList<MessageDeliveryEstimate> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "bid_amount",
+      "daily_budget",
+      "is_direct_send_campaign",
+      "lifetime_budget",
+      "lifetime_in_days",
+      "optimization_goal",
+      "pacing_type",
+      "promoted_object",
+      "targeting_spec",
+    };
+
+    public static final String[] FIELDS = {
+      "estimate_cost",
+      "estimate_cost_lower_bound",
+      "estimate_cost_upper_bound",
+      "estimate_coverage_lower_bound",
+      "estimate_coverage_upper_bound",
+      "estimate_delivery",
+      "estimate_delivery_lower_bound",
+      "estimate_delivery_upper_bound",
+      "estimate_status",
+    };
+
+    @Override
+    public APINodeList<MessageDeliveryEstimate> parseResponse(String response, String header) throws APIException {
+      return MessageDeliveryEstimate.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<MessageDeliveryEstimate> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<MessageDeliveryEstimate> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<MessageDeliveryEstimate>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<MessageDeliveryEstimate>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<MessageDeliveryEstimate>>() {
+           public APINodeList<MessageDeliveryEstimate> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetMessageDeliveryEstimate.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestGetMessageDeliveryEstimate(String nodeId, APIContext context) {
+      super(context, nodeId, "/message_delivery_estimate", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetMessageDeliveryEstimate setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetMessageDeliveryEstimate setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetMessageDeliveryEstimate setBidAmount (Long bidAmount) {
+      this.setParam("bid_amount", bidAmount);
+      return this;
+    }
+    public APIRequestGetMessageDeliveryEstimate setBidAmount (String bidAmount) {
+      this.setParam("bid_amount", bidAmount);
+      return this;
+    }
+
+    public APIRequestGetMessageDeliveryEstimate setDailyBudget (Long dailyBudget) {
+      this.setParam("daily_budget", dailyBudget);
+      return this;
+    }
+    public APIRequestGetMessageDeliveryEstimate setDailyBudget (String dailyBudget) {
+      this.setParam("daily_budget", dailyBudget);
+      return this;
+    }
+
+    public APIRequestGetMessageDeliveryEstimate setIsDirectSendCampaign (Boolean isDirectSendCampaign) {
+      this.setParam("is_direct_send_campaign", isDirectSendCampaign);
+      return this;
+    }
+    public APIRequestGetMessageDeliveryEstimate setIsDirectSendCampaign (String isDirectSendCampaign) {
+      this.setParam("is_direct_send_campaign", isDirectSendCampaign);
+      return this;
+    }
+
+    public APIRequestGetMessageDeliveryEstimate setLifetimeBudget (Long lifetimeBudget) {
+      this.setParam("lifetime_budget", lifetimeBudget);
+      return this;
+    }
+    public APIRequestGetMessageDeliveryEstimate setLifetimeBudget (String lifetimeBudget) {
+      this.setParam("lifetime_budget", lifetimeBudget);
+      return this;
+    }
+
+    public APIRequestGetMessageDeliveryEstimate setLifetimeInDays (Long lifetimeInDays) {
+      this.setParam("lifetime_in_days", lifetimeInDays);
+      return this;
+    }
+    public APIRequestGetMessageDeliveryEstimate setLifetimeInDays (String lifetimeInDays) {
+      this.setParam("lifetime_in_days", lifetimeInDays);
+      return this;
+    }
+
+    public APIRequestGetMessageDeliveryEstimate setOptimizationGoal (MessageDeliveryEstimate.EnumOptimizationGoal optimizationGoal) {
+      this.setParam("optimization_goal", optimizationGoal);
+      return this;
+    }
+    public APIRequestGetMessageDeliveryEstimate setOptimizationGoal (String optimizationGoal) {
+      this.setParam("optimization_goal", optimizationGoal);
+      return this;
+    }
+
+    public APIRequestGetMessageDeliveryEstimate setPacingType (MessageDeliveryEstimate.EnumPacingType pacingType) {
+      this.setParam("pacing_type", pacingType);
+      return this;
+    }
+    public APIRequestGetMessageDeliveryEstimate setPacingType (String pacingType) {
+      this.setParam("pacing_type", pacingType);
+      return this;
+    }
+
+    public APIRequestGetMessageDeliveryEstimate setPromotedObject (Object promotedObject) {
+      this.setParam("promoted_object", promotedObject);
+      return this;
+    }
+    public APIRequestGetMessageDeliveryEstimate setPromotedObject (String promotedObject) {
+      this.setParam("promoted_object", promotedObject);
+      return this;
+    }
+
+    public APIRequestGetMessageDeliveryEstimate setTargetingSpec (Targeting targetingSpec) {
+      this.setParam("targeting_spec", targetingSpec);
+      return this;
+    }
+    public APIRequestGetMessageDeliveryEstimate setTargetingSpec (String targetingSpec) {
+      this.setParam("targeting_spec", targetingSpec);
+      return this;
+    }
+
+    public APIRequestGetMessageDeliveryEstimate requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetMessageDeliveryEstimate requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetMessageDeliveryEstimate requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetMessageDeliveryEstimate requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetMessageDeliveryEstimate requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetMessageDeliveryEstimate requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetMessageDeliveryEstimate requestEstimateCostField () {
+      return this.requestEstimateCostField(true);
+    }
+    public APIRequestGetMessageDeliveryEstimate requestEstimateCostField (boolean value) {
+      this.requestField("estimate_cost", value);
+      return this;
+    }
+    public APIRequestGetMessageDeliveryEstimate requestEstimateCostLowerBoundField () {
+      return this.requestEstimateCostLowerBoundField(true);
+    }
+    public APIRequestGetMessageDeliveryEstimate requestEstimateCostLowerBoundField (boolean value) {
+      this.requestField("estimate_cost_lower_bound", value);
+      return this;
+    }
+    public APIRequestGetMessageDeliveryEstimate requestEstimateCostUpperBoundField () {
+      return this.requestEstimateCostUpperBoundField(true);
+    }
+    public APIRequestGetMessageDeliveryEstimate requestEstimateCostUpperBoundField (boolean value) {
+      this.requestField("estimate_cost_upper_bound", value);
+      return this;
+    }
+    public APIRequestGetMessageDeliveryEstimate requestEstimateCoverageLowerBoundField () {
+      return this.requestEstimateCoverageLowerBoundField(true);
+    }
+    public APIRequestGetMessageDeliveryEstimate requestEstimateCoverageLowerBoundField (boolean value) {
+      this.requestField("estimate_coverage_lower_bound", value);
+      return this;
+    }
+    public APIRequestGetMessageDeliveryEstimate requestEstimateCoverageUpperBoundField () {
+      return this.requestEstimateCoverageUpperBoundField(true);
+    }
+    public APIRequestGetMessageDeliveryEstimate requestEstimateCoverageUpperBoundField (boolean value) {
+      this.requestField("estimate_coverage_upper_bound", value);
+      return this;
+    }
+    public APIRequestGetMessageDeliveryEstimate requestEstimateDeliveryField () {
+      return this.requestEstimateDeliveryField(true);
+    }
+    public APIRequestGetMessageDeliveryEstimate requestEstimateDeliveryField (boolean value) {
+      this.requestField("estimate_delivery", value);
+      return this;
+    }
+    public APIRequestGetMessageDeliveryEstimate requestEstimateDeliveryLowerBoundField () {
+      return this.requestEstimateDeliveryLowerBoundField(true);
+    }
+    public APIRequestGetMessageDeliveryEstimate requestEstimateDeliveryLowerBoundField (boolean value) {
+      this.requestField("estimate_delivery_lower_bound", value);
+      return this;
+    }
+    public APIRequestGetMessageDeliveryEstimate requestEstimateDeliveryUpperBoundField () {
+      return this.requestEstimateDeliveryUpperBoundField(true);
+    }
+    public APIRequestGetMessageDeliveryEstimate requestEstimateDeliveryUpperBoundField (boolean value) {
+      this.requestField("estimate_delivery_upper_bound", value);
+      return this;
+    }
+    public APIRequestGetMessageDeliveryEstimate requestEstimateStatusField () {
+      return this.requestEstimateStatusField(true);
+    }
+    public APIRequestGetMessageDeliveryEstimate requestEstimateStatusField (boolean value) {
+      this.requestField("estimate_status", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestCreateMessage extends APIRequest<APINode> {
+
+    APINode lastResponse = null;
+    @Override
+    public APINode getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "message",
+      "message_id",
+      "messenger_delivery_data",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public APINode execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINode execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINode> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateMessage.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestCreateMessage(String nodeId, APIContext context) {
+      super(context, nodeId, "/messages", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateMessage setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateMessage setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateMessage setMessage (Object message) {
+      this.setParam("message", message);
+      return this;
+    }
+    public APIRequestCreateMessage setMessage (String message) {
+      this.setParam("message", message);
+      return this;
+    }
+
+    public APIRequestCreateMessage setMessageId (Long messageId) {
+      this.setParam("message_id", messageId);
+      return this;
+    }
+    public APIRequestCreateMessage setMessageId (String messageId) {
+      this.setParam("message_id", messageId);
+      return this;
+    }
+
+    public APIRequestCreateMessage setMessengerDeliveryData (Map<String, String> messengerDeliveryData) {
+      this.setParam("messenger_delivery_data", messengerDeliveryData);
+      return this;
+    }
+    public APIRequestCreateMessage setMessengerDeliveryData (String messengerDeliveryData) {
+      this.setParam("messenger_delivery_data", messengerDeliveryData);
+      return this;
+    }
+
+    public APIRequestCreateMessage requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateMessage requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateMessage requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateMessage requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateMessage requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateMessage requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
   }
 
   public static class APIRequestGetMinimumBudgets extends APIRequest<MinimumBudget> {
@@ -24025,6 +24946,7 @@ public class AdAccount extends APINode {
       "connected_instagram_account",
       "connected_page_backed_instagram_account",
       "contact_address",
+      "copyright_attribution_insights",
       "copyright_whitelisted_ig_partners",
       "country_page_likes",
       "cover",
@@ -24428,6 +25350,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetPromotePages requestContactAddressField (boolean value) {
       this.requestField("contact_address", value);
+      return this;
+    }
+    public APIRequestGetPromotePages requestCopyrightAttributionInsightsField () {
+      return this.requestCopyrightAttributionInsightsField(true);
+    }
+    public APIRequestGetPromotePages requestCopyrightAttributionInsightsField (boolean value) {
+      this.requestField("copyright_attribution_insights", value);
       return this;
     }
     public APIRequestGetPromotePages requestCopyrightWhitelistedIgPartnersField () {
@@ -25878,6 +26807,7 @@ public class AdAccount extends APINode {
       "timezone_id",
       "timezone_name",
       "topline_id",
+      "trending_topics_spec",
       "video_view_length_constraint",
       "viewtag",
     };
@@ -26586,6 +27516,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetReachFrequencyPredictions requestToplineIdField (boolean value) {
       this.requestField("topline_id", value);
+      return this;
+    }
+    public APIRequestGetReachFrequencyPredictions requestTrendingTopicsSpecField () {
+      return this.requestTrendingTopicsSpecField(true);
+    }
+    public APIRequestGetReachFrequencyPredictions requestTrendingTopicsSpecField (boolean value) {
+      this.requestField("trending_topics_spec", value);
       return this;
     }
     public APIRequestGetReachFrequencyPredictions requestVideoViewLengthConstraintField () {
@@ -30045,6 +30982,7 @@ public class AdAccount extends APINode {
     public static final String[] FIELDS = {
       "id",
       "is_default_setting",
+      "last_attach_time",
       "name",
       "product_type",
       "status",
@@ -30170,6 +31108,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetValueRuleSet requestIsDefaultSettingField (boolean value) {
       this.requestField("is_default_setting", value);
+      return this;
+    }
+    public APIRequestGetValueRuleSet requestLastAttachTimeField () {
+      return this.requestLastAttachTimeField(true);
+    }
+    public APIRequestGetValueRuleSet requestLastAttachTimeField (boolean value) {
+      this.requestField("last_attach_time", value);
       return this;
     }
     public APIRequestGetValueRuleSet requestNameField () {
@@ -30379,6 +31324,7 @@ public class AdAccount extends APINode {
       "privacy",
       "published",
       "scheduled_publish_time",
+      "season",
       "source",
       "spherical",
       "status",
@@ -30768,6 +31714,13 @@ public class AdAccount extends APINode {
       this.requestField("scheduled_publish_time", value);
       return this;
     }
+    public APIRequestGetVideoAds requestSeasonField () {
+      return this.requestSeasonField(true);
+    }
+    public APIRequestGetVideoAds requestSeasonField (boolean value) {
+      this.requestField("season", value);
+      return this;
+    }
     public APIRequestGetVideoAds requestSourceField () {
       return this.requestSourceField(true);
     }
@@ -31032,6 +31985,7 @@ public class AdAccount extends APINode {
       "min_daily_budget",
       "name",
       "offsite_pixels_tos_accepted",
+      "opportunity_score",
       "owner",
       "owner_business",
       "partner",
@@ -31512,6 +32466,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGet requestOffsitePixelsTosAcceptedField (boolean value) {
       this.requestField("offsite_pixels_tos_accepted", value);
+      return this;
+    }
+    public APIRequestGet requestOpportunityScoreField () {
+      return this.requestOpportunityScoreField(true);
+    }
+    public APIRequestGet requestOpportunityScoreField (boolean value) {
+      this.requestField("opportunity_score", value);
       return this;
     }
     public APIRequestGet requestOwnerField () {
@@ -32352,6 +33313,7 @@ public class AdAccount extends APINode {
     this.mMinDailyBudget = instance.mMinDailyBudget;
     this.mName = instance.mName;
     this.mOffsitePixelsTosAccepted = instance.mOffsitePixelsTosAccepted;
+    this.mOpportunityScore = instance.mOpportunityScore;
     this.mOwner = instance.mOwner;
     this.mOwnerBusiness = instance.mOwnerBusiness;
     this.mPartner = instance.mPartner;

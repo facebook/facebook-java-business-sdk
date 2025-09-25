@@ -40,31 +40,31 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class MessengerCallSettings extends APINode {
-  @SerializedName("audio_enabled")
-  private Boolean mAudioEnabled = null;
-  @SerializedName("call_hours")
-  private Object mCallHours = null;
-  @SerializedName("call_routing")
-  private String mCallRouting = null;
-  @SerializedName("icon_enabled")
-  private Boolean mIconEnabled = null;
-  @SerializedName("video")
-  private String mVideo = null;
+public class GuidanceLiftEstimate extends APINode {
+  @SerializedName("actual_7d_cpr")
+  private Double mActual7dCpr = null;
+  @SerializedName("adoption_date")
+  private String mAdoptionDate = null;
+  @SerializedName("guidance_name")
+  private String mGuidanceName = null;
+  @SerializedName("lift_estimation")
+  private Double mLiftEstimation = null;
+  @SerializedName("predicted_7d_cpr")
+  private Double mPredicted7dCpr = null;
   protected static Gson gson = null;
 
-  public MessengerCallSettings() {
+  public GuidanceLiftEstimate() {
   }
 
   public String getId() {
     return null;
   }
-  public static MessengerCallSettings loadJSON(String json, APIContext context, String header) {
-    MessengerCallSettings messengerCallSettings = getGson().fromJson(json, MessengerCallSettings.class);
+  public static GuidanceLiftEstimate loadJSON(String json, APIContext context, String header) {
+    GuidanceLiftEstimate guidanceLiftEstimate = getGson().fromJson(json, GuidanceLiftEstimate.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(messengerCallSettings.toString());
+      JsonElement o2 = parser.parse(guidanceLiftEstimate.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -74,14 +74,14 @@ public class MessengerCallSettings extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    messengerCallSettings.context = context;
-    messengerCallSettings.rawValue = json;
-    messengerCallSettings.header = header;
-    return messengerCallSettings;
+    guidanceLiftEstimate.context = context;
+    guidanceLiftEstimate.rawValue = json;
+    guidanceLiftEstimate.header = header;
+    return guidanceLiftEstimate;
   }
 
-  public static APINodeList<MessengerCallSettings> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<MessengerCallSettings> messengerCallSettingss = new APINodeList<MessengerCallSettings>(request, json, header);
+  public static APINodeList<GuidanceLiftEstimate> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<GuidanceLiftEstimate> guidanceLiftEstimates = new APINodeList<GuidanceLiftEstimate>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -92,9 +92,9 @@ public class MessengerCallSettings extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          messengerCallSettingss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          guidanceLiftEstimates.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return messengerCallSettingss;
+        return guidanceLiftEstimates;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -104,20 +104,20 @@ public class MessengerCallSettings extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                messengerCallSettingss.setCursors(before, after);
+                guidanceLiftEstimates.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            messengerCallSettingss.setPaging(previous, next);
+            guidanceLiftEstimates.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              messengerCallSettingss.setAppSecret(context.getAppSecretProof());
+              guidanceLiftEstimates.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              messengerCallSettingss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              guidanceLiftEstimates.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -128,23 +128,23 @@ public class MessengerCallSettings extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  messengerCallSettingss.add(loadJSON(entry.getValue().toString(), context, header));
+                  guidanceLiftEstimates.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              messengerCallSettingss.add(loadJSON(obj.toString(), context, header));
+              guidanceLiftEstimates.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return messengerCallSettingss;
+          return guidanceLiftEstimates;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              messengerCallSettingss.add(loadJSON(entry.getValue().toString(), context, header));
+              guidanceLiftEstimates.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return messengerCallSettingss;
+          return guidanceLiftEstimates;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -161,20 +161,20 @@ public class MessengerCallSettings extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              messengerCallSettingss.add(loadJSON(value.toString(), context, header));
+              guidanceLiftEstimates.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return messengerCallSettingss;
+            return guidanceLiftEstimates;
           }
 
           // Sixth, check if it's pure JsonObject
-          messengerCallSettingss.clear();
-          messengerCallSettingss.add(loadJSON(json, context, header));
-          return messengerCallSettingss;
+          guidanceLiftEstimates.clear();
+          guidanceLiftEstimates.add(loadJSON(json, context, header));
+          return guidanceLiftEstimates;
         }
       }
     } catch (Exception e) {
@@ -202,48 +202,48 @@ public class MessengerCallSettings extends APINode {
   }
 
 
-  public Boolean getFieldAudioEnabled() {
-    return mAudioEnabled;
+  public Double getFieldActual7dCpr() {
+    return mActual7dCpr;
   }
 
-  public MessengerCallSettings setFieldAudioEnabled(Boolean value) {
-    this.mAudioEnabled = value;
+  public GuidanceLiftEstimate setFieldActual7dCpr(Double value) {
+    this.mActual7dCpr = value;
     return this;
   }
 
-  public Object getFieldCallHours() {
-    return mCallHours;
+  public String getFieldAdoptionDate() {
+    return mAdoptionDate;
   }
 
-  public MessengerCallSettings setFieldCallHours(Object value) {
-    this.mCallHours = value;
+  public GuidanceLiftEstimate setFieldAdoptionDate(String value) {
+    this.mAdoptionDate = value;
     return this;
   }
 
-  public String getFieldCallRouting() {
-    return mCallRouting;
+  public String getFieldGuidanceName() {
+    return mGuidanceName;
   }
 
-  public MessengerCallSettings setFieldCallRouting(String value) {
-    this.mCallRouting = value;
+  public GuidanceLiftEstimate setFieldGuidanceName(String value) {
+    this.mGuidanceName = value;
     return this;
   }
 
-  public Boolean getFieldIconEnabled() {
-    return mIconEnabled;
+  public Double getFieldLiftEstimation() {
+    return mLiftEstimation;
   }
 
-  public MessengerCallSettings setFieldIconEnabled(Boolean value) {
-    this.mIconEnabled = value;
+  public GuidanceLiftEstimate setFieldLiftEstimation(Double value) {
+    this.mLiftEstimation = value;
     return this;
   }
 
-  public String getFieldVideo() {
-    return mVideo;
+  public Double getFieldPredicted7dCpr() {
+    return mPredicted7dCpr;
   }
 
-  public MessengerCallSettings setFieldVideo(String value) {
-    this.mVideo = value;
+  public GuidanceLiftEstimate setFieldPredicted7dCpr(Double value) {
+    this.mPredicted7dCpr = value;
     return this;
   }
 
@@ -263,21 +263,21 @@ public class MessengerCallSettings extends APINode {
     return gson;
   }
 
-  public MessengerCallSettings copyFrom(MessengerCallSettings instance) {
-    this.mAudioEnabled = instance.mAudioEnabled;
-    this.mCallHours = instance.mCallHours;
-    this.mCallRouting = instance.mCallRouting;
-    this.mIconEnabled = instance.mIconEnabled;
-    this.mVideo = instance.mVideo;
+  public GuidanceLiftEstimate copyFrom(GuidanceLiftEstimate instance) {
+    this.mActual7dCpr = instance.mActual7dCpr;
+    this.mAdoptionDate = instance.mAdoptionDate;
+    this.mGuidanceName = instance.mGuidanceName;
+    this.mLiftEstimation = instance.mLiftEstimation;
+    this.mPredicted7dCpr = instance.mPredicted7dCpr;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<MessengerCallSettings> getParser() {
-    return new APIRequest.ResponseParser<MessengerCallSettings>() {
-      public APINodeList<MessengerCallSettings> parseResponse(String response, APIContext context, APIRequest<MessengerCallSettings> request, String header) throws MalformedResponseException {
-        return MessengerCallSettings.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<GuidanceLiftEstimate> getParser() {
+    return new APIRequest.ResponseParser<GuidanceLiftEstimate>() {
+      public APINodeList<GuidanceLiftEstimate> parseResponse(String response, APIContext context, APIRequest<GuidanceLiftEstimate> request, String header) throws MalformedResponseException {
+        return GuidanceLiftEstimate.parseResponse(response, context, request, header);
       }
     };
   }

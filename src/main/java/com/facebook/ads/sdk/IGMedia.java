@@ -81,6 +81,8 @@ public class IGMedia extends APINode {
   private String mTimestamp = null;
   @SerializedName("username")
   private String mUsername = null;
+  @SerializedName("video_title")
+  private String mVideoTitle = null;
   @SerializedName("view_count")
   private Long mViewCount = null;
   protected static Gson gson = null;
@@ -433,6 +435,10 @@ public class IGMedia extends APINode {
 
   public String getFieldUsername() {
     return mUsername;
+  }
+
+  public String getFieldVideoTitle() {
+    return mVideoTitle;
   }
 
   public Long getFieldViewCount() {
@@ -839,6 +845,7 @@ public class IGMedia extends APINode {
       "thumbnail_url",
       "timestamp",
       "username",
+      "video_title",
       "view_count",
     };
 
@@ -1070,6 +1077,13 @@ public class IGMedia extends APINode {
     }
     public APIRequestGetChildren requestUsernameField (boolean value) {
       this.requestField("username", value);
+      return this;
+    }
+    public APIRequestGetChildren requestVideoTitleField () {
+      return this.requestVideoTitleField(true);
+    }
+    public APIRequestGetChildren requestVideoTitleField (boolean value) {
+      this.requestField("video_title", value);
       return this;
     }
     public APIRequestGetChildren requestViewCountField () {
@@ -2277,6 +2291,7 @@ public class IGMedia extends APINode {
       "thumbnail_url",
       "timestamp",
       "username",
+      "video_title",
       "view_count",
     };
 
@@ -2553,6 +2568,13 @@ public class IGMedia extends APINode {
       this.requestField("username", value);
       return this;
     }
+    public APIRequestGet requestVideoTitleField () {
+      return this.requestVideoTitleField(true);
+    }
+    public APIRequestGet requestVideoTitleField (boolean value) {
+      this.requestField("video_title", value);
+      return this;
+    }
     public APIRequestGet requestViewCountField () {
       return this.requestViewCountField(true);
     }
@@ -2680,6 +2702,8 @@ public class IGMedia extends APINode {
   public static enum EnumBoostableMediaCallsite {
       @SerializedName("ADS_MANAGER_L1_EDITOR_DYNAMIC_ADS_WITH_EXISTING_POST")
       VALUE_ADS_MANAGER_L1_EDITOR_DYNAMIC_ADS_WITH_EXISTING_POST("ADS_MANAGER_L1_EDITOR_DYNAMIC_ADS_WITH_EXISTING_POST"),
+      @SerializedName("PA_HUB_CATALOG_INGESTION_CREATOR_ASSET")
+      VALUE_PA_HUB_CATALOG_INGESTION_CREATOR_ASSET("PA_HUB_CATALOG_INGESTION_CREATOR_ASSET"),
       ;
 
       private String value;
@@ -2729,6 +2753,7 @@ public class IGMedia extends APINode {
     this.mThumbnailUrl = instance.mThumbnailUrl;
     this.mTimestamp = instance.mTimestamp;
     this.mUsername = instance.mUsername;
+    this.mVideoTitle = instance.mVideoTitle;
     this.mViewCount = instance.mViewCount;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

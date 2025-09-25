@@ -483,7 +483,6 @@ public class LiveVideo extends APINode {
     public static final String[] FIELDS = {
       "about",
       "age_range",
-      "avatar_2d_profile_picture",
       "birthday",
       "client_business_id",
       "community",
@@ -497,7 +496,6 @@ public class LiveVideo extends APINode {
       "gender",
       "hometown",
       "id",
-      "id_for_avatars",
       "inspirational_people",
       "install_type",
       "installed",
@@ -643,13 +641,6 @@ public class LiveVideo extends APINode {
       this.requestField("age_range", value);
       return this;
     }
-    public APIRequestGetBlockedUsers requestAvatar2dProfilePictureField () {
-      return this.requestAvatar2dProfilePictureField(true);
-    }
-    public APIRequestGetBlockedUsers requestAvatar2dProfilePictureField (boolean value) {
-      this.requestField("avatar_2d_profile_picture", value);
-      return this;
-    }
     public APIRequestGetBlockedUsers requestBirthdayField () {
       return this.requestBirthdayField(true);
     }
@@ -739,13 +730,6 @@ public class LiveVideo extends APINode {
     }
     public APIRequestGetBlockedUsers requestIdField (boolean value) {
       this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGetBlockedUsers requestIdForAvatarsField () {
-      return this.requestIdForAvatarsField(true);
-    }
-    public APIRequestGetBlockedUsers requestIdForAvatarsField (boolean value) {
-      this.requestField("id_for_avatars", value);
       return this;
     }
     public APIRequestGetBlockedUsers requestInspirationalPeopleField () {
@@ -1351,6 +1335,7 @@ public class LiveVideo extends APINode {
       "connected_instagram_account",
       "connected_page_backed_instagram_account",
       "contact_address",
+      "copyright_attribution_insights",
       "copyright_whitelisted_ig_partners",
       "country_page_likes",
       "cover",
@@ -1754,6 +1739,13 @@ public class LiveVideo extends APINode {
     }
     public APIRequestGetCrosspostSharedPages requestContactAddressField (boolean value) {
       this.requestField("contact_address", value);
+      return this;
+    }
+    public APIRequestGetCrosspostSharedPages requestCopyrightAttributionInsightsField () {
+      return this.requestCopyrightAttributionInsightsField(true);
+    }
+    public APIRequestGetCrosspostSharedPages requestCopyrightAttributionInsightsField (boolean value) {
+      this.requestField("copyright_attribution_insights", value);
       return this;
     }
     public APIRequestGetCrosspostSharedPages requestCopyrightWhitelistedIgPartnersField () {

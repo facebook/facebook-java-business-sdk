@@ -607,6 +607,7 @@ public class AdsPixel extends APINode {
       "min_daily_budget",
       "name",
       "offsite_pixels_tos_accepted",
+      "opportunity_score",
       "owner",
       "owner_business",
       "partner",
@@ -1094,6 +1095,13 @@ public class AdsPixel extends APINode {
       this.requestField("offsite_pixels_tos_accepted", value);
       return this;
     }
+    public APIRequestGetAdAccounts requestOpportunityScoreField () {
+      return this.requestOpportunityScoreField(true);
+    }
+    public APIRequestGetAdAccounts requestOpportunityScoreField (boolean value) {
+      this.requestField("opportunity_score", value);
+      return this;
+    }
     public APIRequestGetAdAccounts requestOwnerField () {
       return this.requestOwnerField(true);
     }
@@ -1361,6 +1369,7 @@ public class AdsPixel extends APINode {
       "id",
       "is_hidden",
       "link",
+      "marketing_messages_onboarding_status",
       "name",
       "primary_page",
       "profile_picture_uri",
@@ -1532,6 +1541,13 @@ public class AdsPixel extends APINode {
     }
     public APIRequestGetAgencies requestLinkField (boolean value) {
       this.requestField("link", value);
+      return this;
+    }
+    public APIRequestGetAgencies requestMarketingMessagesOnboardingStatusField () {
+      return this.requestMarketingMessagesOnboardingStatusField(true);
+    }
+    public APIRequestGetAgencies requestMarketingMessagesOnboardingStatusField (boolean value) {
+      this.requestField("marketing_messages_onboarding_status", value);
       return this;
     }
     public APIRequestGetAgencies requestNameField () {
@@ -2738,6 +2754,7 @@ public class AdsPixel extends APINode {
 
     public static final String[] FIELDS = {
       "active",
+      "browser_agent",
       "cloud_provider",
       "cloud_region",
       "destination_id",
@@ -2852,6 +2869,13 @@ public class AdsPixel extends APINode {
     }
     public APIRequestGetOpenBridgeConfigurations requestActiveField (boolean value) {
       this.requestField("active", value);
+      return this;
+    }
+    public APIRequestGetOpenBridgeConfigurations requestBrowserAgentField () {
+      return this.requestBrowserAgentField(true);
+    }
+    public APIRequestGetOpenBridgeConfigurations requestBrowserAgentField (boolean value) {
+      this.requestField("browser_agent", value);
       return this;
     }
     public APIRequestGetOpenBridgeConfigurations requestCloudProviderField () {
@@ -3262,6 +3286,7 @@ public class AdsPixel extends APINode {
       "min_daily_budget",
       "name",
       "offsite_pixels_tos_accepted",
+      "opportunity_score",
       "owner",
       "owner_business",
       "partner",
@@ -3749,6 +3774,13 @@ public class AdsPixel extends APINode {
       this.requestField("offsite_pixels_tos_accepted", value);
       return this;
     }
+    public APIRequestGetSharedAccounts requestOpportunityScoreField () {
+      return this.requestOpportunityScoreField(true);
+    }
+    public APIRequestGetSharedAccounts requestOpportunityScoreField (boolean value) {
+      this.requestField("opportunity_score", value);
+      return this;
+    }
     public APIRequestGetSharedAccounts requestOwnerField () {
       return this.requestOwnerField(true);
     }
@@ -4022,6 +4054,7 @@ public class AdsPixel extends APINode {
       "id",
       "is_hidden",
       "link",
+      "marketing_messages_onboarding_status",
       "name",
       "primary_page",
       "profile_picture_uri",
@@ -4193,6 +4226,13 @@ public class AdsPixel extends APINode {
     }
     public APIRequestGetSharedAgencies requestLinkField (boolean value) {
       this.requestField("link", value);
+      return this;
+    }
+    public APIRequestGetSharedAgencies requestMarketingMessagesOnboardingStatusField () {
+      return this.requestMarketingMessagesOnboardingStatusField(true);
+    }
+    public APIRequestGetSharedAgencies requestMarketingMessagesOnboardingStatusField (boolean value) {
+      this.requestField("marketing_messages_onboarding_status", value);
       return this;
     }
     public APIRequestGetSharedAgencies requestNameField () {

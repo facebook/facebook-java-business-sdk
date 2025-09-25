@@ -45,6 +45,8 @@ public class AdCreativeAssetGroupsSpec extends APINode {
   private List<Object> mGroups = null;
   @SerializedName("origin")
   private String mOrigin = null;
+  @SerializedName("origins")
+  private List<String> mOrigins = null;
   protected static Gson gson = null;
 
   public AdCreativeAssetGroupsSpec() {
@@ -214,6 +216,15 @@ public class AdCreativeAssetGroupsSpec extends APINode {
     return this;
   }
 
+  public List<String> getFieldOrigins() {
+    return mOrigins;
+  }
+
+  public AdCreativeAssetGroupsSpec setFieldOrigins(List<String> value) {
+    this.mOrigins = value;
+    return this;
+  }
+
 
 
 
@@ -233,6 +244,7 @@ public class AdCreativeAssetGroupsSpec extends APINode {
   public AdCreativeAssetGroupsSpec copyFrom(AdCreativeAssetGroupsSpec instance) {
     this.mGroups = instance.mGroups;
     this.mOrigin = instance.mOrigin;
+    this.mOrigins = instance.mOrigins;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

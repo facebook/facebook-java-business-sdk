@@ -286,7 +286,6 @@ public class WorkSkill extends APINode {
     public static final String[] FIELDS = {
       "about",
       "age_range",
-      "avatar_2d_profile_picture",
       "birthday",
       "client_business_id",
       "community",
@@ -300,7 +299,6 @@ public class WorkSkill extends APINode {
       "gender",
       "hometown",
       "id",
-      "id_for_avatars",
       "inspirational_people",
       "install_type",
       "installed",
@@ -441,13 +439,6 @@ public class WorkSkill extends APINode {
       this.requestField("age_range", value);
       return this;
     }
-    public APIRequestGetUsers requestAvatar2dProfilePictureField () {
-      return this.requestAvatar2dProfilePictureField(true);
-    }
-    public APIRequestGetUsers requestAvatar2dProfilePictureField (boolean value) {
-      this.requestField("avatar_2d_profile_picture", value);
-      return this;
-    }
     public APIRequestGetUsers requestBirthdayField () {
       return this.requestBirthdayField(true);
     }
@@ -537,13 +528,6 @@ public class WorkSkill extends APINode {
     }
     public APIRequestGetUsers requestIdField (boolean value) {
       this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGetUsers requestIdForAvatarsField () {
-      return this.requestIdForAvatarsField(true);
-    }
-    public APIRequestGetUsers requestIdForAvatarsField (boolean value) {
-      this.requestField("id_for_avatars", value);
       return this;
     }
     public APIRequestGetUsers requestInspirationalPeopleField () {

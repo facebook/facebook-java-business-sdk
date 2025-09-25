@@ -2567,6 +2567,7 @@ public class AdStudyObjective extends APINode {
       "id",
       "is_hidden",
       "link",
+      "marketing_messages_onboarding_status",
       "name",
       "primary_page",
       "profile_picture_uri",
@@ -2738,6 +2739,13 @@ public class AdStudyObjective extends APINode {
     }
     public APIRequestGetPartnerPrivateStudies requestLinkField (boolean value) {
       this.requestField("link", value);
+      return this;
+    }
+    public APIRequestGetPartnerPrivateStudies requestMarketingMessagesOnboardingStatusField () {
+      return this.requestMarketingMessagesOnboardingStatusField(true);
+    }
+    public APIRequestGetPartnerPrivateStudies requestMarketingMessagesOnboardingStatusField (boolean value) {
+      this.requestField("marketing_messages_onboarding_status", value);
       return this;
     }
     public APIRequestGetPartnerPrivateStudies requestNameField () {

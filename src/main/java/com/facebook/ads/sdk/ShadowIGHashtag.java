@@ -309,6 +309,7 @@ public class ShadowIGHashtag extends APINode {
       "thumbnail_url",
       "timestamp",
       "username",
+      "video_title",
       "view_count",
     };
 
@@ -547,6 +548,13 @@ public class ShadowIGHashtag extends APINode {
       this.requestField("username", value);
       return this;
     }
+    public APIRequestGetRecentMedia requestVideoTitleField () {
+      return this.requestVideoTitleField(true);
+    }
+    public APIRequestGetRecentMedia requestVideoTitleField (boolean value) {
+      this.requestField("video_title", value);
+      return this;
+    }
     public APIRequestGetRecentMedia requestViewCountField () {
       return this.requestViewCountField(true);
     }
@@ -588,6 +596,7 @@ public class ShadowIGHashtag extends APINode {
       "thumbnail_url",
       "timestamp",
       "username",
+      "video_title",
       "view_count",
     };
 
@@ -824,6 +833,13 @@ public class ShadowIGHashtag extends APINode {
     }
     public APIRequestGetTopMedia requestUsernameField (boolean value) {
       this.requestField("username", value);
+      return this;
+    }
+    public APIRequestGetTopMedia requestVideoTitleField () {
+      return this.requestVideoTitleField(true);
+    }
+    public APIRequestGetTopMedia requestVideoTitleField (boolean value) {
+      this.requestField("video_title", value);
       return this;
     }
     public APIRequestGetTopMedia requestViewCountField () {

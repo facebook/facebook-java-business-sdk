@@ -41,12 +41,16 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class AdCreativeBrandedContentAds extends APINode {
+  @SerializedName("acting_business_id")
+  private String mActingBusinessId = null;
   @SerializedName("ad_format")
   private Long mAdFormat = null;
   @SerializedName("content_search_input")
   private String mContentSearchInput = null;
   @SerializedName("creator_ad_permission_type")
   private String mCreatorAdPermissionType = null;
+  @SerializedName("deliver_dynamic_partner_content")
+  private Boolean mDeliverDynamicPartnerContent = null;
   @SerializedName("facebook_boost_post_access_token")
   private String mFacebookBoostPostAccessToken = null;
   @SerializedName("instagram_boost_post_access_token")
@@ -220,6 +224,15 @@ public class AdCreativeBrandedContentAds extends APINode {
   }
 
 
+  public String getFieldActingBusinessId() {
+    return mActingBusinessId;
+  }
+
+  public AdCreativeBrandedContentAds setFieldActingBusinessId(String value) {
+    this.mActingBusinessId = value;
+    return this;
+  }
+
   public Long getFieldAdFormat() {
     return mAdFormat;
   }
@@ -244,6 +257,15 @@ public class AdCreativeBrandedContentAds extends APINode {
 
   public AdCreativeBrandedContentAds setFieldCreatorAdPermissionType(String value) {
     this.mCreatorAdPermissionType = value;
+    return this;
+  }
+
+  public Boolean getFieldDeliverDynamicPartnerContent() {
+    return mDeliverDynamicPartnerContent;
+  }
+
+  public AdCreativeBrandedContentAds setFieldDeliverDynamicPartnerContent(Boolean value) {
+    this.mDeliverDynamicPartnerContent = value;
     return this;
   }
 
@@ -368,9 +390,11 @@ public class AdCreativeBrandedContentAds extends APINode {
   }
 
   public AdCreativeBrandedContentAds copyFrom(AdCreativeBrandedContentAds instance) {
+    this.mActingBusinessId = instance.mActingBusinessId;
     this.mAdFormat = instance.mAdFormat;
     this.mContentSearchInput = instance.mContentSearchInput;
     this.mCreatorAdPermissionType = instance.mCreatorAdPermissionType;
+    this.mDeliverDynamicPartnerContent = instance.mDeliverDynamicPartnerContent;
     this.mFacebookBoostPostAccessToken = instance.mFacebookBoostPostAccessToken;
     this.mInstagramBoostPostAccessToken = instance.mInstagramBoostPostAccessToken;
     this.mIsMcaInternal = instance.mIsMcaInternal;

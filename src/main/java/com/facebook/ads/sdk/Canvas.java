@@ -63,6 +63,10 @@ public class Canvas extends APINode {
   private List<RichMediaElement> mElements = null;
   @SerializedName("fb_body_elements")
   private List<Object> mFbBodyElements = null;
+  @SerializedName("hero_asset_facebook_post_id")
+  private String mHeroAssetFacebookPostId = null;
+  @SerializedName("hero_asset_instagram_media_id")
+  private String mHeroAssetInstagramMediaId = null;
   @SerializedName("id")
   private String mId = null;
   @SerializedName("is_hidden")
@@ -308,8 +312,8 @@ public class Canvas extends APINode {
     return new APIRequestGetPreview(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestGetPreViews getPreViews() {
-    return new APIRequestGetPreViews(this.getPrefixedId().toString(), context);
+  public APIRequestGetPreviews getPreviews() {
+    return new APIRequestGetPreviews(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGet get() {
@@ -372,6 +376,14 @@ public class Canvas extends APINode {
 
   public List<Object> getFieldFbBodyElements() {
     return mFbBodyElements;
+  }
+
+  public String getFieldHeroAssetFacebookPostId() {
+    return mHeroAssetFacebookPostId;
+  }
+
+  public String getFieldHeroAssetInstagramMediaId() {
+    return mHeroAssetInstagramMediaId;
   }
 
   public String getFieldId() {
@@ -562,7 +574,7 @@ public class Canvas extends APINode {
     }
   }
 
-  public static class APIRequestGetPreViews extends APIRequest<TextWithEntities> {
+  public static class APIRequestGetPreviews extends APIRequest<TextWithEntities> {
 
     APINodeList<TextWithEntities> lastResponse = null;
     @Override
@@ -604,7 +616,7 @@ public class Canvas extends APINode {
         new Function<ResponseWrapper, APINodeList<TextWithEntities>>() {
            public APINodeList<TextWithEntities> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetPreViews.this.parseResponse(result.getBody(), result.getHeader());
+               return APIRequestGetPreviews.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -614,37 +626,37 @@ public class Canvas extends APINode {
       );
     };
 
-    public APIRequestGetPreViews(String nodeId, APIContext context) {
+    public APIRequestGetPreviews(String nodeId, APIContext context) {
       super(context, nodeId, "/previews", "GET", Arrays.asList(PARAMS));
     }
 
     @Override
-    public APIRequestGetPreViews setParam(String param, Object value) {
+    public APIRequestGetPreviews setParam(String param, Object value) {
       setParamInternal(param, value);
       return this;
     }
 
     @Override
-    public APIRequestGetPreViews setParams(Map<String, Object> params) {
+    public APIRequestGetPreviews setParams(Map<String, Object> params) {
       setParamsInternal(params);
       return this;
     }
 
 
-    public APIRequestGetPreViews setUserIds (List<Long> userIds) {
+    public APIRequestGetPreviews setUserIds (List<Long> userIds) {
       this.setParam("user_ids", userIds);
       return this;
     }
-    public APIRequestGetPreViews setUserIds (String userIds) {
+    public APIRequestGetPreviews setUserIds (String userIds) {
       this.setParam("user_ids", userIds);
       return this;
     }
 
-    public APIRequestGetPreViews requestAllFields () {
+    public APIRequestGetPreviews requestAllFields () {
       return this.requestAllFields(true);
     }
 
-    public APIRequestGetPreViews requestAllFields (boolean value) {
+    public APIRequestGetPreviews requestAllFields (boolean value) {
       for (String field : FIELDS) {
         this.requestField(field, value);
       }
@@ -652,12 +664,12 @@ public class Canvas extends APINode {
     }
 
     @Override
-    public APIRequestGetPreViews requestFields (List<String> fields) {
+    public APIRequestGetPreviews requestFields (List<String> fields) {
       return this.requestFields(fields, true);
     }
 
     @Override
-    public APIRequestGetPreViews requestFields (List<String> fields, boolean value) {
+    public APIRequestGetPreviews requestFields (List<String> fields, boolean value) {
       for (String field : fields) {
         this.requestField(field, value);
       }
@@ -665,21 +677,21 @@ public class Canvas extends APINode {
     }
 
     @Override
-    public APIRequestGetPreViews requestField (String field) {
+    public APIRequestGetPreviews requestField (String field) {
       this.requestField(field, true);
       return this;
     }
 
     @Override
-    public APIRequestGetPreViews requestField (String field, boolean value) {
+    public APIRequestGetPreviews requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
 
-    public APIRequestGetPreViews requestTextField () {
+    public APIRequestGetPreviews requestTextField () {
       return this.requestTextField(true);
     }
-    public APIRequestGetPreViews requestTextField (boolean value) {
+    public APIRequestGetPreviews requestTextField (boolean value) {
       this.requestField("text", value);
       return this;
     }
@@ -707,6 +719,8 @@ public class Canvas extends APINode {
       "element_payload",
       "elements",
       "fb_body_elements",
+      "hero_asset_facebook_post_id",
+      "hero_asset_instagram_media_id",
       "id",
       "is_hidden",
       "is_published",
@@ -892,6 +906,20 @@ public class Canvas extends APINode {
       this.requestField("fb_body_elements", value);
       return this;
     }
+    public APIRequestGet requestHeroAssetFacebookPostIdField () {
+      return this.requestHeroAssetFacebookPostIdField(true);
+    }
+    public APIRequestGet requestHeroAssetFacebookPostIdField (boolean value) {
+      this.requestField("hero_asset_facebook_post_id", value);
+      return this;
+    }
+    public APIRequestGet requestHeroAssetInstagramMediaIdField () {
+      return this.requestHeroAssetInstagramMediaIdField(true);
+    }
+    public APIRequestGet requestHeroAssetInstagramMediaIdField (boolean value) {
+      this.requestField("hero_asset_instagram_media_id", value);
+      return this;
+    }
     public APIRequestGet requestIdField () {
       return this.requestIdField(true);
     }
@@ -1017,6 +1045,8 @@ public class Canvas extends APINode {
       "background_color",
       "body_element_ids",
       "enable_swipe_to_open",
+      "hero_asset_facebook_post_id",
+      "hero_asset_instagram_media_id",
       "is_hidden",
       "is_published",
       "name",
@@ -1100,6 +1130,16 @@ public class Canvas extends APINode {
     }
     public APIRequestUpdate setEnableSwipeToOpen (String enableSwipeToOpen) {
       this.setParam("enable_swipe_to_open", enableSwipeToOpen);
+      return this;
+    }
+
+    public APIRequestUpdate setHeroAssetFacebookPostId (String heroAssetFacebookPostId) {
+      this.setParam("hero_asset_facebook_post_id", heroAssetFacebookPostId);
+      return this;
+    }
+
+    public APIRequestUpdate setHeroAssetInstagramMediaId (String heroAssetInstagramMediaId) {
+      this.setParam("hero_asset_instagram_media_id", heroAssetInstagramMediaId);
       return this;
     }
 
@@ -1195,6 +1235,8 @@ public class Canvas extends APINode {
     this.mElementPayload = instance.mElementPayload;
     this.mElements = instance.mElements;
     this.mFbBodyElements = instance.mFbBodyElements;
+    this.mHeroAssetFacebookPostId = instance.mHeroAssetFacebookPostId;
+    this.mHeroAssetInstagramMediaId = instance.mHeroAssetInstagramMediaId;
     this.mId = instance.mId;
     this.mIsHidden = instance.mIsHidden;
     this.mIsPublished = instance.mIsPublished;

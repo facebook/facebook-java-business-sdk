@@ -473,10 +473,14 @@ public class AdActivity extends APINode {
       VALUE_UPDATE_AD_TARGETS_SPEC("update_ad_targets_spec"),
       @SerializedName("update_adaccount_agency_fee")
       VALUE_UPDATE_ADACCOUNT_AGENCY_FEE("update_adaccount_agency_fee"),
+      @SerializedName("update_adaccount_agency_fee_status")
+      VALUE_UPDATE_ADACCOUNT_AGENCY_FEE_STATUS("update_adaccount_agency_fee_status"),
       @SerializedName("update_adgroup_stop_delivery")
       VALUE_UPDATE_ADGROUP_STOP_DELIVERY("update_adgroup_stop_delivery"),
       @SerializedName("update_audience")
       VALUE_UPDATE_AUDIENCE("update_audience"),
+      @SerializedName("update_budget_flex_toggle_status")
+      VALUE_UPDATE_BUDGET_FLEX_TOGGLE_STATUS("update_budget_flex_toggle_status"),
       @SerializedName("update_campaign_ad_scheduling")
       VALUE_UPDATE_CAMPAIGN_AD_SCHEDULING("update_campaign_ad_scheduling"),
       @SerializedName("update_campaign_budget")

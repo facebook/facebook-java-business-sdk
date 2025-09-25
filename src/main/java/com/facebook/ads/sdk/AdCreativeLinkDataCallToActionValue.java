@@ -41,6 +41,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class AdCreativeLinkDataCallToActionValue extends APINode {
+  @SerializedName("android_url")
+  private String mAndroidUrl = null;
   @SerializedName("app_destination")
   private String mAppDestination = null;
   @SerializedName("app_link")
@@ -49,6 +51,12 @@ public class AdCreativeLinkDataCallToActionValue extends APINode {
   private String mApplication = null;
   @SerializedName("event_id")
   private String mEventId = null;
+  @SerializedName("ios_url")
+  private String mIosUrl = null;
+  @SerializedName("land_on_whatsapp_catalog")
+  private Long mLandOnWhatsappCatalog = null;
+  @SerializedName("land_on_whatsapp_profile")
+  private Long mLandOnWhatsappProfile = null;
   @SerializedName("lead_gen_form_id")
   private String mLeadGenFormId = null;
   @SerializedName("link")
@@ -216,6 +224,15 @@ public class AdCreativeLinkDataCallToActionValue extends APINode {
   }
 
 
+  public String getFieldAndroidUrl() {
+    return mAndroidUrl;
+  }
+
+  public AdCreativeLinkDataCallToActionValue setFieldAndroidUrl(String value) {
+    this.mAndroidUrl = value;
+    return this;
+  }
+
   public String getFieldAppDestination() {
     return mAppDestination;
   }
@@ -249,6 +266,33 @@ public class AdCreativeLinkDataCallToActionValue extends APINode {
 
   public AdCreativeLinkDataCallToActionValue setFieldEventId(String value) {
     this.mEventId = value;
+    return this;
+  }
+
+  public String getFieldIosUrl() {
+    return mIosUrl;
+  }
+
+  public AdCreativeLinkDataCallToActionValue setFieldIosUrl(String value) {
+    this.mIosUrl = value;
+    return this;
+  }
+
+  public Long getFieldLandOnWhatsappCatalog() {
+    return mLandOnWhatsappCatalog;
+  }
+
+  public AdCreativeLinkDataCallToActionValue setFieldLandOnWhatsappCatalog(Long value) {
+    this.mLandOnWhatsappCatalog = value;
+    return this;
+  }
+
+  public Long getFieldLandOnWhatsappProfile() {
+    return mLandOnWhatsappProfile;
+  }
+
+  public AdCreativeLinkDataCallToActionValue setFieldLandOnWhatsappProfile(Long value) {
+    this.mLandOnWhatsappProfile = value;
     return this;
   }
 
@@ -341,10 +385,14 @@ public class AdCreativeLinkDataCallToActionValue extends APINode {
   }
 
   public AdCreativeLinkDataCallToActionValue copyFrom(AdCreativeLinkDataCallToActionValue instance) {
+    this.mAndroidUrl = instance.mAndroidUrl;
     this.mAppDestination = instance.mAppDestination;
     this.mAppLink = instance.mAppLink;
     this.mApplication = instance.mApplication;
     this.mEventId = instance.mEventId;
+    this.mIosUrl = instance.mIosUrl;
+    this.mLandOnWhatsappCatalog = instance.mLandOnWhatsappCatalog;
+    this.mLandOnWhatsappProfile = instance.mLandOnWhatsappProfile;
     this.mLeadGenFormId = instance.mLeadGenFormId;
     this.mLink = instance.mLink;
     this.mLinkCaption = instance.mLinkCaption;

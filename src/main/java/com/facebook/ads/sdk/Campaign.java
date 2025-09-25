@@ -77,8 +77,14 @@ public class Campaign extends APINode {
   private Boolean mHasSecondarySkadnetworkReporting = null;
   @SerializedName(value="id", alternate={"copied_campaign_id"})
   private String mId = null;
+  @SerializedName("is_adset_budget_sharing_enabled")
+  private Boolean mIsAdsetBudgetSharingEnabled = null;
   @SerializedName("is_budget_schedule_enabled")
   private Boolean mIsBudgetScheduleEnabled = null;
+  @SerializedName("is_direct_send_campaign")
+  private Boolean mIsDirectSendCampaign = null;
+  @SerializedName("is_message_campaign")
+  private Boolean mIsMessageCampaign = null;
   @SerializedName("is_skadnetwork_attribution")
   private Boolean mIsSkadnetworkAttribution = null;
   @SerializedName("issues_info")
@@ -354,6 +360,10 @@ public class Campaign extends APINode {
     return new APIRequestGetAdSets(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetBudgetSchedules getBudgetSchedules() {
+    return new APIRequestGetBudgetSchedules(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestCreateBudgetSchedule createBudgetSchedule() {
     return new APIRequestCreateBudgetSchedule(this.getPrefixedId().toString(), context);
   }
@@ -459,8 +469,20 @@ public class Campaign extends APINode {
     return mId;
   }
 
+  public Boolean getFieldIsAdsetBudgetSharingEnabled() {
+    return mIsAdsetBudgetSharingEnabled;
+  }
+
   public Boolean getFieldIsBudgetScheduleEnabled() {
     return mIsBudgetScheduleEnabled;
+  }
+
+  public Boolean getFieldIsDirectSendCampaign() {
+    return mIsDirectSendCampaign;
+  }
+
+  public Boolean getFieldIsMessageCampaign() {
+    return mIsMessageCampaign;
   }
 
   public Boolean getFieldIsSkadnetworkAttribution() {
@@ -1661,6 +1683,7 @@ public class Campaign extends APINode {
       "optimization_goal",
       "optimization_sub_event",
       "pacing_type",
+      "placement_soft_opt_out",
       "promoted_object",
       "recommendations",
       "recurring_budget_semantics",
@@ -1676,8 +1699,11 @@ public class Campaign extends APINode {
       "targeting_optimization_types",
       "time_based_ad_rotation_id_blocks",
       "time_based_ad_rotation_intervals",
+      "trending_topics_spec",
       "updated_time",
       "use_new_app_click",
+      "value_rule_set_id",
+      "value_rules_applied",
     };
 
     @Override
@@ -2170,6 +2196,13 @@ public class Campaign extends APINode {
       this.requestField("pacing_type", value);
       return this;
     }
+    public APIRequestGetAdSets requestPlacementSoftOptOutField () {
+      return this.requestPlacementSoftOptOutField(true);
+    }
+    public APIRequestGetAdSets requestPlacementSoftOptOutField (boolean value) {
+      this.requestField("placement_soft_opt_out", value);
+      return this;
+    }
     public APIRequestGetAdSets requestPromotedObjectField () {
       return this.requestPromotedObjectField(true);
     }
@@ -2275,6 +2308,13 @@ public class Campaign extends APINode {
       this.requestField("time_based_ad_rotation_intervals", value);
       return this;
     }
+    public APIRequestGetAdSets requestTrendingTopicsSpecField () {
+      return this.requestTrendingTopicsSpecField(true);
+    }
+    public APIRequestGetAdSets requestTrendingTopicsSpecField (boolean value) {
+      this.requestField("trending_topics_spec", value);
+      return this;
+    }
     public APIRequestGetAdSets requestUpdatedTimeField () {
       return this.requestUpdatedTimeField(true);
     }
@@ -2287,6 +2327,201 @@ public class Campaign extends APINode {
     }
     public APIRequestGetAdSets requestUseNewAppClickField (boolean value) {
       this.requestField("use_new_app_click", value);
+      return this;
+    }
+    public APIRequestGetAdSets requestValueRuleSetIdField () {
+      return this.requestValueRuleSetIdField(true);
+    }
+    public APIRequestGetAdSets requestValueRuleSetIdField (boolean value) {
+      this.requestField("value_rule_set_id", value);
+      return this;
+    }
+    public APIRequestGetAdSets requestValueRulesAppliedField () {
+      return this.requestValueRulesAppliedField(true);
+    }
+    public APIRequestGetAdSets requestValueRulesAppliedField (boolean value) {
+      this.requestField("value_rules_applied", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestGetBudgetSchedules extends APIRequest<HighDemandPeriod> {
+
+    APINodeList<HighDemandPeriod> lastResponse = null;
+    @Override
+    public APINodeList<HighDemandPeriod> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "time_start",
+      "time_stop",
+    };
+
+    public static final String[] FIELDS = {
+      "ad_object_id",
+      "budget_value",
+      "budget_value_type",
+      "id",
+      "recurrence_type",
+      "time_end",
+      "time_start",
+      "weekly_schedule",
+    };
+
+    @Override
+    public APINodeList<HighDemandPeriod> parseResponse(String response, String header) throws APIException {
+      return HighDemandPeriod.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<HighDemandPeriod> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<HighDemandPeriod> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<HighDemandPeriod>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<HighDemandPeriod>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<HighDemandPeriod>>() {
+           public APINodeList<HighDemandPeriod> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetBudgetSchedules.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestGetBudgetSchedules(String nodeId, APIContext context) {
+      super(context, nodeId, "/budget_schedules", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetBudgetSchedules setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetBudgetSchedules setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetBudgetSchedules setTimeStart (String timeStart) {
+      this.setParam("time_start", timeStart);
+      return this;
+    }
+
+    public APIRequestGetBudgetSchedules setTimeStop (String timeStop) {
+      this.setParam("time_stop", timeStop);
+      return this;
+    }
+
+    public APIRequestGetBudgetSchedules requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetBudgetSchedules requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetBudgetSchedules requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetBudgetSchedules requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetBudgetSchedules requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetBudgetSchedules requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetBudgetSchedules requestAdObjectIdField () {
+      return this.requestAdObjectIdField(true);
+    }
+    public APIRequestGetBudgetSchedules requestAdObjectIdField (boolean value) {
+      this.requestField("ad_object_id", value);
+      return this;
+    }
+    public APIRequestGetBudgetSchedules requestBudgetValueField () {
+      return this.requestBudgetValueField(true);
+    }
+    public APIRequestGetBudgetSchedules requestBudgetValueField (boolean value) {
+      this.requestField("budget_value", value);
+      return this;
+    }
+    public APIRequestGetBudgetSchedules requestBudgetValueTypeField () {
+      return this.requestBudgetValueTypeField(true);
+    }
+    public APIRequestGetBudgetSchedules requestBudgetValueTypeField (boolean value) {
+      this.requestField("budget_value_type", value);
+      return this;
+    }
+    public APIRequestGetBudgetSchedules requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetBudgetSchedules requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetBudgetSchedules requestRecurrenceTypeField () {
+      return this.requestRecurrenceTypeField(true);
+    }
+    public APIRequestGetBudgetSchedules requestRecurrenceTypeField (boolean value) {
+      this.requestField("recurrence_type", value);
+      return this;
+    }
+    public APIRequestGetBudgetSchedules requestTimeEndField () {
+      return this.requestTimeEndField(true);
+    }
+    public APIRequestGetBudgetSchedules requestTimeEndField (boolean value) {
+      this.requestField("time_end", value);
+      return this;
+    }
+    public APIRequestGetBudgetSchedules requestTimeStartField () {
+      return this.requestTimeStartField(true);
+    }
+    public APIRequestGetBudgetSchedules requestTimeStartField (boolean value) {
+      this.requestField("time_start", value);
+      return this;
+    }
+    public APIRequestGetBudgetSchedules requestWeeklyScheduleField () {
+      return this.requestWeeklyScheduleField(true);
+    }
+    public APIRequestGetBudgetSchedules requestWeeklyScheduleField (boolean value) {
+      this.requestField("weekly_schedule", value);
       return this;
     }
   }
@@ -2469,7 +2704,10 @@ public class Campaign extends APINode {
       "effective_status",
       "has_secondary_skadnetwork_reporting",
       "id",
+      "is_adset_budget_sharing_enabled",
       "is_budget_schedule_enabled",
+      "is_direct_send_campaign",
+      "is_message_campaign",
       "is_skadnetwork_attribution",
       "issues_info",
       "last_budget_toggling_time",
@@ -2747,11 +2985,32 @@ public class Campaign extends APINode {
       this.requestField("id", value);
       return this;
     }
+    public APIRequestGetCopies requestIsAdsetBudgetSharingEnabledField () {
+      return this.requestIsAdsetBudgetSharingEnabledField(true);
+    }
+    public APIRequestGetCopies requestIsAdsetBudgetSharingEnabledField (boolean value) {
+      this.requestField("is_adset_budget_sharing_enabled", value);
+      return this;
+    }
     public APIRequestGetCopies requestIsBudgetScheduleEnabledField () {
       return this.requestIsBudgetScheduleEnabledField(true);
     }
     public APIRequestGetCopies requestIsBudgetScheduleEnabledField (boolean value) {
       this.requestField("is_budget_schedule_enabled", value);
+      return this;
+    }
+    public APIRequestGetCopies requestIsDirectSendCampaignField () {
+      return this.requestIsDirectSendCampaignField(true);
+    }
+    public APIRequestGetCopies requestIsDirectSendCampaignField (boolean value) {
+      this.requestField("is_direct_send_campaign", value);
+      return this;
+    }
+    public APIRequestGetCopies requestIsMessageCampaignField () {
+      return this.requestIsMessageCampaignField(true);
+    }
+    public APIRequestGetCopies requestIsMessageCampaignField (boolean value) {
+      this.requestField("is_message_campaign", value);
       return this;
     }
     public APIRequestGetCopies requestIsSkadnetworkAttributionField () {
@@ -2927,6 +3186,8 @@ public class Campaign extends APINode {
     public static final String[] PARAMS = {
       "deep_copy",
       "end_time",
+      "migrate_to_advantage_plus",
+      "parameter_overrides",
       "rename_options",
       "start_time",
       "status_option",
@@ -3000,6 +3261,24 @@ public class Campaign extends APINode {
 
     public APIRequestCreateCopy setEndTime (String endTime) {
       this.setParam("end_time", endTime);
+      return this;
+    }
+
+    public APIRequestCreateCopy setMigrateToAdvantagePlus (Boolean migrateToAdvantagePlus) {
+      this.setParam("migrate_to_advantage_plus", migrateToAdvantagePlus);
+      return this;
+    }
+    public APIRequestCreateCopy setMigrateToAdvantagePlus (String migrateToAdvantagePlus) {
+      this.setParam("migrate_to_advantage_plus", migrateToAdvantagePlus);
+      return this;
+    }
+
+    public APIRequestCreateCopy setParameterOverrides (Object parameterOverrides) {
+      this.setParam("parameter_overrides", parameterOverrides);
+      return this;
+    }
+    public APIRequestCreateCopy setParameterOverrides (String parameterOverrides) {
+      this.setParam("parameter_overrides", parameterOverrides);
       return this;
     }
 
@@ -3083,6 +3362,7 @@ public class Campaign extends APINode {
       "export_name",
       "fields",
       "filtering",
+      "graph_cache",
       "level",
       "limit",
       "product_id_limit",
@@ -3244,6 +3524,15 @@ public class Campaign extends APINode {
       return this;
     }
 
+    public APIRequestGetInsights setGraphCache (Boolean graphCache) {
+      this.setParam("graph_cache", graphCache);
+      return this;
+    }
+    public APIRequestGetInsights setGraphCache (String graphCache) {
+      this.setParam("graph_cache", graphCache);
+      return this;
+    }
+
     public APIRequestGetInsights setLevel (AdsInsights.EnumLevel level) {
       this.setParam("level", level);
       return this;
@@ -3396,6 +3685,7 @@ public class Campaign extends APINode {
       "export_name",
       "fields",
       "filtering",
+      "graph_cache",
       "level",
       "limit",
       "product_id_limit",
@@ -3554,6 +3844,15 @@ public class Campaign extends APINode {
     }
     public APIRequestGetInsightsAsync setFiltering (String filtering) {
       this.setParam("filtering", filtering);
+      return this;
+    }
+
+    public APIRequestGetInsightsAsync setGraphCache (Boolean graphCache) {
+      this.setParam("graph_cache", graphCache);
+      return this;
+    }
+    public APIRequestGetInsightsAsync setGraphCache (String graphCache) {
+      this.setParam("graph_cache", graphCache);
       return this;
     }
 
@@ -3828,7 +4127,10 @@ public class Campaign extends APINode {
       "effective_status",
       "has_secondary_skadnetwork_reporting",
       "id",
+      "is_adset_budget_sharing_enabled",
       "is_budget_schedule_enabled",
+      "is_direct_send_campaign",
+      "is_message_campaign",
       "is_skadnetwork_attribution",
       "issues_info",
       "last_budget_toggling_time",
@@ -4106,11 +4408,32 @@ public class Campaign extends APINode {
       this.requestField("id", value);
       return this;
     }
+    public APIRequestGet requestIsAdsetBudgetSharingEnabledField () {
+      return this.requestIsAdsetBudgetSharingEnabledField(true);
+    }
+    public APIRequestGet requestIsAdsetBudgetSharingEnabledField (boolean value) {
+      this.requestField("is_adset_budget_sharing_enabled", value);
+      return this;
+    }
     public APIRequestGet requestIsBudgetScheduleEnabledField () {
       return this.requestIsBudgetScheduleEnabledField(true);
     }
     public APIRequestGet requestIsBudgetScheduleEnabledField (boolean value) {
       this.requestField("is_budget_schedule_enabled", value);
+      return this;
+    }
+    public APIRequestGet requestIsDirectSendCampaignField () {
+      return this.requestIsDirectSendCampaignField(true);
+    }
+    public APIRequestGet requestIsDirectSendCampaignField (boolean value) {
+      this.requestField("is_direct_send_campaign", value);
+      return this;
+    }
+    public APIRequestGet requestIsMessageCampaignField () {
+      return this.requestIsMessageCampaignField(true);
+    }
+    public APIRequestGet requestIsMessageCampaignField (boolean value) {
+      this.requestField("is_message_campaign", value);
       return this;
     }
     public APIRequestGet requestIsSkadnetworkAttributionField () {
@@ -4289,11 +4612,17 @@ public class Campaign extends APINode {
       "adset_budgets",
       "bid_strategy",
       "budget_rebalance_flag",
+      "budget_schedule_specs",
       "daily_budget",
       "execution_options",
+      "is_adset_budget_sharing_enabled",
+      "is_budget_schedule_enabled",
+      "is_direct_send_campaign",
+      "is_message_campaign",
       "is_skadnetwork_attribution",
       "iterative_split_test_configs",
       "lifetime_budget",
+      "migrate_to_advantage_plus",
       "name",
       "objective",
       "pacing_type",
@@ -4410,6 +4739,15 @@ public class Campaign extends APINode {
       return this;
     }
 
+    public APIRequestUpdate setBudgetScheduleSpecs (List<Object> budgetScheduleSpecs) {
+      this.setParam("budget_schedule_specs", budgetScheduleSpecs);
+      return this;
+    }
+    public APIRequestUpdate setBudgetScheduleSpecs (String budgetScheduleSpecs) {
+      this.setParam("budget_schedule_specs", budgetScheduleSpecs);
+      return this;
+    }
+
     public APIRequestUpdate setDailyBudget (Long dailyBudget) {
       this.setParam("daily_budget", dailyBudget);
       return this;
@@ -4425,6 +4763,42 @@ public class Campaign extends APINode {
     }
     public APIRequestUpdate setExecutionOptions (String executionOptions) {
       this.setParam("execution_options", executionOptions);
+      return this;
+    }
+
+    public APIRequestUpdate setIsAdsetBudgetSharingEnabled (Boolean isAdsetBudgetSharingEnabled) {
+      this.setParam("is_adset_budget_sharing_enabled", isAdsetBudgetSharingEnabled);
+      return this;
+    }
+    public APIRequestUpdate setIsAdsetBudgetSharingEnabled (String isAdsetBudgetSharingEnabled) {
+      this.setParam("is_adset_budget_sharing_enabled", isAdsetBudgetSharingEnabled);
+      return this;
+    }
+
+    public APIRequestUpdate setIsBudgetScheduleEnabled (Boolean isBudgetScheduleEnabled) {
+      this.setParam("is_budget_schedule_enabled", isBudgetScheduleEnabled);
+      return this;
+    }
+    public APIRequestUpdate setIsBudgetScheduleEnabled (String isBudgetScheduleEnabled) {
+      this.setParam("is_budget_schedule_enabled", isBudgetScheduleEnabled);
+      return this;
+    }
+
+    public APIRequestUpdate setIsDirectSendCampaign (Boolean isDirectSendCampaign) {
+      this.setParam("is_direct_send_campaign", isDirectSendCampaign);
+      return this;
+    }
+    public APIRequestUpdate setIsDirectSendCampaign (String isDirectSendCampaign) {
+      this.setParam("is_direct_send_campaign", isDirectSendCampaign);
+      return this;
+    }
+
+    public APIRequestUpdate setIsMessageCampaign (Boolean isMessageCampaign) {
+      this.setParam("is_message_campaign", isMessageCampaign);
+      return this;
+    }
+    public APIRequestUpdate setIsMessageCampaign (String isMessageCampaign) {
+      this.setParam("is_message_campaign", isMessageCampaign);
       return this;
     }
 
@@ -4452,6 +4826,15 @@ public class Campaign extends APINode {
     }
     public APIRequestUpdate setLifetimeBudget (String lifetimeBudget) {
       this.setParam("lifetime_budget", lifetimeBudget);
+      return this;
+    }
+
+    public APIRequestUpdate setMigrateToAdvantagePlus (Boolean migrateToAdvantagePlus) {
+      this.setParam("migrate_to_advantage_plus", migrateToAdvantagePlus);
+      return this;
+    }
+    public APIRequestUpdate setMigrateToAdvantagePlus (String migrateToAdvantagePlus) {
+      this.setParam("migrate_to_advantage_plus", migrateToAdvantagePlus);
       return this;
     }
 
@@ -5485,7 +5868,10 @@ public class Campaign extends APINode {
     this.mEffectiveStatus = instance.mEffectiveStatus;
     this.mHasSecondarySkadnetworkReporting = instance.mHasSecondarySkadnetworkReporting;
     this.mId = instance.mId;
+    this.mIsAdsetBudgetSharingEnabled = instance.mIsAdsetBudgetSharingEnabled;
     this.mIsBudgetScheduleEnabled = instance.mIsBudgetScheduleEnabled;
+    this.mIsDirectSendCampaign = instance.mIsDirectSendCampaign;
+    this.mIsMessageCampaign = instance.mIsMessageCampaign;
     this.mIsSkadnetworkAttribution = instance.mIsSkadnetworkAttribution;
     this.mIssuesInfo = instance.mIssuesInfo;
     this.mLastBudgetTogglingTime = instance.mLastBudgetTogglingTime;

@@ -40,23 +40,27 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class FBLiteToNTTransitions extends APINode {
-  @SerializedName("transition")
-  private Object mTransition = null;
+public class TrendingTopicsSpec extends APINode {
+  @SerializedName("is_all_trending")
+  private Boolean mIsAllTrending = null;
+  @SerializedName("is_special_budget_alloc")
+  private Boolean mIsSpecialBudgetAlloc = null;
+  @SerializedName("trending_topics")
+  private List<String> mTrendingTopics = null;
   protected static Gson gson = null;
 
-  public FBLiteToNTTransitions() {
+  public TrendingTopicsSpec() {
   }
 
   public String getId() {
     return null;
   }
-  public static FBLiteToNTTransitions loadJSON(String json, APIContext context, String header) {
-    FBLiteToNTTransitions fbLiteToNTTransitions = getGson().fromJson(json, FBLiteToNTTransitions.class);
+  public static TrendingTopicsSpec loadJSON(String json, APIContext context, String header) {
+    TrendingTopicsSpec trendingTopicsSpec = getGson().fromJson(json, TrendingTopicsSpec.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(fbLiteToNTTransitions.toString());
+      JsonElement o2 = parser.parse(trendingTopicsSpec.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -66,14 +70,14 @@ public class FBLiteToNTTransitions extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    fbLiteToNTTransitions.context = context;
-    fbLiteToNTTransitions.rawValue = json;
-    fbLiteToNTTransitions.header = header;
-    return fbLiteToNTTransitions;
+    trendingTopicsSpec.context = context;
+    trendingTopicsSpec.rawValue = json;
+    trendingTopicsSpec.header = header;
+    return trendingTopicsSpec;
   }
 
-  public static APINodeList<FBLiteToNTTransitions> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<FBLiteToNTTransitions> fbLiteToNTTransitionss = new APINodeList<FBLiteToNTTransitions>(request, json, header);
+  public static APINodeList<TrendingTopicsSpec> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<TrendingTopicsSpec> trendingTopicsSpecs = new APINodeList<TrendingTopicsSpec>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -84,9 +88,9 @@ public class FBLiteToNTTransitions extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          fbLiteToNTTransitionss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          trendingTopicsSpecs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return fbLiteToNTTransitionss;
+        return trendingTopicsSpecs;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -96,20 +100,20 @@ public class FBLiteToNTTransitions extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                fbLiteToNTTransitionss.setCursors(before, after);
+                trendingTopicsSpecs.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            fbLiteToNTTransitionss.setPaging(previous, next);
+            trendingTopicsSpecs.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              fbLiteToNTTransitionss.setAppSecret(context.getAppSecretProof());
+              trendingTopicsSpecs.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              fbLiteToNTTransitionss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              trendingTopicsSpecs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -120,23 +124,23 @@ public class FBLiteToNTTransitions extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  fbLiteToNTTransitionss.add(loadJSON(entry.getValue().toString(), context, header));
+                  trendingTopicsSpecs.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              fbLiteToNTTransitionss.add(loadJSON(obj.toString(), context, header));
+              trendingTopicsSpecs.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return fbLiteToNTTransitionss;
+          return trendingTopicsSpecs;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              fbLiteToNTTransitionss.add(loadJSON(entry.getValue().toString(), context, header));
+              trendingTopicsSpecs.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return fbLiteToNTTransitionss;
+          return trendingTopicsSpecs;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -153,20 +157,20 @@ public class FBLiteToNTTransitions extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              fbLiteToNTTransitionss.add(loadJSON(value.toString(), context, header));
+              trendingTopicsSpecs.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return fbLiteToNTTransitionss;
+            return trendingTopicsSpecs;
           }
 
           // Sixth, check if it's pure JsonObject
-          fbLiteToNTTransitionss.clear();
-          fbLiteToNTTransitionss.add(loadJSON(json, context, header));
-          return fbLiteToNTTransitionss;
+          trendingTopicsSpecs.clear();
+          trendingTopicsSpecs.add(loadJSON(json, context, header));
+          return trendingTopicsSpecs;
         }
       }
     } catch (Exception e) {
@@ -194,12 +198,30 @@ public class FBLiteToNTTransitions extends APINode {
   }
 
 
-  public Object getFieldTransition() {
-    return mTransition;
+  public Boolean getFieldIsAllTrending() {
+    return mIsAllTrending;
   }
 
-  public FBLiteToNTTransitions setFieldTransition(Object value) {
-    this.mTransition = value;
+  public TrendingTopicsSpec setFieldIsAllTrending(Boolean value) {
+    this.mIsAllTrending = value;
+    return this;
+  }
+
+  public Boolean getFieldIsSpecialBudgetAlloc() {
+    return mIsSpecialBudgetAlloc;
+  }
+
+  public TrendingTopicsSpec setFieldIsSpecialBudgetAlloc(Boolean value) {
+    this.mIsSpecialBudgetAlloc = value;
+    return this;
+  }
+
+  public List<String> getFieldTrendingTopics() {
+    return mTrendingTopics;
+  }
+
+  public TrendingTopicsSpec setFieldTrendingTopics(List<String> value) {
+    this.mTrendingTopics = value;
     return this;
   }
 
@@ -219,17 +241,19 @@ public class FBLiteToNTTransitions extends APINode {
     return gson;
   }
 
-  public FBLiteToNTTransitions copyFrom(FBLiteToNTTransitions instance) {
-    this.mTransition = instance.mTransition;
+  public TrendingTopicsSpec copyFrom(TrendingTopicsSpec instance) {
+    this.mIsAllTrending = instance.mIsAllTrending;
+    this.mIsSpecialBudgetAlloc = instance.mIsSpecialBudgetAlloc;
+    this.mTrendingTopics = instance.mTrendingTopics;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<FBLiteToNTTransitions> getParser() {
-    return new APIRequest.ResponseParser<FBLiteToNTTransitions>() {
-      public APINodeList<FBLiteToNTTransitions> parseResponse(String response, APIContext context, APIRequest<FBLiteToNTTransitions> request, String header) throws MalformedResponseException {
-        return FBLiteToNTTransitions.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<TrendingTopicsSpec> getParser() {
+    return new APIRequest.ResponseParser<TrendingTopicsSpec>() {
+      public APINodeList<TrendingTopicsSpec> parseResponse(String response, APIContext context, APIRequest<TrendingTopicsSpec> request, String header) throws MalformedResponseException {
+        return TrendingTopicsSpec.parseResponse(response, context, request, header);
       }
     };
   }

@@ -49,6 +49,8 @@ public class UnifiedThread extends APINode {
   private Object mFormerParticipants = null;
   @SerializedName("id")
   private String mId = null;
+  @SerializedName("is_owner")
+  private Boolean mIsOwner = null;
   @SerializedName("is_subscribed")
   private Boolean mIsSubscribed = null;
   @SerializedName("link")
@@ -307,6 +309,10 @@ public class UnifiedThread extends APINode {
     return mId;
   }
 
+  public Boolean getFieldIsOwner() {
+    return mIsOwner;
+  }
+
   public Boolean getFieldIsSubscribed() {
     return mIsSubscribed;
   }
@@ -490,6 +496,7 @@ public class UnifiedThread extends APINode {
       "folder",
       "former_participants",
       "id",
+      "is_owner",
       "is_subscribed",
       "link",
       "linked_group",
@@ -620,6 +627,13 @@ public class UnifiedThread extends APINode {
     }
     public APIRequestGet requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGet requestIsOwnerField () {
+      return this.requestIsOwnerField(true);
+    }
+    public APIRequestGet requestIsOwnerField (boolean value) {
+      this.requestField("is_owner", value);
       return this;
     }
     public APIRequestGet requestIsSubscribedField () {
@@ -765,6 +779,7 @@ public class UnifiedThread extends APINode {
     this.mFolder = instance.mFolder;
     this.mFormerParticipants = instance.mFormerParticipants;
     this.mId = instance.mId;
+    this.mIsOwner = instance.mIsOwner;
     this.mIsSubscribed = instance.mIsSubscribed;
     this.mLink = instance.mLink;
     this.mLinkedGroup = instance.mLinkedGroup;

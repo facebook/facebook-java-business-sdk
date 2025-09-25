@@ -133,6 +133,8 @@ public class ProductItem extends APINode {
   private Long mInventory = null;
   @SerializedName("is_bundle_hero")
   private Boolean mIsBundleHero = null;
+  @SerializedName("live_special_price")
+  private String mLiveSpecialPrice = null;
   @SerializedName("manufacturer_info")
   private String mManufacturerInfo = null;
   @SerializedName("manufacturer_part_number")
@@ -179,6 +181,8 @@ public class ProductItem extends APINode {
   private List<String> mReviewRejectionReasons = null;
   @SerializedName("review_status")
   private EnumReviewStatus mReviewStatus = null;
+  @SerializedName("rich_text_description")
+  private String mRichTextDescription = null;
   @SerializedName("sale_price")
   private String mSalePrice = null;
   @SerializedName("sale_price_end_date")
@@ -195,6 +199,8 @@ public class ProductItem extends APINode {
   private String mSize = null;
   @SerializedName("start_date")
   private String mStartDate = null;
+  @SerializedName("status")
+  private EnumStatus mStatus = null;
   @SerializedName("tags")
   private List<String> mTags = null;
   @SerializedName("url")
@@ -631,6 +637,10 @@ public class ProductItem extends APINode {
     return mIsBundleHero;
   }
 
+  public String getFieldLiveSpecialPrice() {
+    return mLiveSpecialPrice;
+  }
+
   public String getFieldManufacturerInfo() {
     return mManufacturerInfo;
   }
@@ -735,6 +745,10 @@ public class ProductItem extends APINode {
     return mReviewStatus;
   }
 
+  public String getFieldRichTextDescription() {
+    return mRichTextDescription;
+  }
+
   public String getFieldSalePrice() {
     return mSalePrice;
   }
@@ -765,6 +779,10 @@ public class ProductItem extends APINode {
 
   public String getFieldStartDate() {
     return mStartDate;
+  }
+
+  public EnumStatus getFieldStatus() {
+    return mStatus;
   }
 
   public List<String> getFieldTags() {
@@ -1556,6 +1574,7 @@ public class ProductItem extends APINode {
       "invalidation_errors",
       "inventory",
       "is_bundle_hero",
+      "live_special_price",
       "manufacturer_info",
       "manufacturer_part_number",
       "marked_for_product_launch",
@@ -1579,6 +1598,7 @@ public class ProductItem extends APINode {
       "retailer_product_group_id",
       "review_rejection_reasons",
       "review_status",
+      "rich_text_description",
       "sale_price",
       "sale_price_end_date",
       "sale_price_start_date",
@@ -1587,6 +1607,7 @@ public class ProductItem extends APINode {
       "short_description",
       "size",
       "start_date",
+      "status",
       "tags",
       "url",
       "vendor_id",
@@ -2041,6 +2062,13 @@ public class ProductItem extends APINode {
       this.requestField("is_bundle_hero", value);
       return this;
     }
+    public APIRequestGet requestLiveSpecialPriceField () {
+      return this.requestLiveSpecialPriceField(true);
+    }
+    public APIRequestGet requestLiveSpecialPriceField (boolean value) {
+      this.requestField("live_special_price", value);
+      return this;
+    }
     public APIRequestGet requestManufacturerInfoField () {
       return this.requestManufacturerInfoField(true);
     }
@@ -2202,6 +2230,13 @@ public class ProductItem extends APINode {
       this.requestField("review_status", value);
       return this;
     }
+    public APIRequestGet requestRichTextDescriptionField () {
+      return this.requestRichTextDescriptionField(true);
+    }
+    public APIRequestGet requestRichTextDescriptionField (boolean value) {
+      this.requestField("rich_text_description", value);
+      return this;
+    }
     public APIRequestGet requestSalePriceField () {
       return this.requestSalePriceField(true);
     }
@@ -2256,6 +2291,13 @@ public class ProductItem extends APINode {
     }
     public APIRequestGet requestStartDateField (boolean value) {
       this.requestField("start_date", value);
+      return this;
+    }
+    public APIRequestGet requestStatusField () {
+      return this.requestStatusField(true);
+    }
+    public APIRequestGet requestStatusField (boolean value) {
+      this.requestField("status", value);
       return this;
     }
     public APIRequestGet requestTagsField () {
@@ -2363,6 +2405,7 @@ public class ProductItem extends APINode {
       "iphone_app_store_id",
       "iphone_url",
       "launch_date",
+      "live_special_price",
       "manufacturer_info",
       "manufacturer_part_number",
       "marked_for_product_launch",
@@ -2382,6 +2425,7 @@ public class ProductItem extends APINode {
       "quantity_to_sell_on_facebook",
       "retailer_id",
       "return_policy_days",
+      "rich_text_description",
       "sale_price",
       "sale_price_end_date",
       "sale_price_start_date",
@@ -2759,6 +2803,11 @@ public class ProductItem extends APINode {
       return this;
     }
 
+    public APIRequestUpdate setLiveSpecialPrice (String liveSpecialPrice) {
+      this.setParam("live_special_price", liveSpecialPrice);
+      return this;
+    }
+
     public APIRequestUpdate setManufacturerInfo (String manufacturerInfo) {
       this.setParam("manufacturer_info", manufacturerInfo);
       return this;
@@ -2895,6 +2944,11 @@ public class ProductItem extends APINode {
     }
     public APIRequestUpdate setReturnPolicyDays (String returnPolicyDays) {
       this.setParam("return_policy_days", returnPolicyDays);
+      return this;
+    }
+
+    public APIRequestUpdate setRichTextDescription (String richTextDescription) {
+      this.setParam("rich_text_description", richTextDescription);
       return this;
     }
 
@@ -3207,6 +3261,25 @@ public class ProductItem extends APINode {
       private String value;
 
       private EnumShippingWeightUnit(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumStatus {
+      @SerializedName("PUBLISHED")
+      VALUE_PUBLISHED("PUBLISHED"),
+      @SerializedName("STAGING")
+      VALUE_STAGING("STAGING"),
+      ;
+
+      private String value;
+
+      private EnumStatus(String value) {
         this.value = value;
       }
 
@@ -3743,8 +3816,6 @@ public class ProductItem extends APINode {
       VALUE_CRAWLED_AVAILABILITY_MISMATCH("CRAWLED_AVAILABILITY_MISMATCH"),
       @SerializedName("DA_DISABLED_BY_USER")
       VALUE_DA_DISABLED_BY_USER("DA_DISABLED_BY_USER"),
-      @SerializedName("DA_POLICY_UNFIT_FOR_AUDIENCE")
-      VALUE_DA_POLICY_UNFIT_FOR_AUDIENCE("DA_POLICY_UNFIT_FOR_AUDIENCE"),
       @SerializedName("DA_POLICY_VIOLATION")
       VALUE_DA_POLICY_VIOLATION("DA_POLICY_VIOLATION"),
       @SerializedName("DELETED_ITEM")
@@ -3871,6 +3942,8 @@ public class ProductItem extends APINode {
       VALUE_MARKETPLACE_PARTNER_AUCTION_NO_BID_CLOSE_TIME("MARKETPLACE_PARTNER_AUCTION_NO_BID_CLOSE_TIME"),
       @SerializedName("MARKETPLACE_PARTNER_CURRENCY_NOT_VALID")
       VALUE_MARKETPLACE_PARTNER_CURRENCY_NOT_VALID("MARKETPLACE_PARTNER_CURRENCY_NOT_VALID"),
+      @SerializedName("MARKETPLACE_PARTNER_DISTRIBUTION_DISABLED")
+      VALUE_MARKETPLACE_PARTNER_DISTRIBUTION_DISABLED("MARKETPLACE_PARTNER_DISTRIBUTION_DISABLED"),
       @SerializedName("MARKETPLACE_PARTNER_LISTING_COUNTRY_NOT_MATCH_CATALOG")
       VALUE_MARKETPLACE_PARTNER_LISTING_COUNTRY_NOT_MATCH_CATALOG("MARKETPLACE_PARTNER_LISTING_COUNTRY_NOT_MATCH_CATALOG"),
       @SerializedName("MARKETPLACE_PARTNER_LISTING_LIMIT_EXCEEDED")
@@ -3987,6 +4060,8 @@ public class ProductItem extends APINode {
       VALUE_QUALITY_ITEM_LINK_REDIRECTING("QUALITY_ITEM_LINK_REDIRECTING"),
       @SerializedName("RETAILER_ID_NOT_PROVIDED")
       VALUE_RETAILER_ID_NOT_PROVIDED("RETAILER_ID_NOT_PROVIDED"),
+      @SerializedName("RETAILER_ID_USED_BY_GROUP")
+      VALUE_RETAILER_ID_USED_BY_GROUP("RETAILER_ID_USED_BY_GROUP"),
       @SerializedName("SHOPIFY_INVALID_RETAILER_ID")
       VALUE_SHOPIFY_INVALID_RETAILER_ID("SHOPIFY_INVALID_RETAILER_ID"),
       @SerializedName("SHOPIFY_ITEM_MISSING_SHIPPING_PROFILE")
@@ -4661,6 +4736,7 @@ public class ProductItem extends APINode {
     this.mInvalidationErrors = instance.mInvalidationErrors;
     this.mInventory = instance.mInventory;
     this.mIsBundleHero = instance.mIsBundleHero;
+    this.mLiveSpecialPrice = instance.mLiveSpecialPrice;
     this.mManufacturerInfo = instance.mManufacturerInfo;
     this.mManufacturerPartNumber = instance.mManufacturerPartNumber;
     this.mMarkedForProductLaunch = instance.mMarkedForProductLaunch;
@@ -4684,6 +4760,7 @@ public class ProductItem extends APINode {
     this.mRetailerProductGroupId = instance.mRetailerProductGroupId;
     this.mReviewRejectionReasons = instance.mReviewRejectionReasons;
     this.mReviewStatus = instance.mReviewStatus;
+    this.mRichTextDescription = instance.mRichTextDescription;
     this.mSalePrice = instance.mSalePrice;
     this.mSalePriceEndDate = instance.mSalePriceEndDate;
     this.mSalePriceStartDate = instance.mSalePriceStartDate;
@@ -4692,6 +4769,7 @@ public class ProductItem extends APINode {
     this.mShortDescription = instance.mShortDescription;
     this.mSize = instance.mSize;
     this.mStartDate = instance.mStartDate;
+    this.mStatus = instance.mStatus;
     this.mTags = instance.mTags;
     this.mUrl = instance.mUrl;
     this.mVendorId = instance.mVendorId;

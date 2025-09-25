@@ -43,6 +43,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class WhatsAppBusinessHealthStatus extends APINode {
   @SerializedName("additional_info")
   private List<String> mAdditionalInfo = null;
+  @SerializedName("can_receive_call_sip")
+  private String mCanReceiveCallSip = null;
   @SerializedName("can_send_message")
   private String mCanSendMessage = null;
   @SerializedName("entity_type")
@@ -211,6 +213,15 @@ public class WhatsAppBusinessHealthStatus extends APINode {
     return this;
   }
 
+  public String getFieldCanReceiveCallSip() {
+    return mCanReceiveCallSip;
+  }
+
+  public WhatsAppBusinessHealthStatus setFieldCanReceiveCallSip(String value) {
+    this.mCanReceiveCallSip = value;
+    return this;
+  }
+
   public String getFieldCanSendMessage() {
     return mCanSendMessage;
   }
@@ -265,6 +276,7 @@ public class WhatsAppBusinessHealthStatus extends APINode {
 
   public WhatsAppBusinessHealthStatus copyFrom(WhatsAppBusinessHealthStatus instance) {
     this.mAdditionalInfo = instance.mAdditionalInfo;
+    this.mCanReceiveCallSip = instance.mCanReceiveCallSip;
     this.mCanSendMessage = instance.mCanSendMessage;
     this.mEntityType = instance.mEntityType;
     this.mErrors = instance.mErrors;

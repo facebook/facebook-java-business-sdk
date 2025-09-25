@@ -349,6 +349,73 @@ public class AdAccountMatchedSearchApplicationsEdgeData extends APINode {
       }
   }
 
+  public static enum EnumStoresToFilter {
+      @SerializedName("AMAZON_APP_STORE")
+      VALUE_AMAZON_APP_STORE("AMAZON_APP_STORE"),
+      @SerializedName("APK_MIRROR")
+      VALUE_APK_MIRROR("APK_MIRROR"),
+      @SerializedName("APK_MONK")
+      VALUE_APK_MONK("APK_MONK"),
+      @SerializedName("APK_PURE")
+      VALUE_APK_PURE("APK_PURE"),
+      @SerializedName("APTOIDE_A1_STORE")
+      VALUE_APTOIDE_A1_STORE("APTOIDE_A1_STORE"),
+      @SerializedName("BEMOBI_MOBILE_STORE")
+      VALUE_BEMOBI_MOBILE_STORE("BEMOBI_MOBILE_STORE"),
+      @SerializedName("DIGITAL_TURBINE_STORE")
+      VALUE_DIGITAL_TURBINE_STORE("DIGITAL_TURBINE_STORE"),
+      @SerializedName("DOES_NOT_EXIST")
+      VALUE_DOES_NOT_EXIST("DOES_NOT_EXIST"),
+      @SerializedName("FB_ANDROID_STORE")
+      VALUE_FB_ANDROID_STORE("FB_ANDROID_STORE"),
+      @SerializedName("FB_CANVAS")
+      VALUE_FB_CANVAS("FB_CANVAS"),
+      @SerializedName("FB_GAMEROOM")
+      VALUE_FB_GAMEROOM("FB_GAMEROOM"),
+      @SerializedName("GALAXY_STORE")
+      VALUE_GALAXY_STORE("GALAXY_STORE"),
+      @SerializedName("GOOGLE_PLAY")
+      VALUE_GOOGLE_PLAY("GOOGLE_PLAY"),
+      @SerializedName("INSTANT_GAME")
+      VALUE_INSTANT_GAME("INSTANT_GAME"),
+      @SerializedName("ITUNES")
+      VALUE_ITUNES("ITUNES"),
+      @SerializedName("ITUNES_IPAD")
+      VALUE_ITUNES_IPAD("ITUNES_IPAD"),
+      @SerializedName("NEON_ANDROID_STORE")
+      VALUE_NEON_ANDROID_STORE("NEON_ANDROID_STORE"),
+      @SerializedName("NONE")
+      VALUE_NONE("NONE"),
+      @SerializedName("OCULUS_APP_STORE")
+      VALUE_OCULUS_APP_STORE("OCULUS_APP_STORE"),
+      @SerializedName("OPPO")
+      VALUE_OPPO("OPPO"),
+      @SerializedName("ROKU_STORE")
+      VALUE_ROKU_STORE("ROKU_STORE"),
+      @SerializedName("UPTODOWN")
+      VALUE_UPTODOWN("UPTODOWN"),
+      @SerializedName("VIVO")
+      VALUE_VIVO("VIVO"),
+      @SerializedName("WINDOWS_10_STORE")
+      VALUE_WINDOWS_10_STORE("WINDOWS_10_STORE"),
+      @SerializedName("WINDOWS_STORE")
+      VALUE_WINDOWS_STORE("WINDOWS_STORE"),
+      @SerializedName("XIAOMI")
+      VALUE_XIAOMI("XIAOMI"),
+      ;
+
+      private String value;
+
+      private EnumStoresToFilter(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
 
   synchronized /*package*/ static Gson getGson() {
     if (gson != null) {

@@ -67,8 +67,6 @@ public class MediaCopyrightAttribution extends APINode {
   private String mLinkTitle = null;
   @SerializedName("match_count")
   private Long mMatchCount = null;
-  @SerializedName("owner")
-  private Page mOwner = null;
   @SerializedName("status")
   private String mStatus = null;
   @SerializedName("title")
@@ -342,13 +340,6 @@ public class MediaCopyrightAttribution extends APINode {
     return mMatchCount;
   }
 
-  public Page getFieldOwner() {
-    if (mOwner != null) {
-      mOwner.context = getContext();
-    }
-    return mOwner;
-  }
-
   public String getFieldStatus() {
     return mStatus;
   }
@@ -383,7 +374,6 @@ public class MediaCopyrightAttribution extends APINode {
       "is_enabled",
       "link_title",
       "match_count",
-      "owner",
       "status",
       "title",
     };
@@ -569,13 +559,6 @@ public class MediaCopyrightAttribution extends APINode {
       this.requestField("match_count", value);
       return this;
     }
-    public APIRequestGet requestOwnerField () {
-      return this.requestOwnerField(true);
-    }
-    public APIRequestGet requestOwnerField (boolean value) {
-      this.requestField("owner", value);
-      return this;
-    }
     public APIRequestGet requestStatusField () {
       return this.requestStatusField(true);
     }
@@ -620,7 +603,6 @@ public class MediaCopyrightAttribution extends APINode {
     this.mIsEnabled = instance.mIsEnabled;
     this.mLinkTitle = instance.mLinkTitle;
     this.mMatchCount = instance.mMatchCount;
-    this.mOwner = instance.mOwner;
     this.mStatus = instance.mStatus;
     this.mTitle = instance.mTitle;
     this.context = instance.context;

@@ -260,6 +260,25 @@ public class BrandedContentShadowIGMediaID extends APINode {
 
 
 
+  public static enum EnumMediaRelationship {
+      @SerializedName("IS_TAGGED")
+      VALUE_IS_TAGGED("IS_TAGGED"),
+      @SerializedName("OWNED")
+      VALUE_OWNED("OWNED"),
+      ;
+
+      private String value;
+
+      private EnumMediaRelationship(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
 
   synchronized /*package*/ static Gson getGson() {
     if (gson != null) {

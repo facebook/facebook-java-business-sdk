@@ -49,6 +49,8 @@ public class AudioAsset extends APINode {
   private String mAudioClusterId = null;
   @SerializedName("cover_image_source")
   private String mCoverImageSource = null;
+  @SerializedName("description")
+  private String mDescription = null;
   @SerializedName("display_artist")
   private String mDisplayArtist = null;
   @SerializedName("download_hd_url")
@@ -309,6 +311,10 @@ public class AudioAsset extends APINode {
     return mCoverImageSource;
   }
 
+  public String getFieldDescription() {
+    return mDescription;
+  }
+
   public String getFieldDisplayArtist() {
     return mDisplayArtist;
   }
@@ -389,6 +395,7 @@ public class AudioAsset extends APINode {
       "all_ddex_main_artists",
       "audio_cluster_id",
       "cover_image_source",
+      "description",
       "display_artist",
       "download_hd_url",
       "download_sd_url",
@@ -524,6 +531,13 @@ public class AudioAsset extends APINode {
       this.requestField("cover_image_source", value);
       return this;
     }
+    public APIRequestGet requestDescriptionField () {
+      return this.requestDescriptionField(true);
+    }
+    public APIRequestGet requestDescriptionField (boolean value) {
+      this.requestField("description", value);
+      return this;
+    }
     public APIRequestGet requestDisplayArtistField () {
       return this.requestDisplayArtistField(true);
     }
@@ -650,6 +664,7 @@ public class AudioAsset extends APINode {
     this.mAllDdexMainArtists = instance.mAllDdexMainArtists;
     this.mAudioClusterId = instance.mAudioClusterId;
     this.mCoverImageSource = instance.mCoverImageSource;
+    this.mDescription = instance.mDescription;
     this.mDisplayArtist = instance.mDisplayArtist;
     this.mDownloadHdUrl = instance.mDownloadHdUrl;
     this.mDownloadSdUrl = instance.mDownloadSdUrl;

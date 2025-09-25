@@ -41,6 +41,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class CopyrightOwnershipTransfer extends APINode {
+  @SerializedName("assets")
+  private List<Object> mAssets = null;
   @SerializedName("id")
   private String mId = null;
   @SerializedName("receiving_rights_holder")
@@ -267,6 +269,10 @@ public class CopyrightOwnershipTransfer extends APINode {
   }
 
 
+  public List<Object> getFieldAssets() {
+    return mAssets;
+  }
+
   public String getFieldId() {
     return mId;
   }
@@ -310,6 +316,7 @@ public class CopyrightOwnershipTransfer extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "assets",
       "id",
       "receiving_rights_holder",
       "sending_rights_holder",
@@ -408,6 +415,13 @@ public class CopyrightOwnershipTransfer extends APINode {
       return this;
     }
 
+    public APIRequestGet requestAssetsField () {
+      return this.requestAssetsField(true);
+    }
+    public APIRequestGet requestAssetsField (boolean value) {
+      this.requestField("assets", value);
+      return this;
+    }
     public APIRequestGet requestIdField () {
       return this.requestIdField(true);
     }
@@ -467,6 +481,7 @@ public class CopyrightOwnershipTransfer extends APINode {
   }
 
   public CopyrightOwnershipTransfer copyFrom(CopyrightOwnershipTransfer instance) {
+    this.mAssets = instance.mAssets;
     this.mId = instance.mId;
     this.mReceivingRightsHolder = instance.mReceivingRightsHolder;
     this.mSendingRightsHolder = instance.mSendingRightsHolder;

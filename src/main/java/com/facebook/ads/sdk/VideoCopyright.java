@@ -43,10 +43,14 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class VideoCopyright extends APINode {
   @SerializedName("content_category")
   private String mContentCategory = null;
+  @SerializedName("content_protect_protection_disabled_reason")
+  private String mContentProtectProtectionDisabledReason = null;
   @SerializedName("copyright_content_id")
   private String mCopyrightContentId = null;
   @SerializedName("creator")
   private User mCreator = null;
+  @SerializedName("disable_protection_by_content_protect_status")
+  private Boolean mDisableProtectionByContentProtectStatus = null;
   @SerializedName("excluded_ownership_segments")
   private List<VideoCopyrightSegment> mExcludedOwnershipSegments = null;
   @SerializedName("id")
@@ -299,6 +303,10 @@ public class VideoCopyright extends APINode {
     return mContentCategory;
   }
 
+  public String getFieldContentProtectProtectionDisabledReason() {
+    return mContentProtectProtectionDisabledReason;
+  }
+
   public String getFieldCopyrightContentId() {
     return mCopyrightContentId;
   }
@@ -308,6 +316,10 @@ public class VideoCopyright extends APINode {
       mCreator.context = getContext();
     }
     return mCreator;
+  }
+
+  public Boolean getFieldDisableProtectionByContentProtectStatus() {
+    return mDisableProtectionByContentProtectStatus;
   }
 
   public List<VideoCopyrightSegment> getFieldExcludedOwnershipSegments() {
@@ -537,8 +549,10 @@ public class VideoCopyright extends APINode {
 
     public static final String[] FIELDS = {
       "content_category",
+      "content_protect_protection_disabled_reason",
       "copyright_content_id",
       "creator",
+      "disable_protection_by_content_protect_status",
       "excluded_ownership_segments",
       "id",
       "in_conflict",
@@ -651,6 +665,13 @@ public class VideoCopyright extends APINode {
       this.requestField("content_category", value);
       return this;
     }
+    public APIRequestGet requestContentProtectProtectionDisabledReasonField () {
+      return this.requestContentProtectProtectionDisabledReasonField(true);
+    }
+    public APIRequestGet requestContentProtectProtectionDisabledReasonField (boolean value) {
+      this.requestField("content_protect_protection_disabled_reason", value);
+      return this;
+    }
     public APIRequestGet requestCopyrightContentIdField () {
       return this.requestCopyrightContentIdField(true);
     }
@@ -663,6 +684,13 @@ public class VideoCopyright extends APINode {
     }
     public APIRequestGet requestCreatorField (boolean value) {
       this.requestField("creator", value);
+      return this;
+    }
+    public APIRequestGet requestDisableProtectionByContentProtectStatusField () {
+      return this.requestDisableProtectionByContentProtectStatusField(true);
+    }
+    public APIRequestGet requestDisableProtectionByContentProtectStatusField (boolean value) {
+      this.requestField("disable_protection_by_content_protect_status", value);
       return this;
     }
     public APIRequestGet requestExcludedOwnershipSegmentsField () {
@@ -1023,8 +1051,10 @@ public class VideoCopyright extends APINode {
 
   public VideoCopyright copyFrom(VideoCopyright instance) {
     this.mContentCategory = instance.mContentCategory;
+    this.mContentProtectProtectionDisabledReason = instance.mContentProtectProtectionDisabledReason;
     this.mCopyrightContentId = instance.mCopyrightContentId;
     this.mCreator = instance.mCreator;
+    this.mDisableProtectionByContentProtectStatus = instance.mDisableProtectionByContentProtectStatus;
     this.mExcludedOwnershipSegments = instance.mExcludedOwnershipSegments;
     this.mId = instance.mId;
     this.mInConflict = instance.mInConflict;

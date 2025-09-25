@@ -41,6 +41,18 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class AdCreativeMediaSourcingSpec extends APINode {
+  @SerializedName("bodies")
+  private List<Object> mBodies = null;
+  @SerializedName("descriptions")
+  private List<Object> mDescriptions = null;
+  @SerializedName("images")
+  private List<Object> mImages = null;
+  @SerializedName("related_media")
+  private Object mRelatedMedia = null;
+  @SerializedName("titles")
+  private List<Object> mTitles = null;
+  @SerializedName("videos")
+  private List<Object> mVideos = null;
   protected static Gson gson = null;
 
   public AdCreativeMediaSourcingSpec() {
@@ -192,6 +204,60 @@ public class AdCreativeMediaSourcingSpec extends APINode {
   }
 
 
+  public List<Object> getFieldBodies() {
+    return mBodies;
+  }
+
+  public AdCreativeMediaSourcingSpec setFieldBodies(List<Object> value) {
+    this.mBodies = value;
+    return this;
+  }
+
+  public List<Object> getFieldDescriptions() {
+    return mDescriptions;
+  }
+
+  public AdCreativeMediaSourcingSpec setFieldDescriptions(List<Object> value) {
+    this.mDescriptions = value;
+    return this;
+  }
+
+  public List<Object> getFieldImages() {
+    return mImages;
+  }
+
+  public AdCreativeMediaSourcingSpec setFieldImages(List<Object> value) {
+    this.mImages = value;
+    return this;
+  }
+
+  public Object getFieldRelatedMedia() {
+    return mRelatedMedia;
+  }
+
+  public AdCreativeMediaSourcingSpec setFieldRelatedMedia(Object value) {
+    this.mRelatedMedia = value;
+    return this;
+  }
+
+  public List<Object> getFieldTitles() {
+    return mTitles;
+  }
+
+  public AdCreativeMediaSourcingSpec setFieldTitles(List<Object> value) {
+    this.mTitles = value;
+    return this;
+  }
+
+  public List<Object> getFieldVideos() {
+    return mVideos;
+  }
+
+  public AdCreativeMediaSourcingSpec setFieldVideos(List<Object> value) {
+    this.mVideos = value;
+    return this;
+  }
+
 
 
 
@@ -209,6 +275,12 @@ public class AdCreativeMediaSourcingSpec extends APINode {
   }
 
   public AdCreativeMediaSourcingSpec copyFrom(AdCreativeMediaSourcingSpec instance) {
+    this.mBodies = instance.mBodies;
+    this.mDescriptions = instance.mDescriptions;
+    this.mImages = instance.mImages;
+    this.mRelatedMedia = instance.mRelatedMedia;
+    this.mTitles = instance.mTitles;
+    this.mVideos = instance.mVideos;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

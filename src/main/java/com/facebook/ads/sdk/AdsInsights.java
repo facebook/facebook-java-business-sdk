@@ -323,28 +323,8 @@ public class AdsInsights extends APINode {
   private List<AdsActionStats> mOutboundClicksCtr = null;
   @SerializedName("place_page_name")
   private String mPlacePageName = null;
-  @SerializedName("product_brand")
-  private String mProductBrand = null;
-  @SerializedName("product_category")
-  private String mProductCategory = null;
-  @SerializedName("product_content_id")
-  private String mProductContentId = null;
-  @SerializedName("product_custom_label_0")
-  private String mProductCustomLabel0 = null;
-  @SerializedName("product_custom_label_1")
-  private String mProductCustomLabel1 = null;
-  @SerializedName("product_custom_label_2")
-  private String mProductCustomLabel2 = null;
-  @SerializedName("product_custom_label_3")
-  private String mProductCustomLabel3 = null;
-  @SerializedName("product_custom_label_4")
-  private String mProductCustomLabel4 = null;
-  @SerializedName("product_group_content_id")
-  private String mProductGroupContentId = null;
   @SerializedName("product_group_retailer_id")
   private String mProductGroupRetailerId = null;
-  @SerializedName("product_name")
-  private String mProductName = null;
   @SerializedName("product_retailer_id")
   private String mProductRetailerId = null;
   @SerializedName("product_views")
@@ -468,14 +448,22 @@ public class AdsInsights extends APINode {
   private String mCoarseConversionValue = null;
   @SerializedName("comscore_market")
   private String mComscoreMarket = null;
-  @SerializedName("comscore_market_code")
-  private String mComscoreMarketCode = null;
   @SerializedName("conversion_destination")
   private String mConversionDestination = null;
   @SerializedName("country")
   private String mCountry = null;
+  @SerializedName("creative_automation_asset_id")
+  private String mCreativeAutomationAssetId = null;
   @SerializedName("creative_relaxation_asset_type")
   private String mCreativeRelaxationAssetType = null;
+  @SerializedName("crm_advertiser_l12_territory_ids")
+  private String mCrmAdvertiserL12TerritoryIds = null;
+  @SerializedName("crm_advertiser_subvertical_id")
+  private String mCrmAdvertiserSubverticalId = null;
+  @SerializedName("crm_advertiser_vertical_id")
+  private String mCrmAdvertiserVerticalId = null;
+  @SerializedName("crm_ult_advertiser_id")
+  private String mCrmUltAdvertiserId = null;
   @SerializedName("description_asset")
   private AdAssetDescription mDescriptionAsset = null;
   @SerializedName("device_platform")
@@ -540,14 +528,38 @@ public class AdsInsights extends APINode {
   private String mPlatformPosition = null;
   @SerializedName("postback_sequence_index")
   private String mPostbackSequenceIndex = null;
+  @SerializedName("product_brand_breakdown")
+  private String mProductBrandBreakdown = null;
+  @SerializedName("product_category_breakdown")
+  private String mProductCategoryBreakdown = null;
+  @SerializedName("product_custom_label_0_breakdown")
+  private String mProductCustomLabel0Breakdown = null;
+  @SerializedName("product_custom_label_1_breakdown")
+  private String mProductCustomLabel1Breakdown = null;
+  @SerializedName("product_custom_label_2_breakdown")
+  private String mProductCustomLabel2Breakdown = null;
+  @SerializedName("product_custom_label_3_breakdown")
+  private String mProductCustomLabel3Breakdown = null;
+  @SerializedName("product_custom_label_4_breakdown")
+  private String mProductCustomLabel4Breakdown = null;
+  @SerializedName("product_group_content_id_breakdown")
+  private String mProductGroupContentIdBreakdown = null;
   @SerializedName("product_id")
   private String mProductId = null;
+  @SerializedName("product_set_id_breakdown")
+  private String mProductSetIdBreakdown = null;
   @SerializedName("publisher_platform")
   private String mPublisherPlatform = null;
   @SerializedName("redownload")
   private String mRedownload = null;
   @SerializedName("region")
   private String mRegion = null;
+  @SerializedName("rta_ugc_topic")
+  private String mRtaUgcTopic = null;
+  @SerializedName("rule_set_id")
+  private String mRuleSetId = null;
+  @SerializedName("rule_set_name")
+  private String mRuleSetName = null;
   @SerializedName("signal_source_bucket")
   private String mSignalSourceBucket = null;
   @SerializedName("skan_campaign_id")
@@ -2256,102 +2268,12 @@ public class AdsInsights extends APINode {
     return this;
   }
 
-  public String getFieldProductBrand() {
-    return mProductBrand;
-  }
-
-  public AdsInsights setFieldProductBrand(String value) {
-    this.mProductBrand = value;
-    return this;
-  }
-
-  public String getFieldProductCategory() {
-    return mProductCategory;
-  }
-
-  public AdsInsights setFieldProductCategory(String value) {
-    this.mProductCategory = value;
-    return this;
-  }
-
-  public String getFieldProductContentId() {
-    return mProductContentId;
-  }
-
-  public AdsInsights setFieldProductContentId(String value) {
-    this.mProductContentId = value;
-    return this;
-  }
-
-  public String getFieldProductCustomLabel0() {
-    return mProductCustomLabel0;
-  }
-
-  public AdsInsights setFieldProductCustomLabel0(String value) {
-    this.mProductCustomLabel0 = value;
-    return this;
-  }
-
-  public String getFieldProductCustomLabel1() {
-    return mProductCustomLabel1;
-  }
-
-  public AdsInsights setFieldProductCustomLabel1(String value) {
-    this.mProductCustomLabel1 = value;
-    return this;
-  }
-
-  public String getFieldProductCustomLabel2() {
-    return mProductCustomLabel2;
-  }
-
-  public AdsInsights setFieldProductCustomLabel2(String value) {
-    this.mProductCustomLabel2 = value;
-    return this;
-  }
-
-  public String getFieldProductCustomLabel3() {
-    return mProductCustomLabel3;
-  }
-
-  public AdsInsights setFieldProductCustomLabel3(String value) {
-    this.mProductCustomLabel3 = value;
-    return this;
-  }
-
-  public String getFieldProductCustomLabel4() {
-    return mProductCustomLabel4;
-  }
-
-  public AdsInsights setFieldProductCustomLabel4(String value) {
-    this.mProductCustomLabel4 = value;
-    return this;
-  }
-
-  public String getFieldProductGroupContentId() {
-    return mProductGroupContentId;
-  }
-
-  public AdsInsights setFieldProductGroupContentId(String value) {
-    this.mProductGroupContentId = value;
-    return this;
-  }
-
   public String getFieldProductGroupRetailerId() {
     return mProductGroupRetailerId;
   }
 
   public AdsInsights setFieldProductGroupRetailerId(String value) {
     this.mProductGroupRetailerId = value;
-    return this;
-  }
-
-  public String getFieldProductName() {
-    return mProductName;
-  }
-
-  public AdsInsights setFieldProductName(String value) {
-    this.mProductName = value;
     return this;
   }
 
@@ -2989,10 +2911,6 @@ public class AdsInsights extends APINode {
     return mComscoreMarket;
   }
 
-  public String getFieldComscoreMarketCode() {
-    return mComscoreMarketCode;
-  }
-
   public String getFieldConversionDestination() {
     return mConversionDestination;
   }
@@ -3001,8 +2919,28 @@ public class AdsInsights extends APINode {
     return mCountry;
   }
 
+  public String getFieldCreativeAutomationAssetId() {
+    return mCreativeAutomationAssetId;
+  }
+
   public String getFieldCreativeRelaxationAssetType() {
     return mCreativeRelaxationAssetType;
+  }
+
+  public String getFieldCrmAdvertiserL12TerritoryIds() {
+    return mCrmAdvertiserL12TerritoryIds;
+  }
+
+  public String getFieldCrmAdvertiserSubverticalId() {
+    return mCrmAdvertiserSubverticalId;
+  }
+
+  public String getFieldCrmAdvertiserVerticalId() {
+    return mCrmAdvertiserVerticalId;
+  }
+
+  public String getFieldCrmUltAdvertiserId() {
+    return mCrmUltAdvertiserId;
   }
 
   public AdAssetDescription getFieldDescriptionAsset() {
@@ -3133,8 +3071,44 @@ public class AdsInsights extends APINode {
     return mPostbackSequenceIndex;
   }
 
+  public String getFieldProductBrandBreakdown() {
+    return mProductBrandBreakdown;
+  }
+
+  public String getFieldProductCategoryBreakdown() {
+    return mProductCategoryBreakdown;
+  }
+
+  public String getFieldProductCustomLabel0Breakdown() {
+    return mProductCustomLabel0Breakdown;
+  }
+
+  public String getFieldProductCustomLabel1Breakdown() {
+    return mProductCustomLabel1Breakdown;
+  }
+
+  public String getFieldProductCustomLabel2Breakdown() {
+    return mProductCustomLabel2Breakdown;
+  }
+
+  public String getFieldProductCustomLabel3Breakdown() {
+    return mProductCustomLabel3Breakdown;
+  }
+
+  public String getFieldProductCustomLabel4Breakdown() {
+    return mProductCustomLabel4Breakdown;
+  }
+
+  public String getFieldProductGroupContentIdBreakdown() {
+    return mProductGroupContentIdBreakdown;
+  }
+
   public String getFieldProductId() {
     return mProductId;
+  }
+
+  public String getFieldProductSetIdBreakdown() {
+    return mProductSetIdBreakdown;
   }
 
   public String getFieldPublisherPlatform() {
@@ -3147,6 +3121,18 @@ public class AdsInsights extends APINode {
 
   public String getFieldRegion() {
     return mRegion;
+  }
+
+  public String getFieldRtaUgcTopic() {
+    return mRtaUgcTopic;
+  }
+
+  public String getFieldRuleSetId() {
+    return mRuleSetId;
+  }
+
+  public String getFieldRuleSetName() {
+    return mRuleSetName;
   }
 
   public String getFieldSignalSourceBucket() {
@@ -3351,14 +3337,22 @@ public class AdsInsights extends APINode {
       VALUE_COARSE_CONVERSION_VALUE("coarse_conversion_value"),
       @SerializedName("comscore_market")
       VALUE_COMSCORE_MARKET("comscore_market"),
-      @SerializedName("comscore_market_code")
-      VALUE_COMSCORE_MARKET_CODE("comscore_market_code"),
       @SerializedName("conversion_destination")
       VALUE_CONVERSION_DESTINATION("conversion_destination"),
       @SerializedName("country")
       VALUE_COUNTRY("country"),
+      @SerializedName("creative_automation_asset_id")
+      VALUE_CREATIVE_AUTOMATION_ASSET_ID("creative_automation_asset_id"),
       @SerializedName("creative_relaxation_asset_type")
       VALUE_CREATIVE_RELAXATION_ASSET_TYPE("creative_relaxation_asset_type"),
+      @SerializedName("crm_advertiser_l12_territory_ids")
+      VALUE_CRM_ADVERTISER_L12_TERRITORY_IDS("crm_advertiser_l12_territory_ids"),
+      @SerializedName("crm_advertiser_subvertical_id")
+      VALUE_CRM_ADVERTISER_SUBVERTICAL_ID("crm_advertiser_subvertical_id"),
+      @SerializedName("crm_advertiser_vertical_id")
+      VALUE_CRM_ADVERTISER_VERTICAL_ID("crm_advertiser_vertical_id"),
+      @SerializedName("crm_ult_advertiser_id")
+      VALUE_CRM_ULT_ADVERTISER_ID("crm_ult_advertiser_id"),
       @SerializedName("description_asset")
       VALUE_DESCRIPTION_ASSET("description_asset"),
       @SerializedName("device_platform")
@@ -3423,14 +3417,38 @@ public class AdsInsights extends APINode {
       VALUE_PLATFORM_POSITION("platform_position"),
       @SerializedName("postback_sequence_index")
       VALUE_POSTBACK_SEQUENCE_INDEX("postback_sequence_index"),
+      @SerializedName("product_brand_breakdown")
+      VALUE_PRODUCT_BRAND_BREAKDOWN("product_brand_breakdown"),
+      @SerializedName("product_category_breakdown")
+      VALUE_PRODUCT_CATEGORY_BREAKDOWN("product_category_breakdown"),
+      @SerializedName("product_custom_label_0_breakdown")
+      VALUE_PRODUCT_CUSTOM_LABEL_0_BREAKDOWN("product_custom_label_0_breakdown"),
+      @SerializedName("product_custom_label_1_breakdown")
+      VALUE_PRODUCT_CUSTOM_LABEL_1_BREAKDOWN("product_custom_label_1_breakdown"),
+      @SerializedName("product_custom_label_2_breakdown")
+      VALUE_PRODUCT_CUSTOM_LABEL_2_BREAKDOWN("product_custom_label_2_breakdown"),
+      @SerializedName("product_custom_label_3_breakdown")
+      VALUE_PRODUCT_CUSTOM_LABEL_3_BREAKDOWN("product_custom_label_3_breakdown"),
+      @SerializedName("product_custom_label_4_breakdown")
+      VALUE_PRODUCT_CUSTOM_LABEL_4_BREAKDOWN("product_custom_label_4_breakdown"),
+      @SerializedName("product_group_content_id_breakdown")
+      VALUE_PRODUCT_GROUP_CONTENT_ID_BREAKDOWN("product_group_content_id_breakdown"),
       @SerializedName("product_id")
       VALUE_PRODUCT_ID("product_id"),
+      @SerializedName("product_set_id_breakdown")
+      VALUE_PRODUCT_SET_ID_BREAKDOWN("product_set_id_breakdown"),
       @SerializedName("publisher_platform")
       VALUE_PUBLISHER_PLATFORM("publisher_platform"),
       @SerializedName("redownload")
       VALUE_REDOWNLOAD("redownload"),
       @SerializedName("region")
       VALUE_REGION("region"),
+      @SerializedName("rta_ugc_topic")
+      VALUE_RTA_UGC_TOPIC("rta_ugc_topic"),
+      @SerializedName("rule_set_id")
+      VALUE_RULE_SET_ID("rule_set_id"),
+      @SerializedName("rule_set_name")
+      VALUE_RULE_SET_NAME("rule_set_name"),
       @SerializedName("signal_source_bucket")
       VALUE_SIGNAL_SOURCE_BUCKET("signal_source_bucket"),
       @SerializedName("skan_campaign_id")
@@ -3752,17 +3770,7 @@ public class AdsInsights extends APINode {
     this.mOutboundClicks = instance.mOutboundClicks;
     this.mOutboundClicksCtr = instance.mOutboundClicksCtr;
     this.mPlacePageName = instance.mPlacePageName;
-    this.mProductBrand = instance.mProductBrand;
-    this.mProductCategory = instance.mProductCategory;
-    this.mProductContentId = instance.mProductContentId;
-    this.mProductCustomLabel0 = instance.mProductCustomLabel0;
-    this.mProductCustomLabel1 = instance.mProductCustomLabel1;
-    this.mProductCustomLabel2 = instance.mProductCustomLabel2;
-    this.mProductCustomLabel3 = instance.mProductCustomLabel3;
-    this.mProductCustomLabel4 = instance.mProductCustomLabel4;
-    this.mProductGroupContentId = instance.mProductGroupContentId;
     this.mProductGroupRetailerId = instance.mProductGroupRetailerId;
-    this.mProductName = instance.mProductName;
     this.mProductRetailerId = instance.mProductRetailerId;
     this.mProductViews = instance.mProductViews;
     this.mPurchasePerLandingPageView = instance.mPurchasePerLandingPageView;
@@ -3824,10 +3832,14 @@ public class AdsInsights extends APINode {
     this.mCallToActionAsset = instance.mCallToActionAsset;
     this.mCoarseConversionValue = instance.mCoarseConversionValue;
     this.mComscoreMarket = instance.mComscoreMarket;
-    this.mComscoreMarketCode = instance.mComscoreMarketCode;
     this.mConversionDestination = instance.mConversionDestination;
     this.mCountry = instance.mCountry;
+    this.mCreativeAutomationAssetId = instance.mCreativeAutomationAssetId;
     this.mCreativeRelaxationAssetType = instance.mCreativeRelaxationAssetType;
+    this.mCrmAdvertiserL12TerritoryIds = instance.mCrmAdvertiserL12TerritoryIds;
+    this.mCrmAdvertiserSubverticalId = instance.mCrmAdvertiserSubverticalId;
+    this.mCrmAdvertiserVerticalId = instance.mCrmAdvertiserVerticalId;
+    this.mCrmUltAdvertiserId = instance.mCrmUltAdvertiserId;
     this.mDescriptionAsset = instance.mDescriptionAsset;
     this.mDevicePlatform = instance.mDevicePlatform;
     this.mDma = instance.mDma;
@@ -3860,10 +3872,22 @@ public class AdsInsights extends APINode {
     this.mPlacePageId = instance.mPlacePageId;
     this.mPlatformPosition = instance.mPlatformPosition;
     this.mPostbackSequenceIndex = instance.mPostbackSequenceIndex;
+    this.mProductBrandBreakdown = instance.mProductBrandBreakdown;
+    this.mProductCategoryBreakdown = instance.mProductCategoryBreakdown;
+    this.mProductCustomLabel0Breakdown = instance.mProductCustomLabel0Breakdown;
+    this.mProductCustomLabel1Breakdown = instance.mProductCustomLabel1Breakdown;
+    this.mProductCustomLabel2Breakdown = instance.mProductCustomLabel2Breakdown;
+    this.mProductCustomLabel3Breakdown = instance.mProductCustomLabel3Breakdown;
+    this.mProductCustomLabel4Breakdown = instance.mProductCustomLabel4Breakdown;
+    this.mProductGroupContentIdBreakdown = instance.mProductGroupContentIdBreakdown;
     this.mProductId = instance.mProductId;
+    this.mProductSetIdBreakdown = instance.mProductSetIdBreakdown;
     this.mPublisherPlatform = instance.mPublisherPlatform;
     this.mRedownload = instance.mRedownload;
     this.mRegion = instance.mRegion;
+    this.mRtaUgcTopic = instance.mRtaUgcTopic;
+    this.mRuleSetId = instance.mRuleSetId;
+    this.mRuleSetName = instance.mRuleSetName;
     this.mSignalSourceBucket = instance.mSignalSourceBucket;
     this.mSkanCampaignId = instance.mSkanCampaignId;
     this.mSkanConversionId = instance.mSkanConversionId;

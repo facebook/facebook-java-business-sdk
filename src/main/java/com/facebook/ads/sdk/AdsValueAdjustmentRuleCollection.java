@@ -45,6 +45,8 @@ public class AdsValueAdjustmentRuleCollection extends APINode {
   private String mId = null;
   @SerializedName("is_default_setting")
   private Boolean mIsDefaultSetting = null;
+  @SerializedName("last_attach_time")
+  private String mLastAttachTime = null;
   @SerializedName("name")
   private String mName = null;
   @SerializedName("product_type")
@@ -285,6 +287,10 @@ public class AdsValueAdjustmentRuleCollection extends APINode {
     return mIsDefaultSetting;
   }
 
+  public String getFieldLastAttachTime() {
+    return mLastAttachTime;
+  }
+
   public String getFieldName() {
     return mName;
   }
@@ -350,7 +356,7 @@ public class AdsValueAdjustmentRuleCollection extends APINode {
     };
 
     public APIRequestCreateDeleteRuleSet(String nodeId, APIContext context) {
-      super(context, nodeId, "/delete_rule_set", "POST", Arrays.asList(PARAMS));
+      super(context, nodeId, "/deleteruleset", "POST", Arrays.asList(PARAMS));
     }
 
     @Override
@@ -522,6 +528,7 @@ public class AdsValueAdjustmentRuleCollection extends APINode {
     public static final String[] FIELDS = {
       "id",
       "is_default_setting",
+      "last_attach_time",
       "name",
       "product_type",
       "status",
@@ -629,6 +636,13 @@ public class AdsValueAdjustmentRuleCollection extends APINode {
     }
     public APIRequestGet requestIsDefaultSettingField (boolean value) {
       this.requestField("is_default_setting", value);
+      return this;
+    }
+    public APIRequestGet requestLastAttachTimeField () {
+      return this.requestLastAttachTimeField(true);
+    }
+    public APIRequestGet requestLastAttachTimeField (boolean value) {
+      this.requestField("last_attach_time", value);
       return this;
     }
     public APIRequestGet requestNameField () {
@@ -842,6 +856,7 @@ public class AdsValueAdjustmentRuleCollection extends APINode {
   public AdsValueAdjustmentRuleCollection copyFrom(AdsValueAdjustmentRuleCollection instance) {
     this.mId = instance.mId;
     this.mIsDefaultSetting = instance.mIsDefaultSetting;
+    this.mLastAttachTime = instance.mLastAttachTime;
     this.mName = instance.mName;
     this.mProductType = instance.mProductType;
     this.mStatus = instance.mStatus;

@@ -367,6 +367,7 @@ public class AdLabel extends APINode {
       "link_destination_display_url",
       "link_og_id",
       "link_url",
+      "media_sourcing_spec",
       "messenger_sponsored_message",
       "name",
       "object_id",
@@ -781,6 +782,13 @@ public class AdLabel extends APINode {
     }
     public APIRequestGetAdCreatives requestLinkUrlField (boolean value) {
       this.requestField("link_url", value);
+      return this;
+    }
+    public APIRequestGetAdCreatives requestMediaSourcingSpecField () {
+      return this.requestMediaSourcingSpecField(true);
+    }
+    public APIRequestGetAdCreatives requestMediaSourcingSpecField (boolean value) {
+      this.requestField("media_sourcing_spec", value);
       return this;
     }
     public APIRequestGetAdCreatives requestMessengerSponsoredMessageField () {
@@ -1475,6 +1483,7 @@ public class AdLabel extends APINode {
       "optimization_goal",
       "optimization_sub_event",
       "pacing_type",
+      "placement_soft_opt_out",
       "promoted_object",
       "recommendations",
       "recurring_budget_semantics",
@@ -1490,8 +1499,11 @@ public class AdLabel extends APINode {
       "targeting_optimization_types",
       "time_based_ad_rotation_id_blocks",
       "time_based_ad_rotation_intervals",
+      "trending_topics_spec",
       "updated_time",
       "use_new_app_click",
+      "value_rule_set_id",
+      "value_rules_applied",
     };
 
     @Override
@@ -1948,6 +1960,13 @@ public class AdLabel extends APINode {
       this.requestField("pacing_type", value);
       return this;
     }
+    public APIRequestGetAdSets requestPlacementSoftOptOutField () {
+      return this.requestPlacementSoftOptOutField(true);
+    }
+    public APIRequestGetAdSets requestPlacementSoftOptOutField (boolean value) {
+      this.requestField("placement_soft_opt_out", value);
+      return this;
+    }
     public APIRequestGetAdSets requestPromotedObjectField () {
       return this.requestPromotedObjectField(true);
     }
@@ -2053,6 +2072,13 @@ public class AdLabel extends APINode {
       this.requestField("time_based_ad_rotation_intervals", value);
       return this;
     }
+    public APIRequestGetAdSets requestTrendingTopicsSpecField () {
+      return this.requestTrendingTopicsSpecField(true);
+    }
+    public APIRequestGetAdSets requestTrendingTopicsSpecField (boolean value) {
+      this.requestField("trending_topics_spec", value);
+      return this;
+    }
     public APIRequestGetAdSets requestUpdatedTimeField () {
       return this.requestUpdatedTimeField(true);
     }
@@ -2065,6 +2091,20 @@ public class AdLabel extends APINode {
     }
     public APIRequestGetAdSets requestUseNewAppClickField (boolean value) {
       this.requestField("use_new_app_click", value);
+      return this;
+    }
+    public APIRequestGetAdSets requestValueRuleSetIdField () {
+      return this.requestValueRuleSetIdField(true);
+    }
+    public APIRequestGetAdSets requestValueRuleSetIdField (boolean value) {
+      this.requestField("value_rule_set_id", value);
+      return this;
+    }
+    public APIRequestGetAdSets requestValueRulesAppliedField () {
+      return this.requestValueRulesAppliedField(true);
+    }
+    public APIRequestGetAdSets requestValueRulesAppliedField (boolean value) {
+      this.requestField("value_rules_applied", value);
       return this;
     }
   }
@@ -2098,7 +2138,10 @@ public class AdLabel extends APINode {
       "effective_status",
       "has_secondary_skadnetwork_reporting",
       "id",
+      "is_adset_budget_sharing_enabled",
       "is_budget_schedule_enabled",
+      "is_direct_send_campaign",
+      "is_message_campaign",
       "is_skadnetwork_attribution",
       "issues_info",
       "last_budget_toggling_time",
@@ -2340,11 +2383,32 @@ public class AdLabel extends APINode {
       this.requestField("id", value);
       return this;
     }
+    public APIRequestGetCampaigns requestIsAdsetBudgetSharingEnabledField () {
+      return this.requestIsAdsetBudgetSharingEnabledField(true);
+    }
+    public APIRequestGetCampaigns requestIsAdsetBudgetSharingEnabledField (boolean value) {
+      this.requestField("is_adset_budget_sharing_enabled", value);
+      return this;
+    }
     public APIRequestGetCampaigns requestIsBudgetScheduleEnabledField () {
       return this.requestIsBudgetScheduleEnabledField(true);
     }
     public APIRequestGetCampaigns requestIsBudgetScheduleEnabledField (boolean value) {
       this.requestField("is_budget_schedule_enabled", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestIsDirectSendCampaignField () {
+      return this.requestIsDirectSendCampaignField(true);
+    }
+    public APIRequestGetCampaigns requestIsDirectSendCampaignField (boolean value) {
+      this.requestField("is_direct_send_campaign", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestIsMessageCampaignField () {
+      return this.requestIsMessageCampaignField(true);
+    }
+    public APIRequestGetCampaigns requestIsMessageCampaignField (boolean value) {
+      this.requestField("is_message_campaign", value);
       return this;
     }
     public APIRequestGetCampaigns requestIsSkadnetworkAttributionField () {

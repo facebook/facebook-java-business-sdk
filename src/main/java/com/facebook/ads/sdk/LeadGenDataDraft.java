@@ -65,6 +65,8 @@ public class LeadGenDataDraft extends APINode {
   private String mQuestionPageCustomHeadline = null;
   @SerializedName("questions")
   private List<LeadGenDraftQuestion> mQuestions = null;
+  @SerializedName("should_enforce_work_email")
+  private Boolean mShouldEnforceWorkEmail = null;
   @SerializedName("status")
   private String mStatus = null;
   @SerializedName("thank_you_page")
@@ -336,6 +338,10 @@ public class LeadGenDataDraft extends APINode {
     return mQuestions;
   }
 
+  public Boolean getFieldShouldEnforceWorkEmail() {
+    return mShouldEnforceWorkEmail;
+  }
+
   public String getFieldStatus() {
     return mStatus;
   }
@@ -373,6 +379,7 @@ public class LeadGenDataDraft extends APINode {
       "page",
       "question_page_custom_headline",
       "questions",
+      "should_enforce_work_email",
       "status",
       "thank_you_page",
       "tracking_parameters",
@@ -552,6 +559,13 @@ public class LeadGenDataDraft extends APINode {
       this.requestField("questions", value);
       return this;
     }
+    public APIRequestGet requestShouldEnforceWorkEmailField () {
+      return this.requestShouldEnforceWorkEmailField(true);
+    }
+    public APIRequestGet requestShouldEnforceWorkEmailField (boolean value) {
+      this.requestField("should_enforce_work_email", value);
+      return this;
+    }
     public APIRequestGet requestStatusField () {
       return this.requestStatusField(true);
     }
@@ -602,6 +616,7 @@ public class LeadGenDataDraft extends APINode {
     this.mPage = instance.mPage;
     this.mQuestionPageCustomHeadline = instance.mQuestionPageCustomHeadline;
     this.mQuestions = instance.mQuestions;
+    this.mShouldEnforceWorkEmail = instance.mShouldEnforceWorkEmail;
     this.mStatus = instance.mStatus;
     this.mThankYouPage = instance.mThankYouPage;
     this.mTrackingParameters = instance.mTrackingParameters;

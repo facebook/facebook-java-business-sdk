@@ -609,6 +609,27 @@ public class AdCustomDerivedMetrics extends APINode {
     }
   }
 
+  public static enum EnumScope {
+      @SerializedName("ACCOUNT")
+      VALUE_ACCOUNT("ACCOUNT"),
+      @SerializedName("BUSINESS")
+      VALUE_BUSINESS("BUSINESS"),
+      @SerializedName("BUSINESS_ASSET_GROUP")
+      VALUE_BUSINESS_ASSET_GROUP("BUSINESS_ASSET_GROUP"),
+      ;
+
+      private String value;
+
+      private EnumScope(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
 
   synchronized /*package*/ static Gson getGson() {
     if (gson != null) {

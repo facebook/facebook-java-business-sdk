@@ -43,12 +43,16 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class AdAssetFeedSpecLinkURL extends APINode {
   @SerializedName("adlabels")
   private List<AdAssetFeedSpecAssetLabel> mAdlabels = null;
+  @SerializedName("android_url")
+  private String mAndroidUrl = null;
   @SerializedName("carousel_see_more_url")
   private String mCarouselSeeMoreUrl = null;
   @SerializedName("deeplink_url")
   private String mDeeplinkUrl = null;
   @SerializedName("display_url")
   private String mDisplayUrl = null;
+  @SerializedName("ios_url")
+  private String mIosUrl = null;
   @SerializedName("object_store_urls")
   private List<String> mObjectStoreUrls = null;
   @SerializedName("url_tags")
@@ -220,6 +224,15 @@ public class AdAssetFeedSpecLinkURL extends APINode {
     this.mAdlabels = AdAssetFeedSpecAssetLabel.getGson().fromJson(value, type);
     return this;
   }
+  public String getFieldAndroidUrl() {
+    return mAndroidUrl;
+  }
+
+  public AdAssetFeedSpecLinkURL setFieldAndroidUrl(String value) {
+    this.mAndroidUrl = value;
+    return this;
+  }
+
   public String getFieldCarouselSeeMoreUrl() {
     return mCarouselSeeMoreUrl;
   }
@@ -244,6 +257,15 @@ public class AdAssetFeedSpecLinkURL extends APINode {
 
   public AdAssetFeedSpecLinkURL setFieldDisplayUrl(String value) {
     this.mDisplayUrl = value;
+    return this;
+  }
+
+  public String getFieldIosUrl() {
+    return mIosUrl;
+  }
+
+  public AdAssetFeedSpecLinkURL setFieldIosUrl(String value) {
+    this.mIosUrl = value;
     return this;
   }
 
@@ -292,9 +314,11 @@ public class AdAssetFeedSpecLinkURL extends APINode {
 
   public AdAssetFeedSpecLinkURL copyFrom(AdAssetFeedSpecLinkURL instance) {
     this.mAdlabels = instance.mAdlabels;
+    this.mAndroidUrl = instance.mAndroidUrl;
     this.mCarouselSeeMoreUrl = instance.mCarouselSeeMoreUrl;
     this.mDeeplinkUrl = instance.mDeeplinkUrl;
     this.mDisplayUrl = instance.mDisplayUrl;
+    this.mIosUrl = instance.mIosUrl;
     this.mObjectStoreUrls = instance.mObjectStoreUrls;
     this.mUrlTags = instance.mUrlTags;
     this.mWebsiteUrl = instance.mWebsiteUrl;

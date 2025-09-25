@@ -1113,6 +1113,8 @@ public class AdAccountTargetingUnified extends APINode {
       VALUE_DEVICE_PLATFORMS("device_platforms"),
       @SerializedName("direct_install_devices")
       VALUE_DIRECT_INSTALL_DEVICES("direct_install_devices"),
+      @SerializedName("dt_consolidation_state")
+      VALUE_DT_CONSOLIDATION_STATE("dt_consolidation_state"),
       @SerializedName("dynamic_audience_ids")
       VALUE_DYNAMIC_AUDIENCE_IDS("dynamic_audience_ids"),
       @SerializedName("education_majors")

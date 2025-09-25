@@ -2943,6 +2943,7 @@ public class ProductSet extends APINode {
       "invalidation_errors",
       "inventory",
       "is_bundle_hero",
+      "live_special_price",
       "manufacturer_info",
       "manufacturer_part_number",
       "marked_for_product_launch",
@@ -2966,6 +2967,7 @@ public class ProductSet extends APINode {
       "retailer_product_group_id",
       "review_rejection_reasons",
       "review_status",
+      "rich_text_description",
       "sale_price",
       "sale_price_end_date",
       "sale_price_start_date",
@@ -2974,6 +2976,7 @@ public class ProductSet extends APINode {
       "short_description",
       "size",
       "start_date",
+      "status",
       "tags",
       "url",
       "vendor_id",
@@ -3431,6 +3434,13 @@ public class ProductSet extends APINode {
       this.requestField("is_bundle_hero", value);
       return this;
     }
+    public APIRequestGetProducts requestLiveSpecialPriceField () {
+      return this.requestLiveSpecialPriceField(true);
+    }
+    public APIRequestGetProducts requestLiveSpecialPriceField (boolean value) {
+      this.requestField("live_special_price", value);
+      return this;
+    }
     public APIRequestGetProducts requestManufacturerInfoField () {
       return this.requestManufacturerInfoField(true);
     }
@@ -3592,6 +3602,13 @@ public class ProductSet extends APINode {
       this.requestField("review_status", value);
       return this;
     }
+    public APIRequestGetProducts requestRichTextDescriptionField () {
+      return this.requestRichTextDescriptionField(true);
+    }
+    public APIRequestGetProducts requestRichTextDescriptionField (boolean value) {
+      this.requestField("rich_text_description", value);
+      return this;
+    }
     public APIRequestGetProducts requestSalePriceField () {
       return this.requestSalePriceField(true);
     }
@@ -3646,6 +3663,13 @@ public class ProductSet extends APINode {
     }
     public APIRequestGetProducts requestStartDateField (boolean value) {
       this.requestField("start_date", value);
+      return this;
+    }
+    public APIRequestGetProducts requestStatusField () {
+      return this.requestStatusField(true);
+    }
+    public APIRequestGetProducts requestStatusField (boolean value) {
+      this.requestField("status", value);
       return this;
     }
     public APIRequestGetProducts requestTagsField () {

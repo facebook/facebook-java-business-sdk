@@ -354,6 +354,7 @@ public class ContentBlockList extends APINode {
       "min_daily_budget",
       "name",
       "offsite_pixels_tos_accepted",
+      "opportunity_score",
       "owner",
       "owner_business",
       "partner",
@@ -836,6 +837,13 @@ public class ContentBlockList extends APINode {
       this.requestField("offsite_pixels_tos_accepted", value);
       return this;
     }
+    public APIRequestGetAppliedAdAccounts requestOpportunityScoreField () {
+      return this.requestOpportunityScoreField(true);
+    }
+    public APIRequestGetAppliedAdAccounts requestOpportunityScoreField (boolean value) {
+      this.requestField("opportunity_score", value);
+      return this;
+    }
     public APIRequestGetAppliedAdAccounts requestOwnerField () {
       return this.requestOwnerField(true);
     }
@@ -1107,6 +1115,7 @@ public class ContentBlockList extends APINode {
       "thumbnail_url",
       "timestamp",
       "username",
+      "video_title",
       "view_count",
     };
 
@@ -1338,6 +1347,13 @@ public class ContentBlockList extends APINode {
     }
     public APIRequestGetInstagramContent requestUsernameField (boolean value) {
       this.requestField("username", value);
+      return this;
+    }
+    public APIRequestGetInstagramContent requestVideoTitleField () {
+      return this.requestVideoTitleField(true);
+    }
+    public APIRequestGetInstagramContent requestVideoTitleField (boolean value) {
+      this.requestField("video_title", value);
       return this;
     }
     public APIRequestGetInstagramContent requestViewCountField () {

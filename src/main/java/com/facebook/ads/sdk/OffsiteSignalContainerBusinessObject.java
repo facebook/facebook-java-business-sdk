@@ -869,6 +869,7 @@ public class OffsiteSignalContainerBusinessObject extends APINode {
       "connected_instagram_account",
       "connected_page_backed_instagram_account",
       "contact_address",
+      "copyright_attribution_insights",
       "copyright_whitelisted_ig_partners",
       "country_page_likes",
       "cover",
@@ -1272,6 +1273,13 @@ public class OffsiteSignalContainerBusinessObject extends APINode {
     }
     public APIRequestGetLinkedPage requestContactAddressField (boolean value) {
       this.requestField("contact_address", value);
+      return this;
+    }
+    public APIRequestGetLinkedPage requestCopyrightAttributionInsightsField () {
+      return this.requestCopyrightAttributionInsightsField(true);
+    }
+    public APIRequestGetLinkedPage requestCopyrightAttributionInsightsField (boolean value) {
+      this.requestField("copyright_attribution_insights", value);
       return this;
     }
     public APIRequestGetLinkedPage requestCopyrightWhitelistedIgPartnersField () {

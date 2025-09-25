@@ -40,31 +40,25 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class MessengerCallSettings extends APINode {
-  @SerializedName("audio_enabled")
-  private Boolean mAudioEnabled = null;
-  @SerializedName("call_hours")
-  private Object mCallHours = null;
-  @SerializedName("call_routing")
-  private String mCallRouting = null;
-  @SerializedName("icon_enabled")
-  private Boolean mIconEnabled = null;
-  @SerializedName("video")
-  private String mVideo = null;
+public class MarketingMessagesOnboardingStatus extends APINode {
+  @SerializedName("status")
+  private String mStatus = null;
+  @SerializedName("time")
+  private String mTime = null;
   protected static Gson gson = null;
 
-  public MessengerCallSettings() {
+  public MarketingMessagesOnboardingStatus() {
   }
 
   public String getId() {
     return null;
   }
-  public static MessengerCallSettings loadJSON(String json, APIContext context, String header) {
-    MessengerCallSettings messengerCallSettings = getGson().fromJson(json, MessengerCallSettings.class);
+  public static MarketingMessagesOnboardingStatus loadJSON(String json, APIContext context, String header) {
+    MarketingMessagesOnboardingStatus marketingMessagesOnboardingStatus = getGson().fromJson(json, MarketingMessagesOnboardingStatus.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(messengerCallSettings.toString());
+      JsonElement o2 = parser.parse(marketingMessagesOnboardingStatus.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -74,14 +68,14 @@ public class MessengerCallSettings extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    messengerCallSettings.context = context;
-    messengerCallSettings.rawValue = json;
-    messengerCallSettings.header = header;
-    return messengerCallSettings;
+    marketingMessagesOnboardingStatus.context = context;
+    marketingMessagesOnboardingStatus.rawValue = json;
+    marketingMessagesOnboardingStatus.header = header;
+    return marketingMessagesOnboardingStatus;
   }
 
-  public static APINodeList<MessengerCallSettings> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<MessengerCallSettings> messengerCallSettingss = new APINodeList<MessengerCallSettings>(request, json, header);
+  public static APINodeList<MarketingMessagesOnboardingStatus> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<MarketingMessagesOnboardingStatus> marketingMessagesOnboardingStatuss = new APINodeList<MarketingMessagesOnboardingStatus>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -92,9 +86,9 @@ public class MessengerCallSettings extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          messengerCallSettingss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          marketingMessagesOnboardingStatuss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return messengerCallSettingss;
+        return marketingMessagesOnboardingStatuss;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -104,20 +98,20 @@ public class MessengerCallSettings extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                messengerCallSettingss.setCursors(before, after);
+                marketingMessagesOnboardingStatuss.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            messengerCallSettingss.setPaging(previous, next);
+            marketingMessagesOnboardingStatuss.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              messengerCallSettingss.setAppSecret(context.getAppSecretProof());
+              marketingMessagesOnboardingStatuss.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              messengerCallSettingss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              marketingMessagesOnboardingStatuss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -128,23 +122,23 @@ public class MessengerCallSettings extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  messengerCallSettingss.add(loadJSON(entry.getValue().toString(), context, header));
+                  marketingMessagesOnboardingStatuss.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              messengerCallSettingss.add(loadJSON(obj.toString(), context, header));
+              marketingMessagesOnboardingStatuss.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return messengerCallSettingss;
+          return marketingMessagesOnboardingStatuss;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              messengerCallSettingss.add(loadJSON(entry.getValue().toString(), context, header));
+              marketingMessagesOnboardingStatuss.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return messengerCallSettingss;
+          return marketingMessagesOnboardingStatuss;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -161,20 +155,20 @@ public class MessengerCallSettings extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              messengerCallSettingss.add(loadJSON(value.toString(), context, header));
+              marketingMessagesOnboardingStatuss.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return messengerCallSettingss;
+            return marketingMessagesOnboardingStatuss;
           }
 
           // Sixth, check if it's pure JsonObject
-          messengerCallSettingss.clear();
-          messengerCallSettingss.add(loadJSON(json, context, header));
-          return messengerCallSettingss;
+          marketingMessagesOnboardingStatuss.clear();
+          marketingMessagesOnboardingStatuss.add(loadJSON(json, context, header));
+          return marketingMessagesOnboardingStatuss;
         }
       }
     } catch (Exception e) {
@@ -202,48 +196,21 @@ public class MessengerCallSettings extends APINode {
   }
 
 
-  public Boolean getFieldAudioEnabled() {
-    return mAudioEnabled;
+  public String getFieldStatus() {
+    return mStatus;
   }
 
-  public MessengerCallSettings setFieldAudioEnabled(Boolean value) {
-    this.mAudioEnabled = value;
+  public MarketingMessagesOnboardingStatus setFieldStatus(String value) {
+    this.mStatus = value;
     return this;
   }
 
-  public Object getFieldCallHours() {
-    return mCallHours;
+  public String getFieldTime() {
+    return mTime;
   }
 
-  public MessengerCallSettings setFieldCallHours(Object value) {
-    this.mCallHours = value;
-    return this;
-  }
-
-  public String getFieldCallRouting() {
-    return mCallRouting;
-  }
-
-  public MessengerCallSettings setFieldCallRouting(String value) {
-    this.mCallRouting = value;
-    return this;
-  }
-
-  public Boolean getFieldIconEnabled() {
-    return mIconEnabled;
-  }
-
-  public MessengerCallSettings setFieldIconEnabled(Boolean value) {
-    this.mIconEnabled = value;
-    return this;
-  }
-
-  public String getFieldVideo() {
-    return mVideo;
-  }
-
-  public MessengerCallSettings setFieldVideo(String value) {
-    this.mVideo = value;
+  public MarketingMessagesOnboardingStatus setFieldTime(String value) {
+    this.mTime = value;
     return this;
   }
 
@@ -263,21 +230,18 @@ public class MessengerCallSettings extends APINode {
     return gson;
   }
 
-  public MessengerCallSettings copyFrom(MessengerCallSettings instance) {
-    this.mAudioEnabled = instance.mAudioEnabled;
-    this.mCallHours = instance.mCallHours;
-    this.mCallRouting = instance.mCallRouting;
-    this.mIconEnabled = instance.mIconEnabled;
-    this.mVideo = instance.mVideo;
+  public MarketingMessagesOnboardingStatus copyFrom(MarketingMessagesOnboardingStatus instance) {
+    this.mStatus = instance.mStatus;
+    this.mTime = instance.mTime;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<MessengerCallSettings> getParser() {
-    return new APIRequest.ResponseParser<MessengerCallSettings>() {
-      public APINodeList<MessengerCallSettings> parseResponse(String response, APIContext context, APIRequest<MessengerCallSettings> request, String header) throws MalformedResponseException {
-        return MessengerCallSettings.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<MarketingMessagesOnboardingStatus> getParser() {
+    return new APIRequest.ResponseParser<MarketingMessagesOnboardingStatus>() {
+      public APINodeList<MarketingMessagesOnboardingStatus> parseResponse(String response, APIContext context, APIRequest<MarketingMessagesOnboardingStatus> request, String header) throws MalformedResponseException {
+        return MarketingMessagesOnboardingStatus.parseResponse(response, context, request, header);
       }
     };
   }

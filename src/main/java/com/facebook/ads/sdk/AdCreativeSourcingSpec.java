@@ -45,16 +45,26 @@ public class AdCreativeSourcingSpec extends APINode {
   private String mAssociatedProductSetId = null;
   @SerializedName("brand")
   private Object mBrand = null;
+  @SerializedName("destination_screenshot_spec")
+  private Object mDestinationScreenshotSpec = null;
   @SerializedName("dynamic_site_links_spec")
   private Object mDynamicSiteLinksSpec = null;
   @SerializedName("enable_social_feedback_preservation")
   private Boolean mEnableSocialFeedbackPreservation = null;
+  @SerializedName("intent")
+  private Object mIntent = null;
+  @SerializedName("pca_spec")
+  private Object mPcaSpec = null;
   @SerializedName("promotion_metadata_spec")
   private List<AdCreativePromotionMetadataSpec> mPromotionMetadataSpec = null;
+  @SerializedName("site_links_data_consented")
+  private Object mSiteLinksDataConsented = null;
   @SerializedName("site_links_spec")
   private List<AdCreativeSiteLinksSpec> mSiteLinksSpec = null;
   @SerializedName("source_url")
   private String mSourceUrl = null;
+  @SerializedName("website_media_spec")
+  private Object mWebsiteMediaSpec = null;
   @SerializedName("website_summary_spec")
   private Object mWebsiteSummarySpec = null;
   protected static Gson gson = null;
@@ -226,6 +236,15 @@ public class AdCreativeSourcingSpec extends APINode {
     return this;
   }
 
+  public Object getFieldDestinationScreenshotSpec() {
+    return mDestinationScreenshotSpec;
+  }
+
+  public AdCreativeSourcingSpec setFieldDestinationScreenshotSpec(Object value) {
+    this.mDestinationScreenshotSpec = value;
+    return this;
+  }
+
   public Object getFieldDynamicSiteLinksSpec() {
     return mDynamicSiteLinksSpec;
   }
@@ -244,6 +263,24 @@ public class AdCreativeSourcingSpec extends APINode {
     return this;
   }
 
+  public Object getFieldIntent() {
+    return mIntent;
+  }
+
+  public AdCreativeSourcingSpec setFieldIntent(Object value) {
+    this.mIntent = value;
+    return this;
+  }
+
+  public Object getFieldPcaSpec() {
+    return mPcaSpec;
+  }
+
+  public AdCreativeSourcingSpec setFieldPcaSpec(Object value) {
+    this.mPcaSpec = value;
+    return this;
+  }
+
   public List<AdCreativePromotionMetadataSpec> getFieldPromotionMetadataSpec() {
     return mPromotionMetadataSpec;
   }
@@ -258,6 +295,15 @@ public class AdCreativeSourcingSpec extends APINode {
     this.mPromotionMetadataSpec = AdCreativePromotionMetadataSpec.getGson().fromJson(value, type);
     return this;
   }
+  public Object getFieldSiteLinksDataConsented() {
+    return mSiteLinksDataConsented;
+  }
+
+  public AdCreativeSourcingSpec setFieldSiteLinksDataConsented(Object value) {
+    this.mSiteLinksDataConsented = value;
+    return this;
+  }
+
   public List<AdCreativeSiteLinksSpec> getFieldSiteLinksSpec() {
     return mSiteLinksSpec;
   }
@@ -278,6 +324,15 @@ public class AdCreativeSourcingSpec extends APINode {
 
   public AdCreativeSourcingSpec setFieldSourceUrl(String value) {
     this.mSourceUrl = value;
+    return this;
+  }
+
+  public Object getFieldWebsiteMediaSpec() {
+    return mWebsiteMediaSpec;
+  }
+
+  public AdCreativeSourcingSpec setFieldWebsiteMediaSpec(Object value) {
+    this.mWebsiteMediaSpec = value;
     return this;
   }
 
@@ -309,11 +364,16 @@ public class AdCreativeSourcingSpec extends APINode {
   public AdCreativeSourcingSpec copyFrom(AdCreativeSourcingSpec instance) {
     this.mAssociatedProductSetId = instance.mAssociatedProductSetId;
     this.mBrand = instance.mBrand;
+    this.mDestinationScreenshotSpec = instance.mDestinationScreenshotSpec;
     this.mDynamicSiteLinksSpec = instance.mDynamicSiteLinksSpec;
     this.mEnableSocialFeedbackPreservation = instance.mEnableSocialFeedbackPreservation;
+    this.mIntent = instance.mIntent;
+    this.mPcaSpec = instance.mPcaSpec;
     this.mPromotionMetadataSpec = instance.mPromotionMetadataSpec;
+    this.mSiteLinksDataConsented = instance.mSiteLinksDataConsented;
     this.mSiteLinksSpec = instance.mSiteLinksSpec;
     this.mSourceUrl = instance.mSourceUrl;
+    this.mWebsiteMediaSpec = instance.mWebsiteMediaSpec;
     this.mWebsiteSummarySpec = instance.mWebsiteSummarySpec;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

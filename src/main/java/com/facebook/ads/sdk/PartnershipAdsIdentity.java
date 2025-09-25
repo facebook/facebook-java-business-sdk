@@ -41,6 +41,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class PartnershipAdsIdentity extends APINode {
+  @SerializedName("is_recommended")
+  private Boolean mIsRecommended = null;
   @SerializedName("is_saved")
   private Boolean mIsSaved = null;
   @SerializedName("post_types")
@@ -198,6 +200,15 @@ public class PartnershipAdsIdentity extends APINode {
   }
 
 
+  public Boolean getFieldIsRecommended() {
+    return mIsRecommended;
+  }
+
+  public PartnershipAdsIdentity setFieldIsRecommended(Boolean value) {
+    this.mIsRecommended = value;
+    return this;
+  }
+
   public Boolean getFieldIsSaved() {
     return mIsSaved;
   }
@@ -242,6 +253,7 @@ public class PartnershipAdsIdentity extends APINode {
   }
 
   public PartnershipAdsIdentity copyFrom(PartnershipAdsIdentity instance) {
+    this.mIsRecommended = instance.mIsRecommended;
     this.mIsSaved = instance.mIsSaved;
     this.mPostTypes = instance.mPostTypes;
     this.mSecondaryIdentities = instance.mSecondaryIdentities;

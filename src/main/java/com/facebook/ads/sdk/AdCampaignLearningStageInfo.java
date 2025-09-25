@@ -45,6 +45,12 @@ public class AdCampaignLearningStageInfo extends APINode {
   private List<String> mAttributionWindows = null;
   @SerializedName("conversions")
   private Long mConversions = null;
+  @SerializedName("dynamic_lp_conversions_threshold")
+  private Long mDynamicLpConversionsThreshold = null;
+  @SerializedName("dynamic_lp_days_threshold")
+  private Long mDynamicLpDaysThreshold = null;
+  @SerializedName("dynamic_lp_status")
+  private String mDynamicLpStatus = null;
   @SerializedName("last_sig_edit_ts")
   private Long mLastSigEditTs = null;
   @SerializedName("status")
@@ -218,6 +224,33 @@ public class AdCampaignLearningStageInfo extends APINode {
     return this;
   }
 
+  public Long getFieldDynamicLpConversionsThreshold() {
+    return mDynamicLpConversionsThreshold;
+  }
+
+  public AdCampaignLearningStageInfo setFieldDynamicLpConversionsThreshold(Long value) {
+    this.mDynamicLpConversionsThreshold = value;
+    return this;
+  }
+
+  public Long getFieldDynamicLpDaysThreshold() {
+    return mDynamicLpDaysThreshold;
+  }
+
+  public AdCampaignLearningStageInfo setFieldDynamicLpDaysThreshold(Long value) {
+    this.mDynamicLpDaysThreshold = value;
+    return this;
+  }
+
+  public String getFieldDynamicLpStatus() {
+    return mDynamicLpStatus;
+  }
+
+  public AdCampaignLearningStageInfo setFieldDynamicLpStatus(String value) {
+    this.mDynamicLpStatus = value;
+    return this;
+  }
+
   public Long getFieldLastSigEditTs() {
     return mLastSigEditTs;
   }
@@ -255,6 +288,9 @@ public class AdCampaignLearningStageInfo extends APINode {
   public AdCampaignLearningStageInfo copyFrom(AdCampaignLearningStageInfo instance) {
     this.mAttributionWindows = instance.mAttributionWindows;
     this.mConversions = instance.mConversions;
+    this.mDynamicLpConversionsThreshold = instance.mDynamicLpConversionsThreshold;
+    this.mDynamicLpDaysThreshold = instance.mDynamicLpDaysThreshold;
+    this.mDynamicLpStatus = instance.mDynamicLpStatus;
     this.mLastSigEditTs = instance.mLastSigEditTs;
     this.mStatus = instance.mStatus;
     this.context = instance.context;

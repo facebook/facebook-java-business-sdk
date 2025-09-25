@@ -49,12 +49,20 @@ public class AdsUserSettings extends APINode {
   private Object mAdgroupNameTemplate = null;
   @SerializedName("ads_cs_catalog_opt_out_timestamp")
   private List<Map<String, Long>> mAdsCsCatalogOptOutTimestamp = null;
+  @SerializedName("ads_cs_sitelinks_opt_in_status")
+  private String mAdsCsSitelinksOptInStatus = null;
+  @SerializedName("ads_cs_sitelinks_opt_out_timestamp")
+  private List<Map<String, Long>> mAdsCsSitelinksOptOutTimestamp = null;
   @SerializedName("ads_tool_visits")
   private List<Object> mAdsToolVisits = null;
+  @SerializedName("aplusc_ai_agent_opt_in_status")
+  private String mApluscAiAgentOptInStatus = null;
   @SerializedName("aplusc_carousel_cda_opt_in_status")
   private String mApluscCarouselCdaOptInStatus = null;
   @SerializedName("aplusc_carousel_inline_comment_opt_in_status")
   private String mApluscCarouselInlineCommentOptInStatus = null;
+  @SerializedName("aplusc_da_opt_in_status")
+  private String mApluscDaOptInStatus = null;
   @SerializedName("aplusc_enhance_cta_opt_in_status")
   private String mApluscEnhanceCtaOptInStatus = null;
   @SerializedName("aplusc_epa_opt_in_status")
@@ -85,6 +93,10 @@ public class AdsUserSettings extends APINode {
   private String mCarouselToVideoOptInStatus = null;
   @SerializedName("connected_sources_catalog_opt_in_status")
   private String mConnectedSourcesCatalogOptInStatus = null;
+  @SerializedName("create_cta_sticker_opt_in_status")
+  private String mCreateCtaStickerOptInStatus = null;
+  @SerializedName("creative_flex_opt_in_status")
+  private String mCreativeFlexOptInStatus = null;
   @SerializedName("da_add_overlays_opt_in_status")
   private String mDaAddOverlaysOptInStatus = null;
   @SerializedName("da_hide_price_opt_in_status")
@@ -101,6 +113,8 @@ public class AdsUserSettings extends APINode {
   private String mFocusModeDefault = null;
   @SerializedName("gen_ai_alpha_test_status")
   private Long mGenAiAlphaTestStatus = null;
+  @SerializedName("gen_ai_auto_select_opt_in_status")
+  private String mGenAiAutoSelectOptInStatus = null;
   @SerializedName("id")
   private String mId = null;
   @SerializedName("image_background_generation_opt_in_status")
@@ -109,6 +123,8 @@ public class AdsUserSettings extends APINode {
   private String mImageBrightnessAndContrastOptInStatus = null;
   @SerializedName("image_expansion_opt_in_status")
   private String mImageExpansionOptInStatus = null;
+  @SerializedName("image_templates_text_extraction_opt_in_status")
+  private String mImageTemplatesTextExtractionOptInStatus = null;
   @SerializedName("is_ads_ai_consented")
   private Boolean mIsAdsAiConsented = null;
   @SerializedName("is_cbo_default_on")
@@ -119,6 +135,8 @@ public class AdsUserSettings extends APINode {
   private String mLastUsedPostFormat = null;
   @SerializedName("last_visited_time")
   private String mLastVisitedTime = null;
+  @SerializedName("metadata_brand_kit_last_opt_out_timestamp")
+  private Long mMetadataBrandKitLastOptOutTimestamp = null;
   @SerializedName("metadata_brand_kit_opt_in_status")
   private String mMetadataBrandKitOptInStatus = null;
   @SerializedName("music_on_reels_opt_in")
@@ -139,6 +157,10 @@ public class AdsUserSettings extends APINode {
   private List<String> mPreviouslySeenRecommendations = null;
   @SerializedName("product_extensions_opt_in")
   private String mProductExtensionsOptIn = null;
+  @SerializedName("reactive_control_settings")
+  private List<Object> mReactiveControlSettings = null;
+  @SerializedName("replace_media_text_opt_in_status")
+  private String mReplaceMediaTextOptInStatus = null;
   @SerializedName("sa_off_conv_loc_seen")
   private String mSaOffConvLocSeen = null;
   @SerializedName("saoff_published_l2_conv_loc_seen")
@@ -199,6 +221,12 @@ public class AdsUserSettings extends APINode {
   private Boolean mUseStepperPrimaryEntry = null;
   @SerializedName("user")
   private User mUser = null;
+  @SerializedName("website_media_opt_in_status")
+  private String mWebsiteMediaOptInStatus = null;
+  @SerializedName("website_reviews_data_opt_in_status")
+  private String mWebsiteReviewsDataOptInStatus = null;
+  @SerializedName("website_selling_points_data_opt_in_status")
+  private String mWebsiteSellingPointsDataOptInStatus = null;
   protected static Gson gson = null;
 
   AdsUserSettings() {
@@ -429,8 +457,20 @@ public class AdsUserSettings extends APINode {
     return mAdsCsCatalogOptOutTimestamp;
   }
 
+  public String getFieldAdsCsSitelinksOptInStatus() {
+    return mAdsCsSitelinksOptInStatus;
+  }
+
+  public List<Map<String, Long>> getFieldAdsCsSitelinksOptOutTimestamp() {
+    return mAdsCsSitelinksOptOutTimestamp;
+  }
+
   public List<Object> getFieldAdsToolVisits() {
     return mAdsToolVisits;
+  }
+
+  public String getFieldApluscAiAgentOptInStatus() {
+    return mApluscAiAgentOptInStatus;
   }
 
   public String getFieldApluscCarouselCdaOptInStatus() {
@@ -439,6 +479,10 @@ public class AdsUserSettings extends APINode {
 
   public String getFieldApluscCarouselInlineCommentOptInStatus() {
     return mApluscCarouselInlineCommentOptInStatus;
+  }
+
+  public String getFieldApluscDaOptInStatus() {
+    return mApluscDaOptInStatus;
   }
 
   public String getFieldApluscEnhanceCtaOptInStatus() {
@@ -501,6 +545,14 @@ public class AdsUserSettings extends APINode {
     return mConnectedSourcesCatalogOptInStatus;
   }
 
+  public String getFieldCreateCtaStickerOptInStatus() {
+    return mCreateCtaStickerOptInStatus;
+  }
+
+  public String getFieldCreativeFlexOptInStatus() {
+    return mCreativeFlexOptInStatus;
+  }
+
   public String getFieldDaAddOverlaysOptInStatus() {
     return mDaAddOverlaysOptInStatus;
   }
@@ -533,6 +585,10 @@ public class AdsUserSettings extends APINode {
     return mGenAiAlphaTestStatus;
   }
 
+  public String getFieldGenAiAutoSelectOptInStatus() {
+    return mGenAiAutoSelectOptInStatus;
+  }
+
   public String getFieldId() {
     return mId;
   }
@@ -547,6 +603,10 @@ public class AdsUserSettings extends APINode {
 
   public String getFieldImageExpansionOptInStatus() {
     return mImageExpansionOptInStatus;
+  }
+
+  public String getFieldImageTemplatesTextExtractionOptInStatus() {
+    return mImageTemplatesTextExtractionOptInStatus;
   }
 
   public Boolean getFieldIsAdsAiConsented() {
@@ -567,6 +627,10 @@ public class AdsUserSettings extends APINode {
 
   public String getFieldLastVisitedTime() {
     return mLastVisitedTime;
+  }
+
+  public Long getFieldMetadataBrandKitLastOptOutTimestamp() {
+    return mMetadataBrandKitLastOptOutTimestamp;
   }
 
   public String getFieldMetadataBrandKitOptInStatus() {
@@ -607,6 +671,14 @@ public class AdsUserSettings extends APINode {
 
   public String getFieldProductExtensionsOptIn() {
     return mProductExtensionsOptIn;
+  }
+
+  public List<Object> getFieldReactiveControlSettings() {
+    return mReactiveControlSettings;
+  }
+
+  public String getFieldReplaceMediaTextOptInStatus() {
+    return mReplaceMediaTextOptInStatus;
   }
 
   public String getFieldSaOffConvLocSeen() {
@@ -738,6 +810,18 @@ public class AdsUserSettings extends APINode {
     return mUser;
   }
 
+  public String getFieldWebsiteMediaOptInStatus() {
+    return mWebsiteMediaOptInStatus;
+  }
+
+  public String getFieldWebsiteReviewsDataOptInStatus() {
+    return mWebsiteReviewsDataOptInStatus;
+  }
+
+  public String getFieldWebsiteSellingPointsDataOptInStatus() {
+    return mWebsiteSellingPointsDataOptInStatus;
+  }
+
 
 
   public static class APIRequestGet extends APIRequest<AdsUserSettings> {
@@ -755,9 +839,13 @@ public class AdsUserSettings extends APINode {
       "add_overlays_opt_in_status",
       "adgroup_name_template",
       "ads_cs_catalog_opt_out_timestamp",
+      "ads_cs_sitelinks_opt_in_status",
+      "ads_cs_sitelinks_opt_out_timestamp",
       "ads_tool_visits",
+      "aplusc_ai_agent_opt_in_status",
       "aplusc_carousel_cda_opt_in_status",
       "aplusc_carousel_inline_comment_opt_in_status",
+      "aplusc_da_opt_in_status",
       "aplusc_enhance_cta_opt_in_status",
       "aplusc_epa_opt_in_status",
       "aplusc_local_store_extension_opt_in_status",
@@ -773,6 +861,8 @@ public class AdsUserSettings extends APINode {
       "campaign_name_template",
       "carousel_to_video_opt_in_status",
       "connected_sources_catalog_opt_in_status",
+      "create_cta_sticker_opt_in_status",
+      "creative_flex_opt_in_status",
       "da_add_overlays_opt_in_status",
       "da_hide_price_opt_in_status",
       "default_creation_mode",
@@ -781,15 +871,18 @@ public class AdsUserSettings extends APINode {
       "export_format_default",
       "focus_mode_default",
       "gen_ai_alpha_test_status",
+      "gen_ai_auto_select_opt_in_status",
       "id",
       "image_background_generation_opt_in_status",
       "image_brightness_and_contrast_opt_in_status",
       "image_expansion_opt_in_status",
+      "image_templates_text_extraction_opt_in_status",
       "is_ads_ai_consented",
       "is_cbo_default_on",
       "is_se_removal_guidance_dismissed",
       "last_used_post_format",
       "last_visited_time",
+      "metadata_brand_kit_last_opt_out_timestamp",
       "metadata_brand_kit_opt_in_status",
       "music_on_reels_opt_in",
       "muted_cbo_midflight_education_messages",
@@ -800,6 +893,8 @@ public class AdsUserSettings extends APINode {
       "placement_group_vertical_opt_in_status",
       "previously_seen_recommendations",
       "product_extensions_opt_in",
+      "reactive_control_settings",
+      "replace_media_text_opt_in_status",
       "sa_off_conv_loc_seen",
       "saoff_published_l2_conv_loc_seen",
       "saon_migr_l1_seen_status",
@@ -830,6 +925,9 @@ public class AdsUserSettings extends APINode {
       "use_pe_create_flow",
       "use_stepper_primary_entry",
       "user",
+      "website_media_opt_in_status",
+      "website_reviews_data_opt_in_status",
+      "website_selling_points_data_opt_in_status",
     };
 
     @Override
@@ -950,11 +1048,32 @@ public class AdsUserSettings extends APINode {
       this.requestField("ads_cs_catalog_opt_out_timestamp", value);
       return this;
     }
+    public APIRequestGet requestAdsCsSitelinksOptInStatusField () {
+      return this.requestAdsCsSitelinksOptInStatusField(true);
+    }
+    public APIRequestGet requestAdsCsSitelinksOptInStatusField (boolean value) {
+      this.requestField("ads_cs_sitelinks_opt_in_status", value);
+      return this;
+    }
+    public APIRequestGet requestAdsCsSitelinksOptOutTimestampField () {
+      return this.requestAdsCsSitelinksOptOutTimestampField(true);
+    }
+    public APIRequestGet requestAdsCsSitelinksOptOutTimestampField (boolean value) {
+      this.requestField("ads_cs_sitelinks_opt_out_timestamp", value);
+      return this;
+    }
     public APIRequestGet requestAdsToolVisitsField () {
       return this.requestAdsToolVisitsField(true);
     }
     public APIRequestGet requestAdsToolVisitsField (boolean value) {
       this.requestField("ads_tool_visits", value);
+      return this;
+    }
+    public APIRequestGet requestApluscAiAgentOptInStatusField () {
+      return this.requestApluscAiAgentOptInStatusField(true);
+    }
+    public APIRequestGet requestApluscAiAgentOptInStatusField (boolean value) {
+      this.requestField("aplusc_ai_agent_opt_in_status", value);
       return this;
     }
     public APIRequestGet requestApluscCarouselCdaOptInStatusField () {
@@ -969,6 +1088,13 @@ public class AdsUserSettings extends APINode {
     }
     public APIRequestGet requestApluscCarouselInlineCommentOptInStatusField (boolean value) {
       this.requestField("aplusc_carousel_inline_comment_opt_in_status", value);
+      return this;
+    }
+    public APIRequestGet requestApluscDaOptInStatusField () {
+      return this.requestApluscDaOptInStatusField(true);
+    }
+    public APIRequestGet requestApluscDaOptInStatusField (boolean value) {
+      this.requestField("aplusc_da_opt_in_status", value);
       return this;
     }
     public APIRequestGet requestApluscEnhanceCtaOptInStatusField () {
@@ -1076,6 +1202,20 @@ public class AdsUserSettings extends APINode {
       this.requestField("connected_sources_catalog_opt_in_status", value);
       return this;
     }
+    public APIRequestGet requestCreateCtaStickerOptInStatusField () {
+      return this.requestCreateCtaStickerOptInStatusField(true);
+    }
+    public APIRequestGet requestCreateCtaStickerOptInStatusField (boolean value) {
+      this.requestField("create_cta_sticker_opt_in_status", value);
+      return this;
+    }
+    public APIRequestGet requestCreativeFlexOptInStatusField () {
+      return this.requestCreativeFlexOptInStatusField(true);
+    }
+    public APIRequestGet requestCreativeFlexOptInStatusField (boolean value) {
+      this.requestField("creative_flex_opt_in_status", value);
+      return this;
+    }
     public APIRequestGet requestDaAddOverlaysOptInStatusField () {
       return this.requestDaAddOverlaysOptInStatusField(true);
     }
@@ -1132,6 +1272,13 @@ public class AdsUserSettings extends APINode {
       this.requestField("gen_ai_alpha_test_status", value);
       return this;
     }
+    public APIRequestGet requestGenAiAutoSelectOptInStatusField () {
+      return this.requestGenAiAutoSelectOptInStatusField(true);
+    }
+    public APIRequestGet requestGenAiAutoSelectOptInStatusField (boolean value) {
+      this.requestField("gen_ai_auto_select_opt_in_status", value);
+      return this;
+    }
     public APIRequestGet requestIdField () {
       return this.requestIdField(true);
     }
@@ -1158,6 +1305,13 @@ public class AdsUserSettings extends APINode {
     }
     public APIRequestGet requestImageExpansionOptInStatusField (boolean value) {
       this.requestField("image_expansion_opt_in_status", value);
+      return this;
+    }
+    public APIRequestGet requestImageTemplatesTextExtractionOptInStatusField () {
+      return this.requestImageTemplatesTextExtractionOptInStatusField(true);
+    }
+    public APIRequestGet requestImageTemplatesTextExtractionOptInStatusField (boolean value) {
+      this.requestField("image_templates_text_extraction_opt_in_status", value);
       return this;
     }
     public APIRequestGet requestIsAdsAiConsentedField () {
@@ -1193,6 +1347,13 @@ public class AdsUserSettings extends APINode {
     }
     public APIRequestGet requestLastVisitedTimeField (boolean value) {
       this.requestField("last_visited_time", value);
+      return this;
+    }
+    public APIRequestGet requestMetadataBrandKitLastOptOutTimestampField () {
+      return this.requestMetadataBrandKitLastOptOutTimestampField(true);
+    }
+    public APIRequestGet requestMetadataBrandKitLastOptOutTimestampField (boolean value) {
+      this.requestField("metadata_brand_kit_last_opt_out_timestamp", value);
       return this;
     }
     public APIRequestGet requestMetadataBrandKitOptInStatusField () {
@@ -1263,6 +1424,20 @@ public class AdsUserSettings extends APINode {
     }
     public APIRequestGet requestProductExtensionsOptInField (boolean value) {
       this.requestField("product_extensions_opt_in", value);
+      return this;
+    }
+    public APIRequestGet requestReactiveControlSettingsField () {
+      return this.requestReactiveControlSettingsField(true);
+    }
+    public APIRequestGet requestReactiveControlSettingsField (boolean value) {
+      this.requestField("reactive_control_settings", value);
+      return this;
+    }
+    public APIRequestGet requestReplaceMediaTextOptInStatusField () {
+      return this.requestReplaceMediaTextOptInStatusField(true);
+    }
+    public APIRequestGet requestReplaceMediaTextOptInStatusField (boolean value) {
+      this.requestField("replace_media_text_opt_in_status", value);
       return this;
     }
     public APIRequestGet requestSaOffConvLocSeenField () {
@@ -1475,6 +1650,27 @@ public class AdsUserSettings extends APINode {
       this.requestField("user", value);
       return this;
     }
+    public APIRequestGet requestWebsiteMediaOptInStatusField () {
+      return this.requestWebsiteMediaOptInStatusField(true);
+    }
+    public APIRequestGet requestWebsiteMediaOptInStatusField (boolean value) {
+      this.requestField("website_media_opt_in_status", value);
+      return this;
+    }
+    public APIRequestGet requestWebsiteReviewsDataOptInStatusField () {
+      return this.requestWebsiteReviewsDataOptInStatusField(true);
+    }
+    public APIRequestGet requestWebsiteReviewsDataOptInStatusField (boolean value) {
+      this.requestField("website_reviews_data_opt_in_status", value);
+      return this;
+    }
+    public APIRequestGet requestWebsiteSellingPointsDataOptInStatusField () {
+      return this.requestWebsiteSellingPointsDataOptInStatusField(true);
+    }
+    public APIRequestGet requestWebsiteSellingPointsDataOptInStatusField (boolean value) {
+      this.requestField("website_selling_points_data_opt_in_status", value);
+      return this;
+    }
   }
 
 
@@ -1496,9 +1692,13 @@ public class AdsUserSettings extends APINode {
     this.mAddOverlaysOptInStatus = instance.mAddOverlaysOptInStatus;
     this.mAdgroupNameTemplate = instance.mAdgroupNameTemplate;
     this.mAdsCsCatalogOptOutTimestamp = instance.mAdsCsCatalogOptOutTimestamp;
+    this.mAdsCsSitelinksOptInStatus = instance.mAdsCsSitelinksOptInStatus;
+    this.mAdsCsSitelinksOptOutTimestamp = instance.mAdsCsSitelinksOptOutTimestamp;
     this.mAdsToolVisits = instance.mAdsToolVisits;
+    this.mApluscAiAgentOptInStatus = instance.mApluscAiAgentOptInStatus;
     this.mApluscCarouselCdaOptInStatus = instance.mApluscCarouselCdaOptInStatus;
     this.mApluscCarouselInlineCommentOptInStatus = instance.mApluscCarouselInlineCommentOptInStatus;
+    this.mApluscDaOptInStatus = instance.mApluscDaOptInStatus;
     this.mApluscEnhanceCtaOptInStatus = instance.mApluscEnhanceCtaOptInStatus;
     this.mApluscEpaOptInStatus = instance.mApluscEpaOptInStatus;
     this.mApluscLocalStoreExtensionOptInStatus = instance.mApluscLocalStoreExtensionOptInStatus;
@@ -1514,6 +1714,8 @@ public class AdsUserSettings extends APINode {
     this.mCampaignNameTemplate = instance.mCampaignNameTemplate;
     this.mCarouselToVideoOptInStatus = instance.mCarouselToVideoOptInStatus;
     this.mConnectedSourcesCatalogOptInStatus = instance.mConnectedSourcesCatalogOptInStatus;
+    this.mCreateCtaStickerOptInStatus = instance.mCreateCtaStickerOptInStatus;
+    this.mCreativeFlexOptInStatus = instance.mCreativeFlexOptInStatus;
     this.mDaAddOverlaysOptInStatus = instance.mDaAddOverlaysOptInStatus;
     this.mDaHidePriceOptInStatus = instance.mDaHidePriceOptInStatus;
     this.mDefaultCreationMode = instance.mDefaultCreationMode;
@@ -1522,15 +1724,18 @@ public class AdsUserSettings extends APINode {
     this.mExportFormatDefault = instance.mExportFormatDefault;
     this.mFocusModeDefault = instance.mFocusModeDefault;
     this.mGenAiAlphaTestStatus = instance.mGenAiAlphaTestStatus;
+    this.mGenAiAutoSelectOptInStatus = instance.mGenAiAutoSelectOptInStatus;
     this.mId = instance.mId;
     this.mImageBackgroundGenerationOptInStatus = instance.mImageBackgroundGenerationOptInStatus;
     this.mImageBrightnessAndContrastOptInStatus = instance.mImageBrightnessAndContrastOptInStatus;
     this.mImageExpansionOptInStatus = instance.mImageExpansionOptInStatus;
+    this.mImageTemplatesTextExtractionOptInStatus = instance.mImageTemplatesTextExtractionOptInStatus;
     this.mIsAdsAiConsented = instance.mIsAdsAiConsented;
     this.mIsCboDefaultOn = instance.mIsCboDefaultOn;
     this.mIsSeRemovalGuidanceDismissed = instance.mIsSeRemovalGuidanceDismissed;
     this.mLastUsedPostFormat = instance.mLastUsedPostFormat;
     this.mLastVisitedTime = instance.mLastVisitedTime;
+    this.mMetadataBrandKitLastOptOutTimestamp = instance.mMetadataBrandKitLastOptOutTimestamp;
     this.mMetadataBrandKitOptInStatus = instance.mMetadataBrandKitOptInStatus;
     this.mMusicOnReelsOptIn = instance.mMusicOnReelsOptIn;
     this.mMutedCboMidflightEducationMessages = instance.mMutedCboMidflightEducationMessages;
@@ -1541,6 +1746,8 @@ public class AdsUserSettings extends APINode {
     this.mPlacementGroupVerticalOptInStatus = instance.mPlacementGroupVerticalOptInStatus;
     this.mPreviouslySeenRecommendations = instance.mPreviouslySeenRecommendations;
     this.mProductExtensionsOptIn = instance.mProductExtensionsOptIn;
+    this.mReactiveControlSettings = instance.mReactiveControlSettings;
+    this.mReplaceMediaTextOptInStatus = instance.mReplaceMediaTextOptInStatus;
     this.mSaOffConvLocSeen = instance.mSaOffConvLocSeen;
     this.mSaoffPublishedL2ConvLocSeen = instance.mSaoffPublishedL2ConvLocSeen;
     this.mSaonMigrL1SeenStatus = instance.mSaonMigrL1SeenStatus;
@@ -1571,6 +1778,9 @@ public class AdsUserSettings extends APINode {
     this.mUsePeCreateFlow = instance.mUsePeCreateFlow;
     this.mUseStepperPrimaryEntry = instance.mUseStepperPrimaryEntry;
     this.mUser = instance.mUser;
+    this.mWebsiteMediaOptInStatus = instance.mWebsiteMediaOptInStatus;
+    this.mWebsiteReviewsDataOptInStatus = instance.mWebsiteReviewsDataOptInStatus;
+    this.mWebsiteSellingPointsDataOptInStatus = instance.mWebsiteSellingPointsDataOptInStatus;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

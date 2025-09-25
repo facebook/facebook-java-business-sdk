@@ -47,8 +47,8 @@ public class AdCampaignGroupStructureTree extends APINode {
   private String mId = null;
   @SerializedName("name")
   private String mName = null;
-  @SerializedName("time_updated")
-  private Long mTimeUpdated = null;
+  @SerializedName("status")
+  private String mStatus = null;
   protected static Gson gson = null;
 
   public AdCampaignGroupStructureTree() {
@@ -232,12 +232,12 @@ public class AdCampaignGroupStructureTree extends APINode {
     return this;
   }
 
-  public Long getFieldTimeUpdated() {
-    return mTimeUpdated;
+  public String getFieldStatus() {
+    return mStatus;
   }
 
-  public AdCampaignGroupStructureTree setFieldTimeUpdated(Long value) {
-    this.mTimeUpdated = value;
+  public AdCampaignGroupStructureTree setFieldStatus(String value) {
+    this.mStatus = value;
     return this;
   }
 
@@ -261,7 +261,7 @@ public class AdCampaignGroupStructureTree extends APINode {
     this.mChildren = instance.mChildren;
     this.mId = instance.mId;
     this.mName = instance.mName;
-    this.mTimeUpdated = instance.mTimeUpdated;
+    this.mStatus = instance.mStatus;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

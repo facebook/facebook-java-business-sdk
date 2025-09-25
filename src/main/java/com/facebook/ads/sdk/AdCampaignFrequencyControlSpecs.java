@@ -47,6 +47,8 @@ public class AdCampaignFrequencyControlSpecs extends APINode {
   private Long mIntervalDays = null;
   @SerializedName("max_frequency")
   private Long mMaxFrequency = null;
+  @SerializedName("type")
+  private String mType = null;
   protected static Gson gson = null;
 
   public AdCampaignFrequencyControlSpecs() {
@@ -225,6 +227,15 @@ public class AdCampaignFrequencyControlSpecs extends APINode {
     return this;
   }
 
+  public String getFieldType() {
+    return mType;
+  }
+
+  public AdCampaignFrequencyControlSpecs setFieldType(String value) {
+    this.mType = value;
+    return this;
+  }
+
 
 
 
@@ -245,6 +256,7 @@ public class AdCampaignFrequencyControlSpecs extends APINode {
     this.mEvent = instance.mEvent;
     this.mIntervalDays = instance.mIntervalDays;
     this.mMaxFrequency = instance.mMaxFrequency;
+    this.mType = instance.mType;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

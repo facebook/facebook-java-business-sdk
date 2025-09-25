@@ -238,6 +238,8 @@ public class AdCreativeLinkDataCallToAction extends APINode {
       VALUE_BOOK_NOW("BOOK_NOW"),
       @SerializedName("BOOK_TRAVEL")
       VALUE_BOOK_TRAVEL("BOOK_TRAVEL"),
+      @SerializedName("BROWSE_SHOP")
+      VALUE_BROWSE_SHOP("BROWSE_SHOP"),
       @SerializedName("BUY")
       VALUE_BUY("BUY"),
       @SerializedName("BUY_NOW")
@@ -270,6 +272,8 @@ public class AdCreativeLinkDataCallToAction extends APINode {
       VALUE_EVENT_RSVP("EVENT_RSVP"),
       @SerializedName("FIND_A_GROUP")
       VALUE_FIND_A_GROUP("FIND_A_GROUP"),
+      @SerializedName("FIND_OUT_MORE")
+      VALUE_FIND_OUT_MORE("FIND_OUT_MORE"),
       @SerializedName("FIND_YOUR_GROUPS")
       VALUE_FIND_YOUR_GROUPS("FIND_YOUR_GROUPS"),
       @SerializedName("FOLLOW_NEWS_STORYLINE")
@@ -280,6 +284,8 @@ public class AdCreativeLinkDataCallToAction extends APINode {
       VALUE_FOLLOW_USER("FOLLOW_USER"),
       @SerializedName("GET_A_QUOTE")
       VALUE_GET_A_QUOTE("GET_A_QUOTE"),
+      @SerializedName("GET_DETAILS")
+      VALUE_GET_DETAILS("GET_DETAILS"),
       @SerializedName("GET_DIRECTIONS")
       VALUE_GET_DIRECTIONS("GET_DIRECTIONS"),
       @SerializedName("GET_IN_TOUCH")
@@ -346,6 +352,8 @@ public class AdCreativeLinkDataCallToAction extends APINode {
       VALUE_SAY_THANKS("SAY_THANKS"),
       @SerializedName("SEE_MORE")
       VALUE_SEE_MORE("SEE_MORE"),
+      @SerializedName("SEE_SHOP")
+      VALUE_SEE_SHOP("SEE_SHOP"),
       @SerializedName("SELL_NOW")
       VALUE_SELL_NOW("SELL_NOW"),
       @SerializedName("SEND_A_GIFT")
@@ -358,6 +366,8 @@ public class AdCreativeLinkDataCallToAction extends APINode {
       VALUE_SHARE("SHARE"),
       @SerializedName("SHOP_NOW")
       VALUE_SHOP_NOW("SHOP_NOW"),
+      @SerializedName("SHOP_WITH_AI")
+      VALUE_SHOP_WITH_AI("SHOP_WITH_AI"),
       @SerializedName("SIGN_UP")
       VALUE_SIGN_UP("SIGN_UP"),
       @SerializedName("SOTTO_SUBSCRIBE")
@@ -370,6 +380,10 @@ public class AdCreativeLinkDataCallToAction extends APINode {
       VALUE_SWIPE_UP_PRODUCT("SWIPE_UP_PRODUCT"),
       @SerializedName("SWIPE_UP_SHOP")
       VALUE_SWIPE_UP_SHOP("SWIPE_UP_SHOP"),
+      @SerializedName("TRY_DEMO")
+      VALUE_TRY_DEMO("TRY_DEMO"),
+      @SerializedName("TRY_ON_WITH_AI")
+      VALUE_TRY_ON_WITH_AI("TRY_ON_WITH_AI"),
       @SerializedName("UPDATE_APP")
       VALUE_UPDATE_APP("UPDATE_APP"),
       @SerializedName("USE_APP")
@@ -390,6 +404,8 @@ public class AdCreativeLinkDataCallToAction extends APINode {
       VALUE_VIEW_PRODUCT("VIEW_PRODUCT"),
       @SerializedName("VISIT_PAGES_FEED")
       VALUE_VISIT_PAGES_FEED("VISIT_PAGES_FEED"),
+      @SerializedName("VISIT_WEBSITE")
+      VALUE_VISIT_WEBSITE("VISIT_WEBSITE"),
       @SerializedName("WATCH_LIVE_VIDEO")
       VALUE_WATCH_LIVE_VIDEO("WATCH_LIVE_VIDEO"),
       @SerializedName("WATCH_MORE")
