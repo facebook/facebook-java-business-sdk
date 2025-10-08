@@ -35,6 +35,9 @@ public class AttributionDataTest {
         float attributionShare = 0.5f;
         float attributionValue = 0.3f;
         AttributionModelEnum attributionModel = AttributionModelEnum.LAST_CLICK;
+        String attributionSource = "amm";
+        String touchpointType = "onsite_click";
+        int touchpointTs = 123;
         
         attributionData
                      .scope(scope)
@@ -45,7 +48,10 @@ public class AttributionDataTest {
                      .attributionWindow(attributionWindow)
                      .attributionShare(attributionShare)
                      .attributionModel(attributionModel)
-                     .attributionValue(attributionValue);
+                     .attributionValue(attributionValue)
+                     .attributionSource(attributionSource)
+                     .touchpointType(touchpointType)
+                     .touchpointTs(touchpointTs);
 
         assertEquals(attributionData.getScope(), scope);
         assertEquals(attributionData.getAdId(), adId);
@@ -56,6 +62,9 @@ public class AttributionDataTest {
         assertEquals((long) attributionData.getVisitTime(), visitTime);
         assertEquals(attributionData.getAttributionModel(), attributionModel);
         assertEquals((float)attributionData.getAttributionValue(), attributionValue, 0);
+        assertEquals(attributionData.getAttributionSource(), attributionSource);
+        assertEquals(attributionData.getTouchpointType(), touchpointType);
+        assertEquals((int)attributionData.getTouchpointTs(), touchpointTs);
     }
 
     @Test
@@ -71,6 +80,9 @@ public class AttributionDataTest {
         float attributionShare = 0.5f;
         float attributionValue = 0.3f;
         AttributionModelEnum attributionModel = AttributionModelEnum.LAST_CLICK;
+        String attributionSource = "amm";
+        String touchpointType = "onsite_click";
+        int touchpointTs = 123;
         
         attributionData1
                      .scope(scope)
@@ -81,7 +93,10 @@ public class AttributionDataTest {
                      .attributionWindow(attributionWindow)
                      .attributionShare(attributionShare)
                      .attributionModel(attributionModel)
-                     .attributionValue(attributionValue);
+                     .attributionValue(attributionValue)
+                     .attributionSource(attributionSource)
+                     .touchpointType(touchpointType)
+                     .touchpointTs(touchpointTs);
 
         attributionData2
                      .scope(scope)
@@ -92,7 +107,10 @@ public class AttributionDataTest {
                      .attributionWindow(attributionWindow)
                      .attributionShare(attributionShare)
                      .attributionModel(attributionModel)
-                     .attributionValue(attributionValue);
+                     .attributionValue(attributionValue)
+                     .attributionSource(attributionSource)
+                     .touchpointType(touchpointType)
+                     .touchpointTs(touchpointTs);
 
         assertEquals(attributionData1, attributionData2);
         assertEquals(attributionData1.hashCode(), attributionData2.hashCode());
@@ -110,6 +128,9 @@ public class AttributionDataTest {
         float attributionShare = 0.5f;
         float attributionValue = 0.3f;
         AttributionModelEnum attributionModel = AttributionModelEnum.LAST_CLICK;
+        String attributionSource = "amm";
+        String touchpointType = "onsite_click";
+        int touchpointTs = 123;
         
         // set different attribution windown to test
         attributionData1
@@ -121,7 +142,10 @@ public class AttributionDataTest {
                      .attributionWindow(28)
                      .attributionShare(attributionShare)
                      .attributionModel(attributionModel)
-                     .attributionValue(attributionValue);
+                     .attributionValue(attributionValue)
+                     .attributionSource(attributionSource)
+                     .touchpointType(touchpointType)
+                     .touchpointTs(touchpointTs);
 
         attributionData2
                      .scope(scope)
@@ -132,7 +156,10 @@ public class AttributionDataTest {
                      .attributionWindow(7)
                      .attributionShare(attributionShare)
                      .attributionModel(attributionModel)
-                     .attributionValue(attributionValue);
+                     .attributionValue(attributionValue)
+                     .attributionSource(attributionSource)
+                     .touchpointType(touchpointType)
+                     .touchpointTs(touchpointTs);
 
         assertNotEquals(attributionData1, attributionData2);
         assertNotEquals(attributionData1.hashCode(), attributionData2.hashCode());
