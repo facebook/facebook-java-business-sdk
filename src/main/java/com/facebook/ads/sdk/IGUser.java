@@ -336,6 +336,10 @@ public class IGUser extends APINode {
     return new APIRequestGetCollaborationInvites(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestCreateCollaborationInvite createCollaborationInvite() {
+    return new APIRequestCreateCollaborationInvite(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetConnectedThreadsUser getConnectedThreadsUser() {
     return new APIRequestGetConnectedThreadsUser(this.getPrefixedId().toString(), context);
   }
@@ -402,6 +406,10 @@ public class IGUser extends APINode {
 
   public APIRequestGetRecentlySearchedHashtags getRecentlySearchedHashtags() {
     return new APIRequestGetRecentlySearchedHashtags(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetScheduledMedia getScheduledMedia() {
+    return new APIRequestGetScheduledMedia(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetStories getStories() {
@@ -552,6 +560,7 @@ public class IGUser extends APINode {
       "verification_status",
       "vertical",
       "vertical_id",
+      "whatsapp_business_manager_messaging_limit",
     };
 
     @Override
@@ -796,6 +805,13 @@ public class IGUser extends APINode {
     }
     public APIRequestGetAgencies requestVerticalIdField (boolean value) {
       this.requestField("vertical_id", value);
+      return this;
+    }
+    public APIRequestGetAgencies requestWhatsappBusinessManagerMessagingLimitField () {
+      return this.requestWhatsappBusinessManagerMessagingLimitField(true);
+    }
+    public APIRequestGetAgencies requestWhatsappBusinessManagerMessagingLimitField (boolean value) {
+      this.requestField("whatsapp_business_manager_messaging_limit", value);
       return this;
     }
   }
@@ -2025,8 +2041,10 @@ public class IGUser extends APINode {
       "eligibility_errors",
       "has_permission_for_partnership_ad",
       "id",
+      "linked_products",
       "owner_id",
       "permalink",
+      "product_suggestions",
       "recommended_campaign_objectives",
     };
 
@@ -2187,6 +2205,13 @@ public class IGUser extends APINode {
       this.requestField("id", value);
       return this;
     }
+    public APIRequestGetBrandedContentAdvertisableMedias requestLinkedProductsField () {
+      return this.requestLinkedProductsField(true);
+    }
+    public APIRequestGetBrandedContentAdvertisableMedias requestLinkedProductsField (boolean value) {
+      this.requestField("linked_products", value);
+      return this;
+    }
     public APIRequestGetBrandedContentAdvertisableMedias requestOwnerIdField () {
       return this.requestOwnerIdField(true);
     }
@@ -2199,6 +2224,13 @@ public class IGUser extends APINode {
     }
     public APIRequestGetBrandedContentAdvertisableMedias requestPermalinkField (boolean value) {
       this.requestField("permalink", value);
+      return this;
+    }
+    public APIRequestGetBrandedContentAdvertisableMedias requestProductSuggestionsField () {
+      return this.requestProductSuggestionsField(true);
+    }
+    public APIRequestGetBrandedContentAdvertisableMedias requestProductSuggestionsField (boolean value) {
+      this.requestField("product_suggestions", value);
       return this;
     }
     public APIRequestGetBrandedContentAdvertisableMedias requestRecommendedCampaignObjectivesField () {
@@ -2881,6 +2913,127 @@ public class IGUser extends APINode {
     }
   }
 
+  public static class APIRequestCreateCollaborationInvite extends APIRequest<ShadowIGUserCollaborationInvites> {
+
+    ShadowIGUserCollaborationInvites lastResponse = null;
+    @Override
+    public ShadowIGUserCollaborationInvites getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "accept",
+      "media_id",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public ShadowIGUserCollaborationInvites parseResponse(String response, String header) throws APIException {
+      return ShadowIGUserCollaborationInvites.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public ShadowIGUserCollaborationInvites execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public ShadowIGUserCollaborationInvites execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<ShadowIGUserCollaborationInvites> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<ShadowIGUserCollaborationInvites> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, ShadowIGUserCollaborationInvites>() {
+           public ShadowIGUserCollaborationInvites apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateCollaborationInvite.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestCreateCollaborationInvite(String nodeId, APIContext context) {
+      super(context, nodeId, "/collaboration_invites", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateCollaborationInvite setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateCollaborationInvite setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateCollaborationInvite setAccept (Boolean accept) {
+      this.setParam("accept", accept);
+      return this;
+    }
+    public APIRequestCreateCollaborationInvite setAccept (String accept) {
+      this.setParam("accept", accept);
+      return this;
+    }
+
+    public APIRequestCreateCollaborationInvite setMediaId (String mediaId) {
+      this.setParam("media_id", mediaId);
+      return this;
+    }
+
+    public APIRequestCreateCollaborationInvite requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateCollaborationInvite requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateCollaborationInvite requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateCollaborationInvite requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateCollaborationInvite requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateCollaborationInvite requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGetConnectedThreadsUser extends APIRequest<ThreadsUser> {
 
     APINodeList<ThreadsUser> lastResponse = null;
@@ -3145,6 +3298,7 @@ public class IGUser extends APINode {
       "creator_max_followers",
       "creator_min_engaged_accounts",
       "creator_min_followers",
+      "has_public_contact_email",
       "major_audience_age_bucket",
       "major_audience_countries",
       "major_audience_gender",
@@ -3295,6 +3449,15 @@ public class IGUser extends APINode {
     }
     public APIRequestGetCreatorMarketPlaceCreators setCreatorMinFollowers (String creatorMinFollowers) {
       this.setParam("creator_min_followers", creatorMinFollowers);
+      return this;
+    }
+
+    public APIRequestGetCreatorMarketPlaceCreators setHasPublicContactEmail (Boolean hasPublicContactEmail) {
+      this.setParam("has_public_contact_email", hasPublicContactEmail);
+      return this;
+    }
+    public APIRequestGetCreatorMarketPlaceCreators setHasPublicContactEmail (String hasPublicContactEmail) {
+      this.setParam("has_public_contact_email", hasPublicContactEmail);
       return this;
     }
 
@@ -4197,6 +4360,8 @@ public class IGUser extends APINode {
       "caption",
       "comments_count",
       "copyright_check_information",
+      "has_poll",
+      "has_slider",
       "id",
       "ig_id",
       "is_comment_enabled",
@@ -4351,6 +4516,20 @@ public class IGUser extends APINode {
       this.requestField("copyright_check_information", value);
       return this;
     }
+    public APIRequestGetLiveMedia requestHasPollField () {
+      return this.requestHasPollField(true);
+    }
+    public APIRequestGetLiveMedia requestHasPollField (boolean value) {
+      this.requestField("has_poll", value);
+      return this;
+    }
+    public APIRequestGetLiveMedia requestHasSliderField () {
+      return this.requestHasSliderField(true);
+    }
+    public APIRequestGetLiveMedia requestHasSliderField (boolean value) {
+      this.requestField("has_slider", value);
+      return this;
+    }
     public APIRequestGetLiveMedia requestIdField () {
       return this.requestIdField(true);
     }
@@ -4490,6 +4669,8 @@ public class IGUser extends APINode {
       "caption",
       "comments_count",
       "copyright_check_information",
+      "has_poll",
+      "has_slider",
       "id",
       "ig_id",
       "is_comment_enabled",
@@ -4644,6 +4825,20 @@ public class IGUser extends APINode {
       this.requestField("copyright_check_information", value);
       return this;
     }
+    public APIRequestGetMedia requestHasPollField () {
+      return this.requestHasPollField(true);
+    }
+    public APIRequestGetMedia requestHasPollField (boolean value) {
+      this.requestField("has_poll", value);
+      return this;
+    }
+    public APIRequestGetMedia requestHasSliderField () {
+      return this.requestHasSliderField(true);
+    }
+    public APIRequestGetMedia requestHasSliderField (boolean value) {
+      this.requestField("has_slider", value);
+      return this;
+    }
     public APIRequestGetMedia requestIdField () {
       return this.requestIdField(true);
     }
@@ -4786,6 +4981,7 @@ public class IGUser extends APINode {
       "product_tags",
       "share_to_feed",
       "thumb_offset",
+      "trial_params",
       "upload_type",
       "user_tags",
       "video_url",
@@ -4930,6 +5126,15 @@ public class IGUser extends APINode {
 
     public APIRequestCreateMedia setThumbOffset (String thumbOffset) {
       this.setParam("thumb_offset", thumbOffset);
+      return this;
+    }
+
+    public APIRequestCreateMedia setTrialParams (Map<String, String> trialParams) {
+      this.setParam("trial_params", trialParams);
+      return this;
+    }
+    public APIRequestCreateMedia setTrialParams (String trialParams) {
+      this.setParam("trial_params", trialParams);
       return this;
     }
 
@@ -5826,6 +6031,159 @@ public class IGUser extends APINode {
     }
   }
 
+  public static class APIRequestGetScheduledMedia extends APIRequest<ShadowIGScheduledMedia> {
+
+    APINodeList<ShadowIGScheduledMedia> lastResponse = null;
+    @Override
+    public APINodeList<ShadowIGScheduledMedia> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "caption",
+      "id",
+      "media_type",
+      "media_url",
+      "publish_timestamp",
+      "thumbnail_url",
+    };
+
+    @Override
+    public APINodeList<ShadowIGScheduledMedia> parseResponse(String response, String header) throws APIException {
+      return ShadowIGScheduledMedia.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<ShadowIGScheduledMedia> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<ShadowIGScheduledMedia> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<ShadowIGScheduledMedia>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<ShadowIGScheduledMedia>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<ShadowIGScheduledMedia>>() {
+           public APINodeList<ShadowIGScheduledMedia> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetScheduledMedia.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestGetScheduledMedia(String nodeId, APIContext context) {
+      super(context, nodeId, "/scheduled_media", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetScheduledMedia setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetScheduledMedia setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetScheduledMedia requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetScheduledMedia requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetScheduledMedia requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetScheduledMedia requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetScheduledMedia requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetScheduledMedia requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetScheduledMedia requestCaptionField () {
+      return this.requestCaptionField(true);
+    }
+    public APIRequestGetScheduledMedia requestCaptionField (boolean value) {
+      this.requestField("caption", value);
+      return this;
+    }
+    public APIRequestGetScheduledMedia requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetScheduledMedia requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetScheduledMedia requestMediaTypeField () {
+      return this.requestMediaTypeField(true);
+    }
+    public APIRequestGetScheduledMedia requestMediaTypeField (boolean value) {
+      this.requestField("media_type", value);
+      return this;
+    }
+    public APIRequestGetScheduledMedia requestMediaUrlField () {
+      return this.requestMediaUrlField(true);
+    }
+    public APIRequestGetScheduledMedia requestMediaUrlField (boolean value) {
+      this.requestField("media_url", value);
+      return this;
+    }
+    public APIRequestGetScheduledMedia requestPublishTimestampField () {
+      return this.requestPublishTimestampField(true);
+    }
+    public APIRequestGetScheduledMedia requestPublishTimestampField (boolean value) {
+      this.requestField("publish_timestamp", value);
+      return this;
+    }
+    public APIRequestGetScheduledMedia requestThumbnailUrlField () {
+      return this.requestThumbnailUrlField(true);
+    }
+    public APIRequestGetScheduledMedia requestThumbnailUrlField (boolean value) {
+      this.requestField("thumbnail_url", value);
+      return this;
+    }
+  }
+
   public static class APIRequestGetStories extends APIRequest<IGMedia> {
 
     APINodeList<IGMedia> lastResponse = null;
@@ -5842,6 +6200,8 @@ public class IGUser extends APINode {
       "caption",
       "comments_count",
       "copyright_check_information",
+      "has_poll",
+      "has_slider",
       "id",
       "ig_id",
       "is_comment_enabled",
@@ -5986,6 +6346,20 @@ public class IGUser extends APINode {
       this.requestField("copyright_check_information", value);
       return this;
     }
+    public APIRequestGetStories requestHasPollField () {
+      return this.requestHasPollField(true);
+    }
+    public APIRequestGetStories requestHasPollField (boolean value) {
+      this.requestField("has_poll", value);
+      return this;
+    }
+    public APIRequestGetStories requestHasSliderField () {
+      return this.requestHasSliderField(true);
+    }
+    public APIRequestGetStories requestHasSliderField (boolean value) {
+      this.requestField("has_slider", value);
+      return this;
+    }
     public APIRequestGetStories requestIdField () {
       return this.requestIdField(true);
     }
@@ -6123,6 +6497,8 @@ public class IGUser extends APINode {
       "caption",
       "comments_count",
       "copyright_check_information",
+      "has_poll",
+      "has_slider",
       "id",
       "ig_id",
       "is_comment_enabled",
@@ -6265,6 +6641,20 @@ public class IGUser extends APINode {
     }
     public APIRequestGetTags requestCopyrightCheckInformationField (boolean value) {
       this.requestField("copyright_check_information", value);
+      return this;
+    }
+    public APIRequestGetTags requestHasPollField () {
+      return this.requestHasPollField(true);
+    }
+    public APIRequestGetTags requestHasPollField (boolean value) {
+      this.requestField("has_poll", value);
+      return this;
+    }
+    public APIRequestGetTags requestHasSliderField () {
+      return this.requestHasSliderField(true);
+    }
+    public APIRequestGetTags requestHasSliderField (boolean value) {
+      this.requestField("has_slider", value);
       return this;
     }
     public APIRequestGetTags requestIdField () {

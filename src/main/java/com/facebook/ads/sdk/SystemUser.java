@@ -2764,6 +2764,7 @@ public class SystemUser extends APINode {
       "purchase_order_number",
       "status",
       "timezone_id",
+      "whatsapp_business_manager_messaging_limit",
     };
 
     @Override
@@ -3029,6 +3030,13 @@ public class SystemUser extends APINode {
     }
     public APIRequestGetAssignedWhatsAppBusinessAccounts requestTimezoneIdField (boolean value) {
       this.requestField("timezone_id", value);
+      return this;
+    }
+    public APIRequestGetAssignedWhatsAppBusinessAccounts requestWhatsappBusinessManagerMessagingLimitField () {
+      return this.requestWhatsappBusinessManagerMessagingLimitField(true);
+    }
+    public APIRequestGetAssignedWhatsAppBusinessAccounts requestWhatsappBusinessManagerMessagingLimitField (boolean value) {
+      this.requestField("whatsapp_business_manager_messaging_limit", value);
       return this;
     }
   }

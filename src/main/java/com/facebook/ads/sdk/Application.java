@@ -662,16 +662,8 @@ public class Application extends APINode {
     return new APIRequestGetSubscribedDomains(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestCreateSubscribedDomain createSubscribedDomain() {
-    return new APIRequestCreateSubscribedDomain(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetSubscribedDomainsPhishing getSubscribedDomainsPhishing() {
     return new APIRequestGetSubscribedDomainsPhishing(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestCreateSubscribedDomainsPhishing createSubscribedDomainsPhishing() {
-    return new APIRequestCreateSubscribedDomainsPhishing(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestDeleteSubscriptions deleteSubscriptions() {
@@ -3532,6 +3524,7 @@ public class Application extends APINode {
       "verification_status",
       "vertical",
       "vertical_id",
+      "whatsapp_business_manager_messaging_limit",
     };
 
     @Override
@@ -3776,6 +3769,13 @@ public class Application extends APINode {
     }
     public APIRequestGetAgencies requestVerticalIdField (boolean value) {
       this.requestField("vertical_id", value);
+      return this;
+    }
+    public APIRequestGetAgencies requestWhatsappBusinessManagerMessagingLimitField () {
+      return this.requestWhatsappBusinessManagerMessagingLimitField(true);
+    }
+    public APIRequestGetAgencies requestWhatsappBusinessManagerMessagingLimitField (boolean value) {
+      this.requestField("whatsapp_business_manager_messaging_limit", value);
       return this;
     }
   }
@@ -6217,6 +6217,7 @@ public class Application extends APINode {
       "verification_status",
       "vertical",
       "vertical_id",
+      "whatsapp_business_manager_messaging_limit",
     };
 
     @Override
@@ -6461,6 +6462,13 @@ public class Application extends APINode {
     }
     public APIRequestGetConnectedClientBusinesses requestVerticalIdField (boolean value) {
       this.requestField("vertical_id", value);
+      return this;
+    }
+    public APIRequestGetConnectedClientBusinesses requestWhatsappBusinessManagerMessagingLimitField () {
+      return this.requestWhatsappBusinessManagerMessagingLimitField(true);
+    }
+    public APIRequestGetConnectedClientBusinesses requestWhatsappBusinessManagerMessagingLimitField (boolean value) {
+      this.requestField("whatsapp_business_manager_messaging_limit", value);
       return this;
     }
   }
@@ -9407,131 +9415,6 @@ public class Application extends APINode {
 
   }
 
-  public static class APIRequestCreateSubscribedDomain extends APIRequest<Application> {
-
-    Application lastResponse = null;
-    @Override
-    public Application getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "subscribe",
-      "unsubscribe",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public Application parseResponse(String response, String header) throws APIException {
-      return Application.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public Application execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public Application execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<Application> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<Application> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, Application>() {
-           public Application apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateSubscribedDomain.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         },
-         MoreExecutors.directExecutor()
-      );
-    };
-
-    public APIRequestCreateSubscribedDomain(String nodeId, APIContext context) {
-      super(context, nodeId, "/subscribed_domains", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateSubscribedDomain setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateSubscribedDomain setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateSubscribedDomain setSubscribe (List<String> subscribe) {
-      this.setParam("subscribe", subscribe);
-      return this;
-    }
-    public APIRequestCreateSubscribedDomain setSubscribe (String subscribe) {
-      this.setParam("subscribe", subscribe);
-      return this;
-    }
-
-    public APIRequestCreateSubscribedDomain setUnsubscribe (List<String> unsubscribe) {
-      this.setParam("unsubscribe", unsubscribe);
-      return this;
-    }
-    public APIRequestCreateSubscribedDomain setUnsubscribe (String unsubscribe) {
-      this.setParam("unsubscribe", unsubscribe);
-      return this;
-    }
-
-    public APIRequestCreateSubscribedDomain requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateSubscribedDomain requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateSubscribedDomain requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateSubscribedDomain requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateSubscribedDomain requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateSubscribedDomain requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
   public static class APIRequestGetSubscribedDomainsPhishing extends APIRequest<APINode> {
 
     APINodeList<APINode> lastResponse = null;
@@ -9631,131 +9514,6 @@ public class Application extends APINode {
 
     @Override
     public APIRequestGetSubscribedDomainsPhishing requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
-  public static class APIRequestCreateSubscribedDomainsPhishing extends APIRequest<Application> {
-
-    Application lastResponse = null;
-    @Override
-    public Application getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "subscribe",
-      "unsubscribe",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public Application parseResponse(String response, String header) throws APIException {
-      return Application.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public Application execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public Application execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<Application> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<Application> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, Application>() {
-           public Application apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateSubscribedDomainsPhishing.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         },
-         MoreExecutors.directExecutor()
-      );
-    };
-
-    public APIRequestCreateSubscribedDomainsPhishing(String nodeId, APIContext context) {
-      super(context, nodeId, "/subscribed_domains_phishing", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateSubscribedDomainsPhishing setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateSubscribedDomainsPhishing setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateSubscribedDomainsPhishing setSubscribe (List<String> subscribe) {
-      this.setParam("subscribe", subscribe);
-      return this;
-    }
-    public APIRequestCreateSubscribedDomainsPhishing setSubscribe (String subscribe) {
-      this.setParam("subscribe", subscribe);
-      return this;
-    }
-
-    public APIRequestCreateSubscribedDomainsPhishing setUnsubscribe (List<String> unsubscribe) {
-      this.setParam("unsubscribe", unsubscribe);
-      return this;
-    }
-    public APIRequestCreateSubscribedDomainsPhishing setUnsubscribe (String unsubscribe) {
-      this.setParam("unsubscribe", unsubscribe);
-      return this;
-    }
-
-    public APIRequestCreateSubscribedDomainsPhishing requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateSubscribedDomainsPhishing requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateSubscribedDomainsPhishing requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateSubscribedDomainsPhishing requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateSubscribedDomainsPhishing requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateSubscribedDomainsPhishing requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }

@@ -43,6 +43,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class AdCreativeSiteLinksSpec extends APINode {
   @SerializedName("is_site_link_sticky")
   private Boolean mIsSiteLinkSticky = null;
+  @SerializedName("site_link_classification")
+  private String mSiteLinkClassification = null;
   @SerializedName("site_link_extra_metadata")
   private String mSiteLinkExtraMetadata = null;
   @SerializedName("site_link_hash")
@@ -61,6 +63,8 @@ public class AdCreativeSiteLinksSpec extends APINode {
   private String mSiteLinkTitle = null;
   @SerializedName("site_link_url")
   private String mSiteLinkUrl = null;
+  @SerializedName("site_link_url_anchor")
+  private String mSiteLinkUrlAnchor = null;
   protected static Gson gson = null;
 
   public AdCreativeSiteLinksSpec() {
@@ -221,6 +225,15 @@ public class AdCreativeSiteLinksSpec extends APINode {
     return this;
   }
 
+  public String getFieldSiteLinkClassification() {
+    return mSiteLinkClassification;
+  }
+
+  public AdCreativeSiteLinksSpec setFieldSiteLinkClassification(String value) {
+    this.mSiteLinkClassification = value;
+    return this;
+  }
+
   public String getFieldSiteLinkExtraMetadata() {
     return mSiteLinkExtraMetadata;
   }
@@ -302,6 +315,15 @@ public class AdCreativeSiteLinksSpec extends APINode {
     return this;
   }
 
+  public String getFieldSiteLinkUrlAnchor() {
+    return mSiteLinkUrlAnchor;
+  }
+
+  public AdCreativeSiteLinksSpec setFieldSiteLinkUrlAnchor(String value) {
+    this.mSiteLinkUrlAnchor = value;
+    return this;
+  }
+
 
 
 
@@ -320,6 +342,7 @@ public class AdCreativeSiteLinksSpec extends APINode {
 
   public AdCreativeSiteLinksSpec copyFrom(AdCreativeSiteLinksSpec instance) {
     this.mIsSiteLinkSticky = instance.mIsSiteLinkSticky;
+    this.mSiteLinkClassification = instance.mSiteLinkClassification;
     this.mSiteLinkExtraMetadata = instance.mSiteLinkExtraMetadata;
     this.mSiteLinkHash = instance.mSiteLinkHash;
     this.mSiteLinkId = instance.mSiteLinkId;
@@ -329,6 +352,7 @@ public class AdCreativeSiteLinksSpec extends APINode {
     this.mSiteLinkRecommendationType = instance.mSiteLinkRecommendationType;
     this.mSiteLinkTitle = instance.mSiteLinkTitle;
     this.mSiteLinkUrl = instance.mSiteLinkUrl;
+    this.mSiteLinkUrlAnchor = instance.mSiteLinkUrlAnchor;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

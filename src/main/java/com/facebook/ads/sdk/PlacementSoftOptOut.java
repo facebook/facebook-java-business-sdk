@@ -40,35 +40,35 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class AdAccountLiveVideoAdvertiser extends APINode {
-  @SerializedName("is_lva_toggle_on")
-  private Boolean mIsLvaToggleOn = null;
-  @SerializedName("lva_default_budget")
-  private Long mLvaDefaultBudget = null;
-  @SerializedName("lva_default_duration_s")
-  private Long mLvaDefaultDurationS = null;
-  @SerializedName("should_default_current_live")
-  private Boolean mShouldDefaultCurrentLive = null;
-  @SerializedName("should_default_scheduled_live")
-  private Boolean mShouldDefaultScheduledLive = null;
-  @SerializedName("should_default_toggle_on_from_model")
-  private Boolean mShouldDefaultToggleOnFromModel = null;
-  @SerializedName("should_show_lva_toggle")
-  private Boolean mShouldShowLvaToggle = null;
+public class PlacementSoftOptOut extends APINode {
+  @SerializedName("audience_network_positions")
+  private List<String> mAudienceNetworkPositions = null;
+  @SerializedName("facebook_positions")
+  private List<String> mFacebookPositions = null;
+  @SerializedName("instagram_positions")
+  private List<String> mInstagramPositions = null;
+  @SerializedName("messenger_positions")
+  private List<String> mMessengerPositions = null;
+  @SerializedName("oculus_positions")
+  private List<String> mOculusPositions = null;
+  @SerializedName("threads_positions")
+  private List<String> mThreadsPositions = null;
+  @SerializedName("whatsapp_positions")
+  private List<String> mWhatsappPositions = null;
   protected static Gson gson = null;
 
-  public AdAccountLiveVideoAdvertiser() {
+  public PlacementSoftOptOut() {
   }
 
   public String getId() {
     return null;
   }
-  public static AdAccountLiveVideoAdvertiser loadJSON(String json, APIContext context, String header) {
-    AdAccountLiveVideoAdvertiser adAccountLiveVideoAdvertiser = getGson().fromJson(json, AdAccountLiveVideoAdvertiser.class);
+  public static PlacementSoftOptOut loadJSON(String json, APIContext context, String header) {
+    PlacementSoftOptOut placementSoftOptOut = getGson().fromJson(json, PlacementSoftOptOut.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(adAccountLiveVideoAdvertiser.toString());
+      JsonElement o2 = parser.parse(placementSoftOptOut.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -78,14 +78,14 @@ public class AdAccountLiveVideoAdvertiser extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    adAccountLiveVideoAdvertiser.context = context;
-    adAccountLiveVideoAdvertiser.rawValue = json;
-    adAccountLiveVideoAdvertiser.header = header;
-    return adAccountLiveVideoAdvertiser;
+    placementSoftOptOut.context = context;
+    placementSoftOptOut.rawValue = json;
+    placementSoftOptOut.header = header;
+    return placementSoftOptOut;
   }
 
-  public static APINodeList<AdAccountLiveVideoAdvertiser> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<AdAccountLiveVideoAdvertiser> adAccountLiveVideoAdvertisers = new APINodeList<AdAccountLiveVideoAdvertiser>(request, json, header);
+  public static APINodeList<PlacementSoftOptOut> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<PlacementSoftOptOut> placementSoftOptOuts = new APINodeList<PlacementSoftOptOut>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -96,9 +96,9 @@ public class AdAccountLiveVideoAdvertiser extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adAccountLiveVideoAdvertisers.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          placementSoftOptOuts.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return adAccountLiveVideoAdvertisers;
+        return placementSoftOptOuts;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -108,20 +108,20 @@ public class AdAccountLiveVideoAdvertiser extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                adAccountLiveVideoAdvertisers.setCursors(before, after);
+                placementSoftOptOuts.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            adAccountLiveVideoAdvertisers.setPaging(previous, next);
+            placementSoftOptOuts.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              adAccountLiveVideoAdvertisers.setAppSecret(context.getAppSecretProof());
+              placementSoftOptOuts.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adAccountLiveVideoAdvertisers.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              placementSoftOptOuts.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -132,23 +132,23 @@ public class AdAccountLiveVideoAdvertiser extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adAccountLiveVideoAdvertisers.add(loadJSON(entry.getValue().toString(), context, header));
+                  placementSoftOptOuts.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adAccountLiveVideoAdvertisers.add(loadJSON(obj.toString(), context, header));
+              placementSoftOptOuts.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return adAccountLiveVideoAdvertisers;
+          return placementSoftOptOuts;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adAccountLiveVideoAdvertisers.add(loadJSON(entry.getValue().toString(), context, header));
+              placementSoftOptOuts.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return adAccountLiveVideoAdvertisers;
+          return placementSoftOptOuts;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -165,20 +165,20 @@ public class AdAccountLiveVideoAdvertiser extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adAccountLiveVideoAdvertisers.add(loadJSON(value.toString(), context, header));
+              placementSoftOptOuts.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return adAccountLiveVideoAdvertisers;
+            return placementSoftOptOuts;
           }
 
           // Sixth, check if it's pure JsonObject
-          adAccountLiveVideoAdvertisers.clear();
-          adAccountLiveVideoAdvertisers.add(loadJSON(json, context, header));
-          return adAccountLiveVideoAdvertisers;
+          placementSoftOptOuts.clear();
+          placementSoftOptOuts.add(loadJSON(json, context, header));
+          return placementSoftOptOuts;
         }
       }
     } catch (Exception e) {
@@ -206,66 +206,66 @@ public class AdAccountLiveVideoAdvertiser extends APINode {
   }
 
 
-  public Boolean getFieldIsLvaToggleOn() {
-    return mIsLvaToggleOn;
+  public List<String> getFieldAudienceNetworkPositions() {
+    return mAudienceNetworkPositions;
   }
 
-  public AdAccountLiveVideoAdvertiser setFieldIsLvaToggleOn(Boolean value) {
-    this.mIsLvaToggleOn = value;
+  public PlacementSoftOptOut setFieldAudienceNetworkPositions(List<String> value) {
+    this.mAudienceNetworkPositions = value;
     return this;
   }
 
-  public Long getFieldLvaDefaultBudget() {
-    return mLvaDefaultBudget;
+  public List<String> getFieldFacebookPositions() {
+    return mFacebookPositions;
   }
 
-  public AdAccountLiveVideoAdvertiser setFieldLvaDefaultBudget(Long value) {
-    this.mLvaDefaultBudget = value;
+  public PlacementSoftOptOut setFieldFacebookPositions(List<String> value) {
+    this.mFacebookPositions = value;
     return this;
   }
 
-  public Long getFieldLvaDefaultDurationS() {
-    return mLvaDefaultDurationS;
+  public List<String> getFieldInstagramPositions() {
+    return mInstagramPositions;
   }
 
-  public AdAccountLiveVideoAdvertiser setFieldLvaDefaultDurationS(Long value) {
-    this.mLvaDefaultDurationS = value;
+  public PlacementSoftOptOut setFieldInstagramPositions(List<String> value) {
+    this.mInstagramPositions = value;
     return this;
   }
 
-  public Boolean getFieldShouldDefaultCurrentLive() {
-    return mShouldDefaultCurrentLive;
+  public List<String> getFieldMessengerPositions() {
+    return mMessengerPositions;
   }
 
-  public AdAccountLiveVideoAdvertiser setFieldShouldDefaultCurrentLive(Boolean value) {
-    this.mShouldDefaultCurrentLive = value;
+  public PlacementSoftOptOut setFieldMessengerPositions(List<String> value) {
+    this.mMessengerPositions = value;
     return this;
   }
 
-  public Boolean getFieldShouldDefaultScheduledLive() {
-    return mShouldDefaultScheduledLive;
+  public List<String> getFieldOculusPositions() {
+    return mOculusPositions;
   }
 
-  public AdAccountLiveVideoAdvertiser setFieldShouldDefaultScheduledLive(Boolean value) {
-    this.mShouldDefaultScheduledLive = value;
+  public PlacementSoftOptOut setFieldOculusPositions(List<String> value) {
+    this.mOculusPositions = value;
     return this;
   }
 
-  public Boolean getFieldShouldDefaultToggleOnFromModel() {
-    return mShouldDefaultToggleOnFromModel;
+  public List<String> getFieldThreadsPositions() {
+    return mThreadsPositions;
   }
 
-  public AdAccountLiveVideoAdvertiser setFieldShouldDefaultToggleOnFromModel(Boolean value) {
-    this.mShouldDefaultToggleOnFromModel = value;
+  public PlacementSoftOptOut setFieldThreadsPositions(List<String> value) {
+    this.mThreadsPositions = value;
     return this;
   }
 
-  public Boolean getFieldShouldShowLvaToggle() {
-    return mShouldShowLvaToggle;
+  public List<String> getFieldWhatsappPositions() {
+    return mWhatsappPositions;
   }
 
-  public AdAccountLiveVideoAdvertiser setFieldShouldShowLvaToggle(Boolean value) {
-    this.mShouldShowLvaToggle = value;
+  public PlacementSoftOptOut setFieldWhatsappPositions(List<String> value) {
+    this.mWhatsappPositions = value;
     return this;
   }
 
@@ -285,23 +285,23 @@ public class AdAccountLiveVideoAdvertiser extends APINode {
     return gson;
   }
 
-  public AdAccountLiveVideoAdvertiser copyFrom(AdAccountLiveVideoAdvertiser instance) {
-    this.mIsLvaToggleOn = instance.mIsLvaToggleOn;
-    this.mLvaDefaultBudget = instance.mLvaDefaultBudget;
-    this.mLvaDefaultDurationS = instance.mLvaDefaultDurationS;
-    this.mShouldDefaultCurrentLive = instance.mShouldDefaultCurrentLive;
-    this.mShouldDefaultScheduledLive = instance.mShouldDefaultScheduledLive;
-    this.mShouldDefaultToggleOnFromModel = instance.mShouldDefaultToggleOnFromModel;
-    this.mShouldShowLvaToggle = instance.mShouldShowLvaToggle;
+  public PlacementSoftOptOut copyFrom(PlacementSoftOptOut instance) {
+    this.mAudienceNetworkPositions = instance.mAudienceNetworkPositions;
+    this.mFacebookPositions = instance.mFacebookPositions;
+    this.mInstagramPositions = instance.mInstagramPositions;
+    this.mMessengerPositions = instance.mMessengerPositions;
+    this.mOculusPositions = instance.mOculusPositions;
+    this.mThreadsPositions = instance.mThreadsPositions;
+    this.mWhatsappPositions = instance.mWhatsappPositions;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<AdAccountLiveVideoAdvertiser> getParser() {
-    return new APIRequest.ResponseParser<AdAccountLiveVideoAdvertiser>() {
-      public APINodeList<AdAccountLiveVideoAdvertiser> parseResponse(String response, APIContext context, APIRequest<AdAccountLiveVideoAdvertiser> request, String header) throws MalformedResponseException {
-        return AdAccountLiveVideoAdvertiser.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<PlacementSoftOptOut> getParser() {
+    return new APIRequest.ResponseParser<PlacementSoftOptOut>() {
+      public APINodeList<PlacementSoftOptOut> parseResponse(String response, APIContext context, APIRequest<PlacementSoftOptOut> request, String header) throws MalformedResponseException {
+        return PlacementSoftOptOut.parseResponse(response, context, request, header);
       }
     };
   }

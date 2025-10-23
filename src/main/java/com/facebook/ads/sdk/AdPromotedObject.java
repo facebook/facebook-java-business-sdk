@@ -41,6 +41,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class AdPromotedObject extends APINode {
+  @SerializedName("anchor_event_config")
+  private String mAnchorEventConfig = null;
   @SerializedName("application_id")
   private String mApplicationId = null;
   @SerializedName("boosted_product_set_id")
@@ -275,6 +277,15 @@ public class AdPromotedObject extends APINode {
     return getGson().toJson(this);
   }
 
+
+  public String getFieldAnchorEventConfig() {
+    return mAnchorEventConfig;
+  }
+
+  public AdPromotedObject setFieldAnchorEventConfig(String value) {
+    this.mAnchorEventConfig = value;
+    return this;
+  }
 
   public String getFieldApplicationId() {
     return mApplicationId;
@@ -890,6 +901,7 @@ public class AdPromotedObject extends APINode {
   }
 
   public AdPromotedObject copyFrom(AdPromotedObject instance) {
+    this.mAnchorEventConfig = instance.mAnchorEventConfig;
     this.mApplicationId = instance.mApplicationId;
     this.mBoostedProductSetId = instance.mBoostedProductSetId;
     this.mConversionGoalId = instance.mConversionGoalId;

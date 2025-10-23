@@ -47,10 +47,14 @@ public class BrandedContentShadowIGMediaID extends APINode {
   private Boolean mHasPermissionForPartnershipAd = null;
   @SerializedName("id")
   private String mId = null;
+  @SerializedName("linked_products")
+  private List<ProductItem> mLinkedProducts = null;
   @SerializedName("owner_id")
   private String mOwnerId = null;
   @SerializedName("permalink")
   private String mPermalink = null;
+  @SerializedName("product_suggestions")
+  private List<ProductItem> mProductSuggestions = null;
   @SerializedName("recommended_campaign_objectives")
   private List<String> mRecommendedCampaignObjectives = null;
   protected static Gson gson = null;
@@ -231,6 +235,20 @@ public class BrandedContentShadowIGMediaID extends APINode {
     return this;
   }
 
+  public List<ProductItem> getFieldLinkedProducts() {
+    return mLinkedProducts;
+  }
+
+  public BrandedContentShadowIGMediaID setFieldLinkedProducts(List<ProductItem> value) {
+    this.mLinkedProducts = value;
+    return this;
+  }
+
+  public BrandedContentShadowIGMediaID setFieldLinkedProducts(String value) {
+    Type type = new TypeToken<List<ProductItem>>(){}.getType();
+    this.mLinkedProducts = ProductItem.getGson().fromJson(value, type);
+    return this;
+  }
   public String getFieldOwnerId() {
     return mOwnerId;
   }
@@ -249,6 +267,20 @@ public class BrandedContentShadowIGMediaID extends APINode {
     return this;
   }
 
+  public List<ProductItem> getFieldProductSuggestions() {
+    return mProductSuggestions;
+  }
+
+  public BrandedContentShadowIGMediaID setFieldProductSuggestions(List<ProductItem> value) {
+    this.mProductSuggestions = value;
+    return this;
+  }
+
+  public BrandedContentShadowIGMediaID setFieldProductSuggestions(String value) {
+    Type type = new TypeToken<List<ProductItem>>(){}.getType();
+    this.mProductSuggestions = ProductItem.getGson().fromJson(value, type);
+    return this;
+  }
   public List<String> getFieldRecommendedCampaignObjectives() {
     return mRecommendedCampaignObjectives;
   }
@@ -297,8 +329,10 @@ public class BrandedContentShadowIGMediaID extends APINode {
     this.mEligibilityErrors = instance.mEligibilityErrors;
     this.mHasPermissionForPartnershipAd = instance.mHasPermissionForPartnershipAd;
     this.mId = instance.mId;
+    this.mLinkedProducts = instance.mLinkedProducts;
     this.mOwnerId = instance.mOwnerId;
     this.mPermalink = instance.mPermalink;
+    this.mProductSuggestions = instance.mProductSuggestions;
     this.mRecommendedCampaignObjectives = instance.mRecommendedCampaignObjectives;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

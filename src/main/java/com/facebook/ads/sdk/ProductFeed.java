@@ -6896,6 +6896,23 @@ public class ProductFeed extends APINode {
       }
   }
 
+  public static enum EnumUseCase {
+      @SerializedName("CREATOR_ASSET")
+      VALUE_CREATOR_ASSET("CREATOR_ASSET"),
+      ;
+
+      private String value;
+
+      private EnumUseCase(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
 
   synchronized /*package*/ static Gson getGson() {
     if (gson != null) {

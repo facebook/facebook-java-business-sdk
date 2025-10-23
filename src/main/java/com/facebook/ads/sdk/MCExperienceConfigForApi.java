@@ -45,6 +45,8 @@ public class MCExperienceConfigForApi extends APINode {
   private Boolean mIsCampaignEnabled = null;
   @SerializedName("is_terms_signed")
   private Boolean mIsTermsSigned = null;
+  @SerializedName("is_user_manually_toggle_mc_off")
+  private Boolean mIsUserManuallyToggleMcOff = null;
   @SerializedName("merchant_type")
   private String mMerchantType = null;
   protected static Gson gson = null;
@@ -216,6 +218,15 @@ public class MCExperienceConfigForApi extends APINode {
     return this;
   }
 
+  public Boolean getFieldIsUserManuallyToggleMcOff() {
+    return mIsUserManuallyToggleMcOff;
+  }
+
+  public MCExperienceConfigForApi setFieldIsUserManuallyToggleMcOff(Boolean value) {
+    this.mIsUserManuallyToggleMcOff = value;
+    return this;
+  }
+
   public String getFieldMerchantType() {
     return mMerchantType;
   }
@@ -244,6 +255,7 @@ public class MCExperienceConfigForApi extends APINode {
   public MCExperienceConfigForApi copyFrom(MCExperienceConfigForApi instance) {
     this.mIsCampaignEnabled = instance.mIsCampaignEnabled;
     this.mIsTermsSigned = instance.mIsTermsSigned;
+    this.mIsUserManuallyToggleMcOff = instance.mIsUserManuallyToggleMcOff;
     this.mMerchantType = instance.mMerchantType;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

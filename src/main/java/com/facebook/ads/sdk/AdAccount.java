@@ -3424,6 +3424,7 @@ public class AdAccount extends APINode {
       "destination_spec",
       "dynamic_ad_voice",
       "enable_launch_instant_app",
+      "execution_options",
       "facebook_branded_content",
       "format_transformation_spec",
       "image_crops",
@@ -3680,6 +3681,15 @@ public class AdAccount extends APINode {
     }
     public APIRequestCreateAdCreative setEnableLaunchInstantApp (String enableLaunchInstantApp) {
       this.setParam("enable_launch_instant_app", enableLaunchInstantApp);
+      return this;
+    }
+
+    public APIRequestCreateAdCreative setExecutionOptions (List<AdCreative.EnumExecutionOptions> executionOptions) {
+      this.setParam("execution_options", executionOptions);
+      return this;
+    }
+    public APIRequestCreateAdCreative setExecutionOptions (String executionOptions) {
+      this.setParam("execution_options", executionOptions);
       return this;
     }
 
@@ -8073,6 +8083,7 @@ public class AdAccount extends APINode {
       "account_id",
       "adlabels",
       "adset_schedule",
+      "anchor_event_attribution_window_days",
       "asset_feed_id",
       "attribution_spec",
       "automatic_manual_state",
@@ -8299,6 +8310,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAdSets requestAdsetScheduleField (boolean value) {
       this.requestField("adset_schedule", value);
+      return this;
+    }
+    public APIRequestGetAdSets requestAnchorEventAttributionWindowDaysField () {
+      return this.requestAnchorEventAttributionWindowDaysField(true);
+    }
+    public APIRequestGetAdSets requestAnchorEventAttributionWindowDaysField (boolean value) {
+      this.requestField("anchor_event_attribution_window_days", value);
       return this;
     }
     public APIRequestGetAdSets requestAssetFeedIdField () {
@@ -8848,6 +8866,7 @@ public class AdAccount extends APINode {
       "optimization_goal",
       "optimization_sub_event",
       "pacing_type",
+      "placement_soft_opt_out",
       "promoted_object",
       "rb_prediction_id",
       "regional_regulated_categories",
@@ -9320,6 +9339,15 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestCreateAdSet setPlacementSoftOptOut (Object placementSoftOptOut) {
+      this.setParam("placement_soft_opt_out", placementSoftOptOut);
+      return this;
+    }
+    public APIRequestCreateAdSet setPlacementSoftOptOut (String placementSoftOptOut) {
+      this.setParam("placement_soft_opt_out", placementSoftOptOut);
+      return this;
+    }
+
     public APIRequestCreateAdSet setPromotedObject (Object promotedObject) {
       this.setParam("promoted_object", promotedObject);
       return this;
@@ -9504,6 +9532,7 @@ public class AdAccount extends APINode {
       "account_id",
       "adlabels",
       "adset_schedule",
+      "anchor_event_attribution_window_days",
       "asset_feed_id",
       "attribution_spec",
       "automatic_manual_state",
@@ -9703,6 +9732,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAdSetsByLabels requestAdsetScheduleField (boolean value) {
       this.requestField("adset_schedule", value);
+      return this;
+    }
+    public APIRequestGetAdSetsByLabels requestAnchorEventAttributionWindowDaysField () {
+      return this.requestAnchorEventAttributionWindowDaysField(true);
+    }
+    public APIRequestGetAdSetsByLabels requestAnchorEventAttributionWindowDaysField (boolean value) {
+      this.requestField("anchor_event_attribution_window_days", value);
       return this;
     }
     public APIRequestGetAdSetsByLabels requestAssetFeedIdField () {
@@ -13024,6 +13060,7 @@ public class AdAccount extends APINode {
       "account_id",
       "adlabels",
       "adset_schedule",
+      "anchor_event_attribution_window_days",
       "asset_feed_id",
       "attribution_spec",
       "automatic_manual_state",
@@ -13205,6 +13242,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAffectedAdSets requestAdsetScheduleField (boolean value) {
       this.requestField("adset_schedule", value);
+      return this;
+    }
+    public APIRequestGetAffectedAdSets requestAnchorEventAttributionWindowDaysField () {
+      return this.requestAnchorEventAttributionWindowDaysField(true);
+    }
+    public APIRequestGetAffectedAdSets requestAnchorEventAttributionWindowDaysField (boolean value) {
+      this.requestField("anchor_event_attribution_window_days", value);
       return this;
     }
     public APIRequestGetAffectedAdSets requestAssetFeedIdField () {
@@ -13843,6 +13887,7 @@ public class AdAccount extends APINode {
       "verification_status",
       "vertical",
       "vertical_id",
+      "whatsapp_business_manager_messaging_limit",
     };
 
     @Override
@@ -14087,6 +14132,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAgencies requestVerticalIdField (boolean value) {
       this.requestField("vertical_id", value);
+      return this;
+    }
+    public APIRequestGetAgencies requestWhatsappBusinessManagerMessagingLimitField () {
+      return this.requestWhatsappBusinessManagerMessagingLimitField(true);
+    }
+    public APIRequestGetAgencies requestWhatsappBusinessManagerMessagingLimitField (boolean value) {
+      this.requestField("whatsapp_business_manager_messaging_limit", value);
       return this;
     }
   }
@@ -19643,6 +19695,7 @@ public class AdAccount extends APINode {
       "event_sources",
       "exclusions",
       "facebook_page_id",
+      "inclusionOperator",
       "inclusions",
       "is_snapshot",
       "is_value_based",
@@ -19830,6 +19883,11 @@ public class AdAccount extends APINode {
 
     public APIRequestCreateCustomAudience setFacebookPageId (String facebookPageId) {
       this.setParam("facebook_page_id", facebookPageId);
+      return this;
+    }
+
+    public APIRequestCreateCustomAudience setInclusionoperator (String inclusionoperator) {
+      this.setParam("inclusionOperator", inclusionoperator);
       return this;
     }
 
@@ -20918,6 +20976,7 @@ public class AdAccount extends APINode {
       "account_id",
       "adlabels",
       "adset_schedule",
+      "anchor_event_attribution_window_days",
       "asset_feed_id",
       "attribution_spec",
       "automatic_manual_state",
@@ -21104,6 +21163,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetDeprecatedTargetingAdSets requestAdsetScheduleField (boolean value) {
       this.requestField("adset_schedule", value);
+      return this;
+    }
+    public APIRequestGetDeprecatedTargetingAdSets requestAnchorEventAttributionWindowDaysField () {
+      return this.requestAnchorEventAttributionWindowDaysField(true);
+    }
+    public APIRequestGetDeprecatedTargetingAdSets requestAnchorEventAttributionWindowDaysField (boolean value) {
+      this.requestField("anchor_event_attribution_window_days", value);
       return this;
     }
     public APIRequestGetDeprecatedTargetingAdSets requestAssetFeedIdField () {
@@ -24651,6 +24717,7 @@ public class AdAccount extends APINode {
       "event_source_group",
       "event_sources",
       "exclusions",
+      "inclusionOperator",
       "inclusions",
       "is_snapshot",
       "is_value_based",
@@ -24798,6 +24865,11 @@ public class AdAccount extends APINode {
     }
     public APIRequestCreateProductAudience setExclusions (String exclusions) {
       this.setParam("exclusions", exclusions);
+      return this;
+    }
+
+    public APIRequestCreateProductAudience setInclusionoperator (String inclusionoperator) {
+      this.setParam("inclusionOperator", inclusionoperator);
       return this;
     }
 

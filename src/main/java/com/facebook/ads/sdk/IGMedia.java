@@ -51,6 +51,10 @@ public class IGMedia extends APINode {
   private Long mCommentsCount = null;
   @SerializedName("copyright_check_information")
   private IGVideoCopyrightCheckMatchesInformation mCopyrightCheckInformation = null;
+  @SerializedName("has_poll")
+  private Boolean mHasPoll = null;
+  @SerializedName("has_slider")
+  private Boolean mHasSlider = null;
   @SerializedName("id")
   private String mId = null;
   @SerializedName("ig_id")
@@ -342,6 +346,10 @@ public class IGMedia extends APINode {
     return new APIRequestCreateProductTag(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestDelete delete() {
+    return new APIRequestDelete(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGet get() {
     return new APIRequestGet(this.getPrefixedId().toString(), context);
   }
@@ -372,6 +380,14 @@ public class IGMedia extends APINode {
 
   public IGVideoCopyrightCheckMatchesInformation getFieldCopyrightCheckInformation() {
     return mCopyrightCheckInformation;
+  }
+
+  public Boolean getFieldHasPoll() {
+    return mHasPoll;
+  }
+
+  public Boolean getFieldHasSlider() {
+    return mHasSlider;
   }
 
   public String getFieldId() {
@@ -830,6 +846,8 @@ public class IGMedia extends APINode {
       "caption",
       "comments_count",
       "copyright_check_information",
+      "has_poll",
+      "has_slider",
       "id",
       "ig_id",
       "is_comment_enabled",
@@ -972,6 +990,20 @@ public class IGMedia extends APINode {
     }
     public APIRequestGetChildren requestCopyrightCheckInformationField (boolean value) {
       this.requestField("copyright_check_information", value);
+      return this;
+    }
+    public APIRequestGetChildren requestHasPollField () {
+      return this.requestHasPollField(true);
+    }
+    public APIRequestGetChildren requestHasPollField (boolean value) {
+      this.requestField("has_poll", value);
+      return this;
+    }
+    public APIRequestGetChildren requestHasSliderField () {
+      return this.requestHasSliderField(true);
+    }
+    public APIRequestGetChildren requestHasSliderField (boolean value) {
+      this.requestField("has_slider", value);
       return this;
     }
     public APIRequestGetChildren requestIdField () {
@@ -2253,6 +2285,111 @@ public class IGMedia extends APINode {
 
   }
 
+  public static class APIRequestDelete extends APIRequest<APINode> {
+
+    APINode lastResponse = null;
+    @Override
+    public APINode getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public APINode execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINode execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINode> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
+             try {
+               return APIRequestDelete.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestDelete(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "DELETE", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestDelete setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestDelete setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestDelete requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestDelete requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestDelete requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestDelete requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestDelete requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestDelete requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGet extends APIRequest<IGMedia> {
 
     IGMedia lastResponse = null;
@@ -2276,6 +2413,8 @@ public class IGMedia extends APINode {
       "caption",
       "comments_count",
       "copyright_check_information",
+      "has_poll",
+      "has_slider",
       "id",
       "ig_id",
       "is_comment_enabled",
@@ -2461,6 +2600,20 @@ public class IGMedia extends APINode {
     }
     public APIRequestGet requestCopyrightCheckInformationField (boolean value) {
       this.requestField("copyright_check_information", value);
+      return this;
+    }
+    public APIRequestGet requestHasPollField () {
+      return this.requestHasPollField(true);
+    }
+    public APIRequestGet requestHasPollField (boolean value) {
+      this.requestField("has_poll", value);
+      return this;
+    }
+    public APIRequestGet requestHasSliderField () {
+      return this.requestHasSliderField(true);
+    }
+    public APIRequestGet requestHasSliderField (boolean value) {
+      this.requestField("has_slider", value);
       return this;
     }
     public APIRequestGet requestIdField () {
@@ -2738,6 +2891,8 @@ public class IGMedia extends APINode {
     this.mCaption = instance.mCaption;
     this.mCommentsCount = instance.mCommentsCount;
     this.mCopyrightCheckInformation = instance.mCopyrightCheckInformation;
+    this.mHasPoll = instance.mHasPoll;
+    this.mHasSlider = instance.mHasSlider;
     this.mId = instance.mId;
     this.mIgId = instance.mIgId;
     this.mIsCommentEnabled = instance.mIsCommentEnabled;

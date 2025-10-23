@@ -390,8 +390,6 @@ public class AdPreview extends APINode {
       VALUE_STANDARD_ENHANCEMENTS_CATALOG("standard_enhancements_catalog"),
       @SerializedName("text_overlay_translation")
       VALUE_TEXT_OVERLAY_TRANSLATION("text_overlay_translation"),
-      @SerializedName("video_to_image")
-      VALUE_VIDEO_TO_IMAGE("video_to_image"),
       ;
 
       private String value;

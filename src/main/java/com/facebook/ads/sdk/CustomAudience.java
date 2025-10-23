@@ -3689,6 +3689,7 @@ public class CustomAudience extends APINode {
       "event_source_group",
       "event_sources",
       "exclusions",
+      "inclusionOperator",
       "inclusions",
       "lookalike_spec",
       "name",
@@ -3835,6 +3836,11 @@ public class CustomAudience extends APINode {
     }
     public APIRequestUpdate setExclusions (String exclusions) {
       this.setParam("exclusions", exclusions);
+      return this;
+    }
+
+    public APIRequestUpdate setInclusionoperator (String inclusionoperator) {
+      this.setParam("inclusionOperator", inclusionoperator);
       return this;
     }
 

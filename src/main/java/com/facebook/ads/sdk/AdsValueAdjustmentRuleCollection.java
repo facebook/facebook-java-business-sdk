@@ -356,7 +356,7 @@ public class AdsValueAdjustmentRuleCollection extends APINode {
     };
 
     public APIRequestCreateDeleteRuleSet(String nodeId, APIContext context) {
-      super(context, nodeId, "/deleteruleset", "POST", Arrays.asList(PARAMS));
+      super(context, nodeId, "/delete_rule_set", "POST", Arrays.asList(PARAMS));
     }
 
     @Override

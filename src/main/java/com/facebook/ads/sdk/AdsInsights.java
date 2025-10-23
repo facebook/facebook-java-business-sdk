@@ -69,6 +69,8 @@ public class AdsInsights extends APINode {
   private String mAdsetStart = null;
   @SerializedName("age_targeting")
   private String mAgeTargeting = null;
+  @SerializedName("anchor_events_performance_indicator")
+  private String mAnchorEventsPerformanceIndicator = null;
   @SerializedName("attribution_setting")
   private String mAttributionSetting = null;
   @SerializedName("auction_bid")
@@ -544,6 +546,8 @@ public class AdsInsights extends APINode {
   private String mProductCustomLabel4Breakdown = null;
   @SerializedName("product_group_content_id_breakdown")
   private String mProductGroupContentIdBreakdown = null;
+  @SerializedName("product_group_id")
+  private String mProductGroupId = null;
   @SerializedName("product_id")
   private String mProductId = null;
   @SerializedName("product_set_id_breakdown")
@@ -882,6 +886,15 @@ public class AdsInsights extends APINode {
 
   public AdsInsights setFieldAgeTargeting(String value) {
     this.mAgeTargeting = value;
+    return this;
+  }
+
+  public String getFieldAnchorEventsPerformanceIndicator() {
+    return mAnchorEventsPerformanceIndicator;
+  }
+
+  public AdsInsights setFieldAnchorEventsPerformanceIndicator(String value) {
+    this.mAnchorEventsPerformanceIndicator = value;
     return this;
   }
 
@@ -3103,6 +3116,10 @@ public class AdsInsights extends APINode {
     return mProductGroupContentIdBreakdown;
   }
 
+  public String getFieldProductGroupId() {
+    return mProductGroupId;
+  }
+
   public String getFieldProductId() {
     return mProductId;
   }
@@ -3433,6 +3450,8 @@ public class AdsInsights extends APINode {
       VALUE_PRODUCT_CUSTOM_LABEL_4_BREAKDOWN("product_custom_label_4_breakdown"),
       @SerializedName("product_group_content_id_breakdown")
       VALUE_PRODUCT_GROUP_CONTENT_ID_BREAKDOWN("product_group_content_id_breakdown"),
+      @SerializedName("product_group_id")
+      VALUE_PRODUCT_GROUP_ID("product_group_id"),
       @SerializedName("product_id")
       VALUE_PRODUCT_ID("product_id"),
       @SerializedName("product_set_id_breakdown")
@@ -3643,6 +3662,7 @@ public class AdsInsights extends APINode {
     this.mAdsetName = instance.mAdsetName;
     this.mAdsetStart = instance.mAdsetStart;
     this.mAgeTargeting = instance.mAgeTargeting;
+    this.mAnchorEventsPerformanceIndicator = instance.mAnchorEventsPerformanceIndicator;
     this.mAttributionSetting = instance.mAttributionSetting;
     this.mAuctionBid = instance.mAuctionBid;
     this.mAuctionCompetitiveness = instance.mAuctionCompetitiveness;
@@ -3880,6 +3900,7 @@ public class AdsInsights extends APINode {
     this.mProductCustomLabel3Breakdown = instance.mProductCustomLabel3Breakdown;
     this.mProductCustomLabel4Breakdown = instance.mProductCustomLabel4Breakdown;
     this.mProductGroupContentIdBreakdown = instance.mProductGroupContentIdBreakdown;
+    this.mProductGroupId = instance.mProductGroupId;
     this.mProductId = instance.mProductId;
     this.mProductSetIdBreakdown = instance.mProductSetIdBreakdown;
     this.mPublisherPlatform = instance.mPublisherPlatform;

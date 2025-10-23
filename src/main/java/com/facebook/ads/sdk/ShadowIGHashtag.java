@@ -294,6 +294,8 @@ public class ShadowIGHashtag extends APINode {
       "caption",
       "comments_count",
       "copyright_check_information",
+      "has_poll",
+      "has_slider",
       "id",
       "ig_id",
       "is_comment_enabled",
@@ -443,6 +445,20 @@ public class ShadowIGHashtag extends APINode {
       this.requestField("copyright_check_information", value);
       return this;
     }
+    public APIRequestGetRecentMedia requestHasPollField () {
+      return this.requestHasPollField(true);
+    }
+    public APIRequestGetRecentMedia requestHasPollField (boolean value) {
+      this.requestField("has_poll", value);
+      return this;
+    }
+    public APIRequestGetRecentMedia requestHasSliderField () {
+      return this.requestHasSliderField(true);
+    }
+    public APIRequestGetRecentMedia requestHasSliderField (boolean value) {
+      this.requestField("has_slider", value);
+      return this;
+    }
     public APIRequestGetRecentMedia requestIdField () {
       return this.requestIdField(true);
     }
@@ -581,6 +597,8 @@ public class ShadowIGHashtag extends APINode {
       "caption",
       "comments_count",
       "copyright_check_information",
+      "has_poll",
+      "has_slider",
       "id",
       "ig_id",
       "is_comment_enabled",
@@ -728,6 +746,20 @@ public class ShadowIGHashtag extends APINode {
     }
     public APIRequestGetTopMedia requestCopyrightCheckInformationField (boolean value) {
       this.requestField("copyright_check_information", value);
+      return this;
+    }
+    public APIRequestGetTopMedia requestHasPollField () {
+      return this.requestHasPollField(true);
+    }
+    public APIRequestGetTopMedia requestHasPollField (boolean value) {
+      this.requestField("has_poll", value);
+      return this;
+    }
+    public APIRequestGetTopMedia requestHasSliderField () {
+      return this.requestHasSliderField(true);
+    }
+    public APIRequestGetTopMedia requestHasSliderField (boolean value) {
+      this.requestField("has_slider", value);
       return this;
     }
     public APIRequestGetTopMedia requestIdField () {

@@ -40,78 +40,74 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class CopyrightOwnershipTransfer extends APINode {
-  @SerializedName("assets")
-  private List<Object> mAssets = null;
-  @SerializedName("has_ownership_been_updated")
-  private Boolean mHasOwnershipBeenUpdated = null;
+public class ShadowIGScheduledMedia extends APINode {
+  @SerializedName("caption")
+  private String mCaption = null;
   @SerializedName("id")
   private String mId = null;
-  @SerializedName("receiving_rights_holder")
-  private Profile mReceivingRightsHolder = null;
-  @SerializedName("sending_rights_holder")
-  private Profile mSendingRightsHolder = null;
-  @SerializedName("status")
-  private String mStatus = null;
-  @SerializedName("transfer_territories")
-  private List<String> mTransferTerritories = null;
-  @SerializedName("transfer_time")
-  private String mTransferTime = null;
+  @SerializedName("media_type")
+  private String mMediaType = null;
+  @SerializedName("media_url")
+  private String mMediaUrl = null;
+  @SerializedName("publish_timestamp")
+  private Long mPublishTimestamp = null;
+  @SerializedName("thumbnail_url")
+  private String mThumbnailUrl = null;
   protected static Gson gson = null;
 
-  CopyrightOwnershipTransfer() {
+  ShadowIGScheduledMedia() {
   }
 
-  public CopyrightOwnershipTransfer(Long id, APIContext context) {
+  public ShadowIGScheduledMedia(Long id, APIContext context) {
     this(id.toString(), context);
   }
 
-  public CopyrightOwnershipTransfer(String id, APIContext context) {
+  public ShadowIGScheduledMedia(String id, APIContext context) {
     this.mId = id;
 
     this.context = context;
   }
 
-  public CopyrightOwnershipTransfer fetch() throws APIException{
-    CopyrightOwnershipTransfer newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+  public ShadowIGScheduledMedia fetch() throws APIException{
+    ShadowIGScheduledMedia newInstance = fetchById(this.getPrefixedId().toString(), this.context);
     this.copyFrom(newInstance);
     return this;
   }
 
-  public static CopyrightOwnershipTransfer fetchById(Long id, APIContext context) throws APIException {
+  public static ShadowIGScheduledMedia fetchById(Long id, APIContext context) throws APIException {
     return fetchById(id.toString(), context);
   }
 
-  public static ListenableFuture<CopyrightOwnershipTransfer> fetchByIdAsync(Long id, APIContext context) throws APIException {
+  public static ListenableFuture<ShadowIGScheduledMedia> fetchByIdAsync(Long id, APIContext context) throws APIException {
     return fetchByIdAsync(id.toString(), context);
   }
 
-  public static CopyrightOwnershipTransfer fetchById(String id, APIContext context) throws APIException {
+  public static ShadowIGScheduledMedia fetchById(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
   }
 
-  public static ListenableFuture<CopyrightOwnershipTransfer> fetchByIdAsync(String id, APIContext context) throws APIException {
+  public static ListenableFuture<ShadowIGScheduledMedia> fetchByIdAsync(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
   }
 
-  public static APINodeList<CopyrightOwnershipTransfer> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<CopyrightOwnershipTransfer>)(
-      new APIRequest<CopyrightOwnershipTransfer>(context, "", "/", "GET", CopyrightOwnershipTransfer.getParser())
+  public static APINodeList<ShadowIGScheduledMedia> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<ShadowIGScheduledMedia>)(
+      new APIRequest<ShadowIGScheduledMedia>(context, "", "/", "GET", ShadowIGScheduledMedia.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .execute()
     );
   }
 
-  public static ListenableFuture<APINodeList<CopyrightOwnershipTransfer>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+  public static ListenableFuture<APINodeList<ShadowIGScheduledMedia>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
     return
-      new APIRequest(context, "", "/", "GET", CopyrightOwnershipTransfer.getParser())
+      new APIRequest(context, "", "/", "GET", ShadowIGScheduledMedia.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
@@ -124,12 +120,12 @@ public class CopyrightOwnershipTransfer extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static CopyrightOwnershipTransfer loadJSON(String json, APIContext context, String header) {
-    CopyrightOwnershipTransfer copyrightOwnershipTransfer = getGson().fromJson(json, CopyrightOwnershipTransfer.class);
+  public static ShadowIGScheduledMedia loadJSON(String json, APIContext context, String header) {
+    ShadowIGScheduledMedia shadowIGScheduledMedia = getGson().fromJson(json, ShadowIGScheduledMedia.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(copyrightOwnershipTransfer.toString());
+      JsonElement o2 = parser.parse(shadowIGScheduledMedia.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -139,14 +135,14 @@ public class CopyrightOwnershipTransfer extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    copyrightOwnershipTransfer.context = context;
-    copyrightOwnershipTransfer.rawValue = json;
-    copyrightOwnershipTransfer.header = header;
-    return copyrightOwnershipTransfer;
+    shadowIGScheduledMedia.context = context;
+    shadowIGScheduledMedia.rawValue = json;
+    shadowIGScheduledMedia.header = header;
+    return shadowIGScheduledMedia;
   }
 
-  public static APINodeList<CopyrightOwnershipTransfer> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<CopyrightOwnershipTransfer> copyrightOwnershipTransfers = new APINodeList<CopyrightOwnershipTransfer>(request, json, header);
+  public static APINodeList<ShadowIGScheduledMedia> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<ShadowIGScheduledMedia> shadowIGScheduledMedias = new APINodeList<ShadowIGScheduledMedia>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -157,9 +153,9 @@ public class CopyrightOwnershipTransfer extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          copyrightOwnershipTransfers.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          shadowIGScheduledMedias.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return copyrightOwnershipTransfers;
+        return shadowIGScheduledMedias;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -169,20 +165,20 @@ public class CopyrightOwnershipTransfer extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                copyrightOwnershipTransfers.setCursors(before, after);
+                shadowIGScheduledMedias.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            copyrightOwnershipTransfers.setPaging(previous, next);
+            shadowIGScheduledMedias.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              copyrightOwnershipTransfers.setAppSecret(context.getAppSecretProof());
+              shadowIGScheduledMedias.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              copyrightOwnershipTransfers.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              shadowIGScheduledMedias.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -193,23 +189,23 @@ public class CopyrightOwnershipTransfer extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  copyrightOwnershipTransfers.add(loadJSON(entry.getValue().toString(), context, header));
+                  shadowIGScheduledMedias.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              copyrightOwnershipTransfers.add(loadJSON(obj.toString(), context, header));
+              shadowIGScheduledMedias.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return copyrightOwnershipTransfers;
+          return shadowIGScheduledMedias;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              copyrightOwnershipTransfers.add(loadJSON(entry.getValue().toString(), context, header));
+              shadowIGScheduledMedias.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return copyrightOwnershipTransfers;
+          return shadowIGScheduledMedias;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -226,20 +222,20 @@ public class CopyrightOwnershipTransfer extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              copyrightOwnershipTransfers.add(loadJSON(value.toString(), context, header));
+              shadowIGScheduledMedias.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return copyrightOwnershipTransfers;
+            return shadowIGScheduledMedias;
           }
 
           // Sixth, check if it's pure JsonObject
-          copyrightOwnershipTransfers.clear();
-          copyrightOwnershipTransfers.add(loadJSON(json, context, header));
-          return copyrightOwnershipTransfers;
+          shadowIGScheduledMedias.clear();
+          shadowIGScheduledMedias.add(loadJSON(json, context, header));
+          return shadowIGScheduledMedias;
         }
       }
     } catch (Exception e) {
@@ -271,93 +267,77 @@ public class CopyrightOwnershipTransfer extends APINode {
   }
 
 
-  public List<Object> getFieldAssets() {
-    return mAssets;
-  }
-
-  public Boolean getFieldHasOwnershipBeenUpdated() {
-    return mHasOwnershipBeenUpdated;
+  public String getFieldCaption() {
+    return mCaption;
   }
 
   public String getFieldId() {
     return mId;
   }
 
-  public Profile getFieldReceivingRightsHolder() {
-    if (mReceivingRightsHolder != null) {
-      mReceivingRightsHolder.context = getContext();
-    }
-    return mReceivingRightsHolder;
+  public String getFieldMediaType() {
+    return mMediaType;
   }
 
-  public Profile getFieldSendingRightsHolder() {
-    if (mSendingRightsHolder != null) {
-      mSendingRightsHolder.context = getContext();
-    }
-    return mSendingRightsHolder;
+  public String getFieldMediaUrl() {
+    return mMediaUrl;
   }
 
-  public String getFieldStatus() {
-    return mStatus;
+  public Long getFieldPublishTimestamp() {
+    return mPublishTimestamp;
   }
 
-  public List<String> getFieldTransferTerritories() {
-    return mTransferTerritories;
-  }
-
-  public String getFieldTransferTime() {
-    return mTransferTime;
+  public String getFieldThumbnailUrl() {
+    return mThumbnailUrl;
   }
 
 
 
-  public static class APIRequestGet extends APIRequest<CopyrightOwnershipTransfer> {
+  public static class APIRequestGet extends APIRequest<ShadowIGScheduledMedia> {
 
-    CopyrightOwnershipTransfer lastResponse = null;
+    ShadowIGScheduledMedia lastResponse = null;
     @Override
-    public CopyrightOwnershipTransfer getLastResponse() {
+    public ShadowIGScheduledMedia getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
     };
 
     public static final String[] FIELDS = {
-      "assets",
-      "has_ownership_been_updated",
+      "caption",
       "id",
-      "receiving_rights_holder",
-      "sending_rights_holder",
-      "status",
-      "transfer_territories",
-      "transfer_time",
+      "media_type",
+      "media_url",
+      "publish_timestamp",
+      "thumbnail_url",
     };
 
     @Override
-    public CopyrightOwnershipTransfer parseResponse(String response, String header) throws APIException {
-      return CopyrightOwnershipTransfer.parseResponse(response, getContext(), this, header).head();
+    public ShadowIGScheduledMedia parseResponse(String response, String header) throws APIException {
+      return ShadowIGScheduledMedia.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public CopyrightOwnershipTransfer execute() throws APIException {
+    public ShadowIGScheduledMedia execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public CopyrightOwnershipTransfer execute(Map<String, Object> extraParams) throws APIException {
+    public ShadowIGScheduledMedia execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<CopyrightOwnershipTransfer> executeAsync() throws APIException {
+    public ListenableFuture<ShadowIGScheduledMedia> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<CopyrightOwnershipTransfer> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<ShadowIGScheduledMedia> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, CopyrightOwnershipTransfer>() {
-           public CopyrightOwnershipTransfer apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, ShadowIGScheduledMedia>() {
+           public ShadowIGScheduledMedia apply(ResponseWrapper result) {
              try {
                return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -422,18 +402,11 @@ public class CopyrightOwnershipTransfer extends APINode {
       return this;
     }
 
-    public APIRequestGet requestAssetsField () {
-      return this.requestAssetsField(true);
+    public APIRequestGet requestCaptionField () {
+      return this.requestCaptionField(true);
     }
-    public APIRequestGet requestAssetsField (boolean value) {
-      this.requestField("assets", value);
-      return this;
-    }
-    public APIRequestGet requestHasOwnershipBeenUpdatedField () {
-      return this.requestHasOwnershipBeenUpdatedField(true);
-    }
-    public APIRequestGet requestHasOwnershipBeenUpdatedField (boolean value) {
-      this.requestField("has_ownership_been_updated", value);
+    public APIRequestGet requestCaptionField (boolean value) {
+      this.requestField("caption", value);
       return this;
     }
     public APIRequestGet requestIdField () {
@@ -443,39 +416,32 @@ public class CopyrightOwnershipTransfer extends APINode {
       this.requestField("id", value);
       return this;
     }
-    public APIRequestGet requestReceivingRightsHolderField () {
-      return this.requestReceivingRightsHolderField(true);
+    public APIRequestGet requestMediaTypeField () {
+      return this.requestMediaTypeField(true);
     }
-    public APIRequestGet requestReceivingRightsHolderField (boolean value) {
-      this.requestField("receiving_rights_holder", value);
+    public APIRequestGet requestMediaTypeField (boolean value) {
+      this.requestField("media_type", value);
       return this;
     }
-    public APIRequestGet requestSendingRightsHolderField () {
-      return this.requestSendingRightsHolderField(true);
+    public APIRequestGet requestMediaUrlField () {
+      return this.requestMediaUrlField(true);
     }
-    public APIRequestGet requestSendingRightsHolderField (boolean value) {
-      this.requestField("sending_rights_holder", value);
+    public APIRequestGet requestMediaUrlField (boolean value) {
+      this.requestField("media_url", value);
       return this;
     }
-    public APIRequestGet requestStatusField () {
-      return this.requestStatusField(true);
+    public APIRequestGet requestPublishTimestampField () {
+      return this.requestPublishTimestampField(true);
     }
-    public APIRequestGet requestStatusField (boolean value) {
-      this.requestField("status", value);
+    public APIRequestGet requestPublishTimestampField (boolean value) {
+      this.requestField("publish_timestamp", value);
       return this;
     }
-    public APIRequestGet requestTransferTerritoriesField () {
-      return this.requestTransferTerritoriesField(true);
+    public APIRequestGet requestThumbnailUrlField () {
+      return this.requestThumbnailUrlField(true);
     }
-    public APIRequestGet requestTransferTerritoriesField (boolean value) {
-      this.requestField("transfer_territories", value);
-      return this;
-    }
-    public APIRequestGet requestTransferTimeField () {
-      return this.requestTransferTimeField(true);
-    }
-    public APIRequestGet requestTransferTimeField (boolean value) {
-      this.requestField("transfer_time", value);
+    public APIRequestGet requestThumbnailUrlField (boolean value) {
+      this.requestField("thumbnail_url", value);
       return this;
     }
   }
@@ -494,24 +460,22 @@ public class CopyrightOwnershipTransfer extends APINode {
     return gson;
   }
 
-  public CopyrightOwnershipTransfer copyFrom(CopyrightOwnershipTransfer instance) {
-    this.mAssets = instance.mAssets;
-    this.mHasOwnershipBeenUpdated = instance.mHasOwnershipBeenUpdated;
+  public ShadowIGScheduledMedia copyFrom(ShadowIGScheduledMedia instance) {
+    this.mCaption = instance.mCaption;
     this.mId = instance.mId;
-    this.mReceivingRightsHolder = instance.mReceivingRightsHolder;
-    this.mSendingRightsHolder = instance.mSendingRightsHolder;
-    this.mStatus = instance.mStatus;
-    this.mTransferTerritories = instance.mTransferTerritories;
-    this.mTransferTime = instance.mTransferTime;
+    this.mMediaType = instance.mMediaType;
+    this.mMediaUrl = instance.mMediaUrl;
+    this.mPublishTimestamp = instance.mPublishTimestamp;
+    this.mThumbnailUrl = instance.mThumbnailUrl;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<CopyrightOwnershipTransfer> getParser() {
-    return new APIRequest.ResponseParser<CopyrightOwnershipTransfer>() {
-      public APINodeList<CopyrightOwnershipTransfer> parseResponse(String response, APIContext context, APIRequest<CopyrightOwnershipTransfer> request, String header) throws MalformedResponseException {
-        return CopyrightOwnershipTransfer.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<ShadowIGScheduledMedia> getParser() {
+    return new APIRequest.ResponseParser<ShadowIGScheduledMedia>() {
+      public APINodeList<ShadowIGScheduledMedia> parseResponse(String response, APIContext context, APIRequest<ShadowIGScheduledMedia> request, String header) throws MalformedResponseException {
+        return ShadowIGScheduledMedia.parseResponse(response, context, request, header);
       }
     };
   }

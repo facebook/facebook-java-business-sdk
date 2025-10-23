@@ -49,6 +49,8 @@ public class AdCreativeLinkDataChildAttachment extends APINode {
   private String mCaption = null;
   @SerializedName("description")
   private String mDescription = null;
+  @SerializedName("ig_media_id")
+  private String mIgMediaId = null;
   @SerializedName("image_crops")
   private AdsImageCrops mImageCrops = null;
   @SerializedName("image_hash")
@@ -261,6 +263,15 @@ public class AdCreativeLinkDataChildAttachment extends APINode {
     return this;
   }
 
+  public String getFieldIgMediaId() {
+    return mIgMediaId;
+  }
+
+  public AdCreativeLinkDataChildAttachment setFieldIgMediaId(String value) {
+    this.mIgMediaId = value;
+    return this;
+  }
+
   public AdsImageCrops getFieldImageCrops() {
     return mImageCrops;
   }
@@ -382,6 +393,7 @@ public class AdCreativeLinkDataChildAttachment extends APINode {
     this.mCallToAction = instance.mCallToAction;
     this.mCaption = instance.mCaption;
     this.mDescription = instance.mDescription;
+    this.mIgMediaId = instance.mIgMediaId;
     this.mImageCrops = instance.mImageCrops;
     this.mImageHash = instance.mImageHash;
     this.mIosUrl = instance.mIosUrl;

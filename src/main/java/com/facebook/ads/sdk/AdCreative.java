@@ -3037,6 +3037,23 @@ public class AdCreative extends APINode {
       }
   }
 
+  public static enum EnumExecutionOptions {
+      @SerializedName("validate_only")
+      VALUE_VALIDATE_ONLY("validate_only"),
+      ;
+
+      private String value;
+
+      private EnumExecutionOptions(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
   public static enum EnumOperator {
       @SerializedName("ALL")
       VALUE_ALL("ALL"),

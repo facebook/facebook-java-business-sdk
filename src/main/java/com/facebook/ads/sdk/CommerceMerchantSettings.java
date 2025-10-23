@@ -65,8 +65,6 @@ public class CommerceMerchantSettings extends APINode {
   private String mMerchantStatus = null;
   @SerializedName("offsite_iab_checkout_enabled_countries")
   private List<String> mOffsiteIabCheckoutEnabledCountries = null;
-  @SerializedName("onsite_commerce_merchant")
-  private Object mOnsiteCommerceMerchant = null;
   @SerializedName("payment_provider")
   private String mPaymentProvider = null;
   @SerializedName("privacy_policy_localized")
@@ -318,10 +316,6 @@ public class CommerceMerchantSettings extends APINode {
     return new APIRequestGetSetupStatus(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestGetShippingProfiles getShippingProfiles() {
-    return new APIRequestGetShippingProfiles(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestCreateShippingProfile createShippingProfile() {
     return new APIRequestCreateShippingProfile(this.getPrefixedId().toString(), context);
   }
@@ -388,10 +382,6 @@ public class CommerceMerchantSettings extends APINode {
 
   public List<String> getFieldOffsiteIabCheckoutEnabledCountries() {
     return mOffsiteIabCheckoutEnabledCountries;
-  }
-
-  public Object getFieldOnsiteCommerceMerchant() {
-    return mOnsiteCommerceMerchant;
   }
 
   public String getFieldPaymentProvider() {
@@ -2682,117 +2672,6 @@ public class CommerceMerchantSettings extends APINode {
     }
   }
 
-  public static class APIRequestGetShippingProfiles extends APIRequest<APINode> {
-
-    APINodeList<APINode> lastResponse = null;
-    @Override
-    public APINodeList<APINode> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "reference_id",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<APINode> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetShippingProfiles.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         },
-         MoreExecutors.directExecutor()
-      );
-    };
-
-    public APIRequestGetShippingProfiles(String nodeId, APIContext context) {
-      super(context, nodeId, "/shipping_profiles", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetShippingProfiles setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetShippingProfiles setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetShippingProfiles setReferenceId (String referenceId) {
-      this.setParam("reference_id", referenceId);
-      return this;
-    }
-
-    public APIRequestGetShippingProfiles requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetShippingProfiles requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetShippingProfiles requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetShippingProfiles requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetShippingProfiles requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetShippingProfiles requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
   public static class APIRequestCreateShippingProfile extends APIRequest<APINode> {
 
     APINode lastResponse = null;
@@ -3231,7 +3110,6 @@ public class CommerceMerchantSettings extends APINode {
       "merchant_page",
       "merchant_status",
       "offsite_iab_checkout_enabled_countries",
-      "onsite_commerce_merchant",
       "payment_provider",
       "privacy_policy_localized",
       "return_policy_localized",
@@ -3413,13 +3291,6 @@ public class CommerceMerchantSettings extends APINode {
       this.requestField("offsite_iab_checkout_enabled_countries", value);
       return this;
     }
-    public APIRequestGet requestOnsiteCommerceMerchantField () {
-      return this.requestOnsiteCommerceMerchantField(true);
-    }
-    public APIRequestGet requestOnsiteCommerceMerchantField (boolean value) {
-      this.requestField("onsite_commerce_merchant", value);
-      return this;
-    }
     public APIRequestGet requestPaymentProviderField () {
       return this.requestPaymentProviderField(true);
     }
@@ -3509,7 +3380,6 @@ public class CommerceMerchantSettings extends APINode {
     this.mMerchantPage = instance.mMerchantPage;
     this.mMerchantStatus = instance.mMerchantStatus;
     this.mOffsiteIabCheckoutEnabledCountries = instance.mOffsiteIabCheckoutEnabledCountries;
-    this.mOnsiteCommerceMerchant = instance.mOnsiteCommerceMerchant;
     this.mPaymentProvider = instance.mPaymentProvider;
     this.mPrivacyPolicyLocalized = instance.mPrivacyPolicyLocalized;
     this.mReturnPolicyLocalized = instance.mReturnPolicyLocalized;

@@ -1434,6 +1434,7 @@ public class AdLabel extends APINode {
       "account_id",
       "adlabels",
       "adset_schedule",
+      "anchor_event_attribution_window_days",
       "asset_feed_id",
       "attribution_spec",
       "automatic_manual_state",
@@ -1615,6 +1616,13 @@ public class AdLabel extends APINode {
     }
     public APIRequestGetAdSets requestAdsetScheduleField (boolean value) {
       this.requestField("adset_schedule", value);
+      return this;
+    }
+    public APIRequestGetAdSets requestAnchorEventAttributionWindowDaysField () {
+      return this.requestAnchorEventAttributionWindowDaysField(true);
+    }
+    public APIRequestGetAdSets requestAnchorEventAttributionWindowDaysField (boolean value) {
+      this.requestField("anchor_event_attribution_window_days", value);
       return this;
     }
     public APIRequestGetAdSets requestAssetFeedIdField () {

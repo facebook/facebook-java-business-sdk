@@ -81,6 +81,8 @@ public class AdCreativeFeaturesSpec extends APINode {
   private AdCreativeFeatureDetails mFbStoryTag = null;
   @SerializedName("feed_caption_optimization")
   private AdCreativeFeatureDetails mFeedCaptionOptimization = null;
+  @SerializedName("generate_cta")
+  private AdCreativeFeatureDetails mGenerateCta = null;
   @SerializedName("hide_price")
   private AdCreativeFeatureDetails mHidePrice = null;
   @SerializedName("ig_feed_tag")
@@ -147,6 +149,10 @@ public class AdCreativeFeaturesSpec extends APINode {
   private AdCreativeFeatureDetails mStandardEnhancements = null;
   @SerializedName("standard_enhancements_catalog")
   private AdCreativeFeatureDetails mStandardEnhancementsCatalog = null;
+  @SerializedName("text_extraction_for_headline")
+  private AdCreativeFeatureDetails mTextExtractionForHeadline = null;
+  @SerializedName("text_extraction_for_tap_target")
+  private AdCreativeFeatureDetails mTextExtractionForTapTarget = null;
   @SerializedName("text_generation")
   private AdCreativeFeatureDetails mTextGeneration = null;
   @SerializedName("text_optimizations")
@@ -155,6 +161,8 @@ public class AdCreativeFeaturesSpec extends APINode {
   private AdCreativeFeatureDetails mTextOverlayTranslation = null;
   @SerializedName("text_translation")
   private AdCreativeFeatureDetails mTextTranslation = null;
+  @SerializedName("translate_voiceover")
+  private AdCreativeFeatureDetails mTranslateVoiceover = null;
   @SerializedName("video_auto_crop")
   private AdCreativeFeatureDetails mVideoAutoCrop = null;
   @SerializedName("video_filtering")
@@ -600,6 +608,20 @@ public class AdCreativeFeaturesSpec extends APINode {
   public AdCreativeFeaturesSpec setFieldFeedCaptionOptimization(String value) {
     Type type = new TypeToken<AdCreativeFeatureDetails>(){}.getType();
     this.mFeedCaptionOptimization = AdCreativeFeatureDetails.getGson().fromJson(value, type);
+    return this;
+  }
+  public AdCreativeFeatureDetails getFieldGenerateCta() {
+    return mGenerateCta;
+  }
+
+  public AdCreativeFeaturesSpec setFieldGenerateCta(AdCreativeFeatureDetails value) {
+    this.mGenerateCta = value;
+    return this;
+  }
+
+  public AdCreativeFeaturesSpec setFieldGenerateCta(String value) {
+    Type type = new TypeToken<AdCreativeFeatureDetails>(){}.getType();
+    this.mGenerateCta = AdCreativeFeatureDetails.getGson().fromJson(value, type);
     return this;
   }
   public AdCreativeFeatureDetails getFieldHidePrice() {
@@ -1064,6 +1086,34 @@ public class AdCreativeFeaturesSpec extends APINode {
     this.mStandardEnhancementsCatalog = AdCreativeFeatureDetails.getGson().fromJson(value, type);
     return this;
   }
+  public AdCreativeFeatureDetails getFieldTextExtractionForHeadline() {
+    return mTextExtractionForHeadline;
+  }
+
+  public AdCreativeFeaturesSpec setFieldTextExtractionForHeadline(AdCreativeFeatureDetails value) {
+    this.mTextExtractionForHeadline = value;
+    return this;
+  }
+
+  public AdCreativeFeaturesSpec setFieldTextExtractionForHeadline(String value) {
+    Type type = new TypeToken<AdCreativeFeatureDetails>(){}.getType();
+    this.mTextExtractionForHeadline = AdCreativeFeatureDetails.getGson().fromJson(value, type);
+    return this;
+  }
+  public AdCreativeFeatureDetails getFieldTextExtractionForTapTarget() {
+    return mTextExtractionForTapTarget;
+  }
+
+  public AdCreativeFeaturesSpec setFieldTextExtractionForTapTarget(AdCreativeFeatureDetails value) {
+    this.mTextExtractionForTapTarget = value;
+    return this;
+  }
+
+  public AdCreativeFeaturesSpec setFieldTextExtractionForTapTarget(String value) {
+    Type type = new TypeToken<AdCreativeFeatureDetails>(){}.getType();
+    this.mTextExtractionForTapTarget = AdCreativeFeatureDetails.getGson().fromJson(value, type);
+    return this;
+  }
   public AdCreativeFeatureDetails getFieldTextGeneration() {
     return mTextGeneration;
   }
@@ -1118,6 +1168,20 @@ public class AdCreativeFeaturesSpec extends APINode {
   public AdCreativeFeaturesSpec setFieldTextTranslation(String value) {
     Type type = new TypeToken<AdCreativeFeatureDetails>(){}.getType();
     this.mTextTranslation = AdCreativeFeatureDetails.getGson().fromJson(value, type);
+    return this;
+  }
+  public AdCreativeFeatureDetails getFieldTranslateVoiceover() {
+    return mTranslateVoiceover;
+  }
+
+  public AdCreativeFeaturesSpec setFieldTranslateVoiceover(AdCreativeFeatureDetails value) {
+    this.mTranslateVoiceover = value;
+    return this;
+  }
+
+  public AdCreativeFeaturesSpec setFieldTranslateVoiceover(String value) {
+    Type type = new TypeToken<AdCreativeFeatureDetails>(){}.getType();
+    this.mTranslateVoiceover = AdCreativeFeatureDetails.getGson().fromJson(value, type);
     return this;
   }
   public AdCreativeFeatureDetails getFieldVideoAutoCrop() {
@@ -1269,6 +1333,7 @@ public class AdCreativeFeaturesSpec extends APINode {
     this.mFbReelsTag = instance.mFbReelsTag;
     this.mFbStoryTag = instance.mFbStoryTag;
     this.mFeedCaptionOptimization = instance.mFeedCaptionOptimization;
+    this.mGenerateCta = instance.mGenerateCta;
     this.mHidePrice = instance.mHidePrice;
     this.mIgFeedTag = instance.mIgFeedTag;
     this.mIgGladosFeed = instance.mIgGladosFeed;
@@ -1302,10 +1367,13 @@ public class AdCreativeFeaturesSpec extends APINode {
     this.mSiteExtensions = instance.mSiteExtensions;
     this.mStandardEnhancements = instance.mStandardEnhancements;
     this.mStandardEnhancementsCatalog = instance.mStandardEnhancementsCatalog;
+    this.mTextExtractionForHeadline = instance.mTextExtractionForHeadline;
+    this.mTextExtractionForTapTarget = instance.mTextExtractionForTapTarget;
     this.mTextGeneration = instance.mTextGeneration;
     this.mTextOptimizations = instance.mTextOptimizations;
     this.mTextOverlayTranslation = instance.mTextOverlayTranslation;
     this.mTextTranslation = instance.mTextTranslation;
+    this.mTranslateVoiceover = instance.mTranslateVoiceover;
     this.mVideoAutoCrop = instance.mVideoAutoCrop;
     this.mVideoFiltering = instance.mVideoFiltering;
     this.mVideoHighlight = instance.mVideoHighlight;

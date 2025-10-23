@@ -91,6 +91,8 @@ public class WhatsAppBusinessAccount extends APINode {
   private String mStatus = null;
   @SerializedName("timezone_id")
   private String mTimezoneId = null;
+  @SerializedName("whatsapp_business_manager_messaging_limit")
+  private EnumWhatsappBusinessManagerMessagingLimit mWhatsappBusinessManagerMessagingLimit = null;
   protected static Gson gson = null;
 
   WhatsAppBusinessAccount() {
@@ -334,6 +336,10 @@ public class WhatsAppBusinessAccount extends APINode {
 
   public APIRequestCreateDataset createDataset() {
     return new APIRequestCreateDataset(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetDegreesOfFreedomSpec getDegreesOfFreedomSpec() {
+    return new APIRequestGetDegreesOfFreedomSpec(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetFlows getFlows() {
@@ -605,6 +611,10 @@ public class WhatsAppBusinessAccount extends APINode {
 
   public String getFieldTimezoneId() {
     return mTimezoneId;
+  }
+
+  public EnumWhatsappBusinessManagerMessagingLimit getFieldWhatsappBusinessManagerMessagingLimit() {
+    return mWhatsappBusinessManagerMessagingLimit;
   }
 
 
@@ -1828,6 +1838,111 @@ public class WhatsAppBusinessAccount extends APINode {
 
     @Override
     public APIRequestCreateDataset requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestGetDegreesOfFreedomSpec extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetDegreesOfFreedomSpec.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestGetDegreesOfFreedomSpec(String nodeId, APIContext context) {
+      super(context, nodeId, "/degrees_of_freedom_spec", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetDegreesOfFreedomSpec setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetDegreesOfFreedomSpec setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetDegreesOfFreedomSpec requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetDegreesOfFreedomSpec requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetDegreesOfFreedomSpec requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetDegreesOfFreedomSpec requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetDegreesOfFreedomSpec requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetDegreesOfFreedomSpec requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
@@ -3160,6 +3275,7 @@ public class WhatsAppBusinessAccount extends APINode {
       "bid_spec",
       "category",
       "components",
+      "creative_sourcing_spec",
       "cta_url_link_tracking_opted_out",
       "degrees_of_freedom_spec",
       "display_format",
@@ -3264,6 +3380,15 @@ public class WhatsAppBusinessAccount extends APINode {
     }
     public APIRequestCreateMessageTemplate setComponents (String components) {
       this.setParam("components", components);
+      return this;
+    }
+
+    public APIRequestCreateMessageTemplate setCreativeSourcingSpec (Map<String, String> creativeSourcingSpec) {
+      this.setParam("creative_sourcing_spec", creativeSourcingSpec);
+      return this;
+    }
+    public APIRequestCreateMessageTemplate setCreativeSourcingSpec (String creativeSourcingSpec) {
+      this.setParam("creative_sourcing_spec", creativeSourcingSpec);
       return this;
     }
 
@@ -6014,6 +6139,7 @@ public class WhatsAppBusinessAccount extends APINode {
       "metric_types",
       "start",
       "template_group_ids",
+      "use_waba_timezone",
     };
 
     public static final String[] FIELDS = {
@@ -6107,6 +6233,15 @@ public class WhatsAppBusinessAccount extends APINode {
     }
     public APIRequestGetTemplateGroupAnalytics setTemplateGroupIds (String templateGroupIds) {
       this.setParam("template_group_ids", templateGroupIds);
+      return this;
+    }
+
+    public APIRequestGetTemplateGroupAnalytics setUseWabaTimezone (Boolean useWabaTimezone) {
+      this.setParam("use_waba_timezone", useWabaTimezone);
+      return this;
+    }
+    public APIRequestGetTemplateGroupAnalytics setUseWabaTimezone (String useWabaTimezone) {
+      this.setParam("use_waba_timezone", useWabaTimezone);
       return this;
     }
 
@@ -7111,6 +7246,7 @@ public class WhatsAppBusinessAccount extends APINode {
       "purchase_order_number",
       "status",
       "timezone_id",
+      "whatsapp_business_manager_messaging_limit",
     };
 
     @Override
@@ -7378,6 +7514,13 @@ public class WhatsAppBusinessAccount extends APINode {
       this.requestField("timezone_id", value);
       return this;
     }
+    public APIRequestGet requestWhatsappBusinessManagerMessagingLimitField () {
+      return this.requestWhatsappBusinessManagerMessagingLimitField(true);
+    }
+    public APIRequestGet requestWhatsappBusinessManagerMessagingLimitField (boolean value) {
+      this.requestField("whatsapp_business_manager_messaging_limit", value);
+      return this;
+    }
   }
 
   public static class APIRequestUpdate extends APIRequest<WhatsAppBusinessAccount> {
@@ -7521,6 +7664,33 @@ public class WhatsAppBusinessAccount extends APINode {
       private String value;
 
       private EnumBusinessVerificationStatus(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumWhatsappBusinessManagerMessagingLimit {
+      @SerializedName("TIER_100K")
+      VALUE_TIER_100K("TIER_100K"),
+      @SerializedName("TIER_10K")
+      VALUE_TIER_10K("TIER_10K"),
+      @SerializedName("TIER_250")
+      VALUE_TIER_250("TIER_250"),
+      @SerializedName("TIER_2K")
+      VALUE_TIER_2K("TIER_2K"),
+      @SerializedName("TIER_UNLIMITED")
+      VALUE_TIER_UNLIMITED("TIER_UNLIMITED"),
+      @SerializedName("UNTIERED")
+      VALUE_UNTIERED("UNTIERED"),
+      ;
+
+      private String value;
+
+      private EnumWhatsappBusinessManagerMessagingLimit(String value) {
         this.value = value;
       }
 
@@ -8113,6 +8283,7 @@ public class WhatsAppBusinessAccount extends APINode {
     this.mPurchaseOrderNumber = instance.mPurchaseOrderNumber;
     this.mStatus = instance.mStatus;
     this.mTimezoneId = instance.mTimezoneId;
+    this.mWhatsappBusinessManagerMessagingLimit = instance.mWhatsappBusinessManagerMessagingLimit;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

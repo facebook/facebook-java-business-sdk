@@ -49,10 +49,16 @@ public class AdsUserSettings extends APINode {
   private Object mAdgroupNameTemplate = null;
   @SerializedName("ads_cs_catalog_opt_out_timestamp")
   private List<Map<String, Long>> mAdsCsCatalogOptOutTimestamp = null;
+  @SerializedName("ads_cs_dynamic_se_opt_in_status")
+  private String mAdsCsDynamicSeOptInStatus = null;
+  @SerializedName("ads_cs_dynamic_se_opt_out_timestamp")
+  private List<Map<String, Long>> mAdsCsDynamicSeOptOutTimestamp = null;
   @SerializedName("ads_cs_sitelinks_opt_in_status")
   private String mAdsCsSitelinksOptInStatus = null;
   @SerializedName("ads_cs_sitelinks_opt_out_timestamp")
   private List<Map<String, Long>> mAdsCsSitelinksOptOutTimestamp = null;
+  @SerializedName("ads_destination_optimization_opt_out_timestamp")
+  private List<Map<String, Long>> mAdsDestinationOptimizationOptOutTimestamp = null;
   @SerializedName("ads_tool_visits")
   private List<Object> mAdsToolVisits = null;
   @SerializedName("aplusc_ai_agent_opt_in_status")
@@ -99,8 +105,12 @@ public class AdsUserSettings extends APINode {
   private String mCreativeFlexOptInStatus = null;
   @SerializedName("da_add_overlays_opt_in_status")
   private String mDaAddOverlaysOptInStatus = null;
+  @SerializedName("da_creative_flex_opt_in_status")
+  private String mDaCreativeFlexOptInStatus = null;
   @SerializedName("da_hide_price_opt_in_status")
   private String mDaHidePriceOptInStatus = null;
+  @SerializedName("da_manual_media_nux_impressions")
+  private Long mDaManualMediaNuxImpressions = null;
   @SerializedName("default_creation_mode")
   private String mDefaultCreationMode = null;
   @SerializedName("dynamic_partnership_ads_opt_in_status")
@@ -457,12 +467,24 @@ public class AdsUserSettings extends APINode {
     return mAdsCsCatalogOptOutTimestamp;
   }
 
+  public String getFieldAdsCsDynamicSeOptInStatus() {
+    return mAdsCsDynamicSeOptInStatus;
+  }
+
+  public List<Map<String, Long>> getFieldAdsCsDynamicSeOptOutTimestamp() {
+    return mAdsCsDynamicSeOptOutTimestamp;
+  }
+
   public String getFieldAdsCsSitelinksOptInStatus() {
     return mAdsCsSitelinksOptInStatus;
   }
 
   public List<Map<String, Long>> getFieldAdsCsSitelinksOptOutTimestamp() {
     return mAdsCsSitelinksOptOutTimestamp;
+  }
+
+  public List<Map<String, Long>> getFieldAdsDestinationOptimizationOptOutTimestamp() {
+    return mAdsDestinationOptimizationOptOutTimestamp;
   }
 
   public List<Object> getFieldAdsToolVisits() {
@@ -557,8 +579,16 @@ public class AdsUserSettings extends APINode {
     return mDaAddOverlaysOptInStatus;
   }
 
+  public String getFieldDaCreativeFlexOptInStatus() {
+    return mDaCreativeFlexOptInStatus;
+  }
+
   public String getFieldDaHidePriceOptInStatus() {
     return mDaHidePriceOptInStatus;
+  }
+
+  public Long getFieldDaManualMediaNuxImpressions() {
+    return mDaManualMediaNuxImpressions;
   }
 
   public String getFieldDefaultCreationMode() {
@@ -839,8 +869,11 @@ public class AdsUserSettings extends APINode {
       "add_overlays_opt_in_status",
       "adgroup_name_template",
       "ads_cs_catalog_opt_out_timestamp",
+      "ads_cs_dynamic_se_opt_in_status",
+      "ads_cs_dynamic_se_opt_out_timestamp",
       "ads_cs_sitelinks_opt_in_status",
       "ads_cs_sitelinks_opt_out_timestamp",
+      "ads_destination_optimization_opt_out_timestamp",
       "ads_tool_visits",
       "aplusc_ai_agent_opt_in_status",
       "aplusc_carousel_cda_opt_in_status",
@@ -864,7 +897,9 @@ public class AdsUserSettings extends APINode {
       "create_cta_sticker_opt_in_status",
       "creative_flex_opt_in_status",
       "da_add_overlays_opt_in_status",
+      "da_creative_flex_opt_in_status",
       "da_hide_price_opt_in_status",
+      "da_manual_media_nux_impressions",
       "default_creation_mode",
       "dynamic_partnership_ads_opt_in_status",
       "enhance_cta_text_extraction_opt_in_status",
@@ -1048,6 +1083,20 @@ public class AdsUserSettings extends APINode {
       this.requestField("ads_cs_catalog_opt_out_timestamp", value);
       return this;
     }
+    public APIRequestGet requestAdsCsDynamicSeOptInStatusField () {
+      return this.requestAdsCsDynamicSeOptInStatusField(true);
+    }
+    public APIRequestGet requestAdsCsDynamicSeOptInStatusField (boolean value) {
+      this.requestField("ads_cs_dynamic_se_opt_in_status", value);
+      return this;
+    }
+    public APIRequestGet requestAdsCsDynamicSeOptOutTimestampField () {
+      return this.requestAdsCsDynamicSeOptOutTimestampField(true);
+    }
+    public APIRequestGet requestAdsCsDynamicSeOptOutTimestampField (boolean value) {
+      this.requestField("ads_cs_dynamic_se_opt_out_timestamp", value);
+      return this;
+    }
     public APIRequestGet requestAdsCsSitelinksOptInStatusField () {
       return this.requestAdsCsSitelinksOptInStatusField(true);
     }
@@ -1060,6 +1109,13 @@ public class AdsUserSettings extends APINode {
     }
     public APIRequestGet requestAdsCsSitelinksOptOutTimestampField (boolean value) {
       this.requestField("ads_cs_sitelinks_opt_out_timestamp", value);
+      return this;
+    }
+    public APIRequestGet requestAdsDestinationOptimizationOptOutTimestampField () {
+      return this.requestAdsDestinationOptimizationOptOutTimestampField(true);
+    }
+    public APIRequestGet requestAdsDestinationOptimizationOptOutTimestampField (boolean value) {
+      this.requestField("ads_destination_optimization_opt_out_timestamp", value);
       return this;
     }
     public APIRequestGet requestAdsToolVisitsField () {
@@ -1223,11 +1279,25 @@ public class AdsUserSettings extends APINode {
       this.requestField("da_add_overlays_opt_in_status", value);
       return this;
     }
+    public APIRequestGet requestDaCreativeFlexOptInStatusField () {
+      return this.requestDaCreativeFlexOptInStatusField(true);
+    }
+    public APIRequestGet requestDaCreativeFlexOptInStatusField (boolean value) {
+      this.requestField("da_creative_flex_opt_in_status", value);
+      return this;
+    }
     public APIRequestGet requestDaHidePriceOptInStatusField () {
       return this.requestDaHidePriceOptInStatusField(true);
     }
     public APIRequestGet requestDaHidePriceOptInStatusField (boolean value) {
       this.requestField("da_hide_price_opt_in_status", value);
+      return this;
+    }
+    public APIRequestGet requestDaManualMediaNuxImpressionsField () {
+      return this.requestDaManualMediaNuxImpressionsField(true);
+    }
+    public APIRequestGet requestDaManualMediaNuxImpressionsField (boolean value) {
+      this.requestField("da_manual_media_nux_impressions", value);
       return this;
     }
     public APIRequestGet requestDefaultCreationModeField () {
@@ -1692,8 +1762,11 @@ public class AdsUserSettings extends APINode {
     this.mAddOverlaysOptInStatus = instance.mAddOverlaysOptInStatus;
     this.mAdgroupNameTemplate = instance.mAdgroupNameTemplate;
     this.mAdsCsCatalogOptOutTimestamp = instance.mAdsCsCatalogOptOutTimestamp;
+    this.mAdsCsDynamicSeOptInStatus = instance.mAdsCsDynamicSeOptInStatus;
+    this.mAdsCsDynamicSeOptOutTimestamp = instance.mAdsCsDynamicSeOptOutTimestamp;
     this.mAdsCsSitelinksOptInStatus = instance.mAdsCsSitelinksOptInStatus;
     this.mAdsCsSitelinksOptOutTimestamp = instance.mAdsCsSitelinksOptOutTimestamp;
+    this.mAdsDestinationOptimizationOptOutTimestamp = instance.mAdsDestinationOptimizationOptOutTimestamp;
     this.mAdsToolVisits = instance.mAdsToolVisits;
     this.mApluscAiAgentOptInStatus = instance.mApluscAiAgentOptInStatus;
     this.mApluscCarouselCdaOptInStatus = instance.mApluscCarouselCdaOptInStatus;
@@ -1717,7 +1790,9 @@ public class AdsUserSettings extends APINode {
     this.mCreateCtaStickerOptInStatus = instance.mCreateCtaStickerOptInStatus;
     this.mCreativeFlexOptInStatus = instance.mCreativeFlexOptInStatus;
     this.mDaAddOverlaysOptInStatus = instance.mDaAddOverlaysOptInStatus;
+    this.mDaCreativeFlexOptInStatus = instance.mDaCreativeFlexOptInStatus;
     this.mDaHidePriceOptInStatus = instance.mDaHidePriceOptInStatus;
+    this.mDaManualMediaNuxImpressions = instance.mDaManualMediaNuxImpressions;
     this.mDefaultCreationMode = instance.mDefaultCreationMode;
     this.mDynamicPartnershipAdsOptInStatus = instance.mDynamicPartnershipAdsOptInStatus;
     this.mEnhanceCtaTextExtractionOptInStatus = instance.mEnhanceCtaTextExtractionOptInStatus;

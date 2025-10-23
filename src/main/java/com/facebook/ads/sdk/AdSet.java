@@ -47,6 +47,8 @@ public class AdSet extends APINode {
   private List<AdLabel> mAdlabels = null;
   @SerializedName("adset_schedule")
   private List<DayPart> mAdsetSchedule = null;
+  @SerializedName("anchor_event_attribution_window_days")
+  private Long mAnchorEventAttributionWindowDays = null;
   @SerializedName("asset_feed_id")
   private String mAssetFeedId = null;
   @SerializedName("attribution_spec")
@@ -146,7 +148,7 @@ public class AdSet extends APINode {
   @SerializedName("pacing_type")
   private List<String> mPacingType = null;
   @SerializedName("placement_soft_opt_out")
-  private Placement mPlacementSoftOptOut = null;
+  private PlacementSoftOptOut mPlacementSoftOptOut = null;
   @SerializedName("promoted_object")
   private AdPromotedObject mPromotedObject = null;
   @SerializedName("recommendations")
@@ -514,6 +516,15 @@ public class AdSet extends APINode {
     this.mAdsetSchedule = DayPart.getGson().fromJson(value, type);
     return this;
   }
+  public Long getFieldAnchorEventAttributionWindowDays() {
+    return mAnchorEventAttributionWindowDays;
+  }
+
+  public AdSet setFieldAnchorEventAttributionWindowDays(Long value) {
+    this.mAnchorEventAttributionWindowDays = value;
+    return this;
+  }
+
   public String getFieldAssetFeedId() {
     return mAssetFeedId;
   }
@@ -998,18 +1009,18 @@ public class AdSet extends APINode {
     return this;
   }
 
-  public Placement getFieldPlacementSoftOptOut() {
+  public PlacementSoftOptOut getFieldPlacementSoftOptOut() {
     return mPlacementSoftOptOut;
   }
 
-  public AdSet setFieldPlacementSoftOptOut(Placement value) {
+  public AdSet setFieldPlacementSoftOptOut(PlacementSoftOptOut value) {
     this.mPlacementSoftOptOut = value;
     return this;
   }
 
   public AdSet setFieldPlacementSoftOptOut(String value) {
-    Type type = new TypeToken<Placement>(){}.getType();
-    this.mPlacementSoftOptOut = Placement.getGson().fromJson(value, type);
+    Type type = new TypeToken<PlacementSoftOptOut>(){}.getType();
+    this.mPlacementSoftOptOut = PlacementSoftOptOut.getGson().fromJson(value, type);
     return this;
   }
   public AdPromotedObject getFieldPromotedObject() {
@@ -3861,6 +3872,7 @@ public class AdSet extends APINode {
       "account_id",
       "adlabels",
       "adset_schedule",
+      "anchor_event_attribution_window_days",
       "asset_feed_id",
       "attribution_spec",
       "automatic_manual_state",
@@ -4078,6 +4090,13 @@ public class AdSet extends APINode {
     }
     public APIRequestGetCopies requestAdsetScheduleField (boolean value) {
       this.requestField("adset_schedule", value);
+      return this;
+    }
+    public APIRequestGetCopies requestAnchorEventAttributionWindowDaysField () {
+      return this.requestAnchorEventAttributionWindowDaysField(true);
+    }
+    public APIRequestGetCopies requestAnchorEventAttributionWindowDaysField (boolean value) {
+      this.requestField("anchor_event_attribution_window_days", value);
       return this;
     }
     public APIRequestGetCopies requestAssetFeedIdField () {
@@ -6083,6 +6102,7 @@ public class AdSet extends APINode {
       "account_id",
       "adlabels",
       "adset_schedule",
+      "anchor_event_attribution_window_days",
       "asset_feed_id",
       "attribution_spec",
       "automatic_manual_state",
@@ -6300,6 +6320,13 @@ public class AdSet extends APINode {
     }
     public APIRequestGet requestAdsetScheduleField (boolean value) {
       this.requestField("adset_schedule", value);
+      return this;
+    }
+    public APIRequestGet requestAnchorEventAttributionWindowDaysField () {
+      return this.requestAnchorEventAttributionWindowDaysField(true);
+    }
+    public APIRequestGet requestAnchorEventAttributionWindowDaysField (boolean value) {
+      this.requestField("anchor_event_attribution_window_days", value);
       return this;
     }
     public APIRequestGet requestAssetFeedIdField () {
@@ -6844,6 +6871,7 @@ public class AdSet extends APINode {
       "optimization_goal",
       "optimization_sub_event",
       "pacing_type",
+      "placement_soft_opt_out",
       "promoted_object",
       "rb_prediction_id",
       "regional_regulated_categories",
@@ -7270,6 +7298,15 @@ public class AdSet extends APINode {
     }
     public APIRequestUpdate setPacingType (String pacingType) {
       this.setParam("pacing_type", pacingType);
+      return this;
+    }
+
+    public APIRequestUpdate setPlacementSoftOptOut (Object placementSoftOptOut) {
+      this.setParam("placement_soft_opt_out", placementSoftOptOut);
+      return this;
+    }
+    public APIRequestUpdate setPlacementSoftOptOut (String placementSoftOptOut) {
+      this.setParam("placement_soft_opt_out", placementSoftOptOut);
       return this;
     }
 
@@ -7943,6 +7980,8 @@ public class AdSet extends APINode {
       VALUE_10("10"),
       @SerializedName("11")
       VALUE_11("11"),
+      @SerializedName("12")
+      VALUE_12("12"),
       ;
 
       private String value;
@@ -8044,6 +8083,7 @@ public class AdSet extends APINode {
     this.mAccountId = instance.mAccountId;
     this.mAdlabels = instance.mAdlabels;
     this.mAdsetSchedule = instance.mAdsetSchedule;
+    this.mAnchorEventAttributionWindowDays = instance.mAnchorEventAttributionWindowDays;
     this.mAssetFeedId = instance.mAssetFeedId;
     this.mAttributionSpec = instance.mAttributionSpec;
     this.mAutomaticManualState = instance.mAutomaticManualState;

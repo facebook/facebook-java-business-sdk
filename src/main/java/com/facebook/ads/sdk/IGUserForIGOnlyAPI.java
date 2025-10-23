@@ -658,7 +658,6 @@ public class IGUserForIGOnlyAPI extends APINode {
     }
     public static final String[] PARAMS = {
       "folder",
-      "is_owner",
       "platform",
       "tags",
       "user_id",
@@ -740,15 +739,6 @@ public class IGUserForIGOnlyAPI extends APINode {
 
     public APIRequestGetConversations setFolder (String folder) {
       this.setParam("folder", folder);
-      return this;
-    }
-
-    public APIRequestGetConversations setIsOwner (Boolean isOwner) {
-      this.setParam("is_owner", isOwner);
-      return this;
-    }
-    public APIRequestGetConversations setIsOwner (String isOwner) {
-      this.setParam("is_owner", isOwner);
       return this;
     }
 
@@ -1398,6 +1388,7 @@ public class IGUserForIGOnlyAPI extends APINode {
       "product_tags",
       "share_to_feed",
       "thumb_offset",
+      "trial_params",
       "upload_type",
       "user_tags",
       "video_url",
@@ -1542,6 +1533,15 @@ public class IGUserForIGOnlyAPI extends APINode {
 
     public APIRequestCreateMedia setThumbOffset (String thumbOffset) {
       this.setParam("thumb_offset", thumbOffset);
+      return this;
+    }
+
+    public APIRequestCreateMedia setTrialParams (Map<String, String> trialParams) {
+      this.setParam("trial_params", trialParams);
+      return this;
+    }
+    public APIRequestCreateMedia setTrialParams (String trialParams) {
+      this.setParam("trial_params", trialParams);
       return this;
     }
 

@@ -767,6 +767,7 @@ public class ProductCatalog extends APINode {
       "verification_status",
       "vertical",
       "vertical_id",
+      "whatsapp_business_manager_messaging_limit",
     };
 
     @Override
@@ -1011,6 +1012,13 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestGetAgencies requestVerticalIdField (boolean value) {
       this.requestField("vertical_id", value);
+      return this;
+    }
+    public APIRequestGetAgencies requestWhatsappBusinessManagerMessagingLimitField () {
+      return this.requestWhatsappBusinessManagerMessagingLimitField(true);
+    }
+    public APIRequestGetAgencies requestWhatsappBusinessManagerMessagingLimitField (boolean value) {
+      this.requestField("whatsapp_business_manager_messaging_limit", value);
       return this;
     }
   }
@@ -8451,6 +8459,7 @@ public class ProductCatalog extends APINode {
       "schedule",
       "selected_override_fields",
       "update_schedule",
+      "use_case",
     };
 
     public static final String[] FIELDS = {
@@ -8646,6 +8655,15 @@ public class ProductCatalog extends APINode {
 
     public APIRequestCreateProductFeed setUpdateSchedule (String updateSchedule) {
       this.setParam("update_schedule", updateSchedule);
+      return this;
+    }
+
+    public APIRequestCreateProductFeed setUseCase (ProductFeed.EnumUseCase useCase) {
+      this.setParam("use_case", useCase);
+      return this;
+    }
+    public APIRequestCreateProductFeed setUseCase (String useCase) {
+      this.setParam("use_case", useCase);
       return this;
     }
 
@@ -10320,6 +10338,7 @@ public class ProductCatalog extends APINode {
       "additional_image_urls",
       "additional_variant_attributes",
       "age_group",
+      "allow_upsert",
       "android_app_name",
       "android_class",
       "android_package",
@@ -10480,6 +10499,15 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestCreateProduct setAgeGroup (String ageGroup) {
       this.setParam("age_group", ageGroup);
+      return this;
+    }
+
+    public APIRequestCreateProduct setAllowUpsert (Boolean allowUpsert) {
+      this.setParam("allow_upsert", allowUpsert);
+      return this;
+    }
+    public APIRequestCreateProduct setAllowUpsert (String allowUpsert) {
+      this.setParam("allow_upsert", allowUpsert);
       return this;
     }
 

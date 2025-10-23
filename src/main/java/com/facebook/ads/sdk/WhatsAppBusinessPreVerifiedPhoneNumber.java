@@ -345,6 +345,7 @@ public class WhatsAppBusinessPreVerifiedPhoneNumber extends APINode {
       "verification_status",
       "vertical",
       "vertical_id",
+      "whatsapp_business_manager_messaging_limit",
     };
 
     @Override
@@ -589,6 +590,13 @@ public class WhatsAppBusinessPreVerifiedPhoneNumber extends APINode {
     }
     public APIRequestGetPartners requestVerticalIdField (boolean value) {
       this.requestField("vertical_id", value);
+      return this;
+    }
+    public APIRequestGetPartners requestWhatsappBusinessManagerMessagingLimitField () {
+      return this.requestWhatsappBusinessManagerMessagingLimitField(true);
+    }
+    public APIRequestGetPartners requestWhatsappBusinessManagerMessagingLimitField (boolean value) {
+      this.requestField("whatsapp_business_manager_messaging_limit", value);
       return this;
     }
   }

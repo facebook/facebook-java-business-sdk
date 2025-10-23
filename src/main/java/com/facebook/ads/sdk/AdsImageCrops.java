@@ -47,6 +47,8 @@ public class AdsImageCrops extends APINode {
   private List<JsonArray> m100x72 = null;
   @SerializedName("191x100")
   private List<JsonArray> m191x100 = null;
+  @SerializedName("300x400")
+  private List<JsonArray> m300x400 = null;
   @SerializedName("400x150")
   private List<JsonArray> m400x150 = null;
   @SerializedName("400x500")
@@ -233,6 +235,15 @@ public class AdsImageCrops extends APINode {
     return this;
   }
 
+  public List<JsonArray> getField300x400() {
+    return m300x400;
+  }
+
+  public AdsImageCrops setField300x400(List<JsonArray> value) {
+    this.m300x400 = value;
+    return this;
+  }
+
   public List<JsonArray> getField400x150() {
     return m400x150;
   }
@@ -289,6 +300,7 @@ public class AdsImageCrops extends APINode {
     this.m100x100 = instance.m100x100;
     this.m100x72 = instance.m100x72;
     this.m191x100 = instance.m191x100;
+    this.m300x400 = instance.m300x400;
     this.m400x150 = instance.m400x150;
     this.m400x500 = instance.m400x500;
     this.m600x360 = instance.m600x360;

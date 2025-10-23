@@ -1100,6 +1100,8 @@ public class ContentBlockList extends APINode {
       "caption",
       "comments_count",
       "copyright_check_information",
+      "has_poll",
+      "has_slider",
       "id",
       "ig_id",
       "is_comment_enabled",
@@ -1242,6 +1244,20 @@ public class ContentBlockList extends APINode {
     }
     public APIRequestGetInstagramContent requestCopyrightCheckInformationField (boolean value) {
       this.requestField("copyright_check_information", value);
+      return this;
+    }
+    public APIRequestGetInstagramContent requestHasPollField () {
+      return this.requestHasPollField(true);
+    }
+    public APIRequestGetInstagramContent requestHasPollField (boolean value) {
+      this.requestField("has_poll", value);
+      return this;
+    }
+    public APIRequestGetInstagramContent requestHasSliderField () {
+      return this.requestHasSliderField(true);
+    }
+    public APIRequestGetInstagramContent requestHasSliderField (boolean value) {
+      this.requestField("has_slider", value);
       return this;
     }
     public APIRequestGetInstagramContent requestIdField () {

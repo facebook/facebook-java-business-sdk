@@ -3649,7 +3649,6 @@ public class Group extends APINode {
       "is_manual_mode",
       "is_reference_only",
       "live_views",
-      "overlay_url",
       "permalink_url",
       "planned_start_time",
       "recommended_encoder_settings",
@@ -3874,13 +3873,6 @@ public class Group extends APINode {
     }
     public APIRequestGetLiveVideos requestLiveViewsField (boolean value) {
       this.requestField("live_views", value);
-      return this;
-    }
-    public APIRequestGetLiveVideos requestOverlayUrlField () {
-      return this.requestOverlayUrlField(true);
-    }
-    public APIRequestGetLiveVideos requestOverlayUrlField (boolean value) {
-      this.requestField("overlay_url", value);
       return this;
     }
     public APIRequestGetLiveVideos requestPermalinkUrlField () {

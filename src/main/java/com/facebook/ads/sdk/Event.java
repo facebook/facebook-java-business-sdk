@@ -2448,8 +2448,6 @@ public class Event extends APINode {
       VALUE_FB_LIVE("fb_live"),
       @SerializedName("horizon_event")
       VALUE_HORIZON_EVENT("horizon_event"),
-      @SerializedName("horizon_world")
-      VALUE_HORIZON_WORLD("horizon_world"),
       @SerializedName("messenger_room")
       VALUE_MESSENGER_ROOM("messenger_room"),
       @SerializedName("none")

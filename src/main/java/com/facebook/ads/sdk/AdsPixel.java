@@ -1381,6 +1381,7 @@ public class AdsPixel extends APINode {
       "verification_status",
       "vertical",
       "vertical_id",
+      "whatsapp_business_manager_messaging_limit",
     };
 
     @Override
@@ -1625,6 +1626,13 @@ public class AdsPixel extends APINode {
     }
     public APIRequestGetAgencies requestVerticalIdField (boolean value) {
       this.requestField("vertical_id", value);
+      return this;
+    }
+    public APIRequestGetAgencies requestWhatsappBusinessManagerMessagingLimitField () {
+      return this.requestWhatsappBusinessManagerMessagingLimitField(true);
+    }
+    public APIRequestGetAgencies requestWhatsappBusinessManagerMessagingLimitField (boolean value) {
+      this.requestField("whatsapp_business_manager_messaging_limit", value);
       return this;
     }
   }
@@ -2754,11 +2762,14 @@ public class AdsPixel extends APINode {
 
     public static final String[] FIELDS = {
       "active",
+      "blocked_event_types",
+      "blocked_websites",
       "browser_agent",
       "cloud_provider",
       "cloud_region",
       "destination_id",
       "endpoint",
+      "event_enrichment_state",
       "fallback_domain",
       "first_party_domain",
       "host_business_id",
@@ -2871,6 +2882,20 @@ public class AdsPixel extends APINode {
       this.requestField("active", value);
       return this;
     }
+    public APIRequestGetOpenBridgeConfigurations requestBlockedEventTypesField () {
+      return this.requestBlockedEventTypesField(true);
+    }
+    public APIRequestGetOpenBridgeConfigurations requestBlockedEventTypesField (boolean value) {
+      this.requestField("blocked_event_types", value);
+      return this;
+    }
+    public APIRequestGetOpenBridgeConfigurations requestBlockedWebsitesField () {
+      return this.requestBlockedWebsitesField(true);
+    }
+    public APIRequestGetOpenBridgeConfigurations requestBlockedWebsitesField (boolean value) {
+      this.requestField("blocked_websites", value);
+      return this;
+    }
     public APIRequestGetOpenBridgeConfigurations requestBrowserAgentField () {
       return this.requestBrowserAgentField(true);
     }
@@ -2904,6 +2929,13 @@ public class AdsPixel extends APINode {
     }
     public APIRequestGetOpenBridgeConfigurations requestEndpointField (boolean value) {
       this.requestField("endpoint", value);
+      return this;
+    }
+    public APIRequestGetOpenBridgeConfigurations requestEventEnrichmentStateField () {
+      return this.requestEventEnrichmentStateField(true);
+    }
+    public APIRequestGetOpenBridgeConfigurations requestEventEnrichmentStateField (boolean value) {
+      this.requestField("event_enrichment_state", value);
       return this;
     }
     public APIRequestGetOpenBridgeConfigurations requestFallbackDomainField () {
@@ -4066,6 +4098,7 @@ public class AdsPixel extends APINode {
       "verification_status",
       "vertical",
       "vertical_id",
+      "whatsapp_business_manager_messaging_limit",
     };
 
     @Override
@@ -4310,6 +4343,13 @@ public class AdsPixel extends APINode {
     }
     public APIRequestGetSharedAgencies requestVerticalIdField (boolean value) {
       this.requestField("vertical_id", value);
+      return this;
+    }
+    public APIRequestGetSharedAgencies requestWhatsappBusinessManagerMessagingLimitField () {
+      return this.requestWhatsappBusinessManagerMessagingLimitField(true);
+    }
+    public APIRequestGetSharedAgencies requestWhatsappBusinessManagerMessagingLimitField (boolean value) {
+      this.requestField("whatsapp_business_manager_messaging_limit", value);
       return this;
     }
   }

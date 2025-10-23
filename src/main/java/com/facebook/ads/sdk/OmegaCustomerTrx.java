@@ -737,25 +737,6 @@ public class OmegaCustomerTrx extends APINode {
     }
   }
 
-  public static enum EnumProductTypes {
-      @SerializedName("FACEBOOK")
-      VALUE_FACEBOOK("FACEBOOK"),
-      @SerializedName("WHATSAPP")
-      VALUE_WHATSAPP("WHATSAPP"),
-      ;
-
-      private String value;
-
-      private EnumProductTypes(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
   public static enum EnumType {
       @SerializedName("CM")
       VALUE_CM("CM"),

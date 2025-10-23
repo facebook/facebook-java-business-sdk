@@ -7847,6 +7847,7 @@ public class User extends APINode {
       "purchase_order_number",
       "status",
       "timezone_id",
+      "whatsapp_business_manager_messaging_limit",
     };
 
     @Override
@@ -8112,6 +8113,13 @@ public class User extends APINode {
     }
     public APIRequestGetAssignedWhatsAppBusinessAccounts requestTimezoneIdField (boolean value) {
       this.requestField("timezone_id", value);
+      return this;
+    }
+    public APIRequestGetAssignedWhatsAppBusinessAccounts requestWhatsappBusinessManagerMessagingLimitField () {
+      return this.requestWhatsappBusinessManagerMessagingLimitField(true);
+    }
+    public APIRequestGetAssignedWhatsAppBusinessAccounts requestWhatsappBusinessManagerMessagingLimitField (boolean value) {
+      this.requestField("whatsapp_business_manager_messaging_limit", value);
       return this;
     }
   }
@@ -8485,6 +8493,7 @@ public class User extends APINode {
       "verification_status",
       "vertical",
       "vertical_id",
+      "whatsapp_business_manager_messaging_limit",
     };
 
     @Override
@@ -8731,6 +8740,13 @@ public class User extends APINode {
       this.requestField("vertical_id", value);
       return this;
     }
+    public APIRequestGetBusinesses requestWhatsappBusinessManagerMessagingLimitField () {
+      return this.requestWhatsappBusinessManagerMessagingLimitField(true);
+    }
+    public APIRequestGetBusinesses requestWhatsappBusinessManagerMessagingLimitField (boolean value) {
+      this.requestField("whatsapp_business_manager_messaging_limit", value);
+      return this;
+    }
   }
 
   public static class APIRequestCreateBusiness extends APIRequest<Business> {
@@ -8927,7 +8943,6 @@ public class User extends APINode {
     }
     public static final String[] PARAMS = {
       "folder",
-      "is_owner",
       "platform",
       "tags",
       "user_id",
@@ -9009,15 +9024,6 @@ public class User extends APINode {
 
     public APIRequestGetConversations setFolder (String folder) {
       this.setParam("folder", folder);
-      return this;
-    }
-
-    public APIRequestGetConversations setIsOwner (Boolean isOwner) {
-      this.setParam("is_owner", isOwner);
-      return this;
-    }
-    public APIRequestGetConversations setIsOwner (String isOwner) {
-      this.setParam("is_owner", isOwner);
       return this;
     }
 
@@ -14345,7 +14351,6 @@ public class User extends APINode {
       "is_manual_mode",
       "is_reference_only",
       "live_views",
-      "overlay_url",
       "permalink_url",
       "planned_start_time",
       "recommended_encoder_settings",
@@ -14570,13 +14575,6 @@ public class User extends APINode {
     }
     public APIRequestGetLiveVideos requestLiveViewsField (boolean value) {
       this.requestField("live_views", value);
-      return this;
-    }
-    public APIRequestGetLiveVideos requestOverlayUrlField () {
-      return this.requestOverlayUrlField(true);
-    }
-    public APIRequestGetLiveVideos requestOverlayUrlField (boolean value) {
-      this.requestField("overlay_url", value);
       return this;
     }
     public APIRequestGetLiveVideos requestPermalinkUrlField () {

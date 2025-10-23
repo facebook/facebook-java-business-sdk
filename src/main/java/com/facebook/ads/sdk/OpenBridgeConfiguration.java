@@ -43,6 +43,10 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class OpenBridgeConfiguration extends APINode {
   @SerializedName("active")
   private Boolean mActive = null;
+  @SerializedName("blocked_event_types")
+  private List<String> mBlockedEventTypes = null;
+  @SerializedName("blocked_websites")
+  private List<String> mBlockedWebsites = null;
   @SerializedName("browser_agent")
   private List<String> mBrowserAgent = null;
   @SerializedName("cloud_provider")
@@ -53,6 +57,8 @@ public class OpenBridgeConfiguration extends APINode {
   private String mDestinationId = null;
   @SerializedName("endpoint")
   private String mEndpoint = null;
+  @SerializedName("event_enrichment_state")
+  private String mEventEnrichmentState = null;
   @SerializedName("fallback_domain")
   private String mFallbackDomain = null;
   @SerializedName("first_party_domain")
@@ -305,6 +311,14 @@ public class OpenBridgeConfiguration extends APINode {
     return mActive;
   }
 
+  public List<String> getFieldBlockedEventTypes() {
+    return mBlockedEventTypes;
+  }
+
+  public List<String> getFieldBlockedWebsites() {
+    return mBlockedWebsites;
+  }
+
   public List<String> getFieldBrowserAgent() {
     return mBrowserAgent;
   }
@@ -323,6 +337,10 @@ public class OpenBridgeConfiguration extends APINode {
 
   public String getFieldEndpoint() {
     return mEndpoint;
+  }
+
+  public String getFieldEventEnrichmentState() {
+    return mEventEnrichmentState;
   }
 
   public String getFieldFallbackDomain() {
@@ -496,11 +514,14 @@ public class OpenBridgeConfiguration extends APINode {
 
     public static final String[] FIELDS = {
       "active",
+      "blocked_event_types",
+      "blocked_websites",
       "browser_agent",
       "cloud_provider",
       "cloud_region",
       "destination_id",
       "endpoint",
+      "event_enrichment_state",
       "fallback_domain",
       "first_party_domain",
       "host_business_id",
@@ -613,6 +634,20 @@ public class OpenBridgeConfiguration extends APINode {
       this.requestField("active", value);
       return this;
     }
+    public APIRequestGet requestBlockedEventTypesField () {
+      return this.requestBlockedEventTypesField(true);
+    }
+    public APIRequestGet requestBlockedEventTypesField (boolean value) {
+      this.requestField("blocked_event_types", value);
+      return this;
+    }
+    public APIRequestGet requestBlockedWebsitesField () {
+      return this.requestBlockedWebsitesField(true);
+    }
+    public APIRequestGet requestBlockedWebsitesField (boolean value) {
+      this.requestField("blocked_websites", value);
+      return this;
+    }
     public APIRequestGet requestBrowserAgentField () {
       return this.requestBrowserAgentField(true);
     }
@@ -646,6 +681,13 @@ public class OpenBridgeConfiguration extends APINode {
     }
     public APIRequestGet requestEndpointField (boolean value) {
       this.requestField("endpoint", value);
+      return this;
+    }
+    public APIRequestGet requestEventEnrichmentStateField () {
+      return this.requestEventEnrichmentStateField(true);
+    }
+    public APIRequestGet requestEventEnrichmentStateField (boolean value) {
+      this.requestField("event_enrichment_state", value);
       return this;
     }
     public APIRequestGet requestFallbackDomainField () {
@@ -750,10 +792,13 @@ public class OpenBridgeConfiguration extends APINode {
     }
     public static final String[] PARAMS = {
       "active",
+      "blocked_event_types",
+      "blocked_websites",
       "cloud_provider",
       "cloud_region",
       "destination_id",
       "endpoint",
+      "event_enrichment_state",
       "fallback_domain",
       "first_party_domain",
       "host_business_id",
@@ -833,6 +878,24 @@ public class OpenBridgeConfiguration extends APINode {
       return this;
     }
 
+    public APIRequestUpdate setBlockedEventTypes (List<String> blockedEventTypes) {
+      this.setParam("blocked_event_types", blockedEventTypes);
+      return this;
+    }
+    public APIRequestUpdate setBlockedEventTypes (String blockedEventTypes) {
+      this.setParam("blocked_event_types", blockedEventTypes);
+      return this;
+    }
+
+    public APIRequestUpdate setBlockedWebsites (List<String> blockedWebsites) {
+      this.setParam("blocked_websites", blockedWebsites);
+      return this;
+    }
+    public APIRequestUpdate setBlockedWebsites (String blockedWebsites) {
+      this.setParam("blocked_websites", blockedWebsites);
+      return this;
+    }
+
     public APIRequestUpdate setCloudProvider (String cloudProvider) {
       this.setParam("cloud_provider", cloudProvider);
       return this;
@@ -850,6 +913,15 @@ public class OpenBridgeConfiguration extends APINode {
 
     public APIRequestUpdate setEndpoint (String endpoint) {
       this.setParam("endpoint", endpoint);
+      return this;
+    }
+
+    public APIRequestUpdate setEventEnrichmentState (OpenBridgeConfiguration.EnumEventEnrichmentState eventEnrichmentState) {
+      this.setParam("event_enrichment_state", eventEnrichmentState);
+      return this;
+    }
+    public APIRequestUpdate setEventEnrichmentState (String eventEnrichmentState) {
+      this.setParam("event_enrichment_state", eventEnrichmentState);
       return this;
     }
 
@@ -962,6 +1034,27 @@ public class OpenBridgeConfiguration extends APINode {
 
   }
 
+  public static enum EnumEventEnrichmentState {
+      @SerializedName("NO")
+      VALUE_NO("NO"),
+      @SerializedName("NOT_INITIALIZED")
+      VALUE_NOT_INITIALIZED("NOT_INITIALIZED"),
+      @SerializedName("YES")
+      VALUE_YES("YES"),
+      ;
+
+      private String value;
+
+      private EnumEventEnrichmentState(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
 
   synchronized /*package*/ static Gson getGson() {
     if (gson != null) {
@@ -978,11 +1071,14 @@ public class OpenBridgeConfiguration extends APINode {
 
   public OpenBridgeConfiguration copyFrom(OpenBridgeConfiguration instance) {
     this.mActive = instance.mActive;
+    this.mBlockedEventTypes = instance.mBlockedEventTypes;
+    this.mBlockedWebsites = instance.mBlockedWebsites;
     this.mBrowserAgent = instance.mBrowserAgent;
     this.mCloudProvider = instance.mCloudProvider;
     this.mCloudRegion = instance.mCloudRegion;
     this.mDestinationId = instance.mDestinationId;
     this.mEndpoint = instance.mEndpoint;
+    this.mEventEnrichmentState = instance.mEventEnrichmentState;
     this.mFallbackDomain = instance.mFallbackDomain;
     this.mFirstPartyDomain = instance.mFirstPartyDomain;
     this.mHostBusinessId = instance.mHostBusinessId;

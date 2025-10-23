@@ -71,8 +71,6 @@ public class LiveVideo extends APINode {
   private Boolean mIsReferenceOnly = null;
   @SerializedName("live_views")
   private Long mLiveViews = null;
-  @SerializedName("overlay_url")
-  private String mOverlayUrl = null;
   @SerializedName("permalink_url")
   private String mPermalinkUrl = null;
   @SerializedName("planned_start_time")
@@ -414,10 +412,6 @@ public class LiveVideo extends APINode {
 
   public Long getFieldLiveViews() {
     return mLiveViews;
-  }
-
-  public String getFieldOverlayUrl() {
-    return mOverlayUrl;
   }
 
   public String getFieldPermalinkUrl() {
@@ -2644,7 +2638,6 @@ public class LiveVideo extends APINode {
       "is_manual_mode",
       "is_reference_only",
       "live_views",
-      "overlay_url",
       "permalink_url",
       "planned_start_time",
       "recommended_encoder_settings",
@@ -2851,13 +2844,6 @@ public class LiveVideo extends APINode {
     }
     public APIRequestGetCrosspostedBroadcasts requestLiveViewsField (boolean value) {
       this.requestField("live_views", value);
-      return this;
-    }
-    public APIRequestGetCrosspostedBroadcasts requestOverlayUrlField () {
-      return this.requestOverlayUrlField(true);
-    }
-    public APIRequestGetCrosspostedBroadcasts requestOverlayUrlField (boolean value) {
-      this.requestField("overlay_url", value);
       return this;
     }
     public APIRequestGetCrosspostedBroadcasts requestPermalinkUrlField () {
@@ -3856,7 +3842,6 @@ public class LiveVideo extends APINode {
       "is_manual_mode",
       "is_reference_only",
       "live_views",
-      "overlay_url",
       "permalink_url",
       "planned_start_time",
       "recommended_encoder_settings",
@@ -4068,13 +4053,6 @@ public class LiveVideo extends APINode {
     }
     public APIRequestGet requestLiveViewsField (boolean value) {
       this.requestField("live_views", value);
-      return this;
-    }
-    public APIRequestGet requestOverlayUrlField () {
-      return this.requestOverlayUrlField(true);
-    }
-    public APIRequestGet requestOverlayUrlField (boolean value) {
-      this.requestField("overlay_url", value);
       return this;
     }
     public APIRequestGet requestPermalinkUrlField () {
@@ -4770,7 +4748,6 @@ public class LiveVideo extends APINode {
     this.mIsManualMode = instance.mIsManualMode;
     this.mIsReferenceOnly = instance.mIsReferenceOnly;
     this.mLiveViews = instance.mLiveViews;
-    this.mOverlayUrl = instance.mOverlayUrl;
     this.mPermalinkUrl = instance.mPermalinkUrl;
     this.mPlannedStartTime = instance.mPlannedStartTime;
     this.mRecommendedEncoderSettings = instance.mRecommendedEncoderSettings;

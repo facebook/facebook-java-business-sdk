@@ -391,6 +391,7 @@ public class AdReportRun extends APINode {
       "adset_name",
       "adset_start",
       "age_targeting",
+      "anchor_events_performance_indicator",
       "attribution_setting",
       "auction_bid",
       "auction_competitiveness",
@@ -757,6 +758,13 @@ public class AdReportRun extends APINode {
     }
     public APIRequestGetInsights requestAgeTargetingField (boolean value) {
       this.requestField("age_targeting", value);
+      return this;
+    }
+    public APIRequestGetInsights requestAnchorEventsPerformanceIndicatorField () {
+      return this.requestAnchorEventsPerformanceIndicatorField(true);
+    }
+    public APIRequestGetInsights requestAnchorEventsPerformanceIndicatorField (boolean value) {
+      this.requestField("anchor_events_performance_indicator", value);
       return this;
     }
     public APIRequestGetInsights requestAttributionSettingField () {
@@ -2480,6 +2488,8 @@ public class AdReportRun extends APINode {
       VALUE_PRODUCT_CUSTOM_LABEL_4_BREAKDOWN("product_custom_label_4_breakdown"),
       @SerializedName("product_group_content_id_breakdown")
       VALUE_PRODUCT_GROUP_CONTENT_ID_BREAKDOWN("product_group_content_id_breakdown"),
+      @SerializedName("product_group_id")
+      VALUE_PRODUCT_GROUP_ID("product_group_id"),
       @SerializedName("product_id")
       VALUE_PRODUCT_ID("product_id"),
       @SerializedName("product_set_id_breakdown")

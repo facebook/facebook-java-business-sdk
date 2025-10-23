@@ -3071,6 +3071,7 @@ public class Page extends APINode {
       "verification_status",
       "vertical",
       "vertical_id",
+      "whatsapp_business_manager_messaging_limit",
     };
 
     @Override
@@ -3315,6 +3316,13 @@ public class Page extends APINode {
     }
     public APIRequestGetAgencies requestVerticalIdField (boolean value) {
       this.requestField("vertical_id", value);
+      return this;
+    }
+    public APIRequestGetAgencies requestWhatsappBusinessManagerMessagingLimitField () {
+      return this.requestWhatsappBusinessManagerMessagingLimitField(true);
+    }
+    public APIRequestGetAgencies requestWhatsappBusinessManagerMessagingLimitField (boolean value) {
+      this.requestField("whatsapp_business_manager_messaging_limit", value);
       return this;
     }
   }
@@ -6703,7 +6711,6 @@ public class Page extends APINode {
       "merchant_page",
       "merchant_status",
       "offsite_iab_checkout_enabled_countries",
-      "onsite_commerce_merchant",
       "payment_provider",
       "privacy_policy_localized",
       "return_policy_localized",
@@ -6883,13 +6890,6 @@ public class Page extends APINode {
     }
     public APIRequestGetCommerceMerchantSettings requestOffsiteIabCheckoutEnabledCountriesField (boolean value) {
       this.requestField("offsite_iab_checkout_enabled_countries", value);
-      return this;
-    }
-    public APIRequestGetCommerceMerchantSettings requestOnsiteCommerceMerchantField () {
-      return this.requestOnsiteCommerceMerchantField(true);
-    }
-    public APIRequestGetCommerceMerchantSettings requestOnsiteCommerceMerchantField (boolean value) {
-      this.requestField("onsite_commerce_merchant", value);
       return this;
     }
     public APIRequestGetCommerceMerchantSettings requestPaymentProviderField () {
@@ -7587,7 +7587,6 @@ public class Page extends APINode {
     }
     public static final String[] PARAMS = {
       "folder",
-      "is_owner",
       "platform",
       "tags",
       "user_id",
@@ -7669,15 +7668,6 @@ public class Page extends APINode {
 
     public APIRequestGetConversations setFolder (String folder) {
       this.setParam("folder", folder);
-      return this;
-    }
-
-    public APIRequestGetConversations setIsOwner (Boolean isOwner) {
-      this.setParam("is_owner", isOwner);
-      return this;
-    }
-    public APIRequestGetConversations setIsOwner (String isOwner) {
-      this.setParam("is_owner", isOwner);
       return this;
     }
 
@@ -17135,7 +17125,6 @@ public class Page extends APINode {
       "is_manual_mode",
       "is_reference_only",
       "live_views",
-      "overlay_url",
       "permalink_url",
       "planned_start_time",
       "recommended_encoder_settings",
@@ -17360,13 +17349,6 @@ public class Page extends APINode {
     }
     public APIRequestGetLiveVideos requestLiveViewsField (boolean value) {
       this.requestField("live_views", value);
-      return this;
-    }
-    public APIRequestGetLiveVideos requestOverlayUrlField () {
-      return this.requestOverlayUrlField(true);
-    }
-    public APIRequestGetLiveVideos requestOverlayUrlField (boolean value) {
-      this.requestField("overlay_url", value);
       return this;
     }
     public APIRequestGetLiveVideos requestPermalinkUrlField () {
@@ -31995,7 +31977,6 @@ public class Page extends APINode {
     }
     public static final String[] PARAMS = {
       "folder",
-      "is_owner",
       "platform",
       "tags",
       "user_id",
@@ -32077,15 +32058,6 @@ public class Page extends APINode {
 
     public APIRequestGetThreads setFolder (String folder) {
       this.setParam("folder", folder);
-      return this;
-    }
-
-    public APIRequestGetThreads setIsOwner (Boolean isOwner) {
-      this.setParam("is_owner", isOwner);
-      return this;
-    }
-    public APIRequestGetThreads setIsOwner (String isOwner) {
-      this.setParam("is_owner", isOwner);
       return this;
     }
 
@@ -37672,6 +37644,7 @@ public class Page extends APINode {
       "pickup_options",
       "plot_outline",
       "price_range",
+      "priority_hours",
       "public_transit",
       "restaurant_services",
       "restaurant_specialties",
@@ -38068,6 +38041,15 @@ public class Page extends APINode {
 
     public APIRequestUpdate setPriceRange (String priceRange) {
       this.setParam("price_range", priceRange);
+      return this;
+    }
+
+    public APIRequestUpdate setPriorityHours (Map<String, String> priorityHours) {
+      this.setParam("priority_hours", priorityHours);
+      return this;
+    }
+    public APIRequestUpdate setPriorityHours (String priorityHours) {
+      this.setParam("priority_hours", priorityHours);
       return this;
     }
 

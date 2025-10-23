@@ -1348,6 +1348,8 @@ public class AdAccountTargetingUnified extends APINode {
   }
 
   public static enum EnumAppStore {
+      @SerializedName("all_app_stores_for_android_and_ios")
+      VALUE_ALL_APP_STORES_FOR_ANDROID_AND_IOS("all_app_stores_for_android_and_ios"),
       @SerializedName("amazon_app_store")
       VALUE_AMAZON_APP_STORE("amazon_app_store"),
       @SerializedName("apk_mirror")

@@ -43,6 +43,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class AdCreativeDestinationSpec extends APINode {
   @SerializedName("destination_type")
   private String mDestinationType = null;
+  @SerializedName("website")
+  private Object mWebsite = null;
   protected static Gson gson = null;
 
   public AdCreativeDestinationSpec() {
@@ -203,6 +205,15 @@ public class AdCreativeDestinationSpec extends APINode {
     return this;
   }
 
+  public Object getFieldWebsite() {
+    return mWebsite;
+  }
+
+  public AdCreativeDestinationSpec setFieldWebsite(Object value) {
+    this.mWebsite = value;
+    return this;
+  }
+
 
 
 
@@ -221,6 +232,7 @@ public class AdCreativeDestinationSpec extends APINode {
 
   public AdCreativeDestinationSpec copyFrom(AdCreativeDestinationSpec instance) {
     this.mDestinationType = instance.mDestinationType;
+    this.mWebsite = instance.mWebsite;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

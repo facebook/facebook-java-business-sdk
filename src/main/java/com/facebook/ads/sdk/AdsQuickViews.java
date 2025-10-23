@@ -61,6 +61,8 @@ public class AdsQuickViews extends APINode {
   private String mQuickViewType = null;
   @SerializedName("sort")
   private List<Object> mSort = null;
+  @SerializedName("time_stamp_last_used_by_owner")
+  private String mTimeStampLastUsedByOwner = null;
   protected static Gson gson = null;
 
   AdsQuickViews() {
@@ -318,6 +320,10 @@ public class AdsQuickViews extends APINode {
     return mSort;
   }
 
+  public String getFieldTimeStampLastUsedByOwner() {
+    return mTimeStampLastUsedByOwner;
+  }
+
 
 
   public static class APIRequestGet extends APIRequest<AdsQuickViews> {
@@ -341,6 +347,7 @@ public class AdsQuickViews extends APINode {
       "permission",
       "quick_view_type",
       "sort",
+      "time_stamp_last_used_by_owner",
     };
 
     @Override
@@ -503,6 +510,13 @@ public class AdsQuickViews extends APINode {
       this.requestField("sort", value);
       return this;
     }
+    public APIRequestGet requestTimeStampLastUsedByOwnerField () {
+      return this.requestTimeStampLastUsedByOwnerField(true);
+    }
+    public APIRequestGet requestTimeStampLastUsedByOwnerField (boolean value) {
+      this.requestField("time_stamp_last_used_by_owner", value);
+      return this;
+    }
   }
 
 
@@ -530,6 +544,7 @@ public class AdsQuickViews extends APINode {
     this.mPermission = instance.mPermission;
     this.mQuickViewType = instance.mQuickViewType;
     this.mSort = instance.mSort;
+    this.mTimeStampLastUsedByOwner = instance.mTimeStampLastUsedByOwner;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

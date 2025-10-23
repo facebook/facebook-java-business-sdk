@@ -283,6 +283,8 @@ public class AdAccountMatchedSearchApplicationsEdgeData extends APINode {
 
 
   public static enum EnumAppStore {
+      @SerializedName("ALL_APP_STORES_FOR_ANDROID_AND_IOS")
+      VALUE_ALL_APP_STORES_FOR_ANDROID_AND_IOS("ALL_APP_STORES_FOR_ANDROID_AND_IOS"),
       @SerializedName("AMAZON_APP_STORE")
       VALUE_AMAZON_APP_STORE("AMAZON_APP_STORE"),
       @SerializedName("APK_MIRROR")
@@ -350,6 +352,8 @@ public class AdAccountMatchedSearchApplicationsEdgeData extends APINode {
   }
 
   public static enum EnumStoresToFilter {
+      @SerializedName("ALL_APP_STORES_FOR_ANDROID_AND_IOS")
+      VALUE_ALL_APP_STORES_FOR_ANDROID_AND_IOS("ALL_APP_STORES_FOR_ANDROID_AND_IOS"),
       @SerializedName("AMAZON_APP_STORE")
       VALUE_AMAZON_APP_STORE("AMAZON_APP_STORE"),
       @SerializedName("APK_MIRROR")

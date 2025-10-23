@@ -87,6 +87,8 @@ public class Business extends APINode {
   private String mVertical = null;
   @SerializedName("vertical_id")
   private Long mVerticalId = null;
+  @SerializedName("whatsapp_business_manager_messaging_limit")
+  private EnumWhatsappBusinessManagerMessagingLimit mWhatsappBusinessManagerMessagingLimit = null;
   protected static Gson gson = null;
 
   Business() {
@@ -648,8 +650,8 @@ public class Business extends APINode {
     return new APIRequestGetPartnerAccountLinking(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestCreatePartnerPremiumOption createPartnerPremiumOption() {
-    return new APIRequestCreatePartnerPremiumOption(this.getPrefixedId().toString(), context);
+  public APIRequestCreatePartnerPremiumOptIOn createPartnerPremiumOptIOn() {
+    return new APIRequestCreatePartnerPremiumOptIOn(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetPassbackAttributionMetadataConfigs getPassbackAttributionMetadataConfigs() {
@@ -846,6 +848,10 @@ public class Business extends APINode {
 
   public Long getFieldVerticalId() {
     return mVerticalId;
+  }
+
+  public EnumWhatsappBusinessManagerMessagingLimit getFieldWhatsappBusinessManagerMessagingLimit() {
+    return mWhatsappBusinessManagerMessagingLimit;
   }
 
 
@@ -4783,6 +4789,7 @@ public class Business extends APINode {
       "verification_status",
       "vertical",
       "vertical_id",
+      "whatsapp_business_manager_messaging_limit",
     };
 
     @Override
@@ -5027,6 +5034,13 @@ public class Business extends APINode {
     }
     public APIRequestGetAgencies requestVerticalIdField (boolean value) {
       this.requestField("vertical_id", value);
+      return this;
+    }
+    public APIRequestGetAgencies requestWhatsappBusinessManagerMessagingLimitField () {
+      return this.requestWhatsappBusinessManagerMessagingLimitField(true);
+    }
+    public APIRequestGetAgencies requestWhatsappBusinessManagerMessagingLimitField (boolean value) {
+      this.requestField("whatsapp_business_manager_messaging_limit", value);
       return this;
     }
   }
@@ -5575,15 +5589,10 @@ public class Business extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "account_ids",
-      "advertiser_name",
-      "billing_period_end",
-      "billing_period_start",
       "end_date",
       "invoice_id",
       "issue_end_date",
       "issue_start_date",
-      "product_types",
       "root_id",
       "start_date",
       "type",
@@ -5665,30 +5674,6 @@ public class Business extends APINode {
     }
 
 
-    public APIRequestGetBusinessInvoices setAccountIds (List<Long> accountIds) {
-      this.setParam("account_ids", accountIds);
-      return this;
-    }
-    public APIRequestGetBusinessInvoices setAccountIds (String accountIds) {
-      this.setParam("account_ids", accountIds);
-      return this;
-    }
-
-    public APIRequestGetBusinessInvoices setAdvertiserName (String advertiserName) {
-      this.setParam("advertiser_name", advertiserName);
-      return this;
-    }
-
-    public APIRequestGetBusinessInvoices setBillingPeriodEnd (String billingPeriodEnd) {
-      this.setParam("billing_period_end", billingPeriodEnd);
-      return this;
-    }
-
-    public APIRequestGetBusinessInvoices setBillingPeriodStart (String billingPeriodStart) {
-      this.setParam("billing_period_start", billingPeriodStart);
-      return this;
-    }
-
     public APIRequestGetBusinessInvoices setEndDate (String endDate) {
       this.setParam("end_date", endDate);
       return this;
@@ -5706,15 +5691,6 @@ public class Business extends APINode {
 
     public APIRequestGetBusinessInvoices setIssueStartDate (String issueStartDate) {
       this.setParam("issue_start_date", issueStartDate);
-      return this;
-    }
-
-    public APIRequestGetBusinessInvoices setProductTypes (List<OmegaCustomerTrx.EnumProductTypes> productTypes) {
-      this.setParam("product_types", productTypes);
-      return this;
-    }
-    public APIRequestGetBusinessInvoices setProductTypes (String productTypes) {
-      this.setParam("product_types", productTypes);
       return this;
     }
 
@@ -10703,6 +10679,7 @@ public class Business extends APINode {
       "purchase_order_number",
       "status",
       "timezone_id",
+      "whatsapp_business_manager_messaging_limit",
     };
 
     @Override
@@ -10970,6 +10947,13 @@ public class Business extends APINode {
       this.requestField("timezone_id", value);
       return this;
     }
+    public APIRequestGetClientWhatsAppBusinessAccounts requestWhatsappBusinessManagerMessagingLimitField () {
+      return this.requestWhatsappBusinessManagerMessagingLimitField(true);
+    }
+    public APIRequestGetClientWhatsAppBusinessAccounts requestWhatsappBusinessManagerMessagingLimitField (boolean value) {
+      this.requestField("whatsapp_business_manager_messaging_limit", value);
+      return this;
+    }
   }
 
   public static class APIRequestDeleteClients extends APIRequest<APINode> {
@@ -11116,6 +11100,7 @@ public class Business extends APINode {
       "verification_status",
       "vertical",
       "vertical_id",
+      "whatsapp_business_manager_messaging_limit",
     };
 
     @Override
@@ -11360,6 +11345,13 @@ public class Business extends APINode {
     }
     public APIRequestGetClients requestVerticalIdField (boolean value) {
       this.requestField("vertical_id", value);
+      return this;
+    }
+    public APIRequestGetClients requestWhatsappBusinessManagerMessagingLimitField () {
+      return this.requestWhatsappBusinessManagerMessagingLimitField(true);
+    }
+    public APIRequestGetClients requestWhatsappBusinessManagerMessagingLimitField (boolean value) {
+      this.requestField("whatsapp_business_manager_messaging_limit", value);
       return this;
     }
   }
@@ -11916,7 +11908,6 @@ public class Business extends APINode {
       "merchant_page",
       "merchant_status",
       "offsite_iab_checkout_enabled_countries",
-      "onsite_commerce_merchant",
       "payment_provider",
       "privacy_policy_localized",
       "return_policy_localized",
@@ -12096,13 +12087,6 @@ public class Business extends APINode {
     }
     public APIRequestGetCommerceMerchantSettings requestOffsiteIabCheckoutEnabledCountriesField (boolean value) {
       this.requestField("offsite_iab_checkout_enabled_countries", value);
-      return this;
-    }
-    public APIRequestGetCommerceMerchantSettings requestOnsiteCommerceMerchantField () {
-      return this.requestOnsiteCommerceMerchantField(true);
-    }
-    public APIRequestGetCommerceMerchantSettings requestOnsiteCommerceMerchantField (boolean value) {
-      this.requestField("onsite_commerce_merchant", value);
       return this;
     }
     public APIRequestGetCommerceMerchantSettings requestPaymentProviderField () {
@@ -16122,11 +16106,14 @@ public class Business extends APINode {
 
     public static final String[] FIELDS = {
       "active",
+      "blocked_event_types",
+      "blocked_websites",
       "browser_agent",
       "cloud_provider",
       "cloud_region",
       "destination_id",
       "endpoint",
+      "event_enrichment_state",
       "fallback_domain",
       "first_party_domain",
       "host_business_id",
@@ -16239,6 +16226,20 @@ public class Business extends APINode {
       this.requestField("active", value);
       return this;
     }
+    public APIRequestGetOpenBridgeConfigurations requestBlockedEventTypesField () {
+      return this.requestBlockedEventTypesField(true);
+    }
+    public APIRequestGetOpenBridgeConfigurations requestBlockedEventTypesField (boolean value) {
+      this.requestField("blocked_event_types", value);
+      return this;
+    }
+    public APIRequestGetOpenBridgeConfigurations requestBlockedWebsitesField () {
+      return this.requestBlockedWebsitesField(true);
+    }
+    public APIRequestGetOpenBridgeConfigurations requestBlockedWebsitesField (boolean value) {
+      this.requestField("blocked_websites", value);
+      return this;
+    }
     public APIRequestGetOpenBridgeConfigurations requestBrowserAgentField () {
       return this.requestBrowserAgentField(true);
     }
@@ -16272,6 +16273,13 @@ public class Business extends APINode {
     }
     public APIRequestGetOpenBridgeConfigurations requestEndpointField (boolean value) {
       this.requestField("endpoint", value);
+      return this;
+    }
+    public APIRequestGetOpenBridgeConfigurations requestEventEnrichmentStateField () {
+      return this.requestEventEnrichmentStateField(true);
+    }
+    public APIRequestGetOpenBridgeConfigurations requestEventEnrichmentStateField (boolean value) {
+      this.requestField("event_enrichment_state", value);
       return this;
     }
     public APIRequestGetOpenBridgeConfigurations requestFallbackDomainField () {
@@ -16376,10 +16384,13 @@ public class Business extends APINode {
     }
     public static final String[] PARAMS = {
       "active",
+      "blocked_event_types",
+      "blocked_websites",
       "cloud_provider",
       "cloud_region",
       "destination_id",
       "endpoint",
+      "event_enrichment_state",
       "fallback_domain",
       "first_party_domain",
       "host_business_id",
@@ -16460,6 +16471,24 @@ public class Business extends APINode {
       return this;
     }
 
+    public APIRequestCreateOpenBridgeConfiguration setBlockedEventTypes (List<String> blockedEventTypes) {
+      this.setParam("blocked_event_types", blockedEventTypes);
+      return this;
+    }
+    public APIRequestCreateOpenBridgeConfiguration setBlockedEventTypes (String blockedEventTypes) {
+      this.setParam("blocked_event_types", blockedEventTypes);
+      return this;
+    }
+
+    public APIRequestCreateOpenBridgeConfiguration setBlockedWebsites (List<String> blockedWebsites) {
+      this.setParam("blocked_websites", blockedWebsites);
+      return this;
+    }
+    public APIRequestCreateOpenBridgeConfiguration setBlockedWebsites (String blockedWebsites) {
+      this.setParam("blocked_websites", blockedWebsites);
+      return this;
+    }
+
     public APIRequestCreateOpenBridgeConfiguration setCloudProvider (String cloudProvider) {
       this.setParam("cloud_provider", cloudProvider);
       return this;
@@ -16477,6 +16506,15 @@ public class Business extends APINode {
 
     public APIRequestCreateOpenBridgeConfiguration setEndpoint (String endpoint) {
       this.setParam("endpoint", endpoint);
+      return this;
+    }
+
+    public APIRequestCreateOpenBridgeConfiguration setEventEnrichmentState (OpenBridgeConfiguration.EnumEventEnrichmentState eventEnrichmentState) {
+      this.setParam("event_enrichment_state", eventEnrichmentState);
+      return this;
+    }
+    public APIRequestCreateOpenBridgeConfiguration setEventEnrichmentState (String eventEnrichmentState) {
+      this.setParam("event_enrichment_state", eventEnrichmentState);
       return this;
     }
 
@@ -18618,6 +18656,7 @@ public class Business extends APINode {
       "verification_status",
       "vertical",
       "vertical_id",
+      "whatsapp_business_manager_messaging_limit",
     };
 
     @Override
@@ -18876,6 +18915,13 @@ public class Business extends APINode {
     }
     public APIRequestGetOwnedBusinesses requestVerticalIdField (boolean value) {
       this.requestField("vertical_id", value);
+      return this;
+    }
+    public APIRequestGetOwnedBusinesses requestWhatsappBusinessManagerMessagingLimitField () {
+      return this.requestWhatsappBusinessManagerMessagingLimitField(true);
+    }
+    public APIRequestGetOwnedBusinesses requestWhatsappBusinessManagerMessagingLimitField (boolean value) {
+      this.requestField("whatsapp_business_manager_messaging_limit", value);
       return this;
     }
   }
@@ -21957,6 +22003,7 @@ public class Business extends APINode {
       "purchase_order_number",
       "status",
       "timezone_id",
+      "whatsapp_business_manager_messaging_limit",
     };
 
     @Override
@@ -22222,6 +22269,13 @@ public class Business extends APINode {
     }
     public APIRequestGetOwnedWhatsAppBusinessAccounts requestTimezoneIdField (boolean value) {
       this.requestField("timezone_id", value);
+      return this;
+    }
+    public APIRequestGetOwnedWhatsAppBusinessAccounts requestWhatsappBusinessManagerMessagingLimitField () {
+      return this.requestWhatsappBusinessManagerMessagingLimitField(true);
+    }
+    public APIRequestGetOwnedWhatsAppBusinessAccounts requestWhatsappBusinessManagerMessagingLimitField (boolean value) {
+      this.requestField("whatsapp_business_manager_messaging_limit", value);
       return this;
     }
   }
@@ -22510,7 +22564,7 @@ public class Business extends APINode {
     }
   }
 
-  public static class APIRequestCreatePartnerPremiumOption extends APIRequest<APINode> {
+  public static class APIRequestCreatePartnerPremiumOptIOn extends APIRequest<APINode> {
 
     APINode lastResponse = null;
     @Override
@@ -22556,7 +22610,7 @@ public class Business extends APINode {
         new Function<ResponseWrapper, APINode>() {
            public APINode apply(ResponseWrapper result) {
              try {
-               return APIRequestCreatePartnerPremiumOption.this.parseResponse(result.getBody(), result.getHeader());
+               return APIRequestCreatePartnerPremiumOptIOn.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -22566,70 +22620,70 @@ public class Business extends APINode {
       );
     };
 
-    public APIRequestCreatePartnerPremiumOption(String nodeId, APIContext context) {
+    public APIRequestCreatePartnerPremiumOptIOn(String nodeId, APIContext context) {
       super(context, nodeId, "/partner_premium_options", "POST", Arrays.asList(PARAMS));
     }
 
     @Override
-    public APIRequestCreatePartnerPremiumOption setParam(String param, Object value) {
+    public APIRequestCreatePartnerPremiumOptIOn setParam(String param, Object value) {
       setParamInternal(param, value);
       return this;
     }
 
     @Override
-    public APIRequestCreatePartnerPremiumOption setParams(Map<String, Object> params) {
+    public APIRequestCreatePartnerPremiumOptIOn setParams(Map<String, Object> params) {
       setParamsInternal(params);
       return this;
     }
 
 
-    public APIRequestCreatePartnerPremiumOption setCatalogSegmentId (String catalogSegmentId) {
+    public APIRequestCreatePartnerPremiumOptIOn setCatalogSegmentId (String catalogSegmentId) {
       this.setParam("catalog_segment_id", catalogSegmentId);
       return this;
     }
 
-    public APIRequestCreatePartnerPremiumOption setEnableBasketInsight (Boolean enableBasketInsight) {
+    public APIRequestCreatePartnerPremiumOptIOn setEnableBasketInsight (Boolean enableBasketInsight) {
       this.setParam("enable_basket_insight", enableBasketInsight);
       return this;
     }
-    public APIRequestCreatePartnerPremiumOption setEnableBasketInsight (String enableBasketInsight) {
+    public APIRequestCreatePartnerPremiumOptIOn setEnableBasketInsight (String enableBasketInsight) {
       this.setParam("enable_basket_insight", enableBasketInsight);
       return this;
     }
 
-    public APIRequestCreatePartnerPremiumOption setEnableExtendedAudienceRetargeting (Boolean enableExtendedAudienceRetargeting) {
+    public APIRequestCreatePartnerPremiumOptIOn setEnableExtendedAudienceRetargeting (Boolean enableExtendedAudienceRetargeting) {
       this.setParam("enable_extended_audience_retargeting", enableExtendedAudienceRetargeting);
       return this;
     }
-    public APIRequestCreatePartnerPremiumOption setEnableExtendedAudienceRetargeting (String enableExtendedAudienceRetargeting) {
+    public APIRequestCreatePartnerPremiumOptIOn setEnableExtendedAudienceRetargeting (String enableExtendedAudienceRetargeting) {
       this.setParam("enable_extended_audience_retargeting", enableExtendedAudienceRetargeting);
       return this;
     }
 
-    public APIRequestCreatePartnerPremiumOption setPartnerBusinessId (String partnerBusinessId) {
+    public APIRequestCreatePartnerPremiumOptIOn setPartnerBusinessId (String partnerBusinessId) {
       this.setParam("partner_business_id", partnerBusinessId);
       return this;
     }
 
-    public APIRequestCreatePartnerPremiumOption setRetailerCustomAudienceConfig (Map<String, String> retailerCustomAudienceConfig) {
+    public APIRequestCreatePartnerPremiumOptIOn setRetailerCustomAudienceConfig (Map<String, String> retailerCustomAudienceConfig) {
       this.setParam("retailer_custom_audience_config", retailerCustomAudienceConfig);
       return this;
     }
-    public APIRequestCreatePartnerPremiumOption setRetailerCustomAudienceConfig (String retailerCustomAudienceConfig) {
+    public APIRequestCreatePartnerPremiumOptIOn setRetailerCustomAudienceConfig (String retailerCustomAudienceConfig) {
       this.setParam("retailer_custom_audience_config", retailerCustomAudienceConfig);
       return this;
     }
 
-    public APIRequestCreatePartnerPremiumOption setVendorId (String vendorId) {
+    public APIRequestCreatePartnerPremiumOptIOn setVendorId (String vendorId) {
       this.setParam("vendor_id", vendorId);
       return this;
     }
 
-    public APIRequestCreatePartnerPremiumOption requestAllFields () {
+    public APIRequestCreatePartnerPremiumOptIOn requestAllFields () {
       return this.requestAllFields(true);
     }
 
-    public APIRequestCreatePartnerPremiumOption requestAllFields (boolean value) {
+    public APIRequestCreatePartnerPremiumOptIOn requestAllFields (boolean value) {
       for (String field : FIELDS) {
         this.requestField(field, value);
       }
@@ -22637,12 +22691,12 @@ public class Business extends APINode {
     }
 
     @Override
-    public APIRequestCreatePartnerPremiumOption requestFields (List<String> fields) {
+    public APIRequestCreatePartnerPremiumOptIOn requestFields (List<String> fields) {
       return this.requestFields(fields, true);
     }
 
     @Override
-    public APIRequestCreatePartnerPremiumOption requestFields (List<String> fields, boolean value) {
+    public APIRequestCreatePartnerPremiumOptIOn requestFields (List<String> fields, boolean value) {
       for (String field : fields) {
         this.requestField(field, value);
       }
@@ -22650,13 +22704,13 @@ public class Business extends APINode {
     }
 
     @Override
-    public APIRequestCreatePartnerPremiumOption requestField (String field) {
+    public APIRequestCreatePartnerPremiumOptIOn requestField (String field) {
       this.requestField(field, true);
       return this;
     }
 
     @Override
-    public APIRequestCreatePartnerPremiumOption requestField (String field, boolean value) {
+    public APIRequestCreatePartnerPremiumOptIOn requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
@@ -26649,6 +26703,7 @@ public class Business extends APINode {
       "verification_status",
       "vertical",
       "vertical_id",
+      "whatsapp_business_manager_messaging_limit",
     };
 
     @Override
@@ -26895,6 +26950,13 @@ public class Business extends APINode {
       this.requestField("vertical_id", value);
       return this;
     }
+    public APIRequestGet requestWhatsappBusinessManagerMessagingLimitField () {
+      return this.requestWhatsappBusinessManagerMessagingLimitField(true);
+    }
+    public APIRequestGet requestWhatsappBusinessManagerMessagingLimitField (boolean value) {
+      this.requestField("whatsapp_business_manager_messaging_limit", value);
+      return this;
+    }
   }
 
   public static class APIRequestUpdate extends APIRequest<Business> {
@@ -27076,6 +27138,33 @@ public class Business extends APINode {
       private String value;
 
       private EnumVerificationStatus(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumWhatsappBusinessManagerMessagingLimit {
+      @SerializedName("TIER_100K")
+      VALUE_TIER_100K("TIER_100K"),
+      @SerializedName("TIER_10K")
+      VALUE_TIER_10K("TIER_10K"),
+      @SerializedName("TIER_250")
+      VALUE_TIER_250("TIER_250"),
+      @SerializedName("TIER_2K")
+      VALUE_TIER_2K("TIER_2K"),
+      @SerializedName("TIER_UNLIMITED")
+      VALUE_TIER_UNLIMITED("TIER_UNLIMITED"),
+      @SerializedName("UNTIERED")
+      VALUE_UNTIERED("UNTIERED"),
+      ;
+
+      private String value;
+
+      private EnumWhatsappBusinessManagerMessagingLimit(String value) {
         this.value = value;
       }
 
@@ -28853,6 +28942,7 @@ public class Business extends APINode {
     this.mVerificationStatus = instance.mVerificationStatus;
     this.mVertical = instance.mVertical;
     this.mVerticalId = instance.mVerticalId;
+    this.mWhatsappBusinessManagerMessagingLimit = instance.mWhatsappBusinessManagerMessagingLimit;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

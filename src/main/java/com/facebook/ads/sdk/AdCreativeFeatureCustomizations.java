@@ -41,6 +41,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class AdCreativeFeatureCustomizations extends APINode {
+  @SerializedName("aspect_ratio_config")
+  private Object mAspectRatioConfig = null;
   @SerializedName("background_color")
   private String mBackgroundColor = null;
   @SerializedName("catalog_feed_tag_name")
@@ -208,6 +210,15 @@ public class AdCreativeFeatureCustomizations extends APINode {
   }
 
 
+  public Object getFieldAspectRatioConfig() {
+    return mAspectRatioConfig;
+  }
+
+  public AdCreativeFeatureCustomizations setFieldAspectRatioConfig(Object value) {
+    this.mAspectRatioConfig = value;
+    return this;
+  }
+
   public String getFieldBackgroundColor() {
     return mBackgroundColor;
   }
@@ -297,6 +308,7 @@ public class AdCreativeFeatureCustomizations extends APINode {
   }
 
   public AdCreativeFeatureCustomizations copyFrom(AdCreativeFeatureCustomizations instance) {
+    this.mAspectRatioConfig = instance.mAspectRatioConfig;
     this.mBackgroundColor = instance.mBackgroundColor;
     this.mCatalogFeedTagName = instance.mCatalogFeedTagName;
     this.mFontName = instance.mFontName;
