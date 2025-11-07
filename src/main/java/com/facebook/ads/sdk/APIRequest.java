@@ -355,6 +355,13 @@ public class APIRequest<T extends APINode> {
           .disableHtmlEscaping()
           .create();
       return gson.toJson((List)input);
+    } else if (input instanceof Enum) {
+      String result = input.toString();
+      // Convert EnumDatePreset values to lowercase for API compatibility
+      if (input.getClass().getSimpleName().equals("EnumDatePreset")) {
+        return result.toLowerCase();
+      }
+      return result;
     } else {
       return input.toString();
     }
