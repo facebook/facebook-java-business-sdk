@@ -56,6 +56,21 @@ public class AttributionData {
 
     @SerializedName("touchpoint_ts")
     private Integer touchpointTs = null;
+
+    @SerializedName("attribution_method")
+    private AttributionMethodEnum attributionMethod = null;
+
+    @SerializedName("decline_reason")
+    private DeclineReasonEnum declineReason = null;
+
+    @SerializedName("auditing_token")
+    private String auditingToken = null;
+
+    @SerializedName("linkage_key")
+    private String linkageKey = null;
+
+    @SerializedName("attribution_setting")
+    private AttributionSetting attributionSetting = null;
     
     /**
      * Default constructor
@@ -78,10 +93,16 @@ public class AttributionData {
      * @param attributionSource The attribution source to differentiate the source of the data, e.g. whether this is from AMM or Custom Attribution or any other sources.
      * @param touchpointType The engagement type that caused the original credited conversion.
      * @param touchpointTs The time when the touchpoint event occurred with the ad that the install was credited to.
+     * @param attributionMethod The attribution method used to attribute the event.
+     * @param declineReason The decline reason for the attribution.
+     * @param auditingToken The auditing token for the attribution.
+     * @param linkageKey The linkage key for the attribution.
+     * @param attributionSetting The attribution setting with inactivity and reattribution window configuration.
      */
     public AttributionData(String scope, Long visitTime, String adId, String adsetId, String campaignId, 
         Float attributionShare, AttributionModelEnum attributionModel, Integer attributionWindow, Float attributionValue,
-        String attributionSource, String touchpointType, Integer touchpointTs) {
+        String attributionSource, String touchpointType, Integer touchpointTs, AttributionMethodEnum attributionMethod,
+        DeclineReasonEnum declineReason, String auditingToken, String linkageKey, AttributionSetting attributionSetting) {
       this.scope = scope;
       this.visitTime = visitTime;
       this.adId = adId;
@@ -94,6 +115,11 @@ public class AttributionData {
       this.attributionSource = attributionSource;
       this.touchpointType = touchpointType;
       this.touchpointTs = touchpointTs;
+      this.attributionMethod = attributionMethod;
+      this.declineReason = declineReason;
+      this.auditingToken = auditingToken;
+      this.linkageKey = linkageKey;
+      this.attributionSetting = attributionSetting;
     }
 
     /**
@@ -444,6 +470,151 @@ public class AttributionData {
       this.touchpointTs = touchpointTs;
     }
 
+    /**
+     * Set attributionMethod
+     * 
+     * @param attributionMethod The attribution method used to attribute the event.
+     * @return AttributionData
+     */
+    public AttributionData attributionMethod(AttributionMethodEnum attributionMethod) {
+      this.attributionMethod = attributionMethod;
+      return this;
+    }
+
+    /**
+     * Get attributionMethod
+     * 
+     * @return attributionMethod
+     */
+    public AttributionMethodEnum getAttributionMethod() {
+      return attributionMethod;
+    }
+
+    /**
+     * Set attributionMethod
+     * 
+     * @param attributionMethod The attribution method used to attribute the event.
+     */
+    public void setAttributionMethod(AttributionMethodEnum attributionMethod) {
+      this.attributionMethod = attributionMethod;
+    }
+
+    /**
+     * Set declineReason
+     * 
+     * @param declineReason The decline reason for the attribution.
+     * @return AttributionData
+     */
+    public AttributionData declineReason(DeclineReasonEnum declineReason) {
+      this.declineReason = declineReason;
+      return this;
+    }
+
+    /**
+     * Get declineReason
+     * 
+     * @return declineReason
+     */
+    public DeclineReasonEnum getDeclineReason() {
+      return declineReason;
+    }
+
+    /**
+     * Set declineReason
+     * 
+     * @param declineReason The decline reason for the attribution.
+     */
+    public void setDeclineReason(DeclineReasonEnum declineReason) {
+      this.declineReason = declineReason;
+    }
+
+    /**
+     * Set auditingToken
+     * 
+     * @param auditingToken The auditing token for the attribution.
+     * @return AttributionData
+     */
+    public AttributionData auditingToken(String auditingToken) {
+      this.auditingToken = auditingToken;
+      return this;
+    }
+
+    /**
+     * Get auditingToken
+     * 
+     * @return auditingToken
+     */
+    public String getAuditingToken() {
+      return auditingToken;
+    }
+
+    /**
+     * Set auditingToken
+     * 
+     * @param auditingToken The auditing token for the attribution.
+     */
+    public void setAuditingToken(String auditingToken) {
+      this.auditingToken = auditingToken;
+    }
+
+    /**
+     * Set linkageKey
+     * 
+     * @param linkageKey The linkage key for the attribution.
+     * @return AttributionData
+     */
+    public AttributionData linkageKey(String linkageKey) {
+      this.linkageKey = linkageKey;
+      return this;
+    }
+
+    /**
+     * Get linkageKey
+     * 
+     * @return linkageKey
+     */
+    public String getLinkageKey() {
+      return linkageKey;
+    }
+
+    /**
+     * Set linkageKey
+     * 
+     * @param linkageKey The linkage key for the attribution.
+     */
+    public void setLinkageKey(String linkageKey) {
+      this.linkageKey = linkageKey;
+    }
+
+    /**
+     * Set attributionSetting
+     * 
+     * @param attributionSetting The attribution setting with inactivity and reattribution window configuration.
+     * @return AttributionData
+     */
+    public AttributionData attributionSetting(AttributionSetting attributionSetting) {
+      this.attributionSetting = attributionSetting;
+      return this;
+    }
+
+    /**
+     * Get attributionSetting
+     * 
+     * @return attributionSetting
+     */
+    public AttributionSetting getAttributionSetting() {
+      return attributionSetting;
+    }
+
+    /**
+     * Set attributionSetting
+     * 
+     * @param attributionSetting The attribution setting with inactivity and reattribution window configuration.
+     */
+    public void setAttributionSetting(AttributionSetting attributionSetting) {
+      this.attributionSetting = attributionSetting;
+    }
+
     @Override
     public boolean equals(Object o) {
       if (this == o) return true;
@@ -462,12 +633,17 @@ public class AttributionData {
         && Objects.equals(this.attributionValue, attributionData.attributionValue)
         && Objects.equals(this.attributionSource, attributionData.attributionSource)
         && Objects.equals(this.touchpointType, attributionData.touchpointType)
-        && Objects.equals(this.touchpointTs, attributionData.touchpointTs);
+        && Objects.equals(this.touchpointTs, attributionData.touchpointTs)
+        && Objects.equals(this.attributionMethod, attributionData.attributionMethod)
+        && Objects.equals(this.declineReason, attributionData.declineReason)
+        && Objects.equals(this.auditingToken, attributionData.auditingToken)
+        && Objects.equals(this.linkageKey, attributionData.linkageKey)
+        && Objects.equals(this.attributionSetting, attributionData.attributionSetting);
     }
 
     @Override
     public int hashCode() {
-      return Objects.hash(scope, visitTime, adId, adsetId, campaignId, attributionShare, attributionModel, attributionWindow, attributionValue, attributionSource, touchpointType, touchpointTs);
+      return Objects.hash(scope, visitTime, adId, adsetId, campaignId, attributionShare, attributionModel, attributionWindow, attributionValue, attributionSource, touchpointType, touchpointTs, attributionMethod, declineReason, auditingToken, linkageKey, attributionSetting);
     }
 
     @Override
@@ -486,6 +662,11 @@ public class AttributionData {
       sb.append("    attributionSource: ").append(toIndentedString(attributionSource)).append("\n");
       sb.append("    touchpointType: ").append(toIndentedString(touchpointType)).append("\n");
       sb.append("    touchpointTs: ").append(toIndentedString(touchpointTs)).append("\n");
+      sb.append("    attributionMethod: ").append(toIndentedString(attributionMethod)).append("\n");
+      sb.append("    declineReason: ").append(toIndentedString(declineReason)).append("\n");
+      sb.append("    auditingToken: ").append(toIndentedString(auditingToken)).append("\n");
+      sb.append("    linkageKey: ").append(toIndentedString(linkageKey)).append("\n");
+      sb.append("    attributionSetting: ").append(toIndentedString(attributionSetting)).append("\n");
       sb.append("}");
       return sb.toString();
     }

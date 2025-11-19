@@ -38,7 +38,12 @@ public class AttributionDataTest {
         String attributionSource = "amm";
         String touchpointType = "onsite_click";
         int touchpointTs = 123;
-        
+        AttributionMethodEnum attributionMethod = AttributionMethodEnum.ARD;
+        DeclineReasonEnum declineReason = DeclineReasonEnum.LOOKBACK;
+        String auditingToken = "token123";
+        String linkageKey = "key123";
+        AttributionSetting attributionSetting = new AttributionSetting(24, 48);
+          
         attributionData
                      .scope(scope)
                      .adId(adId)
@@ -51,7 +56,12 @@ public class AttributionDataTest {
                      .attributionValue(attributionValue)
                      .attributionSource(attributionSource)
                      .touchpointType(touchpointType)
-                     .touchpointTs(touchpointTs);
+                     .touchpointTs(touchpointTs)
+                     .attributionMethod(attributionMethod)
+                     .declineReason(declineReason)
+                     .auditingToken(auditingToken)
+                     .linkageKey(linkageKey)
+                     .attributionSetting(attributionSetting);
 
         assertEquals(attributionData.getScope(), scope);
         assertEquals(attributionData.getAdId(), adId);
@@ -65,6 +75,13 @@ public class AttributionDataTest {
         assertEquals(attributionData.getAttributionSource(), attributionSource);
         assertEquals(attributionData.getTouchpointType(), touchpointType);
         assertEquals((int)attributionData.getTouchpointTs(), touchpointTs);
+        assertEquals(attributionData.getAttributionMethod(), attributionMethod);
+        assertEquals(attributionData.getDeclineReason(), declineReason);
+        assertEquals(attributionData.getAuditingToken(), auditingToken);
+        assertEquals(attributionData.getLinkageKey(), linkageKey);
+        assertEquals(attributionData.getAttributionSetting(), attributionSetting);
+        assertEquals((int)attributionData.getAttributionSetting().getInactivityWindowHours(), 24);
+        assertEquals((int)attributionData.getAttributionSetting().getReattributionWindowHours(), 48);
     }
 
     @Test
@@ -83,7 +100,12 @@ public class AttributionDataTest {
         String attributionSource = "amm";
         String touchpointType = "onsite_click";
         int touchpointTs = 123;
-        
+        AttributionMethodEnum attributionMethod = AttributionMethodEnum.ARD;
+        DeclineReasonEnum declineReason = DeclineReasonEnum.LOOKBACK;
+        String auditingToken = "token123";
+        String linkageKey = "key123";
+        AttributionSetting attributionSetting = new AttributionSetting(24, 48);
+          
         attributionData1
                      .scope(scope)
                      .adId(adId)
@@ -96,7 +118,12 @@ public class AttributionDataTest {
                      .attributionValue(attributionValue)
                      .attributionSource(attributionSource)
                      .touchpointType(touchpointType)
-                     .touchpointTs(touchpointTs);
+                     .touchpointTs(touchpointTs)
+                     .attributionMethod(attributionMethod)
+                     .declineReason(declineReason)
+                     .auditingToken(auditingToken)
+                     .linkageKey(linkageKey)
+                     .attributionSetting(attributionSetting);
 
         attributionData2
                      .scope(scope)
@@ -110,7 +137,12 @@ public class AttributionDataTest {
                      .attributionValue(attributionValue)
                      .attributionSource(attributionSource)
                      .touchpointType(touchpointType)
-                     .touchpointTs(touchpointTs);
+                     .touchpointTs(touchpointTs)
+                     .attributionMethod(attributionMethod)
+                     .declineReason(declineReason)
+                     .auditingToken(auditingToken)
+                     .linkageKey(linkageKey)
+                     .attributionSetting(attributionSetting);
 
         assertEquals(attributionData1, attributionData2);
         assertEquals(attributionData1.hashCode(), attributionData2.hashCode());
@@ -131,7 +163,13 @@ public class AttributionDataTest {
         String attributionSource = "amm";
         String touchpointType = "onsite_click";
         int touchpointTs = 123;
-        
+        AttributionMethodEnum attributionMethod = AttributionMethodEnum.ARD;
+        DeclineReasonEnum declineReason = DeclineReasonEnum.LOOKBACK;
+        String auditingToken = "token123";
+        String linkageKey = "key123";
+        AttributionSetting attributionSetting1 = new AttributionSetting(24, 48);
+        AttributionSetting attributionSetting2 = new AttributionSetting(24, 48);
+          
         // set different attribution windown to test
         attributionData1
                      .scope(scope)
@@ -145,7 +183,12 @@ public class AttributionDataTest {
                      .attributionValue(attributionValue)
                      .attributionSource(attributionSource)
                      .touchpointType(touchpointType)
-                     .touchpointTs(touchpointTs);
+                     .touchpointTs(touchpointTs)
+                     .attributionMethod(attributionMethod)
+                     .declineReason(declineReason)
+                     .auditingToken(auditingToken)
+                     .linkageKey(linkageKey)
+                     .attributionSetting(attributionSetting1);
 
         attributionData2
                      .scope(scope)
@@ -159,7 +202,12 @@ public class AttributionDataTest {
                      .attributionValue(attributionValue)
                      .attributionSource(attributionSource)
                      .touchpointType(touchpointType)
-                     .touchpointTs(touchpointTs);
+                     .touchpointTs(touchpointTs)
+                     .attributionMethod(attributionMethod)
+                     .declineReason(declineReason)
+                     .auditingToken(auditingToken)
+                     .linkageKey(linkageKey)
+                     .attributionSetting(attributionSetting2);
 
         assertNotEquals(attributionData1, attributionData2);
         assertNotEquals(attributionData1.hashCode(), attributionData2.hashCode());
