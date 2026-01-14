@@ -76,4 +76,6 @@ public class ServerSideApiConstants {
     public static final String CTWA_CLID = "ctwa_clid";
 
     public static final String PAGE_ID = "page_id";
+
+    public static final String WHATSAPP_BUSINESS_ACCOUNT_ID = "waba_id";
 }
