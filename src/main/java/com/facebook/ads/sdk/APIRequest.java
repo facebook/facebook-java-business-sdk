@@ -63,6 +63,7 @@ public class APIRequest<T extends APINode> {
   protected boolean useVideoEndpoint = false;
   protected String nodeId;
   protected String endpoint;
+  protected String basePath;
   protected String method;
   protected List<String> paramNames;
   protected ResponseParser<T> parser;
@@ -323,7 +324,16 @@ public class APIRequest<T extends APINode> {
       return overrideUrl;
     }
     String endpointBas = useVideoEndpoint ? context.getVideoEndpointBase() : context.getEndpointBase();
+    if (basePath != null && !basePath.isEmpty()) {
+      String cleanBasePath = basePath.replaceAll("^/|/$", "");
+      return endpointBas + "/" + context.getVersion() + "/" + cleanBasePath + "/" + nodeId;
+    }
     return endpointBas + "/" + context.getVersion() + "/" + nodeId + endpoint;
+  }
+
+  public APIRequest<T> setBasePath(String basePath) {
+    this.basePath = basePath;
+    return this;
   }
 
   public static String joinStringList(List<String> list) {
@@ -380,7 +390,13 @@ public class APIRequest<T extends APINode> {
     Map<String, Object> allParams = new HashMap<String, Object>(params);
     if (returnFields != null) allParams.put("fields", joinStringList(returnFields));
     info.method = this.method;
-    StringBuilder relativeUrl = new StringBuilder(context.getVersion() + "/" + nodeId + endpoint);
+    StringBuilder relativeUrl;
+    if (basePath != null && !basePath.isEmpty()) {
+      String cleanBasePath = basePath.replaceAll("^/|/$", "");
+      relativeUrl = new StringBuilder(context.getVersion() + "/" + cleanBasePath + "/" + nodeId);
+    } else {
+      relativeUrl = new StringBuilder(context.getVersion() + "/" + nodeId + endpoint);
+    }
     if (this.method.equals("POST")) {
       info.files = new HashMap<String, File>();
       info.relativeUrl = relativeUrl.toString();
