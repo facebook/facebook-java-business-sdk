@@ -19,7 +19,7 @@ package com.facebook.ads.sdk.businessdataapi;
 
 import com.facebook.ads.sdk.APIContext;
 import com.facebook.ads.sdk.APIException;
-import com.facebook.ads.sdk.Page;
+import com.facebook.ads.sdk.APIRequest;
 import com.facebook.ads.sdk.APINode;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -27,6 +27,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -146,11 +147,11 @@ public class EventRequest {
      */
     public EventResponse execute() throws APIException {
         try {
-            Page.APIRequestCreateBusinessDatum request = new Page.APIRequestCreateBusinessDatum(pageId, context);
-            request.setData(getGson().toJson(getData()));
-            request.setPartnerAgent(getPartnerAgent());
-            APINode event = request.execute();
-            EventResponse response = getGson().fromJson(event.getRawResponse(), EventResponse.class);
+            APIRequest<APINode> request = new APIRequest<APINode>(context, pageId, "/business_data", "POST",
+                    Arrays.asList("data", "partner_agent", "processing_type"));
+            request.setParam("data", getGson().toJson(getData()));
+            request.setParam("partner_agent", getPartnerAgent());
+            EventResponse response = getGson().fromJson(request.execute().getRawResponse(), EventResponse.class);
 
             context.log(String.format("Successfully sent %d event(s)", response.getEventsReceived()));
             return response;
