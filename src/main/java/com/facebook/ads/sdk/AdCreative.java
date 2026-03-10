@@ -125,6 +125,8 @@ public class AdCreative extends APINode {
   private String mLinkOgId = null;
   @SerializedName("link_url")
   private String mLinkUrl = null;
+  @SerializedName("marketing_message_structured_spec")
+  private AdCreativeMarketingMessageStructuredSpec mMarketingMessageStructuredSpec = null;
   @SerializedName("media_sourcing_spec")
   private AdCreativeMediaSourcingSpec mMediaSourcingSpec = null;
   @SerializedName("messenger_sponsored_message")
@@ -161,6 +163,8 @@ public class AdCreative extends APINode {
   private List<AdCreativeProductData> mProductData = null;
   @SerializedName("product_set_id")
   private String mProductSetId = null;
+  @SerializedName("product_suggestion_settings")
+  private AdCreativeProductSuggestionSettings mProductSuggestionSettings = null;
   @SerializedName("recommender_settings")
   private AdCreativeRecommenderSettings mRecommenderSettings = null;
   @SerializedName("regional_regulation_disclaimer_spec")
@@ -875,6 +879,20 @@ public class AdCreative extends APINode {
     return this;
   }
 
+  public AdCreativeMarketingMessageStructuredSpec getFieldMarketingMessageStructuredSpec() {
+    return mMarketingMessageStructuredSpec;
+  }
+
+  public AdCreative setFieldMarketingMessageStructuredSpec(AdCreativeMarketingMessageStructuredSpec value) {
+    this.mMarketingMessageStructuredSpec = value;
+    return this;
+  }
+
+  public AdCreative setFieldMarketingMessageStructuredSpec(String value) {
+    Type type = new TypeToken<AdCreativeMarketingMessageStructuredSpec>(){}.getType();
+    this.mMarketingMessageStructuredSpec = AdCreativeMarketingMessageStructuredSpec.getGson().fromJson(value, type);
+    return this;
+  }
   public AdCreativeMediaSourcingSpec getFieldMediaSourcingSpec() {
     return mMediaSourcingSpec;
   }
@@ -1067,6 +1085,20 @@ public class AdCreative extends APINode {
     return this;
   }
 
+  public AdCreativeProductSuggestionSettings getFieldProductSuggestionSettings() {
+    return mProductSuggestionSettings;
+  }
+
+  public AdCreative setFieldProductSuggestionSettings(AdCreativeProductSuggestionSettings value) {
+    this.mProductSuggestionSettings = value;
+    return this;
+  }
+
+  public AdCreative setFieldProductSuggestionSettings(String value) {
+    Type type = new TypeToken<AdCreativeProductSuggestionSettings>(){}.getType();
+    this.mProductSuggestionSettings = AdCreativeProductSuggestionSettings.getGson().fromJson(value, type);
+    return this;
+  }
   public AdCreativeRecommenderSettings getFieldRecommenderSettings() {
     return mRecommenderSettings;
   }
@@ -1866,6 +1898,7 @@ public class AdCreative extends APINode {
       "link_destination_display_url",
       "link_og_id",
       "link_url",
+      "marketing_message_structured_spec",
       "media_sourcing_spec",
       "messenger_sponsored_message",
       "name",
@@ -1884,6 +1917,7 @@ public class AdCreative extends APINode {
       "portrait_customizations",
       "product_data",
       "product_set_id",
+      "product_suggestion_settings",
       "recommender_settings",
       "regional_regulation_disclaimer_spec",
       "source_facebook_post_id",
@@ -2301,6 +2335,13 @@ public class AdCreative extends APINode {
       this.requestField("link_url", value);
       return this;
     }
+    public APIRequestGet requestMarketingMessageStructuredSpecField () {
+      return this.requestMarketingMessageStructuredSpecField(true);
+    }
+    public APIRequestGet requestMarketingMessageStructuredSpecField (boolean value) {
+      this.requestField("marketing_message_structured_spec", value);
+      return this;
+    }
     public APIRequestGet requestMediaSourcingSpecField () {
       return this.requestMediaSourcingSpecField(true);
     }
@@ -2425,6 +2466,13 @@ public class AdCreative extends APINode {
     }
     public APIRequestGet requestProductSetIdField (boolean value) {
       this.requestField("product_set_id", value);
+      return this;
+    }
+    public APIRequestGet requestProductSuggestionSettingsField () {
+      return this.requestProductSuggestionSettingsField(true);
+    }
+    public APIRequestGet requestProductSuggestionSettingsField (boolean value) {
+      this.requestField("product_suggestion_settings", value);
       return this;
     }
     public APIRequestGet requestRecommenderSettingsField () {
@@ -2664,8 +2712,12 @@ public class AdCreative extends APINode {
       VALUE_APPLY_NOW("APPLY_NOW"),
       @SerializedName("ASK_ABOUT_SERVICES")
       VALUE_ASK_ABOUT_SERVICES("ASK_ABOUT_SERVICES"),
+      @SerializedName("ASK_A_QUESTION")
+      VALUE_ASK_A_QUESTION("ASK_A_QUESTION"),
       @SerializedName("ASK_FOR_MORE_INFO")
       VALUE_ASK_FOR_MORE_INFO("ASK_FOR_MORE_INFO"),
+      @SerializedName("ASK_US")
+      VALUE_ASK_US("ASK_US"),
       @SerializedName("AUDIO_CALL")
       VALUE_AUDIO_CALL("AUDIO_CALL"),
       @SerializedName("BOOK_A_CONSULTATION")
@@ -2690,6 +2742,8 @@ public class AdCreative extends APINode {
       VALUE_CALL_ME("CALL_ME"),
       @SerializedName("CALL_NOW")
       VALUE_CALL_NOW("CALL_NOW"),
+      @SerializedName("CHAT_NOW")
+      VALUE_CHAT_NOW("CHAT_NOW"),
       @SerializedName("CHAT_WITH_US")
       VALUE_CHAT_WITH_US("CHAT_WITH_US"),
       @SerializedName("CONFIRM")
@@ -2808,6 +2862,8 @@ public class AdCreative extends APINode {
       VALUE_SIGN_UP("SIGN_UP"),
       @SerializedName("SOTTO_SUBSCRIBE")
       VALUE_SOTTO_SUBSCRIBE("SOTTO_SUBSCRIBE"),
+      @SerializedName("START_A_CHAT")
+      VALUE_START_A_CHAT("START_A_CHAT"),
       @SerializedName("START_ORDER")
       VALUE_START_ORDER("START_ORDER"),
       @SerializedName("SUBSCRIBE")
@@ -3130,6 +3186,7 @@ public class AdCreative extends APINode {
     this.mLinkDestinationDisplayUrl = instance.mLinkDestinationDisplayUrl;
     this.mLinkOgId = instance.mLinkOgId;
     this.mLinkUrl = instance.mLinkUrl;
+    this.mMarketingMessageStructuredSpec = instance.mMarketingMessageStructuredSpec;
     this.mMediaSourcingSpec = instance.mMediaSourcingSpec;
     this.mMessengerSponsoredMessage = instance.mMessengerSponsoredMessage;
     this.mName = instance.mName;
@@ -3148,6 +3205,7 @@ public class AdCreative extends APINode {
     this.mPortraitCustomizations = instance.mPortraitCustomizations;
     this.mProductData = instance.mProductData;
     this.mProductSetId = instance.mProductSetId;
+    this.mProductSuggestionSettings = instance.mProductSuggestionSettings;
     this.mRecommenderSettings = instance.mRecommenderSettings;
     this.mRegionalRegulationDisclaimerSpec = instance.mRegionalRegulationDisclaimerSpec;
     this.mSourceFacebookPostId = instance.mSourceFacebookPostId;

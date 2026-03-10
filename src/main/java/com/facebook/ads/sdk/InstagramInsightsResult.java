@@ -304,6 +304,12 @@ public class InstagramInsightsResult extends APINode {
       VALUE_CLIPS_REPLAYS_COUNT("clips_replays_count"),
       @SerializedName("comments")
       VALUE_COMMENTS("comments"),
+      @SerializedName("content_views")
+      VALUE_CONTENT_VIEWS("content_views"),
+      @SerializedName("crossposted_views")
+      VALUE_CROSSPOSTED_VIEWS("crossposted_views"),
+      @SerializedName("facebook_views")
+      VALUE_FACEBOOK_VIEWS("facebook_views"),
       @SerializedName("follows")
       VALUE_FOLLOWS("follows"),
       @SerializedName("ig_reels_aggregated_all_plays_count")
@@ -326,14 +332,24 @@ public class InstagramInsightsResult extends APINode {
       VALUE_PROFILE_VISITS("profile_visits"),
       @SerializedName("reach")
       VALUE_REACH("reach"),
+      @SerializedName("reels_skip_rate")
+      VALUE_REELS_SKIP_RATE("reels_skip_rate"),
       @SerializedName("replies")
       VALUE_REPLIES("replies"),
+      @SerializedName("reposts")
+      VALUE_REPOSTS("reposts"),
       @SerializedName("saved")
       VALUE_SAVED("saved"),
       @SerializedName("shares")
       VALUE_SHARES("shares"),
+      @SerializedName("total_comments")
+      VALUE_TOTAL_COMMENTS("total_comments"),
       @SerializedName("total_interactions")
       VALUE_TOTAL_INTERACTIONS("total_interactions"),
+      @SerializedName("total_likes")
+      VALUE_TOTAL_LIKES("total_likes"),
+      @SerializedName("total_views")
+      VALUE_TOTAL_VIEWS("total_views"),
       @SerializedName("video_views")
       VALUE_VIDEO_VIEWS("video_views"),
       @SerializedName("views")

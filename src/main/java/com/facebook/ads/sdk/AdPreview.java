@@ -255,6 +255,8 @@ public class AdPreview extends APINode {
       VALUE_FACEBOOK_REELS_POSTLOOP("FACEBOOK_REELS_POSTLOOP"),
       @SerializedName("FACEBOOK_REELS_POSTLOOP_FEED")
       VALUE_FACEBOOK_REELS_POSTLOOP_FEED("FACEBOOK_REELS_POSTLOOP_FEED"),
+      @SerializedName("FACEBOOK_REELS_SIMILAR_PRODUCTS_MOBILE")
+      VALUE_FACEBOOK_REELS_SIMILAR_PRODUCTS_MOBILE("FACEBOOK_REELS_SIMILAR_PRODUCTS_MOBILE"),
       @SerializedName("FACEBOOK_REELS_STICKER")
       VALUE_FACEBOOK_REELS_STICKER("FACEBOOK_REELS_STICKER"),
       @SerializedName("FACEBOOK_STORY_MOBILE")
@@ -279,8 +281,6 @@ public class AdPreview extends APINode {
       VALUE_INSTAGRAM_PROFILE_REELS("INSTAGRAM_PROFILE_REELS"),
       @SerializedName("INSTAGRAM_REELS")
       VALUE_INSTAGRAM_REELS("INSTAGRAM_REELS"),
-      @SerializedName("INSTAGRAM_REELS_INSTREAM")
-      VALUE_INSTAGRAM_REELS_INSTREAM("INSTAGRAM_REELS_INSTREAM"),
       @SerializedName("INSTAGRAM_REELS_OVERLAY")
       VALUE_INSTAGRAM_REELS_OVERLAY("INSTAGRAM_REELS_OVERLAY"),
       @SerializedName("INSTAGRAM_REELS_WEB")
@@ -367,6 +367,8 @@ public class AdPreview extends APINode {
       VALUE_WATCH_FEED_HOME("WATCH_FEED_HOME"),
       @SerializedName("WATCH_FEED_MOBILE")
       VALUE_WATCH_FEED_MOBILE("WATCH_FEED_MOBILE"),
+      @SerializedName("WHATSAPP_STATUS_MEDIA")
+      VALUE_WHATSAPP_STATUS_MEDIA("WHATSAPP_STATUS_MEDIA"),
       ;
 
       private String value;
@@ -382,6 +384,8 @@ public class AdPreview extends APINode {
   }
 
   public static enum EnumCreativeFeature {
+      @SerializedName("ig_video_native_subtitle")
+      VALUE_IG_VIDEO_NATIVE_SUBTITLE("ig_video_native_subtitle"),
       @SerializedName("product_metadata_automation")
       VALUE_PRODUCT_METADATA_AUTOMATION("product_metadata_automation"),
       @SerializedName("profile_card")

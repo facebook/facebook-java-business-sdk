@@ -280,6 +280,8 @@ public class AdAccountDeliveryEstimate extends APINode {
       VALUE_CONVERSATIONS("CONVERSATIONS"),
       @SerializedName("DERIVED_EVENTS")
       VALUE_DERIVED_EVENTS("DERIVED_EVENTS"),
+      @SerializedName("ENGAGED_PAGE_VIEWS")
+      VALUE_ENGAGED_PAGE_VIEWS("ENGAGED_PAGE_VIEWS"),
       @SerializedName("ENGAGED_USERS")
       VALUE_ENGAGED_USERS("ENGAGED_USERS"),
       @SerializedName("EVENT_RESPONSES")

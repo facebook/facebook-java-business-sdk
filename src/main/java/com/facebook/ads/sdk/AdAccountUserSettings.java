@@ -109,8 +109,6 @@ public class AdAccountUserSettings extends APINode {
   private Boolean mIsAdsManagerFooterRowPreferenceSet = null;
   @SerializedName("is_ads_manager_footer_row_shown")
   private Boolean mIsAdsManagerFooterRowShown = null;
-  @SerializedName("is_text_variation_nux_close")
-  private Boolean mIsTextVariationNuxClose = null;
   @SerializedName("last_used_columns")
   private Object mLastUsedColumns = null;
   @SerializedName("last_used_pe_filters")
@@ -157,8 +155,6 @@ public class AdAccountUserSettings extends APINode {
   private Boolean mShouldShowShopsAdsMetricsOnboardingTour = null;
   @SerializedName("show_archived_data")
   private Boolean mShowArchivedData = null;
-  @SerializedName("show_text_variation_nux_tooltip")
-  private Boolean mShowTextVariationNuxTooltip = null;
   @SerializedName("syd_campaign_trends_activemetric")
   private String mSydCampaignTrendsActivemetric = null;
   @SerializedName("syd_campaign_trends_attribution")
@@ -542,10 +538,6 @@ public class AdAccountUserSettings extends APINode {
     return mIsAdsManagerFooterRowShown;
   }
 
-  public Boolean getFieldIsTextVariationNuxClose() {
-    return mIsTextVariationNuxClose;
-  }
-
   public Object getFieldLastUsedColumns() {
     return mLastUsedColumns;
   }
@@ -636,10 +628,6 @@ public class AdAccountUserSettings extends APINode {
 
   public Boolean getFieldShowArchivedData() {
     return mShowArchivedData;
-  }
-
-  public Boolean getFieldShowTextVariationNuxTooltip() {
-    return mShowTextVariationNuxTooltip;
   }
 
   public String getFieldSydCampaignTrendsActivemetric() {
@@ -752,7 +740,6 @@ public class AdAccountUserSettings extends APINode {
       "is_3p_auth_setting_set",
       "is_ads_manager_footer_row_preference_set",
       "is_ads_manager_footer_row_shown",
-      "is_text_variation_nux_close",
       "last_used_columns",
       "last_used_pe_filters",
       "last_used_website_urls",
@@ -776,7 +763,6 @@ public class AdAccountUserSettings extends APINode {
       "should_logout_of_3p_sourcing",
       "should_show_shops_ads_metrics_onboarding_tour",
       "show_archived_data",
-      "show_text_variation_nux_tooltip",
       "syd_campaign_trends_activemetric",
       "syd_campaign_trends_attribution",
       "syd_campaign_trends_metrics",
@@ -1122,13 +1108,6 @@ public class AdAccountUserSettings extends APINode {
       this.requestField("is_ads_manager_footer_row_shown", value);
       return this;
     }
-    public APIRequestGet requestIsTextVariationNuxCloseField () {
-      return this.requestIsTextVariationNuxCloseField(true);
-    }
-    public APIRequestGet requestIsTextVariationNuxCloseField (boolean value) {
-      this.requestField("is_text_variation_nux_close", value);
-      return this;
-    }
     public APIRequestGet requestLastUsedColumnsField () {
       return this.requestLastUsedColumnsField(true);
     }
@@ -1288,13 +1267,6 @@ public class AdAccountUserSettings extends APINode {
     }
     public APIRequestGet requestShowArchivedDataField (boolean value) {
       this.requestField("show_archived_data", value);
-      return this;
-    }
-    public APIRequestGet requestShowTextVariationNuxTooltipField () {
-      return this.requestShowTextVariationNuxTooltipField(true);
-    }
-    public APIRequestGet requestShowTextVariationNuxTooltipField (boolean value) {
-      this.requestField("show_text_variation_nux_tooltip", value);
       return this;
     }
     public APIRequestGet requestSydCampaignTrendsActivemetricField () {
@@ -1510,7 +1482,6 @@ public class AdAccountUserSettings extends APINode {
     this.mIs3pAuthSettingSet = instance.mIs3pAuthSettingSet;
     this.mIsAdsManagerFooterRowPreferenceSet = instance.mIsAdsManagerFooterRowPreferenceSet;
     this.mIsAdsManagerFooterRowShown = instance.mIsAdsManagerFooterRowShown;
-    this.mIsTextVariationNuxClose = instance.mIsTextVariationNuxClose;
     this.mLastUsedColumns = instance.mLastUsedColumns;
     this.mLastUsedPeFilters = instance.mLastUsedPeFilters;
     this.mLastUsedWebsiteUrls = instance.mLastUsedWebsiteUrls;
@@ -1534,7 +1505,6 @@ public class AdAccountUserSettings extends APINode {
     this.mShouldLogoutOf3pSourcing = instance.mShouldLogoutOf3pSourcing;
     this.mShouldShowShopsAdsMetricsOnboardingTour = instance.mShouldShowShopsAdsMetricsOnboardingTour;
     this.mShowArchivedData = instance.mShowArchivedData;
-    this.mShowTextVariationNuxTooltip = instance.mShowTextVariationNuxTooltip;
     this.mSydCampaignTrendsActivemetric = instance.mSydCampaignTrendsActivemetric;
     this.mSydCampaignTrendsAttribution = instance.mSydCampaignTrendsAttribution;
     this.mSydCampaignTrendsMetrics = instance.mSydCampaignTrendsMetrics;

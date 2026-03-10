@@ -41,6 +41,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class AdCreativeSourcingSpec extends APINode {
+  @SerializedName("ad_extensions_relevancy_spec")
+  private Object mAdExtensionsRelevancySpec = null;
   @SerializedName("associated_product_set_id")
   private String mAssociatedProductSetId = null;
   @SerializedName("brand")
@@ -55,6 +57,8 @@ public class AdCreativeSourcingSpec extends APINode {
   private Object mIntent = null;
   @SerializedName("pca_spec")
   private Object mPcaSpec = null;
+  @SerializedName("product_media_metadata_spec")
+  private Object mProductMediaMetadataSpec = null;
   @SerializedName("promotion_metadata_spec")
   private List<AdCreativePromotionMetadataSpec> mPromotionMetadataSpec = null;
   @SerializedName("site_links_data_consented")
@@ -218,6 +222,15 @@ public class AdCreativeSourcingSpec extends APINode {
   }
 
 
+  public Object getFieldAdExtensionsRelevancySpec() {
+    return mAdExtensionsRelevancySpec;
+  }
+
+  public AdCreativeSourcingSpec setFieldAdExtensionsRelevancySpec(Object value) {
+    this.mAdExtensionsRelevancySpec = value;
+    return this;
+  }
+
   public String getFieldAssociatedProductSetId() {
     return mAssociatedProductSetId;
   }
@@ -278,6 +291,15 @@ public class AdCreativeSourcingSpec extends APINode {
 
   public AdCreativeSourcingSpec setFieldPcaSpec(Object value) {
     this.mPcaSpec = value;
+    return this;
+  }
+
+  public Object getFieldProductMediaMetadataSpec() {
+    return mProductMediaMetadataSpec;
+  }
+
+  public AdCreativeSourcingSpec setFieldProductMediaMetadataSpec(Object value) {
+    this.mProductMediaMetadataSpec = value;
     return this;
   }
 
@@ -362,6 +384,7 @@ public class AdCreativeSourcingSpec extends APINode {
   }
 
   public AdCreativeSourcingSpec copyFrom(AdCreativeSourcingSpec instance) {
+    this.mAdExtensionsRelevancySpec = instance.mAdExtensionsRelevancySpec;
     this.mAssociatedProductSetId = instance.mAssociatedProductSetId;
     this.mBrand = instance.mBrand;
     this.mDestinationScreenshotSpec = instance.mDestinationScreenshotSpec;
@@ -369,6 +392,7 @@ public class AdCreativeSourcingSpec extends APINode {
     this.mEnableSocialFeedbackPreservation = instance.mEnableSocialFeedbackPreservation;
     this.mIntent = instance.mIntent;
     this.mPcaSpec = instance.mPcaSpec;
+    this.mProductMediaMetadataSpec = instance.mProductMediaMetadataSpec;
     this.mPromotionMetadataSpec = instance.mPromotionMetadataSpec;
     this.mSiteLinksDataConsented = instance.mSiteLinksDataConsented;
     this.mSiteLinksSpec = instance.mSiteLinksSpec;

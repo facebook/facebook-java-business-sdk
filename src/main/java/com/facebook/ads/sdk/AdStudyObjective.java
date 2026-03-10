@@ -747,6 +747,7 @@ public class AdStudyObjective extends APINode {
       "category",
       "client_config",
       "company",
+      "config_ids",
       "configured_ios_sso",
       "contact_email",
       "created_time",
@@ -1147,6 +1148,13 @@ public class AdStudyObjective extends APINode {
     }
     public APIRequestGetApplications requestCompanyField (boolean value) {
       this.requestField("company", value);
+      return this;
+    }
+    public APIRequestGetApplications requestConfigIdsField () {
+      return this.requestConfigIdsField(true);
+    }
+    public APIRequestGetApplications requestConfigIdsField (boolean value) {
+      this.requestField("config_ids", value);
       return this;
     }
     public APIRequestGetApplications requestConfiguredIosSsoField () {

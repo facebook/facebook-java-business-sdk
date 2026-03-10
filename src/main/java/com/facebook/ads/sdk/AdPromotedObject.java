@@ -41,8 +41,6 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class AdPromotedObject extends APINode {
-  @SerializedName("anchor_event_config")
-  private String mAnchorEventConfig = null;
   @SerializedName("application_id")
   private String mApplicationId = null;
   @SerializedName("boosted_product_set_id")
@@ -75,6 +73,8 @@ public class AdPromotedObject extends APINode {
   private String mLeadAdsOffsiteConversionType = null;
   @SerializedName("lead_ads_selected_pixel_id")
   private String mLeadAdsSelectedPixelId = null;
+  @SerializedName("live_video_destination")
+  private String mLiveVideoDestination = null;
   @SerializedName("mcme_conversion_id")
   private String mMcmeConversionId = null;
   @SerializedName("multi_event_product")
@@ -119,6 +119,10 @@ public class AdPromotedObject extends APINode {
   private String mProductSetOptimization = null;
   @SerializedName("retention_days")
   private String mRetentionDays = null;
+  @SerializedName("smart_pse_enabled")
+  private Boolean mSmartPseEnabled = null;
+  @SerializedName("smart_pse_setting")
+  private String mSmartPseSetting = null;
   @SerializedName("value_semantic_type")
   private String mValueSemanticType = null;
   @SerializedName("variation")
@@ -278,15 +282,6 @@ public class AdPromotedObject extends APINode {
   }
 
 
-  public String getFieldAnchorEventConfig() {
-    return mAnchorEventConfig;
-  }
-
-  public AdPromotedObject setFieldAnchorEventConfig(String value) {
-    this.mAnchorEventConfig = value;
-    return this;
-  }
-
   public String getFieldApplicationId() {
     return mApplicationId;
   }
@@ -428,6 +423,15 @@ public class AdPromotedObject extends APINode {
 
   public AdPromotedObject setFieldLeadAdsSelectedPixelId(String value) {
     this.mLeadAdsSelectedPixelId = value;
+    return this;
+  }
+
+  public String getFieldLiveVideoDestination() {
+    return mLiveVideoDestination;
+  }
+
+  public AdPromotedObject setFieldLiveVideoDestination(String value) {
+    this.mLiveVideoDestination = value;
     return this;
   }
 
@@ -642,6 +646,24 @@ public class AdPromotedObject extends APINode {
 
   public AdPromotedObject setFieldRetentionDays(String value) {
     this.mRetentionDays = value;
+    return this;
+  }
+
+  public Boolean getFieldSmartPseEnabled() {
+    return mSmartPseEnabled;
+  }
+
+  public AdPromotedObject setFieldSmartPseEnabled(Boolean value) {
+    this.mSmartPseEnabled = value;
+    return this;
+  }
+
+  public String getFieldSmartPseSetting() {
+    return mSmartPseSetting;
+  }
+
+  public AdPromotedObject setFieldSmartPseSetting(String value) {
+    this.mSmartPseSetting = value;
     return this;
   }
 
@@ -901,7 +923,6 @@ public class AdPromotedObject extends APINode {
   }
 
   public AdPromotedObject copyFrom(AdPromotedObject instance) {
-    this.mAnchorEventConfig = instance.mAnchorEventConfig;
     this.mApplicationId = instance.mApplicationId;
     this.mBoostedProductSetId = instance.mBoostedProductSetId;
     this.mConversionGoalId = instance.mConversionGoalId;
@@ -918,6 +939,7 @@ public class AdPromotedObject extends APINode {
     this.mLeadAdsFormEventSourceType = instance.mLeadAdsFormEventSourceType;
     this.mLeadAdsOffsiteConversionType = instance.mLeadAdsOffsiteConversionType;
     this.mLeadAdsSelectedPixelId = instance.mLeadAdsSelectedPixelId;
+    this.mLiveVideoDestination = instance.mLiveVideoDestination;
     this.mMcmeConversionId = instance.mMcmeConversionId;
     this.mMultiEventProduct = instance.mMultiEventProduct;
     this.mObjectStoreUrl = instance.mObjectStoreUrl;
@@ -940,6 +962,8 @@ public class AdPromotedObject extends APINode {
     this.mProductSetId = instance.mProductSetId;
     this.mProductSetOptimization = instance.mProductSetOptimization;
     this.mRetentionDays = instance.mRetentionDays;
+    this.mSmartPseEnabled = instance.mSmartPseEnabled;
+    this.mSmartPseSetting = instance.mSmartPseSetting;
     this.mValueSemanticType = instance.mValueSemanticType;
     this.mVariation = instance.mVariation;
     this.mWhatsAppBusinessPhoneNumberId = instance.mWhatsAppBusinessPhoneNumberId;

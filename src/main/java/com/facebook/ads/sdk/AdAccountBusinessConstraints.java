@@ -45,6 +45,8 @@ public class AdAccountBusinessConstraints extends APINode {
   private Object mAudienceControls = null;
   @SerializedName("campaigns_with_error")
   private List<String> mCampaignsWithError = null;
+  @SerializedName("is_age_restriction_enabled")
+  private Boolean mIsAgeRestrictionEnabled = null;
   @SerializedName("placement_controls")
   private Object mPlacementControls = null;
   @SerializedName("status")
@@ -218,6 +220,15 @@ public class AdAccountBusinessConstraints extends APINode {
     return this;
   }
 
+  public Boolean getFieldIsAgeRestrictionEnabled() {
+    return mIsAgeRestrictionEnabled;
+  }
+
+  public AdAccountBusinessConstraints setFieldIsAgeRestrictionEnabled(Boolean value) {
+    this.mIsAgeRestrictionEnabled = value;
+    return this;
+  }
+
   public Object getFieldPlacementControls() {
     return mPlacementControls;
   }
@@ -276,6 +287,7 @@ public class AdAccountBusinessConstraints extends APINode {
   public AdAccountBusinessConstraints copyFrom(AdAccountBusinessConstraints instance) {
     this.mAudienceControls = instance.mAudienceControls;
     this.mCampaignsWithError = instance.mCampaignsWithError;
+    this.mIsAgeRestrictionEnabled = instance.mIsAgeRestrictionEnabled;
     this.mPlacementControls = instance.mPlacementControls;
     this.mStatus = instance.mStatus;
     this.context = instance.context;

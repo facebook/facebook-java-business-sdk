@@ -228,8 +228,12 @@ public class AdCreativeLinkDataCallToAction extends APINode {
       VALUE_APPLY_NOW("APPLY_NOW"),
       @SerializedName("ASK_ABOUT_SERVICES")
       VALUE_ASK_ABOUT_SERVICES("ASK_ABOUT_SERVICES"),
+      @SerializedName("ASK_A_QUESTION")
+      VALUE_ASK_A_QUESTION("ASK_A_QUESTION"),
       @SerializedName("ASK_FOR_MORE_INFO")
       VALUE_ASK_FOR_MORE_INFO("ASK_FOR_MORE_INFO"),
+      @SerializedName("ASK_US")
+      VALUE_ASK_US("ASK_US"),
       @SerializedName("AUDIO_CALL")
       VALUE_AUDIO_CALL("AUDIO_CALL"),
       @SerializedName("BOOK_A_CONSULTATION")
@@ -254,6 +258,8 @@ public class AdCreativeLinkDataCallToAction extends APINode {
       VALUE_CALL_ME("CALL_ME"),
       @SerializedName("CALL_NOW")
       VALUE_CALL_NOW("CALL_NOW"),
+      @SerializedName("CHAT_NOW")
+      VALUE_CHAT_NOW("CHAT_NOW"),
       @SerializedName("CHAT_WITH_US")
       VALUE_CHAT_WITH_US("CHAT_WITH_US"),
       @SerializedName("CONFIRM")
@@ -372,6 +378,8 @@ public class AdCreativeLinkDataCallToAction extends APINode {
       VALUE_SIGN_UP("SIGN_UP"),
       @SerializedName("SOTTO_SUBSCRIBE")
       VALUE_SOTTO_SUBSCRIBE("SOTTO_SUBSCRIBE"),
+      @SerializedName("START_A_CHAT")
+      VALUE_START_A_CHAT("START_A_CHAT"),
       @SerializedName("START_ORDER")
       VALUE_START_ORDER("START_ORDER"),
       @SerializedName("SUBSCRIBE")

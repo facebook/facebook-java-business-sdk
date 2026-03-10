@@ -53,6 +53,8 @@ public class AdCreativeFeaturesSpec extends APINode {
   private AdCreativeFeatureDetails mAppHighlights = null;
   @SerializedName("audio")
   private AdCreativeFeatureDetails mAudio = null;
+  @SerializedName("auto_promotion_tag")
+  private AdCreativeFeatureDetails mAutoPromotionTag = null;
   @SerializedName("biz_ai")
   private AdCreativeFeatureDetails mBizAi = null;
   @SerializedName("carousel_to_video")
@@ -71,6 +73,8 @@ public class AdCreativeFeaturesSpec extends APINode {
   private AdCreativeFeatureDetails mDhaOptimization = null;
   @SerializedName("dynamic_partner_content")
   private AdCreativeFeatureDetails mDynamicPartnerContent = null;
+  @SerializedName("enable_ncs_testimonials")
+  private AdCreativeFeatureDetails mEnableNcsTestimonials = null;
   @SerializedName("enhance_cta")
   private AdCreativeFeatureDetails mEnhanceCta = null;
   @SerializedName("fb_feed_tag")
@@ -93,6 +97,8 @@ public class AdCreativeFeaturesSpec extends APINode {
   private AdCreativeFeatureDetails mIgReelsTag = null;
   @SerializedName("ig_stream_tag")
   private AdCreativeFeatureDetails mIgStreamTag = null;
+  @SerializedName("ig_video_native_subtitle")
+  private AdCreativeFeatureDetails mIgVideoNativeSubtitle = null;
   @SerializedName("image_animation")
   private AdCreativeFeatureDetails mImageAnimation = null;
   @SerializedName("image_auto_crop")
@@ -105,6 +111,8 @@ public class AdCreativeFeaturesSpec extends APINode {
   private AdCreativeFeatureDetails mImageEnhancement = null;
   @SerializedName("image_templates")
   private AdCreativeFeatureDetails mImageTemplates = null;
+  @SerializedName("image_text_translation")
+  private AdCreativeFeatureDetails mImageTextTranslation = null;
   @SerializedName("image_touchups")
   private AdCreativeFeatureDetails mImageTouchups = null;
   @SerializedName("image_uncrop")
@@ -153,6 +161,8 @@ public class AdCreativeFeaturesSpec extends APINode {
   private AdCreativeFeatureDetails mTextExtractionForHeadline = null;
   @SerializedName("text_extraction_for_tap_target")
   private AdCreativeFeatureDetails mTextExtractionForTapTarget = null;
+  @SerializedName("text_formatting_optimization")
+  private AdCreativeFeatureDetails mTextFormattingOptimization = null;
   @SerializedName("text_generation")
   private AdCreativeFeatureDetails mTextGeneration = null;
   @SerializedName("text_optimizations")
@@ -414,6 +424,20 @@ public class AdCreativeFeaturesSpec extends APINode {
     this.mAudio = AdCreativeFeatureDetails.getGson().fromJson(value, type);
     return this;
   }
+  public AdCreativeFeatureDetails getFieldAutoPromotionTag() {
+    return mAutoPromotionTag;
+  }
+
+  public AdCreativeFeaturesSpec setFieldAutoPromotionTag(AdCreativeFeatureDetails value) {
+    this.mAutoPromotionTag = value;
+    return this;
+  }
+
+  public AdCreativeFeaturesSpec setFieldAutoPromotionTag(String value) {
+    Type type = new TypeToken<AdCreativeFeatureDetails>(){}.getType();
+    this.mAutoPromotionTag = AdCreativeFeatureDetails.getGson().fromJson(value, type);
+    return this;
+  }
   public AdCreativeFeatureDetails getFieldBizAi() {
     return mBizAi;
   }
@@ -538,6 +562,20 @@ public class AdCreativeFeaturesSpec extends APINode {
   public AdCreativeFeaturesSpec setFieldDynamicPartnerContent(String value) {
     Type type = new TypeToken<AdCreativeFeatureDetails>(){}.getType();
     this.mDynamicPartnerContent = AdCreativeFeatureDetails.getGson().fromJson(value, type);
+    return this;
+  }
+  public AdCreativeFeatureDetails getFieldEnableNcsTestimonials() {
+    return mEnableNcsTestimonials;
+  }
+
+  public AdCreativeFeaturesSpec setFieldEnableNcsTestimonials(AdCreativeFeatureDetails value) {
+    this.mEnableNcsTestimonials = value;
+    return this;
+  }
+
+  public AdCreativeFeaturesSpec setFieldEnableNcsTestimonials(String value) {
+    Type type = new TypeToken<AdCreativeFeatureDetails>(){}.getType();
+    this.mEnableNcsTestimonials = AdCreativeFeatureDetails.getGson().fromJson(value, type);
     return this;
   }
   public AdCreativeFeatureDetails getFieldEnhanceCta() {
@@ -694,6 +732,20 @@ public class AdCreativeFeaturesSpec extends APINode {
     this.mIgStreamTag = AdCreativeFeatureDetails.getGson().fromJson(value, type);
     return this;
   }
+  public AdCreativeFeatureDetails getFieldIgVideoNativeSubtitle() {
+    return mIgVideoNativeSubtitle;
+  }
+
+  public AdCreativeFeaturesSpec setFieldIgVideoNativeSubtitle(AdCreativeFeatureDetails value) {
+    this.mIgVideoNativeSubtitle = value;
+    return this;
+  }
+
+  public AdCreativeFeaturesSpec setFieldIgVideoNativeSubtitle(String value) {
+    Type type = new TypeToken<AdCreativeFeatureDetails>(){}.getType();
+    this.mIgVideoNativeSubtitle = AdCreativeFeatureDetails.getGson().fromJson(value, type);
+    return this;
+  }
   public AdCreativeFeatureDetails getFieldImageAnimation() {
     return mImageAnimation;
   }
@@ -776,6 +828,20 @@ public class AdCreativeFeaturesSpec extends APINode {
   public AdCreativeFeaturesSpec setFieldImageTemplates(String value) {
     Type type = new TypeToken<AdCreativeFeatureDetails>(){}.getType();
     this.mImageTemplates = AdCreativeFeatureDetails.getGson().fromJson(value, type);
+    return this;
+  }
+  public AdCreativeFeatureDetails getFieldImageTextTranslation() {
+    return mImageTextTranslation;
+  }
+
+  public AdCreativeFeaturesSpec setFieldImageTextTranslation(AdCreativeFeatureDetails value) {
+    this.mImageTextTranslation = value;
+    return this;
+  }
+
+  public AdCreativeFeaturesSpec setFieldImageTextTranslation(String value) {
+    Type type = new TypeToken<AdCreativeFeatureDetails>(){}.getType();
+    this.mImageTextTranslation = AdCreativeFeatureDetails.getGson().fromJson(value, type);
     return this;
   }
   public AdCreativeFeatureDetails getFieldImageTouchups() {
@@ -1114,6 +1180,20 @@ public class AdCreativeFeaturesSpec extends APINode {
     this.mTextExtractionForTapTarget = AdCreativeFeatureDetails.getGson().fromJson(value, type);
     return this;
   }
+  public AdCreativeFeatureDetails getFieldTextFormattingOptimization() {
+    return mTextFormattingOptimization;
+  }
+
+  public AdCreativeFeaturesSpec setFieldTextFormattingOptimization(AdCreativeFeatureDetails value) {
+    this.mTextFormattingOptimization = value;
+    return this;
+  }
+
+  public AdCreativeFeaturesSpec setFieldTextFormattingOptimization(String value) {
+    Type type = new TypeToken<AdCreativeFeatureDetails>(){}.getType();
+    this.mTextFormattingOptimization = AdCreativeFeatureDetails.getGson().fromJson(value, type);
+    return this;
+  }
   public AdCreativeFeatureDetails getFieldTextGeneration() {
     return mTextGeneration;
   }
@@ -1319,6 +1399,7 @@ public class AdCreativeFeaturesSpec extends APINode {
     this.mAdvantagePlusCreative = instance.mAdvantagePlusCreative;
     this.mAppHighlights = instance.mAppHighlights;
     this.mAudio = instance.mAudio;
+    this.mAutoPromotionTag = instance.mAutoPromotionTag;
     this.mBizAi = instance.mBizAi;
     this.mCarouselToVideo = instance.mCarouselToVideo;
     this.mCatalogFeedTag = instance.mCatalogFeedTag;
@@ -1328,6 +1409,7 @@ public class AdCreativeFeaturesSpec extends APINode {
     this.mDescriptionAutomation = instance.mDescriptionAutomation;
     this.mDhaOptimization = instance.mDhaOptimization;
     this.mDynamicPartnerContent = instance.mDynamicPartnerContent;
+    this.mEnableNcsTestimonials = instance.mEnableNcsTestimonials;
     this.mEnhanceCta = instance.mEnhanceCta;
     this.mFbFeedTag = instance.mFbFeedTag;
     this.mFbReelsTag = instance.mFbReelsTag;
@@ -1339,12 +1421,14 @@ public class AdCreativeFeaturesSpec extends APINode {
     this.mIgGladosFeed = instance.mIgGladosFeed;
     this.mIgReelsTag = instance.mIgReelsTag;
     this.mIgStreamTag = instance.mIgStreamTag;
+    this.mIgVideoNativeSubtitle = instance.mIgVideoNativeSubtitle;
     this.mImageAnimation = instance.mImageAnimation;
     this.mImageAutoCrop = instance.mImageAutoCrop;
     this.mImageBackgroundGen = instance.mImageBackgroundGen;
     this.mImageBrightnessAndContrast = instance.mImageBrightnessAndContrast;
     this.mImageEnhancement = instance.mImageEnhancement;
     this.mImageTemplates = instance.mImageTemplates;
+    this.mImageTextTranslation = instance.mImageTextTranslation;
     this.mImageTouchups = instance.mImageTouchups;
     this.mImageUncrop = instance.mImageUncrop;
     this.mInlineComment = instance.mInlineComment;
@@ -1369,6 +1453,7 @@ public class AdCreativeFeaturesSpec extends APINode {
     this.mStandardEnhancementsCatalog = instance.mStandardEnhancementsCatalog;
     this.mTextExtractionForHeadline = instance.mTextExtractionForHeadline;
     this.mTextExtractionForTapTarget = instance.mTextExtractionForTapTarget;
+    this.mTextFormattingOptimization = instance.mTextFormattingOptimization;
     this.mTextGeneration = instance.mTextGeneration;
     this.mTextOptimizations = instance.mTextOptimizations;
     this.mTextOverlayTranslation = instance.mTextOverlayTranslation;

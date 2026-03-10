@@ -47,6 +47,8 @@ public class IGMediaForIGOnlyAPI extends APINode {
   private String mCaption = null;
   @SerializedName("comments_count")
   private Long mCommentsCount = null;
+  @SerializedName("current_live_viewer_count")
+  private Long mCurrentLiveViewerCount = null;
   @SerializedName("id")
   private String mId = null;
   @SerializedName("is_comment_enabled")
@@ -317,6 +319,10 @@ public class IGMediaForIGOnlyAPI extends APINode {
 
   public Long getFieldCommentsCount() {
     return mCommentsCount;
+  }
+
+  public Long getFieldCurrentLiveViewerCount() {
+    return mCurrentLiveViewerCount;
   }
 
   public String getFieldId() {
@@ -1086,6 +1092,7 @@ public class IGMediaForIGOnlyAPI extends APINode {
       "alt_text",
       "caption",
       "comments_count",
+      "current_live_viewer_count",
       "id",
       "is_comment_enabled",
       "is_shared_to_feed",
@@ -1210,6 +1217,13 @@ public class IGMediaForIGOnlyAPI extends APINode {
     }
     public APIRequestGet requestCommentsCountField (boolean value) {
       this.requestField("comments_count", value);
+      return this;
+    }
+    public APIRequestGet requestCurrentLiveViewerCountField () {
+      return this.requestCurrentLiveViewerCountField(true);
+    }
+    public APIRequestGet requestCurrentLiveViewerCountField (boolean value) {
+      this.requestField("current_live_viewer_count", value);
       return this;
     }
     public APIRequestGet requestIdField () {
@@ -1438,6 +1452,7 @@ public class IGMediaForIGOnlyAPI extends APINode {
     this.mAltText = instance.mAltText;
     this.mCaption = instance.mCaption;
     this.mCommentsCount = instance.mCommentsCount;
+    this.mCurrentLiveViewerCount = instance.mCurrentLiveViewerCount;
     this.mId = instance.mId;
     this.mIsCommentEnabled = instance.mIsCommentEnabled;
     this.mIsSharedToFeed = instance.mIsSharedToFeed;

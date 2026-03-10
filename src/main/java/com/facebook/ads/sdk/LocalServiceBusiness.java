@@ -51,8 +51,6 @@ public class LocalServiceBusiness extends APINode {
   private String mBrand = null;
   @SerializedName("category")
   private String mCategory = null;
-  @SerializedName("category_specific_fields")
-  private CatalogSubVerticalList mCategorySpecificFields = null;
   @SerializedName("condition")
   private EnumCondition mCondition = null;
   @SerializedName("cuisine_type")
@@ -361,10 +359,6 @@ public class LocalServiceBusiness extends APINode {
 
   public String getFieldCategory() {
     return mCategory;
-  }
-
-  public CatalogSubVerticalList getFieldCategorySpecificFields() {
-    return mCategorySpecificFields;
   }
 
   public EnumCondition getFieldCondition() {
@@ -797,7 +791,6 @@ public class LocalServiceBusiness extends APINode {
       "availability",
       "brand",
       "category",
-      "category_specific_fields",
       "condition",
       "cuisine_type",
       "currency",
@@ -957,13 +950,6 @@ public class LocalServiceBusiness extends APINode {
     }
     public APIRequestGet requestCategoryField (boolean value) {
       this.requestField("category", value);
-      return this;
-    }
-    public APIRequestGet requestCategorySpecificFieldsField () {
-      return this.requestCategorySpecificFieldsField(true);
-    }
-    public APIRequestGet requestCategorySpecificFieldsField (boolean value) {
-      this.requestField("category_specific_fields", value);
       return this;
     }
     public APIRequestGet requestConditionField () {
@@ -1332,7 +1318,6 @@ public class LocalServiceBusiness extends APINode {
     this.mAvailability = instance.mAvailability;
     this.mBrand = instance.mBrand;
     this.mCategory = instance.mCategory;
-    this.mCategorySpecificFields = instance.mCategorySpecificFields;
     this.mCondition = instance.mCondition;
     this.mCuisineType = instance.mCuisineType;
     this.mCurrency = instance.mCurrency;

@@ -47,6 +47,8 @@ public class CopyrightOwnershipTransfer extends APINode {
   private Boolean mHasOwnershipBeenUpdated = null;
   @SerializedName("id")
   private String mId = null;
+  @SerializedName("num_assets")
+  private Long mNumAssets = null;
   @SerializedName("receiving_rights_holder")
   private Profile mReceivingRightsHolder = null;
   @SerializedName("sending_rights_holder")
@@ -283,6 +285,10 @@ public class CopyrightOwnershipTransfer extends APINode {
     return mId;
   }
 
+  public Long getFieldNumAssets() {
+    return mNumAssets;
+  }
+
   public Profile getFieldReceivingRightsHolder() {
     if (mReceivingRightsHolder != null) {
       mReceivingRightsHolder.context = getContext();
@@ -325,6 +331,7 @@ public class CopyrightOwnershipTransfer extends APINode {
       "assets",
       "has_ownership_been_updated",
       "id",
+      "num_assets",
       "receiving_rights_holder",
       "sending_rights_holder",
       "status",
@@ -443,6 +450,13 @@ public class CopyrightOwnershipTransfer extends APINode {
       this.requestField("id", value);
       return this;
     }
+    public APIRequestGet requestNumAssetsField () {
+      return this.requestNumAssetsField(true);
+    }
+    public APIRequestGet requestNumAssetsField (boolean value) {
+      this.requestField("num_assets", value);
+      return this;
+    }
     public APIRequestGet requestReceivingRightsHolderField () {
       return this.requestReceivingRightsHolderField(true);
     }
@@ -498,6 +512,7 @@ public class CopyrightOwnershipTransfer extends APINode {
     this.mAssets = instance.mAssets;
     this.mHasOwnershipBeenUpdated = instance.mHasOwnershipBeenUpdated;
     this.mId = instance.mId;
+    this.mNumAssets = instance.mNumAssets;
     this.mReceivingRightsHolder = instance.mReceivingRightsHolder;
     this.mSendingRightsHolder = instance.mSendingRightsHolder;
     this.mStatus = instance.mStatus;

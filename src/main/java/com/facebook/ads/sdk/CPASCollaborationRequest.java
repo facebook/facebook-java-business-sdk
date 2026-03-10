@@ -508,27 +508,6 @@ public class CPASCollaborationRequest extends APINode {
     }
   }
 
-  public static enum EnumRequesterAgencyOrBrand {
-      @SerializedName("AGENCY")
-      VALUE_AGENCY("AGENCY"),
-      @SerializedName("BRAND")
-      VALUE_BRAND("BRAND"),
-      @SerializedName("MERCHANT")
-      VALUE_MERCHANT("MERCHANT"),
-      ;
-
-      private String value;
-
-      private EnumRequesterAgencyOrBrand(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
 
   synchronized /*package*/ static Gson getGson() {
     if (gson != null) {

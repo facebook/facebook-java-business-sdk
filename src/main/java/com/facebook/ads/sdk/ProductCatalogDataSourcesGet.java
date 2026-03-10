@@ -40,27 +40,25 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class ProductDaEventSamplesBatch extends APINode {
-  @SerializedName("samples")
-  private List<Object> mSamples = null;
-  @SerializedName("time_start")
-  private Long mTimeStart = null;
-  @SerializedName("time_stop")
-  private Long mTimeStop = null;
+public class ProductCatalogDataSourcesGet extends APINode {
+  @SerializedName("data")
+  private List<Object> mData = null;
+  @SerializedName("paging")
+  private Object mPaging = null;
   protected static Gson gson = null;
 
-  public ProductDaEventSamplesBatch() {
+  public ProductCatalogDataSourcesGet() {
   }
 
   public String getId() {
     return null;
   }
-  public static ProductDaEventSamplesBatch loadJSON(String json, APIContext context, String header) {
-    ProductDaEventSamplesBatch productDaEventSamplesBatch = getGson().fromJson(json, ProductDaEventSamplesBatch.class);
+  public static ProductCatalogDataSourcesGet loadJSON(String json, APIContext context, String header) {
+    ProductCatalogDataSourcesGet productCatalogDataSourcesGet = getGson().fromJson(json, ProductCatalogDataSourcesGet.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(productDaEventSamplesBatch.toString());
+      JsonElement o2 = parser.parse(productCatalogDataSourcesGet.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -70,14 +68,14 @@ public class ProductDaEventSamplesBatch extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    productDaEventSamplesBatch.context = context;
-    productDaEventSamplesBatch.rawValue = json;
-    productDaEventSamplesBatch.header = header;
-    return productDaEventSamplesBatch;
+    productCatalogDataSourcesGet.context = context;
+    productCatalogDataSourcesGet.rawValue = json;
+    productCatalogDataSourcesGet.header = header;
+    return productCatalogDataSourcesGet;
   }
 
-  public static APINodeList<ProductDaEventSamplesBatch> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<ProductDaEventSamplesBatch> productDaEventSamplesBatchs = new APINodeList<ProductDaEventSamplesBatch>(request, json, header);
+  public static APINodeList<ProductCatalogDataSourcesGet> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<ProductCatalogDataSourcesGet> productCatalogDataSourcesGets = new APINodeList<ProductCatalogDataSourcesGet>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -88,9 +86,9 @@ public class ProductDaEventSamplesBatch extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          productDaEventSamplesBatchs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          productCatalogDataSourcesGets.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return productDaEventSamplesBatchs;
+        return productCatalogDataSourcesGets;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -100,20 +98,20 @@ public class ProductDaEventSamplesBatch extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                productDaEventSamplesBatchs.setCursors(before, after);
+                productCatalogDataSourcesGets.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            productDaEventSamplesBatchs.setPaging(previous, next);
+            productCatalogDataSourcesGets.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              productDaEventSamplesBatchs.setAppSecret(context.getAppSecretProof());
+              productCatalogDataSourcesGets.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              productDaEventSamplesBatchs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              productCatalogDataSourcesGets.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -124,23 +122,23 @@ public class ProductDaEventSamplesBatch extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  productDaEventSamplesBatchs.add(loadJSON(entry.getValue().toString(), context, header));
+                  productCatalogDataSourcesGets.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              productDaEventSamplesBatchs.add(loadJSON(obj.toString(), context, header));
+              productCatalogDataSourcesGets.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return productDaEventSamplesBatchs;
+          return productCatalogDataSourcesGets;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              productDaEventSamplesBatchs.add(loadJSON(entry.getValue().toString(), context, header));
+              productCatalogDataSourcesGets.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return productDaEventSamplesBatchs;
+          return productCatalogDataSourcesGets;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -157,20 +155,20 @@ public class ProductDaEventSamplesBatch extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              productDaEventSamplesBatchs.add(loadJSON(value.toString(), context, header));
+              productCatalogDataSourcesGets.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return productDaEventSamplesBatchs;
+            return productCatalogDataSourcesGets;
           }
 
           // Sixth, check if it's pure JsonObject
-          productDaEventSamplesBatchs.clear();
-          productDaEventSamplesBatchs.add(loadJSON(json, context, header));
-          return productDaEventSamplesBatchs;
+          productCatalogDataSourcesGets.clear();
+          productCatalogDataSourcesGets.add(loadJSON(json, context, header));
+          return productCatalogDataSourcesGets;
         }
       }
     } catch (Exception e) {
@@ -198,30 +196,21 @@ public class ProductDaEventSamplesBatch extends APINode {
   }
 
 
-  public List<Object> getFieldSamples() {
-    return mSamples;
+  public List<Object> getFieldData() {
+    return mData;
   }
 
-  public ProductDaEventSamplesBatch setFieldSamples(List<Object> value) {
-    this.mSamples = value;
+  public ProductCatalogDataSourcesGet setFieldData(List<Object> value) {
+    this.mData = value;
     return this;
   }
 
-  public Long getFieldTimeStart() {
-    return mTimeStart;
+  public Object getFieldPaging() {
+    return mPaging;
   }
 
-  public ProductDaEventSamplesBatch setFieldTimeStart(Long value) {
-    this.mTimeStart = value;
-    return this;
-  }
-
-  public Long getFieldTimeStop() {
-    return mTimeStop;
-  }
-
-  public ProductDaEventSamplesBatch setFieldTimeStop(Long value) {
-    this.mTimeStop = value;
+  public ProductCatalogDataSourcesGet setFieldPaging(Object value) {
+    this.mPaging = value;
     return this;
   }
 
@@ -241,19 +230,18 @@ public class ProductDaEventSamplesBatch extends APINode {
     return gson;
   }
 
-  public ProductDaEventSamplesBatch copyFrom(ProductDaEventSamplesBatch instance) {
-    this.mSamples = instance.mSamples;
-    this.mTimeStart = instance.mTimeStart;
-    this.mTimeStop = instance.mTimeStop;
+  public ProductCatalogDataSourcesGet copyFrom(ProductCatalogDataSourcesGet instance) {
+    this.mData = instance.mData;
+    this.mPaging = instance.mPaging;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<ProductDaEventSamplesBatch> getParser() {
-    return new APIRequest.ResponseParser<ProductDaEventSamplesBatch>() {
-      public APINodeList<ProductDaEventSamplesBatch> parseResponse(String response, APIContext context, APIRequest<ProductDaEventSamplesBatch> request, String header) throws MalformedResponseException {
-        return ProductDaEventSamplesBatch.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<ProductCatalogDataSourcesGet> getParser() {
+    return new APIRequest.ResponseParser<ProductCatalogDataSourcesGet>() {
+      public APINodeList<ProductCatalogDataSourcesGet> parseResponse(String response, APIContext context, APIRequest<ProductCatalogDataSourcesGet> request, String header) throws MalformedResponseException {
+        return ProductCatalogDataSourcesGet.parseResponse(response, context, request, header);
       }
     };
   }

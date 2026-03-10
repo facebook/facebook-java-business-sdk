@@ -121,8 +121,6 @@ public class AdVideo extends APINode {
   private Boolean mPublished = null;
   @SerializedName("scheduled_publish_time")
   private String mScheduledPublishTime = null;
-  @SerializedName("season")
-  private VideoList mSeason = null;
   @SerializedName("source")
   private String mSource = null;
   @SerializedName("spherical")
@@ -611,13 +609,6 @@ public class AdVideo extends APINode {
 
   public String getFieldScheduledPublishTime() {
     return mScheduledPublishTime;
-  }
-
-  public VideoList getFieldSeason() {
-    if (mSeason != null) {
-      mSeason.context = getContext();
-    }
-    return mSeason;
   }
 
   public String getFieldSource() {
@@ -1858,6 +1849,7 @@ public class AdVideo extends APINode {
       "preferred_audience",
       "press_contact",
       "price_range",
+      "priority_hours",
       "privacy_info_url",
       "produced_by",
       "products",
@@ -2796,6 +2788,13 @@ public class AdVideo extends APINode {
     }
     public APIRequestGetCrosspostSharedPages requestPriceRangeField (boolean value) {
       this.requestField("price_range", value);
+      return this;
+    }
+    public APIRequestGetCrosspostSharedPages requestPriorityHoursField () {
+      return this.requestPriorityHoursField(true);
+    }
+    public APIRequestGetCrosspostSharedPages requestPriorityHoursField (boolean value) {
+      this.requestField("priority_hours", value);
       return this;
     }
     public APIRequestGetCrosspostSharedPages requestPrivacyInfoUrlField () {
@@ -4057,6 +4056,7 @@ public class AdVideo extends APINode {
       "preferred_audience",
       "press_contact",
       "price_range",
+      "priority_hours",
       "privacy_info_url",
       "produced_by",
       "products",
@@ -4995,6 +4995,13 @@ public class AdVideo extends APINode {
     }
     public APIRequestGetSponsorTags requestPriceRangeField (boolean value) {
       this.requestField("price_range", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestPriorityHoursField () {
+      return this.requestPriorityHoursField(true);
+    }
+    public APIRequestGetSponsorTags requestPriorityHoursField (boolean value) {
+      this.requestField("priority_hours", value);
       return this;
     }
     public APIRequestGetSponsorTags requestPrivacyInfoUrlField () {
@@ -6007,7 +6014,6 @@ public class AdVideo extends APINode {
       "privacy",
       "published",
       "scheduled_publish_time",
-      "season",
       "source",
       "spherical",
       "status",
@@ -6385,13 +6391,6 @@ public class AdVideo extends APINode {
     }
     public APIRequestGet requestScheduledPublishTimeField (boolean value) {
       this.requestField("scheduled_publish_time", value);
-      return this;
-    }
-    public APIRequestGet requestSeasonField () {
-      return this.requestSeasonField(true);
-    }
-    public APIRequestGet requestSeasonField (boolean value) {
-      this.requestField("season", value);
       return this;
     }
     public APIRequestGet requestSourceField () {
@@ -6809,6 +6808,8 @@ public class AdVideo extends APINode {
       VALUE_AD_DERIVATIVE("AD_DERIVATIVE"),
       @SerializedName("AD_LIBRARY_WATERMARK")
       VALUE_AD_LIBRARY_WATERMARK("AD_LIBRARY_WATERMARK"),
+      @SerializedName("AI_INTERACTIVE_EMBODIMENT")
+      VALUE_AI_INTERACTIVE_EMBODIMENT("AI_INTERACTIVE_EMBODIMENT"),
       @SerializedName("ALBUM_MULTIMEDIA_POST")
       VALUE_ALBUM_MULTIMEDIA_POST("ALBUM_MULTIMEDIA_POST"),
       @SerializedName("ALOHA_SUPERFRAME")
@@ -6883,6 +6884,8 @@ public class AdVideo extends APINode {
       VALUE_FB_AVATAR_ANIMATED_SATP("FB_AVATAR_ANIMATED_SATP"),
       @SerializedName("FB_COLLECTIBLE_VIDEO")
       VALUE_FB_COLLECTIBLE_VIDEO("FB_COLLECTIBLE_VIDEO"),
+      @SerializedName("FB_QUICKSNAP_VIDEO")
+      VALUE_FB_QUICKSNAP_VIDEO("FB_QUICKSNAP_VIDEO"),
       @SerializedName("FB_SHORTS")
       VALUE_FB_SHORTS("FB_SHORTS"),
       @SerializedName("FB_SHORTS_CONTENT_REMIXABLE")
@@ -6965,6 +6968,8 @@ public class AdVideo extends APINode {
       VALUE_MUSIC_CLIP("MUSIC_CLIP"),
       @SerializedName("MUSIC_CLIP_IN_COMMENT")
       VALUE_MUSIC_CLIP_IN_COMMENT("MUSIC_CLIP_IN_COMMENT"),
+      @SerializedName("MUSIC_CLIP_IN_FB_MSGR_STATUS")
+      VALUE_MUSIC_CLIP_IN_FB_MSGR_STATUS("MUSIC_CLIP_IN_FB_MSGR_STATUS"),
       @SerializedName("MUSIC_CLIP_IN_LIGHTWEIGHT_STATUS")
       VALUE_MUSIC_CLIP_IN_LIGHTWEIGHT_STATUS("MUSIC_CLIP_IN_LIGHTWEIGHT_STATUS"),
       @SerializedName("MUSIC_CLIP_IN_MAPLE_POST")
@@ -7003,8 +7008,6 @@ public class AdVideo extends APINode {
       VALUE_PIXELCLOUD("PIXELCLOUD"),
       @SerializedName("PODCAST_HIGHLIGHT")
       VALUE_PODCAST_HIGHLIGHT("PODCAST_HIGHLIGHT"),
-      @SerializedName("PODCAST_ML_PREVIEW")
-      VALUE_PODCAST_ML_PREVIEW("PODCAST_ML_PREVIEW"),
       @SerializedName("PODCAST_ML_PREVIEW_NO_NEWSFEED_STORY")
       VALUE_PODCAST_ML_PREVIEW_NO_NEWSFEED_STORY("PODCAST_ML_PREVIEW_NO_NEWSFEED_STORY"),
       @SerializedName("PODCAST_RSS")
@@ -7037,14 +7040,10 @@ public class AdVideo extends APINode {
       VALUE_PROFILE_INTRO_CARD("PROFILE_INTRO_CARD"),
       @SerializedName("PROFILE_VIDEO")
       VALUE_PROFILE_VIDEO("PROFILE_VIDEO"),
-      @SerializedName("PROTON")
-      VALUE_PROTON("PROTON"),
       @SerializedName("QUICK_CLIP_WORKPLACE_POST")
       VALUE_QUICK_CLIP_WORKPLACE_POST("QUICK_CLIP_WORKPLACE_POST"),
       @SerializedName("QUICK_PROMOTION")
       VALUE_QUICK_PROMOTION("QUICK_PROMOTION"),
-      @SerializedName("REPLACE_VIDEO")
-      VALUE_REPLACE_VIDEO("REPLACE_VIDEO"),
       @SerializedName("SHOWREEL_NATIVE_DUMMY_VIDEO")
       VALUE_SHOWREEL_NATIVE_DUMMY_VIDEO("SHOWREEL_NATIVE_DUMMY_VIDEO"),
       @SerializedName("SLIDESHOW_ANIMOTO")
@@ -7228,6 +7227,8 @@ public class AdVideo extends APINode {
       VALUE_INLINE_CREATED("INLINE_CREATED"),
       @SerializedName("PUBLISHED")
       VALUE_PUBLISHED("PUBLISHED"),
+      @SerializedName("PUBLISH_PENDING")
+      VALUE_PUBLISH_PENDING("PUBLISH_PENDING"),
       @SerializedName("REVIEWABLE_BRANDED_CONTENT")
       VALUE_REVIEWABLE_BRANDED_CONTENT("REVIEWABLE_BRANDED_CONTENT"),
       @SerializedName("SCHEDULED")
@@ -7454,7 +7455,6 @@ public class AdVideo extends APINode {
     this.mPrivacy = instance.mPrivacy;
     this.mPublished = instance.mPublished;
     this.mScheduledPublishTime = instance.mScheduledPublishTime;
-    this.mSeason = instance.mSeason;
     this.mSource = instance.mSource;
     this.mSpherical = instance.mSpherical;
     this.mStatus = instance.mStatus;

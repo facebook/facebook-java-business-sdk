@@ -59,6 +59,8 @@ public class AdAccountTargetingUnified extends APINode {
   private String mInfoTitle = null;
   @SerializedName("is_recommendation")
   private Boolean mIsRecommendation = null;
+  @SerializedName("is_youth_ads_age_gated")
+  private Boolean mIsYouthAdsAgeGated = null;
   @SerializedName("key")
   private String mKey = null;
   @SerializedName("link")
@@ -316,6 +318,15 @@ public class AdAccountTargetingUnified extends APINode {
 
   public AdAccountTargetingUnified setFieldIsRecommendation(Boolean value) {
     this.mIsRecommendation = value;
+    return this;
+  }
+
+  public Boolean getFieldIsYouthAdsAgeGated() {
+    return mIsYouthAdsAgeGated;
+  }
+
+  public AdAccountTargetingUnified setFieldIsYouthAdsAgeGated(Boolean value) {
+    this.mIsYouthAdsAgeGated = value;
     return this;
   }
 
@@ -1376,6 +1387,8 @@ public class AdAccountTargetingUnified extends APINode {
       VALUE_GALAXY_STORE("galaxy_store"),
       @SerializedName("google_play")
       VALUE_GOOGLE_PLAY("google_play"),
+      @SerializedName("horizon_world")
+      VALUE_HORIZON_WORLD("horizon_world"),
       @SerializedName("instant_game")
       VALUE_INSTANT_GAME("instant_game"),
       @SerializedName("itunes")
@@ -1520,6 +1533,7 @@ public class AdAccountTargetingUnified extends APINode {
     this.mInfo = instance.mInfo;
     this.mInfoTitle = instance.mInfoTitle;
     this.mIsRecommendation = instance.mIsRecommendation;
+    this.mIsYouthAdsAgeGated = instance.mIsYouthAdsAgeGated;
     this.mKey = instance.mKey;
     this.mLink = instance.mLink;
     this.mName = instance.mName;

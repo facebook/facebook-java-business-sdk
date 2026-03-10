@@ -41,6 +41,10 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class PartnershipAdContentSearchMedia extends APINode {
+  @SerializedName("fb_ad_code_sponsor_count")
+  private Long mFbAdCodeSponsorCount = null;
+  @SerializedName("fb_ad_code_sponsors")
+  private List<FBPageAndInstagramAccount> mFbAdCodeSponsors = null;
   @SerializedName("ig_ad_code_sponsor_count")
   private Long mIgAdCodeSponsorCount = null;
   @SerializedName("ig_ad_code_sponsors")
@@ -204,6 +208,29 @@ public class PartnershipAdContentSearchMedia extends APINode {
   }
 
 
+  public Long getFieldFbAdCodeSponsorCount() {
+    return mFbAdCodeSponsorCount;
+  }
+
+  public PartnershipAdContentSearchMedia setFieldFbAdCodeSponsorCount(Long value) {
+    this.mFbAdCodeSponsorCount = value;
+    return this;
+  }
+
+  public List<FBPageAndInstagramAccount> getFieldFbAdCodeSponsors() {
+    return mFbAdCodeSponsors;
+  }
+
+  public PartnershipAdContentSearchMedia setFieldFbAdCodeSponsors(List<FBPageAndInstagramAccount> value) {
+    this.mFbAdCodeSponsors = value;
+    return this;
+  }
+
+  public PartnershipAdContentSearchMedia setFieldFbAdCodeSponsors(String value) {
+    Type type = new TypeToken<List<FBPageAndInstagramAccount>>(){}.getType();
+    this.mFbAdCodeSponsors = FBPageAndInstagramAccount.getGson().fromJson(value, type);
+    return this;
+  }
   public Long getFieldIgAdCodeSponsorCount() {
     return mIgAdCodeSponsorCount;
   }
@@ -288,6 +315,8 @@ public class PartnershipAdContentSearchMedia extends APINode {
   }
 
   public PartnershipAdContentSearchMedia copyFrom(PartnershipAdContentSearchMedia instance) {
+    this.mFbAdCodeSponsorCount = instance.mFbAdCodeSponsorCount;
+    this.mFbAdCodeSponsors = instance.mFbAdCodeSponsors;
     this.mIgAdCodeSponsorCount = instance.mIgAdCodeSponsorCount;
     this.mIgAdCodeSponsors = instance.mIgAdCodeSponsors;
     this.mIgMedia = instance.mIgMedia;

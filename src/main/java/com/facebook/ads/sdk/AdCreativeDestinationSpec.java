@@ -43,6 +43,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class AdCreativeDestinationSpec extends APINode {
   @SerializedName("destination_type")
   private String mDestinationType = null;
+  @SerializedName("native_commerce_experience")
+  private Object mNativeCommerceExperience = null;
   @SerializedName("website")
   private Object mWebsite = null;
   protected static Gson gson = null;
@@ -205,6 +207,15 @@ public class AdCreativeDestinationSpec extends APINode {
     return this;
   }
 
+  public Object getFieldNativeCommerceExperience() {
+    return mNativeCommerceExperience;
+  }
+
+  public AdCreativeDestinationSpec setFieldNativeCommerceExperience(Object value) {
+    this.mNativeCommerceExperience = value;
+    return this;
+  }
+
   public Object getFieldWebsite() {
     return mWebsite;
   }
@@ -232,6 +243,7 @@ public class AdCreativeDestinationSpec extends APINode {
 
   public AdCreativeDestinationSpec copyFrom(AdCreativeDestinationSpec instance) {
     this.mDestinationType = instance.mDestinationType;
+    this.mNativeCommerceExperience = instance.mNativeCommerceExperience;
     this.mWebsite = instance.mWebsite;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

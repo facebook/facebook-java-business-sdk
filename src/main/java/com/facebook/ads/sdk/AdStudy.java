@@ -1524,6 +1524,7 @@ public class AdStudy extends APINode {
       "client_business",
       "confidence_level",
       "cooldown_start_time",
+      "creative_test_config",
       "description",
       "end_time",
       "name",
@@ -1620,6 +1621,15 @@ public class AdStudy extends APINode {
     }
     public APIRequestUpdate setCooldownStartTime (String cooldownStartTime) {
       this.setParam("cooldown_start_time", cooldownStartTime);
+      return this;
+    }
+
+    public APIRequestUpdate setCreativeTestConfig (Map<String, String> creativeTestConfig) {
+      this.setParam("creative_test_config", creativeTestConfig);
+      return this;
+    }
+    public APIRequestUpdate setCreativeTestConfig (String creativeTestConfig) {
+      this.setParam("creative_test_config", creativeTestConfig);
       return this;
     }
 
@@ -1736,8 +1746,12 @@ public class AdStudy extends APINode {
       VALUE_GEO_LIFT("GEO_LIFT"),
       @SerializedName("LIFT")
       VALUE_LIFT("LIFT"),
+      @SerializedName("PORTFOLIO_OPTIMIZER")
+      VALUE_PORTFOLIO_OPTIMIZER("PORTFOLIO_OPTIMIZER"),
       @SerializedName("SPLIT_TEST")
       VALUE_SPLIT_TEST("SPLIT_TEST"),
+      @SerializedName("VERSION_CONTROL")
+      VALUE_VERSION_CONTROL("VERSION_CONTROL"),
       ;
 
       private String value;

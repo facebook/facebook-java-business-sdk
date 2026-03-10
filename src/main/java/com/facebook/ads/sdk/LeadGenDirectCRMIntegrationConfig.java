@@ -47,6 +47,8 @@ public class LeadGenDirectCRMIntegrationConfig extends APINode {
   private String mCreationTime = null;
   @SerializedName("id")
   private String mId = null;
+  @SerializedName("lead_filter_settings")
+  private List<Map<String, String>> mLeadFilterSettings = null;
   @SerializedName("lead_gen_data")
   private LeadgenForm mLeadGenData = null;
   @SerializedName("matched_fields")
@@ -283,6 +285,10 @@ public class LeadGenDirectCRMIntegrationConfig extends APINode {
     return mId;
   }
 
+  public List<Map<String, String>> getFieldLeadFilterSettings() {
+    return mLeadFilterSettings;
+  }
+
   public LeadgenForm getFieldLeadGenData() {
     if (mLeadGenData != null) {
       mLeadGenData.context = getContext();
@@ -322,6 +328,7 @@ public class LeadGenDirectCRMIntegrationConfig extends APINode {
       "auth_id",
       "creation_time",
       "id",
+      "lead_filter_settings",
       "lead_gen_data",
       "matched_fields",
       "matched_fields_labels",
@@ -440,6 +447,13 @@ public class LeadGenDirectCRMIntegrationConfig extends APINode {
       this.requestField("id", value);
       return this;
     }
+    public APIRequestGet requestLeadFilterSettingsField () {
+      return this.requestLeadFilterSettingsField(true);
+    }
+    public APIRequestGet requestLeadFilterSettingsField (boolean value) {
+      this.requestField("lead_filter_settings", value);
+      return this;
+    }
     public APIRequestGet requestLeadGenDataField () {
       return this.requestLeadGenDataField(true);
     }
@@ -495,6 +509,7 @@ public class LeadGenDirectCRMIntegrationConfig extends APINode {
     this.mAuthId = instance.mAuthId;
     this.mCreationTime = instance.mCreationTime;
     this.mId = instance.mId;
+    this.mLeadFilterSettings = instance.mLeadFilterSettings;
     this.mLeadGenData = instance.mLeadGenData;
     this.mMatchedFields = instance.mMatchedFields;
     this.mMatchedFieldsLabels = instance.mMatchedFieldsLabels;

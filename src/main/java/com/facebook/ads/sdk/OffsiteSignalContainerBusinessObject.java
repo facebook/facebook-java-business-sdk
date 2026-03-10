@@ -958,6 +958,7 @@ public class OffsiteSignalContainerBusinessObject extends APINode {
       "preferred_audience",
       "press_contact",
       "price_range",
+      "priority_hours",
       "privacy_info_url",
       "produced_by",
       "products",
@@ -1896,6 +1897,13 @@ public class OffsiteSignalContainerBusinessObject extends APINode {
     }
     public APIRequestGetLinkedPage requestPriceRangeField (boolean value) {
       this.requestField("price_range", value);
+      return this;
+    }
+    public APIRequestGetLinkedPage requestPriorityHoursField () {
+      return this.requestPriorityHoursField(true);
+    }
+    public APIRequestGetLinkedPage requestPriorityHoursField (boolean value) {
+      this.requestField("priority_hours", value);
       return this;
     }
     public APIRequestGetLinkedPage requestPrivacyInfoUrlField () {

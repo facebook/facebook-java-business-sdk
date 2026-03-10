@@ -43,6 +43,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class EntWithSponsor extends APINode {
   @SerializedName("id")
   private String mId = null;
+  @SerializedName("is_branded_content")
+  private Boolean mIsBrandedContent = null;
   @SerializedName("owner_linked_instagram_user_v1_id")
   private String mOwnerLinkedInstagramUserV1Id = null;
   @SerializedName("owner_picture")
@@ -211,6 +213,15 @@ public class EntWithSponsor extends APINode {
     return this;
   }
 
+  public Boolean getFieldIsBrandedContent() {
+    return mIsBrandedContent;
+  }
+
+  public EntWithSponsor setFieldIsBrandedContent(Boolean value) {
+    this.mIsBrandedContent = value;
+    return this;
+  }
+
   public String getFieldOwnerLinkedInstagramUserV1Id() {
     return mOwnerLinkedInstagramUserV1Id;
   }
@@ -273,6 +284,7 @@ public class EntWithSponsor extends APINode {
 
   public EntWithSponsor copyFrom(EntWithSponsor instance) {
     this.mId = instance.mId;
+    this.mIsBrandedContent = instance.mIsBrandedContent;
     this.mOwnerLinkedInstagramUserV1Id = instance.mOwnerLinkedInstagramUserV1Id;
     this.mOwnerPicture = instance.mOwnerPicture;
     this.mPostId = instance.mPostId;

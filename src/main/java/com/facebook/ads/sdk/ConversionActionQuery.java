@@ -51,6 +51,8 @@ public class ConversionActionQuery extends APINode {
   private List<Object> mCreative = null;
   @SerializedName("dataset")
   private List<String> mDataset = null;
+  @SerializedName("dataset_split")
+  private List<String> mDatasetSplit = null;
   @SerializedName("event")
   private List<String> mEvent = null;
   @SerializedName("event.creator")
@@ -289,6 +291,15 @@ public class ConversionActionQuery extends APINode {
     return this;
   }
 
+  public List<String> getFieldDatasetSplit() {
+    return mDatasetSplit;
+  }
+
+  public ConversionActionQuery setFieldDatasetSplit(List<String> value) {
+    this.mDatasetSplit = value;
+    return this;
+  }
+
   public List<String> getFieldEvent() {
     return mEvent;
   }
@@ -500,6 +511,7 @@ public class ConversionActionQuery extends APINode {
     this.mConversionId = instance.mConversionId;
     this.mCreative = instance.mCreative;
     this.mDataset = instance.mDataset;
+    this.mDatasetSplit = instance.mDatasetSplit;
     this.mEvent = instance.mEvent;
     this.mEventCreator = instance.mEventCreator;
     this.mEventType = instance.mEventType;

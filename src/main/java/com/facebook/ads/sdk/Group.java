@@ -1509,6 +1509,7 @@ public class Group extends APINode {
       "id",
       "instagram_eligibility",
       "is_app_share",
+      "is_eligible_for_dark_post",
       "is_eligible_for_promotion",
       "is_expired",
       "is_hidden",
@@ -1843,6 +1844,13 @@ public class Group extends APINode {
     }
     public APIRequestGetFeed requestIsAppShareField (boolean value) {
       this.requestField("is_app_share", value);
+      return this;
+    }
+    public APIRequestGetFeed requestIsEligibleForDarkPostField () {
+      return this.requestIsEligibleForDarkPostField(true);
+    }
+    public APIRequestGetFeed requestIsEligibleForDarkPostField (boolean value) {
+      this.requestField("is_eligible_for_dark_post", value);
       return this;
     }
     public APIRequestGetFeed requestIsEligibleForPromotionField () {
@@ -5808,7 +5816,6 @@ public class Group extends APINode {
       "privacy",
       "published",
       "scheduled_publish_time",
-      "season",
       "source",
       "spherical",
       "status",
@@ -6197,13 +6204,6 @@ public class Group extends APINode {
       this.requestField("scheduled_publish_time", value);
       return this;
     }
-    public APIRequestGetVideos requestSeasonField () {
-      return this.requestSeasonField(true);
-    }
-    public APIRequestGetVideos requestSeasonField (boolean value) {
-      this.requestField("season", value);
-      return this;
-    }
     public APIRequestGetVideos requestSourceField () {
       return this.requestSourceField(true);
     }
@@ -6277,6 +6277,7 @@ public class Group extends APINode {
       "content_category",
       "creative_tools",
       "description",
+      "edit_description_spec",
       "embeddable",
       "end_offset",
       "fbuploader_video_file_chunk",
@@ -6474,6 +6475,15 @@ public class Group extends APINode {
 
     public APIRequestCreateVideo setDescription (String description) {
       this.setParam("description", description);
+      return this;
+    }
+
+    public APIRequestCreateVideo setEditDescriptionSpec (Map<String, String> editDescriptionSpec) {
+      this.setParam("edit_description_spec", editDescriptionSpec);
+      return this;
+    }
+    public APIRequestCreateVideo setEditDescriptionSpec (String editDescriptionSpec) {
+      this.setParam("edit_description_spec", editDescriptionSpec);
       return this;
     }
 

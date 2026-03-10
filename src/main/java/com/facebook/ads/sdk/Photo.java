@@ -1639,6 +1639,7 @@ public class Photo extends APINode {
       "preferred_audience",
       "press_contact",
       "price_range",
+      "priority_hours",
       "privacy_info_url",
       "produced_by",
       "products",
@@ -2579,6 +2580,13 @@ public class Photo extends APINode {
       this.requestField("price_range", value);
       return this;
     }
+    public APIRequestGetSponsorTags requestPriorityHoursField () {
+      return this.requestPriorityHoursField(true);
+    }
+    public APIRequestGetSponsorTags requestPriorityHoursField (boolean value) {
+      this.requestField("priority_hours", value);
+      return this;
+    }
     public APIRequestGetSponsorTags requestPrivacyInfoUrlField () {
       return this.requestPrivacyInfoUrlField(true);
     }
@@ -3295,6 +3303,8 @@ public class Photo extends APINode {
       VALUE_INLINE_CREATED("INLINE_CREATED"),
       @SerializedName("PUBLISHED")
       VALUE_PUBLISHED("PUBLISHED"),
+      @SerializedName("PUBLISH_PENDING")
+      VALUE_PUBLISH_PENDING("PUBLISH_PENDING"),
       @SerializedName("REVIEWABLE_BRANDED_CONTENT")
       VALUE_REVIEWABLE_BRANDED_CONTENT("REVIEWABLE_BRANDED_CONTENT"),
       @SerializedName("SCHEDULED")

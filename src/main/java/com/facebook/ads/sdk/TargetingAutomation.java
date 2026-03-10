@@ -43,6 +43,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class TargetingAutomation extends APINode {
   @SerializedName("advantage_audience")
   private Long mAdvantageAudience = null;
+  @SerializedName("creative_audience_pairing")
+  private Long mCreativeAudiencePairing = null;
   @SerializedName("individual_setting")
   private Object mIndividualSetting = null;
   @SerializedName("shared_audiences")
@@ -209,6 +211,15 @@ public class TargetingAutomation extends APINode {
     return this;
   }
 
+  public Long getFieldCreativeAudiencePairing() {
+    return mCreativeAudiencePairing;
+  }
+
+  public TargetingAutomation setFieldCreativeAudiencePairing(Long value) {
+    this.mCreativeAudiencePairing = value;
+    return this;
+  }
+
   public Object getFieldIndividualSetting() {
     return mIndividualSetting;
   }
@@ -254,6 +265,7 @@ public class TargetingAutomation extends APINode {
 
   public TargetingAutomation copyFrom(TargetingAutomation instance) {
     this.mAdvantageAudience = instance.mAdvantageAudience;
+    this.mCreativeAudiencePairing = instance.mCreativeAudiencePairing;
     this.mIndividualSetting = instance.mIndividualSetting;
     this.mSharedAudiences = instance.mSharedAudiences;
     this.mValueExpression = instance.mValueExpression;

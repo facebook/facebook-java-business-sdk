@@ -349,10 +349,12 @@ public class ContentBlockList extends APINode {
       "is_tax_id_required",
       "liable_address",
       "line_numbers",
+      "marketing_messages_settings",
       "media_agency",
       "min_campaign_group_spend_cap",
       "min_daily_budget",
       "name",
+      "offsite_clo_signal_status",
       "offsite_pixels_tos_accepted",
       "opportunity_score",
       "owner",
@@ -802,6 +804,13 @@ public class ContentBlockList extends APINode {
       this.requestField("line_numbers", value);
       return this;
     }
+    public APIRequestGetAppliedAdAccounts requestMarketingMessagesSettingsField () {
+      return this.requestMarketingMessagesSettingsField(true);
+    }
+    public APIRequestGetAppliedAdAccounts requestMarketingMessagesSettingsField (boolean value) {
+      this.requestField("marketing_messages_settings", value);
+      return this;
+    }
     public APIRequestGetAppliedAdAccounts requestMediaAgencyField () {
       return this.requestMediaAgencyField(true);
     }
@@ -828,6 +837,13 @@ public class ContentBlockList extends APINode {
     }
     public APIRequestGetAppliedAdAccounts requestNameField (boolean value) {
       this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetAppliedAdAccounts requestOffsiteCloSignalStatusField () {
+      return this.requestOffsiteCloSignalStatusField(true);
+    }
+    public APIRequestGetAppliedAdAccounts requestOffsiteCloSignalStatusField (boolean value) {
+      this.requestField("offsite_clo_signal_status", value);
       return this;
     }
     public APIRequestGetAppliedAdAccounts requestOffsitePixelsTosAcceptedField () {
@@ -1100,6 +1116,7 @@ public class ContentBlockList extends APINode {
       "caption",
       "comments_count",
       "copyright_check_information",
+      "current_live_viewer_count",
       "has_poll",
       "has_slider",
       "id",
@@ -1244,6 +1261,13 @@ public class ContentBlockList extends APINode {
     }
     public APIRequestGetInstagramContent requestCopyrightCheckInformationField (boolean value) {
       this.requestField("copyright_check_information", value);
+      return this;
+    }
+    public APIRequestGetInstagramContent requestCurrentLiveViewerCountField () {
+      return this.requestCurrentLiveViewerCountField(true);
+    }
+    public APIRequestGetInstagramContent requestCurrentLiveViewerCountField (boolean value) {
+      this.requestField("current_live_viewer_count", value);
       return this;
     }
     public APIRequestGetInstagramContent requestHasPollField () {

@@ -43,6 +43,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class MessengerCallPermissions extends APINode {
   @SerializedName("actions")
   private List<Object> mActions = null;
+  @SerializedName("permission")
+  private Object mPermission = null;
   protected static Gson gson = null;
 
   public MessengerCallPermissions() {
@@ -203,6 +205,15 @@ public class MessengerCallPermissions extends APINode {
     return this;
   }
 
+  public Object getFieldPermission() {
+    return mPermission;
+  }
+
+  public MessengerCallPermissions setFieldPermission(Object value) {
+    this.mPermission = value;
+    return this;
+  }
+
 
 
 
@@ -221,6 +232,7 @@ public class MessengerCallPermissions extends APINode {
 
   public MessengerCallPermissions copyFrom(MessengerCallPermissions instance) {
     this.mActions = instance.mActions;
+    this.mPermission = instance.mPermission;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

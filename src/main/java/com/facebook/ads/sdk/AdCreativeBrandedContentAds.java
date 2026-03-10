@@ -45,6 +45,8 @@ public class AdCreativeBrandedContentAds extends APINode {
   private String mActingBusinessId = null;
   @SerializedName("ad_format")
   private Long mAdFormat = null;
+  @SerializedName("automated_adgroup_creation")
+  private Boolean mAutomatedAdgroupCreation = null;
   @SerializedName("content_search_input")
   private String mContentSearchInput = null;
   @SerializedName("creator_ad_permission_type")
@@ -242,6 +244,15 @@ public class AdCreativeBrandedContentAds extends APINode {
     return this;
   }
 
+  public Boolean getFieldAutomatedAdgroupCreation() {
+    return mAutomatedAdgroupCreation;
+  }
+
+  public AdCreativeBrandedContentAds setFieldAutomatedAdgroupCreation(Boolean value) {
+    this.mAutomatedAdgroupCreation = value;
+    return this;
+  }
+
   public String getFieldContentSearchInput() {
     return mContentSearchInput;
   }
@@ -392,6 +403,7 @@ public class AdCreativeBrandedContentAds extends APINode {
   public AdCreativeBrandedContentAds copyFrom(AdCreativeBrandedContentAds instance) {
     this.mActingBusinessId = instance.mActingBusinessId;
     this.mAdFormat = instance.mAdFormat;
+    this.mAutomatedAdgroupCreation = instance.mAutomatedAdgroupCreation;
     this.mContentSearchInput = instance.mContentSearchInput;
     this.mCreatorAdPermissionType = instance.mCreatorAdPermissionType;
     this.mDeliverDynamicPartnerContent = instance.mDeliverDynamicPartnerContent;

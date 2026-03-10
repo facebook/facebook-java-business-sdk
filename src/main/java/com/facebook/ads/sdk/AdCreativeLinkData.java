@@ -111,6 +111,8 @@ public class AdCreativeLinkData extends APINode {
   private List<String> mRetailerItemIds = null;
   @SerializedName("show_multiple_images")
   private Boolean mShowMultipleImages = null;
+  @SerializedName("smart_pse_enabled")
+  private Boolean mSmartPseEnabled = null;
   @SerializedName("static_fallback_spec")
   private AdCreativeStaticFallbackSpec mStaticFallbackSpec = null;
   @SerializedName("use_flexible_image_aspect_ratio")
@@ -626,6 +628,15 @@ public class AdCreativeLinkData extends APINode {
     return this;
   }
 
+  public Boolean getFieldSmartPseEnabled() {
+    return mSmartPseEnabled;
+  }
+
+  public AdCreativeLinkData setFieldSmartPseEnabled(Boolean value) {
+    this.mSmartPseEnabled = value;
+    return this;
+  }
+
   public AdCreativeStaticFallbackSpec getFieldStaticFallbackSpec() {
     return mStaticFallbackSpec;
   }
@@ -728,6 +739,7 @@ public class AdCreativeLinkData extends APINode {
     this.mPreferredVideoTags = instance.mPreferredVideoTags;
     this.mRetailerItemIds = instance.mRetailerItemIds;
     this.mShowMultipleImages = instance.mShowMultipleImages;
+    this.mSmartPseEnabled = instance.mSmartPseEnabled;
     this.mStaticFallbackSpec = instance.mStaticFallbackSpec;
     this.mUseFlexibleImageAspectRatio = instance.mUseFlexibleImageAspectRatio;
     this.context = instance.context;

@@ -853,10 +853,12 @@ public class InstagramUser extends APINode {
       "is_tax_id_required",
       "liable_address",
       "line_numbers",
+      "marketing_messages_settings",
       "media_agency",
       "min_campaign_group_spend_cap",
       "min_daily_budget",
       "name",
+      "offsite_clo_signal_status",
       "offsite_pixels_tos_accepted",
       "opportunity_score",
       "owner",
@@ -1311,6 +1313,13 @@ public class InstagramUser extends APINode {
       this.requestField("line_numbers", value);
       return this;
     }
+    public APIRequestGetAuthorizedAdAccounts requestMarketingMessagesSettingsField () {
+      return this.requestMarketingMessagesSettingsField(true);
+    }
+    public APIRequestGetAuthorizedAdAccounts requestMarketingMessagesSettingsField (boolean value) {
+      this.requestField("marketing_messages_settings", value);
+      return this;
+    }
     public APIRequestGetAuthorizedAdAccounts requestMediaAgencyField () {
       return this.requestMediaAgencyField(true);
     }
@@ -1337,6 +1346,13 @@ public class InstagramUser extends APINode {
     }
     public APIRequestGetAuthorizedAdAccounts requestNameField (boolean value) {
       this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetAuthorizedAdAccounts requestOffsiteCloSignalStatusField () {
+      return this.requestOffsiteCloSignalStatusField(true);
+    }
+    public APIRequestGetAuthorizedAdAccounts requestOffsiteCloSignalStatusField (boolean value) {
+      this.requestField("offsite_clo_signal_status", value);
       return this;
     }
     public APIRequestGetAuthorizedAdAccounts requestOffsitePixelsTosAcceptedField () {

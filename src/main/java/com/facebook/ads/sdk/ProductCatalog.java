@@ -440,6 +440,10 @@ public class ProductCatalog extends APINode {
     return new APIRequestCreateMarketPlacePartnerSignal(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestCreateMediaTitle createMediaTitle() {
+    return new APIRequestCreateMediaTitle(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetPricingVariablesBatch getPricingVariablesBatch() {
     return new APIRequestGetPricingVariablesBatch(this.getPrefixedId().toString(), context);
   }
@@ -1584,7 +1588,6 @@ public class ProductCatalog extends APINode {
       "automotive_model_id",
       "availability",
       "body_style",
-      "category_specific_fields",
       "currency",
       "custom_label_0",
       "custom_label_1",
@@ -1755,13 +1758,6 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestGetAutomotiveModels requestBodyStyleField (boolean value) {
       this.requestField("body_style", value);
-      return this;
-    }
-    public APIRequestGetAutomotiveModels requestCategorySpecificFieldsField () {
-      return this.requestCategorySpecificFieldsField(true);
-    }
-    public APIRequestGetAutomotiveModels requestCategorySpecificFieldsField (boolean value) {
-      this.requestField("category_specific_fields", value);
       return this;
     }
     public APIRequestGetAutomotiveModels requestCurrencyField () {
@@ -3767,7 +3763,6 @@ public class ProductCatalog extends APINode {
     public static final String[] FIELDS = {
       "address",
       "applinks",
-      "category_specific_fields",
       "currency",
       "custom_label_0",
       "custom_label_1",
@@ -3915,13 +3910,6 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestGetDestinations requestApplinksField (boolean value) {
       this.requestField("applinks", value);
-      return this;
-    }
-    public APIRequestGetDestinations requestCategorySpecificFieldsField () {
-      return this.requestCategorySpecificFieldsField(true);
-    }
-    public APIRequestGetDestinations requestCategorySpecificFieldsField (boolean value) {
-      this.requestField("category_specific_fields", value);
       return this;
     }
     public APIRequestGetDestinations requestCurrencyField () {
@@ -4920,7 +4908,6 @@ public class ProductCatalog extends APINode {
 
     public static final String[] FIELDS = {
       "applinks",
-      "category_specific_fields",
       "currency",
       "custom_label_0",
       "custom_label_1",
@@ -5069,13 +5056,6 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestGetFlights requestApplinksField (boolean value) {
       this.requestField("applinks", value);
-      return this;
-    }
-    public APIRequestGetFlights requestCategorySpecificFieldsField () {
-      return this.requestCategorySpecificFieldsField(true);
-    }
-    public APIRequestGetFlights requestCategorySpecificFieldsField (boolean value) {
-      this.requestField("category_specific_fields", value);
       return this;
     }
     public APIRequestGetFlights requestCurrencyField () {
@@ -5467,7 +5447,6 @@ public class ProductCatalog extends APINode {
       "area_size",
       "area_unit",
       "availability",
-      "category_specific_fields",
       "co_2_emission_rating_eu",
       "currency",
       "custom_label_0",
@@ -5706,13 +5685,6 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestGetHomeListings requestAvailabilityField (boolean value) {
       this.requestField("availability", value);
-      return this;
-    }
-    public APIRequestGetHomeListings requestCategorySpecificFieldsField () {
-      return this.requestCategorySpecificFieldsField(true);
-    }
-    public APIRequestGetHomeListings requestCategorySpecificFieldsField (boolean value) {
-      this.requestField("category_specific_fields", value);
       return this;
     }
     public APIRequestGetHomeListings requestCo2EmissionRatingEuField () {
@@ -6575,7 +6547,6 @@ public class ProductCatalog extends APINode {
       "applinks",
       "brand",
       "category",
-      "category_specific_fields",
       "currency",
       "custom_label_0",
       "custom_label_1",
@@ -6746,13 +6717,6 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestGetHotels requestCategoryField (boolean value) {
       this.requestField("category", value);
-      return this;
-    }
-    public APIRequestGetHotels requestCategorySpecificFieldsField () {
-      return this.requestCategorySpecificFieldsField(true);
-    }
-    public APIRequestGetHotels requestCategorySpecificFieldsField (boolean value) {
-      this.requestField("category_specific_fields", value);
       return this;
     }
     public APIRequestGetHotels requestCurrencyField () {
@@ -7732,9 +7696,12 @@ public class ProductCatalog extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "conversion_type",
+      "event_id",
       "event_name",
       "event_source_url",
       "event_time",
+      "offer_data",
       "order_data",
       "user_data",
     };
@@ -7796,6 +7763,20 @@ public class ProductCatalog extends APINode {
     }
 
 
+    public APIRequestCreateMarketPlacePartnerSignal setConversionType (ProductCatalog.EnumConversionType conversionType) {
+      this.setParam("conversion_type", conversionType);
+      return this;
+    }
+    public APIRequestCreateMarketPlacePartnerSignal setConversionType (String conversionType) {
+      this.setParam("conversion_type", conversionType);
+      return this;
+    }
+
+    public APIRequestCreateMarketPlacePartnerSignal setEventId (String eventId) {
+      this.setParam("event_id", eventId);
+      return this;
+    }
+
     public APIRequestCreateMarketPlacePartnerSignal setEventName (ProductCatalog.EnumEventName eventName) {
       this.setParam("event_name", eventName);
       return this;
@@ -7812,6 +7793,15 @@ public class ProductCatalog extends APINode {
 
     public APIRequestCreateMarketPlacePartnerSignal setEventTime (String eventTime) {
       this.setParam("event_time", eventTime);
+      return this;
+    }
+
+    public APIRequestCreateMarketPlacePartnerSignal setOfferData (Map<String, String> offerData) {
+      this.setParam("offer_data", offerData);
+      return this;
+    }
+    public APIRequestCreateMarketPlacePartnerSignal setOfferData (String offerData) {
+      this.setParam("offer_data", offerData);
       return this;
     }
 
@@ -7865,6 +7855,345 @@ public class ProductCatalog extends APINode {
 
     @Override
     public APIRequestCreateMarketPlacePartnerSignal requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestCreateMediaTitle extends APIRequest<APINode> {
+
+    APINode lastResponse = null;
+    @Override
+    public APINode getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "additional_image_urls",
+      "android_app_name",
+      "android_class",
+      "android_package",
+      "android_url",
+      "awards",
+      "cast",
+      "category",
+      "currency",
+      "description",
+      "director",
+      "fb_product_category",
+      "genre",
+      "image_url",
+      "ios_app_name",
+      "ios_app_store_id",
+      "ios_url",
+      "ipad_app_name",
+      "ipad_app_store_id",
+      "ipad_url",
+      "iphone_app_name",
+      "iphone_app_store_id",
+      "iphone_url",
+      "media_category",
+      "name",
+      "price",
+      "rating",
+      "release_date",
+      "retailer_id",
+      "url",
+      "windows_phone_app_id",
+      "windows_phone_app_name",
+      "windows_phone_url",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public APINode execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINode execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINode> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateMediaTitle.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestCreateMediaTitle(String nodeId, APIContext context) {
+      super(context, nodeId, "/media_titles", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateMediaTitle setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateMediaTitle setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateMediaTitle setAdditionalImageUrls (List<String> additionalImageUrls) {
+      this.setParam("additional_image_urls", additionalImageUrls);
+      return this;
+    }
+    public APIRequestCreateMediaTitle setAdditionalImageUrls (String additionalImageUrls) {
+      this.setParam("additional_image_urls", additionalImageUrls);
+      return this;
+    }
+
+    public APIRequestCreateMediaTitle setAndroidAppName (String androidAppName) {
+      this.setParam("android_app_name", androidAppName);
+      return this;
+    }
+
+    public APIRequestCreateMediaTitle setAndroidClass (String androidClass) {
+      this.setParam("android_class", androidClass);
+      return this;
+    }
+
+    public APIRequestCreateMediaTitle setAndroidPackage (String androidPackage) {
+      this.setParam("android_package", androidPackage);
+      return this;
+    }
+
+    public APIRequestCreateMediaTitle setAndroidUrl (String androidUrl) {
+      this.setParam("android_url", androidUrl);
+      return this;
+    }
+
+    public APIRequestCreateMediaTitle setAwards (List<String> awards) {
+      this.setParam("awards", awards);
+      return this;
+    }
+    public APIRequestCreateMediaTitle setAwards (String awards) {
+      this.setParam("awards", awards);
+      return this;
+    }
+
+    public APIRequestCreateMediaTitle setCast (List<String> cast) {
+      this.setParam("cast", cast);
+      return this;
+    }
+    public APIRequestCreateMediaTitle setCast (String cast) {
+      this.setParam("cast", cast);
+      return this;
+    }
+
+    public APIRequestCreateMediaTitle setCategory (String category) {
+      this.setParam("category", category);
+      return this;
+    }
+
+    public APIRequestCreateMediaTitle setCurrency (String currency) {
+      this.setParam("currency", currency);
+      return this;
+    }
+
+    public APIRequestCreateMediaTitle setDescription (String description) {
+      this.setParam("description", description);
+      return this;
+    }
+
+    public APIRequestCreateMediaTitle setDirector (List<String> director) {
+      this.setParam("director", director);
+      return this;
+    }
+    public APIRequestCreateMediaTitle setDirector (String director) {
+      this.setParam("director", director);
+      return this;
+    }
+
+    public APIRequestCreateMediaTitle setFbProductCategory (String fbProductCategory) {
+      this.setParam("fb_product_category", fbProductCategory);
+      return this;
+    }
+
+    public APIRequestCreateMediaTitle setGenre (List<String> genre) {
+      this.setParam("genre", genre);
+      return this;
+    }
+    public APIRequestCreateMediaTitle setGenre (String genre) {
+      this.setParam("genre", genre);
+      return this;
+    }
+
+    public APIRequestCreateMediaTitle setImageUrl (String imageUrl) {
+      this.setParam("image_url", imageUrl);
+      return this;
+    }
+
+    public APIRequestCreateMediaTitle setIosAppName (String iosAppName) {
+      this.setParam("ios_app_name", iosAppName);
+      return this;
+    }
+
+    public APIRequestCreateMediaTitle setIosAppStoreId (Long iosAppStoreId) {
+      this.setParam("ios_app_store_id", iosAppStoreId);
+      return this;
+    }
+    public APIRequestCreateMediaTitle setIosAppStoreId (String iosAppStoreId) {
+      this.setParam("ios_app_store_id", iosAppStoreId);
+      return this;
+    }
+
+    public APIRequestCreateMediaTitle setIosUrl (String iosUrl) {
+      this.setParam("ios_url", iosUrl);
+      return this;
+    }
+
+    public APIRequestCreateMediaTitle setIpadAppName (String ipadAppName) {
+      this.setParam("ipad_app_name", ipadAppName);
+      return this;
+    }
+
+    public APIRequestCreateMediaTitle setIpadAppStoreId (Long ipadAppStoreId) {
+      this.setParam("ipad_app_store_id", ipadAppStoreId);
+      return this;
+    }
+    public APIRequestCreateMediaTitle setIpadAppStoreId (String ipadAppStoreId) {
+      this.setParam("ipad_app_store_id", ipadAppStoreId);
+      return this;
+    }
+
+    public APIRequestCreateMediaTitle setIpadUrl (String ipadUrl) {
+      this.setParam("ipad_url", ipadUrl);
+      return this;
+    }
+
+    public APIRequestCreateMediaTitle setIphoneAppName (String iphoneAppName) {
+      this.setParam("iphone_app_name", iphoneAppName);
+      return this;
+    }
+
+    public APIRequestCreateMediaTitle setIphoneAppStoreId (Long iphoneAppStoreId) {
+      this.setParam("iphone_app_store_id", iphoneAppStoreId);
+      return this;
+    }
+    public APIRequestCreateMediaTitle setIphoneAppStoreId (String iphoneAppStoreId) {
+      this.setParam("iphone_app_store_id", iphoneAppStoreId);
+      return this;
+    }
+
+    public APIRequestCreateMediaTitle setIphoneUrl (String iphoneUrl) {
+      this.setParam("iphone_url", iphoneUrl);
+      return this;
+    }
+
+    public APIRequestCreateMediaTitle setMediaCategory (String mediaCategory) {
+      this.setParam("media_category", mediaCategory);
+      return this;
+    }
+
+    public APIRequestCreateMediaTitle setName (String name) {
+      this.setParam("name", name);
+      return this;
+    }
+
+    public APIRequestCreateMediaTitle setPrice (Long price) {
+      this.setParam("price", price);
+      return this;
+    }
+    public APIRequestCreateMediaTitle setPrice (String price) {
+      this.setParam("price", price);
+      return this;
+    }
+
+    public APIRequestCreateMediaTitle setRating (String rating) {
+      this.setParam("rating", rating);
+      return this;
+    }
+
+    public APIRequestCreateMediaTitle setReleaseDate (String releaseDate) {
+      this.setParam("release_date", releaseDate);
+      return this;
+    }
+
+    public APIRequestCreateMediaTitle setRetailerId (String retailerId) {
+      this.setParam("retailer_id", retailerId);
+      return this;
+    }
+
+    public APIRequestCreateMediaTitle setUrl (String url) {
+      this.setParam("url", url);
+      return this;
+    }
+
+    public APIRequestCreateMediaTitle setWindowsPhoneAppId (String windowsPhoneAppId) {
+      this.setParam("windows_phone_app_id", windowsPhoneAppId);
+      return this;
+    }
+
+    public APIRequestCreateMediaTitle setWindowsPhoneAppName (String windowsPhoneAppName) {
+      this.setParam("windows_phone_app_name", windowsPhoneAppName);
+      return this;
+    }
+
+    public APIRequestCreateMediaTitle setWindowsPhoneUrl (String windowsPhoneUrl) {
+      this.setParam("windows_phone_url", windowsPhoneUrl);
+      return this;
+    }
+
+    public APIRequestCreateMediaTitle requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateMediaTitle requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateMediaTitle requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateMediaTitle requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateMediaTitle requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateMediaTitle requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
@@ -11191,7 +11520,7 @@ public class ProductCatalog extends APINode {
       "body_style",
       "cashback_currency",
       "cashback_price",
-      "category_specific_fields",
+      "comscore_market_codes",
       "currency",
       "custom_label_0",
       "custom_label_1",
@@ -11416,11 +11745,11 @@ public class ProductCatalog extends APINode {
       this.requestField("cashback_price", value);
       return this;
     }
-    public APIRequestGetVehicleOffers requestCategorySpecificFieldsField () {
-      return this.requestCategorySpecificFieldsField(true);
+    public APIRequestGetVehicleOffers requestComscoreMarketCodesField () {
+      return this.requestComscoreMarketCodesField(true);
     }
-    public APIRequestGetVehicleOffers requestCategorySpecificFieldsField (boolean value) {
-      this.requestField("category_specific_fields", value);
+    public APIRequestGetVehicleOffers requestComscoreMarketCodesField (boolean value) {
+      this.requestField("comscore_market_codes", value);
       return this;
     }
     public APIRequestGetVehicleOffers requestCurrencyField () {
@@ -11801,7 +12130,6 @@ public class ProductCatalog extends APINode {
       "availability_circle_radius",
       "availability_circle_radius_unit",
       "body_style",
-      "category_specific_fields",
       "condition",
       "currency",
       "custom_label_0",
@@ -12010,13 +12338,6 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestGetVehicles requestBodyStyleField (boolean value) {
       this.requestField("body_style", value);
-      return this;
-    }
-    public APIRequestGetVehicles requestCategorySpecificFieldsField () {
-      return this.requestCategorySpecificFieldsField(true);
-    }
-    public APIRequestGetVehicles requestCategorySpecificFieldsField (boolean value) {
-      this.requestField("category_specific_fields", value);
       return this;
     }
     public APIRequestGetVehicles requestConditionField () {
@@ -13835,9 +14156,30 @@ public class ProductCatalog extends APINode {
       }
   }
 
+  public static enum EnumConversionType {
+      @SerializedName("ATTRIBUTED")
+      VALUE_ATTRIBUTED("ATTRIBUTED"),
+      @SerializedName("IN_SESSION")
+      VALUE_IN_SESSION("IN_SESSION"),
+      ;
+
+      private String value;
+
+      private EnumConversionType(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
   public static enum EnumEventName {
       @SerializedName("ADD_TO_CART")
       VALUE_ADD_TO_CART("ADD_TO_CART"),
+      @SerializedName("OFFER_SUBMITTED")
+      VALUE_OFFER_SUBMITTED("OFFER_SUBMITTED"),
       @SerializedName("PURCHASE")
       VALUE_PURCHASE("PURCHASE"),
       @SerializedName("TEST")

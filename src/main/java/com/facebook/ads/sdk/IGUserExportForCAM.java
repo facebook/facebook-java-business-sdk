@@ -67,70 +67,13 @@ public class IGUserExportForCAM extends APINode {
   private List<String> mPastBrandPartnershipPartners = null;
   @SerializedName("portfolio_url")
   private String mPortfolioUrl = null;
+  @SerializedName("profile_picture_url")
+  private String mProfilePictureUrl = null;
   @SerializedName("username")
   private String mUsername = null;
   protected static Gson gson = null;
 
-  IGUserExportForCAM() {
-  }
-
-  public IGUserExportForCAM(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public IGUserExportForCAM(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public IGUserExportForCAM fetch() throws APIException{
-    IGUserExportForCAM newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static IGUserExportForCAM fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<IGUserExportForCAM> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static IGUserExportForCAM fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<IGUserExportForCAM> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<IGUserExportForCAM> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<IGUserExportForCAM>)(
-      new APIRequest<IGUserExportForCAM>(context, "", "/", "GET", IGUserExportForCAM.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<IGUserExportForCAM>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", IGUserExportForCAM.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public IGUserExportForCAM() {
   }
 
   public String getId() {
@@ -279,19 +222,19 @@ public class IGUserExportForCAM extends APINode {
   }
 
   public APIRequestGetBrandedContentMedia getBrandedContentMedia() {
-    return new APIRequestGetBrandedContentMedia(this.getPrefixedId().toString(), context);
+    return new APIRequestGetBrandedContentMedia(this.getId(), context);
   }
 
   public APIRequestGetInsights getInsights() {
-    return new APIRequestGetInsights(this.getPrefixedId().toString(), context);
+    return new APIRequestGetInsights(this.getId(), context);
+  }
+
+  public APIRequestGetPastPartnershipAdsMedia getPastPartnershipAdsMedia() {
+    return new APIRequestGetPastPartnershipAdsMedia(this.getId(), context);
   }
 
   public APIRequestGetRecentMedia getRecentMedia() {
-    return new APIRequestGetRecentMedia(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
+    return new APIRequestGetRecentMedia(this.getId(), context);
   }
 
 
@@ -299,56 +242,135 @@ public class IGUserExportForCAM extends APINode {
     return mAgeBucket;
   }
 
+  public IGUserExportForCAM setFieldAgeBucket(String value) {
+    this.mAgeBucket = value;
+    return this;
+  }
+
   public String getFieldBiography() {
     return mBiography;
+  }
+
+  public IGUserExportForCAM setFieldBiography(String value) {
+    this.mBiography = value;
+    return this;
   }
 
   public String getFieldCountry() {
     return mCountry;
   }
 
+  public IGUserExportForCAM setFieldCountry(String value) {
+    this.mCountry = value;
+    return this;
+  }
+
   public String getFieldEmail() {
     return mEmail;
+  }
+
+  public IGUserExportForCAM setFieldEmail(String value) {
+    this.mEmail = value;
+    return this;
   }
 
   public String getFieldGender() {
     return mGender;
   }
 
+  public IGUserExportForCAM setFieldGender(String value) {
+    this.mGender = value;
+    return this;
+  }
+
   public Boolean getFieldHasBrandPartnershipExperience() {
     return mHasBrandPartnershipExperience;
+  }
+
+  public IGUserExportForCAM setFieldHasBrandPartnershipExperience(Boolean value) {
+    this.mHasBrandPartnershipExperience = value;
+    return this;
   }
 
   public String getFieldId() {
     return mId;
   }
 
+  public IGUserExportForCAM setFieldId(String value) {
+    this.mId = value;
+    return this;
+  }
+
   public Boolean getFieldIsAccountVerified() {
     return mIsAccountVerified;
+  }
+
+  public IGUserExportForCAM setFieldIsAccountVerified(Boolean value) {
+    this.mIsAccountVerified = value;
+    return this;
   }
 
   public Boolean getFieldIsPaidPartnershipMessagesEnabled() {
     return mIsPaidPartnershipMessagesEnabled;
   }
 
+  public IGUserExportForCAM setFieldIsPaidPartnershipMessagesEnabled(Boolean value) {
+    this.mIsPaidPartnershipMessagesEnabled = value;
+    return this;
+  }
+
   public String getFieldMessagingId() {
     return mMessagingId;
+  }
+
+  public IGUserExportForCAM setFieldMessagingId(String value) {
+    this.mMessagingId = value;
+    return this;
   }
 
   public Boolean getFieldOnboardedStatus() {
     return mOnboardedStatus;
   }
 
+  public IGUserExportForCAM setFieldOnboardedStatus(Boolean value) {
+    this.mOnboardedStatus = value;
+    return this;
+  }
+
   public List<String> getFieldPastBrandPartnershipPartners() {
     return mPastBrandPartnershipPartners;
+  }
+
+  public IGUserExportForCAM setFieldPastBrandPartnershipPartners(List<String> value) {
+    this.mPastBrandPartnershipPartners = value;
+    return this;
   }
 
   public String getFieldPortfolioUrl() {
     return mPortfolioUrl;
   }
 
+  public IGUserExportForCAM setFieldPortfolioUrl(String value) {
+    this.mPortfolioUrl = value;
+    return this;
+  }
+
+  public String getFieldProfilePictureUrl() {
+    return mProfilePictureUrl;
+  }
+
+  public IGUserExportForCAM setFieldProfilePictureUrl(String value) {
+    this.mProfilePictureUrl = value;
+    return this;
+  }
+
   public String getFieldUsername() {
     return mUsername;
+  }
+
+  public IGUserExportForCAM setFieldUsername(String value) {
+    this.mUsername = value;
+    return this;
   }
 
 
@@ -603,6 +625,111 @@ public class IGUserExportForCAM extends APINode {
 
   }
 
+  public static class APIRequestGetPastPartnershipAdsMedia extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetPastPartnershipAdsMedia.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestGetPastPartnershipAdsMedia(String nodeId, APIContext context) {
+      super(context, nodeId, "/past_partnership_ads_media", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetPastPartnershipAdsMedia setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPastPartnershipAdsMedia setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetPastPartnershipAdsMedia requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetPastPartnershipAdsMedia requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPastPartnershipAdsMedia requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetPastPartnershipAdsMedia requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPastPartnershipAdsMedia requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPastPartnershipAdsMedia requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGetRecentMedia extends APIRequest<APINode> {
 
     APINodeList<APINode> lastResponse = null;
@@ -706,223 +833,6 @@ public class IGUserExportForCAM extends APINode {
       return this;
     }
 
-  }
-
-  public static class APIRequestGet extends APIRequest<IGUserExportForCAM> {
-
-    IGUserExportForCAM lastResponse = null;
-    @Override
-    public IGUserExportForCAM getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "age_bucket",
-      "biography",
-      "country",
-      "email",
-      "gender",
-      "has_brand_partnership_experience",
-      "id",
-      "is_account_verified",
-      "is_paid_partnership_messages_enabled",
-      "messaging_id",
-      "onboarded_status",
-      "past_brand_partnership_partners",
-      "portfolio_url",
-      "username",
-    };
-
-    @Override
-    public IGUserExportForCAM parseResponse(String response, String header) throws APIException {
-      return IGUserExportForCAM.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public IGUserExportForCAM execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public IGUserExportForCAM execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<IGUserExportForCAM> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<IGUserExportForCAM> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, IGUserExportForCAM>() {
-           public IGUserExportForCAM apply(ResponseWrapper result) {
-             try {
-               return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         },
-         MoreExecutors.directExecutor()
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestAgeBucketField () {
-      return this.requestAgeBucketField(true);
-    }
-    public APIRequestGet requestAgeBucketField (boolean value) {
-      this.requestField("age_bucket", value);
-      return this;
-    }
-    public APIRequestGet requestBiographyField () {
-      return this.requestBiographyField(true);
-    }
-    public APIRequestGet requestBiographyField (boolean value) {
-      this.requestField("biography", value);
-      return this;
-    }
-    public APIRequestGet requestCountryField () {
-      return this.requestCountryField(true);
-    }
-    public APIRequestGet requestCountryField (boolean value) {
-      this.requestField("country", value);
-      return this;
-    }
-    public APIRequestGet requestEmailField () {
-      return this.requestEmailField(true);
-    }
-    public APIRequestGet requestEmailField (boolean value) {
-      this.requestField("email", value);
-      return this;
-    }
-    public APIRequestGet requestGenderField () {
-      return this.requestGenderField(true);
-    }
-    public APIRequestGet requestGenderField (boolean value) {
-      this.requestField("gender", value);
-      return this;
-    }
-    public APIRequestGet requestHasBrandPartnershipExperienceField () {
-      return this.requestHasBrandPartnershipExperienceField(true);
-    }
-    public APIRequestGet requestHasBrandPartnershipExperienceField (boolean value) {
-      this.requestField("has_brand_partnership_experience", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGet requestIsAccountVerifiedField () {
-      return this.requestIsAccountVerifiedField(true);
-    }
-    public APIRequestGet requestIsAccountVerifiedField (boolean value) {
-      this.requestField("is_account_verified", value);
-      return this;
-    }
-    public APIRequestGet requestIsPaidPartnershipMessagesEnabledField () {
-      return this.requestIsPaidPartnershipMessagesEnabledField(true);
-    }
-    public APIRequestGet requestIsPaidPartnershipMessagesEnabledField (boolean value) {
-      this.requestField("is_paid_partnership_messages_enabled", value);
-      return this;
-    }
-    public APIRequestGet requestMessagingIdField () {
-      return this.requestMessagingIdField(true);
-    }
-    public APIRequestGet requestMessagingIdField (boolean value) {
-      this.requestField("messaging_id", value);
-      return this;
-    }
-    public APIRequestGet requestOnboardedStatusField () {
-      return this.requestOnboardedStatusField(true);
-    }
-    public APIRequestGet requestOnboardedStatusField (boolean value) {
-      this.requestField("onboarded_status", value);
-      return this;
-    }
-    public APIRequestGet requestPastBrandPartnershipPartnersField () {
-      return this.requestPastBrandPartnershipPartnersField(true);
-    }
-    public APIRequestGet requestPastBrandPartnershipPartnersField (boolean value) {
-      this.requestField("past_brand_partnership_partners", value);
-      return this;
-    }
-    public APIRequestGet requestPortfolioUrlField () {
-      return this.requestPortfolioUrlField(true);
-    }
-    public APIRequestGet requestPortfolioUrlField (boolean value) {
-      this.requestField("portfolio_url", value);
-      return this;
-    }
-    public APIRequestGet requestUsernameField () {
-      return this.requestUsernameField(true);
-    }
-    public APIRequestGet requestUsernameField (boolean value) {
-      this.requestField("username", value);
-      return this;
-    }
   }
 
   public static enum EnumCreatorCountries {
@@ -2133,6 +2043,7 @@ public class IGUserExportForCAM extends APINode {
     this.mOnboardedStatus = instance.mOnboardedStatus;
     this.mPastBrandPartnershipPartners = instance.mPastBrandPartnershipPartners;
     this.mPortfolioUrl = instance.mPortfolioUrl;
+    this.mProfilePictureUrl = instance.mProfilePictureUrl;
     this.mUsername = instance.mUsername;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

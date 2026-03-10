@@ -43,8 +43,6 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class Flight extends APINode {
   @SerializedName("applinks")
   private CatalogItemAppLinks mApplinks = null;
-  @SerializedName("category_specific_fields")
-  private CatalogSubVerticalList mCategorySpecificFields = null;
   @SerializedName("currency")
   private String mCurrency = null;
   @SerializedName("custom_label_0")
@@ -343,10 +341,6 @@ public class Flight extends APINode {
 
   public CatalogItemAppLinks getFieldApplinks() {
     return mApplinks;
-  }
-
-  public CatalogSubVerticalList getFieldCategorySpecificFields() {
-    return mCategorySpecificFields;
   }
 
   public String getFieldCurrency() {
@@ -902,7 +896,6 @@ public class Flight extends APINode {
 
     public static final String[] FIELDS = {
       "applinks",
-      "category_specific_fields",
       "currency",
       "custom_label_0",
       "custom_label_1",
@@ -1033,13 +1026,6 @@ public class Flight extends APINode {
     }
     public APIRequestGet requestApplinksField (boolean value) {
       this.requestField("applinks", value);
-      return this;
-    }
-    public APIRequestGet requestCategorySpecificFieldsField () {
-      return this.requestCategorySpecificFieldsField(true);
-    }
-    public APIRequestGet requestCategorySpecificFieldsField (boolean value) {
-      this.requestField("category_specific_fields", value);
       return this;
     }
     public APIRequestGet requestCurrencyField () {
@@ -1504,7 +1490,6 @@ public class Flight extends APINode {
 
   public Flight copyFrom(Flight instance) {
     this.mApplinks = instance.mApplinks;
-    this.mCategorySpecificFields = instance.mCategorySpecificFields;
     this.mCurrency = instance.mCurrency;
     this.mCustomLabel0 = instance.mCustomLabel0;
     this.mCustomLabel1 = instance.mCustomLabel1;

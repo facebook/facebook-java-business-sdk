@@ -470,10 +470,6 @@ public class Business extends APINode {
     return new APIRequestGetCollaborativeAdsCollaborationRequests(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestCreateCollaborativeAdsCollaborationRequest createCollaborativeAdsCollaborationRequest() {
-    return new APIRequestCreateCollaborativeAdsCollaborationRequest(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetCollaborativeAdsSuggestedPartners getCollaborativeAdsSuggestedPartners() {
     return new APIRequestGetCollaborativeAdsSuggestedPartners(this.getPrefixedId().toString(), context);
   }
@@ -1932,6 +1928,7 @@ public class Business extends APINode {
       "client_business",
       "confidence_level",
       "cooldown_start_time",
+      "creative_test_config",
       "description",
       "end_time",
       "name",
@@ -2028,6 +2025,15 @@ public class Business extends APINode {
     }
     public APIRequestCreateAdStudy setCooldownStartTime (String cooldownStartTime) {
       this.setParam("cooldown_start_time", cooldownStartTime);
+      return this;
+    }
+
+    public APIRequestCreateAdStudy setCreativeTestConfig (Map<String, String> creativeTestConfig) {
+      this.setParam("creative_test_config", creativeTestConfig);
+      return this;
+    }
+    public APIRequestCreateAdStudy setCreativeTestConfig (String creativeTestConfig) {
+      this.setParam("creative_test_config", creativeTestConfig);
       return this;
     }
 
@@ -6570,10 +6576,12 @@ public class Business extends APINode {
       "is_tax_id_required",
       "liable_address",
       "line_numbers",
+      "marketing_messages_settings",
       "media_agency",
       "min_campaign_group_spend_cap",
       "min_daily_budget",
       "name",
+      "offsite_clo_signal_status",
       "offsite_pixels_tos_accepted",
       "opportunity_score",
       "owner",
@@ -7028,6 +7036,13 @@ public class Business extends APINode {
       this.requestField("line_numbers", value);
       return this;
     }
+    public APIRequestGetClientAdAccounts requestMarketingMessagesSettingsField () {
+      return this.requestMarketingMessagesSettingsField(true);
+    }
+    public APIRequestGetClientAdAccounts requestMarketingMessagesSettingsField (boolean value) {
+      this.requestField("marketing_messages_settings", value);
+      return this;
+    }
     public APIRequestGetClientAdAccounts requestMediaAgencyField () {
       return this.requestMediaAgencyField(true);
     }
@@ -7054,6 +7069,13 @@ public class Business extends APINode {
     }
     public APIRequestGetClientAdAccounts requestNameField (boolean value) {
       this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetClientAdAccounts requestOffsiteCloSignalStatusField () {
+      return this.requestOffsiteCloSignalStatusField(true);
+    }
+    public APIRequestGetClientAdAccounts requestOffsiteCloSignalStatusField (boolean value) {
+      this.requestField("offsite_clo_signal_status", value);
       return this;
     }
     public APIRequestGetClientAdAccounts requestOffsitePixelsTosAcceptedField () {
@@ -7250,6 +7272,7 @@ public class Business extends APINode {
       "category",
       "client_config",
       "company",
+      "config_ids",
       "configured_ios_sso",
       "contact_email",
       "created_time",
@@ -7650,6 +7673,13 @@ public class Business extends APINode {
     }
     public APIRequestGetClientApps requestCompanyField (boolean value) {
       this.requestField("company", value);
+      return this;
+    }
+    public APIRequestGetClientApps requestConfigIdsField () {
+      return this.requestConfigIdsField(true);
+    }
+    public APIRequestGetClientApps requestConfigIdsField (boolean value) {
+      this.requestField("config_ids", value);
       return this;
     }
     public APIRequestGetClientApps requestConfiguredIosSsoField () {
@@ -8690,6 +8720,7 @@ public class Business extends APINode {
       "preferred_audience",
       "press_contact",
       "price_range",
+      "priority_hours",
       "privacy_info_url",
       "produced_by",
       "products",
@@ -9628,6 +9659,13 @@ public class Business extends APINode {
     }
     public APIRequestGetClientPages requestPriceRangeField (boolean value) {
       this.requestField("price_range", value);
+      return this;
+    }
+    public APIRequestGetClientPages requestPriorityHoursField () {
+      return this.requestPriorityHoursField(true);
+    }
+    public APIRequestGetClientPages requestPriorityHoursField (boolean value) {
+      this.requestField("priority_hours", value);
       return this;
     }
     public APIRequestGetClientPages requestPrivacyInfoUrlField () {
@@ -10678,6 +10716,7 @@ public class Business extends APINode {
       "primary_funding_id",
       "purchase_order_number",
       "status",
+      "template_auto_archival_enabled",
       "timezone_id",
       "whatsapp_business_manager_messaging_limit",
     };
@@ -10938,6 +10977,13 @@ public class Business extends APINode {
     }
     public APIRequestGetClientWhatsAppBusinessAccounts requestStatusField (boolean value) {
       this.requestField("status", value);
+      return this;
+    }
+    public APIRequestGetClientWhatsAppBusinessAccounts requestTemplateAutoArchivalEnabledField () {
+      return this.requestTemplateAutoArchivalEnabledField(true);
+    }
+    public APIRequestGetClientWhatsAppBusinessAccounts requestTemplateAutoArchivalEnabledField (boolean value) {
+      this.requestField("template_auto_archival_enabled", value);
       return this;
     }
     public APIRequestGetClientWhatsAppBusinessAccounts requestTimezoneIdField () {
@@ -11547,167 +11593,6 @@ public class Business extends APINode {
     }
   }
 
-  public static class APIRequestCreateCollaborativeAdsCollaborationRequest extends APIRequest<CPASCollaborationRequest> {
-
-    CPASCollaborationRequest lastResponse = null;
-    @Override
-    public CPASCollaborationRequest getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "brands",
-      "contact_email",
-      "contact_first_name",
-      "contact_last_name",
-      "phone_number",
-      "receiver_business",
-      "requester_agency_or_brand",
-      "sender_client_business",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public CPASCollaborationRequest parseResponse(String response, String header) throws APIException {
-      return CPASCollaborationRequest.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public CPASCollaborationRequest execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public CPASCollaborationRequest execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<CPASCollaborationRequest> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<CPASCollaborationRequest> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, CPASCollaborationRequest>() {
-           public CPASCollaborationRequest apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateCollaborativeAdsCollaborationRequest.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         },
-         MoreExecutors.directExecutor()
-      );
-    };
-
-    public APIRequestCreateCollaborativeAdsCollaborationRequest(String nodeId, APIContext context) {
-      super(context, nodeId, "/collaborative_ads_collaboration_requests", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateCollaborativeAdsCollaborationRequest setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateCollaborativeAdsCollaborationRequest setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateCollaborativeAdsCollaborationRequest setBrands (List<String> brands) {
-      this.setParam("brands", brands);
-      return this;
-    }
-    public APIRequestCreateCollaborativeAdsCollaborationRequest setBrands (String brands) {
-      this.setParam("brands", brands);
-      return this;
-    }
-
-    public APIRequestCreateCollaborativeAdsCollaborationRequest setContactEmail (String contactEmail) {
-      this.setParam("contact_email", contactEmail);
-      return this;
-    }
-
-    public APIRequestCreateCollaborativeAdsCollaborationRequest setContactFirstName (String contactFirstName) {
-      this.setParam("contact_first_name", contactFirstName);
-      return this;
-    }
-
-    public APIRequestCreateCollaborativeAdsCollaborationRequest setContactLastName (String contactLastName) {
-      this.setParam("contact_last_name", contactLastName);
-      return this;
-    }
-
-    public APIRequestCreateCollaborativeAdsCollaborationRequest setPhoneNumber (String phoneNumber) {
-      this.setParam("phone_number", phoneNumber);
-      return this;
-    }
-
-    public APIRequestCreateCollaborativeAdsCollaborationRequest setReceiverBusiness (String receiverBusiness) {
-      this.setParam("receiver_business", receiverBusiness);
-      return this;
-    }
-
-    public APIRequestCreateCollaborativeAdsCollaborationRequest setRequesterAgencyOrBrand (CPASCollaborationRequest.EnumRequesterAgencyOrBrand requesterAgencyOrBrand) {
-      this.setParam("requester_agency_or_brand", requesterAgencyOrBrand);
-      return this;
-    }
-    public APIRequestCreateCollaborativeAdsCollaborationRequest setRequesterAgencyOrBrand (String requesterAgencyOrBrand) {
-      this.setParam("requester_agency_or_brand", requesterAgencyOrBrand);
-      return this;
-    }
-
-    public APIRequestCreateCollaborativeAdsCollaborationRequest setSenderClientBusiness (String senderClientBusiness) {
-      this.setParam("sender_client_business", senderClientBusiness);
-      return this;
-    }
-
-    public APIRequestCreateCollaborativeAdsCollaborationRequest requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateCollaborativeAdsCollaborationRequest requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateCollaborativeAdsCollaborationRequest requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateCollaborativeAdsCollaborationRequest requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateCollaborativeAdsCollaborationRequest requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateCollaborativeAdsCollaborationRequest requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
   public static class APIRequestGetCollaborativeAdsSuggestedPartners extends APIRequest<CPASAdvertiserPartnershipRecommendation> {
 
     APINodeList<CPASAdvertiserPartnershipRecommendation> lastResponse = null;
@@ -11897,7 +11782,6 @@ public class Business extends APINode {
 
     public static final String[] FIELDS = {
       "checkout_config",
-      "checkout_message",
       "contact_email",
       "cta",
       "display_name",
@@ -11910,7 +11794,6 @@ public class Business extends APINode {
       "offsite_iab_checkout_enabled_countries",
       "payment_provider",
       "privacy_policy_localized",
-      "return_policy_localized",
       "shops_ads_setup",
       "terms",
     };
@@ -12012,13 +11895,6 @@ public class Business extends APINode {
       this.requestField("checkout_config", value);
       return this;
     }
-    public APIRequestGetCommerceMerchantSettings requestCheckoutMessageField () {
-      return this.requestCheckoutMessageField(true);
-    }
-    public APIRequestGetCommerceMerchantSettings requestCheckoutMessageField (boolean value) {
-      this.requestField("checkout_message", value);
-      return this;
-    }
     public APIRequestGetCommerceMerchantSettings requestContactEmailField () {
       return this.requestContactEmailField(true);
     }
@@ -12101,13 +11977,6 @@ public class Business extends APINode {
     }
     public APIRequestGetCommerceMerchantSettings requestPrivacyPolicyLocalizedField (boolean value) {
       this.requestField("privacy_policy_localized", value);
-      return this;
-    }
-    public APIRequestGetCommerceMerchantSettings requestReturnPolicyLocalizedField () {
-      return this.requestReturnPolicyLocalizedField(true);
-    }
-    public APIRequestGetCommerceMerchantSettings requestReturnPolicyLocalizedField (boolean value) {
-      this.requestField("return_policy_localized", value);
       return this;
     }
     public APIRequestGetCommerceMerchantSettings requestShopsAdsSetupField () {
@@ -16113,9 +15982,10 @@ public class Business extends APINode {
       "cloud_region",
       "destination_id",
       "endpoint",
+      "event_enrichment_advertiser_state",
+      "event_enrichment_meta_state",
       "event_enrichment_state",
       "fallback_domain",
-      "first_party_domain",
       "host_business_id",
       "id",
       "instance_id",
@@ -16275,6 +16145,20 @@ public class Business extends APINode {
       this.requestField("endpoint", value);
       return this;
     }
+    public APIRequestGetOpenBridgeConfigurations requestEventEnrichmentAdvertiserStateField () {
+      return this.requestEventEnrichmentAdvertiserStateField(true);
+    }
+    public APIRequestGetOpenBridgeConfigurations requestEventEnrichmentAdvertiserStateField (boolean value) {
+      this.requestField("event_enrichment_advertiser_state", value);
+      return this;
+    }
+    public APIRequestGetOpenBridgeConfigurations requestEventEnrichmentMetaStateField () {
+      return this.requestEventEnrichmentMetaStateField(true);
+    }
+    public APIRequestGetOpenBridgeConfigurations requestEventEnrichmentMetaStateField (boolean value) {
+      this.requestField("event_enrichment_meta_state", value);
+      return this;
+    }
     public APIRequestGetOpenBridgeConfigurations requestEventEnrichmentStateField () {
       return this.requestEventEnrichmentStateField(true);
     }
@@ -16287,13 +16171,6 @@ public class Business extends APINode {
     }
     public APIRequestGetOpenBridgeConfigurations requestFallbackDomainField (boolean value) {
       this.requestField("fallback_domain", value);
-      return this;
-    }
-    public APIRequestGetOpenBridgeConfigurations requestFirstPartyDomainField () {
-      return this.requestFirstPartyDomainField(true);
-    }
-    public APIRequestGetOpenBridgeConfigurations requestFirstPartyDomainField (boolean value) {
-      this.requestField("first_party_domain", value);
       return this;
     }
     public APIRequestGetOpenBridgeConfigurations requestHostBusinessIdField () {
@@ -16386,13 +16263,15 @@ public class Business extends APINode {
       "active",
       "blocked_event_types",
       "blocked_websites",
+      "capi_publishing_state",
       "cloud_provider",
       "cloud_region",
       "destination_id",
       "endpoint",
+      "event_enrichment_advertiser_state",
+      "event_enrichment_meta_state",
       "event_enrichment_state",
       "fallback_domain",
-      "first_party_domain",
       "host_business_id",
       "instance_id",
       "instance_version",
@@ -16489,6 +16368,15 @@ public class Business extends APINode {
       return this;
     }
 
+    public APIRequestCreateOpenBridgeConfiguration setCapiPublishingState (OpenBridgeConfiguration.EnumCapiPublishingState capiPublishingState) {
+      this.setParam("capi_publishing_state", capiPublishingState);
+      return this;
+    }
+    public APIRequestCreateOpenBridgeConfiguration setCapiPublishingState (String capiPublishingState) {
+      this.setParam("capi_publishing_state", capiPublishingState);
+      return this;
+    }
+
     public APIRequestCreateOpenBridgeConfiguration setCloudProvider (String cloudProvider) {
       this.setParam("cloud_provider", cloudProvider);
       return this;
@@ -16509,6 +16397,24 @@ public class Business extends APINode {
       return this;
     }
 
+    public APIRequestCreateOpenBridgeConfiguration setEventEnrichmentAdvertiserState (OpenBridgeConfiguration.EnumEventEnrichmentAdvertiserState eventEnrichmentAdvertiserState) {
+      this.setParam("event_enrichment_advertiser_state", eventEnrichmentAdvertiserState);
+      return this;
+    }
+    public APIRequestCreateOpenBridgeConfiguration setEventEnrichmentAdvertiserState (String eventEnrichmentAdvertiserState) {
+      this.setParam("event_enrichment_advertiser_state", eventEnrichmentAdvertiserState);
+      return this;
+    }
+
+    public APIRequestCreateOpenBridgeConfiguration setEventEnrichmentMetaState (OpenBridgeConfiguration.EnumEventEnrichmentMetaState eventEnrichmentMetaState) {
+      this.setParam("event_enrichment_meta_state", eventEnrichmentMetaState);
+      return this;
+    }
+    public APIRequestCreateOpenBridgeConfiguration setEventEnrichmentMetaState (String eventEnrichmentMetaState) {
+      this.setParam("event_enrichment_meta_state", eventEnrichmentMetaState);
+      return this;
+    }
+
     public APIRequestCreateOpenBridgeConfiguration setEventEnrichmentState (OpenBridgeConfiguration.EnumEventEnrichmentState eventEnrichmentState) {
       this.setParam("event_enrichment_state", eventEnrichmentState);
       return this;
@@ -16520,11 +16426,6 @@ public class Business extends APINode {
 
     public APIRequestCreateOpenBridgeConfiguration setFallbackDomain (String fallbackDomain) {
       this.setParam("fallback_domain", fallbackDomain);
-      return this;
-    }
-
-    public APIRequestCreateOpenBridgeConfiguration setFirstPartyDomain (String firstPartyDomain) {
-      this.setParam("first_party_domain", firstPartyDomain);
       return this;
     }
 
@@ -16644,6 +16545,7 @@ public class Business extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "include_shared_ad_accounts",
       "search_query",
     };
 
@@ -16696,10 +16598,12 @@ public class Business extends APINode {
       "is_tax_id_required",
       "liable_address",
       "line_numbers",
+      "marketing_messages_settings",
       "media_agency",
       "min_campaign_group_spend_cap",
       "min_daily_budget",
       "name",
+      "offsite_clo_signal_status",
       "offsite_pixels_tos_accepted",
       "opportunity_score",
       "owner",
@@ -16776,6 +16680,15 @@ public class Business extends APINode {
       return this;
     }
 
+
+    public APIRequestGetOwnedAdAccounts setIncludeSharedAdAccounts (Boolean includeSharedAdAccounts) {
+      this.setParam("include_shared_ad_accounts", includeSharedAdAccounts);
+      return this;
+    }
+    public APIRequestGetOwnedAdAccounts setIncludeSharedAdAccounts (String includeSharedAdAccounts) {
+      this.setParam("include_shared_ad_accounts", includeSharedAdAccounts);
+      return this;
+    }
 
     public APIRequestGetOwnedAdAccounts setSearchQuery (String searchQuery) {
       this.setParam("search_query", searchQuery);
@@ -17154,6 +17067,13 @@ public class Business extends APINode {
       this.requestField("line_numbers", value);
       return this;
     }
+    public APIRequestGetOwnedAdAccounts requestMarketingMessagesSettingsField () {
+      return this.requestMarketingMessagesSettingsField(true);
+    }
+    public APIRequestGetOwnedAdAccounts requestMarketingMessagesSettingsField (boolean value) {
+      this.requestField("marketing_messages_settings", value);
+      return this;
+    }
     public APIRequestGetOwnedAdAccounts requestMediaAgencyField () {
       return this.requestMediaAgencyField(true);
     }
@@ -17180,6 +17100,13 @@ public class Business extends APINode {
     }
     public APIRequestGetOwnedAdAccounts requestNameField (boolean value) {
       this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetOwnedAdAccounts requestOffsiteCloSignalStatusField () {
+      return this.requestOffsiteCloSignalStatusField(true);
+    }
+    public APIRequestGetOwnedAdAccounts requestOffsiteCloSignalStatusField (boolean value) {
+      this.requestField("offsite_clo_signal_status", value);
       return this;
     }
     public APIRequestGetOwnedAdAccounts requestOffsitePixelsTosAcceptedField () {
@@ -17487,6 +17414,7 @@ public class Business extends APINode {
       "category",
       "client_config",
       "company",
+      "config_ids",
       "configured_ios_sso",
       "contact_email",
       "created_time",
@@ -17887,6 +17815,13 @@ public class Business extends APINode {
     }
     public APIRequestGetOwnedApps requestCompanyField (boolean value) {
       this.requestField("company", value);
+      return this;
+    }
+    public APIRequestGetOwnedApps requestConfigIdsField () {
+      return this.requestConfigIdsField(true);
+    }
+    public APIRequestGetOwnedApps requestConfigIdsField (boolean value) {
+      this.requestField("config_ids", value);
       return this;
     }
     public APIRequestGetOwnedApps requestConfiguredIosSsoField () {
@@ -19799,6 +19734,7 @@ public class Business extends APINode {
       "preferred_audience",
       "press_contact",
       "price_range",
+      "priority_hours",
       "privacy_info_url",
       "produced_by",
       "products",
@@ -20737,6 +20673,13 @@ public class Business extends APINode {
     }
     public APIRequestGetOwnedPages requestPriceRangeField (boolean value) {
       this.requestField("price_range", value);
+      return this;
+    }
+    public APIRequestGetOwnedPages requestPriorityHoursField () {
+      return this.requestPriorityHoursField(true);
+    }
+    public APIRequestGetOwnedPages requestPriorityHoursField (boolean value) {
+      this.requestField("priority_hours", value);
       return this;
     }
     public APIRequestGetOwnedPages requestPrivacyInfoUrlField () {
@@ -22002,6 +21945,7 @@ public class Business extends APINode {
       "primary_funding_id",
       "purchase_order_number",
       "status",
+      "template_auto_archival_enabled",
       "timezone_id",
       "whatsapp_business_manager_messaging_limit",
     };
@@ -22262,6 +22206,13 @@ public class Business extends APINode {
     }
     public APIRequestGetOwnedWhatsAppBusinessAccounts requestStatusField (boolean value) {
       this.requestField("status", value);
+      return this;
+    }
+    public APIRequestGetOwnedWhatsAppBusinessAccounts requestTemplateAutoArchivalEnabledField () {
+      return this.requestTemplateAutoArchivalEnabledField(true);
+    }
+    public APIRequestGetOwnedWhatsAppBusinessAccounts requestTemplateAutoArchivalEnabledField (boolean value) {
+      this.requestField("template_auto_archival_enabled", value);
       return this;
     }
     public APIRequestGetOwnedWhatsAppBusinessAccounts requestTimezoneIdField () {
@@ -26040,6 +25991,7 @@ public class Business extends APINode {
       "creative_folder_id",
       "creative_tools",
       "description",
+      "edit_description_spec",
       "embeddable",
       "end_offset",
       "fbuploader_video_file_chunk",
@@ -26253,6 +26205,15 @@ public class Business extends APINode {
 
     public APIRequestCreateVideo setDescription (String description) {
       this.setParam("description", description);
+      return this;
+    }
+
+    public APIRequestCreateVideo setEditDescriptionSpec (Map<String, String> editDescriptionSpec) {
+      this.setParam("edit_description_spec", editDescriptionSpec);
+      return this;
+    }
+    public APIRequestCreateVideo setEditDescriptionSpec (String editDescriptionSpec) {
+      this.setParam("edit_description_spec", editDescriptionSpec);
       return this;
     }
 
@@ -28311,6 +28272,230 @@ public class Business extends APINode {
       VALUE_479("479"),
       @SerializedName("480")
       VALUE_480("480"),
+      @SerializedName("481")
+      VALUE_481("481"),
+      @SerializedName("482")
+      VALUE_482("482"),
+      @SerializedName("483")
+      VALUE_483("483"),
+      @SerializedName("484")
+      VALUE_484("484"),
+      @SerializedName("485")
+      VALUE_485("485"),
+      @SerializedName("486")
+      VALUE_486("486"),
+      @SerializedName("487")
+      VALUE_487("487"),
+      @SerializedName("488")
+      VALUE_488("488"),
+      @SerializedName("489")
+      VALUE_489("489"),
+      @SerializedName("490")
+      VALUE_490("490"),
+      @SerializedName("491")
+      VALUE_491("491"),
+      @SerializedName("492")
+      VALUE_492("492"),
+      @SerializedName("493")
+      VALUE_493("493"),
+      @SerializedName("494")
+      VALUE_494("494"),
+      @SerializedName("495")
+      VALUE_495("495"),
+      @SerializedName("496")
+      VALUE_496("496"),
+      @SerializedName("497")
+      VALUE_497("497"),
+      @SerializedName("498")
+      VALUE_498("498"),
+      @SerializedName("499")
+      VALUE_499("499"),
+      @SerializedName("500")
+      VALUE_500("500"),
+      @SerializedName("501")
+      VALUE_501("501"),
+      @SerializedName("502")
+      VALUE_502("502"),
+      @SerializedName("503")
+      VALUE_503("503"),
+      @SerializedName("504")
+      VALUE_504("504"),
+      @SerializedName("505")
+      VALUE_505("505"),
+      @SerializedName("506")
+      VALUE_506("506"),
+      @SerializedName("507")
+      VALUE_507("507"),
+      @SerializedName("508")
+      VALUE_508("508"),
+      @SerializedName("509")
+      VALUE_509("509"),
+      @SerializedName("510")
+      VALUE_510("510"),
+      @SerializedName("511")
+      VALUE_511("511"),
+      @SerializedName("512")
+      VALUE_512("512"),
+      @SerializedName("513")
+      VALUE_513("513"),
+      @SerializedName("514")
+      VALUE_514("514"),
+      @SerializedName("515")
+      VALUE_515("515"),
+      @SerializedName("516")
+      VALUE_516("516"),
+      @SerializedName("517")
+      VALUE_517("517"),
+      @SerializedName("518")
+      VALUE_518("518"),
+      @SerializedName("519")
+      VALUE_519("519"),
+      @SerializedName("520")
+      VALUE_520("520"),
+      @SerializedName("521")
+      VALUE_521("521"),
+      @SerializedName("522")
+      VALUE_522("522"),
+      @SerializedName("523")
+      VALUE_523("523"),
+      @SerializedName("524")
+      VALUE_524("524"),
+      @SerializedName("525")
+      VALUE_525("525"),
+      @SerializedName("526")
+      VALUE_526("526"),
+      @SerializedName("527")
+      VALUE_527("527"),
+      @SerializedName("528")
+      VALUE_528("528"),
+      @SerializedName("529")
+      VALUE_529("529"),
+      @SerializedName("530")
+      VALUE_530("530"),
+      @SerializedName("531")
+      VALUE_531("531"),
+      @SerializedName("532")
+      VALUE_532("532"),
+      @SerializedName("533")
+      VALUE_533("533"),
+      @SerializedName("534")
+      VALUE_534("534"),
+      @SerializedName("535")
+      VALUE_535("535"),
+      @SerializedName("536")
+      VALUE_536("536"),
+      @SerializedName("537")
+      VALUE_537("537"),
+      @SerializedName("538")
+      VALUE_538("538"),
+      @SerializedName("539")
+      VALUE_539("539"),
+      @SerializedName("540")
+      VALUE_540("540"),
+      @SerializedName("541")
+      VALUE_541("541"),
+      @SerializedName("542")
+      VALUE_542("542"),
+      @SerializedName("543")
+      VALUE_543("543"),
+      @SerializedName("544")
+      VALUE_544("544"),
+      @SerializedName("545")
+      VALUE_545("545"),
+      @SerializedName("546")
+      VALUE_546("546"),
+      @SerializedName("547")
+      VALUE_547("547"),
+      @SerializedName("548")
+      VALUE_548("548"),
+      @SerializedName("549")
+      VALUE_549("549"),
+      @SerializedName("550")
+      VALUE_550("550"),
+      @SerializedName("551")
+      VALUE_551("551"),
+      @SerializedName("552")
+      VALUE_552("552"),
+      @SerializedName("553")
+      VALUE_553("553"),
+      @SerializedName("554")
+      VALUE_554("554"),
+      @SerializedName("555")
+      VALUE_555("555"),
+      @SerializedName("556")
+      VALUE_556("556"),
+      @SerializedName("557")
+      VALUE_557("557"),
+      @SerializedName("558")
+      VALUE_558("558"),
+      @SerializedName("559")
+      VALUE_559("559"),
+      @SerializedName("560")
+      VALUE_560("560"),
+      @SerializedName("561")
+      VALUE_561("561"),
+      @SerializedName("562")
+      VALUE_562("562"),
+      @SerializedName("563")
+      VALUE_563("563"),
+      @SerializedName("564")
+      VALUE_564("564"),
+      @SerializedName("565")
+      VALUE_565("565"),
+      @SerializedName("566")
+      VALUE_566("566"),
+      @SerializedName("567")
+      VALUE_567("567"),
+      @SerializedName("568")
+      VALUE_568("568"),
+      @SerializedName("569")
+      VALUE_569("569"),
+      @SerializedName("570")
+      VALUE_570("570"),
+      @SerializedName("571")
+      VALUE_571("571"),
+      @SerializedName("572")
+      VALUE_572("572"),
+      @SerializedName("573")
+      VALUE_573("573"),
+      @SerializedName("574")
+      VALUE_574("574"),
+      @SerializedName("575")
+      VALUE_575("575"),
+      @SerializedName("576")
+      VALUE_576("576"),
+      @SerializedName("577")
+      VALUE_577("577"),
+      @SerializedName("578")
+      VALUE_578("578"),
+      @SerializedName("579")
+      VALUE_579("579"),
+      @SerializedName("580")
+      VALUE_580("580"),
+      @SerializedName("581")
+      VALUE_581("581"),
+      @SerializedName("582")
+      VALUE_582("582"),
+      @SerializedName("583")
+      VALUE_583("583"),
+      @SerializedName("584")
+      VALUE_584("584"),
+      @SerializedName("585")
+      VALUE_585("585"),
+      @SerializedName("586")
+      VALUE_586("586"),
+      @SerializedName("587")
+      VALUE_587("587"),
+      @SerializedName("588")
+      VALUE_588("588"),
+      @SerializedName("589")
+      VALUE_589("589"),
+      @SerializedName("590")
+      VALUE_590("590"),
+      @SerializedName("591")
+      VALUE_591("591"),
+      @SerializedName("592")
+      VALUE_592("592"),
       ;
 
       private String value;

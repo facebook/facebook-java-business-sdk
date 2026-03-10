@@ -367,6 +367,7 @@ public class AdLabel extends APINode {
       "link_destination_display_url",
       "link_og_id",
       "link_url",
+      "marketing_message_structured_spec",
       "media_sourcing_spec",
       "messenger_sponsored_message",
       "name",
@@ -385,6 +386,7 @@ public class AdLabel extends APINode {
       "portrait_customizations",
       "product_data",
       "product_set_id",
+      "product_suggestion_settings",
       "recommender_settings",
       "regional_regulation_disclaimer_spec",
       "source_facebook_post_id",
@@ -784,6 +786,13 @@ public class AdLabel extends APINode {
       this.requestField("link_url", value);
       return this;
     }
+    public APIRequestGetAdCreatives requestMarketingMessageStructuredSpecField () {
+      return this.requestMarketingMessageStructuredSpecField(true);
+    }
+    public APIRequestGetAdCreatives requestMarketingMessageStructuredSpecField (boolean value) {
+      this.requestField("marketing_message_structured_spec", value);
+      return this;
+    }
     public APIRequestGetAdCreatives requestMediaSourcingSpecField () {
       return this.requestMediaSourcingSpecField(true);
     }
@@ -908,6 +917,13 @@ public class AdLabel extends APINode {
     }
     public APIRequestGetAdCreatives requestProductSetIdField (boolean value) {
       this.requestField("product_set_id", value);
+      return this;
+    }
+    public APIRequestGetAdCreatives requestProductSuggestionSettingsField () {
+      return this.requestProductSuggestionSettingsField(true);
+    }
+    public APIRequestGetAdCreatives requestProductSuggestionSettingsField (boolean value) {
+      this.requestField("product_suggestion_settings", value);
       return this;
     }
     public APIRequestGetAdCreatives requestRecommenderSettingsField () {
@@ -1452,6 +1468,8 @@ public class AdLabel extends APINode {
       "campaign_id",
       "configured_status",
       "created_time",
+      "creative_diversity_label",
+      "creative_diversity_score",
       "creative_sequence",
       "creative_sequence_repetition_pattern",
       "daily_budget",
@@ -1742,6 +1760,20 @@ public class AdLabel extends APINode {
     }
     public APIRequestGetAdSets requestCreatedTimeField (boolean value) {
       this.requestField("created_time", value);
+      return this;
+    }
+    public APIRequestGetAdSets requestCreativeDiversityLabelField () {
+      return this.requestCreativeDiversityLabelField(true);
+    }
+    public APIRequestGetAdSets requestCreativeDiversityLabelField (boolean value) {
+      this.requestField("creative_diversity_label", value);
+      return this;
+    }
+    public APIRequestGetAdSets requestCreativeDiversityScoreField () {
+      return this.requestCreativeDiversityScoreField(true);
+    }
+    public APIRequestGetAdSets requestCreativeDiversityScoreField (boolean value) {
+      this.requestField("creative_diversity_score", value);
       return this;
     }
     public APIRequestGetAdSets requestCreativeSequenceField () {

@@ -67,8 +67,18 @@ public class AdsInsights extends APINode {
   private String mAdsetName = null;
   @SerializedName("adset_start")
   private String mAdsetStart = null;
+  @SerializedName("advanced_actions_28d_view")
+  private List<AdsActionStats> mAdvancedActions28dView = null;
+  @SerializedName("advanced_reach_1d_lookback")
+  private String mAdvancedReach1dLookback = null;
+  @SerializedName("advanced_reach_28d_lookback")
+  private String mAdvancedReach28dLookback = null;
+  @SerializedName("advanced_reach_7d_lookback")
+  private String mAdvancedReach7dLookback = null;
   @SerializedName("age_targeting")
   private String mAgeTargeting = null;
+  @SerializedName("anchor_event_attribution_setting")
+  private String mAnchorEventAttributionSetting = null;
   @SerializedName("anchor_events_performance_indicator")
   private String mAnchorEventsPerformanceIndicator = null;
   @SerializedName("attribution_setting")
@@ -243,6 +253,8 @@ public class AdsInsights extends APINode {
   private String mInlineLinkClicks = null;
   @SerializedName("inline_post_engagement")
   private String mInlinePostEngagement = null;
+  @SerializedName("instagram_profile_visits")
+  private String mInstagramProfileVisits = null;
   @SerializedName("instagram_upcoming_event_reminders_set")
   private String mInstagramUpcomingEventRemindersSet = null;
   @SerializedName("instant_experience_clicks_to_open")
@@ -309,6 +321,8 @@ public class AdsInsights extends APINode {
   private String mMarketingMessagesWebsitePurchaseValues = null;
   @SerializedName("mobile_app_purchase_roas")
   private List<AdsActionStats> mMobileAppPurchaseRoas = null;
+  @SerializedName("multi_event_conversion_attribution_setting")
+  private String mMultiEventConversionAttributionSetting = null;
   @SerializedName("objective")
   private String mObjective = null;
   @SerializedName("objective_result_rate")
@@ -546,16 +560,14 @@ public class AdsInsights extends APINode {
   private String mProductCustomLabel4Breakdown = null;
   @SerializedName("product_group_content_id_breakdown")
   private String mProductGroupContentIdBreakdown = null;
-  @SerializedName("product_group_id")
-  private String mProductGroupId = null;
   @SerializedName("product_id")
   private String mProductId = null;
-  @SerializedName("product_set_id_breakdown")
-  private String mProductSetIdBreakdown = null;
   @SerializedName("publisher_platform")
   private String mPublisherPlatform = null;
   @SerializedName("redownload")
   private String mRedownload = null;
+  @SerializedName("reels_trending_topic")
+  private String mReelsTrendingTopic = null;
   @SerializedName("region")
   private String mRegion = null;
   @SerializedName("rta_ugc_topic")
@@ -880,12 +892,62 @@ public class AdsInsights extends APINode {
     return this;
   }
 
+  public List<AdsActionStats> getFieldAdvancedActions28dView() {
+    return mAdvancedActions28dView;
+  }
+
+  public AdsInsights setFieldAdvancedActions28dView(List<AdsActionStats> value) {
+    this.mAdvancedActions28dView = value;
+    return this;
+  }
+
+  public AdsInsights setFieldAdvancedActions28dView(String value) {
+    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
+    this.mAdvancedActions28dView = AdsActionStats.getGson().fromJson(value, type);
+    return this;
+  }
+  public String getFieldAdvancedReach1dLookback() {
+    return mAdvancedReach1dLookback;
+  }
+
+  public AdsInsights setFieldAdvancedReach1dLookback(String value) {
+    this.mAdvancedReach1dLookback = value;
+    return this;
+  }
+
+  public String getFieldAdvancedReach28dLookback() {
+    return mAdvancedReach28dLookback;
+  }
+
+  public AdsInsights setFieldAdvancedReach28dLookback(String value) {
+    this.mAdvancedReach28dLookback = value;
+    return this;
+  }
+
+  public String getFieldAdvancedReach7dLookback() {
+    return mAdvancedReach7dLookback;
+  }
+
+  public AdsInsights setFieldAdvancedReach7dLookback(String value) {
+    this.mAdvancedReach7dLookback = value;
+    return this;
+  }
+
   public String getFieldAgeTargeting() {
     return mAgeTargeting;
   }
 
   public AdsInsights setFieldAgeTargeting(String value) {
     this.mAgeTargeting = value;
+    return this;
+  }
+
+  public String getFieldAnchorEventAttributionSetting() {
+    return mAnchorEventAttributionSetting;
+  }
+
+  public AdsInsights setFieldAnchorEventAttributionSetting(String value) {
+    this.mAnchorEventAttributionSetting = value;
     return this;
   }
 
@@ -1882,6 +1944,15 @@ public class AdsInsights extends APINode {
     return this;
   }
 
+  public String getFieldInstagramProfileVisits() {
+    return mInstagramProfileVisits;
+  }
+
+  public AdsInsights setFieldInstagramProfileVisits(String value) {
+    this.mInstagramProfileVisits = value;
+    return this;
+  }
+
   public String getFieldInstagramUpcomingEventRemindersSet() {
     return mInstagramUpcomingEventRemindersSet;
   }
@@ -2194,6 +2265,15 @@ public class AdsInsights extends APINode {
     this.mMobileAppPurchaseRoas = AdsActionStats.getGson().fromJson(value, type);
     return this;
   }
+  public String getFieldMultiEventConversionAttributionSetting() {
+    return mMultiEventConversionAttributionSetting;
+  }
+
+  public AdsInsights setFieldMultiEventConversionAttributionSetting(String value) {
+    this.mMultiEventConversionAttributionSetting = value;
+    return this;
+  }
+
   public String getFieldObjective() {
     return mObjective;
   }
@@ -3116,16 +3196,8 @@ public class AdsInsights extends APINode {
     return mProductGroupContentIdBreakdown;
   }
 
-  public String getFieldProductGroupId() {
-    return mProductGroupId;
-  }
-
   public String getFieldProductId() {
     return mProductId;
-  }
-
-  public String getFieldProductSetIdBreakdown() {
-    return mProductSetIdBreakdown;
   }
 
   public String getFieldPublisherPlatform() {
@@ -3134,6 +3206,10 @@ public class AdsInsights extends APINode {
 
   public String getFieldRedownload() {
     return mRedownload;
+  }
+
+  public String getFieldReelsTrendingTopic() {
+    return mReelsTrendingTopic;
   }
 
   public String getFieldRegion() {
@@ -3286,6 +3362,8 @@ public class AdsInsights extends APINode {
       VALUE_ACTION_VIDEO_TYPE("action_video_type"),
       @SerializedName("conversion_destination")
       VALUE_CONVERSION_DESTINATION("conversion_destination"),
+      @SerializedName("is_business_ai_assisted")
+      VALUE_IS_BUSINESS_AI_ASSISTED("is_business_ai_assisted"),
       @SerializedName("matched_persona_id")
       VALUE_MATCHED_PERSONA_ID("matched_persona_id"),
       @SerializedName("matched_persona_name")
@@ -3450,16 +3528,14 @@ public class AdsInsights extends APINode {
       VALUE_PRODUCT_CUSTOM_LABEL_4_BREAKDOWN("product_custom_label_4_breakdown"),
       @SerializedName("product_group_content_id_breakdown")
       VALUE_PRODUCT_GROUP_CONTENT_ID_BREAKDOWN("product_group_content_id_breakdown"),
-      @SerializedName("product_group_id")
-      VALUE_PRODUCT_GROUP_ID("product_group_id"),
       @SerializedName("product_id")
       VALUE_PRODUCT_ID("product_id"),
-      @SerializedName("product_set_id_breakdown")
-      VALUE_PRODUCT_SET_ID_BREAKDOWN("product_set_id_breakdown"),
       @SerializedName("publisher_platform")
       VALUE_PUBLISHER_PLATFORM("publisher_platform"),
       @SerializedName("redownload")
       VALUE_REDOWNLOAD("redownload"),
+      @SerializedName("reels_trending_topic")
+      VALUE_REELS_TRENDING_TOPIC("reels_trending_topic"),
       @SerializedName("region")
       VALUE_REGION("region"),
       @SerializedName("rta_ugc_topic")
@@ -3611,6 +3687,8 @@ public class AdsInsights extends APINode {
       VALUE_ACTION_VIDEO_TYPE("action_video_type"),
       @SerializedName("conversion_destination")
       VALUE_CONVERSION_DESTINATION("conversion_destination"),
+      @SerializedName("is_business_ai_assisted")
+      VALUE_IS_BUSINESS_AI_ASSISTED("is_business_ai_assisted"),
       @SerializedName("matched_persona_id")
       VALUE_MATCHED_PERSONA_ID("matched_persona_id"),
       @SerializedName("matched_persona_name")
@@ -3661,7 +3739,12 @@ public class AdsInsights extends APINode {
     this.mAdsetId = instance.mAdsetId;
     this.mAdsetName = instance.mAdsetName;
     this.mAdsetStart = instance.mAdsetStart;
+    this.mAdvancedActions28dView = instance.mAdvancedActions28dView;
+    this.mAdvancedReach1dLookback = instance.mAdvancedReach1dLookback;
+    this.mAdvancedReach28dLookback = instance.mAdvancedReach28dLookback;
+    this.mAdvancedReach7dLookback = instance.mAdvancedReach7dLookback;
     this.mAgeTargeting = instance.mAgeTargeting;
+    this.mAnchorEventAttributionSetting = instance.mAnchorEventAttributionSetting;
     this.mAnchorEventsPerformanceIndicator = instance.mAnchorEventsPerformanceIndicator;
     this.mAttributionSetting = instance.mAttributionSetting;
     this.mAuctionBid = instance.mAuctionBid;
@@ -3749,6 +3832,7 @@ public class AdsInsights extends APINode {
     this.mInlineLinkClickCtr = instance.mInlineLinkClickCtr;
     this.mInlineLinkClicks = instance.mInlineLinkClicks;
     this.mInlinePostEngagement = instance.mInlinePostEngagement;
+    this.mInstagramProfileVisits = instance.mInstagramProfileVisits;
     this.mInstagramUpcomingEventRemindersSet = instance.mInstagramUpcomingEventRemindersSet;
     this.mInstantExperienceClicksToOpen = instance.mInstantExperienceClicksToOpen;
     this.mInstantExperienceClicksToStart = instance.mInstantExperienceClicksToStart;
@@ -3782,6 +3866,7 @@ public class AdsInsights extends APINode {
     this.mMarketingMessagesWebsitePurchase = instance.mMarketingMessagesWebsitePurchase;
     this.mMarketingMessagesWebsitePurchaseValues = instance.mMarketingMessagesWebsitePurchaseValues;
     this.mMobileAppPurchaseRoas = instance.mMobileAppPurchaseRoas;
+    this.mMultiEventConversionAttributionSetting = instance.mMultiEventConversionAttributionSetting;
     this.mObjective = instance.mObjective;
     this.mObjectiveResultRate = instance.mObjectiveResultRate;
     this.mObjectiveResults = instance.mObjectiveResults;
@@ -3900,11 +3985,10 @@ public class AdsInsights extends APINode {
     this.mProductCustomLabel3Breakdown = instance.mProductCustomLabel3Breakdown;
     this.mProductCustomLabel4Breakdown = instance.mProductCustomLabel4Breakdown;
     this.mProductGroupContentIdBreakdown = instance.mProductGroupContentIdBreakdown;
-    this.mProductGroupId = instance.mProductGroupId;
     this.mProductId = instance.mProductId;
-    this.mProductSetIdBreakdown = instance.mProductSetIdBreakdown;
     this.mPublisherPlatform = instance.mPublisherPlatform;
     this.mRedownload = instance.mRedownload;
+    this.mReelsTrendingTopic = instance.mReelsTrendingTopic;
     this.mRegion = instance.mRegion;
     this.mRtaUgcTopic = instance.mRtaUgcTopic;
     this.mRuleSetId = instance.mRuleSetId;

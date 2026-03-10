@@ -43,6 +43,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class RecommendedIGMedia extends APINode {
   @SerializedName("intent_score")
   private Double mIntentScore = null;
+  @SerializedName("media")
+  private IGMedia mMedia = null;
   protected static Gson gson = null;
 
   public RecommendedIGMedia() {
@@ -203,6 +205,23 @@ public class RecommendedIGMedia extends APINode {
     return this;
   }
 
+  public IGMedia getFieldMedia() {
+    if (mMedia != null) {
+      mMedia.context = getContext();
+    }
+    return mMedia;
+  }
+
+  public RecommendedIGMedia setFieldMedia(IGMedia value) {
+    this.mMedia = value;
+    return this;
+  }
+
+  public RecommendedIGMedia setFieldMedia(String value) {
+    Type type = new TypeToken<IGMedia>(){}.getType();
+    this.mMedia = IGMedia.getGson().fromJson(value, type);
+    return this;
+  }
 
 
 
@@ -221,6 +240,7 @@ public class RecommendedIGMedia extends APINode {
 
   public RecommendedIGMedia copyFrom(RecommendedIGMedia instance) {
     this.mIntentScore = instance.mIntentScore;
+    this.mMedia = instance.mMedia;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

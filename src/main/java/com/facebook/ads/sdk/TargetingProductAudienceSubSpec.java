@@ -41,6 +41,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class TargetingProductAudienceSubSpec extends APINode {
+  @SerializedName("min_retention_seconds")
+  private String mMinRetentionSeconds = null;
   @SerializedName("retention_seconds")
   private String mRetentionSeconds = null;
   @SerializedName("rule")
@@ -196,6 +198,15 @@ public class TargetingProductAudienceSubSpec extends APINode {
   }
 
 
+  public String getFieldMinRetentionSeconds() {
+    return mMinRetentionSeconds;
+  }
+
+  public TargetingProductAudienceSubSpec setFieldMinRetentionSeconds(String value) {
+    this.mMinRetentionSeconds = value;
+    return this;
+  }
+
   public String getFieldRetentionSeconds() {
     return mRetentionSeconds;
   }
@@ -231,6 +242,7 @@ public class TargetingProductAudienceSubSpec extends APINode {
   }
 
   public TargetingProductAudienceSubSpec copyFrom(TargetingProductAudienceSubSpec instance) {
+    this.mMinRetentionSeconds = instance.mMinRetentionSeconds;
     this.mRetentionSeconds = instance.mRetentionSeconds;
     this.mRule = instance.mRule;
     this.context = instance.context;

@@ -311,6 +311,8 @@ public class AdAccountMatchedSearchApplicationsEdgeData extends APINode {
       VALUE_GALAXY_STORE("GALAXY_STORE"),
       @SerializedName("GOOGLE_PLAY")
       VALUE_GOOGLE_PLAY("GOOGLE_PLAY"),
+      @SerializedName("HORIZON_WORLD")
+      VALUE_HORIZON_WORLD("HORIZON_WORLD"),
       @SerializedName("INSTANT_GAME")
       VALUE_INSTANT_GAME("INSTANT_GAME"),
       @SerializedName("ITUNES")
@@ -380,6 +382,8 @@ public class AdAccountMatchedSearchApplicationsEdgeData extends APINode {
       VALUE_GALAXY_STORE("GALAXY_STORE"),
       @SerializedName("GOOGLE_PLAY")
       VALUE_GOOGLE_PLAY("GOOGLE_PLAY"),
+      @SerializedName("HORIZON_WORLD")
+      VALUE_HORIZON_WORLD("HORIZON_WORLD"),
       @SerializedName("INSTANT_GAME")
       VALUE_INSTANT_GAME("INSTANT_GAME"),
       @SerializedName("ITUNES")

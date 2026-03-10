@@ -602,10 +602,12 @@ public class AdsPixel extends APINode {
       "is_tax_id_required",
       "liable_address",
       "line_numbers",
+      "marketing_messages_settings",
       "media_agency",
       "min_campaign_group_spend_cap",
       "min_daily_budget",
       "name",
+      "offsite_clo_signal_status",
       "offsite_pixels_tos_accepted",
       "opportunity_score",
       "owner",
@@ -1060,6 +1062,13 @@ public class AdsPixel extends APINode {
       this.requestField("line_numbers", value);
       return this;
     }
+    public APIRequestGetAdAccounts requestMarketingMessagesSettingsField () {
+      return this.requestMarketingMessagesSettingsField(true);
+    }
+    public APIRequestGetAdAccounts requestMarketingMessagesSettingsField (boolean value) {
+      this.requestField("marketing_messages_settings", value);
+      return this;
+    }
     public APIRequestGetAdAccounts requestMediaAgencyField () {
       return this.requestMediaAgencyField(true);
     }
@@ -1086,6 +1095,13 @@ public class AdsPixel extends APINode {
     }
     public APIRequestGetAdAccounts requestNameField (boolean value) {
       this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestOffsiteCloSignalStatusField () {
+      return this.requestOffsiteCloSignalStatusField(true);
+    }
+    public APIRequestGetAdAccounts requestOffsiteCloSignalStatusField (boolean value) {
+      this.requestField("offsite_clo_signal_status", value);
       return this;
     }
     public APIRequestGetAdAccounts requestOffsitePixelsTosAcceptedField () {
@@ -2769,9 +2785,10 @@ public class AdsPixel extends APINode {
       "cloud_region",
       "destination_id",
       "endpoint",
+      "event_enrichment_advertiser_state",
+      "event_enrichment_meta_state",
       "event_enrichment_state",
       "fallback_domain",
-      "first_party_domain",
       "host_business_id",
       "id",
       "instance_id",
@@ -2931,6 +2948,20 @@ public class AdsPixel extends APINode {
       this.requestField("endpoint", value);
       return this;
     }
+    public APIRequestGetOpenBridgeConfigurations requestEventEnrichmentAdvertiserStateField () {
+      return this.requestEventEnrichmentAdvertiserStateField(true);
+    }
+    public APIRequestGetOpenBridgeConfigurations requestEventEnrichmentAdvertiserStateField (boolean value) {
+      this.requestField("event_enrichment_advertiser_state", value);
+      return this;
+    }
+    public APIRequestGetOpenBridgeConfigurations requestEventEnrichmentMetaStateField () {
+      return this.requestEventEnrichmentMetaStateField(true);
+    }
+    public APIRequestGetOpenBridgeConfigurations requestEventEnrichmentMetaStateField (boolean value) {
+      this.requestField("event_enrichment_meta_state", value);
+      return this;
+    }
     public APIRequestGetOpenBridgeConfigurations requestEventEnrichmentStateField () {
       return this.requestEventEnrichmentStateField(true);
     }
@@ -2943,13 +2974,6 @@ public class AdsPixel extends APINode {
     }
     public APIRequestGetOpenBridgeConfigurations requestFallbackDomainField (boolean value) {
       this.requestField("fallback_domain", value);
-      return this;
-    }
-    public APIRequestGetOpenBridgeConfigurations requestFirstPartyDomainField () {
-      return this.requestFirstPartyDomainField(true);
-    }
-    public APIRequestGetOpenBridgeConfigurations requestFirstPartyDomainField (boolean value) {
-      this.requestField("first_party_domain", value);
       return this;
     }
     public APIRequestGetOpenBridgeConfigurations requestHostBusinessIdField () {
@@ -3313,10 +3337,12 @@ public class AdsPixel extends APINode {
       "is_tax_id_required",
       "liable_address",
       "line_numbers",
+      "marketing_messages_settings",
       "media_agency",
       "min_campaign_group_spend_cap",
       "min_daily_budget",
       "name",
+      "offsite_clo_signal_status",
       "offsite_pixels_tos_accepted",
       "opportunity_score",
       "owner",
@@ -3771,6 +3797,13 @@ public class AdsPixel extends APINode {
       this.requestField("line_numbers", value);
       return this;
     }
+    public APIRequestGetSharedAccounts requestMarketingMessagesSettingsField () {
+      return this.requestMarketingMessagesSettingsField(true);
+    }
+    public APIRequestGetSharedAccounts requestMarketingMessagesSettingsField (boolean value) {
+      this.requestField("marketing_messages_settings", value);
+      return this;
+    }
     public APIRequestGetSharedAccounts requestMediaAgencyField () {
       return this.requestMediaAgencyField(true);
     }
@@ -3797,6 +3830,13 @@ public class AdsPixel extends APINode {
     }
     public APIRequestGetSharedAccounts requestNameField (boolean value) {
       this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetSharedAccounts requestOffsiteCloSignalStatusField () {
+      return this.requestOffsiteCloSignalStatusField(true);
+    }
+    public APIRequestGetSharedAccounts requestOffsiteCloSignalStatusField (boolean value) {
+      this.requestField("offsite_clo_signal_status", value);
       return this;
     }
     public APIRequestGetSharedAccounts requestOffsitePixelsTosAcceptedField () {
@@ -4362,6 +4402,7 @@ public class AdsPixel extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "agent",
       "aggregation",
       "end_time",
       "event",
@@ -4428,6 +4469,11 @@ public class AdsPixel extends APINode {
       return this;
     }
 
+
+    public APIRequestGetStats setAgent (String agent) {
+      this.setParam("agent", agent);
+      return this;
+    }
 
     public APIRequestGetStats setAggregation (AdsPixelStatsResult.EnumAggregation aggregation) {
       this.setParam("aggregation", aggregation);

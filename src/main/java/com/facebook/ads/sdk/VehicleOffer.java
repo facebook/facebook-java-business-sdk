@@ -59,8 +59,8 @@ public class VehicleOffer extends APINode {
   private String mCashbackCurrency = null;
   @SerializedName("cashback_price")
   private String mCashbackPrice = null;
-  @SerializedName("category_specific_fields")
-  private CatalogSubVerticalList mCategorySpecificFields = null;
+  @SerializedName("comscore_market_codes")
+  private List<String> mComscoreMarketCodes = null;
   @SerializedName("currency")
   private String mCurrency = null;
   @SerializedName("custom_label_0")
@@ -425,8 +425,8 @@ public class VehicleOffer extends APINode {
     return mCashbackPrice;
   }
 
-  public CatalogSubVerticalList getFieldCategorySpecificFields() {
-    return mCategorySpecificFields;
+  public List<String> getFieldComscoreMarketCodes() {
+    return mComscoreMarketCodes;
   }
 
   public String getFieldCurrency() {
@@ -1062,7 +1062,7 @@ public class VehicleOffer extends APINode {
       "body_style",
       "cashback_currency",
       "cashback_price",
-      "category_specific_fields",
+      "comscore_market_codes",
       "currency",
       "custom_label_0",
       "custom_label_1",
@@ -1269,11 +1269,11 @@ public class VehicleOffer extends APINode {
       this.requestField("cashback_price", value);
       return this;
     }
-    public APIRequestGet requestCategorySpecificFieldsField () {
-      return this.requestCategorySpecificFieldsField(true);
+    public APIRequestGet requestComscoreMarketCodesField () {
+      return this.requestComscoreMarketCodesField(true);
     }
-    public APIRequestGet requestCategorySpecificFieldsField (boolean value) {
-      this.requestField("category_specific_fields", value);
+    public APIRequestGet requestComscoreMarketCodesField (boolean value) {
+      this.requestField("comscore_market_codes", value);
       return this;
     }
     public APIRequestGet requestCurrencyField () {
@@ -1705,7 +1705,7 @@ public class VehicleOffer extends APINode {
     this.mBodyStyle = instance.mBodyStyle;
     this.mCashbackCurrency = instance.mCashbackCurrency;
     this.mCashbackPrice = instance.mCashbackPrice;
-    this.mCategorySpecificFields = instance.mCategorySpecificFields;
+    this.mComscoreMarketCodes = instance.mComscoreMarketCodes;
     this.mCurrency = instance.mCurrency;
     this.mCustomLabel0 = instance.mCustomLabel0;
     this.mCustomLabel1 = instance.mCustomLabel1;

@@ -43,8 +43,6 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class CommerceMerchantSettings extends APINode {
   @SerializedName("checkout_config")
   private String mCheckoutConfig = null;
-  @SerializedName("checkout_message")
-  private String mCheckoutMessage = null;
   @SerializedName("contact_email")
   private String mContactEmail = null;
   @SerializedName("cta")
@@ -69,8 +67,6 @@ public class CommerceMerchantSettings extends APINode {
   private String mPaymentProvider = null;
   @SerializedName("privacy_policy_localized")
   private String mPrivacyPolicyLocalized = null;
-  @SerializedName("return_policy_localized")
-  private String mReturnPolicyLocalized = null;
   @SerializedName("shops_ads_setup")
   private Object mShopsAdsSetup = null;
   @SerializedName("terms")
@@ -332,13 +328,13 @@ public class CommerceMerchantSettings extends APINode {
     return new APIRequestGet(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestUpdate update() {
+    return new APIRequestUpdate(this.getPrefixedId().toString(), context);
+  }
+
 
   public String getFieldCheckoutConfig() {
     return mCheckoutConfig;
-  }
-
-  public String getFieldCheckoutMessage() {
-    return mCheckoutMessage;
   }
 
   public String getFieldContactEmail() {
@@ -390,10 +386,6 @@ public class CommerceMerchantSettings extends APINode {
 
   public String getFieldPrivacyPolicyLocalized() {
     return mPrivacyPolicyLocalized;
-  }
-
-  public String getFieldReturnPolicyLocalized() {
-    return mReturnPolicyLocalized;
   }
 
   public Object getFieldShopsAdsSetup() {
@@ -1221,6 +1213,7 @@ public class CommerceMerchantSettings extends APINode {
       "category",
       "client_config",
       "company",
+      "config_ids",
       "configured_ios_sso",
       "contact_email",
       "created_time",
@@ -1621,6 +1614,13 @@ public class CommerceMerchantSettings extends APINode {
     }
     public APIRequestGetOrderManagementApps requestCompanyField (boolean value) {
       this.requestField("company", value);
+      return this;
+    }
+    public APIRequestGetOrderManagementApps requestConfigIdsField () {
+      return this.requestConfigIdsField(true);
+    }
+    public APIRequestGetOrderManagementApps requestConfigIdsField (boolean value) {
+      this.requestField("config_ids", value);
       return this;
     }
     public APIRequestGetOrderManagementApps requestConfiguredIosSsoField () {
@@ -3099,7 +3099,6 @@ public class CommerceMerchantSettings extends APINode {
 
     public static final String[] FIELDS = {
       "checkout_config",
-      "checkout_message",
       "contact_email",
       "cta",
       "display_name",
@@ -3112,7 +3111,6 @@ public class CommerceMerchantSettings extends APINode {
       "offsite_iab_checkout_enabled_countries",
       "payment_provider",
       "privacy_policy_localized",
-      "return_policy_localized",
       "shops_ads_setup",
       "terms",
     };
@@ -3214,13 +3212,6 @@ public class CommerceMerchantSettings extends APINode {
       this.requestField("checkout_config", value);
       return this;
     }
-    public APIRequestGet requestCheckoutMessageField () {
-      return this.requestCheckoutMessageField(true);
-    }
-    public APIRequestGet requestCheckoutMessageField (boolean value) {
-      this.requestField("checkout_message", value);
-      return this;
-    }
     public APIRequestGet requestContactEmailField () {
       return this.requestContactEmailField(true);
     }
@@ -3305,13 +3296,6 @@ public class CommerceMerchantSettings extends APINode {
       this.requestField("privacy_policy_localized", value);
       return this;
     }
-    public APIRequestGet requestReturnPolicyLocalizedField () {
-      return this.requestReturnPolicyLocalizedField(true);
-    }
-    public APIRequestGet requestReturnPolicyLocalizedField (boolean value) {
-      this.requestField("return_policy_localized", value);
-      return this;
-    }
     public APIRequestGet requestShopsAdsSetupField () {
       return this.requestShopsAdsSetupField(true);
     }
@@ -3326,6 +3310,166 @@ public class CommerceMerchantSettings extends APINode {
       this.requestField("terms", value);
       return this;
     }
+  }
+
+  public static class APIRequestUpdate extends APIRequest<CommerceMerchantSettings> {
+
+    CommerceMerchantSettings lastResponse = null;
+    @Override
+    public CommerceMerchantSettings getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "checkout_config",
+      "korea_ftc_listing",
+      "merchant_status",
+      "privacy_policy_localized",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public CommerceMerchantSettings parseResponse(String response, String header) throws APIException {
+      return CommerceMerchantSettings.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public CommerceMerchantSettings execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public CommerceMerchantSettings execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<CommerceMerchantSettings> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<CommerceMerchantSettings> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, CommerceMerchantSettings>() {
+           public CommerceMerchantSettings apply(ResponseWrapper result) {
+             try {
+               return APIRequestUpdate.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestUpdate(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestUpdate setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestUpdate setCheckoutConfig (Map<String, String> checkoutConfig) {
+      this.setParam("checkout_config", checkoutConfig);
+      return this;
+    }
+    public APIRequestUpdate setCheckoutConfig (String checkoutConfig) {
+      this.setParam("checkout_config", checkoutConfig);
+      return this;
+    }
+
+    public APIRequestUpdate setKoreaFtcListing (String koreaFtcListing) {
+      this.setParam("korea_ftc_listing", koreaFtcListing);
+      return this;
+    }
+
+    public APIRequestUpdate setMerchantStatus (CommerceMerchantSettings.EnumMerchantStatus merchantStatus) {
+      this.setParam("merchant_status", merchantStatus);
+      return this;
+    }
+    public APIRequestUpdate setMerchantStatus (String merchantStatus) {
+      this.setParam("merchant_status", merchantStatus);
+      return this;
+    }
+
+    public APIRequestUpdate setPrivacyPolicyLocalized (Map<String, String> privacyPolicyLocalized) {
+      this.setParam("privacy_policy_localized", privacyPolicyLocalized);
+      return this;
+    }
+    public APIRequestUpdate setPrivacyPolicyLocalized (String privacyPolicyLocalized) {
+      this.setParam("privacy_policy_localized", privacyPolicyLocalized);
+      return this;
+    }
+
+    public APIRequestUpdate requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestUpdate requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestUpdate requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static enum EnumMerchantStatus {
+      @SerializedName("ENABLED")
+      VALUE_ENABLED("ENABLED"),
+      @SerializedName("EXTERNALLY_DISABLED")
+      VALUE_EXTERNALLY_DISABLED("EXTERNALLY_DISABLED"),
+      ;
+
+      private String value;
+
+      private EnumMerchantStatus(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
   }
 
   public static enum EnumStatuses {
@@ -3369,7 +3513,6 @@ public class CommerceMerchantSettings extends APINode {
 
   public CommerceMerchantSettings copyFrom(CommerceMerchantSettings instance) {
     this.mCheckoutConfig = instance.mCheckoutConfig;
-    this.mCheckoutMessage = instance.mCheckoutMessage;
     this.mContactEmail = instance.mContactEmail;
     this.mCta = instance.mCta;
     this.mDisplayName = instance.mDisplayName;
@@ -3382,7 +3525,6 @@ public class CommerceMerchantSettings extends APINode {
     this.mOffsiteIabCheckoutEnabledCountries = instance.mOffsiteIabCheckoutEnabledCountries;
     this.mPaymentProvider = instance.mPaymentProvider;
     this.mPrivacyPolicyLocalized = instance.mPrivacyPolicyLocalized;
-    this.mReturnPolicyLocalized = instance.mReturnPolicyLocalized;
     this.mShopsAdsSetup = instance.mShopsAdsSetup;
     this.mTerms = instance.mTerms;
     this.context = instance.context;

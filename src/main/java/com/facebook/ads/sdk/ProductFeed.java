@@ -310,10 +310,6 @@ public class ProductFeed extends APINode {
     return new APIRequestGetHotels(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestGetMediaTitles getMediaTitles() {
-    return new APIRequestGetMediaTitles(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetProducts getProducts() {
     return new APIRequestGetProducts(this.getPrefixedId().toString(), context);
   }
@@ -475,7 +471,6 @@ public class ProductFeed extends APINode {
       "automotive_model_id",
       "availability",
       "body_style",
-      "category_specific_fields",
       "currency",
       "custom_label_0",
       "custom_label_1",
@@ -646,13 +641,6 @@ public class ProductFeed extends APINode {
     }
     public APIRequestGetAutomotiveModels requestBodyStyleField (boolean value) {
       this.requestField("body_style", value);
-      return this;
-    }
-    public APIRequestGetAutomotiveModels requestCategorySpecificFieldsField () {
-      return this.requestCategorySpecificFieldsField(true);
-    }
-    public APIRequestGetAutomotiveModels requestCategorySpecificFieldsField (boolean value) {
-      this.requestField("category_specific_fields", value);
       return this;
     }
     public APIRequestGetAutomotiveModels requestCurrencyField () {
@@ -910,7 +898,6 @@ public class ProductFeed extends APINode {
     public static final String[] FIELDS = {
       "address",
       "applinks",
-      "category_specific_fields",
       "currency",
       "custom_label_0",
       "custom_label_1",
@@ -1058,13 +1045,6 @@ public class ProductFeed extends APINode {
     }
     public APIRequestGetDestinations requestApplinksField (boolean value) {
       this.requestField("applinks", value);
-      return this;
-    }
-    public APIRequestGetDestinations requestCategorySpecificFieldsField () {
-      return this.requestCategorySpecificFieldsField(true);
-    }
-    public APIRequestGetDestinations requestCategorySpecificFieldsField (boolean value) {
-      this.requestField("category_specific_fields", value);
       return this;
     }
     public APIRequestGetDestinations requestCurrencyField () {
@@ -1258,7 +1238,6 @@ public class ProductFeed extends APINode {
 
     public static final String[] FIELDS = {
       "applinks",
-      "category_specific_fields",
       "currency",
       "custom_label_0",
       "custom_label_1",
@@ -1407,13 +1386,6 @@ public class ProductFeed extends APINode {
     }
     public APIRequestGetFlights requestApplinksField (boolean value) {
       this.requestField("applinks", value);
-      return this;
-    }
-    public APIRequestGetFlights requestCategorySpecificFieldsField () {
-      return this.requestCategorySpecificFieldsField(true);
-    }
-    public APIRequestGetFlights requestCategorySpecificFieldsField (boolean value) {
-      this.requestField("category_specific_fields", value);
       return this;
     }
     public APIRequestGetFlights requestCurrencyField () {
@@ -1674,7 +1646,6 @@ public class ProductFeed extends APINode {
       "area_size",
       "area_unit",
       "availability",
-      "category_specific_fields",
       "co_2_emission_rating_eu",
       "currency",
       "custom_label_0",
@@ -1913,13 +1884,6 @@ public class ProductFeed extends APINode {
     }
     public APIRequestGetHomeListings requestAvailabilityField (boolean value) {
       this.requestField("availability", value);
-      return this;
-    }
-    public APIRequestGetHomeListings requestCategorySpecificFieldsField () {
-      return this.requestCategorySpecificFieldsField(true);
-    }
-    public APIRequestGetHomeListings requestCategorySpecificFieldsField (boolean value) {
-      this.requestField("category_specific_fields", value);
       return this;
     }
     public APIRequestGetHomeListings requestCo2EmissionRatingEuField () {
@@ -2263,7 +2227,6 @@ public class ProductFeed extends APINode {
       "applinks",
       "brand",
       "category",
-      "category_specific_fields",
       "currency",
       "custom_label_0",
       "custom_label_1",
@@ -2434,13 +2397,6 @@ public class ProductFeed extends APINode {
     }
     public APIRequestGetHotels requestCategoryField (boolean value) {
       this.requestField("category", value);
-      return this;
-    }
-    public APIRequestGetHotels requestCategorySpecificFieldsField () {
-      return this.requestCategorySpecificFieldsField(true);
-    }
-    public APIRequestGetHotels requestCategorySpecificFieldsField (boolean value) {
-      this.requestField("category_specific_fields", value);
       return this;
     }
     public APIRequestGetHotels requestCurrencyField () {
@@ -2679,299 +2635,6 @@ public class ProductFeed extends APINode {
     }
     public APIRequestGetHotels requestVisibilityField (boolean value) {
       this.requestField("visibility", value);
-      return this;
-    }
-  }
-
-  public static class APIRequestGetMediaTitles extends APIRequest<MediaTitle> {
-
-    APINodeList<MediaTitle> lastResponse = null;
-    @Override
-    public APINodeList<MediaTitle> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "bulk_pagination",
-      "filter",
-    };
-
-    public static final String[] FIELDS = {
-      "applinks",
-      "category_specific_fields",
-      "content_category",
-      "currency",
-      "description",
-      "fb_page_alias",
-      "fb_page_id",
-      "genres",
-      "id",
-      "image_fetch_status",
-      "images",
-      "kg_fb_id",
-      "media_title_id",
-      "price",
-      "sanitized_images",
-      "title",
-      "title_display_name",
-      "unit_price",
-      "url",
-      "visibility",
-      "wiki_data_item",
-    };
-
-    @Override
-    public APINodeList<MediaTitle> parseResponse(String response, String header) throws APIException {
-      return MediaTitle.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<MediaTitle> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<MediaTitle> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<MediaTitle>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<MediaTitle>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<MediaTitle>>() {
-           public APINodeList<MediaTitle> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetMediaTitles.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         },
-         MoreExecutors.directExecutor()
-      );
-    };
-
-    public APIRequestGetMediaTitles(String nodeId, APIContext context) {
-      super(context, nodeId, "/media_titles", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetMediaTitles setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetMediaTitles setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetMediaTitles setBulkPagination (Boolean bulkPagination) {
-      this.setParam("bulk_pagination", bulkPagination);
-      return this;
-    }
-    public APIRequestGetMediaTitles setBulkPagination (String bulkPagination) {
-      this.setParam("bulk_pagination", bulkPagination);
-      return this;
-    }
-
-    public APIRequestGetMediaTitles setFilter (Object filter) {
-      this.setParam("filter", filter);
-      return this;
-    }
-    public APIRequestGetMediaTitles setFilter (String filter) {
-      this.setParam("filter", filter);
-      return this;
-    }
-
-    public APIRequestGetMediaTitles requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetMediaTitles requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetMediaTitles requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetMediaTitles requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetMediaTitles requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetMediaTitles requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGetMediaTitles requestApplinksField () {
-      return this.requestApplinksField(true);
-    }
-    public APIRequestGetMediaTitles requestApplinksField (boolean value) {
-      this.requestField("applinks", value);
-      return this;
-    }
-    public APIRequestGetMediaTitles requestCategorySpecificFieldsField () {
-      return this.requestCategorySpecificFieldsField(true);
-    }
-    public APIRequestGetMediaTitles requestCategorySpecificFieldsField (boolean value) {
-      this.requestField("category_specific_fields", value);
-      return this;
-    }
-    public APIRequestGetMediaTitles requestContentCategoryField () {
-      return this.requestContentCategoryField(true);
-    }
-    public APIRequestGetMediaTitles requestContentCategoryField (boolean value) {
-      this.requestField("content_category", value);
-      return this;
-    }
-    public APIRequestGetMediaTitles requestCurrencyField () {
-      return this.requestCurrencyField(true);
-    }
-    public APIRequestGetMediaTitles requestCurrencyField (boolean value) {
-      this.requestField("currency", value);
-      return this;
-    }
-    public APIRequestGetMediaTitles requestDescriptionField () {
-      return this.requestDescriptionField(true);
-    }
-    public APIRequestGetMediaTitles requestDescriptionField (boolean value) {
-      this.requestField("description", value);
-      return this;
-    }
-    public APIRequestGetMediaTitles requestFbPageAliasField () {
-      return this.requestFbPageAliasField(true);
-    }
-    public APIRequestGetMediaTitles requestFbPageAliasField (boolean value) {
-      this.requestField("fb_page_alias", value);
-      return this;
-    }
-    public APIRequestGetMediaTitles requestFbPageIdField () {
-      return this.requestFbPageIdField(true);
-    }
-    public APIRequestGetMediaTitles requestFbPageIdField (boolean value) {
-      this.requestField("fb_page_id", value);
-      return this;
-    }
-    public APIRequestGetMediaTitles requestGenresField () {
-      return this.requestGenresField(true);
-    }
-    public APIRequestGetMediaTitles requestGenresField (boolean value) {
-      this.requestField("genres", value);
-      return this;
-    }
-    public APIRequestGetMediaTitles requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetMediaTitles requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGetMediaTitles requestImageFetchStatusField () {
-      return this.requestImageFetchStatusField(true);
-    }
-    public APIRequestGetMediaTitles requestImageFetchStatusField (boolean value) {
-      this.requestField("image_fetch_status", value);
-      return this;
-    }
-    public APIRequestGetMediaTitles requestImagesField () {
-      return this.requestImagesField(true);
-    }
-    public APIRequestGetMediaTitles requestImagesField (boolean value) {
-      this.requestField("images", value);
-      return this;
-    }
-    public APIRequestGetMediaTitles requestKgFbIdField () {
-      return this.requestKgFbIdField(true);
-    }
-    public APIRequestGetMediaTitles requestKgFbIdField (boolean value) {
-      this.requestField("kg_fb_id", value);
-      return this;
-    }
-    public APIRequestGetMediaTitles requestMediaTitleIdField () {
-      return this.requestMediaTitleIdField(true);
-    }
-    public APIRequestGetMediaTitles requestMediaTitleIdField (boolean value) {
-      this.requestField("media_title_id", value);
-      return this;
-    }
-    public APIRequestGetMediaTitles requestPriceField () {
-      return this.requestPriceField(true);
-    }
-    public APIRequestGetMediaTitles requestPriceField (boolean value) {
-      this.requestField("price", value);
-      return this;
-    }
-    public APIRequestGetMediaTitles requestSanitizedImagesField () {
-      return this.requestSanitizedImagesField(true);
-    }
-    public APIRequestGetMediaTitles requestSanitizedImagesField (boolean value) {
-      this.requestField("sanitized_images", value);
-      return this;
-    }
-    public APIRequestGetMediaTitles requestTitleField () {
-      return this.requestTitleField(true);
-    }
-    public APIRequestGetMediaTitles requestTitleField (boolean value) {
-      this.requestField("title", value);
-      return this;
-    }
-    public APIRequestGetMediaTitles requestTitleDisplayNameField () {
-      return this.requestTitleDisplayNameField(true);
-    }
-    public APIRequestGetMediaTitles requestTitleDisplayNameField (boolean value) {
-      this.requestField("title_display_name", value);
-      return this;
-    }
-    public APIRequestGetMediaTitles requestUnitPriceField () {
-      return this.requestUnitPriceField(true);
-    }
-    public APIRequestGetMediaTitles requestUnitPriceField (boolean value) {
-      this.requestField("unit_price", value);
-      return this;
-    }
-    public APIRequestGetMediaTitles requestUrlField () {
-      return this.requestUrlField(true);
-    }
-    public APIRequestGetMediaTitles requestUrlField (boolean value) {
-      this.requestField("url", value);
-      return this;
-    }
-    public APIRequestGetMediaTitles requestVisibilityField () {
-      return this.requestVisibilityField(true);
-    }
-    public APIRequestGetMediaTitles requestVisibilityField (boolean value) {
-      this.requestField("visibility", value);
-      return this;
-    }
-    public APIRequestGetMediaTitles requestWikiDataItemField () {
-      return this.requestWikiDataItemField(true);
-    }
-    public APIRequestGetMediaTitles requestWikiDataItemField (boolean value) {
-      this.requestField("wiki_data_item", value);
       return this;
     }
   }
@@ -4876,7 +4539,7 @@ public class ProductFeed extends APINode {
       "body_style",
       "cashback_currency",
       "cashback_price",
-      "category_specific_fields",
+      "comscore_market_codes",
       "currency",
       "custom_label_0",
       "custom_label_1",
@@ -5101,11 +4764,11 @@ public class ProductFeed extends APINode {
       this.requestField("cashback_price", value);
       return this;
     }
-    public APIRequestGetVehicleOffers requestCategorySpecificFieldsField () {
-      return this.requestCategorySpecificFieldsField(true);
+    public APIRequestGetVehicleOffers requestComscoreMarketCodesField () {
+      return this.requestComscoreMarketCodesField(true);
     }
-    public APIRequestGetVehicleOffers requestCategorySpecificFieldsField (boolean value) {
-      this.requestField("category_specific_fields", value);
+    public APIRequestGetVehicleOffers requestComscoreMarketCodesField (boolean value) {
+      this.requestField("comscore_market_codes", value);
       return this;
     }
     public APIRequestGetVehicleOffers requestCurrencyField () {
@@ -5486,7 +5149,6 @@ public class ProductFeed extends APINode {
       "availability_circle_radius",
       "availability_circle_radius_unit",
       "body_style",
-      "category_specific_fields",
       "condition",
       "currency",
       "custom_label_0",
@@ -5695,13 +5357,6 @@ public class ProductFeed extends APINode {
     }
     public APIRequestGetVehicles requestBodyStyleField (boolean value) {
       this.requestField("body_style", value);
-      return this;
-    }
-    public APIRequestGetVehicles requestCategorySpecificFieldsField () {
-      return this.requestCategorySpecificFieldsField(true);
-    }
-    public APIRequestGetVehicles requestCategorySpecificFieldsField (boolean value) {
-      this.requestField("category_specific_fields", value);
       return this;
     }
     public APIRequestGetVehicles requestConditionField () {
@@ -6754,6 +6409,12 @@ public class ProductFeed extends APINode {
   }
 
   public static enum EnumFeedType {
+      @SerializedName("ACTIVITY")
+      VALUE_ACTIVITY("ACTIVITY"),
+      @SerializedName("APP_AND_SOFTWARE")
+      VALUE_APP_AND_SOFTWARE("APP_AND_SOFTWARE"),
+      @SerializedName("ARTICLE_AND_PUBLICATION")
+      VALUE_ARTICLE_AND_PUBLICATION("ARTICLE_AND_PUBLICATION"),
       @SerializedName("AUTOMOTIVE_MODEL")
       VALUE_AUTOMOTIVE_MODEL("AUTOMOTIVE_MODEL"),
       @SerializedName("COLLECTION")
@@ -6778,6 +6439,8 @@ public class ProductFeed extends APINode {
       VALUE_PRODUCTS("PRODUCTS"),
       @SerializedName("PRODUCT_RATINGS_AND_REVIEWS")
       VALUE_PRODUCT_RATINGS_AND_REVIEWS("PRODUCT_RATINGS_AND_REVIEWS"),
+      @SerializedName("SERVICE")
+      VALUE_SERVICE("SERVICE"),
       @SerializedName("TRANSACTABLE_ITEMS")
       VALUE_TRANSACTABLE_ITEMS("TRANSACTABLE_ITEMS"),
       @SerializedName("VEHICLES")

@@ -65,6 +65,10 @@ public class AdCreativeSiteLinksSpec extends APINode {
   private String mSiteLinkUrl = null;
   @SerializedName("site_link_url_anchor")
   private String mSiteLinkUrlAnchor = null;
+  @SerializedName("site_link_url_recommender_type")
+  private String mSiteLinkUrlRecommenderType = null;
+  @SerializedName("site_link_website_data_source")
+  private String mSiteLinkWebsiteDataSource = null;
   protected static Gson gson = null;
 
   public AdCreativeSiteLinksSpec() {
@@ -324,6 +328,24 @@ public class AdCreativeSiteLinksSpec extends APINode {
     return this;
   }
 
+  public String getFieldSiteLinkUrlRecommenderType() {
+    return mSiteLinkUrlRecommenderType;
+  }
+
+  public AdCreativeSiteLinksSpec setFieldSiteLinkUrlRecommenderType(String value) {
+    this.mSiteLinkUrlRecommenderType = value;
+    return this;
+  }
+
+  public String getFieldSiteLinkWebsiteDataSource() {
+    return mSiteLinkWebsiteDataSource;
+  }
+
+  public AdCreativeSiteLinksSpec setFieldSiteLinkWebsiteDataSource(String value) {
+    this.mSiteLinkWebsiteDataSource = value;
+    return this;
+  }
+
 
 
 
@@ -353,6 +375,8 @@ public class AdCreativeSiteLinksSpec extends APINode {
     this.mSiteLinkTitle = instance.mSiteLinkTitle;
     this.mSiteLinkUrl = instance.mSiteLinkUrl;
     this.mSiteLinkUrlAnchor = instance.mSiteLinkUrlAnchor;
+    this.mSiteLinkUrlRecommenderType = instance.mSiteLinkUrlRecommenderType;
+    this.mSiteLinkWebsiteDataSource = instance.mSiteLinkWebsiteDataSource;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

@@ -85,6 +85,8 @@ public class CustomAudience extends APINode {
   private List<String> mLookalikeAudienceIds = null;
   @SerializedName("lookalike_spec")
   private LookalikeSpec mLookalikeSpec = null;
+  @SerializedName("messenger_marketing_messages_page")
+  private Page mMessengerMarketingMessagesPage = null;
   @SerializedName("name")
   private String mName = null;
   @SerializedName("operation_status")
@@ -484,6 +486,13 @@ public class CustomAudience extends APINode {
     return mLookalikeSpec;
   }
 
+  public Page getFieldMessengerMarketingMessagesPage() {
+    if (mMessengerMarketingMessagesPage != null) {
+      mMessengerMarketingMessagesPage.context = getContext();
+    }
+    return mMessengerMarketingMessagesPage;
+  }
+
   public String getFieldName() {
     return mName;
   }
@@ -740,10 +749,12 @@ public class CustomAudience extends APINode {
       "is_tax_id_required",
       "liable_address",
       "line_numbers",
+      "marketing_messages_settings",
       "media_agency",
       "min_campaign_group_spend_cap",
       "min_daily_budget",
       "name",
+      "offsite_clo_signal_status",
       "offsite_pixels_tos_accepted",
       "opportunity_score",
       "owner",
@@ -1198,6 +1209,13 @@ public class CustomAudience extends APINode {
       this.requestField("line_numbers", value);
       return this;
     }
+    public APIRequestGetAdAccounts requestMarketingMessagesSettingsField () {
+      return this.requestMarketingMessagesSettingsField(true);
+    }
+    public APIRequestGetAdAccounts requestMarketingMessagesSettingsField (boolean value) {
+      this.requestField("marketing_messages_settings", value);
+      return this;
+    }
     public APIRequestGetAdAccounts requestMediaAgencyField () {
       return this.requestMediaAgencyField(true);
     }
@@ -1224,6 +1242,13 @@ public class CustomAudience extends APINode {
     }
     public APIRequestGetAdAccounts requestNameField (boolean value) {
       this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestOffsiteCloSignalStatusField () {
+      return this.requestOffsiteCloSignalStatusField(true);
+    }
+    public APIRequestGetAdAccounts requestOffsiteCloSignalStatusField (boolean value) {
+      this.requestField("offsite_clo_signal_status", value);
       return this;
     }
     public APIRequestGetAdAccounts requestOffsitePixelsTosAcceptedField () {
@@ -3239,6 +3264,7 @@ public class CustomAudience extends APINode {
       "is_value_based",
       "lookalike_audience_ids",
       "lookalike_spec",
+      "messenger_marketing_messages_page",
       "name",
       "operation_status",
       "opt_out_link",
@@ -3536,6 +3562,13 @@ public class CustomAudience extends APINode {
       this.requestField("lookalike_spec", value);
       return this;
     }
+    public APIRequestGet requestMessengerMarketingMessagesPageField () {
+      return this.requestMessengerMarketingMessagesPageField(true);
+    }
+    public APIRequestGet requestMessengerMarketingMessagesPageField (boolean value) {
+      this.requestField("messenger_marketing_messages_page", value);
+      return this;
+    }
     public APIRequestGet requestNameField () {
       return this.requestNameField(true);
     }
@@ -3701,6 +3734,7 @@ public class CustomAudience extends APINode {
       "rule",
       "rule_aggregation",
       "tags",
+      "use_for_products",
       "use_in_campaigns",
     };
 
@@ -3919,6 +3953,15 @@ public class CustomAudience extends APINode {
       return this;
     }
 
+    public APIRequestUpdate setUseForProducts (List<CustomAudience.EnumUseForProducts> useForProducts) {
+      this.setParam("use_for_products", useForProducts);
+      return this;
+    }
+    public APIRequestUpdate setUseForProducts (String useForProducts) {
+      this.setParam("use_for_products", useForProducts);
+      return this;
+    }
+
     public APIRequestUpdate setUseInCampaigns (Boolean useInCampaigns) {
       this.setParam("use_in_campaigns", useInCampaigns);
       return this;
@@ -4129,6 +4172,25 @@ public class CustomAudience extends APINode {
       }
   }
 
+  public static enum EnumUsageRestriction {
+      @SerializedName("EXCLUSION_ONLY")
+      VALUE_EXCLUSION_ONLY("EXCLUSION_ONLY"),
+      @SerializedName("NONE")
+      VALUE_NONE("NONE"),
+      ;
+
+      private String value;
+
+      private EnumUsageRestriction(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
   public static enum EnumUseForProducts {
       @SerializedName("ADS")
       VALUE_ADS("ADS"),
@@ -4204,6 +4266,7 @@ public class CustomAudience extends APINode {
     this.mIsValueBased = instance.mIsValueBased;
     this.mLookalikeAudienceIds = instance.mLookalikeAudienceIds;
     this.mLookalikeSpec = instance.mLookalikeSpec;
+    this.mMessengerMarketingMessagesPage = instance.mMessengerMarketingMessagesPage;
     this.mName = instance.mName;
     this.mOperationStatus = instance.mOperationStatus;
     this.mOptOutLink = instance.mOptOutLink;

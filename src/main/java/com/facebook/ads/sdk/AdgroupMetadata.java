@@ -53,6 +53,8 @@ public class AdgroupMetadata extends APINode {
   private String mCarouselStyle = null;
   @SerializedName("carousel_with_static_card_style")
   private String mCarouselWithStaticCardStyle = null;
+  @SerializedName("is_pca_unified_format_ad")
+  private Boolean mIsPcaUnifiedFormatAd = null;
   protected static Gson gson = null;
 
   public AdgroupMetadata() {
@@ -258,6 +260,15 @@ public class AdgroupMetadata extends APINode {
     return this;
   }
 
+  public Boolean getFieldIsPcaUnifiedFormatAd() {
+    return mIsPcaUnifiedFormatAd;
+  }
+
+  public AdgroupMetadata setFieldIsPcaUnifiedFormatAd(Boolean value) {
+    this.mIsPcaUnifiedFormatAd = value;
+    return this;
+  }
+
 
 
 
@@ -281,6 +292,7 @@ public class AdgroupMetadata extends APINode {
     this.mAdgroupMediaSource = instance.mAdgroupMediaSource;
     this.mCarouselStyle = instance.mCarouselStyle;
     this.mCarouselWithStaticCardStyle = instance.mCarouselWithStaticCardStyle;
+    this.mIsPcaUnifiedFormatAd = instance.mIsPcaUnifiedFormatAd;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

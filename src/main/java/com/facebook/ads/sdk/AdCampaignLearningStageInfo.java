@@ -53,6 +53,10 @@ public class AdCampaignLearningStageInfo extends APINode {
   private String mDynamicLpStatus = null;
   @SerializedName("last_sig_edit_ts")
   private Long mLastSigEditTs = null;
+  @SerializedName("recommended_budget_prediction")
+  private Object mRecommendedBudgetPrediction = null;
+  @SerializedName("sigedit_removal")
+  private Boolean mSigeditRemoval = null;
   @SerializedName("status")
   private String mStatus = null;
   protected static Gson gson = null;
@@ -260,6 +264,24 @@ public class AdCampaignLearningStageInfo extends APINode {
     return this;
   }
 
+  public Object getFieldRecommendedBudgetPrediction() {
+    return mRecommendedBudgetPrediction;
+  }
+
+  public AdCampaignLearningStageInfo setFieldRecommendedBudgetPrediction(Object value) {
+    this.mRecommendedBudgetPrediction = value;
+    return this;
+  }
+
+  public Boolean getFieldSigeditRemoval() {
+    return mSigeditRemoval;
+  }
+
+  public AdCampaignLearningStageInfo setFieldSigeditRemoval(Boolean value) {
+    this.mSigeditRemoval = value;
+    return this;
+  }
+
   public String getFieldStatus() {
     return mStatus;
   }
@@ -292,6 +314,8 @@ public class AdCampaignLearningStageInfo extends APINode {
     this.mDynamicLpDaysThreshold = instance.mDynamicLpDaysThreshold;
     this.mDynamicLpStatus = instance.mDynamicLpStatus;
     this.mLastSigEditTs = instance.mLastSigEditTs;
+    this.mRecommendedBudgetPrediction = instance.mRecommendedBudgetPrediction;
+    this.mSigeditRemoval = instance.mSigeditRemoval;
     this.mStatus = instance.mStatus;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

@@ -59,6 +59,8 @@ public class AdAssetTargetRuleTargeting extends APINode {
   private List<String> mPublisherPlatforms = null;
   @SerializedName("threads_positions")
   private List<String> mThreadsPositions = null;
+  @SerializedName("whatsapp_positions")
+  private List<String> mWhatsappPositions = null;
   protected static Gson gson = null;
 
   public AdAssetTargetRuleTargeting() {
@@ -296,6 +298,15 @@ public class AdAssetTargetRuleTargeting extends APINode {
     return this;
   }
 
+  public List<String> getFieldWhatsappPositions() {
+    return mWhatsappPositions;
+  }
+
+  public AdAssetTargetRuleTargeting setFieldWhatsappPositions(List<String> value) {
+    this.mWhatsappPositions = value;
+    return this;
+  }
+
 
 
   public static enum EnumDevicePlatforms {
@@ -341,6 +352,7 @@ public class AdAssetTargetRuleTargeting extends APINode {
     this.mInstagramPositions = instance.mInstagramPositions;
     this.mPublisherPlatforms = instance.mPublisherPlatforms;
     this.mThreadsPositions = instance.mThreadsPositions;
+    this.mWhatsappPositions = instance.mWhatsappPositions;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

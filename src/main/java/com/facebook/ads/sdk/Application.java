@@ -109,6 +109,8 @@ public class Application extends APINode {
   private Map<String, String> mClientConfig = null;
   @SerializedName("company")
   private String mCompany = null;
+  @SerializedName("config_ids")
+  private List<Object> mConfigIds = null;
   @SerializedName("configured_ios_sso")
   private Boolean mConfiguredIosSso = null;
   @SerializedName("contact_email")
@@ -658,14 +660,6 @@ public class Application extends APINode {
     return new APIRequestGetSgwInstallDeferralLink(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestGetSubscribedDomains getSubscribedDomains() {
-    return new APIRequestGetSubscribedDomains(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestGetSubscribedDomainsPhishing getSubscribedDomainsPhishing() {
-    return new APIRequestGetSubscribedDomainsPhishing(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestDeleteSubscriptions deleteSubscriptions() {
     return new APIRequestDeleteSubscriptions(this.getPrefixedId().toString(), context);
   }
@@ -676,6 +670,14 @@ public class Application extends APINode {
 
   public APIRequestCreateSubscription createSubscription() {
     return new APIRequestCreateSubscription(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetThreatPrivacyGroupsMember getThreatPrivacyGroupsMember() {
+    return new APIRequestGetThreatPrivacyGroupsMember(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetThreatPrivacyGroupsOwner getThreatPrivacyGroupsOwner() {
+    return new APIRequestGetThreatPrivacyGroupsOwner(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestCreateUpload createUpload() {
@@ -836,6 +838,10 @@ public class Application extends APINode {
 
   public String getFieldCompany() {
     return mCompany;
+  }
+
+  public List<Object> getFieldConfigIds() {
+    return mConfigIds;
   }
 
   public Boolean getFieldConfiguredIosSso() {
@@ -5188,10 +5194,12 @@ public class Application extends APINode {
       "is_tax_id_required",
       "liable_address",
       "line_numbers",
+      "marketing_messages_settings",
       "media_agency",
       "min_campaign_group_spend_cap",
       "min_daily_budget",
       "name",
+      "offsite_clo_signal_status",
       "offsite_pixels_tos_accepted",
       "opportunity_score",
       "owner",
@@ -5646,6 +5654,13 @@ public class Application extends APINode {
       this.requestField("line_numbers", value);
       return this;
     }
+    public APIRequestGetAuthorizedAdAccounts requestMarketingMessagesSettingsField () {
+      return this.requestMarketingMessagesSettingsField(true);
+    }
+    public APIRequestGetAuthorizedAdAccounts requestMarketingMessagesSettingsField (boolean value) {
+      this.requestField("marketing_messages_settings", value);
+      return this;
+    }
     public APIRequestGetAuthorizedAdAccounts requestMediaAgencyField () {
       return this.requestMediaAgencyField(true);
     }
@@ -5672,6 +5687,13 @@ public class Application extends APINode {
     }
     public APIRequestGetAuthorizedAdAccounts requestNameField (boolean value) {
       this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetAuthorizedAdAccounts requestOffsiteCloSignalStatusField () {
+      return this.requestOffsiteCloSignalStatusField(true);
+    }
+    public APIRequestGetAuthorizedAdAccounts requestOffsiteCloSignalStatusField (boolean value) {
+      this.requestField("offsite_clo_signal_status", value);
       return this;
     }
     public APIRequestGetAuthorizedAdAccounts requestOffsitePixelsTosAcceptedField () {
@@ -9310,216 +9332,6 @@ public class Application extends APINode {
 
   }
 
-  public static class APIRequestGetSubscribedDomains extends APIRequest<APINode> {
-
-    APINodeList<APINode> lastResponse = null;
-    @Override
-    public APINodeList<APINode> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<APINode> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetSubscribedDomains.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         },
-         MoreExecutors.directExecutor()
-      );
-    };
-
-    public APIRequestGetSubscribedDomains(String nodeId, APIContext context) {
-      super(context, nodeId, "/subscribed_domains", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetSubscribedDomains setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetSubscribedDomains setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetSubscribedDomains requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetSubscribedDomains requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetSubscribedDomains requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetSubscribedDomains requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetSubscribedDomains requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetSubscribedDomains requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
-  public static class APIRequestGetSubscribedDomainsPhishing extends APIRequest<APINode> {
-
-    APINodeList<APINode> lastResponse = null;
-    @Override
-    public APINodeList<APINode> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<APINode> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetSubscribedDomainsPhishing.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         },
-         MoreExecutors.directExecutor()
-      );
-    };
-
-    public APIRequestGetSubscribedDomainsPhishing(String nodeId, APIContext context) {
-      super(context, nodeId, "/subscribed_domains_phishing", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetSubscribedDomainsPhishing setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetSubscribedDomainsPhishing setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetSubscribedDomainsPhishing requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetSubscribedDomainsPhishing requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetSubscribedDomainsPhishing requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetSubscribedDomainsPhishing requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetSubscribedDomainsPhishing requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetSubscribedDomainsPhishing requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
   public static class APIRequestDeleteSubscriptions extends APIRequest<APINode> {
 
     APINodeList<APINode> lastResponse = null;
@@ -9883,6 +9695,260 @@ public class Application extends APINode {
 
     @Override
     public APIRequestCreateSubscription requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestGetThreatPrivacyGroupsMember extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "description",
+      "group_id",
+      "name",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetThreatPrivacyGroupsMember.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestGetThreatPrivacyGroupsMember(String nodeId, APIContext context) {
+      super(context, nodeId, "/threat_privacy_groups_member", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetThreatPrivacyGroupsMember setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetThreatPrivacyGroupsMember setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetThreatPrivacyGroupsMember setDescription (String description) {
+      this.setParam("description", description);
+      return this;
+    }
+
+    public APIRequestGetThreatPrivacyGroupsMember setGroupId (Long groupId) {
+      this.setParam("group_id", groupId);
+      return this;
+    }
+    public APIRequestGetThreatPrivacyGroupsMember setGroupId (String groupId) {
+      this.setParam("group_id", groupId);
+      return this;
+    }
+
+    public APIRequestGetThreatPrivacyGroupsMember setName (String name) {
+      this.setParam("name", name);
+      return this;
+    }
+
+    public APIRequestGetThreatPrivacyGroupsMember requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetThreatPrivacyGroupsMember requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetThreatPrivacyGroupsMember requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetThreatPrivacyGroupsMember requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetThreatPrivacyGroupsMember requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetThreatPrivacyGroupsMember requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestGetThreatPrivacyGroupsOwner extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "description",
+      "group_id",
+      "name",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetThreatPrivacyGroupsOwner.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestGetThreatPrivacyGroupsOwner(String nodeId, APIContext context) {
+      super(context, nodeId, "/threat_privacy_groups_owner", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetThreatPrivacyGroupsOwner setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetThreatPrivacyGroupsOwner setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetThreatPrivacyGroupsOwner setDescription (String description) {
+      this.setParam("description", description);
+      return this;
+    }
+
+    public APIRequestGetThreatPrivacyGroupsOwner setGroupId (Long groupId) {
+      this.setParam("group_id", groupId);
+      return this;
+    }
+    public APIRequestGetThreatPrivacyGroupsOwner setGroupId (String groupId) {
+      this.setParam("group_id", groupId);
+      return this;
+    }
+
+    public APIRequestGetThreatPrivacyGroupsOwner setName (String name) {
+      this.setParam("name", name);
+      return this;
+    }
+
+    public APIRequestGetThreatPrivacyGroupsOwner requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetThreatPrivacyGroupsOwner requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetThreatPrivacyGroupsOwner requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetThreatPrivacyGroupsOwner requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetThreatPrivacyGroupsOwner requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetThreatPrivacyGroupsOwner requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
@@ -10332,6 +10398,7 @@ public class Application extends APINode {
       "category",
       "client_config",
       "company",
+      "config_ids",
       "configured_ios_sso",
       "contact_email",
       "created_time",
@@ -10737,6 +10804,13 @@ public class Application extends APINode {
     }
     public APIRequestGet requestCompanyField (boolean value) {
       this.requestField("company", value);
+      return this;
+    }
+    public APIRequestGet requestConfigIdsField () {
+      return this.requestConfigIdsField(true);
+    }
+    public APIRequestGet requestConfigIdsField (boolean value) {
+      this.requestField("config_ids", value);
       return this;
     }
     public APIRequestGet requestConfiguredIosSsoField () {
@@ -11959,6 +12033,7 @@ public class Application extends APINode {
     this.mCategory = instance.mCategory;
     this.mClientConfig = instance.mClientConfig;
     this.mCompany = instance.mCompany;
+    this.mConfigIds = instance.mConfigIds;
     this.mConfiguredIosSso = instance.mConfiguredIosSso;
     this.mContactEmail = instance.mContactEmail;
     this.mCreatedTime = instance.mCreatedTime;

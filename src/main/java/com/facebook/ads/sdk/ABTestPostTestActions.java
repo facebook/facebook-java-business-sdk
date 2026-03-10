@@ -43,6 +43,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class ABTestPostTestActions extends APINode {
   @SerializedName("auto_change_budget_to_winner")
   private Long mAutoChangeBudgetToWinner = null;
+  @SerializedName("winner_budget")
+  private String mWinnerBudget = null;
   protected static Gson gson = null;
 
   public ABTestPostTestActions() {
@@ -203,6 +205,15 @@ public class ABTestPostTestActions extends APINode {
     return this;
   }
 
+  public String getFieldWinnerBudget() {
+    return mWinnerBudget;
+  }
+
+  public ABTestPostTestActions setFieldWinnerBudget(String value) {
+    this.mWinnerBudget = value;
+    return this;
+  }
+
 
 
 
@@ -221,6 +232,7 @@ public class ABTestPostTestActions extends APINode {
 
   public ABTestPostTestActions copyFrom(ABTestPostTestActions instance) {
     this.mAutoChangeBudgetToWinner = instance.mAutoChangeBudgetToWinner;
+    this.mWinnerBudget = instance.mWinnerBudget;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

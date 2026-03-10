@@ -830,6 +830,10 @@ public class PagePostExperiment extends APINode {
       VALUE_SHARES("SHARES"),
       @SerializedName("VIDEO_VIEWS_60S")
       VALUE_VIDEO_VIEWS_60S("VIDEO_VIEWS_60S"),
+      @SerializedName("VIEWERS")
+      VALUE_VIEWERS("VIEWERS"),
+      @SerializedName("VIEWS")
+      VALUE_VIEWS("VIEWS"),
       ;
 
       private String value;

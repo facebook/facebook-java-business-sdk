@@ -40,31 +40,23 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class MerchantCompliance extends APINode {
-  @SerializedName("active_campaigns")
-  private Long mActiveCampaigns = null;
-  @SerializedName("compliance_status")
-  private String mComplianceStatus = null;
-  @SerializedName("count_down_start_time")
-  private Long mCountDownStartTime = null;
-  @SerializedName("purchase")
-  private Long mPurchase = null;
-  @SerializedName("purchase_conversion_value")
-  private Double mPurchaseConversionValue = null;
+public class CatalogGenericIngestionSessionErrorsGet extends APINode {
+  @SerializedName("data")
+  private List<Object> mData = null;
   protected static Gson gson = null;
 
-  public MerchantCompliance() {
+  public CatalogGenericIngestionSessionErrorsGet() {
   }
 
   public String getId() {
     return null;
   }
-  public static MerchantCompliance loadJSON(String json, APIContext context, String header) {
-    MerchantCompliance merchantCompliance = getGson().fromJson(json, MerchantCompliance.class);
+  public static CatalogGenericIngestionSessionErrorsGet loadJSON(String json, APIContext context, String header) {
+    CatalogGenericIngestionSessionErrorsGet catalogGenericIngestionSessionErrorsGet = getGson().fromJson(json, CatalogGenericIngestionSessionErrorsGet.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(merchantCompliance.toString());
+      JsonElement o2 = parser.parse(catalogGenericIngestionSessionErrorsGet.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -74,14 +66,14 @@ public class MerchantCompliance extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    merchantCompliance.context = context;
-    merchantCompliance.rawValue = json;
-    merchantCompliance.header = header;
-    return merchantCompliance;
+    catalogGenericIngestionSessionErrorsGet.context = context;
+    catalogGenericIngestionSessionErrorsGet.rawValue = json;
+    catalogGenericIngestionSessionErrorsGet.header = header;
+    return catalogGenericIngestionSessionErrorsGet;
   }
 
-  public static APINodeList<MerchantCompliance> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<MerchantCompliance> merchantCompliances = new APINodeList<MerchantCompliance>(request, json, header);
+  public static APINodeList<CatalogGenericIngestionSessionErrorsGet> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<CatalogGenericIngestionSessionErrorsGet> catalogGenericIngestionSessionErrorsGets = new APINodeList<CatalogGenericIngestionSessionErrorsGet>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -92,9 +84,9 @@ public class MerchantCompliance extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          merchantCompliances.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          catalogGenericIngestionSessionErrorsGets.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return merchantCompliances;
+        return catalogGenericIngestionSessionErrorsGets;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -104,20 +96,20 @@ public class MerchantCompliance extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                merchantCompliances.setCursors(before, after);
+                catalogGenericIngestionSessionErrorsGets.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            merchantCompliances.setPaging(previous, next);
+            catalogGenericIngestionSessionErrorsGets.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              merchantCompliances.setAppSecret(context.getAppSecretProof());
+              catalogGenericIngestionSessionErrorsGets.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              merchantCompliances.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              catalogGenericIngestionSessionErrorsGets.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -128,23 +120,23 @@ public class MerchantCompliance extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  merchantCompliances.add(loadJSON(entry.getValue().toString(), context, header));
+                  catalogGenericIngestionSessionErrorsGets.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              merchantCompliances.add(loadJSON(obj.toString(), context, header));
+              catalogGenericIngestionSessionErrorsGets.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return merchantCompliances;
+          return catalogGenericIngestionSessionErrorsGets;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              merchantCompliances.add(loadJSON(entry.getValue().toString(), context, header));
+              catalogGenericIngestionSessionErrorsGets.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return merchantCompliances;
+          return catalogGenericIngestionSessionErrorsGets;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -161,20 +153,20 @@ public class MerchantCompliance extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              merchantCompliances.add(loadJSON(value.toString(), context, header));
+              catalogGenericIngestionSessionErrorsGets.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return merchantCompliances;
+            return catalogGenericIngestionSessionErrorsGets;
           }
 
           // Sixth, check if it's pure JsonObject
-          merchantCompliances.clear();
-          merchantCompliances.add(loadJSON(json, context, header));
-          return merchantCompliances;
+          catalogGenericIngestionSessionErrorsGets.clear();
+          catalogGenericIngestionSessionErrorsGets.add(loadJSON(json, context, header));
+          return catalogGenericIngestionSessionErrorsGets;
         }
       }
     } catch (Exception e) {
@@ -202,48 +194,12 @@ public class MerchantCompliance extends APINode {
   }
 
 
-  public Long getFieldActiveCampaigns() {
-    return mActiveCampaigns;
+  public List<Object> getFieldData() {
+    return mData;
   }
 
-  public MerchantCompliance setFieldActiveCampaigns(Long value) {
-    this.mActiveCampaigns = value;
-    return this;
-  }
-
-  public String getFieldComplianceStatus() {
-    return mComplianceStatus;
-  }
-
-  public MerchantCompliance setFieldComplianceStatus(String value) {
-    this.mComplianceStatus = value;
-    return this;
-  }
-
-  public Long getFieldCountDownStartTime() {
-    return mCountDownStartTime;
-  }
-
-  public MerchantCompliance setFieldCountDownStartTime(Long value) {
-    this.mCountDownStartTime = value;
-    return this;
-  }
-
-  public Long getFieldPurchase() {
-    return mPurchase;
-  }
-
-  public MerchantCompliance setFieldPurchase(Long value) {
-    this.mPurchase = value;
-    return this;
-  }
-
-  public Double getFieldPurchaseConversionValue() {
-    return mPurchaseConversionValue;
-  }
-
-  public MerchantCompliance setFieldPurchaseConversionValue(Double value) {
-    this.mPurchaseConversionValue = value;
+  public CatalogGenericIngestionSessionErrorsGet setFieldData(List<Object> value) {
+    this.mData = value;
     return this;
   }
 
@@ -263,21 +219,17 @@ public class MerchantCompliance extends APINode {
     return gson;
   }
 
-  public MerchantCompliance copyFrom(MerchantCompliance instance) {
-    this.mActiveCampaigns = instance.mActiveCampaigns;
-    this.mComplianceStatus = instance.mComplianceStatus;
-    this.mCountDownStartTime = instance.mCountDownStartTime;
-    this.mPurchase = instance.mPurchase;
-    this.mPurchaseConversionValue = instance.mPurchaseConversionValue;
+  public CatalogGenericIngestionSessionErrorsGet copyFrom(CatalogGenericIngestionSessionErrorsGet instance) {
+    this.mData = instance.mData;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<MerchantCompliance> getParser() {
-    return new APIRequest.ResponseParser<MerchantCompliance>() {
-      public APINodeList<MerchantCompliance> parseResponse(String response, APIContext context, APIRequest<MerchantCompliance> request, String header) throws MalformedResponseException {
-        return MerchantCompliance.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<CatalogGenericIngestionSessionErrorsGet> getParser() {
+    return new APIRequest.ResponseParser<CatalogGenericIngestionSessionErrorsGet>() {
+      public APINodeList<CatalogGenericIngestionSessionErrorsGet> parseResponse(String response, APIContext context, APIRequest<CatalogGenericIngestionSessionErrorsGet> request, String header) throws MalformedResponseException {
+        return CatalogGenericIngestionSessionErrorsGet.parseResponse(response, context, request, header);
       }
     };
   }

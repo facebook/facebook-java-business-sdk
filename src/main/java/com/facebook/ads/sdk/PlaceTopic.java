@@ -51,8 +51,6 @@ public class PlaceTopic extends APINode {
   private String mId = null;
   @SerializedName("name")
   private String mName = null;
-  @SerializedName("parent_ids")
-  private List<String> mParentIds = null;
   @SerializedName("plural_name")
   private String mPluralName = null;
   @SerializedName("top_subtopic_names")
@@ -291,10 +289,6 @@ public class PlaceTopic extends APINode {
     return mName;
   }
 
-  public List<String> getFieldParentIds() {
-    return mParentIds;
-  }
-
   public String getFieldPluralName() {
     return mPluralName;
   }
@@ -322,7 +316,6 @@ public class PlaceTopic extends APINode {
       "icon_url",
       "id",
       "name",
-      "parent_ids",
       "plural_name",
       "top_subtopic_names",
     };
@@ -461,13 +454,6 @@ public class PlaceTopic extends APINode {
       this.requestField("name", value);
       return this;
     }
-    public APIRequestGet requestParentIdsField () {
-      return this.requestParentIdsField(true);
-    }
-    public APIRequestGet requestParentIdsField (boolean value) {
-      this.requestField("parent_ids", value);
-      return this;
-    }
     public APIRequestGet requestPluralNameField () {
       return this.requestPluralNameField(true);
     }
@@ -527,7 +513,6 @@ public class PlaceTopic extends APINode {
     this.mIconUrl = instance.mIconUrl;
     this.mId = instance.mId;
     this.mName = instance.mName;
-    this.mParentIds = instance.mParentIds;
     this.mPluralName = instance.mPluralName;
     this.mTopSubtopicNames = instance.mTopSubtopicNames;
     this.context = instance.context;

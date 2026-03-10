@@ -40,88 +40,23 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class InstagramThread extends APINode {
-  @SerializedName("folder")
-  private String mFolder = null;
+public class AdCampaignGroup extends APINode {
   @SerializedName("id")
   private String mId = null;
-  @SerializedName("participants")
-  private Object mParticipants = null;
-  @SerializedName("updated_time")
-  private String mUpdatedTime = null;
   protected static Gson gson = null;
 
-  InstagramThread() {
-  }
-
-  public InstagramThread(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public InstagramThread(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public InstagramThread fetch() throws APIException{
-    InstagramThread newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static InstagramThread fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<InstagramThread> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static InstagramThread fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<InstagramThread> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<InstagramThread> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<InstagramThread>)(
-      new APIRequest<InstagramThread>(context, "", "/", "GET", InstagramThread.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<InstagramThread>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", InstagramThread.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public AdCampaignGroup() {
   }
 
   public String getId() {
     return getFieldId().toString();
   }
-  public static InstagramThread loadJSON(String json, APIContext context, String header) {
-    InstagramThread instagramThread = getGson().fromJson(json, InstagramThread.class);
+  public static AdCampaignGroup loadJSON(String json, APIContext context, String header) {
+    AdCampaignGroup adCampaignGroup = getGson().fromJson(json, AdCampaignGroup.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(instagramThread.toString());
+      JsonElement o2 = parser.parse(adCampaignGroup.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -131,14 +66,14 @@ public class InstagramThread extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    instagramThread.context = context;
-    instagramThread.rawValue = json;
-    instagramThread.header = header;
-    return instagramThread;
+    adCampaignGroup.context = context;
+    adCampaignGroup.rawValue = json;
+    adCampaignGroup.header = header;
+    return adCampaignGroup;
   }
 
-  public static APINodeList<InstagramThread> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<InstagramThread> instagramThreads = new APINodeList<InstagramThread>(request, json, header);
+  public static APINodeList<AdCampaignGroup> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdCampaignGroup> adCampaignGroups = new APINodeList<AdCampaignGroup>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -149,9 +84,9 @@ public class InstagramThread extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          instagramThreads.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          adCampaignGroups.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return instagramThreads;
+        return adCampaignGroups;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -161,20 +96,20 @@ public class InstagramThread extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                instagramThreads.setCursors(before, after);
+                adCampaignGroups.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            instagramThreads.setPaging(previous, next);
+            adCampaignGroups.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              instagramThreads.setAppSecret(context.getAppSecretProof());
+              adCampaignGroups.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              instagramThreads.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              adCampaignGroups.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -185,23 +120,23 @@ public class InstagramThread extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  instagramThreads.add(loadJSON(entry.getValue().toString(), context, header));
+                  adCampaignGroups.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              instagramThreads.add(loadJSON(obj.toString(), context, header));
+              adCampaignGroups.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return instagramThreads;
+          return adCampaignGroups;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              instagramThreads.add(loadJSON(entry.getValue().toString(), context, header));
+              adCampaignGroups.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return instagramThreads;
+          return adCampaignGroups;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -218,20 +153,20 @@ public class InstagramThread extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              instagramThreads.add(loadJSON(value.toString(), context, header));
+              adCampaignGroups.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return instagramThreads;
+            return adCampaignGroups;
           }
 
           // Sixth, check if it's pure JsonObject
-          instagramThreads.clear();
-          instagramThreads.add(loadJSON(json, context, header));
-          return instagramThreads;
+          adCampaignGroups.clear();
+          adCampaignGroups.add(loadJSON(json, context, header));
+          return adCampaignGroups;
         }
       }
     } catch (Exception e) {
@@ -258,74 +193,64 @@ public class InstagramThread extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
+  public APIRequestGenget genget() {
+    return new APIRequestGenget(this.getId(), context);
   }
 
-
-  public String getFieldFolder() {
-    return mFolder;
-  }
 
   public String getFieldId() {
     return mId;
   }
 
-  public Object getFieldParticipants() {
-    return mParticipants;
-  }
-
-  public String getFieldUpdatedTime() {
-    return mUpdatedTime;
+  public AdCampaignGroup setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
 
 
 
-  public static class APIRequestGet extends APIRequest<InstagramThread> {
+  public static class APIRequestGenget extends APIRequest<AdCampaignGroupGet> {
 
-    InstagramThread lastResponse = null;
+    APINodeList<AdCampaignGroupGet> lastResponse = null;
     @Override
-    public InstagramThread getLastResponse() {
+    public APINodeList<AdCampaignGroupGet> getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "fields",
     };
 
     public static final String[] FIELDS = {
-      "folder",
-      "id",
-      "participants",
-      "updated_time",
     };
 
     @Override
-    public InstagramThread parseResponse(String response, String header) throws APIException {
-      return InstagramThread.parseResponse(response, getContext(), this, header).head();
+    public APINodeList<AdCampaignGroupGet> parseResponse(String response, String header) throws APIException {
+      return AdCampaignGroupGet.parseResponse(response, getContext(), this, header);
     }
 
     @Override
-    public InstagramThread execute() throws APIException {
+    public APINodeList<AdCampaignGroupGet> execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public InstagramThread execute(Map<String, Object> extraParams) throws APIException {
+    public APINodeList<AdCampaignGroupGet> execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<InstagramThread> executeAsync() throws APIException {
+    public ListenableFuture<APINodeList<AdCampaignGroupGet>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<InstagramThread> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<APINodeList<AdCampaignGroupGet>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, InstagramThread>() {
-           public InstagramThread apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, APINodeList<AdCampaignGroupGet>>() {
+           public APINodeList<AdCampaignGroupGet> apply(ResponseWrapper result) {
              try {
-               return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
+               return APIRequestGenget.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -335,28 +260,33 @@ public class InstagramThread extends APINode {
       );
     };
 
-    public APIRequestGet(String nodeId, APIContext context) {
+    public APIRequestGenget(String nodeId, APIContext context) {
       super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
     }
 
     @Override
-    public APIRequestGet setParam(String param, Object value) {
+    public APIRequestGenget setParam(String param, Object value) {
       setParamInternal(param, value);
       return this;
     }
 
     @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
+    public APIRequestGenget setParams(Map<String, Object> params) {
       setParamsInternal(params);
       return this;
     }
 
 
-    public APIRequestGet requestAllFields () {
+    public APIRequestGenget setFields (String fields) {
+      this.setParam("fields", fields);
+      return this;
+    }
+
+    public APIRequestGenget requestAllFields () {
       return this.requestAllFields(true);
     }
 
-    public APIRequestGet requestAllFields (boolean value) {
+    public APIRequestGenget requestAllFields (boolean value) {
       for (String field : FIELDS) {
         this.requestField(field, value);
       }
@@ -364,12 +294,12 @@ public class InstagramThread extends APINode {
     }
 
     @Override
-    public APIRequestGet requestFields (List<String> fields) {
+    public APIRequestGenget requestFields (List<String> fields) {
       return this.requestFields(fields, true);
     }
 
     @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
+    public APIRequestGenget requestFields (List<String> fields, boolean value) {
       for (String field : fields) {
         this.requestField(field, value);
       }
@@ -377,45 +307,17 @@ public class InstagramThread extends APINode {
     }
 
     @Override
-    public APIRequestGet requestField (String field) {
+    public APIRequestGenget requestField (String field) {
       this.requestField(field, true);
       return this;
     }
 
     @Override
-    public APIRequestGet requestField (String field, boolean value) {
+    public APIRequestGenget requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
 
-    public APIRequestGet requestFolderField () {
-      return this.requestFolderField(true);
-    }
-    public APIRequestGet requestFolderField (boolean value) {
-      this.requestField("folder", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGet requestParticipantsField () {
-      return this.requestParticipantsField(true);
-    }
-    public APIRequestGet requestParticipantsField (boolean value) {
-      this.requestField("participants", value);
-      return this;
-    }
-    public APIRequestGet requestUpdatedTimeField () {
-      return this.requestUpdatedTimeField(true);
-    }
-    public APIRequestGet requestUpdatedTimeField (boolean value) {
-      this.requestField("updated_time", value);
-      return this;
-    }
   }
 
 
@@ -432,20 +334,17 @@ public class InstagramThread extends APINode {
     return gson;
   }
 
-  public InstagramThread copyFrom(InstagramThread instance) {
-    this.mFolder = instance.mFolder;
+  public AdCampaignGroup copyFrom(AdCampaignGroup instance) {
     this.mId = instance.mId;
-    this.mParticipants = instance.mParticipants;
-    this.mUpdatedTime = instance.mUpdatedTime;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<InstagramThread> getParser() {
-    return new APIRequest.ResponseParser<InstagramThread>() {
-      public APINodeList<InstagramThread> parseResponse(String response, APIContext context, APIRequest<InstagramThread> request, String header) throws MalformedResponseException {
-        return InstagramThread.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<AdCampaignGroup> getParser() {
+    return new APIRequest.ResponseParser<AdCampaignGroup>() {
+      public APINodeList<AdCampaignGroup> parseResponse(String response, APIContext context, APIRequest<AdCampaignGroup> request, String header) throws MalformedResponseException {
+        return AdCampaignGroup.parseResponse(response, context, request, header);
       }
     };
   }

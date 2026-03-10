@@ -1418,6 +1418,7 @@ public class LiveVideo extends APINode {
       "preferred_audience",
       "press_contact",
       "price_range",
+      "priority_hours",
       "privacy_info_url",
       "produced_by",
       "products",
@@ -2356,6 +2357,13 @@ public class LiveVideo extends APINode {
     }
     public APIRequestGetCrosspostSharedPages requestPriceRangeField (boolean value) {
       this.requestField("price_range", value);
+      return this;
+    }
+    public APIRequestGetCrosspostSharedPages requestPriorityHoursField () {
+      return this.requestPriorityHoursField(true);
+    }
+    public APIRequestGetCrosspostSharedPages requestPriorityHoursField (boolean value) {
+      this.requestField("priority_hours", value);
       return this;
     }
     public APIRequestGetCrosspostSharedPages requestPrivacyInfoUrlField () {

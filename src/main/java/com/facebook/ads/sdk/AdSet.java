@@ -83,6 +83,10 @@ public class AdSet extends APINode {
   private EnumConfiguredStatus mConfiguredStatus = null;
   @SerializedName("created_time")
   private String mCreatedTime = null;
+  @SerializedName("creative_diversity_label")
+  private List<String> mCreativeDiversityLabel = null;
+  @SerializedName("creative_diversity_score")
+  private List<String> mCreativeDiversityScore = null;
   @SerializedName("creative_sequence")
   private List<String> mCreativeSequence = null;
   @SerializedName("creative_sequence_repetition_pattern")
@@ -703,6 +707,24 @@ public class AdSet extends APINode {
 
   public AdSet setFieldCreatedTime(String value) {
     this.mCreatedTime = value;
+    return this;
+  }
+
+  public List<String> getFieldCreativeDiversityLabel() {
+    return mCreativeDiversityLabel;
+  }
+
+  public AdSet setFieldCreativeDiversityLabel(List<String> value) {
+    this.mCreativeDiversityLabel = value;
+    return this;
+  }
+
+  public List<String> getFieldCreativeDiversityScore() {
+    return mCreativeDiversityScore;
+  }
+
+  public AdSet setFieldCreativeDiversityScore(List<String> value) {
+    this.mCreativeDiversityScore = value;
     return this;
   }
 
@@ -1795,6 +1817,7 @@ public class AdSet extends APINode {
       "link_destination_display_url",
       "link_og_id",
       "link_url",
+      "marketing_message_structured_spec",
       "media_sourcing_spec",
       "messenger_sponsored_message",
       "name",
@@ -1813,6 +1836,7 @@ public class AdSet extends APINode {
       "portrait_customizations",
       "product_data",
       "product_set_id",
+      "product_suggestion_settings",
       "recommender_settings",
       "regional_regulation_disclaimer_spec",
       "source_facebook_post_id",
@@ -2212,6 +2236,13 @@ public class AdSet extends APINode {
       this.requestField("link_url", value);
       return this;
     }
+    public APIRequestGetAdCreatives requestMarketingMessageStructuredSpecField () {
+      return this.requestMarketingMessageStructuredSpecField(true);
+    }
+    public APIRequestGetAdCreatives requestMarketingMessageStructuredSpecField (boolean value) {
+      this.requestField("marketing_message_structured_spec", value);
+      return this;
+    }
     public APIRequestGetAdCreatives requestMediaSourcingSpecField () {
       return this.requestMediaSourcingSpecField(true);
     }
@@ -2336,6 +2367,13 @@ public class AdSet extends APINode {
     }
     public APIRequestGetAdCreatives requestProductSetIdField (boolean value) {
       this.requestField("product_set_id", value);
+      return this;
+    }
+    public APIRequestGetAdCreatives requestProductSuggestionSettingsField () {
+      return this.requestProductSuggestionSettingsField(true);
+    }
+    public APIRequestGetAdCreatives requestProductSuggestionSettingsField (boolean value) {
+      this.requestField("product_suggestion_settings", value);
       return this;
     }
     public APIRequestGetAdCreatives requestRecommenderSettingsField () {
@@ -3890,6 +3928,8 @@ public class AdSet extends APINode {
       "campaign_id",
       "configured_status",
       "created_time",
+      "creative_diversity_label",
+      "creative_diversity_score",
       "creative_sequence",
       "creative_sequence_repetition_pattern",
       "daily_budget",
@@ -4216,6 +4256,20 @@ public class AdSet extends APINode {
     }
     public APIRequestGetCopies requestCreatedTimeField (boolean value) {
       this.requestField("created_time", value);
+      return this;
+    }
+    public APIRequestGetCopies requestCreativeDiversityLabelField () {
+      return this.requestCreativeDiversityLabelField(true);
+    }
+    public APIRequestGetCopies requestCreativeDiversityLabelField (boolean value) {
+      this.requestField("creative_diversity_label", value);
+      return this;
+    }
+    public APIRequestGetCopies requestCreativeDiversityScoreField () {
+      return this.requestCreativeDiversityScoreField(true);
+    }
+    public APIRequestGetCopies requestCreativeDiversityScoreField (boolean value) {
+      this.requestField("creative_diversity_score", value);
       return this;
     }
     public APIRequestGetCopies requestCreativeSequenceField () {
@@ -6120,6 +6174,8 @@ public class AdSet extends APINode {
       "campaign_id",
       "configured_status",
       "created_time",
+      "creative_diversity_label",
+      "creative_diversity_score",
       "creative_sequence",
       "creative_sequence_repetition_pattern",
       "daily_budget",
@@ -6446,6 +6502,20 @@ public class AdSet extends APINode {
     }
     public APIRequestGet requestCreatedTimeField (boolean value) {
       this.requestField("created_time", value);
+      return this;
+    }
+    public APIRequestGet requestCreativeDiversityLabelField () {
+      return this.requestCreativeDiversityLabelField(true);
+    }
+    public APIRequestGet requestCreativeDiversityLabelField (boolean value) {
+      this.requestField("creative_diversity_label", value);
+      return this;
+    }
+    public APIRequestGet requestCreativeDiversityScoreField () {
+      return this.requestCreativeDiversityScoreField(true);
+    }
+    public APIRequestGet requestCreativeDiversityScoreField (boolean value) {
+      this.requestField("creative_diversity_score", value);
       return this;
     }
     public APIRequestGet requestCreativeSequenceField () {
@@ -6855,6 +6925,7 @@ public class AdSet extends APINode {
       "end_time",
       "execution_options",
       "existing_customer_budget_percentage",
+      "frequency_control_specs",
       "full_funnel_exploration_mode",
       "is_ba_skip_delayed_eligible",
       "is_budget_schedule_enabled",
@@ -7158,6 +7229,15 @@ public class AdSet extends APINode {
     }
     public APIRequestUpdate setExistingCustomerBudgetPercentage (String existingCustomerBudgetPercentage) {
       this.setParam("existing_customer_budget_percentage", existingCustomerBudgetPercentage);
+      return this;
+    }
+
+    public APIRequestUpdate setFrequencyControlSpecs (List<Object> frequencyControlSpecs) {
+      this.setParam("frequency_control_specs", frequencyControlSpecs);
+      return this;
+    }
+    public APIRequestUpdate setFrequencyControlSpecs (String frequencyControlSpecs) {
+      this.setParam("frequency_control_specs", frequencyControlSpecs);
       return this;
     }
 
@@ -7595,6 +7675,8 @@ public class AdSet extends APINode {
       VALUE_CONVERSATIONS("CONVERSATIONS"),
       @SerializedName("DERIVED_EVENTS")
       VALUE_DERIVED_EVENTS("DERIVED_EVENTS"),
+      @SerializedName("ENGAGED_PAGE_VIEWS")
+      VALUE_ENGAGED_PAGE_VIEWS("ENGAGED_PAGE_VIEWS"),
       @SerializedName("ENGAGED_USERS")
       VALUE_ENGAGED_USERS("ENGAGED_USERS"),
       @SerializedName("EVENT_RESPONSES")
@@ -7982,6 +8064,10 @@ public class AdSet extends APINode {
       VALUE_11("11"),
       @SerializedName("12")
       VALUE_12("12"),
+      @SerializedName("13")
+      VALUE_13("13"),
+      @SerializedName("14")
+      VALUE_14("14"),
       ;
 
       private String value;
@@ -8101,6 +8187,8 @@ public class AdSet extends APINode {
     this.mCampaignId = instance.mCampaignId;
     this.mConfiguredStatus = instance.mConfiguredStatus;
     this.mCreatedTime = instance.mCreatedTime;
+    this.mCreativeDiversityLabel = instance.mCreativeDiversityLabel;
+    this.mCreativeDiversityScore = instance.mCreativeDiversityScore;
     this.mCreativeSequence = instance.mCreativeSequence;
     this.mCreativeSequenceRepetitionPattern = instance.mCreativeSequenceRepetitionPattern;
     this.mDailyBudget = instance.mDailyBudget;

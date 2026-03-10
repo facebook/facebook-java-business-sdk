@@ -306,6 +306,10 @@ public class InsightsResult extends APINode {
       VALUE_COMMENTS("comments"),
       @SerializedName("content_views")
       VALUE_CONTENT_VIEWS("content_views"),
+      @SerializedName("crossposted_views")
+      VALUE_CROSSPOSTED_VIEWS("crossposted_views"),
+      @SerializedName("facebook_views")
+      VALUE_FACEBOOK_VIEWS("facebook_views"),
       @SerializedName("follows")
       VALUE_FOLLOWS("follows"),
       @SerializedName("ig_reels_aggregated_all_plays_count")
@@ -330,6 +334,8 @@ public class InsightsResult extends APINode {
       VALUE_QUOTES("quotes"),
       @SerializedName("reach")
       VALUE_REACH("reach"),
+      @SerializedName("reels_skip_rate")
+      VALUE_REELS_SKIP_RATE("reels_skip_rate"),
       @SerializedName("replies")
       VALUE_REPLIES("replies"),
       @SerializedName("reposts")
@@ -344,10 +350,18 @@ public class InsightsResult extends APINode {
       VALUE_THREAD_SHARES("thread_shares"),
       @SerializedName("threads_media_clicks")
       VALUE_THREADS_MEDIA_CLICKS("threads_media_clicks"),
+      @SerializedName("threads_reposts")
+      VALUE_THREADS_REPOSTS("threads_reposts"),
       @SerializedName("threads_views")
       VALUE_THREADS_VIEWS("threads_views"),
+      @SerializedName("total_comments")
+      VALUE_TOTAL_COMMENTS("total_comments"),
       @SerializedName("total_interactions")
       VALUE_TOTAL_INTERACTIONS("total_interactions"),
+      @SerializedName("total_likes")
+      VALUE_TOTAL_LIKES("total_likes"),
+      @SerializedName("total_views")
+      VALUE_TOTAL_VIEWS("total_views"),
       @SerializedName("views")
       VALUE_VIEWS("views"),
       ;

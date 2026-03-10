@@ -46,11 +46,11 @@ public class MessengerCallSettings extends APINode {
   @SerializedName("call_hours")
   private Object mCallHours = null;
   @SerializedName("call_routing")
-  private String mCallRouting = null;
+  private Object mCallRouting = null;
   @SerializedName("icon_enabled")
   private Boolean mIconEnabled = null;
-  @SerializedName("video")
-  private String mVideo = null;
+  @SerializedName("video_enabled")
+  private Boolean mVideoEnabled = null;
   protected static Gson gson = null;
 
   public MessengerCallSettings() {
@@ -220,11 +220,11 @@ public class MessengerCallSettings extends APINode {
     return this;
   }
 
-  public String getFieldCallRouting() {
+  public Object getFieldCallRouting() {
     return mCallRouting;
   }
 
-  public MessengerCallSettings setFieldCallRouting(String value) {
+  public MessengerCallSettings setFieldCallRouting(Object value) {
     this.mCallRouting = value;
     return this;
   }
@@ -238,12 +238,12 @@ public class MessengerCallSettings extends APINode {
     return this;
   }
 
-  public String getFieldVideo() {
-    return mVideo;
+  public Boolean getFieldVideoEnabled() {
+    return mVideoEnabled;
   }
 
-  public MessengerCallSettings setFieldVideo(String value) {
-    this.mVideo = value;
+  public MessengerCallSettings setFieldVideoEnabled(Boolean value) {
+    this.mVideoEnabled = value;
     return this;
   }
 
@@ -268,7 +268,7 @@ public class MessengerCallSettings extends APINode {
     this.mCallHours = instance.mCallHours;
     this.mCallRouting = instance.mCallRouting;
     this.mIconEnabled = instance.mIconEnabled;
-    this.mVideo = instance.mVideo;
+    this.mVideoEnabled = instance.mVideoEnabled;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

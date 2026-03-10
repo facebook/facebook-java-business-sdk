@@ -41,8 +41,14 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class AdCreativeMarketingMessageStructuredSpec extends APINode {
+  @SerializedName("asset_customization")
+  private Object mAssetCustomization = null;
+  @SerializedName("autoreply")
+  private Object mAutoreply = null;
   @SerializedName("buttons")
   private List<Object> mButtons = null;
+  @SerializedName("conversation_template_id")
+  private String mConversationTemplateId = null;
   @SerializedName("footer")
   private String mFooter = null;
   @SerializedName("greeting")
@@ -51,6 +57,8 @@ public class AdCreativeMarketingMessageStructuredSpec extends APINode {
   private Boolean mIsOptimizedText = null;
   @SerializedName("language")
   private String mLanguage = null;
+  @SerializedName("offer")
+  private Object mOffer = null;
   @SerializedName("referenced_adgroup_id")
   private String mReferencedAdgroupId = null;
   @SerializedName("whats_app_business_phone_number_id")
@@ -206,12 +214,39 @@ public class AdCreativeMarketingMessageStructuredSpec extends APINode {
   }
 
 
+  public Object getFieldAssetCustomization() {
+    return mAssetCustomization;
+  }
+
+  public AdCreativeMarketingMessageStructuredSpec setFieldAssetCustomization(Object value) {
+    this.mAssetCustomization = value;
+    return this;
+  }
+
+  public Object getFieldAutoreply() {
+    return mAutoreply;
+  }
+
+  public AdCreativeMarketingMessageStructuredSpec setFieldAutoreply(Object value) {
+    this.mAutoreply = value;
+    return this;
+  }
+
   public List<Object> getFieldButtons() {
     return mButtons;
   }
 
   public AdCreativeMarketingMessageStructuredSpec setFieldButtons(List<Object> value) {
     this.mButtons = value;
+    return this;
+  }
+
+  public String getFieldConversationTemplateId() {
+    return mConversationTemplateId;
+  }
+
+  public AdCreativeMarketingMessageStructuredSpec setFieldConversationTemplateId(String value) {
+    this.mConversationTemplateId = value;
     return this;
   }
 
@@ -251,6 +286,15 @@ public class AdCreativeMarketingMessageStructuredSpec extends APINode {
     return this;
   }
 
+  public Object getFieldOffer() {
+    return mOffer;
+  }
+
+  public AdCreativeMarketingMessageStructuredSpec setFieldOffer(Object value) {
+    this.mOffer = value;
+    return this;
+  }
+
   public String getFieldReferencedAdgroupId() {
     return mReferencedAdgroupId;
   }
@@ -286,11 +330,15 @@ public class AdCreativeMarketingMessageStructuredSpec extends APINode {
   }
 
   public AdCreativeMarketingMessageStructuredSpec copyFrom(AdCreativeMarketingMessageStructuredSpec instance) {
+    this.mAssetCustomization = instance.mAssetCustomization;
+    this.mAutoreply = instance.mAutoreply;
     this.mButtons = instance.mButtons;
+    this.mConversationTemplateId = instance.mConversationTemplateId;
     this.mFooter = instance.mFooter;
     this.mGreeting = instance.mGreeting;
     this.mIsOptimizedText = instance.mIsOptimizedText;
     this.mLanguage = instance.mLanguage;
+    this.mOffer = instance.mOffer;
     this.mReferencedAdgroupId = instance.mReferencedAdgroupId;
     this.mWhatsAppBusinessPhoneNumberId = instance.mWhatsAppBusinessPhoneNumberId;
     this.context = instance.context;

@@ -89,6 +89,8 @@ public class Post extends APINode {
   private String mInstagramEligibility = null;
   @SerializedName("is_app_share")
   private Boolean mIsAppShare = null;
+  @SerializedName("is_eligible_for_dark_post")
+  private Boolean mIsEligibleForDarkPost = null;
   @SerializedName("is_eligible_for_promotion")
   private Boolean mIsEligibleForPromotion = null;
   @SerializedName("is_expired")
@@ -531,6 +533,10 @@ public class Post extends APINode {
 
   public Boolean getFieldIsAppShare() {
     return mIsAppShare;
+  }
+
+  public Boolean getFieldIsEligibleForDarkPost() {
+    return mIsEligibleForDarkPost;
   }
 
   public Boolean getFieldIsEligibleForPromotion() {
@@ -2176,6 +2182,7 @@ public class Post extends APINode {
       "id",
       "instagram_eligibility",
       "is_app_share",
+      "is_eligible_for_dark_post",
       "is_eligible_for_promotion",
       "is_expired",
       "is_hidden",
@@ -2472,6 +2479,13 @@ public class Post extends APINode {
     }
     public APIRequestGetSharedPosts requestIsAppShareField (boolean value) {
       this.requestField("is_app_share", value);
+      return this;
+    }
+    public APIRequestGetSharedPosts requestIsEligibleForDarkPostField () {
+      return this.requestIsEligibleForDarkPostField(true);
+    }
+    public APIRequestGetSharedPosts requestIsEligibleForDarkPostField (boolean value) {
+      this.requestField("is_eligible_for_dark_post", value);
       return this;
     }
     public APIRequestGetSharedPosts requestIsEligibleForPromotionField () {
@@ -2869,6 +2883,7 @@ public class Post extends APINode {
       "preferred_audience",
       "press_contact",
       "price_range",
+      "priority_hours",
       "privacy_info_url",
       "produced_by",
       "products",
@@ -3809,6 +3824,13 @@ public class Post extends APINode {
       this.requestField("price_range", value);
       return this;
     }
+    public APIRequestGetSponsorTags requestPriorityHoursField () {
+      return this.requestPriorityHoursField(true);
+    }
+    public APIRequestGetSponsorTags requestPriorityHoursField (boolean value) {
+      this.requestField("priority_hours", value);
+      return this;
+    }
     public APIRequestGetSponsorTags requestPrivacyInfoUrlField () {
       return this.requestPrivacyInfoUrlField(true);
     }
@@ -4398,6 +4420,7 @@ public class Post extends APINode {
       "id",
       "instagram_eligibility",
       "is_app_share",
+      "is_eligible_for_dark_post",
       "is_eligible_for_promotion",
       "is_expired",
       "is_hidden",
@@ -4704,6 +4727,13 @@ public class Post extends APINode {
     }
     public APIRequestGet requestIsAppShareField (boolean value) {
       this.requestField("is_app_share", value);
+      return this;
+    }
+    public APIRequestGet requestIsEligibleForDarkPostField () {
+      return this.requestIsEligibleForDarkPostField(true);
+    }
+    public APIRequestGet requestIsEligibleForDarkPostField (boolean value) {
+      this.requestField("is_eligible_for_dark_post", value);
       return this;
     }
     public APIRequestGet requestIsEligibleForPromotionField () {
@@ -5474,6 +5504,8 @@ public class Post extends APINode {
       VALUE_INLINE_CREATED("INLINE_CREATED"),
       @SerializedName("PUBLISHED")
       VALUE_PUBLISHED("PUBLISHED"),
+      @SerializedName("PUBLISH_PENDING")
+      VALUE_PUBLISH_PENDING("PUBLISH_PENDING"),
       @SerializedName("REVIEWABLE_BRANDED_CONTENT")
       VALUE_REVIEWABLE_BRANDED_CONTENT("REVIEWABLE_BRANDED_CONTENT"),
       @SerializedName("SCHEDULED")
@@ -5573,6 +5605,7 @@ public class Post extends APINode {
     this.mId = instance.mId;
     this.mInstagramEligibility = instance.mInstagramEligibility;
     this.mIsAppShare = instance.mIsAppShare;
+    this.mIsEligibleForDarkPost = instance.mIsEligibleForDarkPost;
     this.mIsEligibleForPromotion = instance.mIsEligibleForPromotion;
     this.mIsExpired = instance.mIsExpired;
     this.mIsHidden = instance.mIsHidden;

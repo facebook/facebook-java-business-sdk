@@ -51,6 +51,8 @@ public class IGMedia extends APINode {
   private Long mCommentsCount = null;
   @SerializedName("copyright_check_information")
   private IGVideoCopyrightCheckMatchesInformation mCopyrightCheckInformation = null;
+  @SerializedName("current_live_viewer_count")
+  private Long mCurrentLiveViewerCount = null;
   @SerializedName("has_poll")
   private Boolean mHasPoll = null;
   @SerializedName("has_slider")
@@ -380,6 +382,10 @@ public class IGMedia extends APINode {
 
   public IGVideoCopyrightCheckMatchesInformation getFieldCopyrightCheckInformation() {
     return mCopyrightCheckInformation;
+  }
+
+  public Long getFieldCurrentLiveViewerCount() {
+    return mCurrentLiveViewerCount;
   }
 
   public Boolean getFieldHasPoll() {
@@ -846,6 +852,7 @@ public class IGMedia extends APINode {
       "caption",
       "comments_count",
       "copyright_check_information",
+      "current_live_viewer_count",
       "has_poll",
       "has_slider",
       "id",
@@ -990,6 +997,13 @@ public class IGMedia extends APINode {
     }
     public APIRequestGetChildren requestCopyrightCheckInformationField (boolean value) {
       this.requestField("copyright_check_information", value);
+      return this;
+    }
+    public APIRequestGetChildren requestCurrentLiveViewerCountField () {
+      return this.requestCurrentLiveViewerCountField(true);
+    }
+    public APIRequestGetChildren requestCurrentLiveViewerCountField (boolean value) {
+      this.requestField("current_live_viewer_count", value);
       return this;
     }
     public APIRequestGetChildren requestHasPollField () {
@@ -2413,6 +2427,7 @@ public class IGMedia extends APINode {
       "caption",
       "comments_count",
       "copyright_check_information",
+      "current_live_viewer_count",
       "has_poll",
       "has_slider",
       "id",
@@ -2600,6 +2615,13 @@ public class IGMedia extends APINode {
     }
     public APIRequestGet requestCopyrightCheckInformationField (boolean value) {
       this.requestField("copyright_check_information", value);
+      return this;
+    }
+    public APIRequestGet requestCurrentLiveViewerCountField () {
+      return this.requestCurrentLiveViewerCountField(true);
+    }
+    public APIRequestGet requestCurrentLiveViewerCountField (boolean value) {
+      this.requestField("current_live_viewer_count", value);
       return this;
     }
     public APIRequestGet requestHasPollField () {
@@ -2891,6 +2913,7 @@ public class IGMedia extends APINode {
     this.mCaption = instance.mCaption;
     this.mCommentsCount = instance.mCommentsCount;
     this.mCopyrightCheckInformation = instance.mCopyrightCheckInformation;
+    this.mCurrentLiveViewerCount = instance.mCurrentLiveViewerCount;
     this.mHasPoll = instance.mHasPoll;
     this.mHasSlider = instance.mHasSlider;
     this.mId = instance.mId;

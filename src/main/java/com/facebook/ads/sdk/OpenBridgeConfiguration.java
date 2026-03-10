@@ -57,12 +57,14 @@ public class OpenBridgeConfiguration extends APINode {
   private String mDestinationId = null;
   @SerializedName("endpoint")
   private String mEndpoint = null;
+  @SerializedName("event_enrichment_advertiser_state")
+  private String mEventEnrichmentAdvertiserState = null;
+  @SerializedName("event_enrichment_meta_state")
+  private String mEventEnrichmentMetaState = null;
   @SerializedName("event_enrichment_state")
   private String mEventEnrichmentState = null;
   @SerializedName("fallback_domain")
   private String mFallbackDomain = null;
-  @SerializedName("first_party_domain")
-  private String mFirstPartyDomain = null;
   @SerializedName("host_business_id")
   private String mHostBusinessId = null;
   @SerializedName("id")
@@ -339,16 +341,20 @@ public class OpenBridgeConfiguration extends APINode {
     return mEndpoint;
   }
 
+  public String getFieldEventEnrichmentAdvertiserState() {
+    return mEventEnrichmentAdvertiserState;
+  }
+
+  public String getFieldEventEnrichmentMetaState() {
+    return mEventEnrichmentMetaState;
+  }
+
   public String getFieldEventEnrichmentState() {
     return mEventEnrichmentState;
   }
 
   public String getFieldFallbackDomain() {
     return mFallbackDomain;
-  }
-
-  public String getFieldFirstPartyDomain() {
-    return mFirstPartyDomain;
   }
 
   public String getFieldHostBusinessId() {
@@ -521,9 +527,10 @@ public class OpenBridgeConfiguration extends APINode {
       "cloud_region",
       "destination_id",
       "endpoint",
+      "event_enrichment_advertiser_state",
+      "event_enrichment_meta_state",
       "event_enrichment_state",
       "fallback_domain",
-      "first_party_domain",
       "host_business_id",
       "id",
       "instance_id",
@@ -683,6 +690,20 @@ public class OpenBridgeConfiguration extends APINode {
       this.requestField("endpoint", value);
       return this;
     }
+    public APIRequestGet requestEventEnrichmentAdvertiserStateField () {
+      return this.requestEventEnrichmentAdvertiserStateField(true);
+    }
+    public APIRequestGet requestEventEnrichmentAdvertiserStateField (boolean value) {
+      this.requestField("event_enrichment_advertiser_state", value);
+      return this;
+    }
+    public APIRequestGet requestEventEnrichmentMetaStateField () {
+      return this.requestEventEnrichmentMetaStateField(true);
+    }
+    public APIRequestGet requestEventEnrichmentMetaStateField (boolean value) {
+      this.requestField("event_enrichment_meta_state", value);
+      return this;
+    }
     public APIRequestGet requestEventEnrichmentStateField () {
       return this.requestEventEnrichmentStateField(true);
     }
@@ -695,13 +716,6 @@ public class OpenBridgeConfiguration extends APINode {
     }
     public APIRequestGet requestFallbackDomainField (boolean value) {
       this.requestField("fallback_domain", value);
-      return this;
-    }
-    public APIRequestGet requestFirstPartyDomainField () {
-      return this.requestFirstPartyDomainField(true);
-    }
-    public APIRequestGet requestFirstPartyDomainField (boolean value) {
-      this.requestField("first_party_domain", value);
       return this;
     }
     public APIRequestGet requestHostBusinessIdField () {
@@ -794,13 +808,15 @@ public class OpenBridgeConfiguration extends APINode {
       "active",
       "blocked_event_types",
       "blocked_websites",
+      "capi_publishing_state",
       "cloud_provider",
       "cloud_region",
       "destination_id",
       "endpoint",
+      "event_enrichment_advertiser_state",
+      "event_enrichment_meta_state",
       "event_enrichment_state",
       "fallback_domain",
-      "first_party_domain",
       "host_business_id",
       "instance_id",
       "instance_version",
@@ -896,6 +912,15 @@ public class OpenBridgeConfiguration extends APINode {
       return this;
     }
 
+    public APIRequestUpdate setCapiPublishingState (OpenBridgeConfiguration.EnumCapiPublishingState capiPublishingState) {
+      this.setParam("capi_publishing_state", capiPublishingState);
+      return this;
+    }
+    public APIRequestUpdate setCapiPublishingState (String capiPublishingState) {
+      this.setParam("capi_publishing_state", capiPublishingState);
+      return this;
+    }
+
     public APIRequestUpdate setCloudProvider (String cloudProvider) {
       this.setParam("cloud_provider", cloudProvider);
       return this;
@@ -916,6 +941,24 @@ public class OpenBridgeConfiguration extends APINode {
       return this;
     }
 
+    public APIRequestUpdate setEventEnrichmentAdvertiserState (OpenBridgeConfiguration.EnumEventEnrichmentAdvertiserState eventEnrichmentAdvertiserState) {
+      this.setParam("event_enrichment_advertiser_state", eventEnrichmentAdvertiserState);
+      return this;
+    }
+    public APIRequestUpdate setEventEnrichmentAdvertiserState (String eventEnrichmentAdvertiserState) {
+      this.setParam("event_enrichment_advertiser_state", eventEnrichmentAdvertiserState);
+      return this;
+    }
+
+    public APIRequestUpdate setEventEnrichmentMetaState (OpenBridgeConfiguration.EnumEventEnrichmentMetaState eventEnrichmentMetaState) {
+      this.setParam("event_enrichment_meta_state", eventEnrichmentMetaState);
+      return this;
+    }
+    public APIRequestUpdate setEventEnrichmentMetaState (String eventEnrichmentMetaState) {
+      this.setParam("event_enrichment_meta_state", eventEnrichmentMetaState);
+      return this;
+    }
+
     public APIRequestUpdate setEventEnrichmentState (OpenBridgeConfiguration.EnumEventEnrichmentState eventEnrichmentState) {
       this.setParam("event_enrichment_state", eventEnrichmentState);
       return this;
@@ -927,11 +970,6 @@ public class OpenBridgeConfiguration extends APINode {
 
     public APIRequestUpdate setFallbackDomain (String fallbackDomain) {
       this.setParam("fallback_domain", fallbackDomain);
-      return this;
-    }
-
-    public APIRequestUpdate setFirstPartyDomain (String firstPartyDomain) {
-      this.setParam("first_party_domain", firstPartyDomain);
       return this;
     }
 
@@ -1034,6 +1072,69 @@ public class OpenBridgeConfiguration extends APINode {
 
   }
 
+  public static enum EnumCapiPublishingState {
+      @SerializedName("DISABLED")
+      VALUE_DISABLED("DISABLED"),
+      @SerializedName("ENABLED")
+      VALUE_ENABLED("ENABLED"),
+      @SerializedName("NOT_INITIALIZED")
+      VALUE_NOT_INITIALIZED("NOT_INITIALIZED"),
+      ;
+
+      private String value;
+
+      private EnumCapiPublishingState(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumEventEnrichmentAdvertiserState {
+      @SerializedName("DISABLED")
+      VALUE_DISABLED("DISABLED"),
+      @SerializedName("ENABLED")
+      VALUE_ENABLED("ENABLED"),
+      @SerializedName("NOT_INITIALIZED")
+      VALUE_NOT_INITIALIZED("NOT_INITIALIZED"),
+      ;
+
+      private String value;
+
+      private EnumEventEnrichmentAdvertiserState(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumEventEnrichmentMetaState {
+      @SerializedName("ALLOWED")
+      VALUE_ALLOWED("ALLOWED"),
+      @SerializedName("BLOCKED")
+      VALUE_BLOCKED("BLOCKED"),
+      @SerializedName("NOT_INITIALIZED")
+      VALUE_NOT_INITIALIZED("NOT_INITIALIZED"),
+      ;
+
+      private String value;
+
+      private EnumEventEnrichmentMetaState(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
   public static enum EnumEventEnrichmentState {
       @SerializedName("NO")
       VALUE_NO("NO"),
@@ -1078,9 +1179,10 @@ public class OpenBridgeConfiguration extends APINode {
     this.mCloudRegion = instance.mCloudRegion;
     this.mDestinationId = instance.mDestinationId;
     this.mEndpoint = instance.mEndpoint;
+    this.mEventEnrichmentAdvertiserState = instance.mEventEnrichmentAdvertiserState;
+    this.mEventEnrichmentMetaState = instance.mEventEnrichmentMetaState;
     this.mEventEnrichmentState = instance.mEventEnrichmentState;
     this.mFallbackDomain = instance.mFallbackDomain;
-    this.mFirstPartyDomain = instance.mFirstPartyDomain;
     this.mHostBusinessId = instance.mHostBusinessId;
     this.mId = instance.mId;
     this.mInstanceId = instance.mInstanceId;

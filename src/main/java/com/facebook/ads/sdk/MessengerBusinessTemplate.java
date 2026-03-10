@@ -59,6 +59,8 @@ public class MessengerBusinessTemplate extends APINode {
   private String mLibraryTemplateName = null;
   @SerializedName("name")
   private String mName = null;
+  @SerializedName("parameter_format")
+  private String mParameterFormat = null;
   @SerializedName("rejected_reason")
   private String mRejectedReason = null;
   @SerializedName("rejection_reasons")
@@ -321,6 +323,10 @@ public class MessengerBusinessTemplate extends APINode {
     return mName;
   }
 
+  public String getFieldParameterFormat() {
+    return mParameterFormat;
+  }
+
   public String getFieldRejectedReason() {
     return mRejectedReason;
   }
@@ -359,6 +365,7 @@ public class MessengerBusinessTemplate extends APINode {
       "last_updated_time",
       "library_template_name",
       "name",
+      "parameter_format",
       "rejected_reason",
       "rejection_reasons",
       "specific_rejection_reasons",
@@ -518,6 +525,13 @@ public class MessengerBusinessTemplate extends APINode {
       this.requestField("name", value);
       return this;
     }
+    public APIRequestGet requestParameterFormatField () {
+      return this.requestParameterFormatField(true);
+    }
+    public APIRequestGet requestParameterFormatField (boolean value) {
+      this.requestField("parameter_format", value);
+      return this;
+    }
     public APIRequestGet requestRejectedReasonField () {
       return this.requestRejectedReasonField(true);
     }
@@ -557,6 +571,7 @@ public class MessengerBusinessTemplate extends APINode {
     }
     public static final String[] PARAMS = {
       "components",
+      "parameter_format",
     };
 
     public static final String[] FIELDS = {
@@ -625,6 +640,15 @@ public class MessengerBusinessTemplate extends APINode {
       return this;
     }
 
+    public APIRequestUpdate setParameterFormat (MessengerBusinessTemplate.EnumParameterFormat parameterFormat) {
+      this.setParam("parameter_format", parameterFormat);
+      return this;
+    }
+    public APIRequestUpdate setParameterFormat (String parameterFormat) {
+      this.setParam("parameter_format", parameterFormat);
+      return this;
+    }
+
     public APIRequestUpdate requestAllFields () {
       return this.requestAllFields(true);
     }
@@ -661,6 +685,25 @@ public class MessengerBusinessTemplate extends APINode {
       return this;
     }
 
+  }
+
+  public static enum EnumParameterFormat {
+      @SerializedName("NAMED")
+      VALUE_NAMED("NAMED"),
+      @SerializedName("POSITIONAL")
+      VALUE_POSITIONAL("POSITIONAL"),
+      ;
+
+      private String value;
+
+      private EnumParameterFormat(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
   }
 
   public static enum EnumStatus {
@@ -722,6 +765,7 @@ public class MessengerBusinessTemplate extends APINode {
     this.mLastUpdatedTime = instance.mLastUpdatedTime;
     this.mLibraryTemplateName = instance.mLibraryTemplateName;
     this.mName = instance.mName;
+    this.mParameterFormat = instance.mParameterFormat;
     this.mRejectedReason = instance.mRejectedReason;
     this.mRejectionReasons = instance.mRejectionReasons;
     this.mSpecificRejectionReasons = instance.mSpecificRejectionReasons;

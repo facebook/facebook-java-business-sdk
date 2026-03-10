@@ -364,10 +364,12 @@ public class EventSourceGroup extends APINode {
       "is_tax_id_required",
       "liable_address",
       "line_numbers",
+      "marketing_messages_settings",
       "media_agency",
       "min_campaign_group_spend_cap",
       "min_daily_budget",
       "name",
+      "offsite_clo_signal_status",
       "offsite_pixels_tos_accepted",
       "opportunity_score",
       "owner",
@@ -817,6 +819,13 @@ public class EventSourceGroup extends APINode {
       this.requestField("line_numbers", value);
       return this;
     }
+    public APIRequestGetSharedAccounts requestMarketingMessagesSettingsField () {
+      return this.requestMarketingMessagesSettingsField(true);
+    }
+    public APIRequestGetSharedAccounts requestMarketingMessagesSettingsField (boolean value) {
+      this.requestField("marketing_messages_settings", value);
+      return this;
+    }
     public APIRequestGetSharedAccounts requestMediaAgencyField () {
       return this.requestMediaAgencyField(true);
     }
@@ -843,6 +852,13 @@ public class EventSourceGroup extends APINode {
     }
     public APIRequestGetSharedAccounts requestNameField (boolean value) {
       this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetSharedAccounts requestOffsiteCloSignalStatusField () {
+      return this.requestOffsiteCloSignalStatusField(true);
+    }
+    public APIRequestGetSharedAccounts requestOffsiteCloSignalStatusField (boolean value) {
+      this.requestField("offsite_clo_signal_status", value);
       return this;
     }
     public APIRequestGetSharedAccounts requestOffsitePixelsTosAcceptedField () {

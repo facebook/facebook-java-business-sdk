@@ -1963,10 +1963,12 @@ public class IGUserForIGOnlyAPI extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "folder",
       "message",
       "messaging_type",
       "payload",
       "recipient",
+      "reply_to",
       "sender_action",
       "tag",
       "thread_control",
@@ -2029,6 +2031,15 @@ public class IGUserForIGOnlyAPI extends APINode {
     }
 
 
+    public APIRequestCreateMessage setFolder (EnumFolder folder) {
+      this.setParam("folder", folder);
+      return this;
+    }
+    public APIRequestCreateMessage setFolder (String folder) {
+      this.setParam("folder", folder);
+      return this;
+    }
+
     public APIRequestCreateMessage setMessage (Object message) {
       this.setParam("message", message);
       return this;
@@ -2058,6 +2069,15 @@ public class IGUserForIGOnlyAPI extends APINode {
     }
     public APIRequestCreateMessage setRecipient (String recipient) {
       this.setParam("recipient", recipient);
+      return this;
+    }
+
+    public APIRequestCreateMessage setReplyTo (Object replyTo) {
+      this.setParam("reply_to", replyTo);
+      return this;
+    }
+    public APIRequestCreateMessage setReplyTo (String replyTo) {
+      this.setParam("reply_to", replyTo);
       return this;
     }
 
@@ -3636,6 +3656,23 @@ public class IGUserForIGOnlyAPI extends APINode {
     }
   }
 
+  public static enum EnumFolder {
+      @SerializedName("PARTNERSHIP")
+      VALUE_PARTNERSHIP("PARTNERSHIP"),
+      ;
+
+      private String value;
+
+      private EnumFolder(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
   public static enum EnumMessagingType {
       @SerializedName("MESSAGE_TAG")
       VALUE_MESSAGE_TAG("MESSAGE_TAG"),
@@ -3693,8 +3730,6 @@ public class IGUserForIGOnlyAPI extends APINode {
       VALUE_DESCRIPTION("DESCRIPTION"),
       @SerializedName("GET_STARTED")
       VALUE_GET_STARTED("GET_STARTED"),
-      @SerializedName("GREETING")
-      VALUE_GREETING("GREETING"),
       @SerializedName("HOME_URL")
       VALUE_HOME_URL("HOME_URL"),
       @SerializedName("ICE_BREAKERS")

@@ -40,86 +40,23 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class ProductSetUsage extends APINode {
+public class ProductCatalogDataSources extends APINode {
   @SerializedName("id")
   private String mId = null;
-  @SerializedName("product_set")
-  private ProductSet mProductSet = null;
-  @SerializedName("usage_type")
-  private String mUsageType = null;
   protected static Gson gson = null;
 
-  ProductSetUsage() {
-  }
-
-  public ProductSetUsage(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public ProductSetUsage(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public ProductSetUsage fetch() throws APIException{
-    ProductSetUsage newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static ProductSetUsage fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<ProductSetUsage> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static ProductSetUsage fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<ProductSetUsage> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<ProductSetUsage> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<ProductSetUsage>)(
-      new APIRequest<ProductSetUsage>(context, "", "/", "GET", ProductSetUsage.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<ProductSetUsage>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", ProductSetUsage.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public ProductCatalogDataSources() {
   }
 
   public String getId() {
     return getFieldId().toString();
   }
-  public static ProductSetUsage loadJSON(String json, APIContext context, String header) {
-    ProductSetUsage productSetUsage = getGson().fromJson(json, ProductSetUsage.class);
+  public static ProductCatalogDataSources loadJSON(String json, APIContext context, String header) {
+    ProductCatalogDataSources productCatalogDataSources = getGson().fromJson(json, ProductCatalogDataSources.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(productSetUsage.toString());
+      JsonElement o2 = parser.parse(productCatalogDataSources.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -129,14 +66,14 @@ public class ProductSetUsage extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    productSetUsage.context = context;
-    productSetUsage.rawValue = json;
-    productSetUsage.header = header;
-    return productSetUsage;
+    productCatalogDataSources.context = context;
+    productCatalogDataSources.rawValue = json;
+    productCatalogDataSources.header = header;
+    return productCatalogDataSources;
   }
 
-  public static APINodeList<ProductSetUsage> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<ProductSetUsage> productSetUsages = new APINodeList<ProductSetUsage>(request, json, header);
+  public static APINodeList<ProductCatalogDataSources> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<ProductCatalogDataSources> productCatalogDataSourcess = new APINodeList<ProductCatalogDataSources>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -147,9 +84,9 @@ public class ProductSetUsage extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          productSetUsages.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          productCatalogDataSourcess.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return productSetUsages;
+        return productCatalogDataSourcess;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -159,20 +96,20 @@ public class ProductSetUsage extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                productSetUsages.setCursors(before, after);
+                productCatalogDataSourcess.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            productSetUsages.setPaging(previous, next);
+            productCatalogDataSourcess.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              productSetUsages.setAppSecret(context.getAppSecretProof());
+              productCatalogDataSourcess.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              productSetUsages.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              productCatalogDataSourcess.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -183,23 +120,23 @@ public class ProductSetUsage extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  productSetUsages.add(loadJSON(entry.getValue().toString(), context, header));
+                  productCatalogDataSourcess.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              productSetUsages.add(loadJSON(obj.toString(), context, header));
+              productCatalogDataSourcess.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return productSetUsages;
+          return productCatalogDataSourcess;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              productSetUsages.add(loadJSON(entry.getValue().toString(), context, header));
+              productCatalogDataSourcess.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return productSetUsages;
+          return productCatalogDataSourcess;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -216,20 +153,20 @@ public class ProductSetUsage extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              productSetUsages.add(loadJSON(value.toString(), context, header));
+              productCatalogDataSourcess.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return productSetUsages;
+            return productCatalogDataSourcess;
           }
 
           // Sixth, check if it's pure JsonObject
-          productSetUsages.clear();
-          productSetUsages.add(loadJSON(json, context, header));
-          return productSetUsages;
+          productCatalogDataSourcess.clear();
+          productCatalogDataSourcess.add(loadJSON(json, context, header));
+          return productCatalogDataSourcess;
         }
       }
     } catch (Exception e) {
@@ -256,8 +193,8 @@ public class ProductSetUsage extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
+  public APIRequestGenget genget() {
+    return new APIRequestGenget(this.getId(), context);
   }
 
 
@@ -265,63 +202,59 @@ public class ProductSetUsage extends APINode {
     return mId;
   }
 
-  public ProductSet getFieldProductSet() {
-    if (mProductSet != null) {
-      mProductSet.context = getContext();
-    }
-    return mProductSet;
-  }
-
-  public String getFieldUsageType() {
-    return mUsageType;
+  public ProductCatalogDataSources setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
 
 
 
-  public static class APIRequestGet extends APIRequest<ProductSetUsage> {
+  public static class APIRequestGenget extends APIRequest<ProductCatalogDataSourcesGet> {
 
-    ProductSetUsage lastResponse = null;
+    APINodeList<ProductCatalogDataSourcesGet> lastResponse = null;
     @Override
-    public ProductSetUsage getLastResponse() {
+    public APINodeList<ProductCatalogDataSourcesGet> getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "after",
+      "before",
+      "fields",
+      "ingestion_source_type",
+      "limit",
     };
 
     public static final String[] FIELDS = {
-      "id",
-      "product_set",
-      "usage_type",
     };
 
     @Override
-    public ProductSetUsage parseResponse(String response, String header) throws APIException {
-      return ProductSetUsage.parseResponse(response, getContext(), this, header).head();
+    public APINodeList<ProductCatalogDataSourcesGet> parseResponse(String response, String header) throws APIException {
+      return ProductCatalogDataSourcesGet.parseResponse(response, getContext(), this, header);
     }
 
     @Override
-    public ProductSetUsage execute() throws APIException {
+    public APINodeList<ProductCatalogDataSourcesGet> execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public ProductSetUsage execute(Map<String, Object> extraParams) throws APIException {
+    public APINodeList<ProductCatalogDataSourcesGet> execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<ProductSetUsage> executeAsync() throws APIException {
+    public ListenableFuture<APINodeList<ProductCatalogDataSourcesGet>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<ProductSetUsage> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<APINodeList<ProductCatalogDataSourcesGet>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, ProductSetUsage>() {
-           public ProductSetUsage apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, APINodeList<ProductCatalogDataSourcesGet>>() {
+           public APINodeList<ProductCatalogDataSourcesGet> apply(ResponseWrapper result) {
              try {
-               return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
+               return APIRequestGenget.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -331,28 +264,57 @@ public class ProductSetUsage extends APINode {
       );
     };
 
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
+    public APIRequestGenget(String nodeId, APIContext context) {
+      super(context, nodeId, "/data_sources", "GET", Arrays.asList(PARAMS));
     }
 
     @Override
-    public APIRequestGet setParam(String param, Object value) {
+    public APIRequestGenget setParam(String param, Object value) {
       setParamInternal(param, value);
       return this;
     }
 
     @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
+    public APIRequestGenget setParams(Map<String, Object> params) {
       setParamsInternal(params);
       return this;
     }
 
 
-    public APIRequestGet requestAllFields () {
+    public APIRequestGenget setAfter (String after) {
+      this.setParam("after", after);
+      return this;
+    }
+
+    public APIRequestGenget setBefore (String before) {
+      this.setParam("before", before);
+      return this;
+    }
+
+    public APIRequestGenget setFields (String fields) {
+      this.setParam("fields", fields);
+      return this;
+    }
+
+    public APIRequestGenget setIngestionSourceType (String ingestionSourceType) {
+      this.setParam("ingestion_source_type", ingestionSourceType);
+      return this;
+    }
+
+    public APIRequestGenget setLimit (Long limit) {
+      this.setParam("limit", limit);
+      return this;
+    }
+    public APIRequestGenget setLimit (String limit) {
+      this.setParam("limit", limit);
+      return this;
+    }
+
+    public APIRequestGenget requestAllFields () {
       return this.requestAllFields(true);
     }
 
-    public APIRequestGet requestAllFields (boolean value) {
+    public APIRequestGenget requestAllFields (boolean value) {
       for (String field : FIELDS) {
         this.requestField(field, value);
       }
@@ -360,12 +322,12 @@ public class ProductSetUsage extends APINode {
     }
 
     @Override
-    public APIRequestGet requestFields (List<String> fields) {
+    public APIRequestGenget requestFields (List<String> fields) {
       return this.requestFields(fields, true);
     }
 
     @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
+    public APIRequestGenget requestFields (List<String> fields, boolean value) {
       for (String field : fields) {
         this.requestField(field, value);
       }
@@ -373,38 +335,17 @@ public class ProductSetUsage extends APINode {
     }
 
     @Override
-    public APIRequestGet requestField (String field) {
+    public APIRequestGenget requestField (String field) {
       this.requestField(field, true);
       return this;
     }
 
     @Override
-    public APIRequestGet requestField (String field, boolean value) {
+    public APIRequestGenget requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
 
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGet requestProductSetField () {
-      return this.requestProductSetField(true);
-    }
-    public APIRequestGet requestProductSetField (boolean value) {
-      this.requestField("product_set", value);
-      return this;
-    }
-    public APIRequestGet requestUsageTypeField () {
-      return this.requestUsageTypeField(true);
-    }
-    public APIRequestGet requestUsageTypeField (boolean value) {
-      this.requestField("usage_type", value);
-      return this;
-    }
   }
 
 
@@ -421,19 +362,17 @@ public class ProductSetUsage extends APINode {
     return gson;
   }
 
-  public ProductSetUsage copyFrom(ProductSetUsage instance) {
+  public ProductCatalogDataSources copyFrom(ProductCatalogDataSources instance) {
     this.mId = instance.mId;
-    this.mProductSet = instance.mProductSet;
-    this.mUsageType = instance.mUsageType;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<ProductSetUsage> getParser() {
-    return new APIRequest.ResponseParser<ProductSetUsage>() {
-      public APINodeList<ProductSetUsage> parseResponse(String response, APIContext context, APIRequest<ProductSetUsage> request, String header) throws MalformedResponseException {
-        return ProductSetUsage.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<ProductCatalogDataSources> getParser() {
+    return new APIRequest.ResponseParser<ProductCatalogDataSources>() {
+      public APINodeList<ProductCatalogDataSources> parseResponse(String response, APIContext context, APIRequest<ProductCatalogDataSources> request, String header) throws MalformedResponseException {
+        return ProductCatalogDataSources.parseResponse(response, context, request, header);
       }
     };
   }

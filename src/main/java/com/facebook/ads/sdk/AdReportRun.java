@@ -57,6 +57,14 @@ public class AdReportRun extends APINode {
   private List<String> mEmails = null;
   @SerializedName("error_code")
   private Long mErrorCode = null;
+  @SerializedName("error_message")
+  private String mErrorMessage = null;
+  @SerializedName("error_subcode")
+  private Long mErrorSubcode = null;
+  @SerializedName("error_user_msg")
+  private String mErrorUserMsg = null;
+  @SerializedName("error_user_title")
+  private String mErrorUserTitle = null;
   @SerializedName("friendly_name")
   private String mFriendlyName = null;
   @SerializedName("id")
@@ -332,6 +340,22 @@ public class AdReportRun extends APINode {
     return mErrorCode;
   }
 
+  public String getFieldErrorMessage() {
+    return mErrorMessage;
+  }
+
+  public Long getFieldErrorSubcode() {
+    return mErrorSubcode;
+  }
+
+  public String getFieldErrorUserMsg() {
+    return mErrorUserMsg;
+  }
+
+  public String getFieldErrorUserTitle() {
+    return mErrorUserTitle;
+  }
+
   public String getFieldFriendlyName() {
     return mFriendlyName;
   }
@@ -390,7 +414,12 @@ public class AdReportRun extends APINode {
       "adset_id",
       "adset_name",
       "adset_start",
+      "advanced_actions_28d_view",
+      "advanced_reach_1d_lookback",
+      "advanced_reach_28d_lookback",
+      "advanced_reach_7d_lookback",
       "age_targeting",
+      "anchor_event_attribution_setting",
       "anchor_events_performance_indicator",
       "attribution_setting",
       "auction_bid",
@@ -478,6 +507,7 @@ public class AdReportRun extends APINode {
       "inline_link_click_ctr",
       "inline_link_clicks",
       "inline_post_engagement",
+      "instagram_profile_visits",
       "instagram_upcoming_event_reminders_set",
       "instant_experience_clicks_to_open",
       "instant_experience_clicks_to_start",
@@ -511,6 +541,7 @@ public class AdReportRun extends APINode {
       "marketing_messages_website_purchase",
       "marketing_messages_website_purchase_values",
       "mobile_app_purchase_roas",
+      "multi_event_conversion_attribution_setting",
       "objective",
       "objective_result_rate",
       "objective_results",
@@ -753,11 +784,46 @@ public class AdReportRun extends APINode {
       this.requestField("adset_start", value);
       return this;
     }
+    public APIRequestGetInsights requestAdvancedActions28dViewField () {
+      return this.requestAdvancedActions28dViewField(true);
+    }
+    public APIRequestGetInsights requestAdvancedActions28dViewField (boolean value) {
+      this.requestField("advanced_actions_28d_view", value);
+      return this;
+    }
+    public APIRequestGetInsights requestAdvancedReach1dLookbackField () {
+      return this.requestAdvancedReach1dLookbackField(true);
+    }
+    public APIRequestGetInsights requestAdvancedReach1dLookbackField (boolean value) {
+      this.requestField("advanced_reach_1d_lookback", value);
+      return this;
+    }
+    public APIRequestGetInsights requestAdvancedReach28dLookbackField () {
+      return this.requestAdvancedReach28dLookbackField(true);
+    }
+    public APIRequestGetInsights requestAdvancedReach28dLookbackField (boolean value) {
+      this.requestField("advanced_reach_28d_lookback", value);
+      return this;
+    }
+    public APIRequestGetInsights requestAdvancedReach7dLookbackField () {
+      return this.requestAdvancedReach7dLookbackField(true);
+    }
+    public APIRequestGetInsights requestAdvancedReach7dLookbackField (boolean value) {
+      this.requestField("advanced_reach_7d_lookback", value);
+      return this;
+    }
     public APIRequestGetInsights requestAgeTargetingField () {
       return this.requestAgeTargetingField(true);
     }
     public APIRequestGetInsights requestAgeTargetingField (boolean value) {
       this.requestField("age_targeting", value);
+      return this;
+    }
+    public APIRequestGetInsights requestAnchorEventAttributionSettingField () {
+      return this.requestAnchorEventAttributionSettingField(true);
+    }
+    public APIRequestGetInsights requestAnchorEventAttributionSettingField (boolean value) {
+      this.requestField("anchor_event_attribution_setting", value);
       return this;
     }
     public APIRequestGetInsights requestAnchorEventsPerformanceIndicatorField () {
@@ -1369,6 +1435,13 @@ public class AdReportRun extends APINode {
       this.requestField("inline_post_engagement", value);
       return this;
     }
+    public APIRequestGetInsights requestInstagramProfileVisitsField () {
+      return this.requestInstagramProfileVisitsField(true);
+    }
+    public APIRequestGetInsights requestInstagramProfileVisitsField (boolean value) {
+      this.requestField("instagram_profile_visits", value);
+      return this;
+    }
     public APIRequestGetInsights requestInstagramUpcomingEventRemindersSetField () {
       return this.requestInstagramUpcomingEventRemindersSetField(true);
     }
@@ -1598,6 +1671,13 @@ public class AdReportRun extends APINode {
     }
     public APIRequestGetInsights requestMobileAppPurchaseRoasField (boolean value) {
       this.requestField("mobile_app_purchase_roas", value);
+      return this;
+    }
+    public APIRequestGetInsights requestMultiEventConversionAttributionSettingField () {
+      return this.requestMultiEventConversionAttributionSettingField(true);
+    }
+    public APIRequestGetInsights requestMultiEventConversionAttributionSettingField (boolean value) {
+      this.requestField("multi_event_conversion_attribution_setting", value);
       return this;
     }
     public APIRequestGetInsights requestObjectiveField () {
@@ -2034,6 +2114,10 @@ public class AdReportRun extends APINode {
       "date_stop",
       "emails",
       "error_code",
+      "error_message",
+      "error_subcode",
+      "error_user_msg",
+      "error_user_title",
       "friendly_name",
       "id",
       "is_async_export",
@@ -2190,6 +2274,34 @@ public class AdReportRun extends APINode {
       this.requestField("error_code", value);
       return this;
     }
+    public APIRequestGet requestErrorMessageField () {
+      return this.requestErrorMessageField(true);
+    }
+    public APIRequestGet requestErrorMessageField (boolean value) {
+      this.requestField("error_message", value);
+      return this;
+    }
+    public APIRequestGet requestErrorSubcodeField () {
+      return this.requestErrorSubcodeField(true);
+    }
+    public APIRequestGet requestErrorSubcodeField (boolean value) {
+      this.requestField("error_subcode", value);
+      return this;
+    }
+    public APIRequestGet requestErrorUserMsgField () {
+      return this.requestErrorUserMsgField(true);
+    }
+    public APIRequestGet requestErrorUserMsgField (boolean value) {
+      this.requestField("error_user_msg", value);
+      return this;
+    }
+    public APIRequestGet requestErrorUserTitleField () {
+      return this.requestErrorUserTitleField(true);
+    }
+    public APIRequestGet requestErrorUserTitleField (boolean value) {
+      this.requestField("error_user_title", value);
+      return this;
+    }
     public APIRequestGet requestFriendlyNameField () {
       return this.requestFriendlyNameField(true);
     }
@@ -2324,6 +2436,8 @@ public class AdReportRun extends APINode {
       VALUE_ACTION_VIDEO_TYPE("action_video_type"),
       @SerializedName("conversion_destination")
       VALUE_CONVERSION_DESTINATION("conversion_destination"),
+      @SerializedName("is_business_ai_assisted")
+      VALUE_IS_BUSINESS_AI_ASSISTED("is_business_ai_assisted"),
       @SerializedName("matched_persona_id")
       VALUE_MATCHED_PERSONA_ID("matched_persona_id"),
       @SerializedName("matched_persona_name")
@@ -2488,16 +2602,14 @@ public class AdReportRun extends APINode {
       VALUE_PRODUCT_CUSTOM_LABEL_4_BREAKDOWN("product_custom_label_4_breakdown"),
       @SerializedName("product_group_content_id_breakdown")
       VALUE_PRODUCT_GROUP_CONTENT_ID_BREAKDOWN("product_group_content_id_breakdown"),
-      @SerializedName("product_group_id")
-      VALUE_PRODUCT_GROUP_ID("product_group_id"),
       @SerializedName("product_id")
       VALUE_PRODUCT_ID("product_id"),
-      @SerializedName("product_set_id_breakdown")
-      VALUE_PRODUCT_SET_ID_BREAKDOWN("product_set_id_breakdown"),
       @SerializedName("publisher_platform")
       VALUE_PUBLISHER_PLATFORM("publisher_platform"),
       @SerializedName("redownload")
       VALUE_REDOWNLOAD("redownload"),
+      @SerializedName("reels_trending_topic")
+      VALUE_REELS_TRENDING_TOPIC("reels_trending_topic"),
       @SerializedName("region")
       VALUE_REGION("region"),
       @SerializedName("rta_ugc_topic")
@@ -2649,6 +2761,8 @@ public class AdReportRun extends APINode {
       VALUE_ACTION_VIDEO_TYPE("action_video_type"),
       @SerializedName("conversion_destination")
       VALUE_CONVERSION_DESTINATION("conversion_destination"),
+      @SerializedName("is_business_ai_assisted")
+      VALUE_IS_BUSINESS_AI_ASSISTED("is_business_ai_assisted"),
       @SerializedName("matched_persona_id")
       VALUE_MATCHED_PERSONA_ID("matched_persona_id"),
       @SerializedName("matched_persona_name")
@@ -2694,6 +2808,10 @@ public class AdReportRun extends APINode {
     this.mDateStop = instance.mDateStop;
     this.mEmails = instance.mEmails;
     this.mErrorCode = instance.mErrorCode;
+    this.mErrorMessage = instance.mErrorMessage;
+    this.mErrorSubcode = instance.mErrorSubcode;
+    this.mErrorUserMsg = instance.mErrorUserMsg;
+    this.mErrorUserTitle = instance.mErrorUserTitle;
     this.mFriendlyName = instance.mFriendlyName;
     this.mId = instance.mId;
     this.mIsAsyncExport = instance.mIsAsyncExport;

@@ -362,10 +362,12 @@ public class AdStudyCell extends APINode {
       "is_tax_id_required",
       "liable_address",
       "line_numbers",
+      "marketing_messages_settings",
       "media_agency",
       "min_campaign_group_spend_cap",
       "min_daily_budget",
       "name",
+      "offsite_clo_signal_status",
       "offsite_pixels_tos_accepted",
       "opportunity_score",
       "owner",
@@ -815,6 +817,13 @@ public class AdStudyCell extends APINode {
       this.requestField("line_numbers", value);
       return this;
     }
+    public APIRequestGetAdAccounts requestMarketingMessagesSettingsField () {
+      return this.requestMarketingMessagesSettingsField(true);
+    }
+    public APIRequestGetAdAccounts requestMarketingMessagesSettingsField (boolean value) {
+      this.requestField("marketing_messages_settings", value);
+      return this;
+    }
     public APIRequestGetAdAccounts requestMediaAgencyField () {
       return this.requestMediaAgencyField(true);
     }
@@ -841,6 +850,13 @@ public class AdStudyCell extends APINode {
     }
     public APIRequestGetAdAccounts requestNameField (boolean value) {
       this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestOffsiteCloSignalStatusField () {
+      return this.requestOffsiteCloSignalStatusField(true);
+    }
+    public APIRequestGetAdAccounts requestOffsiteCloSignalStatusField (boolean value) {
+      this.requestField("offsite_clo_signal_status", value);
       return this;
     }
     public APIRequestGetAdAccounts requestOffsitePixelsTosAcceptedField () {
@@ -1024,6 +1040,8 @@ public class AdStudyCell extends APINode {
       "campaign_id",
       "configured_status",
       "created_time",
+      "creative_diversity_label",
+      "creative_diversity_score",
       "creative_sequence",
       "creative_sequence_repetition_pattern",
       "daily_budget",
@@ -1314,6 +1332,20 @@ public class AdStudyCell extends APINode {
     }
     public APIRequestGetAdSets requestCreatedTimeField (boolean value) {
       this.requestField("created_time", value);
+      return this;
+    }
+    public APIRequestGetAdSets requestCreativeDiversityLabelField () {
+      return this.requestCreativeDiversityLabelField(true);
+    }
+    public APIRequestGetAdSets requestCreativeDiversityLabelField (boolean value) {
+      this.requestField("creative_diversity_label", value);
+      return this;
+    }
+    public APIRequestGetAdSets requestCreativeDiversityScoreField () {
+      return this.requestCreativeDiversityScoreField(true);
+    }
+    public APIRequestGetAdSets requestCreativeDiversityScoreField (boolean value) {
+      this.requestField("creative_diversity_score", value);
       return this;
     }
     public APIRequestGetAdSets requestCreativeSequenceField () {

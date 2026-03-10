@@ -1151,6 +1151,7 @@ public class User extends APINode {
       "preferred_audience",
       "press_contact",
       "price_range",
+      "priority_hours",
       "privacy_info_url",
       "produced_by",
       "products",
@@ -2114,6 +2115,13 @@ public class User extends APINode {
       this.requestField("price_range", value);
       return this;
     }
+    public APIRequestGetAccounts requestPriorityHoursField () {
+      return this.requestPriorityHoursField(true);
+    }
+    public APIRequestGetAccounts requestPriorityHoursField (boolean value) {
+      this.requestField("priority_hours", value);
+      return this;
+    }
     public APIRequestGetAccounts requestPrivacyInfoUrlField () {
       return this.requestPrivacyInfoUrlField(true);
     }
@@ -2854,6 +2862,7 @@ public class User extends APINode {
       "client_business",
       "confidence_level",
       "cooldown_start_time",
+      "creative_test_config",
       "description",
       "end_time",
       "name",
@@ -2950,6 +2959,15 @@ public class User extends APINode {
     }
     public APIRequestCreateAdStudy setCooldownStartTime (String cooldownStartTime) {
       this.setParam("cooldown_start_time", cooldownStartTime);
+      return this;
+    }
+
+    public APIRequestCreateAdStudy setCreativeTestConfig (Map<String, String> creativeTestConfig) {
+      this.setParam("creative_test_config", creativeTestConfig);
+      return this;
+    }
+    public APIRequestCreateAdStudy setCreativeTestConfig (String creativeTestConfig) {
+      this.setParam("creative_test_config", creativeTestConfig);
       return this;
     }
 
@@ -3114,10 +3132,12 @@ public class User extends APINode {
       "is_tax_id_required",
       "liable_address",
       "line_numbers",
+      "marketing_messages_settings",
       "media_agency",
       "min_campaign_group_spend_cap",
       "min_daily_budget",
       "name",
+      "offsite_clo_signal_status",
       "offsite_pixels_tos_accepted",
       "opportunity_score",
       "owner",
@@ -3567,6 +3587,13 @@ public class User extends APINode {
       this.requestField("line_numbers", value);
       return this;
     }
+    public APIRequestGetAdAccounts requestMarketingMessagesSettingsField () {
+      return this.requestMarketingMessagesSettingsField(true);
+    }
+    public APIRequestGetAdAccounts requestMarketingMessagesSettingsField (boolean value) {
+      this.requestField("marketing_messages_settings", value);
+      return this;
+    }
     public APIRequestGetAdAccounts requestMediaAgencyField () {
       return this.requestMediaAgencyField(true);
     }
@@ -3593,6 +3620,13 @@ public class User extends APINode {
     }
     public APIRequestGetAdAccounts requestNameField (boolean value) {
       this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestOffsiteCloSignalStatusField () {
+      return this.requestOffsiteCloSignalStatusField(true);
+    }
+    public APIRequestGetAdAccounts requestOffsiteCloSignalStatusField (boolean value) {
+      this.requestField("offsite_clo_signal_status", value);
       return this;
     }
     public APIRequestGetAdAccounts requestOffsitePixelsTosAcceptedField () {
@@ -4505,10 +4539,12 @@ public class User extends APINode {
       "is_tax_id_required",
       "liable_address",
       "line_numbers",
+      "marketing_messages_settings",
       "media_agency",
       "min_campaign_group_spend_cap",
       "min_daily_budget",
       "name",
+      "offsite_clo_signal_status",
       "offsite_pixels_tos_accepted",
       "opportunity_score",
       "owner",
@@ -4958,6 +4994,13 @@ public class User extends APINode {
       this.requestField("line_numbers", value);
       return this;
     }
+    public APIRequestGetAssignedAdAccounts requestMarketingMessagesSettingsField () {
+      return this.requestMarketingMessagesSettingsField(true);
+    }
+    public APIRequestGetAssignedAdAccounts requestMarketingMessagesSettingsField (boolean value) {
+      this.requestField("marketing_messages_settings", value);
+      return this;
+    }
     public APIRequestGetAssignedAdAccounts requestMediaAgencyField () {
       return this.requestMediaAgencyField(true);
     }
@@ -4984,6 +5027,13 @@ public class User extends APINode {
     }
     public APIRequestGetAssignedAdAccounts requestNameField (boolean value) {
       this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetAssignedAdAccounts requestOffsiteCloSignalStatusField () {
+      return this.requestOffsiteCloSignalStatusField(true);
+    }
+    public APIRequestGetAssignedAdAccounts requestOffsiteCloSignalStatusField (boolean value) {
+      this.requestField("offsite_clo_signal_status", value);
       return this;
     }
     public APIRequestGetAssignedAdAccounts requestOffsitePixelsTosAcceptedField () {
@@ -5180,6 +5230,7 @@ public class User extends APINode {
       "category",
       "client_config",
       "company",
+      "config_ids",
       "configured_ios_sso",
       "contact_email",
       "created_time",
@@ -5580,6 +5631,13 @@ public class User extends APINode {
     }
     public APIRequestGetAssignedApplications requestCompanyField (boolean value) {
       this.requestField("company", value);
+      return this;
+    }
+    public APIRequestGetAssignedApplications requestConfigIdsField () {
+      return this.requestConfigIdsField(true);
+    }
+    public APIRequestGetAssignedApplications requestConfigIdsField (boolean value) {
+      this.requestField("config_ids", value);
       return this;
     }
     public APIRequestGetAssignedApplications requestConfiguredIosSsoField () {
@@ -6351,6 +6409,7 @@ public class User extends APINode {
       "preferred_audience",
       "press_contact",
       "price_range",
+      "priority_hours",
       "privacy_info_url",
       "produced_by",
       "products",
@@ -7300,6 +7359,13 @@ public class User extends APINode {
       this.requestField("price_range", value);
       return this;
     }
+    public APIRequestGetAssignedPages requestPriorityHoursField () {
+      return this.requestPriorityHoursField(true);
+    }
+    public APIRequestGetAssignedPages requestPriorityHoursField (boolean value) {
+      this.requestField("priority_hours", value);
+      return this;
+    }
     public APIRequestGetAssignedPages requestPrivacyInfoUrlField () {
       return this.requestPrivacyInfoUrlField(true);
     }
@@ -7846,6 +7912,7 @@ public class User extends APINode {
       "primary_funding_id",
       "purchase_order_number",
       "status",
+      "template_auto_archival_enabled",
       "timezone_id",
       "whatsapp_business_manager_messaging_limit",
     };
@@ -8106,6 +8173,13 @@ public class User extends APINode {
     }
     public APIRequestGetAssignedWhatsAppBusinessAccounts requestStatusField (boolean value) {
       this.requestField("status", value);
+      return this;
+    }
+    public APIRequestGetAssignedWhatsAppBusinessAccounts requestTemplateAutoArchivalEnabledField () {
+      return this.requestTemplateAutoArchivalEnabledField(true);
+    }
+    public APIRequestGetAssignedWhatsAppBusinessAccounts requestTemplateAutoArchivalEnabledField (boolean value) {
+      this.requestField("template_auto_archival_enabled", value);
       return this;
     }
     public APIRequestGetAssignedWhatsAppBusinessAccounts requestTimezoneIdField () {
@@ -9782,6 +9856,7 @@ public class User extends APINode {
       "id",
       "instagram_eligibility",
       "is_app_share",
+      "is_eligible_for_dark_post",
       "is_eligible_for_promotion",
       "is_expired",
       "is_hidden",
@@ -10116,6 +10191,13 @@ public class User extends APINode {
     }
     public APIRequestGetFeed requestIsAppShareField (boolean value) {
       this.requestField("is_app_share", value);
+      return this;
+    }
+    public APIRequestGetFeed requestIsEligibleForDarkPostField () {
+      return this.requestIsEligibleForDarkPostField(true);
+    }
+    public APIRequestGetFeed requestIsEligibleForDarkPostField (boolean value) {
+      this.requestField("is_eligible_for_dark_post", value);
       return this;
     }
     public APIRequestGetFeed requestIsEligibleForPromotionField () {
@@ -13124,6 +13206,7 @@ public class User extends APINode {
       "preferred_audience",
       "press_contact",
       "price_range",
+      "priority_hours",
       "privacy_info_url",
       "produced_by",
       "products",
@@ -14067,6 +14150,13 @@ public class User extends APINode {
     }
     public APIRequestGetLikes requestPriceRangeField (boolean value) {
       this.requestField("price_range", value);
+      return this;
+    }
+    public APIRequestGetLikes requestPriorityHoursField () {
+      return this.requestPriorityHoursField(true);
+    }
+    public APIRequestGetLikes requestPriorityHoursField (boolean value) {
+      this.requestField("priority_hours", value);
       return this;
     }
     public APIRequestGetLikes requestPrivacyInfoUrlField () {
@@ -15293,6 +15383,7 @@ public class User extends APINode {
       "preferred_audience",
       "press_contact",
       "price_range",
+      "priority_hours",
       "privacy_info_url",
       "produced_by",
       "products",
@@ -16238,6 +16329,13 @@ public class User extends APINode {
       this.requestField("price_range", value);
       return this;
     }
+    public APIRequestGetMusic requestPriorityHoursField () {
+      return this.requestPriorityHoursField(true);
+    }
+    public APIRequestGetMusic requestPriorityHoursField (boolean value) {
+      this.requestField("priority_hours", value);
+      return this;
+    }
     public APIRequestGetMusic requestPrivacyInfoUrlField () {
       return this.requestPrivacyInfoUrlField(true);
     }
@@ -16506,6 +16604,7 @@ public class User extends APINode {
       "label",
       "message",
       "notif_ids",
+      "notification_content_id",
       "payload",
       "read",
       "ref",
@@ -16615,6 +16714,15 @@ public class User extends APINode {
     }
     public APIRequestCreateNotification setNotifIds (String notifIds) {
       this.setParam("notif_ids", notifIds);
+      return this;
+    }
+
+    public APIRequestCreateNotification setNotificationContentId (Long notificationContentId) {
+      this.setParam("notification_content_id", notificationContentId);
+      return this;
+    }
+    public APIRequestCreateNotification setNotificationContentId (String notificationContentId) {
+      this.setParam("notification_content_id", notificationContentId);
       return this;
     }
 
@@ -17283,10 +17391,12 @@ public class User extends APINode {
       "is_tax_id_required",
       "liable_address",
       "line_numbers",
+      "marketing_messages_settings",
       "media_agency",
       "min_campaign_group_spend_cap",
       "min_daily_budget",
       "name",
+      "offsite_clo_signal_status",
       "offsite_pixels_tos_accepted",
       "opportunity_score",
       "owner",
@@ -17736,6 +17846,13 @@ public class User extends APINode {
       this.requestField("line_numbers", value);
       return this;
     }
+    public APIRequestGetPersonalAdAccounts requestMarketingMessagesSettingsField () {
+      return this.requestMarketingMessagesSettingsField(true);
+    }
+    public APIRequestGetPersonalAdAccounts requestMarketingMessagesSettingsField (boolean value) {
+      this.requestField("marketing_messages_settings", value);
+      return this;
+    }
     public APIRequestGetPersonalAdAccounts requestMediaAgencyField () {
       return this.requestMediaAgencyField(true);
     }
@@ -17762,6 +17879,13 @@ public class User extends APINode {
     }
     public APIRequestGetPersonalAdAccounts requestNameField (boolean value) {
       this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetPersonalAdAccounts requestOffsiteCloSignalStatusField () {
+      return this.requestOffsiteCloSignalStatusField(true);
+    }
+    public APIRequestGetPersonalAdAccounts requestOffsiteCloSignalStatusField (boolean value) {
+      this.requestField("offsite_clo_signal_status", value);
       return this;
     }
     public APIRequestGetPersonalAdAccounts requestOffsitePixelsTosAcceptedField () {
@@ -19043,6 +19167,7 @@ public class User extends APINode {
       "id",
       "instagram_eligibility",
       "is_app_share",
+      "is_eligible_for_dark_post",
       "is_eligible_for_promotion",
       "is_expired",
       "is_hidden",
@@ -19377,6 +19502,13 @@ public class User extends APINode {
     }
     public APIRequestGetPosts requestIsAppShareField (boolean value) {
       this.requestField("is_app_share", value);
+      return this;
+    }
+    public APIRequestGetPosts requestIsEligibleForDarkPostField () {
+      return this.requestIsEligibleForDarkPostField(true);
+    }
+    public APIRequestGetPosts requestIsEligibleForDarkPostField (boolean value) {
+      this.requestField("is_eligible_for_dark_post", value);
       return this;
     }
     public APIRequestGetPosts requestIsEligibleForPromotionField () {
@@ -20157,7 +20289,6 @@ public class User extends APINode {
       "privacy",
       "published",
       "scheduled_publish_time",
-      "season",
       "source",
       "spherical",
       "status",
@@ -20546,13 +20677,6 @@ public class User extends APINode {
       this.requestField("scheduled_publish_time", value);
       return this;
     }
-    public APIRequestGetVideos requestSeasonField () {
-      return this.requestSeasonField(true);
-    }
-    public APIRequestGetVideos requestSeasonField (boolean value) {
-      this.requestField("season", value);
-      return this;
-    }
     public APIRequestGetVideos requestSourceField () {
       return this.requestSourceField(true);
     }
@@ -20627,6 +20751,7 @@ public class User extends APINode {
       "creative_tools",
       "description",
       "direct_share_status",
+      "edit_description_spec",
       "embeddable",
       "end_offset",
       "fbuploader_video_file_chunk",
@@ -20834,6 +20959,15 @@ public class User extends APINode {
     }
     public APIRequestCreateVideo setDirectShareStatus (String directShareStatus) {
       this.setParam("direct_share_status", directShareStatus);
+      return this;
+    }
+
+    public APIRequestCreateVideo setEditDescriptionSpec (Map<String, String> editDescriptionSpec) {
+      this.setParam("edit_description_spec", editDescriptionSpec);
+      return this;
+    }
+    public APIRequestCreateVideo setEditDescriptionSpec (String editDescriptionSpec) {
+      this.setParam("edit_description_spec", editDescriptionSpec);
       return this;
     }
 

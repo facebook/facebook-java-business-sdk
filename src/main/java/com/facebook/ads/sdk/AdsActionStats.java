@@ -139,6 +139,8 @@ public class AdsActionStats extends APINode {
   private String mInteractiveComponentStickerId = null;
   @SerializedName("interactive_component_sticker_response")
   private String mInteractiveComponentStickerResponse = null;
+  @SerializedName("promoted_product_set_result")
+  private String mPromotedProductSetResult = null;
   @SerializedName("skan_click")
   private String mSkanClick = null;
   @SerializedName("skan_click_second_postback")
@@ -745,6 +747,15 @@ public class AdsActionStats extends APINode {
     return this;
   }
 
+  public String getFieldPromotedProductSetResult() {
+    return mPromotedProductSetResult;
+  }
+
+  public AdsActionStats setFieldPromotedProductSetResult(String value) {
+    this.mPromotedProductSetResult = value;
+    return this;
+  }
+
   public String getFieldSkanClick() {
     return mSkanClick;
   }
@@ -874,6 +885,7 @@ public class AdsActionStats extends APINode {
     this.mInline = instance.mInline;
     this.mInteractiveComponentStickerId = instance.mInteractiveComponentStickerId;
     this.mInteractiveComponentStickerResponse = instance.mInteractiveComponentStickerResponse;
+    this.mPromotedProductSetResult = instance.mPromotedProductSetResult;
     this.mSkanClick = instance.mSkanClick;
     this.mSkanClickSecondPostback = instance.mSkanClickSecondPostback;
     this.mSkanClickThirdPostback = instance.mSkanClickThirdPostback;

@@ -1113,6 +1113,8 @@ public class WhatsAppBusinessPreVerifiedPhoneNumber extends APINode {
   }
 
   public static enum EnumCodeMethod {
+      @SerializedName("IVR")
+      VALUE_IVR("IVR"),
       @SerializedName("SMS")
       VALUE_SMS("SMS"),
       @SerializedName("VOICE")

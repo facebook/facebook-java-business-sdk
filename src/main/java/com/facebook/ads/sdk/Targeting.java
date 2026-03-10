@@ -103,6 +103,8 @@ public class Targeting extends APINode {
   private List<String> mEffectivePublisherPlatforms = null;
   @SerializedName("effective_threads_positions")
   private List<String> mEffectiveThreadsPositions = null;
+  @SerializedName("effective_whatsapp_positions")
+  private List<String> mEffectiveWhatsappPositions = null;
   @SerializedName("engagement_specs")
   private List<TargetingDynamicRule> mEngagementSpecs = null;
   @SerializedName("ethnic_affinity")
@@ -163,6 +165,8 @@ public class Targeting extends APINode {
   private List<IDName> mIndustries = null;
   @SerializedName("instagram_positions")
   private List<String> mInstagramPositions = null;
+  @SerializedName("install_state_application")
+  private String mInstallStateApplication = null;
   @SerializedName("instream_video_skippable_excluded")
   private Boolean mInstreamVideoSkippableExcluded = null;
   @SerializedName("interested_in")
@@ -215,12 +219,16 @@ public class Targeting extends APINode {
   private List<String> mThreadsPositions = null;
   @SerializedName("user_adclusters")
   private List<IDName> mUserAdclusters = null;
+  @SerializedName("user_age_unknown")
+  private Boolean mUserAgeUnknown = null;
   @SerializedName("user_device")
   private List<String> mUserDevice = null;
   @SerializedName("user_event")
   private List<Long> mUserEvent = null;
   @SerializedName("user_os")
   private List<String> mUserOs = null;
+  @SerializedName("whatsapp_positions")
+  private List<String> mWhatsappPositions = null;
   @SerializedName("wireless_carrier")
   private List<String> mWirelessCarrier = null;
   @SerializedName("work_employers")
@@ -699,6 +707,15 @@ public class Targeting extends APINode {
     return this;
   }
 
+  public List<String> getFieldEffectiveWhatsappPositions() {
+    return mEffectiveWhatsappPositions;
+  }
+
+  public Targeting setFieldEffectiveWhatsappPositions(List<String> value) {
+    this.mEffectiveWhatsappPositions = value;
+    return this;
+  }
+
   public List<TargetingDynamicRule> getFieldEngagementSpecs() {
     return mEngagementSpecs;
   }
@@ -1064,6 +1081,15 @@ public class Targeting extends APINode {
     return this;
   }
 
+  public String getFieldInstallStateApplication() {
+    return mInstallStateApplication;
+  }
+
+  public Targeting setFieldInstallStateApplication(String value) {
+    this.mInstallStateApplication = value;
+    return this;
+  }
+
   public Boolean getFieldInstreamVideoSkippableExcluded() {
     return mInstreamVideoSkippableExcluded;
   }
@@ -1358,6 +1384,15 @@ public class Targeting extends APINode {
     this.mUserAdclusters = IDName.getGson().fromJson(value, type);
     return this;
   }
+  public Boolean getFieldUserAgeUnknown() {
+    return mUserAgeUnknown;
+  }
+
+  public Targeting setFieldUserAgeUnknown(Boolean value) {
+    this.mUserAgeUnknown = value;
+    return this;
+  }
+
   public List<String> getFieldUserDevice() {
     return mUserDevice;
   }
@@ -1382,6 +1417,15 @@ public class Targeting extends APINode {
 
   public Targeting setFieldUserOs(List<String> value) {
     this.mUserOs = value;
+    return this;
+  }
+
+  public List<String> getFieldWhatsappPositions() {
+    return mWhatsappPositions;
+  }
+
+  public Targeting setFieldWhatsappPositions(List<String> value) {
+    this.mWhatsappPositions = value;
     return this;
   }
 
@@ -1517,6 +1561,7 @@ public class Targeting extends APINode {
     this.mEffectiveMessengerPositions = instance.mEffectiveMessengerPositions;
     this.mEffectivePublisherPlatforms = instance.mEffectivePublisherPlatforms;
     this.mEffectiveThreadsPositions = instance.mEffectiveThreadsPositions;
+    this.mEffectiveWhatsappPositions = instance.mEffectiveWhatsappPositions;
     this.mEngagementSpecs = instance.mEngagementSpecs;
     this.mEthnicAffinity = instance.mEthnicAffinity;
     this.mExcludeReachedSince = instance.mExcludeReachedSince;
@@ -1547,6 +1592,7 @@ public class Targeting extends APINode {
     this.mIncome = instance.mIncome;
     this.mIndustries = instance.mIndustries;
     this.mInstagramPositions = instance.mInstagramPositions;
+    this.mInstallStateApplication = instance.mInstallStateApplication;
     this.mInstreamVideoSkippableExcluded = instance.mInstreamVideoSkippableExcluded;
     this.mInterestedIn = instance.mInterestedIn;
     this.mInterests = instance.mInterests;
@@ -1573,9 +1619,11 @@ public class Targeting extends APINode {
     this.mTargetingRelaxationTypes = instance.mTargetingRelaxationTypes;
     this.mThreadsPositions = instance.mThreadsPositions;
     this.mUserAdclusters = instance.mUserAdclusters;
+    this.mUserAgeUnknown = instance.mUserAgeUnknown;
     this.mUserDevice = instance.mUserDevice;
     this.mUserEvent = instance.mUserEvent;
     this.mUserOs = instance.mUserOs;
+    this.mWhatsappPositions = instance.mWhatsappPositions;
     this.mWirelessCarrier = instance.mWirelessCarrier;
     this.mWorkEmployers = instance.mWorkEmployers;
     this.mWorkPositions = instance.mWorkPositions;

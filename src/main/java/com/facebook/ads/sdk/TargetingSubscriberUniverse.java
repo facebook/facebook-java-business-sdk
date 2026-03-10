@@ -41,6 +41,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class TargetingSubscriberUniverse extends APINode {
+  @SerializedName("messenger_subscriber_pool")
+  private IDName mMessengerSubscriberPool = null;
   @SerializedName("messenger_subscriber_source")
   private IDName mMessengerSubscriberSource = null;
   @SerializedName("whatsapp_subscriber_pool")
@@ -198,6 +200,20 @@ public class TargetingSubscriberUniverse extends APINode {
   }
 
 
+  public IDName getFieldMessengerSubscriberPool() {
+    return mMessengerSubscriberPool;
+  }
+
+  public TargetingSubscriberUniverse setFieldMessengerSubscriberPool(IDName value) {
+    this.mMessengerSubscriberPool = value;
+    return this;
+  }
+
+  public TargetingSubscriberUniverse setFieldMessengerSubscriberPool(String value) {
+    Type type = new TypeToken<IDName>(){}.getType();
+    this.mMessengerSubscriberPool = IDName.getGson().fromJson(value, type);
+    return this;
+  }
   public IDName getFieldMessengerSubscriberSource() {
     return mMessengerSubscriberSource;
   }
@@ -257,6 +273,7 @@ public class TargetingSubscriberUniverse extends APINode {
   }
 
   public TargetingSubscriberUniverse copyFrom(TargetingSubscriberUniverse instance) {
+    this.mMessengerSubscriberPool = instance.mMessengerSubscriberPool;
     this.mMessengerSubscriberSource = instance.mMessengerSubscriberSource;
     this.mWhatsappSubscriberPool = instance.mWhatsappSubscriberPool;
     this.mWhatsappSubscriberSource = instance.mWhatsappSubscriberSource;

@@ -47,8 +47,6 @@ public class MessengerProfile extends APINode {
   private List<Object> mCommands = null;
   @SerializedName("get_started")
   private Object mGetStarted = null;
-  @SerializedName("greeting")
-  private List<Object> mGreeting = null;
   @SerializedName("ice_breakers")
   private List<Object> mIceBreakers = null;
   @SerializedName("persistent_menu")
@@ -235,15 +233,6 @@ public class MessengerProfile extends APINode {
     return this;
   }
 
-  public List<Object> getFieldGreeting() {
-    return mGreeting;
-  }
-
-  public MessengerProfile setFieldGreeting(List<Object> value) {
-    this.mGreeting = value;
-    return this;
-  }
-
   public List<Object> getFieldIceBreakers() {
     return mIceBreakers;
   }
@@ -300,7 +289,6 @@ public class MessengerProfile extends APINode {
     this.mAccountLinkingUrl = instance.mAccountLinkingUrl;
     this.mCommands = instance.mCommands;
     this.mGetStarted = instance.mGetStarted;
-    this.mGreeting = instance.mGreeting;
     this.mIceBreakers = instance.mIceBreakers;
     this.mPersistentMenu = instance.mPersistentMenu;
     this.mSubjectToNewEuPrivacyRules = instance.mSubjectToNewEuPrivacyRules;

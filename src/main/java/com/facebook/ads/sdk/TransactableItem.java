@@ -45,8 +45,6 @@ public class TransactableItem extends APINode {
   private String mActionTitle = null;
   @SerializedName("applinks")
   private CatalogItemAppLinks mApplinks = null;
-  @SerializedName("category_specific_fields")
-  private CatalogSubVerticalList mCategorySpecificFields = null;
   @SerializedName("currency")
   private String mCurrency = null;
   @SerializedName("description")
@@ -309,10 +307,6 @@ public class TransactableItem extends APINode {
 
   public CatalogItemAppLinks getFieldApplinks() {
     return mApplinks;
-  }
-
-  public CatalogSubVerticalList getFieldCategorySpecificFields() {
-    return mCategorySpecificFields;
   }
 
   public String getFieldCurrency() {
@@ -668,7 +662,6 @@ public class TransactableItem extends APINode {
     public static final String[] FIELDS = {
       "action_title",
       "applinks",
-      "category_specific_fields",
       "currency",
       "description",
       "duration_time",
@@ -790,13 +783,6 @@ public class TransactableItem extends APINode {
     }
     public APIRequestGet requestApplinksField (boolean value) {
       this.requestField("applinks", value);
-      return this;
-    }
-    public APIRequestGet requestCategorySpecificFieldsField () {
-      return this.requestCategorySpecificFieldsField(true);
-    }
-    public APIRequestGet requestCategorySpecificFieldsField (boolean value) {
-      this.requestField("category_specific_fields", value);
       return this;
     }
     public APIRequestGet requestCurrencyField () {
@@ -983,7 +969,6 @@ public class TransactableItem extends APINode {
   public TransactableItem copyFrom(TransactableItem instance) {
     this.mActionTitle = instance.mActionTitle;
     this.mApplinks = instance.mApplinks;
-    this.mCategorySpecificFields = instance.mCategorySpecificFields;
     this.mCurrency = instance.mCurrency;
     this.mDescription = instance.mDescription;
     this.mDurationTime = instance.mDurationTime;

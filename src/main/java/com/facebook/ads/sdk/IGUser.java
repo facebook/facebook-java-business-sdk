@@ -328,6 +328,10 @@ public class IGUser extends APINode {
     return new APIRequestCreateBrandedContentTagApproval(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestCreateBusinessMessagingFeatureStatus createBusinessMessagingFeatureStatus() {
+    return new APIRequestCreateBusinessMessagingFeatureStatus(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetCatalogProductSearch getCatalogProductSearch() {
     return new APIRequestGetCatalogProductSearch(this.getPrefixedId().toString(), context);
   }
@@ -338,6 +342,10 @@ public class IGUser extends APINode {
 
   public APIRequestCreateCollaborationInvite createCollaborationInvite() {
     return new APIRequestCreateCollaborationInvite(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetCollaborativeMedia getCollaborativeMedia() {
+    return new APIRequestGetCollaborativeMedia(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetConnectedThreadsUser getConnectedThreadsUser() {
@@ -390,6 +398,10 @@ public class IGUser extends APINode {
 
   public APIRequestCreateMention createMention() {
     return new APIRequestCreateMention(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestCreateModerateConversation createModerateConversation() {
+    return new APIRequestCreateModerateConversation(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetNotificationMessageTokens getNotificationMessageTokens() {
@@ -876,10 +888,12 @@ public class IGUser extends APINode {
       "is_tax_id_required",
       "liable_address",
       "line_numbers",
+      "marketing_messages_settings",
       "media_agency",
       "min_campaign_group_spend_cap",
       "min_daily_budget",
       "name",
+      "offsite_clo_signal_status",
       "offsite_pixels_tos_accepted",
       "opportunity_score",
       "owner",
@@ -1334,6 +1348,13 @@ public class IGUser extends APINode {
       this.requestField("line_numbers", value);
       return this;
     }
+    public APIRequestGetAuthorizedAdAccounts requestMarketingMessagesSettingsField () {
+      return this.requestMarketingMessagesSettingsField(true);
+    }
+    public APIRequestGetAuthorizedAdAccounts requestMarketingMessagesSettingsField (boolean value) {
+      this.requestField("marketing_messages_settings", value);
+      return this;
+    }
     public APIRequestGetAuthorizedAdAccounts requestMediaAgencyField () {
       return this.requestMediaAgencyField(true);
     }
@@ -1360,6 +1381,13 @@ public class IGUser extends APINode {
     }
     public APIRequestGetAuthorizedAdAccounts requestNameField (boolean value) {
       this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetAuthorizedAdAccounts requestOffsiteCloSignalStatusField () {
+      return this.requestOffsiteCloSignalStatusField(true);
+    }
+    public APIRequestGetAuthorizedAdAccounts requestOffsiteCloSignalStatusField (boolean value) {
+      this.requestField("offsite_clo_signal_status", value);
       return this;
     }
     public APIRequestGetAuthorizedAdAccounts requestOffsitePixelsTosAcceptedField () {
@@ -1773,6 +1801,7 @@ public class IGUser extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "creator_username",
     };
 
     public static final String[] FIELDS = {
@@ -1834,6 +1863,11 @@ public class IGUser extends APINode {
       return this;
     }
 
+
+    public APIRequestGetBrandedContentAdPermissions setCreatorUsername (String creatorUsername) {
+      this.setParam("creator_username", creatorUsername);
+      return this;
+    }
 
     public APIRequestGetBrandedContentAdPermissions requestAllFields () {
       return this.requestAllFields(true);
@@ -2595,6 +2629,121 @@ public class IGUser extends APINode {
 
   }
 
+  public static class APIRequestCreateBusinessMessagingFeatureStatus extends APIRequest<IGUser> {
+
+    IGUser lastResponse = null;
+    @Override
+    public IGUser getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "features",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public IGUser parseResponse(String response, String header) throws APIException {
+      return IGUser.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public IGUser execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public IGUser execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<IGUser> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<IGUser> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, IGUser>() {
+           public IGUser apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateBusinessMessagingFeatureStatus.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestCreateBusinessMessagingFeatureStatus(String nodeId, APIContext context) {
+      super(context, nodeId, "/business_messaging_feature_status", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateBusinessMessagingFeatureStatus setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateBusinessMessagingFeatureStatus setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateBusinessMessagingFeatureStatus setFeatures (List<Map<String, String>> features) {
+      this.setParam("features", features);
+      return this;
+    }
+    public APIRequestCreateBusinessMessagingFeatureStatus setFeatures (String features) {
+      this.setParam("features", features);
+      return this;
+    }
+
+    public APIRequestCreateBusinessMessagingFeatureStatus requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateBusinessMessagingFeatureStatus requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateBusinessMessagingFeatureStatus requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateBusinessMessagingFeatureStatus requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateBusinessMessagingFeatureStatus requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateBusinessMessagingFeatureStatus requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGetCatalogProductSearch extends APIRequest<ShadowIGUserCatalogProductSearch> {
 
     APINodeList<ShadowIGUserCatalogProductSearch> lastResponse = null;
@@ -3034,6 +3183,247 @@ public class IGUser extends APINode {
 
   }
 
+  public static class APIRequestGetCollaborativeMedia extends APIRequest<ShadowIGUserCollaborativeMedia> {
+
+    APINodeList<ShadowIGUserCollaborativeMedia> lastResponse = null;
+    @Override
+    public APINodeList<ShadowIGUserCollaborativeMedia> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "caption",
+      "comments_count",
+      "id",
+      "like_count",
+      "media_product_type",
+      "media_type",
+      "media_url",
+      "permalink",
+      "reposts_count",
+      "saved_count",
+      "shares_count",
+      "thumbnail_url",
+      "timestamp",
+      "total_comments_count",
+      "total_like_count",
+      "total_views_count",
+      "username",
+    };
+
+    @Override
+    public APINodeList<ShadowIGUserCollaborativeMedia> parseResponse(String response, String header) throws APIException {
+      return ShadowIGUserCollaborativeMedia.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<ShadowIGUserCollaborativeMedia> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<ShadowIGUserCollaborativeMedia> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<ShadowIGUserCollaborativeMedia>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<ShadowIGUserCollaborativeMedia>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<ShadowIGUserCollaborativeMedia>>() {
+           public APINodeList<ShadowIGUserCollaborativeMedia> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetCollaborativeMedia.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestGetCollaborativeMedia(String nodeId, APIContext context) {
+      super(context, nodeId, "/collaborative_media", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetCollaborativeMedia setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCollaborativeMedia setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetCollaborativeMedia requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetCollaborativeMedia requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCollaborativeMedia requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetCollaborativeMedia requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCollaborativeMedia requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCollaborativeMedia requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetCollaborativeMedia requestCaptionField () {
+      return this.requestCaptionField(true);
+    }
+    public APIRequestGetCollaborativeMedia requestCaptionField (boolean value) {
+      this.requestField("caption", value);
+      return this;
+    }
+    public APIRequestGetCollaborativeMedia requestCommentsCountField () {
+      return this.requestCommentsCountField(true);
+    }
+    public APIRequestGetCollaborativeMedia requestCommentsCountField (boolean value) {
+      this.requestField("comments_count", value);
+      return this;
+    }
+    public APIRequestGetCollaborativeMedia requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetCollaborativeMedia requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetCollaborativeMedia requestLikeCountField () {
+      return this.requestLikeCountField(true);
+    }
+    public APIRequestGetCollaborativeMedia requestLikeCountField (boolean value) {
+      this.requestField("like_count", value);
+      return this;
+    }
+    public APIRequestGetCollaborativeMedia requestMediaProductTypeField () {
+      return this.requestMediaProductTypeField(true);
+    }
+    public APIRequestGetCollaborativeMedia requestMediaProductTypeField (boolean value) {
+      this.requestField("media_product_type", value);
+      return this;
+    }
+    public APIRequestGetCollaborativeMedia requestMediaTypeField () {
+      return this.requestMediaTypeField(true);
+    }
+    public APIRequestGetCollaborativeMedia requestMediaTypeField (boolean value) {
+      this.requestField("media_type", value);
+      return this;
+    }
+    public APIRequestGetCollaborativeMedia requestMediaUrlField () {
+      return this.requestMediaUrlField(true);
+    }
+    public APIRequestGetCollaborativeMedia requestMediaUrlField (boolean value) {
+      this.requestField("media_url", value);
+      return this;
+    }
+    public APIRequestGetCollaborativeMedia requestPermalinkField () {
+      return this.requestPermalinkField(true);
+    }
+    public APIRequestGetCollaborativeMedia requestPermalinkField (boolean value) {
+      this.requestField("permalink", value);
+      return this;
+    }
+    public APIRequestGetCollaborativeMedia requestRepostsCountField () {
+      return this.requestRepostsCountField(true);
+    }
+    public APIRequestGetCollaborativeMedia requestRepostsCountField (boolean value) {
+      this.requestField("reposts_count", value);
+      return this;
+    }
+    public APIRequestGetCollaborativeMedia requestSavedCountField () {
+      return this.requestSavedCountField(true);
+    }
+    public APIRequestGetCollaborativeMedia requestSavedCountField (boolean value) {
+      this.requestField("saved_count", value);
+      return this;
+    }
+    public APIRequestGetCollaborativeMedia requestSharesCountField () {
+      return this.requestSharesCountField(true);
+    }
+    public APIRequestGetCollaborativeMedia requestSharesCountField (boolean value) {
+      this.requestField("shares_count", value);
+      return this;
+    }
+    public APIRequestGetCollaborativeMedia requestThumbnailUrlField () {
+      return this.requestThumbnailUrlField(true);
+    }
+    public APIRequestGetCollaborativeMedia requestThumbnailUrlField (boolean value) {
+      this.requestField("thumbnail_url", value);
+      return this;
+    }
+    public APIRequestGetCollaborativeMedia requestTimestampField () {
+      return this.requestTimestampField(true);
+    }
+    public APIRequestGetCollaborativeMedia requestTimestampField (boolean value) {
+      this.requestField("timestamp", value);
+      return this;
+    }
+    public APIRequestGetCollaborativeMedia requestTotalCommentsCountField () {
+      return this.requestTotalCommentsCountField(true);
+    }
+    public APIRequestGetCollaborativeMedia requestTotalCommentsCountField (boolean value) {
+      this.requestField("total_comments_count", value);
+      return this;
+    }
+    public APIRequestGetCollaborativeMedia requestTotalLikeCountField () {
+      return this.requestTotalLikeCountField(true);
+    }
+    public APIRequestGetCollaborativeMedia requestTotalLikeCountField (boolean value) {
+      this.requestField("total_like_count", value);
+      return this;
+    }
+    public APIRequestGetCollaborativeMedia requestTotalViewsCountField () {
+      return this.requestTotalViewsCountField(true);
+    }
+    public APIRequestGetCollaborativeMedia requestTotalViewsCountField (boolean value) {
+      this.requestField("total_views_count", value);
+      return this;
+    }
+    public APIRequestGetCollaborativeMedia requestUsernameField () {
+      return this.requestUsernameField(true);
+    }
+    public APIRequestGetCollaborativeMedia requestUsernameField (boolean value) {
+      this.requestField("username", value);
+      return this;
+    }
+  }
+
   public static class APIRequestGetConnectedThreadsUser extends APIRequest<ThreadsUser> {
 
     APINodeList<ThreadsUser> lastResponse = null;
@@ -3307,6 +3697,7 @@ public class IGUser extends APINode {
       "show_onboarded_creators_only",
       "similar_to_creators",
       "username",
+      "usernames",
     };
 
     public static final String[] FIELDS = {
@@ -3323,6 +3714,7 @@ public class IGUser extends APINode {
       "onboarded_status",
       "past_brand_partnership_partners",
       "portfolio_url",
+      "profile_picture_url",
       "username",
     };
 
@@ -3525,6 +3917,15 @@ public class IGUser extends APINode {
       return this;
     }
 
+    public APIRequestGetCreatorMarketPlaceCreators setUsernames (List<String> usernames) {
+      this.setParam("usernames", usernames);
+      return this;
+    }
+    public APIRequestGetCreatorMarketPlaceCreators setUsernames (String usernames) {
+      this.setParam("usernames", usernames);
+      return this;
+    }
+
     public APIRequestGetCreatorMarketPlaceCreators requestAllFields () {
       return this.requestAllFields(true);
     }
@@ -3650,6 +4051,13 @@ public class IGUser extends APINode {
     }
     public APIRequestGetCreatorMarketPlaceCreators requestPortfolioUrlField (boolean value) {
       this.requestField("portfolio_url", value);
+      return this;
+    }
+    public APIRequestGetCreatorMarketPlaceCreators requestProfilePictureUrlField () {
+      return this.requestProfilePictureUrlField(true);
+    }
+    public APIRequestGetCreatorMarketPlaceCreators requestProfilePictureUrlField (boolean value) {
+      this.requestField("profile_picture_url", value);
       return this;
     }
     public APIRequestGetCreatorMarketPlaceCreators requestUsernameField () {
@@ -4360,6 +4768,7 @@ public class IGUser extends APINode {
       "caption",
       "comments_count",
       "copyright_check_information",
+      "current_live_viewer_count",
       "has_poll",
       "has_slider",
       "id",
@@ -4516,6 +4925,13 @@ public class IGUser extends APINode {
       this.requestField("copyright_check_information", value);
       return this;
     }
+    public APIRequestGetLiveMedia requestCurrentLiveViewerCountField () {
+      return this.requestCurrentLiveViewerCountField(true);
+    }
+    public APIRequestGetLiveMedia requestCurrentLiveViewerCountField (boolean value) {
+      this.requestField("current_live_viewer_count", value);
+      return this;
+    }
     public APIRequestGetLiveMedia requestHasPollField () {
       return this.requestHasPollField(true);
     }
@@ -4669,6 +5085,7 @@ public class IGUser extends APINode {
       "caption",
       "comments_count",
       "copyright_check_information",
+      "current_live_viewer_count",
       "has_poll",
       "has_slider",
       "id",
@@ -4823,6 +5240,13 @@ public class IGUser extends APINode {
     }
     public APIRequestGetMedia requestCopyrightCheckInformationField (boolean value) {
       this.requestField("copyright_check_information", value);
+      return this;
+    }
+    public APIRequestGetMedia requestCurrentLiveViewerCountField () {
+      return this.requestCurrentLiveViewerCountField(true);
+    }
+    public APIRequestGetMedia requestCurrentLiveViewerCountField (boolean value) {
+      this.requestField("current_live_viewer_count", value);
       return this;
     }
     public APIRequestGetMedia requestHasPollField () {
@@ -5427,6 +5851,131 @@ public class IGUser extends APINode {
 
     @Override
     public APIRequestCreateMention requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestCreateModerateConversation extends APIRequest<APINode> {
+
+    APINode lastResponse = null;
+    @Override
+    public APINode getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "actions",
+      "user_ids",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public APINode execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINode execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINode> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateModerateConversation.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         },
+         MoreExecutors.directExecutor()
+      );
+    };
+
+    public APIRequestCreateModerateConversation(String nodeId, APIContext context) {
+      super(context, nodeId, "/moderate_conversations", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateModerateConversation setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateModerateConversation setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateModerateConversation setActions (List<EnumActions> actions) {
+      this.setParam("actions", actions);
+      return this;
+    }
+    public APIRequestCreateModerateConversation setActions (String actions) {
+      this.setParam("actions", actions);
+      return this;
+    }
+
+    public APIRequestCreateModerateConversation setUserIds (List<Map<String, String>> userIds) {
+      this.setParam("user_ids", userIds);
+      return this;
+    }
+    public APIRequestCreateModerateConversation setUserIds (String userIds) {
+      this.setParam("user_ids", userIds);
+      return this;
+    }
+
+    public APIRequestCreateModerateConversation requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateModerateConversation requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateModerateConversation requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateModerateConversation requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateModerateConversation requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateModerateConversation requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
@@ -6200,6 +6749,7 @@ public class IGUser extends APINode {
       "caption",
       "comments_count",
       "copyright_check_information",
+      "current_live_viewer_count",
       "has_poll",
       "has_slider",
       "id",
@@ -6344,6 +6894,13 @@ public class IGUser extends APINode {
     }
     public APIRequestGetStories requestCopyrightCheckInformationField (boolean value) {
       this.requestField("copyright_check_information", value);
+      return this;
+    }
+    public APIRequestGetStories requestCurrentLiveViewerCountField () {
+      return this.requestCurrentLiveViewerCountField(true);
+    }
+    public APIRequestGetStories requestCurrentLiveViewerCountField (boolean value) {
+      this.requestField("current_live_viewer_count", value);
       return this;
     }
     public APIRequestGetStories requestHasPollField () {
@@ -6497,6 +7054,7 @@ public class IGUser extends APINode {
       "caption",
       "comments_count",
       "copyright_check_information",
+      "current_live_viewer_count",
       "has_poll",
       "has_slider",
       "id",
@@ -6641,6 +7199,13 @@ public class IGUser extends APINode {
     }
     public APIRequestGetTags requestCopyrightCheckInformationField (boolean value) {
       this.requestField("copyright_check_information", value);
+      return this;
+    }
+    public APIRequestGetTags requestCurrentLiveViewerCountField () {
+      return this.requestCurrentLiveViewerCountField(true);
+    }
+    public APIRequestGetTags requestCurrentLiveViewerCountField (boolean value) {
+      this.requestField("current_live_viewer_count", value);
       return this;
     }
     public APIRequestGetTags requestHasPollField () {
@@ -7506,6 +8071,27 @@ public class IGUser extends APINode {
       this.requestField("website", value);
       return this;
     }
+  }
+
+  public static enum EnumActions {
+      @SerializedName("BLOCK_USER")
+      VALUE_BLOCK_USER("BLOCK_USER"),
+      @SerializedName("MOVE_TO_SPAM")
+      VALUE_MOVE_TO_SPAM("MOVE_TO_SPAM"),
+      @SerializedName("UNBLOCK_USER")
+      VALUE_UNBLOCK_USER("UNBLOCK_USER"),
+      ;
+
+      private String value;
+
+      private EnumActions(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
   }
 
   public static enum EnumNotificationSubtypes {

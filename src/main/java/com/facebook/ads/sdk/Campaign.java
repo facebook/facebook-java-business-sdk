@@ -1652,6 +1652,8 @@ public class Campaign extends APINode {
       "campaign_id",
       "configured_status",
       "created_time",
+      "creative_diversity_label",
+      "creative_diversity_score",
       "creative_sequence",
       "creative_sequence_repetition_pattern",
       "daily_budget",
@@ -1978,6 +1980,20 @@ public class Campaign extends APINode {
     }
     public APIRequestGetAdSets requestCreatedTimeField (boolean value) {
       this.requestField("created_time", value);
+      return this;
+    }
+    public APIRequestGetAdSets requestCreativeDiversityLabelField () {
+      return this.requestCreativeDiversityLabelField(true);
+    }
+    public APIRequestGetAdSets requestCreativeDiversityLabelField (boolean value) {
+      this.requestField("creative_diversity_label", value);
+      return this;
+    }
+    public APIRequestGetAdSets requestCreativeDiversityScoreField () {
+      return this.requestCreativeDiversityScoreField(true);
+    }
+    public APIRequestGetAdSets requestCreativeDiversityScoreField (boolean value) {
+      this.requestField("creative_diversity_score", value);
       return this;
     }
     public APIRequestGetAdSets requestCreativeSequenceField () {

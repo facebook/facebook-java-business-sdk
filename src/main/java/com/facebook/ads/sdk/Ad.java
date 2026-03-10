@@ -604,6 +604,7 @@ public class Ad extends APINode {
       "link_destination_display_url",
       "link_og_id",
       "link_url",
+      "marketing_message_structured_spec",
       "media_sourcing_spec",
       "messenger_sponsored_message",
       "name",
@@ -622,6 +623,7 @@ public class Ad extends APINode {
       "portrait_customizations",
       "product_data",
       "product_set_id",
+      "product_suggestion_settings",
       "recommender_settings",
       "regional_regulation_disclaimer_spec",
       "source_facebook_post_id",
@@ -1021,6 +1023,13 @@ public class Ad extends APINode {
       this.requestField("link_url", value);
       return this;
     }
+    public APIRequestGetAdCreatives requestMarketingMessageStructuredSpecField () {
+      return this.requestMarketingMessageStructuredSpecField(true);
+    }
+    public APIRequestGetAdCreatives requestMarketingMessageStructuredSpecField (boolean value) {
+      this.requestField("marketing_message_structured_spec", value);
+      return this;
+    }
     public APIRequestGetAdCreatives requestMediaSourcingSpecField () {
       return this.requestMediaSourcingSpecField(true);
     }
@@ -1145,6 +1154,13 @@ public class Ad extends APINode {
     }
     public APIRequestGetAdCreatives requestProductSetIdField (boolean value) {
       this.requestField("product_set_id", value);
+      return this;
+    }
+    public APIRequestGetAdCreatives requestProductSuggestionSettingsField () {
+      return this.requestProductSuggestionSettingsField(true);
+    }
+    public APIRequestGetAdCreatives requestProductSuggestionSettingsField (boolean value) {
+      this.requestField("product_suggestion_settings", value);
       return this;
     }
     public APIRequestGetAdCreatives requestRecommenderSettingsField () {

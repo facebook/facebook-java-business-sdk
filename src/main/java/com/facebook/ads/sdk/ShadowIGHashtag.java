@@ -294,6 +294,7 @@ public class ShadowIGHashtag extends APINode {
       "caption",
       "comments_count",
       "copyright_check_information",
+      "current_live_viewer_count",
       "has_poll",
       "has_slider",
       "id",
@@ -443,6 +444,13 @@ public class ShadowIGHashtag extends APINode {
     }
     public APIRequestGetRecentMedia requestCopyrightCheckInformationField (boolean value) {
       this.requestField("copyright_check_information", value);
+      return this;
+    }
+    public APIRequestGetRecentMedia requestCurrentLiveViewerCountField () {
+      return this.requestCurrentLiveViewerCountField(true);
+    }
+    public APIRequestGetRecentMedia requestCurrentLiveViewerCountField (boolean value) {
+      this.requestField("current_live_viewer_count", value);
       return this;
     }
     public APIRequestGetRecentMedia requestHasPollField () {
@@ -597,6 +605,7 @@ public class ShadowIGHashtag extends APINode {
       "caption",
       "comments_count",
       "copyright_check_information",
+      "current_live_viewer_count",
       "has_poll",
       "has_slider",
       "id",
@@ -746,6 +755,13 @@ public class ShadowIGHashtag extends APINode {
     }
     public APIRequestGetTopMedia requestCopyrightCheckInformationField (boolean value) {
       this.requestField("copyright_check_information", value);
+      return this;
+    }
+    public APIRequestGetTopMedia requestCurrentLiveViewerCountField () {
+      return this.requestCurrentLiveViewerCountField(true);
+    }
+    public APIRequestGetTopMedia requestCurrentLiveViewerCountField (boolean value) {
+      this.requestField("current_live_viewer_count", value);
       return this;
     }
     public APIRequestGetTopMedia requestHasPollField () {

@@ -49,6 +49,8 @@ public class CatalogItemOverride extends APINode {
   private String mOverrideType = null;
   @SerializedName("override_value")
   private String mOverrideValue = null;
+  @SerializedName("upload_expected_method")
+  private String mUploadExpectedMethod = null;
   protected static Gson gson = null;
 
   CatalogItemOverride() {
@@ -282,6 +284,10 @@ public class CatalogItemOverride extends APINode {
     return mOverrideValue;
   }
 
+  public String getFieldUploadExpectedMethod() {
+    return mUploadExpectedMethod;
+  }
+
 
 
   public static class APIRequestGet extends APIRequest<CatalogItemOverride> {
@@ -299,6 +305,7 @@ public class CatalogItemOverride extends APINode {
       "local_info",
       "override_type",
       "override_value",
+      "upload_expected_method",
     };
 
     @Override
@@ -419,6 +426,13 @@ public class CatalogItemOverride extends APINode {
       this.requestField("override_value", value);
       return this;
     }
+    public APIRequestGet requestUploadExpectedMethodField () {
+      return this.requestUploadExpectedMethodField(true);
+    }
+    public APIRequestGet requestUploadExpectedMethodField (boolean value) {
+      this.requestField("upload_expected_method", value);
+      return this;
+    }
   }
 
 
@@ -440,6 +454,7 @@ public class CatalogItemOverride extends APINode {
     this.mLocalInfo = instance.mLocalInfo;
     this.mOverrideType = instance.mOverrideType;
     this.mOverrideValue = instance.mOverrideValue;
+    this.mUploadExpectedMethod = instance.mUploadExpectedMethod;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

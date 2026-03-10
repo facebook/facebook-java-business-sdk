@@ -440,10 +440,12 @@ public class BusinessUser extends APINode {
       "is_tax_id_required",
       "liable_address",
       "line_numbers",
+      "marketing_messages_settings",
       "media_agency",
       "min_campaign_group_spend_cap",
       "min_daily_budget",
       "name",
+      "offsite_clo_signal_status",
       "offsite_pixels_tos_accepted",
       "opportunity_score",
       "owner",
@@ -893,6 +895,13 @@ public class BusinessUser extends APINode {
       this.requestField("line_numbers", value);
       return this;
     }
+    public APIRequestGetAssignedAdAccounts requestMarketingMessagesSettingsField () {
+      return this.requestMarketingMessagesSettingsField(true);
+    }
+    public APIRequestGetAssignedAdAccounts requestMarketingMessagesSettingsField (boolean value) {
+      this.requestField("marketing_messages_settings", value);
+      return this;
+    }
     public APIRequestGetAssignedAdAccounts requestMediaAgencyField () {
       return this.requestMediaAgencyField(true);
     }
@@ -919,6 +928,13 @@ public class BusinessUser extends APINode {
     }
     public APIRequestGetAssignedAdAccounts requestNameField (boolean value) {
       this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetAssignedAdAccounts requestOffsiteCloSignalStatusField () {
+      return this.requestOffsiteCloSignalStatusField(true);
+    }
+    public APIRequestGetAssignedAdAccounts requestOffsiteCloSignalStatusField (boolean value) {
+      this.requestField("offsite_clo_signal_status", value);
       return this;
     }
     public APIRequestGetAssignedAdAccounts requestOffsitePixelsTosAcceptedField () {
@@ -1333,6 +1349,7 @@ public class BusinessUser extends APINode {
       "preferred_audience",
       "press_contact",
       "price_range",
+      "priority_hours",
       "privacy_info_url",
       "produced_by",
       "products",
@@ -2282,6 +2299,13 @@ public class BusinessUser extends APINode {
       this.requestField("price_range", value);
       return this;
     }
+    public APIRequestGetAssignedPages requestPriorityHoursField () {
+      return this.requestPriorityHoursField(true);
+    }
+    public APIRequestGetAssignedPages requestPriorityHoursField (boolean value) {
+      this.requestField("priority_hours", value);
+      return this;
+    }
     public APIRequestGetAssignedPages requestPrivacyInfoUrlField () {
       return this.requestPrivacyInfoUrlField(true);
     }
@@ -2828,6 +2852,7 @@ public class BusinessUser extends APINode {
       "primary_funding_id",
       "purchase_order_number",
       "status",
+      "template_auto_archival_enabled",
       "timezone_id",
       "whatsapp_business_manager_messaging_limit",
     };
@@ -3088,6 +3113,13 @@ public class BusinessUser extends APINode {
     }
     public APIRequestGetAssignedWhatsAppBusinessAccounts requestStatusField (boolean value) {
       this.requestField("status", value);
+      return this;
+    }
+    public APIRequestGetAssignedWhatsAppBusinessAccounts requestTemplateAutoArchivalEnabledField () {
+      return this.requestTemplateAutoArchivalEnabledField(true);
+    }
+    public APIRequestGetAssignedWhatsAppBusinessAccounts requestTemplateAutoArchivalEnabledField (boolean value) {
+      this.requestField("template_auto_archival_enabled", value);
       return this;
     }
     public APIRequestGetAssignedWhatsAppBusinessAccounts requestTimezoneIdField () {

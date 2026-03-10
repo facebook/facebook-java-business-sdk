@@ -961,10 +961,12 @@ public class BusinessAssetGroup extends APINode {
       "is_tax_id_required",
       "liable_address",
       "line_numbers",
+      "marketing_messages_settings",
       "media_agency",
       "min_campaign_group_spend_cap",
       "min_daily_budget",
       "name",
+      "offsite_clo_signal_status",
       "offsite_pixels_tos_accepted",
       "opportunity_score",
       "owner",
@@ -1414,6 +1416,13 @@ public class BusinessAssetGroup extends APINode {
       this.requestField("line_numbers", value);
       return this;
     }
+    public APIRequestGetContainedAdAccounts requestMarketingMessagesSettingsField () {
+      return this.requestMarketingMessagesSettingsField(true);
+    }
+    public APIRequestGetContainedAdAccounts requestMarketingMessagesSettingsField (boolean value) {
+      this.requestField("marketing_messages_settings", value);
+      return this;
+    }
     public APIRequestGetContainedAdAccounts requestMediaAgencyField () {
       return this.requestMediaAgencyField(true);
     }
@@ -1440,6 +1449,13 @@ public class BusinessAssetGroup extends APINode {
     }
     public APIRequestGetContainedAdAccounts requestNameField (boolean value) {
       this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetContainedAdAccounts requestOffsiteCloSignalStatusField () {
+      return this.requestOffsiteCloSignalStatusField(true);
+    }
+    public APIRequestGetContainedAdAccounts requestOffsiteCloSignalStatusField (boolean value) {
+      this.requestField("offsite_clo_signal_status", value);
       return this;
     }
     public APIRequestGetContainedAdAccounts requestOffsitePixelsTosAcceptedField () {
@@ -1858,6 +1874,7 @@ public class BusinessAssetGroup extends APINode {
       "category",
       "client_config",
       "company",
+      "config_ids",
       "configured_ios_sso",
       "contact_email",
       "created_time",
@@ -2258,6 +2275,13 @@ public class BusinessAssetGroup extends APINode {
     }
     public APIRequestGetContainedApplications requestCompanyField (boolean value) {
       this.requestField("company", value);
+      return this;
+    }
+    public APIRequestGetContainedApplications requestConfigIdsField () {
+      return this.requestConfigIdsField(true);
+    }
+    public APIRequestGetContainedApplications requestConfigIdsField (boolean value) {
+      this.requestField("config_ids", value);
       return this;
     }
     public APIRequestGetContainedApplications requestConfiguredIosSsoField () {
@@ -3467,57 +3491,64 @@ public class BusinessAssetGroup extends APINode {
 
   }
 
-  public static class APIRequestGetContainedInstagramAccounts extends APIRequest<InstagramUser> {
+  public static class APIRequestGetContainedInstagramAccounts extends APIRequest<IGUser> {
 
-    APINodeList<InstagramUser> lastResponse = null;
+    APINodeList<IGUser> lastResponse = null;
     @Override
-    public APINodeList<InstagramUser> getLastResponse() {
+    public APINodeList<IGUser> getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
     };
 
     public static final String[] FIELDS = {
-      "follow_count",
-      "followed_by_count",
-      "has_profile_picture",
+      "biography",
+      "business_discovery",
+      "followers_count",
+      "follows_count",
+      "has_profile_pic",
       "id",
-      "ig_user_id",
-      "is_private",
+      "ig_id",
       "is_published",
+      "legacy_instagram_user_id",
       "media_count",
-      "mini_shop_storefront",
+      "mentioned_comment",
+      "mentioned_media",
+      "name",
       "owner_business",
-      "profile_pic",
+      "profile_picture_url",
+      "shopping_product_tag_eligibility",
+      "shopping_review_status",
       "username",
+      "website",
     };
 
     @Override
-    public APINodeList<InstagramUser> parseResponse(String response, String header) throws APIException {
-      return InstagramUser.parseResponse(response, getContext(), this, header);
+    public APINodeList<IGUser> parseResponse(String response, String header) throws APIException {
+      return IGUser.parseResponse(response, getContext(), this, header);
     }
 
     @Override
-    public APINodeList<InstagramUser> execute() throws APIException {
+    public APINodeList<IGUser> execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINodeList<InstagramUser> execute(Map<String, Object> extraParams) throws APIException {
+    public APINodeList<IGUser> execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<APINodeList<InstagramUser>> executeAsync() throws APIException {
+    public ListenableFuture<APINodeList<IGUser>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<APINodeList<InstagramUser>> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<APINodeList<IGUser>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<InstagramUser>>() {
-           public APINodeList<InstagramUser> apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, APINodeList<IGUser>>() {
+           public APINodeList<IGUser> apply(ResponseWrapper result) {
              try {
                return APIRequestGetContainedInstagramAccounts.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -3582,25 +3613,39 @@ public class BusinessAssetGroup extends APINode {
       return this;
     }
 
-    public APIRequestGetContainedInstagramAccounts requestFollowCountField () {
-      return this.requestFollowCountField(true);
+    public APIRequestGetContainedInstagramAccounts requestBiographyField () {
+      return this.requestBiographyField(true);
     }
-    public APIRequestGetContainedInstagramAccounts requestFollowCountField (boolean value) {
-      this.requestField("follow_count", value);
+    public APIRequestGetContainedInstagramAccounts requestBiographyField (boolean value) {
+      this.requestField("biography", value);
       return this;
     }
-    public APIRequestGetContainedInstagramAccounts requestFollowedByCountField () {
-      return this.requestFollowedByCountField(true);
+    public APIRequestGetContainedInstagramAccounts requestBusinessDiscoveryField () {
+      return this.requestBusinessDiscoveryField(true);
     }
-    public APIRequestGetContainedInstagramAccounts requestFollowedByCountField (boolean value) {
-      this.requestField("followed_by_count", value);
+    public APIRequestGetContainedInstagramAccounts requestBusinessDiscoveryField (boolean value) {
+      this.requestField("business_discovery", value);
       return this;
     }
-    public APIRequestGetContainedInstagramAccounts requestHasProfilePictureField () {
-      return this.requestHasProfilePictureField(true);
+    public APIRequestGetContainedInstagramAccounts requestFollowersCountField () {
+      return this.requestFollowersCountField(true);
     }
-    public APIRequestGetContainedInstagramAccounts requestHasProfilePictureField (boolean value) {
-      this.requestField("has_profile_picture", value);
+    public APIRequestGetContainedInstagramAccounts requestFollowersCountField (boolean value) {
+      this.requestField("followers_count", value);
+      return this;
+    }
+    public APIRequestGetContainedInstagramAccounts requestFollowsCountField () {
+      return this.requestFollowsCountField(true);
+    }
+    public APIRequestGetContainedInstagramAccounts requestFollowsCountField (boolean value) {
+      this.requestField("follows_count", value);
+      return this;
+    }
+    public APIRequestGetContainedInstagramAccounts requestHasProfilePicField () {
+      return this.requestHasProfilePicField(true);
+    }
+    public APIRequestGetContainedInstagramAccounts requestHasProfilePicField (boolean value) {
+      this.requestField("has_profile_pic", value);
       return this;
     }
     public APIRequestGetContainedInstagramAccounts requestIdField () {
@@ -3610,18 +3655,11 @@ public class BusinessAssetGroup extends APINode {
       this.requestField("id", value);
       return this;
     }
-    public APIRequestGetContainedInstagramAccounts requestIgUserIdField () {
-      return this.requestIgUserIdField(true);
+    public APIRequestGetContainedInstagramAccounts requestIgIdField () {
+      return this.requestIgIdField(true);
     }
-    public APIRequestGetContainedInstagramAccounts requestIgUserIdField (boolean value) {
-      this.requestField("ig_user_id", value);
-      return this;
-    }
-    public APIRequestGetContainedInstagramAccounts requestIsPrivateField () {
-      return this.requestIsPrivateField(true);
-    }
-    public APIRequestGetContainedInstagramAccounts requestIsPrivateField (boolean value) {
-      this.requestField("is_private", value);
+    public APIRequestGetContainedInstagramAccounts requestIgIdField (boolean value) {
+      this.requestField("ig_id", value);
       return this;
     }
     public APIRequestGetContainedInstagramAccounts requestIsPublishedField () {
@@ -3631,6 +3669,13 @@ public class BusinessAssetGroup extends APINode {
       this.requestField("is_published", value);
       return this;
     }
+    public APIRequestGetContainedInstagramAccounts requestLegacyInstagramUserIdField () {
+      return this.requestLegacyInstagramUserIdField(true);
+    }
+    public APIRequestGetContainedInstagramAccounts requestLegacyInstagramUserIdField (boolean value) {
+      this.requestField("legacy_instagram_user_id", value);
+      return this;
+    }
     public APIRequestGetContainedInstagramAccounts requestMediaCountField () {
       return this.requestMediaCountField(true);
     }
@@ -3638,11 +3683,25 @@ public class BusinessAssetGroup extends APINode {
       this.requestField("media_count", value);
       return this;
     }
-    public APIRequestGetContainedInstagramAccounts requestMiniShopStorefrontField () {
-      return this.requestMiniShopStorefrontField(true);
+    public APIRequestGetContainedInstagramAccounts requestMentionedCommentField () {
+      return this.requestMentionedCommentField(true);
     }
-    public APIRequestGetContainedInstagramAccounts requestMiniShopStorefrontField (boolean value) {
-      this.requestField("mini_shop_storefront", value);
+    public APIRequestGetContainedInstagramAccounts requestMentionedCommentField (boolean value) {
+      this.requestField("mentioned_comment", value);
+      return this;
+    }
+    public APIRequestGetContainedInstagramAccounts requestMentionedMediaField () {
+      return this.requestMentionedMediaField(true);
+    }
+    public APIRequestGetContainedInstagramAccounts requestMentionedMediaField (boolean value) {
+      this.requestField("mentioned_media", value);
+      return this;
+    }
+    public APIRequestGetContainedInstagramAccounts requestNameField () {
+      return this.requestNameField(true);
+    }
+    public APIRequestGetContainedInstagramAccounts requestNameField (boolean value) {
+      this.requestField("name", value);
       return this;
     }
     public APIRequestGetContainedInstagramAccounts requestOwnerBusinessField () {
@@ -3652,11 +3711,25 @@ public class BusinessAssetGroup extends APINode {
       this.requestField("owner_business", value);
       return this;
     }
-    public APIRequestGetContainedInstagramAccounts requestProfilePicField () {
-      return this.requestProfilePicField(true);
+    public APIRequestGetContainedInstagramAccounts requestProfilePictureUrlField () {
+      return this.requestProfilePictureUrlField(true);
     }
-    public APIRequestGetContainedInstagramAccounts requestProfilePicField (boolean value) {
-      this.requestField("profile_pic", value);
+    public APIRequestGetContainedInstagramAccounts requestProfilePictureUrlField (boolean value) {
+      this.requestField("profile_picture_url", value);
+      return this;
+    }
+    public APIRequestGetContainedInstagramAccounts requestShoppingProductTagEligibilityField () {
+      return this.requestShoppingProductTagEligibilityField(true);
+    }
+    public APIRequestGetContainedInstagramAccounts requestShoppingProductTagEligibilityField (boolean value) {
+      this.requestField("shopping_product_tag_eligibility", value);
+      return this;
+    }
+    public APIRequestGetContainedInstagramAccounts requestShoppingReviewStatusField () {
+      return this.requestShoppingReviewStatusField(true);
+    }
+    public APIRequestGetContainedInstagramAccounts requestShoppingReviewStatusField (boolean value) {
+      this.requestField("shopping_review_status", value);
       return this;
     }
     public APIRequestGetContainedInstagramAccounts requestUsernameField () {
@@ -3664,6 +3737,13 @@ public class BusinessAssetGroup extends APINode {
     }
     public APIRequestGetContainedInstagramAccounts requestUsernameField (boolean value) {
       this.requestField("username", value);
+      return this;
+    }
+    public APIRequestGetContainedInstagramAccounts requestWebsiteField () {
+      return this.requestWebsiteField(true);
+    }
+    public APIRequestGetContainedInstagramAccounts requestWebsiteField (boolean value) {
+      this.requestField("website", value);
       return this;
     }
   }
@@ -4017,6 +4097,7 @@ public class BusinessAssetGroup extends APINode {
       "preferred_audience",
       "press_contact",
       "price_range",
+      "priority_hours",
       "privacy_info_url",
       "produced_by",
       "products",
@@ -4955,6 +5036,13 @@ public class BusinessAssetGroup extends APINode {
     }
     public APIRequestGetContainedPages requestPriceRangeField (boolean value) {
       this.requestField("price_range", value);
+      return this;
+    }
+    public APIRequestGetContainedPages requestPriorityHoursField () {
+      return this.requestPriorityHoursField(true);
+    }
+    public APIRequestGetContainedPages requestPriorityHoursField (boolean value) {
+      this.requestField("priority_hours", value);
       return this;
     }
     public APIRequestGetContainedPages requestPrivacyInfoUrlField () {

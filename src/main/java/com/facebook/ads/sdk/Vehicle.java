@@ -53,8 +53,6 @@ public class Vehicle extends APINode {
   private String mAvailabilityCircleRadiusUnit = null;
   @SerializedName("body_style")
   private String mBodyStyle = null;
-  @SerializedName("category_specific_fields")
-  private CatalogSubVerticalList mCategorySpecificFields = null;
   @SerializedName("condition")
   private String mCondition = null;
   @SerializedName("currency")
@@ -423,10 +421,6 @@ public class Vehicle extends APINode {
 
   public String getFieldBodyStyle() {
     return mBodyStyle;
-  }
-
-  public CatalogSubVerticalList getFieldCategorySpecificFields() {
-    return mCategorySpecificFields;
   }
 
   public String getFieldCondition() {
@@ -1090,7 +1084,6 @@ public class Vehicle extends APINode {
       "availability_circle_radius",
       "availability_circle_radius_unit",
       "body_style",
-      "category_specific_fields",
       "condition",
       "currency",
       "custom_label_0",
@@ -1281,13 +1274,6 @@ public class Vehicle extends APINode {
     }
     public APIRequestGet requestBodyStyleField (boolean value) {
       this.requestField("body_style", value);
-      return this;
-    }
-    public APIRequestGet requestCategorySpecificFieldsField () {
-      return this.requestCategorySpecificFieldsField(true);
-    }
-    public APIRequestGet requestCategorySpecificFieldsField (boolean value) {
-      this.requestField("category_specific_fields", value);
       return this;
     }
     public APIRequestGet requestConditionField () {
@@ -2350,7 +2336,6 @@ public class Vehicle extends APINode {
     this.mAvailabilityCircleRadius = instance.mAvailabilityCircleRadius;
     this.mAvailabilityCircleRadiusUnit = instance.mAvailabilityCircleRadiusUnit;
     this.mBodyStyle = instance.mBodyStyle;
-    this.mCategorySpecificFields = instance.mCategorySpecificFields;
     this.mCondition = instance.mCondition;
     this.mCurrency = instance.mCurrency;
     this.mCustomLabel0 = instance.mCustomLabel0;
