@@ -42,8 +42,9 @@ public class AttributionDataTest {
         DeclineReasonEnum declineReason = DeclineReasonEnum.LOOKBACK;
         String auditingToken = "token123";
         String linkageKey = "key123";
+        String touchpointId = "tp_test_touchpoint_id_123";
         AttributionSetting attributionSetting = new AttributionSetting(24, 48);
-          
+
         attributionData
                      .scope(scope)
                      .adId(adId)
@@ -61,6 +62,7 @@ public class AttributionDataTest {
                      .declineReason(declineReason)
                      .auditingToken(auditingToken)
                      .linkageKey(linkageKey)
+                     .touchpointId(touchpointId)
                      .attributionSetting(attributionSetting);
 
         assertEquals(attributionData.getScope(), scope);
@@ -79,6 +81,7 @@ public class AttributionDataTest {
         assertEquals(attributionData.getDeclineReason(), declineReason);
         assertEquals(attributionData.getAuditingToken(), auditingToken);
         assertEquals(attributionData.getLinkageKey(), linkageKey);
+        assertEquals(attributionData.getTouchpointId(), touchpointId);
         assertEquals(attributionData.getAttributionSetting(), attributionSetting);
         assertEquals((int)attributionData.getAttributionSetting().getInactivityWindowHours(), 24);
         assertEquals((int)attributionData.getAttributionSetting().getReattributionWindowHours(), 48);
@@ -104,8 +107,9 @@ public class AttributionDataTest {
         DeclineReasonEnum declineReason = DeclineReasonEnum.LOOKBACK;
         String auditingToken = "token123";
         String linkageKey = "key123";
+        String touchpointId = "tp_test_touchpoint_id_123";
         AttributionSetting attributionSetting = new AttributionSetting(24, 48);
-          
+
         attributionData1
                      .scope(scope)
                      .adId(adId)
@@ -123,6 +127,7 @@ public class AttributionDataTest {
                      .declineReason(declineReason)
                      .auditingToken(auditingToken)
                      .linkageKey(linkageKey)
+                     .touchpointId(touchpointId)
                      .attributionSetting(attributionSetting);
 
         attributionData2
@@ -142,6 +147,7 @@ public class AttributionDataTest {
                      .declineReason(declineReason)
                      .auditingToken(auditingToken)
                      .linkageKey(linkageKey)
+                     .touchpointId(touchpointId)
                      .attributionSetting(attributionSetting);
 
         assertEquals(attributionData1, attributionData2);
@@ -170,7 +176,7 @@ public class AttributionDataTest {
         AttributionSetting attributionSetting1 = new AttributionSetting(24, 48);
         AttributionSetting attributionSetting2 = new AttributionSetting(24, 48);
           
-        // set different attribution windown to test
+        // set different attribution window to test
         attributionData1
                      .scope(scope)
                      .adId(adId)
@@ -188,6 +194,7 @@ public class AttributionDataTest {
                      .declineReason(declineReason)
                      .auditingToken(auditingToken)
                      .linkageKey(linkageKey)
+                     .touchpointId("tp_test_touchpoint_id_123")
                      .attributionSetting(attributionSetting1);
 
         attributionData2
@@ -207,6 +214,7 @@ public class AttributionDataTest {
                      .declineReason(declineReason)
                      .auditingToken(auditingToken)
                      .linkageKey(linkageKey)
+                     .touchpointId("tp_test_touchpoint_id_456")
                      .attributionSetting(attributionSetting2);
 
         assertNotEquals(attributionData1, attributionData2);

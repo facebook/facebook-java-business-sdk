@@ -69,6 +69,9 @@ public class AttributionData {
     @SerializedName("linkage_key")
     private String linkageKey = null;
 
+    @SerializedName("touchpoint_id")
+    private String touchpointId = null;
+
     @SerializedName("attribution_setting")
     private AttributionSetting attributionSetting = null;
     
@@ -97,12 +100,13 @@ public class AttributionData {
      * @param declineReason The decline reason for the attribution.
      * @param auditingToken The auditing token for the attribution.
      * @param linkageKey The linkage key for the attribution.
+     * @param touchpointId Unique identifier for touchpoint events shared by Meta with advertisers.
      * @param attributionSetting The attribution setting with inactivity and reattribution window configuration.
      */
-    public AttributionData(String scope, Long visitTime, String adId, String adsetId, String campaignId, 
+    public AttributionData(String scope, Long visitTime, String adId, String adsetId, String campaignId,
         Float attributionShare, AttributionModelEnum attributionModel, Integer attributionWindow, Float attributionValue,
         String attributionSource, String touchpointType, Integer touchpointTs, AttributionMethodEnum attributionMethod,
-        DeclineReasonEnum declineReason, String auditingToken, String linkageKey, AttributionSetting attributionSetting) {
+        DeclineReasonEnum declineReason, String auditingToken, String linkageKey, String touchpointId, AttributionSetting attributionSetting) {
       this.scope = scope;
       this.visitTime = visitTime;
       this.adId = adId;
@@ -119,6 +123,7 @@ public class AttributionData {
       this.declineReason = declineReason;
       this.auditingToken = auditingToken;
       this.linkageKey = linkageKey;
+      this.touchpointId = touchpointId;
       this.attributionSetting = attributionSetting;
     }
 
@@ -587,8 +592,37 @@ public class AttributionData {
     }
 
     /**
+     * Set touchpointId
+     *
+     * @param touchpointId Unique identifier for touchpoint events shared by Meta with advertisers.
+     * @return AttributionData
+     */
+    public AttributionData touchpointId(String touchpointId) {
+      this.touchpointId = touchpointId;
+      return this;
+    }
+
+    /**
+     * Get touchpointId
+     *
+     * @return touchpointId
+     */
+    public String getTouchpointId() {
+      return touchpointId;
+    }
+
+    /**
+     * Set touchpointId
+     *
+     * @param touchpointId Unique identifier for touchpoint events shared by Meta with advertisers.
+     */
+    public void setTouchpointId(String touchpointId) {
+      this.touchpointId = touchpointId;
+    }
+
+    /**
      * Set attributionSetting
-     * 
+     *
      * @param attributionSetting The attribution setting with inactivity and reattribution window configuration.
      * @return AttributionData
      */
@@ -638,12 +672,13 @@ public class AttributionData {
         && Objects.equals(this.declineReason, attributionData.declineReason)
         && Objects.equals(this.auditingToken, attributionData.auditingToken)
         && Objects.equals(this.linkageKey, attributionData.linkageKey)
+        && Objects.equals(this.touchpointId, attributionData.touchpointId)
         && Objects.equals(this.attributionSetting, attributionData.attributionSetting);
     }
 
     @Override
     public int hashCode() {
-      return Objects.hash(scope, visitTime, adId, adsetId, campaignId, attributionShare, attributionModel, attributionWindow, attributionValue, attributionSource, touchpointType, touchpointTs, attributionMethod, declineReason, auditingToken, linkageKey, attributionSetting);
+      return Objects.hash(scope, visitTime, adId, adsetId, campaignId, attributionShare, attributionModel, attributionWindow, attributionValue, attributionSource, touchpointType, touchpointTs, attributionMethod, declineReason, auditingToken, linkageKey, touchpointId, attributionSetting);
     }
 
     @Override
@@ -666,6 +701,7 @@ public class AttributionData {
       sb.append("    declineReason: ").append(toIndentedString(declineReason)).append("\n");
       sb.append("    auditingToken: ").append(toIndentedString(auditingToken)).append("\n");
       sb.append("    linkageKey: ").append(toIndentedString(linkageKey)).append("\n");
+      sb.append("    touchpointId: ").append(toIndentedString(touchpointId)).append("\n");
       sb.append("    attributionSetting: ").append(toIndentedString(attributionSetting)).append("\n");
       sb.append("}");
       return sb.toString();
