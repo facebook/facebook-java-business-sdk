@@ -280,10 +280,6 @@ public class CommerceMerchantSettings extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestCreateAcknowledgeOrder createAcknowledgeOrder() {
-    return new APIRequestCreateAcknowledgeOrder(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetCommerceOrders getCommerceOrders() {
     return new APIRequestGetCommerceOrders(this.getPrefixedId().toString(), context);
   }
@@ -397,127 +393,6 @@ public class CommerceMerchantSettings extends APINode {
   }
 
 
-
-  public static class APIRequestCreateAcknowledgeOrder extends APIRequest<CommerceMerchantSettings> {
-
-    CommerceMerchantSettings lastResponse = null;
-    @Override
-    public CommerceMerchantSettings getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "idempotency_key",
-      "orders",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public CommerceMerchantSettings parseResponse(String response, String header) throws APIException {
-      return CommerceMerchantSettings.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public CommerceMerchantSettings execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public CommerceMerchantSettings execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<CommerceMerchantSettings> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<CommerceMerchantSettings> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, CommerceMerchantSettings>() {
-           public CommerceMerchantSettings apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateAcknowledgeOrder.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         },
-         MoreExecutors.directExecutor()
-      );
-    };
-
-    public APIRequestCreateAcknowledgeOrder(String nodeId, APIContext context) {
-      super(context, nodeId, "/acknowledge_orders", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateAcknowledgeOrder setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateAcknowledgeOrder setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateAcknowledgeOrder setIdempotencyKey (String idempotencyKey) {
-      this.setParam("idempotency_key", idempotencyKey);
-      return this;
-    }
-
-    public APIRequestCreateAcknowledgeOrder setOrders (List<Map<String, String>> orders) {
-      this.setParam("orders", orders);
-      return this;
-    }
-    public APIRequestCreateAcknowledgeOrder setOrders (String orders) {
-      this.setParam("orders", orders);
-      return this;
-    }
-
-    public APIRequestCreateAcknowledgeOrder requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateAcknowledgeOrder requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateAcknowledgeOrder requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateAcknowledgeOrder requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateAcknowledgeOrder requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateAcknowledgeOrder requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
 
   public static class APIRequestGetCommerceOrders extends APIRequest<CommerceOrder> {
 

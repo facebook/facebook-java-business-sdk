@@ -109,6 +109,8 @@ public class Ad extends APINode {
   private Ad mSourceAd = null;
   @SerializedName("source_ad_id")
   private String mSourceAdId = null;
+  @SerializedName("special_ad_categories")
+  private List<String> mSpecialAdCategories = null;
   @SerializedName("status")
   private EnumStatus mStatus = null;
   @SerializedName("targeting")
@@ -529,6 +531,10 @@ public class Ad extends APINode {
     return mSourceAdId;
   }
 
+  public List<String> getFieldSpecialAdCategories() {
+    return mSpecialAdCategories;
+  }
+
   public EnumStatus getFieldStatus() {
     return mStatus;
   }
@@ -590,6 +596,7 @@ public class Ad extends APINode {
       "effective_object_story_id",
       "enable_direct_install",
       "enable_launch_instant_app",
+      "existing_post_title",
       "facebook_branded_content",
       "format_transformation_spec",
       "id",
@@ -923,6 +930,13 @@ public class Ad extends APINode {
     }
     public APIRequestGetAdCreatives requestEnableLaunchInstantAppField (boolean value) {
       this.requestField("enable_launch_instant_app", value);
+      return this;
+    }
+    public APIRequestGetAdCreatives requestExistingPostTitleField () {
+      return this.requestExistingPostTitleField(true);
+    }
+    public APIRequestGetAdCreatives requestExistingPostTitleField (boolean value) {
+      this.requestField("existing_post_title", value);
       return this;
     }
     public APIRequestGetAdCreatives requestFacebookBrandedContentField () {
@@ -1633,6 +1647,7 @@ public class Ad extends APINode {
       "recommendations",
       "source_ad",
       "source_ad_id",
+      "special_ad_categories",
       "status",
       "targeting",
       "tracking_and_conversion_with_defaults",
@@ -2002,6 +2017,13 @@ public class Ad extends APINode {
     }
     public APIRequestGetCopies requestSourceAdIdField (boolean value) {
       this.requestField("source_ad_id", value);
+      return this;
+    }
+    public APIRequestGetCopies requestSpecialAdCategoriesField () {
+      return this.requestSpecialAdCategoriesField(true);
+    }
+    public APIRequestGetCopies requestSpecialAdCategoriesField (boolean value) {
+      this.requestField("special_ad_categories", value);
       return this;
     }
     public APIRequestGetCopies requestStatusField () {
@@ -3614,6 +3636,7 @@ public class Ad extends APINode {
       "recommendations",
       "source_ad",
       "source_ad_id",
+      "special_ad_categories",
       "status",
       "targeting",
       "tracking_and_conversion_with_defaults",
@@ -3992,6 +4015,13 @@ public class Ad extends APINode {
     }
     public APIRequestGet requestSourceAdIdField (boolean value) {
       this.requestField("source_ad_id", value);
+      return this;
+    }
+    public APIRequestGet requestSpecialAdCategoriesField () {
+      return this.requestSpecialAdCategoriesField(true);
+    }
+    public APIRequestGet requestSpecialAdCategoriesField (boolean value) {
+      this.requestField("special_ad_categories", value);
       return this;
     }
     public APIRequestGet requestStatusField () {
@@ -4567,6 +4597,7 @@ public class Ad extends APINode {
     this.mRecommendations = instance.mRecommendations;
     this.mSourceAd = instance.mSourceAd;
     this.mSourceAdId = instance.mSourceAdId;
+    this.mSpecialAdCategories = instance.mSpecialAdCategories;
     this.mStatus = instance.mStatus;
     this.mTargeting = instance.mTargeting;
     this.mTrackingAndConversionWithDefaults = instance.mTrackingAndConversionWithDefaults;

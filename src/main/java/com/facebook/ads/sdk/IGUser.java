@@ -3682,8 +3682,10 @@ public class IGUser extends APINode {
     public static final String[] PARAMS = {
       "creator_age_bucket",
       "creator_countries",
+      "creator_follower_growth",
       "creator_gender",
       "creator_interests",
+      "creator_latest_post_activity",
       "creator_max_engaged_accounts",
       "creator_max_followers",
       "creator_min_engaged_accounts",
@@ -3691,6 +3693,7 @@ public class IGUser extends APINode {
       "has_public_contact_email",
       "major_audience_age_bucket",
       "major_audience_countries",
+      "major_audience_device_type",
       "major_audience_gender",
       "query",
       "reels_interaction_rate",
@@ -3790,6 +3793,15 @@ public class IGUser extends APINode {
       return this;
     }
 
+    public APIRequestGetCreatorMarketPlaceCreators setCreatorFollowerGrowth (Object creatorFollowerGrowth) {
+      this.setParam("creator_follower_growth", creatorFollowerGrowth);
+      return this;
+    }
+    public APIRequestGetCreatorMarketPlaceCreators setCreatorFollowerGrowth (String creatorFollowerGrowth) {
+      this.setParam("creator_follower_growth", creatorFollowerGrowth);
+      return this;
+    }
+
     public APIRequestGetCreatorMarketPlaceCreators setCreatorGender (List<IGUserExportForCAM.EnumCreatorGender> creatorGender) {
       this.setParam("creator_gender", creatorGender);
       return this;
@@ -3805,6 +3817,15 @@ public class IGUser extends APINode {
     }
     public APIRequestGetCreatorMarketPlaceCreators setCreatorInterests (String creatorInterests) {
       this.setParam("creator_interests", creatorInterests);
+      return this;
+    }
+
+    public APIRequestGetCreatorMarketPlaceCreators setCreatorLatestPostActivity (Object creatorLatestPostActivity) {
+      this.setParam("creator_latest_post_activity", creatorLatestPostActivity);
+      return this;
+    }
+    public APIRequestGetCreatorMarketPlaceCreators setCreatorLatestPostActivity (String creatorLatestPostActivity) {
+      this.setParam("creator_latest_post_activity", creatorLatestPostActivity);
       return this;
     }
 
@@ -3868,6 +3889,15 @@ public class IGUser extends APINode {
     }
     public APIRequestGetCreatorMarketPlaceCreators setMajorAudienceCountries (String majorAudienceCountries) {
       this.setParam("major_audience_countries", majorAudienceCountries);
+      return this;
+    }
+
+    public APIRequestGetCreatorMarketPlaceCreators setMajorAudienceDeviceType (List<Object> majorAudienceDeviceType) {
+      this.setParam("major_audience_device_type", majorAudienceDeviceType);
+      return this;
+    }
+    public APIRequestGetCreatorMarketPlaceCreators setMajorAudienceDeviceType (String majorAudienceDeviceType) {
+      this.setParam("major_audience_device_type", majorAudienceDeviceType);
       return this;
     }
 

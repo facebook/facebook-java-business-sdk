@@ -1588,6 +1588,7 @@ public class CustomAudience extends APINode {
       "recommendations",
       "source_ad",
       "source_ad_id",
+      "special_ad_categories",
       "status",
       "targeting",
       "tracking_and_conversion_with_defaults",
@@ -1939,6 +1940,13 @@ public class CustomAudience extends APINode {
     }
     public APIRequestGetAds requestSourceAdIdField (boolean value) {
       this.requestField("source_ad_id", value);
+      return this;
+    }
+    public APIRequestGetAds requestSpecialAdCategoriesField () {
+      return this.requestSpecialAdCategoriesField(true);
+    }
+    public APIRequestGetAds requestSpecialAdCategoriesField (boolean value) {
+      this.requestField("special_ad_categories", value);
       return this;
     }
     public APIRequestGetAds requestStatusField () {

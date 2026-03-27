@@ -49,6 +49,8 @@ public class CreativeMulticellTestConfig extends APINode {
   private Long mDailyBudget = null;
   @SerializedName("entry_source")
   private String mEntrySource = null;
+  @SerializedName("lead_gen_forms")
+  private String mLeadGenForms = null;
   @SerializedName("lifetime_budget")
   private Long mLifetimeBudget = null;
   @SerializedName("use_existing_daily_budget")
@@ -240,6 +242,15 @@ public class CreativeMulticellTestConfig extends APINode {
     return this;
   }
 
+  public String getFieldLeadGenForms() {
+    return mLeadGenForms;
+  }
+
+  public CreativeMulticellTestConfig setFieldLeadGenForms(String value) {
+    this.mLeadGenForms = value;
+    return this;
+  }
+
   public Long getFieldLifetimeBudget() {
     return mLifetimeBudget;
   }
@@ -279,6 +290,7 @@ public class CreativeMulticellTestConfig extends APINode {
     this.mConfiguredCellCount = instance.mConfiguredCellCount;
     this.mDailyBudget = instance.mDailyBudget;
     this.mEntrySource = instance.mEntrySource;
+    this.mLeadGenForms = instance.mLeadGenForms;
     this.mLifetimeBudget = instance.mLifetimeBudget;
     this.mUseExistingDailyBudget = instance.mUseExistingDailyBudget;
     this.context = instance.context;

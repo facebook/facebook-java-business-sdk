@@ -40,27 +40,23 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class ProductFeedAppsAndSoftwareGet extends APINode {
-  @SerializedName("data")
-  private List<Object> mData = null;
-  @SerializedName("paging")
-  private Object mPaging = null;
-  @SerializedName("summary")
-  private Object mSummary = null;
+public class ArticlesAndPublicationsItemDelete extends APINode {
+  @SerializedName("success")
+  private Boolean mSuccess = null;
   protected static Gson gson = null;
 
-  public ProductFeedAppsAndSoftwareGet() {
+  public ArticlesAndPublicationsItemDelete() {
   }
 
   public String getId() {
     return null;
   }
-  public static ProductFeedAppsAndSoftwareGet loadJSON(String json, APIContext context, String header) {
-    ProductFeedAppsAndSoftwareGet productFeedAppsAndSoftwareGet = getGson().fromJson(json, ProductFeedAppsAndSoftwareGet.class);
+  public static ArticlesAndPublicationsItemDelete loadJSON(String json, APIContext context, String header) {
+    ArticlesAndPublicationsItemDelete articlesAndPublicationsItemDelete = getGson().fromJson(json, ArticlesAndPublicationsItemDelete.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(productFeedAppsAndSoftwareGet.toString());
+      JsonElement o2 = parser.parse(articlesAndPublicationsItemDelete.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -70,14 +66,14 @@ public class ProductFeedAppsAndSoftwareGet extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    productFeedAppsAndSoftwareGet.context = context;
-    productFeedAppsAndSoftwareGet.rawValue = json;
-    productFeedAppsAndSoftwareGet.header = header;
-    return productFeedAppsAndSoftwareGet;
+    articlesAndPublicationsItemDelete.context = context;
+    articlesAndPublicationsItemDelete.rawValue = json;
+    articlesAndPublicationsItemDelete.header = header;
+    return articlesAndPublicationsItemDelete;
   }
 
-  public static APINodeList<ProductFeedAppsAndSoftwareGet> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<ProductFeedAppsAndSoftwareGet> productFeedAppsAndSoftwareGets = new APINodeList<ProductFeedAppsAndSoftwareGet>(request, json, header);
+  public static APINodeList<ArticlesAndPublicationsItemDelete> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<ArticlesAndPublicationsItemDelete> articlesAndPublicationsItemDeletes = new APINodeList<ArticlesAndPublicationsItemDelete>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -88,9 +84,9 @@ public class ProductFeedAppsAndSoftwareGet extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          productFeedAppsAndSoftwareGets.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          articlesAndPublicationsItemDeletes.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return productFeedAppsAndSoftwareGets;
+        return articlesAndPublicationsItemDeletes;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -100,20 +96,20 @@ public class ProductFeedAppsAndSoftwareGet extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                productFeedAppsAndSoftwareGets.setCursors(before, after);
+                articlesAndPublicationsItemDeletes.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            productFeedAppsAndSoftwareGets.setPaging(previous, next);
+            articlesAndPublicationsItemDeletes.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              productFeedAppsAndSoftwareGets.setAppSecret(context.getAppSecretProof());
+              articlesAndPublicationsItemDeletes.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              productFeedAppsAndSoftwareGets.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              articlesAndPublicationsItemDeletes.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -124,23 +120,23 @@ public class ProductFeedAppsAndSoftwareGet extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  productFeedAppsAndSoftwareGets.add(loadJSON(entry.getValue().toString(), context, header));
+                  articlesAndPublicationsItemDeletes.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              productFeedAppsAndSoftwareGets.add(loadJSON(obj.toString(), context, header));
+              articlesAndPublicationsItemDeletes.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return productFeedAppsAndSoftwareGets;
+          return articlesAndPublicationsItemDeletes;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              productFeedAppsAndSoftwareGets.add(loadJSON(entry.getValue().toString(), context, header));
+              articlesAndPublicationsItemDeletes.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return productFeedAppsAndSoftwareGets;
+          return articlesAndPublicationsItemDeletes;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -157,20 +153,20 @@ public class ProductFeedAppsAndSoftwareGet extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              productFeedAppsAndSoftwareGets.add(loadJSON(value.toString(), context, header));
+              articlesAndPublicationsItemDeletes.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return productFeedAppsAndSoftwareGets;
+            return articlesAndPublicationsItemDeletes;
           }
 
           // Sixth, check if it's pure JsonObject
-          productFeedAppsAndSoftwareGets.clear();
-          productFeedAppsAndSoftwareGets.add(loadJSON(json, context, header));
-          return productFeedAppsAndSoftwareGets;
+          articlesAndPublicationsItemDeletes.clear();
+          articlesAndPublicationsItemDeletes.add(loadJSON(json, context, header));
+          return articlesAndPublicationsItemDeletes;
         }
       }
     } catch (Exception e) {
@@ -198,55 +194,16 @@ public class ProductFeedAppsAndSoftwareGet extends APINode {
   }
 
 
-  public List<Object> getFieldData() {
-    return mData;
+  public Boolean getFieldSuccess() {
+    return mSuccess;
   }
 
-  public ProductFeedAppsAndSoftwareGet setFieldData(List<Object> value) {
-    this.mData = value;
-    return this;
-  }
-
-  public Object getFieldPaging() {
-    return mPaging;
-  }
-
-  public ProductFeedAppsAndSoftwareGet setFieldPaging(Object value) {
-    this.mPaging = value;
-    return this;
-  }
-
-  public Object getFieldSummary() {
-    return mSummary;
-  }
-
-  public ProductFeedAppsAndSoftwareGet setFieldSummary(Object value) {
-    this.mSummary = value;
+  public ArticlesAndPublicationsItemDelete setFieldSuccess(Boolean value) {
+    this.mSuccess = value;
     return this;
   }
 
 
-
-  public static enum EnumDisplayFormat {
-      @SerializedName("CAROUSEL_AD")
-      VALUE_CAROUSEL_AD("CAROUSEL_AD"),
-      @SerializedName("SHOPS_PDP")
-      VALUE_SHOPS_PDP("SHOPS_PDP"),
-      @SerializedName("SINGLE_AD")
-      VALUE_SINGLE_AD("SINGLE_AD"),
-      ;
-
-      private String value;
-
-      private EnumDisplayFormat(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
 
 
   synchronized /*package*/ static Gson getGson() {
@@ -262,19 +219,17 @@ public class ProductFeedAppsAndSoftwareGet extends APINode {
     return gson;
   }
 
-  public ProductFeedAppsAndSoftwareGet copyFrom(ProductFeedAppsAndSoftwareGet instance) {
-    this.mData = instance.mData;
-    this.mPaging = instance.mPaging;
-    this.mSummary = instance.mSummary;
+  public ArticlesAndPublicationsItemDelete copyFrom(ArticlesAndPublicationsItemDelete instance) {
+    this.mSuccess = instance.mSuccess;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<ProductFeedAppsAndSoftwareGet> getParser() {
-    return new APIRequest.ResponseParser<ProductFeedAppsAndSoftwareGet>() {
-      public APINodeList<ProductFeedAppsAndSoftwareGet> parseResponse(String response, APIContext context, APIRequest<ProductFeedAppsAndSoftwareGet> request, String header) throws MalformedResponseException {
-        return ProductFeedAppsAndSoftwareGet.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<ArticlesAndPublicationsItemDelete> getParser() {
+    return new APIRequest.ResponseParser<ArticlesAndPublicationsItemDelete>() {
+      public APINodeList<ArticlesAndPublicationsItemDelete> parseResponse(String response, APIContext context, APIRequest<ArticlesAndPublicationsItemDelete> request, String header) throws MalformedResponseException {
+        return ArticlesAndPublicationsItemDelete.parseResponse(response, context, request, header);
       }
     };
   }

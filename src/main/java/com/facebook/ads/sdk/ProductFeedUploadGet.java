@@ -52,7 +52,7 @@ public class ProductFeedUploadGet extends APINode {
   @SerializedName("filename")
   private String mFilename = null;
   @SerializedName("id")
-  private String mId = null;
+  private Long mId = null;
   @SerializedName("input_method")
   private EnumInputMethod mInputMethod = null;
   @SerializedName("num_deleted_items")
@@ -269,11 +269,11 @@ public class ProductFeedUploadGet extends APINode {
     return this;
   }
 
-  public String getFieldId() {
+  public Long getFieldId() {
     return mId;
   }
 
-  public ProductFeedUploadGet setFieldId(String value) {
+  public ProductFeedUploadGet setFieldId(Long value) {
     this.mId = value;
     return this;
   }

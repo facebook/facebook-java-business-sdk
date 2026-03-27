@@ -1086,6 +1086,8 @@ public class AdAccountTargetingUnified extends APINode {
       VALUE_ALTERNATE_AUTO_TARGETING_OPTION("alternate_auto_targeting_option"),
       @SerializedName("app_install_state")
       VALUE_APP_INSTALL_STATE("app_install_state"),
+      @SerializedName("audience_concepts")
+      VALUE_AUDIENCE_CONCEPTS("audience_concepts"),
       @SerializedName("audience_network_positions")
       VALUE_AUDIENCE_NETWORK_POSITIONS("audience_network_positions"),
       @SerializedName("behaviors")

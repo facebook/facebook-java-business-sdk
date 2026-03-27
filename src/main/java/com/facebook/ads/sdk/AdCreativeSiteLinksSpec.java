@@ -41,6 +41,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class AdCreativeSiteLinksSpec extends APINode {
+  @SerializedName("is_defaulting_eligible")
+  private Boolean mIsDefaultingEligible = null;
   @SerializedName("is_site_link_sticky")
   private Boolean mIsSiteLinkSticky = null;
   @SerializedName("site_link_classification")
@@ -220,6 +222,15 @@ public class AdCreativeSiteLinksSpec extends APINode {
   }
 
 
+  public Boolean getFieldIsDefaultingEligible() {
+    return mIsDefaultingEligible;
+  }
+
+  public AdCreativeSiteLinksSpec setFieldIsDefaultingEligible(Boolean value) {
+    this.mIsDefaultingEligible = value;
+    return this;
+  }
+
   public Boolean getFieldIsSiteLinkSticky() {
     return mIsSiteLinkSticky;
   }
@@ -363,6 +374,7 @@ public class AdCreativeSiteLinksSpec extends APINode {
   }
 
   public AdCreativeSiteLinksSpec copyFrom(AdCreativeSiteLinksSpec instance) {
+    this.mIsDefaultingEligible = instance.mIsDefaultingEligible;
     this.mIsSiteLinkSticky = instance.mIsSiteLinkSticky;
     this.mSiteLinkClassification = instance.mSiteLinkClassification;
     this.mSiteLinkExtraMetadata = instance.mSiteLinkExtraMetadata;

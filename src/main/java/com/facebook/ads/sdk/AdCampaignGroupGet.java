@@ -70,7 +70,7 @@ public class AdCampaignGroupGet extends APINode {
   @SerializedName("promoted_object")
   private Object mPromotedObject = null;
   @SerializedName("special_ad_categories")
-  private List<EnumSpecialAdCategories> mSpecialAdCategories = null;
+  private List<String> mSpecialAdCategories = null;
   @SerializedName("spend_cap")
   private String mSpendCap = null;
   @SerializedName("start_time")
@@ -358,11 +358,11 @@ public class AdCampaignGroupGet extends APINode {
     return this;
   }
 
-  public List<EnumSpecialAdCategories> getFieldSpecialAdCategories() {
+  public List<String> getFieldSpecialAdCategories() {
     return mSpecialAdCategories;
   }
 
-  public AdCampaignGroupGet setFieldSpecialAdCategories(List<EnumSpecialAdCategories> value) {
+  public AdCampaignGroupGet setFieldSpecialAdCategories(List<String> value) {
     this.mSpecialAdCategories = value;
     return this;
   }
@@ -413,41 +413,6 @@ public class AdCampaignGroupGet extends APINode {
   }
 
 
-
-  public static enum EnumSpecialAdCategories {
-      @SerializedName("CREDIT")
-      VALUE_CREDIT("CREDIT"),
-      @SerializedName("EDUCATION")
-      VALUE_EDUCATION("EDUCATION"),
-      @SerializedName("ELECTIONS_POLITICS")
-      VALUE_ELECTIONS_POLITICS("ELECTIONS_POLITICS"),
-      @SerializedName("EMPLOYMENT")
-      VALUE_EMPLOYMENT("EMPLOYMENT"),
-      @SerializedName("FINANCIAL_PRODUCTS_SERVICES")
-      VALUE_FINANCIAL_PRODUCTS_SERVICES("FINANCIAL_PRODUCTS_SERVICES"),
-      @SerializedName("HOUSING")
-      VALUE_HOUSING("HOUSING"),
-      @SerializedName("ISSUES_ELECTIONS_POLITICS")
-      VALUE_ISSUES_ELECTIONS_POLITICS("ISSUES_ELECTIONS_POLITICS"),
-      @SerializedName("NONE")
-      VALUE_NONE("NONE"),
-      @SerializedName("ONLINE_GAMBLING_AND_GAMING")
-      VALUE_ONLINE_GAMBLING_AND_GAMING("ONLINE_GAMBLING_AND_GAMING"),
-      @SerializedName("SOCIAL_ISSUES")
-      VALUE_SOCIAL_ISSUES("SOCIAL_ISSUES"),
-      ;
-
-      private String value;
-
-      private EnumSpecialAdCategories(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
 
 
   synchronized /*package*/ static Gson getGson() {

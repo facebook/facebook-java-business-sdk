@@ -49,6 +49,8 @@ public class OpenBridgeConfiguration extends APINode {
   private List<String> mBlockedWebsites = null;
   @SerializedName("browser_agent")
   private List<String> mBrowserAgent = null;
+  @SerializedName("capi_publishing_state")
+  private String mCapiPublishingState = null;
   @SerializedName("cloud_provider")
   private String mCloudProvider = null;
   @SerializedName("cloud_region")
@@ -325,6 +327,10 @@ public class OpenBridgeConfiguration extends APINode {
     return mBrowserAgent;
   }
 
+  public String getFieldCapiPublishingState() {
+    return mCapiPublishingState;
+  }
+
   public String getFieldCloudProvider() {
     return mCloudProvider;
   }
@@ -523,6 +529,7 @@ public class OpenBridgeConfiguration extends APINode {
       "blocked_event_types",
       "blocked_websites",
       "browser_agent",
+      "capi_publishing_state",
       "cloud_provider",
       "cloud_region",
       "destination_id",
@@ -660,6 +667,13 @@ public class OpenBridgeConfiguration extends APINode {
     }
     public APIRequestGet requestBrowserAgentField (boolean value) {
       this.requestField("browser_agent", value);
+      return this;
+    }
+    public APIRequestGet requestCapiPublishingStateField () {
+      return this.requestCapiPublishingStateField(true);
+    }
+    public APIRequestGet requestCapiPublishingStateField (boolean value) {
+      this.requestField("capi_publishing_state", value);
       return this;
     }
     public APIRequestGet requestCloudProviderField () {
@@ -1175,6 +1189,7 @@ public class OpenBridgeConfiguration extends APINode {
     this.mBlockedEventTypes = instance.mBlockedEventTypes;
     this.mBlockedWebsites = instance.mBlockedWebsites;
     this.mBrowserAgent = instance.mBrowserAgent;
+    this.mCapiPublishingState = instance.mCapiPublishingState;
     this.mCloudProvider = instance.mCloudProvider;
     this.mCloudRegion = instance.mCloudRegion;
     this.mDestinationId = instance.mDestinationId;

@@ -51,6 +51,8 @@ public class AdSet extends APINode {
   private Long mAnchorEventAttributionWindowDays = null;
   @SerializedName("asset_feed_id")
   private String mAssetFeedId = null;
+  @SerializedName("attribution_count_type")
+  private String mAttributionCountType = null;
   @SerializedName("attribution_spec")
   private List<AttributionSpec> mAttributionSpec = null;
   @SerializedName("automatic_manual_state")
@@ -137,10 +139,14 @@ public class AdSet extends APINode {
   private String mLifetimeMinSpendTarget = null;
   @SerializedName("lifetime_spend_cap")
   private String mLifetimeSpendCap = null;
+  @SerializedName("low_creative_reach")
+  private List<String> mLowCreativeReach = null;
   @SerializedName("max_budget_spend_percentage")
   private String mMaxBudgetSpendPercentage = null;
   @SerializedName("min_budget_spend_percentage")
   private String mMinBudgetSpendPercentage = null;
+  @SerializedName("multi_event_conversion_attribution_window_seconds")
+  private Long mMultiEventConversionAttributionWindowSeconds = null;
   @SerializedName("multi_optimization_goal_weight")
   private String mMultiOptimizationGoalWeight = null;
   @SerializedName("name")
@@ -171,6 +177,8 @@ public class AdSet extends APINode {
   private AdSet mSourceAdset = null;
   @SerializedName("source_adset_id")
   private String mSourceAdsetId = null;
+  @SerializedName("special_ad_categories")
+  private List<String> mSpecialAdCategories = null;
   @SerializedName("start_time")
   private String mStartTime = null;
   @SerializedName("status")
@@ -535,6 +543,15 @@ public class AdSet extends APINode {
 
   public AdSet setFieldAssetFeedId(String value) {
     this.mAssetFeedId = value;
+    return this;
+  }
+
+  public String getFieldAttributionCountType() {
+    return mAttributionCountType;
+  }
+
+  public AdSet setFieldAttributionCountType(String value) {
+    this.mAttributionCountType = value;
     return this;
   }
 
@@ -968,6 +985,15 @@ public class AdSet extends APINode {
     return this;
   }
 
+  public List<String> getFieldLowCreativeReach() {
+    return mLowCreativeReach;
+  }
+
+  public AdSet setFieldLowCreativeReach(List<String> value) {
+    this.mLowCreativeReach = value;
+    return this;
+  }
+
   public String getFieldMaxBudgetSpendPercentage() {
     return mMaxBudgetSpendPercentage;
   }
@@ -983,6 +1009,15 @@ public class AdSet extends APINode {
 
   public AdSet setFieldMinBudgetSpendPercentage(String value) {
     this.mMinBudgetSpendPercentage = value;
+    return this;
+  }
+
+  public Long getFieldMultiEventConversionAttributionWindowSeconds() {
+    return mMultiEventConversionAttributionWindowSeconds;
+  }
+
+  public AdSet setFieldMultiEventConversionAttributionWindowSeconds(Long value) {
+    this.mMultiEventConversionAttributionWindowSeconds = value;
     return this;
   }
 
@@ -1146,6 +1181,15 @@ public class AdSet extends APINode {
 
   public AdSet setFieldSourceAdsetId(String value) {
     this.mSourceAdsetId = value;
+    return this;
+  }
+
+  public List<String> getFieldSpecialAdCategories() {
+    return mSpecialAdCategories;
+  }
+
+  public AdSet setFieldSpecialAdCategories(List<String> value) {
+    this.mSpecialAdCategories = value;
     return this;
   }
 
@@ -1803,6 +1847,7 @@ public class AdSet extends APINode {
       "effective_object_story_id",
       "enable_direct_install",
       "enable_launch_instant_app",
+      "existing_post_title",
       "facebook_branded_content",
       "format_transformation_spec",
       "id",
@@ -2136,6 +2181,13 @@ public class AdSet extends APINode {
     }
     public APIRequestGetAdCreatives requestEnableLaunchInstantAppField (boolean value) {
       this.requestField("enable_launch_instant_app", value);
+      return this;
+    }
+    public APIRequestGetAdCreatives requestExistingPostTitleField () {
+      return this.requestExistingPostTitleField(true);
+    }
+    public APIRequestGetAdCreatives requestExistingPostTitleField (boolean value) {
+      this.requestField("existing_post_title", value);
       return this;
     }
     public APIRequestGetAdCreatives requestFacebookBrandedContentField () {
@@ -2971,6 +3023,7 @@ public class AdSet extends APINode {
       "recommendations",
       "source_ad",
       "source_ad_id",
+      "special_ad_categories",
       "status",
       "targeting",
       "tracking_and_conversion_with_defaults",
@@ -3340,6 +3393,13 @@ public class AdSet extends APINode {
     }
     public APIRequestGetAds requestSourceAdIdField (boolean value) {
       this.requestField("source_ad_id", value);
+      return this;
+    }
+    public APIRequestGetAds requestSpecialAdCategoriesField () {
+      return this.requestSpecialAdCategoriesField(true);
+    }
+    public APIRequestGetAds requestSpecialAdCategoriesField (boolean value) {
+      this.requestField("special_ad_categories", value);
       return this;
     }
     public APIRequestGetAds requestStatusField () {
@@ -3912,6 +3972,7 @@ public class AdSet extends APINode {
       "adset_schedule",
       "anchor_event_attribution_window_days",
       "asset_feed_id",
+      "attribution_count_type",
       "attribution_spec",
       "automatic_manual_state",
       "bid_adjustments",
@@ -3955,8 +4016,10 @@ public class AdSet extends APINode {
       "lifetime_imps",
       "lifetime_min_spend_target",
       "lifetime_spend_cap",
+      "low_creative_reach",
       "max_budget_spend_percentage",
       "min_budget_spend_percentage",
+      "multi_event_conversion_attribution_window_seconds",
       "multi_optimization_goal_weight",
       "name",
       "optimization_goal",
@@ -3972,6 +4035,7 @@ public class AdSet extends APINode {
       "rf_prediction_id",
       "source_adset",
       "source_adset_id",
+      "special_ad_categories",
       "start_time",
       "status",
       "targeting",
@@ -4144,6 +4208,13 @@ public class AdSet extends APINode {
     }
     public APIRequestGetCopies requestAssetFeedIdField (boolean value) {
       this.requestField("asset_feed_id", value);
+      return this;
+    }
+    public APIRequestGetCopies requestAttributionCountTypeField () {
+      return this.requestAttributionCountTypeField(true);
+    }
+    public APIRequestGetCopies requestAttributionCountTypeField (boolean value) {
+      this.requestField("attribution_count_type", value);
       return this;
     }
     public APIRequestGetCopies requestAttributionSpecField () {
@@ -4447,6 +4518,13 @@ public class AdSet extends APINode {
       this.requestField("lifetime_spend_cap", value);
       return this;
     }
+    public APIRequestGetCopies requestLowCreativeReachField () {
+      return this.requestLowCreativeReachField(true);
+    }
+    public APIRequestGetCopies requestLowCreativeReachField (boolean value) {
+      this.requestField("low_creative_reach", value);
+      return this;
+    }
     public APIRequestGetCopies requestMaxBudgetSpendPercentageField () {
       return this.requestMaxBudgetSpendPercentageField(true);
     }
@@ -4459,6 +4537,13 @@ public class AdSet extends APINode {
     }
     public APIRequestGetCopies requestMinBudgetSpendPercentageField (boolean value) {
       this.requestField("min_budget_spend_percentage", value);
+      return this;
+    }
+    public APIRequestGetCopies requestMultiEventConversionAttributionWindowSecondsField () {
+      return this.requestMultiEventConversionAttributionWindowSecondsField(true);
+    }
+    public APIRequestGetCopies requestMultiEventConversionAttributionWindowSecondsField (boolean value) {
+      this.requestField("multi_event_conversion_attribution_window_seconds", value);
       return this;
     }
     public APIRequestGetCopies requestMultiOptimizationGoalWeightField () {
@@ -4564,6 +4649,13 @@ public class AdSet extends APINode {
     }
     public APIRequestGetCopies requestSourceAdsetIdField (boolean value) {
       this.requestField("source_adset_id", value);
+      return this;
+    }
+    public APIRequestGetCopies requestSpecialAdCategoriesField () {
+      return this.requestSpecialAdCategoriesField(true);
+    }
+    public APIRequestGetCopies requestSpecialAdCategoriesField (boolean value) {
+      this.requestField("special_ad_categories", value);
       return this;
     }
     public APIRequestGetCopies requestStartTimeField () {
@@ -6158,6 +6250,7 @@ public class AdSet extends APINode {
       "adset_schedule",
       "anchor_event_attribution_window_days",
       "asset_feed_id",
+      "attribution_count_type",
       "attribution_spec",
       "automatic_manual_state",
       "bid_adjustments",
@@ -6201,8 +6294,10 @@ public class AdSet extends APINode {
       "lifetime_imps",
       "lifetime_min_spend_target",
       "lifetime_spend_cap",
+      "low_creative_reach",
       "max_budget_spend_percentage",
       "min_budget_spend_percentage",
+      "multi_event_conversion_attribution_window_seconds",
       "multi_optimization_goal_weight",
       "name",
       "optimization_goal",
@@ -6218,6 +6313,7 @@ public class AdSet extends APINode {
       "rf_prediction_id",
       "source_adset",
       "source_adset_id",
+      "special_ad_categories",
       "start_time",
       "status",
       "targeting",
@@ -6390,6 +6486,13 @@ public class AdSet extends APINode {
     }
     public APIRequestGet requestAssetFeedIdField (boolean value) {
       this.requestField("asset_feed_id", value);
+      return this;
+    }
+    public APIRequestGet requestAttributionCountTypeField () {
+      return this.requestAttributionCountTypeField(true);
+    }
+    public APIRequestGet requestAttributionCountTypeField (boolean value) {
+      this.requestField("attribution_count_type", value);
       return this;
     }
     public APIRequestGet requestAttributionSpecField () {
@@ -6693,6 +6796,13 @@ public class AdSet extends APINode {
       this.requestField("lifetime_spend_cap", value);
       return this;
     }
+    public APIRequestGet requestLowCreativeReachField () {
+      return this.requestLowCreativeReachField(true);
+    }
+    public APIRequestGet requestLowCreativeReachField (boolean value) {
+      this.requestField("low_creative_reach", value);
+      return this;
+    }
     public APIRequestGet requestMaxBudgetSpendPercentageField () {
       return this.requestMaxBudgetSpendPercentageField(true);
     }
@@ -6705,6 +6815,13 @@ public class AdSet extends APINode {
     }
     public APIRequestGet requestMinBudgetSpendPercentageField (boolean value) {
       this.requestField("min_budget_spend_percentage", value);
+      return this;
+    }
+    public APIRequestGet requestMultiEventConversionAttributionWindowSecondsField () {
+      return this.requestMultiEventConversionAttributionWindowSecondsField(true);
+    }
+    public APIRequestGet requestMultiEventConversionAttributionWindowSecondsField (boolean value) {
+      this.requestField("multi_event_conversion_attribution_window_seconds", value);
       return this;
     }
     public APIRequestGet requestMultiOptimizationGoalWeightField () {
@@ -6810,6 +6927,13 @@ public class AdSet extends APINode {
     }
     public APIRequestGet requestSourceAdsetIdField (boolean value) {
       this.requestField("source_adset_id", value);
+      return this;
+    }
+    public APIRequestGet requestSpecialAdCategoriesField () {
+      return this.requestSpecialAdCategoriesField(true);
+    }
+    public APIRequestGet requestSpecialAdCategoriesField (boolean value) {
+      this.requestField("special_ad_categories", value);
       return this;
     }
     public APIRequestGet requestStartTimeField () {
@@ -6937,6 +7061,7 @@ public class AdSet extends APINode {
       "lifetime_spend_cap",
       "max_budget_spend_percentage",
       "min_budget_spend_percentage",
+      "multi_event_conversion_attribution_window_seconds",
       "multi_optimization_goal_weight",
       "name",
       "optimization_goal",
@@ -7337,6 +7462,15 @@ public class AdSet extends APINode {
     }
     public APIRequestUpdate setMinBudgetSpendPercentage (String minBudgetSpendPercentage) {
       this.setParam("min_budget_spend_percentage", minBudgetSpendPercentage);
+      return this;
+    }
+
+    public APIRequestUpdate setMultiEventConversionAttributionWindowSeconds (Long multiEventConversionAttributionWindowSeconds) {
+      this.setParam("multi_event_conversion_attribution_window_seconds", multiEventConversionAttributionWindowSeconds);
+      return this;
+    }
+    public APIRequestUpdate setMultiEventConversionAttributionWindowSeconds (String multiEventConversionAttributionWindowSeconds) {
+      this.setParam("multi_event_conversion_attribution_window_seconds", multiEventConversionAttributionWindowSeconds);
       return this;
     }
 
@@ -8171,6 +8305,7 @@ public class AdSet extends APINode {
     this.mAdsetSchedule = instance.mAdsetSchedule;
     this.mAnchorEventAttributionWindowDays = instance.mAnchorEventAttributionWindowDays;
     this.mAssetFeedId = instance.mAssetFeedId;
+    this.mAttributionCountType = instance.mAttributionCountType;
     this.mAttributionSpec = instance.mAttributionSpec;
     this.mAutomaticManualState = instance.mAutomaticManualState;
     this.mBidAdjustments = instance.mBidAdjustments;
@@ -8214,8 +8349,10 @@ public class AdSet extends APINode {
     this.mLifetimeImps = instance.mLifetimeImps;
     this.mLifetimeMinSpendTarget = instance.mLifetimeMinSpendTarget;
     this.mLifetimeSpendCap = instance.mLifetimeSpendCap;
+    this.mLowCreativeReach = instance.mLowCreativeReach;
     this.mMaxBudgetSpendPercentage = instance.mMaxBudgetSpendPercentage;
     this.mMinBudgetSpendPercentage = instance.mMinBudgetSpendPercentage;
+    this.mMultiEventConversionAttributionWindowSeconds = instance.mMultiEventConversionAttributionWindowSeconds;
     this.mMultiOptimizationGoalWeight = instance.mMultiOptimizationGoalWeight;
     this.mName = instance.mName;
     this.mOptimizationGoal = instance.mOptimizationGoal;
@@ -8231,6 +8368,7 @@ public class AdSet extends APINode {
     this.mRfPredictionId = instance.mRfPredictionId;
     this.mSourceAdset = instance.mSourceAdset;
     this.mSourceAdsetId = instance.mSourceAdsetId;
+    this.mSpecialAdCategories = instance.mSpecialAdCategories;
     this.mStartTime = instance.mStartTime;
     this.mStatus = instance.mStatus;
     this.mTargeting = instance.mTargeting;

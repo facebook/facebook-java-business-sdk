@@ -167,6 +167,10 @@ public class AdsUserSettings extends APINode {
   private List<String> mOpenTabs = null;
   @SerializedName("pac_relaxation_opt_in_status")
   private String mPacRelaxationOptInStatus = null;
+  @SerializedName("pcau_cat_optout_survey_impr")
+  private Long mPcauCatOptoutSurveyImpr = null;
+  @SerializedName("pcau_cat_optout_survey_resp_ts")
+  private String mPcauCatOptoutSurveyRespTs = null;
   @SerializedName("placement_group_square_opt_in_status")
   private String mPlacementGroupSquareOptInStatus = null;
   @SerializedName("placement_group_vertical_opt_in_status")
@@ -713,6 +717,14 @@ public class AdsUserSettings extends APINode {
     return mPacRelaxationOptInStatus;
   }
 
+  public Long getFieldPcauCatOptoutSurveyImpr() {
+    return mPcauCatOptoutSurveyImpr;
+  }
+
+  public String getFieldPcauCatOptoutSurveyRespTs() {
+    return mPcauCatOptoutSurveyRespTs;
+  }
+
   public String getFieldPlacementGroupSquareOptInStatus() {
     return mPlacementGroupSquareOptInStatus;
   }
@@ -958,6 +970,8 @@ public class AdsUserSettings extends APINode {
       "onsite_destination_optimization_opt_in",
       "open_tabs",
       "pac_relaxation_opt_in_status",
+      "pcau_cat_optout_survey_impr",
+      "pcau_cat_optout_survey_resp_ts",
       "placement_group_square_opt_in_status",
       "placement_group_vertical_opt_in_status",
       "previously_seen_recommendations",
@@ -1531,6 +1545,20 @@ public class AdsUserSettings extends APINode {
       this.requestField("pac_relaxation_opt_in_status", value);
       return this;
     }
+    public APIRequestGet requestPcauCatOptoutSurveyImprField () {
+      return this.requestPcauCatOptoutSurveyImprField(true);
+    }
+    public APIRequestGet requestPcauCatOptoutSurveyImprField (boolean value) {
+      this.requestField("pcau_cat_optout_survey_impr", value);
+      return this;
+    }
+    public APIRequestGet requestPcauCatOptoutSurveyRespTsField () {
+      return this.requestPcauCatOptoutSurveyRespTsField(true);
+    }
+    public APIRequestGet requestPcauCatOptoutSurveyRespTsField (boolean value) {
+      this.requestField("pcau_cat_optout_survey_resp_ts", value);
+      return this;
+    }
     public APIRequestGet requestPlacementGroupSquareOptInStatusField () {
       return this.requestPlacementGroupSquareOptInStatusField(true);
     }
@@ -1891,6 +1919,8 @@ public class AdsUserSettings extends APINode {
     this.mOnsiteDestinationOptimizationOptIn = instance.mOnsiteDestinationOptimizationOptIn;
     this.mOpenTabs = instance.mOpenTabs;
     this.mPacRelaxationOptInStatus = instance.mPacRelaxationOptInStatus;
+    this.mPcauCatOptoutSurveyImpr = instance.mPcauCatOptoutSurveyImpr;
+    this.mPcauCatOptoutSurveyRespTs = instance.mPcauCatOptoutSurveyRespTs;
     this.mPlacementGroupSquareOptInStatus = instance.mPlacementGroupSquareOptInStatus;
     this.mPlacementGroupVerticalOptInStatus = instance.mPlacementGroupVerticalOptInStatus;
     this.mPreviouslySeenRecommendations = instance.mPreviouslySeenRecommendations;

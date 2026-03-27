@@ -2835,6 +2835,7 @@ public class BusinessUser extends APINode {
       "country",
       "creation_time",
       "currency",
+      "disable_marketing_messages_on_cloud_api",
       "health_status",
       "id",
       "is_enabled_for_insights",
@@ -2994,6 +2995,13 @@ public class BusinessUser extends APINode {
     }
     public APIRequestGetAssignedWhatsAppBusinessAccounts requestCurrencyField (boolean value) {
       this.requestField("currency", value);
+      return this;
+    }
+    public APIRequestGetAssignedWhatsAppBusinessAccounts requestDisableMarketingMessagesOnCloudApiField () {
+      return this.requestDisableMarketingMessagesOnCloudApiField(true);
+    }
+    public APIRequestGetAssignedWhatsAppBusinessAccounts requestDisableMarketingMessagesOnCloudApiField (boolean value) {
+      this.requestField("disable_marketing_messages_on_cloud_api", value);
       return this;
     }
     public APIRequestGetAssignedWhatsAppBusinessAccounts requestHealthStatusField () {

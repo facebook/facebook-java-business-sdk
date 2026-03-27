@@ -423,6 +423,7 @@ public class AdStudy extends APINode {
 
     public static final String[] FIELDS = {
       "ad_entities_count",
+      "ad_ids",
       "control_percentage",
       "id",
       "name",
@@ -524,6 +525,13 @@ public class AdStudy extends APINode {
     }
     public APIRequestGetCells requestAdEntitiesCountField (boolean value) {
       this.requestField("ad_entities_count", value);
+      return this;
+    }
+    public APIRequestGetCells requestAdIdsField () {
+      return this.requestAdIdsField(true);
+    }
+    public APIRequestGetCells requestAdIdsField (boolean value) {
+      this.requestField("ad_ids", value);
       return this;
     }
     public APIRequestGetCells requestControlPercentageField () {
@@ -1524,7 +1532,6 @@ public class AdStudy extends APINode {
       "client_business",
       "confidence_level",
       "cooldown_start_time",
-      "creative_test_config",
       "description",
       "end_time",
       "name",
@@ -1621,15 +1628,6 @@ public class AdStudy extends APINode {
     }
     public APIRequestUpdate setCooldownStartTime (String cooldownStartTime) {
       this.setParam("cooldown_start_time", cooldownStartTime);
-      return this;
-    }
-
-    public APIRequestUpdate setCreativeTestConfig (Map<String, String> creativeTestConfig) {
-      this.setParam("creative_test_config", creativeTestConfig);
-      return this;
-    }
-    public APIRequestUpdate setCreativeTestConfig (String creativeTestConfig) {
-      this.setParam("creative_test_config", creativeTestConfig);
       return this;
     }
 

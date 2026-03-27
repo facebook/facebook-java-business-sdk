@@ -45,6 +45,8 @@ public class ProductFeedMediaTitlesGet extends APINode {
   private List<Object> mData = null;
   @SerializedName("paging")
   private Object mPaging = null;
+  @SerializedName("summary")
+  private Object mSummary = null;
   protected static Gson gson = null;
 
   public ProductFeedMediaTitlesGet() {
@@ -214,7 +216,37 @@ public class ProductFeedMediaTitlesGet extends APINode {
     return this;
   }
 
+  public Object getFieldSummary() {
+    return mSummary;
+  }
 
+  public ProductFeedMediaTitlesGet setFieldSummary(Object value) {
+    this.mSummary = value;
+    return this;
+  }
+
+
+
+  public static enum EnumDisplayFormat {
+      @SerializedName("CAROUSEL_AD")
+      VALUE_CAROUSEL_AD("CAROUSEL_AD"),
+      @SerializedName("SHOPS_PDP")
+      VALUE_SHOPS_PDP("SHOPS_PDP"),
+      @SerializedName("SINGLE_AD")
+      VALUE_SINGLE_AD("SINGLE_AD"),
+      ;
+
+      private String value;
+
+      private EnumDisplayFormat(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
 
 
   synchronized /*package*/ static Gson getGson() {
@@ -233,6 +265,7 @@ public class ProductFeedMediaTitlesGet extends APINode {
   public ProductFeedMediaTitlesGet copyFrom(ProductFeedMediaTitlesGet instance) {
     this.mData = instance.mData;
     this.mPaging = instance.mPaging;
+    this.mSummary = instance.mSummary;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

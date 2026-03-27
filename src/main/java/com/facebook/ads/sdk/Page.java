@@ -564,10 +564,6 @@ public class Page extends APINode {
     return new APIRequestCreateAbTest(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestCreateAcknowledgeOrder createAcknowledgeOrder() {
-    return new APIRequestCreateAcknowledgeOrder(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetAdsEligibility getAdsEligibility() {
     return new APIRequestGetAdsEligibility(this.getPrefixedId().toString(), context);
   }
@@ -2122,127 +2118,6 @@ public class Page extends APINode {
 
     @Override
     public APIRequestCreateAbTest requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
-  public static class APIRequestCreateAcknowledgeOrder extends APIRequest<Page> {
-
-    Page lastResponse = null;
-    @Override
-    public Page getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "idempotency_key",
-      "orders",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public Page parseResponse(String response, String header) throws APIException {
-      return Page.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public Page execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public Page execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<Page> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<Page> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, Page>() {
-           public Page apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateAcknowledgeOrder.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         },
-         MoreExecutors.directExecutor()
-      );
-    };
-
-    public APIRequestCreateAcknowledgeOrder(String nodeId, APIContext context) {
-      super(context, nodeId, "/acknowledge_orders", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateAcknowledgeOrder setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateAcknowledgeOrder setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateAcknowledgeOrder setIdempotencyKey (String idempotencyKey) {
-      this.setParam("idempotency_key", idempotencyKey);
-      return this;
-    }
-
-    public APIRequestCreateAcknowledgeOrder setOrders (List<Map<String, String>> orders) {
-      this.setParam("orders", orders);
-      return this;
-    }
-    public APIRequestCreateAcknowledgeOrder setOrders (String orders) {
-      this.setParam("orders", orders);
-      return this;
-    }
-
-    public APIRequestCreateAcknowledgeOrder requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateAcknowledgeOrder requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateAcknowledgeOrder requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateAcknowledgeOrder requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateAcknowledgeOrder requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateAcknowledgeOrder requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }

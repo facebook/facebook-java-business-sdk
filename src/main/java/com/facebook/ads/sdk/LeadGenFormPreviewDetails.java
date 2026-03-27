@@ -121,6 +121,10 @@ public class LeadGenFormPreviewDetails extends APINode {
   private String mReviewYourInfoText = null;
   @SerializedName("secure_sharing_text")
   private String mSecureSharingText = null;
+  @SerializedName("secure_sharing_text_for_embedded_booking_calendly")
+  private String mSecureSharingTextForEmbeddedBookingCalendly = null;
+  @SerializedName("secure_sharing_text_for_embedded_booking_ghl")
+  private String mSecureSharingTextForEmbeddedBookingGhl = null;
   @SerializedName("secure_sharing_text_for_optional_privacy_policy")
   private String mSecureSharingTextForOptionalPrivacyPolicy = null;
   @SerializedName("slide_to_submit_text")
@@ -646,6 +650,24 @@ public class LeadGenFormPreviewDetails extends APINode {
     return this;
   }
 
+  public String getFieldSecureSharingTextForEmbeddedBookingCalendly() {
+    return mSecureSharingTextForEmbeddedBookingCalendly;
+  }
+
+  public LeadGenFormPreviewDetails setFieldSecureSharingTextForEmbeddedBookingCalendly(String value) {
+    this.mSecureSharingTextForEmbeddedBookingCalendly = value;
+    return this;
+  }
+
+  public String getFieldSecureSharingTextForEmbeddedBookingGhl() {
+    return mSecureSharingTextForEmbeddedBookingGhl;
+  }
+
+  public LeadGenFormPreviewDetails setFieldSecureSharingTextForEmbeddedBookingGhl(String value) {
+    this.mSecureSharingTextForEmbeddedBookingGhl = value;
+    return this;
+  }
+
   public String getFieldSecureSharingTextForOptionalPrivacyPolicy() {
     return mSecureSharingTextForOptionalPrivacyPolicy;
   }
@@ -766,6 +788,8 @@ public class LeadGenFormPreviewDetails extends APINode {
     this.mReturnToFacebookText = instance.mReturnToFacebookText;
     this.mReviewYourInfoText = instance.mReviewYourInfoText;
     this.mSecureSharingText = instance.mSecureSharingText;
+    this.mSecureSharingTextForEmbeddedBookingCalendly = instance.mSecureSharingTextForEmbeddedBookingCalendly;
+    this.mSecureSharingTextForEmbeddedBookingGhl = instance.mSecureSharingTextForEmbeddedBookingGhl;
     this.mSecureSharingTextForOptionalPrivacyPolicy = instance.mSecureSharingTextForOptionalPrivacyPolicy;
     this.mSlideToSubmitText = instance.mSlideToSubmitText;
     this.mSocialProofSectionHeaders = instance.mSocialProofSectionHeaders;

@@ -1928,7 +1928,6 @@ public class Business extends APINode {
       "client_business",
       "confidence_level",
       "cooldown_start_time",
-      "creative_test_config",
       "description",
       "end_time",
       "name",
@@ -2025,15 +2024,6 @@ public class Business extends APINode {
     }
     public APIRequestCreateAdStudy setCooldownStartTime (String cooldownStartTime) {
       this.setParam("cooldown_start_time", cooldownStartTime);
-      return this;
-    }
-
-    public APIRequestCreateAdStudy setCreativeTestConfig (Map<String, String> creativeTestConfig) {
-      this.setParam("creative_test_config", creativeTestConfig);
-      return this;
-    }
-    public APIRequestCreateAdStudy setCreativeTestConfig (String creativeTestConfig) {
-      this.setParam("creative_test_config", creativeTestConfig);
       return this;
     }
 
@@ -10699,6 +10689,7 @@ public class Business extends APINode {
       "country",
       "creation_time",
       "currency",
+      "disable_marketing_messages_on_cloud_api",
       "health_status",
       "id",
       "is_enabled_for_insights",
@@ -10858,6 +10849,13 @@ public class Business extends APINode {
     }
     public APIRequestGetClientWhatsAppBusinessAccounts requestCurrencyField (boolean value) {
       this.requestField("currency", value);
+      return this;
+    }
+    public APIRequestGetClientWhatsAppBusinessAccounts requestDisableMarketingMessagesOnCloudApiField () {
+      return this.requestDisableMarketingMessagesOnCloudApiField(true);
+    }
+    public APIRequestGetClientWhatsAppBusinessAccounts requestDisableMarketingMessagesOnCloudApiField (boolean value) {
+      this.requestField("disable_marketing_messages_on_cloud_api", value);
       return this;
     }
     public APIRequestGetClientWhatsAppBusinessAccounts requestHealthStatusField () {
@@ -15978,6 +15976,7 @@ public class Business extends APINode {
       "blocked_event_types",
       "blocked_websites",
       "browser_agent",
+      "capi_publishing_state",
       "cloud_provider",
       "cloud_region",
       "destination_id",
@@ -16115,6 +16114,13 @@ public class Business extends APINode {
     }
     public APIRequestGetOpenBridgeConfigurations requestBrowserAgentField (boolean value) {
       this.requestField("browser_agent", value);
+      return this;
+    }
+    public APIRequestGetOpenBridgeConfigurations requestCapiPublishingStateField () {
+      return this.requestCapiPublishingStateField(true);
+    }
+    public APIRequestGetOpenBridgeConfigurations requestCapiPublishingStateField (boolean value) {
+      this.requestField("capi_publishing_state", value);
       return this;
     }
     public APIRequestGetOpenBridgeConfigurations requestCloudProviderField () {
@@ -21928,6 +21934,7 @@ public class Business extends APINode {
       "country",
       "creation_time",
       "currency",
+      "disable_marketing_messages_on_cloud_api",
       "health_status",
       "id",
       "is_enabled_for_insights",
@@ -22087,6 +22094,13 @@ public class Business extends APINode {
     }
     public APIRequestGetOwnedWhatsAppBusinessAccounts requestCurrencyField (boolean value) {
       this.requestField("currency", value);
+      return this;
+    }
+    public APIRequestGetOwnedWhatsAppBusinessAccounts requestDisableMarketingMessagesOnCloudApiField () {
+      return this.requestDisableMarketingMessagesOnCloudApiField(true);
+    }
+    public APIRequestGetOwnedWhatsAppBusinessAccounts requestDisableMarketingMessagesOnCloudApiField (boolean value) {
+      this.requestField("disable_marketing_messages_on_cloud_api", value);
       return this;
     }
     public APIRequestGetOwnedWhatsAppBusinessAccounts requestHealthStatusField () {

@@ -47,8 +47,20 @@ public class AdCreativeFeatureCustomizations extends APINode {
   private String mBackgroundColor = null;
   @SerializedName("catalog_feed_tag_name")
   private String mCatalogFeedTagName = null;
+  @SerializedName("fb_feed_tag_name")
+  private String mFbFeedTagName = null;
+  @SerializedName("fb_reels_tag_name")
+  private String mFbReelsTagName = null;
+  @SerializedName("fb_story_tag_name")
+  private String mFbStoryTagName = null;
   @SerializedName("font_name")
   private String mFontName = null;
+  @SerializedName("ig_feed_tag_name")
+  private String mIgFeedTagName = null;
+  @SerializedName("ig_reels_tag_name")
+  private String mIgReelsTagName = null;
+  @SerializedName("ig_stream_tag_name")
+  private String mIgStreamTagName = null;
   @SerializedName("image_crop_style")
   private String mImageCropStyle = null;
   @SerializedName("pe_carousel")
@@ -237,12 +249,66 @@ public class AdCreativeFeatureCustomizations extends APINode {
     return this;
   }
 
+  public String getFieldFbFeedTagName() {
+    return mFbFeedTagName;
+  }
+
+  public AdCreativeFeatureCustomizations setFieldFbFeedTagName(String value) {
+    this.mFbFeedTagName = value;
+    return this;
+  }
+
+  public String getFieldFbReelsTagName() {
+    return mFbReelsTagName;
+  }
+
+  public AdCreativeFeatureCustomizations setFieldFbReelsTagName(String value) {
+    this.mFbReelsTagName = value;
+    return this;
+  }
+
+  public String getFieldFbStoryTagName() {
+    return mFbStoryTagName;
+  }
+
+  public AdCreativeFeatureCustomizations setFieldFbStoryTagName(String value) {
+    this.mFbStoryTagName = value;
+    return this;
+  }
+
   public String getFieldFontName() {
     return mFontName;
   }
 
   public AdCreativeFeatureCustomizations setFieldFontName(String value) {
     this.mFontName = value;
+    return this;
+  }
+
+  public String getFieldIgFeedTagName() {
+    return mIgFeedTagName;
+  }
+
+  public AdCreativeFeatureCustomizations setFieldIgFeedTagName(String value) {
+    this.mIgFeedTagName = value;
+    return this;
+  }
+
+  public String getFieldIgReelsTagName() {
+    return mIgReelsTagName;
+  }
+
+  public AdCreativeFeatureCustomizations setFieldIgReelsTagName(String value) {
+    this.mIgReelsTagName = value;
+    return this;
+  }
+
+  public String getFieldIgStreamTagName() {
+    return mIgStreamTagName;
+  }
+
+  public AdCreativeFeatureCustomizations setFieldIgStreamTagName(String value) {
+    this.mIgStreamTagName = value;
     return this;
   }
 
@@ -311,7 +377,13 @@ public class AdCreativeFeatureCustomizations extends APINode {
     this.mAspectRatioConfig = instance.mAspectRatioConfig;
     this.mBackgroundColor = instance.mBackgroundColor;
     this.mCatalogFeedTagName = instance.mCatalogFeedTagName;
+    this.mFbFeedTagName = instance.mFbFeedTagName;
+    this.mFbReelsTagName = instance.mFbReelsTagName;
+    this.mFbStoryTagName = instance.mFbStoryTagName;
     this.mFontName = instance.mFontName;
+    this.mIgFeedTagName = instance.mIgFeedTagName;
+    this.mIgReelsTagName = instance.mIgReelsTagName;
+    this.mIgStreamTagName = instance.mIgStreamTagName;
     this.mImageCropStyle = instance.mImageCropStyle;
     this.mPeCarousel = instance.mPeCarousel;
     this.mShowcaseCardDisplay = instance.mShowcaseCardDisplay;

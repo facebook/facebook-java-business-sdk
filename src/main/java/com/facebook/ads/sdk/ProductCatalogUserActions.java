@@ -41,8 +41,6 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class ProductCatalogUserActions extends APINode {
-  @SerializedName("actions")
-  private List<String> mActions = null;
   protected static Gson gson = null;
 
   public ProductCatalogUserActions() {
@@ -194,15 +192,6 @@ public class ProductCatalogUserActions extends APINode {
   }
 
 
-  public List<String> getFieldActions() {
-    return mActions;
-  }
-
-  public ProductCatalogUserActions setFieldActions(List<String> value) {
-    this.mActions = value;
-    return this;
-  }
-
 
 
 
@@ -220,7 +209,6 @@ public class ProductCatalogUserActions extends APINode {
   }
 
   public ProductCatalogUserActions copyFrom(ProductCatalogUserActions instance) {
-    this.mActions = instance.mActions;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

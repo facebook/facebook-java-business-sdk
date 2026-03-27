@@ -40,27 +40,27 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class AdjacentContentDeliveryReport extends APINode {
-  @SerializedName("ad_id")
-  private String mAdId = null;
-  @SerializedName("content")
-  private List<Object> mContent = null;
-  @SerializedName("impression_id")
-  private String mImpressionId = null;
+public class ProductSetMediaTitlesGet extends APINode {
+  @SerializedName("data")
+  private List<Object> mData = null;
+  @SerializedName("paging")
+  private Object mPaging = null;
+  @SerializedName("summary")
+  private Object mSummary = null;
   protected static Gson gson = null;
 
-  public AdjacentContentDeliveryReport() {
+  public ProductSetMediaTitlesGet() {
   }
 
   public String getId() {
     return null;
   }
-  public static AdjacentContentDeliveryReport loadJSON(String json, APIContext context, String header) {
-    AdjacentContentDeliveryReport adjacentContentDeliveryReport = getGson().fromJson(json, AdjacentContentDeliveryReport.class);
+  public static ProductSetMediaTitlesGet loadJSON(String json, APIContext context, String header) {
+    ProductSetMediaTitlesGet productSetMediaTitlesGet = getGson().fromJson(json, ProductSetMediaTitlesGet.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(adjacentContentDeliveryReport.toString());
+      JsonElement o2 = parser.parse(productSetMediaTitlesGet.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -70,14 +70,14 @@ public class AdjacentContentDeliveryReport extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    adjacentContentDeliveryReport.context = context;
-    adjacentContentDeliveryReport.rawValue = json;
-    adjacentContentDeliveryReport.header = header;
-    return adjacentContentDeliveryReport;
+    productSetMediaTitlesGet.context = context;
+    productSetMediaTitlesGet.rawValue = json;
+    productSetMediaTitlesGet.header = header;
+    return productSetMediaTitlesGet;
   }
 
-  public static APINodeList<AdjacentContentDeliveryReport> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<AdjacentContentDeliveryReport> adjacentContentDeliveryReports = new APINodeList<AdjacentContentDeliveryReport>(request, json, header);
+  public static APINodeList<ProductSetMediaTitlesGet> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<ProductSetMediaTitlesGet> productSetMediaTitlesGets = new APINodeList<ProductSetMediaTitlesGet>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -88,9 +88,9 @@ public class AdjacentContentDeliveryReport extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adjacentContentDeliveryReports.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          productSetMediaTitlesGets.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return adjacentContentDeliveryReports;
+        return productSetMediaTitlesGets;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -100,20 +100,20 @@ public class AdjacentContentDeliveryReport extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                adjacentContentDeliveryReports.setCursors(before, after);
+                productSetMediaTitlesGets.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            adjacentContentDeliveryReports.setPaging(previous, next);
+            productSetMediaTitlesGets.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              adjacentContentDeliveryReports.setAppSecret(context.getAppSecretProof());
+              productSetMediaTitlesGets.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adjacentContentDeliveryReports.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              productSetMediaTitlesGets.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -124,23 +124,23 @@ public class AdjacentContentDeliveryReport extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adjacentContentDeliveryReports.add(loadJSON(entry.getValue().toString(), context, header));
+                  productSetMediaTitlesGets.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adjacentContentDeliveryReports.add(loadJSON(obj.toString(), context, header));
+              productSetMediaTitlesGets.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return adjacentContentDeliveryReports;
+          return productSetMediaTitlesGets;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adjacentContentDeliveryReports.add(loadJSON(entry.getValue().toString(), context, header));
+              productSetMediaTitlesGets.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return adjacentContentDeliveryReports;
+          return productSetMediaTitlesGets;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -157,20 +157,20 @@ public class AdjacentContentDeliveryReport extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adjacentContentDeliveryReports.add(loadJSON(value.toString(), context, header));
+              productSetMediaTitlesGets.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return adjacentContentDeliveryReports;
+            return productSetMediaTitlesGets;
           }
 
           // Sixth, check if it's pure JsonObject
-          adjacentContentDeliveryReports.clear();
-          adjacentContentDeliveryReports.add(loadJSON(json, context, header));
-          return adjacentContentDeliveryReports;
+          productSetMediaTitlesGets.clear();
+          productSetMediaTitlesGets.add(loadJSON(json, context, header));
+          return productSetMediaTitlesGets;
         }
       }
     } catch (Exception e) {
@@ -198,34 +198,55 @@ public class AdjacentContentDeliveryReport extends APINode {
   }
 
 
-  public String getFieldAdId() {
-    return mAdId;
+  public List<Object> getFieldData() {
+    return mData;
   }
 
-  public AdjacentContentDeliveryReport setFieldAdId(String value) {
-    this.mAdId = value;
+  public ProductSetMediaTitlesGet setFieldData(List<Object> value) {
+    this.mData = value;
     return this;
   }
 
-  public List<Object> getFieldContent() {
-    return mContent;
+  public Object getFieldPaging() {
+    return mPaging;
   }
 
-  public AdjacentContentDeliveryReport setFieldContent(List<Object> value) {
-    this.mContent = value;
+  public ProductSetMediaTitlesGet setFieldPaging(Object value) {
+    this.mPaging = value;
     return this;
   }
 
-  public String getFieldImpressionId() {
-    return mImpressionId;
+  public Object getFieldSummary() {
+    return mSummary;
   }
 
-  public AdjacentContentDeliveryReport setFieldImpressionId(String value) {
-    this.mImpressionId = value;
+  public ProductSetMediaTitlesGet setFieldSummary(Object value) {
+    this.mSummary = value;
     return this;
   }
 
 
+
+  public static enum EnumDisplayFormat {
+      @SerializedName("CAROUSEL_AD")
+      VALUE_CAROUSEL_AD("CAROUSEL_AD"),
+      @SerializedName("SHOPS_PDP")
+      VALUE_SHOPS_PDP("SHOPS_PDP"),
+      @SerializedName("SINGLE_AD")
+      VALUE_SINGLE_AD("SINGLE_AD"),
+      ;
+
+      private String value;
+
+      private EnumDisplayFormat(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
 
 
   synchronized /*package*/ static Gson getGson() {
@@ -241,19 +262,19 @@ public class AdjacentContentDeliveryReport extends APINode {
     return gson;
   }
 
-  public AdjacentContentDeliveryReport copyFrom(AdjacentContentDeliveryReport instance) {
-    this.mAdId = instance.mAdId;
-    this.mContent = instance.mContent;
-    this.mImpressionId = instance.mImpressionId;
+  public ProductSetMediaTitlesGet copyFrom(ProductSetMediaTitlesGet instance) {
+    this.mData = instance.mData;
+    this.mPaging = instance.mPaging;
+    this.mSummary = instance.mSummary;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<AdjacentContentDeliveryReport> getParser() {
-    return new APIRequest.ResponseParser<AdjacentContentDeliveryReport>() {
-      public APINodeList<AdjacentContentDeliveryReport> parseResponse(String response, APIContext context, APIRequest<AdjacentContentDeliveryReport> request, String header) throws MalformedResponseException {
-        return AdjacentContentDeliveryReport.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<ProductSetMediaTitlesGet> getParser() {
+    return new APIRequest.ResponseParser<ProductSetMediaTitlesGet>() {
+      public APINodeList<ProductSetMediaTitlesGet> parseResponse(String response, APIContext context, APIRequest<ProductSetMediaTitlesGet> request, String header) throws MalformedResponseException {
+        return ProductSetMediaTitlesGet.parseResponse(response, context, request, header);
       }
     };
   }

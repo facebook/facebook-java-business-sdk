@@ -43,14 +43,20 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class AdCampaignLearningStageInfo extends APINode {
   @SerializedName("attribution_windows")
   private List<String> mAttributionWindows = null;
+  @SerializedName("cas_segment")
+  private String mCasSegment = null;
   @SerializedName("conversions")
   private Long mConversions = null;
+  @SerializedName("current_budget_prediction")
+  private Object mCurrentBudgetPrediction = null;
   @SerializedName("dynamic_lp_conversions_threshold")
   private Long mDynamicLpConversionsThreshold = null;
   @SerializedName("dynamic_lp_days_threshold")
   private Long mDynamicLpDaysThreshold = null;
   @SerializedName("dynamic_lp_status")
   private String mDynamicLpStatus = null;
+  @SerializedName("is_one_to_one_cbo_budget")
+  private Boolean mIsOneToOneCboBudget = null;
   @SerializedName("last_sig_edit_ts")
   private Long mLastSigEditTs = null;
   @SerializedName("recommended_budget_prediction")
@@ -219,12 +225,30 @@ public class AdCampaignLearningStageInfo extends APINode {
     return this;
   }
 
+  public String getFieldCasSegment() {
+    return mCasSegment;
+  }
+
+  public AdCampaignLearningStageInfo setFieldCasSegment(String value) {
+    this.mCasSegment = value;
+    return this;
+  }
+
   public Long getFieldConversions() {
     return mConversions;
   }
 
   public AdCampaignLearningStageInfo setFieldConversions(Long value) {
     this.mConversions = value;
+    return this;
+  }
+
+  public Object getFieldCurrentBudgetPrediction() {
+    return mCurrentBudgetPrediction;
+  }
+
+  public AdCampaignLearningStageInfo setFieldCurrentBudgetPrediction(Object value) {
+    this.mCurrentBudgetPrediction = value;
     return this;
   }
 
@@ -252,6 +276,15 @@ public class AdCampaignLearningStageInfo extends APINode {
 
   public AdCampaignLearningStageInfo setFieldDynamicLpStatus(String value) {
     this.mDynamicLpStatus = value;
+    return this;
+  }
+
+  public Boolean getFieldIsOneToOneCboBudget() {
+    return mIsOneToOneCboBudget;
+  }
+
+  public AdCampaignLearningStageInfo setFieldIsOneToOneCboBudget(Boolean value) {
+    this.mIsOneToOneCboBudget = value;
     return this;
   }
 
@@ -309,10 +342,13 @@ public class AdCampaignLearningStageInfo extends APINode {
 
   public AdCampaignLearningStageInfo copyFrom(AdCampaignLearningStageInfo instance) {
     this.mAttributionWindows = instance.mAttributionWindows;
+    this.mCasSegment = instance.mCasSegment;
     this.mConversions = instance.mConversions;
+    this.mCurrentBudgetPrediction = instance.mCurrentBudgetPrediction;
     this.mDynamicLpConversionsThreshold = instance.mDynamicLpConversionsThreshold;
     this.mDynamicLpDaysThreshold = instance.mDynamicLpDaysThreshold;
     this.mDynamicLpStatus = instance.mDynamicLpStatus;
+    this.mIsOneToOneCboBudget = instance.mIsOneToOneCboBudget;
     this.mLastSigEditTs = instance.mLastSigEditTs;
     this.mRecommendedBudgetPrediction = instance.mRecommendedBudgetPrediction;
     this.mSigeditRemoval = instance.mSigeditRemoval;

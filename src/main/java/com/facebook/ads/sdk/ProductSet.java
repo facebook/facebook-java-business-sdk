@@ -2563,15 +2563,19 @@ public class ProductSet extends APINode {
       "additional_image_cdn_urls",
       "additional_image_urls",
       "additional_variant_attributes",
+      "affiliate_seller_rating",
+      "affiliate_seller_rating_count",
       "age_group",
       "applinks",
       "availability",
+      "base_commission_rate",
       "brand",
       "bundle_items",
       "bundle_retailer_ids",
       "capabilities_disabled_by_user",
       "capability_to_review_status",
       "category",
+      "category_ranking",
       "category_specific_fields",
       "color",
       "commerce_insights",
@@ -2615,6 +2619,7 @@ public class ProductSet extends APINode {
       "name",
       "ordering_index",
       "origin_country",
+      "overall_ranking",
       "parent_product_id",
       "pattern",
       "post_conversion_signal_based_enforcement_appeal_eligibility",
@@ -2796,6 +2801,20 @@ public class ProductSet extends APINode {
       this.requestField("additional_variant_attributes", value);
       return this;
     }
+    public APIRequestGetProducts requestAffiliateSellerRatingField () {
+      return this.requestAffiliateSellerRatingField(true);
+    }
+    public APIRequestGetProducts requestAffiliateSellerRatingField (boolean value) {
+      this.requestField("affiliate_seller_rating", value);
+      return this;
+    }
+    public APIRequestGetProducts requestAffiliateSellerRatingCountField () {
+      return this.requestAffiliateSellerRatingCountField(true);
+    }
+    public APIRequestGetProducts requestAffiliateSellerRatingCountField (boolean value) {
+      this.requestField("affiliate_seller_rating_count", value);
+      return this;
+    }
     public APIRequestGetProducts requestAgeGroupField () {
       return this.requestAgeGroupField(true);
     }
@@ -2815,6 +2834,13 @@ public class ProductSet extends APINode {
     }
     public APIRequestGetProducts requestAvailabilityField (boolean value) {
       this.requestField("availability", value);
+      return this;
+    }
+    public APIRequestGetProducts requestBaseCommissionRateField () {
+      return this.requestBaseCommissionRateField(true);
+    }
+    public APIRequestGetProducts requestBaseCommissionRateField (boolean value) {
+      this.requestField("base_commission_rate", value);
       return this;
     }
     public APIRequestGetProducts requestBrandField () {
@@ -2857,6 +2883,13 @@ public class ProductSet extends APINode {
     }
     public APIRequestGetProducts requestCategoryField (boolean value) {
       this.requestField("category", value);
+      return this;
+    }
+    public APIRequestGetProducts requestCategoryRankingField () {
+      return this.requestCategoryRankingField(true);
+    }
+    public APIRequestGetProducts requestCategoryRankingField (boolean value) {
+      this.requestField("category_ranking", value);
       return this;
     }
     public APIRequestGetProducts requestCategorySpecificFieldsField () {
@@ -3158,6 +3191,13 @@ public class ProductSet extends APINode {
     }
     public APIRequestGetProducts requestOriginCountryField (boolean value) {
       this.requestField("origin_country", value);
+      return this;
+    }
+    public APIRequestGetProducts requestOverallRankingField () {
+      return this.requestOverallRankingField(true);
+    }
+    public APIRequestGetProducts requestOverallRankingField (boolean value) {
+      this.requestField("overall_ranking", value);
       return this;
     }
     public APIRequestGetProducts requestParentProductIdField () {

@@ -825,6 +825,8 @@ public class AdsValueAdjustmentRuleCollection extends APINode {
       VALUE_ACTIVE("ACTIVE"),
       @SerializedName("DELETED")
       VALUE_DELETED("DELETED"),
+      @SerializedName("DRAFT")
+      VALUE_DRAFT("DRAFT"),
       ;
 
       private String value;

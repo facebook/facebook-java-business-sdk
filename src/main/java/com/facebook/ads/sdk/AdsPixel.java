@@ -2781,6 +2781,7 @@ public class AdsPixel extends APINode {
       "blocked_event_types",
       "blocked_websites",
       "browser_agent",
+      "capi_publishing_state",
       "cloud_provider",
       "cloud_region",
       "destination_id",
@@ -2918,6 +2919,13 @@ public class AdsPixel extends APINode {
     }
     public APIRequestGetOpenBridgeConfigurations requestBrowserAgentField (boolean value) {
       this.requestField("browser_agent", value);
+      return this;
+    }
+    public APIRequestGetOpenBridgeConfigurations requestCapiPublishingStateField () {
+      return this.requestCapiPublishingStateField(true);
+    }
+    public APIRequestGetOpenBridgeConfigurations requestCapiPublishingStateField (boolean value) {
+      this.requestField("capi_publishing_state", value);
       return this;
     }
     public APIRequestGetOpenBridgeConfigurations requestCloudProviderField () {

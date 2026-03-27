@@ -43,6 +43,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class AdStudyCell extends APINode {
   @SerializedName("ad_entities_count")
   private Long mAdEntitiesCount = null;
+  @SerializedName("ad_ids")
+  private List<String> mAdIds = null;
   @SerializedName("control_percentage")
   private Double mControlPercentage = null;
   @SerializedName("id")
@@ -283,6 +285,10 @@ public class AdStudyCell extends APINode {
 
   public Long getFieldAdEntitiesCount() {
     return mAdEntitiesCount;
+  }
+
+  public List<String> getFieldAdIds() {
+    return mAdIds;
   }
 
   public Double getFieldControlPercentage() {
@@ -1024,6 +1030,7 @@ public class AdStudyCell extends APINode {
       "adset_schedule",
       "anchor_event_attribution_window_days",
       "asset_feed_id",
+      "attribution_count_type",
       "attribution_spec",
       "automatic_manual_state",
       "bid_adjustments",
@@ -1067,8 +1074,10 @@ public class AdStudyCell extends APINode {
       "lifetime_imps",
       "lifetime_min_spend_target",
       "lifetime_spend_cap",
+      "low_creative_reach",
       "max_budget_spend_percentage",
       "min_budget_spend_percentage",
+      "multi_event_conversion_attribution_window_seconds",
       "multi_optimization_goal_weight",
       "name",
       "optimization_goal",
@@ -1084,6 +1093,7 @@ public class AdStudyCell extends APINode {
       "rf_prediction_id",
       "source_adset",
       "source_adset_id",
+      "special_ad_categories",
       "start_time",
       "status",
       "targeting",
@@ -1220,6 +1230,13 @@ public class AdStudyCell extends APINode {
     }
     public APIRequestGetAdSets requestAssetFeedIdField (boolean value) {
       this.requestField("asset_feed_id", value);
+      return this;
+    }
+    public APIRequestGetAdSets requestAttributionCountTypeField () {
+      return this.requestAttributionCountTypeField(true);
+    }
+    public APIRequestGetAdSets requestAttributionCountTypeField (boolean value) {
+      this.requestField("attribution_count_type", value);
       return this;
     }
     public APIRequestGetAdSets requestAttributionSpecField () {
@@ -1523,6 +1540,13 @@ public class AdStudyCell extends APINode {
       this.requestField("lifetime_spend_cap", value);
       return this;
     }
+    public APIRequestGetAdSets requestLowCreativeReachField () {
+      return this.requestLowCreativeReachField(true);
+    }
+    public APIRequestGetAdSets requestLowCreativeReachField (boolean value) {
+      this.requestField("low_creative_reach", value);
+      return this;
+    }
     public APIRequestGetAdSets requestMaxBudgetSpendPercentageField () {
       return this.requestMaxBudgetSpendPercentageField(true);
     }
@@ -1535,6 +1559,13 @@ public class AdStudyCell extends APINode {
     }
     public APIRequestGetAdSets requestMinBudgetSpendPercentageField (boolean value) {
       this.requestField("min_budget_spend_percentage", value);
+      return this;
+    }
+    public APIRequestGetAdSets requestMultiEventConversionAttributionWindowSecondsField () {
+      return this.requestMultiEventConversionAttributionWindowSecondsField(true);
+    }
+    public APIRequestGetAdSets requestMultiEventConversionAttributionWindowSecondsField (boolean value) {
+      this.requestField("multi_event_conversion_attribution_window_seconds", value);
       return this;
     }
     public APIRequestGetAdSets requestMultiOptimizationGoalWeightField () {
@@ -1640,6 +1671,13 @@ public class AdStudyCell extends APINode {
     }
     public APIRequestGetAdSets requestSourceAdsetIdField (boolean value) {
       this.requestField("source_adset_id", value);
+      return this;
+    }
+    public APIRequestGetAdSets requestSpecialAdCategoriesField () {
+      return this.requestSpecialAdCategoriesField(true);
+    }
+    public APIRequestGetAdSets requestSpecialAdCategoriesField (boolean value) {
+      this.requestField("special_ad_categories", value);
       return this;
     }
     public APIRequestGetAdSets requestStartTimeField () {
@@ -2198,6 +2236,7 @@ public class AdStudyCell extends APINode {
 
     public static final String[] FIELDS = {
       "ad_entities_count",
+      "ad_ids",
       "control_percentage",
       "id",
       "name",
@@ -2301,6 +2340,13 @@ public class AdStudyCell extends APINode {
       this.requestField("ad_entities_count", value);
       return this;
     }
+    public APIRequestGet requestAdIdsField () {
+      return this.requestAdIdsField(true);
+    }
+    public APIRequestGet requestAdIdsField (boolean value) {
+      this.requestField("ad_ids", value);
+      return this;
+    }
     public APIRequestGet requestControlPercentageField () {
       return this.requestControlPercentageField(true);
     }
@@ -2340,6 +2386,7 @@ public class AdStudyCell extends APINode {
     }
     public static final String[] PARAMS = {
       "adaccounts",
+      "ads",
       "adsets",
       "campaigns",
       "creation_template",
@@ -2410,6 +2457,15 @@ public class AdStudyCell extends APINode {
     }
     public APIRequestUpdate setAdaccounts (String adaccounts) {
       this.setParam("adaccounts", adaccounts);
+      return this;
+    }
+
+    public APIRequestUpdate setAds (List<String> ads) {
+      this.setParam("ads", ads);
+      return this;
+    }
+    public APIRequestUpdate setAds (String ads) {
+      this.setParam("ads", ads);
       return this;
     }
 
@@ -2555,6 +2611,7 @@ public class AdStudyCell extends APINode {
 
   public AdStudyCell copyFrom(AdStudyCell instance) {
     this.mAdEntitiesCount = instance.mAdEntitiesCount;
+    this.mAdIds = instance.mAdIds;
     this.mControlPercentage = instance.mControlPercentage;
     this.mId = instance.mId;
     this.mName = instance.mName;

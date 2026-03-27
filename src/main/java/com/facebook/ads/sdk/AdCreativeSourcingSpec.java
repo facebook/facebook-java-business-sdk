@@ -49,6 +49,8 @@ public class AdCreativeSourcingSpec extends APINode {
   private Object mBrand = null;
   @SerializedName("destination_screenshot_spec")
   private Object mDestinationScreenshotSpec = null;
+  @SerializedName("duplication_source")
+  private String mDuplicationSource = null;
   @SerializedName("dynamic_site_links_spec")
   private Object mDynamicSiteLinksSpec = null;
   @SerializedName("enable_social_feedback_preservation")
@@ -258,6 +260,15 @@ public class AdCreativeSourcingSpec extends APINode {
     return this;
   }
 
+  public String getFieldDuplicationSource() {
+    return mDuplicationSource;
+  }
+
+  public AdCreativeSourcingSpec setFieldDuplicationSource(String value) {
+    this.mDuplicationSource = value;
+    return this;
+  }
+
   public Object getFieldDynamicSiteLinksSpec() {
     return mDynamicSiteLinksSpec;
   }
@@ -388,6 +399,7 @@ public class AdCreativeSourcingSpec extends APINode {
     this.mAssociatedProductSetId = instance.mAssociatedProductSetId;
     this.mBrand = instance.mBrand;
     this.mDestinationScreenshotSpec = instance.mDestinationScreenshotSpec;
+    this.mDuplicationSource = instance.mDuplicationSource;
     this.mDynamicSiteLinksSpec = instance.mDynamicSiteLinksSpec;
     this.mEnableSocialFeedbackPreservation = instance.mEnableSocialFeedbackPreservation;
     this.mIntent = instance.mIntent;

@@ -47,12 +47,18 @@ public class ProductItem extends APINode {
   private List<String> mAdditionalImageUrls = null;
   @SerializedName("additional_variant_attributes")
   private List<Map<String, String>> mAdditionalVariantAttributes = null;
+  @SerializedName("affiliate_seller_rating")
+  private Double mAffiliateSellerRating = null;
+  @SerializedName("affiliate_seller_rating_count")
+  private Long mAffiliateSellerRatingCount = null;
   @SerializedName("age_group")
   private EnumAgeGroup mAgeGroup = null;
   @SerializedName("applinks")
   private CatalogItemAppLinks mApplinks = null;
   @SerializedName("availability")
   private EnumAvailability mAvailability = null;
+  @SerializedName("base_commission_rate")
+  private Long mBaseCommissionRate = null;
   @SerializedName("brand")
   private String mBrand = null;
   @SerializedName("bundle_items")
@@ -65,6 +71,8 @@ public class ProductItem extends APINode {
   private List<Map<String, EnumCapabilityToReviewStatus>> mCapabilityToReviewStatus = null;
   @SerializedName("category")
   private String mCategory = null;
+  @SerializedName("category_ranking")
+  private Long mCategoryRanking = null;
   @SerializedName("category_specific_fields")
   private CatalogSubVerticalList mCategorySpecificFields = null;
   @SerializedName("color")
@@ -151,6 +159,8 @@ public class ProductItem extends APINode {
   private Long mOrderingIndex = null;
   @SerializedName("origin_country")
   private String mOriginCountry = null;
+  @SerializedName("overall_ranking")
+  private Long mOverallRanking = null;
   @SerializedName("parent_product_id")
   private String mParentProductId = null;
   @SerializedName("pattern")
@@ -465,6 +475,14 @@ public class ProductItem extends APINode {
     return mAdditionalVariantAttributes;
   }
 
+  public Double getFieldAffiliateSellerRating() {
+    return mAffiliateSellerRating;
+  }
+
+  public Long getFieldAffiliateSellerRatingCount() {
+    return mAffiliateSellerRatingCount;
+  }
+
   public EnumAgeGroup getFieldAgeGroup() {
     return mAgeGroup;
   }
@@ -475,6 +493,10 @@ public class ProductItem extends APINode {
 
   public EnumAvailability getFieldAvailability() {
     return mAvailability;
+  }
+
+  public Long getFieldBaseCommissionRate() {
+    return mBaseCommissionRate;
   }
 
   public String getFieldBrand() {
@@ -499,6 +521,10 @@ public class ProductItem extends APINode {
 
   public String getFieldCategory() {
     return mCategory;
+  }
+
+  public Long getFieldCategoryRanking() {
+    return mCategoryRanking;
   }
 
   public CatalogSubVerticalList getFieldCategorySpecificFields() {
@@ -671,6 +697,10 @@ public class ProductItem extends APINode {
 
   public String getFieldOriginCountry() {
     return mOriginCountry;
+  }
+
+  public Long getFieldOverallRanking() {
+    return mOverallRanking;
   }
 
   public String getFieldParentProductId() {
@@ -1531,15 +1561,19 @@ public class ProductItem extends APINode {
       "additional_image_cdn_urls",
       "additional_image_urls",
       "additional_variant_attributes",
+      "affiliate_seller_rating",
+      "affiliate_seller_rating_count",
       "age_group",
       "applinks",
       "availability",
+      "base_commission_rate",
       "brand",
       "bundle_items",
       "bundle_retailer_ids",
       "capabilities_disabled_by_user",
       "capability_to_review_status",
       "category",
+      "category_ranking",
       "category_specific_fields",
       "color",
       "commerce_insights",
@@ -1583,6 +1617,7 @@ public class ProductItem extends APINode {
       "name",
       "ordering_index",
       "origin_country",
+      "overall_ranking",
       "parent_product_id",
       "pattern",
       "post_conversion_signal_based_enforcement_appeal_eligibility",
@@ -1761,6 +1796,20 @@ public class ProductItem extends APINode {
       this.requestField("additional_variant_attributes", value);
       return this;
     }
+    public APIRequestGet requestAffiliateSellerRatingField () {
+      return this.requestAffiliateSellerRatingField(true);
+    }
+    public APIRequestGet requestAffiliateSellerRatingField (boolean value) {
+      this.requestField("affiliate_seller_rating", value);
+      return this;
+    }
+    public APIRequestGet requestAffiliateSellerRatingCountField () {
+      return this.requestAffiliateSellerRatingCountField(true);
+    }
+    public APIRequestGet requestAffiliateSellerRatingCountField (boolean value) {
+      this.requestField("affiliate_seller_rating_count", value);
+      return this;
+    }
     public APIRequestGet requestAgeGroupField () {
       return this.requestAgeGroupField(true);
     }
@@ -1780,6 +1829,13 @@ public class ProductItem extends APINode {
     }
     public APIRequestGet requestAvailabilityField (boolean value) {
       this.requestField("availability", value);
+      return this;
+    }
+    public APIRequestGet requestBaseCommissionRateField () {
+      return this.requestBaseCommissionRateField(true);
+    }
+    public APIRequestGet requestBaseCommissionRateField (boolean value) {
+      this.requestField("base_commission_rate", value);
       return this;
     }
     public APIRequestGet requestBrandField () {
@@ -1822,6 +1878,13 @@ public class ProductItem extends APINode {
     }
     public APIRequestGet requestCategoryField (boolean value) {
       this.requestField("category", value);
+      return this;
+    }
+    public APIRequestGet requestCategoryRankingField () {
+      return this.requestCategoryRankingField(true);
+    }
+    public APIRequestGet requestCategoryRankingField (boolean value) {
+      this.requestField("category_ranking", value);
       return this;
     }
     public APIRequestGet requestCategorySpecificFieldsField () {
@@ -2123,6 +2186,13 @@ public class ProductItem extends APINode {
     }
     public APIRequestGet requestOriginCountryField (boolean value) {
       this.requestField("origin_country", value);
+      return this;
+    }
+    public APIRequestGet requestOverallRankingField () {
+      return this.requestOverallRankingField(true);
+    }
+    public APIRequestGet requestOverallRankingField (boolean value) {
+      this.requestField("overall_ranking", value);
       return this;
     }
     public APIRequestGet requestParentProductIdField () {
@@ -4709,15 +4779,19 @@ public class ProductItem extends APINode {
     this.mAdditionalImageCdnUrls = instance.mAdditionalImageCdnUrls;
     this.mAdditionalImageUrls = instance.mAdditionalImageUrls;
     this.mAdditionalVariantAttributes = instance.mAdditionalVariantAttributes;
+    this.mAffiliateSellerRating = instance.mAffiliateSellerRating;
+    this.mAffiliateSellerRatingCount = instance.mAffiliateSellerRatingCount;
     this.mAgeGroup = instance.mAgeGroup;
     this.mApplinks = instance.mApplinks;
     this.mAvailability = instance.mAvailability;
+    this.mBaseCommissionRate = instance.mBaseCommissionRate;
     this.mBrand = instance.mBrand;
     this.mBundleItems = instance.mBundleItems;
     this.mBundleRetailerIds = instance.mBundleRetailerIds;
     this.mCapabilitiesDisabledByUser = instance.mCapabilitiesDisabledByUser;
     this.mCapabilityToReviewStatus = instance.mCapabilityToReviewStatus;
     this.mCategory = instance.mCategory;
+    this.mCategoryRanking = instance.mCategoryRanking;
     this.mCategorySpecificFields = instance.mCategorySpecificFields;
     this.mColor = instance.mColor;
     this.mCommerceInsights = instance.mCommerceInsights;
@@ -4761,6 +4835,7 @@ public class ProductItem extends APINode {
     this.mName = instance.mName;
     this.mOrderingIndex = instance.mOrderingIndex;
     this.mOriginCountry = instance.mOriginCountry;
+    this.mOverallRanking = instance.mOverallRanking;
     this.mParentProductId = instance.mParentProductId;
     this.mPattern = instance.mPattern;
     this.mPostConversionSignalBasedEnforcementAppealEligibility = instance.mPostConversionSignalBasedEnforcementAppealEligibility;

@@ -97,6 +97,8 @@ public class AdCreative extends APINode {
   private Boolean mEnableDirectInstall = null;
   @SerializedName("enable_launch_instant_app")
   private Boolean mEnableLaunchInstantApp = null;
+  @SerializedName("existing_post_title")
+  private String mExistingPostTitle = null;
   @SerializedName("facebook_branded_content")
   private AdCreativeFacebookBrandedContent mFacebookBrandedContent = null;
   @SerializedName("format_transformation_spec")
@@ -724,6 +726,15 @@ public class AdCreative extends APINode {
 
   public AdCreative setFieldEnableLaunchInstantApp(Boolean value) {
     this.mEnableLaunchInstantApp = value;
+    return this;
+  }
+
+  public String getFieldExistingPostTitle() {
+    return mExistingPostTitle;
+  }
+
+  public AdCreative setFieldExistingPostTitle(String value) {
+    this.mExistingPostTitle = value;
     return this;
   }
 
@@ -1884,6 +1895,7 @@ public class AdCreative extends APINode {
       "effective_object_story_id",
       "enable_direct_install",
       "enable_launch_instant_app",
+      "existing_post_title",
       "facebook_branded_content",
       "format_transformation_spec",
       "id",
@@ -2235,6 +2247,13 @@ public class AdCreative extends APINode {
     }
     public APIRequestGet requestEnableLaunchInstantAppField (boolean value) {
       this.requestField("enable_launch_instant_app", value);
+      return this;
+    }
+    public APIRequestGet requestExistingPostTitleField () {
+      return this.requestExistingPostTitleField(true);
+    }
+    public APIRequestGet requestExistingPostTitleField (boolean value) {
+      this.requestField("existing_post_title", value);
       return this;
     }
     public APIRequestGet requestFacebookBrandedContentField () {
@@ -3172,6 +3191,7 @@ public class AdCreative extends APINode {
     this.mEffectiveObjectStoryId = instance.mEffectiveObjectStoryId;
     this.mEnableDirectInstall = instance.mEnableDirectInstall;
     this.mEnableLaunchInstantApp = instance.mEnableLaunchInstantApp;
+    this.mExistingPostTitle = instance.mExistingPostTitle;
     this.mFacebookBrandedContent = instance.mFacebookBrandedContent;
     this.mFormatTransformationSpec = instance.mFormatTransformationSpec;
     this.mId = instance.mId;

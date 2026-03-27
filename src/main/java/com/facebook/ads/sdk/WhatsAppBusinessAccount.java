@@ -55,6 +55,8 @@ public class WhatsAppBusinessAccount extends APINode {
   private Long mCreationTime = null;
   @SerializedName("currency")
   private String mCurrency = null;
+  @SerializedName("disable_marketing_messages_on_cloud_api")
+  private Boolean mDisableMarketingMessagesOnCloudApi = null;
   @SerializedName("health_status")
   private WhatsAppBusinessHealthStatusForMessageSend mHealthStatus = null;
   @SerializedName("id")
@@ -535,6 +537,10 @@ public class WhatsAppBusinessAccount extends APINode {
 
   public String getFieldCurrency() {
     return mCurrency;
+  }
+
+  public Boolean getFieldDisableMarketingMessagesOnCloudApi() {
+    return mDisableMarketingMessagesOnCloudApi;
   }
 
   public WhatsAppBusinessHealthStatusForMessageSend getFieldHealthStatus() {
@@ -7266,6 +7272,7 @@ public class WhatsAppBusinessAccount extends APINode {
       "country",
       "creation_time",
       "currency",
+      "disable_marketing_messages_on_cloud_api",
       "health_status",
       "id",
       "is_enabled_for_insights",
@@ -7427,6 +7434,13 @@ public class WhatsAppBusinessAccount extends APINode {
       this.requestField("currency", value);
       return this;
     }
+    public APIRequestGet requestDisableMarketingMessagesOnCloudApiField () {
+      return this.requestDisableMarketingMessagesOnCloudApiField(true);
+    }
+    public APIRequestGet requestDisableMarketingMessagesOnCloudApiField (boolean value) {
+      this.requestField("disable_marketing_messages_on_cloud_api", value);
+      return this;
+    }
     public APIRequestGet requestHealthStatusField () {
       return this.requestHealthStatusField(true);
     }
@@ -7578,6 +7592,7 @@ public class WhatsAppBusinessAccount extends APINode {
     }
     public static final String[] PARAMS = {
       "degrees_of_freedom_spec",
+      "disable_marketing_messages_on_cloud_api",
       "is_enabled_for_insights",
       "template_auto_archival_enabled",
     };
@@ -7645,6 +7660,15 @@ public class WhatsAppBusinessAccount extends APINode {
     }
     public APIRequestUpdate setDegreesOfFreedomSpec (String degreesOfFreedomSpec) {
       this.setParam("degrees_of_freedom_spec", degreesOfFreedomSpec);
+      return this;
+    }
+
+    public APIRequestUpdate setDisableMarketingMessagesOnCloudApi (Boolean disableMarketingMessagesOnCloudApi) {
+      this.setParam("disable_marketing_messages_on_cloud_api", disableMarketingMessagesOnCloudApi);
+      return this;
+    }
+    public APIRequestUpdate setDisableMarketingMessagesOnCloudApi (String disableMarketingMessagesOnCloudApi) {
+      this.setParam("disable_marketing_messages_on_cloud_api", disableMarketingMessagesOnCloudApi);
       return this;
     }
 
@@ -8333,6 +8357,7 @@ public class WhatsAppBusinessAccount extends APINode {
     this.mCountry = instance.mCountry;
     this.mCreationTime = instance.mCreationTime;
     this.mCurrency = instance.mCurrency;
+    this.mDisableMarketingMessagesOnCloudApi = instance.mDisableMarketingMessagesOnCloudApi;
     this.mHealthStatus = instance.mHealthStatus;
     this.mId = instance.mId;
     this.mIsEnabledForInsights = instance.mIsEnabledForInsights;

@@ -219,12 +219,15 @@ public class ProductFeedAppsAndSoftware extends APINode {
     public static final String[] PARAMS = {
       "after",
       "before",
+      "display_format",
       "limit",
+      "summary",
     };
 
     public static final String[] FIELDS = {
       "data",
       "paging",
+      "summary",
     };
 
     @Override
@@ -291,12 +294,30 @@ public class ProductFeedAppsAndSoftware extends APINode {
       return this;
     }
 
+    public APIRequestGenget setDisplayFormat (ProductFeedAppsAndSoftwareGet.EnumDisplayFormat displayFormat) {
+      this.setParam("display_format", displayFormat);
+      return this;
+    }
+    public APIRequestGenget setDisplayFormat (String displayFormat) {
+      this.setParam("display_format", displayFormat);
+      return this;
+    }
+
     public APIRequestGenget setLimit (Long limit) {
       this.setParam("limit", limit);
       return this;
     }
     public APIRequestGenget setLimit (String limit) {
       this.setParam("limit", limit);
+      return this;
+    }
+
+    public APIRequestGenget setSummary (Boolean summary) {
+      this.setParam("summary", summary);
+      return this;
+    }
+    public APIRequestGenget setSummary (String summary) {
+      this.setParam("summary", summary);
       return this;
     }
 
@@ -348,6 +369,13 @@ public class ProductFeedAppsAndSoftware extends APINode {
     }
     public APIRequestGenget requestPagingField (boolean value) {
       this.requestField("paging", value);
+      return this;
+    }
+    public APIRequestGenget requestSummaryField () {
+      return this.requestSummaryField(true);
+    }
+    public APIRequestGenget requestSummaryField (boolean value) {
+      this.requestField("summary", value);
       return this;
     }
   }

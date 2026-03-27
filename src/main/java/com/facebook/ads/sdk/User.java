@@ -2862,7 +2862,6 @@ public class User extends APINode {
       "client_business",
       "confidence_level",
       "cooldown_start_time",
-      "creative_test_config",
       "description",
       "end_time",
       "name",
@@ -2959,15 +2958,6 @@ public class User extends APINode {
     }
     public APIRequestCreateAdStudy setCooldownStartTime (String cooldownStartTime) {
       this.setParam("cooldown_start_time", cooldownStartTime);
-      return this;
-    }
-
-    public APIRequestCreateAdStudy setCreativeTestConfig (Map<String, String> creativeTestConfig) {
-      this.setParam("creative_test_config", creativeTestConfig);
-      return this;
-    }
-    public APIRequestCreateAdStudy setCreativeTestConfig (String creativeTestConfig) {
-      this.setParam("creative_test_config", creativeTestConfig);
       return this;
     }
 
@@ -7895,6 +7885,7 @@ public class User extends APINode {
       "country",
       "creation_time",
       "currency",
+      "disable_marketing_messages_on_cloud_api",
       "health_status",
       "id",
       "is_enabled_for_insights",
@@ -8054,6 +8045,13 @@ public class User extends APINode {
     }
     public APIRequestGetAssignedWhatsAppBusinessAccounts requestCurrencyField (boolean value) {
       this.requestField("currency", value);
+      return this;
+    }
+    public APIRequestGetAssignedWhatsAppBusinessAccounts requestDisableMarketingMessagesOnCloudApiField () {
+      return this.requestDisableMarketingMessagesOnCloudApiField(true);
+    }
+    public APIRequestGetAssignedWhatsAppBusinessAccounts requestDisableMarketingMessagesOnCloudApiField (boolean value) {
+      this.requestField("disable_marketing_messages_on_cloud_api", value);
       return this;
     }
     public APIRequestGetAssignedWhatsAppBusinessAccounts requestHealthStatusField () {

@@ -2770,6 +2770,7 @@ public class AdAccount extends APINode {
       "effective_object_story_id",
       "enable_direct_install",
       "enable_launch_instant_app",
+      "existing_post_title",
       "facebook_branded_content",
       "format_transformation_spec",
       "id",
@@ -3103,6 +3104,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAdCreatives requestEnableLaunchInstantAppField (boolean value) {
       this.requestField("enable_launch_instant_app", value);
+      return this;
+    }
+    public APIRequestGetAdCreatives requestExistingPostTitleField () {
+      return this.requestExistingPostTitleField(true);
+    }
+    public APIRequestGetAdCreatives requestExistingPostTitleField (boolean value) {
+      this.requestField("existing_post_title", value);
       return this;
     }
     public APIRequestGetAdCreatives requestFacebookBrandedContentField () {
@@ -3465,6 +3473,7 @@ public class AdAccount extends APINode {
       "dynamic_ad_voice",
       "enable_launch_instant_app",
       "execution_options",
+      "existing_post_title",
       "facebook_branded_content",
       "format_transformation_spec",
       "image_crops",
@@ -3733,6 +3742,11 @@ public class AdAccount extends APINode {
     }
     public APIRequestCreateAdCreative setExecutionOptions (String executionOptions) {
       this.setParam("execution_options", executionOptions);
+      return this;
+    }
+
+    public APIRequestCreateAdCreative setExistingPostTitle (String existingPostTitle) {
+      this.setParam("existing_post_title", existingPostTitle);
       return this;
     }
 
@@ -4078,6 +4092,7 @@ public class AdAccount extends APINode {
       "effective_object_story_id",
       "enable_direct_install",
       "enable_launch_instant_app",
+      "existing_post_title",
       "facebook_branded_content",
       "format_transformation_spec",
       "id",
@@ -4429,6 +4444,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAdCreativesByLabels requestEnableLaunchInstantAppField (boolean value) {
       this.requestField("enable_launch_instant_app", value);
+      return this;
+    }
+    public APIRequestGetAdCreativesByLabels requestExistingPostTitleField () {
+      return this.requestExistingPostTitleField(true);
+    }
+    public APIRequestGetAdCreativesByLabels requestExistingPostTitleField (boolean value) {
+      this.requestField("existing_post_title", value);
       return this;
     }
     public APIRequestGetAdCreativesByLabels requestFacebookBrandedContentField () {
@@ -6463,6 +6485,7 @@ public class AdAccount extends APINode {
       "recommendations",
       "source_ad",
       "source_ad_id",
+      "special_ad_categories",
       "status",
       "targeting",
       "tracking_and_conversion_with_defaults",
@@ -6832,6 +6855,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAds requestSourceAdIdField (boolean value) {
       this.requestField("source_ad_id", value);
+      return this;
+    }
+    public APIRequestGetAds requestSpecialAdCategoriesField () {
+      return this.requestSpecialAdCategoriesField(true);
+    }
+    public APIRequestGetAds requestSpecialAdCategoriesField (boolean value) {
+      this.requestField("special_ad_categories", value);
       return this;
     }
     public APIRequestGetAds requestStatusField () {
@@ -7762,6 +7792,7 @@ public class AdAccount extends APINode {
       "recommendations",
       "source_ad",
       "source_ad_id",
+      "special_ad_categories",
       "status",
       "targeting",
       "tracking_and_conversion_with_defaults",
@@ -8115,6 +8146,13 @@ public class AdAccount extends APINode {
       this.requestField("source_ad_id", value);
       return this;
     }
+    public APIRequestGetAdsByLabels requestSpecialAdCategoriesField () {
+      return this.requestSpecialAdCategoriesField(true);
+    }
+    public APIRequestGetAdsByLabels requestSpecialAdCategoriesField (boolean value) {
+      this.requestField("special_ad_categories", value);
+      return this;
+    }
     public APIRequestGetAdsByLabels requestStatusField () {
       return this.requestStatusField(true);
     }
@@ -8173,6 +8211,7 @@ public class AdAccount extends APINode {
       "adset_schedule",
       "anchor_event_attribution_window_days",
       "asset_feed_id",
+      "attribution_count_type",
       "attribution_spec",
       "automatic_manual_state",
       "bid_adjustments",
@@ -8216,8 +8255,10 @@ public class AdAccount extends APINode {
       "lifetime_imps",
       "lifetime_min_spend_target",
       "lifetime_spend_cap",
+      "low_creative_reach",
       "max_budget_spend_percentage",
       "min_budget_spend_percentage",
+      "multi_event_conversion_attribution_window_seconds",
       "multi_optimization_goal_weight",
       "name",
       "optimization_goal",
@@ -8233,6 +8274,7 @@ public class AdAccount extends APINode {
       "rf_prediction_id",
       "source_adset",
       "source_adset_id",
+      "special_ad_categories",
       "start_time",
       "status",
       "targeting",
@@ -8414,6 +8456,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAdSets requestAssetFeedIdField (boolean value) {
       this.requestField("asset_feed_id", value);
+      return this;
+    }
+    public APIRequestGetAdSets requestAttributionCountTypeField () {
+      return this.requestAttributionCountTypeField(true);
+    }
+    public APIRequestGetAdSets requestAttributionCountTypeField (boolean value) {
+      this.requestField("attribution_count_type", value);
       return this;
     }
     public APIRequestGetAdSets requestAttributionSpecField () {
@@ -8717,6 +8766,13 @@ public class AdAccount extends APINode {
       this.requestField("lifetime_spend_cap", value);
       return this;
     }
+    public APIRequestGetAdSets requestLowCreativeReachField () {
+      return this.requestLowCreativeReachField(true);
+    }
+    public APIRequestGetAdSets requestLowCreativeReachField (boolean value) {
+      this.requestField("low_creative_reach", value);
+      return this;
+    }
     public APIRequestGetAdSets requestMaxBudgetSpendPercentageField () {
       return this.requestMaxBudgetSpendPercentageField(true);
     }
@@ -8729,6 +8785,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAdSets requestMinBudgetSpendPercentageField (boolean value) {
       this.requestField("min_budget_spend_percentage", value);
+      return this;
+    }
+    public APIRequestGetAdSets requestMultiEventConversionAttributionWindowSecondsField () {
+      return this.requestMultiEventConversionAttributionWindowSecondsField(true);
+    }
+    public APIRequestGetAdSets requestMultiEventConversionAttributionWindowSecondsField (boolean value) {
+      this.requestField("multi_event_conversion_attribution_window_seconds", value);
       return this;
     }
     public APIRequestGetAdSets requestMultiOptimizationGoalWeightField () {
@@ -8834,6 +8897,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAdSets requestSourceAdsetIdField (boolean value) {
       this.requestField("source_adset_id", value);
+      return this;
+    }
+    public APIRequestGetAdSets requestSpecialAdCategoriesField () {
+      return this.requestSpecialAdCategoriesField(true);
+    }
+    public APIRequestGetAdSets requestSpecialAdCategoriesField (boolean value) {
+      this.requestField("special_ad_categories", value);
       return this;
     }
     public APIRequestGetAdSets requestStartTimeField () {
@@ -8965,6 +9035,7 @@ public class AdAccount extends APINode {
       "line_number",
       "max_budget_spend_percentage",
       "min_budget_spend_percentage",
+      "multi_event_conversion_attribution_window_seconds",
       "multi_optimization_goal_weight",
       "name",
       "optimization_goal",
@@ -9402,6 +9473,15 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestCreateAdSet setMultiEventConversionAttributionWindowSeconds (Long multiEventConversionAttributionWindowSeconds) {
+      this.setParam("multi_event_conversion_attribution_window_seconds", multiEventConversionAttributionWindowSeconds);
+      return this;
+    }
+    public APIRequestCreateAdSet setMultiEventConversionAttributionWindowSeconds (String multiEventConversionAttributionWindowSeconds) {
+      this.setParam("multi_event_conversion_attribution_window_seconds", multiEventConversionAttributionWindowSeconds);
+      return this;
+    }
+
     public APIRequestCreateAdSet setMultiOptimizationGoalWeight (AdSet.EnumMultiOptimizationGoalWeight multiOptimizationGoalWeight) {
       this.setParam("multi_optimization_goal_weight", multiOptimizationGoalWeight);
       return this;
@@ -9638,6 +9718,7 @@ public class AdAccount extends APINode {
       "adset_schedule",
       "anchor_event_attribution_window_days",
       "asset_feed_id",
+      "attribution_count_type",
       "attribution_spec",
       "automatic_manual_state",
       "bid_adjustments",
@@ -9681,8 +9762,10 @@ public class AdAccount extends APINode {
       "lifetime_imps",
       "lifetime_min_spend_target",
       "lifetime_spend_cap",
+      "low_creative_reach",
       "max_budget_spend_percentage",
       "min_budget_spend_percentage",
+      "multi_event_conversion_attribution_window_seconds",
       "multi_optimization_goal_weight",
       "name",
       "optimization_goal",
@@ -9698,6 +9781,7 @@ public class AdAccount extends APINode {
       "rf_prediction_id",
       "source_adset",
       "source_adset_id",
+      "special_ad_categories",
       "start_time",
       "status",
       "targeting",
@@ -9852,6 +9936,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAdSetsByLabels requestAssetFeedIdField (boolean value) {
       this.requestField("asset_feed_id", value);
+      return this;
+    }
+    public APIRequestGetAdSetsByLabels requestAttributionCountTypeField () {
+      return this.requestAttributionCountTypeField(true);
+    }
+    public APIRequestGetAdSetsByLabels requestAttributionCountTypeField (boolean value) {
+      this.requestField("attribution_count_type", value);
       return this;
     }
     public APIRequestGetAdSetsByLabels requestAttributionSpecField () {
@@ -10155,6 +10246,13 @@ public class AdAccount extends APINode {
       this.requestField("lifetime_spend_cap", value);
       return this;
     }
+    public APIRequestGetAdSetsByLabels requestLowCreativeReachField () {
+      return this.requestLowCreativeReachField(true);
+    }
+    public APIRequestGetAdSetsByLabels requestLowCreativeReachField (boolean value) {
+      this.requestField("low_creative_reach", value);
+      return this;
+    }
     public APIRequestGetAdSetsByLabels requestMaxBudgetSpendPercentageField () {
       return this.requestMaxBudgetSpendPercentageField(true);
     }
@@ -10167,6 +10265,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAdSetsByLabels requestMinBudgetSpendPercentageField (boolean value) {
       this.requestField("min_budget_spend_percentage", value);
+      return this;
+    }
+    public APIRequestGetAdSetsByLabels requestMultiEventConversionAttributionWindowSecondsField () {
+      return this.requestMultiEventConversionAttributionWindowSecondsField(true);
+    }
+    public APIRequestGetAdSetsByLabels requestMultiEventConversionAttributionWindowSecondsField (boolean value) {
+      this.requestField("multi_event_conversion_attribution_window_seconds", value);
       return this;
     }
     public APIRequestGetAdSetsByLabels requestMultiOptimizationGoalWeightField () {
@@ -10272,6 +10377,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAdSetsByLabels requestSourceAdsetIdField (boolean value) {
       this.requestField("source_adset_id", value);
+      return this;
+    }
+    public APIRequestGetAdSetsByLabels requestSpecialAdCategoriesField () {
+      return this.requestSpecialAdCategoriesField(true);
+    }
+    public APIRequestGetAdSetsByLabels requestSpecialAdCategoriesField (boolean value) {
+      this.requestField("special_ad_categories", value);
       return this;
     }
     public APIRequestGetAdSetsByLabels requestStartTimeField () {
@@ -13192,6 +13304,7 @@ public class AdAccount extends APINode {
       "adset_schedule",
       "anchor_event_attribution_window_days",
       "asset_feed_id",
+      "attribution_count_type",
       "attribution_spec",
       "automatic_manual_state",
       "bid_adjustments",
@@ -13235,8 +13348,10 @@ public class AdAccount extends APINode {
       "lifetime_imps",
       "lifetime_min_spend_target",
       "lifetime_spend_cap",
+      "low_creative_reach",
       "max_budget_spend_percentage",
       "min_budget_spend_percentage",
+      "multi_event_conversion_attribution_window_seconds",
       "multi_optimization_goal_weight",
       "name",
       "optimization_goal",
@@ -13252,6 +13367,7 @@ public class AdAccount extends APINode {
       "rf_prediction_id",
       "source_adset",
       "source_adset_id",
+      "special_ad_categories",
       "start_time",
       "status",
       "targeting",
@@ -13388,6 +13504,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAffectedAdSets requestAssetFeedIdField (boolean value) {
       this.requestField("asset_feed_id", value);
+      return this;
+    }
+    public APIRequestGetAffectedAdSets requestAttributionCountTypeField () {
+      return this.requestAttributionCountTypeField(true);
+    }
+    public APIRequestGetAffectedAdSets requestAttributionCountTypeField (boolean value) {
+      this.requestField("attribution_count_type", value);
       return this;
     }
     public APIRequestGetAffectedAdSets requestAttributionSpecField () {
@@ -13691,6 +13814,13 @@ public class AdAccount extends APINode {
       this.requestField("lifetime_spend_cap", value);
       return this;
     }
+    public APIRequestGetAffectedAdSets requestLowCreativeReachField () {
+      return this.requestLowCreativeReachField(true);
+    }
+    public APIRequestGetAffectedAdSets requestLowCreativeReachField (boolean value) {
+      this.requestField("low_creative_reach", value);
+      return this;
+    }
     public APIRequestGetAffectedAdSets requestMaxBudgetSpendPercentageField () {
       return this.requestMaxBudgetSpendPercentageField(true);
     }
@@ -13703,6 +13833,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAffectedAdSets requestMinBudgetSpendPercentageField (boolean value) {
       this.requestField("min_budget_spend_percentage", value);
+      return this;
+    }
+    public APIRequestGetAffectedAdSets requestMultiEventConversionAttributionWindowSecondsField () {
+      return this.requestMultiEventConversionAttributionWindowSecondsField(true);
+    }
+    public APIRequestGetAffectedAdSets requestMultiEventConversionAttributionWindowSecondsField (boolean value) {
+      this.requestField("multi_event_conversion_attribution_window_seconds", value);
       return this;
     }
     public APIRequestGetAffectedAdSets requestMultiOptimizationGoalWeightField () {
@@ -13808,6 +13945,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAffectedAdSets requestSourceAdsetIdField (boolean value) {
       this.requestField("source_adset_id", value);
+      return this;
+    }
+    public APIRequestGetAffectedAdSets requestSpecialAdCategoriesField () {
+      return this.requestSpecialAdCategoriesField(true);
+    }
+    public APIRequestGetAffectedAdSets requestSpecialAdCategoriesField (boolean value) {
+      this.requestField("special_ad_categories", value);
       return this;
     }
     public APIRequestGetAffectedAdSets requestStartTimeField () {
@@ -21142,6 +21286,7 @@ public class AdAccount extends APINode {
       "adset_schedule",
       "anchor_event_attribution_window_days",
       "asset_feed_id",
+      "attribution_count_type",
       "attribution_spec",
       "automatic_manual_state",
       "bid_adjustments",
@@ -21185,8 +21330,10 @@ public class AdAccount extends APINode {
       "lifetime_imps",
       "lifetime_min_spend_target",
       "lifetime_spend_cap",
+      "low_creative_reach",
       "max_budget_spend_percentage",
       "min_budget_spend_percentage",
+      "multi_event_conversion_attribution_window_seconds",
       "multi_optimization_goal_weight",
       "name",
       "optimization_goal",
@@ -21202,6 +21349,7 @@ public class AdAccount extends APINode {
       "rf_prediction_id",
       "source_adset",
       "source_adset_id",
+      "special_ad_categories",
       "start_time",
       "status",
       "targeting",
@@ -21343,6 +21491,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetDeprecatedTargetingAdSets requestAssetFeedIdField (boolean value) {
       this.requestField("asset_feed_id", value);
+      return this;
+    }
+    public APIRequestGetDeprecatedTargetingAdSets requestAttributionCountTypeField () {
+      return this.requestAttributionCountTypeField(true);
+    }
+    public APIRequestGetDeprecatedTargetingAdSets requestAttributionCountTypeField (boolean value) {
+      this.requestField("attribution_count_type", value);
       return this;
     }
     public APIRequestGetDeprecatedTargetingAdSets requestAttributionSpecField () {
@@ -21646,6 +21801,13 @@ public class AdAccount extends APINode {
       this.requestField("lifetime_spend_cap", value);
       return this;
     }
+    public APIRequestGetDeprecatedTargetingAdSets requestLowCreativeReachField () {
+      return this.requestLowCreativeReachField(true);
+    }
+    public APIRequestGetDeprecatedTargetingAdSets requestLowCreativeReachField (boolean value) {
+      this.requestField("low_creative_reach", value);
+      return this;
+    }
     public APIRequestGetDeprecatedTargetingAdSets requestMaxBudgetSpendPercentageField () {
       return this.requestMaxBudgetSpendPercentageField(true);
     }
@@ -21658,6 +21820,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetDeprecatedTargetingAdSets requestMinBudgetSpendPercentageField (boolean value) {
       this.requestField("min_budget_spend_percentage", value);
+      return this;
+    }
+    public APIRequestGetDeprecatedTargetingAdSets requestMultiEventConversionAttributionWindowSecondsField () {
+      return this.requestMultiEventConversionAttributionWindowSecondsField(true);
+    }
+    public APIRequestGetDeprecatedTargetingAdSets requestMultiEventConversionAttributionWindowSecondsField (boolean value) {
+      this.requestField("multi_event_conversion_attribution_window_seconds", value);
       return this;
     }
     public APIRequestGetDeprecatedTargetingAdSets requestMultiOptimizationGoalWeightField () {
@@ -21763,6 +21932,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetDeprecatedTargetingAdSets requestSourceAdsetIdField (boolean value) {
       this.requestField("source_adset_id", value);
+      return this;
+    }
+    public APIRequestGetDeprecatedTargetingAdSets requestSpecialAdCategoriesField () {
+      return this.requestSpecialAdCategoriesField(true);
+    }
+    public APIRequestGetDeprecatedTargetingAdSets requestSpecialAdCategoriesField (boolean value) {
+      this.requestField("special_ad_categories", value);
       return this;
     }
     public APIRequestGetDeprecatedTargetingAdSets requestStartTimeField () {

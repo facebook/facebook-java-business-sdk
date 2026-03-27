@@ -43,8 +43,16 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class PageCTXBudgetSimilarAdvertiserBudgetRecommendation extends APINode {
   @SerializedName("budget")
   private String mBudget = null;
+  @SerializedName("budget_new_model")
+  private String mBudgetNewModel = null;
+  @SerializedName("budget_without_threshold")
+  private String mBudgetWithoutThreshold = null;
   @SerializedName("reported_conversion")
   private String mReportedConversion = null;
+  @SerializedName("reported_conversions_new_model")
+  private String mReportedConversionsNewModel = null;
+  @SerializedName("reported_conversions_without_threshold")
+  private String mReportedConversionsWithoutThreshold = null;
   protected static Gson gson = null;
 
   public PageCTXBudgetSimilarAdvertiserBudgetRecommendation() {
@@ -205,12 +213,48 @@ public class PageCTXBudgetSimilarAdvertiserBudgetRecommendation extends APINode 
     return this;
   }
 
+  public String getFieldBudgetNewModel() {
+    return mBudgetNewModel;
+  }
+
+  public PageCTXBudgetSimilarAdvertiserBudgetRecommendation setFieldBudgetNewModel(String value) {
+    this.mBudgetNewModel = value;
+    return this;
+  }
+
+  public String getFieldBudgetWithoutThreshold() {
+    return mBudgetWithoutThreshold;
+  }
+
+  public PageCTXBudgetSimilarAdvertiserBudgetRecommendation setFieldBudgetWithoutThreshold(String value) {
+    this.mBudgetWithoutThreshold = value;
+    return this;
+  }
+
   public String getFieldReportedConversion() {
     return mReportedConversion;
   }
 
   public PageCTXBudgetSimilarAdvertiserBudgetRecommendation setFieldReportedConversion(String value) {
     this.mReportedConversion = value;
+    return this;
+  }
+
+  public String getFieldReportedConversionsNewModel() {
+    return mReportedConversionsNewModel;
+  }
+
+  public PageCTXBudgetSimilarAdvertiserBudgetRecommendation setFieldReportedConversionsNewModel(String value) {
+    this.mReportedConversionsNewModel = value;
+    return this;
+  }
+
+  public String getFieldReportedConversionsWithoutThreshold() {
+    return mReportedConversionsWithoutThreshold;
+  }
+
+  public PageCTXBudgetSimilarAdvertiserBudgetRecommendation setFieldReportedConversionsWithoutThreshold(String value) {
+    this.mReportedConversionsWithoutThreshold = value;
     return this;
   }
 
@@ -232,7 +276,11 @@ public class PageCTXBudgetSimilarAdvertiserBudgetRecommendation extends APINode 
 
   public PageCTXBudgetSimilarAdvertiserBudgetRecommendation copyFrom(PageCTXBudgetSimilarAdvertiserBudgetRecommendation instance) {
     this.mBudget = instance.mBudget;
+    this.mBudgetNewModel = instance.mBudgetNewModel;
+    this.mBudgetWithoutThreshold = instance.mBudgetWithoutThreshold;
     this.mReportedConversion = instance.mReportedConversion;
+    this.mReportedConversionsNewModel = instance.mReportedConversionsNewModel;
+    this.mReportedConversionsWithoutThreshold = instance.mReportedConversionsWithoutThreshold;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
