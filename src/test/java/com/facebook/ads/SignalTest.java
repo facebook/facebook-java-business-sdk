@@ -30,6 +30,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class SignalTest {
         @Test
@@ -100,8 +101,9 @@ public class SignalTest {
                 Assert.assertTrue(bdapiDataJSON.contains("\"event_name\":\"Purchase\""));
 
                 String capiDataJSON = (new Gson()).toJson(capiEventRequest.getData());
-                String customPropertiesJSON = (new Gson()).toJson(customProperties);
-                Assert.assertTrue(capiDataJSON
-                                .contains(customPropertiesJSON.substring(1, customPropertiesJSON.length() - 1)));
+                Map<String, String> mp = customProperties; 
+                mp.forEach((key, value) -> Assert.assertTrue(capiDataJSON.contains(
+                        "\"" + key + "\":" +  "\"" + value + "\"" 
+                ))); 
         }
 }
