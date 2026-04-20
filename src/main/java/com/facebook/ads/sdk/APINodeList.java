@@ -22,6 +22,7 @@
  */
 package com.facebook.ads.sdk;
 
+import com.google.common.util.concurrent.ListenableFuture;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import java.net.URL;
@@ -59,39 +60,78 @@ public class APINodeList<T extends APINode> extends ArrayList<T> implements APIR
       return this;
     }
 
+    private boolean prepareCallUsingNext(){
+        // App secret won't return with the 'next' URL. Need to append it
+        // for paging.
+        if (this.appSecret == null) {
+            this.request.setOverrideUrl(this.next);
+            return true;
+        } else {
+            try {
+                URL a = new URL(this.next);
+                String connector = a.getQuery() == null ? "?" : "&";
+                this.request.setOverrideUrl(
+                        this.next +
+                                connector +
+                                "appsecret_proof=" +
+                                this.appSecret
+                );
+                return true;
+            } catch (java.net.MalformedURLException e) {
+                return false;
+            }
+        }
+    }
+
+    private Map<String, Object> prepareCallWithExtraParams(int limit) {
+        if (after == null) return null;
+        this.request.setOverrideUrl(null);
+        Map<String, Object> extraParams = new HashMap<String, Object>();
+        if (limit > 0) extraParams.put("limit", limit);
+        extraParams.put("after", after);
+        return extraParams;
+    }
+
     public APINodeList<T> nextPage() throws APIException {
       return nextPage(0);
     }
 
-    public APINodeList<T> nextPage(int limit) throws APIException {
-      // First check if 'next' url is retured. If so, always use the it.
-      if (this.next != null) {
-        // App secret won't return with the 'next' URL. Need to append it
-        // for paging.
-        if (this.appSecret == null) {
-          this.request.setOverrideUrl(this.next);
-        } else {
-          try {
-            URL a = new URL(this.next);
-            String connector = a.getQuery() == null ? "?" : "&";
-            this.request.setOverrideUrl(
-              this.next +
-              connector +
-              "appsecret_proof=" +
-              this.appSecret
-            );
-          } catch (java.net.MalformedURLException e) {
-            return null;
-          }
+    public ListenableFuture<APIResponse> nextPageAsync() throws APIException {
+      return nextPageAsync(0);
+    }
+
+    public ListenableFuture<APIResponse> nextPageAsync(int limit) throws APIException {
+        // First check if 'next' url is returned. If so, always use the it.
+        if (this.next != null) {
+            if(prepareCallUsingNext()) {
+                return  request.executeAsyncBase();
+            } else {
+                return null;
+            }
         }
-        return (APINodeList<T>) request.execute();
+        Map<String, Object> extraParams = prepareCallWithExtraParams(limit);
+        if(extraParams != null) {
+            return request.executeAsyncBase(extraParams);
+        } else {
+            return null;
+        }
+    }
+
+    public APINodeList<T> nextPage(int limit) throws APIException {
+      // First check if 'next' url is returned. If so, always use the it.
+      if (this.next != null) {
+        if(prepareCallUsingNext()) {
+            return (APINodeList<T>) request.execute();
+        } else {
+            return null;
+        }
       }
-      if (after == null) return null;
-      this.request.setOverrideUrl(null);
-      Map<String, Object> extraParams = new HashMap<String, Object>();
-      if (limit > 0) extraParams.put("limit", limit);
-      extraParams.put("after", after);
-      return (APINodeList<T>) request.execute(extraParams);
+      Map<String, Object> extraParams = prepareCallWithExtraParams(limit);
+      if(extraParams != null) {
+          return (APINodeList<T>) request.execute(extraParams);
+      } else {
+          return null;
+      }
     }
 
     public void setCursors(String before, String after) {
