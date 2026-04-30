@@ -45,6 +45,14 @@ public class APIContext {
   private String version;
   protected boolean isDebug = false;
   protected PrintStream logger = System.out;
+  /**
+   * @see java.net.URLConnection#setConnectTimeout(int)
+   */
+  private int connectTimeout;
+  /**
+   * @see java.net.URLConnection#setReadTimeout(int)
+   */
+  private int readTimeout;
 
   public APIContext(String endpointBase, String videoEndpointBase, String version, String accessToken, String appSecret, String appID, boolean logCrash) {
     this.version = version;
@@ -179,5 +187,21 @@ public class APIContext {
 
   public static void disableCrashReport() {
     CrashReporter.disable();
+  }
+
+  public int getConnectTimeout() {
+    return connectTimeout;
+  }
+
+  public void setConnectTimeout(int connectTimeout) {
+    this.connectTimeout = connectTimeout;
+  }
+
+  public int getReadTimeout() {
+    return readTimeout;
+  }
+
+  public void setReadTimeout(int readTimeout) {
+    this.readTimeout = readTimeout;
   }
 }
