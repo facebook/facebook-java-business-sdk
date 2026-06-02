@@ -17,6 +17,7 @@
  */
 package com.facebook.ads.sdk.serverside;
 
+import com.facebook.capi.sdk.ParamBuilder;
 import com.google.gson.annotations.SerializedName;
 import java.util.Objects;
 
@@ -78,6 +79,7 @@ public class Event {
   // serialized into the wire payload.
   private transient Object requestContext = null;
   private transient Preference preference = null;
+  private transient ParamBuilder paramBuilder = null;
 
   /**
    * Default Constructor.
@@ -623,6 +625,14 @@ public class Event {
   public Event setRequestContext(Object context, Preference preference) {
     this.requestContext = context;
     this.preference = preference != null ? preference : new Preference();
+    this.paramBuilder = new ParamBuilder();
+    // NOTE: paramBuilder.processRequestFromContext(context) will be invoked
+    // here once the Maven Central release of com.facebook.capi.sdk:capi-param-builder
+    // includes that method. It exists in fbsource HEAD but is not yet published
+    // to Maven Central — calling it now breaks the build (NoSuchMethodError at
+    // compile time). Until the upstream artifact is republished and the version
+    // pin in pom.xml is bumped, ParamBuilder remains uninitialized with context
+    // and applyParamBuilderDefaults() is effectively a no-op.
     return this;
   }
 
