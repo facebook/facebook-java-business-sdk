@@ -73,6 +73,12 @@ public class Event {
   @SerializedName("attribution_data")
   private AttributionData attributionData = null;
 
+  // Transient — the request context and Preference are used by the CAPI
+  // ParamBuilder to auto-extract parameters before send; they must not be
+  // serialized into the wire payload.
+  private transient Object requestContext = null;
+  private transient Preference preference = null;
+
   /**
    * Default Constructor.
    */
@@ -594,11 +600,58 @@ public class Event {
 
   /**
    * Set attributionData for the event.
-   * 
+   *
    * @param attributionData represents attribution data used for attribution passback event to optimize the performance.
    */
   public void setAttributionData(AttributionData attributionData) {
     this.attributionData = attributionData;
+  }
+
+  /**
+   * Sets the request context and optional preference for automatic data extraction.
+   *
+   * <p>Stores the context (e.g. an HTTP request) and a Preference allowlist. Later in the stack,
+   * the CAPI ParamBuilder will use the stored context to extract parameters like fbc, fbp,
+   * client_ip_address, and referrer_url from it, gated by the Preference. If no preference is
+   * provided, all fields default to true.
+   *
+   * @param context    the request context (e.g. an HTTP request)
+   * @param preference optional Preference object controlling auto-extraction; when null, defaults
+   *                   to an allow-all {@code new Preference()}.
+   * @return Event (fluent)
+   */
+  public Event setRequestContext(Object context, Preference preference) {
+    this.requestContext = context;
+    this.preference = preference != null ? preference : new Preference();
+    return this;
+  }
+
+  /**
+   * Sets the request context with an allow-all Preference.
+   *
+   * @param context the request context (e.g. an HTTP request)
+   * @return Event (fluent)
+   */
+  public Event setRequestContext(Object context) {
+    return setRequestContext(context, null);
+  }
+
+  /**
+   * Get the request context object.
+   *
+   * @return the request context, or null if {@link #setRequestContext} was never called.
+   */
+  public Object getRequestContext() {
+    return requestContext;
+  }
+
+  /**
+   * Get the Preference allowlist.
+   *
+   * @return the Preference, or null if {@link #setRequestContext} was never called.
+   */
+  public Preference getPreference() {
+    return preference;
   }
 
   @Override
