@@ -205,6 +205,7 @@ public class EventRequestContextTest {
                      when(pb.getFbc()).thenReturn("XX");
                      when(pb.getFbp()).thenReturn("YY");
                      when(pb.getEventSourceUrl()).thenReturn("https://shop.example.com/cart");
+                     when(pb.getReferrerUrl()).thenReturn("https://referrer.example.com/");
                  })) {
             Preference pref = new Preference(false, false, false, false, false);
             Event event = new Event()
@@ -220,6 +221,7 @@ public class EventRequestContextTest {
                 assertNull(ud.getFbp());
             }
             assertNull(event.getEventSourceUrl());
+            assertNull(event.getReferrerUrl());
         }
     }
 
@@ -276,6 +278,62 @@ public class EventRequestContextTest {
             event.applyParamBuilderDefaults();
             assertEquals("WITHFBC", event.getUserData().getFbc());
             assertNull(event.getEventSourceUrl());
+        }
+    }
+
+    // ----------------------------------------------------------------
+    // referrer_url auto-population (mocked ParamBuilder)
+    // ----------------------------------------------------------------
+
+    @Test
+    public void testAutoPopulatesReferrerUrl() {
+        try (MockedConstruction<ParamBuilder> mocked =
+                 mockConstruction(ParamBuilder.class, (pb, ctx) -> {
+                     when(pb.getReferrerUrl()).thenReturn("https://google.com/search?q=foo");
+                 })) {
+            Event event = new Event()
+                .eventName("PageView")
+                .eventTime(1700000070L)
+                .setRequestContext(new Object());
+
+            event.applyParamBuilderDefaults();
+            assertEquals("https://google.com/search?q=foo", event.getReferrerUrl());
+        }
+    }
+
+    @Test
+    public void testCallerSuppliedReferrerUrlTakesPrecedence() {
+        try (MockedConstruction<ParamBuilder> mocked =
+                 mockConstruction(ParamBuilder.class, (pb, ctx) -> {
+                     when(pb.getReferrerUrl()).thenReturn("https://from-builder/");
+                 })) {
+            Event event = new Event()
+                .eventName("Lead")
+                .eventTime(1700000071L)
+                .referrerUrl("https://from-caller/")
+                .setRequestContext(new Object());
+
+            event.applyParamBuilderDefaults();
+            assertEquals("https://from-caller/", event.getReferrerUrl());
+        }
+    }
+
+    @Test
+    public void testPreferenceGatesReferrerUrl() {
+        try (MockedConstruction<ParamBuilder> mocked =
+                 mockConstruction(ParamBuilder.class, (pb, ctx) -> {
+                     when(pb.getFbc()).thenReturn("WITHFBC");
+                     when(pb.getReferrerUrl()).thenReturn("https://from-builder/");
+                 })) {
+            Preference pref = new Preference(true, true, true, false, true);
+            Event event = new Event()
+                .eventName("PageView")
+                .eventTime(1700000072L)
+                .setRequestContext(new Object(), pref);
+
+            event.applyParamBuilderDefaults();
+            assertEquals("WITHFBC", event.getUserData().getFbc());
+            assertNull(event.getReferrerUrl());
         }
     }
 

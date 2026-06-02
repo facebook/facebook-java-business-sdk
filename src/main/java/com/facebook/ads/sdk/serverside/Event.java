@@ -35,6 +35,9 @@ public class Event {
   @SerializedName("event_source_url")
   private String eventSourceUrl = null;
 
+  @SerializedName("referrer_url")
+  private String referrerUrl = null;
+
   @SerializedName("opt_out")
   private Boolean optOut = null;
 
@@ -106,12 +109,13 @@ public class Event {
    * @param messagingChannel indicated the messaging channel used.
    * *@param originalEventData indicated the original event data used for attribution passback or generalized value optimization(GVO).
    * @param attributionData indicated the attribution data used for attribution passback event to optimize the performance.
+   * @param referrerUrl referrer URL of the browser request that triggered the event
    */
   public Event(String eventName, Long eventTime, String eventSourceUrl, Boolean optOut,
       String eventId, UserData userData, CustomData customData, String[] dataProcessingOptions,
       Integer dataProcessingOptionsCountry, Integer dataProcessingOptionsState, ActionSource actionSource, AppData appData,
-      String advancedMeasurementTable, MessagingChannel messagingChannel, OriginalEventData originalEventData, 
-      AttributionData attributionData) {
+      String advancedMeasurementTable, MessagingChannel messagingChannel, OriginalEventData originalEventData,
+      AttributionData attributionData, String referrerUrl) {
     this.eventName = eventName;
     this.eventTime = eventTime;
     this.eventSourceUrl = eventSourceUrl;
@@ -128,6 +132,7 @@ public class Event {
     this.messagingChannel = messagingChannel;
     this.originalEventData = originalEventData;
     this.attributionData = attributionData;
+    this.referrerUrl = referrerUrl;
   }
 
   /**
@@ -215,6 +220,35 @@ public class Event {
    */
   public void setEventSourceUrl(String eventSourceUrl) {
     this.eventSourceUrl = eventSourceUrl;
+  }
+
+  /**
+   * Set referrer URL of the browser request that triggered the event.
+   *
+   * @param referrerUrl referrer URL of the browser request that triggered the event
+   * @return Event
+   */
+  public Event referrerUrl(String referrerUrl) {
+    this.referrerUrl = referrerUrl;
+    return this;
+  }
+
+  /**
+   * Get referrer URL of the browser request that triggered the event.
+   *
+   * @return referrerUrl
+   */
+  public String getReferrerUrl() {
+    return referrerUrl;
+  }
+
+  /**
+   * Set referrer URL of the browser request that triggered the event.
+   *
+   * @param referrerUrl referrer URL of the browser request that triggered the event
+   */
+  public void setReferrerUrl(String referrerUrl) {
+    this.referrerUrl = referrerUrl;
   }
 
   /**
@@ -674,6 +708,13 @@ public class Event {
         && builderEventSourceUrl != null && !builderEventSourceUrl.isEmpty()) {
       this.eventSourceUrl = builderEventSourceUrl;
     }
+
+    String builderReferrerUrl = this.paramBuilder.getReferrerUrl();
+    if (Boolean.TRUE.equals(this.preference.isReferrerUrlAllowed())
+        && (this.referrerUrl == null || this.referrerUrl.isEmpty())
+        && builderReferrerUrl != null && !builderReferrerUrl.isEmpty()) {
+      this.referrerUrl = builderReferrerUrl;
+    }
   }
 
   /**
@@ -725,13 +766,14 @@ public class Event {
         && Objects.equals(this.dataProcessingOptionsState, event.dataProcessingOptionsState)
         && Objects.equals(this.messagingChannel, event.messagingChannel)
         && Objects.equals(this.originalEventData, event.originalEventData)
-        && Objects.equals(this.attributionData, event.attributionData);
+        && Objects.equals(this.attributionData, event.attributionData)
+        && Objects.equals(this.referrerUrl, event.referrerUrl);
   }
 
   @Override
   public int hashCode() {
     return Objects.hash(
-        eventName, eventTime, eventSourceUrl, optOut, eventId, userData, customData, dataProcessingOptions, dataProcessingOptionsCountry, dataProcessingOptionsState , messagingChannel, originalEventData, attributionData);
+        eventName, eventTime, eventSourceUrl, optOut, eventId, userData, customData, dataProcessingOptions, dataProcessingOptionsCountry, dataProcessingOptionsState , messagingChannel, originalEventData, attributionData, referrerUrl);
   }
 
   @Override
@@ -742,6 +784,7 @@ public class Event {
     sb.append("    eventName: ").append(toIndentedString(eventName)).append("\n");
     sb.append("    eventTime: ").append(toIndentedString(eventTime)).append("\n");
     sb.append("    eventSourceUrl: ").append(toIndentedString(eventSourceUrl)).append("\n");
+    sb.append("    referrerUrl: ").append(toIndentedString(referrerUrl)).append("\n");
     sb.append("    optOut: ").append(toIndentedString(optOut)).append("\n");
     sb.append("    eventId: ").append(toIndentedString(eventId)).append("\n");
     sb.append("    userData: ").append(toIndentedString(userData)).append("\n");
