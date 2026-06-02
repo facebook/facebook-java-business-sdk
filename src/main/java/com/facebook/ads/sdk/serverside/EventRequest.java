@@ -385,6 +385,7 @@ public class EventRequest {
    * @throws APIException Api Exception
    */
   public EventResponse execute() throws APIException {
+    applyParamBuilderDefaultsToAllEvents();
     EventResponse response;
     try {
       if (endpointRequest != null && endpointRequest.isSendToEndpointOnly()) {
@@ -519,6 +520,7 @@ public class EventRequest {
    * @throws APIException Api Exception
    */
   public ListenableFuture<EventResponse> executeAsync() throws APIException {
+    applyParamBuilderDefaultsToAllEvents();
     try {
       if (endpointRequest == null) {
         return sendEventToCAPIOnly();
@@ -562,8 +564,26 @@ public class EventRequest {
   }
 
   public String getSerializedPayload() {
+    applyParamBuilderDefaultsToAllEvents();
     List<Event> s2sData = getData();
     return getGson().toJson(s2sData);
+  }
+
+  /**
+   * Invokes {@link Event#applyParamBuilderDefaults} on every event in {@link #data},
+   * letting the CAPI ParamBuilder fill in fbc / fbp on UserData just before the wire
+   * payload is built. Idempotent — safe to call multiple times and from multiple
+   * send paths.
+   */
+  private void applyParamBuilderDefaultsToAllEvents() {
+    if (data == null) {
+      return;
+    }
+    for (Event event : data) {
+      if (event != null) {
+        event.applyParamBuilderDefaults();
+      }
+    }
   }
 
   private AdsPixel.APIRequestCreateEvent getPixelCreateEvent() {

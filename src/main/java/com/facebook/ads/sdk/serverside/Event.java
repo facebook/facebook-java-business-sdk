@@ -612,10 +612,11 @@ public class Event {
   /**
    * Sets the request context and optional preference for automatic data extraction.
    *
-   * <p>Stores the context (e.g. an HTTP request) and a Preference allowlist. Later in the stack,
-   * the CAPI ParamBuilder will use the stored context to extract parameters like fbc, fbp,
-   * client_ip_address, and referrer_url from it, gated by the Preference. If no preference is
-   * provided, all fields default to true.
+   * <p>Stores the context (e.g. an HTTP request) and constructs a CAPI ParamBuilder; extraction
+   * of parameters (fbc, fbp, ...) into UserData is deferred until {@link EventRequest#execute}
+   * runs at send time, so call order with {@link #setUserData} does not matter. The preference
+   * object controls which data are allowed to be auto-set. If no preference is provided, all
+   * fields default to true.
    *
    * @param context    the request context (e.g. an HTTP request)
    * @param preference optional Preference object controlling auto-extraction; when null, defaults
@@ -633,6 +634,21 @@ public class Event {
     // compile time). Until the upstream artifact is republished and the version
     // pin in pom.xml is bumped, ParamBuilder remains uninitialized with context
     // and applyParamBuilderDefaults() is effectively a no-op.
+    return this;
+  }
+
+  /**
+   * Fills empty UserData fields from the ParamBuilder-extracted values, gated by Preference.
+   * No-op when {@link #setRequestContext} was never called. Idempotent: only fills fields that
+   * are currently empty, so the caller's explicit UserData values always take precedence
+   * regardless of call order.
+   *
+   * <p>Invoked by {@link EventRequest} just before serializing the wire payload.
+   */
+  /* package */ void applyParamBuilderDefaults() {
+    if (this.paramBuilder == null || this.preference == null) {
+      return;
+    }
 
     UserData ud = this.userData != null ? this.userData : new UserData();
 
@@ -651,8 +667,6 @@ public class Event {
     }
 
     this.userData = ud;
-
-    return this;
   }
 
   /**
