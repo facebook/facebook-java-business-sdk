@@ -33,41 +33,46 @@ public class PreferenceTest {
         assertTrue(p.isFbpAllowed());
         assertTrue(p.isClientIpAddressAllowed());
         assertTrue(p.isReferrerUrlAllowed());
+        assertTrue(p.isEventSourceUrlAllowed());
     }
 
     @Test
     public void testAllDisallowedDeniesEveryField() {
-        Preference p = new Preference(false, false, false, false);
+        Preference p = new Preference(false, false, false, false, false);
         assertFalse(p.isFbcAllowed());
         assertFalse(p.isFbpAllowed());
         assertFalse(p.isClientIpAddressAllowed());
         assertFalse(p.isReferrerUrlAllowed());
+        assertFalse(p.isEventSourceUrlAllowed());
     }
 
     @Test
     public void testPartialAllowlist() {
         // Only fbc and client_ip_address allowed.
-        Preference p = new Preference(true, false, true, false);
+        Preference p = new Preference(true, false, true, false, false);
         assertTrue(p.isFbcAllowed());
         assertFalse(p.isFbpAllowed());
         assertTrue(p.isClientIpAddressAllowed());
         assertFalse(p.isReferrerUrlAllowed());
+        assertFalse(p.isEventSourceUrlAllowed());
     }
 
     @Test
     public void testEachFlagIndependentlyControllable() {
         boolean[][] cases = {
-            {true,  false, false, false},
-            {false, true,  false, false},
-            {false, false, true,  false},
-            {false, false, false, true},
+            {true,  false, false, false, false},
+            {false, true,  false, false, false},
+            {false, false, true,  false, false},
+            {false, false, false, true,  false},
+            {false, false, false, false, true},
         };
         for (boolean[] c : cases) {
-            Preference p = new Preference(c[0], c[1], c[2], c[3]);
+            Preference p = new Preference(c[0], c[1], c[2], c[3], c[4]);
             assertEquals(c[0], p.isFbcAllowed());
             assertEquals(c[1], p.isFbpAllowed());
             assertEquals(c[2], p.isClientIpAddressAllowed());
             assertEquals(c[3], p.isReferrerUrlAllowed());
+            assertEquals(c[4], p.isEventSourceUrlAllowed());
         }
     }
 
@@ -77,21 +82,25 @@ public class PreferenceTest {
             .fbcAllowed(false)
             .fbpAllowed(true)
             .clientIpAddressAllowed(false)
-            .referrerUrlAllowed(true);
+            .referrerUrlAllowed(true)
+            .eventSourceUrlAllowed(false);
         assertFalse(p.isFbcAllowed());
         assertTrue(p.isFbpAllowed());
         assertFalse(p.isClientIpAddressAllowed());
         assertTrue(p.isReferrerUrlAllowed());
+        assertFalse(p.isEventSourceUrlAllowed());
 
         // Plain setters
         p.setFbcAllowed(true);
         p.setFbpAllowed(false);
         p.setClientIpAddressAllowed(true);
         p.setReferrerUrlAllowed(false);
+        p.setEventSourceUrlAllowed(true);
         assertTrue(p.isFbcAllowed());
         assertFalse(p.isFbpAllowed());
         assertTrue(p.isClientIpAddressAllowed());
         assertFalse(p.isReferrerUrlAllowed());
+        assertTrue(p.isEventSourceUrlAllowed());
     }
 
     @Test
@@ -99,8 +108,8 @@ public class PreferenceTest {
         assertEquals(new Preference(), new Preference());
         assertEquals(new Preference().hashCode(), new Preference().hashCode());
 
-        Preference a = new Preference(true, false, true, false);
-        Preference b = new Preference(true, false, true, false);
+        Preference a = new Preference(true, false, true, false, false);
+        Preference b = new Preference(true, false, true, false, false);
         assertEquals(a, b);
         assertEquals(a.hashCode(), b.hashCode());
     }
@@ -108,7 +117,7 @@ public class PreferenceTest {
     @Test
     public void testNotEqualWhenAnyFlagDiffers() {
         Preference a = new Preference();
-        Preference b = new Preference(false, true, true, true);
+        Preference b = new Preference(false, true, true, true, true);
         assertNotEquals(a, b);
     }
 }

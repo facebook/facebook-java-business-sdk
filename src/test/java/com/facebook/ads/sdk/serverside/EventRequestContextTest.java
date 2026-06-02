@@ -57,7 +57,7 @@ public class EventRequestContextTest {
     @Test
     public void testStoresContextAndPreference() {
         Object ctx = new Object();
-        Preference pref = new Preference(false, true, true, false);
+        Preference pref = new Preference(false, true, true, false, true);
 
         try (MockedConstruction<ParamBuilder> mocked = mockConstruction(ParamBuilder.class)) {
             Event event = new Event()
@@ -185,7 +185,7 @@ public class EventRequestContextTest {
                      when(pb.getFbc()).thenReturn("WITHFBC");
                      when(pb.getFbp()).thenReturn("WITHFBP");
                  })) {
-            Preference pref = new Preference(true, false, true, true);
+            Preference pref = new Preference(true, false, true, true, true);
             Event event = new Event()
                 .eventName("PageView")
                 .eventTime(1700000030L)
@@ -204,7 +204,7 @@ public class EventRequestContextTest {
                      when(pb.getFbc()).thenReturn("XX");
                      when(pb.getFbp()).thenReturn("YY");
                  })) {
-            Preference pref = new Preference(false, false, false, false);
+            Preference pref = new Preference(false, false, false, false, false);
             Event event = new Event()
                 .eventName("PageView")
                 .eventTime(1700000031L)

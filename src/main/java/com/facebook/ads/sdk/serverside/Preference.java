@@ -40,8 +40,11 @@ public class Preference {
   @SerializedName("is_referrer_url_allowed")
   private Boolean referrerUrlAllowed = true;
 
+  @SerializedName("is_event_source_url_allowed")
+  private Boolean eventSourceUrlAllowed = true;
+
   /**
-   * Default constructor — all four flags default to true (allow-all).
+   * Default constructor — all flags default to true (allow-all).
    */
   public Preference() {
   }
@@ -53,13 +56,16 @@ public class Preference {
    * @param fbpAllowed              whether fbp is allowed (default: true)
    * @param clientIpAddressAllowed  whether client_ip_address is allowed (default: true)
    * @param referrerUrlAllowed      whether referrer_url is allowed (default: true)
+   * @param eventSourceUrlAllowed   whether event_source_url is allowed (default: true)
    */
   public Preference(Boolean fbcAllowed, Boolean fbpAllowed,
-                    Boolean clientIpAddressAllowed, Boolean referrerUrlAllowed) {
+                    Boolean clientIpAddressAllowed, Boolean referrerUrlAllowed,
+                    Boolean eventSourceUrlAllowed) {
     this.fbcAllowed = fbcAllowed;
     this.fbpAllowed = fbpAllowed;
     this.clientIpAddressAllowed = clientIpAddressAllowed;
     this.referrerUrlAllowed = referrerUrlAllowed;
+    this.eventSourceUrlAllowed = eventSourceUrlAllowed;
   }
 
   // ---------- fbcAllowed ------------------------------------------------
@@ -186,6 +192,37 @@ public class Preference {
     this.referrerUrlAllowed = referrerUrlAllowed;
   }
 
+  // ---------- eventSourceUrlAllowed -------------------------------------
+
+  /**
+   * Set whether event_source_url is allowed.
+   *
+   * @param eventSourceUrlAllowed whether event_source_url is allowed.
+   * @return Preference (fluent)
+   */
+  public Preference eventSourceUrlAllowed(Boolean eventSourceUrlAllowed) {
+    this.eventSourceUrlAllowed = eventSourceUrlAllowed;
+    return this;
+  }
+
+  /**
+   * Get whether event_source_url is allowed.
+   *
+   * @return whether event_source_url is allowed.
+   */
+  public Boolean isEventSourceUrlAllowed() {
+    return eventSourceUrlAllowed;
+  }
+
+  /**
+   * Set whether event_source_url is allowed.
+   *
+   * @param eventSourceUrlAllowed whether event_source_url is allowed.
+   */
+  public void setEventSourceUrlAllowed(Boolean eventSourceUrlAllowed) {
+    this.eventSourceUrlAllowed = eventSourceUrlAllowed;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -198,12 +235,14 @@ public class Preference {
     return Objects.equals(this.fbcAllowed, preference.fbcAllowed)
         && Objects.equals(this.fbpAllowed, preference.fbpAllowed)
         && Objects.equals(this.clientIpAddressAllowed, preference.clientIpAddressAllowed)
-        && Objects.equals(this.referrerUrlAllowed, preference.referrerUrlAllowed);
+        && Objects.equals(this.referrerUrlAllowed, preference.referrerUrlAllowed)
+        && Objects.equals(this.eventSourceUrlAllowed, preference.eventSourceUrlAllowed);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(fbcAllowed, fbpAllowed, clientIpAddressAllowed, referrerUrlAllowed);
+    return Objects.hash(fbcAllowed, fbpAllowed, clientIpAddressAllowed, referrerUrlAllowed,
+        eventSourceUrlAllowed);
   }
 
   @Override
@@ -214,6 +253,7 @@ public class Preference {
     sb.append("    isFbpAllowed: ").append(toIndentedString(fbpAllowed)).append("\n");
     sb.append("    isClientIpAddressAllowed: ").append(toIndentedString(clientIpAddressAllowed)).append("\n");
     sb.append("    isReferrerUrlAllowed: ").append(toIndentedString(referrerUrlAllowed)).append("\n");
+    sb.append("    isEventSourceUrlAllowed: ").append(toIndentedString(eventSourceUrlAllowed)).append("\n");
     sb.append("}");
     return sb.toString();
   }
