@@ -177,7 +177,11 @@
     </dependency>
     <dependency>
       <groupId>org.mockito</groupId>
-      <artifactId>mockito-core</artifactId>
+      <!-- mockito-inline (vs. mockito-core) ships the InlineByteBuddyMockMaker,
+           which is required by EventRequestContextTest's MockedConstruction usage
+           to intercept `new ParamBuilder()` calls. Same version + same public API
+           surface as mockito-core; just defaults to the inline mock maker. -->
+      <artifactId>mockito-inline</artifactId>
       <version>3.5.11</version>
       <scope>test</scope>
     </dependency>
