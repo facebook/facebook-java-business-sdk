@@ -633,6 +633,25 @@ public class Event {
     // compile time). Until the upstream artifact is republished and the version
     // pin in pom.xml is bumped, ParamBuilder remains uninitialized with context
     // and applyParamBuilderDefaults() is effectively a no-op.
+
+    UserData ud = this.userData != null ? this.userData : new UserData();
+
+    String builderFbc = this.paramBuilder.getFbc();
+    if (Boolean.TRUE.equals(this.preference.isFbcAllowed())
+        && (ud.getFbc() == null || ud.getFbc().isEmpty())
+        && builderFbc != null && !builderFbc.isEmpty()) {
+      ud.setFbc(builderFbc);
+    }
+
+    String builderFbp = this.paramBuilder.getFbp();
+    if (Boolean.TRUE.equals(this.preference.isFbpAllowed())
+        && (ud.getFbp() == null || ud.getFbp().isEmpty())
+        && builderFbp != null && !builderFbp.isEmpty()) {
+      ud.setFbp(builderFbp);
+    }
+
+    this.userData = ud;
+
     return this;
   }
 
