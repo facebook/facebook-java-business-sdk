@@ -661,13 +661,7 @@ public class Event {
     this.requestContext = context;
     this.preference = preference != null ? preference : new Preference();
     this.paramBuilder = new ParamBuilder();
-    // NOTE: paramBuilder.processRequestFromContext(context) will be invoked
-    // here once the Maven Central release of com.facebook.capi.sdk:capi-param-builder
-    // includes that method. It exists in fbsource HEAD but is not yet published
-    // to Maven Central — calling it now breaks the build (NoSuchMethodError at
-    // compile time). Until the upstream artifact is republished and the version
-    // pin in pom.xml is bumped, ParamBuilder remains uninitialized with context
-    // and applyParamBuilderDefaults() is effectively a no-op.
+    this.paramBuilder.processRequestFromContext(context);
     return this;
   }
 

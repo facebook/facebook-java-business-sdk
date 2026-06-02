@@ -402,57 +402,52 @@ public class EventRequestContextTest {
     @Test
     public void testRealParamBuilderExposesMethodsTheSdkCalls() {
         // Guardrail against the SDK <-> upstream Maven artifact drifting apart.
-        // Only checks the methods that Event#applyParamBuilderDefaults currently
-        // calls today — getFbc + getFbp. processRequestFromContext is NOT
-        // checked yet because the Maven Central release lags fbsource HEAD for
-        // that method; Event#setRequestContext therefore does not invoke it yet
-        // (see the NOTE in Event#setRequestContext). Add the
-        // processRequestFromContext assertion in the follow-up diff that bumps
-        // the pom pin and re-introduces the call.
+        // Checks every ParamBuilder method the SDK calls against the pinned 1.3.0
+        // artifact: processRequestFromContext (Event#setRequestContext) and
+        // getFbc / getFbp / getEventSourceUrl / getReferrerUrl
+        // (Event#applyParamBuilderDefaults). If the upstream API shifts, bump the
+        // pinned Maven version in pom.xml.
         ParamBuilder pb = new ParamBuilder();
         try {
+            ParamBuilder.class.getMethod("processRequestFromContext", Object.class);
             ParamBuilder.class.getMethod("getFbc");
             ParamBuilder.class.getMethod("getFbp");
+            ParamBuilder.class.getMethod("getEventSourceUrl");
+            ParamBuilder.class.getMethod("getReferrerUrl");
         } catch (NoSuchMethodException e) {
-            fail("capi-param-builder must expose getFbc / getFbp; "
-                + "Event.applyParamBuilderDefaults calls them. Bump the pinned "
-                + "Maven version in pom.xml if the upstream API has shifted. Missing: "
+            fail("capi-param-builder must expose processRequestFromContext / getFbc / "
+                + "getFbp / getEventSourceUrl / getReferrerUrl; Event calls them. Bump the "
+                + "pinned Maven version in pom.xml if the upstream API has shifted. Missing: "
                 + e.getMessage());
         }
         assertNotNull(pb);
     }
 
     @Test
-    public void testSetRequestContextStoresParamBuilderWithoutContextProcessing() {
-        // Real ParamBuilder, no mocking. The SDK currently defers calling
-        // ParamBuilder.processRequestFromContext until the Maven Central release
-        // catches up with fbsource HEAD (see Event#setRequestContext). Until
-        // then, applyParamBuilderDefaults is effectively a no-op for fbc/fbp
-        // because the builder was never given any context to extract from —
-        // getFbc / getFbp return null.
+    public void testSetRequestContextPopulatesFbpFromCookieEndToEnd() {
+        // Real ParamBuilder, NO mocking. Event#setRequestContext now invokes
+        // paramBuilder.processRequestFromContext(context), so a real request
+        // context flows end-to-end: the _fbp cookie is extracted by the upstream
+        // 1.3.0 ParamBuilder and lands on UserData during applyParamBuilderDefaults.
         //
-        // When the upstream pin is bumped and the call is re-added in a
-        // follow-up diff, this test should be replaced with the end-to-end
-        // populate-from-cookie assertion that's currently captured in the
-        // RealParamBuilderSmoke companion script (see test plan for D105523324).
-        Map<String, Object> headers = new HashMap<>();
-        headers.put("host", "shop.example.com");
-        headers.put("cookie", "_fbp=fb.1.1700000000000.987654321");
-        Map<String, Object> request = new HashMap<>();
-        request.put("headers", headers);
-        request.put("url", "/");
+        // The Java RequestContextAdaptor's Map strategy reads flat CGI/environ-style
+        // keys (HTTP_HOST, HTTP_COOKIE, ...), NOT a nested "headers" map.
+        Map<String, Object> context = new HashMap<>();
+        context.put("HTTP_HOST", "shop.example.com");
+        context.put("HTTP_COOKIE", "_fbp=fb.1.1700000000000.987654321");
 
         Event event = new Event()
             .eventName("PageView")
             .eventTime(1700000000L)
-            .setRequestContext(request);
+            .setRequestContext(context);
 
         event.applyParamBuilderDefaults();
-        // No fbc/fbp expected — the SDK isn't yet calling processRequestFromContext.
         UserData ud = event.getUserData();
-        if (ud != null) {
-            assertNull("fbc must not be populated until the SDK calls processRequestFromContext", ud.getFbc());
-            assertNull("fbp must not be populated until the SDK calls processRequestFromContext", ud.getFbp());
-        }
+        assertNotNull(ud);
+        // ParamBuilder appends an appendix token to a 4-segment fbp, so assert on
+        // the prefix rather than exact equality.
+        assertNotNull("fbp should be auto-populated from the _fbp cookie", ud.getFbp());
+        assertTrue("fbp should start with the cookie value",
+            ud.getFbp().startsWith("fb.1.1700000000000.987654321"));
     }
 }
