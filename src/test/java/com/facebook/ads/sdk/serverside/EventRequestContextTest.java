@@ -450,4 +450,51 @@ public class EventRequestContextTest {
         assertTrue("fbp should start with the cookie value",
             ud.getFbp().startsWith("fb.1.1700000000000.987654321"));
     }
+
+    // Flat environ-style Map — the shape RequestContextAdaptor reads for raw Maps.
+    // The upstream 1.3.0 ParamBuilder appends an appendix token to every value, so
+    // assert on the prefix rather than exact equality.
+    private static Map<String, Object> realCtx() {
+        Map<String, Object> c = new HashMap<>();
+        c.put("HTTP_HOST", "shop.example.com");
+        c.put("HTTP_COOKIE",
+            "_fbc=fb.1.1700000000000.AbCdEf12345; _fbp=fb.1.1700000000000.987654321");
+        c.put("HTTP_REFERER", "https://google.com/search?q=foo");
+        c.put("REQUEST_URI", "/cart");
+        c.put("HTTPS", "on");
+        return c;
+    }
+
+    @Test
+    public void testRealBuilderAutoPopulatesFbcFromCookie() {
+        Event event = new Event().eventName("PageView").eventTime(1700000010L)
+            .setRequestContext(realCtx());
+        event.applyParamBuilderDefaults();
+        String fbc = event.getUserData().getFbc();
+        assertNotNull("fbc should be auto-populated from the _fbc cookie", fbc);
+        assertTrue("fbc not extracted from cookie: " + fbc,
+            fbc.startsWith("fb.1.1700000000000.AbCdEf12345"));
+    }
+
+    @Test
+    public void testRealBuilderAutoPopulatesEventSourceUrl() {
+        Event event = new Event().eventName("PageView").eventTime(1700000060L)
+            .setRequestContext(realCtx());
+        event.applyParamBuilderDefaults();
+        String esu = event.getEventSourceUrl();
+        assertNotNull("event_source_url should be built from host + uri", esu);
+        assertTrue("event_source_url unexpected: " + esu,
+            esu.startsWith("https://shop.example.com/cart"));
+    }
+
+    @Test
+    public void testRealBuilderAutoPopulatesReferrerUrl() {
+        Event event = new Event().eventName("PageView").eventTime(1700000070L)
+            .setRequestContext(realCtx());
+        event.applyParamBuilderDefaults();
+        String ref = event.getReferrerUrl();
+        assertNotNull("referrer_url should be extracted from the Referer header", ref);
+        assertTrue("referrer_url unexpected: " + ref,
+            ref.startsWith("https://google.com/search?q=foo"));
+    }
 }
