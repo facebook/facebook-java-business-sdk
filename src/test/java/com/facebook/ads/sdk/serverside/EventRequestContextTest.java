@@ -84,6 +84,7 @@ public class EventRequestContextTest {
             assertTrue(pref.isFbpAllowed());
             assertTrue(pref.isClientIpAddressAllowed());
             assertTrue(pref.isReferrerUrlAllowed());
+            assertTrue(pref.isEventSourceUrlAllowed());
         }
     }
 
@@ -203,6 +204,7 @@ public class EventRequestContextTest {
                  mockConstruction(ParamBuilder.class, (pb, ctx) -> {
                      when(pb.getFbc()).thenReturn("XX");
                      when(pb.getFbp()).thenReturn("YY");
+                     when(pb.getEventSourceUrl()).thenReturn("https://shop.example.com/cart");
                  })) {
             Preference pref = new Preference(false, false, false, false, false);
             Event event = new Event()
@@ -217,6 +219,63 @@ public class EventRequestContextTest {
                 assertNull(ud.getFbc());
                 assertNull(ud.getFbp());
             }
+            assertNull(event.getEventSourceUrl());
+        }
+    }
+
+    // ----------------------------------------------------------------
+    // event_source_url auto-population (mocked ParamBuilder)
+    // ----------------------------------------------------------------
+
+    @Test
+    public void testAutoPopulatesEventSourceUrl() {
+        try (MockedConstruction<ParamBuilder> mocked =
+                 mockConstruction(ParamBuilder.class, (pb, ctx) -> {
+                     when(pb.getEventSourceUrl()).thenReturn("https://shop.example.com/cart");
+                 })) {
+            Event event = new Event()
+                .eventName("PageView")
+                .eventTime(1700000060L)
+                .setRequestContext(new Object());
+
+            event.applyParamBuilderDefaults();
+            assertEquals("https://shop.example.com/cart", event.getEventSourceUrl());
+        }
+    }
+
+    @Test
+    public void testCallerSuppliedEventSourceUrlTakesPrecedence() {
+        try (MockedConstruction<ParamBuilder> mocked =
+                 mockConstruction(ParamBuilder.class, (pb, ctx) -> {
+                     when(pb.getEventSourceUrl()).thenReturn("https://from-builder/");
+                 })) {
+            Event event = new Event()
+                .eventName("Lead")
+                .eventTime(1700000061L)
+                .eventSourceUrl("https://from-caller/")
+                .setRequestContext(new Object());
+
+            event.applyParamBuilderDefaults();
+            assertEquals("https://from-caller/", event.getEventSourceUrl());
+        }
+    }
+
+    @Test
+    public void testPreferenceGatesEventSourceUrl() {
+        try (MockedConstruction<ParamBuilder> mocked =
+                 mockConstruction(ParamBuilder.class, (pb, ctx) -> {
+                     when(pb.getFbc()).thenReturn("WITHFBC");
+                     when(pb.getEventSourceUrl()).thenReturn("https://from-builder/");
+                 })) {
+            Preference pref = new Preference(true, true, true, true, false);
+            Event event = new Event()
+                .eventName("PageView")
+                .eventTime(1700000062L)
+                .setRequestContext(new Object(), pref);
+
+            event.applyParamBuilderDefaults();
+            assertEquals("WITHFBC", event.getUserData().getFbc());
+            assertNull(event.getEventSourceUrl());
         }
     }
 

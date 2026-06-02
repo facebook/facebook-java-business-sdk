@@ -638,9 +638,9 @@ public class Event {
   }
 
   /**
-   * Fills empty UserData fields from the ParamBuilder-extracted values, gated by Preference.
-   * No-op when {@link #setRequestContext} was never called. Idempotent: only fills fields that
-   * are currently empty, so the caller's explicit UserData values always take precedence
+   * Fills empty UserData and Event fields from the ParamBuilder-extracted values, gated by
+   * Preference. No-op when {@link #setRequestContext} was never called. Idempotent: only fills
+   * fields that are currently empty, so the caller's explicit values always take precedence
    * regardless of call order.
    *
    * <p>Invoked by {@link EventRequest} just before serializing the wire payload.
@@ -667,6 +667,13 @@ public class Event {
     }
 
     this.userData = ud;
+
+    String builderEventSourceUrl = this.paramBuilder.getEventSourceUrl();
+    if (Boolean.TRUE.equals(this.preference.isEventSourceUrlAllowed())
+        && (this.eventSourceUrl == null || this.eventSourceUrl.isEmpty())
+        && builderEventSourceUrl != null && !builderEventSourceUrl.isEmpty()) {
+      this.eventSourceUrl = builderEventSourceUrl;
+    }
   }
 
   /**
