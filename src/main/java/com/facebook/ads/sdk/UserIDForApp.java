@@ -45,6 +45,8 @@ public class UserIDForApp extends APINode {
   private Application mApp = null;
   @SerializedName("id")
   private String mId = null;
+  @SerializedName("instant_game_player_id")
+  private String mInstantGamePlayerId = null;
   protected static Gson gson = null;
 
   public UserIDForApp() {
@@ -222,6 +224,15 @@ public class UserIDForApp extends APINode {
     return this;
   }
 
+  public String getFieldInstantGamePlayerId() {
+    return mInstantGamePlayerId;
+  }
+
+  public UserIDForApp setFieldInstantGamePlayerId(String value) {
+    this.mInstantGamePlayerId = value;
+    return this;
+  }
+
 
 
 
@@ -241,6 +252,7 @@ public class UserIDForApp extends APINode {
   public UserIDForApp copyFrom(UserIDForApp instance) {
     this.mApp = instance.mApp;
     this.mId = instance.mId;
+    this.mInstantGamePlayerId = instance.mInstantGamePlayerId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

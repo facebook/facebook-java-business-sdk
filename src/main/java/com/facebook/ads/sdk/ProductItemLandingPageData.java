@@ -212,6 +212,8 @@ public class ProductItemLandingPageData extends APINode {
       VALUE_DISCONTINUED("discontinued"),
       @SerializedName("in stock")
       VALUE_IN_STOCK("in stock"),
+      @SerializedName("mark_as_expired")
+      VALUE_MARK_AS_EXPIRED("mark_as_expired"),
       @SerializedName("mark_as_sold")
       VALUE_MARK_AS_SOLD("mark_as_sold"),
       @SerializedName("out of stock")

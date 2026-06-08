@@ -59,6 +59,8 @@ public class AdCreativeSiteLinksSpec extends APINode {
   private String mSiteLinkImageUrl = null;
   @SerializedName("site_link_language")
   private String mSiteLinkLanguage = null;
+  @SerializedName("site_link_original_url")
+  private String mSiteLinkOriginalUrl = null;
   @SerializedName("site_link_recommendation_type")
   private String mSiteLinkRecommendationType = null;
   @SerializedName("site_link_title")
@@ -303,6 +305,15 @@ public class AdCreativeSiteLinksSpec extends APINode {
     return this;
   }
 
+  public String getFieldSiteLinkOriginalUrl() {
+    return mSiteLinkOriginalUrl;
+  }
+
+  public AdCreativeSiteLinksSpec setFieldSiteLinkOriginalUrl(String value) {
+    this.mSiteLinkOriginalUrl = value;
+    return this;
+  }
+
   public String getFieldSiteLinkRecommendationType() {
     return mSiteLinkRecommendationType;
   }
@@ -383,6 +394,7 @@ public class AdCreativeSiteLinksSpec extends APINode {
     this.mSiteLinkImageHash = instance.mSiteLinkImageHash;
     this.mSiteLinkImageUrl = instance.mSiteLinkImageUrl;
     this.mSiteLinkLanguage = instance.mSiteLinkLanguage;
+    this.mSiteLinkOriginalUrl = instance.mSiteLinkOriginalUrl;
     this.mSiteLinkRecommendationType = instance.mSiteLinkRecommendationType;
     this.mSiteLinkTitle = instance.mSiteLinkTitle;
     this.mSiteLinkUrl = instance.mSiteLinkUrl;

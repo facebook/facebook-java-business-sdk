@@ -40,27 +40,23 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class ProductFeedArticlesAndPublicationsGet extends APINode {
-  @SerializedName("data")
-  private List<Object> mData = null;
-  @SerializedName("paging")
-  private Object mPaging = null;
-  @SerializedName("summary")
-  private Object mSummary = null;
+public class PartnershipAdContentListSpec extends APINode {
+  @SerializedName("list_id")
+  private String mListId = null;
   protected static Gson gson = null;
 
-  public ProductFeedArticlesAndPublicationsGet() {
+  public PartnershipAdContentListSpec() {
   }
 
   public String getId() {
     return null;
   }
-  public static ProductFeedArticlesAndPublicationsGet loadJSON(String json, APIContext context, String header) {
-    ProductFeedArticlesAndPublicationsGet productFeedArticlesAndPublicationsGet = getGson().fromJson(json, ProductFeedArticlesAndPublicationsGet.class);
+  public static PartnershipAdContentListSpec loadJSON(String json, APIContext context, String header) {
+    PartnershipAdContentListSpec partnershipAdContentListSpec = getGson().fromJson(json, PartnershipAdContentListSpec.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(productFeedArticlesAndPublicationsGet.toString());
+      JsonElement o2 = parser.parse(partnershipAdContentListSpec.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -70,14 +66,14 @@ public class ProductFeedArticlesAndPublicationsGet extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    productFeedArticlesAndPublicationsGet.context = context;
-    productFeedArticlesAndPublicationsGet.rawValue = json;
-    productFeedArticlesAndPublicationsGet.header = header;
-    return productFeedArticlesAndPublicationsGet;
+    partnershipAdContentListSpec.context = context;
+    partnershipAdContentListSpec.rawValue = json;
+    partnershipAdContentListSpec.header = header;
+    return partnershipAdContentListSpec;
   }
 
-  public static APINodeList<ProductFeedArticlesAndPublicationsGet> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<ProductFeedArticlesAndPublicationsGet> productFeedArticlesAndPublicationsGets = new APINodeList<ProductFeedArticlesAndPublicationsGet>(request, json, header);
+  public static APINodeList<PartnershipAdContentListSpec> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<PartnershipAdContentListSpec> partnershipAdContentListSpecs = new APINodeList<PartnershipAdContentListSpec>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -88,9 +84,9 @@ public class ProductFeedArticlesAndPublicationsGet extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          productFeedArticlesAndPublicationsGets.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          partnershipAdContentListSpecs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return productFeedArticlesAndPublicationsGets;
+        return partnershipAdContentListSpecs;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -100,20 +96,20 @@ public class ProductFeedArticlesAndPublicationsGet extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                productFeedArticlesAndPublicationsGets.setCursors(before, after);
+                partnershipAdContentListSpecs.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            productFeedArticlesAndPublicationsGets.setPaging(previous, next);
+            partnershipAdContentListSpecs.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              productFeedArticlesAndPublicationsGets.setAppSecret(context.getAppSecretProof());
+              partnershipAdContentListSpecs.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              productFeedArticlesAndPublicationsGets.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              partnershipAdContentListSpecs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -124,23 +120,23 @@ public class ProductFeedArticlesAndPublicationsGet extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  productFeedArticlesAndPublicationsGets.add(loadJSON(entry.getValue().toString(), context, header));
+                  partnershipAdContentListSpecs.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              productFeedArticlesAndPublicationsGets.add(loadJSON(obj.toString(), context, header));
+              partnershipAdContentListSpecs.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return productFeedArticlesAndPublicationsGets;
+          return partnershipAdContentListSpecs;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              productFeedArticlesAndPublicationsGets.add(loadJSON(entry.getValue().toString(), context, header));
+              partnershipAdContentListSpecs.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return productFeedArticlesAndPublicationsGets;
+          return partnershipAdContentListSpecs;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -157,20 +153,20 @@ public class ProductFeedArticlesAndPublicationsGet extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              productFeedArticlesAndPublicationsGets.add(loadJSON(value.toString(), context, header));
+              partnershipAdContentListSpecs.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return productFeedArticlesAndPublicationsGets;
+            return partnershipAdContentListSpecs;
           }
 
           // Sixth, check if it's pure JsonObject
-          productFeedArticlesAndPublicationsGets.clear();
-          productFeedArticlesAndPublicationsGets.add(loadJSON(json, context, header));
-          return productFeedArticlesAndPublicationsGets;
+          partnershipAdContentListSpecs.clear();
+          partnershipAdContentListSpecs.add(loadJSON(json, context, header));
+          return partnershipAdContentListSpecs;
         }
       }
     } catch (Exception e) {
@@ -198,30 +194,12 @@ public class ProductFeedArticlesAndPublicationsGet extends APINode {
   }
 
 
-  public List<Object> getFieldData() {
-    return mData;
+  public String getFieldListId() {
+    return mListId;
   }
 
-  public ProductFeedArticlesAndPublicationsGet setFieldData(List<Object> value) {
-    this.mData = value;
-    return this;
-  }
-
-  public Object getFieldPaging() {
-    return mPaging;
-  }
-
-  public ProductFeedArticlesAndPublicationsGet setFieldPaging(Object value) {
-    this.mPaging = value;
-    return this;
-  }
-
-  public Object getFieldSummary() {
-    return mSummary;
-  }
-
-  public ProductFeedArticlesAndPublicationsGet setFieldSummary(Object value) {
-    this.mSummary = value;
+  public PartnershipAdContentListSpec setFieldListId(String value) {
+    this.mListId = value;
     return this;
   }
 
@@ -241,19 +219,17 @@ public class ProductFeedArticlesAndPublicationsGet extends APINode {
     return gson;
   }
 
-  public ProductFeedArticlesAndPublicationsGet copyFrom(ProductFeedArticlesAndPublicationsGet instance) {
-    this.mData = instance.mData;
-    this.mPaging = instance.mPaging;
-    this.mSummary = instance.mSummary;
+  public PartnershipAdContentListSpec copyFrom(PartnershipAdContentListSpec instance) {
+    this.mListId = instance.mListId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<ProductFeedArticlesAndPublicationsGet> getParser() {
-    return new APIRequest.ResponseParser<ProductFeedArticlesAndPublicationsGet>() {
-      public APINodeList<ProductFeedArticlesAndPublicationsGet> parseResponse(String response, APIContext context, APIRequest<ProductFeedArticlesAndPublicationsGet> request, String header) throws MalformedResponseException {
-        return ProductFeedArticlesAndPublicationsGet.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<PartnershipAdContentListSpec> getParser() {
+    return new APIRequest.ResponseParser<PartnershipAdContentListSpec>() {
+      public APINodeList<PartnershipAdContentListSpec> parseResponse(String response, APIContext context, APIRequest<PartnershipAdContentListSpec> request, String header) throws MalformedResponseException {
+        return PartnershipAdContentListSpec.parseResponse(response, context, request, header);
       }
     };
   }

@@ -40,23 +40,37 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class ProductCatalogAppsAndSoftwareItemDelete extends APINode {
-  @SerializedName("success")
-  private Boolean mSuccess = null;
+public class HighDemandPeriodGet extends APINode {
+  @SerializedName("ad_object_id")
+  private String mAdObjectId = null;
+  @SerializedName("budget_value")
+  private Long mBudgetValue = null;
+  @SerializedName("budget_value_type")
+  private String mBudgetValueType = null;
+  @SerializedName("id")
+  private String mId = null;
+  @SerializedName("recurrence_type")
+  private String mRecurrenceType = null;
+  @SerializedName("time_end")
+  private String mTimeEnd = null;
+  @SerializedName("time_start")
+  private String mTimeStart = null;
+  @SerializedName("weekly_schedule")
+  private List<Object> mWeeklySchedule = null;
   protected static Gson gson = null;
 
-  public ProductCatalogAppsAndSoftwareItemDelete() {
+  public HighDemandPeriodGet() {
   }
 
   public String getId() {
-    return null;
+    return getFieldId().toString();
   }
-  public static ProductCatalogAppsAndSoftwareItemDelete loadJSON(String json, APIContext context, String header) {
-    ProductCatalogAppsAndSoftwareItemDelete productCatalogAppsAndSoftwareItemDelete = getGson().fromJson(json, ProductCatalogAppsAndSoftwareItemDelete.class);
+  public static HighDemandPeriodGet loadJSON(String json, APIContext context, String header) {
+    HighDemandPeriodGet highDemandPeriodGet = getGson().fromJson(json, HighDemandPeriodGet.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(productCatalogAppsAndSoftwareItemDelete.toString());
+      JsonElement o2 = parser.parse(highDemandPeriodGet.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -66,14 +80,14 @@ public class ProductCatalogAppsAndSoftwareItemDelete extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    productCatalogAppsAndSoftwareItemDelete.context = context;
-    productCatalogAppsAndSoftwareItemDelete.rawValue = json;
-    productCatalogAppsAndSoftwareItemDelete.header = header;
-    return productCatalogAppsAndSoftwareItemDelete;
+    highDemandPeriodGet.context = context;
+    highDemandPeriodGet.rawValue = json;
+    highDemandPeriodGet.header = header;
+    return highDemandPeriodGet;
   }
 
-  public static APINodeList<ProductCatalogAppsAndSoftwareItemDelete> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<ProductCatalogAppsAndSoftwareItemDelete> productCatalogAppsAndSoftwareItemDeletes = new APINodeList<ProductCatalogAppsAndSoftwareItemDelete>(request, json, header);
+  public static APINodeList<HighDemandPeriodGet> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<HighDemandPeriodGet> highDemandPeriodGets = new APINodeList<HighDemandPeriodGet>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -84,9 +98,9 @@ public class ProductCatalogAppsAndSoftwareItemDelete extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          productCatalogAppsAndSoftwareItemDeletes.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          highDemandPeriodGets.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return productCatalogAppsAndSoftwareItemDeletes;
+        return highDemandPeriodGets;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -96,20 +110,20 @@ public class ProductCatalogAppsAndSoftwareItemDelete extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                productCatalogAppsAndSoftwareItemDeletes.setCursors(before, after);
+                highDemandPeriodGets.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            productCatalogAppsAndSoftwareItemDeletes.setPaging(previous, next);
+            highDemandPeriodGets.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              productCatalogAppsAndSoftwareItemDeletes.setAppSecret(context.getAppSecretProof());
+              highDemandPeriodGets.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              productCatalogAppsAndSoftwareItemDeletes.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              highDemandPeriodGets.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -120,23 +134,23 @@ public class ProductCatalogAppsAndSoftwareItemDelete extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  productCatalogAppsAndSoftwareItemDeletes.add(loadJSON(entry.getValue().toString(), context, header));
+                  highDemandPeriodGets.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              productCatalogAppsAndSoftwareItemDeletes.add(loadJSON(obj.toString(), context, header));
+              highDemandPeriodGets.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return productCatalogAppsAndSoftwareItemDeletes;
+          return highDemandPeriodGets;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              productCatalogAppsAndSoftwareItemDeletes.add(loadJSON(entry.getValue().toString(), context, header));
+              highDemandPeriodGets.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return productCatalogAppsAndSoftwareItemDeletes;
+          return highDemandPeriodGets;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -153,20 +167,20 @@ public class ProductCatalogAppsAndSoftwareItemDelete extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              productCatalogAppsAndSoftwareItemDeletes.add(loadJSON(value.toString(), context, header));
+              highDemandPeriodGets.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return productCatalogAppsAndSoftwareItemDeletes;
+            return highDemandPeriodGets;
           }
 
           // Sixth, check if it's pure JsonObject
-          productCatalogAppsAndSoftwareItemDeletes.clear();
-          productCatalogAppsAndSoftwareItemDeletes.add(loadJSON(json, context, header));
-          return productCatalogAppsAndSoftwareItemDeletes;
+          highDemandPeriodGets.clear();
+          highDemandPeriodGets.add(loadJSON(json, context, header));
+          return highDemandPeriodGets;
         }
       }
     } catch (Exception e) {
@@ -194,12 +208,75 @@ public class ProductCatalogAppsAndSoftwareItemDelete extends APINode {
   }
 
 
-  public Boolean getFieldSuccess() {
-    return mSuccess;
+  public String getFieldAdObjectId() {
+    return mAdObjectId;
   }
 
-  public ProductCatalogAppsAndSoftwareItemDelete setFieldSuccess(Boolean value) {
-    this.mSuccess = value;
+  public HighDemandPeriodGet setFieldAdObjectId(String value) {
+    this.mAdObjectId = value;
+    return this;
+  }
+
+  public Long getFieldBudgetValue() {
+    return mBudgetValue;
+  }
+
+  public HighDemandPeriodGet setFieldBudgetValue(Long value) {
+    this.mBudgetValue = value;
+    return this;
+  }
+
+  public String getFieldBudgetValueType() {
+    return mBudgetValueType;
+  }
+
+  public HighDemandPeriodGet setFieldBudgetValueType(String value) {
+    this.mBudgetValueType = value;
+    return this;
+  }
+
+  public String getFieldId() {
+    return mId;
+  }
+
+  public HighDemandPeriodGet setFieldId(String value) {
+    this.mId = value;
+    return this;
+  }
+
+  public String getFieldRecurrenceType() {
+    return mRecurrenceType;
+  }
+
+  public HighDemandPeriodGet setFieldRecurrenceType(String value) {
+    this.mRecurrenceType = value;
+    return this;
+  }
+
+  public String getFieldTimeEnd() {
+    return mTimeEnd;
+  }
+
+  public HighDemandPeriodGet setFieldTimeEnd(String value) {
+    this.mTimeEnd = value;
+    return this;
+  }
+
+  public String getFieldTimeStart() {
+    return mTimeStart;
+  }
+
+  public HighDemandPeriodGet setFieldTimeStart(String value) {
+    this.mTimeStart = value;
+    return this;
+  }
+
+  public List<Object> getFieldWeeklySchedule() {
+    return mWeeklySchedule;
+  }
+
+  public HighDemandPeriodGet setFieldWeeklySchedule(List<Object> value) {
+    this.mWeeklySchedule = value;
     return this;
   }
 
@@ -219,17 +296,24 @@ public class ProductCatalogAppsAndSoftwareItemDelete extends APINode {
     return gson;
   }
 
-  public ProductCatalogAppsAndSoftwareItemDelete copyFrom(ProductCatalogAppsAndSoftwareItemDelete instance) {
-    this.mSuccess = instance.mSuccess;
+  public HighDemandPeriodGet copyFrom(HighDemandPeriodGet instance) {
+    this.mAdObjectId = instance.mAdObjectId;
+    this.mBudgetValue = instance.mBudgetValue;
+    this.mBudgetValueType = instance.mBudgetValueType;
+    this.mId = instance.mId;
+    this.mRecurrenceType = instance.mRecurrenceType;
+    this.mTimeEnd = instance.mTimeEnd;
+    this.mTimeStart = instance.mTimeStart;
+    this.mWeeklySchedule = instance.mWeeklySchedule;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<ProductCatalogAppsAndSoftwareItemDelete> getParser() {
-    return new APIRequest.ResponseParser<ProductCatalogAppsAndSoftwareItemDelete>() {
-      public APINodeList<ProductCatalogAppsAndSoftwareItemDelete> parseResponse(String response, APIContext context, APIRequest<ProductCatalogAppsAndSoftwareItemDelete> request, String header) throws MalformedResponseException {
-        return ProductCatalogAppsAndSoftwareItemDelete.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<HighDemandPeriodGet> getParser() {
+    return new APIRequest.ResponseParser<HighDemandPeriodGet>() {
+      public APINodeList<HighDemandPeriodGet> parseResponse(String response, APIContext context, APIRequest<HighDemandPeriodGet> request, String header) throws MalformedResponseException {
+        return HighDemandPeriodGet.parseResponse(response, context, request, header);
       }
     };
   }

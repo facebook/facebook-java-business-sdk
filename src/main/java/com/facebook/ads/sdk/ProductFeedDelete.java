@@ -40,27 +40,23 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class ProductSetMediaTitlesGet extends APINode {
-  @SerializedName("data")
-  private List<Object> mData = null;
-  @SerializedName("paging")
-  private Object mPaging = null;
-  @SerializedName("summary")
-  private Object mSummary = null;
+public class ProductFeedDelete extends APINode {
+  @SerializedName("success")
+  private Boolean mSuccess = null;
   protected static Gson gson = null;
 
-  public ProductSetMediaTitlesGet() {
+  public ProductFeedDelete() {
   }
 
   public String getId() {
     return null;
   }
-  public static ProductSetMediaTitlesGet loadJSON(String json, APIContext context, String header) {
-    ProductSetMediaTitlesGet productSetMediaTitlesGet = getGson().fromJson(json, ProductSetMediaTitlesGet.class);
+  public static ProductFeedDelete loadJSON(String json, APIContext context, String header) {
+    ProductFeedDelete productFeedDelete = getGson().fromJson(json, ProductFeedDelete.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(productSetMediaTitlesGet.toString());
+      JsonElement o2 = parser.parse(productFeedDelete.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -70,14 +66,14 @@ public class ProductSetMediaTitlesGet extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    productSetMediaTitlesGet.context = context;
-    productSetMediaTitlesGet.rawValue = json;
-    productSetMediaTitlesGet.header = header;
-    return productSetMediaTitlesGet;
+    productFeedDelete.context = context;
+    productFeedDelete.rawValue = json;
+    productFeedDelete.header = header;
+    return productFeedDelete;
   }
 
-  public static APINodeList<ProductSetMediaTitlesGet> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<ProductSetMediaTitlesGet> productSetMediaTitlesGets = new APINodeList<ProductSetMediaTitlesGet>(request, json, header);
+  public static APINodeList<ProductFeedDelete> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<ProductFeedDelete> productFeedDeletes = new APINodeList<ProductFeedDelete>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -88,9 +84,9 @@ public class ProductSetMediaTitlesGet extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          productSetMediaTitlesGets.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          productFeedDeletes.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return productSetMediaTitlesGets;
+        return productFeedDeletes;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -100,20 +96,20 @@ public class ProductSetMediaTitlesGet extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                productSetMediaTitlesGets.setCursors(before, after);
+                productFeedDeletes.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            productSetMediaTitlesGets.setPaging(previous, next);
+            productFeedDeletes.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              productSetMediaTitlesGets.setAppSecret(context.getAppSecretProof());
+              productFeedDeletes.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              productSetMediaTitlesGets.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              productFeedDeletes.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -124,23 +120,23 @@ public class ProductSetMediaTitlesGet extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  productSetMediaTitlesGets.add(loadJSON(entry.getValue().toString(), context, header));
+                  productFeedDeletes.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              productSetMediaTitlesGets.add(loadJSON(obj.toString(), context, header));
+              productFeedDeletes.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return productSetMediaTitlesGets;
+          return productFeedDeletes;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              productSetMediaTitlesGets.add(loadJSON(entry.getValue().toString(), context, header));
+              productFeedDeletes.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return productSetMediaTitlesGets;
+          return productFeedDeletes;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -157,20 +153,20 @@ public class ProductSetMediaTitlesGet extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              productSetMediaTitlesGets.add(loadJSON(value.toString(), context, header));
+              productFeedDeletes.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return productSetMediaTitlesGets;
+            return productFeedDeletes;
           }
 
           // Sixth, check if it's pure JsonObject
-          productSetMediaTitlesGets.clear();
-          productSetMediaTitlesGets.add(loadJSON(json, context, header));
-          return productSetMediaTitlesGets;
+          productFeedDeletes.clear();
+          productFeedDeletes.add(loadJSON(json, context, header));
+          return productFeedDeletes;
         }
       }
     } catch (Exception e) {
@@ -198,55 +194,16 @@ public class ProductSetMediaTitlesGet extends APINode {
   }
 
 
-  public List<Object> getFieldData() {
-    return mData;
+  public Boolean getFieldSuccess() {
+    return mSuccess;
   }
 
-  public ProductSetMediaTitlesGet setFieldData(List<Object> value) {
-    this.mData = value;
-    return this;
-  }
-
-  public Object getFieldPaging() {
-    return mPaging;
-  }
-
-  public ProductSetMediaTitlesGet setFieldPaging(Object value) {
-    this.mPaging = value;
-    return this;
-  }
-
-  public Object getFieldSummary() {
-    return mSummary;
-  }
-
-  public ProductSetMediaTitlesGet setFieldSummary(Object value) {
-    this.mSummary = value;
+  public ProductFeedDelete setFieldSuccess(Boolean value) {
+    this.mSuccess = value;
     return this;
   }
 
 
-
-  public static enum EnumDisplayFormat {
-      @SerializedName("CAROUSEL_AD")
-      VALUE_CAROUSEL_AD("CAROUSEL_AD"),
-      @SerializedName("SHOPS_PDP")
-      VALUE_SHOPS_PDP("SHOPS_PDP"),
-      @SerializedName("SINGLE_AD")
-      VALUE_SINGLE_AD("SINGLE_AD"),
-      ;
-
-      private String value;
-
-      private EnumDisplayFormat(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
 
 
   synchronized /*package*/ static Gson getGson() {
@@ -262,19 +219,17 @@ public class ProductSetMediaTitlesGet extends APINode {
     return gson;
   }
 
-  public ProductSetMediaTitlesGet copyFrom(ProductSetMediaTitlesGet instance) {
-    this.mData = instance.mData;
-    this.mPaging = instance.mPaging;
-    this.mSummary = instance.mSummary;
+  public ProductFeedDelete copyFrom(ProductFeedDelete instance) {
+    this.mSuccess = instance.mSuccess;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<ProductSetMediaTitlesGet> getParser() {
-    return new APIRequest.ResponseParser<ProductSetMediaTitlesGet>() {
-      public APINodeList<ProductSetMediaTitlesGet> parseResponse(String response, APIContext context, APIRequest<ProductSetMediaTitlesGet> request, String header) throws MalformedResponseException {
-        return ProductSetMediaTitlesGet.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<ProductFeedDelete> getParser() {
+    return new APIRequest.ResponseParser<ProductFeedDelete>() {
+      public APINodeList<ProductFeedDelete> parseResponse(String response, APIContext context, APIRequest<ProductFeedDelete> request, String header) throws MalformedResponseException {
+        return ProductFeedDelete.parseResponse(response, context, request, header);
       }
     };
   }

@@ -969,6 +969,7 @@ public class BusinessAssetGroup extends APINode {
       "offsite_clo_signal_status",
       "offsite_pixels_tos_accepted",
       "opportunity_score",
+      "opportunity_score_weight",
       "owner",
       "owner_business",
       "partner",
@@ -1470,6 +1471,13 @@ public class BusinessAssetGroup extends APINode {
     }
     public APIRequestGetContainedAdAccounts requestOpportunityScoreField (boolean value) {
       this.requestField("opportunity_score", value);
+      return this;
+    }
+    public APIRequestGetContainedAdAccounts requestOpportunityScoreWeightField () {
+      return this.requestOpportunityScoreWeightField(true);
+    }
+    public APIRequestGetContainedAdAccounts requestOpportunityScoreWeightField (boolean value) {
+      this.requestField("opportunity_score_weight", value);
       return this;
     }
     public APIRequestGetContainedAdAccounts requestOwnerField () {
@@ -3504,6 +3512,7 @@ public class BusinessAssetGroup extends APINode {
     public static final String[] FIELDS = {
       "biography",
       "business_discovery",
+      "collaborative_media_search",
       "followers_count",
       "follows_count",
       "has_profile_pic",
@@ -3625,6 +3634,13 @@ public class BusinessAssetGroup extends APINode {
     }
     public APIRequestGetContainedInstagramAccounts requestBusinessDiscoveryField (boolean value) {
       this.requestField("business_discovery", value);
+      return this;
+    }
+    public APIRequestGetContainedInstagramAccounts requestCollaborativeMediaSearchField () {
+      return this.requestCollaborativeMediaSearchField(true);
+    }
+    public APIRequestGetContainedInstagramAccounts requestCollaborativeMediaSearchField (boolean value) {
+      this.requestField("collaborative_media_search", value);
       return this;
     }
     public APIRequestGetContainedInstagramAccounts requestFollowersCountField () {
@@ -4083,6 +4099,7 @@ public class BusinessAssetGroup extends APINode {
       "offer_eligible",
       "overall_star_rating",
       "owner_business",
+      "page_backed_threads_account_id",
       "page_token",
       "parent_page",
       "parking",
@@ -4938,6 +4955,13 @@ public class BusinessAssetGroup extends APINode {
     }
     public APIRequestGetContainedPages requestOwnerBusinessField (boolean value) {
       this.requestField("owner_business", value);
+      return this;
+    }
+    public APIRequestGetContainedPages requestPageBackedThreadsAccountIdField () {
+      return this.requestPageBackedThreadsAccountIdField(true);
+    }
+    public APIRequestGetContainedPages requestPageBackedThreadsAccountIdField (boolean value) {
+      this.requestField("page_backed_threads_account_id", value);
       return this;
     }
     public APIRequestGetContainedPages requestPageTokenField () {
@@ -6147,6 +6171,7 @@ public class BusinessAssetGroup extends APINode {
       "name",
       "owner_business",
       "product_count",
+      "show_assign_permissions",
       "store_catalog_settings",
       "user_access_expire_time",
       "vertical",
@@ -6352,6 +6377,13 @@ public class BusinessAssetGroup extends APINode {
     }
     public APIRequestGetContainedProductCatalogs requestProductCountField (boolean value) {
       this.requestField("product_count", value);
+      return this;
+    }
+    public APIRequestGetContainedProductCatalogs requestShowAssignPermissionsField () {
+      return this.requestShowAssignPermissionsField(true);
+    }
+    public APIRequestGetContainedProductCatalogs requestShowAssignPermissionsField (boolean value) {
+      this.requestField("show_assign_permissions", value);
       return this;
     }
     public APIRequestGetContainedProductCatalogs requestStoreCatalogSettingsField () {
@@ -6811,6 +6843,10 @@ public class BusinessAssetGroup extends APINode {
       VALUE_PROFILE_PLUS_ANALYZE("PROFILE_PLUS_ANALYZE"),
       @SerializedName("PROFILE_PLUS_CREATE_CONTENT")
       VALUE_PROFILE_PLUS_CREATE_CONTENT("PROFILE_PLUS_CREATE_CONTENT"),
+      @SerializedName("PROFILE_PLUS_CREATIVE_MANAGEMENT")
+      VALUE_PROFILE_PLUS_CREATIVE_MANAGEMENT("PROFILE_PLUS_CREATIVE_MANAGEMENT"),
+      @SerializedName("PROFILE_PLUS_CREATOR_MANAGEMENT")
+      VALUE_PROFILE_PLUS_CREATOR_MANAGEMENT("PROFILE_PLUS_CREATOR_MANAGEMENT"),
       @SerializedName("PROFILE_PLUS_FACEBOOK_ACCESS")
       VALUE_PROFILE_PLUS_FACEBOOK_ACCESS("PROFILE_PLUS_FACEBOOK_ACCESS"),
       @SerializedName("PROFILE_PLUS_FULL_CONTROL")

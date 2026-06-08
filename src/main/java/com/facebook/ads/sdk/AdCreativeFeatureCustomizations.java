@@ -65,6 +65,8 @@ public class AdCreativeFeatureCustomizations extends APINode {
   private String mImageCropStyle = null;
   @SerializedName("pe_carousel")
   private Object mPeCarousel = null;
+  @SerializedName("recomposition_type")
+  private Object mRecompositionType = null;
   @SerializedName("showcase_card_display")
   private String mShowcaseCardDisplay = null;
   @SerializedName("text_extraction")
@@ -330,6 +332,15 @@ public class AdCreativeFeatureCustomizations extends APINode {
     return this;
   }
 
+  public Object getFieldRecompositionType() {
+    return mRecompositionType;
+  }
+
+  public AdCreativeFeatureCustomizations setFieldRecompositionType(Object value) {
+    this.mRecompositionType = value;
+    return this;
+  }
+
   public String getFieldShowcaseCardDisplay() {
     return mShowcaseCardDisplay;
   }
@@ -386,6 +397,7 @@ public class AdCreativeFeatureCustomizations extends APINode {
     this.mIgStreamTagName = instance.mIgStreamTagName;
     this.mImageCropStyle = instance.mImageCropStyle;
     this.mPeCarousel = instance.mPeCarousel;
+    this.mRecompositionType = instance.mRecompositionType;
     this.mShowcaseCardDisplay = instance.mShowcaseCardDisplay;
     this.mTextExtraction = instance.mTextExtraction;
     this.mTextStyle = instance.mTextStyle;

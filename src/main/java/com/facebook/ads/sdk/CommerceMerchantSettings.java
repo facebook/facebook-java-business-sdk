@@ -45,8 +45,6 @@ public class CommerceMerchantSettings extends APINode {
   private String mCheckoutConfig = null;
   @SerializedName("contact_email")
   private String mContactEmail = null;
-  @SerializedName("cta")
-  private String mCta = null;
   @SerializedName("display_name")
   private String mDisplayName = null;
   @SerializedName("facebook_channel")
@@ -288,10 +286,6 @@ public class CommerceMerchantSettings extends APINode {
     return new APIRequestGetCommercePayouts(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestGetCommerceTransactions getCommerceTransactions() {
-    return new APIRequestGetCommerceTransactions(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetOrderManagementApps getOrderManagementApps() {
     return new APIRequestGetOrderManagementApps(this.getPrefixedId().toString(), context);
   }
@@ -335,10 +329,6 @@ public class CommerceMerchantSettings extends APINode {
 
   public String getFieldContactEmail() {
     return mContactEmail;
-  }
-
-  public String getFieldCta() {
-    return mCta;
   }
 
   public String getFieldDisplayName() {
@@ -420,7 +410,6 @@ public class CommerceMerchantSettings extends APINode {
       "last_updated",
       "merchant_order_id",
       "order_status",
-      "pre_order_details",
       "selected_shipping_option",
       "ship_by_date",
       "shipping_address",
@@ -621,13 +610,6 @@ public class CommerceMerchantSettings extends APINode {
       this.requestField("order_status", value);
       return this;
     }
-    public APIRequestGetCommerceOrders requestPreOrderDetailsField () {
-      return this.requestPreOrderDetailsField(true);
-    }
-    public APIRequestGetCommerceOrders requestPreOrderDetailsField (boolean value) {
-      this.requestField("pre_order_details", value);
-      return this;
-    }
     public APIRequestGetCommerceOrders requestSelectedShippingOptionField () {
       return this.requestSelectedShippingOptionField(true);
     }
@@ -804,241 +786,6 @@ public class CommerceMerchantSettings extends APINode {
     }
     public APIRequestGetCommercePayouts requestTransferIdField (boolean value) {
       this.requestField("transfer_id", value);
-      return this;
-    }
-  }
-
-  public static class APIRequestGetCommerceTransactions extends APIRequest<CommerceOrderTransactionDetail> {
-
-    APINodeList<CommerceOrderTransactionDetail> lastResponse = null;
-    @Override
-    public APINodeList<CommerceOrderTransactionDetail> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "end_time",
-      "payout_reference_id",
-      "start_time",
-    };
-
-    public static final String[] FIELDS = {
-      "merchant_order_id",
-      "net_payment_amount",
-      "order_created",
-      "order_details",
-      "order_id",
-      "payout_reference_id",
-      "postal_code",
-      "processing_fee",
-      "state",
-      "tax_rate",
-      "transaction_date",
-      "transaction_type",
-      "transfer_id",
-      "id",
-    };
-
-    @Override
-    public APINodeList<CommerceOrderTransactionDetail> parseResponse(String response, String header) throws APIException {
-      return CommerceOrderTransactionDetail.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<CommerceOrderTransactionDetail> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<CommerceOrderTransactionDetail> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<CommerceOrderTransactionDetail>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<CommerceOrderTransactionDetail>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<CommerceOrderTransactionDetail>>() {
-           public APINodeList<CommerceOrderTransactionDetail> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetCommerceTransactions.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         },
-         MoreExecutors.directExecutor()
-      );
-    };
-
-    public APIRequestGetCommerceTransactions(String nodeId, APIContext context) {
-      super(context, nodeId, "/commerce_transactions", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetCommerceTransactions setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetCommerceTransactions setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetCommerceTransactions setEndTime (String endTime) {
-      this.setParam("end_time", endTime);
-      return this;
-    }
-
-    public APIRequestGetCommerceTransactions setPayoutReferenceId (String payoutReferenceId) {
-      this.setParam("payout_reference_id", payoutReferenceId);
-      return this;
-    }
-
-    public APIRequestGetCommerceTransactions setStartTime (String startTime) {
-      this.setParam("start_time", startTime);
-      return this;
-    }
-
-    public APIRequestGetCommerceTransactions requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetCommerceTransactions requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetCommerceTransactions requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetCommerceTransactions requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetCommerceTransactions requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetCommerceTransactions requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGetCommerceTransactions requestMerchantOrderIdField () {
-      return this.requestMerchantOrderIdField(true);
-    }
-    public APIRequestGetCommerceTransactions requestMerchantOrderIdField (boolean value) {
-      this.requestField("merchant_order_id", value);
-      return this;
-    }
-    public APIRequestGetCommerceTransactions requestNetPaymentAmountField () {
-      return this.requestNetPaymentAmountField(true);
-    }
-    public APIRequestGetCommerceTransactions requestNetPaymentAmountField (boolean value) {
-      this.requestField("net_payment_amount", value);
-      return this;
-    }
-    public APIRequestGetCommerceTransactions requestOrderCreatedField () {
-      return this.requestOrderCreatedField(true);
-    }
-    public APIRequestGetCommerceTransactions requestOrderCreatedField (boolean value) {
-      this.requestField("order_created", value);
-      return this;
-    }
-    public APIRequestGetCommerceTransactions requestOrderDetailsField () {
-      return this.requestOrderDetailsField(true);
-    }
-    public APIRequestGetCommerceTransactions requestOrderDetailsField (boolean value) {
-      this.requestField("order_details", value);
-      return this;
-    }
-    public APIRequestGetCommerceTransactions requestOrderIdField () {
-      return this.requestOrderIdField(true);
-    }
-    public APIRequestGetCommerceTransactions requestOrderIdField (boolean value) {
-      this.requestField("order_id", value);
-      return this;
-    }
-    public APIRequestGetCommerceTransactions requestPayoutReferenceIdField () {
-      return this.requestPayoutReferenceIdField(true);
-    }
-    public APIRequestGetCommerceTransactions requestPayoutReferenceIdField (boolean value) {
-      this.requestField("payout_reference_id", value);
-      return this;
-    }
-    public APIRequestGetCommerceTransactions requestPostalCodeField () {
-      return this.requestPostalCodeField(true);
-    }
-    public APIRequestGetCommerceTransactions requestPostalCodeField (boolean value) {
-      this.requestField("postal_code", value);
-      return this;
-    }
-    public APIRequestGetCommerceTransactions requestProcessingFeeField () {
-      return this.requestProcessingFeeField(true);
-    }
-    public APIRequestGetCommerceTransactions requestProcessingFeeField (boolean value) {
-      this.requestField("processing_fee", value);
-      return this;
-    }
-    public APIRequestGetCommerceTransactions requestStateField () {
-      return this.requestStateField(true);
-    }
-    public APIRequestGetCommerceTransactions requestStateField (boolean value) {
-      this.requestField("state", value);
-      return this;
-    }
-    public APIRequestGetCommerceTransactions requestTaxRateField () {
-      return this.requestTaxRateField(true);
-    }
-    public APIRequestGetCommerceTransactions requestTaxRateField (boolean value) {
-      this.requestField("tax_rate", value);
-      return this;
-    }
-    public APIRequestGetCommerceTransactions requestTransactionDateField () {
-      return this.requestTransactionDateField(true);
-    }
-    public APIRequestGetCommerceTransactions requestTransactionDateField (boolean value) {
-      this.requestField("transaction_date", value);
-      return this;
-    }
-    public APIRequestGetCommerceTransactions requestTransactionTypeField () {
-      return this.requestTransactionTypeField(true);
-    }
-    public APIRequestGetCommerceTransactions requestTransactionTypeField (boolean value) {
-      this.requestField("transaction_type", value);
-      return this;
-    }
-    public APIRequestGetCommerceTransactions requestTransferIdField () {
-      return this.requestTransferIdField(true);
-    }
-    public APIRequestGetCommerceTransactions requestTransferIdField (boolean value) {
-      this.requestField("transfer_id", value);
-      return this;
-    }
-    public APIRequestGetCommerceTransactions requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetCommerceTransactions requestIdField (boolean value) {
-      this.requestField("id", value);
       return this;
     }
   }
@@ -2031,6 +1778,7 @@ public class CommerceMerchantSettings extends APINode {
       "name",
       "owner_business",
       "product_count",
+      "show_assign_permissions",
       "store_catalog_settings",
       "user_access_expire_time",
       "vertical",
@@ -2236,6 +1984,13 @@ public class CommerceMerchantSettings extends APINode {
     }
     public APIRequestGetProductCatalogs requestProductCountField (boolean value) {
       this.requestField("product_count", value);
+      return this;
+    }
+    public APIRequestGetProductCatalogs requestShowAssignPermissionsField () {
+      return this.requestShowAssignPermissionsField(true);
+    }
+    public APIRequestGetProductCatalogs requestShowAssignPermissionsField (boolean value) {
+      this.requestField("show_assign_permissions", value);
       return this;
     }
     public APIRequestGetProductCatalogs requestStoreCatalogSettingsField () {
@@ -2975,7 +2730,6 @@ public class CommerceMerchantSettings extends APINode {
     public static final String[] FIELDS = {
       "checkout_config",
       "contact_email",
-      "cta",
       "display_name",
       "facebook_channel",
       "id",
@@ -3092,13 +2846,6 @@ public class CommerceMerchantSettings extends APINode {
     }
     public APIRequestGet requestContactEmailField (boolean value) {
       this.requestField("contact_email", value);
-      return this;
-    }
-    public APIRequestGet requestCtaField () {
-      return this.requestCtaField(true);
-    }
-    public APIRequestGet requestCtaField (boolean value) {
-      this.requestField("cta", value);
       return this;
     }
     public APIRequestGet requestDisplayNameField () {
@@ -3389,7 +3136,6 @@ public class CommerceMerchantSettings extends APINode {
   public CommerceMerchantSettings copyFrom(CommerceMerchantSettings instance) {
     this.mCheckoutConfig = instance.mCheckoutConfig;
     this.mContactEmail = instance.mContactEmail;
-    this.mCta = instance.mCta;
     this.mDisplayName = instance.mDisplayName;
     this.mFacebookChannel = instance.mFacebookChannel;
     this.mId = instance.mId;

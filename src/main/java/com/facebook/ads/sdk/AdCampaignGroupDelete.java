@@ -40,27 +40,23 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class RichMediaElement extends APINode {
-  @SerializedName("element")
-  private Object mElement = null;
-  @SerializedName("element_type")
-  private String mElementType = null;
-  @SerializedName("name")
-  private String mName = null;
+public class AdCampaignGroupDelete extends APINode {
+  @SerializedName("success")
+  private Boolean mSuccess = null;
   protected static Gson gson = null;
 
-  public RichMediaElement() {
+  public AdCampaignGroupDelete() {
   }
 
   public String getId() {
     return null;
   }
-  public static RichMediaElement loadJSON(String json, APIContext context, String header) {
-    RichMediaElement richMediaElement = getGson().fromJson(json, RichMediaElement.class);
+  public static AdCampaignGroupDelete loadJSON(String json, APIContext context, String header) {
+    AdCampaignGroupDelete adCampaignGroupDelete = getGson().fromJson(json, AdCampaignGroupDelete.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(richMediaElement.toString());
+      JsonElement o2 = parser.parse(adCampaignGroupDelete.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -70,14 +66,14 @@ public class RichMediaElement extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    richMediaElement.context = context;
-    richMediaElement.rawValue = json;
-    richMediaElement.header = header;
-    return richMediaElement;
+    adCampaignGroupDelete.context = context;
+    adCampaignGroupDelete.rawValue = json;
+    adCampaignGroupDelete.header = header;
+    return adCampaignGroupDelete;
   }
 
-  public static APINodeList<RichMediaElement> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<RichMediaElement> richMediaElements = new APINodeList<RichMediaElement>(request, json, header);
+  public static APINodeList<AdCampaignGroupDelete> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdCampaignGroupDelete> adCampaignGroupDeletes = new APINodeList<AdCampaignGroupDelete>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -88,9 +84,9 @@ public class RichMediaElement extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          richMediaElements.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          adCampaignGroupDeletes.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return richMediaElements;
+        return adCampaignGroupDeletes;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -100,20 +96,20 @@ public class RichMediaElement extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                richMediaElements.setCursors(before, after);
+                adCampaignGroupDeletes.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            richMediaElements.setPaging(previous, next);
+            adCampaignGroupDeletes.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              richMediaElements.setAppSecret(context.getAppSecretProof());
+              adCampaignGroupDeletes.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              richMediaElements.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              adCampaignGroupDeletes.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -124,23 +120,23 @@ public class RichMediaElement extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  richMediaElements.add(loadJSON(entry.getValue().toString(), context, header));
+                  adCampaignGroupDeletes.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              richMediaElements.add(loadJSON(obj.toString(), context, header));
+              adCampaignGroupDeletes.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return richMediaElements;
+          return adCampaignGroupDeletes;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              richMediaElements.add(loadJSON(entry.getValue().toString(), context, header));
+              adCampaignGroupDeletes.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return richMediaElements;
+          return adCampaignGroupDeletes;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -157,20 +153,20 @@ public class RichMediaElement extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              richMediaElements.add(loadJSON(value.toString(), context, header));
+              adCampaignGroupDeletes.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return richMediaElements;
+            return adCampaignGroupDeletes;
           }
 
           // Sixth, check if it's pure JsonObject
-          richMediaElements.clear();
-          richMediaElements.add(loadJSON(json, context, header));
-          return richMediaElements;
+          adCampaignGroupDeletes.clear();
+          adCampaignGroupDeletes.add(loadJSON(json, context, header));
+          return adCampaignGroupDeletes;
         }
       }
     } catch (Exception e) {
@@ -198,30 +194,12 @@ public class RichMediaElement extends APINode {
   }
 
 
-  public Object getFieldElement() {
-    return mElement;
+  public Boolean getFieldSuccess() {
+    return mSuccess;
   }
 
-  public RichMediaElement setFieldElement(Object value) {
-    this.mElement = value;
-    return this;
-  }
-
-  public String getFieldElementType() {
-    return mElementType;
-  }
-
-  public RichMediaElement setFieldElementType(String value) {
-    this.mElementType = value;
-    return this;
-  }
-
-  public String getFieldName() {
-    return mName;
-  }
-
-  public RichMediaElement setFieldName(String value) {
-    this.mName = value;
+  public AdCampaignGroupDelete setFieldSuccess(Boolean value) {
+    this.mSuccess = value;
     return this;
   }
 
@@ -241,19 +219,17 @@ public class RichMediaElement extends APINode {
     return gson;
   }
 
-  public RichMediaElement copyFrom(RichMediaElement instance) {
-    this.mElement = instance.mElement;
-    this.mElementType = instance.mElementType;
-    this.mName = instance.mName;
+  public AdCampaignGroupDelete copyFrom(AdCampaignGroupDelete instance) {
+    this.mSuccess = instance.mSuccess;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<RichMediaElement> getParser() {
-    return new APIRequest.ResponseParser<RichMediaElement>() {
-      public APINodeList<RichMediaElement> parseResponse(String response, APIContext context, APIRequest<RichMediaElement> request, String header) throws MalformedResponseException {
-        return RichMediaElement.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<AdCampaignGroupDelete> getParser() {
+    return new APIRequest.ResponseParser<AdCampaignGroupDelete>() {
+      public APINodeList<AdCampaignGroupDelete> parseResponse(String response, APIContext context, APIRequest<AdCampaignGroupDelete> request, String header) throws MalformedResponseException {
+        return AdCampaignGroupDelete.parseResponse(response, context, request, header);
       }
     };
   }

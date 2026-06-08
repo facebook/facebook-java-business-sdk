@@ -193,8 +193,8 @@ public class AdCampaignGroup extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGenget genget() {
-    return new APIRequestGenget(this.getId(), context);
+  public APIRequestGendelete gendelete() {
+    return new APIRequestGendelete(this.getId(), context);
   }
 
 
@@ -209,48 +209,47 @@ public class AdCampaignGroup extends APINode {
 
 
 
-  public static class APIRequestGenget extends APIRequest<AdCampaignGroupGet> {
+  public static class APIRequestGendelete extends APIRequest<AdCampaignGroupDelete> {
 
-    APINodeList<AdCampaignGroupGet> lastResponse = null;
+    APINodeList<AdCampaignGroupDelete> lastResponse = null;
     @Override
-    public APINodeList<AdCampaignGroupGet> getLastResponse() {
+    public APINodeList<AdCampaignGroupDelete> getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "fields",
     };
 
     public static final String[] FIELDS = {
     };
 
     @Override
-    public APINodeList<AdCampaignGroupGet> parseResponse(String response, String header) throws APIException {
-      return AdCampaignGroupGet.parseResponse(response, getContext(), this, header);
+    public APINodeList<AdCampaignGroupDelete> parseResponse(String response, String header) throws APIException {
+      return AdCampaignGroupDelete.parseResponse(response, getContext(), this, header);
     }
 
     @Override
-    public APINodeList<AdCampaignGroupGet> execute() throws APIException {
+    public APINodeList<AdCampaignGroupDelete> execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINodeList<AdCampaignGroupGet> execute(Map<String, Object> extraParams) throws APIException {
+    public APINodeList<AdCampaignGroupDelete> execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<APINodeList<AdCampaignGroupGet>> executeAsync() throws APIException {
+    public ListenableFuture<APINodeList<AdCampaignGroupDelete>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<APINodeList<AdCampaignGroupGet>> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<APINodeList<AdCampaignGroupDelete>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<AdCampaignGroupGet>>() {
-           public APINodeList<AdCampaignGroupGet> apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, APINodeList<AdCampaignGroupDelete>>() {
+           public APINodeList<AdCampaignGroupDelete> apply(ResponseWrapper result) {
              try {
-               return APIRequestGenget.this.parseResponse(result.getBody(), result.getHeader());
+               return APIRequestGendelete.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -260,33 +259,28 @@ public class AdCampaignGroup extends APINode {
       );
     };
 
-    public APIRequestGenget(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
+    public APIRequestGendelete(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "DELETE", Arrays.asList(PARAMS));
     }
 
     @Override
-    public APIRequestGenget setParam(String param, Object value) {
+    public APIRequestGendelete setParam(String param, Object value) {
       setParamInternal(param, value);
       return this;
     }
 
     @Override
-    public APIRequestGenget setParams(Map<String, Object> params) {
+    public APIRequestGendelete setParams(Map<String, Object> params) {
       setParamsInternal(params);
       return this;
     }
 
 
-    public APIRequestGenget setFields (String fields) {
-      this.setParam("fields", fields);
-      return this;
-    }
-
-    public APIRequestGenget requestAllFields () {
+    public APIRequestGendelete requestAllFields () {
       return this.requestAllFields(true);
     }
 
-    public APIRequestGenget requestAllFields (boolean value) {
+    public APIRequestGendelete requestAllFields (boolean value) {
       for (String field : FIELDS) {
         this.requestField(field, value);
       }
@@ -294,12 +288,12 @@ public class AdCampaignGroup extends APINode {
     }
 
     @Override
-    public APIRequestGenget requestFields (List<String> fields) {
+    public APIRequestGendelete requestFields (List<String> fields) {
       return this.requestFields(fields, true);
     }
 
     @Override
-    public APIRequestGenget requestFields (List<String> fields, boolean value) {
+    public APIRequestGendelete requestFields (List<String> fields, boolean value) {
       for (String field : fields) {
         this.requestField(field, value);
       }
@@ -307,13 +301,13 @@ public class AdCampaignGroup extends APINode {
     }
 
     @Override
-    public APIRequestGenget requestField (String field) {
+    public APIRequestGendelete requestField (String field) {
       this.requestField(field, true);
       return this;
     }
 
     @Override
-    public APIRequestGenget requestField (String field, boolean value) {
+    public APIRequestGendelete requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }

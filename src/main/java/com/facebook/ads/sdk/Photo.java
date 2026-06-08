@@ -1387,6 +1387,7 @@ public class Photo extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "attribution_id_v2",
       "feedback_source",
       "nectar_module",
       "notify",
@@ -1449,6 +1450,11 @@ public class Photo extends APINode {
       return this;
     }
 
+
+    public APIRequestCreateLike setAttributionIdV2 (String attributionIdV2) {
+      this.setParam("attribution_id_v2", attributionIdV2);
+      return this;
+    }
 
     public APIRequestCreateLike setFeedbackSource (String feedbackSource) {
       this.setParam("feedback_source", feedbackSource);
@@ -1625,6 +1631,7 @@ public class Photo extends APINode {
       "offer_eligible",
       "overall_star_rating",
       "owner_business",
+      "page_backed_threads_account_id",
       "page_token",
       "parent_page",
       "parking",
@@ -2480,6 +2487,13 @@ public class Photo extends APINode {
     }
     public APIRequestGetSponsorTags requestOwnerBusinessField (boolean value) {
       this.requestField("owner_business", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestPageBackedThreadsAccountIdField () {
+      return this.requestPageBackedThreadsAccountIdField(true);
+    }
+    public APIRequestGetSponsorTags requestPageBackedThreadsAccountIdField (boolean value) {
+      this.requestField("page_backed_threads_account_id", value);
       return this;
     }
     public APIRequestGetSponsorTags requestPageTokenField () {

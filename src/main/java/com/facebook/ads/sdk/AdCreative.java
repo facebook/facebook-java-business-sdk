@@ -103,6 +103,8 @@ public class AdCreative extends APINode {
   private AdCreativeFacebookBrandedContent mFacebookBrandedContent = null;
   @SerializedName("format_transformation_spec")
   private List<AdCreativeFormatTransformationSpec> mFormatTransformationSpec = null;
+  @SerializedName("generative_asset_spec")
+  private AdCreativeGenerativeAssetSpec mGenerativeAssetSpec = null;
   @SerializedName("id")
   private String mId = null;
   @SerializedName("image_crops")
@@ -193,6 +195,8 @@ public class AdCreative extends APINode {
   private Boolean mUsePageActorOverride = null;
   @SerializedName("video_id")
   private String mVideoId = null;
+  @SerializedName("wamo_whatsapp_identity_spec")
+  private AdCreativeWAMOWhatsAppIdentitySpec mWamoWhatsappIdentitySpec = null;
   @SerializedName("creative_id")
   private String mCreativeId = null;
   protected static Gson gson = null;
@@ -766,6 +770,20 @@ public class AdCreative extends APINode {
     this.mFormatTransformationSpec = AdCreativeFormatTransformationSpec.getGson().fromJson(value, type);
     return this;
   }
+  public AdCreativeGenerativeAssetSpec getFieldGenerativeAssetSpec() {
+    return mGenerativeAssetSpec;
+  }
+
+  public AdCreative setFieldGenerativeAssetSpec(AdCreativeGenerativeAssetSpec value) {
+    this.mGenerativeAssetSpec = value;
+    return this;
+  }
+
+  public AdCreative setFieldGenerativeAssetSpec(String value) {
+    Type type = new TypeToken<AdCreativeGenerativeAssetSpec>(){}.getType();
+    this.mGenerativeAssetSpec = AdCreativeGenerativeAssetSpec.getGson().fromJson(value, type);
+    return this;
+  }
   public String getFieldId() {
     return mId;
   }
@@ -1242,6 +1260,20 @@ public class AdCreative extends APINode {
     return this;
   }
 
+  public AdCreativeWAMOWhatsAppIdentitySpec getFieldWamoWhatsappIdentitySpec() {
+    return mWamoWhatsappIdentitySpec;
+  }
+
+  public AdCreative setFieldWamoWhatsappIdentitySpec(AdCreativeWAMOWhatsAppIdentitySpec value) {
+    this.mWamoWhatsappIdentitySpec = value;
+    return this;
+  }
+
+  public AdCreative setFieldWamoWhatsappIdentitySpec(String value) {
+    Type type = new TypeToken<AdCreativeWAMOWhatsAppIdentitySpec>(){}.getType();
+    this.mWamoWhatsappIdentitySpec = AdCreativeWAMOWhatsAppIdentitySpec.getGson().fromJson(value, type);
+    return this;
+  }
 
 
   public static class APIRequestCreateAdLabel extends APIRequest<AdCreative> {
@@ -1898,6 +1930,7 @@ public class AdCreative extends APINode {
       "existing_post_title",
       "facebook_branded_content",
       "format_transformation_spec",
+      "generative_asset_spec",
       "id",
       "image_crops",
       "image_hash",
@@ -1943,6 +1976,7 @@ public class AdCreative extends APINode {
       "url_tags",
       "use_page_actor_override",
       "video_id",
+      "wamo_whatsapp_identity_spec",
     };
 
     @Override
@@ -2270,6 +2304,13 @@ public class AdCreative extends APINode {
       this.requestField("format_transformation_spec", value);
       return this;
     }
+    public APIRequestGet requestGenerativeAssetSpecField () {
+      return this.requestGenerativeAssetSpecField(true);
+    }
+    public APIRequestGet requestGenerativeAssetSpecField (boolean value) {
+      this.requestField("generative_asset_spec", value);
+      return this;
+    }
     public APIRequestGet requestIdField () {
       return this.requestIdField(true);
     }
@@ -2585,6 +2626,13 @@ public class AdCreative extends APINode {
       this.requestField("video_id", value);
       return this;
     }
+    public APIRequestGet requestWamoWhatsappIdentitySpecField () {
+      return this.requestWamoWhatsappIdentitySpecField(true);
+    }
+    public APIRequestGet requestWamoWhatsappIdentitySpecField (boolean value) {
+      this.requestField("wamo_whatsapp_identity_spec", value);
+      return this;
+    }
   }
 
   public static class APIRequestUpdate extends APIRequest<AdCreative> {
@@ -2819,6 +2867,8 @@ public class AdCreative extends APINode {
       VALUE_INSTALL_MOBILE_APP("INSTALL_MOBILE_APP"),
       @SerializedName("JOIN_CHANNEL")
       VALUE_JOIN_CHANNEL("JOIN_CHANNEL"),
+      @SerializedName("JOIN_LIVE_VIDEO")
+      VALUE_JOIN_LIVE_VIDEO("JOIN_LIVE_VIDEO"),
       @SerializedName("LEARN_MORE")
       VALUE_LEARN_MORE("LEARN_MORE"),
       @SerializedName("LIKE_PAGE")
@@ -3194,6 +3244,7 @@ public class AdCreative extends APINode {
     this.mExistingPostTitle = instance.mExistingPostTitle;
     this.mFacebookBrandedContent = instance.mFacebookBrandedContent;
     this.mFormatTransformationSpec = instance.mFormatTransformationSpec;
+    this.mGenerativeAssetSpec = instance.mGenerativeAssetSpec;
     this.mId = instance.mId;
     this.mImageCrops = instance.mImageCrops;
     this.mImageHash = instance.mImageHash;
@@ -3239,6 +3290,7 @@ public class AdCreative extends APINode {
     this.mUrlTags = instance.mUrlTags;
     this.mUsePageActorOverride = instance.mUsePageActorOverride;
     this.mVideoId = instance.mVideoId;
+    this.mWamoWhatsappIdentitySpec = instance.mWamoWhatsappIdentitySpec;
     this.mCreativeId = this.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

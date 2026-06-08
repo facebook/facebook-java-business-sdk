@@ -63,8 +63,6 @@ public class CommerceOrder extends APINode {
   private String mMerchantOrderId = null;
   @SerializedName("order_status")
   private Object mOrderStatus = null;
-  @SerializedName("pre_order_details")
-  private Object mPreOrderDetails = null;
   @SerializedName("selected_shipping_option")
   private Object mSelectedShippingOption = null;
   @SerializedName("ship_by_date")
@@ -292,20 +290,8 @@ public class CommerceOrder extends APINode {
     return new APIRequestGetPayments(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestGetPromotionDetails getPromotionDetails() {
-    return new APIRequestGetPromotionDetails(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestGetPromoTIOns getPromoTIOns() {
-    return new APIRequestGetPromoTIOns(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetRefunds getRefunds() {
     return new APIRequestGetRefunds(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestGetReturns getReturns() {
-    return new APIRequestGetReturns(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetShipments getShipments() {
@@ -363,10 +349,6 @@ public class CommerceOrder extends APINode {
 
   public Object getFieldOrderStatus() {
     return mOrderStatus;
-  }
-
-  public Object getFieldPreOrderDetails() {
-    return mPreOrderDetails;
   }
 
   public Object getFieldSelectedShippingOption() {
@@ -698,216 +680,6 @@ public class CommerceOrder extends APINode {
 
   }
 
-  public static class APIRequestGetPromotionDetails extends APIRequest<APINode> {
-
-    APINodeList<APINode> lastResponse = null;
-    @Override
-    public APINodeList<APINode> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<APINode> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetPromotionDetails.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         },
-         MoreExecutors.directExecutor()
-      );
-    };
-
-    public APIRequestGetPromotionDetails(String nodeId, APIContext context) {
-      super(context, nodeId, "/promotion_details", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetPromotionDetails setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetPromotionDetails setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetPromotionDetails requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetPromotionDetails requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetPromotionDetails requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetPromotionDetails requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetPromotionDetails requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetPromotionDetails requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
-  public static class APIRequestGetPromoTIOns extends APIRequest<APINode> {
-
-    APINodeList<APINode> lastResponse = null;
-    @Override
-    public APINodeList<APINode> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<APINode> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetPromoTIOns.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         },
-         MoreExecutors.directExecutor()
-      );
-    };
-
-    public APIRequestGetPromoTIOns(String nodeId, APIContext context) {
-      super(context, nodeId, "/promotions", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetPromoTIOns setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetPromoTIOns setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetPromoTIOns requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetPromoTIOns requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetPromoTIOns requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetPromoTIOns requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetPromoTIOns requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetPromoTIOns requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
   public static class APIRequestGetRefunds extends APIRequest<APINode> {
 
     APINodeList<APINode> lastResponse = null;
@@ -1007,127 +779,6 @@ public class CommerceOrder extends APINode {
 
     @Override
     public APIRequestGetRefunds requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
-  public static class APIRequestGetReturns extends APIRequest<APINode> {
-
-    APINodeList<APINode> lastResponse = null;
-    @Override
-    public APINodeList<APINode> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "merchant_return_id",
-      "statuses",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<APINode> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetReturns.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         },
-         MoreExecutors.directExecutor()
-      );
-    };
-
-    public APIRequestGetReturns(String nodeId, APIContext context) {
-      super(context, nodeId, "/returns", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetReturns setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetReturns setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetReturns setMerchantReturnId (String merchantReturnId) {
-      this.setParam("merchant_return_id", merchantReturnId);
-      return this;
-    }
-
-    public APIRequestGetReturns setStatuses (List<EnumStatuses> statuses) {
-      this.setParam("statuses", statuses);
-      return this;
-    }
-    public APIRequestGetReturns setStatuses (String statuses) {
-      this.setParam("statuses", statuses);
-      return this;
-    }
-
-    public APIRequestGetReturns requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetReturns requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetReturns requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetReturns requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetReturns requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetReturns requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
@@ -1446,7 +1097,6 @@ public class CommerceOrder extends APINode {
       "last_updated",
       "merchant_order_id",
       "order_status",
-      "pre_order_details",
       "selected_shipping_option",
       "ship_by_date",
       "shipping_address",
@@ -1619,13 +1269,6 @@ public class CommerceOrder extends APINode {
       this.requestField("order_status", value);
       return this;
     }
-    public APIRequestGet requestPreOrderDetailsField () {
-      return this.requestPreOrderDetailsField(true);
-    }
-    public APIRequestGet requestPreOrderDetailsField (boolean value) {
-      this.requestField("pre_order_details", value);
-      return this;
-    }
     public APIRequestGet requestSelectedShippingOptionField () {
       return this.requestSelectedShippingOptionField(true);
     }
@@ -1699,31 +1342,6 @@ public class CommerceOrder extends APINode {
       }
   }
 
-  public static enum EnumStatuses {
-      @SerializedName("APPROVED")
-      VALUE_APPROVED("APPROVED"),
-      @SerializedName("DISAPPROVED")
-      VALUE_DISAPPROVED("DISAPPROVED"),
-      @SerializedName("MERCHANT_MARKED_COMPLETED")
-      VALUE_MERCHANT_MARKED_COMPLETED("MERCHANT_MARKED_COMPLETED"),
-      @SerializedName("REFUNDED")
-      VALUE_REFUNDED("REFUNDED"),
-      @SerializedName("REQUESTED")
-      VALUE_REQUESTED("REQUESTED"),
-      ;
-
-      private String value;
-
-      private EnumStatuses(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
 
   synchronized /*package*/ static Gson getGson() {
     if (gson != null) {
@@ -1750,7 +1368,6 @@ public class CommerceOrder extends APINode {
     this.mLastUpdated = instance.mLastUpdated;
     this.mMerchantOrderId = instance.mMerchantOrderId;
     this.mOrderStatus = instance.mOrderStatus;
-    this.mPreOrderDetails = instance.mPreOrderDetails;
     this.mSelectedShippingOption = instance.mSelectedShippingOption;
     this.mShipByDate = instance.mShipByDate;
     this.mShippingAddress = instance.mShippingAddress;

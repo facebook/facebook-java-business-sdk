@@ -357,6 +357,7 @@ public class ContentBlockList extends APINode {
       "offsite_clo_signal_status",
       "offsite_pixels_tos_accepted",
       "opportunity_score",
+      "opportunity_score_weight",
       "owner",
       "owner_business",
       "partner",
@@ -860,6 +861,13 @@ public class ContentBlockList extends APINode {
       this.requestField("opportunity_score", value);
       return this;
     }
+    public APIRequestGetAppliedAdAccounts requestOpportunityScoreWeightField () {
+      return this.requestOpportunityScoreWeightField(true);
+    }
+    public APIRequestGetAppliedAdAccounts requestOpportunityScoreWeightField (boolean value) {
+      this.requestField("opportunity_score_weight", value);
+      return this;
+    }
     public APIRequestGetAppliedAdAccounts requestOwnerField () {
       return this.requestOwnerField(true);
     }
@@ -1125,14 +1133,21 @@ public class ContentBlockList extends APINode {
       "is_shared_to_feed",
       "legacy_instagram_media_id",
       "like_count",
+      "media_audio_type",
       "media_product_type",
       "media_type",
       "media_url",
       "owner",
       "permalink",
+      "reposts_count",
+      "saved_count",
+      "shares_count",
       "shortcode",
       "thumbnail_url",
       "timestamp",
+      "total_comments_count",
+      "total_like_count",
+      "total_views_count",
       "username",
       "video_title",
       "view_count",
@@ -1326,6 +1341,13 @@ public class ContentBlockList extends APINode {
       this.requestField("like_count", value);
       return this;
     }
+    public APIRequestGetInstagramContent requestMediaAudioTypeField () {
+      return this.requestMediaAudioTypeField(true);
+    }
+    public APIRequestGetInstagramContent requestMediaAudioTypeField (boolean value) {
+      this.requestField("media_audio_type", value);
+      return this;
+    }
     public APIRequestGetInstagramContent requestMediaProductTypeField () {
       return this.requestMediaProductTypeField(true);
     }
@@ -1361,6 +1383,27 @@ public class ContentBlockList extends APINode {
       this.requestField("permalink", value);
       return this;
     }
+    public APIRequestGetInstagramContent requestRepostsCountField () {
+      return this.requestRepostsCountField(true);
+    }
+    public APIRequestGetInstagramContent requestRepostsCountField (boolean value) {
+      this.requestField("reposts_count", value);
+      return this;
+    }
+    public APIRequestGetInstagramContent requestSavedCountField () {
+      return this.requestSavedCountField(true);
+    }
+    public APIRequestGetInstagramContent requestSavedCountField (boolean value) {
+      this.requestField("saved_count", value);
+      return this;
+    }
+    public APIRequestGetInstagramContent requestSharesCountField () {
+      return this.requestSharesCountField(true);
+    }
+    public APIRequestGetInstagramContent requestSharesCountField (boolean value) {
+      this.requestField("shares_count", value);
+      return this;
+    }
     public APIRequestGetInstagramContent requestShortcodeField () {
       return this.requestShortcodeField(true);
     }
@@ -1380,6 +1423,27 @@ public class ContentBlockList extends APINode {
     }
     public APIRequestGetInstagramContent requestTimestampField (boolean value) {
       this.requestField("timestamp", value);
+      return this;
+    }
+    public APIRequestGetInstagramContent requestTotalCommentsCountField () {
+      return this.requestTotalCommentsCountField(true);
+    }
+    public APIRequestGetInstagramContent requestTotalCommentsCountField (boolean value) {
+      this.requestField("total_comments_count", value);
+      return this;
+    }
+    public APIRequestGetInstagramContent requestTotalLikeCountField () {
+      return this.requestTotalLikeCountField(true);
+    }
+    public APIRequestGetInstagramContent requestTotalLikeCountField (boolean value) {
+      this.requestField("total_like_count", value);
+      return this;
+    }
+    public APIRequestGetInstagramContent requestTotalViewsCountField () {
+      return this.requestTotalViewsCountField(true);
+    }
+    public APIRequestGetInstagramContent requestTotalViewsCountField (boolean value) {
+      this.requestField("total_views_count", value);
       return this;
     }
     public APIRequestGetInstagramContent requestUsernameField () {

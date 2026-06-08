@@ -125,6 +125,8 @@ public class AdsActionStats extends APINode {
   private String mActionVideoSound = null;
   @SerializedName("action_video_type")
   private String mActionVideoType = null;
+  @SerializedName("custom")
+  private String mCustom = null;
   @SerializedName("dda")
   private String mDda = null;
   @SerializedName("incrementality")
@@ -684,6 +686,15 @@ public class AdsActionStats extends APINode {
     return this;
   }
 
+  public String getFieldCustom() {
+    return mCustom;
+  }
+
+  public AdsActionStats setFieldCustom(String value) {
+    this.mCustom = value;
+    return this;
+  }
+
   public String getFieldDda() {
     return mDda;
   }
@@ -878,6 +889,7 @@ public class AdsActionStats extends APINode {
     this.mActionVideoAssetId = instance.mActionVideoAssetId;
     this.mActionVideoSound = instance.mActionVideoSound;
     this.mActionVideoType = instance.mActionVideoType;
+    this.mCustom = instance.mCustom;
     this.mDda = instance.mDda;
     this.mIncrementality = instance.mIncrementality;
     this.mIncrementalityAllConversions = instance.mIncrementalityAllConversions;

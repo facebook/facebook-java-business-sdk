@@ -41,6 +41,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class AdCreativeFormatTransformationSpec extends APINode {
+  @SerializedName("customizations")
+  private List<Object> mCustomizations = null;
   @SerializedName("data_source")
   private List<String> mDataSource = null;
   @SerializedName("format")
@@ -196,6 +198,15 @@ public class AdCreativeFormatTransformationSpec extends APINode {
   }
 
 
+  public List<Object> getFieldCustomizations() {
+    return mCustomizations;
+  }
+
+  public AdCreativeFormatTransformationSpec setFieldCustomizations(List<Object> value) {
+    this.mCustomizations = value;
+    return this;
+  }
+
   public List<String> getFieldDataSource() {
     return mDataSource;
   }
@@ -231,6 +242,7 @@ public class AdCreativeFormatTransformationSpec extends APINode {
   }
 
   public AdCreativeFormatTransformationSpec copyFrom(AdCreativeFormatTransformationSpec instance) {
+    this.mCustomizations = instance.mCustomizations;
     this.mDataSource = instance.mDataSource;
     this.mFormat = instance.mFormat;
     this.context = instance.context;

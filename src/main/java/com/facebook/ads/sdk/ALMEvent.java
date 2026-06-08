@@ -63,6 +63,8 @@ public class ALMEvent extends APINode {
   private List<String> mParentAdvertiserIds = null;
   @SerializedName("reseller_business_id")
   private String mResellerBusinessId = null;
+  @SerializedName("solution_id")
+  private String mSolutionId = null;
   @SerializedName("sub_channel")
   private String mSubChannel = null;
   @SerializedName("user_id")
@@ -325,6 +327,10 @@ public class ALMEvent extends APINode {
     return mResellerBusinessId;
   }
 
+  public String getFieldSolutionId() {
+    return mSolutionId;
+  }
+
   public String getFieldSubChannel() {
     return mSubChannel;
   }
@@ -357,6 +363,7 @@ public class ALMEvent extends APINode {
       "id",
       "parent_advertiser_ids",
       "reseller_business_id",
+      "solution_id",
       "sub_channel",
       "user_id",
     };
@@ -528,6 +535,13 @@ public class ALMEvent extends APINode {
       this.requestField("reseller_business_id", value);
       return this;
     }
+    public APIRequestGet requestSolutionIdField () {
+      return this.requestSolutionIdField(true);
+    }
+    public APIRequestGet requestSolutionIdField (boolean value) {
+      this.requestField("solution_id", value);
+      return this;
+    }
     public APIRequestGet requestSubChannelField () {
       return this.requestSubChannelField(true);
     }
@@ -570,6 +584,7 @@ public class ALMEvent extends APINode {
     this.mId = instance.mId;
     this.mParentAdvertiserIds = instance.mParentAdvertiserIds;
     this.mResellerBusinessId = instance.mResellerBusinessId;
+    this.mSolutionId = instance.mSolutionId;
     this.mSubChannel = instance.mSubChannel;
     this.mUserId = instance.mUserId;
     this.context = instance.context;

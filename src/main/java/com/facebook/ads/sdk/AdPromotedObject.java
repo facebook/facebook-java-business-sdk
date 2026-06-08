@@ -47,6 +47,8 @@ public class AdPromotedObject extends APINode {
   private String mBoostedProductSetId = null;
   @SerializedName("conversion_goal_id")
   private String mConversionGoalId = null;
+  @SerializedName("custom_attribution_source_ids")
+  private List<String> mCustomAttributionSourceIds = null;
   @SerializedName("custom_conversion_id")
   private String mCustomConversionId = null;
   @SerializedName("custom_event_str")
@@ -63,14 +65,22 @@ public class AdPromotedObject extends APINode {
   private EnumFullFunnelObjective mFullFunnelObjective = null;
   @SerializedName("fundraiser_campaign_id")
   private String mFundraiserCampaignId = null;
+  @SerializedName("instagram_actor_id")
+  private String mInstagramActorId = null;
+  @SerializedName("job_listing_id")
+  private String mJobListingId = null;
   @SerializedName("lead_ads_custom_event_str")
   private String mLeadAdsCustomEventStr = null;
   @SerializedName("lead_ads_custom_event_type")
   private EnumLeadAdsCustomEventType mLeadAdsCustomEventType = null;
+  @SerializedName("lead_ads_follow_up_event")
+  private String mLeadAdsFollowUpEvent = null;
   @SerializedName("lead_ads_form_event_source_type")
   private String mLeadAdsFormEventSourceType = null;
   @SerializedName("lead_ads_offsite_conversion_type")
   private String mLeadAdsOffsiteConversionType = null;
+  @SerializedName("lead_ads_quality_volume_setting")
+  private String mLeadAdsQualityVolumeSetting = null;
   @SerializedName("lead_ads_selected_pixel_id")
   private String mLeadAdsSelectedPixelId = null;
   @SerializedName("live_video_destination")
@@ -78,7 +88,7 @@ public class AdPromotedObject extends APINode {
   @SerializedName("mcme_conversion_id")
   private String mMcmeConversionId = null;
   @SerializedName("multi_event_product")
-  private String mMultiEventProduct = null;
+  private Long mMultiEventProduct = null;
   @SerializedName("object_store_url")
   private String mObjectStoreUrl = null;
   @SerializedName("object_store_urls")
@@ -309,6 +319,15 @@ public class AdPromotedObject extends APINode {
     return this;
   }
 
+  public List<String> getFieldCustomAttributionSourceIds() {
+    return mCustomAttributionSourceIds;
+  }
+
+  public AdPromotedObject setFieldCustomAttributionSourceIds(List<String> value) {
+    this.mCustomAttributionSourceIds = value;
+    return this;
+  }
+
   public String getFieldCustomConversionId() {
     return mCustomConversionId;
   }
@@ -381,6 +400,24 @@ public class AdPromotedObject extends APINode {
     return this;
   }
 
+  public String getFieldInstagramActorId() {
+    return mInstagramActorId;
+  }
+
+  public AdPromotedObject setFieldInstagramActorId(String value) {
+    this.mInstagramActorId = value;
+    return this;
+  }
+
+  public String getFieldJobListingId() {
+    return mJobListingId;
+  }
+
+  public AdPromotedObject setFieldJobListingId(String value) {
+    this.mJobListingId = value;
+    return this;
+  }
+
   public String getFieldLeadAdsCustomEventStr() {
     return mLeadAdsCustomEventStr;
   }
@@ -399,6 +436,15 @@ public class AdPromotedObject extends APINode {
     return this;
   }
 
+  public String getFieldLeadAdsFollowUpEvent() {
+    return mLeadAdsFollowUpEvent;
+  }
+
+  public AdPromotedObject setFieldLeadAdsFollowUpEvent(String value) {
+    this.mLeadAdsFollowUpEvent = value;
+    return this;
+  }
+
   public String getFieldLeadAdsFormEventSourceType() {
     return mLeadAdsFormEventSourceType;
   }
@@ -414,6 +460,15 @@ public class AdPromotedObject extends APINode {
 
   public AdPromotedObject setFieldLeadAdsOffsiteConversionType(String value) {
     this.mLeadAdsOffsiteConversionType = value;
+    return this;
+  }
+
+  public String getFieldLeadAdsQualityVolumeSetting() {
+    return mLeadAdsQualityVolumeSetting;
+  }
+
+  public AdPromotedObject setFieldLeadAdsQualityVolumeSetting(String value) {
+    this.mLeadAdsQualityVolumeSetting = value;
     return this;
   }
 
@@ -444,11 +499,11 @@ public class AdPromotedObject extends APINode {
     return this;
   }
 
-  public String getFieldMultiEventProduct() {
+  public Long getFieldMultiEventProduct() {
     return mMultiEventProduct;
   }
 
-  public AdPromotedObject setFieldMultiEventProduct(String value) {
+  public AdPromotedObject setFieldMultiEventProduct(Long value) {
     this.mMultiEventProduct = value;
     return this;
   }
@@ -926,6 +981,7 @@ public class AdPromotedObject extends APINode {
     this.mApplicationId = instance.mApplicationId;
     this.mBoostedProductSetId = instance.mBoostedProductSetId;
     this.mConversionGoalId = instance.mConversionGoalId;
+    this.mCustomAttributionSourceIds = instance.mCustomAttributionSourceIds;
     this.mCustomConversionId = instance.mCustomConversionId;
     this.mCustomEventStr = instance.mCustomEventStr;
     this.mCustomEventType = instance.mCustomEventType;
@@ -934,10 +990,14 @@ public class AdPromotedObject extends APINode {
     this.mEventId = instance.mEventId;
     this.mFullFunnelObjective = instance.mFullFunnelObjective;
     this.mFundraiserCampaignId = instance.mFundraiserCampaignId;
+    this.mInstagramActorId = instance.mInstagramActorId;
+    this.mJobListingId = instance.mJobListingId;
     this.mLeadAdsCustomEventStr = instance.mLeadAdsCustomEventStr;
     this.mLeadAdsCustomEventType = instance.mLeadAdsCustomEventType;
+    this.mLeadAdsFollowUpEvent = instance.mLeadAdsFollowUpEvent;
     this.mLeadAdsFormEventSourceType = instance.mLeadAdsFormEventSourceType;
     this.mLeadAdsOffsiteConversionType = instance.mLeadAdsOffsiteConversionType;
+    this.mLeadAdsQualityVolumeSetting = instance.mLeadAdsQualityVolumeSetting;
     this.mLeadAdsSelectedPixelId = instance.mLeadAdsSelectedPixelId;
     this.mLiveVideoDestination = instance.mLiveVideoDestination;
     this.mMcmeConversionId = instance.mMcmeConversionId;

@@ -79,6 +79,8 @@ public class Ad extends APINode {
   private AdCreative mCreative = null;
   @SerializedName("creative_asset_groups_spec")
   private AdCreativeAssetGroupsSpec mCreativeAssetGroupsSpec = null;
+  @SerializedName("creative_automation_spec")
+  private AdCreativeAutomationSpec mCreativeAutomationSpec = null;
   @SerializedName("demolink_hash")
   private String mDemolinkHash = null;
   @SerializedName("display_sequence")
@@ -468,6 +470,10 @@ public class Ad extends APINode {
     return mCreativeAssetGroupsSpec;
   }
 
+  public AdCreativeAutomationSpec getFieldCreativeAutomationSpec() {
+    return mCreativeAutomationSpec;
+  }
+
   public String getFieldDemolinkHash() {
     return mDemolinkHash;
   }
@@ -599,6 +605,7 @@ public class Ad extends APINode {
       "existing_post_title",
       "facebook_branded_content",
       "format_transformation_spec",
+      "generative_asset_spec",
       "id",
       "image_crops",
       "image_hash",
@@ -644,6 +651,7 @@ public class Ad extends APINode {
       "url_tags",
       "use_page_actor_override",
       "video_id",
+      "wamo_whatsapp_identity_spec",
     };
 
     @Override
@@ -951,6 +959,13 @@ public class Ad extends APINode {
     }
     public APIRequestGetAdCreatives requestFormatTransformationSpecField (boolean value) {
       this.requestField("format_transformation_spec", value);
+      return this;
+    }
+    public APIRequestGetAdCreatives requestGenerativeAssetSpecField () {
+      return this.requestGenerativeAssetSpecField(true);
+    }
+    public APIRequestGetAdCreatives requestGenerativeAssetSpecField (boolean value) {
+      this.requestField("generative_asset_spec", value);
       return this;
     }
     public APIRequestGetAdCreatives requestIdField () {
@@ -1266,6 +1281,13 @@ public class Ad extends APINode {
     }
     public APIRequestGetAdCreatives requestVideoIdField (boolean value) {
       this.requestField("video_id", value);
+      return this;
+    }
+    public APIRequestGetAdCreatives requestWamoWhatsappIdentitySpecField () {
+      return this.requestWamoWhatsappIdentitySpecField(true);
+    }
+    public APIRequestGetAdCreatives requestWamoWhatsappIdentitySpecField (boolean value) {
+      this.requestField("wamo_whatsapp_identity_spec", value);
       return this;
     }
   }
@@ -1632,6 +1654,7 @@ public class Ad extends APINode {
       "created_time",
       "creative",
       "creative_asset_groups_spec",
+      "creative_automation_spec",
       "demolink_hash",
       "display_sequence",
       "effective_status",
@@ -1912,6 +1935,13 @@ public class Ad extends APINode {
     }
     public APIRequestGetCopies requestCreativeAssetGroupsSpecField (boolean value) {
       this.requestField("creative_asset_groups_spec", value);
+      return this;
+    }
+    public APIRequestGetCopies requestCreativeAutomationSpecField () {
+      return this.requestCreativeAutomationSpecField(true);
+    }
+    public APIRequestGetCopies requestCreativeAutomationSpecField (boolean value) {
+      this.requestField("creative_automation_spec", value);
       return this;
     }
     public APIRequestGetCopies requestDemolinkHashField () {
@@ -3621,6 +3651,7 @@ public class Ad extends APINode {
       "created_time",
       "creative",
       "creative_asset_groups_spec",
+      "creative_automation_spec",
       "demolink_hash",
       "display_sequence",
       "effective_status",
@@ -3912,6 +3943,13 @@ public class Ad extends APINode {
       this.requestField("creative_asset_groups_spec", value);
       return this;
     }
+    public APIRequestGet requestCreativeAutomationSpecField () {
+      return this.requestCreativeAutomationSpecField(true);
+    }
+    public APIRequestGet requestCreativeAutomationSpecField (boolean value) {
+      this.requestField("creative_automation_spec", value);
+      return this;
+    }
     public APIRequestGet requestDemolinkHashField () {
       return this.requestDemolinkHashField(true);
     }
@@ -4078,6 +4116,7 @@ public class Ad extends APINode {
       "conversion_domain",
       "creative",
       "creative_asset_groups_spec",
+      "creative_automation_spec",
       "display_sequence",
       "draft_adgroup_id",
       "engagement_audience",
@@ -4208,6 +4247,15 @@ public class Ad extends APINode {
     }
     public APIRequestUpdate setCreativeAssetGroupsSpec (String creativeAssetGroupsSpec) {
       this.setParam("creative_asset_groups_spec", creativeAssetGroupsSpec);
+      return this;
+    }
+
+    public APIRequestUpdate setCreativeAutomationSpec (Object creativeAutomationSpec) {
+      this.setParam("creative_automation_spec", creativeAutomationSpec);
+      return this;
+    }
+    public APIRequestUpdate setCreativeAutomationSpec (String creativeAutomationSpec) {
+      this.setParam("creative_automation_spec", creativeAutomationSpec);
       return this;
     }
 
@@ -4582,6 +4630,7 @@ public class Ad extends APINode {
     this.mCreatedTime = instance.mCreatedTime;
     this.mCreative = instance.mCreative;
     this.mCreativeAssetGroupsSpec = instance.mCreativeAssetGroupsSpec;
+    this.mCreativeAutomationSpec = instance.mCreativeAutomationSpec;
     this.mDemolinkHash = instance.mDemolinkHash;
     this.mDisplaySequence = instance.mDisplaySequence;
     this.mEffectiveStatus = instance.mEffectiveStatus;

@@ -1,0 +1,416 @@
+/*
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ * All rights reserved.
+ *
+ * This source code is licensed under the license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+package com.facebook.ads.sdk;
+
+import java.io.File;
+import java.lang.reflect.Modifier;
+import java.lang.reflect.Type;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import com.google.common.base.Function;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.MoreExecutors;
+import com.google.common.util.concurrent.SettableFuture;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonArray;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.reflect.TypeToken;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
+
+import com.facebook.ads.sdk.APIException.MalformedResponseException;
+
+/**
+ * This class is auto-generated.
+ *
+ * For any issues or feature requests related to this class, please let us know
+ * on github and we'll fix in our codegen framework. We'll not be able to accept
+ * pull request for this class.
+ *
+ */
+public class PageCTXBudgetDFOBudgetRecommendation extends APINode {
+  @SerializedName("budget")
+  private String mBudget = null;
+  @SerializedName("budget_leads")
+  private String mBudgetLeads = null;
+  @SerializedName("budget_new_model")
+  private String mBudgetNewModel = null;
+  @SerializedName("budget_purchases")
+  private String mBudgetPurchases = null;
+  @SerializedName("budget_value")
+  private String mBudgetValue = null;
+  @SerializedName("budget_without_threshold")
+  private String mBudgetWithoutThreshold = null;
+  @SerializedName("reported_conversion")
+  private String mReportedConversion = null;
+  @SerializedName("reported_conversion_leads")
+  private String mReportedConversionLeads = null;
+  @SerializedName("reported_conversion_purchases")
+  private String mReportedConversionPurchases = null;
+  @SerializedName("reported_conversion_value")
+  private String mReportedConversionValue = null;
+  @SerializedName("reported_conversions_new_model")
+  private String mReportedConversionsNewModel = null;
+  @SerializedName("reported_conversions_without_threshold")
+  private String mReportedConversionsWithoutThreshold = null;
+  @SerializedName("zo_budget")
+  private String mZoBudget = null;
+  @SerializedName("zo_budget_leads")
+  private String mZoBudgetLeads = null;
+  @SerializedName("zo_budget_purchases")
+  private String mZoBudgetPurchases = null;
+  @SerializedName("zo_budget_value")
+  private String mZoBudgetValue = null;
+  protected static Gson gson = null;
+
+  public PageCTXBudgetDFOBudgetRecommendation() {
+  }
+
+  public String getId() {
+    return null;
+  }
+  public static PageCTXBudgetDFOBudgetRecommendation loadJSON(String json, APIContext context, String header) {
+    PageCTXBudgetDFOBudgetRecommendation pageCTXBudgetDFOBudgetRecommendation = getGson().fromJson(json, PageCTXBudgetDFOBudgetRecommendation.class);
+    if (context.isDebug()) {
+      JsonParser parser = new JsonParser();
+      JsonElement o1 = parser.parse(json);
+      JsonElement o2 = parser.parse(pageCTXBudgetDFOBudgetRecommendation.toString());
+      if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
+        o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
+      }
+      if (!o1.equals(o2)) {
+        context.log("[Warning] When parsing response, object is not consistent with JSON:");
+        context.log("[JSON]" + o1);
+        context.log("[Object]" + o2);
+      }
+    }
+    pageCTXBudgetDFOBudgetRecommendation.context = context;
+    pageCTXBudgetDFOBudgetRecommendation.rawValue = json;
+    pageCTXBudgetDFOBudgetRecommendation.header = header;
+    return pageCTXBudgetDFOBudgetRecommendation;
+  }
+
+  public static APINodeList<PageCTXBudgetDFOBudgetRecommendation> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<PageCTXBudgetDFOBudgetRecommendation> pageCTXBudgetDFOBudgetRecommendations = new APINodeList<PageCTXBudgetDFOBudgetRecommendation>(request, json, header);
+    JsonArray arr;
+    JsonObject obj;
+    JsonParser parser = new JsonParser();
+    Exception exception = null;
+    try{
+      JsonElement result = parser.parse(json);
+      if (result.isJsonArray()) {
+        // First, check if it's a pure JSON Array
+        arr = result.getAsJsonArray();
+        for (int i = 0; i < arr.size(); i++) {
+          pageCTXBudgetDFOBudgetRecommendations.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+        };
+        return pageCTXBudgetDFOBudgetRecommendations;
+      } else if (result.isJsonObject()) {
+        obj = result.getAsJsonObject();
+        if (obj.has("data")) {
+          if (obj.has("paging")) {
+            JsonObject paging = obj.get("paging").getAsJsonObject();
+            if (paging.has("cursors")) {
+                JsonObject cursors = paging.get("cursors").getAsJsonObject();
+                String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
+                String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
+                pageCTXBudgetDFOBudgetRecommendations.setCursors(before, after);
+            }
+            String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
+            String next = paging.has("next") ? paging.get("next").getAsString() : null;
+            pageCTXBudgetDFOBudgetRecommendations.setPaging(previous, next);
+            if (context.hasAppSecret()) {
+              pageCTXBudgetDFOBudgetRecommendations.setAppSecret(context.getAppSecretProof());
+            }
+          }
+          if (obj.get("data").isJsonArray()) {
+            // Second, check if it's a JSON array with "data"
+            arr = obj.get("data").getAsJsonArray();
+            for (int i = 0; i < arr.size(); i++) {
+              pageCTXBudgetDFOBudgetRecommendations.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+            };
+          } else if (obj.get("data").isJsonObject()) {
+            // Third, check if it's a JSON object with "data"
+            obj = obj.get("data").getAsJsonObject();
+            boolean isRedownload = false;
+            for (String s : new String[]{"campaigns", "adsets", "ads"}) {
+              if (obj.has(s)) {
+                isRedownload = true;
+                obj = obj.getAsJsonObject(s);
+                for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
+                  pageCTXBudgetDFOBudgetRecommendations.add(loadJSON(entry.getValue().toString(), context, header));
+                }
+                break;
+              }
+            }
+            if (!isRedownload) {
+              pageCTXBudgetDFOBudgetRecommendations.add(loadJSON(obj.toString(), context, header));
+            }
+          }
+          return pageCTXBudgetDFOBudgetRecommendations;
+        } else if (obj.has("images")) {
+          // Fourth, check if it's a map of image objects
+          obj = obj.get("images").getAsJsonObject();
+          for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
+              pageCTXBudgetDFOBudgetRecommendations.add(loadJSON(entry.getValue().toString(), context, header));
+          }
+          return pageCTXBudgetDFOBudgetRecommendations;
+        } else {
+          // Fifth, check if it's an array of objects indexed by id
+          boolean isIdIndexedArray = true;
+          for (Map.Entry entry : obj.entrySet()) {
+            String key = (String) entry.getKey();
+            if (key.equals("__fb_trace_id__")) {
+              continue;
+            }
+            JsonElement value = (JsonElement) entry.getValue();
+            if (
+              value != null &&
+              value.isJsonObject() &&
+              value.getAsJsonObject().has("id") &&
+              value.getAsJsonObject().get("id") != null &&
+              value.getAsJsonObject().get("id").getAsString().equals(key)
+            ) {
+              pageCTXBudgetDFOBudgetRecommendations.add(loadJSON(value.toString(), context, header));
+            } else {
+              isIdIndexedArray = false;
+              break;
+            }
+          }
+          if (isIdIndexedArray) {
+            return pageCTXBudgetDFOBudgetRecommendations;
+          }
+
+          // Sixth, check if it's pure JsonObject
+          pageCTXBudgetDFOBudgetRecommendations.clear();
+          pageCTXBudgetDFOBudgetRecommendations.add(loadJSON(json, context, header));
+          return pageCTXBudgetDFOBudgetRecommendations;
+        }
+      }
+    } catch (Exception e) {
+      exception = e;
+    }
+    throw new MalformedResponseException(
+      "Invalid response string: " + json,
+      exception
+    );
+  }
+
+  @Override
+  public APIContext getContext() {
+    return context;
+  }
+
+  @Override
+  public void setContext(APIContext context) {
+    this.context = context;
+  }
+
+  @Override
+  public String toString() {
+    return getGson().toJson(this);
+  }
+
+
+  public String getFieldBudget() {
+    return mBudget;
+  }
+
+  public PageCTXBudgetDFOBudgetRecommendation setFieldBudget(String value) {
+    this.mBudget = value;
+    return this;
+  }
+
+  public String getFieldBudgetLeads() {
+    return mBudgetLeads;
+  }
+
+  public PageCTXBudgetDFOBudgetRecommendation setFieldBudgetLeads(String value) {
+    this.mBudgetLeads = value;
+    return this;
+  }
+
+  public String getFieldBudgetNewModel() {
+    return mBudgetNewModel;
+  }
+
+  public PageCTXBudgetDFOBudgetRecommendation setFieldBudgetNewModel(String value) {
+    this.mBudgetNewModel = value;
+    return this;
+  }
+
+  public String getFieldBudgetPurchases() {
+    return mBudgetPurchases;
+  }
+
+  public PageCTXBudgetDFOBudgetRecommendation setFieldBudgetPurchases(String value) {
+    this.mBudgetPurchases = value;
+    return this;
+  }
+
+  public String getFieldBudgetValue() {
+    return mBudgetValue;
+  }
+
+  public PageCTXBudgetDFOBudgetRecommendation setFieldBudgetValue(String value) {
+    this.mBudgetValue = value;
+    return this;
+  }
+
+  public String getFieldBudgetWithoutThreshold() {
+    return mBudgetWithoutThreshold;
+  }
+
+  public PageCTXBudgetDFOBudgetRecommendation setFieldBudgetWithoutThreshold(String value) {
+    this.mBudgetWithoutThreshold = value;
+    return this;
+  }
+
+  public String getFieldReportedConversion() {
+    return mReportedConversion;
+  }
+
+  public PageCTXBudgetDFOBudgetRecommendation setFieldReportedConversion(String value) {
+    this.mReportedConversion = value;
+    return this;
+  }
+
+  public String getFieldReportedConversionLeads() {
+    return mReportedConversionLeads;
+  }
+
+  public PageCTXBudgetDFOBudgetRecommendation setFieldReportedConversionLeads(String value) {
+    this.mReportedConversionLeads = value;
+    return this;
+  }
+
+  public String getFieldReportedConversionPurchases() {
+    return mReportedConversionPurchases;
+  }
+
+  public PageCTXBudgetDFOBudgetRecommendation setFieldReportedConversionPurchases(String value) {
+    this.mReportedConversionPurchases = value;
+    return this;
+  }
+
+  public String getFieldReportedConversionValue() {
+    return mReportedConversionValue;
+  }
+
+  public PageCTXBudgetDFOBudgetRecommendation setFieldReportedConversionValue(String value) {
+    this.mReportedConversionValue = value;
+    return this;
+  }
+
+  public String getFieldReportedConversionsNewModel() {
+    return mReportedConversionsNewModel;
+  }
+
+  public PageCTXBudgetDFOBudgetRecommendation setFieldReportedConversionsNewModel(String value) {
+    this.mReportedConversionsNewModel = value;
+    return this;
+  }
+
+  public String getFieldReportedConversionsWithoutThreshold() {
+    return mReportedConversionsWithoutThreshold;
+  }
+
+  public PageCTXBudgetDFOBudgetRecommendation setFieldReportedConversionsWithoutThreshold(String value) {
+    this.mReportedConversionsWithoutThreshold = value;
+    return this;
+  }
+
+  public String getFieldZoBudget() {
+    return mZoBudget;
+  }
+
+  public PageCTXBudgetDFOBudgetRecommendation setFieldZoBudget(String value) {
+    this.mZoBudget = value;
+    return this;
+  }
+
+  public String getFieldZoBudgetLeads() {
+    return mZoBudgetLeads;
+  }
+
+  public PageCTXBudgetDFOBudgetRecommendation setFieldZoBudgetLeads(String value) {
+    this.mZoBudgetLeads = value;
+    return this;
+  }
+
+  public String getFieldZoBudgetPurchases() {
+    return mZoBudgetPurchases;
+  }
+
+  public PageCTXBudgetDFOBudgetRecommendation setFieldZoBudgetPurchases(String value) {
+    this.mZoBudgetPurchases = value;
+    return this;
+  }
+
+  public String getFieldZoBudgetValue() {
+    return mZoBudgetValue;
+  }
+
+  public PageCTXBudgetDFOBudgetRecommendation setFieldZoBudgetValue(String value) {
+    this.mZoBudgetValue = value;
+    return this;
+  }
+
+
+
+
+  synchronized /*package*/ static Gson getGson() {
+    if (gson != null) {
+      return gson;
+    } else {
+      gson = new GsonBuilder()
+        .excludeFieldsWithModifiers(Modifier.STATIC)
+        .excludeFieldsWithModifiers(Modifier.PROTECTED)
+        .disableHtmlEscaping()
+        .create();
+    }
+    return gson;
+  }
+
+  public PageCTXBudgetDFOBudgetRecommendation copyFrom(PageCTXBudgetDFOBudgetRecommendation instance) {
+    this.mBudget = instance.mBudget;
+    this.mBudgetLeads = instance.mBudgetLeads;
+    this.mBudgetNewModel = instance.mBudgetNewModel;
+    this.mBudgetPurchases = instance.mBudgetPurchases;
+    this.mBudgetValue = instance.mBudgetValue;
+    this.mBudgetWithoutThreshold = instance.mBudgetWithoutThreshold;
+    this.mReportedConversion = instance.mReportedConversion;
+    this.mReportedConversionLeads = instance.mReportedConversionLeads;
+    this.mReportedConversionPurchases = instance.mReportedConversionPurchases;
+    this.mReportedConversionValue = instance.mReportedConversionValue;
+    this.mReportedConversionsNewModel = instance.mReportedConversionsNewModel;
+    this.mReportedConversionsWithoutThreshold = instance.mReportedConversionsWithoutThreshold;
+    this.mZoBudget = instance.mZoBudget;
+    this.mZoBudgetLeads = instance.mZoBudgetLeads;
+    this.mZoBudgetPurchases = instance.mZoBudgetPurchases;
+    this.mZoBudgetValue = instance.mZoBudgetValue;
+    this.context = instance.context;
+    this.rawValue = instance.rawValue;
+    return this;
+  }
+
+  public static APIRequest.ResponseParser<PageCTXBudgetDFOBudgetRecommendation> getParser() {
+    return new APIRequest.ResponseParser<PageCTXBudgetDFOBudgetRecommendation>() {
+      public APINodeList<PageCTXBudgetDFOBudgetRecommendation> parseResponse(String response, APIContext context, APIRequest<PageCTXBudgetDFOBudgetRecommendation> request, String header) throws MalformedResponseException {
+        return PageCTXBudgetDFOBudgetRecommendation.parseResponse(response, context, request, header);
+      }
+    };
+  }
+}

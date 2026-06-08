@@ -40,23 +40,23 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class CatalogSubscribedApps extends APINode {
+public class AdCampaignBudgetSchedules extends APINode {
   @SerializedName("id")
   private String mId = null;
   protected static Gson gson = null;
 
-  public CatalogSubscribedApps() {
+  public AdCampaignBudgetSchedules() {
   }
 
   public String getId() {
     return getFieldId().toString();
   }
-  public static CatalogSubscribedApps loadJSON(String json, APIContext context, String header) {
-    CatalogSubscribedApps catalogSubscribedApps = getGson().fromJson(json, CatalogSubscribedApps.class);
+  public static AdCampaignBudgetSchedules loadJSON(String json, APIContext context, String header) {
+    AdCampaignBudgetSchedules adCampaignBudgetSchedules = getGson().fromJson(json, AdCampaignBudgetSchedules.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(catalogSubscribedApps.toString());
+      JsonElement o2 = parser.parse(adCampaignBudgetSchedules.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -66,14 +66,14 @@ public class CatalogSubscribedApps extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    catalogSubscribedApps.context = context;
-    catalogSubscribedApps.rawValue = json;
-    catalogSubscribedApps.header = header;
-    return catalogSubscribedApps;
+    adCampaignBudgetSchedules.context = context;
+    adCampaignBudgetSchedules.rawValue = json;
+    adCampaignBudgetSchedules.header = header;
+    return adCampaignBudgetSchedules;
   }
 
-  public static APINodeList<CatalogSubscribedApps> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<CatalogSubscribedApps> catalogSubscribedAppss = new APINodeList<CatalogSubscribedApps>(request, json, header);
+  public static APINodeList<AdCampaignBudgetSchedules> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdCampaignBudgetSchedules> adCampaignBudgetScheduless = new APINodeList<AdCampaignBudgetSchedules>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -84,9 +84,9 @@ public class CatalogSubscribedApps extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          catalogSubscribedAppss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          adCampaignBudgetScheduless.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return catalogSubscribedAppss;
+        return adCampaignBudgetScheduless;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -96,20 +96,20 @@ public class CatalogSubscribedApps extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                catalogSubscribedAppss.setCursors(before, after);
+                adCampaignBudgetScheduless.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            catalogSubscribedAppss.setPaging(previous, next);
+            adCampaignBudgetScheduless.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              catalogSubscribedAppss.setAppSecret(context.getAppSecretProof());
+              adCampaignBudgetScheduless.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              catalogSubscribedAppss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              adCampaignBudgetScheduless.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -120,23 +120,23 @@ public class CatalogSubscribedApps extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  catalogSubscribedAppss.add(loadJSON(entry.getValue().toString(), context, header));
+                  adCampaignBudgetScheduless.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              catalogSubscribedAppss.add(loadJSON(obj.toString(), context, header));
+              adCampaignBudgetScheduless.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return catalogSubscribedAppss;
+          return adCampaignBudgetScheduless;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              catalogSubscribedAppss.add(loadJSON(entry.getValue().toString(), context, header));
+              adCampaignBudgetScheduless.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return catalogSubscribedAppss;
+          return adCampaignBudgetScheduless;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -153,20 +153,20 @@ public class CatalogSubscribedApps extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              catalogSubscribedAppss.add(loadJSON(value.toString(), context, header));
+              adCampaignBudgetScheduless.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return catalogSubscribedAppss;
+            return adCampaignBudgetScheduless;
           }
 
           // Sixth, check if it's pure JsonObject
-          catalogSubscribedAppss.clear();
-          catalogSubscribedAppss.add(loadJSON(json, context, header));
-          return catalogSubscribedAppss;
+          adCampaignBudgetScheduless.clear();
+          adCampaignBudgetScheduless.add(loadJSON(json, context, header));
+          return adCampaignBudgetScheduless;
         }
       }
     } catch (Exception e) {
@@ -193,8 +193,8 @@ public class CatalogSubscribedApps extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGendelete gendelete() {
-    return new APIRequestGendelete(this.getId(), context);
+  public APIRequestGenpost genpost() {
+    return new APIRequestGenpost(this.getId(), context);
   }
 
 
@@ -202,18 +202,18 @@ public class CatalogSubscribedApps extends APINode {
     return mId;
   }
 
-  public CatalogSubscribedApps setFieldId(String value) {
+  public AdCampaignBudgetSchedules setFieldId(String value) {
     this.mId = value;
     return this;
   }
 
 
 
-  public static class APIRequestGendelete extends APIRequest<CatalogSubscribedAppsDelete> {
+  public static class APIRequestGenpost extends APIRequest<AdCampaignBudgetSchedulesPost> {
 
-    APINodeList<CatalogSubscribedAppsDelete> lastResponse = null;
+    AdCampaignBudgetSchedulesPost lastResponse = null;
     @Override
-    public APINodeList<CatalogSubscribedAppsDelete> getLastResponse() {
+    public AdCampaignBudgetSchedulesPost getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
@@ -223,33 +223,33 @@ public class CatalogSubscribedApps extends APINode {
     };
 
     @Override
-    public APINodeList<CatalogSubscribedAppsDelete> parseResponse(String response, String header) throws APIException {
-      return CatalogSubscribedAppsDelete.parseResponse(response, getContext(), this, header);
+    public AdCampaignBudgetSchedulesPost parseResponse(String response, String header) throws APIException {
+      return AdCampaignBudgetSchedulesPost.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public APINodeList<CatalogSubscribedAppsDelete> execute() throws APIException {
+    public AdCampaignBudgetSchedulesPost execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINodeList<CatalogSubscribedAppsDelete> execute(Map<String, Object> extraParams) throws APIException {
+    public AdCampaignBudgetSchedulesPost execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<APINodeList<CatalogSubscribedAppsDelete>> executeAsync() throws APIException {
+    public ListenableFuture<AdCampaignBudgetSchedulesPost> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<APINodeList<CatalogSubscribedAppsDelete>> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<AdCampaignBudgetSchedulesPost> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<CatalogSubscribedAppsDelete>>() {
-           public APINodeList<CatalogSubscribedAppsDelete> apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, AdCampaignBudgetSchedulesPost>() {
+           public AdCampaignBudgetSchedulesPost apply(ResponseWrapper result) {
              try {
-               return APIRequestGendelete.this.parseResponse(result.getBody(), result.getHeader());
+               return APIRequestGenpost.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -259,28 +259,28 @@ public class CatalogSubscribedApps extends APINode {
       );
     };
 
-    public APIRequestGendelete(String nodeId, APIContext context) {
-      super(context, nodeId, "/subscribed_apps", "DELETE", Arrays.asList(PARAMS));
+    public APIRequestGenpost(String nodeId, APIContext context) {
+      super(context, nodeId, "/budget_schedules", "POST", Arrays.asList(PARAMS));
     }
 
     @Override
-    public APIRequestGendelete setParam(String param, Object value) {
+    public APIRequestGenpost setParam(String param, Object value) {
       setParamInternal(param, value);
       return this;
     }
 
     @Override
-    public APIRequestGendelete setParams(Map<String, Object> params) {
+    public APIRequestGenpost setParams(Map<String, Object> params) {
       setParamsInternal(params);
       return this;
     }
 
 
-    public APIRequestGendelete requestAllFields () {
+    public APIRequestGenpost requestAllFields () {
       return this.requestAllFields(true);
     }
 
-    public APIRequestGendelete requestAllFields (boolean value) {
+    public APIRequestGenpost requestAllFields (boolean value) {
       for (String field : FIELDS) {
         this.requestField(field, value);
       }
@@ -288,12 +288,12 @@ public class CatalogSubscribedApps extends APINode {
     }
 
     @Override
-    public APIRequestGendelete requestFields (List<String> fields) {
+    public APIRequestGenpost requestFields (List<String> fields) {
       return this.requestFields(fields, true);
     }
 
     @Override
-    public APIRequestGendelete requestFields (List<String> fields, boolean value) {
+    public APIRequestGenpost requestFields (List<String> fields, boolean value) {
       for (String field : fields) {
         this.requestField(field, value);
       }
@@ -301,13 +301,13 @@ public class CatalogSubscribedApps extends APINode {
     }
 
     @Override
-    public APIRequestGendelete requestField (String field) {
+    public APIRequestGenpost requestField (String field) {
       this.requestField(field, true);
       return this;
     }
 
     @Override
-    public APIRequestGendelete requestField (String field, boolean value) {
+    public APIRequestGenpost requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
@@ -328,17 +328,17 @@ public class CatalogSubscribedApps extends APINode {
     return gson;
   }
 
-  public CatalogSubscribedApps copyFrom(CatalogSubscribedApps instance) {
+  public AdCampaignBudgetSchedules copyFrom(AdCampaignBudgetSchedules instance) {
     this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<CatalogSubscribedApps> getParser() {
-    return new APIRequest.ResponseParser<CatalogSubscribedApps>() {
-      public APINodeList<CatalogSubscribedApps> parseResponse(String response, APIContext context, APIRequest<CatalogSubscribedApps> request, String header) throws MalformedResponseException {
-        return CatalogSubscribedApps.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<AdCampaignBudgetSchedules> getParser() {
+    return new APIRequest.ResponseParser<AdCampaignBudgetSchedules>() {
+      public APINodeList<AdCampaignBudgetSchedules> parseResponse(String response, APIContext context, APIRequest<AdCampaignBudgetSchedules> request, String header) throws MalformedResponseException {
+        return AdCampaignBudgetSchedules.parseResponse(response, context, request, header);
       }
     };
   }

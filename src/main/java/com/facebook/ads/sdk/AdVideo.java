@@ -119,8 +119,12 @@ public class AdVideo extends APINode {
   private Privacy mPrivacy = null;
   @SerializedName("published")
   private Boolean mPublished = null;
+  @SerializedName("replace_audio_status")
+  private String mReplaceAudioStatus = null;
   @SerializedName("scheduled_publish_time")
   private String mScheduledPublishTime = null;
+  @SerializedName("selected_audio_spec")
+  private Object mSelectedAudioSpec = null;
   @SerializedName("source")
   private String mSource = null;
   @SerializedName("spherical")
@@ -376,10 +380,6 @@ public class AdVideo extends APINode {
     return new APIRequestGetCrosspostSharedPages(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestCreateGamingClipCreate createGamingClipCreate() {
-    return new APIRequestCreateGamingClipCreate(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetLikes getLikes() {
     return new APIRequestGetLikes(this.getPrefixedId().toString(), context);
   }
@@ -607,8 +607,16 @@ public class AdVideo extends APINode {
     return mPublished;
   }
 
+  public String getFieldReplaceAudioStatus() {
+    return mReplaceAudioStatus;
+  }
+
   public String getFieldScheduledPublishTime() {
     return mScheduledPublishTime;
+  }
+
+  public Object getFieldSelectedAudioSpec() {
+    return mSelectedAudioSpec;
   }
 
   public String getFieldSource() {
@@ -1835,6 +1843,7 @@ public class AdVideo extends APINode {
       "offer_eligible",
       "overall_star_rating",
       "owner_business",
+      "page_backed_threads_account_id",
       "page_token",
       "parent_page",
       "parking",
@@ -2692,6 +2701,13 @@ public class AdVideo extends APINode {
       this.requestField("owner_business", value);
       return this;
     }
+    public APIRequestGetCrosspostSharedPages requestPageBackedThreadsAccountIdField () {
+      return this.requestPageBackedThreadsAccountIdField(true);
+    }
+    public APIRequestGetCrosspostSharedPages requestPageBackedThreadsAccountIdField (boolean value) {
+      this.requestField("page_backed_threads_account_id", value);
+      return this;
+    }
     public APIRequestGetCrosspostSharedPages requestPageTokenField () {
       return this.requestPageTokenField(true);
     }
@@ -3051,121 +3067,6 @@ public class AdVideo extends APINode {
     }
   }
 
-  public static class APIRequestCreateGamingClipCreate extends APIRequest<AdVideo> {
-
-    AdVideo lastResponse = null;
-    @Override
-    public AdVideo getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "duration_seconds",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public AdVideo parseResponse(String response, String header) throws APIException {
-      return AdVideo.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public AdVideo execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public AdVideo execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<AdVideo> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<AdVideo> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, AdVideo>() {
-           public AdVideo apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateGamingClipCreate.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         },
-         MoreExecutors.directExecutor()
-      );
-    };
-
-    public APIRequestCreateGamingClipCreate(String nodeId, APIContext context) {
-      super(context, nodeId, "/gaming_clip_create", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateGamingClipCreate setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateGamingClipCreate setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateGamingClipCreate setDurationSeconds (Double durationSeconds) {
-      this.setParam("duration_seconds", durationSeconds);
-      return this;
-    }
-    public APIRequestCreateGamingClipCreate setDurationSeconds (String durationSeconds) {
-      this.setParam("duration_seconds", durationSeconds);
-      return this;
-    }
-
-    public APIRequestCreateGamingClipCreate requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateGamingClipCreate requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateGamingClipCreate requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateGamingClipCreate requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateGamingClipCreate requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateGamingClipCreate requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
   public static class APIRequestGetLikes extends APIRequest<Profile> {
 
     APINodeList<Profile> lastResponse = null;
@@ -3367,6 +3268,7 @@ public class AdVideo extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "attribution_id_v2",
       "feedback_source",
       "nectar_module",
       "notify",
@@ -3429,6 +3331,11 @@ public class AdVideo extends APINode {
       return this;
     }
 
+
+    public APIRequestCreateLike setAttributionIdV2 (String attributionIdV2) {
+      this.setParam("attribution_id_v2", attributionIdV2);
+      return this;
+    }
 
     public APIRequestCreateLike setFeedbackSource (String feedbackSource) {
       this.setParam("feedback_source", feedbackSource);
@@ -4042,6 +3949,7 @@ public class AdVideo extends APINode {
       "offer_eligible",
       "overall_star_rating",
       "owner_business",
+      "page_backed_threads_account_id",
       "page_token",
       "parent_page",
       "parking",
@@ -4897,6 +4805,13 @@ public class AdVideo extends APINode {
     }
     public APIRequestGetSponsorTags requestOwnerBusinessField (boolean value) {
       this.requestField("owner_business", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestPageBackedThreadsAccountIdField () {
+      return this.requestPageBackedThreadsAccountIdField(true);
+    }
+    public APIRequestGetSponsorTags requestPageBackedThreadsAccountIdField (boolean value) {
+      this.requestField("page_backed_threads_account_id", value);
       return this;
     }
     public APIRequestGetSponsorTags requestPageTokenField () {
@@ -6013,7 +5928,9 @@ public class AdVideo extends APINode {
       "premiere_living_room_status",
       "privacy",
       "published",
+      "replace_audio_status",
       "scheduled_publish_time",
+      "selected_audio_spec",
       "source",
       "spherical",
       "status",
@@ -6386,11 +6303,25 @@ public class AdVideo extends APINode {
       this.requestField("published", value);
       return this;
     }
+    public APIRequestGet requestReplaceAudioStatusField () {
+      return this.requestReplaceAudioStatusField(true);
+    }
+    public APIRequestGet requestReplaceAudioStatusField (boolean value) {
+      this.requestField("replace_audio_status", value);
+      return this;
+    }
     public APIRequestGet requestScheduledPublishTimeField () {
       return this.requestScheduledPublishTimeField(true);
     }
     public APIRequestGet requestScheduledPublishTimeField (boolean value) {
       this.requestField("scheduled_publish_time", value);
+      return this;
+    }
+    public APIRequestGet requestSelectedAudioSpecField () {
+      return this.requestSelectedAudioSpecField(true);
+    }
+    public APIRequestGet requestSelectedAudioSpecField (boolean value) {
+      this.requestField("selected_audio_spec", value);
       return this;
     }
     public APIRequestGet requestSourceField () {
@@ -7454,7 +7385,9 @@ public class AdVideo extends APINode {
     this.mPremiereLivingRoomStatus = instance.mPremiereLivingRoomStatus;
     this.mPrivacy = instance.mPrivacy;
     this.mPublished = instance.mPublished;
+    this.mReplaceAudioStatus = instance.mReplaceAudioStatus;
     this.mScheduledPublishTime = instance.mScheduledPublishTime;
+    this.mSelectedAudioSpec = instance.mSelectedAudioSpec;
     this.mSource = instance.mSource;
     this.mSpherical = instance.mSpherical;
     this.mStatus = instance.mStatus;

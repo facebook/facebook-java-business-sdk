@@ -386,6 +386,10 @@ public class AdPreview extends APINode {
   public static enum EnumCreativeFeature {
       @SerializedName("ig_video_native_subtitle")
       VALUE_IG_VIDEO_NATIVE_SUBTITLE("ig_video_native_subtitle"),
+      @SerializedName("image_animation")
+      VALUE_IMAGE_ANIMATION("image_animation"),
+      @SerializedName("product_browsing")
+      VALUE_PRODUCT_BROWSING("product_browsing"),
       @SerializedName("product_metadata_automation")
       VALUE_PRODUCT_METADATA_AUTOMATION("product_metadata_automation"),
       @SerializedName("profile_card")

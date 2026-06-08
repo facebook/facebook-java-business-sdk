@@ -40,23 +40,29 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class ProductCatalogAppsAndSoftwarePost extends APINode {
+public class AdAccountAccountControlsPost extends APINode {
+  @SerializedName("error_code")
+  private Long mErrorCode = null;
+  @SerializedName("error_message")
+  private String mErrorMessage = null;
   @SerializedName("id")
   private String mId = null;
+  @SerializedName("success")
+  private Boolean mSuccess = null;
   protected static Gson gson = null;
 
-  public ProductCatalogAppsAndSoftwarePost() {
+  public AdAccountAccountControlsPost() {
   }
 
   public String getId() {
     return getFieldId().toString();
   }
-  public static ProductCatalogAppsAndSoftwarePost loadJSON(String json, APIContext context, String header) {
-    ProductCatalogAppsAndSoftwarePost productCatalogAppsAndSoftwarePost = getGson().fromJson(json, ProductCatalogAppsAndSoftwarePost.class);
+  public static AdAccountAccountControlsPost loadJSON(String json, APIContext context, String header) {
+    AdAccountAccountControlsPost adAccountAccountControlsPost = getGson().fromJson(json, AdAccountAccountControlsPost.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(productCatalogAppsAndSoftwarePost.toString());
+      JsonElement o2 = parser.parse(adAccountAccountControlsPost.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -66,14 +72,14 @@ public class ProductCatalogAppsAndSoftwarePost extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    productCatalogAppsAndSoftwarePost.context = context;
-    productCatalogAppsAndSoftwarePost.rawValue = json;
-    productCatalogAppsAndSoftwarePost.header = header;
-    return productCatalogAppsAndSoftwarePost;
+    adAccountAccountControlsPost.context = context;
+    adAccountAccountControlsPost.rawValue = json;
+    adAccountAccountControlsPost.header = header;
+    return adAccountAccountControlsPost;
   }
 
-  public static APINodeList<ProductCatalogAppsAndSoftwarePost> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<ProductCatalogAppsAndSoftwarePost> productCatalogAppsAndSoftwarePosts = new APINodeList<ProductCatalogAppsAndSoftwarePost>(request, json, header);
+  public static APINodeList<AdAccountAccountControlsPost> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdAccountAccountControlsPost> adAccountAccountControlsPosts = new APINodeList<AdAccountAccountControlsPost>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -84,9 +90,9 @@ public class ProductCatalogAppsAndSoftwarePost extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          productCatalogAppsAndSoftwarePosts.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          adAccountAccountControlsPosts.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return productCatalogAppsAndSoftwarePosts;
+        return adAccountAccountControlsPosts;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -96,20 +102,20 @@ public class ProductCatalogAppsAndSoftwarePost extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                productCatalogAppsAndSoftwarePosts.setCursors(before, after);
+                adAccountAccountControlsPosts.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            productCatalogAppsAndSoftwarePosts.setPaging(previous, next);
+            adAccountAccountControlsPosts.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              productCatalogAppsAndSoftwarePosts.setAppSecret(context.getAppSecretProof());
+              adAccountAccountControlsPosts.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              productCatalogAppsAndSoftwarePosts.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              adAccountAccountControlsPosts.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -120,23 +126,23 @@ public class ProductCatalogAppsAndSoftwarePost extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  productCatalogAppsAndSoftwarePosts.add(loadJSON(entry.getValue().toString(), context, header));
+                  adAccountAccountControlsPosts.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              productCatalogAppsAndSoftwarePosts.add(loadJSON(obj.toString(), context, header));
+              adAccountAccountControlsPosts.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return productCatalogAppsAndSoftwarePosts;
+          return adAccountAccountControlsPosts;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              productCatalogAppsAndSoftwarePosts.add(loadJSON(entry.getValue().toString(), context, header));
+              adAccountAccountControlsPosts.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return productCatalogAppsAndSoftwarePosts;
+          return adAccountAccountControlsPosts;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -153,20 +159,20 @@ public class ProductCatalogAppsAndSoftwarePost extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              productCatalogAppsAndSoftwarePosts.add(loadJSON(value.toString(), context, header));
+              adAccountAccountControlsPosts.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return productCatalogAppsAndSoftwarePosts;
+            return adAccountAccountControlsPosts;
           }
 
           // Sixth, check if it's pure JsonObject
-          productCatalogAppsAndSoftwarePosts.clear();
-          productCatalogAppsAndSoftwarePosts.add(loadJSON(json, context, header));
-          return productCatalogAppsAndSoftwarePosts;
+          adAccountAccountControlsPosts.clear();
+          adAccountAccountControlsPosts.add(loadJSON(json, context, header));
+          return adAccountAccountControlsPosts;
         }
       }
     } catch (Exception e) {
@@ -194,12 +200,39 @@ public class ProductCatalogAppsAndSoftwarePost extends APINode {
   }
 
 
+  public Long getFieldErrorCode() {
+    return mErrorCode;
+  }
+
+  public AdAccountAccountControlsPost setFieldErrorCode(Long value) {
+    this.mErrorCode = value;
+    return this;
+  }
+
+  public String getFieldErrorMessage() {
+    return mErrorMessage;
+  }
+
+  public AdAccountAccountControlsPost setFieldErrorMessage(String value) {
+    this.mErrorMessage = value;
+    return this;
+  }
+
   public String getFieldId() {
     return mId;
   }
 
-  public ProductCatalogAppsAndSoftwarePost setFieldId(String value) {
+  public AdAccountAccountControlsPost setFieldId(String value) {
     this.mId = value;
+    return this;
+  }
+
+  public Boolean getFieldSuccess() {
+    return mSuccess;
+  }
+
+  public AdAccountAccountControlsPost setFieldSuccess(Boolean value) {
+    this.mSuccess = value;
     return this;
   }
 
@@ -219,17 +252,20 @@ public class ProductCatalogAppsAndSoftwarePost extends APINode {
     return gson;
   }
 
-  public ProductCatalogAppsAndSoftwarePost copyFrom(ProductCatalogAppsAndSoftwarePost instance) {
+  public AdAccountAccountControlsPost copyFrom(AdAccountAccountControlsPost instance) {
+    this.mErrorCode = instance.mErrorCode;
+    this.mErrorMessage = instance.mErrorMessage;
     this.mId = instance.mId;
+    this.mSuccess = instance.mSuccess;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<ProductCatalogAppsAndSoftwarePost> getParser() {
-    return new APIRequest.ResponseParser<ProductCatalogAppsAndSoftwarePost>() {
-      public APINodeList<ProductCatalogAppsAndSoftwarePost> parseResponse(String response, APIContext context, APIRequest<ProductCatalogAppsAndSoftwarePost> request, String header) throws MalformedResponseException {
-        return ProductCatalogAppsAndSoftwarePost.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<AdAccountAccountControlsPost> getParser() {
+    return new APIRequest.ResponseParser<AdAccountAccountControlsPost>() {
+      public APINodeList<AdAccountAccountControlsPost> parseResponse(String response, APIContext context, APIRequest<AdAccountAccountControlsPost> request, String header) throws MalformedResponseException {
+        return AdAccountAccountControlsPost.parseResponse(response, context, request, header);
       }
     };
   }

@@ -610,6 +610,7 @@ public class AdsPixel extends APINode {
       "offsite_clo_signal_status",
       "offsite_pixels_tos_accepted",
       "opportunity_score",
+      "opportunity_score_weight",
       "owner",
       "owner_business",
       "partner",
@@ -1116,6 +1117,13 @@ public class AdsPixel extends APINode {
     }
     public APIRequestGetAdAccounts requestOpportunityScoreField (boolean value) {
       this.requestField("opportunity_score", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestOpportunityScoreWeightField () {
+      return this.requestOpportunityScoreWeightField(true);
+    }
+    public APIRequestGetAdAccounts requestOpportunityScoreWeightField (boolean value) {
+      this.requestField("opportunity_score_weight", value);
       return this;
     }
     public APIRequestGetAdAccounts requestOwnerField () {
@@ -3353,6 +3361,7 @@ public class AdsPixel extends APINode {
       "offsite_clo_signal_status",
       "offsite_pixels_tos_accepted",
       "opportunity_score",
+      "opportunity_score_weight",
       "owner",
       "owner_business",
       "partner",
@@ -3859,6 +3868,13 @@ public class AdsPixel extends APINode {
     }
     public APIRequestGetSharedAccounts requestOpportunityScoreField (boolean value) {
       this.requestField("opportunity_score", value);
+      return this;
+    }
+    public APIRequestGetSharedAccounts requestOpportunityScoreWeightField () {
+      return this.requestOpportunityScoreWeightField(true);
+    }
+    public APIRequestGetSharedAccounts requestOpportunityScoreWeightField (boolean value) {
+      this.requestField("opportunity_score_weight", value);
       return this;
     }
     public APIRequestGetSharedAccounts requestOwnerField () {
@@ -4962,6 +4978,8 @@ public class AdsPixel extends APINode {
       "first_party_cookie_status",
       "name",
       "server_events_business_ids",
+      "server_events_business_ids_add",
+      "server_events_business_ids_remove",
     };
 
     public static final String[] FIELDS = {
@@ -5068,6 +5086,24 @@ public class AdsPixel extends APINode {
     }
     public APIRequestUpdate setServerEventsBusinessIds (String serverEventsBusinessIds) {
       this.setParam("server_events_business_ids", serverEventsBusinessIds);
+      return this;
+    }
+
+    public APIRequestUpdate setServerEventsBusinessIdsAdd (List<String> serverEventsBusinessIdsAdd) {
+      this.setParam("server_events_business_ids_add", serverEventsBusinessIdsAdd);
+      return this;
+    }
+    public APIRequestUpdate setServerEventsBusinessIdsAdd (String serverEventsBusinessIdsAdd) {
+      this.setParam("server_events_business_ids_add", serverEventsBusinessIdsAdd);
+      return this;
+    }
+
+    public APIRequestUpdate setServerEventsBusinessIdsRemove (List<String> serverEventsBusinessIdsRemove) {
+      this.setParam("server_events_business_ids_remove", serverEventsBusinessIdsRemove);
+      return this;
+    }
+    public APIRequestUpdate setServerEventsBusinessIdsRemove (String serverEventsBusinessIdsRemove) {
+      this.setParam("server_events_business_ids_remove", serverEventsBusinessIdsRemove);
       return this;
     }
 

@@ -40,23 +40,29 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class CatalogGenericIngestionSessionErrorsGet extends APINode {
-  @SerializedName("data")
-  private List<Object> mData = null;
+public class RepeatReachState extends APINode {
+  @SerializedName("current_saturation_level")
+  private Double mCurrentSaturationLevel = null;
+  @SerializedName("forecasted_saturation_level")
+  private Double mForecastedSaturationLevel = null;
+  @SerializedName("high_saturation_threshold")
+  private Double mHighSaturationThreshold = null;
+  @SerializedName("should_display_cpr")
+  private Boolean mShouldDisplayCpr = null;
   protected static Gson gson = null;
 
-  public CatalogGenericIngestionSessionErrorsGet() {
+  public RepeatReachState() {
   }
 
   public String getId() {
     return null;
   }
-  public static CatalogGenericIngestionSessionErrorsGet loadJSON(String json, APIContext context, String header) {
-    CatalogGenericIngestionSessionErrorsGet catalogGenericIngestionSessionErrorsGet = getGson().fromJson(json, CatalogGenericIngestionSessionErrorsGet.class);
+  public static RepeatReachState loadJSON(String json, APIContext context, String header) {
+    RepeatReachState repeatReachState = getGson().fromJson(json, RepeatReachState.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(catalogGenericIngestionSessionErrorsGet.toString());
+      JsonElement o2 = parser.parse(repeatReachState.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -66,14 +72,14 @@ public class CatalogGenericIngestionSessionErrorsGet extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    catalogGenericIngestionSessionErrorsGet.context = context;
-    catalogGenericIngestionSessionErrorsGet.rawValue = json;
-    catalogGenericIngestionSessionErrorsGet.header = header;
-    return catalogGenericIngestionSessionErrorsGet;
+    repeatReachState.context = context;
+    repeatReachState.rawValue = json;
+    repeatReachState.header = header;
+    return repeatReachState;
   }
 
-  public static APINodeList<CatalogGenericIngestionSessionErrorsGet> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<CatalogGenericIngestionSessionErrorsGet> catalogGenericIngestionSessionErrorsGets = new APINodeList<CatalogGenericIngestionSessionErrorsGet>(request, json, header);
+  public static APINodeList<RepeatReachState> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<RepeatReachState> repeatReachStates = new APINodeList<RepeatReachState>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -84,9 +90,9 @@ public class CatalogGenericIngestionSessionErrorsGet extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          catalogGenericIngestionSessionErrorsGets.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          repeatReachStates.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return catalogGenericIngestionSessionErrorsGets;
+        return repeatReachStates;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -96,20 +102,20 @@ public class CatalogGenericIngestionSessionErrorsGet extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                catalogGenericIngestionSessionErrorsGets.setCursors(before, after);
+                repeatReachStates.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            catalogGenericIngestionSessionErrorsGets.setPaging(previous, next);
+            repeatReachStates.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              catalogGenericIngestionSessionErrorsGets.setAppSecret(context.getAppSecretProof());
+              repeatReachStates.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              catalogGenericIngestionSessionErrorsGets.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              repeatReachStates.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -120,23 +126,23 @@ public class CatalogGenericIngestionSessionErrorsGet extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  catalogGenericIngestionSessionErrorsGets.add(loadJSON(entry.getValue().toString(), context, header));
+                  repeatReachStates.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              catalogGenericIngestionSessionErrorsGets.add(loadJSON(obj.toString(), context, header));
+              repeatReachStates.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return catalogGenericIngestionSessionErrorsGets;
+          return repeatReachStates;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              catalogGenericIngestionSessionErrorsGets.add(loadJSON(entry.getValue().toString(), context, header));
+              repeatReachStates.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return catalogGenericIngestionSessionErrorsGets;
+          return repeatReachStates;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -153,20 +159,20 @@ public class CatalogGenericIngestionSessionErrorsGet extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              catalogGenericIngestionSessionErrorsGets.add(loadJSON(value.toString(), context, header));
+              repeatReachStates.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return catalogGenericIngestionSessionErrorsGets;
+            return repeatReachStates;
           }
 
           // Sixth, check if it's pure JsonObject
-          catalogGenericIngestionSessionErrorsGets.clear();
-          catalogGenericIngestionSessionErrorsGets.add(loadJSON(json, context, header));
-          return catalogGenericIngestionSessionErrorsGets;
+          repeatReachStates.clear();
+          repeatReachStates.add(loadJSON(json, context, header));
+          return repeatReachStates;
         }
       }
     } catch (Exception e) {
@@ -194,12 +200,39 @@ public class CatalogGenericIngestionSessionErrorsGet extends APINode {
   }
 
 
-  public List<Object> getFieldData() {
-    return mData;
+  public Double getFieldCurrentSaturationLevel() {
+    return mCurrentSaturationLevel;
   }
 
-  public CatalogGenericIngestionSessionErrorsGet setFieldData(List<Object> value) {
-    this.mData = value;
+  public RepeatReachState setFieldCurrentSaturationLevel(Double value) {
+    this.mCurrentSaturationLevel = value;
+    return this;
+  }
+
+  public Double getFieldForecastedSaturationLevel() {
+    return mForecastedSaturationLevel;
+  }
+
+  public RepeatReachState setFieldForecastedSaturationLevel(Double value) {
+    this.mForecastedSaturationLevel = value;
+    return this;
+  }
+
+  public Double getFieldHighSaturationThreshold() {
+    return mHighSaturationThreshold;
+  }
+
+  public RepeatReachState setFieldHighSaturationThreshold(Double value) {
+    this.mHighSaturationThreshold = value;
+    return this;
+  }
+
+  public Boolean getFieldShouldDisplayCpr() {
+    return mShouldDisplayCpr;
+  }
+
+  public RepeatReachState setFieldShouldDisplayCpr(Boolean value) {
+    this.mShouldDisplayCpr = value;
     return this;
   }
 
@@ -219,17 +252,20 @@ public class CatalogGenericIngestionSessionErrorsGet extends APINode {
     return gson;
   }
 
-  public CatalogGenericIngestionSessionErrorsGet copyFrom(CatalogGenericIngestionSessionErrorsGet instance) {
-    this.mData = instance.mData;
+  public RepeatReachState copyFrom(RepeatReachState instance) {
+    this.mCurrentSaturationLevel = instance.mCurrentSaturationLevel;
+    this.mForecastedSaturationLevel = instance.mForecastedSaturationLevel;
+    this.mHighSaturationThreshold = instance.mHighSaturationThreshold;
+    this.mShouldDisplayCpr = instance.mShouldDisplayCpr;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<CatalogGenericIngestionSessionErrorsGet> getParser() {
-    return new APIRequest.ResponseParser<CatalogGenericIngestionSessionErrorsGet>() {
-      public APINodeList<CatalogGenericIngestionSessionErrorsGet> parseResponse(String response, APIContext context, APIRequest<CatalogGenericIngestionSessionErrorsGet> request, String header) throws MalformedResponseException {
-        return CatalogGenericIngestionSessionErrorsGet.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<RepeatReachState> getParser() {
+    return new APIRequest.ResponseParser<RepeatReachState>() {
+      public APINodeList<RepeatReachState> parseResponse(String response, APIContext context, APIRequest<RepeatReachState> request, String header) throws MalformedResponseException {
+        return RepeatReachState.parseResponse(response, context, request, header);
       }
     };
   }

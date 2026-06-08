@@ -321,6 +321,8 @@ public class AdAssetCustomizationRuleCustomizationSpec extends APINode {
 
 
   public static enum EnumDevicePlatforms {
+      @SerializedName("connected_tv")
+      VALUE_CONNECTED_TV("connected_tv"),
       @SerializedName("desktop")
       VALUE_DESKTOP("desktop"),
       @SerializedName("mobile")

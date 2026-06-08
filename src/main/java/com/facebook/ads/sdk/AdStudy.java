@@ -1532,6 +1532,7 @@ public class AdStudy extends APINode {
       "client_business",
       "confidence_level",
       "cooldown_start_time",
+      "creative_test_config",
       "description",
       "end_time",
       "name",
@@ -1628,6 +1629,15 @@ public class AdStudy extends APINode {
     }
     public APIRequestUpdate setCooldownStartTime (String cooldownStartTime) {
       this.setParam("cooldown_start_time", cooldownStartTime);
+      return this;
+    }
+
+    public APIRequestUpdate setCreativeTestConfig (Map<String, String> creativeTestConfig) {
+      this.setParam("creative_test_config", creativeTestConfig);
+      return this;
+    }
+    public APIRequestUpdate setCreativeTestConfig (String creativeTestConfig) {
+      this.setParam("creative_test_config", creativeTestConfig);
       return this;
     }
 

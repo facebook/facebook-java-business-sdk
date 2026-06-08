@@ -43,6 +43,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class CreativeMulticellTestConfig extends APINode {
   @SerializedName("budget_percentage")
   private Long mBudgetPercentage = null;
+  @SerializedName("budget_source")
+  private String mBudgetSource = null;
   @SerializedName("configured_cell_count")
   private Long mConfiguredCellCount = null;
   @SerializedName("daily_budget")
@@ -215,6 +217,15 @@ public class CreativeMulticellTestConfig extends APINode {
     return this;
   }
 
+  public String getFieldBudgetSource() {
+    return mBudgetSource;
+  }
+
+  public CreativeMulticellTestConfig setFieldBudgetSource(String value) {
+    this.mBudgetSource = value;
+    return this;
+  }
+
   public Long getFieldConfiguredCellCount() {
     return mConfiguredCellCount;
   }
@@ -287,6 +298,7 @@ public class CreativeMulticellTestConfig extends APINode {
 
   public CreativeMulticellTestConfig copyFrom(CreativeMulticellTestConfig instance) {
     this.mBudgetPercentage = instance.mBudgetPercentage;
+    this.mBudgetSource = instance.mBudgetSource;
     this.mConfiguredCellCount = instance.mConfiguredCellCount;
     this.mDailyBudget = instance.mDailyBudget;
     this.mEntrySource = instance.mEntrySource;

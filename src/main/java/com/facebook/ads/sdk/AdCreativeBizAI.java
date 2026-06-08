@@ -45,6 +45,8 @@ public class AdCreativeBizAI extends APINode {
   private Object mCapabilities = null;
   @SerializedName("pills")
   private List<Object> mPills = null;
+  @SerializedName("pills_mbs_version")
+  private Long mPillsMbsVersion = null;
   protected static Gson gson = null;
 
   public AdCreativeBizAI() {
@@ -214,6 +216,15 @@ public class AdCreativeBizAI extends APINode {
     return this;
   }
 
+  public Long getFieldPillsMbsVersion() {
+    return mPillsMbsVersion;
+  }
+
+  public AdCreativeBizAI setFieldPillsMbsVersion(Long value) {
+    this.mPillsMbsVersion = value;
+    return this;
+  }
+
 
 
 
@@ -233,6 +244,7 @@ public class AdCreativeBizAI extends APINode {
   public AdCreativeBizAI copyFrom(AdCreativeBizAI instance) {
     this.mCapabilities = instance.mCapabilities;
     this.mPills = instance.mPills;
+    this.mPillsMbsVersion = instance.mPillsMbsVersion;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

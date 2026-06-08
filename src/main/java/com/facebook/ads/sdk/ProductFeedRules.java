@@ -217,14 +217,12 @@ public class ProductFeedRules extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "after",
-      "before",
-      "limit",
     };
 
     public static final String[] FIELDS = {
       "data",
       "paging",
+      "summary",
     };
 
     @Override
@@ -281,25 +279,6 @@ public class ProductFeedRules extends APINode {
     }
 
 
-    public APIRequestGenget setAfter (String after) {
-      this.setParam("after", after);
-      return this;
-    }
-
-    public APIRequestGenget setBefore (String before) {
-      this.setParam("before", before);
-      return this;
-    }
-
-    public APIRequestGenget setLimit (Long limit) {
-      this.setParam("limit", limit);
-      return this;
-    }
-    public APIRequestGenget setLimit (String limit) {
-      this.setParam("limit", limit);
-      return this;
-    }
-
     public APIRequestGenget requestAllFields () {
       return this.requestAllFields(true);
     }
@@ -348,6 +327,13 @@ public class ProductFeedRules extends APINode {
     }
     public APIRequestGenget requestPagingField (boolean value) {
       this.requestField("paging", value);
+      return this;
+    }
+    public APIRequestGenget requestSummaryField () {
+      return this.requestSummaryField(true);
+    }
+    public APIRequestGenget requestSummaryField (boolean value) {
+      this.requestField("summary", value);
       return this;
     }
   }

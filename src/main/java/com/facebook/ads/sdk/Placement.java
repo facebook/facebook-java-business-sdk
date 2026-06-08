@@ -393,6 +393,8 @@ public class Placement extends APINode {
 
 
   public static enum EnumDevicePlatforms {
+      @SerializedName("connected_tv")
+      VALUE_CONNECTED_TV("connected_tv"),
       @SerializedName("desktop")
       VALUE_DESKTOP("desktop"),
       @SerializedName("mobile")
@@ -412,6 +414,8 @@ public class Placement extends APINode {
   }
 
   public static enum EnumEffectiveDevicePlatforms {
+      @SerializedName("connected_tv")
+      VALUE_CONNECTED_TV("connected_tv"),
       @SerializedName("desktop")
       VALUE_DESKTOP("desktop"),
       @SerializedName("mobile")

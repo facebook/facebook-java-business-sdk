@@ -41,14 +41,22 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class CPASCollaborationRequest extends APINode {
+  @SerializedName("ad_account_id")
+  private String mAdAccountId = null;
+  @SerializedName("ad_account_name")
+  private String mAdAccountName = null;
   @SerializedName("brands")
   private List<String> mBrands = null;
+  @SerializedName("catalog_segment")
+  private ProductCatalog mCatalogSegment = null;
   @SerializedName("contact_email")
   private String mContactEmail = null;
   @SerializedName("contact_first_name")
   private String mContactFirstName = null;
   @SerializedName("contact_last_name")
   private String mContactLastName = null;
+  @SerializedName("creation_time")
+  private String mCreationTime = null;
   @SerializedName("id")
   private String mId = null;
   @SerializedName("phone_number")
@@ -57,8 +65,16 @@ public class CPASCollaborationRequest extends APINode {
   private Business mReceiverBusiness = null;
   @SerializedName("requester_agency_or_brand")
   private String mRequesterAgencyOrBrand = null;
+  @SerializedName("seller_id")
+  private String mSellerId = null;
+  @SerializedName("sender_business")
+  private Business mSenderBusiness = null;
   @SerializedName("sender_client_business")
   private Business mSenderClientBusiness = null;
+  @SerializedName("shop_url")
+  private String mShopUrl = null;
+  @SerializedName("source")
+  private String mSource = null;
   @SerializedName("status")
   private String mStatus = null;
   protected static Gson gson = null;
@@ -275,8 +291,23 @@ public class CPASCollaborationRequest extends APINode {
   }
 
 
+  public String getFieldAdAccountId() {
+    return mAdAccountId;
+  }
+
+  public String getFieldAdAccountName() {
+    return mAdAccountName;
+  }
+
   public List<String> getFieldBrands() {
     return mBrands;
+  }
+
+  public ProductCatalog getFieldCatalogSegment() {
+    if (mCatalogSegment != null) {
+      mCatalogSegment.context = getContext();
+    }
+    return mCatalogSegment;
   }
 
   public String getFieldContactEmail() {
@@ -289,6 +320,10 @@ public class CPASCollaborationRequest extends APINode {
 
   public String getFieldContactLastName() {
     return mContactLastName;
+  }
+
+  public String getFieldCreationTime() {
+    return mCreationTime;
   }
 
   public String getFieldId() {
@@ -310,11 +345,30 @@ public class CPASCollaborationRequest extends APINode {
     return mRequesterAgencyOrBrand;
   }
 
+  public String getFieldSellerId() {
+    return mSellerId;
+  }
+
+  public Business getFieldSenderBusiness() {
+    if (mSenderBusiness != null) {
+      mSenderBusiness.context = getContext();
+    }
+    return mSenderBusiness;
+  }
+
   public Business getFieldSenderClientBusiness() {
     if (mSenderClientBusiness != null) {
       mSenderClientBusiness.context = getContext();
     }
     return mSenderClientBusiness;
+  }
+
+  public String getFieldShopUrl() {
+    return mShopUrl;
+  }
+
+  public String getFieldSource() {
+    return mSource;
   }
 
   public String getFieldStatus() {
@@ -334,15 +388,23 @@ public class CPASCollaborationRequest extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "ad_account_id",
+      "ad_account_name",
       "brands",
+      "catalog_segment",
       "contact_email",
       "contact_first_name",
       "contact_last_name",
+      "creation_time",
       "id",
       "phone_number",
       "receiver_business",
       "requester_agency_or_brand",
+      "seller_id",
+      "sender_business",
       "sender_client_business",
+      "shop_url",
+      "source",
       "status",
     };
 
@@ -436,11 +498,32 @@ public class CPASCollaborationRequest extends APINode {
       return this;
     }
 
+    public APIRequestGet requestAdAccountIdField () {
+      return this.requestAdAccountIdField(true);
+    }
+    public APIRequestGet requestAdAccountIdField (boolean value) {
+      this.requestField("ad_account_id", value);
+      return this;
+    }
+    public APIRequestGet requestAdAccountNameField () {
+      return this.requestAdAccountNameField(true);
+    }
+    public APIRequestGet requestAdAccountNameField (boolean value) {
+      this.requestField("ad_account_name", value);
+      return this;
+    }
     public APIRequestGet requestBrandsField () {
       return this.requestBrandsField(true);
     }
     public APIRequestGet requestBrandsField (boolean value) {
       this.requestField("brands", value);
+      return this;
+    }
+    public APIRequestGet requestCatalogSegmentField () {
+      return this.requestCatalogSegmentField(true);
+    }
+    public APIRequestGet requestCatalogSegmentField (boolean value) {
+      this.requestField("catalog_segment", value);
       return this;
     }
     public APIRequestGet requestContactEmailField () {
@@ -462,6 +545,13 @@ public class CPASCollaborationRequest extends APINode {
     }
     public APIRequestGet requestContactLastNameField (boolean value) {
       this.requestField("contact_last_name", value);
+      return this;
+    }
+    public APIRequestGet requestCreationTimeField () {
+      return this.requestCreationTimeField(true);
+    }
+    public APIRequestGet requestCreationTimeField (boolean value) {
+      this.requestField("creation_time", value);
       return this;
     }
     public APIRequestGet requestIdField () {
@@ -492,11 +582,39 @@ public class CPASCollaborationRequest extends APINode {
       this.requestField("requester_agency_or_brand", value);
       return this;
     }
+    public APIRequestGet requestSellerIdField () {
+      return this.requestSellerIdField(true);
+    }
+    public APIRequestGet requestSellerIdField (boolean value) {
+      this.requestField("seller_id", value);
+      return this;
+    }
+    public APIRequestGet requestSenderBusinessField () {
+      return this.requestSenderBusinessField(true);
+    }
+    public APIRequestGet requestSenderBusinessField (boolean value) {
+      this.requestField("sender_business", value);
+      return this;
+    }
     public APIRequestGet requestSenderClientBusinessField () {
       return this.requestSenderClientBusinessField(true);
     }
     public APIRequestGet requestSenderClientBusinessField (boolean value) {
       this.requestField("sender_client_business", value);
+      return this;
+    }
+    public APIRequestGet requestShopUrlField () {
+      return this.requestShopUrlField(true);
+    }
+    public APIRequestGet requestShopUrlField (boolean value) {
+      this.requestField("shop_url", value);
+      return this;
+    }
+    public APIRequestGet requestSourceField () {
+      return this.requestSourceField(true);
+    }
+    public APIRequestGet requestSourceField (boolean value) {
+      this.requestField("source", value);
       return this;
     }
     public APIRequestGet requestStatusField () {
@@ -506,6 +624,46 @@ public class CPASCollaborationRequest extends APINode {
       this.requestField("status", value);
       return this;
     }
+  }
+
+  public static enum EnumRequestRole {
+      @SerializedName("RECEIVER")
+      VALUE_RECEIVER("RECEIVER"),
+      @SerializedName("SENDER")
+      VALUE_SENDER("SENDER"),
+      ;
+
+      private String value;
+
+      private EnumRequestRole(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumSource {
+      @SerializedName("EXTERNAL")
+      VALUE_EXTERNAL("EXTERNAL"),
+      @SerializedName("INTERNAL")
+      VALUE_INTERNAL("INTERNAL"),
+      @SerializedName("SELF_SERVE")
+      VALUE_SELF_SERVE("SELF_SERVE"),
+      ;
+
+      private String value;
+
+      private EnumSource(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
   }
 
 
@@ -523,15 +681,23 @@ public class CPASCollaborationRequest extends APINode {
   }
 
   public CPASCollaborationRequest copyFrom(CPASCollaborationRequest instance) {
+    this.mAdAccountId = instance.mAdAccountId;
+    this.mAdAccountName = instance.mAdAccountName;
     this.mBrands = instance.mBrands;
+    this.mCatalogSegment = instance.mCatalogSegment;
     this.mContactEmail = instance.mContactEmail;
     this.mContactFirstName = instance.mContactFirstName;
     this.mContactLastName = instance.mContactLastName;
+    this.mCreationTime = instance.mCreationTime;
     this.mId = instance.mId;
     this.mPhoneNumber = instance.mPhoneNumber;
     this.mReceiverBusiness = instance.mReceiverBusiness;
     this.mRequesterAgencyOrBrand = instance.mRequesterAgencyOrBrand;
+    this.mSellerId = instance.mSellerId;
+    this.mSenderBusiness = instance.mSenderBusiness;
     this.mSenderClientBusiness = instance.mSenderClientBusiness;
+    this.mShopUrl = instance.mShopUrl;
+    this.mSource = instance.mSource;
     this.mStatus = instance.mStatus;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

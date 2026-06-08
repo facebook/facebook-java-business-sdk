@@ -67,15 +67,13 @@ public class CommerceOrderTransactionDetail extends APINode {
   private String mTransactionType = null;
   @SerializedName("transfer_id")
   private String mTransferId = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public CommerceOrderTransactionDetail() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static CommerceOrderTransactionDetail loadJSON(String json, APIContext context, String header) {
     CommerceOrderTransactionDetail commerceOrderTransactionDetail = getGson().fromJson(json, CommerceOrderTransactionDetail.class);
@@ -219,14 +217,6 @@ public class CommerceOrderTransactionDetail extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGetItems getItems() {
-    return new APIRequestGetItems(this.getId(), context);
-  }
-
-  public APIRequestGetTaxDetails getTaxDetails() {
-    return new APIRequestGetTaxDetails(this.getId(), context);
-  }
-
 
   public String getFieldMerchantOrderId() {
     return mMerchantOrderId;
@@ -353,226 +343,7 @@ public class CommerceOrderTransactionDetail extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
 
-  public CommerceOrderTransactionDetail setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
-
-
-  public static class APIRequestGetItems extends APIRequest<APINode> {
-
-    APINodeList<APINode> lastResponse = null;
-    @Override
-    public APINodeList<APINode> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<APINode> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetItems.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         },
-         MoreExecutors.directExecutor()
-      );
-    };
-
-    public APIRequestGetItems(String nodeId, APIContext context) {
-      super(context, nodeId, "/items", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetItems setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetItems setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetItems requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetItems requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetItems requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetItems requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetItems requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetItems requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
-  public static class APIRequestGetTaxDetails extends APIRequest<APINode> {
-
-    APINodeList<APINode> lastResponse = null;
-    @Override
-    public APINodeList<APINode> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<APINode> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetTaxDetails.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         },
-         MoreExecutors.directExecutor()
-      );
-    };
-
-    public APIRequestGetTaxDetails(String nodeId, APIContext context) {
-      super(context, nodeId, "/tax_details", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetTaxDetails setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetTaxDetails setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetTaxDetails requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetTaxDetails requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetTaxDetails requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetTaxDetails requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetTaxDetails requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetTaxDetails requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
 
 
   synchronized /*package*/ static Gson getGson() {
@@ -602,7 +373,6 @@ public class CommerceOrderTransactionDetail extends APINode {
     this.mTransactionDate = instance.mTransactionDate;
     this.mTransactionType = instance.mTransactionType;
     this.mTransferId = instance.mTransferId;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

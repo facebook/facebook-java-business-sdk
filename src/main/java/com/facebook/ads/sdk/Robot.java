@@ -47,6 +47,8 @@ public class Robot extends APINode {
   private List<Map<String, String>> mConfigurations = null;
   @SerializedName("data_center")
   private String mDataCenter = null;
+  @SerializedName("fw_image")
+  private String mFwImage = null;
   @SerializedName("id")
   private String mId = null;
   @SerializedName("init_pos")
@@ -55,14 +57,22 @@ public class Robot extends APINode {
   private List<Map<String, Double>> mLastPos = null;
   @SerializedName("meetup_link_hash")
   private String mMeetupLinkHash = null;
+  @SerializedName("release_image")
+  private String mReleaseImage = null;
   @SerializedName("robot_notes")
   private String mRobotNotes = null;
   @SerializedName("suite")
   private String mSuite = null;
+  @SerializedName("target_fw_image")
+  private String mTargetFwImage = null;
+  @SerializedName("target_fw_image_uri")
+  private String mTargetFwImageUri = null;
   @SerializedName("target_map_image_uri")
   private String mTargetMapImageUri = null;
   @SerializedName("target_os_image_uri")
   private String mTargetOsImageUri = null;
+  @SerializedName("target_release_image")
+  private String mTargetReleaseImage = null;
   @SerializedName("target_sw_image_uri")
   private String mTargetSwImageUri = null;
   @SerializedName("user")
@@ -293,6 +303,10 @@ public class Robot extends APINode {
     return mDataCenter;
   }
 
+  public String getFieldFwImage() {
+    return mFwImage;
+  }
+
   public String getFieldId() {
     return mId;
   }
@@ -309,6 +323,10 @@ public class Robot extends APINode {
     return mMeetupLinkHash;
   }
 
+  public String getFieldReleaseImage() {
+    return mReleaseImage;
+  }
+
   public String getFieldRobotNotes() {
     return mRobotNotes;
   }
@@ -317,12 +335,24 @@ public class Robot extends APINode {
     return mSuite;
   }
 
+  public String getFieldTargetFwImage() {
+    return mTargetFwImage;
+  }
+
+  public String getFieldTargetFwImageUri() {
+    return mTargetFwImageUri;
+  }
+
   public String getFieldTargetMapImageUri() {
     return mTargetMapImageUri;
   }
 
   public String getFieldTargetOsImageUri() {
     return mTargetOsImageUri;
+  }
+
+  public String getFieldTargetReleaseImage() {
+    return mTargetReleaseImage;
   }
 
   public String getFieldTargetSwImageUri() {
@@ -352,14 +382,19 @@ public class Robot extends APINode {
       "bringup_vars",
       "configurations",
       "data_center",
+      "fw_image",
       "id",
       "init_pos",
       "last_pos",
       "meetup_link_hash",
+      "release_image",
       "robot_notes",
       "suite",
+      "target_fw_image",
+      "target_fw_image_uri",
       "target_map_image_uri",
       "target_os_image_uri",
+      "target_release_image",
       "target_sw_image_uri",
       "user",
     };
@@ -475,6 +510,13 @@ public class Robot extends APINode {
       this.requestField("data_center", value);
       return this;
     }
+    public APIRequestGet requestFwImageField () {
+      return this.requestFwImageField(true);
+    }
+    public APIRequestGet requestFwImageField (boolean value) {
+      this.requestField("fw_image", value);
+      return this;
+    }
     public APIRequestGet requestIdField () {
       return this.requestIdField(true);
     }
@@ -503,6 +545,13 @@ public class Robot extends APINode {
       this.requestField("meetup_link_hash", value);
       return this;
     }
+    public APIRequestGet requestReleaseImageField () {
+      return this.requestReleaseImageField(true);
+    }
+    public APIRequestGet requestReleaseImageField (boolean value) {
+      this.requestField("release_image", value);
+      return this;
+    }
     public APIRequestGet requestRobotNotesField () {
       return this.requestRobotNotesField(true);
     }
@@ -517,6 +566,20 @@ public class Robot extends APINode {
       this.requestField("suite", value);
       return this;
     }
+    public APIRequestGet requestTargetFwImageField () {
+      return this.requestTargetFwImageField(true);
+    }
+    public APIRequestGet requestTargetFwImageField (boolean value) {
+      this.requestField("target_fw_image", value);
+      return this;
+    }
+    public APIRequestGet requestTargetFwImageUriField () {
+      return this.requestTargetFwImageUriField(true);
+    }
+    public APIRequestGet requestTargetFwImageUriField (boolean value) {
+      this.requestField("target_fw_image_uri", value);
+      return this;
+    }
     public APIRequestGet requestTargetMapImageUriField () {
       return this.requestTargetMapImageUriField(true);
     }
@@ -529,6 +592,13 @@ public class Robot extends APINode {
     }
     public APIRequestGet requestTargetOsImageUriField (boolean value) {
       this.requestField("target_os_image_uri", value);
+      return this;
+    }
+    public APIRequestGet requestTargetReleaseImageField () {
+      return this.requestTargetReleaseImageField(true);
+    }
+    public APIRequestGet requestTargetReleaseImageField (boolean value) {
+      this.requestField("target_release_image", value);
       return this;
     }
     public APIRequestGet requestTargetSwImageUriField () {
@@ -565,14 +635,19 @@ public class Robot extends APINode {
     this.mBringupVars = instance.mBringupVars;
     this.mConfigurations = instance.mConfigurations;
     this.mDataCenter = instance.mDataCenter;
+    this.mFwImage = instance.mFwImage;
     this.mId = instance.mId;
     this.mInitPos = instance.mInitPos;
     this.mLastPos = instance.mLastPos;
     this.mMeetupLinkHash = instance.mMeetupLinkHash;
+    this.mReleaseImage = instance.mReleaseImage;
     this.mRobotNotes = instance.mRobotNotes;
     this.mSuite = instance.mSuite;
+    this.mTargetFwImage = instance.mTargetFwImage;
+    this.mTargetFwImageUri = instance.mTargetFwImageUri;
     this.mTargetMapImageUri = instance.mTargetMapImageUri;
     this.mTargetOsImageUri = instance.mTargetOsImageUri;
+    this.mTargetReleaseImage = instance.mTargetReleaseImage;
     this.mTargetSwImageUri = instance.mTargetSwImageUri;
     this.mUser = instance.mUser;
     this.context = instance.context;

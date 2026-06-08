@@ -45,6 +45,8 @@ public class ProductFeedRulesGet extends APINode {
   private List<Object> mData = null;
   @SerializedName("paging")
   private Object mPaging = null;
+  @SerializedName("summary")
+  private Object mSummary = null;
   protected static Gson gson = null;
 
   public ProductFeedRulesGet() {
@@ -214,6 +216,15 @@ public class ProductFeedRulesGet extends APINode {
     return this;
   }
 
+  public Object getFieldSummary() {
+    return mSummary;
+  }
+
+  public ProductFeedRulesGet setFieldSummary(Object value) {
+    this.mSummary = value;
+    return this;
+  }
+
 
 
 
@@ -233,6 +244,7 @@ public class ProductFeedRulesGet extends APINode {
   public ProductFeedRulesGet copyFrom(ProductFeedRulesGet instance) {
     this.mData = instance.mData;
     this.mPaging = instance.mPaging;
+    this.mSummary = instance.mSummary;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

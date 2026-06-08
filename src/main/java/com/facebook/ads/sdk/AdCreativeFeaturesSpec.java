@@ -71,6 +71,8 @@ public class AdCreativeFeaturesSpec extends APINode {
   private AdCreativeFeatureDetails mDescriptionAutomation = null;
   @SerializedName("dha_optimization")
   private AdCreativeFeatureDetails mDhaOptimization = null;
+  @SerializedName("dynamic_cta_text")
+  private AdCreativeFeatureDetails mDynamicCtaText = null;
   @SerializedName("dynamic_partner_content")
   private AdCreativeFeatureDetails mDynamicPartnerContent = null;
   @SerializedName("enable_ncs_testimonials")
@@ -89,6 +91,8 @@ public class AdCreativeFeaturesSpec extends APINode {
   private AdCreativeFeatureDetails mGenerateCta = null;
   @SerializedName("hide_price")
   private AdCreativeFeatureDetails mHidePrice = null;
+  @SerializedName("hyperlink_formatting")
+  private AdCreativeFeatureDetails mHyperlinkFormatting = null;
   @SerializedName("ig_feed_tag")
   private AdCreativeFeatureDetails mIgFeedTag = null;
   @SerializedName("ig_glados_feed")
@@ -105,8 +109,12 @@ public class AdCreativeFeaturesSpec extends APINode {
   private AdCreativeFeatureDetails mImageAutoCrop = null;
   @SerializedName("image_background_gen")
   private AdCreativeFeatureDetails mImageBackgroundGen = null;
+  @SerializedName("image_banner")
+  private AdCreativeFeatureDetails mImageBanner = null;
   @SerializedName("image_brightness_and_contrast")
   private AdCreativeFeatureDetails mImageBrightnessAndContrast = null;
+  @SerializedName("image_end_card")
+  private AdCreativeFeatureDetails mImageEndCard = null;
   @SerializedName("image_enhancement")
   private AdCreativeFeatureDetails mImageEnhancement = null;
   @SerializedName("image_templates")
@@ -127,12 +135,20 @@ public class AdCreativeFeaturesSpec extends APINode {
   private AdCreativeFeatureDetails mMediaOrder = null;
   @SerializedName("media_type_automation")
   private AdCreativeFeatureDetails mMediaTypeAutomation = null;
+  @SerializedName("multi_creative_post_carousel")
+  private AdCreativeFeatureDetails mMultiCreativePostCarousel = null;
   @SerializedName("multi_photo_to_video")
   private AdCreativeFeatureDetails mMultiPhotoToVideo = null;
   @SerializedName("music_generation")
   private AdCreativeFeatureDetails mMusicGeneration = null;
+  @SerializedName("pac_genai_recomposition")
+  private AdCreativeFeatureDetails mPacGenaiRecomposition = null;
+  @SerializedName("pac_recomposition")
+  private AdCreativeFeatureDetails mPacRecomposition = null;
   @SerializedName("pac_relaxation")
   private AdCreativeFeatureDetails mPacRelaxation = null;
+  @SerializedName("product_browsing")
+  private AdCreativeFeatureDetails mProductBrowsing = null;
   @SerializedName("product_extensions")
   private AdCreativeFeatureDetails mProductExtensions = null;
   @SerializedName("product_metadata_automation")
@@ -185,6 +201,8 @@ public class AdCreativeFeaturesSpec extends APINode {
   private AdCreativeFeatureDetails mVideoToImage = null;
   @SerializedName("video_uncrop")
   private AdCreativeFeatureDetails mVideoUncrop = null;
+  @SerializedName("video_uncrop_9x16_to_9x18")
+  private AdCreativeFeatureDetails mVideoUncrop9x16To9x18 = null;
   @SerializedName("wa_mm_image_filtering")
   private AdCreativeFeatureDetails mWaMmImageFiltering = null;
   @SerializedName("wa_mm_text_truncation_length")
@@ -550,6 +568,20 @@ public class AdCreativeFeaturesSpec extends APINode {
     this.mDhaOptimization = AdCreativeFeatureDetails.getGson().fromJson(value, type);
     return this;
   }
+  public AdCreativeFeatureDetails getFieldDynamicCtaText() {
+    return mDynamicCtaText;
+  }
+
+  public AdCreativeFeaturesSpec setFieldDynamicCtaText(AdCreativeFeatureDetails value) {
+    this.mDynamicCtaText = value;
+    return this;
+  }
+
+  public AdCreativeFeaturesSpec setFieldDynamicCtaText(String value) {
+    Type type = new TypeToken<AdCreativeFeatureDetails>(){}.getType();
+    this.mDynamicCtaText = AdCreativeFeatureDetails.getGson().fromJson(value, type);
+    return this;
+  }
   public AdCreativeFeatureDetails getFieldDynamicPartnerContent() {
     return mDynamicPartnerContent;
   }
@@ -676,6 +708,20 @@ public class AdCreativeFeaturesSpec extends APINode {
     this.mHidePrice = AdCreativeFeatureDetails.getGson().fromJson(value, type);
     return this;
   }
+  public AdCreativeFeatureDetails getFieldHyperlinkFormatting() {
+    return mHyperlinkFormatting;
+  }
+
+  public AdCreativeFeaturesSpec setFieldHyperlinkFormatting(AdCreativeFeatureDetails value) {
+    this.mHyperlinkFormatting = value;
+    return this;
+  }
+
+  public AdCreativeFeaturesSpec setFieldHyperlinkFormatting(String value) {
+    Type type = new TypeToken<AdCreativeFeatureDetails>(){}.getType();
+    this.mHyperlinkFormatting = AdCreativeFeatureDetails.getGson().fromJson(value, type);
+    return this;
+  }
   public AdCreativeFeatureDetails getFieldIgFeedTag() {
     return mIgFeedTag;
   }
@@ -788,6 +834,20 @@ public class AdCreativeFeaturesSpec extends APINode {
     this.mImageBackgroundGen = AdCreativeFeatureDetails.getGson().fromJson(value, type);
     return this;
   }
+  public AdCreativeFeatureDetails getFieldImageBanner() {
+    return mImageBanner;
+  }
+
+  public AdCreativeFeaturesSpec setFieldImageBanner(AdCreativeFeatureDetails value) {
+    this.mImageBanner = value;
+    return this;
+  }
+
+  public AdCreativeFeaturesSpec setFieldImageBanner(String value) {
+    Type type = new TypeToken<AdCreativeFeatureDetails>(){}.getType();
+    this.mImageBanner = AdCreativeFeatureDetails.getGson().fromJson(value, type);
+    return this;
+  }
   public AdCreativeFeatureDetails getFieldImageBrightnessAndContrast() {
     return mImageBrightnessAndContrast;
   }
@@ -800,6 +860,20 @@ public class AdCreativeFeaturesSpec extends APINode {
   public AdCreativeFeaturesSpec setFieldImageBrightnessAndContrast(String value) {
     Type type = new TypeToken<AdCreativeFeatureDetails>(){}.getType();
     this.mImageBrightnessAndContrast = AdCreativeFeatureDetails.getGson().fromJson(value, type);
+    return this;
+  }
+  public AdCreativeFeatureDetails getFieldImageEndCard() {
+    return mImageEndCard;
+  }
+
+  public AdCreativeFeaturesSpec setFieldImageEndCard(AdCreativeFeatureDetails value) {
+    this.mImageEndCard = value;
+    return this;
+  }
+
+  public AdCreativeFeaturesSpec setFieldImageEndCard(String value) {
+    Type type = new TypeToken<AdCreativeFeatureDetails>(){}.getType();
+    this.mImageEndCard = AdCreativeFeatureDetails.getGson().fromJson(value, type);
     return this;
   }
   public AdCreativeFeatureDetails getFieldImageEnhancement() {
@@ -942,6 +1016,20 @@ public class AdCreativeFeaturesSpec extends APINode {
     this.mMediaTypeAutomation = AdCreativeFeatureDetails.getGson().fromJson(value, type);
     return this;
   }
+  public AdCreativeFeatureDetails getFieldMultiCreativePostCarousel() {
+    return mMultiCreativePostCarousel;
+  }
+
+  public AdCreativeFeaturesSpec setFieldMultiCreativePostCarousel(AdCreativeFeatureDetails value) {
+    this.mMultiCreativePostCarousel = value;
+    return this;
+  }
+
+  public AdCreativeFeaturesSpec setFieldMultiCreativePostCarousel(String value) {
+    Type type = new TypeToken<AdCreativeFeatureDetails>(){}.getType();
+    this.mMultiCreativePostCarousel = AdCreativeFeatureDetails.getGson().fromJson(value, type);
+    return this;
+  }
   public AdCreativeFeatureDetails getFieldMultiPhotoToVideo() {
     return mMultiPhotoToVideo;
   }
@@ -970,6 +1058,34 @@ public class AdCreativeFeaturesSpec extends APINode {
     this.mMusicGeneration = AdCreativeFeatureDetails.getGson().fromJson(value, type);
     return this;
   }
+  public AdCreativeFeatureDetails getFieldPacGenaiRecomposition() {
+    return mPacGenaiRecomposition;
+  }
+
+  public AdCreativeFeaturesSpec setFieldPacGenaiRecomposition(AdCreativeFeatureDetails value) {
+    this.mPacGenaiRecomposition = value;
+    return this;
+  }
+
+  public AdCreativeFeaturesSpec setFieldPacGenaiRecomposition(String value) {
+    Type type = new TypeToken<AdCreativeFeatureDetails>(){}.getType();
+    this.mPacGenaiRecomposition = AdCreativeFeatureDetails.getGson().fromJson(value, type);
+    return this;
+  }
+  public AdCreativeFeatureDetails getFieldPacRecomposition() {
+    return mPacRecomposition;
+  }
+
+  public AdCreativeFeaturesSpec setFieldPacRecomposition(AdCreativeFeatureDetails value) {
+    this.mPacRecomposition = value;
+    return this;
+  }
+
+  public AdCreativeFeaturesSpec setFieldPacRecomposition(String value) {
+    Type type = new TypeToken<AdCreativeFeatureDetails>(){}.getType();
+    this.mPacRecomposition = AdCreativeFeatureDetails.getGson().fromJson(value, type);
+    return this;
+  }
   public AdCreativeFeatureDetails getFieldPacRelaxation() {
     return mPacRelaxation;
   }
@@ -982,6 +1098,20 @@ public class AdCreativeFeaturesSpec extends APINode {
   public AdCreativeFeaturesSpec setFieldPacRelaxation(String value) {
     Type type = new TypeToken<AdCreativeFeatureDetails>(){}.getType();
     this.mPacRelaxation = AdCreativeFeatureDetails.getGson().fromJson(value, type);
+    return this;
+  }
+  public AdCreativeFeatureDetails getFieldProductBrowsing() {
+    return mProductBrowsing;
+  }
+
+  public AdCreativeFeaturesSpec setFieldProductBrowsing(AdCreativeFeatureDetails value) {
+    this.mProductBrowsing = value;
+    return this;
+  }
+
+  public AdCreativeFeaturesSpec setFieldProductBrowsing(String value) {
+    Type type = new TypeToken<AdCreativeFeatureDetails>(){}.getType();
+    this.mProductBrowsing = AdCreativeFeatureDetails.getGson().fromJson(value, type);
     return this;
   }
   public AdCreativeFeatureDetails getFieldProductExtensions() {
@@ -1348,6 +1478,20 @@ public class AdCreativeFeaturesSpec extends APINode {
     this.mVideoUncrop = AdCreativeFeatureDetails.getGson().fromJson(value, type);
     return this;
   }
+  public AdCreativeFeatureDetails getFieldVideoUncrop9x16To9x18() {
+    return mVideoUncrop9x16To9x18;
+  }
+
+  public AdCreativeFeaturesSpec setFieldVideoUncrop9x16To9x18(AdCreativeFeatureDetails value) {
+    this.mVideoUncrop9x16To9x18 = value;
+    return this;
+  }
+
+  public AdCreativeFeaturesSpec setFieldVideoUncrop9x16To9x18(String value) {
+    Type type = new TypeToken<AdCreativeFeatureDetails>(){}.getType();
+    this.mVideoUncrop9x16To9x18 = AdCreativeFeatureDetails.getGson().fromJson(value, type);
+    return this;
+  }
   public AdCreativeFeatureDetails getFieldWaMmImageFiltering() {
     return mWaMmImageFiltering;
   }
@@ -1408,6 +1552,7 @@ public class AdCreativeFeaturesSpec extends APINode {
     this.mCvTransformation = instance.mCvTransformation;
     this.mDescriptionAutomation = instance.mDescriptionAutomation;
     this.mDhaOptimization = instance.mDhaOptimization;
+    this.mDynamicCtaText = instance.mDynamicCtaText;
     this.mDynamicPartnerContent = instance.mDynamicPartnerContent;
     this.mEnableNcsTestimonials = instance.mEnableNcsTestimonials;
     this.mEnhanceCta = instance.mEnhanceCta;
@@ -1417,6 +1562,7 @@ public class AdCreativeFeaturesSpec extends APINode {
     this.mFeedCaptionOptimization = instance.mFeedCaptionOptimization;
     this.mGenerateCta = instance.mGenerateCta;
     this.mHidePrice = instance.mHidePrice;
+    this.mHyperlinkFormatting = instance.mHyperlinkFormatting;
     this.mIgFeedTag = instance.mIgFeedTag;
     this.mIgGladosFeed = instance.mIgGladosFeed;
     this.mIgReelsTag = instance.mIgReelsTag;
@@ -1425,7 +1571,9 @@ public class AdCreativeFeaturesSpec extends APINode {
     this.mImageAnimation = instance.mImageAnimation;
     this.mImageAutoCrop = instance.mImageAutoCrop;
     this.mImageBackgroundGen = instance.mImageBackgroundGen;
+    this.mImageBanner = instance.mImageBanner;
     this.mImageBrightnessAndContrast = instance.mImageBrightnessAndContrast;
+    this.mImageEndCard = instance.mImageEndCard;
     this.mImageEnhancement = instance.mImageEnhancement;
     this.mImageTemplates = instance.mImageTemplates;
     this.mImageTextTranslation = instance.mImageTextTranslation;
@@ -1436,9 +1584,13 @@ public class AdCreativeFeaturesSpec extends APINode {
     this.mMediaLiquidityAnimatedImage = instance.mMediaLiquidityAnimatedImage;
     this.mMediaOrder = instance.mMediaOrder;
     this.mMediaTypeAutomation = instance.mMediaTypeAutomation;
+    this.mMultiCreativePostCarousel = instance.mMultiCreativePostCarousel;
     this.mMultiPhotoToVideo = instance.mMultiPhotoToVideo;
     this.mMusicGeneration = instance.mMusicGeneration;
+    this.mPacGenaiRecomposition = instance.mPacGenaiRecomposition;
+    this.mPacRecomposition = instance.mPacRecomposition;
     this.mPacRelaxation = instance.mPacRelaxation;
+    this.mProductBrowsing = instance.mProductBrowsing;
     this.mProductExtensions = instance.mProductExtensions;
     this.mProductMetadataAutomation = instance.mProductMetadataAutomation;
     this.mProductTags = instance.mProductTags;
@@ -1465,6 +1617,7 @@ public class AdCreativeFeaturesSpec extends APINode {
     this.mVideoHighlights = instance.mVideoHighlights;
     this.mVideoToImage = instance.mVideoToImage;
     this.mVideoUncrop = instance.mVideoUncrop;
+    this.mVideoUncrop9x16To9x18 = instance.mVideoUncrop9x16To9x18;
     this.mWaMmImageFiltering = instance.mWaMmImageFiltering;
     this.mWaMmTextTruncationLength = instance.mWaMmTextTruncationLength;
     this.context = instance.context;

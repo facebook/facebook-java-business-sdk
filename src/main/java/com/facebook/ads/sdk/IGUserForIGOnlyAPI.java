@@ -1376,13 +1376,16 @@ public class IGUserForIGOnlyAPI extends APINode {
     }
     public static final String[] PARAMS = {
       "alt_text",
+      "audio_configuration",
       "audio_name",
+      "branded_content_sponsor_ids",
       "caption",
       "children",
       "collaborators",
       "cover_url",
       "image_url",
       "is_carousel_item",
+      "is_paid_partnership",
       "location_id",
       "media_type",
       "product_tags",
@@ -1456,8 +1459,22 @@ public class IGUserForIGOnlyAPI extends APINode {
       return this;
     }
 
+    public APIRequestCreateMedia setAudioConfiguration (String audioConfiguration) {
+      this.setParam("audio_configuration", audioConfiguration);
+      return this;
+    }
+
     public APIRequestCreateMedia setAudioName (String audioName) {
       this.setParam("audio_name", audioName);
+      return this;
+    }
+
+    public APIRequestCreateMedia setBrandedContentSponsorIds (List<Long> brandedContentSponsorIds) {
+      this.setParam("branded_content_sponsor_ids", brandedContentSponsorIds);
+      return this;
+    }
+    public APIRequestCreateMedia setBrandedContentSponsorIds (String brandedContentSponsorIds) {
+      this.setParam("branded_content_sponsor_ids", brandedContentSponsorIds);
       return this;
     }
 
@@ -1500,6 +1517,15 @@ public class IGUserForIGOnlyAPI extends APINode {
     }
     public APIRequestCreateMedia setIsCarouselItem (String isCarouselItem) {
       this.setParam("is_carousel_item", isCarouselItem);
+      return this;
+    }
+
+    public APIRequestCreateMedia setIsPaidPartnership (Boolean isPaidPartnership) {
+      this.setParam("is_paid_partnership", isPaidPartnership);
+      return this;
+    }
+    public APIRequestCreateMedia setIsPaidPartnership (String isPaidPartnership) {
+      this.setParam("is_paid_partnership", isPaidPartnership);
       return this;
     }
 
@@ -3759,6 +3785,8 @@ public class IGUserForIGOnlyAPI extends APINode {
   }
 
   public static enum EnumSubscribedFields {
+      @SerializedName("agent_messages")
+      VALUE_AGENT_MESSAGES("agent_messages"),
       @SerializedName("comment_poll_response")
       VALUE_COMMENT_POLL_RESPONSE("comment_poll_response"),
       @SerializedName("comments")

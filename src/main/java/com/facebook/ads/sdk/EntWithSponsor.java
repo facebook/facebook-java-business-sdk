@@ -41,6 +41,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class EntWithSponsor extends APINode {
+  @SerializedName("has_audio_swapped_fb_copy")
+  private Boolean mHasAudioSwappedFbCopy = null;
   @SerializedName("id")
   private String mId = null;
   @SerializedName("is_branded_content")
@@ -53,6 +55,8 @@ public class EntWithSponsor extends APINode {
   private String mPostId = null;
   @SerializedName("post_info")
   private Post mPostInfo = null;
+  @SerializedName("promotable_id")
+  private String mPromotableId = null;
   protected static Gson gson = null;
 
   public EntWithSponsor() {
@@ -204,6 +208,15 @@ public class EntWithSponsor extends APINode {
   }
 
 
+  public Boolean getFieldHasAudioSwappedFbCopy() {
+    return mHasAudioSwappedFbCopy;
+  }
+
+  public EntWithSponsor setFieldHasAudioSwappedFbCopy(Boolean value) {
+    this.mHasAudioSwappedFbCopy = value;
+    return this;
+  }
+
   public String getFieldId() {
     return mId;
   }
@@ -266,6 +279,15 @@ public class EntWithSponsor extends APINode {
     this.mPostInfo = Post.getGson().fromJson(value, type);
     return this;
   }
+  public String getFieldPromotableId() {
+    return mPromotableId;
+  }
+
+  public EntWithSponsor setFieldPromotableId(String value) {
+    this.mPromotableId = value;
+    return this;
+  }
+
 
 
 
@@ -283,12 +305,14 @@ public class EntWithSponsor extends APINode {
   }
 
   public EntWithSponsor copyFrom(EntWithSponsor instance) {
+    this.mHasAudioSwappedFbCopy = instance.mHasAudioSwappedFbCopy;
     this.mId = instance.mId;
     this.mIsBrandedContent = instance.mIsBrandedContent;
     this.mOwnerLinkedInstagramUserV1Id = instance.mOwnerLinkedInstagramUserV1Id;
     this.mOwnerPicture = instance.mOwnerPicture;
     this.mPostId = instance.mPostId;
     this.mPostInfo = instance.mPostInfo;
+    this.mPromotableId = instance.mPromotableId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

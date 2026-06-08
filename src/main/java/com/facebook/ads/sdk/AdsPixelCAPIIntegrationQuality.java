@@ -47,6 +47,8 @@ public class AdsPixelCAPIIntegrationQuality extends APINode {
   private Object mDataFreshness = null;
   @SerializedName("dedupe_key_feedback")
   private List<Object> mDedupeKeyFeedback = null;
+  @SerializedName("event_ad_sets")
+  private List<Object> mEventAdSets = null;
   @SerializedName("event_coverage")
   private Object mEventCoverage = null;
   @SerializedName("event_match_quality")
@@ -55,6 +57,8 @@ public class AdsPixelCAPIIntegrationQuality extends APINode {
   private String mEventName = null;
   @SerializedName("event_potential_aly_acr_increase")
   private Object mEventPotentialAlyAcrIncrease = null;
+  @SerializedName("event_spend")
+  private Object mEventSpend = null;
   protected static Gson gson = null;
 
   public AdsPixelCAPIIntegrationQuality() {
@@ -233,6 +237,15 @@ public class AdsPixelCAPIIntegrationQuality extends APINode {
     return this;
   }
 
+  public List<Object> getFieldEventAdSets() {
+    return mEventAdSets;
+  }
+
+  public AdsPixelCAPIIntegrationQuality setFieldEventAdSets(List<Object> value) {
+    this.mEventAdSets = value;
+    return this;
+  }
+
   public Object getFieldEventCoverage() {
     return mEventCoverage;
   }
@@ -269,6 +282,15 @@ public class AdsPixelCAPIIntegrationQuality extends APINode {
     return this;
   }
 
+  public Object getFieldEventSpend() {
+    return mEventSpend;
+  }
+
+  public AdsPixelCAPIIntegrationQuality setFieldEventSpend(Object value) {
+    this.mEventSpend = value;
+    return this;
+  }
+
 
 
 
@@ -289,10 +311,12 @@ public class AdsPixelCAPIIntegrationQuality extends APINode {
     this.mAcr = instance.mAcr;
     this.mDataFreshness = instance.mDataFreshness;
     this.mDedupeKeyFeedback = instance.mDedupeKeyFeedback;
+    this.mEventAdSets = instance.mEventAdSets;
     this.mEventCoverage = instance.mEventCoverage;
     this.mEventMatchQuality = instance.mEventMatchQuality;
     this.mEventName = instance.mEventName;
     this.mEventPotentialAlyAcrIncrease = instance.mEventPotentialAlyAcrIncrease;
+    this.mEventSpend = instance.mEventSpend;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

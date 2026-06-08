@@ -968,6 +968,7 @@ public class Comment extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "attribution_id_v2",
       "feedback_source",
       "nectar_module",
       "tracking",
@@ -1029,6 +1030,11 @@ public class Comment extends APINode {
       return this;
     }
 
+
+    public APIRequestDeleteLikes setAttributionIdV2 (String attributionIdV2) {
+      this.setParam("attribution_id_v2", attributionIdV2);
+      return this;
+    }
 
     public APIRequestDeleteLikes setFeedbackSource (String feedbackSource) {
       this.setParam("feedback_source", feedbackSource);
@@ -1284,6 +1290,7 @@ public class Comment extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "attribution_id_v2",
       "feedback_source",
       "nectar_module",
       "tracking",
@@ -1345,6 +1352,11 @@ public class Comment extends APINode {
       return this;
     }
 
+
+    public APIRequestCreateLike setAttributionIdV2 (String attributionIdV2) {
+      this.setParam("attribution_id_v2", attributionIdV2);
+      return this;
+    }
 
     public APIRequestCreateLike setFeedbackSource (String feedbackSource) {
       this.setParam("feedback_source", feedbackSource);

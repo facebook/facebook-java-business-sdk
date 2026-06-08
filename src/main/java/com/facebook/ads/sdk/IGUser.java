@@ -45,6 +45,8 @@ public class IGUser extends APINode {
   private String mBiography = null;
   @SerializedName("business_discovery")
   private IGUser mBusinessDiscovery = null;
+  @SerializedName("collaborative_media_search")
+  private ShadowIGUserCollaborativeMedia mCollaborativeMediaSearch = null;
   @SerializedName("followers_count")
   private Long mFollowersCount = null;
   @SerializedName("follows_count")
@@ -458,6 +460,10 @@ public class IGUser extends APINode {
       mBusinessDiscovery.context = getContext();
     }
     return mBusinessDiscovery;
+  }
+
+  public ShadowIGUserCollaborativeMedia getFieldCollaborativeMediaSearch() {
+    return mCollaborativeMediaSearch;
   }
 
   public Long getFieldFollowersCount() {
@@ -896,6 +902,7 @@ public class IGUser extends APINode {
       "offsite_clo_signal_status",
       "offsite_pixels_tos_accepted",
       "opportunity_score",
+      "opportunity_score_weight",
       "owner",
       "owner_business",
       "partner",
@@ -1402,6 +1409,13 @@ public class IGUser extends APINode {
     }
     public APIRequestGetAuthorizedAdAccounts requestOpportunityScoreField (boolean value) {
       this.requestField("opportunity_score", value);
+      return this;
+    }
+    public APIRequestGetAuthorizedAdAccounts requestOpportunityScoreWeightField () {
+      return this.requestOpportunityScoreWeightField(true);
+    }
+    public APIRequestGetAuthorizedAdAccounts requestOpportunityScoreWeightField (boolean value) {
+      this.requestField("opportunity_score_weight", value);
       return this;
     }
     public APIRequestGetAuthorizedAdAccounts requestOwnerField () {
@@ -2075,6 +2089,7 @@ public class IGUser extends APINode {
       "eligibility_errors",
       "has_permission_for_partnership_ad",
       "id",
+      "is_creator_allowlisted",
       "linked_products",
       "owner_id",
       "permalink",
@@ -2237,6 +2252,13 @@ public class IGUser extends APINode {
     }
     public APIRequestGetBrandedContentAdvertisableMedias requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetBrandedContentAdvertisableMedias requestIsCreatorAllowlistedField () {
+      return this.requestIsCreatorAllowlistedField(true);
+    }
+    public APIRequestGetBrandedContentAdvertisableMedias requestIsCreatorAllowlistedField (boolean value) {
+      this.requestField("is_creator_allowlisted", value);
       return this;
     }
     public APIRequestGetBrandedContentAdvertisableMedias requestLinkedProductsField () {
@@ -3690,12 +3712,17 @@ public class IGUser extends APINode {
       "creator_max_followers",
       "creator_min_engaged_accounts",
       "creator_min_followers",
+      "creator_states",
+      "custom_audience_id",
       "has_public_contact_email",
+      "is_paid_partnership_messages_enabled",
       "major_audience_age_bucket",
       "major_audience_countries",
       "major_audience_device_type",
       "major_audience_gender",
+      "major_audience_states",
       "query",
+      "recommendation_type",
       "reels_interaction_rate",
       "show_onboarded_creators_only",
       "similar_to_creators",
@@ -3705,6 +3732,7 @@ public class IGUser extends APINode {
 
     public static final String[] FIELDS = {
       "age_bucket",
+      "badges",
       "biography",
       "country",
       "email",
@@ -3712,6 +3740,7 @@ public class IGUser extends APINode {
       "has_brand_partnership_experience",
       "id",
       "is_account_verified",
+      "is_creator_following_brand",
       "is_paid_partnership_messages_enabled",
       "messaging_id",
       "onboarded_status",
@@ -3865,12 +3894,35 @@ public class IGUser extends APINode {
       return this;
     }
 
+    public APIRequestGetCreatorMarketPlaceCreators setCreatorStates (List<String> creatorStates) {
+      this.setParam("creator_states", creatorStates);
+      return this;
+    }
+    public APIRequestGetCreatorMarketPlaceCreators setCreatorStates (String creatorStates) {
+      this.setParam("creator_states", creatorStates);
+      return this;
+    }
+
+    public APIRequestGetCreatorMarketPlaceCreators setCustomAudienceId (String customAudienceId) {
+      this.setParam("custom_audience_id", customAudienceId);
+      return this;
+    }
+
     public APIRequestGetCreatorMarketPlaceCreators setHasPublicContactEmail (Boolean hasPublicContactEmail) {
       this.setParam("has_public_contact_email", hasPublicContactEmail);
       return this;
     }
     public APIRequestGetCreatorMarketPlaceCreators setHasPublicContactEmail (String hasPublicContactEmail) {
       this.setParam("has_public_contact_email", hasPublicContactEmail);
+      return this;
+    }
+
+    public APIRequestGetCreatorMarketPlaceCreators setIsPaidPartnershipMessagesEnabled (Boolean isPaidPartnershipMessagesEnabled) {
+      this.setParam("is_paid_partnership_messages_enabled", isPaidPartnershipMessagesEnabled);
+      return this;
+    }
+    public APIRequestGetCreatorMarketPlaceCreators setIsPaidPartnershipMessagesEnabled (String isPaidPartnershipMessagesEnabled) {
+      this.setParam("is_paid_partnership_messages_enabled", isPaidPartnershipMessagesEnabled);
       return this;
     }
 
@@ -3910,8 +3962,26 @@ public class IGUser extends APINode {
       return this;
     }
 
+    public APIRequestGetCreatorMarketPlaceCreators setMajorAudienceStates (List<String> majorAudienceStates) {
+      this.setParam("major_audience_states", majorAudienceStates);
+      return this;
+    }
+    public APIRequestGetCreatorMarketPlaceCreators setMajorAudienceStates (String majorAudienceStates) {
+      this.setParam("major_audience_states", majorAudienceStates);
+      return this;
+    }
+
     public APIRequestGetCreatorMarketPlaceCreators setQuery (String query) {
       this.setParam("query", query);
+      return this;
+    }
+
+    public APIRequestGetCreatorMarketPlaceCreators setRecommendationType (IGUserExportForCAM.EnumRecommendationType recommendationType) {
+      this.setParam("recommendation_type", recommendationType);
+      return this;
+    }
+    public APIRequestGetCreatorMarketPlaceCreators setRecommendationType (String recommendationType) {
+      this.setParam("recommendation_type", recommendationType);
       return this;
     }
 
@@ -3999,6 +4069,13 @@ public class IGUser extends APINode {
       this.requestField("age_bucket", value);
       return this;
     }
+    public APIRequestGetCreatorMarketPlaceCreators requestBadgesField () {
+      return this.requestBadgesField(true);
+    }
+    public APIRequestGetCreatorMarketPlaceCreators requestBadgesField (boolean value) {
+      this.requestField("badges", value);
+      return this;
+    }
     public APIRequestGetCreatorMarketPlaceCreators requestBiographyField () {
       return this.requestBiographyField(true);
     }
@@ -4046,6 +4123,13 @@ public class IGUser extends APINode {
     }
     public APIRequestGetCreatorMarketPlaceCreators requestIsAccountVerifiedField (boolean value) {
       this.requestField("is_account_verified", value);
+      return this;
+    }
+    public APIRequestGetCreatorMarketPlaceCreators requestIsCreatorFollowingBrandField () {
+      return this.requestIsCreatorFollowingBrandField(true);
+    }
+    public APIRequestGetCreatorMarketPlaceCreators requestIsCreatorFollowingBrandField (boolean value) {
+      this.requestField("is_creator_following_brand", value);
       return this;
     }
     public APIRequestGetCreatorMarketPlaceCreators requestIsPaidPartnershipMessagesEnabledField () {
@@ -4807,14 +4891,21 @@ public class IGUser extends APINode {
       "is_shared_to_feed",
       "legacy_instagram_media_id",
       "like_count",
+      "media_audio_type",
       "media_product_type",
       "media_type",
       "media_url",
       "owner",
       "permalink",
+      "reposts_count",
+      "saved_count",
+      "shares_count",
       "shortcode",
       "thumbnail_url",
       "timestamp",
+      "total_comments_count",
+      "total_like_count",
+      "total_views_count",
       "username",
       "video_title",
       "view_count",
@@ -5018,6 +5109,13 @@ public class IGUser extends APINode {
       this.requestField("like_count", value);
       return this;
     }
+    public APIRequestGetLiveMedia requestMediaAudioTypeField () {
+      return this.requestMediaAudioTypeField(true);
+    }
+    public APIRequestGetLiveMedia requestMediaAudioTypeField (boolean value) {
+      this.requestField("media_audio_type", value);
+      return this;
+    }
     public APIRequestGetLiveMedia requestMediaProductTypeField () {
       return this.requestMediaProductTypeField(true);
     }
@@ -5053,6 +5151,27 @@ public class IGUser extends APINode {
       this.requestField("permalink", value);
       return this;
     }
+    public APIRequestGetLiveMedia requestRepostsCountField () {
+      return this.requestRepostsCountField(true);
+    }
+    public APIRequestGetLiveMedia requestRepostsCountField (boolean value) {
+      this.requestField("reposts_count", value);
+      return this;
+    }
+    public APIRequestGetLiveMedia requestSavedCountField () {
+      return this.requestSavedCountField(true);
+    }
+    public APIRequestGetLiveMedia requestSavedCountField (boolean value) {
+      this.requestField("saved_count", value);
+      return this;
+    }
+    public APIRequestGetLiveMedia requestSharesCountField () {
+      return this.requestSharesCountField(true);
+    }
+    public APIRequestGetLiveMedia requestSharesCountField (boolean value) {
+      this.requestField("shares_count", value);
+      return this;
+    }
     public APIRequestGetLiveMedia requestShortcodeField () {
       return this.requestShortcodeField(true);
     }
@@ -5072,6 +5191,27 @@ public class IGUser extends APINode {
     }
     public APIRequestGetLiveMedia requestTimestampField (boolean value) {
       this.requestField("timestamp", value);
+      return this;
+    }
+    public APIRequestGetLiveMedia requestTotalCommentsCountField () {
+      return this.requestTotalCommentsCountField(true);
+    }
+    public APIRequestGetLiveMedia requestTotalCommentsCountField (boolean value) {
+      this.requestField("total_comments_count", value);
+      return this;
+    }
+    public APIRequestGetLiveMedia requestTotalLikeCountField () {
+      return this.requestTotalLikeCountField(true);
+    }
+    public APIRequestGetLiveMedia requestTotalLikeCountField (boolean value) {
+      this.requestField("total_like_count", value);
+      return this;
+    }
+    public APIRequestGetLiveMedia requestTotalViewsCountField () {
+      return this.requestTotalViewsCountField(true);
+    }
+    public APIRequestGetLiveMedia requestTotalViewsCountField (boolean value) {
+      this.requestField("total_views_count", value);
       return this;
     }
     public APIRequestGetLiveMedia requestUsernameField () {
@@ -5124,14 +5264,21 @@ public class IGUser extends APINode {
       "is_shared_to_feed",
       "legacy_instagram_media_id",
       "like_count",
+      "media_audio_type",
       "media_product_type",
       "media_type",
       "media_url",
       "owner",
       "permalink",
+      "reposts_count",
+      "saved_count",
+      "shares_count",
       "shortcode",
       "thumbnail_url",
       "timestamp",
+      "total_comments_count",
+      "total_like_count",
+      "total_views_count",
       "username",
       "video_title",
       "view_count",
@@ -5335,6 +5482,13 @@ public class IGUser extends APINode {
       this.requestField("like_count", value);
       return this;
     }
+    public APIRequestGetMedia requestMediaAudioTypeField () {
+      return this.requestMediaAudioTypeField(true);
+    }
+    public APIRequestGetMedia requestMediaAudioTypeField (boolean value) {
+      this.requestField("media_audio_type", value);
+      return this;
+    }
     public APIRequestGetMedia requestMediaProductTypeField () {
       return this.requestMediaProductTypeField(true);
     }
@@ -5370,6 +5524,27 @@ public class IGUser extends APINode {
       this.requestField("permalink", value);
       return this;
     }
+    public APIRequestGetMedia requestRepostsCountField () {
+      return this.requestRepostsCountField(true);
+    }
+    public APIRequestGetMedia requestRepostsCountField (boolean value) {
+      this.requestField("reposts_count", value);
+      return this;
+    }
+    public APIRequestGetMedia requestSavedCountField () {
+      return this.requestSavedCountField(true);
+    }
+    public APIRequestGetMedia requestSavedCountField (boolean value) {
+      this.requestField("saved_count", value);
+      return this;
+    }
+    public APIRequestGetMedia requestSharesCountField () {
+      return this.requestSharesCountField(true);
+    }
+    public APIRequestGetMedia requestSharesCountField (boolean value) {
+      this.requestField("shares_count", value);
+      return this;
+    }
     public APIRequestGetMedia requestShortcodeField () {
       return this.requestShortcodeField(true);
     }
@@ -5389,6 +5564,27 @@ public class IGUser extends APINode {
     }
     public APIRequestGetMedia requestTimestampField (boolean value) {
       this.requestField("timestamp", value);
+      return this;
+    }
+    public APIRequestGetMedia requestTotalCommentsCountField () {
+      return this.requestTotalCommentsCountField(true);
+    }
+    public APIRequestGetMedia requestTotalCommentsCountField (boolean value) {
+      this.requestField("total_comments_count", value);
+      return this;
+    }
+    public APIRequestGetMedia requestTotalLikeCountField () {
+      return this.requestTotalLikeCountField(true);
+    }
+    public APIRequestGetMedia requestTotalLikeCountField (boolean value) {
+      this.requestField("total_like_count", value);
+      return this;
+    }
+    public APIRequestGetMedia requestTotalViewsCountField () {
+      return this.requestTotalViewsCountField(true);
+    }
+    public APIRequestGetMedia requestTotalViewsCountField (boolean value) {
+      this.requestField("total_views_count", value);
       return this;
     }
     public APIRequestGetMedia requestUsernameField () {
@@ -5423,13 +5619,16 @@ public class IGUser extends APINode {
     }
     public static final String[] PARAMS = {
       "alt_text",
+      "audio_configuration",
       "audio_name",
+      "branded_content_sponsor_ids",
       "caption",
       "children",
       "collaborators",
       "cover_url",
       "image_url",
       "is_carousel_item",
+      "is_paid_partnership",
       "location_id",
       "media_type",
       "product_tags",
@@ -5503,8 +5702,22 @@ public class IGUser extends APINode {
       return this;
     }
 
+    public APIRequestCreateMedia setAudioConfiguration (String audioConfiguration) {
+      this.setParam("audio_configuration", audioConfiguration);
+      return this;
+    }
+
     public APIRequestCreateMedia setAudioName (String audioName) {
       this.setParam("audio_name", audioName);
+      return this;
+    }
+
+    public APIRequestCreateMedia setBrandedContentSponsorIds (List<Long> brandedContentSponsorIds) {
+      this.setParam("branded_content_sponsor_ids", brandedContentSponsorIds);
+      return this;
+    }
+    public APIRequestCreateMedia setBrandedContentSponsorIds (String brandedContentSponsorIds) {
+      this.setParam("branded_content_sponsor_ids", brandedContentSponsorIds);
       return this;
     }
 
@@ -5547,6 +5760,15 @@ public class IGUser extends APINode {
     }
     public APIRequestCreateMedia setIsCarouselItem (String isCarouselItem) {
       this.setParam("is_carousel_item", isCarouselItem);
+      return this;
+    }
+
+    public APIRequestCreateMedia setIsPaidPartnership (Boolean isPaidPartnership) {
+      this.setParam("is_paid_partnership", isPaidPartnership);
+      return this;
+    }
+    public APIRequestCreateMedia setIsPaidPartnership (String isPaidPartnership) {
+      this.setParam("is_paid_partnership", isPaidPartnership);
       return this;
     }
 
@@ -6788,14 +7010,21 @@ public class IGUser extends APINode {
       "is_shared_to_feed",
       "legacy_instagram_media_id",
       "like_count",
+      "media_audio_type",
       "media_product_type",
       "media_type",
       "media_url",
       "owner",
       "permalink",
+      "reposts_count",
+      "saved_count",
+      "shares_count",
       "shortcode",
       "thumbnail_url",
       "timestamp",
+      "total_comments_count",
+      "total_like_count",
+      "total_views_count",
       "username",
       "video_title",
       "view_count",
@@ -6989,6 +7218,13 @@ public class IGUser extends APINode {
       this.requestField("like_count", value);
       return this;
     }
+    public APIRequestGetStories requestMediaAudioTypeField () {
+      return this.requestMediaAudioTypeField(true);
+    }
+    public APIRequestGetStories requestMediaAudioTypeField (boolean value) {
+      this.requestField("media_audio_type", value);
+      return this;
+    }
     public APIRequestGetStories requestMediaProductTypeField () {
       return this.requestMediaProductTypeField(true);
     }
@@ -7024,6 +7260,27 @@ public class IGUser extends APINode {
       this.requestField("permalink", value);
       return this;
     }
+    public APIRequestGetStories requestRepostsCountField () {
+      return this.requestRepostsCountField(true);
+    }
+    public APIRequestGetStories requestRepostsCountField (boolean value) {
+      this.requestField("reposts_count", value);
+      return this;
+    }
+    public APIRequestGetStories requestSavedCountField () {
+      return this.requestSavedCountField(true);
+    }
+    public APIRequestGetStories requestSavedCountField (boolean value) {
+      this.requestField("saved_count", value);
+      return this;
+    }
+    public APIRequestGetStories requestSharesCountField () {
+      return this.requestSharesCountField(true);
+    }
+    public APIRequestGetStories requestSharesCountField (boolean value) {
+      this.requestField("shares_count", value);
+      return this;
+    }
     public APIRequestGetStories requestShortcodeField () {
       return this.requestShortcodeField(true);
     }
@@ -7043,6 +7300,27 @@ public class IGUser extends APINode {
     }
     public APIRequestGetStories requestTimestampField (boolean value) {
       this.requestField("timestamp", value);
+      return this;
+    }
+    public APIRequestGetStories requestTotalCommentsCountField () {
+      return this.requestTotalCommentsCountField(true);
+    }
+    public APIRequestGetStories requestTotalCommentsCountField (boolean value) {
+      this.requestField("total_comments_count", value);
+      return this;
+    }
+    public APIRequestGetStories requestTotalLikeCountField () {
+      return this.requestTotalLikeCountField(true);
+    }
+    public APIRequestGetStories requestTotalLikeCountField (boolean value) {
+      this.requestField("total_like_count", value);
+      return this;
+    }
+    public APIRequestGetStories requestTotalViewsCountField () {
+      return this.requestTotalViewsCountField(true);
+    }
+    public APIRequestGetStories requestTotalViewsCountField (boolean value) {
+      this.requestField("total_views_count", value);
       return this;
     }
     public APIRequestGetStories requestUsernameField () {
@@ -7093,14 +7371,21 @@ public class IGUser extends APINode {
       "is_shared_to_feed",
       "legacy_instagram_media_id",
       "like_count",
+      "media_audio_type",
       "media_product_type",
       "media_type",
       "media_url",
       "owner",
       "permalink",
+      "reposts_count",
+      "saved_count",
+      "shares_count",
       "shortcode",
       "thumbnail_url",
       "timestamp",
+      "total_comments_count",
+      "total_like_count",
+      "total_views_count",
       "username",
       "video_title",
       "view_count",
@@ -7294,6 +7579,13 @@ public class IGUser extends APINode {
       this.requestField("like_count", value);
       return this;
     }
+    public APIRequestGetTags requestMediaAudioTypeField () {
+      return this.requestMediaAudioTypeField(true);
+    }
+    public APIRequestGetTags requestMediaAudioTypeField (boolean value) {
+      this.requestField("media_audio_type", value);
+      return this;
+    }
     public APIRequestGetTags requestMediaProductTypeField () {
       return this.requestMediaProductTypeField(true);
     }
@@ -7329,6 +7621,27 @@ public class IGUser extends APINode {
       this.requestField("permalink", value);
       return this;
     }
+    public APIRequestGetTags requestRepostsCountField () {
+      return this.requestRepostsCountField(true);
+    }
+    public APIRequestGetTags requestRepostsCountField (boolean value) {
+      this.requestField("reposts_count", value);
+      return this;
+    }
+    public APIRequestGetTags requestSavedCountField () {
+      return this.requestSavedCountField(true);
+    }
+    public APIRequestGetTags requestSavedCountField (boolean value) {
+      this.requestField("saved_count", value);
+      return this;
+    }
+    public APIRequestGetTags requestSharesCountField () {
+      return this.requestSharesCountField(true);
+    }
+    public APIRequestGetTags requestSharesCountField (boolean value) {
+      this.requestField("shares_count", value);
+      return this;
+    }
     public APIRequestGetTags requestShortcodeField () {
       return this.requestShortcodeField(true);
     }
@@ -7348,6 +7661,27 @@ public class IGUser extends APINode {
     }
     public APIRequestGetTags requestTimestampField (boolean value) {
       this.requestField("timestamp", value);
+      return this;
+    }
+    public APIRequestGetTags requestTotalCommentsCountField () {
+      return this.requestTotalCommentsCountField(true);
+    }
+    public APIRequestGetTags requestTotalCommentsCountField (boolean value) {
+      this.requestField("total_comments_count", value);
+      return this;
+    }
+    public APIRequestGetTags requestTotalLikeCountField () {
+      return this.requestTotalLikeCountField(true);
+    }
+    public APIRequestGetTags requestTotalLikeCountField (boolean value) {
+      this.requestField("total_like_count", value);
+      return this;
+    }
+    public APIRequestGetTags requestTotalViewsCountField () {
+      return this.requestTotalViewsCountField(true);
+    }
+    public APIRequestGetTags requestTotalViewsCountField (boolean value) {
+      this.requestField("total_views_count", value);
       return this;
     }
     public APIRequestGetTags requestUsernameField () {
@@ -7854,6 +8188,7 @@ public class IGUser extends APINode {
     public static final String[] FIELDS = {
       "biography",
       "business_discovery",
+      "collaborative_media_search",
       "followers_count",
       "follows_count",
       "has_profile_pic",
@@ -7980,6 +8315,13 @@ public class IGUser extends APINode {
     }
     public APIRequestGet requestBusinessDiscoveryField (boolean value) {
       this.requestField("business_discovery", value);
+      return this;
+    }
+    public APIRequestGet requestCollaborativeMediaSearchField () {
+      return this.requestCollaborativeMediaSearchField(true);
+    }
+    public APIRequestGet requestCollaborativeMediaSearchField (boolean value) {
+      this.requestField("collaborative_media_search", value);
       return this;
     }
     public APIRequestGet requestFollowersCountField () {
@@ -8182,6 +8524,7 @@ public class IGUser extends APINode {
   public IGUser copyFrom(IGUser instance) {
     this.mBiography = instance.mBiography;
     this.mBusinessDiscovery = instance.mBusinessDiscovery;
+    this.mCollaborativeMediaSearch = instance.mCollaborativeMediaSearch;
     this.mFollowersCount = instance.mFollowersCount;
     this.mFollowsCount = instance.mFollowsCount;
     this.mHasProfilePic = instance.mHasProfilePic;

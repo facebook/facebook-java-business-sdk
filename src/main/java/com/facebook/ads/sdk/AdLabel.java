@@ -356,6 +356,7 @@ public class AdLabel extends APINode {
       "existing_post_title",
       "facebook_branded_content",
       "format_transformation_spec",
+      "generative_asset_spec",
       "id",
       "image_crops",
       "image_hash",
@@ -401,6 +402,7 @@ public class AdLabel extends APINode {
       "url_tags",
       "use_page_actor_override",
       "video_id",
+      "wamo_whatsapp_identity_spec",
     };
 
     @Override
@@ -708,6 +710,13 @@ public class AdLabel extends APINode {
     }
     public APIRequestGetAdCreatives requestFormatTransformationSpecField (boolean value) {
       this.requestField("format_transformation_spec", value);
+      return this;
+    }
+    public APIRequestGetAdCreatives requestGenerativeAssetSpecField () {
+      return this.requestGenerativeAssetSpecField(true);
+    }
+    public APIRequestGetAdCreatives requestGenerativeAssetSpecField (boolean value) {
+      this.requestField("generative_asset_spec", value);
       return this;
     }
     public APIRequestGetAdCreatives requestIdField () {
@@ -1025,6 +1034,13 @@ public class AdLabel extends APINode {
       this.requestField("video_id", value);
       return this;
     }
+    public APIRequestGetAdCreatives requestWamoWhatsappIdentitySpecField () {
+      return this.requestWamoWhatsappIdentitySpecField(true);
+    }
+    public APIRequestGetAdCreatives requestWamoWhatsappIdentitySpecField (boolean value) {
+      this.requestField("wamo_whatsapp_identity_spec", value);
+      return this;
+    }
   }
 
   public static class APIRequestGetAds extends APIRequest<Ad> {
@@ -1057,6 +1073,7 @@ public class AdLabel extends APINode {
       "created_time",
       "creative",
       "creative_asset_groups_spec",
+      "creative_automation_spec",
       "demolink_hash",
       "display_sequence",
       "effective_status",
@@ -1303,6 +1320,13 @@ public class AdLabel extends APINode {
       this.requestField("creative_asset_groups_spec", value);
       return this;
     }
+    public APIRequestGetAds requestCreativeAutomationSpecField () {
+      return this.requestCreativeAutomationSpecField(true);
+    }
+    public APIRequestGetAds requestCreativeAutomationSpecField (boolean value) {
+      this.requestField("creative_automation_spec", value);
+      return this;
+    }
     public APIRequestGetAds requestDemolinkHashField () {
       return this.requestDemolinkHashField(true);
     }
@@ -1466,7 +1490,6 @@ public class AdLabel extends APINode {
       "account_id",
       "adlabels",
       "adset_schedule",
-      "anchor_event_attribution_window_days",
       "asset_feed_id",
       "attribution_count_type",
       "attribution_spec",
@@ -1484,6 +1507,7 @@ public class AdLabel extends APINode {
       "campaign_attribution",
       "campaign_id",
       "configured_status",
+      "cost_bidding_mode",
       "created_time",
       "creative_diversity_label",
       "creative_diversity_score",
@@ -1504,16 +1528,20 @@ public class AdLabel extends APINode {
       "instagram_user_id",
       "is_ba_skip_delayed_eligible",
       "is_budget_schedule_enabled",
+      "is_dc_follow_optimized",
       "is_dynamic_creative",
       "is_incremental_attribution_enabled",
+      "is_organic_ad_joint_optimized",
       "issues_info",
       "learning_stage_info",
       "lifetime_budget",
       "lifetime_imps",
       "lifetime_min_spend_target",
       "lifetime_spend_cap",
+      "live_video_ad_campaign_config",
       "low_creative_reach",
       "max_budget_spend_percentage",
+      "meta_moment_maker_spec",
       "min_budget_spend_percentage",
       "multi_event_conversion_attribution_window_seconds",
       "multi_optimization_goal_weight",
@@ -1527,6 +1555,7 @@ public class AdLabel extends APINode {
       "recurring_budget_semantics",
       "regional_regulated_categories",
       "regional_regulation_identities",
+      "relative_value",
       "review_feedback",
       "rf_prediction_id",
       "source_adset",
@@ -1656,13 +1685,6 @@ public class AdLabel extends APINode {
       this.requestField("adset_schedule", value);
       return this;
     }
-    public APIRequestGetAdSets requestAnchorEventAttributionWindowDaysField () {
-      return this.requestAnchorEventAttributionWindowDaysField(true);
-    }
-    public APIRequestGetAdSets requestAnchorEventAttributionWindowDaysField (boolean value) {
-      this.requestField("anchor_event_attribution_window_days", value);
-      return this;
-    }
     public APIRequestGetAdSets requestAssetFeedIdField () {
       return this.requestAssetFeedIdField(true);
     }
@@ -1780,6 +1802,13 @@ public class AdLabel extends APINode {
     }
     public APIRequestGetAdSets requestConfiguredStatusField (boolean value) {
       this.requestField("configured_status", value);
+      return this;
+    }
+    public APIRequestGetAdSets requestCostBiddingModeField () {
+      return this.requestCostBiddingModeField(true);
+    }
+    public APIRequestGetAdSets requestCostBiddingModeField (boolean value) {
+      this.requestField("cost_bidding_mode", value);
       return this;
     }
     public APIRequestGetAdSets requestCreatedTimeField () {
@@ -1922,6 +1951,13 @@ public class AdLabel extends APINode {
       this.requestField("is_budget_schedule_enabled", value);
       return this;
     }
+    public APIRequestGetAdSets requestIsDcFollowOptimizedField () {
+      return this.requestIsDcFollowOptimizedField(true);
+    }
+    public APIRequestGetAdSets requestIsDcFollowOptimizedField (boolean value) {
+      this.requestField("is_dc_follow_optimized", value);
+      return this;
+    }
     public APIRequestGetAdSets requestIsDynamicCreativeField () {
       return this.requestIsDynamicCreativeField(true);
     }
@@ -1934,6 +1970,13 @@ public class AdLabel extends APINode {
     }
     public APIRequestGetAdSets requestIsIncrementalAttributionEnabledField (boolean value) {
       this.requestField("is_incremental_attribution_enabled", value);
+      return this;
+    }
+    public APIRequestGetAdSets requestIsOrganicAdJointOptimizedField () {
+      return this.requestIsOrganicAdJointOptimizedField(true);
+    }
+    public APIRequestGetAdSets requestIsOrganicAdJointOptimizedField (boolean value) {
+      this.requestField("is_organic_ad_joint_optimized", value);
       return this;
     }
     public APIRequestGetAdSets requestIssuesInfoField () {
@@ -1978,6 +2021,13 @@ public class AdLabel extends APINode {
       this.requestField("lifetime_spend_cap", value);
       return this;
     }
+    public APIRequestGetAdSets requestLiveVideoAdCampaignConfigField () {
+      return this.requestLiveVideoAdCampaignConfigField(true);
+    }
+    public APIRequestGetAdSets requestLiveVideoAdCampaignConfigField (boolean value) {
+      this.requestField("live_video_ad_campaign_config", value);
+      return this;
+    }
     public APIRequestGetAdSets requestLowCreativeReachField () {
       return this.requestLowCreativeReachField(true);
     }
@@ -1990,6 +2040,13 @@ public class AdLabel extends APINode {
     }
     public APIRequestGetAdSets requestMaxBudgetSpendPercentageField (boolean value) {
       this.requestField("max_budget_spend_percentage", value);
+      return this;
+    }
+    public APIRequestGetAdSets requestMetaMomentMakerSpecField () {
+      return this.requestMetaMomentMakerSpecField(true);
+    }
+    public APIRequestGetAdSets requestMetaMomentMakerSpecField (boolean value) {
+      this.requestField("meta_moment_maker_spec", value);
       return this;
     }
     public APIRequestGetAdSets requestMinBudgetSpendPercentageField () {
@@ -2081,6 +2138,13 @@ public class AdLabel extends APINode {
     }
     public APIRequestGetAdSets requestRegionalRegulationIdentitiesField (boolean value) {
       this.requestField("regional_regulation_identities", value);
+      return this;
+    }
+    public APIRequestGetAdSets requestRelativeValueField () {
+      return this.requestRelativeValueField(true);
+    }
+    public APIRequestGetAdSets requestRelativeValueField (boolean value) {
+      this.requestField("relative_value", value);
       return this;
     }
     public APIRequestGetAdSets requestReviewFeedbackField () {
@@ -2224,12 +2288,15 @@ public class AdLabel extends APINode {
       "created_time",
       "daily_budget",
       "effective_status",
+      "frequency_control_specs",
       "has_secondary_skadnetwork_reporting",
       "id",
       "is_adset_budget_sharing_enabled",
       "is_budget_schedule_enabled",
       "is_direct_send_campaign",
       "is_message_campaign",
+      "is_meta_moment_maker_enabled",
+      "is_reels_trending_ads_enabled",
       "is_skadnetwork_attribution",
       "issues_info",
       "last_budget_toggling_time",
@@ -2457,6 +2524,13 @@ public class AdLabel extends APINode {
       this.requestField("effective_status", value);
       return this;
     }
+    public APIRequestGetCampaigns requestFrequencyControlSpecsField () {
+      return this.requestFrequencyControlSpecsField(true);
+    }
+    public APIRequestGetCampaigns requestFrequencyControlSpecsField (boolean value) {
+      this.requestField("frequency_control_specs", value);
+      return this;
+    }
     public APIRequestGetCampaigns requestHasSecondarySkadnetworkReportingField () {
       return this.requestHasSecondarySkadnetworkReportingField(true);
     }
@@ -2497,6 +2571,20 @@ public class AdLabel extends APINode {
     }
     public APIRequestGetCampaigns requestIsMessageCampaignField (boolean value) {
       this.requestField("is_message_campaign", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestIsMetaMomentMakerEnabledField () {
+      return this.requestIsMetaMomentMakerEnabledField(true);
+    }
+    public APIRequestGetCampaigns requestIsMetaMomentMakerEnabledField (boolean value) {
+      this.requestField("is_meta_moment_maker_enabled", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestIsReelsTrendingAdsEnabledField () {
+      return this.requestIsReelsTrendingAdsEnabledField(true);
+    }
+    public APIRequestGetCampaigns requestIsReelsTrendingAdsEnabledField (boolean value) {
+      this.requestField("is_reels_trending_ads_enabled", value);
       return this;
     }
     public APIRequestGetCampaigns requestIsSkadnetworkAttributionField () {

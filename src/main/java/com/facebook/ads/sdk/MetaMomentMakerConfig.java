@@ -40,25 +40,23 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class SmartPixelInsights extends APINode {
-  @SerializedName("source")
-  private String mSource = null;
-  @SerializedName("stats")
-  private List<Object> mStats = null;
+public class MetaMomentMakerConfig extends APINode {
+  @SerializedName("saturation_mode")
+  private String mSaturationMode = null;
   protected static Gson gson = null;
 
-  public SmartPixelInsights() {
+  public MetaMomentMakerConfig() {
   }
 
   public String getId() {
     return null;
   }
-  public static SmartPixelInsights loadJSON(String json, APIContext context, String header) {
-    SmartPixelInsights smartPixelInsights = getGson().fromJson(json, SmartPixelInsights.class);
+  public static MetaMomentMakerConfig loadJSON(String json, APIContext context, String header) {
+    MetaMomentMakerConfig metaMomentMakerConfig = getGson().fromJson(json, MetaMomentMakerConfig.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(smartPixelInsights.toString());
+      JsonElement o2 = parser.parse(metaMomentMakerConfig.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -68,14 +66,14 @@ public class SmartPixelInsights extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    smartPixelInsights.context = context;
-    smartPixelInsights.rawValue = json;
-    smartPixelInsights.header = header;
-    return smartPixelInsights;
+    metaMomentMakerConfig.context = context;
+    metaMomentMakerConfig.rawValue = json;
+    metaMomentMakerConfig.header = header;
+    return metaMomentMakerConfig;
   }
 
-  public static APINodeList<SmartPixelInsights> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<SmartPixelInsights> smartPixelInsightss = new APINodeList<SmartPixelInsights>(request, json, header);
+  public static APINodeList<MetaMomentMakerConfig> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<MetaMomentMakerConfig> metaMomentMakerConfigs = new APINodeList<MetaMomentMakerConfig>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -86,9 +84,9 @@ public class SmartPixelInsights extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          smartPixelInsightss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          metaMomentMakerConfigs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return smartPixelInsightss;
+        return metaMomentMakerConfigs;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -98,20 +96,20 @@ public class SmartPixelInsights extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                smartPixelInsightss.setCursors(before, after);
+                metaMomentMakerConfigs.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            smartPixelInsightss.setPaging(previous, next);
+            metaMomentMakerConfigs.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              smartPixelInsightss.setAppSecret(context.getAppSecretProof());
+              metaMomentMakerConfigs.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              smartPixelInsightss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              metaMomentMakerConfigs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -122,23 +120,23 @@ public class SmartPixelInsights extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  smartPixelInsightss.add(loadJSON(entry.getValue().toString(), context, header));
+                  metaMomentMakerConfigs.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              smartPixelInsightss.add(loadJSON(obj.toString(), context, header));
+              metaMomentMakerConfigs.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return smartPixelInsightss;
+          return metaMomentMakerConfigs;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              smartPixelInsightss.add(loadJSON(entry.getValue().toString(), context, header));
+              metaMomentMakerConfigs.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return smartPixelInsightss;
+          return metaMomentMakerConfigs;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -155,20 +153,20 @@ public class SmartPixelInsights extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              smartPixelInsightss.add(loadJSON(value.toString(), context, header));
+              metaMomentMakerConfigs.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return smartPixelInsightss;
+            return metaMomentMakerConfigs;
           }
 
           // Sixth, check if it's pure JsonObject
-          smartPixelInsightss.clear();
-          smartPixelInsightss.add(loadJSON(json, context, header));
-          return smartPixelInsightss;
+          metaMomentMakerConfigs.clear();
+          metaMomentMakerConfigs.add(loadJSON(json, context, header));
+          return metaMomentMakerConfigs;
         }
       }
     } catch (Exception e) {
@@ -196,21 +194,12 @@ public class SmartPixelInsights extends APINode {
   }
 
 
-  public String getFieldSource() {
-    return mSource;
+  public String getFieldSaturationMode() {
+    return mSaturationMode;
   }
 
-  public SmartPixelInsights setFieldSource(String value) {
-    this.mSource = value;
-    return this;
-  }
-
-  public List<Object> getFieldStats() {
-    return mStats;
-  }
-
-  public SmartPixelInsights setFieldStats(List<Object> value) {
-    this.mStats = value;
+  public MetaMomentMakerConfig setFieldSaturationMode(String value) {
+    this.mSaturationMode = value;
     return this;
   }
 
@@ -230,18 +219,17 @@ public class SmartPixelInsights extends APINode {
     return gson;
   }
 
-  public SmartPixelInsights copyFrom(SmartPixelInsights instance) {
-    this.mSource = instance.mSource;
-    this.mStats = instance.mStats;
+  public MetaMomentMakerConfig copyFrom(MetaMomentMakerConfig instance) {
+    this.mSaturationMode = instance.mSaturationMode;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<SmartPixelInsights> getParser() {
-    return new APIRequest.ResponseParser<SmartPixelInsights>() {
-      public APINodeList<SmartPixelInsights> parseResponse(String response, APIContext context, APIRequest<SmartPixelInsights> request, String header) throws MalformedResponseException {
-        return SmartPixelInsights.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<MetaMomentMakerConfig> getParser() {
+    return new APIRequest.ResponseParser<MetaMomentMakerConfig>() {
+      public APINodeList<MetaMomentMakerConfig> parseResponse(String response, APIContext context, APIRequest<MetaMomentMakerConfig> request, String header) throws MalformedResponseException {
+        return MetaMomentMakerConfig.parseResponse(response, context, request, header);
       }
     };
   }

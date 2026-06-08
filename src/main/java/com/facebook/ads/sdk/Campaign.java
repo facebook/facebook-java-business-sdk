@@ -73,6 +73,8 @@ public class Campaign extends APINode {
   private String mDailyBudget = null;
   @SerializedName("effective_status")
   private EnumEffectiveStatus mEffectiveStatus = null;
+  @SerializedName("frequency_control_specs")
+  private List<AdCampaignFrequencyControlSpecs> mFrequencyControlSpecs = null;
   @SerializedName("has_secondary_skadnetwork_reporting")
   private Boolean mHasSecondarySkadnetworkReporting = null;
   @SerializedName(value="id", alternate={"copied_campaign_id"})
@@ -85,6 +87,10 @@ public class Campaign extends APINode {
   private Boolean mIsDirectSendCampaign = null;
   @SerializedName("is_message_campaign")
   private Boolean mIsMessageCampaign = null;
+  @SerializedName("is_meta_moment_maker_enabled")
+  private Boolean mIsMetaMomentMakerEnabled = null;
+  @SerializedName("is_reels_trending_ads_enabled")
+  private Boolean mIsReelsTrendingAdsEnabled = null;
   @SerializedName("is_skadnetwork_attribution")
   private Boolean mIsSkadnetworkAttribution = null;
   @SerializedName("issues_info")
@@ -461,6 +467,10 @@ public class Campaign extends APINode {
     return mEffectiveStatus;
   }
 
+  public List<AdCampaignFrequencyControlSpecs> getFieldFrequencyControlSpecs() {
+    return mFrequencyControlSpecs;
+  }
+
   public Boolean getFieldHasSecondarySkadnetworkReporting() {
     return mHasSecondarySkadnetworkReporting;
   }
@@ -483,6 +493,14 @@ public class Campaign extends APINode {
 
   public Boolean getFieldIsMessageCampaign() {
     return mIsMessageCampaign;
+  }
+
+  public Boolean getFieldIsMetaMomentMakerEnabled() {
+    return mIsMetaMomentMakerEnabled;
+  }
+
+  public Boolean getFieldIsReelsTrendingAdsEnabled() {
+    return mIsReelsTrendingAdsEnabled;
   }
 
   public Boolean getFieldIsSkadnetworkAttribution() {
@@ -1193,6 +1211,7 @@ public class Campaign extends APINode {
       "created_time",
       "creative",
       "creative_asset_groups_spec",
+      "creative_automation_spec",
       "demolink_hash",
       "display_sequence",
       "effective_status",
@@ -1475,6 +1494,13 @@ public class Campaign extends APINode {
       this.requestField("creative_asset_groups_spec", value);
       return this;
     }
+    public APIRequestGetAds requestCreativeAutomationSpecField () {
+      return this.requestCreativeAutomationSpecField(true);
+    }
+    public APIRequestGetAds requestCreativeAutomationSpecField (boolean value) {
+      this.requestField("creative_automation_spec", value);
+      return this;
+    }
     public APIRequestGetAds requestDemolinkHashField () {
       return this.requestDemolinkHashField(true);
     }
@@ -1642,7 +1668,6 @@ public class Campaign extends APINode {
       "account_id",
       "adlabels",
       "adset_schedule",
-      "anchor_event_attribution_window_days",
       "asset_feed_id",
       "attribution_count_type",
       "attribution_spec",
@@ -1660,6 +1685,7 @@ public class Campaign extends APINode {
       "campaign_attribution",
       "campaign_id",
       "configured_status",
+      "cost_bidding_mode",
       "created_time",
       "creative_diversity_label",
       "creative_diversity_score",
@@ -1680,16 +1706,20 @@ public class Campaign extends APINode {
       "instagram_user_id",
       "is_ba_skip_delayed_eligible",
       "is_budget_schedule_enabled",
+      "is_dc_follow_optimized",
       "is_dynamic_creative",
       "is_incremental_attribution_enabled",
+      "is_organic_ad_joint_optimized",
       "issues_info",
       "learning_stage_info",
       "lifetime_budget",
       "lifetime_imps",
       "lifetime_min_spend_target",
       "lifetime_spend_cap",
+      "live_video_ad_campaign_config",
       "low_creative_reach",
       "max_budget_spend_percentage",
+      "meta_moment_maker_spec",
       "min_budget_spend_percentage",
       "multi_event_conversion_attribution_window_seconds",
       "multi_optimization_goal_weight",
@@ -1703,6 +1733,7 @@ public class Campaign extends APINode {
       "recurring_budget_semantics",
       "regional_regulated_categories",
       "regional_regulation_identities",
+      "relative_value",
       "review_feedback",
       "rf_prediction_id",
       "source_adset",
@@ -1868,13 +1899,6 @@ public class Campaign extends APINode {
       this.requestField("adset_schedule", value);
       return this;
     }
-    public APIRequestGetAdSets requestAnchorEventAttributionWindowDaysField () {
-      return this.requestAnchorEventAttributionWindowDaysField(true);
-    }
-    public APIRequestGetAdSets requestAnchorEventAttributionWindowDaysField (boolean value) {
-      this.requestField("anchor_event_attribution_window_days", value);
-      return this;
-    }
     public APIRequestGetAdSets requestAssetFeedIdField () {
       return this.requestAssetFeedIdField(true);
     }
@@ -1992,6 +2016,13 @@ public class Campaign extends APINode {
     }
     public APIRequestGetAdSets requestConfiguredStatusField (boolean value) {
       this.requestField("configured_status", value);
+      return this;
+    }
+    public APIRequestGetAdSets requestCostBiddingModeField () {
+      return this.requestCostBiddingModeField(true);
+    }
+    public APIRequestGetAdSets requestCostBiddingModeField (boolean value) {
+      this.requestField("cost_bidding_mode", value);
       return this;
     }
     public APIRequestGetAdSets requestCreatedTimeField () {
@@ -2134,6 +2165,13 @@ public class Campaign extends APINode {
       this.requestField("is_budget_schedule_enabled", value);
       return this;
     }
+    public APIRequestGetAdSets requestIsDcFollowOptimizedField () {
+      return this.requestIsDcFollowOptimizedField(true);
+    }
+    public APIRequestGetAdSets requestIsDcFollowOptimizedField (boolean value) {
+      this.requestField("is_dc_follow_optimized", value);
+      return this;
+    }
     public APIRequestGetAdSets requestIsDynamicCreativeField () {
       return this.requestIsDynamicCreativeField(true);
     }
@@ -2146,6 +2184,13 @@ public class Campaign extends APINode {
     }
     public APIRequestGetAdSets requestIsIncrementalAttributionEnabledField (boolean value) {
       this.requestField("is_incremental_attribution_enabled", value);
+      return this;
+    }
+    public APIRequestGetAdSets requestIsOrganicAdJointOptimizedField () {
+      return this.requestIsOrganicAdJointOptimizedField(true);
+    }
+    public APIRequestGetAdSets requestIsOrganicAdJointOptimizedField (boolean value) {
+      this.requestField("is_organic_ad_joint_optimized", value);
       return this;
     }
     public APIRequestGetAdSets requestIssuesInfoField () {
@@ -2190,6 +2235,13 @@ public class Campaign extends APINode {
       this.requestField("lifetime_spend_cap", value);
       return this;
     }
+    public APIRequestGetAdSets requestLiveVideoAdCampaignConfigField () {
+      return this.requestLiveVideoAdCampaignConfigField(true);
+    }
+    public APIRequestGetAdSets requestLiveVideoAdCampaignConfigField (boolean value) {
+      this.requestField("live_video_ad_campaign_config", value);
+      return this;
+    }
     public APIRequestGetAdSets requestLowCreativeReachField () {
       return this.requestLowCreativeReachField(true);
     }
@@ -2202,6 +2254,13 @@ public class Campaign extends APINode {
     }
     public APIRequestGetAdSets requestMaxBudgetSpendPercentageField (boolean value) {
       this.requestField("max_budget_spend_percentage", value);
+      return this;
+    }
+    public APIRequestGetAdSets requestMetaMomentMakerSpecField () {
+      return this.requestMetaMomentMakerSpecField(true);
+    }
+    public APIRequestGetAdSets requestMetaMomentMakerSpecField (boolean value) {
+      this.requestField("meta_moment_maker_spec", value);
       return this;
     }
     public APIRequestGetAdSets requestMinBudgetSpendPercentageField () {
@@ -2293,6 +2352,13 @@ public class Campaign extends APINode {
     }
     public APIRequestGetAdSets requestRegionalRegulationIdentitiesField (boolean value) {
       this.requestField("regional_regulation_identities", value);
+      return this;
+    }
+    public APIRequestGetAdSets requestRelativeValueField () {
+      return this.requestRelativeValueField(true);
+    }
+    public APIRequestGetAdSets requestRelativeValueField (boolean value) {
+      this.requestField("relative_value", value);
       return this;
     }
     public APIRequestGetAdSets requestReviewFeedbackField () {
@@ -2766,12 +2832,15 @@ public class Campaign extends APINode {
       "created_time",
       "daily_budget",
       "effective_status",
+      "frequency_control_specs",
       "has_secondary_skadnetwork_reporting",
       "id",
       "is_adset_budget_sharing_enabled",
       "is_budget_schedule_enabled",
       "is_direct_send_campaign",
       "is_message_campaign",
+      "is_meta_moment_maker_enabled",
+      "is_reels_trending_ads_enabled",
       "is_skadnetwork_attribution",
       "issues_info",
       "last_budget_toggling_time",
@@ -3035,6 +3104,13 @@ public class Campaign extends APINode {
       this.requestField("effective_status", value);
       return this;
     }
+    public APIRequestGetCopies requestFrequencyControlSpecsField () {
+      return this.requestFrequencyControlSpecsField(true);
+    }
+    public APIRequestGetCopies requestFrequencyControlSpecsField (boolean value) {
+      this.requestField("frequency_control_specs", value);
+      return this;
+    }
     public APIRequestGetCopies requestHasSecondarySkadnetworkReportingField () {
       return this.requestHasSecondarySkadnetworkReportingField(true);
     }
@@ -3075,6 +3151,20 @@ public class Campaign extends APINode {
     }
     public APIRequestGetCopies requestIsMessageCampaignField (boolean value) {
       this.requestField("is_message_campaign", value);
+      return this;
+    }
+    public APIRequestGetCopies requestIsMetaMomentMakerEnabledField () {
+      return this.requestIsMetaMomentMakerEnabledField(true);
+    }
+    public APIRequestGetCopies requestIsMetaMomentMakerEnabledField (boolean value) {
+      this.requestField("is_meta_moment_maker_enabled", value);
+      return this;
+    }
+    public APIRequestGetCopies requestIsReelsTrendingAdsEnabledField () {
+      return this.requestIsReelsTrendingAdsEnabledField(true);
+    }
+    public APIRequestGetCopies requestIsReelsTrendingAdsEnabledField (boolean value) {
+      this.requestField("is_reels_trending_ads_enabled", value);
       return this;
     }
     public APIRequestGetCopies requestIsSkadnetworkAttributionField () {
@@ -4189,12 +4279,15 @@ public class Campaign extends APINode {
       "created_time",
       "daily_budget",
       "effective_status",
+      "frequency_control_specs",
       "has_secondary_skadnetwork_reporting",
       "id",
       "is_adset_budget_sharing_enabled",
       "is_budget_schedule_enabled",
       "is_direct_send_campaign",
       "is_message_campaign",
+      "is_meta_moment_maker_enabled",
+      "is_reels_trending_ads_enabled",
       "is_skadnetwork_attribution",
       "issues_info",
       "last_budget_toggling_time",
@@ -4458,6 +4551,13 @@ public class Campaign extends APINode {
       this.requestField("effective_status", value);
       return this;
     }
+    public APIRequestGet requestFrequencyControlSpecsField () {
+      return this.requestFrequencyControlSpecsField(true);
+    }
+    public APIRequestGet requestFrequencyControlSpecsField (boolean value) {
+      this.requestField("frequency_control_specs", value);
+      return this;
+    }
     public APIRequestGet requestHasSecondarySkadnetworkReportingField () {
       return this.requestHasSecondarySkadnetworkReportingField(true);
     }
@@ -4498,6 +4598,20 @@ public class Campaign extends APINode {
     }
     public APIRequestGet requestIsMessageCampaignField (boolean value) {
       this.requestField("is_message_campaign", value);
+      return this;
+    }
+    public APIRequestGet requestIsMetaMomentMakerEnabledField () {
+      return this.requestIsMetaMomentMakerEnabledField(true);
+    }
+    public APIRequestGet requestIsMetaMomentMakerEnabledField (boolean value) {
+      this.requestField("is_meta_moment_maker_enabled", value);
+      return this;
+    }
+    public APIRequestGet requestIsReelsTrendingAdsEnabledField () {
+      return this.requestIsReelsTrendingAdsEnabledField(true);
+    }
+    public APIRequestGet requestIsReelsTrendingAdsEnabledField (boolean value) {
+      this.requestField("is_reels_trending_ads_enabled", value);
       return this;
     }
     public APIRequestGet requestIsSkadnetworkAttributionField () {
@@ -4679,10 +4793,13 @@ public class Campaign extends APINode {
       "budget_schedule_specs",
       "daily_budget",
       "execution_options",
+      "frequency_control_specs",
       "is_adset_budget_sharing_enabled",
       "is_budget_schedule_enabled",
       "is_direct_send_campaign",
       "is_message_campaign",
+      "is_meta_moment_maker_enabled",
+      "is_reels_trending_ads_enabled",
       "is_skadnetwork_attribution",
       "iterative_split_test_configs",
       "lifetime_budget",
@@ -4830,6 +4947,15 @@ public class Campaign extends APINode {
       return this;
     }
 
+    public APIRequestUpdate setFrequencyControlSpecs (List<Object> frequencyControlSpecs) {
+      this.setParam("frequency_control_specs", frequencyControlSpecs);
+      return this;
+    }
+    public APIRequestUpdate setFrequencyControlSpecs (String frequencyControlSpecs) {
+      this.setParam("frequency_control_specs", frequencyControlSpecs);
+      return this;
+    }
+
     public APIRequestUpdate setIsAdsetBudgetSharingEnabled (Boolean isAdsetBudgetSharingEnabled) {
       this.setParam("is_adset_budget_sharing_enabled", isAdsetBudgetSharingEnabled);
       return this;
@@ -4863,6 +4989,24 @@ public class Campaign extends APINode {
     }
     public APIRequestUpdate setIsMessageCampaign (String isMessageCampaign) {
       this.setParam("is_message_campaign", isMessageCampaign);
+      return this;
+    }
+
+    public APIRequestUpdate setIsMetaMomentMakerEnabled (Boolean isMetaMomentMakerEnabled) {
+      this.setParam("is_meta_moment_maker_enabled", isMetaMomentMakerEnabled);
+      return this;
+    }
+    public APIRequestUpdate setIsMetaMomentMakerEnabled (String isMetaMomentMakerEnabled) {
+      this.setParam("is_meta_moment_maker_enabled", isMetaMomentMakerEnabled);
+      return this;
+    }
+
+    public APIRequestUpdate setIsReelsTrendingAdsEnabled (Boolean isReelsTrendingAdsEnabled) {
+      this.setParam("is_reels_trending_ads_enabled", isReelsTrendingAdsEnabled);
+      return this;
+    }
+    public APIRequestUpdate setIsReelsTrendingAdsEnabled (String isReelsTrendingAdsEnabled) {
+      this.setParam("is_reels_trending_ads_enabled", isReelsTrendingAdsEnabled);
       return this;
     }
 
@@ -5930,12 +6074,15 @@ public class Campaign extends APINode {
     this.mCreatedTime = instance.mCreatedTime;
     this.mDailyBudget = instance.mDailyBudget;
     this.mEffectiveStatus = instance.mEffectiveStatus;
+    this.mFrequencyControlSpecs = instance.mFrequencyControlSpecs;
     this.mHasSecondarySkadnetworkReporting = instance.mHasSecondarySkadnetworkReporting;
     this.mId = instance.mId;
     this.mIsAdsetBudgetSharingEnabled = instance.mIsAdsetBudgetSharingEnabled;
     this.mIsBudgetScheduleEnabled = instance.mIsBudgetScheduleEnabled;
     this.mIsDirectSendCampaign = instance.mIsDirectSendCampaign;
     this.mIsMessageCampaign = instance.mIsMessageCampaign;
+    this.mIsMetaMomentMakerEnabled = instance.mIsMetaMomentMakerEnabled;
+    this.mIsReelsTrendingAdsEnabled = instance.mIsReelsTrendingAdsEnabled;
     this.mIsSkadnetworkAttribution = instance.mIsSkadnetworkAttribution;
     this.mIssuesInfo = instance.mIssuesInfo;
     this.mLastBudgetTogglingTime = instance.mLastBudgetTogglingTime;

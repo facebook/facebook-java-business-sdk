@@ -1552,6 +1552,7 @@ public class Application extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "add_to_messaging_customer_base_for_whatsapp",
       "advertiser_id",
       "advertiser_tracking_enabled",
       "anon_id",
@@ -1565,6 +1566,7 @@ public class Application extends APINode {
       "bundle_short_version",
       "bundle_version",
       "campaign_ids",
+      "circuit_breaker_timeout_ms",
       "click_id",
       "consider_views",
       "custom_events",
@@ -1583,6 +1585,7 @@ public class Application extends APINode {
       "install_referrer",
       "install_timestamp",
       "installer_package",
+      "is_circuit_breaker_active",
       "is_fb",
       "limited_data_use",
       "meta_install_referrer",
@@ -1656,6 +1659,11 @@ public class Application extends APINode {
       return this;
     }
 
+
+    public APIRequestCreateActivity setAddToMessagingCustomerBaseForWhatsapp (String addToMessagingCustomerBaseForWhatsapp) {
+      this.setParam("add_to_messaging_customer_base_for_whatsapp", addToMessagingCustomerBaseForWhatsapp);
+      return this;
+    }
 
     public APIRequestCreateActivity setAdvertiserId (String advertiserId) {
       this.setParam("advertiser_id", advertiserId);
@@ -1735,6 +1743,15 @@ public class Application extends APINode {
 
     public APIRequestCreateActivity setCampaignIds (String campaignIds) {
       this.setParam("campaign_ids", campaignIds);
+      return this;
+    }
+
+    public APIRequestCreateActivity setCircuitBreakerTimeoutMs (Long circuitBreakerTimeoutMs) {
+      this.setParam("circuit_breaker_timeout_ms", circuitBreakerTimeoutMs);
+      return this;
+    }
+    public APIRequestCreateActivity setCircuitBreakerTimeoutMs (String circuitBreakerTimeoutMs) {
+      this.setParam("circuit_breaker_timeout_ms", circuitBreakerTimeoutMs);
       return this;
     }
 
@@ -1869,6 +1886,15 @@ public class Application extends APINode {
 
     public APIRequestCreateActivity setInstallerPackage (String installerPackage) {
       this.setParam("installer_package", installerPackage);
+      return this;
+    }
+
+    public APIRequestCreateActivity setIsCircuitBreakerActive (Boolean isCircuitBreakerActive) {
+      this.setParam("is_circuit_breaker_active", isCircuitBreakerActive);
+      return this;
+    }
+    public APIRequestCreateActivity setIsCircuitBreakerActive (String isCircuitBreakerActive) {
+      this.setParam("is_circuit_breaker_active", isCircuitBreakerActive);
       return this;
     }
 
@@ -5202,6 +5228,7 @@ public class Application extends APINode {
       "offsite_clo_signal_status",
       "offsite_pixels_tos_accepted",
       "opportunity_score",
+      "opportunity_score_weight",
       "owner",
       "owner_business",
       "partner",
@@ -5708,6 +5735,13 @@ public class Application extends APINode {
     }
     public APIRequestGetAuthorizedAdAccounts requestOpportunityScoreField (boolean value) {
       this.requestField("opportunity_score", value);
+      return this;
+    }
+    public APIRequestGetAuthorizedAdAccounts requestOpportunityScoreWeightField () {
+      return this.requestOpportunityScoreWeightField(true);
+    }
+    public APIRequestGetAuthorizedAdAccounts requestOpportunityScoreWeightField (boolean value) {
+      this.requestField("opportunity_score_weight", value);
       return this;
     }
     public APIRequestGetAuthorizedAdAccounts requestOwnerField () {
@@ -9568,6 +9602,7 @@ public class Application extends APINode {
     public static final String[] PARAMS = {
       "callback_url",
       "fields",
+      "include_client_certificate",
       "include_values",
       "object",
       "verify_token",
@@ -9641,6 +9676,15 @@ public class Application extends APINode {
     }
     public APIRequestCreateSubscription setFields (String fields) {
       this.setParam("fields", fields);
+      return this;
+    }
+
+    public APIRequestCreateSubscription setIncludeClientCertificate (Boolean includeClientCertificate) {
+      this.setParam("include_client_certificate", includeClientCertificate);
+      return this;
+    }
+    public APIRequestCreateSubscription setIncludeClientCertificate (String includeClientCertificate) {
+      this.setParam("include_client_certificate", includeClientCertificate);
       return this;
     }
 
@@ -11694,6 +11738,8 @@ public class Application extends APINode {
   public static enum EnumAnPlatforms {
       @SerializedName("ANDROID")
       VALUE_ANDROID("ANDROID"),
+      @SerializedName("CTV")
+      VALUE_CTV("CTV"),
       @SerializedName("DESKTOP")
       VALUE_DESKTOP("DESKTOP"),
       @SerializedName("GALAXY")

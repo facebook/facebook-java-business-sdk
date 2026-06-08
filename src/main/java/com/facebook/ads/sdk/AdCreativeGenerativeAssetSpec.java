@@ -41,6 +41,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class AdCreativeGenerativeAssetSpec extends APINode {
+  @SerializedName("transparency_metadata")
+  private Object mTransparencyMetadata = null;
   protected static Gson gson = null;
 
   public AdCreativeGenerativeAssetSpec() {
@@ -192,6 +194,15 @@ public class AdCreativeGenerativeAssetSpec extends APINode {
   }
 
 
+  public Object getFieldTransparencyMetadata() {
+    return mTransparencyMetadata;
+  }
+
+  public AdCreativeGenerativeAssetSpec setFieldTransparencyMetadata(Object value) {
+    this.mTransparencyMetadata = value;
+    return this;
+  }
+
 
 
 
@@ -209,6 +220,7 @@ public class AdCreativeGenerativeAssetSpec extends APINode {
   }
 
   public AdCreativeGenerativeAssetSpec copyFrom(AdCreativeGenerativeAssetSpec instance) {
+    this.mTransparencyMetadata = instance.mTransparencyMetadata;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

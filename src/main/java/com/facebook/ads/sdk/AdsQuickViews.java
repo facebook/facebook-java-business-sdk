@@ -49,6 +49,8 @@ public class AdsQuickViews extends APINode {
   private List<String> mColumnFields = null;
   @SerializedName("description")
   private String mDescription = null;
+  @SerializedName("grouping")
+  private String mGrouping = null;
   @SerializedName("id")
   private String mId = null;
   @SerializedName("is_attribution_windows_disabled")
@@ -59,6 +61,8 @@ public class AdsQuickViews extends APINode {
   private Boolean mIsColumnsAndSortDisabled = null;
   @SerializedName("is_filters_disabled")
   private Boolean mIsFiltersDisabled = null;
+  @SerializedName("is_grouping_disabled")
+  private Boolean mIsGroupingDisabled = null;
   @SerializedName("name")
   private String mName = null;
   @SerializedName("owner")
@@ -301,6 +305,10 @@ public class AdsQuickViews extends APINode {
     return mDescription;
   }
 
+  public String getFieldGrouping() {
+    return mGrouping;
+  }
+
   public String getFieldId() {
     return mId;
   }
@@ -319,6 +327,10 @@ public class AdsQuickViews extends APINode {
 
   public Boolean getFieldIsFiltersDisabled() {
     return mIsFiltersDisabled;
+  }
+
+  public Boolean getFieldIsGroupingDisabled() {
+    return mIsGroupingDisabled;
   }
 
   public String getFieldName() {
@@ -365,11 +377,13 @@ public class AdsQuickViews extends APINode {
       "breakdowns",
       "column_fields",
       "description",
+      "grouping",
       "id",
       "is_attribution_windows_disabled",
       "is_breakdowns_disabled",
       "is_columns_and_sort_disabled",
       "is_filters_disabled",
+      "is_grouping_disabled",
       "name",
       "owner",
       "permission",
@@ -496,6 +510,13 @@ public class AdsQuickViews extends APINode {
       this.requestField("description", value);
       return this;
     }
+    public APIRequestGet requestGroupingField () {
+      return this.requestGroupingField(true);
+    }
+    public APIRequestGet requestGroupingField (boolean value) {
+      this.requestField("grouping", value);
+      return this;
+    }
     public APIRequestGet requestIdField () {
       return this.requestIdField(true);
     }
@@ -529,6 +550,13 @@ public class AdsQuickViews extends APINode {
     }
     public APIRequestGet requestIsFiltersDisabledField (boolean value) {
       this.requestField("is_filters_disabled", value);
+      return this;
+    }
+    public APIRequestGet requestIsGroupingDisabledField () {
+      return this.requestIsGroupingDisabledField(true);
+    }
+    public APIRequestGet requestIsGroupingDisabledField (boolean value) {
+      this.requestField("is_grouping_disabled", value);
       return this;
     }
     public APIRequestGet requestNameField () {
@@ -594,11 +622,13 @@ public class AdsQuickViews extends APINode {
     this.mBreakdowns = instance.mBreakdowns;
     this.mColumnFields = instance.mColumnFields;
     this.mDescription = instance.mDescription;
+    this.mGrouping = instance.mGrouping;
     this.mId = instance.mId;
     this.mIsAttributionWindowsDisabled = instance.mIsAttributionWindowsDisabled;
     this.mIsBreakdownsDisabled = instance.mIsBreakdownsDisabled;
     this.mIsColumnsAndSortDisabled = instance.mIsColumnsAndSortDisabled;
     this.mIsFiltersDisabled = instance.mIsFiltersDisabled;
+    this.mIsGroupingDisabled = instance.mIsGroupingDisabled;
     this.mName = instance.mName;
     this.mOwner = instance.mOwner;
     this.mPermission = instance.mPermission;

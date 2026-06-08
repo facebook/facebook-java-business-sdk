@@ -216,6 +216,27 @@ public class ProductCatalogDataSourcesGet extends APINode {
 
 
 
+  public static enum EnumIngestionSourceType {
+      @SerializedName("ALL")
+      VALUE_ALL("ALL"),
+      @SerializedName("PRIMARY")
+      VALUE_PRIMARY("PRIMARY"),
+      @SerializedName("SUPPLEMENTARY")
+      VALUE_SUPPLEMENTARY("SUPPLEMENTARY"),
+      ;
+
+      private String value;
+
+      private EnumIngestionSourceType(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
 
   synchronized /*package*/ static Gson getGson() {
     if (gson != null) {

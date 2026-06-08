@@ -2711,6 +2711,8 @@ public class ProductFeed extends APINode {
       "material",
       "mobile_link",
       "name",
+      "offer_disclaimer",
+      "offer_disclaimer_url",
       "ordering_index",
       "origin_country",
       "overall_ranking",
@@ -3271,6 +3273,20 @@ public class ProductFeed extends APINode {
     }
     public APIRequestGetProducts requestNameField (boolean value) {
       this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetProducts requestOfferDisclaimerField () {
+      return this.requestOfferDisclaimerField(true);
+    }
+    public APIRequestGetProducts requestOfferDisclaimerField (boolean value) {
+      this.requestField("offer_disclaimer", value);
+      return this;
+    }
+    public APIRequestGetProducts requestOfferDisclaimerUrlField () {
+      return this.requestOfferDisclaimerUrlField(true);
+    }
+    public APIRequestGetProducts requestOfferDisclaimerUrlField (boolean value) {
+      this.requestField("offer_disclaimer_url", value);
       return this;
     }
     public APIRequestGetProducts requestOrderingIndexField () {

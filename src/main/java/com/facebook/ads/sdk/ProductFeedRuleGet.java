@@ -44,9 +44,9 @@ public class ProductFeedRuleGet extends APINode {
   @SerializedName("attribute")
   private String mAttribute = null;
   @SerializedName("id")
-  private String mId = null;
+  private Long mId = null;
   @SerializedName("params")
-  private Map<String, String> mParams = null;
+  private List<Object> mParams = null;
   @SerializedName("rule_type")
   private EnumRuleType mRuleType = null;
   protected static Gson gson = null;
@@ -209,20 +209,20 @@ public class ProductFeedRuleGet extends APINode {
     return this;
   }
 
-  public String getFieldId() {
+  public Long getFieldId() {
     return mId;
   }
 
-  public ProductFeedRuleGet setFieldId(String value) {
+  public ProductFeedRuleGet setFieldId(Long value) {
     this.mId = value;
     return this;
   }
 
-  public Map<String, String> getFieldParams() {
+  public List<Object> getFieldParams() {
     return mParams;
   }
 
-  public ProductFeedRuleGet setFieldParams(Map<String, String> value) {
+  public ProductFeedRuleGet setFieldParams(List<Object> value) {
     this.mParams = value;
     return this;
   }

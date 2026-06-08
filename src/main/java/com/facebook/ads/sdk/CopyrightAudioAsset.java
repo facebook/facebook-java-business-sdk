@@ -49,6 +49,8 @@ public class CopyrightAudioAsset extends APINode {
   private String mCreationTime = null;
   @SerializedName("id")
   private String mId = null;
+  @SerializedName("reference_file_isrcs")
+  private List<String> mReferenceFileIsrcs = null;
   @SerializedName("reference_files")
   private List<Object> mReferenceFiles = null;
   @SerializedName("title")
@@ -242,6 +244,15 @@ public class CopyrightAudioAsset extends APINode {
     return this;
   }
 
+  public List<String> getFieldReferenceFileIsrcs() {
+    return mReferenceFileIsrcs;
+  }
+
+  public CopyrightAudioAsset setFieldReferenceFileIsrcs(List<String> value) {
+    this.mReferenceFileIsrcs = value;
+    return this;
+  }
+
   public List<Object> getFieldReferenceFiles() {
     return mReferenceFiles;
   }
@@ -290,6 +301,7 @@ public class CopyrightAudioAsset extends APINode {
     this.mAudioLibraryPolicy = instance.mAudioLibraryPolicy;
     this.mCreationTime = instance.mCreationTime;
     this.mId = instance.mId;
+    this.mReferenceFileIsrcs = instance.mReferenceFileIsrcs;
     this.mReferenceFiles = instance.mReferenceFiles;
     this.mTitle = instance.mTitle;
     this.mUpdateTime = instance.mUpdateTime;

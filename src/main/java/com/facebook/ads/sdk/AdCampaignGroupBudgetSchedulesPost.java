@@ -40,23 +40,23 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class ProductCatalogMediaTitles extends APINode {
+public class AdCampaignGroupBudgetSchedulesPost extends APINode {
   @SerializedName("id")
   private String mId = null;
   protected static Gson gson = null;
 
-  public ProductCatalogMediaTitles() {
+  public AdCampaignGroupBudgetSchedulesPost() {
   }
 
   public String getId() {
     return getFieldId().toString();
   }
-  public static ProductCatalogMediaTitles loadJSON(String json, APIContext context, String header) {
-    ProductCatalogMediaTitles productCatalogMediaTitles = getGson().fromJson(json, ProductCatalogMediaTitles.class);
+  public static AdCampaignGroupBudgetSchedulesPost loadJSON(String json, APIContext context, String header) {
+    AdCampaignGroupBudgetSchedulesPost adCampaignGroupBudgetSchedulesPost = getGson().fromJson(json, AdCampaignGroupBudgetSchedulesPost.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(productCatalogMediaTitles.toString());
+      JsonElement o2 = parser.parse(adCampaignGroupBudgetSchedulesPost.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -66,14 +66,14 @@ public class ProductCatalogMediaTitles extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    productCatalogMediaTitles.context = context;
-    productCatalogMediaTitles.rawValue = json;
-    productCatalogMediaTitles.header = header;
-    return productCatalogMediaTitles;
+    adCampaignGroupBudgetSchedulesPost.context = context;
+    adCampaignGroupBudgetSchedulesPost.rawValue = json;
+    adCampaignGroupBudgetSchedulesPost.header = header;
+    return adCampaignGroupBudgetSchedulesPost;
   }
 
-  public static APINodeList<ProductCatalogMediaTitles> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<ProductCatalogMediaTitles> productCatalogMediaTitless = new APINodeList<ProductCatalogMediaTitles>(request, json, header);
+  public static APINodeList<AdCampaignGroupBudgetSchedulesPost> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdCampaignGroupBudgetSchedulesPost> adCampaignGroupBudgetSchedulesPosts = new APINodeList<AdCampaignGroupBudgetSchedulesPost>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -84,9 +84,9 @@ public class ProductCatalogMediaTitles extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          productCatalogMediaTitless.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          adCampaignGroupBudgetSchedulesPosts.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return productCatalogMediaTitless;
+        return adCampaignGroupBudgetSchedulesPosts;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -96,20 +96,20 @@ public class ProductCatalogMediaTitles extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                productCatalogMediaTitless.setCursors(before, after);
+                adCampaignGroupBudgetSchedulesPosts.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            productCatalogMediaTitless.setPaging(previous, next);
+            adCampaignGroupBudgetSchedulesPosts.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              productCatalogMediaTitless.setAppSecret(context.getAppSecretProof());
+              adCampaignGroupBudgetSchedulesPosts.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              productCatalogMediaTitless.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              adCampaignGroupBudgetSchedulesPosts.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -120,23 +120,23 @@ public class ProductCatalogMediaTitles extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  productCatalogMediaTitless.add(loadJSON(entry.getValue().toString(), context, header));
+                  adCampaignGroupBudgetSchedulesPosts.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              productCatalogMediaTitless.add(loadJSON(obj.toString(), context, header));
+              adCampaignGroupBudgetSchedulesPosts.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return productCatalogMediaTitless;
+          return adCampaignGroupBudgetSchedulesPosts;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              productCatalogMediaTitless.add(loadJSON(entry.getValue().toString(), context, header));
+              adCampaignGroupBudgetSchedulesPosts.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return productCatalogMediaTitless;
+          return adCampaignGroupBudgetSchedulesPosts;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -153,20 +153,20 @@ public class ProductCatalogMediaTitles extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              productCatalogMediaTitless.add(loadJSON(value.toString(), context, header));
+              adCampaignGroupBudgetSchedulesPosts.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return productCatalogMediaTitless;
+            return adCampaignGroupBudgetSchedulesPosts;
           }
 
           // Sixth, check if it's pure JsonObject
-          productCatalogMediaTitless.clear();
-          productCatalogMediaTitless.add(loadJSON(json, context, header));
-          return productCatalogMediaTitless;
+          adCampaignGroupBudgetSchedulesPosts.clear();
+          adCampaignGroupBudgetSchedulesPosts.add(loadJSON(json, context, header));
+          return adCampaignGroupBudgetSchedulesPosts;
         }
       }
     } catch (Exception e) {
@@ -193,126 +193,17 @@ public class ProductCatalogMediaTitles extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGenpost genpost() {
-    return new APIRequestGenpost(this.getId(), context);
-  }
-
 
   public String getFieldId() {
     return mId;
   }
 
-  public ProductCatalogMediaTitles setFieldId(String value) {
+  public AdCampaignGroupBudgetSchedulesPost setFieldId(String value) {
     this.mId = value;
     return this;
   }
 
 
-
-  public static class APIRequestGenpost extends APIRequest<ProductCatalogMediaTitlesPost> {
-
-    ProductCatalogMediaTitlesPost lastResponse = null;
-    @Override
-    public ProductCatalogMediaTitlesPost getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public ProductCatalogMediaTitlesPost parseResponse(String response, String header) throws APIException {
-      return ProductCatalogMediaTitlesPost.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public ProductCatalogMediaTitlesPost execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public ProductCatalogMediaTitlesPost execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<ProductCatalogMediaTitlesPost> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<ProductCatalogMediaTitlesPost> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, ProductCatalogMediaTitlesPost>() {
-           public ProductCatalogMediaTitlesPost apply(ResponseWrapper result) {
-             try {
-               return APIRequestGenpost.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         },
-         MoreExecutors.directExecutor()
-      );
-    };
-
-    public APIRequestGenpost(String nodeId, APIContext context) {
-      super(context, nodeId, "/media_titles", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGenpost setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGenpost setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGenpost requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGenpost requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGenpost requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGenpost requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGenpost requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGenpost requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
 
 
   synchronized /*package*/ static Gson getGson() {
@@ -328,17 +219,17 @@ public class ProductCatalogMediaTitles extends APINode {
     return gson;
   }
 
-  public ProductCatalogMediaTitles copyFrom(ProductCatalogMediaTitles instance) {
+  public AdCampaignGroupBudgetSchedulesPost copyFrom(AdCampaignGroupBudgetSchedulesPost instance) {
     this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<ProductCatalogMediaTitles> getParser() {
-    return new APIRequest.ResponseParser<ProductCatalogMediaTitles>() {
-      public APINodeList<ProductCatalogMediaTitles> parseResponse(String response, APIContext context, APIRequest<ProductCatalogMediaTitles> request, String header) throws MalformedResponseException {
-        return ProductCatalogMediaTitles.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<AdCampaignGroupBudgetSchedulesPost> getParser() {
+    return new APIRequest.ResponseParser<AdCampaignGroupBudgetSchedulesPost>() {
+      public APINodeList<AdCampaignGroupBudgetSchedulesPost> parseResponse(String response, APIContext context, APIRequest<AdCampaignGroupBudgetSchedulesPost> request, String header) throws MalformedResponseException {
+        return AdCampaignGroupBudgetSchedulesPost.parseResponse(response, context, request, header);
       }
     };
   }

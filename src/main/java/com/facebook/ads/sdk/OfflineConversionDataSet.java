@@ -565,6 +565,7 @@ public class OfflineConversionDataSet extends APINode {
       "offsite_clo_signal_status",
       "offsite_pixels_tos_accepted",
       "opportunity_score",
+      "opportunity_score_weight",
       "owner",
       "owner_business",
       "partner",
@@ -1073,6 +1074,13 @@ public class OfflineConversionDataSet extends APINode {
       this.requestField("opportunity_score", value);
       return this;
     }
+    public APIRequestGetAdAccounts requestOpportunityScoreWeightField () {
+      return this.requestOpportunityScoreWeightField(true);
+    }
+    public APIRequestGetAdAccounts requestOpportunityScoreWeightField (boolean value) {
+      this.requestField("opportunity_score_weight", value);
+      return this;
+    }
     public APIRequestGetAdAccounts requestOwnerField () {
       return this.requestOwnerField(true);
     }
@@ -1513,6 +1521,7 @@ public class OfflineConversionDataSet extends APINode {
       "account_id",
       "approximate_count_lower_bound",
       "approximate_count_upper_bound",
+      "audience_labels",
       "customer_file_source",
       "data_source",
       "data_source_types",
@@ -1677,6 +1686,13 @@ public class OfflineConversionDataSet extends APINode {
     }
     public APIRequestGetAudiences requestApproximateCountUpperBoundField (boolean value) {
       this.requestField("approximate_count_upper_bound", value);
+      return this;
+    }
+    public APIRequestGetAudiences requestAudienceLabelsField () {
+      return this.requestAudienceLabelsField(true);
+    }
+    public APIRequestGetAudiences requestAudienceLabelsField (boolean value) {
+      this.requestField("audience_labels", value);
       return this;
     }
     public APIRequestGetAudiences requestCustomerFileSourceField () {
@@ -2575,6 +2591,7 @@ public class OfflineConversionDataSet extends APINode {
       "offsite_clo_signal_status",
       "offsite_pixels_tos_accepted",
       "opportunity_score",
+      "opportunity_score_weight",
       "owner",
       "owner_business",
       "partner",
@@ -3090,6 +3107,13 @@ public class OfflineConversionDataSet extends APINode {
     }
     public APIRequestGetSharedAccounts requestOpportunityScoreField (boolean value) {
       this.requestField("opportunity_score", value);
+      return this;
+    }
+    public APIRequestGetSharedAccounts requestOpportunityScoreWeightField () {
+      return this.requestOpportunityScoreWeightField(true);
+    }
+    public APIRequestGetSharedAccounts requestOpportunityScoreWeightField (boolean value) {
+      this.requestField("opportunity_score_weight", value);
       return this;
     }
     public APIRequestGetSharedAccounts requestOwnerField () {

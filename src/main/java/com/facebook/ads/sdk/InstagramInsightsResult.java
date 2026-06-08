@@ -300,8 +300,6 @@ public class InstagramInsightsResult extends APINode {
   }
 
   public static enum EnumMetric {
-      @SerializedName("clips_replays_count")
-      VALUE_CLIPS_REPLAYS_COUNT("clips_replays_count"),
       @SerializedName("comments")
       VALUE_COMMENTS("comments"),
       @SerializedName("content_views")
@@ -312,8 +310,6 @@ public class InstagramInsightsResult extends APINode {
       VALUE_FACEBOOK_VIEWS("facebook_views"),
       @SerializedName("follows")
       VALUE_FOLLOWS("follows"),
-      @SerializedName("ig_reels_aggregated_all_plays_count")
-      VALUE_IG_REELS_AGGREGATED_ALL_PLAYS_COUNT("ig_reels_aggregated_all_plays_count"),
       @SerializedName("ig_reels_avg_watch_time")
       VALUE_IG_REELS_AVG_WATCH_TIME("ig_reels_avg_watch_time"),
       @SerializedName("ig_reels_video_view_total_time")
@@ -322,10 +318,10 @@ public class InstagramInsightsResult extends APINode {
       VALUE_IMPRESSIONS("impressions"),
       @SerializedName("likes")
       VALUE_LIKES("likes"),
+      @SerializedName("link_clicks")
+      VALUE_LINK_CLICKS("link_clicks"),
       @SerializedName("navigation")
       VALUE_NAVIGATION("navigation"),
-      @SerializedName("plays")
-      VALUE_PLAYS("plays"),
       @SerializedName("profile_activity")
       VALUE_PROFILE_ACTIVITY("profile_activity"),
       @SerializedName("profile_visits")
@@ -350,8 +346,6 @@ public class InstagramInsightsResult extends APINode {
       VALUE_TOTAL_LIKES("total_likes"),
       @SerializedName("total_views")
       VALUE_TOTAL_VIEWS("total_views"),
-      @SerializedName("video_views")
-      VALUE_VIDEO_VIEWS("video_views"),
       @SerializedName("views")
       VALUE_VIEWS("views"),
       ;

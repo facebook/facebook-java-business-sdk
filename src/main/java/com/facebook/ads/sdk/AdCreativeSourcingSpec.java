@@ -55,6 +55,8 @@ public class AdCreativeSourcingSpec extends APINode {
   private Object mDynamicSiteLinksSpec = null;
   @SerializedName("enable_social_feedback_preservation")
   private Boolean mEnableSocialFeedbackPreservation = null;
+  @SerializedName("featured_offering_spec")
+  private Object mFeaturedOfferingSpec = null;
   @SerializedName("intent")
   private Object mIntent = null;
   @SerializedName("pca_spec")
@@ -287,6 +289,15 @@ public class AdCreativeSourcingSpec extends APINode {
     return this;
   }
 
+  public Object getFieldFeaturedOfferingSpec() {
+    return mFeaturedOfferingSpec;
+  }
+
+  public AdCreativeSourcingSpec setFieldFeaturedOfferingSpec(Object value) {
+    this.mFeaturedOfferingSpec = value;
+    return this;
+  }
+
   public Object getFieldIntent() {
     return mIntent;
   }
@@ -402,6 +413,7 @@ public class AdCreativeSourcingSpec extends APINode {
     this.mDuplicationSource = instance.mDuplicationSource;
     this.mDynamicSiteLinksSpec = instance.mDynamicSiteLinksSpec;
     this.mEnableSocialFeedbackPreservation = instance.mEnableSocialFeedbackPreservation;
+    this.mFeaturedOfferingSpec = instance.mFeaturedOfferingSpec;
     this.mIntent = instance.mIntent;
     this.mPcaSpec = instance.mPcaSpec;
     this.mProductMediaMetadataSpec = instance.mProductMediaMetadataSpec;

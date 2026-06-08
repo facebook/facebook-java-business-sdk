@@ -40,27 +40,25 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class ProductSetAppsAndSoftwareGet extends APINode {
-  @SerializedName("data")
-  private List<Object> mData = null;
-  @SerializedName("paging")
-  private Object mPaging = null;
-  @SerializedName("summary")
-  private Object mSummary = null;
+public class ProductCatalogPost extends APINode {
+  @SerializedName("__firstOneOf")
+  private Object mFirstoneof = null;
+  @SerializedName("__secondOneOf")
+  private Object mSecondoneof = null;
   protected static Gson gson = null;
 
-  public ProductSetAppsAndSoftwareGet() {
+  public ProductCatalogPost() {
   }
 
   public String getId() {
     return null;
   }
-  public static ProductSetAppsAndSoftwareGet loadJSON(String json, APIContext context, String header) {
-    ProductSetAppsAndSoftwareGet productSetAppsAndSoftwareGet = getGson().fromJson(json, ProductSetAppsAndSoftwareGet.class);
+  public static ProductCatalogPost loadJSON(String json, APIContext context, String header) {
+    ProductCatalogPost productCatalogPost = getGson().fromJson(json, ProductCatalogPost.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(productSetAppsAndSoftwareGet.toString());
+      JsonElement o2 = parser.parse(productCatalogPost.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -70,14 +68,14 @@ public class ProductSetAppsAndSoftwareGet extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    productSetAppsAndSoftwareGet.context = context;
-    productSetAppsAndSoftwareGet.rawValue = json;
-    productSetAppsAndSoftwareGet.header = header;
-    return productSetAppsAndSoftwareGet;
+    productCatalogPost.context = context;
+    productCatalogPost.rawValue = json;
+    productCatalogPost.header = header;
+    return productCatalogPost;
   }
 
-  public static APINodeList<ProductSetAppsAndSoftwareGet> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<ProductSetAppsAndSoftwareGet> productSetAppsAndSoftwareGets = new APINodeList<ProductSetAppsAndSoftwareGet>(request, json, header);
+  public static APINodeList<ProductCatalogPost> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<ProductCatalogPost> productCatalogPosts = new APINodeList<ProductCatalogPost>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -88,9 +86,9 @@ public class ProductSetAppsAndSoftwareGet extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          productSetAppsAndSoftwareGets.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          productCatalogPosts.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return productSetAppsAndSoftwareGets;
+        return productCatalogPosts;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -100,20 +98,20 @@ public class ProductSetAppsAndSoftwareGet extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                productSetAppsAndSoftwareGets.setCursors(before, after);
+                productCatalogPosts.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            productSetAppsAndSoftwareGets.setPaging(previous, next);
+            productCatalogPosts.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              productSetAppsAndSoftwareGets.setAppSecret(context.getAppSecretProof());
+              productCatalogPosts.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              productSetAppsAndSoftwareGets.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              productCatalogPosts.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -124,23 +122,23 @@ public class ProductSetAppsAndSoftwareGet extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  productSetAppsAndSoftwareGets.add(loadJSON(entry.getValue().toString(), context, header));
+                  productCatalogPosts.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              productSetAppsAndSoftwareGets.add(loadJSON(obj.toString(), context, header));
+              productCatalogPosts.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return productSetAppsAndSoftwareGets;
+          return productCatalogPosts;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              productSetAppsAndSoftwareGets.add(loadJSON(entry.getValue().toString(), context, header));
+              productCatalogPosts.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return productSetAppsAndSoftwareGets;
+          return productCatalogPosts;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -157,20 +155,20 @@ public class ProductSetAppsAndSoftwareGet extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              productSetAppsAndSoftwareGets.add(loadJSON(value.toString(), context, header));
+              productCatalogPosts.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return productSetAppsAndSoftwareGets;
+            return productCatalogPosts;
           }
 
           // Sixth, check if it's pure JsonObject
-          productSetAppsAndSoftwareGets.clear();
-          productSetAppsAndSoftwareGets.add(loadJSON(json, context, header));
-          return productSetAppsAndSoftwareGets;
+          productCatalogPosts.clear();
+          productCatalogPosts.add(loadJSON(json, context, header));
+          return productCatalogPosts;
         }
       }
     } catch (Exception e) {
@@ -198,55 +196,25 @@ public class ProductSetAppsAndSoftwareGet extends APINode {
   }
 
 
-  public List<Object> getFieldData() {
-    return mData;
+  public Object getFieldFirstoneof() {
+    return mFirstoneof;
   }
 
-  public ProductSetAppsAndSoftwareGet setFieldData(List<Object> value) {
-    this.mData = value;
+  public ProductCatalogPost setFieldFirstoneof(Object value) {
+    this.mFirstoneof = value;
     return this;
   }
 
-  public Object getFieldPaging() {
-    return mPaging;
+  public Object getFieldSecondoneof() {
+    return mSecondoneof;
   }
 
-  public ProductSetAppsAndSoftwareGet setFieldPaging(Object value) {
-    this.mPaging = value;
-    return this;
-  }
-
-  public Object getFieldSummary() {
-    return mSummary;
-  }
-
-  public ProductSetAppsAndSoftwareGet setFieldSummary(Object value) {
-    this.mSummary = value;
+  public ProductCatalogPost setFieldSecondoneof(Object value) {
+    this.mSecondoneof = value;
     return this;
   }
 
 
-
-  public static enum EnumDisplayFormat {
-      @SerializedName("CAROUSEL_AD")
-      VALUE_CAROUSEL_AD("CAROUSEL_AD"),
-      @SerializedName("SHOPS_PDP")
-      VALUE_SHOPS_PDP("SHOPS_PDP"),
-      @SerializedName("SINGLE_AD")
-      VALUE_SINGLE_AD("SINGLE_AD"),
-      ;
-
-      private String value;
-
-      private EnumDisplayFormat(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
 
 
   synchronized /*package*/ static Gson getGson() {
@@ -262,19 +230,18 @@ public class ProductSetAppsAndSoftwareGet extends APINode {
     return gson;
   }
 
-  public ProductSetAppsAndSoftwareGet copyFrom(ProductSetAppsAndSoftwareGet instance) {
-    this.mData = instance.mData;
-    this.mPaging = instance.mPaging;
-    this.mSummary = instance.mSummary;
+  public ProductCatalogPost copyFrom(ProductCatalogPost instance) {
+    this.mFirstoneof = instance.mFirstoneof;
+    this.mSecondoneof = instance.mSecondoneof;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<ProductSetAppsAndSoftwareGet> getParser() {
-    return new APIRequest.ResponseParser<ProductSetAppsAndSoftwareGet>() {
-      public APINodeList<ProductSetAppsAndSoftwareGet> parseResponse(String response, APIContext context, APIRequest<ProductSetAppsAndSoftwareGet> request, String header) throws MalformedResponseException {
-        return ProductSetAppsAndSoftwareGet.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<ProductCatalogPost> getParser() {
+    return new APIRequest.ResponseParser<ProductCatalogPost>() {
+      public APINodeList<ProductCatalogPost> parseResponse(String response, APIContext context, APIRequest<ProductCatalogPost> request, String header) throws MalformedResponseException {
+        return ProductCatalogPost.parseResponse(response, context, request, header);
       }
     };
   }

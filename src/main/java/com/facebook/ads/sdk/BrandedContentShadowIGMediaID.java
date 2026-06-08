@@ -47,6 +47,8 @@ public class BrandedContentShadowIGMediaID extends APINode {
   private Boolean mHasPermissionForPartnershipAd = null;
   @SerializedName("id")
   private String mId = null;
+  @SerializedName("is_creator_allowlisted")
+  private Boolean mIsCreatorAllowlisted = null;
   @SerializedName("linked_products")
   private List<ProductItem> mLinkedProducts = null;
   @SerializedName("owner_id")
@@ -235,6 +237,15 @@ public class BrandedContentShadowIGMediaID extends APINode {
     return this;
   }
 
+  public Boolean getFieldIsCreatorAllowlisted() {
+    return mIsCreatorAllowlisted;
+  }
+
+  public BrandedContentShadowIGMediaID setFieldIsCreatorAllowlisted(Boolean value) {
+    this.mIsCreatorAllowlisted = value;
+    return this;
+  }
+
   public List<ProductItem> getFieldLinkedProducts() {
     return mLinkedProducts;
   }
@@ -329,6 +340,7 @@ public class BrandedContentShadowIGMediaID extends APINode {
     this.mEligibilityErrors = instance.mEligibilityErrors;
     this.mHasPermissionForPartnershipAd = instance.mHasPermissionForPartnershipAd;
     this.mId = instance.mId;
+    this.mIsCreatorAllowlisted = instance.mIsCreatorAllowlisted;
     this.mLinkedProducts = instance.mLinkedProducts;
     this.mOwnerId = instance.mOwnerId;
     this.mPermalink = instance.mPermalink;

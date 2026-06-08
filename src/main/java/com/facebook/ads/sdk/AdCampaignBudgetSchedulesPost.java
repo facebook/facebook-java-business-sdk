@@ -40,23 +40,23 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class CatalogGenericFeeds extends APINode {
+public class AdCampaignBudgetSchedulesPost extends APINode {
   @SerializedName("id")
   private String mId = null;
   protected static Gson gson = null;
 
-  public CatalogGenericFeeds() {
+  public AdCampaignBudgetSchedulesPost() {
   }
 
   public String getId() {
     return getFieldId().toString();
   }
-  public static CatalogGenericFeeds loadJSON(String json, APIContext context, String header) {
-    CatalogGenericFeeds catalogGenericFeeds = getGson().fromJson(json, CatalogGenericFeeds.class);
+  public static AdCampaignBudgetSchedulesPost loadJSON(String json, APIContext context, String header) {
+    AdCampaignBudgetSchedulesPost adCampaignBudgetSchedulesPost = getGson().fromJson(json, AdCampaignBudgetSchedulesPost.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(catalogGenericFeeds.toString());
+      JsonElement o2 = parser.parse(adCampaignBudgetSchedulesPost.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -66,14 +66,14 @@ public class CatalogGenericFeeds extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    catalogGenericFeeds.context = context;
-    catalogGenericFeeds.rawValue = json;
-    catalogGenericFeeds.header = header;
-    return catalogGenericFeeds;
+    adCampaignBudgetSchedulesPost.context = context;
+    adCampaignBudgetSchedulesPost.rawValue = json;
+    adCampaignBudgetSchedulesPost.header = header;
+    return adCampaignBudgetSchedulesPost;
   }
 
-  public static APINodeList<CatalogGenericFeeds> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<CatalogGenericFeeds> catalogGenericFeedss = new APINodeList<CatalogGenericFeeds>(request, json, header);
+  public static APINodeList<AdCampaignBudgetSchedulesPost> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdCampaignBudgetSchedulesPost> adCampaignBudgetSchedulesPosts = new APINodeList<AdCampaignBudgetSchedulesPost>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -84,9 +84,9 @@ public class CatalogGenericFeeds extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          catalogGenericFeedss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          adCampaignBudgetSchedulesPosts.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return catalogGenericFeedss;
+        return adCampaignBudgetSchedulesPosts;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -96,20 +96,20 @@ public class CatalogGenericFeeds extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                catalogGenericFeedss.setCursors(before, after);
+                adCampaignBudgetSchedulesPosts.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            catalogGenericFeedss.setPaging(previous, next);
+            adCampaignBudgetSchedulesPosts.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              catalogGenericFeedss.setAppSecret(context.getAppSecretProof());
+              adCampaignBudgetSchedulesPosts.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              catalogGenericFeedss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              adCampaignBudgetSchedulesPosts.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -120,23 +120,23 @@ public class CatalogGenericFeeds extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  catalogGenericFeedss.add(loadJSON(entry.getValue().toString(), context, header));
+                  adCampaignBudgetSchedulesPosts.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              catalogGenericFeedss.add(loadJSON(obj.toString(), context, header));
+              adCampaignBudgetSchedulesPosts.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return catalogGenericFeedss;
+          return adCampaignBudgetSchedulesPosts;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              catalogGenericFeedss.add(loadJSON(entry.getValue().toString(), context, header));
+              adCampaignBudgetSchedulesPosts.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return catalogGenericFeedss;
+          return adCampaignBudgetSchedulesPosts;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -153,20 +153,20 @@ public class CatalogGenericFeeds extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              catalogGenericFeedss.add(loadJSON(value.toString(), context, header));
+              adCampaignBudgetSchedulesPosts.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return catalogGenericFeedss;
+            return adCampaignBudgetSchedulesPosts;
           }
 
           // Sixth, check if it's pure JsonObject
-          catalogGenericFeedss.clear();
-          catalogGenericFeedss.add(loadJSON(json, context, header));
-          return catalogGenericFeedss;
+          adCampaignBudgetSchedulesPosts.clear();
+          adCampaignBudgetSchedulesPosts.add(loadJSON(json, context, header));
+          return adCampaignBudgetSchedulesPosts;
         }
       }
     } catch (Exception e) {
@@ -193,134 +193,17 @@ public class CatalogGenericFeeds extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGenget genget() {
-    return new APIRequestGenget(this.getId(), context);
-  }
-
 
   public String getFieldId() {
     return mId;
   }
 
-  public CatalogGenericFeeds setFieldId(String value) {
+  public AdCampaignBudgetSchedulesPost setFieldId(String value) {
     this.mId = value;
     return this;
   }
 
 
-
-  public static class APIRequestGenget extends APIRequest<CatalogGenericFeedsGet> {
-
-    APINodeList<CatalogGenericFeedsGet> lastResponse = null;
-    @Override
-    public APINodeList<CatalogGenericFeedsGet> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "data",
-    };
-
-    @Override
-    public APINodeList<CatalogGenericFeedsGet> parseResponse(String response, String header) throws APIException {
-      return CatalogGenericFeedsGet.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<CatalogGenericFeedsGet> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<CatalogGenericFeedsGet> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<CatalogGenericFeedsGet>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<CatalogGenericFeedsGet>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<CatalogGenericFeedsGet>>() {
-           public APINodeList<CatalogGenericFeedsGet> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGenget.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         },
-         MoreExecutors.directExecutor()
-      );
-    };
-
-    public APIRequestGenget(String nodeId, APIContext context) {
-      super(context, nodeId, "/uploads", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGenget setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGenget setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGenget requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGenget requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGenget requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGenget requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGenget requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGenget requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGenget requestDataField () {
-      return this.requestDataField(true);
-    }
-    public APIRequestGenget requestDataField (boolean value) {
-      this.requestField("data", value);
-      return this;
-    }
-  }
 
 
   synchronized /*package*/ static Gson getGson() {
@@ -336,17 +219,17 @@ public class CatalogGenericFeeds extends APINode {
     return gson;
   }
 
-  public CatalogGenericFeeds copyFrom(CatalogGenericFeeds instance) {
+  public AdCampaignBudgetSchedulesPost copyFrom(AdCampaignBudgetSchedulesPost instance) {
     this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<CatalogGenericFeeds> getParser() {
-    return new APIRequest.ResponseParser<CatalogGenericFeeds>() {
-      public APINodeList<CatalogGenericFeeds> parseResponse(String response, APIContext context, APIRequest<CatalogGenericFeeds> request, String header) throws MalformedResponseException {
-        return CatalogGenericFeeds.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<AdCampaignBudgetSchedulesPost> getParser() {
+    return new APIRequest.ResponseParser<AdCampaignBudgetSchedulesPost>() {
+      public APINodeList<AdCampaignBudgetSchedulesPost> parseResponse(String response, APIContext context, APIRequest<AdCampaignBudgetSchedulesPost> request, String header) throws MalformedResponseException {
+        return AdCampaignBudgetSchedulesPost.parseResponse(response, context, request, header);
       }
     };
   }

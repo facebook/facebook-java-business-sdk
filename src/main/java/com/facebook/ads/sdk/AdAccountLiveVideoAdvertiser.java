@@ -41,6 +41,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class AdAccountLiveVideoAdvertiser extends APINode {
+  @SerializedName("ig_lva_default_duration_s")
+  private Long mIgLvaDefaultDurationS = null;
   @SerializedName("is_lva_toggle_on")
   private Boolean mIsLvaToggleOn = null;
   @SerializedName("lva_default_budget")
@@ -206,6 +208,15 @@ public class AdAccountLiveVideoAdvertiser extends APINode {
   }
 
 
+  public Long getFieldIgLvaDefaultDurationS() {
+    return mIgLvaDefaultDurationS;
+  }
+
+  public AdAccountLiveVideoAdvertiser setFieldIgLvaDefaultDurationS(Long value) {
+    this.mIgLvaDefaultDurationS = value;
+    return this;
+  }
+
   public Boolean getFieldIsLvaToggleOn() {
     return mIsLvaToggleOn;
   }
@@ -286,6 +297,7 @@ public class AdAccountLiveVideoAdvertiser extends APINode {
   }
 
   public AdAccountLiveVideoAdvertiser copyFrom(AdAccountLiveVideoAdvertiser instance) {
+    this.mIgLvaDefaultDurationS = instance.mIgLvaDefaultDurationS;
     this.mIsLvaToggleOn = instance.mIsLvaToggleOn;
     this.mLvaDefaultBudget = instance.mLvaDefaultBudget;
     this.mLvaDefaultDurationS = instance.mLvaDefaultDurationS;

@@ -1138,6 +1138,8 @@ public class AdAccountTargetingUnified extends APINode {
       VALUE_EDUCATION_STATUSES("education_statuses"),
       @SerializedName("effective_audience_network_positions")
       VALUE_EFFECTIVE_AUDIENCE_NETWORK_POSITIONS("effective_audience_network_positions"),
+      @SerializedName("effective_brand_safety_content_filter_levels")
+      VALUE_EFFECTIVE_BRAND_SAFETY_CONTENT_FILTER_LEVELS("effective_brand_safety_content_filter_levels"),
       @SerializedName("effective_device_platforms")
       VALUE_EFFECTIVE_DEVICE_PLATFORMS("effective_device_platforms"),
       @SerializedName("effective_facebook_positions")
@@ -1214,6 +1216,8 @@ public class AdAccountTargetingUnified extends APINode {
       VALUE_GENERATION("generation"),
       @SerializedName("geo_locations")
       VALUE_GEO_LOCATIONS("geo_locations"),
+      @SerializedName("hashtag_interactions")
+      VALUE_HASHTAG_INTERACTIONS("hashtag_interactions"),
       @SerializedName("home_ownership")
       VALUE_HOME_OWNERSHIP("home_ownership"),
       @SerializedName("home_type")

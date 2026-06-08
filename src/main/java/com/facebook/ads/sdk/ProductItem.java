@@ -155,6 +155,10 @@ public class ProductItem extends APINode {
   private String mMobileLink = null;
   @SerializedName("name")
   private String mName = null;
+  @SerializedName("offer_disclaimer")
+  private String mOfferDisclaimer = null;
+  @SerializedName("offer_disclaimer_url")
+  private String mOfferDisclaimerUrl = null;
   @SerializedName("ordering_index")
   private Long mOrderingIndex = null;
   @SerializedName("origin_country")
@@ -689,6 +693,14 @@ public class ProductItem extends APINode {
 
   public String getFieldName() {
     return mName;
+  }
+
+  public String getFieldOfferDisclaimer() {
+    return mOfferDisclaimer;
+  }
+
+  public String getFieldOfferDisclaimerUrl() {
+    return mOfferDisclaimerUrl;
   }
 
   public Long getFieldOrderingIndex() {
@@ -1615,6 +1627,8 @@ public class ProductItem extends APINode {
       "material",
       "mobile_link",
       "name",
+      "offer_disclaimer",
+      "offer_disclaimer_url",
       "ordering_index",
       "origin_country",
       "overall_ranking",
@@ -2172,6 +2186,20 @@ public class ProductItem extends APINode {
     }
     public APIRequestGet requestNameField (boolean value) {
       this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGet requestOfferDisclaimerField () {
+      return this.requestOfferDisclaimerField(true);
+    }
+    public APIRequestGet requestOfferDisclaimerField (boolean value) {
+      this.requestField("offer_disclaimer", value);
+      return this;
+    }
+    public APIRequestGet requestOfferDisclaimerUrlField () {
+      return this.requestOfferDisclaimerUrlField(true);
+    }
+    public APIRequestGet requestOfferDisclaimerUrlField (boolean value) {
+      this.requestField("offer_disclaimer_url", value);
       return this;
     }
     public APIRequestGet requestOrderingIndexField () {
@@ -3168,6 +3196,8 @@ public class ProductItem extends APINode {
       VALUE_DISCONTINUED("discontinued"),
       @SerializedName("in stock")
       VALUE_IN_STOCK("in stock"),
+      @SerializedName("mark_as_expired")
+      VALUE_MARK_AS_EXPIRED("mark_as_expired"),
       @SerializedName("mark_as_sold")
       VALUE_MARK_AS_SOLD("mark_as_sold"),
       @SerializedName("out of stock")
@@ -4020,6 +4050,8 @@ public class ProductItem extends APINode {
       VALUE_ITEM_STALE_OUT_OF_STOCK("ITEM_STALE_OUT_OF_STOCK"),
       @SerializedName("MARKETPLACE_DISABLED_BY_USER")
       VALUE_MARKETPLACE_DISABLED_BY_USER("MARKETPLACE_DISABLED_BY_USER"),
+      @SerializedName("MARKETPLACE_NOT_SHIPPED_ITEM")
+      VALUE_MARKETPLACE_NOT_SHIPPED_ITEM("MARKETPLACE_NOT_SHIPPED_ITEM"),
       @SerializedName("MARKETPLACE_PARTNER_AUCTION_NO_BID_CLOSE_TIME")
       VALUE_MARKETPLACE_PARTNER_AUCTION_NO_BID_CLOSE_TIME("MARKETPLACE_PARTNER_AUCTION_NO_BID_CLOSE_TIME"),
       @SerializedName("MARKETPLACE_PARTNER_CURRENCY_NOT_VALID")
@@ -4046,6 +4078,14 @@ public class ProductItem extends APINode {
       VALUE_MARKETPLACE_PARTNER_SELLER_BANNED("MARKETPLACE_PARTNER_SELLER_BANNED"),
       @SerializedName("MARKETPLACE_PARTNER_SELLER_NOT_VALID")
       VALUE_MARKETPLACE_PARTNER_SELLER_NOT_VALID("MARKETPLACE_PARTNER_SELLER_NOT_VALID"),
+      @SerializedName("MARKETPLACE_SHIPPED_ITEM_EXPIRED")
+      VALUE_MARKETPLACE_SHIPPED_ITEM_EXPIRED("MARKETPLACE_SHIPPED_ITEM_EXPIRED"),
+      @SerializedName("MARKETPLACE_SHIPPED_ITEM_NOT_AVAILABLE")
+      VALUE_MARKETPLACE_SHIPPED_ITEM_NOT_AVAILABLE("MARKETPLACE_SHIPPED_ITEM_NOT_AVAILABLE"),
+      @SerializedName("MARKETPLACE_SHIPPED_SELLER_FEATURE_BANNED")
+      VALUE_MARKETPLACE_SHIPPED_SELLER_FEATURE_BANNED("MARKETPLACE_SHIPPED_SELLER_FEATURE_BANNED"),
+      @SerializedName("MARKETPLACE_SHIPPED_SELLER_NOT_FULLY_ONBOARDED")
+      VALUE_MARKETPLACE_SHIPPED_SELLER_NOT_FULLY_ONBOARDED("MARKETPLACE_SHIPPED_SELLER_NOT_FULLY_ONBOARDED"),
       @SerializedName("MINI_SHOPS_DISABLED_BY_USER")
       VALUE_MINI_SHOPS_DISABLED_BY_USER("MINI_SHOPS_DISABLED_BY_USER"),
       @SerializedName("MISSING_CHECKOUT")
@@ -4146,6 +4186,8 @@ public class ProductItem extends APINode {
       VALUE_RETAILER_ID_USED_BY_GROUP("RETAILER_ID_USED_BY_GROUP"),
       @SerializedName("SHOPIFY_INVALID_RETAILER_ID")
       VALUE_SHOPIFY_INVALID_RETAILER_ID("SHOPIFY_INVALID_RETAILER_ID"),
+      @SerializedName("SHOPIFY_ITEM_MISSING_DELIVERY_PROFILE_ZERO_INVENTORY")
+      VALUE_SHOPIFY_ITEM_MISSING_DELIVERY_PROFILE_ZERO_INVENTORY("SHOPIFY_ITEM_MISSING_DELIVERY_PROFILE_ZERO_INVENTORY"),
       @SerializedName("SHOPIFY_ITEM_MISSING_SHIPPING_PROFILE")
       VALUE_SHOPIFY_ITEM_MISSING_SHIPPING_PROFILE("SHOPIFY_ITEM_MISSING_SHIPPING_PROFILE"),
       @SerializedName("SHOPS_POLICY_VIOLATION")
@@ -4174,6 +4216,10 @@ public class ProductItem extends APINode {
       VALUE_VIDEO_FETCH_FAILED_FORBIDDEN("VIDEO_FETCH_FAILED_FORBIDDEN"),
       @SerializedName("VIDEO_FETCH_FAILED_LINK_BROKEN")
       VALUE_VIDEO_FETCH_FAILED_LINK_BROKEN("VIDEO_FETCH_FAILED_LINK_BROKEN"),
+      @SerializedName("VIDEO_FETCH_FAILED_RATE_LIMITED")
+      VALUE_VIDEO_FETCH_FAILED_RATE_LIMITED("VIDEO_FETCH_FAILED_RATE_LIMITED"),
+      @SerializedName("VIDEO_FETCH_FAILED_SERVER_ERROR")
+      VALUE_VIDEO_FETCH_FAILED_SERVER_ERROR("VIDEO_FETCH_FAILED_SERVER_ERROR"),
       @SerializedName("VIDEO_FETCH_FAILED_TIMED_OUT")
       VALUE_VIDEO_FETCH_FAILED_TIMED_OUT("VIDEO_FETCH_FAILED_TIMED_OUT"),
       @SerializedName("VIDEO_ISSUE_GENERIC")
@@ -4833,6 +4879,8 @@ public class ProductItem extends APINode {
     this.mMaterial = instance.mMaterial;
     this.mMobileLink = instance.mMobileLink;
     this.mName = instance.mName;
+    this.mOfferDisclaimer = instance.mOfferDisclaimer;
+    this.mOfferDisclaimerUrl = instance.mOfferDisclaimerUrl;
     this.mOrderingIndex = instance.mOrderingIndex;
     this.mOriginCountry = instance.mOriginCountry;
     this.mOverallRanking = instance.mOverallRanking;

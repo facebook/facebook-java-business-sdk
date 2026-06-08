@@ -43,6 +43,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class AdCreativeWAMOWhatsAppIdentitySpec extends APINode {
   @SerializedName("wamo_whatsapp_identity_id")
   private String mWamoWhatsappIdentityId = null;
+  @SerializedName("whatsapp_phone_number")
+  private String mWhatsappPhoneNumber = null;
   protected static Gson gson = null;
 
   public AdCreativeWAMOWhatsAppIdentitySpec() {
@@ -203,6 +205,15 @@ public class AdCreativeWAMOWhatsAppIdentitySpec extends APINode {
     return this;
   }
 
+  public String getFieldWhatsappPhoneNumber() {
+    return mWhatsappPhoneNumber;
+  }
+
+  public AdCreativeWAMOWhatsAppIdentitySpec setFieldWhatsappPhoneNumber(String value) {
+    this.mWhatsappPhoneNumber = value;
+    return this;
+  }
+
 
 
 
@@ -221,6 +232,7 @@ public class AdCreativeWAMOWhatsAppIdentitySpec extends APINode {
 
   public AdCreativeWAMOWhatsAppIdentitySpec copyFrom(AdCreativeWAMOWhatsAppIdentitySpec instance) {
     this.mWamoWhatsappIdentityId = instance.mWamoWhatsappIdentityId;
+    this.mWhatsappPhoneNumber = instance.mWhatsappPhoneNumber;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

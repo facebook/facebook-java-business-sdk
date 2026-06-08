@@ -544,6 +544,29 @@ public class UserPageOneTimeOptInTokenSettings extends APINode {
     }
   }
 
+  public static enum EnumOptInSource {
+      @SerializedName("COMMENT_AUTOMATION")
+      VALUE_COMMENT_AUTOMATION("COMMENT_AUTOMATION"),
+      @SerializedName("CTM")
+      VALUE_CTM("CTM"),
+      @SerializedName("REPLY_AUTOMATION")
+      VALUE_REPLY_AUTOMATION("REPLY_AUTOMATION"),
+      @SerializedName("SUBSCRIBER_LIST")
+      VALUE_SUBSCRIBER_LIST("SUBSCRIBER_LIST"),
+      ;
+
+      private String value;
+
+      private EnumOptInSource(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
 
   synchronized /*package*/ static Gson getGson() {
     if (gson != null) {

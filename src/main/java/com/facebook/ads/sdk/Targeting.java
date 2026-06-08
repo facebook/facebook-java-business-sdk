@@ -91,6 +91,8 @@ public class Targeting extends APINode {
   private List<Long> mEducationStatuses = null;
   @SerializedName("effective_audience_network_positions")
   private List<String> mEffectiveAudienceNetworkPositions = null;
+  @SerializedName("effective_brand_safety_content_filter_levels")
+  private List<String> mEffectiveBrandSafetyContentFilterLevels = null;
   @SerializedName("effective_device_platforms")
   private List<EnumEffectiveDevicePlatforms> mEffectiveDevicePlatforms = null;
   @SerializedName("effective_facebook_positions")
@@ -209,6 +211,8 @@ public class Targeting extends APINode {
   private List<Long> mRelationshipStatuses = null;
   @SerializedName("site_category")
   private List<String> mSiteCategory = null;
+  @SerializedName("subscriber_universe")
+  private TargetingSubscriberUniverse mSubscriberUniverse = null;
   @SerializedName("targeting_automation")
   private TargetingAutomation mTargetingAutomation = null;
   @SerializedName("targeting_optimization")
@@ -650,6 +654,15 @@ public class Targeting extends APINode {
 
   public Targeting setFieldEffectiveAudienceNetworkPositions(List<String> value) {
     this.mEffectiveAudienceNetworkPositions = value;
+    return this;
+  }
+
+  public List<String> getFieldEffectiveBrandSafetyContentFilterLevels() {
+    return mEffectiveBrandSafetyContentFilterLevels;
+  }
+
+  public Targeting setFieldEffectiveBrandSafetyContentFilterLevels(List<String> value) {
+    this.mEffectiveBrandSafetyContentFilterLevels = value;
     return this;
   }
 
@@ -1324,6 +1337,20 @@ public class Targeting extends APINode {
     return this;
   }
 
+  public TargetingSubscriberUniverse getFieldSubscriberUniverse() {
+    return mSubscriberUniverse;
+  }
+
+  public Targeting setFieldSubscriberUniverse(TargetingSubscriberUniverse value) {
+    this.mSubscriberUniverse = value;
+    return this;
+  }
+
+  public Targeting setFieldSubscriberUniverse(String value) {
+    Type type = new TypeToken<TargetingSubscriberUniverse>(){}.getType();
+    this.mSubscriberUniverse = TargetingSubscriberUniverse.getGson().fromJson(value, type);
+    return this;
+  }
   public TargetingAutomation getFieldTargetingAutomation() {
     return mTargetingAutomation;
   }
@@ -1478,6 +1505,8 @@ public class Targeting extends APINode {
 
 
   public static enum EnumDevicePlatforms {
+      @SerializedName("connected_tv")
+      VALUE_CONNECTED_TV("connected_tv"),
       @SerializedName("desktop")
       VALUE_DESKTOP("desktop"),
       @SerializedName("mobile")
@@ -1497,6 +1526,8 @@ public class Targeting extends APINode {
   }
 
   public static enum EnumEffectiveDevicePlatforms {
+      @SerializedName("connected_tv")
+      VALUE_CONNECTED_TV("connected_tv"),
       @SerializedName("desktop")
       VALUE_DESKTOP("desktop"),
       @SerializedName("mobile")
@@ -1555,6 +1586,7 @@ public class Targeting extends APINode {
     this.mEducationSchools = instance.mEducationSchools;
     this.mEducationStatuses = instance.mEducationStatuses;
     this.mEffectiveAudienceNetworkPositions = instance.mEffectiveAudienceNetworkPositions;
+    this.mEffectiveBrandSafetyContentFilterLevels = instance.mEffectiveBrandSafetyContentFilterLevels;
     this.mEffectiveDevicePlatforms = instance.mEffectiveDevicePlatforms;
     this.mEffectiveFacebookPositions = instance.mEffectiveFacebookPositions;
     this.mEffectiveInstagramPositions = instance.mEffectiveInstagramPositions;
@@ -1614,6 +1646,7 @@ public class Targeting extends APINode {
     this.mRegions = instance.mRegions;
     this.mRelationshipStatuses = instance.mRelationshipStatuses;
     this.mSiteCategory = instance.mSiteCategory;
+    this.mSubscriberUniverse = instance.mSubscriberUniverse;
     this.mTargetingAutomation = instance.mTargetingAutomation;
     this.mTargetingOptimization = instance.mTargetingOptimization;
     this.mTargetingRelaxationTypes = instance.mTargetingRelaxationTypes;

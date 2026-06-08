@@ -1199,6 +1199,8 @@ public class LocalServiceBusiness extends APINode {
       VALUE_DISCONTINUED("DISCONTINUED"),
       @SerializedName("IN_STOCK")
       VALUE_IN_STOCK("IN_STOCK"),
+      @SerializedName("MARK_AS_EXPIRED")
+      VALUE_MARK_AS_EXPIRED("MARK_AS_EXPIRED"),
       @SerializedName("MARK_AS_SOLD")
       VALUE_MARK_AS_SOLD("MARK_AS_SOLD"),
       @SerializedName("OUT_OF_STOCK")

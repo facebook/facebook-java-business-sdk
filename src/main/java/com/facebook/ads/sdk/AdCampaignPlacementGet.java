@@ -296,6 +296,8 @@ public class AdCampaignPlacementGet extends APINode {
   public static enum EnumEffectiveAudienceNetworkPositions {
       @SerializedName("CLASSIC")
       VALUE_CLASSIC("CLASSIC"),
+      @SerializedName("CTV_INSTREAM_VIDEO")
+      VALUE_CTV_INSTREAM_VIDEO("CTV_INSTREAM_VIDEO"),
       @SerializedName("INSTREAM_VIDEO")
       VALUE_INSTREAM_VIDEO("INSTREAM_VIDEO"),
       @SerializedName("REWARDED_VIDEO")
@@ -315,6 +317,8 @@ public class AdCampaignPlacementGet extends APINode {
   }
 
   public static enum EnumEffectiveDevicePlatforms {
+      @SerializedName("CONNECTED_TV")
+      VALUE_CONNECTED_TV("CONNECTED_TV"),
       @SerializedName("DESKTOP")
       VALUE_DESKTOP("DESKTOP"),
       @SerializedName("MOBILE")

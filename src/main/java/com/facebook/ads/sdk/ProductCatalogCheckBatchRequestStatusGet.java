@@ -40,27 +40,25 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class ProductCatalogImageSettingsInternal extends APINode {
-  @SerializedName("carousel_ad")
-  private ProductCatalogImageSettingsOperation mCarouselAd = null;
-  @SerializedName("shops_pdp")
-  private ProductCatalogImageSettingsOperation mShopsPdp = null;
-  @SerializedName("single_ad")
-  private ProductCatalogImageSettingsOperation mSingleAd = null;
+public class ProductCatalogCheckBatchRequestStatusGet extends APINode {
+  @SerializedName("data")
+  private List<Object> mData = null;
+  @SerializedName("paging")
+  private Object mPaging = null;
   protected static Gson gson = null;
 
-  public ProductCatalogImageSettingsInternal() {
+  public ProductCatalogCheckBatchRequestStatusGet() {
   }
 
   public String getId() {
     return null;
   }
-  public static ProductCatalogImageSettingsInternal loadJSON(String json, APIContext context, String header) {
-    ProductCatalogImageSettingsInternal productCatalogImageSettingsInternal = getGson().fromJson(json, ProductCatalogImageSettingsInternal.class);
+  public static ProductCatalogCheckBatchRequestStatusGet loadJSON(String json, APIContext context, String header) {
+    ProductCatalogCheckBatchRequestStatusGet productCatalogCheckBatchRequestStatusGet = getGson().fromJson(json, ProductCatalogCheckBatchRequestStatusGet.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(productCatalogImageSettingsInternal.toString());
+      JsonElement o2 = parser.parse(productCatalogCheckBatchRequestStatusGet.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -70,14 +68,14 @@ public class ProductCatalogImageSettingsInternal extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    productCatalogImageSettingsInternal.context = context;
-    productCatalogImageSettingsInternal.rawValue = json;
-    productCatalogImageSettingsInternal.header = header;
-    return productCatalogImageSettingsInternal;
+    productCatalogCheckBatchRequestStatusGet.context = context;
+    productCatalogCheckBatchRequestStatusGet.rawValue = json;
+    productCatalogCheckBatchRequestStatusGet.header = header;
+    return productCatalogCheckBatchRequestStatusGet;
   }
 
-  public static APINodeList<ProductCatalogImageSettingsInternal> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<ProductCatalogImageSettingsInternal> productCatalogImageSettingsInternals = new APINodeList<ProductCatalogImageSettingsInternal>(request, json, header);
+  public static APINodeList<ProductCatalogCheckBatchRequestStatusGet> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<ProductCatalogCheckBatchRequestStatusGet> productCatalogCheckBatchRequestStatusGets = new APINodeList<ProductCatalogCheckBatchRequestStatusGet>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -88,9 +86,9 @@ public class ProductCatalogImageSettingsInternal extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          productCatalogImageSettingsInternals.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          productCatalogCheckBatchRequestStatusGets.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return productCatalogImageSettingsInternals;
+        return productCatalogCheckBatchRequestStatusGets;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -100,20 +98,20 @@ public class ProductCatalogImageSettingsInternal extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                productCatalogImageSettingsInternals.setCursors(before, after);
+                productCatalogCheckBatchRequestStatusGets.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            productCatalogImageSettingsInternals.setPaging(previous, next);
+            productCatalogCheckBatchRequestStatusGets.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              productCatalogImageSettingsInternals.setAppSecret(context.getAppSecretProof());
+              productCatalogCheckBatchRequestStatusGets.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              productCatalogImageSettingsInternals.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              productCatalogCheckBatchRequestStatusGets.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -124,23 +122,23 @@ public class ProductCatalogImageSettingsInternal extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  productCatalogImageSettingsInternals.add(loadJSON(entry.getValue().toString(), context, header));
+                  productCatalogCheckBatchRequestStatusGets.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              productCatalogImageSettingsInternals.add(loadJSON(obj.toString(), context, header));
+              productCatalogCheckBatchRequestStatusGets.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return productCatalogImageSettingsInternals;
+          return productCatalogCheckBatchRequestStatusGets;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              productCatalogImageSettingsInternals.add(loadJSON(entry.getValue().toString(), context, header));
+              productCatalogCheckBatchRequestStatusGets.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return productCatalogImageSettingsInternals;
+          return productCatalogCheckBatchRequestStatusGets;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -157,20 +155,20 @@ public class ProductCatalogImageSettingsInternal extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              productCatalogImageSettingsInternals.add(loadJSON(value.toString(), context, header));
+              productCatalogCheckBatchRequestStatusGets.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return productCatalogImageSettingsInternals;
+            return productCatalogCheckBatchRequestStatusGets;
           }
 
           // Sixth, check if it's pure JsonObject
-          productCatalogImageSettingsInternals.clear();
-          productCatalogImageSettingsInternals.add(loadJSON(json, context, header));
-          return productCatalogImageSettingsInternals;
+          productCatalogCheckBatchRequestStatusGets.clear();
+          productCatalogCheckBatchRequestStatusGets.add(loadJSON(json, context, header));
+          return productCatalogCheckBatchRequestStatusGets;
         }
       }
     } catch (Exception e) {
@@ -198,49 +196,46 @@ public class ProductCatalogImageSettingsInternal extends APINode {
   }
 
 
-  public ProductCatalogImageSettingsOperation getFieldCarouselAd() {
-    return mCarouselAd;
+  public List<Object> getFieldData() {
+    return mData;
   }
 
-  public ProductCatalogImageSettingsInternal setFieldCarouselAd(ProductCatalogImageSettingsOperation value) {
-    this.mCarouselAd = value;
+  public ProductCatalogCheckBatchRequestStatusGet setFieldData(List<Object> value) {
+    this.mData = value;
     return this;
   }
 
-  public ProductCatalogImageSettingsInternal setFieldCarouselAd(String value) {
-    Type type = new TypeToken<ProductCatalogImageSettingsOperation>(){}.getType();
-    this.mCarouselAd = ProductCatalogImageSettingsOperation.getGson().fromJson(value, type);
-    return this;
-  }
-  public ProductCatalogImageSettingsOperation getFieldShopsPdp() {
-    return mShopsPdp;
+  public Object getFieldPaging() {
+    return mPaging;
   }
 
-  public ProductCatalogImageSettingsInternal setFieldShopsPdp(ProductCatalogImageSettingsOperation value) {
-    this.mShopsPdp = value;
+  public ProductCatalogCheckBatchRequestStatusGet setFieldPaging(Object value) {
+    this.mPaging = value;
     return this;
   }
 
-  public ProductCatalogImageSettingsInternal setFieldShopsPdp(String value) {
-    Type type = new TypeToken<ProductCatalogImageSettingsOperation>(){}.getType();
-    this.mShopsPdp = ProductCatalogImageSettingsOperation.getGson().fromJson(value, type);
-    return this;
-  }
-  public ProductCatalogImageSettingsOperation getFieldSingleAd() {
-    return mSingleAd;
-  }
 
-  public ProductCatalogImageSettingsInternal setFieldSingleAd(ProductCatalogImageSettingsOperation value) {
-    this.mSingleAd = value;
-    return this;
-  }
 
-  public ProductCatalogImageSettingsInternal setFieldSingleAd(String value) {
-    Type type = new TypeToken<ProductCatalogImageSettingsOperation>(){}.getType();
-    this.mSingleAd = ProductCatalogImageSettingsOperation.getGson().fromJson(value, type);
-    return this;
-  }
+  public static enum EnumErrorPriority {
+      @SerializedName("HIGH")
+      VALUE_HIGH("HIGH"),
+      @SerializedName("LOW")
+      VALUE_LOW("LOW"),
+      @SerializedName("MEDIUM")
+      VALUE_MEDIUM("MEDIUM"),
+      ;
 
+      private String value;
+
+      private EnumErrorPriority(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
 
 
   synchronized /*package*/ static Gson getGson() {
@@ -256,19 +251,18 @@ public class ProductCatalogImageSettingsInternal extends APINode {
     return gson;
   }
 
-  public ProductCatalogImageSettingsInternal copyFrom(ProductCatalogImageSettingsInternal instance) {
-    this.mCarouselAd = instance.mCarouselAd;
-    this.mShopsPdp = instance.mShopsPdp;
-    this.mSingleAd = instance.mSingleAd;
+  public ProductCatalogCheckBatchRequestStatusGet copyFrom(ProductCatalogCheckBatchRequestStatusGet instance) {
+    this.mData = instance.mData;
+    this.mPaging = instance.mPaging;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<ProductCatalogImageSettingsInternal> getParser() {
-    return new APIRequest.ResponseParser<ProductCatalogImageSettingsInternal>() {
-      public APINodeList<ProductCatalogImageSettingsInternal> parseResponse(String response, APIContext context, APIRequest<ProductCatalogImageSettingsInternal> request, String header) throws MalformedResponseException {
-        return ProductCatalogImageSettingsInternal.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<ProductCatalogCheckBatchRequestStatusGet> getParser() {
+    return new APIRequest.ResponseParser<ProductCatalogCheckBatchRequestStatusGet>() {
+      public APINodeList<ProductCatalogCheckBatchRequestStatusGet> parseResponse(String response, APIContext context, APIRequest<ProductCatalogCheckBatchRequestStatusGet> request, String header) throws MalformedResponseException {
+        return ProductCatalogCheckBatchRequestStatusGet.parseResponse(response, context, request, header);
       }
     };
   }

@@ -43,6 +43,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class IGUserExportForCAM extends APINode {
   @SerializedName("age_bucket")
   private String mAgeBucket = null;
+  @SerializedName("badges")
+  private List<String> mBadges = null;
   @SerializedName("biography")
   private String mBiography = null;
   @SerializedName("country")
@@ -57,6 +59,8 @@ public class IGUserExportForCAM extends APINode {
   private String mId = null;
   @SerializedName("is_account_verified")
   private Boolean mIsAccountVerified = null;
+  @SerializedName("is_creator_following_brand")
+  private Boolean mIsCreatorFollowingBrand = null;
   @SerializedName("is_paid_partnership_messages_enabled")
   private Boolean mIsPaidPartnershipMessagesEnabled = null;
   @SerializedName("messaging_id")
@@ -247,6 +251,15 @@ public class IGUserExportForCAM extends APINode {
     return this;
   }
 
+  public List<String> getFieldBadges() {
+    return mBadges;
+  }
+
+  public IGUserExportForCAM setFieldBadges(List<String> value) {
+    this.mBadges = value;
+    return this;
+  }
+
   public String getFieldBiography() {
     return mBiography;
   }
@@ -307,6 +320,15 @@ public class IGUserExportForCAM extends APINode {
 
   public IGUserExportForCAM setFieldIsAccountVerified(Boolean value) {
     this.mIsAccountVerified = value;
+    return this;
+  }
+
+  public Boolean getFieldIsCreatorFollowingBrand() {
+    return mIsCreatorFollowingBrand;
+  }
+
+  public IGUserExportForCAM setFieldIsCreatorFollowingBrand(Boolean value) {
+    this.mIsCreatorFollowingBrand = value;
     return this;
   }
 
@@ -1919,6 +1941,31 @@ public class IGUserExportForCAM extends APINode {
       }
   }
 
+  public static enum EnumRecommendationType {
+      @SerializedName("high_ad_performance")
+      VALUE_HIGH_AD_PERFORMANCE("high_ad_performance"),
+      @SerializedName("most_ads_experience")
+      VALUE_MOST_ADS_EXPERIENCE("most_ads_experience"),
+      @SerializedName("most_relevant_for_me")
+      VALUE_MOST_RELEVANT_FOR_ME("most_relevant_for_me"),
+      @SerializedName("similar_audience")
+      VALUE_SIMILAR_AUDIENCE("similar_audience"),
+      @SerializedName("similar_brands")
+      VALUE_SIMILAR_BRANDS("similar_brands"),
+      ;
+
+      private String value;
+
+      private EnumRecommendationType(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
   public static enum EnumBreakdown {
       @SerializedName("AGE")
       VALUE_AGE("AGE"),
@@ -2031,6 +2078,7 @@ public class IGUserExportForCAM extends APINode {
 
   public IGUserExportForCAM copyFrom(IGUserExportForCAM instance) {
     this.mAgeBucket = instance.mAgeBucket;
+    this.mBadges = instance.mBadges;
     this.mBiography = instance.mBiography;
     this.mCountry = instance.mCountry;
     this.mEmail = instance.mEmail;
@@ -2038,6 +2086,7 @@ public class IGUserExportForCAM extends APINode {
     this.mHasBrandPartnershipExperience = instance.mHasBrandPartnershipExperience;
     this.mId = instance.mId;
     this.mIsAccountVerified = instance.mIsAccountVerified;
+    this.mIsCreatorFollowingBrand = instance.mIsCreatorFollowingBrand;
     this.mIsPaidPartnershipMessagesEnabled = instance.mIsPaidPartnershipMessagesEnabled;
     this.mMessagingId = instance.mMessagingId;
     this.mOnboardedStatus = instance.mOnboardedStatus;

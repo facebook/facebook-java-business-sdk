@@ -376,6 +376,7 @@ public class AdStudyCell extends APINode {
       "offsite_clo_signal_status",
       "offsite_pixels_tos_accepted",
       "opportunity_score",
+      "opportunity_score_weight",
       "owner",
       "owner_business",
       "partner",
@@ -879,6 +880,13 @@ public class AdStudyCell extends APINode {
       this.requestField("opportunity_score", value);
       return this;
     }
+    public APIRequestGetAdAccounts requestOpportunityScoreWeightField () {
+      return this.requestOpportunityScoreWeightField(true);
+    }
+    public APIRequestGetAdAccounts requestOpportunityScoreWeightField (boolean value) {
+      this.requestField("opportunity_score_weight", value);
+      return this;
+    }
     public APIRequestGetAdAccounts requestOwnerField () {
       return this.requestOwnerField(true);
     }
@@ -1028,7 +1036,6 @@ public class AdStudyCell extends APINode {
       "account_id",
       "adlabels",
       "adset_schedule",
-      "anchor_event_attribution_window_days",
       "asset_feed_id",
       "attribution_count_type",
       "attribution_spec",
@@ -1046,6 +1053,7 @@ public class AdStudyCell extends APINode {
       "campaign_attribution",
       "campaign_id",
       "configured_status",
+      "cost_bidding_mode",
       "created_time",
       "creative_diversity_label",
       "creative_diversity_score",
@@ -1066,16 +1074,20 @@ public class AdStudyCell extends APINode {
       "instagram_user_id",
       "is_ba_skip_delayed_eligible",
       "is_budget_schedule_enabled",
+      "is_dc_follow_optimized",
       "is_dynamic_creative",
       "is_incremental_attribution_enabled",
+      "is_organic_ad_joint_optimized",
       "issues_info",
       "learning_stage_info",
       "lifetime_budget",
       "lifetime_imps",
       "lifetime_min_spend_target",
       "lifetime_spend_cap",
+      "live_video_ad_campaign_config",
       "low_creative_reach",
       "max_budget_spend_percentage",
+      "meta_moment_maker_spec",
       "min_budget_spend_percentage",
       "multi_event_conversion_attribution_window_seconds",
       "multi_optimization_goal_weight",
@@ -1089,6 +1101,7 @@ public class AdStudyCell extends APINode {
       "recurring_budget_semantics",
       "regional_regulated_categories",
       "regional_regulation_identities",
+      "relative_value",
       "review_feedback",
       "rf_prediction_id",
       "source_adset",
@@ -1218,13 +1231,6 @@ public class AdStudyCell extends APINode {
       this.requestField("adset_schedule", value);
       return this;
     }
-    public APIRequestGetAdSets requestAnchorEventAttributionWindowDaysField () {
-      return this.requestAnchorEventAttributionWindowDaysField(true);
-    }
-    public APIRequestGetAdSets requestAnchorEventAttributionWindowDaysField (boolean value) {
-      this.requestField("anchor_event_attribution_window_days", value);
-      return this;
-    }
     public APIRequestGetAdSets requestAssetFeedIdField () {
       return this.requestAssetFeedIdField(true);
     }
@@ -1342,6 +1348,13 @@ public class AdStudyCell extends APINode {
     }
     public APIRequestGetAdSets requestConfiguredStatusField (boolean value) {
       this.requestField("configured_status", value);
+      return this;
+    }
+    public APIRequestGetAdSets requestCostBiddingModeField () {
+      return this.requestCostBiddingModeField(true);
+    }
+    public APIRequestGetAdSets requestCostBiddingModeField (boolean value) {
+      this.requestField("cost_bidding_mode", value);
       return this;
     }
     public APIRequestGetAdSets requestCreatedTimeField () {
@@ -1484,6 +1497,13 @@ public class AdStudyCell extends APINode {
       this.requestField("is_budget_schedule_enabled", value);
       return this;
     }
+    public APIRequestGetAdSets requestIsDcFollowOptimizedField () {
+      return this.requestIsDcFollowOptimizedField(true);
+    }
+    public APIRequestGetAdSets requestIsDcFollowOptimizedField (boolean value) {
+      this.requestField("is_dc_follow_optimized", value);
+      return this;
+    }
     public APIRequestGetAdSets requestIsDynamicCreativeField () {
       return this.requestIsDynamicCreativeField(true);
     }
@@ -1496,6 +1516,13 @@ public class AdStudyCell extends APINode {
     }
     public APIRequestGetAdSets requestIsIncrementalAttributionEnabledField (boolean value) {
       this.requestField("is_incremental_attribution_enabled", value);
+      return this;
+    }
+    public APIRequestGetAdSets requestIsOrganicAdJointOptimizedField () {
+      return this.requestIsOrganicAdJointOptimizedField(true);
+    }
+    public APIRequestGetAdSets requestIsOrganicAdJointOptimizedField (boolean value) {
+      this.requestField("is_organic_ad_joint_optimized", value);
       return this;
     }
     public APIRequestGetAdSets requestIssuesInfoField () {
@@ -1540,6 +1567,13 @@ public class AdStudyCell extends APINode {
       this.requestField("lifetime_spend_cap", value);
       return this;
     }
+    public APIRequestGetAdSets requestLiveVideoAdCampaignConfigField () {
+      return this.requestLiveVideoAdCampaignConfigField(true);
+    }
+    public APIRequestGetAdSets requestLiveVideoAdCampaignConfigField (boolean value) {
+      this.requestField("live_video_ad_campaign_config", value);
+      return this;
+    }
     public APIRequestGetAdSets requestLowCreativeReachField () {
       return this.requestLowCreativeReachField(true);
     }
@@ -1552,6 +1586,13 @@ public class AdStudyCell extends APINode {
     }
     public APIRequestGetAdSets requestMaxBudgetSpendPercentageField (boolean value) {
       this.requestField("max_budget_spend_percentage", value);
+      return this;
+    }
+    public APIRequestGetAdSets requestMetaMomentMakerSpecField () {
+      return this.requestMetaMomentMakerSpecField(true);
+    }
+    public APIRequestGetAdSets requestMetaMomentMakerSpecField (boolean value) {
+      this.requestField("meta_moment_maker_spec", value);
       return this;
     }
     public APIRequestGetAdSets requestMinBudgetSpendPercentageField () {
@@ -1643,6 +1684,13 @@ public class AdStudyCell extends APINode {
     }
     public APIRequestGetAdSets requestRegionalRegulationIdentitiesField (boolean value) {
       this.requestField("regional_regulation_identities", value);
+      return this;
+    }
+    public APIRequestGetAdSets requestRelativeValueField () {
+      return this.requestRelativeValueField(true);
+    }
+    public APIRequestGetAdSets requestRelativeValueField (boolean value) {
+      this.requestField("relative_value", value);
       return this;
     }
     public APIRequestGetAdSets requestReviewFeedbackField () {
@@ -1786,12 +1834,15 @@ public class AdStudyCell extends APINode {
       "created_time",
       "daily_budget",
       "effective_status",
+      "frequency_control_specs",
       "has_secondary_skadnetwork_reporting",
       "id",
       "is_adset_budget_sharing_enabled",
       "is_budget_schedule_enabled",
       "is_direct_send_campaign",
       "is_message_campaign",
+      "is_meta_moment_maker_enabled",
+      "is_reels_trending_ads_enabled",
       "is_skadnetwork_attribution",
       "issues_info",
       "last_budget_toggling_time",
@@ -2019,6 +2070,13 @@ public class AdStudyCell extends APINode {
       this.requestField("effective_status", value);
       return this;
     }
+    public APIRequestGetCampaigns requestFrequencyControlSpecsField () {
+      return this.requestFrequencyControlSpecsField(true);
+    }
+    public APIRequestGetCampaigns requestFrequencyControlSpecsField (boolean value) {
+      this.requestField("frequency_control_specs", value);
+      return this;
+    }
     public APIRequestGetCampaigns requestHasSecondarySkadnetworkReportingField () {
       return this.requestHasSecondarySkadnetworkReportingField(true);
     }
@@ -2059,6 +2117,20 @@ public class AdStudyCell extends APINode {
     }
     public APIRequestGetCampaigns requestIsMessageCampaignField (boolean value) {
       this.requestField("is_message_campaign", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestIsMetaMomentMakerEnabledField () {
+      return this.requestIsMetaMomentMakerEnabledField(true);
+    }
+    public APIRequestGetCampaigns requestIsMetaMomentMakerEnabledField (boolean value) {
+      this.requestField("is_meta_moment_maker_enabled", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestIsReelsTrendingAdsEnabledField () {
+      return this.requestIsReelsTrendingAdsEnabledField(true);
+    }
+    public APIRequestGetCampaigns requestIsReelsTrendingAdsEnabledField (boolean value) {
+      this.requestField("is_reels_trending_ads_enabled", value);
       return this;
     }
     public APIRequestGetCampaigns requestIsSkadnetworkAttributionField () {

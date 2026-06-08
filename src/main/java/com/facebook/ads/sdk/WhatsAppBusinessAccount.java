@@ -67,6 +67,8 @@ public class WhatsAppBusinessAccount extends APINode {
   private Boolean mIsSharedWithPartners = null;
   @SerializedName("linked_commerce_account")
   private CommerceMerchantSettings mLinkedCommerceAccount = null;
+  @SerializedName("marketing_messages_ad_account")
+  private Object mMarketingMessagesAdAccount = null;
   @SerializedName("marketing_messages_lite_api_status")
   private String mMarketingMessagesLiteApiStatus = null;
   @SerializedName("marketing_messages_onboarding_status")
@@ -442,10 +444,6 @@ public class WhatsAppBusinessAccount extends APINode {
     return new APIRequestGetSchedules(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestCreateSetOboMobilityIntent createSetOboMobilityIntent() {
-    return new APIRequestCreateSetOboMobilityIntent(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestCreateSetSolutionMigrationIntent createSetSolutionMigrationIntent() {
     return new APIRequestCreateSetSolutionMigrationIntent(this.getPrefixedId().toString(), context);
   }
@@ -480,10 +478,6 @@ public class WhatsAppBusinessAccount extends APINode {
 
   public APIRequestCreateTemplateGroup createTemplateGroup() {
     return new APIRequestCreateTemplateGroup(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestGetTemplatePerformanceMetrics getTemplatePerformanceMetrics() {
-    return new APIRequestGetTemplatePerformanceMetrics(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestCreateUpsertMessageTemplate createUpsertMessageTemplate() {
@@ -564,6 +558,10 @@ public class WhatsAppBusinessAccount extends APINode {
       mLinkedCommerceAccount.context = getContext();
     }
     return mLinkedCommerceAccount;
+  }
+
+  public Object getFieldMarketingMessagesAdAccount() {
+    return mMarketingMessagesAdAccount;
   }
 
   public String getFieldMarketingMessagesLiteApiStatus() {
@@ -3323,13 +3321,16 @@ public class WhatsAppBusinessAccount extends APINode {
       "cta_url_link_tracking_opted_out",
       "degrees_of_freedom_spec",
       "display_format",
+      "is_primary_device_delivery_only",
       "language",
       "library_template_body_inputs",
       "library_template_button_inputs",
       "library_template_name",
       "message_send_ttl_seconds",
       "name",
+      "optimization_spec",
       "parameter_format",
+      "product_set_id",
       "send_type",
       "sub_category",
     };
@@ -3463,6 +3464,15 @@ public class WhatsAppBusinessAccount extends APINode {
       return this;
     }
 
+    public APIRequestCreateMessageTemplate setIsPrimaryDeviceDeliveryOnly (Boolean isPrimaryDeviceDeliveryOnly) {
+      this.setParam("is_primary_device_delivery_only", isPrimaryDeviceDeliveryOnly);
+      return this;
+    }
+    public APIRequestCreateMessageTemplate setIsPrimaryDeviceDeliveryOnly (String isPrimaryDeviceDeliveryOnly) {
+      this.setParam("is_primary_device_delivery_only", isPrimaryDeviceDeliveryOnly);
+      return this;
+    }
+
     public APIRequestCreateMessageTemplate setLanguage (String language) {
       this.setParam("language", language);
       return this;
@@ -3505,12 +3515,26 @@ public class WhatsAppBusinessAccount extends APINode {
       return this;
     }
 
+    public APIRequestCreateMessageTemplate setOptimizationSpec (Map<String, String> optimizationSpec) {
+      this.setParam("optimization_spec", optimizationSpec);
+      return this;
+    }
+    public APIRequestCreateMessageTemplate setOptimizationSpec (String optimizationSpec) {
+      this.setParam("optimization_spec", optimizationSpec);
+      return this;
+    }
+
     public APIRequestCreateMessageTemplate setParameterFormat (WhatsAppBusinessAccount.EnumParameterFormat parameterFormat) {
       this.setParam("parameter_format", parameterFormat);
       return this;
     }
     public APIRequestCreateMessageTemplate setParameterFormat (String parameterFormat) {
       this.setParam("parameter_format", parameterFormat);
+      return this;
+    }
+
+    public APIRequestCreateMessageTemplate setProductSetId (String productSetId) {
+      this.setParam("product_set_id", productSetId);
       return this;
     }
 
@@ -4897,6 +4921,7 @@ public class WhatsAppBusinessAccount extends APINode {
       "name",
       "owner_business",
       "product_count",
+      "show_assign_permissions",
       "store_catalog_settings",
       "user_access_expire_time",
       "vertical",
@@ -5102,6 +5127,13 @@ public class WhatsAppBusinessAccount extends APINode {
     }
     public APIRequestGetProductCatalogs requestProductCountField (boolean value) {
       this.requestField("product_count", value);
+      return this;
+    }
+    public APIRequestGetProductCatalogs requestShowAssignPermissionsField () {
+      return this.requestShowAssignPermissionsField(true);
+    }
+    public APIRequestGetProductCatalogs requestShowAssignPermissionsField (boolean value) {
+      this.requestField("show_assign_permissions", value);
       return this;
     }
     public APIRequestGetProductCatalogs requestStoreCatalogSettingsField () {
@@ -5337,117 +5369,6 @@ public class WhatsAppBusinessAccount extends APINode {
 
     @Override
     public APIRequestGetSchedules requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
-  public static class APIRequestCreateSetOboMobilityIntent extends APIRequest<APINode> {
-
-    APINode lastResponse = null;
-    @Override
-    public APINode getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "solution_id",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINode parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public APINode execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINode execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINode> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINode>() {
-           public APINode apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateSetOboMobilityIntent.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         },
-         MoreExecutors.directExecutor()
-      );
-    };
-
-    public APIRequestCreateSetOboMobilityIntent(String nodeId, APIContext context) {
-      super(context, nodeId, "/set_obo_mobility_intent", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateSetOboMobilityIntent setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateSetOboMobilityIntent setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateSetOboMobilityIntent setSolutionId (String solutionId) {
-      this.setParam("solution_id", solutionId);
-      return this;
-    }
-
-    public APIRequestCreateSetOboMobilityIntent requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateSetOboMobilityIntent requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateSetOboMobilityIntent requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateSetOboMobilityIntent requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateSetOboMobilityIntent requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateSetOboMobilityIntent requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
@@ -6091,7 +6012,7 @@ public class WhatsAppBusinessAccount extends APINode {
       return this;
     }
 
-    public APIRequestGetTemplateAnalytics setMetricTypes (List<EnumMetricTypes> metricTypes) {
+    public APIRequestGetTemplateAnalytics setMetricTypes (List<String> metricTypes) {
       this.setParam("metric_types", metricTypes);
       return this;
     }
@@ -6257,7 +6178,7 @@ public class WhatsAppBusinessAccount extends APINode {
       return this;
     }
 
-    public APIRequestGetTemplateGroupAnalytics setMetricTypes (List<EnumMetricTypes> metricTypes) {
+    public APIRequestGetTemplateGroupAnalytics setMetricTypes (List<String> metricTypes) {
       this.setParam("metric_types", metricTypes);
       return this;
     }
@@ -6553,123 +6474,6 @@ public class WhatsAppBusinessAccount extends APINode {
 
     @Override
     public APIRequestCreateTemplateGroup requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
-  public static class APIRequestGetTemplatePerformanceMetrics extends APIRequest<APINode> {
-
-    APINodeList<APINode> lastResponse = null;
-    @Override
-    public APINodeList<APINode> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "name",
-      "template_id",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<APINode> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetTemplatePerformanceMetrics.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         },
-         MoreExecutors.directExecutor()
-      );
-    };
-
-    public APIRequestGetTemplatePerformanceMetrics(String nodeId, APIContext context) {
-      super(context, nodeId, "/template_performance_metrics", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetTemplatePerformanceMetrics setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetTemplatePerformanceMetrics setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetTemplatePerformanceMetrics setName (String name) {
-      this.setParam("name", name);
-      return this;
-    }
-
-    public APIRequestGetTemplatePerformanceMetrics setTemplateId (String templateId) {
-      this.setParam("template_id", templateId);
-      return this;
-    }
-
-    public APIRequestGetTemplatePerformanceMetrics requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetTemplatePerformanceMetrics requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetTemplatePerformanceMetrics requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetTemplatePerformanceMetrics requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetTemplatePerformanceMetrics requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetTemplatePerformanceMetrics requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
@@ -7278,6 +7082,7 @@ public class WhatsAppBusinessAccount extends APINode {
       "is_enabled_for_insights",
       "is_shared_with_partners",
       "linked_commerce_account",
+      "marketing_messages_ad_account",
       "marketing_messages_lite_api_status",
       "marketing_messages_onboarding_status",
       "message_template_namespace",
@@ -7476,6 +7281,13 @@ public class WhatsAppBusinessAccount extends APINode {
       this.requestField("linked_commerce_account", value);
       return this;
     }
+    public APIRequestGet requestMarketingMessagesAdAccountField () {
+      return this.requestMarketingMessagesAdAccountField(true);
+    }
+    public APIRequestGet requestMarketingMessagesAdAccountField (boolean value) {
+      this.requestField("marketing_messages_ad_account", value);
+      return this;
+    }
     public APIRequestGet requestMarketingMessagesLiteApiStatusField () {
       return this.requestMarketingMessagesLiteApiStatusField(true);
     }
@@ -7591,6 +7403,7 @@ public class WhatsAppBusinessAccount extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "creative_optimizations_enrollment",
       "degrees_of_freedom_spec",
       "disable_marketing_messages_on_cloud_api",
       "is_enabled_for_insights",
@@ -7653,6 +7466,15 @@ public class WhatsAppBusinessAccount extends APINode {
       return this;
     }
 
+
+    public APIRequestUpdate setCreativeOptimizationsEnrollment (Map<String, String> creativeOptimizationsEnrollment) {
+      this.setParam("creative_optimizations_enrollment", creativeOptimizationsEnrollment);
+      return this;
+    }
+    public APIRequestUpdate setCreativeOptimizationsEnrollment (String creativeOptimizationsEnrollment) {
+      this.setParam("creative_optimizations_enrollment", creativeOptimizationsEnrollment);
+      return this;
+    }
 
     public APIRequestUpdate setDegreesOfFreedomSpec (Map<String, String> degreesOfFreedomSpec) {
       this.setParam("degrees_of_freedom_spec", degreesOfFreedomSpec);
@@ -7772,6 +7594,8 @@ public class WhatsAppBusinessAccount extends APINode {
       VALUE_TIER_250("TIER_250"),
       @SerializedName("TIER_2K")
       VALUE_TIER_2K("TIER_2K"),
+      @SerializedName("TIER_50")
+      VALUE_TIER_50("TIER_50"),
       @SerializedName("TIER_UNLIMITED")
       VALUE_TIER_UNLIMITED("TIER_UNLIMITED"),
       @SerializedName("UNTIERED")
@@ -7906,6 +7730,8 @@ public class WhatsAppBusinessAccount extends APINode {
       VALUE_CAMPAIGN("CAMPAIGN"),
       @SerializedName("DIRECT")
       VALUE_DIRECT("DIRECT"),
+      @SerializedName("TRIGGER")
+      VALUE_TRIGGER("TRIGGER"),
       ;
 
       private String value;
@@ -8317,6 +8143,8 @@ public class WhatsAppBusinessAccount extends APINode {
   }
 
   public static enum EnumProductType {
+      @SerializedName("CAMPAIGN_INSIGHTS")
+      VALUE_CAMPAIGN_INSIGHTS("CAMPAIGN_INSIGHTS"),
       @SerializedName("CLOUD_API")
       VALUE_CLOUD_API("CLOUD_API"),
       @SerializedName("MARKETING_MESSAGES_LITE_API")
@@ -8363,6 +8191,7 @@ public class WhatsAppBusinessAccount extends APINode {
     this.mIsEnabledForInsights = instance.mIsEnabledForInsights;
     this.mIsSharedWithPartners = instance.mIsSharedWithPartners;
     this.mLinkedCommerceAccount = instance.mLinkedCommerceAccount;
+    this.mMarketingMessagesAdAccount = instance.mMarketingMessagesAdAccount;
     this.mMarketingMessagesLiteApiStatus = instance.mMarketingMessagesLiteApiStatus;
     this.mMarketingMessagesOnboardingStatus = instance.mMarketingMessagesOnboardingStatus;
     this.mMessageTemplateNamespace = instance.mMessageTemplateNamespace;

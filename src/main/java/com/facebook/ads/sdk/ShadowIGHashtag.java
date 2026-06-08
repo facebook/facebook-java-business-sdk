@@ -303,14 +303,21 @@ public class ShadowIGHashtag extends APINode {
       "is_shared_to_feed",
       "legacy_instagram_media_id",
       "like_count",
+      "media_audio_type",
       "media_product_type",
       "media_type",
       "media_url",
       "owner",
       "permalink",
+      "reposts_count",
+      "saved_count",
+      "shares_count",
       "shortcode",
       "thumbnail_url",
       "timestamp",
+      "total_comments_count",
+      "total_like_count",
+      "total_views_count",
       "username",
       "video_title",
       "view_count",
@@ -509,6 +516,13 @@ public class ShadowIGHashtag extends APINode {
       this.requestField("like_count", value);
       return this;
     }
+    public APIRequestGetRecentMedia requestMediaAudioTypeField () {
+      return this.requestMediaAudioTypeField(true);
+    }
+    public APIRequestGetRecentMedia requestMediaAudioTypeField (boolean value) {
+      this.requestField("media_audio_type", value);
+      return this;
+    }
     public APIRequestGetRecentMedia requestMediaProductTypeField () {
       return this.requestMediaProductTypeField(true);
     }
@@ -544,6 +558,27 @@ public class ShadowIGHashtag extends APINode {
       this.requestField("permalink", value);
       return this;
     }
+    public APIRequestGetRecentMedia requestRepostsCountField () {
+      return this.requestRepostsCountField(true);
+    }
+    public APIRequestGetRecentMedia requestRepostsCountField (boolean value) {
+      this.requestField("reposts_count", value);
+      return this;
+    }
+    public APIRequestGetRecentMedia requestSavedCountField () {
+      return this.requestSavedCountField(true);
+    }
+    public APIRequestGetRecentMedia requestSavedCountField (boolean value) {
+      this.requestField("saved_count", value);
+      return this;
+    }
+    public APIRequestGetRecentMedia requestSharesCountField () {
+      return this.requestSharesCountField(true);
+    }
+    public APIRequestGetRecentMedia requestSharesCountField (boolean value) {
+      this.requestField("shares_count", value);
+      return this;
+    }
     public APIRequestGetRecentMedia requestShortcodeField () {
       return this.requestShortcodeField(true);
     }
@@ -563,6 +598,27 @@ public class ShadowIGHashtag extends APINode {
     }
     public APIRequestGetRecentMedia requestTimestampField (boolean value) {
       this.requestField("timestamp", value);
+      return this;
+    }
+    public APIRequestGetRecentMedia requestTotalCommentsCountField () {
+      return this.requestTotalCommentsCountField(true);
+    }
+    public APIRequestGetRecentMedia requestTotalCommentsCountField (boolean value) {
+      this.requestField("total_comments_count", value);
+      return this;
+    }
+    public APIRequestGetRecentMedia requestTotalLikeCountField () {
+      return this.requestTotalLikeCountField(true);
+    }
+    public APIRequestGetRecentMedia requestTotalLikeCountField (boolean value) {
+      this.requestField("total_like_count", value);
+      return this;
+    }
+    public APIRequestGetRecentMedia requestTotalViewsCountField () {
+      return this.requestTotalViewsCountField(true);
+    }
+    public APIRequestGetRecentMedia requestTotalViewsCountField (boolean value) {
+      this.requestField("total_views_count", value);
       return this;
     }
     public APIRequestGetRecentMedia requestUsernameField () {
@@ -614,14 +670,21 @@ public class ShadowIGHashtag extends APINode {
       "is_shared_to_feed",
       "legacy_instagram_media_id",
       "like_count",
+      "media_audio_type",
       "media_product_type",
       "media_type",
       "media_url",
       "owner",
       "permalink",
+      "reposts_count",
+      "saved_count",
+      "shares_count",
       "shortcode",
       "thumbnail_url",
       "timestamp",
+      "total_comments_count",
+      "total_like_count",
+      "total_views_count",
       "username",
       "video_title",
       "view_count",
@@ -820,6 +883,13 @@ public class ShadowIGHashtag extends APINode {
       this.requestField("like_count", value);
       return this;
     }
+    public APIRequestGetTopMedia requestMediaAudioTypeField () {
+      return this.requestMediaAudioTypeField(true);
+    }
+    public APIRequestGetTopMedia requestMediaAudioTypeField (boolean value) {
+      this.requestField("media_audio_type", value);
+      return this;
+    }
     public APIRequestGetTopMedia requestMediaProductTypeField () {
       return this.requestMediaProductTypeField(true);
     }
@@ -855,6 +925,27 @@ public class ShadowIGHashtag extends APINode {
       this.requestField("permalink", value);
       return this;
     }
+    public APIRequestGetTopMedia requestRepostsCountField () {
+      return this.requestRepostsCountField(true);
+    }
+    public APIRequestGetTopMedia requestRepostsCountField (boolean value) {
+      this.requestField("reposts_count", value);
+      return this;
+    }
+    public APIRequestGetTopMedia requestSavedCountField () {
+      return this.requestSavedCountField(true);
+    }
+    public APIRequestGetTopMedia requestSavedCountField (boolean value) {
+      this.requestField("saved_count", value);
+      return this;
+    }
+    public APIRequestGetTopMedia requestSharesCountField () {
+      return this.requestSharesCountField(true);
+    }
+    public APIRequestGetTopMedia requestSharesCountField (boolean value) {
+      this.requestField("shares_count", value);
+      return this;
+    }
     public APIRequestGetTopMedia requestShortcodeField () {
       return this.requestShortcodeField(true);
     }
@@ -874,6 +965,27 @@ public class ShadowIGHashtag extends APINode {
     }
     public APIRequestGetTopMedia requestTimestampField (boolean value) {
       this.requestField("timestamp", value);
+      return this;
+    }
+    public APIRequestGetTopMedia requestTotalCommentsCountField () {
+      return this.requestTotalCommentsCountField(true);
+    }
+    public APIRequestGetTopMedia requestTotalCommentsCountField (boolean value) {
+      this.requestField("total_comments_count", value);
+      return this;
+    }
+    public APIRequestGetTopMedia requestTotalLikeCountField () {
+      return this.requestTotalLikeCountField(true);
+    }
+    public APIRequestGetTopMedia requestTotalLikeCountField (boolean value) {
+      this.requestField("total_like_count", value);
+      return this;
+    }
+    public APIRequestGetTopMedia requestTotalViewsCountField () {
+      return this.requestTotalViewsCountField(true);
+    }
+    public APIRequestGetTopMedia requestTotalViewsCountField (boolean value) {
+      this.requestField("total_views_count", value);
       return this;
     }
     public APIRequestGetTopMedia requestUsernameField () {

@@ -73,6 +73,8 @@ public class ProductCatalog extends APINode {
   private Business mOwnerBusiness = null;
   @SerializedName("product_count")
   private Long mProductCount = null;
+  @SerializedName("show_assign_permissions")
+  private Boolean mShowAssignPermissions = null;
   @SerializedName("store_catalog_settings")
   private StoreCatalogSettings mStoreCatalogSettings = null;
   @SerializedName("user_access_expire_time")
@@ -608,6 +610,10 @@ public class ProductCatalog extends APINode {
 
   public Long getFieldProductCount() {
     return mProductCount;
+  }
+
+  public Boolean getFieldShowAssignPermissions() {
+    return mShowAssignPermissions;
   }
 
   public StoreCatalogSettings getFieldStoreCatalogSettings() {
@@ -9878,6 +9884,8 @@ public class ProductCatalog extends APINode {
       "material",
       "mobile_link",
       "name",
+      "offer_disclaimer",
+      "offer_disclaimer_url",
       "ordering_index",
       "origin_country",
       "overall_ranking",
@@ -10447,6 +10455,20 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestGetProducts requestNameField (boolean value) {
       this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetProducts requestOfferDisclaimerField () {
+      return this.requestOfferDisclaimerField(true);
+    }
+    public APIRequestGetProducts requestOfferDisclaimerField (boolean value) {
+      this.requestField("offer_disclaimer", value);
+      return this;
+    }
+    public APIRequestGetProducts requestOfferDisclaimerUrlField () {
+      return this.requestOfferDisclaimerUrlField(true);
+    }
+    public APIRequestGetProducts requestOfferDisclaimerUrlField (boolean value) {
+      this.requestField("offer_disclaimer_url", value);
       return this;
     }
     public APIRequestGetProducts requestOrderingIndexField () {
@@ -13548,6 +13570,7 @@ public class ProductCatalog extends APINode {
       "name",
       "owner_business",
       "product_count",
+      "show_assign_permissions",
       "store_catalog_settings",
       "user_access_expire_time",
       "vertical",
@@ -13762,6 +13785,13 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestGet requestProductCountField (boolean value) {
       this.requestField("product_count", value);
+      return this;
+    }
+    public APIRequestGet requestShowAssignPermissionsField () {
+      return this.requestShowAssignPermissionsField(true);
+    }
+    public APIRequestGet requestShowAssignPermissionsField (boolean value) {
+      this.requestField("show_assign_permissions", value);
       return this;
     }
     public APIRequestGet requestStoreCatalogSettingsField () {
@@ -14016,8 +14046,8 @@ public class ProductCatalog extends APINode {
       VALUE_OFFER_ITEMS("offer_items"),
       @SerializedName("offline_commerce")
       VALUE_OFFLINE_COMMERCE("offline_commerce"),
-      @SerializedName("professional_services")
-      VALUE_PROFESSIONAL_SERVICES("professional_services"),
+      @SerializedName("services")
+      VALUE_SERVICES("services"),
       @SerializedName("transactable_items")
       VALUE_TRANSACTABLE_ITEMS("transactable_items"),
       @SerializedName("vehicles")
@@ -14318,6 +14348,7 @@ public class ProductCatalog extends APINode {
     this.mName = instance.mName;
     this.mOwnerBusiness = instance.mOwnerBusiness;
     this.mProductCount = instance.mProductCount;
+    this.mShowAssignPermissions = instance.mShowAssignPermissions;
     this.mStoreCatalogSettings = instance.mStoreCatalogSettings;
     this.mUserAccessExpireTime = instance.mUserAccessExpireTime;
     this.mVertical = instance.mVertical;

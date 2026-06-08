@@ -47,6 +47,8 @@ public class CustomAudience extends APINode {
   private Long mApproximateCountLowerBound = null;
   @SerializedName("approximate_count_upper_bound")
   private Long mApproximateCountUpperBound = null;
+  @SerializedName("audience_labels")
+  private List<String> mAudienceLabels = null;
   @SerializedName("customer_file_source")
   private String mCustomerFileSource = null;
   @SerializedName("data_source")
@@ -407,6 +409,10 @@ public class CustomAudience extends APINode {
     return mApproximateCountUpperBound;
   }
 
+  public List<String> getFieldAudienceLabels() {
+    return mAudienceLabels;
+  }
+
   public String getFieldCustomerFileSource() {
     return mCustomerFileSource;
   }
@@ -757,6 +763,7 @@ public class CustomAudience extends APINode {
       "offsite_clo_signal_status",
       "offsite_pixels_tos_accepted",
       "opportunity_score",
+      "opportunity_score_weight",
       "owner",
       "owner_business",
       "partner",
@@ -1265,6 +1272,13 @@ public class CustomAudience extends APINode {
       this.requestField("opportunity_score", value);
       return this;
     }
+    public APIRequestGetAdAccounts requestOpportunityScoreWeightField () {
+      return this.requestOpportunityScoreWeightField(true);
+    }
+    public APIRequestGetAdAccounts requestOpportunityScoreWeightField (boolean value) {
+      this.requestField("opportunity_score_weight", value);
+      return this;
+    }
     public APIRequestGetAdAccounts requestOwnerField () {
       return this.requestOwnerField(true);
     }
@@ -1573,6 +1587,7 @@ public class CustomAudience extends APINode {
       "created_time",
       "creative",
       "creative_asset_groups_spec",
+      "creative_automation_spec",
       "demolink_hash",
       "display_sequence",
       "effective_status",
@@ -1835,6 +1850,13 @@ public class CustomAudience extends APINode {
     }
     public APIRequestGetAds requestCreativeAssetGroupsSpecField (boolean value) {
       this.requestField("creative_asset_groups_spec", value);
+      return this;
+    }
+    public APIRequestGetAds requestCreativeAutomationSpecField () {
+      return this.requestCreativeAutomationSpecField(true);
+    }
+    public APIRequestGetAds requestCreativeAutomationSpecField (boolean value) {
+      this.requestField("creative_automation_spec", value);
       return this;
     }
     public APIRequestGetAds requestDemolinkHashField () {
@@ -3253,6 +3275,7 @@ public class CustomAudience extends APINode {
       "account_id",
       "approximate_count_lower_bound",
       "approximate_count_upper_bound",
+      "audience_labels",
       "customer_file_source",
       "data_source",
       "data_source_types",
@@ -3435,6 +3458,13 @@ public class CustomAudience extends APINode {
     }
     public APIRequestGet requestApproximateCountUpperBoundField (boolean value) {
       this.requestField("approximate_count_upper_bound", value);
+      return this;
+    }
+    public APIRequestGet requestAudienceLabelsField () {
+      return this.requestAudienceLabelsField(true);
+    }
+    public APIRequestGet requestAudienceLabelsField (boolean value) {
+      this.requestField("audience_labels", value);
       return this;
     }
     public APIRequestGet requestCustomerFileSourceField () {
@@ -3721,6 +3751,7 @@ public class CustomAudience extends APINode {
     }
     public static final String[] PARAMS = {
       "allowed_domains",
+      "audience_labels",
       "claim_objective",
       "content_type",
       "countries",
@@ -3809,6 +3840,15 @@ public class CustomAudience extends APINode {
     }
     public APIRequestUpdate setAllowedDomains (String allowedDomains) {
       this.setParam("allowed_domains", allowedDomains);
+      return this;
+    }
+
+    public APIRequestUpdate setAudienceLabels (List<CustomAudience.EnumAudienceLabels> audienceLabels) {
+      this.setParam("audience_labels", audienceLabels);
+      return this;
+    }
+    public APIRequestUpdate setAudienceLabels (String audienceLabels) {
+      this.setParam("audience_labels", audienceLabels);
       return this;
     }
 
@@ -4015,6 +4055,59 @@ public class CustomAudience extends APINode {
       return this;
     }
 
+  }
+
+  public static enum EnumAudienceLabels {
+      @SerializedName("APP_INSTALLERS")
+      VALUE_APP_INSTALLERS("APP_INSTALLERS"),
+      @SerializedName("APP_USERS")
+      VALUE_APP_USERS("APP_USERS"),
+      @SerializedName("AT_RISK")
+      VALUE_AT_RISK("AT_RISK"),
+      @SerializedName("CART_ABANDONERS")
+      VALUE_CART_ABANDONERS("CART_ABANDONERS"),
+      @SerializedName("CUSTOMER_LEADS")
+      VALUE_CUSTOMER_LEADS("CUSTOMER_LEADS"),
+      @SerializedName("DISENGAGED")
+      VALUE_DISENGAGED("DISENGAGED"),
+      @SerializedName("DISQUALIFIED_LEADS")
+      VALUE_DISQUALIFIED_LEADS("DISQUALIFIED_LEADS"),
+      @SerializedName("ENGAGED_USERS")
+      VALUE_ENGAGED_USERS("ENGAGED_USERS"),
+      @SerializedName("HIGH_VALUE_CUSTOMERS")
+      VALUE_HIGH_VALUE_CUSTOMERS("HIGH_VALUE_CUSTOMERS"),
+      @SerializedName("LOW_VALUE_CUSTOMERS")
+      VALUE_LOW_VALUE_CUSTOMERS("LOW_VALUE_CUSTOMERS"),
+      @SerializedName("OTHER_1")
+      VALUE_OTHER_1("OTHER_1"),
+      @SerializedName("OTHER_2")
+      VALUE_OTHER_2("OTHER_2"),
+      @SerializedName("OTHER_3")
+      VALUE_OTHER_3("OTHER_3"),
+      @SerializedName("PERSONAS")
+      VALUE_PERSONAS("PERSONAS"),
+      @SerializedName("QUALIFIED_LEADS")
+      VALUE_QUALIFIED_LEADS("QUALIFIED_LEADS"),
+      @SerializedName("RECENT_PURCHASERS")
+      VALUE_RECENT_PURCHASERS("RECENT_PURCHASERS"),
+      @SerializedName("RESTRICTED_USERS")
+      VALUE_RESTRICTED_USERS("RESTRICTED_USERS"),
+      @SerializedName("TRIAL_USERS")
+      VALUE_TRIAL_USERS("TRIAL_USERS"),
+      @SerializedName("UNWANTED_CUSTOMERS")
+      VALUE_UNWANTED_CUSTOMERS("UNWANTED_CUSTOMERS"),
+      ;
+
+      private String value;
+
+      private EnumAudienceLabels(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
   }
 
   public static enum EnumClaimObjective {
@@ -4255,6 +4348,7 @@ public class CustomAudience extends APINode {
     this.mAccountId = instance.mAccountId;
     this.mApproximateCountLowerBound = instance.mApproximateCountLowerBound;
     this.mApproximateCountUpperBound = instance.mApproximateCountUpperBound;
+    this.mAudienceLabels = instance.mAudienceLabels;
     this.mCustomerFileSource = instance.mCustomerFileSource;
     this.mDataSource = instance.mDataSource;
     this.mDataSourceTypes = instance.mDataSourceTypes;

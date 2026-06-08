@@ -45,6 +45,8 @@ public class SignalsIWLExtractor extends APINode {
   private String mDomainUri = null;
   @SerializedName("event_type")
   private String mEventType = null;
+  @SerializedName("extractor_config")
+  private Object mExtractorConfig = null;
   @SerializedName("extractor_type")
   private String mExtractorType = null;
   @SerializedName("id")
@@ -271,6 +273,10 @@ public class SignalsIWLExtractor extends APINode {
     return mEventType;
   }
 
+  public Object getFieldExtractorConfig() {
+    return mExtractorConfig;
+  }
+
   public String getFieldExtractorType() {
     return mExtractorType;
   }
@@ -294,6 +300,7 @@ public class SignalsIWLExtractor extends APINode {
     public static final String[] FIELDS = {
       "domain_uri",
       "event_type",
+      "extractor_config",
       "extractor_type",
       "id",
     };
@@ -402,6 +409,13 @@ public class SignalsIWLExtractor extends APINode {
       this.requestField("event_type", value);
       return this;
     }
+    public APIRequestGet requestExtractorConfigField () {
+      return this.requestExtractorConfigField(true);
+    }
+    public APIRequestGet requestExtractorConfigField (boolean value) {
+      this.requestField("extractor_config", value);
+      return this;
+    }
     public APIRequestGet requestExtractorTypeField () {
       return this.requestExtractorTypeField(true);
     }
@@ -435,6 +449,7 @@ public class SignalsIWLExtractor extends APINode {
   public SignalsIWLExtractor copyFrom(SignalsIWLExtractor instance) {
     this.mDomainUri = instance.mDomainUri;
     this.mEventType = instance.mEventType;
+    this.mExtractorConfig = instance.mExtractorConfig;
     this.mExtractorType = instance.mExtractorType;
     this.mId = instance.mId;
     this.context = instance.context;

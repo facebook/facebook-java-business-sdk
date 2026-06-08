@@ -429,6 +429,8 @@ public class AdActivity extends APINode {
       VALUE_UNKNOWN("unknown"),
       @SerializedName("unshare_audience")
       VALUE_UNSHARE_AUDIENCE("unshare_audience"),
+      @SerializedName("update_ad_audience_persona")
+      VALUE_UPDATE_AD_AUDIENCE_PERSONA("update_ad_audience_persona"),
       @SerializedName("update_ad_bid_info")
       VALUE_UPDATE_AD_BID_INFO("update_ad_bid_info"),
       @SerializedName("update_ad_bid_type")
@@ -453,6 +455,8 @@ public class AdActivity extends APINode {
       VALUE_UPDATE_AD_SET_BIDDING("update_ad_set_bidding"),
       @SerializedName("update_ad_set_budget")
       VALUE_UPDATE_AD_SET_BUDGET("update_ad_set_budget"),
+      @SerializedName("update_ad_set_cost_bidding_mode")
+      VALUE_UPDATE_AD_SET_COST_BIDDING_MODE("update_ad_set_cost_bidding_mode"),
       @SerializedName("update_ad_set_duration")
       VALUE_UPDATE_AD_SET_DURATION("update_ad_set_duration"),
       @SerializedName("update_ad_set_learning_stage_status")
@@ -469,6 +473,8 @@ public class AdActivity extends APINode {
       VALUE_UPDATE_AD_SET_SPEND_CAP("update_ad_set_spend_cap"),
       @SerializedName("update_ad_set_target_spec")
       VALUE_UPDATE_AD_SET_TARGET_SPEC("update_ad_set_target_spec"),
+      @SerializedName("update_ad_set_value_rules")
+      VALUE_UPDATE_AD_SET_VALUE_RULES("update_ad_set_value_rules"),
       @SerializedName("update_ad_targets_spec")
       VALUE_UPDATE_AD_TARGETS_SPEC("update_ad_targets_spec"),
       @SerializedName("update_adaccount_agency_fee")
@@ -489,6 +495,8 @@ public class AdActivity extends APINode {
       VALUE_UPDATE_CAMPAIGN_BUDGET_OPTIMIZATION_TOGGLING_STATUS("update_campaign_budget_optimization_toggling_status"),
       @SerializedName("update_campaign_budget_scheduling_state")
       VALUE_UPDATE_CAMPAIGN_BUDGET_SCHEDULING_STATE("update_campaign_budget_scheduling_state"),
+      @SerializedName("update_campaign_budget_split")
+      VALUE_UPDATE_CAMPAIGN_BUDGET_SPLIT("update_campaign_budget_split"),
       @SerializedName("update_campaign_conversion_goal")
       VALUE_UPDATE_CAMPAIGN_CONVERSION_GOAL("update_campaign_conversion_goal"),
       @SerializedName("update_campaign_delivery_destination")
@@ -517,8 +525,6 @@ public class AdActivity extends APINode {
       VALUE_UPDATE_CAMPAIGN_SCHEDULE("update_campaign_schedule"),
       @SerializedName("update_campaign_value_adjustment_rule")
       VALUE_UPDATE_CAMPAIGN_VALUE_ADJUSTMENT_RULE("update_campaign_value_adjustment_rule"),
-      @SerializedName("update_campaign_value_adjustment_rule_attachment")
-      VALUE_UPDATE_CAMPAIGN_VALUE_ADJUSTMENT_RULE_ATTACHMENT("update_campaign_value_adjustment_rule_attachment"),
       @SerializedName("update_delivery_type_cross_level_shift")
       VALUE_UPDATE_DELIVERY_TYPE_CROSS_LEVEL_SHIFT("update_delivery_type_cross_level_shift"),
       ;

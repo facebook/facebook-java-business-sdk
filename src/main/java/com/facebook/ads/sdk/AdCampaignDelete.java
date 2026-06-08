@@ -40,21 +40,23 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class ProductCatalogArticlesAndPublications extends APINode {
+public class AdCampaignDelete extends APINode {
+  @SerializedName("success")
+  private Boolean mSuccess = null;
   protected static Gson gson = null;
 
-  public ProductCatalogArticlesAndPublications() {
+  public AdCampaignDelete() {
   }
 
   public String getId() {
     return null;
   }
-  public static ProductCatalogArticlesAndPublications loadJSON(String json, APIContext context, String header) {
-    ProductCatalogArticlesAndPublications productCatalogArticlesAndPublications = getGson().fromJson(json, ProductCatalogArticlesAndPublications.class);
+  public static AdCampaignDelete loadJSON(String json, APIContext context, String header) {
+    AdCampaignDelete adCampaignDelete = getGson().fromJson(json, AdCampaignDelete.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(productCatalogArticlesAndPublications.toString());
+      JsonElement o2 = parser.parse(adCampaignDelete.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -64,14 +66,14 @@ public class ProductCatalogArticlesAndPublications extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    productCatalogArticlesAndPublications.context = context;
-    productCatalogArticlesAndPublications.rawValue = json;
-    productCatalogArticlesAndPublications.header = header;
-    return productCatalogArticlesAndPublications;
+    adCampaignDelete.context = context;
+    adCampaignDelete.rawValue = json;
+    adCampaignDelete.header = header;
+    return adCampaignDelete;
   }
 
-  public static APINodeList<ProductCatalogArticlesAndPublications> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<ProductCatalogArticlesAndPublications> productCatalogArticlesAndPublicationss = new APINodeList<ProductCatalogArticlesAndPublications>(request, json, header);
+  public static APINodeList<AdCampaignDelete> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdCampaignDelete> adCampaignDeletes = new APINodeList<AdCampaignDelete>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -82,9 +84,9 @@ public class ProductCatalogArticlesAndPublications extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          productCatalogArticlesAndPublicationss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          adCampaignDeletes.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return productCatalogArticlesAndPublicationss;
+        return adCampaignDeletes;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -94,20 +96,20 @@ public class ProductCatalogArticlesAndPublications extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                productCatalogArticlesAndPublicationss.setCursors(before, after);
+                adCampaignDeletes.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            productCatalogArticlesAndPublicationss.setPaging(previous, next);
+            adCampaignDeletes.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              productCatalogArticlesAndPublicationss.setAppSecret(context.getAppSecretProof());
+              adCampaignDeletes.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              productCatalogArticlesAndPublicationss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              adCampaignDeletes.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -118,23 +120,23 @@ public class ProductCatalogArticlesAndPublications extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  productCatalogArticlesAndPublicationss.add(loadJSON(entry.getValue().toString(), context, header));
+                  adCampaignDeletes.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              productCatalogArticlesAndPublicationss.add(loadJSON(obj.toString(), context, header));
+              adCampaignDeletes.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return productCatalogArticlesAndPublicationss;
+          return adCampaignDeletes;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              productCatalogArticlesAndPublicationss.add(loadJSON(entry.getValue().toString(), context, header));
+              adCampaignDeletes.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return productCatalogArticlesAndPublicationss;
+          return adCampaignDeletes;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -151,20 +153,20 @@ public class ProductCatalogArticlesAndPublications extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              productCatalogArticlesAndPublicationss.add(loadJSON(value.toString(), context, header));
+              adCampaignDeletes.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return productCatalogArticlesAndPublicationss;
+            return adCampaignDeletes;
           }
 
           // Sixth, check if it's pure JsonObject
-          productCatalogArticlesAndPublicationss.clear();
-          productCatalogArticlesAndPublicationss.add(loadJSON(json, context, header));
-          return productCatalogArticlesAndPublicationss;
+          adCampaignDeletes.clear();
+          adCampaignDeletes.add(loadJSON(json, context, header));
+          return adCampaignDeletes;
         }
       }
     } catch (Exception e) {
@@ -192,6 +194,15 @@ public class ProductCatalogArticlesAndPublications extends APINode {
   }
 
 
+  public Boolean getFieldSuccess() {
+    return mSuccess;
+  }
+
+  public AdCampaignDelete setFieldSuccess(Boolean value) {
+    this.mSuccess = value;
+    return this;
+  }
+
 
 
 
@@ -208,16 +219,17 @@ public class ProductCatalogArticlesAndPublications extends APINode {
     return gson;
   }
 
-  public ProductCatalogArticlesAndPublications copyFrom(ProductCatalogArticlesAndPublications instance) {
+  public AdCampaignDelete copyFrom(AdCampaignDelete instance) {
+    this.mSuccess = instance.mSuccess;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<ProductCatalogArticlesAndPublications> getParser() {
-    return new APIRequest.ResponseParser<ProductCatalogArticlesAndPublications>() {
-      public APINodeList<ProductCatalogArticlesAndPublications> parseResponse(String response, APIContext context, APIRequest<ProductCatalogArticlesAndPublications> request, String header) throws MalformedResponseException {
-        return ProductCatalogArticlesAndPublications.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<AdCampaignDelete> getParser() {
+    return new APIRequest.ResponseParser<AdCampaignDelete>() {
+      public APINodeList<AdCampaignDelete> parseResponse(String response, APIContext context, APIRequest<AdCampaignDelete> request, String header) throws MalformedResponseException {
+        return AdCampaignDelete.parseResponse(response, context, request, header);
       }
     };
   }

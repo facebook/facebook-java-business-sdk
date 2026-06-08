@@ -40,23 +40,37 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class ArticlesAndPublicationsItemDelete extends APINode {
-  @SerializedName("success")
-  private Boolean mSuccess = null;
+public class CustomAudienceMatchRateInsights extends APINode {
+  @SerializedName("email_quality")
+  private String mEmailQuality = null;
+  @SerializedName("email_upload_volume_pct")
+  private Double mEmailUploadVolumePct = null;
+  @SerializedName("is_eligible")
+  private Boolean mIsEligible = null;
+  @SerializedName("madid_quality")
+  private String mMadidQuality = null;
+  @SerializedName("madid_upload_volume_pct")
+  private Double mMadidUploadVolumePct = null;
+  @SerializedName("match_rate_score")
+  private Double mMatchRateScore = null;
+  @SerializedName("phone_quality")
+  private String mPhoneQuality = null;
+  @SerializedName("phone_upload_volume_pct")
+  private Double mPhoneUploadVolumePct = null;
   protected static Gson gson = null;
 
-  public ArticlesAndPublicationsItemDelete() {
+  public CustomAudienceMatchRateInsights() {
   }
 
   public String getId() {
     return null;
   }
-  public static ArticlesAndPublicationsItemDelete loadJSON(String json, APIContext context, String header) {
-    ArticlesAndPublicationsItemDelete articlesAndPublicationsItemDelete = getGson().fromJson(json, ArticlesAndPublicationsItemDelete.class);
+  public static CustomAudienceMatchRateInsights loadJSON(String json, APIContext context, String header) {
+    CustomAudienceMatchRateInsights customAudienceMatchRateInsights = getGson().fromJson(json, CustomAudienceMatchRateInsights.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(articlesAndPublicationsItemDelete.toString());
+      JsonElement o2 = parser.parse(customAudienceMatchRateInsights.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -66,14 +80,14 @@ public class ArticlesAndPublicationsItemDelete extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    articlesAndPublicationsItemDelete.context = context;
-    articlesAndPublicationsItemDelete.rawValue = json;
-    articlesAndPublicationsItemDelete.header = header;
-    return articlesAndPublicationsItemDelete;
+    customAudienceMatchRateInsights.context = context;
+    customAudienceMatchRateInsights.rawValue = json;
+    customAudienceMatchRateInsights.header = header;
+    return customAudienceMatchRateInsights;
   }
 
-  public static APINodeList<ArticlesAndPublicationsItemDelete> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<ArticlesAndPublicationsItemDelete> articlesAndPublicationsItemDeletes = new APINodeList<ArticlesAndPublicationsItemDelete>(request, json, header);
+  public static APINodeList<CustomAudienceMatchRateInsights> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<CustomAudienceMatchRateInsights> customAudienceMatchRateInsightss = new APINodeList<CustomAudienceMatchRateInsights>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -84,9 +98,9 @@ public class ArticlesAndPublicationsItemDelete extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          articlesAndPublicationsItemDeletes.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          customAudienceMatchRateInsightss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return articlesAndPublicationsItemDeletes;
+        return customAudienceMatchRateInsightss;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -96,20 +110,20 @@ public class ArticlesAndPublicationsItemDelete extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                articlesAndPublicationsItemDeletes.setCursors(before, after);
+                customAudienceMatchRateInsightss.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            articlesAndPublicationsItemDeletes.setPaging(previous, next);
+            customAudienceMatchRateInsightss.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              articlesAndPublicationsItemDeletes.setAppSecret(context.getAppSecretProof());
+              customAudienceMatchRateInsightss.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              articlesAndPublicationsItemDeletes.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              customAudienceMatchRateInsightss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -120,23 +134,23 @@ public class ArticlesAndPublicationsItemDelete extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  articlesAndPublicationsItemDeletes.add(loadJSON(entry.getValue().toString(), context, header));
+                  customAudienceMatchRateInsightss.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              articlesAndPublicationsItemDeletes.add(loadJSON(obj.toString(), context, header));
+              customAudienceMatchRateInsightss.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return articlesAndPublicationsItemDeletes;
+          return customAudienceMatchRateInsightss;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              articlesAndPublicationsItemDeletes.add(loadJSON(entry.getValue().toString(), context, header));
+              customAudienceMatchRateInsightss.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return articlesAndPublicationsItemDeletes;
+          return customAudienceMatchRateInsightss;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -153,20 +167,20 @@ public class ArticlesAndPublicationsItemDelete extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              articlesAndPublicationsItemDeletes.add(loadJSON(value.toString(), context, header));
+              customAudienceMatchRateInsightss.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return articlesAndPublicationsItemDeletes;
+            return customAudienceMatchRateInsightss;
           }
 
           // Sixth, check if it's pure JsonObject
-          articlesAndPublicationsItemDeletes.clear();
-          articlesAndPublicationsItemDeletes.add(loadJSON(json, context, header));
-          return articlesAndPublicationsItemDeletes;
+          customAudienceMatchRateInsightss.clear();
+          customAudienceMatchRateInsightss.add(loadJSON(json, context, header));
+          return customAudienceMatchRateInsightss;
         }
       }
     } catch (Exception e) {
@@ -194,12 +208,75 @@ public class ArticlesAndPublicationsItemDelete extends APINode {
   }
 
 
-  public Boolean getFieldSuccess() {
-    return mSuccess;
+  public String getFieldEmailQuality() {
+    return mEmailQuality;
   }
 
-  public ArticlesAndPublicationsItemDelete setFieldSuccess(Boolean value) {
-    this.mSuccess = value;
+  public CustomAudienceMatchRateInsights setFieldEmailQuality(String value) {
+    this.mEmailQuality = value;
+    return this;
+  }
+
+  public Double getFieldEmailUploadVolumePct() {
+    return mEmailUploadVolumePct;
+  }
+
+  public CustomAudienceMatchRateInsights setFieldEmailUploadVolumePct(Double value) {
+    this.mEmailUploadVolumePct = value;
+    return this;
+  }
+
+  public Boolean getFieldIsEligible() {
+    return mIsEligible;
+  }
+
+  public CustomAudienceMatchRateInsights setFieldIsEligible(Boolean value) {
+    this.mIsEligible = value;
+    return this;
+  }
+
+  public String getFieldMadidQuality() {
+    return mMadidQuality;
+  }
+
+  public CustomAudienceMatchRateInsights setFieldMadidQuality(String value) {
+    this.mMadidQuality = value;
+    return this;
+  }
+
+  public Double getFieldMadidUploadVolumePct() {
+    return mMadidUploadVolumePct;
+  }
+
+  public CustomAudienceMatchRateInsights setFieldMadidUploadVolumePct(Double value) {
+    this.mMadidUploadVolumePct = value;
+    return this;
+  }
+
+  public Double getFieldMatchRateScore() {
+    return mMatchRateScore;
+  }
+
+  public CustomAudienceMatchRateInsights setFieldMatchRateScore(Double value) {
+    this.mMatchRateScore = value;
+    return this;
+  }
+
+  public String getFieldPhoneQuality() {
+    return mPhoneQuality;
+  }
+
+  public CustomAudienceMatchRateInsights setFieldPhoneQuality(String value) {
+    this.mPhoneQuality = value;
+    return this;
+  }
+
+  public Double getFieldPhoneUploadVolumePct() {
+    return mPhoneUploadVolumePct;
+  }
+
+  public CustomAudienceMatchRateInsights setFieldPhoneUploadVolumePct(Double value) {
+    this.mPhoneUploadVolumePct = value;
     return this;
   }
 
@@ -219,17 +296,24 @@ public class ArticlesAndPublicationsItemDelete extends APINode {
     return gson;
   }
 
-  public ArticlesAndPublicationsItemDelete copyFrom(ArticlesAndPublicationsItemDelete instance) {
-    this.mSuccess = instance.mSuccess;
+  public CustomAudienceMatchRateInsights copyFrom(CustomAudienceMatchRateInsights instance) {
+    this.mEmailQuality = instance.mEmailQuality;
+    this.mEmailUploadVolumePct = instance.mEmailUploadVolumePct;
+    this.mIsEligible = instance.mIsEligible;
+    this.mMadidQuality = instance.mMadidQuality;
+    this.mMadidUploadVolumePct = instance.mMadidUploadVolumePct;
+    this.mMatchRateScore = instance.mMatchRateScore;
+    this.mPhoneQuality = instance.mPhoneQuality;
+    this.mPhoneUploadVolumePct = instance.mPhoneUploadVolumePct;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<ArticlesAndPublicationsItemDelete> getParser() {
-    return new APIRequest.ResponseParser<ArticlesAndPublicationsItemDelete>() {
-      public APINodeList<ArticlesAndPublicationsItemDelete> parseResponse(String response, APIContext context, APIRequest<ArticlesAndPublicationsItemDelete> request, String header) throws MalformedResponseException {
-        return ArticlesAndPublicationsItemDelete.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<CustomAudienceMatchRateInsights> getParser() {
+    return new APIRequest.ResponseParser<CustomAudienceMatchRateInsights>() {
+      public APINodeList<CustomAudienceMatchRateInsights> parseResponse(String response, APIContext context, APIRequest<CustomAudienceMatchRateInsights> request, String header) throws MalformedResponseException {
+        return CustomAudienceMatchRateInsights.parseResponse(response, context, request, header);
       }
     };
   }

@@ -55,6 +55,8 @@ public class VideoCopyrightRule extends APINode {
   private Boolean mIsInMigration = null;
   @SerializedName("name")
   private String mName = null;
+  @SerializedName("validity_status")
+  private String mValidityStatus = null;
   protected static Gson gson = null;
 
   VideoCopyrightRule() {
@@ -300,6 +302,10 @@ public class VideoCopyrightRule extends APINode {
     return mName;
   }
 
+  public String getFieldValidityStatus() {
+    return mValidityStatus;
+  }
+
 
 
   public static class APIRequestGet extends APIRequest<VideoCopyrightRule> {
@@ -320,6 +326,7 @@ public class VideoCopyrightRule extends APINode {
       "id",
       "is_in_migration",
       "name",
+      "validity_status",
     };
 
     @Override
@@ -461,6 +468,13 @@ public class VideoCopyrightRule extends APINode {
       this.requestField("name", value);
       return this;
     }
+    public APIRequestGet requestValidityStatusField () {
+      return this.requestValidityStatusField(true);
+    }
+    public APIRequestGet requestValidityStatusField (boolean value) {
+      this.requestField("validity_status", value);
+      return this;
+    }
   }
 
   public static enum EnumSource {
@@ -506,6 +520,7 @@ public class VideoCopyrightRule extends APINode {
     this.mId = instance.mId;
     this.mIsInMigration = instance.mIsInMigration;
     this.mName = instance.mName;
+    this.mValidityStatus = instance.mValidityStatus;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

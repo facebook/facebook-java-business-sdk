@@ -296,6 +296,10 @@ public class ProductCatalogDataSources extends APINode {
       return this;
     }
 
+    public APIRequestGenget setIngestionSourceType (ProductCatalogDataSourcesGet.EnumIngestionSourceType ingestionSourceType) {
+      this.setParam("ingestion_source_type", ingestionSourceType);
+      return this;
+    }
     public APIRequestGenget setIngestionSourceType (String ingestionSourceType) {
       this.setParam("ingestion_source_type", ingestionSourceType);
       return this;

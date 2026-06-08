@@ -313,6 +313,7 @@ public class AdsValueAdjustmentRuleCollection extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "status",
     };
 
     public static final String[] FIELDS = {
@@ -371,6 +372,15 @@ public class AdsValueAdjustmentRuleCollection extends APINode {
       return this;
     }
 
+
+    public APIRequestCreateDeleteRuleSet setStatus (AdsValueAdjustmentRuleCollection.EnumStatus status) {
+      this.setParam("status", status);
+      return this;
+    }
+    public APIRequestCreateDeleteRuleSet setStatus (String status) {
+      this.setParam("status", status);
+      return this;
+    }
 
     public APIRequestCreateDeleteRuleSet requestAllFields () {
       return this.requestAllFields(true);
@@ -676,6 +686,7 @@ public class AdsValueAdjustmentRuleCollection extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "entry_point",
       "is_default_setting",
       "name",
       "rules",
@@ -738,6 +749,15 @@ public class AdsValueAdjustmentRuleCollection extends APINode {
     }
 
 
+    public APIRequestUpdate setEntryPoint (AdsValueAdjustmentRuleCollection.EnumEntryPoint entryPoint) {
+      this.setParam("entry_point", entryPoint);
+      return this;
+    }
+    public APIRequestUpdate setEntryPoint (String entryPoint) {
+      this.setParam("entry_point", entryPoint);
+      return this;
+    }
+
     public APIRequestUpdate setIsDefaultSetting (Boolean isDefaultSetting) {
       this.setParam("is_default_setting", isDefaultSetting);
       return this;
@@ -797,6 +817,31 @@ public class AdsValueAdjustmentRuleCollection extends APINode {
       return this;
     }
 
+  }
+
+  public static enum EnumEntryPoint {
+      @SerializedName("ADVERTISING_SETTINGS")
+      VALUE_ADVERTISING_SETTINGS("ADVERTISING_SETTINGS"),
+      @SerializedName("L2_CONVERSION_LOCATION")
+      VALUE_L2_CONVERSION_LOCATION("L2_CONVERSION_LOCATION"),
+      @SerializedName("L2_GLOBAL")
+      VALUE_L2_GLOBAL("L2_GLOBAL"),
+      @SerializedName("L2_NCA_GOAL")
+      VALUE_L2_NCA_GOAL("L2_NCA_GOAL"),
+      @SerializedName("L2_PLACEMENT")
+      VALUE_L2_PLACEMENT("L2_PLACEMENT"),
+      ;
+
+      private String value;
+
+      private EnumEntryPoint(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
   }
 
   public static enum EnumProductType {

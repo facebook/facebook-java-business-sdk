@@ -365,7 +365,9 @@ public class VideoList extends APINode {
       "premiere_living_room_status",
       "privacy",
       "published",
+      "replace_audio_status",
       "scheduled_publish_time",
+      "selected_audio_spec",
       "source",
       "spherical",
       "status",
@@ -738,11 +740,25 @@ public class VideoList extends APINode {
       this.requestField("published", value);
       return this;
     }
+    public APIRequestGetVideos requestReplaceAudioStatusField () {
+      return this.requestReplaceAudioStatusField(true);
+    }
+    public APIRequestGetVideos requestReplaceAudioStatusField (boolean value) {
+      this.requestField("replace_audio_status", value);
+      return this;
+    }
     public APIRequestGetVideos requestScheduledPublishTimeField () {
       return this.requestScheduledPublishTimeField(true);
     }
     public APIRequestGetVideos requestScheduledPublishTimeField (boolean value) {
       this.requestField("scheduled_publish_time", value);
+      return this;
+    }
+    public APIRequestGetVideos requestSelectedAudioSpecField () {
+      return this.requestSelectedAudioSpecField(true);
+    }
+    public APIRequestGetVideos requestSelectedAudioSpecField (boolean value) {
+      this.requestField("selected_audio_spec", value);
       return this;
     }
     public APIRequestGetVideos requestSourceField () {

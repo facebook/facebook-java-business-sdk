@@ -1404,6 +1404,7 @@ public class LiveVideo extends APINode {
       "offer_eligible",
       "overall_star_rating",
       "owner_business",
+      "page_backed_threads_account_id",
       "page_token",
       "parent_page",
       "parking",
@@ -2259,6 +2260,13 @@ public class LiveVideo extends APINode {
     }
     public APIRequestGetCrosspostSharedPages requestOwnerBusinessField (boolean value) {
       this.requestField("owner_business", value);
+      return this;
+    }
+    public APIRequestGetCrosspostSharedPages requestPageBackedThreadsAccountIdField () {
+      return this.requestPageBackedThreadsAccountIdField(true);
+    }
+    public APIRequestGetCrosspostSharedPages requestPageBackedThreadsAccountIdField (boolean value) {
+      this.requestField("page_backed_threads_account_id", value);
       return this;
     }
     public APIRequestGetCrosspostSharedPages requestPageTokenField () {
@@ -4583,6 +4591,8 @@ public class LiveVideo extends APINode {
       VALUE_LEFT_RIGHT("LEFT_RIGHT"),
       @SerializedName("MONO")
       VALUE_MONO("MONO"),
+      @SerializedName("MULTI_VIEW")
+      VALUE_MULTI_VIEW("MULTI_VIEW"),
       @SerializedName("TOP_BOTTOM")
       VALUE_TOP_BOTTOM("TOP_BOTTOM"),
       ;

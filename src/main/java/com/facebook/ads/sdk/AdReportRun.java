@@ -437,6 +437,14 @@ public class AdReportRun extends APINode {
       "catalog_segment_value_omni_purchase_roas",
       "catalog_segment_value_website_purchase_roas",
       "clicks",
+      "configurable_attribution_action",
+      "configurable_attribution_actionvalue",
+      "configurable_audience_overlap_reach",
+      "configurable_reachbyfrequency_action",
+      "configurable_reachbyfrequency_converters_count",
+      "configurable_reachbyfrequency_impressions_cost",
+      "configurable_reachbyfrequency_impressions_count",
+      "configurable_reachbyfrequency_reach",
       "conversion_lead_rate",
       "conversion_leads",
       "conversion_rate_ranking",
@@ -464,6 +472,7 @@ public class AdReportRun extends APINode {
       "converted_promoted_product_website_pixel_purchase_value",
       "cost_per_15_sec_video_view",
       "cost_per_2_sec_continuous_video_view",
+      "cost_per_6_sec_video_view",
       "cost_per_action_type",
       "cost_per_ad_click",
       "cost_per_conversion",
@@ -472,6 +481,7 @@ public class AdReportRun extends APINode {
       "cost_per_estimated_ad_recallers",
       "cost_per_inline_link_click",
       "cost_per_inline_post_engagement",
+      "cost_per_message_delivered",
       "cost_per_objective_result",
       "cost_per_one_thousand_ad_impression",
       "cost_per_outbound_click",
@@ -486,6 +496,9 @@ public class AdReportRun extends APINode {
       "cpm",
       "cpp",
       "created_time",
+      "creative_diversity_data",
+      "creative_diversity_label",
+      "creative_diversity_score",
       "creative_media_type",
       "ctr",
       "date_start",
@@ -540,12 +553,15 @@ public class AdReportRun extends APINode {
       "marketing_messages_website_initiate_checkout",
       "marketing_messages_website_purchase",
       "marketing_messages_website_purchase_values",
+      "messages_delivered",
+      "messages_delivered_ctr",
       "mobile_app_purchase_roas",
       "multi_event_conversion_attribution_setting",
       "objective",
       "objective_result_rate",
       "objective_results",
       "onsite_conversion_messaging_detected_purchase_deduped",
+      "opportunity_score_l4",
       "optimization_goal",
       "outbound_clicks",
       "outbound_clicks_ctr",
@@ -559,9 +575,11 @@ public class AdReportRun extends APINode {
       "qualifying_question_qualify_answer_rate",
       "quality_ranking",
       "reach",
+      "read_rate",
       "result_rate",
       "result_values_performance_indicator",
       "results",
+      "shop_clicks",
       "shops_assisted_purchases",
       "social_spend",
       "spend",
@@ -583,6 +601,7 @@ public class AdReportRun extends APINode {
       "updated_time",
       "video_15_sec_watched_actions",
       "video_30_sec_watched_actions",
+      "video_6_sec_watched_actions",
       "video_avg_time_watched_actions",
       "video_continuous_2_sec_watched_actions",
       "video_p100_watched_actions",
@@ -945,6 +964,62 @@ public class AdReportRun extends APINode {
       this.requestField("clicks", value);
       return this;
     }
+    public APIRequestGetInsights requestConfigurableAttributionActionField () {
+      return this.requestConfigurableAttributionActionField(true);
+    }
+    public APIRequestGetInsights requestConfigurableAttributionActionField (boolean value) {
+      this.requestField("configurable_attribution_action", value);
+      return this;
+    }
+    public APIRequestGetInsights requestConfigurableAttributionActionvalueField () {
+      return this.requestConfigurableAttributionActionvalueField(true);
+    }
+    public APIRequestGetInsights requestConfigurableAttributionActionvalueField (boolean value) {
+      this.requestField("configurable_attribution_actionvalue", value);
+      return this;
+    }
+    public APIRequestGetInsights requestConfigurableAudienceOverlapReachField () {
+      return this.requestConfigurableAudienceOverlapReachField(true);
+    }
+    public APIRequestGetInsights requestConfigurableAudienceOverlapReachField (boolean value) {
+      this.requestField("configurable_audience_overlap_reach", value);
+      return this;
+    }
+    public APIRequestGetInsights requestConfigurableReachbyfrequencyActionField () {
+      return this.requestConfigurableReachbyfrequencyActionField(true);
+    }
+    public APIRequestGetInsights requestConfigurableReachbyfrequencyActionField (boolean value) {
+      this.requestField("configurable_reachbyfrequency_action", value);
+      return this;
+    }
+    public APIRequestGetInsights requestConfigurableReachbyfrequencyConvertersCountField () {
+      return this.requestConfigurableReachbyfrequencyConvertersCountField(true);
+    }
+    public APIRequestGetInsights requestConfigurableReachbyfrequencyConvertersCountField (boolean value) {
+      this.requestField("configurable_reachbyfrequency_converters_count", value);
+      return this;
+    }
+    public APIRequestGetInsights requestConfigurableReachbyfrequencyImpressionsCostField () {
+      return this.requestConfigurableReachbyfrequencyImpressionsCostField(true);
+    }
+    public APIRequestGetInsights requestConfigurableReachbyfrequencyImpressionsCostField (boolean value) {
+      this.requestField("configurable_reachbyfrequency_impressions_cost", value);
+      return this;
+    }
+    public APIRequestGetInsights requestConfigurableReachbyfrequencyImpressionsCountField () {
+      return this.requestConfigurableReachbyfrequencyImpressionsCountField(true);
+    }
+    public APIRequestGetInsights requestConfigurableReachbyfrequencyImpressionsCountField (boolean value) {
+      this.requestField("configurable_reachbyfrequency_impressions_count", value);
+      return this;
+    }
+    public APIRequestGetInsights requestConfigurableReachbyfrequencyReachField () {
+      return this.requestConfigurableReachbyfrequencyReachField(true);
+    }
+    public APIRequestGetInsights requestConfigurableReachbyfrequencyReachField (boolean value) {
+      this.requestField("configurable_reachbyfrequency_reach", value);
+      return this;
+    }
     public APIRequestGetInsights requestConversionLeadRateField () {
       return this.requestConversionLeadRateField(true);
     }
@@ -1134,6 +1209,13 @@ public class AdReportRun extends APINode {
       this.requestField("cost_per_2_sec_continuous_video_view", value);
       return this;
     }
+    public APIRequestGetInsights requestCostPer6SecVideoViewField () {
+      return this.requestCostPer6SecVideoViewField(true);
+    }
+    public APIRequestGetInsights requestCostPer6SecVideoViewField (boolean value) {
+      this.requestField("cost_per_6_sec_video_view", value);
+      return this;
+    }
     public APIRequestGetInsights requestCostPerActionTypeField () {
       return this.requestCostPerActionTypeField(true);
     }
@@ -1188,6 +1270,13 @@ public class AdReportRun extends APINode {
     }
     public APIRequestGetInsights requestCostPerInlinePostEngagementField (boolean value) {
       this.requestField("cost_per_inline_post_engagement", value);
+      return this;
+    }
+    public APIRequestGetInsights requestCostPerMessageDeliveredField () {
+      return this.requestCostPerMessageDeliveredField(true);
+    }
+    public APIRequestGetInsights requestCostPerMessageDeliveredField (boolean value) {
+      this.requestField("cost_per_message_delivered", value);
       return this;
     }
     public APIRequestGetInsights requestCostPerObjectiveResultField () {
@@ -1286,6 +1375,27 @@ public class AdReportRun extends APINode {
     }
     public APIRequestGetInsights requestCreatedTimeField (boolean value) {
       this.requestField("created_time", value);
+      return this;
+    }
+    public APIRequestGetInsights requestCreativeDiversityDataField () {
+      return this.requestCreativeDiversityDataField(true);
+    }
+    public APIRequestGetInsights requestCreativeDiversityDataField (boolean value) {
+      this.requestField("creative_diversity_data", value);
+      return this;
+    }
+    public APIRequestGetInsights requestCreativeDiversityLabelField () {
+      return this.requestCreativeDiversityLabelField(true);
+    }
+    public APIRequestGetInsights requestCreativeDiversityLabelField (boolean value) {
+      this.requestField("creative_diversity_label", value);
+      return this;
+    }
+    public APIRequestGetInsights requestCreativeDiversityScoreField () {
+      return this.requestCreativeDiversityScoreField(true);
+    }
+    public APIRequestGetInsights requestCreativeDiversityScoreField (boolean value) {
+      this.requestField("creative_diversity_score", value);
       return this;
     }
     public APIRequestGetInsights requestCreativeMediaTypeField () {
@@ -1666,6 +1776,20 @@ public class AdReportRun extends APINode {
       this.requestField("marketing_messages_website_purchase_values", value);
       return this;
     }
+    public APIRequestGetInsights requestMessagesDeliveredField () {
+      return this.requestMessagesDeliveredField(true);
+    }
+    public APIRequestGetInsights requestMessagesDeliveredField (boolean value) {
+      this.requestField("messages_delivered", value);
+      return this;
+    }
+    public APIRequestGetInsights requestMessagesDeliveredCtrField () {
+      return this.requestMessagesDeliveredCtrField(true);
+    }
+    public APIRequestGetInsights requestMessagesDeliveredCtrField (boolean value) {
+      this.requestField("messages_delivered_ctr", value);
+      return this;
+    }
     public APIRequestGetInsights requestMobileAppPurchaseRoasField () {
       return this.requestMobileAppPurchaseRoasField(true);
     }
@@ -1706,6 +1830,13 @@ public class AdReportRun extends APINode {
     }
     public APIRequestGetInsights requestOnsiteConversionMessagingDetectedPurchaseDedupedField (boolean value) {
       this.requestField("onsite_conversion_messaging_detected_purchase_deduped", value);
+      return this;
+    }
+    public APIRequestGetInsights requestOpportunityScoreL4Field () {
+      return this.requestOpportunityScoreL4Field(true);
+    }
+    public APIRequestGetInsights requestOpportunityScoreL4Field (boolean value) {
+      this.requestField("opportunity_score_l4", value);
       return this;
     }
     public APIRequestGetInsights requestOptimizationGoalField () {
@@ -1799,6 +1930,13 @@ public class AdReportRun extends APINode {
       this.requestField("reach", value);
       return this;
     }
+    public APIRequestGetInsights requestReadRateField () {
+      return this.requestReadRateField(true);
+    }
+    public APIRequestGetInsights requestReadRateField (boolean value) {
+      this.requestField("read_rate", value);
+      return this;
+    }
     public APIRequestGetInsights requestResultRateField () {
       return this.requestResultRateField(true);
     }
@@ -1818,6 +1956,13 @@ public class AdReportRun extends APINode {
     }
     public APIRequestGetInsights requestResultsField (boolean value) {
       this.requestField("results", value);
+      return this;
+    }
+    public APIRequestGetInsights requestShopClicksField () {
+      return this.requestShopClicksField(true);
+    }
+    public APIRequestGetInsights requestShopClicksField (boolean value) {
+      this.requestField("shop_clicks", value);
       return this;
     }
     public APIRequestGetInsights requestShopsAssistedPurchasesField () {
@@ -1965,6 +2110,13 @@ public class AdReportRun extends APINode {
     }
     public APIRequestGetInsights requestVideo30SecWatchedActionsField (boolean value) {
       this.requestField("video_30_sec_watched_actions", value);
+      return this;
+    }
+    public APIRequestGetInsights requestVideo6SecWatchedActionsField () {
+      return this.requestVideo6SecWatchedActionsField(true);
+    }
+    public APIRequestGetInsights requestVideo6SecWatchedActionsField (boolean value) {
+      this.requestField("video_6_sec_watched_actions", value);
       return this;
     }
     public APIRequestGetInsights requestVideoAvgTimeWatchedActionsField () {
@@ -2528,6 +2680,8 @@ public class AdReportRun extends APINode {
       VALUE_DEVICE_PLATFORM("device_platform"),
       @SerializedName("dma")
       VALUE_DMA("dma"),
+      @SerializedName("existing_post_id")
+      VALUE_EXISTING_POST_ID("existing_post_id"),
       @SerializedName("fidelity_type")
       VALUE_FIDELITY_TYPE("fidelity_type"),
       @SerializedName("flexible_format_asset_type")
@@ -2550,6 +2704,14 @@ public class AdReportRun extends APINode {
       VALUE_IMPRESSION_DEVICE("impression_device"),
       @SerializedName("impression_view_time_advertiser_hour_v2")
       VALUE_IMPRESSION_VIEW_TIME_ADVERTISER_HOUR_V2("impression_view_time_advertiser_hour_v2"),
+      @SerializedName("instagram_ads_follow_type")
+      VALUE_INSTAGRAM_ADS_FOLLOW_TYPE("instagram_ads_follow_type"),
+      @SerializedName("instagram_ads_instagram_media_product_type")
+      VALUE_INSTAGRAM_ADS_INSTAGRAM_MEDIA_PRODUCT_TYPE("instagram_ads_instagram_media_product_type"),
+      @SerializedName("instagram_ads_time_since_creation_bucket")
+      VALUE_INSTAGRAM_ADS_TIME_SINCE_CREATION_BUCKET("instagram_ads_time_since_creation_bucket"),
+      @SerializedName("internal_campaign_id")
+      VALUE_INTERNAL_CAMPAIGN_ID("internal_campaign_id"),
       @SerializedName("is_auto_advance")
       VALUE_IS_AUTO_ADVANCE("is_auto_advance"),
       @SerializedName("is_conversion_id_modeled")
@@ -2580,6 +2742,10 @@ public class AdReportRun extends APINode {
       VALUE_MEDIA_TYPE("media_type"),
       @SerializedName("mmm")
       VALUE_MMM("mmm"),
+      @SerializedName("overlap_segment")
+      VALUE_OVERLAP_SEGMENT("overlap_segment"),
+      @SerializedName("pa_creator_ig_handle")
+      VALUE_PA_CREATOR_IG_HANDLE("pa_creator_ig_handle"),
       @SerializedName("place_page_id")
       VALUE_PLACE_PAGE_ID("place_page_id"),
       @SerializedName("platform_position")
@@ -2646,6 +2812,8 @@ public class AdReportRun extends APINode {
       VALUE_USER_PERSONA_NAME("user_persona_name"),
       @SerializedName("video_asset")
       VALUE_VIDEO_ASSET("video_asset"),
+      @SerializedName("zip")
+      VALUE_ZIP("zip"),
       ;
 
       private String value;

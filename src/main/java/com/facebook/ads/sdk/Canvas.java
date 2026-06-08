@@ -59,8 +59,6 @@ public class Canvas extends APINode {
   private CanvasDynamicSetting mDynamicSetting = null;
   @SerializedName("element_payload")
   private String mElementPayload = null;
-  @SerializedName("elements")
-  private List<RichMediaElement> mElements = null;
   @SerializedName("fb_body_elements")
   private List<Object> mFbBodyElements = null;
   @SerializedName("hero_asset_facebook_post_id")
@@ -368,10 +366,6 @@ public class Canvas extends APINode {
 
   public String getFieldElementPayload() {
     return mElementPayload;
-  }
-
-  public List<RichMediaElement> getFieldElements() {
-    return mElements;
   }
 
   public List<Object> getFieldFbBodyElements() {
@@ -717,7 +711,6 @@ public class Canvas extends APINode {
       "collection_thumbnails",
       "dynamic_setting",
       "element_payload",
-      "elements",
       "fb_body_elements",
       "hero_asset_facebook_post_id",
       "hero_asset_instagram_media_id",
@@ -890,13 +883,6 @@ public class Canvas extends APINode {
     }
     public APIRequestGet requestElementPayloadField (boolean value) {
       this.requestField("element_payload", value);
-      return this;
-    }
-    public APIRequestGet requestElementsField () {
-      return this.requestElementsField(true);
-    }
-    public APIRequestGet requestElementsField (boolean value) {
-      this.requestField("elements", value);
       return this;
     }
     public APIRequestGet requestFbBodyElementsField () {
@@ -1233,7 +1219,6 @@ public class Canvas extends APINode {
     this.mCollectionThumbnails = instance.mCollectionThumbnails;
     this.mDynamicSetting = instance.mDynamicSetting;
     this.mElementPayload = instance.mElementPayload;
-    this.mElements = instance.mElements;
     this.mFbBodyElements = instance.mFbBodyElements;
     this.mHeroAssetFacebookPostId = instance.mHeroAssetFacebookPostId;
     this.mHeroAssetInstagramMediaId = instance.mHeroAssetInstagramMediaId;

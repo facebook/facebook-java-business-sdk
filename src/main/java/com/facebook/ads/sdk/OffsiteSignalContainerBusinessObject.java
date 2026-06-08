@@ -944,6 +944,7 @@ public class OffsiteSignalContainerBusinessObject extends APINode {
       "offer_eligible",
       "overall_star_rating",
       "owner_business",
+      "page_backed_threads_account_id",
       "page_token",
       "parent_page",
       "parking",
@@ -1799,6 +1800,13 @@ public class OffsiteSignalContainerBusinessObject extends APINode {
     }
     public APIRequestGetLinkedPage requestOwnerBusinessField (boolean value) {
       this.requestField("owner_business", value);
+      return this;
+    }
+    public APIRequestGetLinkedPage requestPageBackedThreadsAccountIdField () {
+      return this.requestPageBackedThreadsAccountIdField(true);
+    }
+    public APIRequestGetLinkedPage requestPageBackedThreadsAccountIdField (boolean value) {
+      this.requestField("page_backed_threads_account_id", value);
       return this;
     }
     public APIRequestGetLinkedPage requestPageTokenField () {

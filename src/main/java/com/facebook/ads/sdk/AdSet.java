@@ -47,8 +47,6 @@ public class AdSet extends APINode {
   private List<AdLabel> mAdlabels = null;
   @SerializedName("adset_schedule")
   private List<DayPart> mAdsetSchedule = null;
-  @SerializedName("anchor_event_attribution_window_days")
-  private Long mAnchorEventAttributionWindowDays = null;
   @SerializedName("asset_feed_id")
   private String mAssetFeedId = null;
   @SerializedName("attribution_count_type")
@@ -83,6 +81,8 @@ public class AdSet extends APINode {
   private String mCampaignId = null;
   @SerializedName("configured_status")
   private EnumConfiguredStatus mConfiguredStatus = null;
+  @SerializedName("cost_bidding_mode")
+  private String mCostBiddingMode = null;
   @SerializedName("created_time")
   private String mCreatedTime = null;
   @SerializedName("creative_diversity_label")
@@ -123,10 +123,14 @@ public class AdSet extends APINode {
   private Boolean mIsBaSkipDelayedEligible = null;
   @SerializedName("is_budget_schedule_enabled")
   private Boolean mIsBudgetScheduleEnabled = null;
+  @SerializedName("is_dc_follow_optimized")
+  private Boolean mIsDcFollowOptimized = null;
   @SerializedName("is_dynamic_creative")
   private Boolean mIsDynamicCreative = null;
   @SerializedName("is_incremental_attribution_enabled")
   private Boolean mIsIncrementalAttributionEnabled = null;
+  @SerializedName("is_organic_ad_joint_optimized")
+  private Boolean mIsOrganicAdJointOptimized = null;
   @SerializedName("issues_info")
   private List<AdCampaignIssuesInfo> mIssuesInfo = null;
   @SerializedName("learning_stage_info")
@@ -139,10 +143,14 @@ public class AdSet extends APINode {
   private String mLifetimeMinSpendTarget = null;
   @SerializedName("lifetime_spend_cap")
   private String mLifetimeSpendCap = null;
+  @SerializedName("live_video_ad_campaign_config")
+  private LiveVideoAdCampaignConfig mLiveVideoAdCampaignConfig = null;
   @SerializedName("low_creative_reach")
   private List<String> mLowCreativeReach = null;
   @SerializedName("max_budget_spend_percentage")
   private String mMaxBudgetSpendPercentage = null;
+  @SerializedName("meta_moment_maker_spec")
+  private MetaMomentMakerConfig mMetaMomentMakerSpec = null;
   @SerializedName("min_budget_spend_percentage")
   private String mMinBudgetSpendPercentage = null;
   @SerializedName("multi_event_conversion_attribution_window_seconds")
@@ -169,6 +177,8 @@ public class AdSet extends APINode {
   private List<String> mRegionalRegulatedCategories = null;
   @SerializedName("regional_regulation_identities")
   private RegionalRegulationIdentities mRegionalRegulationIdentities = null;
+  @SerializedName("relative_value")
+  private String mRelativeValue = null;
   @SerializedName("review_feedback")
   private String mReviewFeedback = null;
   @SerializedName("rf_prediction_id")
@@ -528,15 +538,6 @@ public class AdSet extends APINode {
     this.mAdsetSchedule = DayPart.getGson().fromJson(value, type);
     return this;
   }
-  public Long getFieldAnchorEventAttributionWindowDays() {
-    return mAnchorEventAttributionWindowDays;
-  }
-
-  public AdSet setFieldAnchorEventAttributionWindowDays(Long value) {
-    this.mAnchorEventAttributionWindowDays = value;
-    return this;
-  }
-
   public String getFieldAssetFeedId() {
     return mAssetFeedId;
   }
@@ -715,6 +716,15 @@ public class AdSet extends APINode {
 
   public AdSet setFieldConfiguredStatus(EnumConfiguredStatus value) {
     this.mConfiguredStatus = value;
+    return this;
+  }
+
+  public String getFieldCostBiddingMode() {
+    return mCostBiddingMode;
+  }
+
+  public AdSet setFieldCostBiddingMode(String value) {
+    this.mCostBiddingMode = value;
     return this;
   }
 
@@ -903,6 +913,15 @@ public class AdSet extends APINode {
     return this;
   }
 
+  public Boolean getFieldIsDcFollowOptimized() {
+    return mIsDcFollowOptimized;
+  }
+
+  public AdSet setFieldIsDcFollowOptimized(Boolean value) {
+    this.mIsDcFollowOptimized = value;
+    return this;
+  }
+
   public Boolean getFieldIsDynamicCreative() {
     return mIsDynamicCreative;
   }
@@ -918,6 +937,15 @@ public class AdSet extends APINode {
 
   public AdSet setFieldIsIncrementalAttributionEnabled(Boolean value) {
     this.mIsIncrementalAttributionEnabled = value;
+    return this;
+  }
+
+  public Boolean getFieldIsOrganicAdJointOptimized() {
+    return mIsOrganicAdJointOptimized;
+  }
+
+  public AdSet setFieldIsOrganicAdJointOptimized(Boolean value) {
+    this.mIsOrganicAdJointOptimized = value;
     return this;
   }
 
@@ -985,6 +1013,23 @@ public class AdSet extends APINode {
     return this;
   }
 
+  public LiveVideoAdCampaignConfig getFieldLiveVideoAdCampaignConfig() {
+    if (mLiveVideoAdCampaignConfig != null) {
+      mLiveVideoAdCampaignConfig.context = getContext();
+    }
+    return mLiveVideoAdCampaignConfig;
+  }
+
+  public AdSet setFieldLiveVideoAdCampaignConfig(LiveVideoAdCampaignConfig value) {
+    this.mLiveVideoAdCampaignConfig = value;
+    return this;
+  }
+
+  public AdSet setFieldLiveVideoAdCampaignConfig(String value) {
+    Type type = new TypeToken<LiveVideoAdCampaignConfig>(){}.getType();
+    this.mLiveVideoAdCampaignConfig = LiveVideoAdCampaignConfig.getGson().fromJson(value, type);
+    return this;
+  }
   public List<String> getFieldLowCreativeReach() {
     return mLowCreativeReach;
   }
@@ -1003,6 +1048,20 @@ public class AdSet extends APINode {
     return this;
   }
 
+  public MetaMomentMakerConfig getFieldMetaMomentMakerSpec() {
+    return mMetaMomentMakerSpec;
+  }
+
+  public AdSet setFieldMetaMomentMakerSpec(MetaMomentMakerConfig value) {
+    this.mMetaMomentMakerSpec = value;
+    return this;
+  }
+
+  public AdSet setFieldMetaMomentMakerSpec(String value) {
+    Type type = new TypeToken<MetaMomentMakerConfig>(){}.getType();
+    this.mMetaMomentMakerSpec = MetaMomentMakerConfig.getGson().fromJson(value, type);
+    return this;
+  }
   public String getFieldMinBudgetSpendPercentage() {
     return mMinBudgetSpendPercentage;
   }
@@ -1140,6 +1199,15 @@ public class AdSet extends APINode {
     this.mRegionalRegulationIdentities = RegionalRegulationIdentities.getGson().fromJson(value, type);
     return this;
   }
+  public String getFieldRelativeValue() {
+    return mRelativeValue;
+  }
+
+  public AdSet setFieldRelativeValue(String value) {
+    this.mRelativeValue = value;
+    return this;
+  }
+
   public String getFieldReviewFeedback() {
     return mReviewFeedback;
   }
@@ -1850,6 +1918,7 @@ public class AdSet extends APINode {
       "existing_post_title",
       "facebook_branded_content",
       "format_transformation_spec",
+      "generative_asset_spec",
       "id",
       "image_crops",
       "image_hash",
@@ -1895,6 +1964,7 @@ public class AdSet extends APINode {
       "url_tags",
       "use_page_actor_override",
       "video_id",
+      "wamo_whatsapp_identity_spec",
     };
 
     @Override
@@ -2202,6 +2272,13 @@ public class AdSet extends APINode {
     }
     public APIRequestGetAdCreatives requestFormatTransformationSpecField (boolean value) {
       this.requestField("format_transformation_spec", value);
+      return this;
+    }
+    public APIRequestGetAdCreatives requestGenerativeAssetSpecField () {
+      return this.requestGenerativeAssetSpecField(true);
+    }
+    public APIRequestGetAdCreatives requestGenerativeAssetSpecField (boolean value) {
+      this.requestField("generative_asset_spec", value);
       return this;
     }
     public APIRequestGetAdCreatives requestIdField () {
@@ -2517,6 +2594,13 @@ public class AdSet extends APINode {
     }
     public APIRequestGetAdCreatives requestVideoIdField (boolean value) {
       this.requestField("video_id", value);
+      return this;
+    }
+    public APIRequestGetAdCreatives requestWamoWhatsappIdentitySpecField () {
+      return this.requestWamoWhatsappIdentitySpecField(true);
+    }
+    public APIRequestGetAdCreatives requestWamoWhatsappIdentitySpecField (boolean value) {
+      this.requestField("wamo_whatsapp_identity_spec", value);
       return this;
     }
   }
@@ -3008,6 +3092,7 @@ public class AdSet extends APINode {
       "created_time",
       "creative",
       "creative_asset_groups_spec",
+      "creative_automation_spec",
       "demolink_hash",
       "display_sequence",
       "effective_status",
@@ -3288,6 +3373,13 @@ public class AdSet extends APINode {
     }
     public APIRequestGetAds requestCreativeAssetGroupsSpecField (boolean value) {
       this.requestField("creative_asset_groups_spec", value);
+      return this;
+    }
+    public APIRequestGetAds requestCreativeAutomationSpecField () {
+      return this.requestCreativeAutomationSpecField(true);
+    }
+    public APIRequestGetAds requestCreativeAutomationSpecField (boolean value) {
+      this.requestField("creative_automation_spec", value);
       return this;
     }
     public APIRequestGetAds requestDemolinkHashField () {
@@ -3970,7 +4062,6 @@ public class AdSet extends APINode {
       "account_id",
       "adlabels",
       "adset_schedule",
-      "anchor_event_attribution_window_days",
       "asset_feed_id",
       "attribution_count_type",
       "attribution_spec",
@@ -3988,6 +4079,7 @@ public class AdSet extends APINode {
       "campaign_attribution",
       "campaign_id",
       "configured_status",
+      "cost_bidding_mode",
       "created_time",
       "creative_diversity_label",
       "creative_diversity_score",
@@ -4008,16 +4100,20 @@ public class AdSet extends APINode {
       "instagram_user_id",
       "is_ba_skip_delayed_eligible",
       "is_budget_schedule_enabled",
+      "is_dc_follow_optimized",
       "is_dynamic_creative",
       "is_incremental_attribution_enabled",
+      "is_organic_ad_joint_optimized",
       "issues_info",
       "learning_stage_info",
       "lifetime_budget",
       "lifetime_imps",
       "lifetime_min_spend_target",
       "lifetime_spend_cap",
+      "live_video_ad_campaign_config",
       "low_creative_reach",
       "max_budget_spend_percentage",
+      "meta_moment_maker_spec",
       "min_budget_spend_percentage",
       "multi_event_conversion_attribution_window_seconds",
       "multi_optimization_goal_weight",
@@ -4031,6 +4127,7 @@ public class AdSet extends APINode {
       "recurring_budget_semantics",
       "regional_regulated_categories",
       "regional_regulation_identities",
+      "relative_value",
       "review_feedback",
       "rf_prediction_id",
       "source_adset",
@@ -4196,13 +4293,6 @@ public class AdSet extends APINode {
       this.requestField("adset_schedule", value);
       return this;
     }
-    public APIRequestGetCopies requestAnchorEventAttributionWindowDaysField () {
-      return this.requestAnchorEventAttributionWindowDaysField(true);
-    }
-    public APIRequestGetCopies requestAnchorEventAttributionWindowDaysField (boolean value) {
-      this.requestField("anchor_event_attribution_window_days", value);
-      return this;
-    }
     public APIRequestGetCopies requestAssetFeedIdField () {
       return this.requestAssetFeedIdField(true);
     }
@@ -4320,6 +4410,13 @@ public class AdSet extends APINode {
     }
     public APIRequestGetCopies requestConfiguredStatusField (boolean value) {
       this.requestField("configured_status", value);
+      return this;
+    }
+    public APIRequestGetCopies requestCostBiddingModeField () {
+      return this.requestCostBiddingModeField(true);
+    }
+    public APIRequestGetCopies requestCostBiddingModeField (boolean value) {
+      this.requestField("cost_bidding_mode", value);
       return this;
     }
     public APIRequestGetCopies requestCreatedTimeField () {
@@ -4462,6 +4559,13 @@ public class AdSet extends APINode {
       this.requestField("is_budget_schedule_enabled", value);
       return this;
     }
+    public APIRequestGetCopies requestIsDcFollowOptimizedField () {
+      return this.requestIsDcFollowOptimizedField(true);
+    }
+    public APIRequestGetCopies requestIsDcFollowOptimizedField (boolean value) {
+      this.requestField("is_dc_follow_optimized", value);
+      return this;
+    }
     public APIRequestGetCopies requestIsDynamicCreativeField () {
       return this.requestIsDynamicCreativeField(true);
     }
@@ -4474,6 +4578,13 @@ public class AdSet extends APINode {
     }
     public APIRequestGetCopies requestIsIncrementalAttributionEnabledField (boolean value) {
       this.requestField("is_incremental_attribution_enabled", value);
+      return this;
+    }
+    public APIRequestGetCopies requestIsOrganicAdJointOptimizedField () {
+      return this.requestIsOrganicAdJointOptimizedField(true);
+    }
+    public APIRequestGetCopies requestIsOrganicAdJointOptimizedField (boolean value) {
+      this.requestField("is_organic_ad_joint_optimized", value);
       return this;
     }
     public APIRequestGetCopies requestIssuesInfoField () {
@@ -4518,6 +4629,13 @@ public class AdSet extends APINode {
       this.requestField("lifetime_spend_cap", value);
       return this;
     }
+    public APIRequestGetCopies requestLiveVideoAdCampaignConfigField () {
+      return this.requestLiveVideoAdCampaignConfigField(true);
+    }
+    public APIRequestGetCopies requestLiveVideoAdCampaignConfigField (boolean value) {
+      this.requestField("live_video_ad_campaign_config", value);
+      return this;
+    }
     public APIRequestGetCopies requestLowCreativeReachField () {
       return this.requestLowCreativeReachField(true);
     }
@@ -4530,6 +4648,13 @@ public class AdSet extends APINode {
     }
     public APIRequestGetCopies requestMaxBudgetSpendPercentageField (boolean value) {
       this.requestField("max_budget_spend_percentage", value);
+      return this;
+    }
+    public APIRequestGetCopies requestMetaMomentMakerSpecField () {
+      return this.requestMetaMomentMakerSpecField(true);
+    }
+    public APIRequestGetCopies requestMetaMomentMakerSpecField (boolean value) {
+      this.requestField("meta_moment_maker_spec", value);
       return this;
     }
     public APIRequestGetCopies requestMinBudgetSpendPercentageField () {
@@ -4621,6 +4746,13 @@ public class AdSet extends APINode {
     }
     public APIRequestGetCopies requestRegionalRegulationIdentitiesField (boolean value) {
       this.requestField("regional_regulation_identities", value);
+      return this;
+    }
+    public APIRequestGetCopies requestRelativeValueField () {
+      return this.requestRelativeValueField(true);
+    }
+    public APIRequestGetCopies requestRelativeValueField (boolean value) {
+      this.requestField("relative_value", value);
       return this;
     }
     public APIRequestGetCopies requestReviewFeedbackField () {
@@ -6248,7 +6380,6 @@ public class AdSet extends APINode {
       "account_id",
       "adlabels",
       "adset_schedule",
-      "anchor_event_attribution_window_days",
       "asset_feed_id",
       "attribution_count_type",
       "attribution_spec",
@@ -6266,6 +6397,7 @@ public class AdSet extends APINode {
       "campaign_attribution",
       "campaign_id",
       "configured_status",
+      "cost_bidding_mode",
       "created_time",
       "creative_diversity_label",
       "creative_diversity_score",
@@ -6286,16 +6418,20 @@ public class AdSet extends APINode {
       "instagram_user_id",
       "is_ba_skip_delayed_eligible",
       "is_budget_schedule_enabled",
+      "is_dc_follow_optimized",
       "is_dynamic_creative",
       "is_incremental_attribution_enabled",
+      "is_organic_ad_joint_optimized",
       "issues_info",
       "learning_stage_info",
       "lifetime_budget",
       "lifetime_imps",
       "lifetime_min_spend_target",
       "lifetime_spend_cap",
+      "live_video_ad_campaign_config",
       "low_creative_reach",
       "max_budget_spend_percentage",
+      "meta_moment_maker_spec",
       "min_budget_spend_percentage",
       "multi_event_conversion_attribution_window_seconds",
       "multi_optimization_goal_weight",
@@ -6309,6 +6445,7 @@ public class AdSet extends APINode {
       "recurring_budget_semantics",
       "regional_regulated_categories",
       "regional_regulation_identities",
+      "relative_value",
       "review_feedback",
       "rf_prediction_id",
       "source_adset",
@@ -6474,13 +6611,6 @@ public class AdSet extends APINode {
       this.requestField("adset_schedule", value);
       return this;
     }
-    public APIRequestGet requestAnchorEventAttributionWindowDaysField () {
-      return this.requestAnchorEventAttributionWindowDaysField(true);
-    }
-    public APIRequestGet requestAnchorEventAttributionWindowDaysField (boolean value) {
-      this.requestField("anchor_event_attribution_window_days", value);
-      return this;
-    }
     public APIRequestGet requestAssetFeedIdField () {
       return this.requestAssetFeedIdField(true);
     }
@@ -6598,6 +6728,13 @@ public class AdSet extends APINode {
     }
     public APIRequestGet requestConfiguredStatusField (boolean value) {
       this.requestField("configured_status", value);
+      return this;
+    }
+    public APIRequestGet requestCostBiddingModeField () {
+      return this.requestCostBiddingModeField(true);
+    }
+    public APIRequestGet requestCostBiddingModeField (boolean value) {
+      this.requestField("cost_bidding_mode", value);
       return this;
     }
     public APIRequestGet requestCreatedTimeField () {
@@ -6740,6 +6877,13 @@ public class AdSet extends APINode {
       this.requestField("is_budget_schedule_enabled", value);
       return this;
     }
+    public APIRequestGet requestIsDcFollowOptimizedField () {
+      return this.requestIsDcFollowOptimizedField(true);
+    }
+    public APIRequestGet requestIsDcFollowOptimizedField (boolean value) {
+      this.requestField("is_dc_follow_optimized", value);
+      return this;
+    }
     public APIRequestGet requestIsDynamicCreativeField () {
       return this.requestIsDynamicCreativeField(true);
     }
@@ -6752,6 +6896,13 @@ public class AdSet extends APINode {
     }
     public APIRequestGet requestIsIncrementalAttributionEnabledField (boolean value) {
       this.requestField("is_incremental_attribution_enabled", value);
+      return this;
+    }
+    public APIRequestGet requestIsOrganicAdJointOptimizedField () {
+      return this.requestIsOrganicAdJointOptimizedField(true);
+    }
+    public APIRequestGet requestIsOrganicAdJointOptimizedField (boolean value) {
+      this.requestField("is_organic_ad_joint_optimized", value);
       return this;
     }
     public APIRequestGet requestIssuesInfoField () {
@@ -6796,6 +6947,13 @@ public class AdSet extends APINode {
       this.requestField("lifetime_spend_cap", value);
       return this;
     }
+    public APIRequestGet requestLiveVideoAdCampaignConfigField () {
+      return this.requestLiveVideoAdCampaignConfigField(true);
+    }
+    public APIRequestGet requestLiveVideoAdCampaignConfigField (boolean value) {
+      this.requestField("live_video_ad_campaign_config", value);
+      return this;
+    }
     public APIRequestGet requestLowCreativeReachField () {
       return this.requestLowCreativeReachField(true);
     }
@@ -6808,6 +6966,13 @@ public class AdSet extends APINode {
     }
     public APIRequestGet requestMaxBudgetSpendPercentageField (boolean value) {
       this.requestField("max_budget_spend_percentage", value);
+      return this;
+    }
+    public APIRequestGet requestMetaMomentMakerSpecField () {
+      return this.requestMetaMomentMakerSpecField(true);
+    }
+    public APIRequestGet requestMetaMomentMakerSpecField (boolean value) {
+      this.requestField("meta_moment_maker_spec", value);
       return this;
     }
     public APIRequestGet requestMinBudgetSpendPercentageField () {
@@ -6899,6 +7064,13 @@ public class AdSet extends APINode {
     }
     public APIRequestGet requestRegionalRegulationIdentitiesField (boolean value) {
       this.requestField("regional_regulation_identities", value);
+      return this;
+    }
+    public APIRequestGet requestRelativeValueField () {
+      return this.requestRelativeValueField(true);
+    }
+    public APIRequestGet requestRelativeValueField (boolean value) {
+      this.requestField("relative_value", value);
       return this;
     }
     public APIRequestGet requestReviewFeedbackField () {
@@ -7036,6 +7208,7 @@ public class AdSet extends APINode {
       "budget_schedule_specs",
       "campaign_attribution",
       "campaign_spec",
+      "cost_bidding_mode",
       "creative_sequence",
       "creative_sequence_repetition_pattern",
       "daily_budget",
@@ -7053,13 +7226,16 @@ public class AdSet extends APINode {
       "full_funnel_exploration_mode",
       "is_ba_skip_delayed_eligible",
       "is_budget_schedule_enabled",
+      "is_dc_follow_optimized",
       "is_incremental_attribution_enabled",
       "is_sac_cfca_terms_certified",
       "lifetime_budget",
       "lifetime_imps",
       "lifetime_min_spend_target",
       "lifetime_spend_cap",
+      "live_video_ad_campaign_config",
       "max_budget_spend_percentage",
+      "meta_moment_maker_spec",
       "min_budget_spend_percentage",
       "multi_event_conversion_attribution_window_seconds",
       "multi_optimization_goal_weight",
@@ -7072,6 +7248,7 @@ public class AdSet extends APINode {
       "rb_prediction_id",
       "regional_regulated_categories",
       "regional_regulation_identities",
+      "relative_value",
       "rf_prediction_id",
       "start_time",
       "status",
@@ -7256,6 +7433,15 @@ public class AdSet extends APINode {
       return this;
     }
 
+    public APIRequestUpdate setCostBiddingMode (AdSet.EnumCostBiddingMode costBiddingMode) {
+      this.setParam("cost_bidding_mode", costBiddingMode);
+      return this;
+    }
+    public APIRequestUpdate setCostBiddingMode (String costBiddingMode) {
+      this.setParam("cost_bidding_mode", costBiddingMode);
+      return this;
+    }
+
     public APIRequestUpdate setCreativeSequence (List<String> creativeSequence) {
       this.setParam("creative_sequence", creativeSequence);
       return this;
@@ -7393,6 +7579,15 @@ public class AdSet extends APINode {
       return this;
     }
 
+    public APIRequestUpdate setIsDcFollowOptimized (Boolean isDcFollowOptimized) {
+      this.setParam("is_dc_follow_optimized", isDcFollowOptimized);
+      return this;
+    }
+    public APIRequestUpdate setIsDcFollowOptimized (String isDcFollowOptimized) {
+      this.setParam("is_dc_follow_optimized", isDcFollowOptimized);
+      return this;
+    }
+
     public APIRequestUpdate setIsIncrementalAttributionEnabled (Boolean isIncrementalAttributionEnabled) {
       this.setParam("is_incremental_attribution_enabled", isIncrementalAttributionEnabled);
       return this;
@@ -7447,12 +7642,30 @@ public class AdSet extends APINode {
       return this;
     }
 
+    public APIRequestUpdate setLiveVideoAdCampaignConfig (Object liveVideoAdCampaignConfig) {
+      this.setParam("live_video_ad_campaign_config", liveVideoAdCampaignConfig);
+      return this;
+    }
+    public APIRequestUpdate setLiveVideoAdCampaignConfig (String liveVideoAdCampaignConfig) {
+      this.setParam("live_video_ad_campaign_config", liveVideoAdCampaignConfig);
+      return this;
+    }
+
     public APIRequestUpdate setMaxBudgetSpendPercentage (Long maxBudgetSpendPercentage) {
       this.setParam("max_budget_spend_percentage", maxBudgetSpendPercentage);
       return this;
     }
     public APIRequestUpdate setMaxBudgetSpendPercentage (String maxBudgetSpendPercentage) {
       this.setParam("max_budget_spend_percentage", maxBudgetSpendPercentage);
+      return this;
+    }
+
+    public APIRequestUpdate setMetaMomentMakerSpec (Map<String, String> metaMomentMakerSpec) {
+      this.setParam("meta_moment_maker_spec", metaMomentMakerSpec);
+      return this;
+    }
+    public APIRequestUpdate setMetaMomentMakerSpec (String metaMomentMakerSpec) {
+      this.setParam("meta_moment_maker_spec", metaMomentMakerSpec);
       return this;
     }
 
@@ -7553,6 +7766,15 @@ public class AdSet extends APINode {
     }
     public APIRequestUpdate setRegionalRegulationIdentities (String regionalRegulationIdentities) {
       this.setParam("regional_regulation_identities", regionalRegulationIdentities);
+      return this;
+    }
+
+    public APIRequestUpdate setRelativeValue (Double relativeValue) {
+      this.setParam("relative_value", relativeValue);
+      return this;
+    }
+    public APIRequestUpdate setRelativeValue (String relativeValue) {
+      this.setParam("relative_value", relativeValue);
       return this;
     }
 
@@ -7829,6 +8051,8 @@ public class AdSet extends APINode {
       VALUE_MEANINGFUL_CALL_ATTEMPT("MEANINGFUL_CALL_ATTEMPT"),
       @SerializedName("MESSAGING_APPOINTMENT_CONVERSION")
       VALUE_MESSAGING_APPOINTMENT_CONVERSION("MESSAGING_APPOINTMENT_CONVERSION"),
+      @SerializedName("MESSAGING_DEEP_CONVERSATION_AND_FOLLOW")
+      VALUE_MESSAGING_DEEP_CONVERSATION_AND_FOLLOW("MESSAGING_DEEP_CONVERSATION_AND_FOLLOW"),
       @SerializedName("MESSAGING_PURCHASE_CONVERSION")
       VALUE_MESSAGING_PURCHASE_CONVERSION("MESSAGING_PURCHASE_CONVERSION"),
       @SerializedName("NONE")
@@ -7896,6 +8120,25 @@ public class AdSet extends APINode {
       }
   }
 
+  public static enum EnumAttributionCountType {
+      @SerializedName("ALL_CONVERSIONS")
+      VALUE_ALL_CONVERSIONS("ALL_CONVERSIONS"),
+      @SerializedName("FIRST_CONVERSION")
+      VALUE_FIRST_CONVERSION("FIRST_CONVERSION"),
+      ;
+
+      private String value;
+
+      private EnumAttributionCountType(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
   public static enum EnumAutomaticManualState {
       @SerializedName("AUTOMATIC")
       VALUE_AUTOMATIC("AUTOMATIC"),
@@ -7927,6 +8170,27 @@ public class AdSet extends APINode {
       private String value;
 
       private EnumBudgetSource(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumCostBiddingMode {
+      @SerializedName("BALANCED")
+      VALUE_BALANCED("BALANCED"),
+      @SerializedName("COST_FOCUSED")
+      VALUE_COST_FOCUSED("COST_FOCUSED"),
+      @SerializedName("VOLUME_FOCUSED")
+      VALUE_VOLUME_FOCUSED("VOLUME_FOCUSED"),
+      ;
+
+      private String value;
+
+      private EnumCostBiddingMode(String value) {
         this.value = value;
       }
 
@@ -8202,6 +8466,16 @@ public class AdSet extends APINode {
       VALUE_13("13"),
       @SerializedName("14")
       VALUE_14("14"),
+      @SerializedName("15")
+      VALUE_15("15"),
+      @SerializedName("16")
+      VALUE_16("16"),
+      @SerializedName("17")
+      VALUE_17("17"),
+      @SerializedName("18")
+      VALUE_18("18"),
+      @SerializedName("19")
+      VALUE_19("19"),
       ;
 
       private String value;
@@ -8303,7 +8577,6 @@ public class AdSet extends APINode {
     this.mAccountId = instance.mAccountId;
     this.mAdlabels = instance.mAdlabels;
     this.mAdsetSchedule = instance.mAdsetSchedule;
-    this.mAnchorEventAttributionWindowDays = instance.mAnchorEventAttributionWindowDays;
     this.mAssetFeedId = instance.mAssetFeedId;
     this.mAttributionCountType = instance.mAttributionCountType;
     this.mAttributionSpec = instance.mAttributionSpec;
@@ -8321,6 +8594,7 @@ public class AdSet extends APINode {
     this.mCampaignAttribution = instance.mCampaignAttribution;
     this.mCampaignId = instance.mCampaignId;
     this.mConfiguredStatus = instance.mConfiguredStatus;
+    this.mCostBiddingMode = instance.mCostBiddingMode;
     this.mCreatedTime = instance.mCreatedTime;
     this.mCreativeDiversityLabel = instance.mCreativeDiversityLabel;
     this.mCreativeDiversityScore = instance.mCreativeDiversityScore;
@@ -8341,16 +8615,20 @@ public class AdSet extends APINode {
     this.mInstagramUserId = instance.mInstagramUserId;
     this.mIsBaSkipDelayedEligible = instance.mIsBaSkipDelayedEligible;
     this.mIsBudgetScheduleEnabled = instance.mIsBudgetScheduleEnabled;
+    this.mIsDcFollowOptimized = instance.mIsDcFollowOptimized;
     this.mIsDynamicCreative = instance.mIsDynamicCreative;
     this.mIsIncrementalAttributionEnabled = instance.mIsIncrementalAttributionEnabled;
+    this.mIsOrganicAdJointOptimized = instance.mIsOrganicAdJointOptimized;
     this.mIssuesInfo = instance.mIssuesInfo;
     this.mLearningStageInfo = instance.mLearningStageInfo;
     this.mLifetimeBudget = instance.mLifetimeBudget;
     this.mLifetimeImps = instance.mLifetimeImps;
     this.mLifetimeMinSpendTarget = instance.mLifetimeMinSpendTarget;
     this.mLifetimeSpendCap = instance.mLifetimeSpendCap;
+    this.mLiveVideoAdCampaignConfig = instance.mLiveVideoAdCampaignConfig;
     this.mLowCreativeReach = instance.mLowCreativeReach;
     this.mMaxBudgetSpendPercentage = instance.mMaxBudgetSpendPercentage;
+    this.mMetaMomentMakerSpec = instance.mMetaMomentMakerSpec;
     this.mMinBudgetSpendPercentage = instance.mMinBudgetSpendPercentage;
     this.mMultiEventConversionAttributionWindowSeconds = instance.mMultiEventConversionAttributionWindowSeconds;
     this.mMultiOptimizationGoalWeight = instance.mMultiOptimizationGoalWeight;
@@ -8364,6 +8642,7 @@ public class AdSet extends APINode {
     this.mRecurringBudgetSemantics = instance.mRecurringBudgetSemantics;
     this.mRegionalRegulatedCategories = instance.mRegionalRegulatedCategories;
     this.mRegionalRegulationIdentities = instance.mRegionalRegulationIdentities;
+    this.mRelativeValue = instance.mRelativeValue;
     this.mReviewFeedback = instance.mReviewFeedback;
     this.mRfPredictionId = instance.mRfPredictionId;
     this.mSourceAdset = instance.mSourceAdset;

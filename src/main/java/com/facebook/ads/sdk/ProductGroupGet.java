@@ -40,23 +40,35 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class CatalogGenericFeedsGet extends APINode {
-  @SerializedName("data")
-  private List<Object> mData = null;
+public class ProductGroupGet extends APINode {
+  @SerializedName("id")
+  private Long mId = null;
+  @SerializedName("mini_shops_product_sets_count")
+  private Long mMiniShopsProductSetsCount = null;
+  @SerializedName("product_catalog")
+  private Object mProductCatalog = null;
+  @SerializedName("products")
+  private Object mProducts = null;
+  @SerializedName("representative_item_id")
+  private String mRepresentativeItemId = null;
+  @SerializedName("retailer_id")
+  private String mRetailerId = null;
+  @SerializedName("variants")
+  private List<Object> mVariants = null;
   protected static Gson gson = null;
 
-  public CatalogGenericFeedsGet() {
+  public ProductGroupGet() {
   }
 
   public String getId() {
-    return null;
+    return getFieldId().toString();
   }
-  public static CatalogGenericFeedsGet loadJSON(String json, APIContext context, String header) {
-    CatalogGenericFeedsGet catalogGenericFeedsGet = getGson().fromJson(json, CatalogGenericFeedsGet.class);
+  public static ProductGroupGet loadJSON(String json, APIContext context, String header) {
+    ProductGroupGet productGroupGet = getGson().fromJson(json, ProductGroupGet.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(catalogGenericFeedsGet.toString());
+      JsonElement o2 = parser.parse(productGroupGet.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -66,14 +78,14 @@ public class CatalogGenericFeedsGet extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    catalogGenericFeedsGet.context = context;
-    catalogGenericFeedsGet.rawValue = json;
-    catalogGenericFeedsGet.header = header;
-    return catalogGenericFeedsGet;
+    productGroupGet.context = context;
+    productGroupGet.rawValue = json;
+    productGroupGet.header = header;
+    return productGroupGet;
   }
 
-  public static APINodeList<CatalogGenericFeedsGet> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<CatalogGenericFeedsGet> catalogGenericFeedsGets = new APINodeList<CatalogGenericFeedsGet>(request, json, header);
+  public static APINodeList<ProductGroupGet> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<ProductGroupGet> productGroupGets = new APINodeList<ProductGroupGet>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -84,9 +96,9 @@ public class CatalogGenericFeedsGet extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          catalogGenericFeedsGets.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          productGroupGets.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return catalogGenericFeedsGets;
+        return productGroupGets;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -96,20 +108,20 @@ public class CatalogGenericFeedsGet extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                catalogGenericFeedsGets.setCursors(before, after);
+                productGroupGets.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            catalogGenericFeedsGets.setPaging(previous, next);
+            productGroupGets.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              catalogGenericFeedsGets.setAppSecret(context.getAppSecretProof());
+              productGroupGets.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              catalogGenericFeedsGets.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              productGroupGets.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -120,23 +132,23 @@ public class CatalogGenericFeedsGet extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  catalogGenericFeedsGets.add(loadJSON(entry.getValue().toString(), context, header));
+                  productGroupGets.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              catalogGenericFeedsGets.add(loadJSON(obj.toString(), context, header));
+              productGroupGets.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return catalogGenericFeedsGets;
+          return productGroupGets;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              catalogGenericFeedsGets.add(loadJSON(entry.getValue().toString(), context, header));
+              productGroupGets.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return catalogGenericFeedsGets;
+          return productGroupGets;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -153,20 +165,20 @@ public class CatalogGenericFeedsGet extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              catalogGenericFeedsGets.add(loadJSON(value.toString(), context, header));
+              productGroupGets.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return catalogGenericFeedsGets;
+            return productGroupGets;
           }
 
           // Sixth, check if it's pure JsonObject
-          catalogGenericFeedsGets.clear();
-          catalogGenericFeedsGets.add(loadJSON(json, context, header));
-          return catalogGenericFeedsGets;
+          productGroupGets.clear();
+          productGroupGets.add(loadJSON(json, context, header));
+          return productGroupGets;
         }
       }
     } catch (Exception e) {
@@ -194,12 +206,66 @@ public class CatalogGenericFeedsGet extends APINode {
   }
 
 
-  public List<Object> getFieldData() {
-    return mData;
+  public Long getFieldId() {
+    return mId;
   }
 
-  public CatalogGenericFeedsGet setFieldData(List<Object> value) {
-    this.mData = value;
+  public ProductGroupGet setFieldId(Long value) {
+    this.mId = value;
+    return this;
+  }
+
+  public Long getFieldMiniShopsProductSetsCount() {
+    return mMiniShopsProductSetsCount;
+  }
+
+  public ProductGroupGet setFieldMiniShopsProductSetsCount(Long value) {
+    this.mMiniShopsProductSetsCount = value;
+    return this;
+  }
+
+  public Object getFieldProductCatalog() {
+    return mProductCatalog;
+  }
+
+  public ProductGroupGet setFieldProductCatalog(Object value) {
+    this.mProductCatalog = value;
+    return this;
+  }
+
+  public Object getFieldProducts() {
+    return mProducts;
+  }
+
+  public ProductGroupGet setFieldProducts(Object value) {
+    this.mProducts = value;
+    return this;
+  }
+
+  public String getFieldRepresentativeItemId() {
+    return mRepresentativeItemId;
+  }
+
+  public ProductGroupGet setFieldRepresentativeItemId(String value) {
+    this.mRepresentativeItemId = value;
+    return this;
+  }
+
+  public String getFieldRetailerId() {
+    return mRetailerId;
+  }
+
+  public ProductGroupGet setFieldRetailerId(String value) {
+    this.mRetailerId = value;
+    return this;
+  }
+
+  public List<Object> getFieldVariants() {
+    return mVariants;
+  }
+
+  public ProductGroupGet setFieldVariants(List<Object> value) {
+    this.mVariants = value;
     return this;
   }
 
@@ -219,17 +285,23 @@ public class CatalogGenericFeedsGet extends APINode {
     return gson;
   }
 
-  public CatalogGenericFeedsGet copyFrom(CatalogGenericFeedsGet instance) {
-    this.mData = instance.mData;
+  public ProductGroupGet copyFrom(ProductGroupGet instance) {
+    this.mId = instance.mId;
+    this.mMiniShopsProductSetsCount = instance.mMiniShopsProductSetsCount;
+    this.mProductCatalog = instance.mProductCatalog;
+    this.mProducts = instance.mProducts;
+    this.mRepresentativeItemId = instance.mRepresentativeItemId;
+    this.mRetailerId = instance.mRetailerId;
+    this.mVariants = instance.mVariants;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<CatalogGenericFeedsGet> getParser() {
-    return new APIRequest.ResponseParser<CatalogGenericFeedsGet>() {
-      public APINodeList<CatalogGenericFeedsGet> parseResponse(String response, APIContext context, APIRequest<CatalogGenericFeedsGet> request, String header) throws MalformedResponseException {
-        return CatalogGenericFeedsGet.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<ProductGroupGet> getParser() {
+    return new APIRequest.ResponseParser<ProductGroupGet>() {
+      public APINodeList<ProductGroupGet> parseResponse(String response, APIContext context, APIRequest<ProductGroupGet> request, String header) throws MalformedResponseException {
+        return ProductGroupGet.parseResponse(response, context, request, header);
       }
     };
   }

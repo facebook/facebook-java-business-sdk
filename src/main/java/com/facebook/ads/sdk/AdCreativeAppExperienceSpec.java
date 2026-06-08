@@ -40,21 +40,27 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class CatalogSubscribedAppsDelete extends APINode {
+public class AdCreativeAppExperienceSpec extends APINode {
+  @SerializedName("reveal_details")
+  private Object mRevealDetails = null;
+  @SerializedName("show_spotlights")
+  private Object mShowSpotlights = null;
+  @SerializedName("website_summary")
+  private Object mWebsiteSummary = null;
   protected static Gson gson = null;
 
-  public CatalogSubscribedAppsDelete() {
+  public AdCreativeAppExperienceSpec() {
   }
 
   public String getId() {
     return null;
   }
-  public static CatalogSubscribedAppsDelete loadJSON(String json, APIContext context, String header) {
-    CatalogSubscribedAppsDelete catalogSubscribedAppsDelete = getGson().fromJson(json, CatalogSubscribedAppsDelete.class);
+  public static AdCreativeAppExperienceSpec loadJSON(String json, APIContext context, String header) {
+    AdCreativeAppExperienceSpec adCreativeAppExperienceSpec = getGson().fromJson(json, AdCreativeAppExperienceSpec.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(catalogSubscribedAppsDelete.toString());
+      JsonElement o2 = parser.parse(adCreativeAppExperienceSpec.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -64,14 +70,14 @@ public class CatalogSubscribedAppsDelete extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    catalogSubscribedAppsDelete.context = context;
-    catalogSubscribedAppsDelete.rawValue = json;
-    catalogSubscribedAppsDelete.header = header;
-    return catalogSubscribedAppsDelete;
+    adCreativeAppExperienceSpec.context = context;
+    adCreativeAppExperienceSpec.rawValue = json;
+    adCreativeAppExperienceSpec.header = header;
+    return adCreativeAppExperienceSpec;
   }
 
-  public static APINodeList<CatalogSubscribedAppsDelete> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<CatalogSubscribedAppsDelete> catalogSubscribedAppsDeletes = new APINodeList<CatalogSubscribedAppsDelete>(request, json, header);
+  public static APINodeList<AdCreativeAppExperienceSpec> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdCreativeAppExperienceSpec> adCreativeAppExperienceSpecs = new APINodeList<AdCreativeAppExperienceSpec>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -82,9 +88,9 @@ public class CatalogSubscribedAppsDelete extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          catalogSubscribedAppsDeletes.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          adCreativeAppExperienceSpecs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return catalogSubscribedAppsDeletes;
+        return adCreativeAppExperienceSpecs;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -94,20 +100,20 @@ public class CatalogSubscribedAppsDelete extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                catalogSubscribedAppsDeletes.setCursors(before, after);
+                adCreativeAppExperienceSpecs.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            catalogSubscribedAppsDeletes.setPaging(previous, next);
+            adCreativeAppExperienceSpecs.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              catalogSubscribedAppsDeletes.setAppSecret(context.getAppSecretProof());
+              adCreativeAppExperienceSpecs.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              catalogSubscribedAppsDeletes.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              adCreativeAppExperienceSpecs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -118,23 +124,23 @@ public class CatalogSubscribedAppsDelete extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  catalogSubscribedAppsDeletes.add(loadJSON(entry.getValue().toString(), context, header));
+                  adCreativeAppExperienceSpecs.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              catalogSubscribedAppsDeletes.add(loadJSON(obj.toString(), context, header));
+              adCreativeAppExperienceSpecs.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return catalogSubscribedAppsDeletes;
+          return adCreativeAppExperienceSpecs;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              catalogSubscribedAppsDeletes.add(loadJSON(entry.getValue().toString(), context, header));
+              adCreativeAppExperienceSpecs.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return catalogSubscribedAppsDeletes;
+          return adCreativeAppExperienceSpecs;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -151,20 +157,20 @@ public class CatalogSubscribedAppsDelete extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              catalogSubscribedAppsDeletes.add(loadJSON(value.toString(), context, header));
+              adCreativeAppExperienceSpecs.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return catalogSubscribedAppsDeletes;
+            return adCreativeAppExperienceSpecs;
           }
 
           // Sixth, check if it's pure JsonObject
-          catalogSubscribedAppsDeletes.clear();
-          catalogSubscribedAppsDeletes.add(loadJSON(json, context, header));
-          return catalogSubscribedAppsDeletes;
+          adCreativeAppExperienceSpecs.clear();
+          adCreativeAppExperienceSpecs.add(loadJSON(json, context, header));
+          return adCreativeAppExperienceSpecs;
         }
       }
     } catch (Exception e) {
@@ -192,6 +198,33 @@ public class CatalogSubscribedAppsDelete extends APINode {
   }
 
 
+  public Object getFieldRevealDetails() {
+    return mRevealDetails;
+  }
+
+  public AdCreativeAppExperienceSpec setFieldRevealDetails(Object value) {
+    this.mRevealDetails = value;
+    return this;
+  }
+
+  public Object getFieldShowSpotlights() {
+    return mShowSpotlights;
+  }
+
+  public AdCreativeAppExperienceSpec setFieldShowSpotlights(Object value) {
+    this.mShowSpotlights = value;
+    return this;
+  }
+
+  public Object getFieldWebsiteSummary() {
+    return mWebsiteSummary;
+  }
+
+  public AdCreativeAppExperienceSpec setFieldWebsiteSummary(Object value) {
+    this.mWebsiteSummary = value;
+    return this;
+  }
+
 
 
 
@@ -208,16 +241,19 @@ public class CatalogSubscribedAppsDelete extends APINode {
     return gson;
   }
 
-  public CatalogSubscribedAppsDelete copyFrom(CatalogSubscribedAppsDelete instance) {
+  public AdCreativeAppExperienceSpec copyFrom(AdCreativeAppExperienceSpec instance) {
+    this.mRevealDetails = instance.mRevealDetails;
+    this.mShowSpotlights = instance.mShowSpotlights;
+    this.mWebsiteSummary = instance.mWebsiteSummary;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<CatalogSubscribedAppsDelete> getParser() {
-    return new APIRequest.ResponseParser<CatalogSubscribedAppsDelete>() {
-      public APINodeList<CatalogSubscribedAppsDelete> parseResponse(String response, APIContext context, APIRequest<CatalogSubscribedAppsDelete> request, String header) throws MalformedResponseException {
-        return CatalogSubscribedAppsDelete.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<AdCreativeAppExperienceSpec> getParser() {
+    return new APIRequest.ResponseParser<AdCreativeAppExperienceSpec>() {
+      public APINodeList<AdCreativeAppExperienceSpec> parseResponse(String response, APIContext context, APIRequest<AdCreativeAppExperienceSpec> request, String header) throws MalformedResponseException {
+        return AdCreativeAppExperienceSpec.parseResponse(response, context, request, header);
       }
     };
   }

@@ -40,21 +40,23 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class ProductCatalogUserActions extends APINode {
+public class AdCampaignDeliveryStatsGet extends APINode {
+  @SerializedName("data")
+  private List<Object> mData = null;
   protected static Gson gson = null;
 
-  public ProductCatalogUserActions() {
+  public AdCampaignDeliveryStatsGet() {
   }
 
   public String getId() {
     return null;
   }
-  public static ProductCatalogUserActions loadJSON(String json, APIContext context, String header) {
-    ProductCatalogUserActions productCatalogUserActions = getGson().fromJson(json, ProductCatalogUserActions.class);
+  public static AdCampaignDeliveryStatsGet loadJSON(String json, APIContext context, String header) {
+    AdCampaignDeliveryStatsGet adCampaignDeliveryStatsGet = getGson().fromJson(json, AdCampaignDeliveryStatsGet.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(productCatalogUserActions.toString());
+      JsonElement o2 = parser.parse(adCampaignDeliveryStatsGet.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -64,14 +66,14 @@ public class ProductCatalogUserActions extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    productCatalogUserActions.context = context;
-    productCatalogUserActions.rawValue = json;
-    productCatalogUserActions.header = header;
-    return productCatalogUserActions;
+    adCampaignDeliveryStatsGet.context = context;
+    adCampaignDeliveryStatsGet.rawValue = json;
+    adCampaignDeliveryStatsGet.header = header;
+    return adCampaignDeliveryStatsGet;
   }
 
-  public static APINodeList<ProductCatalogUserActions> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<ProductCatalogUserActions> productCatalogUserActionss = new APINodeList<ProductCatalogUserActions>(request, json, header);
+  public static APINodeList<AdCampaignDeliveryStatsGet> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdCampaignDeliveryStatsGet> adCampaignDeliveryStatsGets = new APINodeList<AdCampaignDeliveryStatsGet>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -82,9 +84,9 @@ public class ProductCatalogUserActions extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          productCatalogUserActionss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          adCampaignDeliveryStatsGets.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return productCatalogUserActionss;
+        return adCampaignDeliveryStatsGets;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -94,20 +96,20 @@ public class ProductCatalogUserActions extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                productCatalogUserActionss.setCursors(before, after);
+                adCampaignDeliveryStatsGets.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            productCatalogUserActionss.setPaging(previous, next);
+            adCampaignDeliveryStatsGets.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              productCatalogUserActionss.setAppSecret(context.getAppSecretProof());
+              adCampaignDeliveryStatsGets.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              productCatalogUserActionss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              adCampaignDeliveryStatsGets.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -118,23 +120,23 @@ public class ProductCatalogUserActions extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  productCatalogUserActionss.add(loadJSON(entry.getValue().toString(), context, header));
+                  adCampaignDeliveryStatsGets.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              productCatalogUserActionss.add(loadJSON(obj.toString(), context, header));
+              adCampaignDeliveryStatsGets.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return productCatalogUserActionss;
+          return adCampaignDeliveryStatsGets;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              productCatalogUserActionss.add(loadJSON(entry.getValue().toString(), context, header));
+              adCampaignDeliveryStatsGets.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return productCatalogUserActionss;
+          return adCampaignDeliveryStatsGets;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -151,20 +153,20 @@ public class ProductCatalogUserActions extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              productCatalogUserActionss.add(loadJSON(value.toString(), context, header));
+              adCampaignDeliveryStatsGets.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return productCatalogUserActionss;
+            return adCampaignDeliveryStatsGets;
           }
 
           // Sixth, check if it's pure JsonObject
-          productCatalogUserActionss.clear();
-          productCatalogUserActionss.add(loadJSON(json, context, header));
-          return productCatalogUserActionss;
+          adCampaignDeliveryStatsGets.clear();
+          adCampaignDeliveryStatsGets.add(loadJSON(json, context, header));
+          return adCampaignDeliveryStatsGets;
         }
       }
     } catch (Exception e) {
@@ -192,6 +194,15 @@ public class ProductCatalogUserActions extends APINode {
   }
 
 
+  public List<Object> getFieldData() {
+    return mData;
+  }
+
+  public AdCampaignDeliveryStatsGet setFieldData(List<Object> value) {
+    this.mData = value;
+    return this;
+  }
+
 
 
 
@@ -208,16 +219,17 @@ public class ProductCatalogUserActions extends APINode {
     return gson;
   }
 
-  public ProductCatalogUserActions copyFrom(ProductCatalogUserActions instance) {
+  public AdCampaignDeliveryStatsGet copyFrom(AdCampaignDeliveryStatsGet instance) {
+    this.mData = instance.mData;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<ProductCatalogUserActions> getParser() {
-    return new APIRequest.ResponseParser<ProductCatalogUserActions>() {
-      public APINodeList<ProductCatalogUserActions> parseResponse(String response, APIContext context, APIRequest<ProductCatalogUserActions> request, String header) throws MalformedResponseException {
-        return ProductCatalogUserActions.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<AdCampaignDeliveryStatsGet> getParser() {
+    return new APIRequest.ResponseParser<AdCampaignDeliveryStatsGet>() {
+      public APINodeList<AdCampaignDeliveryStatsGet> parseResponse(String response, APIContext context, APIRequest<AdCampaignDeliveryStatsGet> request, String header) throws MalformedResponseException {
+        return AdCampaignDeliveryStatsGet.parseResponse(response, context, request, header);
       }
     };
   }

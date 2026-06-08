@@ -91,12 +91,16 @@ public class PagePost extends APINode {
   private Boolean mIsEligibleForPromotion = null;
   @SerializedName("is_expired")
   private Boolean mIsExpired = null;
+  @SerializedName("is_fb_live_videos")
+  private Boolean mIsFbLiveVideos = null;
   @SerializedName("is_hidden")
   private Boolean mIsHidden = null;
   @SerializedName("is_inline_created")
   private Boolean mIsInlineCreated = null;
   @SerializedName("is_instagram_eligible")
   private Boolean mIsInstagramEligible = null;
+  @SerializedName("is_live_clip")
+  private Boolean mIsLiveClip = null;
   @SerializedName("is_popular")
   private Boolean mIsPopular = null;
   @SerializedName("is_published")
@@ -151,6 +155,8 @@ public class PagePost extends APINode {
   private Object mVia = null;
   @SerializedName("video_buying_eligibility")
   private List<String> mVideoBuyingEligibility = null;
+  @SerializedName("was_fb_live_videos")
+  private Boolean mWasFbLiveVideos = null;
   @SerializedName("width")
   private Long mWidth = null;
   protected static Gson gson = null;
@@ -529,6 +535,10 @@ public class PagePost extends APINode {
     return mIsExpired;
   }
 
+  public Boolean getFieldIsFbLiveVideos() {
+    return mIsFbLiveVideos;
+  }
+
   public Boolean getFieldIsHidden() {
     return mIsHidden;
   }
@@ -539,6 +549,10 @@ public class PagePost extends APINode {
 
   public Boolean getFieldIsInstagramEligible() {
     return mIsInstagramEligible;
+  }
+
+  public Boolean getFieldIsLiveClip() {
+    return mIsLiveClip;
   }
 
   public Boolean getFieldIsPopular() {
@@ -653,6 +667,10 @@ public class PagePost extends APINode {
 
   public List<String> getFieldVideoBuyingEligibility() {
     return mVideoBuyingEligibility;
+  }
+
+  public Boolean getFieldWasFbLiveVideos() {
+    return mWasFbLiveVideos;
   }
 
   public Long getFieldWidth() {
@@ -1674,6 +1692,7 @@ public class PagePost extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "attribution_id_v2",
       "nectar_module",
       "tracking",
     };
@@ -1734,6 +1753,11 @@ public class PagePost extends APINode {
       return this;
     }
 
+
+    public APIRequestDeleteLikes setAttributionIdV2 (String attributionIdV2) {
+      this.setParam("attribution_id_v2", attributionIdV2);
+      return this;
+    }
 
     public APIRequestDeleteLikes setNectarModule (String nectarModule) {
       this.setParam("nectar_module", nectarModule);
@@ -1984,6 +2008,7 @@ public class PagePost extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "attribution_id_v2",
       "feedback_source",
       "nectar_module",
       "tracking",
@@ -2045,6 +2070,11 @@ public class PagePost extends APINode {
       return this;
     }
 
+
+    public APIRequestCreateLike setAttributionIdV2 (String attributionIdV2) {
+      this.setParam("attribution_id_v2", attributionIdV2);
+      return this;
+    }
 
     public APIRequestCreateLike setFeedbackSource (String feedbackSource) {
       this.setParam("feedback_source", feedbackSource);
@@ -2340,9 +2370,11 @@ public class PagePost extends APINode {
       "is_eligible_for_dark_post",
       "is_eligible_for_promotion",
       "is_expired",
+      "is_fb_live_videos",
       "is_hidden",
       "is_inline_created",
       "is_instagram_eligible",
+      "is_live_clip",
       "is_popular",
       "is_published",
       "is_spherical",
@@ -2375,6 +2407,7 @@ public class PagePost extends APINode {
       "updated_time",
       "via",
       "video_buying_eligibility",
+      "was_fb_live_videos",
       "width",
     };
 
@@ -2657,6 +2690,13 @@ public class PagePost extends APINode {
       this.requestField("is_expired", value);
       return this;
     }
+    public APIRequestGetSharedPosts requestIsFbLiveVideosField () {
+      return this.requestIsFbLiveVideosField(true);
+    }
+    public APIRequestGetSharedPosts requestIsFbLiveVideosField (boolean value) {
+      this.requestField("is_fb_live_videos", value);
+      return this;
+    }
     public APIRequestGetSharedPosts requestIsHiddenField () {
       return this.requestIsHiddenField(true);
     }
@@ -2676,6 +2716,13 @@ public class PagePost extends APINode {
     }
     public APIRequestGetSharedPosts requestIsInstagramEligibleField (boolean value) {
       this.requestField("is_instagram_eligible", value);
+      return this;
+    }
+    public APIRequestGetSharedPosts requestIsLiveClipField () {
+      return this.requestIsLiveClipField(true);
+    }
+    public APIRequestGetSharedPosts requestIsLiveClipField (boolean value) {
+      this.requestField("is_live_clip", value);
       return this;
     }
     public APIRequestGetSharedPosts requestIsPopularField () {
@@ -2902,6 +2949,13 @@ public class PagePost extends APINode {
       this.requestField("video_buying_eligibility", value);
       return this;
     }
+    public APIRequestGetSharedPosts requestWasFbLiveVideosField () {
+      return this.requestWasFbLiveVideosField(true);
+    }
+    public APIRequestGetSharedPosts requestWasFbLiveVideosField (boolean value) {
+      this.requestField("was_fb_live_videos", value);
+      return this;
+    }
     public APIRequestGetSharedPosts requestWidthField () {
       return this.requestWidthField(true);
     }
@@ -3024,6 +3078,7 @@ public class PagePost extends APINode {
       "offer_eligible",
       "overall_star_rating",
       "owner_business",
+      "page_backed_threads_account_id",
       "page_token",
       "parent_page",
       "parking",
@@ -3881,6 +3936,13 @@ public class PagePost extends APINode {
       this.requestField("owner_business", value);
       return this;
     }
+    public APIRequestGetSponsorTags requestPageBackedThreadsAccountIdField () {
+      return this.requestPageBackedThreadsAccountIdField(true);
+    }
+    public APIRequestGetSponsorTags requestPageBackedThreadsAccountIdField (boolean value) {
+      this.requestField("page_backed_threads_account_id", value);
+      return this;
+    }
     public APIRequestGetSponsorTags requestPageTokenField () {
       return this.requestPageTokenField(true);
     }
@@ -4576,9 +4638,11 @@ public class PagePost extends APINode {
       "is_eligible_for_dark_post",
       "is_eligible_for_promotion",
       "is_expired",
+      "is_fb_live_videos",
       "is_hidden",
       "is_inline_created",
       "is_instagram_eligible",
+      "is_live_clip",
       "is_popular",
       "is_published",
       "is_spherical",
@@ -4606,6 +4670,7 @@ public class PagePost extends APINode {
       "updated_time",
       "via",
       "video_buying_eligibility",
+      "was_fb_live_videos",
       "width",
     };
 
@@ -4884,6 +4949,13 @@ public class PagePost extends APINode {
       this.requestField("is_expired", value);
       return this;
     }
+    public APIRequestGet requestIsFbLiveVideosField () {
+      return this.requestIsFbLiveVideosField(true);
+    }
+    public APIRequestGet requestIsFbLiveVideosField (boolean value) {
+      this.requestField("is_fb_live_videos", value);
+      return this;
+    }
     public APIRequestGet requestIsHiddenField () {
       return this.requestIsHiddenField(true);
     }
@@ -4903,6 +4975,13 @@ public class PagePost extends APINode {
     }
     public APIRequestGet requestIsInstagramEligibleField (boolean value) {
       this.requestField("is_instagram_eligible", value);
+      return this;
+    }
+    public APIRequestGet requestIsLiveClipField () {
+      return this.requestIsLiveClipField(true);
+    }
+    public APIRequestGet requestIsLiveClipField (boolean value) {
+      this.requestField("is_live_clip", value);
       return this;
     }
     public APIRequestGet requestIsPopularField () {
@@ -5092,6 +5171,13 @@ public class PagePost extends APINode {
     }
     public APIRequestGet requestVideoBuyingEligibilityField (boolean value) {
       this.requestField("video_buying_eligibility", value);
+      return this;
+    }
+    public APIRequestGet requestWasFbLiveVideosField () {
+      return this.requestWasFbLiveVideosField(true);
+    }
+    public APIRequestGet requestWasFbLiveVideosField (boolean value) {
+      this.requestField("was_fb_live_videos", value);
       return this;
     }
     public APIRequestGet requestWidthField () {
@@ -5590,9 +5676,11 @@ public class PagePost extends APINode {
     this.mIsEligibleForDarkPost = instance.mIsEligibleForDarkPost;
     this.mIsEligibleForPromotion = instance.mIsEligibleForPromotion;
     this.mIsExpired = instance.mIsExpired;
+    this.mIsFbLiveVideos = instance.mIsFbLiveVideos;
     this.mIsHidden = instance.mIsHidden;
     this.mIsInlineCreated = instance.mIsInlineCreated;
     this.mIsInstagramEligible = instance.mIsInstagramEligible;
+    this.mIsLiveClip = instance.mIsLiveClip;
     this.mIsPopular = instance.mIsPopular;
     this.mIsPublished = instance.mIsPublished;
     this.mIsSpherical = instance.mIsSpherical;
@@ -5620,6 +5708,7 @@ public class PagePost extends APINode {
     this.mUpdatedTime = instance.mUpdatedTime;
     this.mVia = instance.mVia;
     this.mVideoBuyingEligibility = instance.mVideoBuyingEligibility;
+    this.mWasFbLiveVideos = instance.mWasFbLiveVideos;
     this.mWidth = instance.mWidth;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

@@ -383,6 +383,7 @@ public class SystemUser extends APINode {
       "offsite_clo_signal_status",
       "offsite_pixels_tos_accepted",
       "opportunity_score",
+      "opportunity_score_weight",
       "owner",
       "owner_business",
       "partner",
@@ -886,6 +887,13 @@ public class SystemUser extends APINode {
       this.requestField("opportunity_score", value);
       return this;
     }
+    public APIRequestGetAssignedAdAccounts requestOpportunityScoreWeightField () {
+      return this.requestOpportunityScoreWeightField(true);
+    }
+    public APIRequestGetAssignedAdAccounts requestOpportunityScoreWeightField (boolean value) {
+      this.requestField("opportunity_score_weight", value);
+      return this;
+    }
     public APIRequestGetAssignedAdAccounts requestOwnerField () {
       return this.requestOwnerField(true);
     }
@@ -1270,6 +1278,7 @@ public class SystemUser extends APINode {
       "offer_eligible",
       "overall_star_rating",
       "owner_business",
+      "page_backed_threads_account_id",
       "page_token",
       "parent_page",
       "parking",
@@ -2136,6 +2145,13 @@ public class SystemUser extends APINode {
       this.requestField("owner_business", value);
       return this;
     }
+    public APIRequestGetAssignedPages requestPageBackedThreadsAccountIdField () {
+      return this.requestPageBackedThreadsAccountIdField(true);
+    }
+    public APIRequestGetAssignedPages requestPageBackedThreadsAccountIdField (boolean value) {
+      this.requestField("page_backed_threads_account_id", value);
+      return this;
+    }
     public APIRequestGetAssignedPages requestPageTokenField () {
       return this.requestPageTokenField(true);
     }
@@ -2522,6 +2538,7 @@ public class SystemUser extends APINode {
       "name",
       "owner_business",
       "product_count",
+      "show_assign_permissions",
       "store_catalog_settings",
       "user_access_expire_time",
       "vertical",
@@ -2729,6 +2746,13 @@ public class SystemUser extends APINode {
       this.requestField("product_count", value);
       return this;
     }
+    public APIRequestGetAssignedProductCatalogs requestShowAssignPermissionsField () {
+      return this.requestShowAssignPermissionsField(true);
+    }
+    public APIRequestGetAssignedProductCatalogs requestShowAssignPermissionsField (boolean value) {
+      this.requestField("show_assign_permissions", value);
+      return this;
+    }
     public APIRequestGetAssignedProductCatalogs requestStoreCatalogSettingsField () {
       return this.requestStoreCatalogSettingsField(true);
     }
@@ -2776,6 +2800,7 @@ public class SystemUser extends APINode {
       "is_enabled_for_insights",
       "is_shared_with_partners",
       "linked_commerce_account",
+      "marketing_messages_ad_account",
       "marketing_messages_lite_api_status",
       "marketing_messages_onboarding_status",
       "message_template_namespace",
@@ -2972,6 +2997,13 @@ public class SystemUser extends APINode {
     }
     public APIRequestGetAssignedWhatsAppBusinessAccounts requestLinkedCommerceAccountField (boolean value) {
       this.requestField("linked_commerce_account", value);
+      return this;
+    }
+    public APIRequestGetAssignedWhatsAppBusinessAccounts requestMarketingMessagesAdAccountField () {
+      return this.requestMarketingMessagesAdAccountField(true);
+    }
+    public APIRequestGetAssignedWhatsAppBusinessAccounts requestMarketingMessagesAdAccountField (boolean value) {
+      this.requestField("marketing_messages_ad_account", value);
       return this;
     }
     public APIRequestGetAssignedWhatsAppBusinessAccounts requestMarketingMessagesLiteApiStatusField () {

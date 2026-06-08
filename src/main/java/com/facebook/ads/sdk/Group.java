@@ -1512,9 +1512,11 @@ public class Group extends APINode {
       "is_eligible_for_dark_post",
       "is_eligible_for_promotion",
       "is_expired",
+      "is_fb_live_videos",
       "is_hidden",
       "is_inline_created",
       "is_instagram_eligible",
+      "is_live_clip",
       "is_popular",
       "is_published",
       "is_spherical",
@@ -1547,6 +1549,7 @@ public class Group extends APINode {
       "updated_time",
       "via",
       "video_buying_eligibility",
+      "was_fb_live_videos",
       "width",
     };
 
@@ -1867,6 +1870,13 @@ public class Group extends APINode {
       this.requestField("is_expired", value);
       return this;
     }
+    public APIRequestGetFeed requestIsFbLiveVideosField () {
+      return this.requestIsFbLiveVideosField(true);
+    }
+    public APIRequestGetFeed requestIsFbLiveVideosField (boolean value) {
+      this.requestField("is_fb_live_videos", value);
+      return this;
+    }
     public APIRequestGetFeed requestIsHiddenField () {
       return this.requestIsHiddenField(true);
     }
@@ -1886,6 +1896,13 @@ public class Group extends APINode {
     }
     public APIRequestGetFeed requestIsInstagramEligibleField (boolean value) {
       this.requestField("is_instagram_eligible", value);
+      return this;
+    }
+    public APIRequestGetFeed requestIsLiveClipField () {
+      return this.requestIsLiveClipField(true);
+    }
+    public APIRequestGetFeed requestIsLiveClipField (boolean value) {
+      this.requestField("is_live_clip", value);
       return this;
     }
     public APIRequestGetFeed requestIsPopularField () {
@@ -2110,6 +2127,13 @@ public class Group extends APINode {
     }
     public APIRequestGetFeed requestVideoBuyingEligibilityField (boolean value) {
       this.requestField("video_buying_eligibility", value);
+      return this;
+    }
+    public APIRequestGetFeed requestWasFbLiveVideosField () {
+      return this.requestWasFbLiveVideosField(true);
+    }
+    public APIRequestGetFeed requestWasFbLiveVideosField (boolean value) {
+      this.requestField("was_fb_live_videos", value);
       return this;
     }
     public APIRequestGetFeed requestWidthField () {
@@ -5815,7 +5839,9 @@ public class Group extends APINode {
       "premiere_living_room_status",
       "privacy",
       "published",
+      "replace_audio_status",
       "scheduled_publish_time",
+      "selected_audio_spec",
       "source",
       "spherical",
       "status",
@@ -6197,11 +6223,25 @@ public class Group extends APINode {
       this.requestField("published", value);
       return this;
     }
+    public APIRequestGetVideos requestReplaceAudioStatusField () {
+      return this.requestReplaceAudioStatusField(true);
+    }
+    public APIRequestGetVideos requestReplaceAudioStatusField (boolean value) {
+      this.requestField("replace_audio_status", value);
+      return this;
+    }
     public APIRequestGetVideos requestScheduledPublishTimeField () {
       return this.requestScheduledPublishTimeField(true);
     }
     public APIRequestGetVideos requestScheduledPublishTimeField (boolean value) {
       this.requestField("scheduled_publish_time", value);
+      return this;
+    }
+    public APIRequestGetVideos requestSelectedAudioSpecField () {
+      return this.requestSelectedAudioSpecField(true);
+    }
+    public APIRequestGetVideos requestSelectedAudioSpecField (boolean value) {
+      this.requestField("selected_audio_spec", value);
       return this;
     }
     public APIRequestGetVideos requestSourceField () {
@@ -6314,6 +6354,7 @@ public class Group extends APINode {
       "referenced_sticker_id",
       "replace_video_id",
       "scheduled_publish_time",
+      "selected_audio_spec",
       "slideshow_spec",
       "source",
       "source_instagram_media_id",
@@ -6756,6 +6797,15 @@ public class Group extends APINode {
     }
     public APIRequestCreateVideo setScheduledPublishTime (String scheduledPublishTime) {
       this.setParam("scheduled_publish_time", scheduledPublishTime);
+      return this;
+    }
+
+    public APIRequestCreateVideo setSelectedAudioSpec (Map<String, String> selectedAudioSpec) {
+      this.setParam("selected_audio_spec", selectedAudioSpec);
+      return this;
+    }
+    public APIRequestCreateVideo setSelectedAudioSpec (String selectedAudioSpec) {
+      this.setParam("selected_audio_spec", selectedAudioSpec);
       return this;
     }
 
@@ -7503,6 +7553,8 @@ public class Group extends APINode {
       VALUE_PARENTING("PARENTING"),
       @SerializedName("STREAMER")
       VALUE_STREAMER("STREAMER"),
+      @SerializedName("WORK_AGENT_TO_AGENT")
+      VALUE_WORK_AGENT_TO_AGENT("WORK_AGENT_TO_AGENT"),
       @SerializedName("WORK_ANNOUNCEMENT")
       VALUE_WORK_ANNOUNCEMENT("WORK_ANNOUNCEMENT"),
       @SerializedName("WORK_DEMO_GROUP")
@@ -7574,6 +7626,8 @@ public class Group extends APINode {
       VALUE_PARENTING("PARENTING"),
       @SerializedName("STREAMER")
       VALUE_STREAMER("STREAMER"),
+      @SerializedName("WORK_AGENT_TO_AGENT")
+      VALUE_WORK_AGENT_TO_AGENT("WORK_AGENT_TO_AGENT"),
       @SerializedName("WORK_ANNOUNCEMENT")
       VALUE_WORK_ANNOUNCEMENT("WORK_ANNOUNCEMENT"),
       @SerializedName("WORK_DEMO_GROUP")

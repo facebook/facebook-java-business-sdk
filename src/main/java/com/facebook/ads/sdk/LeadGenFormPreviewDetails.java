@@ -45,8 +45,6 @@ public class LeadGenFormPreviewDetails extends APINode {
   private String mBookOnWebsiteText = null;
   @SerializedName("call_business_text")
   private String mCallBusinessText = null;
-  @SerializedName("call_to_action_title")
-  private String mCallToActionTitle = null;
   @SerializedName("chat_on_messenger_text")
   private String mChatOnMessengerText = null;
   @SerializedName("chat_on_whatsapp_text")
@@ -305,15 +303,6 @@ public class LeadGenFormPreviewDetails extends APINode {
 
   public LeadGenFormPreviewDetails setFieldCallBusinessText(String value) {
     this.mCallBusinessText = value;
-    return this;
-  }
-
-  public String getFieldCallToActionTitle() {
-    return mCallToActionTitle;
-  }
-
-  public LeadGenFormPreviewDetails setFieldCallToActionTitle(String value) {
-    this.mCallToActionTitle = value;
     return this;
   }
 
@@ -750,7 +739,6 @@ public class LeadGenFormPreviewDetails extends APINode {
   public LeadGenFormPreviewDetails copyFrom(LeadGenFormPreviewDetails instance) {
     this.mBookOnWebsiteText = instance.mBookOnWebsiteText;
     this.mCallBusinessText = instance.mCallBusinessText;
-    this.mCallToActionTitle = instance.mCallToActionTitle;
     this.mChatOnMessengerText = instance.mChatOnMessengerText;
     this.mChatOnWhatsappText = instance.mChatOnWhatsappText;
     this.mContactInformationText = instance.mContactInformationText;

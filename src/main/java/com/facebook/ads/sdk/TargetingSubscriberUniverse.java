@@ -41,12 +41,12 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class TargetingSubscriberUniverse extends APINode {
+  @SerializedName("messaging_customer_base_for_whatsapp")
+  private IDName mMessagingCustomerBaseForWhatsapp = null;
   @SerializedName("messenger_subscriber_pool")
   private IDName mMessengerSubscriberPool = null;
   @SerializedName("messenger_subscriber_source")
   private IDName mMessengerSubscriberSource = null;
-  @SerializedName("whatsapp_subscriber_pool")
-  private IDName mWhatsappSubscriberPool = null;
   @SerializedName("whatsapp_subscriber_source")
   private IDName mWhatsappSubscriberSource = null;
   protected static Gson gson = null;
@@ -200,6 +200,20 @@ public class TargetingSubscriberUniverse extends APINode {
   }
 
 
+  public IDName getFieldMessagingCustomerBaseForWhatsapp() {
+    return mMessagingCustomerBaseForWhatsapp;
+  }
+
+  public TargetingSubscriberUniverse setFieldMessagingCustomerBaseForWhatsapp(IDName value) {
+    this.mMessagingCustomerBaseForWhatsapp = value;
+    return this;
+  }
+
+  public TargetingSubscriberUniverse setFieldMessagingCustomerBaseForWhatsapp(String value) {
+    Type type = new TypeToken<IDName>(){}.getType();
+    this.mMessagingCustomerBaseForWhatsapp = IDName.getGson().fromJson(value, type);
+    return this;
+  }
   public IDName getFieldMessengerSubscriberPool() {
     return mMessengerSubscriberPool;
   }
@@ -226,20 +240,6 @@ public class TargetingSubscriberUniverse extends APINode {
   public TargetingSubscriberUniverse setFieldMessengerSubscriberSource(String value) {
     Type type = new TypeToken<IDName>(){}.getType();
     this.mMessengerSubscriberSource = IDName.getGson().fromJson(value, type);
-    return this;
-  }
-  public IDName getFieldWhatsappSubscriberPool() {
-    return mWhatsappSubscriberPool;
-  }
-
-  public TargetingSubscriberUniverse setFieldWhatsappSubscriberPool(IDName value) {
-    this.mWhatsappSubscriberPool = value;
-    return this;
-  }
-
-  public TargetingSubscriberUniverse setFieldWhatsappSubscriberPool(String value) {
-    Type type = new TypeToken<IDName>(){}.getType();
-    this.mWhatsappSubscriberPool = IDName.getGson().fromJson(value, type);
     return this;
   }
   public IDName getFieldWhatsappSubscriberSource() {
@@ -273,9 +273,9 @@ public class TargetingSubscriberUniverse extends APINode {
   }
 
   public TargetingSubscriberUniverse copyFrom(TargetingSubscriberUniverse instance) {
+    this.mMessagingCustomerBaseForWhatsapp = instance.mMessagingCustomerBaseForWhatsapp;
     this.mMessengerSubscriberPool = instance.mMessengerSubscriberPool;
     this.mMessengerSubscriberSource = instance.mMessengerSubscriberSource;
-    this.mWhatsappSubscriberPool = instance.mWhatsappSubscriberPool;
     this.mWhatsappSubscriberSource = instance.mWhatsappSubscriberSource;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

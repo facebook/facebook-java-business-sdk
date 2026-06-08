@@ -97,6 +97,8 @@ public class AdAssetFeedSpec extends APINode {
   private List<Object> mUpcomingEvents = null;
   @SerializedName("videos")
   private List<AdAssetFeedSpecVideo> mVideos = null;
+  @SerializedName("web_destination_spec")
+  private Object mWebDestinationSpec = null;
   protected static Gson gson = null;
 
   public AdAssetFeedSpec() {
@@ -575,6 +577,15 @@ public class AdAssetFeedSpec extends APINode {
     this.mVideos = AdAssetFeedSpecVideo.getGson().fromJson(value, type);
     return this;
   }
+  public Object getFieldWebDestinationSpec() {
+    return mWebDestinationSpec;
+  }
+
+  public AdAssetFeedSpec setFieldWebDestinationSpec(Object value) {
+    this.mWebDestinationSpec = value;
+    return this;
+  }
+
 
 
   public static enum EnumCallToActionTypes {
@@ -672,6 +683,8 @@ public class AdAssetFeedSpec extends APINode {
       VALUE_INSTALL_MOBILE_APP("INSTALL_MOBILE_APP"),
       @SerializedName("JOIN_CHANNEL")
       VALUE_JOIN_CHANNEL("JOIN_CHANNEL"),
+      @SerializedName("JOIN_LIVE_VIDEO")
+      VALUE_JOIN_LIVE_VIDEO("JOIN_LIVE_VIDEO"),
       @SerializedName("LEARN_MORE")
       VALUE_LEARN_MORE("LEARN_MORE"),
       @SerializedName("LIKE_PAGE")
@@ -837,6 +850,7 @@ public class AdAssetFeedSpec extends APINode {
     this.mTranslations = instance.mTranslations;
     this.mUpcomingEvents = instance.mUpcomingEvents;
     this.mVideos = instance.mVideos;
+    this.mWebDestinationSpec = instance.mWebDestinationSpec;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

@@ -40,25 +40,27 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class ProductCatalogGet extends APINode {
+public class AdsPixelCustomAttributionSource extends APINode {
   @SerializedName("id")
   private String mId = null;
+  @SerializedName("is_eligible")
+  private Boolean mIsEligible = null;
   @SerializedName("name")
   private String mName = null;
   protected static Gson gson = null;
 
-  public ProductCatalogGet() {
+  public AdsPixelCustomAttributionSource() {
   }
 
   public String getId() {
     return getFieldId().toString();
   }
-  public static ProductCatalogGet loadJSON(String json, APIContext context, String header) {
-    ProductCatalogGet productCatalogGet = getGson().fromJson(json, ProductCatalogGet.class);
+  public static AdsPixelCustomAttributionSource loadJSON(String json, APIContext context, String header) {
+    AdsPixelCustomAttributionSource adsPixelCustomAttributionSource = getGson().fromJson(json, AdsPixelCustomAttributionSource.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(productCatalogGet.toString());
+      JsonElement o2 = parser.parse(adsPixelCustomAttributionSource.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -68,14 +70,14 @@ public class ProductCatalogGet extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    productCatalogGet.context = context;
-    productCatalogGet.rawValue = json;
-    productCatalogGet.header = header;
-    return productCatalogGet;
+    adsPixelCustomAttributionSource.context = context;
+    adsPixelCustomAttributionSource.rawValue = json;
+    adsPixelCustomAttributionSource.header = header;
+    return adsPixelCustomAttributionSource;
   }
 
-  public static APINodeList<ProductCatalogGet> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<ProductCatalogGet> productCatalogGets = new APINodeList<ProductCatalogGet>(request, json, header);
+  public static APINodeList<AdsPixelCustomAttributionSource> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdsPixelCustomAttributionSource> adsPixelCustomAttributionSources = new APINodeList<AdsPixelCustomAttributionSource>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -86,9 +88,9 @@ public class ProductCatalogGet extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          productCatalogGets.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          adsPixelCustomAttributionSources.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return productCatalogGets;
+        return adsPixelCustomAttributionSources;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -98,20 +100,20 @@ public class ProductCatalogGet extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                productCatalogGets.setCursors(before, after);
+                adsPixelCustomAttributionSources.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            productCatalogGets.setPaging(previous, next);
+            adsPixelCustomAttributionSources.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              productCatalogGets.setAppSecret(context.getAppSecretProof());
+              adsPixelCustomAttributionSources.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              productCatalogGets.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              adsPixelCustomAttributionSources.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -122,23 +124,23 @@ public class ProductCatalogGet extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  productCatalogGets.add(loadJSON(entry.getValue().toString(), context, header));
+                  adsPixelCustomAttributionSources.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              productCatalogGets.add(loadJSON(obj.toString(), context, header));
+              adsPixelCustomAttributionSources.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return productCatalogGets;
+          return adsPixelCustomAttributionSources;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              productCatalogGets.add(loadJSON(entry.getValue().toString(), context, header));
+              adsPixelCustomAttributionSources.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return productCatalogGets;
+          return adsPixelCustomAttributionSources;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -155,20 +157,20 @@ public class ProductCatalogGet extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              productCatalogGets.add(loadJSON(value.toString(), context, header));
+              adsPixelCustomAttributionSources.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return productCatalogGets;
+            return adsPixelCustomAttributionSources;
           }
 
           // Sixth, check if it's pure JsonObject
-          productCatalogGets.clear();
-          productCatalogGets.add(loadJSON(json, context, header));
-          return productCatalogGets;
+          adsPixelCustomAttributionSources.clear();
+          adsPixelCustomAttributionSources.add(loadJSON(json, context, header));
+          return adsPixelCustomAttributionSources;
         }
       }
     } catch (Exception e) {
@@ -200,8 +202,17 @@ public class ProductCatalogGet extends APINode {
     return mId;
   }
 
-  public ProductCatalogGet setFieldId(String value) {
+  public AdsPixelCustomAttributionSource setFieldId(String value) {
     this.mId = value;
+    return this;
+  }
+
+  public Boolean getFieldIsEligible() {
+    return mIsEligible;
+  }
+
+  public AdsPixelCustomAttributionSource setFieldIsEligible(Boolean value) {
+    this.mIsEligible = value;
     return this;
   }
 
@@ -209,7 +220,7 @@ public class ProductCatalogGet extends APINode {
     return mName;
   }
 
-  public ProductCatalogGet setFieldName(String value) {
+  public AdsPixelCustomAttributionSource setFieldName(String value) {
     this.mName = value;
     return this;
   }
@@ -230,18 +241,19 @@ public class ProductCatalogGet extends APINode {
     return gson;
   }
 
-  public ProductCatalogGet copyFrom(ProductCatalogGet instance) {
+  public AdsPixelCustomAttributionSource copyFrom(AdsPixelCustomAttributionSource instance) {
     this.mId = instance.mId;
+    this.mIsEligible = instance.mIsEligible;
     this.mName = instance.mName;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<ProductCatalogGet> getParser() {
-    return new APIRequest.ResponseParser<ProductCatalogGet>() {
-      public APINodeList<ProductCatalogGet> parseResponse(String response, APIContext context, APIRequest<ProductCatalogGet> request, String header) throws MalformedResponseException {
-        return ProductCatalogGet.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<AdsPixelCustomAttributionSource> getParser() {
+    return new APIRequest.ResponseParser<AdsPixelCustomAttributionSource>() {
+      public APINodeList<AdsPixelCustomAttributionSource> parseResponse(String response, APIContext context, APIRequest<AdsPixelCustomAttributionSource> request, String header) throws MalformedResponseException {
+        return AdsPixelCustomAttributionSource.parseResponse(response, context, request, header);
       }
     };
   }

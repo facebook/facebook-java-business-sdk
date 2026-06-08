@@ -69,6 +69,8 @@ public class IGMedia extends APINode {
   private String mLegacyInstagramMediaId = null;
   @SerializedName("like_count")
   private Long mLikeCount = null;
+  @SerializedName("media_audio_type")
+  private String mMediaAudioType = null;
   @SerializedName("media_product_type")
   private String mMediaProductType = null;
   @SerializedName("media_type")
@@ -79,12 +81,24 @@ public class IGMedia extends APINode {
   private IGUser mOwner = null;
   @SerializedName("permalink")
   private String mPermalink = null;
+  @SerializedName("reposts_count")
+  private Long mRepostsCount = null;
+  @SerializedName("saved_count")
+  private Long mSavedCount = null;
+  @SerializedName("shares_count")
+  private Long mSharesCount = null;
   @SerializedName("shortcode")
   private String mShortcode = null;
   @SerializedName("thumbnail_url")
   private String mThumbnailUrl = null;
   @SerializedName("timestamp")
   private String mTimestamp = null;
+  @SerializedName("total_comments_count")
+  private Long mTotalCommentsCount = null;
+  @SerializedName("total_like_count")
+  private Long mTotalLikeCount = null;
+  @SerializedName("total_views_count")
+  private Long mTotalViewsCount = null;
   @SerializedName("username")
   private String mUsername = null;
   @SerializedName("video_title")
@@ -420,6 +434,10 @@ public class IGMedia extends APINode {
     return mLikeCount;
   }
 
+  public String getFieldMediaAudioType() {
+    return mMediaAudioType;
+  }
+
   public String getFieldMediaProductType() {
     return mMediaProductType;
   }
@@ -443,6 +461,18 @@ public class IGMedia extends APINode {
     return mPermalink;
   }
 
+  public Long getFieldRepostsCount() {
+    return mRepostsCount;
+  }
+
+  public Long getFieldSavedCount() {
+    return mSavedCount;
+  }
+
+  public Long getFieldSharesCount() {
+    return mSharesCount;
+  }
+
   public String getFieldShortcode() {
     return mShortcode;
   }
@@ -453,6 +483,18 @@ public class IGMedia extends APINode {
 
   public String getFieldTimestamp() {
     return mTimestamp;
+  }
+
+  public Long getFieldTotalCommentsCount() {
+    return mTotalCommentsCount;
+  }
+
+  public Long getFieldTotalLikeCount() {
+    return mTotalLikeCount;
+  }
+
+  public Long getFieldTotalViewsCount() {
+    return mTotalViewsCount;
   }
 
   public String getFieldUsername() {
@@ -861,14 +903,21 @@ public class IGMedia extends APINode {
       "is_shared_to_feed",
       "legacy_instagram_media_id",
       "like_count",
+      "media_audio_type",
       "media_product_type",
       "media_type",
       "media_url",
       "owner",
       "permalink",
+      "reposts_count",
+      "saved_count",
+      "shares_count",
       "shortcode",
       "thumbnail_url",
       "timestamp",
+      "total_comments_count",
+      "total_like_count",
+      "total_views_count",
       "username",
       "video_title",
       "view_count",
@@ -1062,6 +1111,13 @@ public class IGMedia extends APINode {
       this.requestField("like_count", value);
       return this;
     }
+    public APIRequestGetChildren requestMediaAudioTypeField () {
+      return this.requestMediaAudioTypeField(true);
+    }
+    public APIRequestGetChildren requestMediaAudioTypeField (boolean value) {
+      this.requestField("media_audio_type", value);
+      return this;
+    }
     public APIRequestGetChildren requestMediaProductTypeField () {
       return this.requestMediaProductTypeField(true);
     }
@@ -1097,6 +1153,27 @@ public class IGMedia extends APINode {
       this.requestField("permalink", value);
       return this;
     }
+    public APIRequestGetChildren requestRepostsCountField () {
+      return this.requestRepostsCountField(true);
+    }
+    public APIRequestGetChildren requestRepostsCountField (boolean value) {
+      this.requestField("reposts_count", value);
+      return this;
+    }
+    public APIRequestGetChildren requestSavedCountField () {
+      return this.requestSavedCountField(true);
+    }
+    public APIRequestGetChildren requestSavedCountField (boolean value) {
+      this.requestField("saved_count", value);
+      return this;
+    }
+    public APIRequestGetChildren requestSharesCountField () {
+      return this.requestSharesCountField(true);
+    }
+    public APIRequestGetChildren requestSharesCountField (boolean value) {
+      this.requestField("shares_count", value);
+      return this;
+    }
     public APIRequestGetChildren requestShortcodeField () {
       return this.requestShortcodeField(true);
     }
@@ -1116,6 +1193,27 @@ public class IGMedia extends APINode {
     }
     public APIRequestGetChildren requestTimestampField (boolean value) {
       this.requestField("timestamp", value);
+      return this;
+    }
+    public APIRequestGetChildren requestTotalCommentsCountField () {
+      return this.requestTotalCommentsCountField(true);
+    }
+    public APIRequestGetChildren requestTotalCommentsCountField (boolean value) {
+      this.requestField("total_comments_count", value);
+      return this;
+    }
+    public APIRequestGetChildren requestTotalLikeCountField () {
+      return this.requestTotalLikeCountField(true);
+    }
+    public APIRequestGetChildren requestTotalLikeCountField (boolean value) {
+      this.requestField("total_like_count", value);
+      return this;
+    }
+    public APIRequestGetChildren requestTotalViewsCountField () {
+      return this.requestTotalViewsCountField(true);
+    }
+    public APIRequestGetChildren requestTotalViewsCountField (boolean value) {
+      this.requestField("total_views_count", value);
       return this;
     }
     public APIRequestGetChildren requestUsernameField () {
@@ -2436,14 +2534,21 @@ public class IGMedia extends APINode {
       "is_shared_to_feed",
       "legacy_instagram_media_id",
       "like_count",
+      "media_audio_type",
       "media_product_type",
       "media_type",
       "media_url",
       "owner",
       "permalink",
+      "reposts_count",
+      "saved_count",
+      "shares_count",
       "shortcode",
       "thumbnail_url",
       "timestamp",
+      "total_comments_count",
+      "total_like_count",
+      "total_views_count",
       "username",
       "video_title",
       "view_count",
@@ -2680,6 +2785,13 @@ public class IGMedia extends APINode {
       this.requestField("like_count", value);
       return this;
     }
+    public APIRequestGet requestMediaAudioTypeField () {
+      return this.requestMediaAudioTypeField(true);
+    }
+    public APIRequestGet requestMediaAudioTypeField (boolean value) {
+      this.requestField("media_audio_type", value);
+      return this;
+    }
     public APIRequestGet requestMediaProductTypeField () {
       return this.requestMediaProductTypeField(true);
     }
@@ -2715,6 +2827,27 @@ public class IGMedia extends APINode {
       this.requestField("permalink", value);
       return this;
     }
+    public APIRequestGet requestRepostsCountField () {
+      return this.requestRepostsCountField(true);
+    }
+    public APIRequestGet requestRepostsCountField (boolean value) {
+      this.requestField("reposts_count", value);
+      return this;
+    }
+    public APIRequestGet requestSavedCountField () {
+      return this.requestSavedCountField(true);
+    }
+    public APIRequestGet requestSavedCountField (boolean value) {
+      this.requestField("saved_count", value);
+      return this;
+    }
+    public APIRequestGet requestSharesCountField () {
+      return this.requestSharesCountField(true);
+    }
+    public APIRequestGet requestSharesCountField (boolean value) {
+      this.requestField("shares_count", value);
+      return this;
+    }
     public APIRequestGet requestShortcodeField () {
       return this.requestShortcodeField(true);
     }
@@ -2734,6 +2867,27 @@ public class IGMedia extends APINode {
     }
     public APIRequestGet requestTimestampField (boolean value) {
       this.requestField("timestamp", value);
+      return this;
+    }
+    public APIRequestGet requestTotalCommentsCountField () {
+      return this.requestTotalCommentsCountField(true);
+    }
+    public APIRequestGet requestTotalCommentsCountField (boolean value) {
+      this.requestField("total_comments_count", value);
+      return this;
+    }
+    public APIRequestGet requestTotalLikeCountField () {
+      return this.requestTotalLikeCountField(true);
+    }
+    public APIRequestGet requestTotalLikeCountField (boolean value) {
+      this.requestField("total_like_count", value);
+      return this;
+    }
+    public APIRequestGet requestTotalViewsCountField () {
+      return this.requestTotalViewsCountField(true);
+    }
+    public APIRequestGet requestTotalViewsCountField (boolean value) {
+      this.requestField("total_views_count", value);
       return this;
     }
     public APIRequestGet requestUsernameField () {
@@ -2922,14 +3076,21 @@ public class IGMedia extends APINode {
     this.mIsSharedToFeed = instance.mIsSharedToFeed;
     this.mLegacyInstagramMediaId = instance.mLegacyInstagramMediaId;
     this.mLikeCount = instance.mLikeCount;
+    this.mMediaAudioType = instance.mMediaAudioType;
     this.mMediaProductType = instance.mMediaProductType;
     this.mMediaType = instance.mMediaType;
     this.mMediaUrl = instance.mMediaUrl;
     this.mOwner = instance.mOwner;
     this.mPermalink = instance.mPermalink;
+    this.mRepostsCount = instance.mRepostsCount;
+    this.mSavedCount = instance.mSavedCount;
+    this.mSharesCount = instance.mSharesCount;
     this.mShortcode = instance.mShortcode;
     this.mThumbnailUrl = instance.mThumbnailUrl;
     this.mTimestamp = instance.mTimestamp;
+    this.mTotalCommentsCount = instance.mTotalCommentsCount;
+    this.mTotalLikeCount = instance.mTotalLikeCount;
+    this.mTotalViewsCount = instance.mTotalViewsCount;
     this.mUsername = instance.mUsername;
     this.mVideoTitle = instance.mVideoTitle;
     this.mViewCount = instance.mViewCount;

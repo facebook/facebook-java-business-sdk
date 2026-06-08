@@ -40,23 +40,23 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class ProductFeedArticlesAndPublications extends APINode {
+public class ProductCatalogCheckBatchRequestStatus extends APINode {
   @SerializedName("id")
   private String mId = null;
   protected static Gson gson = null;
 
-  public ProductFeedArticlesAndPublications() {
+  public ProductCatalogCheckBatchRequestStatus() {
   }
 
   public String getId() {
     return getFieldId().toString();
   }
-  public static ProductFeedArticlesAndPublications loadJSON(String json, APIContext context, String header) {
-    ProductFeedArticlesAndPublications productFeedArticlesAndPublications = getGson().fromJson(json, ProductFeedArticlesAndPublications.class);
+  public static ProductCatalogCheckBatchRequestStatus loadJSON(String json, APIContext context, String header) {
+    ProductCatalogCheckBatchRequestStatus productCatalogCheckBatchRequestStatus = getGson().fromJson(json, ProductCatalogCheckBatchRequestStatus.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(productFeedArticlesAndPublications.toString());
+      JsonElement o2 = parser.parse(productCatalogCheckBatchRequestStatus.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -66,14 +66,14 @@ public class ProductFeedArticlesAndPublications extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    productFeedArticlesAndPublications.context = context;
-    productFeedArticlesAndPublications.rawValue = json;
-    productFeedArticlesAndPublications.header = header;
-    return productFeedArticlesAndPublications;
+    productCatalogCheckBatchRequestStatus.context = context;
+    productCatalogCheckBatchRequestStatus.rawValue = json;
+    productCatalogCheckBatchRequestStatus.header = header;
+    return productCatalogCheckBatchRequestStatus;
   }
 
-  public static APINodeList<ProductFeedArticlesAndPublications> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<ProductFeedArticlesAndPublications> productFeedArticlesAndPublicationss = new APINodeList<ProductFeedArticlesAndPublications>(request, json, header);
+  public static APINodeList<ProductCatalogCheckBatchRequestStatus> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<ProductCatalogCheckBatchRequestStatus> productCatalogCheckBatchRequestStatuss = new APINodeList<ProductCatalogCheckBatchRequestStatus>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -84,9 +84,9 @@ public class ProductFeedArticlesAndPublications extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          productFeedArticlesAndPublicationss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          productCatalogCheckBatchRequestStatuss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return productFeedArticlesAndPublicationss;
+        return productCatalogCheckBatchRequestStatuss;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -96,20 +96,20 @@ public class ProductFeedArticlesAndPublications extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                productFeedArticlesAndPublicationss.setCursors(before, after);
+                productCatalogCheckBatchRequestStatuss.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            productFeedArticlesAndPublicationss.setPaging(previous, next);
+            productCatalogCheckBatchRequestStatuss.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              productFeedArticlesAndPublicationss.setAppSecret(context.getAppSecretProof());
+              productCatalogCheckBatchRequestStatuss.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              productFeedArticlesAndPublicationss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              productCatalogCheckBatchRequestStatuss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -120,23 +120,23 @@ public class ProductFeedArticlesAndPublications extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  productFeedArticlesAndPublicationss.add(loadJSON(entry.getValue().toString(), context, header));
+                  productCatalogCheckBatchRequestStatuss.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              productFeedArticlesAndPublicationss.add(loadJSON(obj.toString(), context, header));
+              productCatalogCheckBatchRequestStatuss.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return productFeedArticlesAndPublicationss;
+          return productCatalogCheckBatchRequestStatuss;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              productFeedArticlesAndPublicationss.add(loadJSON(entry.getValue().toString(), context, header));
+              productCatalogCheckBatchRequestStatuss.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return productFeedArticlesAndPublicationss;
+          return productCatalogCheckBatchRequestStatuss;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -153,20 +153,20 @@ public class ProductFeedArticlesAndPublications extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              productFeedArticlesAndPublicationss.add(loadJSON(value.toString(), context, header));
+              productCatalogCheckBatchRequestStatuss.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return productFeedArticlesAndPublicationss;
+            return productCatalogCheckBatchRequestStatuss;
           }
 
           // Sixth, check if it's pure JsonObject
-          productFeedArticlesAndPublicationss.clear();
-          productFeedArticlesAndPublicationss.add(loadJSON(json, context, header));
-          return productFeedArticlesAndPublicationss;
+          productCatalogCheckBatchRequestStatuss.clear();
+          productCatalogCheckBatchRequestStatuss.add(loadJSON(json, context, header));
+          return productCatalogCheckBatchRequestStatuss;
         }
       }
     } catch (Exception e) {
@@ -202,59 +202,59 @@ public class ProductFeedArticlesAndPublications extends APINode {
     return mId;
   }
 
-  public ProductFeedArticlesAndPublications setFieldId(String value) {
+  public ProductCatalogCheckBatchRequestStatus setFieldId(String value) {
     this.mId = value;
     return this;
   }
 
 
 
-  public static class APIRequestGenget extends APIRequest<ProductFeedArticlesAndPublicationsGet> {
+  public static class APIRequestGenget extends APIRequest<ProductCatalogCheckBatchRequestStatusGet> {
 
-    APINodeList<ProductFeedArticlesAndPublicationsGet> lastResponse = null;
+    APINodeList<ProductCatalogCheckBatchRequestStatusGet> lastResponse = null;
     @Override
-    public APINodeList<ProductFeedArticlesAndPublicationsGet> getLastResponse() {
+    public APINodeList<ProductCatalogCheckBatchRequestStatusGet> getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
       "after",
       "before",
+      "error_priority",
+      "fields",
+      "handle",
       "limit",
-      "summary",
+      "load_ids_of_invalid_requests",
     };
 
     public static final String[] FIELDS = {
-      "data",
-      "paging",
-      "summary",
     };
 
     @Override
-    public APINodeList<ProductFeedArticlesAndPublicationsGet> parseResponse(String response, String header) throws APIException {
-      return ProductFeedArticlesAndPublicationsGet.parseResponse(response, getContext(), this, header);
+    public APINodeList<ProductCatalogCheckBatchRequestStatusGet> parseResponse(String response, String header) throws APIException {
+      return ProductCatalogCheckBatchRequestStatusGet.parseResponse(response, getContext(), this, header);
     }
 
     @Override
-    public APINodeList<ProductFeedArticlesAndPublicationsGet> execute() throws APIException {
+    public APINodeList<ProductCatalogCheckBatchRequestStatusGet> execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINodeList<ProductFeedArticlesAndPublicationsGet> execute(Map<String, Object> extraParams) throws APIException {
+    public APINodeList<ProductCatalogCheckBatchRequestStatusGet> execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<APINodeList<ProductFeedArticlesAndPublicationsGet>> executeAsync() throws APIException {
+    public ListenableFuture<APINodeList<ProductCatalogCheckBatchRequestStatusGet>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<APINodeList<ProductFeedArticlesAndPublicationsGet>> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<APINodeList<ProductCatalogCheckBatchRequestStatusGet>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<ProductFeedArticlesAndPublicationsGet>>() {
-           public APINodeList<ProductFeedArticlesAndPublicationsGet> apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, APINodeList<ProductCatalogCheckBatchRequestStatusGet>>() {
+           public APINodeList<ProductCatalogCheckBatchRequestStatusGet> apply(ResponseWrapper result) {
              try {
                return APIRequestGenget.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -267,7 +267,7 @@ public class ProductFeedArticlesAndPublications extends APINode {
     };
 
     public APIRequestGenget(String nodeId, APIContext context) {
-      super(context, nodeId, "/publications", "GET", Arrays.asList(PARAMS));
+      super(context, nodeId, "/check_batch_request_status", "GET", Arrays.asList(PARAMS));
     }
 
     @Override
@@ -293,6 +293,25 @@ public class ProductFeedArticlesAndPublications extends APINode {
       return this;
     }
 
+    public APIRequestGenget setErrorPriority (ProductCatalogCheckBatchRequestStatusGet.EnumErrorPriority errorPriority) {
+      this.setParam("error_priority", errorPriority);
+      return this;
+    }
+    public APIRequestGenget setErrorPriority (String errorPriority) {
+      this.setParam("error_priority", errorPriority);
+      return this;
+    }
+
+    public APIRequestGenget setFields (String fields) {
+      this.setParam("fields", fields);
+      return this;
+    }
+
+    public APIRequestGenget setHandle (String handle) {
+      this.setParam("handle", handle);
+      return this;
+    }
+
     public APIRequestGenget setLimit (Long limit) {
       this.setParam("limit", limit);
       return this;
@@ -302,12 +321,12 @@ public class ProductFeedArticlesAndPublications extends APINode {
       return this;
     }
 
-    public APIRequestGenget setSummary (Boolean summary) {
-      this.setParam("summary", summary);
+    public APIRequestGenget setLoadIdsOfInvalidRequests (Boolean loadIdsOfInvalidRequests) {
+      this.setParam("load_ids_of_invalid_requests", loadIdsOfInvalidRequests);
       return this;
     }
-    public APIRequestGenget setSummary (String summary) {
-      this.setParam("summary", summary);
+    public APIRequestGenget setLoadIdsOfInvalidRequests (String loadIdsOfInvalidRequests) {
+      this.setParam("load_ids_of_invalid_requests", loadIdsOfInvalidRequests);
       return this;
     }
 
@@ -347,27 +366,6 @@ public class ProductFeedArticlesAndPublications extends APINode {
       return this;
     }
 
-    public APIRequestGenget requestDataField () {
-      return this.requestDataField(true);
-    }
-    public APIRequestGenget requestDataField (boolean value) {
-      this.requestField("data", value);
-      return this;
-    }
-    public APIRequestGenget requestPagingField () {
-      return this.requestPagingField(true);
-    }
-    public APIRequestGenget requestPagingField (boolean value) {
-      this.requestField("paging", value);
-      return this;
-    }
-    public APIRequestGenget requestSummaryField () {
-      return this.requestSummaryField(true);
-    }
-    public APIRequestGenget requestSummaryField (boolean value) {
-      this.requestField("summary", value);
-      return this;
-    }
   }
 
 
@@ -384,17 +382,17 @@ public class ProductFeedArticlesAndPublications extends APINode {
     return gson;
   }
 
-  public ProductFeedArticlesAndPublications copyFrom(ProductFeedArticlesAndPublications instance) {
+  public ProductCatalogCheckBatchRequestStatus copyFrom(ProductCatalogCheckBatchRequestStatus instance) {
     this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<ProductFeedArticlesAndPublications> getParser() {
-    return new APIRequest.ResponseParser<ProductFeedArticlesAndPublications>() {
-      public APINodeList<ProductFeedArticlesAndPublications> parseResponse(String response, APIContext context, APIRequest<ProductFeedArticlesAndPublications> request, String header) throws MalformedResponseException {
-        return ProductFeedArticlesAndPublications.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<ProductCatalogCheckBatchRequestStatus> getParser() {
+    return new APIRequest.ResponseParser<ProductCatalogCheckBatchRequestStatus>() {
+      public APINodeList<ProductCatalogCheckBatchRequestStatus> parseResponse(String response, APIContext context, APIRequest<ProductCatalogCheckBatchRequestStatus> request, String header) throws MalformedResponseException {
+        return ProductCatalogCheckBatchRequestStatus.parseResponse(response, context, request, header);
       }
     };
   }
