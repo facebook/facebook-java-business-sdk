@@ -42,7 +42,7 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  */
 public class ProductFeedUploadGet extends APINode {
   @SerializedName("end_time")
-  private mixed mEndTime = null;
+  private Object mEndTime = null;
   @SerializedName("error_count")
   private Long mErrorCount = null;
   @SerializedName("error_report")
@@ -66,7 +66,7 @@ public class ProductFeedUploadGet extends APINode {
   @SerializedName("progresses")
   private Object mProgresses = null;
   @SerializedName("start_time")
-  private mixed mStartTime = null;
+  private Object mStartTime = null;
   @SerializedName("upload_complete")
   private Boolean mUploadComplete = null;
   @SerializedName("url")
@@ -224,11 +224,11 @@ public class ProductFeedUploadGet extends APINode {
   }
 
 
-  public mixed getFieldEndTime() {
+  public Object getFieldEndTime() {
     return mEndTime;
   }
 
-  public ProductFeedUploadGet setFieldEndTime(mixed value) {
+  public ProductFeedUploadGet setFieldEndTime(Object value) {
     this.mEndTime = value;
     return this;
   }
@@ -332,11 +332,11 @@ public class ProductFeedUploadGet extends APINode {
     return this;
   }
 
-  public mixed getFieldStartTime() {
+  public Object getFieldStartTime() {
     return mStartTime;
   }
 
-  public ProductFeedUploadGet setFieldStartTime(mixed value) {
+  public ProductFeedUploadGet setFieldStartTime(Object value) {
     this.mStartTime = value;
     return this;
   }
