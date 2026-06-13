@@ -196,4 +196,86 @@ public class UserDataTest {
     assertNotEquals(userData1, userData2);
     assertNotEquals(userData1.hashCode(), userData2.hashCode());
   }
+
+  @Test
+  public void WhatsAppFieldsTest() {
+    UserData userData = new UserData();
+    userData
+        .ctwaClid("ctwa-clid-123")
+        .pageId("page-id-456")
+        .whatsappBusinessAccountId("whatsapp-biz-account-789");
+
+    assertEquals(userData.getCtwaClid(), "ctwa-clid-123");
+    assertEquals(userData.getPageId(), "page-id-456");
+    assertEquals(userData.getWhatsappBusinessAccountId(), "whatsapp-biz-account-789");
+  }
+
+  @Test
+  public void WhatsAppFieldsWithSettersTest() {
+    UserData userData = new UserData();
+    userData.setCtwaClid("ctwa-clid-123");
+    userData.setPageId("page-id-456");
+    userData.setWhatsappBusinessAccountId("whatsapp-biz-account-789");
+
+    assertEquals(userData.getCtwaClid(), "ctwa-clid-123");
+    assertEquals(userData.getPageId(), "page-id-456");
+    assertEquals(userData.getWhatsappBusinessAccountId(), "whatsapp-biz-account-789");
+  }
+
+  @Test
+  public void WhatsAppFieldsEqualsTest() {
+    UserData userData1 = new UserData();
+    userData1
+        .ctwaClid("ctwa-clid-123")
+        .pageId("page-id-456")
+        .whatsappBusinessAccountId("whatsapp-biz-account-789");
+
+    UserData userData2 = new UserData();
+    userData2
+        .ctwaClid("ctwa-clid-123")
+        .pageId("page-id-456")
+        .whatsappBusinessAccountId("whatsapp-biz-account-789");
+
+    assertEquals(userData1, userData2);
+    assertEquals(userData1.hashCode(), userData2.hashCode());
+  }
+
+  @Test
+  public void WhatsAppFieldsInConstructorTest() {
+    UserData userData = new UserData(
+        "email@example.com",
+        "1234567890",
+        GenderEnum.MALE,
+        "20000101",
+        "lastname",
+        "firstname",
+        "city",
+        "state",
+        "12345",
+        "US",
+        "external-id",
+        "192.168.1.1",
+        "Chrome",
+        "fbc-value",
+        "fbp-value",
+        "subscription-id",
+        "fb-login-id",
+        "lead-id",
+        "first5",
+        "last5",
+        "f",
+        "01",
+        "01",
+        "2000",
+        "madid-value",
+        "anon-id",
+        "ctwa-clid-123",
+        "page-id-456",
+        "whatsapp-biz-account-789"
+    );
+
+    assertEquals(userData.getCtwaClid(), "ctwa-clid-123");
+    assertEquals(userData.getPageId(), "page-id-456");
+    assertEquals(userData.getWhatsappBusinessAccountId(), "whatsapp-biz-account-789");
+  }
 }
