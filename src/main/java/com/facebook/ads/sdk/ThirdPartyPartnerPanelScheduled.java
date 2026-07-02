@@ -611,6 +611,7 @@ public class ThirdPartyPartnerPanelScheduled extends APINode {
         .excludeFieldsWithModifiers(Modifier.STATIC)
         .excludeFieldsWithModifiers(Modifier.PROTECTED)
         .disableHtmlEscaping()
+        .setObjectToNumberStrategy(com.google.gson.ToNumberPolicy.LONG_OR_DOUBLE)
         .create();
     }
     return gson;
