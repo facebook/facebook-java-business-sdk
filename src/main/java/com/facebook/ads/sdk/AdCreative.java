@@ -119,6 +119,8 @@ public class AdCreative extends APINode {
   private String mInstagramPermalinkUrl = null;
   @SerializedName("instagram_user_id")
   private String mInstagramUserId = null;
+  @SerializedName("threads_user_id")
+  private String mThreadsUserId = null;
   @SerializedName("interactive_components_spec")
   private AdCreativeInteractiveComponentsSpec mInteractiveComponentsSpec = null;
   @SerializedName("link_deep_link_url")
@@ -855,6 +857,15 @@ public class AdCreative extends APINode {
 
   public AdCreative setFieldInstagramUserId(String value) {
     this.mInstagramUserId = value;
+    return this;
+  }
+
+  public String getFieldThreadsUserId() {
+    return mThreadsUserId;
+  }
+
+  public AdCreative setFieldThreadsUserId(String value) {
+    this.mThreadsUserId = value;
     return this;
   }
 
@@ -1938,6 +1949,7 @@ public class AdCreative extends APINode {
       "instagram_branded_content",
       "instagram_permalink_url",
       "instagram_user_id",
+      "threads_user_id",
       "interactive_components_spec",
       "link_deep_link_url",
       "link_destination_display_url",
@@ -2358,6 +2370,13 @@ public class AdCreative extends APINode {
     }
     public APIRequestGet requestInstagramUserIdField (boolean value) {
       this.requestField("instagram_user_id", value);
+      return this;
+    }
+    public APIRequestGet requestThreadsUserIdField () {
+      return this.requestThreadsUserIdField(true);
+    }
+    public APIRequestGet requestThreadsUserIdField (boolean value) {
+      this.requestField("threads_user_id", value);
       return this;
     }
     public APIRequestGet requestInteractiveComponentsSpecField () {
@@ -3252,6 +3271,7 @@ public class AdCreative extends APINode {
     this.mInstagramBrandedContent = instance.mInstagramBrandedContent;
     this.mInstagramPermalinkUrl = instance.mInstagramPermalinkUrl;
     this.mInstagramUserId = instance.mInstagramUserId;
+    this.mThreadsUserId = instance.mThreadsUserId;
     this.mInteractiveComponentsSpec = instance.mInteractiveComponentsSpec;
     this.mLinkDeepLinkUrl = instance.mLinkDeepLinkUrl;
     this.mLinkDestinationDisplayUrl = instance.mLinkDestinationDisplayUrl;

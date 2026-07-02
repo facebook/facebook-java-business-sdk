@@ -613,6 +613,7 @@ public class Ad extends APINode {
       "instagram_branded_content",
       "instagram_permalink_url",
       "instagram_user_id",
+      "threads_user_id",
       "interactive_components_spec",
       "link_deep_link_url",
       "link_destination_display_url",
@@ -1015,6 +1016,13 @@ public class Ad extends APINode {
     }
     public APIRequestGetAdCreatives requestInstagramUserIdField (boolean value) {
       this.requestField("instagram_user_id", value);
+      return this;
+    }
+    public APIRequestGetAdCreatives requestThreadsUserIdField () {
+      return this.requestThreadsUserIdField(true);
+    }
+    public APIRequestGetAdCreatives requestThreadsUserIdField (boolean value) {
+      this.requestField("threads_user_id", value);
       return this;
     }
     public APIRequestGetAdCreatives requestInteractiveComponentsSpecField () {

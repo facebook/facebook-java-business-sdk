@@ -43,6 +43,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class AdCreativeObjectStorySpec extends APINode {
   @SerializedName("instagram_user_id")
   private String mInstagramUserId = null;
+  @SerializedName("threads_user_id")
+  private String mThreadsUserId = null;
   @SerializedName("link_data")
   private AdCreativeLinkData mLinkData = null;
   @SerializedName("page_id")
@@ -217,6 +219,15 @@ public class AdCreativeObjectStorySpec extends APINode {
     return this;
   }
 
+  public String getFieldThreadsUserId() {
+    return mThreadsUserId;
+  }
+
+  public AdCreativeObjectStorySpec setFieldThreadsUserId(String value) {
+    this.mThreadsUserId = value;
+    return this;
+  }
+
   public AdCreativeLinkData getFieldLinkData() {
     return mLinkData;
   }
@@ -328,6 +339,7 @@ public class AdCreativeObjectStorySpec extends APINode {
 
   public AdCreativeObjectStorySpec copyFrom(AdCreativeObjectStorySpec instance) {
     this.mInstagramUserId = instance.mInstagramUserId;
+    this.mThreadsUserId = instance.mThreadsUserId;
     this.mLinkData = instance.mLinkData;
     this.mPageId = instance.mPageId;
     this.mPhotoData = instance.mPhotoData;
