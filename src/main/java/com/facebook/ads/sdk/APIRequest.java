@@ -356,6 +356,7 @@ public class APIRequest<T extends APINode> {
           .excludeFieldsWithModifiers(Modifier.STATIC)
           .excludeFieldsWithModifiers(Modifier.PROTECTED)
           .disableHtmlEscaping()
+          .setObjectToNumberStrategy(com.google.gson.ToNumberPolicy.LONG_OR_DOUBLE)
           .create();
       return gson.toJson((Map)input);
     } else if (input instanceof List) {
@@ -363,6 +364,7 @@ public class APIRequest<T extends APINode> {
           .excludeFieldsWithModifiers(Modifier.STATIC)
           .excludeFieldsWithModifiers(Modifier.PROTECTED)
           .disableHtmlEscaping()
+          .setObjectToNumberStrategy(com.google.gson.ToNumberPolicy.LONG_OR_DOUBLE)
           .create();
       return gson.toJson((List)input);
     } else {
