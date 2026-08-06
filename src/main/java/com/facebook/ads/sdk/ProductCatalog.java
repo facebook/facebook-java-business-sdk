@@ -6383,11 +6383,11 @@ public class ProductCatalog extends APINode {
     }
   }
 
-  public static class APIRequestCreateHotelRoomsBatch extends APIRequest<ProductCatalog> {
+  public static class APIRequestCreateHotelRoomsBatch extends APIRequest<ProductCatalogHotelRoomsBatch> {
 
-    ProductCatalog lastResponse = null;
+    ProductCatalogHotelRoomsBatch lastResponse = null;
     @Override
-    public ProductCatalog getLastResponse() {
+    public ProductCatalogHotelRoomsBatch getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
@@ -6403,31 +6403,31 @@ public class ProductCatalog extends APINode {
     };
 
     @Override
-    public ProductCatalog parseResponse(String response, String header) throws APIException {
-      return ProductCatalog.parseResponse(response, getContext(), this, header).head();
+    public ProductCatalogHotelRoomsBatch parseResponse(String response, String header) throws APIException {
+      return ProductCatalogHotelRoomsBatch.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public ProductCatalog execute() throws APIException {
+    public ProductCatalogHotelRoomsBatch execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public ProductCatalog execute(Map<String, Object> extraParams) throws APIException {
+    public ProductCatalogHotelRoomsBatch execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<ProductCatalog> executeAsync() throws APIException {
+    public ListenableFuture<ProductCatalogHotelRoomsBatch> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<ProductCatalog> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<ProductCatalogHotelRoomsBatch> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, ProductCatalog>() {
-           public ProductCatalog apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, ProductCatalogHotelRoomsBatch>() {
+           public ProductCatalogHotelRoomsBatch apply(ResponseWrapper result) {
              try {
                return APIRequestCreateHotelRoomsBatch.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -6470,7 +6470,7 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
-    public APIRequestCreateHotelRoomsBatch setStandard (ProductCatalog.EnumStandard standard) {
+    public APIRequestCreateHotelRoomsBatch setStandard (ProductCatalogHotelRoomsBatch.EnumStandard standard) {
       this.setParam("standard", standard);
       return this;
     }
@@ -14150,23 +14150,6 @@ public class ProductCatalog extends APINode {
       }
   }
 
-  public static enum EnumStandard {
-      @SerializedName("google")
-      VALUE_GOOGLE("google"),
-      ;
-
-      private String value;
-
-      private EnumStandard(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
   public static enum EnumItemSubType {
       @SerializedName("APPLIANCES")
       VALUE_APPLIANCES("APPLIANCES"),
@@ -14271,6 +14254,23 @@ public class ProductCatalog extends APINode {
       private String value;
 
       private EnumEventName(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumStandard {
+      @SerializedName("google")
+      VALUE_GOOGLE("google"),
+      ;
+
+      private String value;
+
+      private EnumStandard(String value) {
         this.value = value;
       }
 

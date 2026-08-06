@@ -566,11 +566,11 @@ public class Group extends APINode {
 
   }
 
-  public static class APIRequestCreateAdmin extends APIRequest<Group> {
+  public static class APIRequestCreateAdmin extends APIRequest<User> {
 
-    Group lastResponse = null;
+    User lastResponse = null;
     @Override
-    public Group getLastResponse() {
+    public User getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
@@ -581,31 +581,31 @@ public class Group extends APINode {
     };
 
     @Override
-    public Group parseResponse(String response, String header) throws APIException {
-      return Group.parseResponse(response, getContext(), this, header).head();
+    public User parseResponse(String response, String header) throws APIException {
+      return User.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public Group execute() throws APIException {
+    public User execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public Group execute(Map<String, Object> extraParams) throws APIException {
+    public User execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<Group> executeAsync() throws APIException {
+    public ListenableFuture<User> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<Group> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<User> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, Group>() {
-           public Group apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, User>() {
+           public User apply(ResponseWrapper result) {
              try {
                return APIRequestCreateAdmin.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -4396,11 +4396,11 @@ public class Group extends APINode {
 
   }
 
-  public static class APIRequestCreateMember extends APIRequest<Group> {
+  public static class APIRequestCreateMember extends APIRequest<User> {
 
-    Group lastResponse = null;
+    User lastResponse = null;
     @Override
-    public Group getLastResponse() {
+    public User getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
@@ -4415,31 +4415,31 @@ public class Group extends APINode {
     };
 
     @Override
-    public Group parseResponse(String response, String header) throws APIException {
-      return Group.parseResponse(response, getContext(), this, header).head();
+    public User parseResponse(String response, String header) throws APIException {
+      return User.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public Group execute() throws APIException {
+    public User execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public Group execute(Map<String, Object> extraParams) throws APIException {
+    public User execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<Group> executeAsync() throws APIException {
+    public ListenableFuture<User> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<Group> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<User> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, Group>() {
-           public Group apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, User>() {
+           public User apply(ResponseWrapper result) {
              try {
                return APIRequestCreateMember.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -6344,6 +6344,7 @@ public class Group extends APINode {
       "initial_heading",
       "initial_pitch",
       "instant_game_entry_point_data",
+      "is_ai_generated",
       "is_boost_intended",
       "is_explicit_share",
       "is_group_linking_post",
@@ -6663,6 +6664,15 @@ public class Group extends APINode {
 
     public APIRequestCreateVideo setInstantGameEntryPointData (String instantGameEntryPointData) {
       this.setParam("instant_game_entry_point_data", instantGameEntryPointData);
+      return this;
+    }
+
+    public APIRequestCreateVideo setIsAiGenerated (Boolean isAiGenerated) {
+      this.setParam("is_ai_generated", isAiGenerated);
+      return this;
+    }
+    public APIRequestCreateVideo setIsAiGenerated (String isAiGenerated) {
+      this.setParam("is_ai_generated", isAiGenerated);
       return this;
     }
 

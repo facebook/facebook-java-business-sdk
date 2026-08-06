@@ -3984,7 +3984,7 @@ public class IGUser extends APINode {
       return this;
     }
 
-    public APIRequestGetCreatorMarketPlaceCreators setPlatform (List<IGUserExportForCAM.EnumPlatform> platform) {
+    public APIRequestGetCreatorMarketPlaceCreators setPlatform (IGUserExportForCAM.EnumPlatform platform) {
       this.setParam("platform", platform);
       return this;
     }
@@ -5704,9 +5704,12 @@ public class IGUser extends APINode {
       "image_url",
       "is_ai_generated",
       "is_carousel_item",
+      "is_comment_prompt_used",
       "is_paid_partnership",
+      "is_poll_duration_extended",
       "location_id",
       "media_type",
+      "poll_attachment",
       "product_tags",
       "share_to_feed",
       "thumb_offset",
@@ -5848,12 +5851,30 @@ public class IGUser extends APINode {
       return this;
     }
 
+    public APIRequestCreateMedia setIsCommentPromptUsed (Boolean isCommentPromptUsed) {
+      this.setParam("is_comment_prompt_used", isCommentPromptUsed);
+      return this;
+    }
+    public APIRequestCreateMedia setIsCommentPromptUsed (String isCommentPromptUsed) {
+      this.setParam("is_comment_prompt_used", isCommentPromptUsed);
+      return this;
+    }
+
     public APIRequestCreateMedia setIsPaidPartnership (Boolean isPaidPartnership) {
       this.setParam("is_paid_partnership", isPaidPartnership);
       return this;
     }
     public APIRequestCreateMedia setIsPaidPartnership (String isPaidPartnership) {
       this.setParam("is_paid_partnership", isPaidPartnership);
+      return this;
+    }
+
+    public APIRequestCreateMedia setIsPollDurationExtended (Boolean isPollDurationExtended) {
+      this.setParam("is_poll_duration_extended", isPollDurationExtended);
+      return this;
+    }
+    public APIRequestCreateMedia setIsPollDurationExtended (String isPollDurationExtended) {
+      this.setParam("is_poll_duration_extended", isPollDurationExtended);
       return this;
     }
 
@@ -5864,6 +5885,11 @@ public class IGUser extends APINode {
 
     public APIRequestCreateMedia setMediaType (String mediaType) {
       this.setParam("media_type", mediaType);
+      return this;
+    }
+
+    public APIRequestCreateMedia setPollAttachment (String pollAttachment) {
+      this.setParam("poll_attachment", pollAttachment);
       return this;
     }
 

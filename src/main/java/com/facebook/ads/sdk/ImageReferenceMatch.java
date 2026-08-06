@@ -63,14 +63,14 @@ public class ImageReferenceMatch extends APINode {
   private String mMatchState = null;
   @SerializedName("matched_reference_copyright")
   private ImageCopyright mMatchedReferenceCopyright = null;
-  @SerializedName("matched_reference_owner")
-  private Profile mMatchedReferenceOwner = null;
+  @SerializedName("matched_reference_owner_rh_owner")
+  private Object mMatchedReferenceOwnerRhOwner = null;
   @SerializedName("modification_history")
   private List<Object> mModificationHistory = null;
   @SerializedName("reference_copyright")
   private ImageCopyright mReferenceCopyright = null;
-  @SerializedName("reference_owner")
-  private Profile mReferenceOwner = null;
+  @SerializedName("reference_owner_rh_owner")
+  private Object mReferenceOwnerRhOwner = null;
   @SerializedName("rejection_form_data_entries_with_translations")
   private List<Object> mRejectionFormDataEntriesWithTranslations = null;
   @SerializedName("resolution_reason")
@@ -338,11 +338,8 @@ public class ImageReferenceMatch extends APINode {
     return mMatchedReferenceCopyright;
   }
 
-  public Profile getFieldMatchedReferenceOwner() {
-    if (mMatchedReferenceOwner != null) {
-      mMatchedReferenceOwner.context = getContext();
-    }
-    return mMatchedReferenceOwner;
+  public Object getFieldMatchedReferenceOwnerRhOwner() {
+    return mMatchedReferenceOwnerRhOwner;
   }
 
   public List<Object> getFieldModificationHistory() {
@@ -356,11 +353,8 @@ public class ImageReferenceMatch extends APINode {
     return mReferenceCopyright;
   }
 
-  public Profile getFieldReferenceOwner() {
-    if (mReferenceOwner != null) {
-      mReferenceOwner.context = getContext();
-    }
-    return mReferenceOwner;
+  public Object getFieldReferenceOwnerRhOwner() {
+    return mReferenceOwnerRhOwner;
   }
 
   public List<Object> getFieldRejectionFormDataEntriesWithTranslations() {
@@ -399,10 +393,10 @@ public class ImageReferenceMatch extends APINode {
       "id",
       "match_state",
       "matched_reference_copyright",
-      "matched_reference_owner",
+      "matched_reference_owner_rh_owner",
       "modification_history",
       "reference_copyright",
-      "reference_owner",
+      "reference_owner_rh_owner",
       "rejection_form_data_entries_with_translations",
       "resolution_reason",
       "update_time",
@@ -575,11 +569,11 @@ public class ImageReferenceMatch extends APINode {
       this.requestField("matched_reference_copyright", value);
       return this;
     }
-    public APIRequestGet requestMatchedReferenceOwnerField () {
-      return this.requestMatchedReferenceOwnerField(true);
+    public APIRequestGet requestMatchedReferenceOwnerRhOwnerField () {
+      return this.requestMatchedReferenceOwnerRhOwnerField(true);
     }
-    public APIRequestGet requestMatchedReferenceOwnerField (boolean value) {
-      this.requestField("matched_reference_owner", value);
+    public APIRequestGet requestMatchedReferenceOwnerRhOwnerField (boolean value) {
+      this.requestField("matched_reference_owner_rh_owner", value);
       return this;
     }
     public APIRequestGet requestModificationHistoryField () {
@@ -596,11 +590,11 @@ public class ImageReferenceMatch extends APINode {
       this.requestField("reference_copyright", value);
       return this;
     }
-    public APIRequestGet requestReferenceOwnerField () {
-      return this.requestReferenceOwnerField(true);
+    public APIRequestGet requestReferenceOwnerRhOwnerField () {
+      return this.requestReferenceOwnerRhOwnerField(true);
     }
-    public APIRequestGet requestReferenceOwnerField (boolean value) {
-      this.requestField("reference_owner", value);
+    public APIRequestGet requestReferenceOwnerRhOwnerField (boolean value) {
+      this.requestField("reference_owner_rh_owner", value);
       return this;
     }
     public APIRequestGet requestRejectionFormDataEntriesWithTranslationsField () {
@@ -652,10 +646,10 @@ public class ImageReferenceMatch extends APINode {
     this.mId = instance.mId;
     this.mMatchState = instance.mMatchState;
     this.mMatchedReferenceCopyright = instance.mMatchedReferenceCopyright;
-    this.mMatchedReferenceOwner = instance.mMatchedReferenceOwner;
+    this.mMatchedReferenceOwnerRhOwner = instance.mMatchedReferenceOwnerRhOwner;
     this.mModificationHistory = instance.mModificationHistory;
     this.mReferenceCopyright = instance.mReferenceCopyright;
-    this.mReferenceOwner = instance.mReferenceOwner;
+    this.mReferenceOwnerRhOwner = instance.mReferenceOwnerRhOwner;
     this.mRejectionFormDataEntriesWithTranslations = instance.mRejectionFormDataEntriesWithTranslations;
     this.mResolutionReason = instance.mResolutionReason;
     this.mUpdateTime = instance.mUpdateTime;

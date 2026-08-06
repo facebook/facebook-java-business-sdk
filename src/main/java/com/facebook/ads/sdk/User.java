@@ -20944,6 +20944,7 @@ public class User extends APINode {
       "initial_heading",
       "initial_pitch",
       "instant_game_entry_point_data",
+      "is_ai_generated",
       "is_boost_intended",
       "is_explicit_share",
       "is_group_linking_post",
@@ -21273,6 +21274,15 @@ public class User extends APINode {
 
     public APIRequestCreateVideo setInstantGameEntryPointData (String instantGameEntryPointData) {
       this.setParam("instant_game_entry_point_data", instantGameEntryPointData);
+      return this;
+    }
+
+    public APIRequestCreateVideo setIsAiGenerated (Boolean isAiGenerated) {
+      this.setParam("is_ai_generated", isAiGenerated);
+      return this;
+    }
+    public APIRequestCreateVideo setIsAiGenerated (String isAiGenerated) {
+      this.setParam("is_ai_generated", isAiGenerated);
       return this;
     }
 

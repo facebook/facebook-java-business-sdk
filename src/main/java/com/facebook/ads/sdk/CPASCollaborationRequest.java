@@ -652,6 +652,8 @@ public class CPASCollaborationRequest extends APINode {
       VALUE_INTERNAL("INTERNAL"),
       @SerializedName("SELF_SERVE")
       VALUE_SELF_SERVE("SELF_SERVE"),
+      @SerializedName("SELF_SERVE_CONTACT_FORM")
+      VALUE_SELF_SERVE_CONTACT_FORM("SELF_SERVE_CONTACT_FORM"),
       ;
 
       private String value;

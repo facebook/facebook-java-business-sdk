@@ -522,6 +522,7 @@ public class AdReportRun extends APINode {
       "inline_link_click_ctr",
       "inline_link_clicks",
       "inline_post_engagement",
+      "instagram_profile_follow",
       "instagram_profile_visits",
       "instagram_upcoming_event_reminders_set",
       "instant_experience_clicks_to_open",
@@ -551,10 +552,6 @@ public class AdReportRun extends APINode {
       "marketing_messages_sent",
       "marketing_messages_spend",
       "marketing_messages_spend_currency",
-      "marketing_messages_website_add_to_cart",
-      "marketing_messages_website_initiate_checkout",
-      "marketing_messages_website_purchase",
-      "marketing_messages_website_purchase_values",
       "messages_delivered",
       "messages_delivered_ctr",
       "mobile_app_purchase_roas",
@@ -568,6 +565,8 @@ public class AdReportRun extends APINode {
       "outbound_clicks",
       "outbound_clicks_ctr",
       "place_page_name",
+      "playable_average_game_length",
+      "playable_game_start_rate",
       "product_group_retailer_id",
       "product_retailer_id",
       "product_views",
@@ -1560,6 +1559,13 @@ public class AdReportRun extends APINode {
       this.requestField("inline_post_engagement", value);
       return this;
     }
+    public APIRequestGetInsights requestInstagramProfileFollowField () {
+      return this.requestInstagramProfileFollowField(true);
+    }
+    public APIRequestGetInsights requestInstagramProfileFollowField (boolean value) {
+      this.requestField("instagram_profile_follow", value);
+      return this;
+    }
     public APIRequestGetInsights requestInstagramProfileVisitsField () {
       return this.requestInstagramProfileVisitsField(true);
     }
@@ -1763,34 +1769,6 @@ public class AdReportRun extends APINode {
       this.requestField("marketing_messages_spend_currency", value);
       return this;
     }
-    public APIRequestGetInsights requestMarketingMessagesWebsiteAddToCartField () {
-      return this.requestMarketingMessagesWebsiteAddToCartField(true);
-    }
-    public APIRequestGetInsights requestMarketingMessagesWebsiteAddToCartField (boolean value) {
-      this.requestField("marketing_messages_website_add_to_cart", value);
-      return this;
-    }
-    public APIRequestGetInsights requestMarketingMessagesWebsiteInitiateCheckoutField () {
-      return this.requestMarketingMessagesWebsiteInitiateCheckoutField(true);
-    }
-    public APIRequestGetInsights requestMarketingMessagesWebsiteInitiateCheckoutField (boolean value) {
-      this.requestField("marketing_messages_website_initiate_checkout", value);
-      return this;
-    }
-    public APIRequestGetInsights requestMarketingMessagesWebsitePurchaseField () {
-      return this.requestMarketingMessagesWebsitePurchaseField(true);
-    }
-    public APIRequestGetInsights requestMarketingMessagesWebsitePurchaseField (boolean value) {
-      this.requestField("marketing_messages_website_purchase", value);
-      return this;
-    }
-    public APIRequestGetInsights requestMarketingMessagesWebsitePurchaseValuesField () {
-      return this.requestMarketingMessagesWebsitePurchaseValuesField(true);
-    }
-    public APIRequestGetInsights requestMarketingMessagesWebsitePurchaseValuesField (boolean value) {
-      this.requestField("marketing_messages_website_purchase_values", value);
-      return this;
-    }
     public APIRequestGetInsights requestMessagesDeliveredField () {
       return this.requestMessagesDeliveredField(true);
     }
@@ -1880,6 +1858,20 @@ public class AdReportRun extends APINode {
     }
     public APIRequestGetInsights requestPlacePageNameField (boolean value) {
       this.requestField("place_page_name", value);
+      return this;
+    }
+    public APIRequestGetInsights requestPlayableAverageGameLengthField () {
+      return this.requestPlayableAverageGameLengthField(true);
+    }
+    public APIRequestGetInsights requestPlayableAverageGameLengthField (boolean value) {
+      this.requestField("playable_average_game_length", value);
+      return this;
+    }
+    public APIRequestGetInsights requestPlayableGameStartRateField () {
+      return this.requestPlayableGameStartRateField(true);
+    }
+    public APIRequestGetInsights requestPlayableGameStartRateField (boolean value) {
+      this.requestField("playable_game_start_rate", value);
       return this;
     }
     public APIRequestGetInsights requestProductGroupRetailerIdField () {

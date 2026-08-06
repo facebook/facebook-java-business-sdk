@@ -1985,6 +1985,10 @@ public class IGUserExportForCAM extends APINode {
   }
 
   public static enum EnumPlatform {
+      @SerializedName("any")
+      VALUE_ANY("any"),
+      @SerializedName("both")
+      VALUE_BOTH("both"),
       @SerializedName("facebook")
       VALUE_FACEBOOK("facebook"),
       @SerializedName("instagram")

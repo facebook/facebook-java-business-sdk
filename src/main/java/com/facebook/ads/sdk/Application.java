@@ -1587,6 +1587,9 @@ public class Application extends APINode {
       "installer_package",
       "is_circuit_breaker_active",
       "is_fb",
+      "is_redownload",
+      "last_new_install_time",
+      "last_session_time",
       "limited_data_use",
       "meta_install_referrer",
       "migration_bundle",
@@ -1904,6 +1907,33 @@ public class Application extends APINode {
     }
     public APIRequestCreateActivity setIsFb (String isFb) {
       this.setParam("is_fb", isFb);
+      return this;
+    }
+
+    public APIRequestCreateActivity setIsRedownload (Boolean isRedownload) {
+      this.setParam("is_redownload", isRedownload);
+      return this;
+    }
+    public APIRequestCreateActivity setIsRedownload (String isRedownload) {
+      this.setParam("is_redownload", isRedownload);
+      return this;
+    }
+
+    public APIRequestCreateActivity setLastNewInstallTime (Long lastNewInstallTime) {
+      this.setParam("last_new_install_time", lastNewInstallTime);
+      return this;
+    }
+    public APIRequestCreateActivity setLastNewInstallTime (String lastNewInstallTime) {
+      this.setParam("last_new_install_time", lastNewInstallTime);
+      return this;
+    }
+
+    public APIRequestCreateActivity setLastSessionTime (Long lastSessionTime) {
+      this.setParam("last_session_time", lastSessionTime);
+      return this;
+    }
+    public APIRequestCreateActivity setLastSessionTime (String lastSessionTime) {
+      this.setParam("last_session_time", lastSessionTime);
       return this;
     }
 

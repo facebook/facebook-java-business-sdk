@@ -3265,6 +3265,7 @@ public class CustomAudience extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "acting_account_id",
       "ad_account_id",
       "special_ad_categories",
       "special_ad_category_countries",
@@ -3370,6 +3371,15 @@ public class CustomAudience extends APINode {
       return this;
     }
 
+
+    public APIRequestGet setActingAccountId (Long actingAccountId) {
+      this.setParam("acting_account_id", actingAccountId);
+      return this;
+    }
+    public APIRequestGet setActingAccountId (String actingAccountId) {
+      this.setParam("acting_account_id", actingAccountId);
+      return this;
+    }
 
     public APIRequestGet setAdAccountId (String adAccountId) {
       this.setParam("ad_account_id", adAccountId);

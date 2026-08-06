@@ -41,10 +41,6 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class AdAccountDeliveryEstimate extends APINode {
-  @SerializedName("daily_outcomes_curve")
-  private List<OutcomePredictionPoint> mDailyOutcomesCurve = null;
-  @SerializedName("estimate_dau")
-  private Long mEstimateDau = null;
   @SerializedName("estimate_mau_lower_bound")
   private Long mEstimateMauLowerBound = null;
   @SerializedName("estimate_mau_upper_bound")
@@ -204,29 +200,6 @@ public class AdAccountDeliveryEstimate extends APINode {
   }
 
 
-  public List<OutcomePredictionPoint> getFieldDailyOutcomesCurve() {
-    return mDailyOutcomesCurve;
-  }
-
-  public AdAccountDeliveryEstimate setFieldDailyOutcomesCurve(List<OutcomePredictionPoint> value) {
-    this.mDailyOutcomesCurve = value;
-    return this;
-  }
-
-  public AdAccountDeliveryEstimate setFieldDailyOutcomesCurve(String value) {
-    Type type = new TypeToken<List<OutcomePredictionPoint>>(){}.getType();
-    this.mDailyOutcomesCurve = OutcomePredictionPoint.getGson().fromJson(value, type);
-    return this;
-  }
-  public Long getFieldEstimateDau() {
-    return mEstimateDau;
-  }
-
-  public AdAccountDeliveryEstimate setFieldEstimateDau(Long value) {
-    this.mEstimateDau = value;
-    return this;
-  }
-
   public Long getFieldEstimateMauLowerBound() {
     return mEstimateMauLowerBound;
   }
@@ -361,8 +334,6 @@ public class AdAccountDeliveryEstimate extends APINode {
   }
 
   public AdAccountDeliveryEstimate copyFrom(AdAccountDeliveryEstimate instance) {
-    this.mDailyOutcomesCurve = instance.mDailyOutcomesCurve;
-    this.mEstimateDau = instance.mEstimateDau;
     this.mEstimateMauLowerBound = instance.mEstimateMauLowerBound;
     this.mEstimateMauUpperBound = instance.mEstimateMauUpperBound;
     this.mEstimateReady = instance.mEstimateReady;

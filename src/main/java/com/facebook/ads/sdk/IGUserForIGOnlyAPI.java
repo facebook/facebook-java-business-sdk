@@ -1386,7 +1386,6 @@ public class IGUserForIGOnlyAPI extends APINode {
       "alt_text",
       "audio_configuration",
       "audio_name",
-      "branded_content_sponsor_ids",
       "caption",
       "children",
       "collaborators",
@@ -1394,7 +1393,6 @@ public class IGUserForIGOnlyAPI extends APINode {
       "image_url",
       "is_ai_generated",
       "is_carousel_item",
-      "is_paid_partnership",
       "location_id",
       "media_type",
       "product_tags",
@@ -1478,15 +1476,6 @@ public class IGUserForIGOnlyAPI extends APINode {
       return this;
     }
 
-    public APIRequestCreateMedia setBrandedContentSponsorIds (List<Long> brandedContentSponsorIds) {
-      this.setParam("branded_content_sponsor_ids", brandedContentSponsorIds);
-      return this;
-    }
-    public APIRequestCreateMedia setBrandedContentSponsorIds (String brandedContentSponsorIds) {
-      this.setParam("branded_content_sponsor_ids", brandedContentSponsorIds);
-      return this;
-    }
-
     public APIRequestCreateMedia setCaption (String caption) {
       this.setParam("caption", caption);
       return this;
@@ -1535,15 +1524,6 @@ public class IGUserForIGOnlyAPI extends APINode {
     }
     public APIRequestCreateMedia setIsCarouselItem (String isCarouselItem) {
       this.setParam("is_carousel_item", isCarouselItem);
-      return this;
-    }
-
-    public APIRequestCreateMedia setIsPaidPartnership (Boolean isPaidPartnership) {
-      this.setParam("is_paid_partnership", isPaidPartnership);
-      return this;
-    }
-    public APIRequestCreateMedia setIsPaidPartnership (String isPaidPartnership) {
-      this.setParam("is_paid_partnership", isPaidPartnership);
       return this;
     }
 

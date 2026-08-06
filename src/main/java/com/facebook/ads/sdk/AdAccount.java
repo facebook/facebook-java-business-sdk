@@ -1223,6 +1223,7 @@ public class AdAccount extends APINode {
       "campaigns_with_error",
       "is_age_restriction_enabled",
       "placement_controls",
+      "placement_controls_per_objective",
       "status",
     };
 
@@ -1344,6 +1345,13 @@ public class AdAccount extends APINode {
       this.requestField("placement_controls", value);
       return this;
     }
+    public APIRequestGetAccountControls requestPlacementControlsPerObjectiveField () {
+      return this.requestPlacementControlsPerObjectiveField(true);
+    }
+    public APIRequestGetAccountControls requestPlacementControlsPerObjectiveField (boolean value) {
+      this.requestField("placement_controls_per_objective", value);
+      return this;
+    }
     public APIRequestGetAccountControls requestStatusField () {
       return this.requestStatusField(true);
     }
@@ -1363,6 +1371,7 @@ public class AdAccount extends APINode {
     public static final String[] PARAMS = {
       "audience_controls",
       "placement_controls",
+      "placement_controls_per_objective",
     };
 
     public static final String[] FIELDS = {
@@ -1437,6 +1446,15 @@ public class AdAccount extends APINode {
     }
     public APIRequestCreateAccountControl setPlacementControls (String placementControls) {
       this.setParam("placement_controls", placementControls);
+      return this;
+    }
+
+    public APIRequestCreateAccountControl setPlacementControlsPerObjective (Object placementControlsPerObjective) {
+      this.setParam("placement_controls_per_objective", placementControlsPerObjective);
+      return this;
+    }
+    public APIRequestCreateAccountControl setPlacementControlsPerObjective (String placementControlsPerObjective) {
+      this.setParam("placement_controls_per_objective", placementControlsPerObjective);
       return this;
     }
 
@@ -6994,6 +7012,7 @@ public class AdAccount extends APINode {
       "creative",
       "creative_asset_groups_spec",
       "creative_automation_spec",
+      "dataset_split_specs",
       "date_format",
       "display_sequence",
       "draft_adgroup_id",
@@ -7154,6 +7173,15 @@ public class AdAccount extends APINode {
     }
     public APIRequestCreateAd setCreativeAutomationSpec (String creativeAutomationSpec) {
       this.setParam("creative_automation_spec", creativeAutomationSpec);
+      return this;
+    }
+
+    public APIRequestCreateAd setDatasetSplitSpecs (List<Map<String, String>> datasetSplitSpecs) {
+      this.setParam("dataset_split_specs", datasetSplitSpecs);
+      return this;
+    }
+    public APIRequestCreateAd setDatasetSplitSpecs (String datasetSplitSpecs) {
+      this.setParam("dataset_split_specs", datasetSplitSpecs);
       return this;
     }
 
@@ -8302,6 +8330,7 @@ public class AdAccount extends APINode {
       "ad_set_goal",
       "adlabels",
       "adset_schedule",
+      "anchor_event_attribution_window_days",
       "asset_feed_id",
       "attribution_count_type",
       "attribution_spec",
@@ -8548,6 +8577,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAdSets requestAdsetScheduleField (boolean value) {
       this.requestField("adset_schedule", value);
+      return this;
+    }
+    public APIRequestGetAdSets requestAnchorEventAttributionWindowDaysField () {
+      return this.requestAnchorEventAttributionWindowDaysField(true);
+    }
+    public APIRequestGetAdSets requestAnchorEventAttributionWindowDaysField (boolean value) {
+      this.requestField("anchor_event_attribution_window_days", value);
       return this;
     }
     public APIRequestGetAdSets requestAssetFeedIdField () {
@@ -9955,6 +9991,7 @@ public class AdAccount extends APINode {
       "ad_set_goal",
       "adlabels",
       "adset_schedule",
+      "anchor_event_attribution_window_days",
       "asset_feed_id",
       "attribution_count_type",
       "attribution_spec",
@@ -10174,6 +10211,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAdSetsByLabels requestAdsetScheduleField (boolean value) {
       this.requestField("adset_schedule", value);
+      return this;
+    }
+    public APIRequestGetAdSetsByLabels requestAnchorEventAttributionWindowDaysField () {
+      return this.requestAnchorEventAttributionWindowDaysField(true);
+    }
+    public APIRequestGetAdSetsByLabels requestAnchorEventAttributionWindowDaysField (boolean value) {
+      this.requestField("anchor_event_attribution_window_days", value);
       return this;
     }
     public APIRequestGetAdSetsByLabels requestAssetFeedIdField () {
@@ -12964,6 +13008,7 @@ public class AdAccount extends APINode {
       "initial_heading",
       "initial_pitch",
       "instant_game_entry_point_data",
+      "is_ai_generated",
       "is_boost_intended",
       "is_group_linking_post",
       "is_partnership_ad",
@@ -13299,6 +13344,15 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestCreateAdVideo setIsAiGenerated (Boolean isAiGenerated) {
+      this.setParam("is_ai_generated", isAiGenerated);
+      return this;
+    }
+    public APIRequestCreateAdVideo setIsAiGenerated (String isAiGenerated) {
+      this.setParam("is_ai_generated", isAiGenerated);
+      return this;
+    }
+
     public APIRequestCreateAdVideo setIsBoostIntended (Boolean isBoostIntended) {
       this.setParam("is_boost_intended", isBoostIntended);
       return this;
@@ -13623,6 +13677,7 @@ public class AdAccount extends APINode {
       "ad_set_goal",
       "adlabels",
       "adset_schedule",
+      "anchor_event_attribution_window_days",
       "asset_feed_id",
       "attribution_count_type",
       "attribution_spec",
@@ -13824,6 +13879,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAffectedAdSets requestAdsetScheduleField (boolean value) {
       this.requestField("adset_schedule", value);
+      return this;
+    }
+    public APIRequestGetAffectedAdSets requestAnchorEventAttributionWindowDaysField () {
+      return this.requestAnchorEventAttributionWindowDaysField(true);
+    }
+    public APIRequestGetAffectedAdSets requestAnchorEventAttributionWindowDaysField (boolean value) {
+      this.requestField("anchor_event_attribution_window_days", value);
       return this;
     }
     public APIRequestGetAffectedAdSets requestAssetFeedIdField () {
@@ -21596,8 +21658,6 @@ public class AdAccount extends APINode {
     };
 
     public static final String[] FIELDS = {
-      "daily_outcomes_curve",
-      "estimate_dau",
       "estimate_mau_lower_bound",
       "estimate_mau_upper_bound",
       "estimate_ready",
@@ -21721,20 +21781,6 @@ public class AdAccount extends APINode {
       return this;
     }
 
-    public APIRequestGetDeliveryEstimate requestDailyOutcomesCurveField () {
-      return this.requestDailyOutcomesCurveField(true);
-    }
-    public APIRequestGetDeliveryEstimate requestDailyOutcomesCurveField (boolean value) {
-      this.requestField("daily_outcomes_curve", value);
-      return this;
-    }
-    public APIRequestGetDeliveryEstimate requestEstimateDauField () {
-      return this.requestEstimateDauField(true);
-    }
-    public APIRequestGetDeliveryEstimate requestEstimateDauField (boolean value) {
-      this.requestField("estimate_dau", value);
-      return this;
-    }
     public APIRequestGetDeliveryEstimate requestEstimateMauLowerBoundField () {
       return this.requestEstimateMauLowerBoundField(true);
     }
@@ -21781,6 +21827,7 @@ public class AdAccount extends APINode {
       "ad_set_goal",
       "adlabels",
       "adset_schedule",
+      "anchor_event_attribution_window_days",
       "asset_feed_id",
       "attribution_count_type",
       "attribution_spec",
@@ -21987,6 +22034,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetDeprecatedTargetingAdSets requestAdsetScheduleField (boolean value) {
       this.requestField("adset_schedule", value);
+      return this;
+    }
+    public APIRequestGetDeprecatedTargetingAdSets requestAnchorEventAttributionWindowDaysField () {
+      return this.requestAnchorEventAttributionWindowDaysField(true);
+    }
+    public APIRequestGetDeprecatedTargetingAdSets requestAnchorEventAttributionWindowDaysField (boolean value) {
+      this.requestField("anchor_event_attribution_window_days", value);
       return this;
     }
     public APIRequestGetDeprecatedTargetingAdSets requestAssetFeedIdField () {
@@ -33024,6 +33078,7 @@ public class AdAccount extends APINode {
     }
     public static final String[] PARAMS = {
       "description",
+      "is_ai_generated",
       "privacy",
       "title",
       "upload_phase",
@@ -33090,6 +33145,15 @@ public class AdAccount extends APINode {
 
     public APIRequestCreateVideoAd setDescription (String description) {
       this.setParam("description", description);
+      return this;
+    }
+
+    public APIRequestCreateVideoAd setIsAiGenerated (Boolean isAiGenerated) {
+      this.setParam("is_ai_generated", isAiGenerated);
+      return this;
+    }
+    public APIRequestCreateVideoAd setIsAiGenerated (String isAiGenerated) {
+      this.setParam("is_ai_generated", isAiGenerated);
       return this;
     }
 
@@ -34328,6 +34392,8 @@ public class AdAccount extends APINode {
       VALUE_FEED_NESTED_DNM("FEED_NESTED_DNM"),
       @SerializedName("FEED_RELAXED")
       VALUE_FEED_RELAXED("FEED_RELAXED"),
+      @SerializedName("FEED_SELECT")
+      VALUE_FEED_SELECT("FEED_SELECT"),
       @SerializedName("FEED_STANDARD")
       VALUE_FEED_STANDARD("FEED_STANDARD"),
       @SerializedName("FEED_STRICT")

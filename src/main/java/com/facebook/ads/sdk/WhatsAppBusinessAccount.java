@@ -3320,7 +3320,6 @@ public class WhatsAppBusinessAccount extends APINode {
     }
     public static final String[] PARAMS = {
       "allow_category_change",
-      "bid_spec",
       "category",
       "components",
       "creative_sourcing_spec",
@@ -3339,6 +3338,7 @@ public class WhatsAppBusinessAccount extends APINode {
       "parameter_format",
       "product_set_id",
       "send_type",
+      "source_template_id",
       "sub_category",
     };
 
@@ -3405,15 +3405,6 @@ public class WhatsAppBusinessAccount extends APINode {
     }
     public APIRequestCreateMessageTemplate setAllowCategoryChange (String allowCategoryChange) {
       this.setParam("allow_category_change", allowCategoryChange);
-      return this;
-    }
-
-    public APIRequestCreateMessageTemplate setBidSpec (Map<String, String> bidSpec) {
-      this.setParam("bid_spec", bidSpec);
-      return this;
-    }
-    public APIRequestCreateMessageTemplate setBidSpec (String bidSpec) {
-      this.setParam("bid_spec", bidSpec);
       return this;
     }
 
@@ -3560,6 +3551,15 @@ public class WhatsAppBusinessAccount extends APINode {
     }
     public APIRequestCreateMessageTemplate setSendType (String sendType) {
       this.setParam("send_type", sendType);
+      return this;
+    }
+
+    public APIRequestCreateMessageTemplate setSourceTemplateId (Long sourceTemplateId) {
+      this.setParam("source_template_id", sourceTemplateId);
+      return this;
+    }
+    public APIRequestCreateMessageTemplate setSourceTemplateId (String sourceTemplateId) {
+      this.setParam("source_template_id", sourceTemplateId);
       return this;
     }
 

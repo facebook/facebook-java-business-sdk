@@ -49,6 +49,8 @@ public class AdSet extends APINode {
   private List<AdLabel> mAdlabels = null;
   @SerializedName("adset_schedule")
   private List<DayPart> mAdsetSchedule = null;
+  @SerializedName("anchor_event_attribution_window_days")
+  private Long mAnchorEventAttributionWindowDays = null;
   @SerializedName("asset_feed_id")
   private String mAssetFeedId = null;
   @SerializedName("attribution_count_type")
@@ -556,6 +558,15 @@ public class AdSet extends APINode {
     this.mAdsetSchedule = DayPart.getGson().fromJson(value, type);
     return this;
   }
+  public Long getFieldAnchorEventAttributionWindowDays() {
+    return mAnchorEventAttributionWindowDays;
+  }
+
+  public AdSet setFieldAnchorEventAttributionWindowDays(Long value) {
+    this.mAnchorEventAttributionWindowDays = value;
+    return this;
+  }
+
   public String getFieldAssetFeedId() {
     return mAssetFeedId;
   }
@@ -4098,6 +4109,7 @@ public class AdSet extends APINode {
       "ad_set_goal",
       "adlabels",
       "adset_schedule",
+      "anchor_event_attribution_window_days",
       "asset_feed_id",
       "attribution_count_type",
       "attribution_spec",
@@ -4335,6 +4347,13 @@ public class AdSet extends APINode {
     }
     public APIRequestGetCopies requestAdsetScheduleField (boolean value) {
       this.requestField("adset_schedule", value);
+      return this;
+    }
+    public APIRequestGetCopies requestAnchorEventAttributionWindowDaysField () {
+      return this.requestAnchorEventAttributionWindowDaysField(true);
+    }
+    public APIRequestGetCopies requestAnchorEventAttributionWindowDaysField (boolean value) {
+      this.requestField("anchor_event_attribution_window_days", value);
       return this;
     }
     public APIRequestGetCopies requestAssetFeedIdField () {
@@ -5097,8 +5116,6 @@ public class AdSet extends APINode {
     };
 
     public static final String[] FIELDS = {
-      "daily_outcomes_curve",
-      "estimate_dau",
       "estimate_mau_lower_bound",
       "estimate_mau_upper_bound",
       "estimate_ready",
@@ -5222,20 +5239,6 @@ public class AdSet extends APINode {
       return this;
     }
 
-    public APIRequestGetDeliveryEstimate requestDailyOutcomesCurveField () {
-      return this.requestDailyOutcomesCurveField(true);
-    }
-    public APIRequestGetDeliveryEstimate requestDailyOutcomesCurveField (boolean value) {
-      this.requestField("daily_outcomes_curve", value);
-      return this;
-    }
-    public APIRequestGetDeliveryEstimate requestEstimateDauField () {
-      return this.requestEstimateDauField(true);
-    }
-    public APIRequestGetDeliveryEstimate requestEstimateDauField (boolean value) {
-      this.requestField("estimate_dau", value);
-      return this;
-    }
     public APIRequestGetDeliveryEstimate requestEstimateMauLowerBoundField () {
       return this.requestEstimateMauLowerBoundField(true);
     }
@@ -6432,6 +6435,7 @@ public class AdSet extends APINode {
       "ad_set_goal",
       "adlabels",
       "adset_schedule",
+      "anchor_event_attribution_window_days",
       "asset_feed_id",
       "attribution_count_type",
       "attribution_spec",
@@ -6669,6 +6673,13 @@ public class AdSet extends APINode {
     }
     public APIRequestGet requestAdsetScheduleField (boolean value) {
       this.requestField("adset_schedule", value);
+      return this;
+    }
+    public APIRequestGet requestAnchorEventAttributionWindowDaysField () {
+      return this.requestAnchorEventAttributionWindowDaysField(true);
+    }
+    public APIRequestGet requestAnchorEventAttributionWindowDaysField (boolean value) {
+      this.requestField("anchor_event_attribution_window_days", value);
       return this;
     }
     public APIRequestGet requestAssetFeedIdField () {
@@ -8681,6 +8692,7 @@ public class AdSet extends APINode {
     this.mAdSetGoal = instance.mAdSetGoal;
     this.mAdlabels = instance.mAdlabels;
     this.mAdsetSchedule = instance.mAdsetSchedule;
+    this.mAnchorEventAttributionWindowDays = instance.mAnchorEventAttributionWindowDays;
     this.mAssetFeedId = instance.mAssetFeedId;
     this.mAttributionCountType = instance.mAttributionCountType;
     this.mAttributionSpec = instance.mAttributionSpec;

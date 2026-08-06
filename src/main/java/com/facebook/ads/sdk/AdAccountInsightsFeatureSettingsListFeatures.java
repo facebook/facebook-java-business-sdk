@@ -40,29 +40,25 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class ProductCatalogHotelRoomsBatch extends APINode {
-  @SerializedName("errors")
-  private List<Object> mErrors = null;
-  @SerializedName("errors_total_count")
-  private Long mErrorsTotalCount = null;
-  @SerializedName("handle")
-  private String mHandle = null;
-  @SerializedName("status")
-  private String mStatus = null;
+public class AdAccountInsightsFeatureSettingsListFeatures extends APINode {
+  @SerializedName("data")
+  private List<Object> mData = null;
+  @SerializedName("paging")
+  private Object mPaging = null;
   protected static Gson gson = null;
 
-  public ProductCatalogHotelRoomsBatch() {
+  public AdAccountInsightsFeatureSettingsListFeatures() {
   }
 
   public String getId() {
     return null;
   }
-  public static ProductCatalogHotelRoomsBatch loadJSON(String json, APIContext context, String header) {
-    ProductCatalogHotelRoomsBatch productCatalogHotelRoomsBatch = getGson().fromJson(json, ProductCatalogHotelRoomsBatch.class);
+  public static AdAccountInsightsFeatureSettingsListFeatures loadJSON(String json, APIContext context, String header) {
+    AdAccountInsightsFeatureSettingsListFeatures adAccountInsightsFeatureSettingsListFeatures = getGson().fromJson(json, AdAccountInsightsFeatureSettingsListFeatures.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(productCatalogHotelRoomsBatch.toString());
+      JsonElement o2 = parser.parse(adAccountInsightsFeatureSettingsListFeatures.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -72,14 +68,14 @@ public class ProductCatalogHotelRoomsBatch extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    productCatalogHotelRoomsBatch.context = context;
-    productCatalogHotelRoomsBatch.rawValue = json;
-    productCatalogHotelRoomsBatch.header = header;
-    return productCatalogHotelRoomsBatch;
+    adAccountInsightsFeatureSettingsListFeatures.context = context;
+    adAccountInsightsFeatureSettingsListFeatures.rawValue = json;
+    adAccountInsightsFeatureSettingsListFeatures.header = header;
+    return adAccountInsightsFeatureSettingsListFeatures;
   }
 
-  public static APINodeList<ProductCatalogHotelRoomsBatch> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<ProductCatalogHotelRoomsBatch> productCatalogHotelRoomsBatchs = new APINodeList<ProductCatalogHotelRoomsBatch>(request, json, header);
+  public static APINodeList<AdAccountInsightsFeatureSettingsListFeatures> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdAccountInsightsFeatureSettingsListFeatures> adAccountInsightsFeatureSettingsListFeaturess = new APINodeList<AdAccountInsightsFeatureSettingsListFeatures>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -90,9 +86,9 @@ public class ProductCatalogHotelRoomsBatch extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          productCatalogHotelRoomsBatchs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          adAccountInsightsFeatureSettingsListFeaturess.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return productCatalogHotelRoomsBatchs;
+        return adAccountInsightsFeatureSettingsListFeaturess;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -102,20 +98,20 @@ public class ProductCatalogHotelRoomsBatch extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                productCatalogHotelRoomsBatchs.setCursors(before, after);
+                adAccountInsightsFeatureSettingsListFeaturess.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            productCatalogHotelRoomsBatchs.setPaging(previous, next);
+            adAccountInsightsFeatureSettingsListFeaturess.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              productCatalogHotelRoomsBatchs.setAppSecret(context.getAppSecretProof());
+              adAccountInsightsFeatureSettingsListFeaturess.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              productCatalogHotelRoomsBatchs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              adAccountInsightsFeatureSettingsListFeaturess.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -126,23 +122,23 @@ public class ProductCatalogHotelRoomsBatch extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  productCatalogHotelRoomsBatchs.add(loadJSON(entry.getValue().toString(), context, header));
+                  adAccountInsightsFeatureSettingsListFeaturess.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              productCatalogHotelRoomsBatchs.add(loadJSON(obj.toString(), context, header));
+              adAccountInsightsFeatureSettingsListFeaturess.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return productCatalogHotelRoomsBatchs;
+          return adAccountInsightsFeatureSettingsListFeaturess;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              productCatalogHotelRoomsBatchs.add(loadJSON(entry.getValue().toString(), context, header));
+              adAccountInsightsFeatureSettingsListFeaturess.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return productCatalogHotelRoomsBatchs;
+          return adAccountInsightsFeatureSettingsListFeaturess;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -159,20 +155,20 @@ public class ProductCatalogHotelRoomsBatch extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              productCatalogHotelRoomsBatchs.add(loadJSON(value.toString(), context, header));
+              adAccountInsightsFeatureSettingsListFeaturess.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return productCatalogHotelRoomsBatchs;
+            return adAccountInsightsFeatureSettingsListFeaturess;
           }
 
           // Sixth, check if it's pure JsonObject
-          productCatalogHotelRoomsBatchs.clear();
-          productCatalogHotelRoomsBatchs.add(loadJSON(json, context, header));
-          return productCatalogHotelRoomsBatchs;
+          adAccountInsightsFeatureSettingsListFeaturess.clear();
+          adAccountInsightsFeatureSettingsListFeaturess.add(loadJSON(json, context, header));
+          return adAccountInsightsFeatureSettingsListFeaturess;
         }
       }
     } catch (Exception e) {
@@ -200,60 +196,25 @@ public class ProductCatalogHotelRoomsBatch extends APINode {
   }
 
 
-  public List<Object> getFieldErrors() {
-    return mErrors;
+  public List<Object> getFieldData() {
+    return mData;
   }
 
-  public ProductCatalogHotelRoomsBatch setFieldErrors(List<Object> value) {
-    this.mErrors = value;
+  public AdAccountInsightsFeatureSettingsListFeatures setFieldData(List<Object> value) {
+    this.mData = value;
     return this;
   }
 
-  public Long getFieldErrorsTotalCount() {
-    return mErrorsTotalCount;
+  public Object getFieldPaging() {
+    return mPaging;
   }
 
-  public ProductCatalogHotelRoomsBatch setFieldErrorsTotalCount(Long value) {
-    this.mErrorsTotalCount = value;
-    return this;
-  }
-
-  public String getFieldHandle() {
-    return mHandle;
-  }
-
-  public ProductCatalogHotelRoomsBatch setFieldHandle(String value) {
-    this.mHandle = value;
-    return this;
-  }
-
-  public String getFieldStatus() {
-    return mStatus;
-  }
-
-  public ProductCatalogHotelRoomsBatch setFieldStatus(String value) {
-    this.mStatus = value;
+  public AdAccountInsightsFeatureSettingsListFeatures setFieldPaging(Object value) {
+    this.mPaging = value;
     return this;
   }
 
 
-
-  public static enum EnumStandard {
-      @SerializedName("google")
-      VALUE_GOOGLE("google"),
-      ;
-
-      private String value;
-
-      private EnumStandard(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
 
 
   synchronized /*package*/ static Gson getGson() {
@@ -269,20 +230,18 @@ public class ProductCatalogHotelRoomsBatch extends APINode {
     return gson;
   }
 
-  public ProductCatalogHotelRoomsBatch copyFrom(ProductCatalogHotelRoomsBatch instance) {
-    this.mErrors = instance.mErrors;
-    this.mErrorsTotalCount = instance.mErrorsTotalCount;
-    this.mHandle = instance.mHandle;
-    this.mStatus = instance.mStatus;
+  public AdAccountInsightsFeatureSettingsListFeatures copyFrom(AdAccountInsightsFeatureSettingsListFeatures instance) {
+    this.mData = instance.mData;
+    this.mPaging = instance.mPaging;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<ProductCatalogHotelRoomsBatch> getParser() {
-    return new APIRequest.ResponseParser<ProductCatalogHotelRoomsBatch>() {
-      public APINodeList<ProductCatalogHotelRoomsBatch> parseResponse(String response, APIContext context, APIRequest<ProductCatalogHotelRoomsBatch> request, String header) throws MalformedResponseException {
-        return ProductCatalogHotelRoomsBatch.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<AdAccountInsightsFeatureSettingsListFeatures> getParser() {
+    return new APIRequest.ResponseParser<AdAccountInsightsFeatureSettingsListFeatures>() {
+      public APINodeList<AdAccountInsightsFeatureSettingsListFeatures> parseResponse(String response, APIContext context, APIRequest<AdAccountInsightsFeatureSettingsListFeatures> request, String header) throws MalformedResponseException {
+        return AdAccountInsightsFeatureSettingsListFeatures.parseResponse(response, context, request, header);
       }
     };
   }

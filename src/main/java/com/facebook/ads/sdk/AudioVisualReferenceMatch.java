@@ -75,8 +75,8 @@ public class AudioVisualReferenceMatch extends APINode {
   private Double mMatchedOverlapPercentage = null;
   @SerializedName("matched_owner_match_duration_in_sec")
   private Double mMatchedOwnerMatchDurationInSec = null;
-  @SerializedName("matched_reference_owner")
-  private Profile mMatchedReferenceOwner = null;
+  @SerializedName("matched_reference_owner_v2")
+  private Object mMatchedReferenceOwnerV2 = null;
   @SerializedName("modification_history")
   private List<Object> mModificationHistory = null;
   @SerializedName("num_matches_on_matched_side")
@@ -87,8 +87,8 @@ public class AudioVisualReferenceMatch extends APINode {
   private Double mRefOwnerMatchDurationInSec = null;
   @SerializedName("reference_overlap_percentage")
   private Double mReferenceOverlapPercentage = null;
-  @SerializedName("reference_owner")
-  private Profile mReferenceOwner = null;
+  @SerializedName("reference_owner_v2")
+  private Object mReferenceOwnerV2 = null;
   @SerializedName("rejection_form_data_entries_with_translations")
   private List<Object> mRejectionFormDataEntriesWithTranslations = null;
   @SerializedName("resolution_details")
@@ -409,23 +409,15 @@ public class AudioVisualReferenceMatch extends APINode {
     return this;
   }
 
-  public Profile getFieldMatchedReferenceOwner() {
-    if (mMatchedReferenceOwner != null) {
-      mMatchedReferenceOwner.context = getContext();
-    }
-    return mMatchedReferenceOwner;
+  public Object getFieldMatchedReferenceOwnerV2() {
+    return mMatchedReferenceOwnerV2;
   }
 
-  public AudioVisualReferenceMatch setFieldMatchedReferenceOwner(Profile value) {
-    this.mMatchedReferenceOwner = value;
+  public AudioVisualReferenceMatch setFieldMatchedReferenceOwnerV2(Object value) {
+    this.mMatchedReferenceOwnerV2 = value;
     return this;
   }
 
-  public AudioVisualReferenceMatch setFieldMatchedReferenceOwner(String value) {
-    Type type = new TypeToken<Profile>(){}.getType();
-    this.mMatchedReferenceOwner = Profile.getGson().fromJson(value, type);
-    return this;
-  }
   public List<Object> getFieldModificationHistory() {
     return mModificationHistory;
   }
@@ -471,23 +463,15 @@ public class AudioVisualReferenceMatch extends APINode {
     return this;
   }
 
-  public Profile getFieldReferenceOwner() {
-    if (mReferenceOwner != null) {
-      mReferenceOwner.context = getContext();
-    }
-    return mReferenceOwner;
+  public Object getFieldReferenceOwnerV2() {
+    return mReferenceOwnerV2;
   }
 
-  public AudioVisualReferenceMatch setFieldReferenceOwner(Profile value) {
-    this.mReferenceOwner = value;
+  public AudioVisualReferenceMatch setFieldReferenceOwnerV2(Object value) {
+    this.mReferenceOwnerV2 = value;
     return this;
   }
 
-  public AudioVisualReferenceMatch setFieldReferenceOwner(String value) {
-    Type type = new TypeToken<Profile>(){}.getType();
-    this.mReferenceOwner = Profile.getGson().fromJson(value, type);
-    return this;
-  }
   public List<Object> getFieldRejectionFormDataEntriesWithTranslations() {
     return mRejectionFormDataEntriesWithTranslations;
   }
@@ -594,13 +578,13 @@ public class AudioVisualReferenceMatch extends APINode {
     this.mMatchState = instance.mMatchState;
     this.mMatchedOverlapPercentage = instance.mMatchedOverlapPercentage;
     this.mMatchedOwnerMatchDurationInSec = instance.mMatchedOwnerMatchDurationInSec;
-    this.mMatchedReferenceOwner = instance.mMatchedReferenceOwner;
+    this.mMatchedReferenceOwnerV2 = instance.mMatchedReferenceOwnerV2;
     this.mModificationHistory = instance.mModificationHistory;
     this.mNumMatchesOnMatchedSide = instance.mNumMatchesOnMatchedSide;
     this.mNumMatchesOnRefSide = instance.mNumMatchesOnRefSide;
     this.mRefOwnerMatchDurationInSec = instance.mRefOwnerMatchDurationInSec;
     this.mReferenceOverlapPercentage = instance.mReferenceOverlapPercentage;
-    this.mReferenceOwner = instance.mReferenceOwner;
+    this.mReferenceOwnerV2 = instance.mReferenceOwnerV2;
     this.mRejectionFormDataEntriesWithTranslations = instance.mRejectionFormDataEntriesWithTranslations;
     this.mResolutionDetails = instance.mResolutionDetails;
     this.mResolutionReason = instance.mResolutionReason;

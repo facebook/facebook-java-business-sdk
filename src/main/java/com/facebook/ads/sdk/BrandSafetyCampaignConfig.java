@@ -43,6 +43,12 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class BrandSafetyCampaignConfig extends APINode {
   @SerializedName("comment_moderation_filter")
   private String mCommentModerationFilter = null;
+  @SerializedName("fb_comment_moderation_filter")
+  private String mFbCommentModerationFilter = null;
+  @SerializedName("ig_comment_moderation_filter")
+  private String mIgCommentModerationFilter = null;
+  @SerializedName("threads_comment_moderation_filter")
+  private String mThreadsCommentModerationFilter = null;
   protected static Gson gson = null;
 
   public BrandSafetyCampaignConfig() {
@@ -203,6 +209,33 @@ public class BrandSafetyCampaignConfig extends APINode {
     return this;
   }
 
+  public String getFieldFbCommentModerationFilter() {
+    return mFbCommentModerationFilter;
+  }
+
+  public BrandSafetyCampaignConfig setFieldFbCommentModerationFilter(String value) {
+    this.mFbCommentModerationFilter = value;
+    return this;
+  }
+
+  public String getFieldIgCommentModerationFilter() {
+    return mIgCommentModerationFilter;
+  }
+
+  public BrandSafetyCampaignConfig setFieldIgCommentModerationFilter(String value) {
+    this.mIgCommentModerationFilter = value;
+    return this;
+  }
+
+  public String getFieldThreadsCommentModerationFilter() {
+    return mThreadsCommentModerationFilter;
+  }
+
+  public BrandSafetyCampaignConfig setFieldThreadsCommentModerationFilter(String value) {
+    this.mThreadsCommentModerationFilter = value;
+    return this;
+  }
+
 
 
 
@@ -221,6 +254,9 @@ public class BrandSafetyCampaignConfig extends APINode {
 
   public BrandSafetyCampaignConfig copyFrom(BrandSafetyCampaignConfig instance) {
     this.mCommentModerationFilter = instance.mCommentModerationFilter;
+    this.mFbCommentModerationFilter = instance.mFbCommentModerationFilter;
+    this.mIgCommentModerationFilter = instance.mIgCommentModerationFilter;
+    this.mThreadsCommentModerationFilter = instance.mThreadsCommentModerationFilter;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

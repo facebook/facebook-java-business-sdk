@@ -45,6 +45,8 @@ public class AdCreativeMediaSourcingSpec extends APINode {
   private List<Object> mBodies = null;
   @SerializedName("descriptions")
   private List<Object> mDescriptions = null;
+  @SerializedName("destinations")
+  private List<Object> mDestinations = null;
   @SerializedName("images")
   private List<Object> mImages = null;
   @SerializedName("push_metadata_ids")
@@ -224,6 +226,15 @@ public class AdCreativeMediaSourcingSpec extends APINode {
     return this;
   }
 
+  public List<Object> getFieldDestinations() {
+    return mDestinations;
+  }
+
+  public AdCreativeMediaSourcingSpec setFieldDestinations(List<Object> value) {
+    this.mDestinations = value;
+    return this;
+  }
+
   public List<Object> getFieldImages() {
     return mImages;
   }
@@ -288,6 +299,7 @@ public class AdCreativeMediaSourcingSpec extends APINode {
   public AdCreativeMediaSourcingSpec copyFrom(AdCreativeMediaSourcingSpec instance) {
     this.mBodies = instance.mBodies;
     this.mDescriptions = instance.mDescriptions;
+    this.mDestinations = instance.mDestinations;
     this.mImages = instance.mImages;
     this.mPushMetadataIds = instance.mPushMetadataIds;
     this.mRelatedMedia = instance.mRelatedMedia;

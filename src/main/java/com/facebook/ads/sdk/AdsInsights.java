@@ -283,6 +283,8 @@ public class AdsInsights extends APINode {
   private String mInlineLinkClicks = null;
   @SerializedName("inline_post_engagement")
   private String mInlinePostEngagement = null;
+  @SerializedName("instagram_profile_follow")
+  private String mInstagramProfileFollow = null;
   @SerializedName("instagram_profile_visits")
   private String mInstagramProfileVisits = null;
   @SerializedName("instagram_upcoming_event_reminders_set")
@@ -341,14 +343,6 @@ public class AdsInsights extends APINode {
   private String mMarketingMessagesSpend = null;
   @SerializedName("marketing_messages_spend_currency")
   private String mMarketingMessagesSpendCurrency = null;
-  @SerializedName("marketing_messages_website_add_to_cart")
-  private String mMarketingMessagesWebsiteAddToCart = null;
-  @SerializedName("marketing_messages_website_initiate_checkout")
-  private String mMarketingMessagesWebsiteInitiateCheckout = null;
-  @SerializedName("marketing_messages_website_purchase")
-  private String mMarketingMessagesWebsitePurchase = null;
-  @SerializedName("marketing_messages_website_purchase_values")
-  private String mMarketingMessagesWebsitePurchaseValues = null;
   @SerializedName("messages_delivered")
   private String mMessagesDelivered = null;
   @SerializedName("messages_delivered_ctr")
@@ -375,6 +369,10 @@ public class AdsInsights extends APINode {
   private List<AdsActionStats> mOutboundClicksCtr = null;
   @SerializedName("place_page_name")
   private String mPlacePageName = null;
+  @SerializedName("playable_average_game_length")
+  private String mPlayableAverageGameLength = null;
+  @SerializedName("playable_game_start_rate")
+  private String mPlayableGameStartRate = null;
   @SerializedName("product_group_retailer_id")
   private String mProductGroupRetailerId = null;
   @SerializedName("product_retailer_id")
@@ -2160,6 +2158,15 @@ public class AdsInsights extends APINode {
     return this;
   }
 
+  public String getFieldInstagramProfileFollow() {
+    return mInstagramProfileFollow;
+  }
+
+  public AdsInsights setFieldInstagramProfileFollow(String value) {
+    this.mInstagramProfileFollow = value;
+    return this;
+  }
+
   public String getFieldInstagramProfileVisits() {
     return mInstagramProfileVisits;
   }
@@ -2431,42 +2438,6 @@ public class AdsInsights extends APINode {
     return this;
   }
 
-  public String getFieldMarketingMessagesWebsiteAddToCart() {
-    return mMarketingMessagesWebsiteAddToCart;
-  }
-
-  public AdsInsights setFieldMarketingMessagesWebsiteAddToCart(String value) {
-    this.mMarketingMessagesWebsiteAddToCart = value;
-    return this;
-  }
-
-  public String getFieldMarketingMessagesWebsiteInitiateCheckout() {
-    return mMarketingMessagesWebsiteInitiateCheckout;
-  }
-
-  public AdsInsights setFieldMarketingMessagesWebsiteInitiateCheckout(String value) {
-    this.mMarketingMessagesWebsiteInitiateCheckout = value;
-    return this;
-  }
-
-  public String getFieldMarketingMessagesWebsitePurchase() {
-    return mMarketingMessagesWebsitePurchase;
-  }
-
-  public AdsInsights setFieldMarketingMessagesWebsitePurchase(String value) {
-    this.mMarketingMessagesWebsitePurchase = value;
-    return this;
-  }
-
-  public String getFieldMarketingMessagesWebsitePurchaseValues() {
-    return mMarketingMessagesWebsitePurchaseValues;
-  }
-
-  public AdsInsights setFieldMarketingMessagesWebsitePurchaseValues(String value) {
-    this.mMarketingMessagesWebsitePurchaseValues = value;
-    return this;
-  }
-
   public String getFieldMessagesDelivered() {
     return mMessagesDelivered;
   }
@@ -2601,6 +2572,24 @@ public class AdsInsights extends APINode {
 
   public AdsInsights setFieldPlacePageName(String value) {
     this.mPlacePageName = value;
+    return this;
+  }
+
+  public String getFieldPlayableAverageGameLength() {
+    return mPlayableAverageGameLength;
+  }
+
+  public AdsInsights setFieldPlayableAverageGameLength(String value) {
+    this.mPlayableAverageGameLength = value;
+    return this;
+  }
+
+  public String getFieldPlayableGameStartRate() {
+    return mPlayableGameStartRate;
+  }
+
+  public AdsInsights setFieldPlayableGameStartRate(String value) {
+    this.mPlayableGameStartRate = value;
     return this;
   }
 
@@ -4175,6 +4164,7 @@ public class AdsInsights extends APINode {
     this.mInlineLinkClickCtr = instance.mInlineLinkClickCtr;
     this.mInlineLinkClicks = instance.mInlineLinkClicks;
     this.mInlinePostEngagement = instance.mInlinePostEngagement;
+    this.mInstagramProfileFollow = instance.mInstagramProfileFollow;
     this.mInstagramProfileVisits = instance.mInstagramProfileVisits;
     this.mInstagramUpcomingEventRemindersSet = instance.mInstagramUpcomingEventRemindersSet;
     this.mInstantExperienceClicksToOpen = instance.mInstantExperienceClicksToOpen;
@@ -4204,10 +4194,6 @@ public class AdsInsights extends APINode {
     this.mMarketingMessagesSent = instance.mMarketingMessagesSent;
     this.mMarketingMessagesSpend = instance.mMarketingMessagesSpend;
     this.mMarketingMessagesSpendCurrency = instance.mMarketingMessagesSpendCurrency;
-    this.mMarketingMessagesWebsiteAddToCart = instance.mMarketingMessagesWebsiteAddToCart;
-    this.mMarketingMessagesWebsiteInitiateCheckout = instance.mMarketingMessagesWebsiteInitiateCheckout;
-    this.mMarketingMessagesWebsitePurchase = instance.mMarketingMessagesWebsitePurchase;
-    this.mMarketingMessagesWebsitePurchaseValues = instance.mMarketingMessagesWebsitePurchaseValues;
     this.mMessagesDelivered = instance.mMessagesDelivered;
     this.mMessagesDeliveredCtr = instance.mMessagesDeliveredCtr;
     this.mMobileAppPurchaseRoas = instance.mMobileAppPurchaseRoas;
@@ -4221,6 +4207,8 @@ public class AdsInsights extends APINode {
     this.mOutboundClicks = instance.mOutboundClicks;
     this.mOutboundClicksCtr = instance.mOutboundClicksCtr;
     this.mPlacePageName = instance.mPlacePageName;
+    this.mPlayableAverageGameLength = instance.mPlayableAverageGameLength;
+    this.mPlayableGameStartRate = instance.mPlayableGameStartRate;
     this.mProductGroupRetailerId = instance.mProductGroupRetailerId;
     this.mProductRetailerId = instance.mProductRetailerId;
     this.mProductViews = instance.mProductViews;

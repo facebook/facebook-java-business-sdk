@@ -49,6 +49,8 @@ public class AdAccountBusinessConstraints extends APINode {
   private Boolean mIsAgeRestrictionEnabled = null;
   @SerializedName("placement_controls")
   private Object mPlacementControls = null;
+  @SerializedName("placement_controls_per_objective")
+  private Object mPlacementControlsPerObjective = null;
   @SerializedName("status")
   private EnumStatus mStatus = null;
   protected static Gson gson = null;
@@ -238,6 +240,15 @@ public class AdAccountBusinessConstraints extends APINode {
     return this;
   }
 
+  public Object getFieldPlacementControlsPerObjective() {
+    return mPlacementControlsPerObjective;
+  }
+
+  public AdAccountBusinessConstraints setFieldPlacementControlsPerObjective(Object value) {
+    this.mPlacementControlsPerObjective = value;
+    return this;
+  }
+
   public EnumStatus getFieldStatus() {
     return mStatus;
   }
@@ -289,6 +300,7 @@ public class AdAccountBusinessConstraints extends APINode {
     this.mCampaignsWithError = instance.mCampaignsWithError;
     this.mIsAgeRestrictionEnabled = instance.mIsAgeRestrictionEnabled;
     this.mPlacementControls = instance.mPlacementControls;
+    this.mPlacementControlsPerObjective = instance.mPlacementControlsPerObjective;
     this.mStatus = instance.mStatus;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

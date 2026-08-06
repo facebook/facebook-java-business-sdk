@@ -34732,6 +34732,7 @@ public class Page extends APINode {
     public static final String[] PARAMS = {
       "description",
       "feed_targeting",
+      "is_ai_generated",
       "place",
       "scheduled_publish_time",
       "targeting",
@@ -34809,6 +34810,15 @@ public class Page extends APINode {
     }
     public APIRequestCreateVideoReel setFeedTargeting (String feedTargeting) {
       this.setParam("feed_targeting", feedTargeting);
+      return this;
+    }
+
+    public APIRequestCreateVideoReel setIsAiGenerated (Boolean isAiGenerated) {
+      this.setParam("is_ai_generated", isAiGenerated);
+      return this;
+    }
+    public APIRequestCreateVideoReel setIsAiGenerated (String isAiGenerated) {
+      this.setParam("is_ai_generated", isAiGenerated);
       return this;
     }
 
@@ -34907,6 +34917,7 @@ public class Page extends APINode {
     public static final String[] PARAMS = {
       "description",
       "feed_targeting",
+      "is_ai_generated",
       "place",
       "scheduled_publish_time",
       "targeting",
@@ -34984,6 +34995,15 @@ public class Page extends APINode {
     }
     public APIRequestCreateVideoStory setFeedTargeting (String feedTargeting) {
       this.setParam("feed_targeting", feedTargeting);
+      return this;
+    }
+
+    public APIRequestCreateVideoStory setIsAiGenerated (Boolean isAiGenerated) {
+      this.setParam("is_ai_generated", isAiGenerated);
+      return this;
+    }
+    public APIRequestCreateVideoStory setIsAiGenerated (String isAiGenerated) {
+      this.setParam("is_ai_generated", isAiGenerated);
       return this;
     }
 
@@ -35627,6 +35647,7 @@ public class Page extends APINode {
       "initial_heading",
       "initial_pitch",
       "instant_game_entry_point_data",
+      "is_ai_generated",
       "is_boost_intended",
       "is_explicit_share",
       "is_group_linking_post",
@@ -36034,6 +36055,15 @@ public class Page extends APINode {
 
     public APIRequestCreateVideo setInstantGameEntryPointData (String instantGameEntryPointData) {
       this.setParam("instant_game_entry_point_data", instantGameEntryPointData);
+      return this;
+    }
+
+    public APIRequestCreateVideo setIsAiGenerated (Boolean isAiGenerated) {
+      this.setParam("is_ai_generated", isAiGenerated);
+      return this;
+    }
+    public APIRequestCreateVideo setIsAiGenerated (String isAiGenerated) {
+      this.setParam("is_ai_generated", isAiGenerated);
       return this;
     }
 
@@ -39593,8 +39623,26 @@ public class Page extends APINode {
       VALUE_C2PA_METADATA_EDITED("C2PA_METADATA_EDITED"),
       @SerializedName("EXPLICIT")
       VALUE_EXPLICIT("EXPLICIT"),
+      @SerializedName("EXPLICIT_AI_CUT")
+      VALUE_EXPLICIT_AI_CUT("EXPLICIT_AI_CUT"),
+      @SerializedName("EXPLICIT_AI_EDIT")
+      VALUE_EXPLICIT_AI_EDIT("EXPLICIT_AI_EDIT"),
+      @SerializedName("EXPLICIT_AI_EDIT_PRESETS_SHEET")
+      VALUE_EXPLICIT_AI_EDIT_PRESETS_SHEET("EXPLICIT_AI_EDIT_PRESETS_SHEET"),
+      @SerializedName("EXPLICIT_AI_EXPANDER")
+      VALUE_EXPLICIT_AI_EXPANDER("EXPLICIT_AI_EXPANDER"),
+      @SerializedName("EXPLICIT_AI_REWRITE_WITH_META_AI_INTENT")
+      VALUE_EXPLICIT_AI_REWRITE_WITH_META_AI_INTENT("EXPLICIT_AI_REWRITE_WITH_META_AI_INTENT"),
+      @SerializedName("EXPLICIT_AI_TRANSITION")
+      VALUE_EXPLICIT_AI_TRANSITION("EXPLICIT_AI_TRANSITION"),
+      @SerializedName("EXPLICIT_AI_V2V_RESTYLE")
+      VALUE_EXPLICIT_AI_V2V_RESTYLE("EXPLICIT_AI_V2V_RESTYLE"),
       @SerializedName("EXPLICIT_ANIMATE")
       VALUE_EXPLICIT_ANIMATE("EXPLICIT_ANIMATE"),
+      @SerializedName("EXPLICIT_CLIPGEN")
+      VALUE_EXPLICIT_CLIPGEN("EXPLICIT_CLIPGEN"),
+      @SerializedName("EXPLICIT_CUTOUT")
+      VALUE_EXPLICIT_CUTOUT("EXPLICIT_CUTOUT"),
       @SerializedName("EXPLICIT_DROP_IN")
       VALUE_EXPLICIT_DROP_IN("EXPLICIT_DROP_IN"),
       @SerializedName("EXPLICIT_FACE_SWAP")
@@ -39603,8 +39651,14 @@ public class Page extends APINode {
       VALUE_EXPLICIT_IMAGINE("EXPLICIT_IMAGINE"),
       @SerializedName("EXPLICIT_IMAGINE_ME")
       VALUE_EXPLICIT_IMAGINE_ME("EXPLICIT_IMAGINE_ME"),
+      @SerializedName("EXPLICIT_MAGIC_CUT")
+      VALUE_EXPLICIT_MAGIC_CUT("EXPLICIT_MAGIC_CUT"),
       @SerializedName("EXPLICIT_RESTYLE")
       VALUE_EXPLICIT_RESTYLE("EXPLICIT_RESTYLE"),
+      @SerializedName("EXPLICIT_RESTYLE_EFFECTS_MERGE")
+      VALUE_EXPLICIT_RESTYLE_EFFECTS_MERGE("EXPLICIT_RESTYLE_EFFECTS_MERGE"),
+      @SerializedName("EXPLICIT_SUBJECT_EFFECT")
+      VALUE_EXPLICIT_SUBJECT_EFFECT("EXPLICIT_SUBJECT_EFFECT"),
       @SerializedName("EXPLICIT_WARDROBE")
       VALUE_EXPLICIT_WARDROBE("EXPLICIT_WARDROBE"),
       @SerializedName("INVISIBLE_WATERMARK")
@@ -39613,6 +39667,8 @@ public class Page extends APINode {
       VALUE_IPTC("IPTC"),
       @SerializedName("IPTC_METADATA_EDITED")
       VALUE_IPTC_METADATA_EDITED("IPTC_METADATA_EDITED"),
+      @SerializedName("NONE")
+      VALUE_NONE("NONE"),
       ;
 
       private String value;

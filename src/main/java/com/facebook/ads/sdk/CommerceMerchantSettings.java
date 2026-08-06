@@ -294,10 +294,6 @@ public class CommerceMerchantSettings extends APINode {
     return new APIRequestGetProductCatalogs(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestGetReturns getReturns() {
-    return new APIRequestGetReturns(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetSetupStatus getSetupStatus() {
     return new APIRequestGetSetupStatus(this.getPrefixedId().toString(), context);
   }
@@ -308,10 +304,6 @@ public class CommerceMerchantSettings extends APINode {
 
   public APIRequestGetShops getShops() {
     return new APIRequestGetShops(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestGetTaxSettings getTaxSettings() {
-    return new APIRequestGetTaxSettings(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGet get() {
@@ -2016,139 +2008,6 @@ public class CommerceMerchantSettings extends APINode {
     }
   }
 
-  public static class APIRequestGetReturns extends APIRequest<APINode> {
-
-    APINodeList<APINode> lastResponse = null;
-    @Override
-    public APINodeList<APINode> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "end_time_created",
-      "merchant_return_id",
-      "start_time_created",
-      "statuses",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<APINode> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetReturns.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         },
-         MoreExecutors.directExecutor()
-      );
-    };
-
-    public APIRequestGetReturns(String nodeId, APIContext context) {
-      super(context, nodeId, "/returns", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetReturns setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetReturns setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetReturns setEndTimeCreated (String endTimeCreated) {
-      this.setParam("end_time_created", endTimeCreated);
-      return this;
-    }
-
-    public APIRequestGetReturns setMerchantReturnId (String merchantReturnId) {
-      this.setParam("merchant_return_id", merchantReturnId);
-      return this;
-    }
-
-    public APIRequestGetReturns setStartTimeCreated (String startTimeCreated) {
-      this.setParam("start_time_created", startTimeCreated);
-      return this;
-    }
-
-    public APIRequestGetReturns setStatuses (List<EnumStatuses> statuses) {
-      this.setParam("statuses", statuses);
-      return this;
-    }
-    public APIRequestGetReturns setStatuses (String statuses) {
-      this.setParam("statuses", statuses);
-      return this;
-    }
-
-    public APIRequestGetReturns requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetReturns requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetReturns requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetReturns requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetReturns requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetReturns requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
   public static class APIRequestGetSetupStatus extends APIRequest<CommerceMerchantSettingsSetupStatus> {
 
     APINodeList<CommerceMerchantSettingsSetupStatus> lastResponse = null;
@@ -2612,111 +2471,6 @@ public class CommerceMerchantSettings extends APINode {
     }
   }
 
-  public static class APIRequestGetTaxSettings extends APIRequest<APINode> {
-
-    APINodeList<APINode> lastResponse = null;
-    @Override
-    public APINodeList<APINode> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<APINode> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetTaxSettings.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         },
-         MoreExecutors.directExecutor()
-      );
-    };
-
-    public APIRequestGetTaxSettings(String nodeId, APIContext context) {
-      super(context, nodeId, "/tax_settings", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetTaxSettings setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetTaxSettings setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetTaxSettings requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetTaxSettings requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetTaxSettings requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetTaxSettings requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetTaxSettings requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetTaxSettings requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
   public static class APIRequestGet extends APIRequest<CommerceMerchantSettings> {
 
     CommerceMerchantSettings lastResponse = null;
@@ -3085,31 +2839,6 @@ public class CommerceMerchantSettings extends APINode {
       private String value;
 
       private EnumMerchantStatus(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumStatuses {
-      @SerializedName("APPROVED")
-      VALUE_APPROVED("APPROVED"),
-      @SerializedName("DISAPPROVED")
-      VALUE_DISAPPROVED("DISAPPROVED"),
-      @SerializedName("MERCHANT_MARKED_COMPLETED")
-      VALUE_MERCHANT_MARKED_COMPLETED("MERCHANT_MARKED_COMPLETED"),
-      @SerializedName("REFUNDED")
-      VALUE_REFUNDED("REFUNDED"),
-      @SerializedName("REQUESTED")
-      VALUE_REQUESTED("REQUESTED"),
-      ;
-
-      private String value;
-
-      private EnumStatuses(String value) {
         this.value = value;
       }
 
