@@ -25,10 +25,7 @@ package com.facebook.ads.sdk;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import java.net.URL;
-import java.util.List;
 import java.util.ArrayList;
-import java.util.Map;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Objects;
 import java.util.Spliterator;
@@ -86,12 +83,7 @@ public class APINodeList<T extends APINode> extends ArrayList<T> implements APIR
         }
         return (APINodeList<T>) request.execute();
       }
-      if (after == null) return null;
-      this.request.setOverrideUrl(null);
-      Map<String, Object> extraParams = new HashMap<String, Object>();
-      if (limit > 0) extraParams.put("limit", limit);
-      extraParams.put("after", after);
-      return (APINodeList<T>) request.execute(extraParams);
+      return null;
     }
 
     public void setCursors(String before, String after) {
