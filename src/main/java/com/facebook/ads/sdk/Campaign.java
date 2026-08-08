@@ -1706,6 +1706,7 @@ public class Campaign extends APINode {
       "full_funnel_exploration_mode",
       "id",
       "instagram_user_id",
+      "threads_user_id",
       "is_ba_skip_delayed_eligible",
       "is_budget_schedule_enabled",
       "is_dc_follow_optimized",
@@ -2166,6 +2167,13 @@ public class Campaign extends APINode {
     }
     public APIRequestGetAdSets requestInstagramUserIdField (boolean value) {
       this.requestField("instagram_user_id", value);
+      return this;
+    }
+    public APIRequestGetAdSets requestThreadsUserIdField () {
+      return this.requestThreadsUserIdField(true);
+    }
+    public APIRequestGetAdSets requestThreadsUserIdField (boolean value) {
+      this.requestField("threads_user_id", value);
       return this;
     }
     public APIRequestGetAdSets requestIsBaSkipDelayedEligibleField () {
