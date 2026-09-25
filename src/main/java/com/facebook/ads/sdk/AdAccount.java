@@ -2813,6 +2813,7 @@ public class AdAccount extends APINode {
       "instagram_branded_content",
       "instagram_permalink_url",
       "instagram_user_id",
+      "threads_user_id",
       "interactive_components_spec",
       "link_deep_link_url",
       "link_destination_display_url",
@@ -3217,6 +3218,13 @@ public class AdAccount extends APINode {
       this.requestField("instagram_user_id", value);
       return this;
     }
+    public APIRequestGetAdCreatives requestThreadsUserIdField () {
+      return this.requestThreadsUserIdField(true);
+    }
+    public APIRequestGetAdCreatives requestThreadsUserIdField (boolean value) {
+      this.requestField("threads_user_id", value);
+      return this;
+    }
     public APIRequestGetAdCreatives requestInteractiveComponentsSpecField () {
       return this.requestInteractiveComponentsSpecField(true);
     }
@@ -3532,6 +3540,7 @@ public class AdAccount extends APINode {
       "instagram_branded_content",
       "instagram_permalink_url",
       "instagram_user_id",
+      "threads_user_id",
       "interactive_components_spec",
       "is_dco_internal",
       "link_og_id",
@@ -3871,6 +3880,11 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestCreateAdCreative setThreadsUserId (String threadsUserId) {
+      this.setParam("threads_user_id", threadsUserId);
+      return this;
+    }
+
     public APIRequestCreateAdCreative setInteractiveComponentsSpec (Map<String, String> interactiveComponentsSpec) {
       this.setParam("interactive_components_spec", interactiveComponentsSpec);
       return this;
@@ -4181,6 +4195,7 @@ public class AdAccount extends APINode {
       "instagram_branded_content",
       "instagram_permalink_url",
       "instagram_user_id",
+      "threads_user_id",
       "interactive_components_spec",
       "link_deep_link_url",
       "link_destination_display_url",
@@ -4601,6 +4616,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAdCreativesByLabels requestInstagramUserIdField (boolean value) {
       this.requestField("instagram_user_id", value);
+      return this;
+    }
+    public APIRequestGetAdCreativesByLabels requestThreadsUserIdField () {
+      return this.requestThreadsUserIdField(true);
+    }
+    public APIRequestGetAdCreativesByLabels requestThreadsUserIdField (boolean value) {
+      this.requestField("threads_user_id", value);
       return this;
     }
     public APIRequestGetAdCreativesByLabels requestInteractiveComponentsSpecField () {
@@ -8402,6 +8424,7 @@ public class AdAccount extends APINode {
       "full_funnel_exploration_mode",
       "id",
       "instagram_user_id",
+      "threads_user_id",
       "is_ba_skip_delayed_eligible",
       "is_budget_schedule_enabled",
       "is_dc_follow_optimized",
@@ -8864,6 +8887,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAdSets requestInstagramUserIdField (boolean value) {
       this.requestField("instagram_user_id", value);
+      return this;
+    }
+    public APIRequestGetAdSets requestThreadsUserIdField () {
+      return this.requestThreadsUserIdField(true);
+    }
+    public APIRequestGetAdSets requestThreadsUserIdField (boolean value) {
+      this.requestField("threads_user_id", value);
       return this;
     }
     public APIRequestGetAdSets requestIsBaSkipDelayedEligibleField () {
@@ -10045,6 +10075,7 @@ public class AdAccount extends APINode {
       "full_funnel_exploration_mode",
       "id",
       "instagram_user_id",
+      "threads_user_id",
       "is_ba_skip_delayed_eligible",
       "is_budget_schedule_enabled",
       "is_dc_follow_optimized",
@@ -10480,6 +10511,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAdSetsByLabels requestInstagramUserIdField (boolean value) {
       this.requestField("instagram_user_id", value);
+      return this;
+    }
+    public APIRequestGetAdSetsByLabels requestThreadsUserIdField () {
+      return this.requestThreadsUserIdField(true);
+    }
+    public APIRequestGetAdSetsByLabels requestThreadsUserIdField (boolean value) {
+      this.requestField("threads_user_id", value);
       return this;
     }
     public APIRequestGetAdSetsByLabels requestIsBaSkipDelayedEligibleField () {
@@ -13723,6 +13761,7 @@ public class AdAccount extends APINode {
       "full_funnel_exploration_mode",
       "id",
       "instagram_user_id",
+      "threads_user_id",
       "is_ba_skip_delayed_eligible",
       "is_budget_schedule_enabled",
       "is_dc_follow_optimized",
@@ -14140,6 +14179,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAffectedAdSets requestInstagramUserIdField (boolean value) {
       this.requestField("instagram_user_id", value);
+      return this;
+    }
+    public APIRequestGetAffectedAdSets requestThreadsUserIdField () {
+      return this.requestThreadsUserIdField(true);
+    }
+    public APIRequestGetAffectedAdSets requestThreadsUserIdField (boolean value) {
+      this.requestField("threads_user_id", value);
       return this;
     }
     public APIRequestGetAffectedAdSets requestIsBaSkipDelayedEligibleField () {
@@ -21881,6 +21927,7 @@ public class AdAccount extends APINode {
       "full_funnel_exploration_mode",
       "id",
       "instagram_user_id",
+      "threads_user_id",
       "is_ba_skip_delayed_eligible",
       "is_budget_schedule_enabled",
       "is_dc_follow_optimized",
@@ -22303,6 +22350,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetDeprecatedTargetingAdSets requestInstagramUserIdField (boolean value) {
       this.requestField("instagram_user_id", value);
+      return this;
+    }
+    public APIRequestGetDeprecatedTargetingAdSets requestThreadsUserIdField () {
+      return this.requestThreadsUserIdField(true);
+    }
+    public APIRequestGetDeprecatedTargetingAdSets requestThreadsUserIdField (boolean value) {
+      this.requestField("threads_user_id", value);
       return this;
     }
     public APIRequestGetDeprecatedTargetingAdSets requestIsBaSkipDelayedEligibleField () {
