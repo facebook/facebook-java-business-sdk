@@ -85,11 +85,13 @@ public class ServerSideTest {
     String serializedPayload = eventRequest.getSerializedPayload();
 
     // ASSERT
-    String cpString = (new Gson()).toJson(customProperties);
-    String serializedContents = (new Gson()).toJson(contents);
+    String cpStringPattern1 = "\"Key2\":\"Value2\",\"Key1\":\"Value1\"";
+    String cpStringPattern2 = "\"Key1\":\"Value1\",\"Key2\":\"Value2\"";
+    String serializedContentsPattern1 = "{\"brand\":\"brandA\",\"id\":\"1\"},{\"brand\":\"brandB\",\"id\":\"2\"}";
+    String serializedContentsPattern2 = "{\"id\":\"1\",\"brand\":\"brandA\"},{\"id\":\"2\",\"brand\":\"brandB\"}";
     String serializedContentIds = (new Gson()).toJson(contentIds);
-    Assert.assertTrue(serializedPayload.contains(cpString.substring(1, cpString.length() - 1)));
-    Assert.assertTrue(serializedPayload.contains(serializedContents));
+    Assert.assertTrue(serializedPayload.contains(cpStringPattern1) || serializedPayload.contains(cpStringPattern2));
+    Assert.assertTrue(serializedPayload.contains(serializedContentsPattern1) || serializedPayload.contains(serializedContentsPattern2));
     Assert.assertTrue(serializedPayload.contains(serializedContentIds));
     Assert.assertTrue(serializedPayload.contains(currency.toLowerCase()));
     Assert.assertTrue(serializedPayload.contains(contentCategory));
