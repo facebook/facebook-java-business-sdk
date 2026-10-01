@@ -17,20 +17,19 @@
  */
 package com.facebook.ads.sdk.serverside;
 
-import com.facebook.ads.utils.ServerSideApiConstants;
-import com.facebook.ads.sdk.serverside.utils.Sha256GenderEnumListAdaptor;
-import com.facebook.ads.sdk.serverside.utils.Sha256StringAdaptor;
-import com.facebook.ads.sdk.serverside.utils.Sha256StringListAdaptor;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
-import java.util.stream.Collectors;
+
+import com.facebook.ads.sdk.serverside.utils.Sha256GenderEnumListAdaptor;
+import com.facebook.ads.sdk.serverside.utils.Sha256StringAdaptor;
+import com.facebook.ads.sdk.serverside.utils.Sha256StringListAdaptor;
+import com.facebook.ads.utils.ServerSideApiConstants;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
 
 /**
  * UserData is a set of identifiers Facebook can use for targeted attribution.
@@ -137,6 +136,9 @@ public class UserData {
   @SerializedName(ServerSideApiConstants.PAGE_ID)
   private String pageId = null;
 
+  @SerializedName(ServerSideApiConstants.WHATSAPP_BUSINESS_ACCOUNT_ID)
+  private String whatsappBusinessAccountId = null;
+
   /**
    * Default Constructor.
    */
@@ -174,12 +176,13 @@ public class UserData {
    * @param anonId ID of a person who has installed the app anonymously
    * @param ctwaClid ID of a conversation that was started on WhatsApp
    * @param pageId ID of the page that the ad is associated with
+   * @Param whatsappBusinessAccountId ID of the WhatsApp Business account associated with the User
    */
   public UserData(String email, String phone, GenderEnum gender, String dateOfBirth,
       String lastName, String firstName, String city, String state, String zipcode,
       String countryCode, String externalId, String clientIpAddress, String clientUserAgent,
       String fbc, String fbp, String subscriptionId, String fbLoginId, String leadId,
-      String f5first, String f5last, String fi, String dobd, String dobm, String doby, String madid, String anonId, String ctwaClid, String pageId) {
+      String f5first, String f5last, String fi, String dobd, String dobm, String doby, String madid, String anonId, String ctwaClid, String pageId, String whatsappBusinessAccountId) {
     this.emails = Arrays.asList(email);
     this.phones = Arrays.asList(phone);
     this.genders = Arrays.asList(gender);
@@ -205,7 +208,9 @@ public class UserData {
     this.dobm = dobm;
     this.doby = doby;
     this.madid = madid;
-    this.anonId = anonId;
+    this.anonId = anonId; 
+    this.pageId = pageId;
+    this.whatsappBusinessAccountId = whatsappBusinessAccountId;
   }
 
   /**
@@ -1461,6 +1466,37 @@ public class UserData {
     this.pageId = pageId;
   }
 
+  /**
+   * Id of the WhatsApp Business Account assciated with the User
+   * 
+   * @param whatsappBusinessAccountId
+   * @returns UserData
+   */
+  public UserData whatsappBusinessAccountId(String whatsappBusinessAccountId) {
+    setWhatsappBusinessAccountId(whatsappBusinessAccountId);
+    return this;
+  }
+
+  /**
+   * Get the Id of the WhatsApp Business Account assciated with the User
+   * 
+   * @return whatsappBusinessAccountId
+   */
+  public String getWhatsappBusinessAccountId() {
+    return this.whatsappBusinessAccountId;
+  }
+
+  /**
+   * Set the Id of the WhatsApp Business Account assciated with the User
+   * 
+   * @param whatsappBusinessAccountId
+   */
+  public void setWhatsappBusinessAccountId(String whatsappBusinessAccountId) {
+    this.whatsappBusinessAccountId = whatsappBusinessAccountId;
+  }
+
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -1497,7 +1533,8 @@ public class UserData {
         && Objects.equals(this.madid, userData.madid)
         && Objects.equals(this.anonId, userData.anonId)
         && Objects.equals(this.ctwaClid, userData.ctwaClid)
-        && Objects.equals(this.pageId, userData.pageId);
+        && Objects.equals(this.pageId, userData.pageId)
+        && Objects.equals(this.whatsappBusinessAccountId, userData.whatsappBusinessAccountId);
   }
 
   @Override
@@ -1530,7 +1567,9 @@ public class UserData {
         madid,
         anonId,
         ctwaClid,
-        pageId);
+        pageId,
+        whatsappBusinessAccountId);
+
   }
 
   @Override
@@ -1566,6 +1605,7 @@ public class UserData {
     sb.append("    anonId: ").append(toIndentedString(anonId)).append("\n");
     sb.append("    ctwaClid: ").append(toIndentedString(ctwaClid)).append("\n");
     sb.append("    pageId: ").append(toIndentedString(pageId)).append("\n");
+    sb.append("    whatsappBusinessAccountId: ").append(toIndentedString(whatsappBusinessAccountId)).append("\n");
     sb.append("}");
     return sb.toString();
   }
